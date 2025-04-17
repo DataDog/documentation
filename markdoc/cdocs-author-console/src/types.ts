@@ -37,4 +37,9 @@ export interface OptionConfig {
   label: string;
 }
 
-export type FormStatus = 'unmodified' | 'pending' | 'saved';
+/**
+ * `waiting`: The form has no unsaved changes, but is not valid unless the user takes further action.
+ * `pending`: The form has unsaved changes, regardless of their validity.
+ * `done`: The form has been saved, or canceled. Either way, the form is in a valid state.
+ */
+export type FormStatus = 'waiting' | 'pending' | 'done';

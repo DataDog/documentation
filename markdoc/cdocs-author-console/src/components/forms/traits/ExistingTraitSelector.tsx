@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
 
-export default function TraitSelector(props: {
+export default function ExistingTraitSelector(props: {
   customizationConfig: CustomizationConfig;
   onSave: (traitId: string) => void;
 }) {

@@ -11,6 +11,8 @@ function FilterForm(props: {
   onPending: () => void;
   onClean: () => void;
 }) {
+  const [formStatus, setFormStatus] = useState('clean');
+
   const formHeaderStyles: React.CSSProperties = {
     backgroundColor: '#eff1f5',
     fontSize: '0.9em',

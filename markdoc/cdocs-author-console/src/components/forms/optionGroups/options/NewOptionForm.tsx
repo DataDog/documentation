@@ -8,36 +8,49 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { OptionConfig } from '../../../../types';
+import { OptionConfig, FormStatus } from '../../../../types';
 
 function NewOptionForm(props: {
   customizationConfig: CustomizationConfig;
-  onPending: () => void;
-  onClean: () => void;
-  onSave: (newOptionConfig: OptionConfig) => void;
+  onStatusChange: (p: { status: FormStatus; data?: OptionConfig }) => void;
 }) {
   const blankOption: OptionConfig = {
     id: '',
     label: ''
   };
 
+  // The form begins as "done" because the accordion is closed,
+  // and the user may not intend to add a new option
+  const [formStatus, setFormStatus] = useState<FormStatus>('done');
+  const [newOptionConfig, setNewOptionConfig] = useState(blankOption);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+
   const handleFormChange = (updatedOptionConfig: OptionConfig) => {
-    const wasModified = newOptionConfig.id !== blankOption.id || newOptionConfig.label !== blankOption.label;
-    const isModified = updatedOptionConfig.id !== blankOption.id || updatedOptionConfig.label !== blankOption.label;
-    if (!wasModified && isModified) {
-      props.onPending();
-    }
+    // Update the form data
     setNewOptionConfig(updatedOptionConfig);
+
+    // Update the form status
+    const newFormStatus = 'pending';
+    setFormStatus(newFormStatus);
+
+    // Notify the parent component of any status change
+    if (formStatus !== newFormStatus) {
+      props.onStatusChange({ status: newFormStatus });
+    }
+  };
+
+  // The accordion can only be toggled open,
+  // it must be saved or canceled to close
+  const handleAccordionToggle = () => {
+    setFormStatus('waiting');
+    props.onStatusChange({ status: 'waiting' });
   };
 
   const handleFormCancel = () => {
     setNewOptionConfig(blankOption);
-    props.onClean();
+    setFormStatus('done');
+    props.onStatusChange({ status: 'done' });
   };
-
-  const [newOptionConfig, setNewOptionConfig] = useState(blankOption);
-  const [formErrors, setFormErrors] = useState<string[]>([]);
-  const [newOptionFormIsOpen, setNewOptionFormIsOpen] = useState(false);
 
   const validateFormData = () => {
     let errors: string[] = [];
@@ -61,19 +74,17 @@ function NewOptionForm(props: {
   const handleSave = () => {
     const isValid = validateFormData();
     if (isValid) {
-      props.onSave(newOptionConfig);
+      props.onStatusChange({ status: 'done', data: newOptionConfig });
       setNewOptionConfig(blankOption);
-      setNewOptionFormIsOpen(false);
+      setFormStatus('done');
     }
   };
 
   return (
     <Accordion
-      expanded={newOptionFormIsOpen}
-      onChange={() => {
-        const optionIsInProgress = !newOptionFormIsOpen;
-        setNewOptionFormIsOpen(optionIsInProgress);
-      }}
+      disabled={formStatus !== 'done'}
+      expanded={formStatus !== 'done'}
+      onChange={handleAccordionToggle}
       aria-controls="new-option-form"
       id="new-option-form-header-header"
     >

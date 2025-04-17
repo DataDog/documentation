@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import OptionGroupSelector from './OptionGroupSelector';
+import ExistingOptionGroupSelector from './ExistingOptionGroupSelector';
 import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -98,7 +98,7 @@ function OptionGroupForm(props: {
         <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
       </Tabs>
       <CustomTabPanel value={currentTabIndex} index={0}>
-        <OptionGroupSelector
+        <ExistingOptionGroupSelector
           customizationConfig={props.customizationConfig}
           onSelect={handleExistingOptionGroupSelect}
         />

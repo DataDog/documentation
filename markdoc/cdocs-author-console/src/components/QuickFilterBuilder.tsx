@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import TraitSelector from './forms/traits/TraitSelector';
-import OptionGroupSelector from './forms/optionGroups/OptionGroupSelector';
+import ExistingTraitSelector from './forms/traits/ExistingTraitSelector';
+import ExistingOptionGroupSelector from './forms/optionGroups/ExistingOptionGroupSelector';
 import Code from './Code';
 import { DocTemplater } from './DocTemplater';
 import { buildWizardFilter } from '../dataUtils';
@@ -66,11 +66,14 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
 
       <h3>Trait</h3>
       <p>Select the user characteristic you want to filter the page on, such as the user's operating system.</p>
-      <TraitSelector customizationConfig={props.customizationConfig} onSave={handleTraitSelect} />
+      <ExistingTraitSelector customizationConfig={props.customizationConfig} onSave={handleTraitSelect} />
 
       <h3>Option group</h3>
       <p>Select the list of options to offer for the filter, such as "Linux, Windows, and MacOS".</p>
-      <OptionGroupSelector customizationConfig={props.customizationConfig} onSelect={handleOptionGroupIdSelect} />
+      <ExistingOptionGroupSelector
+        customizationConfig={props.customizationConfig}
+        onSelect={handleOptionGroupIdSelect}
+      />
 
       {traitId && optionGroupId && (
         <>

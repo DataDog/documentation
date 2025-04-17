@@ -3,6 +3,7 @@ import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
+import OptionGroupForm from './forms/optionGroups/OptionGroupForm';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -20,6 +21,14 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
+      <h1>Testing sandbox</h1>
+      <OptionGroupForm
+        customizationConfig={customizationConfig}
+        onSave={() => {}}
+        onClean={() => {}}
+        onPending={() => {}}
+      />
+      <hr />
       {filters.length === 0 && (
         <p>
           Click the button below to configure a filter and generate instructions for setting up a new customizable doc.

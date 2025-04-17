@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
 
-export default function OptionGroupSelector(props: {
+export default function ExistingOptionGroupSelector(props: {
   customizationConfig: CustomizationConfig;
   onSelect: (optionGroupId: string) => void;
 }) {
