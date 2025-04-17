@@ -161,7 +161,7 @@ The LangGraph integration automatically traces `Pregel/CompiledGraph` and `Runna
 
 ### Traced methods
 
-The Langgraph integration instruments synchronous and asynchronous versions of the following methods:
+The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
 
 - [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
 - [RunnableSeq.invoke()][35]
