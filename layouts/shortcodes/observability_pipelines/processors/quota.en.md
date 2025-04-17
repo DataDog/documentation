@@ -19,10 +19,6 @@ To set up the quota processor:
         - Click **Download as CSV** for an example of how to structure the CSV.  
         - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.  
     b. Click **Add Field** if you want to add another partition.
-1. In the **When quota is met** dropdown menu, select if you want to **drop logs**, **keep logs**, or **send logs to archive**, when the quota has been met.
-    - If you select **send logs to archive**, an Amazon S3 overflow destination is added. See [Amazon S3 Destination][5002] for instructions to:
-        - [Configure Log Archives][5003], if you haven't already configured it.
-        - [Set up the Amazon S3 destination][5004]
 
 #### Examples
 
