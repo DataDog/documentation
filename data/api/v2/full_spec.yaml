@@ -652,8 +652,9 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-webhook`, `notebook`, `reference-table`,
-        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`.'
+        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
+        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
+        `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -12689,6 +12690,641 @@ components:
       - retryStrategy
       - fallbackStepName
       type: object
+    EscalationPolicy:
+      description: Represents a complete escalation policy response, including policy
+        data and optionally included related resources.
+      example:
+        data:
+          attributes:
+            description: Escalation Policy 1 description
+            name: Escalation Policy 1
+            resolve_page_on_policy_end: true
+            retries: 2
+          id: 00000000-aba1-0000-0000-000000000000
+          relationships:
+            steps:
+              data:
+              - id: 00000000-aba1-0000-0000-000000000000
+                type: steps
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: policies
+        included:
+        - attributes:
+            avatar: ''
+            description: Team 1 description
+            handle: team1
+            name: Team 1
+          id: 00000000-da3a-0000-0000-000000000000
+          type: teams
+        - attributes:
+            assignment: default
+            escalate_after_seconds: 3600
+          id: 00000000-aba1-0000-0000-000000000000
+          relationships:
+            targets:
+              data:
+              - id: 00000000-aba1-0000-0000-000000000000
+                type: users
+              - id: 00000000-aba2-0000-0000-000000000000
+                type: schedules
+              - id: 00000000-aba3-0000-0000-000000000000
+                type: teams
+          type: steps
+        - id: 00000000-aba1-0000-0000-000000000000
+          type: users
+        - id: 00000000-aba2-0000-0000-000000000000
+          type: schedules
+        - id: 00000000-aba3-0000-0000-000000000000
+          type: teams
+      properties:
+        data:
+          $ref: '#/components/schemas/EscalationPolicyData'
+        included:
+          description: Provides any included related resources, such as steps or targets,
+            returned with the policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyIncluded'
+          type: array
+      type: object
+    EscalationPolicyCreateRequest:
+      description: Represents a request to create a new escalation policy, including
+        the policy data.
+      example:
+        data:
+          attributes:
+            description: Escalation Policy 1 description
+            name: Escalation Policy 1
+            resolve_page_on_policy_end: true
+            retries: 2
+            steps:
+            - assignment: default
+              escalate_after_seconds: 3600
+              targets:
+              - id: 00000000-aba1-0000-0000-000000000000
+                type: users
+              - id: 00000000-aba2-0000-0000-000000000000
+                type: schedules
+              - id: 00000000-aba3-0000-0000-000000000000
+                type: teams
+            - assignment: round-robin
+              escalate_after_seconds: 3600
+              targets:
+              - id: 00000000-aba1-0000-0000-000000000000
+                type: users
+              - id: 00000000-abb1-0000-0000-000000000000
+                type: users
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: policies
+      properties:
+        data:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestData'
+      required:
+      - data
+      type: object
+    EscalationPolicyCreateRequestData:
+      description: Represents the data for creating an escalation policy, including
+        its attributes, relationships, and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    EscalationPolicyCreateRequestDataAttributes:
+      description: Defines the attributes for creating an escalation policy, including
+        its description, name, resolution behavior, retries, and steps.
+      properties:
+        description:
+          description: Provides a detailed text description of the new escalation
+            policy.
+          type: string
+        name:
+          description: Specifies the name for the new escalation policy.
+          example: On-call Escalation Policy
+          type: string
+        resolve_page_on_policy_end:
+          description: Indicates whether the page is automatically resolved when the
+            policy ends.
+          type: boolean
+        retries:
+          description: Specifies how many times the escalation sequence is retried
+            if there is no response.
+          format: int64
+          type: integer
+        steps:
+          description: A list of escalation steps, each defining assignment, escalation
+            timeout, and targets for the new policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItems'
+          type: array
+      required:
+      - name
+      - steps
+      type: object
+    EscalationPolicyCreateRequestDataAttributesStepsItems:
+      description: Defines a single escalation step within an escalation policy creation
+        request. Contains assignment strategy, escalation timeout, and a list of targets.
+      properties:
+        assignment:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsAssignment'
+        escalate_after_seconds:
+          description: Defines how many seconds to wait before escalating to the next
+            step.
+          example: 3600
+          format: int64
+          type: integer
+        targets:
+          description: Specifies the collection of escalation targets for this step.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItems'
+          type: array
+      required:
+      - targets
+      type: object
+    EscalationPolicyCreateRequestDataAttributesStepsItemsAssignment:
+      description: Specifies how this escalation step will assign targets (example
+        `default` or `round-robin`).
+      enum:
+      - default
+      - round-robin
+      example: default
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - ROUND_ROBIN
+    EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItems:
+      description: Defines a single escalation target within a step for an escalation
+        policy creation request. Contains `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for this target.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItemsType'
+      type: object
+    EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItemsType:
+      description: Specifies the type of escalation target (example `users`, `schedules`,
+        or `teams`).
+      enum:
+      - users
+      - schedules
+      - teams
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+      - SCHEDULES
+      - TEAMS
+    EscalationPolicyCreateRequestDataRelationships:
+      description: Represents relationships in an escalation policy creation request,
+        including references to teams.
+      properties:
+        teams:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeams'
+      type: object
+    EscalationPolicyCreateRequestDataRelationshipsTeams:
+      description: Defines the relationship to teams within an escalation policy creation
+        request, referencing the teams to be associated with the policy.
+      properties:
+        data:
+          description: An array of team references for the new escalation policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    EscalationPolicyCreateRequestDataRelationshipsTeamsDataItems:
+      description: Defines a single relationship to a team within an escalation policy
+        creation request. Contains the team's `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for the related team.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationPolicyCreateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Indicates that the resource is of type `teams`.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    EscalationPolicyCreateRequestDataType:
+      default: policies
+      description: Indicates that the resource is of type `policies`.
+      enum:
+      - policies
+      example: policies
+      type: string
+      x-enum-varnames:
+      - POLICIES
+    EscalationPolicyData:
+      description: Represents the data for a single escalation policy, including its
+        attributes, ID, relationships, and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyDataAttributes'
+        id:
+          description: Specifies the unique identifier of the escalation policy.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EscalationPolicyDataRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationPolicyDataType'
+      required:
+      - type
+      type: object
+    EscalationPolicyDataAttributes:
+      description: Defines the main attributes of an escalation policy, such as its
+        description, name, and behavior on policy end.
+      properties:
+        description:
+          description: Provides a detailed text description of the escalation policy.
+          type: string
+        name:
+          description: Specifies the name of the escalation policy.
+          example: On-call Escalation Policy
+          type: string
+        resolve_page_on_policy_end:
+          description: Indicates whether the page is automatically resolved when the
+            policy ends.
+          type: boolean
+        retries:
+          description: Specifies how many times the escalation sequence is retried
+            if there is no response.
+          format: int64
+          type: integer
+      required:
+      - name
+      type: object
+    EscalationPolicyDataRelationships:
+      description: Represents the relationships for an escalation policy, including
+        references to steps and teams.
+      properties:
+        steps:
+          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsSteps'
+        teams:
+          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeams'
+      required:
+      - steps
+      type: object
+    EscalationPolicyDataRelationshipsSteps:
+      description: Defines the relationship to a collection of steps within an escalation
+        policy. Contains an array of step data references.
+      properties:
+        data:
+          description: An array of references to the steps defined in this escalation
+            policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyDataRelationshipsStepsDataItems'
+          type: array
+      type: object
+    EscalationPolicyDataRelationshipsStepsDataItems:
+      description: Defines a relationship to a single step within an escalation policy.
+        Contains the step's `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for the step resource.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsStepsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationPolicyDataRelationshipsStepsDataItemsType:
+      default: steps
+      description: Indicates that the resource is of type `steps`.
+      enum:
+      - steps
+      example: steps
+      type: string
+      x-enum-varnames:
+      - STEPS
+    EscalationPolicyDataRelationshipsTeams:
+      description: Defines the relationship to a collection of teams within an escalation
+        policy. Contains an array of team data references.
+      properties:
+        data:
+          description: An array of references to the teams associated with this escalation
+            policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    EscalationPolicyDataRelationshipsTeamsDataItems:
+      description: Defines a relationship to a single team within an escalation policy.
+        Contains the team's `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for the team resource.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationPolicyDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Indicates that the resource is of type `teams`.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    EscalationPolicyDataType:
+      default: policies
+      description: Indicates that the resource is of type `policies`.
+      enum:
+      - policies
+      example: policies
+      type: string
+      x-enum-varnames:
+      - POLICIES
+    EscalationPolicyIncluded:
+      description: Represents included related resources when retrieving an escalation
+        policy, such as teams, steps, or targets.
+      oneOf:
+      - $ref: '#/components/schemas/TeamReference'
+      - $ref: '#/components/schemas/EscalationPolicyStep'
+      - $ref: '#/components/schemas/UserTarget'
+      - $ref: '#/components/schemas/ScheduleTarget'
+      - $ref: '#/components/schemas/TeamTarget'
+    EscalationPolicyStep:
+      description: Represents a single step in an escalation policy, including its
+        attributes, relationships, and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyStepAttributes'
+        id:
+          description: Specifies the unique identifier of this escalation policy step.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EscalationPolicyStepRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationPolicyStepType'
+      required:
+      - type
+      type: object
+    EscalationPolicyStepAttributes:
+      description: Defines attributes for an escalation policy step, such as assignment
+        strategy and escalation timeout.
+      properties:
+        assignment:
+          $ref: '#/components/schemas/EscalationPolicyStepAttributesAssignment'
+        escalate_after_seconds:
+          description: Specifies how many seconds to wait before escalating to the
+            next step.
+          format: int64
+          type: integer
+      type: object
+    EscalationPolicyStepAttributesAssignment:
+      description: Specifies how this escalation step will assign targets (example
+        `default` or `round-robin`).
+      enum:
+      - default
+      - round-robin
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - ROUND_ROBIN
+    EscalationPolicyStepRelationships:
+      description: Represents the relationship of an escalation policy step to its
+        targets.
+      properties:
+        targets:
+          $ref: '#/components/schemas/EscalationTarget'
+      type: object
+    EscalationPolicyStepType:
+      default: steps
+      description: Indicates that the resource is of type `steps`.
+      enum:
+      - steps
+      example: steps
+      type: string
+      x-enum-varnames:
+      - STEPS
+    EscalationPolicyUpdateRequest:
+      description: Represents a request to update an existing escalation policy, including
+        the updated policy data.
+      example:
+        data:
+          attributes:
+            description: Escalation Policy 1 description
+            name: Escalation Policy 1
+            resolve_page_on_policy_end: false
+            retries: 2
+            steps:
+            - assignment: default
+              escalate_after_seconds: 3600
+              id: 00000000-aba1-0000-0000-000000000000
+              targets:
+              - id: 00000000-aba1-0000-0000-000000000000
+                type: users
+              - id: 00000000-aba2-0000-0000-000000000000
+                type: schedules
+          id: a3000000-0000-0000-0000-000000000000
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: policies
+      properties:
+        data:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestData'
+      required:
+      - data
+      type: object
+    EscalationPolicyUpdateRequestData:
+      description: Represents the data for updating an existing escalation policy,
+        including its ID, attributes, relationships, and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributes'
+        id:
+          description: Specifies the unique identifier of the escalation policy being
+            updated.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    EscalationPolicyUpdateRequestDataAttributes:
+      description: Defines the attributes that can be updated for an escalation policy,
+        such as description, name, resolution behavior, retries, and steps.
+      properties:
+        description:
+          description: Provides a detailed text description of the escalation policy.
+          type: string
+        name:
+          description: Specifies the name of the escalation policy.
+          example: On-call Escalation Policy
+          type: string
+        resolve_page_on_policy_end:
+          description: Indicates whether the page is automatically resolved when the
+            policy ends.
+          type: boolean
+        retries:
+          description: Specifies how many times the escalation sequence is retried
+            if there is no response.
+          format: int64
+          type: integer
+        steps:
+          description: A list of escalation steps, each defining assignment, escalation
+            timeout, and targets.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItems'
+          type: array
+      required:
+      - name
+      - steps
+      type: object
+    EscalationPolicyUpdateRequestDataAttributesStepsItems:
+      description: Defines a single escalation step within an escalation policy update
+        request. Contains assignment strategy, escalation timeout, an optional step
+        ID, and a list of targets.
+      properties:
+        assignment:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsAssignment'
+        escalate_after_seconds:
+          description: Defines how many seconds to wait before escalating to the next
+            step.
+          example: 3600
+          format: int64
+          type: integer
+        id:
+          description: Specifies the unique identifier of this step.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        targets:
+          description: Specifies the collection of escalation targets for this step.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItems'
+          type: array
+      required:
+      - targets
+      type: object
+    EscalationPolicyUpdateRequestDataAttributesStepsItemsAssignment:
+      description: Specifies how this escalation step will assign targets (example
+        `default` or `round-robin`).
+      enum:
+      - default
+      - round-robin
+      example: default
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - ROUND_ROBIN
+    EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItems:
+      description: Defines a single escalation target within a step for an escalation
+        policy update request. Contains `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for this target.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItemsType'
+      type: object
+    EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItemsType:
+      description: Specifies the type of escalation target (example `users`, `schedules`,
+        or `teams`).
+      enum:
+      - users
+      - schedules
+      - teams
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+      - SCHEDULES
+      - TEAMS
+    EscalationPolicyUpdateRequestDataRelationships:
+      description: Represents relationships in an escalation policy update request,
+        including references to teams.
+      properties:
+        teams:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeams'
+      type: object
+    EscalationPolicyUpdateRequestDataRelationshipsTeams:
+      description: Defines the relationship to teams within an escalation policy update
+        request, referencing the teams to be associated with or removed from the policy.
+      properties:
+        data:
+          description: An array of team references for the escalation policy update.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItems:
+      description: Defines a single relationship to a team within an escalation policy
+        update request. Contains the team's `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for the related team.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Indicates that the resource is of type `teams`.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    EscalationPolicyUpdateRequestDataType:
+      default: policies
+      description: Indicates that the resource is of type `policies`.
+      enum:
+      - policies
+      example: policies
+      type: string
+      x-enum-varnames:
+      - POLICIES
+    EscalationTarget:
+      description: Represents an escalation target, which can be a team, user, or
+        schedule.
+      oneOf:
+      - $ref: '#/components/schemas/TeamTarget'
+      - $ref: '#/components/schemas/UserTarget'
+      - $ref: '#/components/schemas/ScheduleTarget'
     Event:
       description: The metadata associated with a request.
       properties:
@@ -17728,11 +18364,13 @@ components:
       properties:
         days:
           description: The number of days in each rotation cycle.
+          example: 1
           format: int32
           maximum: 400
           type: integer
         seconds:
           description: Any additional seconds for the rotation cycle (up to 30 days).
+          example: 300
           format: int64
           maximum: 2592000
           type: integer
@@ -17747,11 +18385,13 @@ components:
           $ref: '#/components/schemas/LayerAttributesRestrictionsItemsEndDay'
         end_time:
           description: The time of day the restriction ends (hh:mm:ss).
+          example: '17:00:00'
           type: string
         start_day:
           $ref: '#/components/schemas/LayerAttributesRestrictionsItemsStartDay'
         start_time:
           description: The time of day the restriction begins (hh:mm:ss).
+          example: 09:00:00
           type: string
       type: object
     LayerAttributesRestrictionsItemsEndDay:
@@ -17817,6 +18457,7 @@ components:
       properties:
         id:
           description: The unique user ID of the layer member.
+          example: 00000000-0000-0000-0000-000000000002
           type: string
         type:
           $ref: '#/components/schemas/LayerRelationshipsMembersDataItemsType'
@@ -21764,6 +22405,201 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
+      type: object
+    MonitorNotificationRuleAttributes:
+      additionalProperties: false
+      description: Attributes of the monitor notification rule.
+      properties:
+        filter:
+          $ref: '#/components/schemas/MonitorNotificationRuleFilter'
+        name:
+          $ref: '#/components/schemas/MonitorNotificationRuleName'
+        recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
+      required:
+      - name
+      - recipients
+      type: object
+    MonitorNotificationRuleCreateRequest:
+      description: Request for creating a monitor notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorNotificationRuleCreateRequestData'
+      required:
+      - data
+      type: object
+    MonitorNotificationRuleCreateRequestData:
+      description: Object to create a monitor notification rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorNotificationRuleAttributes'
+        type:
+          $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
+      required:
+      - attributes
+      type: object
+    MonitorNotificationRuleData:
+      description: Monitor notification rule data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorNotificationRuleResponseAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorNotificationRuleId'
+        relationships:
+          $ref: '#/components/schemas/MonitorNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
+      type: object
+    MonitorNotificationRuleFilter:
+      description: Filter used to associate the notification rule with monitors.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorNotificationRuleFilterTags'
+    MonitorNotificationRuleFilterTags:
+      additionalProperties: false
+      description: Filter monitors by tags. Monitors must match all tags.
+      properties:
+        tags:
+          description: A list of monitor tags.
+          example:
+          - team:product
+          - host:abc
+          items:
+            maxLength: 255
+            type: string
+          maxItems: 20
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+      - tags
+      type: object
+    MonitorNotificationRuleId:
+      description: The ID of the monitor notification rule.
+      example: 00000000-0000-1234-0000-000000000000
+      type: string
+    MonitorNotificationRuleListResponse:
+      description: Response for retrieving all monitor notification rules.
+      properties:
+        data:
+          description: A list of monitor notification rules.
+          items:
+            $ref: '#/components/schemas/MonitorNotificationRuleData'
+          type: array
+        included:
+          description: Array of objects related to the monitor notification rules.
+          items:
+            $ref: '#/components/schemas/MonitorNotificationRuleResponseIncludedItem'
+          type: array
+      type: object
+    MonitorNotificationRuleName:
+      description: The name of the monitor notification rule.
+      example: A notification rule name
+      maxLength: 1000
+      minLength: 1
+      type: string
+    MonitorNotificationRuleRecipients:
+      description: A list of recipients to notify. Uses the same format as the monitor
+        `message` field. Must not start with an '@'.
+      example:
+      - slack-test-channel
+      - jira-test
+      items:
+        description: individual recipient.
+        maxLength: 255
+        type: string
+      maxItems: 20
+      minItems: 1
+      type: array
+      uniqueItems: true
+    MonitorNotificationRuleRelationships:
+      description: All relationships associated with monitor notification rule.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/MonitorNotificationRuleRelationshipsCreatedBy'
+      type: object
+    MonitorNotificationRuleRelationshipsCreatedBy:
+      description: The user who created the monitor notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorNotificationRuleRelationshipsCreatedByData'
+      type: object
+    MonitorNotificationRuleRelationshipsCreatedByData:
+      description: Data for the user who created the monitor notification rule.
+      nullable: true
+      properties:
+        id:
+          description: User ID of the monitor notification rule creator.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      type: object
+    MonitorNotificationRuleResourceType:
+      default: monitor-notification-rule
+      description: Monitor notification rule resource type.
+      enum:
+      - monitor-notification-rule
+      example: monitor-notification-rule
+      type: string
+      x-enum-varnames:
+      - MONITOR_NOTIFICATION_RULE
+    MonitorNotificationRuleResponse:
+      description: A monitor notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorNotificationRuleData'
+        included:
+          description: Array of objects related to the monitor notification rule that
+            the user requested.
+          items:
+            $ref: '#/components/schemas/MonitorNotificationRuleResponseIncludedItem'
+          type: array
+      type: object
+    MonitorNotificationRuleResponseAttributes:
+      additionalProperties: {}
+      description: Attributes of the monitor notification rule.
+      properties:
+        created:
+          description: Creation time of the monitor notification rule.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+        filter:
+          $ref: '#/components/schemas/MonitorNotificationRuleFilter'
+        modified:
+          description: Time the monitor notification rule was last modified.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+        name:
+          $ref: '#/components/schemas/MonitorNotificationRuleName'
+        recipients:
+          $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
+      type: object
+    MonitorNotificationRuleResponseIncludedItem:
+      description: An object related to a monitor notification rule.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+    MonitorNotificationRuleUpdateRequest:
+      description: Request for updating a monitor notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorNotificationRuleUpdateRequestData'
+      required:
+      - data
+      type: object
+    MonitorNotificationRuleUpdateRequestData:
+      description: Object to update a monitor notification rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorNotificationRuleAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorNotificationRuleId'
+        type:
+          $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
+      required:
+      - id
+      - attributes
       type: object
     MonitorTrigger:
       description: Trigger a workflow from a Monitor. For automatic triggering a handle
@@ -27811,7 +28647,6 @@ components:
         type:
           $ref: '#/components/schemas/ScheduleCreateRequestDataType'
       required:
-      - attributes
       - type
       type: object
     ScheduleCreateRequestDataAttributes:
@@ -27892,12 +28727,14 @@ components:
       properties:
         days:
           description: The number of full days in each rotation period.
+          example: 1
           format: int32
           maximum: 400
           type: integer
         seconds:
           description: Extra seconds that may be added to extend the rotation beyond
             whole days.
+          example: 300
           format: int64
           maximum: 2592000
           type: integer
@@ -27915,6 +28752,7 @@ components:
       properties:
         id:
           description: The user's ID.
+          example: 00000000-aba1-0000-0000-000000000000
           type: string
       type: object
     ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems:
@@ -28083,7 +28921,7 @@ components:
       properties:
         id:
           description: The unique identifier of the layer in this relationship.
-          example: 67963b57-d67c-dfa7-b180-62ee9301d2f5
+          example: 00000000-0000-0000-0000-000000000001
           type: string
         type:
           $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItemsType'
@@ -28165,6 +29003,7 @@ components:
       properties:
         id:
           description: The user's unique identifier.
+          example: 00000000-aba1-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/ScheduleMemberRelationshipsUserDataType'
@@ -28185,6 +29024,29 @@ components:
       type: string
       x-enum-varnames:
       - MEMBERS
+    ScheduleTarget:
+      description: Represents a schedule target for an escalation policy step, including
+        its ID and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the schedule resource.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleTargetType'
+      required:
+      - type
+      - id
+      type: object
+    ScheduleTargetType:
+      default: schedules
+      description: Indicates that the resource is of type `schedules`.
+      enum:
+      - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
     ScheduleTrigger:
       description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
@@ -28260,9 +29122,9 @@ components:
         type:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataType'
       required:
-      - attributes
       - type
       - id
+      - attributes
       type: object
     ScheduleUpdateRequestDataAttributes:
       description: Defines the updatable attributes for a schedule, such as name,
@@ -28302,15 +29164,18 @@ components:
       properties:
         effective_date:
           description: When this updated layer takes effect (ISO 8601 format).
+          example: '2025-02-03T05:00:00Z'
           format: date-time
           type: string
         end_date:
           description: When this updated layer should stop being active (ISO 8601
             format).
+          example: '2025-12-31T00:00:00Z'
           format: date-time
           type: string
         id:
           description: A unique identifier for the layer being updated.
+          example: 00000000-0000-0000-0000-000000000001
           type: string
         interval:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsInterval'
@@ -28320,7 +29185,8 @@ components:
             $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItems'
           type: array
         name:
-          description: "The name for this layer (for example, \u201CSecondary Coverage\u201D)."
+          description: The name for this layer (for example, "Secondary Coverage").
+          example: Primary On-Call Layer
           type: string
         restrictions:
           description: Any time restrictions that define when this layer is active.
@@ -28329,6 +29195,7 @@ components:
           type: array
         rotation_start:
           description: The date/time at which the rotation begins (ISO 8601 format).
+          example: '2025-02-01T00:00:00Z'
           format: date-time
           type: string
       type: object
@@ -28338,12 +29205,14 @@ components:
       properties:
         days:
           description: How many days each rotation cycle should span.
+          example: 1
           format: int32
           maximum: 400
           type: integer
         seconds:
           description: Additional seconds to add to the rotation cycle (for example,
             partial days).
+          example: 300
           format: int64
           maximum: 2592000
           type: integer
@@ -28363,6 +29232,7 @@ components:
       properties:
         id:
           description: The user's ID.
+          example: 00000000-aba1-0000-0000-000000000000
           type: string
       type: object
     ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems:
@@ -28375,11 +29245,13 @@ components:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
         end_time:
           description: The time at which this restriction ends (hh:mm:ss).
+          example: '17:00:00'
           type: string
         start_day:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
         start_time:
           description: The time at which this restriction starts (hh:mm:ss).
+          example: 09:00:00
           type: string
       type: object
     ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
@@ -28442,6 +29314,7 @@ components:
       properties:
         id:
           description: The unique team identifier.
+          example: 00000000-aba1-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType'
@@ -28481,6 +29354,7 @@ components:
       properties:
         email:
           description: The user's email address.
+          example: jane.doe@example.com
           type: string
         name:
           description: The user's name.
@@ -34232,6 +35106,7 @@ components:
       properties:
         id:
           description: The unique identifier of the user.
+          example: 00000000-aba1-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
@@ -34274,6 +35149,29 @@ components:
         data:
           $ref: '#/components/schemas/Team'
       type: object
+    TeamTarget:
+      description: Represents a team target for an escalation policy step, including
+        the team's ID and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the team resource.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamTargetType'
+      required:
+      - type
+      - id
+      type: object
+    TeamTargetType:
+      default: teams
+      description: Indicates that the resource is of type `teams`.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
     TeamType:
       default: team
       description: Team type
@@ -35458,6 +36356,29 @@ components:
       type: object
       x-merge-override:
         properties: false
+    UserTarget:
+      description: Represents a user target for an escalation policy step, including
+        the user's ID and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the user resource.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTargetType'
+      required:
+      - type
+      - id
+      type: object
+    UserTargetType:
+      default: users
+      description: Indicates that the resource is of type `users`.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     UserTeam:
       description: A user's relationship with a team
       properties:
@@ -36485,6 +37406,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_config_policy_write: Edit and delete monitor configuration.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
@@ -47980,6 +48902,285 @@ paths:
         permissions: []
       x-undo:
         type: safe
+  /api/v2/monitor/notification_rule:
+    get:
+      description: Returns a list of all monitor notification rules.
+      operationId: GetMonitorNotificationRules
+      parameters:
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          path is `created_by`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorNotificationRuleListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor notification rules
+      tags:
+      - Monitors
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a monitor notification rule.
+      operationId: CreateMonitorNotificationRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorNotificationRuleCreateRequest'
+        description: Request body to create a monitor notification rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorNotificationRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Create a monitor notification rule
+      tags:
+      - Monitors
+      x-given:
+        monitor_notification_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-notification-rule\",\n
+              \   \"attributes\": {\n      \"name\":\"test rule\",\n      \"filter\":
+              {\n        \"tags\": [\n          \"app:{{ unique_lower }}\"\n        ]\n
+              \     },\n      \"recipients\":[\n        \"slack-monitor-app\"\n      ]\n
+              \   }\n  }\n}"
+          step: there is a valid "monitor_notification_rule" in the system
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
+      x-undo:
+        operationId: DeleteMonitorNotificationRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/notification_rule/{rule_id}:
+    delete:
+      description: Deletes a monitor notification rule by `rule_id`.
+      operationId: DeleteMonitorNotificationRule
+      parameters:
+      - description: ID of the monitor notification rule to delete.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Delete a monitor notification rule
+      tags:
+      - Monitors
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns a monitor notification rule by `rule_id`.
+      operationId: GetMonitorNotificationRule
+      parameters:
+      - description: ID of the monitor notification rule to fetch.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          path is `created_by`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorNotificationRuleResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor notification rule
+      tags:
+      - Monitors
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates a monitor notification rule by `rule_id`.
+      operationId: UpdateMonitorNotificationRule
+      parameters:
+      - description: ID of the monitor notification rule to update.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorNotificationRuleUpdateRequest'
+        description: Request body to update the monitor notification rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorNotificationRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Update a monitor notification rule
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/monitor/policy:
     get:
       description: Get all monitor configuration policies.
@@ -48525,6 +49726,201 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/on-call/escalation-policies:
+    post:
+      description: Create a new on-call escalation policy
+      operationId: CreateOnCallEscalationPolicy
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `steps`, `steps.targets`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EscalationPolicyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscalationPolicy'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create on call escalation policy
+      tags:
+      - On-Call
+      x-given:
+        escalation_policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\",\n      \"description\": \"{{ unique }}\",\n      \"resolve_page_on_policy_end\":
+              true,\n      \"retries\": 2,\n      \"steps\": [\n        {\n          \"assignment\":
+              \"default\",\n          \"escalate_after_seconds\": 3600,\n          \"targets\":
+              [\n            {\n              \"id\": \"{{ dd_team.data.id }}\",\n
+              \             \"type\": \"teams\"\n            },\n            {\n              \"id\":
+              \"{{ schedule.data.id }}\",\n              \"type\": \"schedules\"\n
+              \           },\n            {\n              \"id\": \"{{ user.data.id
+              }}\",\n              \"type\": \"users\"\n            }\n          ]\n
+              \       },\n        {\n          \"assignment\": \"round-robin\",\n
+              \         \"escalate_after_seconds\": 3600,\n          \"targets\":
+              [\n            {\n              \"id\": \"{{ dd_team.data.id }}\",\n
+              \             \"type\": \"teams\"\n            }\n          ]\n        }\n
+              \     ]\n    },\n    \"relationships\": {\n      \"teams\": {\n        \"data\":
+              [\n          {\n            \"id\": \"{{ dd_team.data.id }}\",\n            \"type\":
+              \"teams\"\n          }\n        ]\n      }\n    },\n    \"type\": \"policies\"\n
+              \ }\n}"
+          step: there is a valid "escalation_policy" in the system
+      x-menu-order: 5
+      x-undo:
+        operationId: DeleteOnCallEscalationPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
+  /api/v2/on-call/escalation-policies/{policy_id}:
+    delete:
+      description: Delete an on-call escalation policy
+      operationId: DeleteOnCallEscalationPolicy
+      parameters:
+      - description: The ID of the escalation policy
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: a3000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete on call escalation policy
+      tags:
+      - On-Call
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an on-call escalation policy
+      operationId: GetOnCallEscalationPolicy
+      parameters:
+      - description: The ID of the escalation policy
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: a3000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `steps`, `steps.targets`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscalationPolicy'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get on call escalation policy
+      tags:
+      - On-Call
+      x-menu-order: 7
+      x-undo:
+        type: safe
+    put:
+      description: Update an on-call escalation policy
+      operationId: UpdateOnCallEscalationPolicy
+      parameters:
+      - description: The ID of the escalation policy
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          example: a3000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `steps`, `steps.targets`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EscalationPolicyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscalationPolicy'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update on call escalation policy
+      tags:
+      - On-Call
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
   /api/v2/on-call/schedules:
     post:
       description: Create a new on-call schedule
@@ -50329,6 +51725,8 @@ paths:
 
         - Integration Accounts: `integration-account`
 
+        - Integration Services: `integration-service`
+
         - Integration Webhooks: `integration-webhook`
 
         - Notebooks: `notebook`
@@ -50367,6 +51765,8 @@ paths:
         Dashboards                  | `viewer`, `editor`
 
         Integration Accounts        | `viewer`, `editor`
+
+        Integration Services        | `viewer`, `editor`
 
         Integration Webhooks        | `viewer`, `editor`
 
