@@ -51,6 +51,8 @@ export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endp
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 ```
 
+<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
+
 #### Manual instrumentation
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
@@ -71,7 +73,7 @@ const exporter = new OTLPTraceExporter({
     'dd-protocol': 'otlp',
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
+    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
   },
 });
 ```
@@ -91,7 +93,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .build();
 ```
 
@@ -114,7 +116,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-protocol": "otlp",
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -135,7 +137,7 @@ exporter = OTLPSpanExporter(
         "dd-protocol": "otlp",
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
+        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -182,7 +184,7 @@ exporters:
       dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
+      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
 ...
 
 service:

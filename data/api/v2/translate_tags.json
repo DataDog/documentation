@@ -179,6 +179,10 @@
     "name": "Okta Integration",
     "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
   },
+  "on-call": {
+    "name": "On-Call",
+    "description": "Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\ndirectly through the Datadog API."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."

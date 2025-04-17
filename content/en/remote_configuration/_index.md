@@ -13,7 +13,7 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/threats/setup"
   tag: "Documentation"
-  text: "Setting Up CSM Threats"
+  text: "Setting Up Workload Protection"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
@@ -32,7 +32,7 @@ algolia:
 
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 

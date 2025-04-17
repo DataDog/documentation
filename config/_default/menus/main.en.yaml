@@ -155,12 +155,12 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 17
-    - name: Application Security Management
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
       weight: 1701
-    - name: Cloud Security Management
+    - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
@@ -817,21 +817,6 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 810
-    - name: Java
-      url: opentelemetry/integrations/runtime_metrics/java
-      identifier: otel_runtime_metrics_java
-      parent: otel_runtime_metrics
-      weight: 8101
-    - name: .NET
-      url: opentelemetry/integrations/runtime_metrics/dotnet
-      identifier: otel_runtime_metrics_dotnet
-      parent: otel_runtime_metrics
-      weight: 8102
-    - name: Go
-      url: opentelemetry/integrations/runtime_metrics/go
-      identifier: otel_runtime_metrics_go
-      parent: otel_runtime_metrics
-      weight: 8103
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
@@ -2045,7 +2030,7 @@ menu:
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
       weight: 402
-    - name: Application Security Management
+    - name: App and API Protection
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
@@ -2231,6 +2216,21 @@ menu:
       parent: error_tracking
       identifier: error_tracking_backend
       weight: 10
+    - name: Getting Started
+      url: error_tracking/backend/getting_started
+      parent: error_tracking_backend
+      identifier: error_tracking_backend_setup
+      weight: 100
+    - name: Using Single Step Instrumentation
+      url: error_tracking/backend/getting_started/single_step_instrumentation
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_ssi
+      weight: 1000
+    - name: Using Datadog Tracing Libraries
+      url: error_tracking/backend/getting_started/dd_libraries
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_libs
+      weight: 1001
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -2256,6 +2256,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Guides
+      url: error_tracking/guides
+      parent: error_tracking
+      identifier: error_tracking_guides
+      weight: 13
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -2400,10 +2405,10 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -3025,7 +3030,7 @@ menu:
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705  
+      weight: 705
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
@@ -6113,37 +6118,42 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_default_rules
       weight: 4
+    - name: Threat Intelligence
+      url: /security/cloud_siem/threat_intelligence
+      parent: cloud_siem
+      identifier: cloud_siem_threat_intelligence
+      weight: 5
     - name: Investigate Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
       identifier: cloud_siem_investigate_security_signals
-      weight: 5
+      weight: 6
     - name: Investigator
       url: security/cloud_siem/investigator
       parent: cloud_siem
       identifier: cloud_siem_investigator
-      weight: 6
+      weight: 7
     - name: Historical Jobs
       url: security/cloud_siem/historical_jobs
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
-      weight: 7
+      weight: 8
     - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
-      weight: 8
+      weight: 9
     - name: Security Operational Metrics
       url: security/cloud_siem/security_operational_metrics/
       parent: cloud_siem
       identifier: siem_security_operational_metrics
-      weight: 9
+      weight: 10
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 10
-    - name: Cloud Security Management
+      weight: 11
+    - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
       pre: cloud-security-management
@@ -6214,7 +6224,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
-    - name: Threats
+    - name: Workload Protection
       url: security/threats/
       parent: csm
       identifier: cloud_workload_security
@@ -6369,7 +6379,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
-    - name: Application Security Management
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
@@ -6667,7 +6677,7 @@ menu:
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
-      weight: 50000
+      weight: 30000
     - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
@@ -6893,7 +6903,7 @@ menu:
       pre: continuous-testing
       identifier: continuous_testing
       parent: digital_experience_heading
-      weight: 60000
+      weight: 40000
     - name: Local and Staging Environments
       url: /continuous_testing/environments
       parent: continuous_testing
@@ -6960,12 +6970,12 @@ menu:
       identifier: continuous_testing_settings
       weight: 3
     - name: Results Explorer
-      url: continuous_testing/explorer/
+      url: continuous_testing/results_explorer/
       parent: continuous_testing
       identifier: continuous_testing_results_explorer
       weight: 4
     - name: Metrics
-      url: synthetics/metrics/
+      url: continuous_testing/metrics/
       parent: continuous_testing
       identifier: continuous_testing_metrics
       weight: 5
@@ -6979,7 +6989,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 40000
+      weight: 20000
     - name: Browser Monitoring
       url: real_user_monitoring/browser/
       parent: rum
@@ -7481,7 +7491,7 @@ menu:
       identifier: rum_session_replay_browser
       weight: 502
     - name: Privacy Options
-      url: real_user_monitoring/session_replay/privacy_options
+      url: real_user_monitoring/session_replay/browser/privacy_options
       parent: rum_session_replay_browser
       identifier: rum_session_replay_privacy_options
       weight: 102
@@ -7566,7 +7576,7 @@ menu:
       identifier: rum_correlate_with_other_telemetry_apm
       weight: 702
     - name: Correlate Synthetics with RUM
-      url: synthetics/guide/explore-rum-through-synthetics/
+      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703
