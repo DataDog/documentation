@@ -30,17 +30,13 @@ algolia:
 
 ## Overview
 
-Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Workers) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
+Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
 For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 
-When Remote Configuration is enabled on the Datadog Agent, it periodically polls the configured , to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
-
-When Remote Configuration is enabled, Datadog components such as the Datadog Agent securely poll the configured [Datadog site][1] for configuration changes that are ready to apply. Pending changes are then automatically applied to Datadog components.
-
-For example, after you submit configuration changes in the Datadog product UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog.
+When Remote Configuration is enabled, Datadog components such as the Datadog Agent securely poll the configured [Datadog site][1] for configuration changes that are ready to apply. Pending changes are then automatically applied to Datadog components. For example, after you submit configuration changes in the Datadog UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog.
 
 The following diagram illustrates how Remote Configuration works:
 
@@ -48,7 +44,7 @@ The following diagram illustrates how Remote Configuration works:
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.
-3. Remote-configuration enabled Datadog components in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog instead of directly polling Datadog.
+3. Remote-configuration enabled Datadog components in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries that are deployed in your environments communicate with Agents to request and receive configuration updates from Datadog instead of directly polling Datadog.
 
 ## Supported environments
 
@@ -117,6 +113,8 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 </ul></p></div>
 
 To enable Remote Configuration:
+1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
+1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 
 < **HH**: insert happy path here >
 
@@ -124,7 +122,7 @@ To enable Remote Configuration:
 
 ### Product-specific configuration
 
-After you've enabled Remote Configuration in your organization, consult the documentation listed below for instructions specific to the product you're configuring.
+After you've enabled Remote Configuration in your organization, consult the documentation below for instructions specific to the product you're configuring.
 
 | Product | Setup instructions |
 | ------- | --------------------- |
