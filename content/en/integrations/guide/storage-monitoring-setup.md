@@ -398,7 +398,7 @@ Ensure your [shell environment][302] is set to Bash before running the script. E
 For Each Storage Account you wish to monitor:
 
 
-#### Add a Blob Inventory Policy
+#### Create a blob inventory policy
 1. In the Azure portal, navigate to your Storage Account.
 2. Go to **Data management** -> **Blob inventory**.
 3. Click **Add**.
@@ -421,7 +421,7 @@ For Each Storage Account you wish to monitor:
    - Exclude prefix: datadog-storage-monitoring
 5. Click **Add**.  
 
-#### Add Role Assignment
+#### Add the role assignment
 1. In the Azure portal, navigate to your Storage Account.
 2. Go to **Data storage** -> **Containers**.
 3. Click on the **datadog-storage-monitoring** container.
