@@ -21,7 +21,7 @@ short_description: Rastrea las métricas principales de Azure DB for MariaDB.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Database for MariaDB proporciona una base de datos como servicio MariaDB comunitaria, totalmente gestionada y preparada para empresas.
@@ -35,7 +35,7 @@ Obtén métricas de Azure Database for MariaDB para:
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
+Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
 
@@ -47,13 +47,13 @@ Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No
 
 La integración Azure Database for MariaDB no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Azure Database for MariaDB no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_mariadb/azure_db_for_mariadb_metadata.csv
