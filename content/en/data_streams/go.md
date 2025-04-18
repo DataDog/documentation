@@ -28,7 +28,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 ### Installation
 
 ### Monitoring Kafka Pipelines
-Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be at least `0.11.0.0` or higher. Versions lower than this do not support message headers.
+Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
 
 #### Automatic Instrumentation
 
