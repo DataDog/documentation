@@ -36,7 +36,8 @@ Code Origins captures the exact locations in your codebase where APM spans are c
 - Understand code execution flow
 - Identify performance bottlenecks
 
-{{< img src="tracing/guide/code_origins/code_origin_details.png" alt="Code Origin Details" style="width:100%;">}}
+In Trace Explorer, select a span to see Code Origin details on the Overview tab:
+{{< img src="tracing/guide/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
 
 
 ## Getting started
@@ -71,8 +72,8 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 2. Click on any trace to view its details.
 3. In the span details panel, look for the "Code Origin" section.
 4. Optionally, click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
-
-{{< img src="tracing/guide/code_origins/code_origin_traces_explorer.png" alt="Code Origin in Traces Explorer" style="width:100%;">}}
+  
+    {{< img src="tracing/guide/code_origins/code_origin_add_span_tags_spotlight.png" alt="Code Origin in Traces Explorer" style="width:100%;">}}  
 
 ### In your IDE
 
@@ -81,8 +82,6 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 2. View RED metrics (Requests, Errors, and Duration) as inline annotations above your endpoint methods.
 
     {{< img src="tracing/guide/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
-
-3. Quickly navigate to the code location of a given APM span visible from your IDE. 
 
 
 
