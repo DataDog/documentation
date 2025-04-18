@@ -34,9 +34,22 @@ For more information on advanced profile details, review the [Profile Format Ref
 ## Prerequisites 
 
 - The minimum Agent version required is `7.65` or higher.
+- [Remote Configuration][14] enabled on your Datadog Agent.
 - Permissions required:
-  - [`ndm_device_profiles_view`][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
-  - [`ndm_device_profiles_edit`][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
+  - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
+  - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
+- To [automatically apply created device profiles](#apply-a-profile-to-created-devices) using Remote Configuration, ensure the following setting is enabled in your `datadog-agent/conf.d/snmp.d/conf.yaml` file:
+
+  ```yaml
+  init_config:
+    loader: core
+    use_device_id_as_hostname: true
+    min_collection_interval: 15
+    use_remote_config_profiles: true
+
+  instances:
+  ......
+  ```
 
 ## Setup
 
@@ -234,7 +247,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 {{< tabs >}}
 {{% tab "Automatic (recommended)" %}}
 
-After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
+After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14]. See [prerequisites](#prerequisites) for more information.
 
 {{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
 
