@@ -30,7 +30,7 @@ Some Datadog permissions provide access to more privileged functionality that is
 
 Sensitive permissions are flagged in the Roles and Permissions interfaces to identify that they may need increased scrutiny. As a best practice, administrators configuring roles should pay special attention to these permissions, and confirm which of these permissions are assigned to their roles and users.
 
-### Preview Mode permissions
+### Preview mode permissions
 
 Some permissions appear in "Preview Mode" before becoming fully enforced. During this period:
 
