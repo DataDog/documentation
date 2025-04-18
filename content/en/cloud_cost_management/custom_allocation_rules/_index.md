@@ -66,7 +66,9 @@ For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {u
 
 For determining the proportion of costs to be allocate, metrics can be aggregated on a daily or monthly basis. However, the costs themselves are still allocated on a daily basis.
 
-Tip: Review available metrics and tags in the [Metrics Summary][6].
+You can review available metrics and tags in the [Metrics Summary][6].
+
+[6]: https://app.datadoghq.com/metric/summary
 
 {{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:60%;" >}}
 
