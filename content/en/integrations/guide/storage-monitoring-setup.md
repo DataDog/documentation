@@ -378,7 +378,8 @@ To set up Storage Monitoring for Azure Blob Storage, follow these steps:
 To enable inventories for the selected storage accounts in each subscription, run the following script in your [Azure Cloud Shell][301]: 
 
 ```shell
-curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh | bash -s -- <client_id> <subscription_id> <comma_separated_storage_account_names>
+curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh \
+  | bash -s -- <client_id> <subscription_id> <comma_separated_storage_account_names>
 ```
 
 Ensure your [shell environment][302] is set to Bash before running the script. Ensure that the you replace the various placeholder inputs with the correct values:
