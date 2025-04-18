@@ -12,7 +12,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning">This feature is available for Agent version `7.65.0` and above. For older Agent versions or to explicitly enable the V1 implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a> </div>
+<div class="alert alert-warning">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a> </div>
 
 ## Overview
 
@@ -24,51 +24,49 @@ To enable the Auto multi-line feature in your Agent configuration, set `auto_mul
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
-
 ```yaml
 logs_config:
   auto_multi_line_detection: true
 ```
-
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
-
 ```shell
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Default Settings
-
 By default, the following features are enabled:
 
 - `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format will be used to aggregate logs. 
 - `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs will never be aggregated. 
 
-You can disable these features by setting the following to `false` in your configuration file or in you environment variable:
+You can disable these features by setting the following to `false` in your configuration file or in your environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
-
 ```yaml
 logs_config:
   auto_multi_line:
     enable_datetime_detection: false
     enable_json_detection: false
-```
 
+```
 {{% /tab %}}
+
 {{% tab "Environment Variables" %}}
 
 ```shell
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_DATETIME_DETECTION=false
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_DETECTION=false
-```
 
+
+  
+```
 {{% /tab %}}
 {{< /tabs >}}
+  
 
 ### Enable multi-line aggregation per integration
 
@@ -85,9 +83,9 @@ logs:
 
 ### Supported datetime formats
 
-Auto multi-line detection uses a fuzzy algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. In order to prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
+Auto multi-line detection uses a algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. In order to prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
 
-Your datetime format should include both a date and time component to be detected. 
+Your datetime format should include both a _date_ and _time_ component to be detected. 
 
 Examples of formats that are long enough to be detected:
  - `2021-03-28 13:45:30`
@@ -155,7 +153,6 @@ Tokens include
 - datetime components. 
 
 Each Log token is compared with each Sample token. If 75% of the log's tokens match the sample's tokens, the log is marked for aggregation. 
-	
 Datadog recommends using sample based matching if your logs have a stable format. If you need more flexible matching you can use regex. 
 
 ### Regex Patterns
@@ -217,27 +214,16 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 
 Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step will assign a label to logs, and the aggregation step will aggregate the logs based on the labels that were assigned. 
 
-### Label Types
-| Label | Usage | Description |
-|---------|------|-------------|
+### Labels
+`start_group`
+: Defines _beginning of a multi-line log_<br> - Flushes any buffered multi-line log if present<br> - Starts new multi-line log<br> - Only one multi-line log can be buffered at a time
 
-|`start_group`| Defines **beginning of a multi-line log** | - Flushes any buffered multi-line log if present \b - Starts new multi-line log \b - Only one multi-line log can be buffered at a time|
-|`aggregate`| Is **added to existing multi-line log** | - If no multi-line log exists, flushes immediately \b - Default label when nothing else matches|
-|`no_aggregate`| Declares logs that are **never part of aggregation**|  - Flushes buffered multi-line log if present \b - Flushes sample immediately \b - Used for JSON logs|
+`aggregate`
+: Is _added to existing multi-line log_<br> - If no multi-line log exists, flushes immediately<br> - Default label when nothing else matches
 
-1. **start_group**: Beginning of a multi-line log
-   - Flushes any buffered multi-line log if present
-   - Starts new multi-line log
-   - Only one multi-line log can be buffered at a time
+`no_aggregate`
+: Declares logs that are _never part of aggregation_<br> - Flushes buffered multi-line log if present<br> - Flushes sample immediately <br>- Used for JSON logs
 
-2. **aggregate**: Adds to existing multi-line log
-   - If no multi-line log exists, flushes immediately
-   - Default label when nothing else matches
-
-3. **no_aggregate**: Never part of aggregation
-   - Flushes buffered multi-line log if present
-   - Flushes sample immediately
-   - Used for JSON logs
 
 ### Label Configuration
 
@@ -279,7 +265,7 @@ logs_config:
   tag_truncated_logs: true
 ```
 
-These settings add the following tags to your logs so you can search for them in the logs explorer:
+These settings add the following _tags_ to your logs so you can search for them in the logs explorer:
 
 - `multiline`: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
 - `truncated`: Shows truncation source (e.g., `single_line`, `multi_line`)
@@ -297,5 +283,12 @@ These settings add the following tags to your logs so you can search for them in
 | `logs_config.auto_multi_line.timestamp_detector_match_threshold` | Float | 0.5 | Timestamp matching threshold |
 | `logs_config.auto_multi_line.tokenizer_max_input_bytes` | Int | 60 | Bytes to tokenize |
 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/logs/auto_multiline_detection
 [2]: /agent/logs/auto_multiline_detection_legacy
+
+
