@@ -250,7 +250,7 @@ window.addEventListener('scroll', () => {
  * If Cdocs is running on this page,
  * tell it to refresh the TOC when content changes
  */
-if (clientFiltersManager) {
+if (window.clientFiltersManager) {
     // Update the TOC after the page is initially rendered
     // and before it is revealed
     clientFiltersManager.registerHook('beforeReveal', buildTOCMap);
