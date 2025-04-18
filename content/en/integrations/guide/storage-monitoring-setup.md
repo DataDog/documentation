@@ -1,5 +1,5 @@
 ---
-title: Storage Monitoring for Amazon S3 & Google Cloud Storage
+title: Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage
 private: true
 ---
 
@@ -7,15 +7,13 @@ private: true
 
 ## Overview
 
-Storage Monitoring for Amazon S3 & Google Cloud Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
+Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 & GCS buckets.
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets, GCS buckets, and Azure Storage Accounts.
 
-You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Storage Monitoring**.
+Access your Storage Monitoring data by navigating to **Infrastructure -> Storage Monitoring**.
 
-## Setup
-{{< tabs >}}
-{{% tab "Amazon S3" %}}
+## Setup for Amazon S3
 
 ### Installation
 
@@ -167,9 +165,7 @@ If you encounter any issues or need assistance:
 - Verify all permissions are correctly configured
 - If you're still encountering issues, [reach out][1] with your bucket details, AWS account ID, and Datadog org ID
 
-{{% /tab %}}
-
-{{% tab "Google Cloud Storage" %}}
+## Setup for Google Cloud Storage
 
 ### Installation
 
@@ -371,14 +367,14 @@ If you encounter any issues or need assistance:
 {{% /tab %}}
 
 
-{{% tab "Azure Blob Storage" %}}
+## Setup for Azure Blob Storage
 
 ### Installation
 
 To set up Storage Monitoring for Azure Blob Storage, follow these steps:
 
 {{< tabs >}}
-{{% tab "Automated Installation" %}}
+{{% tab "Azure CLI" %}}
 
 To enable inventories for the selected storage accounts in each subscription, run the following script in your [Azure Cloud Shell][301]: 
 
@@ -397,7 +393,7 @@ Ensure your [shell environment][302] is set to Bash before running the script. E
 [303]: https://learn.microsoft.com/en-us/azure/cloud-shell/get-started/classic?tabs=azurecli#select-your-shell-environment
 {{% /tab %}}
 
-{{% tab "Manual Installation" %}}
+{{% tab "Azure Portal" %}}
 
 For Each Storage Account you wish to monitor:
 
@@ -439,7 +435,7 @@ For Each Storage Account you wish to monitor:
 7.  Click **Review + assign**.
 
 {{% /tab %}}
-
+{{< tabs >}}
 
 ### Post-Installation
 
@@ -448,4 +444,4 @@ Once you finish with the above steps, fill out the [post-setup form][310].
 [310]: https://forms.gle/WXFbGyBwWfEo3gbM7
 
 
-{{< /tabs >}}
+
