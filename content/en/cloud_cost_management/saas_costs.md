@@ -427,7 +427,8 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "GitHub" %}}
 
-**Note**: The GitHub cost integration calculates costs with discounts. A discounted item contains the same `charge_description` as the list price item, a negative cost, and a `discount` tag.
+**Note**: The GitHub cost integration estimates costs based on list prices and usage data, and includes discount values when available. It does not account for any negotiated rates.
+
 
 | Tag Name | Tag Description |
 |---|---|
