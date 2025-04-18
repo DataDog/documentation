@@ -32,7 +32,7 @@ Sensitive permissions are flagged in the Roles and Permissions interfaces to ide
 
 ### Preview mode permissions
 
-Some permissions appear in "Preview Mode" before becoming fully enforced. During this period:
+Some permissions appear in "preview mode" before becoming fully enforced. During this period:
 
 - Preview permissions are marked in the app with a "Preview" badge
 - They do not restrict access until the preview period ends
