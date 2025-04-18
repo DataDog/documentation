@@ -12769,13 +12769,6 @@ components:
                 type: schedules
               - id: 00000000-aba3-0000-0000-000000000000
                 type: teams
-            - assignment: round-robin
-              escalate_after_seconds: 3600
-              targets:
-              - id: 00000000-aba1-0000-0000-000000000000
-                type: users
-              - id: 00000000-abb1-0000-0000-000000000000
-                type: users
           relationships:
             teams:
               data:
@@ -12812,7 +12805,7 @@ components:
           type: string
         name:
           description: Specifies the name for the new escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -12855,15 +12848,13 @@ components:
       type: object
     EscalationPolicyCreateRequestDataAttributesStepsItemsAssignment:
       description: Specifies how this escalation step will assign targets (example
-        `default` or `round-robin`).
+        `default`).
       enum:
       - default
-      - round-robin
       example: default
       type: string
       x-enum-varnames:
       - DEFAULT
-      - ROUND_ROBIN
     EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItems:
       description: Defines a single escalation target within a step for an escalation
         policy creation request. Contains `id` and `type`.
@@ -12945,13 +12936,12 @@ components:
           $ref: '#/components/schemas/EscalationPolicyDataAttributes'
         id:
           description: Specifies the unique identifier of the escalation policy.
+          example: ab000000-0000-0000-0000-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/EscalationPolicyDataRelationships'
         type:
           $ref: '#/components/schemas/EscalationPolicyDataType'
-      required:
-      - type
       type: object
     EscalationPolicyDataAttributes:
       description: Defines the main attributes of an escalation policy, such as its
@@ -12959,10 +12949,11 @@ components:
       properties:
         description:
           description: Provides a detailed text description of the escalation policy.
+          example: This is an escalation policy for on-call support.
           type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -12971,10 +12962,9 @@ components:
         retries:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
+          example: 2
           format: int64
           type: integer
-      required:
-      - name
       type: object
     EscalationPolicyDataRelationships:
       description: Represents the relationships for an escalation policy, including
@@ -13103,14 +13093,12 @@ components:
       type: object
     EscalationPolicyStepAttributesAssignment:
       description: Specifies how this escalation step will assign targets (example
-        `default` or `round-robin`).
+        `default`).
       enum:
       - default
-      - round-robin
       type: string
       x-enum-varnames:
       - DEFAULT
-      - ROUND_ROBIN
     EscalationPolicyStepRelationships:
       description: Represents the relationship of an escalation policy step to its
         targets.
@@ -13188,7 +13176,7 @@ components:
           type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13236,15 +13224,13 @@ components:
       type: object
     EscalationPolicyUpdateRequestDataAttributesStepsItemsAssignment:
       description: Specifies how this escalation step will assign targets (example
-        `default` or `round-robin`).
+        `default`).
       enum:
       - default
-      - round-robin
       example: default
       type: string
       x-enum-varnames:
       - DEFAULT
-      - ROUND_ROBIN
     EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItems:
       description: Defines a single escalation target within a step for an escalation
         policy update request. Contains `id` and `type`.
@@ -28655,6 +28641,7 @@ components:
           $ref: '#/components/schemas/ScheduleCreateRequestDataType'
       required:
       - type
+      - attributes
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
@@ -49812,7 +49799,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on call escalation policy
+      summary: Create on-call escalation policy
       tags:
       - On-Call
       x-given:
@@ -49828,14 +49815,10 @@ paths:
               \"{{ schedule.data.id }}\",\n              \"type\": \"schedules\"\n
               \           },\n            {\n              \"id\": \"{{ user.data.id
               }}\",\n              \"type\": \"users\"\n            }\n          ]\n
-              \       },\n        {\n          \"assignment\": \"round-robin\",\n
-              \         \"escalate_after_seconds\": 3600,\n          \"targets\":
-              [\n            {\n              \"id\": \"{{ dd_team.data.id }}\",\n
-              \             \"type\": \"teams\"\n            }\n          ]\n        }\n
-              \     ]\n    },\n    \"relationships\": {\n      \"teams\": {\n        \"data\":
-              [\n          {\n            \"id\": \"{{ dd_team.data.id }}\",\n            \"type\":
-              \"teams\"\n          }\n        ]\n      }\n    },\n    \"type\": \"policies\"\n
-              \ }\n}"
+              \       }\n      ]\n    },\n    \"relationships\": {\n      \"teams\":
+              {\n        \"data\": [\n          {\n            \"id\": \"{{ dd_team.data.id
+              }}\",\n            \"type\": \"teams\"\n          }\n        ]\n      }\n
+              \   },\n    \"type\": \"policies\"\n  }\n}"
           step: there is a valid "escalation_policy" in the system
       x-menu-order: 5
       x-undo:
@@ -49871,7 +49854,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on call escalation policy
+      summary: Delete on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
@@ -49915,7 +49898,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on call escalation policy
+      summary: Get on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
@@ -49965,7 +49948,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on call escalation policy
+      summary: Update on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
