@@ -1,3 +1,6 @@
+---
+{}
+---
 | Resource Type | Permissions |
 | ------------- | ----------- |
 | aws:apigateway:api | apigateway:GetRestApis |

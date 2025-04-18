@@ -1,3 +1,6 @@
+---
+{}
+---
 | Resource Type | Permissions |
 | ------------- | ----------- |
 | aws:ec2:volume | ec2:DescribeVolumes |

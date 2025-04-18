@@ -1,3 +1,6 @@
+---
+{}
+---
 | Resource Type | Permissions |
 | ------------- | ----------- |
 | aws:ec2:vpngateway | ec2:DescribeVpnGateways |

@@ -1,3 +1,6 @@
+---
+{}
+---
 | Resource Type | Permissions |
 | ------------- | ----------- |
 | aws:accessanalyzer:analyzer | access-analyzer:GetAnalyzer,<br/>access-analyzer:ListAnalyzers |

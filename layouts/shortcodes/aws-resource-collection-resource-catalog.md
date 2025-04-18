@@ -1,3 +1,6 @@
+---
+{}
+---
 | Resource Type | Permissions |
 | ------------- | ----------- |
 | aws:acm:acm | acm:DescribeCertificate,<br/>acm:ListCertificates |
