@@ -210,6 +210,18 @@ When `true`, user principal is collected. Available for versions 0.61+.
 **Default**: `100`<br>
 Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
 
+`dd.trace.http.server.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP request paths to custom resource names. Provide a comma‑separated list of `pattern:resource_name` pairs, where `pattern` is an [Ant‑style path pattern][20] that must match the value of the `http.path_group` span tag. Mappings are evaluated in order of priority, and the first matching rule applies. Unmatched request paths use the default normalization behavior.<br>
+**Example:**  
+Using `-Ddd.trace.http.server.path-resource-name-mapping=/admin/*.jsp:/admin-page,/admin/user/**:/admin/user` yields:
+Request path | Resource path
+------------ | -------------
+`/admin/index.jsp` | `/admin-page`
+`/admin/user/12345/delete` | `/admin/user`
+`/user/12345` | `/user/?`
+
 `dd.http.server.tag.query-string`
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
@@ -604,3 +616,4 @@ Deprecated since version 1.9.0
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
 [19]: /security/application_security/threats/setup/threat_detection/java/
+[20]: https://ant.apache.org/manual/dirtasks.html#patterns
