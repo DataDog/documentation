@@ -134,4 +134,3 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 [1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [5]: https://www.datadoghq.com/support/
-[6]: https://app.datadoghq.com/metric/summary
