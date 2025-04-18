@@ -69,27 +69,41 @@ function NewOptionGroupForm(props: {
         customizationConfig={props.customizationConfig}
         onSelect={handleExistingOptionGroupSelect}
       />
-      <h3>Option group ID</h3>
-      <TextField
-        value={optionGroupId}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setOptionGroupId(e.target.value);
-        }}
-        variant="outlined"
-        placeholder="e.g., rum_sdk_platform_options"
-        fullWidth
-        required
-      />
-      <h3>Options</h3>
-      <OptionSelector
-        customizationConfig={props.customizationConfig}
-        onStatusChange={(p) => {
-          if (p.status === 'done' && p.data) {
-            setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
-          }
-          setOptionSelectionFormStatus(p.status);
-        }}
-      />
+      {/* expanded={formStatus !== 'done'} */}
+      {/* onChange={handleAccordionToggle} */}
+      <Accordion aria-controls="new-option-group-form" id="new-option-group-form-header">
+        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+          <Typography component="span">I can't find a suitable option group in the list.</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <h3>Create a new option group</h3>
+          <h4>Option group ID</h4>
+          <TextField
+            value={optionGroupId}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setOptionGroupId(e.target.value);
+            }}
+            variant="outlined"
+            placeholder="e.g., rum_sdk_platform_options"
+            fullWidth
+            required
+          />
+          <h4>Options</h4>
+          <OptionSelector
+            customizationConfig={props.customizationConfig}
+            onStatusChange={(p) => {
+              if (p.status === 'done' && p.data) {
+                setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
+              }
+              setOptionSelectionFormStatus(p.status);
+            }}
+          />
+        </AccordionDetails>
+        <AccordionActions>
+          <Button variant="contained">Save</Button>
+          <Button variant="contained">Cancel</Button>
+        </AccordionActions>
+      </Accordion>
       <Button
         disabled={!optionGroupId || optionGroup.length < 2 || optionSelectionFormStatus !== 'done'}
         sx={{ marginTop: '15px' }}
@@ -103,3 +117,69 @@ function NewOptionGroupForm(props: {
 }
 
 export default NewOptionGroupForm;
+
+/*
+<Accordion
+      expanded={formStatus !== 'done'}
+      onChange={handleAccordionToggle}
+      aria-controls="new-option-group-form"
+      id="new-option-group-form-header"
+    >
+      <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+        <Typography component="span">I can't find a suitable option group in the list.</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <h4>Create a new option group</h4>
+        <p>
+          Option ID
+          <TextField
+            value={newOptionConfig.id}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handleFormChange({
+                ...newOptionConfig,
+                id: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., amazon_ec2"
+            fullWidth
+            required
+          />
+        </p>
+        <p>
+          Option label
+          <TextField
+            value={newOptionConfig.label}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handleFormChange({
+                ...newOptionConfig,
+                label: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., Amazon EC2"
+            fullWidth
+            required
+          />
+        </p>
+
+        {formErrors.length === 0 && (
+          <ul style={{ color: 'red' }}>
+            {formErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
+      </AccordionDetails>
+      <AccordionActions>
+        <Button
+          variant="contained"
+        >
+          Save
+        </Button>
+        <Button variant="contained">
+          Cancel
+        </Button>
+      </AccordionActions>
+    </Accordion>
+*/
