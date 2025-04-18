@@ -242,7 +242,7 @@ The signal is looking for an attempt to steal a user account by trying many diff
 
 Review the accounts flagged as compromised. Click on a user to open a summary of recent activity.
 
-{{<img src="security/ato/guide_user_menu.png" alt="Menu shown when hovering over a user pill. A button allowing to open the user side panel is highlighted in the top right" style="width:100%;" >}}
+{{<img src="security/ato/guide_user_menu.png" alt="Menu shown when hovering over a user pill. A button allowing to open the user side panel is highlighted in the top right" style="width:50%;" >}}
 
 Questions for triage:
 
@@ -326,7 +326,7 @@ If you want to initiate a partial response, do the following:
 
 The attackers are likely using a small number of IPs. To block them, open the signal and use Next Steps. You can set the duration of blocking. 
 
-{{<img src="security/ato/guide_next_steps.png" alt="Menu shown quick responses to the signal, from triaging the signal, to responding to the signal by blocking IPs or compromised users, to enabling automatic blocking" style="height:100%;" >}}
+{{<img src="security/ato/guide_next_steps.png" alt="Menu shown quick responses to the signal, from triaging the signal, to responding to the signal by blocking IPs or compromised users, to enabling automatic blocking" style="width:50%;" >}}
 
 Datadog recommends **12h**, which is enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. Datadog does not recommend permanent blocking.  
 You can also block compromised users, although a better approach would be to extract them and reset their credentials using your own systems.
@@ -376,7 +376,7 @@ In the following example, a lot of traffic comes from before the attack. This me
 
 In a different example, the activity from the cluster started with the attack. This means there shouldn't be collateral damage and you can proceed to block.
 
-{{<img src="security/ato/guide_cluster_explorer_tp.png" alt="Graph showing on a logarithmic scale very little traffic outside of the attacks" style="width:100%;" >}}
+{{<img src="security/ato/guide_cluster_explorer_tp.png" alt="Graph showing on a logarithmic scale very little traffic outside of the attacks" style="width:70%;" >}}
 
 After confirming that the traits match the attackers, you can push an In-App WAF rule to block requests matching those traits. This is supported for user agent-based traits only.
 
@@ -539,7 +539,7 @@ The Denylist can be managed and automated using the Datadog platform by clicking
 
 Use the **Automate Attacker Blocking** or **Block All Attacking IPs** signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users. As a reminder, Datadog doesn't recommend blocking IPs permanently due to risks of blocking legitimate traffic after IPs get recycled into public pools.  
 
-{{<img src="security/ato/guide_next_steps.png" alt="Menu shown quick responses to the signal, from triaging the signal, to responding to the signal by blocking IPs or compromised users, to enabling automatic blocking" style="height:100%;" >}}
+{{<img src="security/ato/guide_next_steps.png" alt="Menu shown quick responses to the signal, from triaging the signal, to responding to the signal by blocking IPs or compromised users, to enabling automatic blocking" style="width:50%;" >}}
 
 The blocking can be rescinded or extended from the [Denylist][27].
 
@@ -547,7 +547,7 @@ The blocking can be rescinded or extended from the [Denylist][27].
 
 If the signal wasn't accurate, you can extract the list or users or IPs and add it to the Denylist manually.
 
-{{<img src="security/ato/guide_denylist_new.png" alt="Prompt enabling you to add a new IP, user or user agent to the denylist" style="width:100%;" >}}
+{{<img src="security/ato/guide_denylist_new.png" alt="Prompt enabling you to add a new IP, user or user agent to the denylist" style="width:80%;" >}}
 
 #### In-App WAF rules
 
