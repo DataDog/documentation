@@ -262,7 +262,7 @@ This signal is looking for a large number of accounts with failed logins coming 
 
 {{<img src="security/ato/guide_signal_credential_stuffing.png" alt="Signal side-panel showing a credential stuffing signal with a compromised user" style="width:100%;" >}}
 
-Review the accounts flagged as targeted for some similarity and to establish those users sensitivity.
+Review the accounts flagged as targeted for similarities and to establish those users' sensitivity.
 
 {{<img src="security/ato/guide_user_table.png" alt="Table showing the users targeted by the attack. One user is shown in a pill because we have a side-panel with more activity on them" style="width:100%;" >}}
 
@@ -385,10 +385,10 @@ To create the rule, do the following:
 1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
-4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
+4. In **Select the services you want this rule to apply to**, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
 {{<img src="security/ato/guide_waf_blocking.png" alt="Screenshot of the WAF rule creation modal selecting a specific route on a specific service" style="width:100%;" >}}
 5. In **If incoming requests match these conditions**, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
-   1. If you want to block a specific user agent, you can paste it in **Values**. In **Operator**, you can use **matches value in list**, or if you want more flexibility, you can also use a **Matches RegEx**.
+   1. If you want to block a specific user agent, paste it in **Values**. In **Operator**, you can use **matches value in list**, or, if you want more flexibility, you can also use **Matches RegEx**.
 {{<img src="security/ato/guide_waf_blocking_ua.png" alt="A screenshot of a user agent getting blocked" style="width:100%;" >}}
 6. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
 {{<img src="security/ato/guide_waf_blocking_traces.png" alt="Table showing traces matching your rules" style="width:100%;" >}}
@@ -424,9 +424,9 @@ Next, start by isolating the attack's activity.
 
 Extract the list of targeted users by going to [Signals][1].
 
-You can generally query the traces for the targeted users by clicking on the `login attempts` link in the `Security Traces` section, at the top of the side panel.
+You can query the traces for the targeted users by clicking on the **login attempts** link in **Security Traces**.
 
-If you want direct access to the targeted users, you may extract the list from the signal side panel.
+If you want direct access to the targeted users, you can extract the list from the signal side panel.
 
 {{<img src="security/ato/guide_bruteforce_users.png" alt="Table showing attacked users" style="width:100%;" >}}
 
@@ -444,7 +444,7 @@ Successful logins should be considered suspicious.
 
 This signal flagged a lot of activity coming from a few IPs and is closely related to its distributed variant. You might need to use the distributed credential stuffing method if parts of the attack were missed by the signal.
 
-You can generally query the traces matched by the attacking IPs by clicking on the `login attempts` link in the `Security Traces` section, at the top of the side panel.
+You can query the traces matched by the attacking IPs by clicking on the **login attempts** link in **Security Traces**.
 
 If you want direct access to the attacking IPs, you may extract the list from the signal side panel.
 
@@ -469,7 +469,7 @@ In the diffuse attacks case, attacker attributes are available in the signal.
 {{<img src="security/ato/guide_signal_distributed_credential_stuffing.png" alt="Screenshot of a distributed credential stuffing signal" style="width:100%;" >}}
 
 1. After opening the signal in the side panel, click **Investigate in full screen**.   
-2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**, then, in **Traces**, click **View in AAP Traces Explorer**.
+2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**. Next, in **Traces**, click **View in AAP Traces Explorer**.
 
 This gets you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query, but you should expand it to also match login successes on top of the failures. You can do that by replacing `@appsec.security_activity:business_logic.users.login.failure` with `@appsec.security_activity:business_logic.users.login.*`. Review the exhaustiveness and accuracy of the filter using [the technique described above](#isolate-attacker-activity).
 
@@ -575,32 +575,34 @@ For more information, see [In-App WAF Rules][30].
 
 #### Automated data export
 
-You can configure a signal to push any user ID matched to a webhook. This method can be used to push compromised users to your systems and reset their credentials or restrict them. The goal is to make those accounts useless to the attacker.
+You can configure a signal to push any user ID using a webhook. This method can be used to push compromised users to your systems and reset their credentials or restrict them. The goal is to make those accounts useless to the attacker.
 
 <div class="alert alert-info">Not all rules are compatible with this feature. From the OOTB rules, the compatible rules are:
-- Distributed Credential Stuffing campaign (attacker fingerprint)
-- Bruteforce attack
-- Credential Stuffing attack
-</a></div>
+<ul>
+ <li>Distributed Credential Stuffing campaign (attacker fingerprint)</li>
+ <li>Bruteforce attack</li>
+ <li>Credential Stuffing attack</li>
+</ul>
+</div>
 
 To configure a signal to push a user ID using a webhook, do the following: 
-1. Configuring a [standard webhook target](/api/latest/webhooks-integration/). See also: [Automate the Remediation of Detected Threats with Webhooks](/security/cloud_siem/guide/automate-the-remediation-of-detected-threats/) which illustrates the feature in Cloud SIEM.
-2. In [Detection Rules](https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules), open the rules you want to configure. 
+1. Configuring a [standard webhook target][28]. To see how this works in Cloud SIEM, go to [Automate the Remediation of Detected Threats with Webhooks][29].
+2. In [Detection Rules][30], open the rules you want to configure. 
 {{<img src="security/ato/guide_detection_rules.png" alt="Tables of ATO-related detection rules" style="width:100%;" >}}
 3. Go to the notification settings in a detection rule condition. 
-4. Add a recipient and turn on _Notify for every new `@usr.id` detected_. This allows you to export the list when updates occur.
+4. Add a recipient and turn on **Notify** for every new `@usr.id` detected. This allows you to export the list when updates occur.
 
 {{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
 
-Notification targets set in the detection rule condition receive a message when new user IDs are detected. However, notification profiles monitoring these signals do not receive alerts for new user IDs.
+Notification targets set in the detection rule condition receive a message when new user IDs are detected. Notification profiles monitoring these signals do not receive alerts for new user IDs.
 
 To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Include the `$SECURITY_SIGNAL_ATTRIBUTES` variable in the webhook payload. The user IDs are stored under the `@usr.id` path in the JSON payload.
 
 {{<img src="security/application_security/threats/notify-on-update-payload.png" alt="Notify on update example payload" style="width:100%;">}}
 
-By parsing the payload, you can act upon those IDs in your own systems. 
+By parsing the payload, you can act upon the IDs in your own systems. 
 
-**Important:** The list only contains the IDs detected since the last notification. IDs aren't deduplicated if they login again.
+**Important:** The list only contains the IDs detected since the last notification. IDs aren't deduplicated if they log in again.
 
 ### Step 3.5: Monitor
 
@@ -730,6 +732,9 @@ This is general guidance. Depending on your applications and environments, there
 [25]: https://app.datadoghq.com/security/appsec/traces
 [26]: https://app.datadoghq.com/security
 [27]: https://app.datadoghq.com/security/appsec/denylist
+[28]: /api/latest/webhooks-integration/
+[29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
+[30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
 [28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
 [30]: /security/application_security/threats/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
