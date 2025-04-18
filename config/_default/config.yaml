@@ -154,6 +154,11 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  Partners:
+    baseName: "partners"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   Redirects:
     baseName: "redirects"
     isPlainText: true
