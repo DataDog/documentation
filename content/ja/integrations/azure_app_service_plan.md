@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/azure_appserviceplan
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure App Service Plan のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
