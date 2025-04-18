@@ -87,11 +87,11 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ## How it works
 
-Code Origins identifies the source code locations where APM spans originate. It captures two types of spans:
+Code Origins identifies the source code locations where APM spans originate. Code Origin details are captured for two types of spans:
 
-**Entry spans**: Shows the first method in your application code that handles an incoming request. The APM integration pinpoints the line of code where requests enter your system.
+**Entry spans**: The first method in your application code that handles an incoming request. The APM integration pinpoints the line of code where requests enter your system.
 
-**Exit spans**: Shows the exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code.
+**Exit spans**: The exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code.
 
 <div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
 
