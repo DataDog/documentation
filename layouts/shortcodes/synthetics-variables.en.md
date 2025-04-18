@@ -1,6 +1,6 @@
 ### Create local variables
 
-To create a local variable, click **Create a Local Variable**. You can select one of the following available builtins to add to your variable string:
+To create a local variable, click **+ All steps > Variables**. You can select one of the following available builtins to add to your variable string:
 
 &#x7b;&#x7b; numeric(n) &#x7d;&#x7d;
 : Generates a numeric string with `n` digits.
