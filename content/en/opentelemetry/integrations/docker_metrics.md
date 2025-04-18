@@ -129,7 +129,7 @@ The Docker Stats receiver generates container metrics for the OpenTelemetry Coll
 
 Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
 
-The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names:
+The following table shows the Datadog container metric names that correspond to OpenTelemetry container metric names:
 
 {{< mapping-table resource="dockerstats.csv">}}
 
