@@ -6215,7 +6215,7 @@ menu:
       weight: 107
     - name: Workload Protection
       url: security/workload_protection/
-      # pre: SecurityWorkloadSecurity
+      pre: security-workload-security
       parent: security_platform_heading
       identifier: workload_protection
       weight: 60000
