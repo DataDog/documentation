@@ -1,42 +1,16 @@
 import { useState } from 'react';
 import ExistingOptionGroupSelector from './ExistingOptionGroupSelector';
 import { CustomizationConfig } from 'cdocs-data';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import OptionSelector from './options/OptionSelector';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormStatus } from '../../../types';
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  };
-}
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ paddingTop: '20px', paddingBottom: '20px' }}>{children}</Box>}
-    </div>
-  );
-}
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Typography from '@mui/material/Typography';
 
 // TODO: Export all of these types from cdocs-data,
 // it doesn't make sense to have to redeclare them here
@@ -91,53 +65,39 @@ function NewOptionGroupForm(props: {
 
   return (
     <div>
-      <Tabs
-        value={currentTabIndex}
-        onChange={handleTabChange}
-        aria-label="basic tabs example"
-        TabIndicatorProps={{ style: { backgroundColor: '#632ca6' } }}
-        textColor="inherit"
+      <ExistingOptionGroupSelector
+        customizationConfig={props.customizationConfig}
+        onSelect={handleExistingOptionGroupSelect}
+      />
+      <h3>Option group ID</h3>
+      <TextField
+        value={optionGroupId}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setOptionGroupId(e.target.value);
+        }}
+        variant="outlined"
+        placeholder="e.g., rum_sdk_platform_options"
+        fullWidth
+        required
+      />
+      <h3>Options</h3>
+      <OptionSelector
+        customizationConfig={props.customizationConfig}
+        onStatusChange={(p) => {
+          if (p.status === 'done' && p.data) {
+            setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
+          }
+          setOptionSelectionFormStatus(p.status);
+        }}
+      />
+      <Button
+        disabled={!optionGroupId || optionGroup.length < 2 || optionSelectionFormStatus !== 'done'}
+        sx={{ marginTop: '15px' }}
+        variant="contained"
+        onClick={handleNewGroupSave}
       >
-        <Tab disableRipple label="Select from existing" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
-        <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
-      </Tabs>
-      <CustomTabPanel value={currentTabIndex} index={0}>
-        <ExistingOptionGroupSelector
-          customizationConfig={props.customizationConfig}
-          onSelect={handleExistingOptionGroupSelect}
-        />
-      </CustomTabPanel>
-      <CustomTabPanel value={currentTabIndex} index={1}>
-        <h3>Option group ID</h3>
-        <TextField
-          value={optionGroupId}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setOptionGroupId(e.target.value);
-          }}
-          variant="outlined"
-          placeholder="e.g., rum_sdk_platform_options"
-          fullWidth
-          required
-        />
-        <h3>Options</h3>
-        <OptionSelector
-          customizationConfig={props.customizationConfig}
-          onStatusChange={(p) => {
-            if (p.status === 'done' && p.data) {
-              setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
-            }
-            setOptionSelectionFormStatus(p.status);
-          }}
-        />
-        <Button
-          disabled={!optionGroupId || optionGroup.length < 2 || optionSelectionFormStatus !== 'done'}
-          sx={{ marginTop: '15px' }}
-          variant="contained"
-          onClick={handleNewGroupSave}
-        >
-          Save option group
-        </Button>
-      </CustomTabPanel>
+        Save option group
+      </Button>
     </div>
   );
 }
