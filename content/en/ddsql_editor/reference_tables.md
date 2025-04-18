@@ -14,7 +14,7 @@ The DDSQL Editor is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong> use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
 </div>
 
 # Overview
