@@ -1062,6 +1062,11 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_visual_studio
       weight: 703
+    - name: Live Debugger
+      url: developers/ide_plugins/live_debugger/
+      parent: ide_plugins
+      identifier: ide_plugins_debugger
+      weight: 704
     - name: Community
       url: developers/community/
       parent: dev_tools

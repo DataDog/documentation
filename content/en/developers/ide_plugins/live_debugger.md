@@ -1,4 +1,10 @@
 ---
+title: Live Debugger
+type: documentation
+products:
+- name: JetBrains IDEs
+  url: /developers/ide_plugins/idea/
+  icon: ide
 further_reading:
 - link: /dynamic_instrumentation/
   tag: Documentation
@@ -6,9 +12,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
-title: Live Debugger
-type: documentation
 ---
+{{< product-availability >}}
+
 ## Overview
 The Live Debugger enables you to add temporary log statements to your runtime code to collect information for debugging. The log statements (also referred to as "log probes") are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running system. The log probes can be edited or deleted at any time, and automatically expire after 60 minutes.
 
