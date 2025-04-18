@@ -1,6 +1,8 @@
 ---
 description: Agent expression attributes and operators for CSM Threats Rules
 disable_edit: true
+aliases:
+  - /security/threats/agent
 further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: Documentation
