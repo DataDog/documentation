@@ -5,6 +5,7 @@ import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
 import TraitForm from './forms/traits/NewTraitForm';
 import FlexibleTraitSelector from './forms/traits/FlexibleTraitSelector';
+import NewOptionGroupForm from './forms/optionGroups/NewOptionGroupForm';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -22,6 +23,10 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
+      <h1>Debug</h1>
+      <h2>NewOptionGroupForm:</h2>
+      <NewOptionGroupForm customizationConfig={customizationConfig} />
+      <hr />
       {filters.length === 0 && (
         <p>
           Click the button below to configure a filter and generate instructions for setting up a new customizable doc.

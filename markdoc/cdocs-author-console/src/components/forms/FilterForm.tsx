@@ -96,7 +96,10 @@ function FilterForm(props: {
         }}
       />
       <h2 style={formHeaderStyles}>Choose an option group</h2>
-      <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
+      <p style={{ fontSize: '0.9em' }}>
+        The list of options the user can select for this filter. For example, if you've chosen the{' '}
+        <code>prog_lang</code> trait above, your option group would contain options like Python and JavaScript.
+      </p>
       <OptionGroupForm customizationConfig={props.customizationConfig} onSave={handleOptionGroupSave} />
     </div>
   );
