@@ -434,7 +434,7 @@ For Each Storage Account you wish to monitor:
 7.  Click **Review + assign**.
 
 {{% /tab %}}
-{{< tabs >}}
+{{< /tabs >}}
 
 ### Post-Installation
 
