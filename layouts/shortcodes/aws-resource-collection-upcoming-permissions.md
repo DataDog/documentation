@@ -1,7 +1,6 @@
 ---
 {}
 ---
-## AWS IAM Permissions Required For Upcoming Resource Collection Releases
 ```json
 [
   "aps:DescribeRuleGroupsNamespace",
