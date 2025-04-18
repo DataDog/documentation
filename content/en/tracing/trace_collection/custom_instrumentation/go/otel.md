@@ -126,19 +126,19 @@ t := otel.Tracer("")
 
 ### Setting errors on a span
 
-To set an error on a span, use the `setStatus` method like this:
+To set an error on a span, use the otel SetAttributes or ddtrace WithError options.
 
 ```go
 // Start a span.
-ctx, span := t.Start(context.Background(), "span_name")
+ctx, span := t.Start(context.Background(), "spanName") // where `t` refers to otel/trace
 
 ...
 // Set an error on a span with 'span.SetAttributes'.
-span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
+span.SetAttributes(attribute.String(ext.ErrorMsg, "errorMsg"))
 
 // ALternatively, it is possible to set an error on a span via end span options. 
-EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
-sp.End()
+EndOptions(span, tracer.WithError(errors.New("myErr"))) // where `tracer` refers to ddtrace/tracer
+span.End()
 
 ```
 
