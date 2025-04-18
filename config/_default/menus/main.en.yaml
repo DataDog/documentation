@@ -3782,6 +3782,11 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
+    - name: Code Origins for Spans
+      url: tracing/guide/code_origins
+      parent: tracing
+      identifier: tracing_code_origins
+      weight: 7
     - name: Service Observability
       url: tracing/services/
       parent: tracing
