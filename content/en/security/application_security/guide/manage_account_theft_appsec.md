@@ -600,7 +600,7 @@ To receive targeted and compromised user IDs with a webhook, set up a webhook us
 
 By parsing the payload, you can act upon those IDs in your own systems. 
 
-**Important:** The list only contains the IDs detected since the last notification. IDs aren’t deduplicated if they login again.
+**Important:** The list only contains the IDs detected since the last notification. IDs aren't deduplicated if they login again.
 
 ### Step 3.5: Monitor
 
