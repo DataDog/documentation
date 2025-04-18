@@ -56362,7 +56362,6 @@ paths:
         - security_monitoring_rules_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.'
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
