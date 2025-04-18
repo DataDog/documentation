@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: docs10556/aws-resource-collection-mappings
+          branch: prod
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
@@ -573,8 +573,7 @@
           options:
             base_path: ""
             dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-upcoming-permissions"
-
+            file_name: "aws-resource-collection-upcoming-permissions.md"
 
       - repo_name: web-ui
         contents:
