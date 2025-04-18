@@ -7,6 +7,10 @@ further_reading:
   - link: "/security/application_security/threats/threat-intelligence/"
     tag: "documentation"
     text: "AAP Threat Intelligence"
+  - link: "/security/cloud_siem/threat_intelligence/"
+    tag: "documentation"
+    text: "Cloud SIEM Threat Intelligence"
+
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
@@ -87,6 +91,8 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | AAP and Cloud SIEM |
 | disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | AAP |
+| C2 | suspicious | domains  | Detect communication with known command and control domains | Cloud SIEM |
+| Phishing | suspicious | domains  | Identify phishing domains used in credential harvesting or brand impersonation | Cloud SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |
