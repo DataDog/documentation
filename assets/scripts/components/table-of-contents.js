@@ -246,18 +246,22 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-/* Tell Cdocs to refresh the TOC when content changes */
+/**
+ * If Cdocs is running on this page,
+ * tell it to refresh the TOC when content changes
+ */
+if (clientFiltersManager) {
+    // Update the TOC after the page is initially rendered
+    // and before it is revealed
+    clientFiltersManager.registerHook('beforeReveal', buildTOCMap);
 
-// Update the TOC after the page is initially rendered
-// and before it is revealed
-clientFiltersManager.registerHook('beforeReveal', buildTOCMap);
+    // Update the active header in the TOC after the page is revealed
+    clientFiltersManager.registerHook('afterReveal', buildTOCMap);
+    clientFiltersManager.registerHook('afterReveal', onScroll);
 
-// Update the active header in the TOC after the page is revealed
-clientFiltersManager.registerHook('afterReveal', buildTOCMap);
-clientFiltersManager.registerHook('afterReveal', onScroll);
-
-// Update the active header in the TOC after the page is re-rendered
-clientFiltersManager.registerHook('afterRerender', buildTOCMap);
-clientFiltersManager.registerHook('afterRerender', onScroll);
+    // Update the active header in the TOC after the page is re-rendered
+    clientFiltersManager.registerHook('afterRerender', buildTOCMap);
+    clientFiltersManager.registerHook('afterRerender', onScroll);
+}
 
 DOMReady(handleAPIPage);
