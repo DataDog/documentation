@@ -432,7 +432,6 @@ Create a customized scatterplot that uses text marks instead of points, with aut
 ```
 {{% /collapse-content %}}
 
-## Categorical Heatmap with Time Filtering
 
 ## Categorical Heatmap with Time Filtering
 
@@ -503,7 +502,6 @@ The following image shows a variation of the heatmap that displays hourly patter
 ```
 {{% /collapse-content %}}
 
-## Lollipop Chart
 
 ## Lollipop Chart
 
