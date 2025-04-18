@@ -71,7 +71,11 @@ function NewOptionGroupForm(props: {
       />
       {/* expanded={formStatus !== 'done'} */}
       {/* onChange={handleAccordionToggle} */}
-      <Accordion aria-controls="new-option-group-form" id="new-option-group-form-header">
+      <Accordion
+        sx={{ border: '1.5px solid #632ca6' }}
+        aria-controls="new-option-group-form"
+        id="new-option-group-form-header"
+      >
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
           <Typography component="span">I can't find a suitable option group in the list.</Typography>
         </AccordionSummary>

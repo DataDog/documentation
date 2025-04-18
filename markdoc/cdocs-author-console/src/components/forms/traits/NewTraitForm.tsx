@@ -97,7 +97,11 @@ function NewTraitForm(props: {
 
   return (
     <div>
-      <Accordion expanded={formStatus !== 'done'} onChange={handleAccordionToggle}>
+      <Accordion
+        sx={{ border: '1.5px solid #632ca6' }}
+        expanded={formStatus !== 'done'}
+        onChange={handleAccordionToggle}
+      >
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
           <Typography component="span">I couldn't find the trait I need.</Typography>
         </AccordionSummary>

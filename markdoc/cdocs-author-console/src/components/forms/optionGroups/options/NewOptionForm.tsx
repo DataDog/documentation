@@ -96,6 +96,7 @@ function NewOptionForm(props: {
       onChange={handleAccordionToggle}
       aria-controls="new-option-form"
       id="new-option-form-header-header"
+      sx={{ border: '1.5px solid #b48fe1' }}
     >
       <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
         <Typography component="span">An option I need is missing from the list.</Typography>
