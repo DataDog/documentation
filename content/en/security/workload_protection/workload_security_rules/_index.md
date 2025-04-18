@@ -3,19 +3,7 @@ title: Workload Protection Detection Rules
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
-further_reading:
-- link: "/security/threats/setup"
-  tag: "Documentation"
-  text: "Setting Up Workload Protection"
-- link: "/security/workload_protection/agent_expressions"
-  tag: "Documentation"
-  text: "Agent Expressions"
-- link: "security/threats/backend"
-  tag: "Documentation"
-  text: "Workload Protection Events"
-- link: "/security/notifications/variables/"
-  tag: "Documentation"
-  text: "Learn more about Security notification variables"
+  - /security/threats/workload_security_rules
 ---
 
 This topic explains how Workload Protection actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
@@ -93,9 +81,9 @@ For a detailed explanation, see [Workload Protection Detection Rules][11].
 
 Agent rules contain [Agent expressions](#agent-expressions) that determine which activities the Agent collects. A full set of Agent rules is called a policy. Datadog provides you with several [out-of-the-box Agent rules][6] powered by the default Agent policy.
 
-With [Remote Configuration][7] enabled, you automatically receive new and updated Workload Protection Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
+With [Workload Protection][7] enabled, you automatically receive new and updated Workload Protection Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
 
-<div class="alert alert-info">Remote Configuration for Workload Protection is in Preview. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<!-- <div class="alert alert-info">Remote Configuration for Workload Protection is in Preview. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div> -->
 
 ### Agent expressions
 
@@ -125,9 +113,6 @@ Putting it all together, the rule expression is `exec.file.path == "/usr/bin/bas
 
 Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the [detection rules][3]. If the pattern matches a detection rule, a [security signal][8] is generated. Datadog continuously develops new detection rules, which are automatically imported into your account.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/#cat-workload-security
 [2]: /security/workload_protection/agent_expressions
@@ -135,7 +120,7 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
+[7]: https://app.datadoghq.com/security/configuration/workload/setup
 [8]: /security/workload_protection/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules

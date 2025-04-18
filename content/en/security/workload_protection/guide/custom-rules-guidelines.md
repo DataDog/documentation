@@ -1,5 +1,7 @@
 ---
 title: Guidelines for Writing Custom Workload Protection Rules
+aliases:
+  - /security/cloud_security_management/guide/custom-rules-guidelines
 further_reading:
 - link: "/security/workload_protection/workload_security_rules"
   tag: "Documentation"

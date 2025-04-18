@@ -1,5 +1,7 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
+aliases:
+  - /security/cloud_security_management/guide/active-protection
 further_reading:
 - link: "security/workload_protection/workload_security_rules"
   tag: "Documentation"
@@ -51,7 +53,7 @@ Active Protection is enabled at the organization level.
 
 To check if Active Protection is already enabled in your organization, go to [Agent Configuration][2]. If Active Protection is enabled, a **Protection** column is displayed in the Agent rule list.
 
-{{< img src="security/cws/guide/protection-column.png" alt="The protection column indicates that Active Protection is enabled in the org" style="width:100%;" >}}
+<!-- {{< img src="security/cws/guide/protection-column.png" alt="The protection column indicates that Active Protection is enabled in the org" style="width:100%;" >}} -->
 
 If Active Protection is available for a crypto mining rule, then **Monitoring** or **Blocking** is listed in the **Protection** column.
 
@@ -79,10 +81,10 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to Cloud Security [Agent Configuration][2] rules.
+1. Go to CSM [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
-    {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}
+    <!-- {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}} -->
 
 After Active Protection is enabled, the Agent Configuration rules list contains a **Protection** column.
 

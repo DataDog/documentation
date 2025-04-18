@@ -1,18 +1,7 @@
 ---
 title: Create Policies and Custom Rules
-further_reading:
-- link: "/security/threats/setup"
-  tag: "Documentation"
-  text: "Setting Up Workload Protection"
-- link: "/security/workload_protection/agent_expressions"
-  tag: "Documentation"
-  text: "Agent Expressions"
-- link: "security/threats/backend"
-  tag: "Documentation"
-  text: "Workload Protection Events"
-- link: "/security/notifications/variables/"
-  tag: "Documentation"
-  text: "Learn more about Security notification variables"
+aliases:
+  - /security/threats/workload_security_rules/custom_rules
 ---
 
 This topic explains how to create custom Datadog Agent policies and detection rules for [Workload Protection][8].
@@ -33,7 +22,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 ## Policies
 
-Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security > Agent Configuration][3].
+Rules are managed and applied using [policies][3].
 
 You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
 
@@ -48,7 +37,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Create a policy
 
-1. Go to [Security > Cloud Security > Agent Configuration][3].
+1. Go to [Agent Configuration][3].
 2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
 3. Enter a name for the policy and click **Create**.
    The new policy is created and placed as the top priority, but it is not enabled or deployed.
@@ -60,7 +49,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Prioritize policies
 
-1. Go to [Security > Cloud Security > Agent Configuration][3].
+1. Go to [Agent Configuration][3].
 2. Click **Determine Priority**.
 3. Drag the policies to set their priority.
 4. Click **Confirm Reordering**.
@@ -75,7 +64,7 @@ When a policy is overridden, the **Overridden** status is displayed. Hover over 
 
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
-1. Go to [Security > Cloud Security > Agent Configuration][3].
+1. Go to [Agent Configuration][3].
 2. Hover over a policy, or open a policy, and click **Apply Tags & Deploy Policy**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
@@ -116,7 +105,7 @@ As you define the rules using this tool, the threat expressions generated for th
 
 To use the Assisted rule creator:
 
-1. Go to [Security > Cloud Security > Agent Configuration][3].
+1. Go to [Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
@@ -136,7 +125,7 @@ To use the Assisted rule creator:
 
 You can create a custom Agent rule and deploy it as part of a new Agent policy. Later, when defining a custom [detection rule][3], you reference the custom Agent rule and add expression parameters.
 
-1. Go to [Security > Cloud Security > Agent Configuration][3].
+1. Go to [Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Manual rule creator**.
 4. Add a name and description for the rule.
@@ -211,7 +200,7 @@ You can use Remote Configuration in the Datadog UI to automatically deploy the c
 
 To enable a policy using Remote Configuration in the Datadog UI, do the following:
 
-1. On the **Agent Configuration** page, hover over a policy and click **Apply Tags & Deploy Policy**. You can also open a policy and click **Apply Tags & Deploy Policy**.
+1. On [Agent Configuration][3], hover over a policy and click **Apply Tags & Deploy Policy**. You can also open a policy and click **Apply Tags & Deploy Policy**.
 2. Add tags to identify the target infrastructure.
 3. Select **Enabled**.
 4. Click **Apply**. The policy is applied to all infrastructure targeted by the policy tags.
@@ -224,7 +213,7 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 
 After you upload the new default policy file to the Agent, navigate to the [**Threat Detection Rules**][3] page.
 
-1. On the [**Threat Detection Rules**][3] page, select **New Rule**, and then select **Manual rule creator**.
+1. On [Agent Configuration][3], select **New Rule**, and then select **Manual rule creator**.
 2. **Select a rule type:**
    1. In **Detection rule types**, select **Workload Security**. 
    2. Select a detection method such as **Threshold** or **New Value**.
@@ -253,10 +242,6 @@ Datadog recommends including a remediation [runbook][10] in the body. As noted i
 4. Click **Save Changes**.
 
 You can also disable a rule by setting the **Then...** section of a rule to **Do Nothing**.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]:#create-the-custom-agent-and-detection-rules-together
 [2]:#create-a-custom-agent-rule
