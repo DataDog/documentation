@@ -23,10 +23,10 @@ further_reading:
     text: "Begin detecting threats with Cloud SIEM"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
-    text: "Start tracking misconfigurations with CSM Misconfigurations"
+    text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
@@ -87,11 +87,11 @@ cascade:
 
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
 
-Datadog Security includes [Application Security](#application-security), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
+Datadog Security includes [Application Security](#application-security), [Cloud SIEM](#cloud-siem), and [Cloud Security](#cloud-security). To learn more, check out the [30-second Product Guided Tour][14].
 
-## Application Security
+##  App and API Protection
 
-Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
 - [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
@@ -106,13 +106,13 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
-## Cloud Security Management
+## Cloud Security
 
-[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+[Cloud Security][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+Cloud Security includes [Workload Protection][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 
 To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
