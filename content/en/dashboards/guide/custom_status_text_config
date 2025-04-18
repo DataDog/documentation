@@ -593,9 +593,6 @@ This example demonstrates how to create a status widget that displays Firefox us
 
 {{< img src="dashboards/guide/wildcard_examples/custom_status_text.png" alt="Custom status text widget showing Firefox usage statistics with conditional coloring based on comparison with Safari usage" style="width:100%;" >}}
 
-{{< img src="dashboards/guide/wildcard_examples/custom_status_text_config.png" alt="Configuration for the custom status text widget" style="width:100%;" >}}
-
-
 {{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
 ```
 {
