@@ -94,6 +94,32 @@ receivers:
 
 {{< /tabs >}}
 
+## Correlate traces with container metrics
+
+To correlate trace and container metrics, configure [Universal Service Monitoring attributes][4] for each service, and set the following resource attributes for each service: 
+
+| Attribute                                | Value                                                          | Description                                                                                                                                                     |
+|------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container.id` (**Required**)            | The Docker container ID.                                       | Identifies the container and enables correlation between spans and container metrics. If the attribute is missing, container metric views are not shown in APM. |
+| `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Display name in the UI.                                                                                                                                         |
+| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.                                                                          |
+
+To populate these attributes:
+- **Using the Collector**: The `docker_stats` receiver automatically sets these attributes for you.
+- **Using the Datadog Agent**: Add a container resource detector in your application code.  
+   For example, using Go:
+   ```go
+   // resource.WithContainer() adds container.id so the Agent can tag the spans
+   res, err := resource.New(
+       ctx,
+       resource.WithContainer(),                    
+       resource.WithFromEnv(),
+       semconv.ServiceNameKey.String("calendar"),   
+   )
+   ```
+
+See the complete example in [opentelemetry-examples][8].
+
 ## Data collected
 
 The Docker Stats receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts for use in the following views:
@@ -101,15 +127,9 @@ The Docker Stats receiver generates container metrics for the OpenTelemetry Coll
 - [Containers Overview default dashboard][6]
 - [APM Trace view][7] with container metrics
 
-**Note**: To correlate trace and container metrics, configure [Universal Service Monitoring attributes][4] for each service, and set the following resource attributes for each service: 
-  - `k8s.container.name` 
-  - `k8s.pod.name` 
-  - `container.name` 
-  - `container.id`
-
 Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
 
-The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names
+The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names:
 
 {{< mapping-table resource="dockerstats.csv">}}
 
@@ -152,3 +172,4 @@ Value: 0.170933
 [5]: /opentelemetry/guide/semantic_mapping/
 [6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [7]: /tracing/trace_explorer/trace_view/
+[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go#L133
