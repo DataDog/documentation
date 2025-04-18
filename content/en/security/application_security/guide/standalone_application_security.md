@@ -38,7 +38,7 @@ For AAP Threat Management, add the `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENABL
 For Code Security, add the `DD_APM_TRACING_ENABLED=false DD_IAST_ENABLED=true` environment variable.
 
 
-[1]: /security/application_security/workload_protection/
+[1]: /security/workload_protection/
 [2]: /security/application_security/code_security/
 [3]: /tracing/
 [4]: /security/application_security/threats/setup/

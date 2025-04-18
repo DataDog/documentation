@@ -74,4 +74,4 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [7]: /security/threats/setup
 [8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
-[10]: /security/cloud_security_management/guide/active-protection
+[10]: /security/workload_protection/guide/active-protection

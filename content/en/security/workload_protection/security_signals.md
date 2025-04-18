@@ -19,7 +19,7 @@ further_reading:
 
 To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
 
-{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+<!-- {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}} -->
 
 ## Filter security signals
 
@@ -68,10 +68,6 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 3. Click **Run Workflow**.
 4. On the workflow modal, select the workflow you want to run. The workflow must have a security trigger to appear in the list. Depending on the workflow, you may be required to enter additional input parameters.
 5. Click **Run**.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/notifications/rules/
 [2]: /account_management/audit_trail/events/#cloud-security-platform-events

@@ -154,7 +154,7 @@ runtime_security_config:
 Ensure you perform the following configuration requirements before deploying the Agent:
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
-2. Install/update the Agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4].
+2. Install/update the Agent with [Workload Protection enabled][4].
 3. Specify additional configurations from the previous **eBPF-less agent setup** sections to install the custom version and enable eBPF-less mode.
 
 
@@ -417,6 +417,6 @@ To attach to an application, you’ll need the following:
 [1]: https://ebpf.io/what-is-ebpf/
 [2]: https://github.com/DataDog/datadog-agent
 [3]: /security/guide/aws_fargate_config_guide/?tab=amazonecs
-[4]: /security/cloud_security_management/setup/agent
+[4]: https://app.datadoghq.com/security/configuration/workload/setup
 [5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: https://docs.docker.com/network/

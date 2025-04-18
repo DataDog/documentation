@@ -269,7 +269,7 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
-[12]: /security/cloud_security_management/guide/active-protection
+[12]: /security/workload_protection/guide/active-protection
 [13]: #disable-default-agent-rules
 [14]: #create-the-custom-agent-and-detection-rules-together
 [15]: https://app.datadoghq.com/cost/settings/tags

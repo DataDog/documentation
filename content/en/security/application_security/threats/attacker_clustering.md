@@ -69,4 +69,4 @@ The attacker clustering attributes selected are then shown as regular expression
 [1]: /security/application_security/threats/threat-intelligence/
 [2]: /security/application_security/threats/attacker_fingerprint
 [3]: /security/application_security/threats/event_rules
-[4]: /security/application_security/workload_protection/security_signals/
+[4]: /security/workload_protection/security_signals/

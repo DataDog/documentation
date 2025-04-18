@@ -6224,9 +6224,9 @@ menu:
       parent: workload_protection
       identifier: workload_protection_workload_security_rules
       weight: 201
-    - name: Create Policies and Custom Rules
+    - name: Custom Rules
       url: security/workload_protection/workload_security_rules/custom_rules
-      parent: cws_workload_security_rules
+      parent: workload_protection_workload_security_rules
       identifier: workload_protection_custom_rules
       weight: 101
     - name: Investigate Security Signals
@@ -6244,11 +6244,26 @@ menu:
       parent: workload_protection
       identifier: workload_protection_agent_expressions
       weight: 204
+    - name: Linux Syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_agent_expressions
+      identifier: linux_expressions
+      weight: 1
+    - name: Windows Syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_agent_expressions
+      identifier: windows_expressions
+      weight: 2
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
       identifier: workload_protection_guides
-      weight: 204
+      weight: 205
+    - name: Troubleshooting
+      url: security/workload_protection/troubleshooting/threats
+      parent: workload_protection
+      identifier: workload_protection_troubleshooting
+      weight: 206
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -6359,11 +6374,6 @@ menu:
       parent: csm
       identifier: csm_troubleshooting
       weight: 12
-    - name: Threats
-      url: security/cloud_security_management/troubleshooting/threats/
-      parent: csm_troubleshooting
-      identifier: csm_troubleshooting_threats
-      weight: 1201
     - name: Vulnerabilities
       url: security/cloud_security_management/troubleshooting/vulnerabilities/
       parent: csm_troubleshooting

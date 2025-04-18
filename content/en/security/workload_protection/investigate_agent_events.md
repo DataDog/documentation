@@ -45,7 +45,7 @@ The event details include the attributes, [metrics][16], and [processes][15]. **
 
 In **Path**, the latest process tree is displayed. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
 
-{{< img src="security/csm/agent_events_explorer_details.png" alt="Your image description" style="width:100%;" >}}
+<!-- {{< img src="security/csm/agent_events_explorer_details.png" alt="Your image description" style="width:100%;" >}} -->
 
 **Path** is often the best place to start your investigation of an event.
 
@@ -61,10 +61,6 @@ To triage an event:
 6. Review the rule **Goal**, **Strategy**, and follow the steps in **Triage and response**.
 
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [11]: /security/workload_protection/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
@@ -72,4 +68,4 @@ To triage an event:
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
-[18]: /security/cloud_security_management/guide/active-protection
+[18]: /security/workload_protection/guide/active-protection
