@@ -39,7 +39,7 @@ Some permissions appear in "preview mode" before becoming fully enforced. During
 - The preview typically lasts 2-4 weeks before enforcement begins
 - Administrators should configure roles appropriately during this period
 
-Preview mode gives organization administrators the ability to opt-in to certain new permissions to prevent losing access to resources that were previously unrestricted. Release notes associated with each preview mode permission indicate when the permission is created and when it will be enforced. While these permissions don't restrict access during preview, it's recommended to update role configurations before they become enforced to prevent disruption.
+Preview mode gives your organization's administrators the ability to opt into certain new permissions, so they can prevent losing access to resources that were previously unrestricted. Release notes associated with each preview mode permission indicate when the permission is created and when it will be enforced. While these permissions don't restrict access during preview, Datadog recommends updating role configurations before they become enforced to prevent disruption.
 
 ### Managed roles
 
