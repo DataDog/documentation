@@ -36,7 +36,7 @@ Anomalies with the most unexpected costs are at the top, so that it is easier to
 
 This is an example of the list of anomalies detected in your infrastructure:
 
-{{< img src="cloud_cost/anomalies/cost_anomalies_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies_new_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
 ## Take action on anomalies
 
