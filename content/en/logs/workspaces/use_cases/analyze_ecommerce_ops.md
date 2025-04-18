@@ -22,12 +22,12 @@ Using Log Workspaces for e-commerce monitoring offers several advantages:
 This guide demonstrates how to use Log Workspaces with an example focusing on payment failures and customer ratings.
 
 ## Understanding the data
-Follow this example to understand how to correlate **payment processing errors** from your `web-store` service with **negative customer ratings and reviews** from the `shopist-customer-feedback` service. It also demonstartes how to quantify the **revenue impact** of bad ratings caused by failed payment experiences.
+Follow this example to understand how to correlate **payment processing errors** from your `web-store` service with **negative customer ratings and reviews** from the `shopist-customer-feedback` service. It also demonstrates how to quantify the **revenue impact** of bad ratings caused by failed payment experiences.
 
 The example focuses on two critical aspects of e-commerce operations:
 
-- **Payment Processing**: Logs from the payment gateway indicating successful and failed transactions  
-- **Customer Feedback**: Ratings and reviews submitted after purchase attempts
+* **Payment Processing**: Logs from the payment gateway indicating successful and failed transactions  
+* **Customer Feedback**: Ratings and reviews submitted after purchase attempts
 
 ## Bringing in your data source and building your queries
 
@@ -89,7 +89,7 @@ The query from the Analysis cell populates a table showing payment errors that r
 
 {{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/analysis_join_bad_ratings_with_payment_errors.png" alt="SQL query results showing payment errors with associated customer feedback, merchant information, and value categorization" caption="Analysis results showing correlated payment errors and customer feedback, with transactions categorized by value tier for prioritization." style="width:100%;" >}}
 
-## Visualizing the data
+## Visualize the data
 
 Log Workspaces provides powerful visualization capabilities to transform your e-commerce data into actionable insights:
 
@@ -98,21 +98,29 @@ Log Workspaces provides powerful visualization capabilities to transform your e-
 * **Value tier distribution**: Visualize the proportion of issues affecting high vs. low value transactions
 * **Geo-distribution maps**: See where payment issues are occurring geographically
 
-{{< img src="static/images/logs/workspace/use_cases/analyze_ecommerce_ops/visualization_most_bad_ratings.png" alt="Visualization of e-commerce data showing payment errors by merchant and value tier" caption="Visualization showing the distribution of payment errors by merchant and value tier, highlighting which sellers have the most high-value transaction issues." style="width:100%;" >}}
-
-These visualizations help e-commerce businesses make data-driven decisions to improve checkout flows, address payment gateway issues, and enhance the overall shopping experience for customers.
-
+{{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/visualization_most_bad_ratings.png" alt="Visualization of e-commerce data showing payment errors by merchant and value tier" caption="Treemap graph showing the distribution of payment errors by merchant and value tier, highlighting which sellers have the most high-value transaction issues." style="width:100%;" >}}
 
 ## Advanced analysis on SQL queries
 
-### Using Reference Tables
+Reference tables in Log Workspaces allow you to import additional contextual data to enrich your analysis. For e-commerce operations, reference tables can provide critical business context that isn't available in your logs alone.
 
-### Join the data to get the Point of Contact (POC) coupled with the previous analysis.
+In this example, we'll use a reference table containing merchant details to enhance our payment error analysis:
 
-### Sum the total revenue lost from orders that received a bad rating.
+### 1. Create a reference table
+Upload a CSV file with merchant information or query it from another data source.
+{{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/merch_details.png" alt="Reference table showing merchant details including merchant ID, name, contact information, and tier status for e-commerce analysis" style="width:100%;" >}}
 
-### Visualize the Total Lost Revenue.
+### 2. Join with log data
+Use the merchant ID as the common key to connect log data with merchant details. In the example, analysis combines payment error logs with merchant reference data to provide business context for troubleshooting.
+{{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/combined_salesforce.png" alt="SQL query joining log data with merchant reference table to provide business context for payment errors"  style="width:100%;" >}}
 
+### 3. Calculated field queries
+Add business context like merchant tier, contract details, or support contacts. The following [Calculated Field][3] query computes the sum of lost revenue from failed transactions, grouped by merchant tier to identify high-impact segments:
+{{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/sum_lost_revenue.png" alt="SQL query calculating total lost revenue from failed transactions by merchant tier" style="width:100%;" >}}
+
+### 4. Visualize the results
+Create charts to visualize the lost revenue by merchant tier for clearer business impact assessment. The following pie chart displays the distribution of lost revenue across different merchant tiers, highlighting which segments contribute most to revenue loss and require immediate attention. This graph makes it easier for stakeholders to quickly identify which merchant categories are experiencing the highest financial impact from failed transactions.
+{{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/visualize_total_loss_revenue.png" alt="Visualization of total lost revenue from failed transactions by merchant tier" style="width:100%;" >}}
 
 ## Further reading
 
@@ -120,3 +128,4 @@ These visualizations help e-commerce businesses make data-driven decisions to im
 
 [1]: /logs/workspaces/#create-a-workspace-and-add-a-data-source
 [2]: /logs/workspaces/#visualization-cell
+[3]: /logs/workspaces/#calculated-fields-queries
