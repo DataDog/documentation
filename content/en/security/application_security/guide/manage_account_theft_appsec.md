@@ -34,7 +34,7 @@ This step describes how to set up your service to use AAP.
 
 1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
 
-{{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
 
 2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
