@@ -40,16 +40,16 @@ For more information on advanced profile details, review the [Profile Format Ref
   - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
 - To [automatically apply created device profiles](#apply-a-profile-to-created-devices) using Remote Configuration, ensure the following setting is enabled in your `datadog-agent/conf.d/snmp.d/conf.yaml` file:
 
-  ```yaml
-  init_config:
-    loader: core
-    use_device_id_as_hostname: true
-    min_collection_interval: 15
-    use_remote_config_profiles: true
+  {{< highlight yaml "hl_lines=5" >}}
+    init_config:
+      loader: core
+      use_device_id_as_hostname: true
+      min_collection_interval: 15
+      use_remote_config_profiles: true
 
-  instances:
-  ......
-  ```
+    instances:
+    ......
+  {{< /highlight >}}
 
 ## Setup
 
