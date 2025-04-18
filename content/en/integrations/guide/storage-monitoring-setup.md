@@ -364,7 +364,6 @@ If you encounter any issues or need assistance:
 [2]: https://cloud.google.com/storage/docs/insights/using-inventory-reports#enable_the_api
 [3]: https://forms.gle/c7b8JiLENDaUEqGk8
 
-{{% /tab %}}
 
 
 ## Setup for Azure Blob Storage
