@@ -5,9 +5,9 @@ import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { OptionConfig, FormStatus } from '../../../../types';
 
 function NewOptionForm(props: {

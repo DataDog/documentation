@@ -34,7 +34,7 @@ export default function StrictTraitSelector(props: {
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {
-            params.inputProps.placeholder = 'Type here to search';
+            params.inputProps.placeholder = 'Type here to search available traits';
           }
           return <TextField {...params} />;
         }}

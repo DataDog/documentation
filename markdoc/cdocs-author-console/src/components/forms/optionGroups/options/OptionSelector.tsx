@@ -134,7 +134,7 @@ export default function OptionSelector(props: {
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {
-            params.inputProps.placeholder = 'Type here to search';
+            params.inputProps.placeholder = 'Type here to search available options';
           }
           return <TextField {...params} />;
         }}
