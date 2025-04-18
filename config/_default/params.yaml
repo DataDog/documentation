@@ -130,7 +130,7 @@ code_language_ids:
     apache: "Apache HTTP Server"
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
-    ddsql_editor_syntax: "DDSQL for the DDSQL Editor"
+    ddsql_editor_syntax: "DDSQL Editor Syntax (Preview)"
     ddsql_default: "DDSQL"
 branch: ""
 

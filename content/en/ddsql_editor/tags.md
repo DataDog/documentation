@@ -4,7 +4,7 @@ aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
 further_reading:
-- link: "/ddsql/ddsql_editor_syntax"
+- link: "/ddsql_reference/ddsql_editor_syntax"
   tag: "Documentation"
   text: "DDSQL Editor Syntax (Preview)"
 ---
@@ -14,7 +14,7 @@ The DDSQL Editor is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">
-  The DDSQL Editor supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong> use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
 </div>
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.

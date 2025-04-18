@@ -1,5 +1,5 @@
 ---
-title: DDSQL Window Functions (Preview)
+title: DDSQL Editor Window Functions (Preview)
 private: true
 aliases:
 - /dashboards/ddsql_editor/reference/window_functions/
@@ -9,8 +9,6 @@ aliases:
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
 DDSQL for the DDSQL Editor is in Preview.
 {{< /callout >}}
-
-<div class="alert alert-warning">The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.</div>
 
 ## Overview
 

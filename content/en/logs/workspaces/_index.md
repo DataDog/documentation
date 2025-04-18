@@ -256,4 +256,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
-[5]: /ddsql/
+[5]: /ddsql_reference/

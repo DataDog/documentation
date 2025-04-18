@@ -1,17 +1,9 @@
 ---
-title: DDSQL Expressions and Operators (Preview)
+title: DDSQL Editor Expressions and Operators (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/expressions_and_operators/
 - /ddsql_editor/reference/expressions_and_operators/
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL for the DDSQL Editor is in Preview.
-{{< /callout >}}
-
-<div class="alert alert-warning">
-  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
-</div>
 
 *Value expressions* are the general expression language used to produce values for conditions, `SELECT` expressions, filters, and clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
 

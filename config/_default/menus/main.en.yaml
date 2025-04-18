@@ -1318,10 +1318,10 @@ menu:
       identifier: cloudcraft_api_users_info
       parent: cloudcraft_api_users
       weight: 1
-    - name: DDSQL
-      url: ddsql/
+    - name: DDSQL Reference
+      url: ddsql_reference/
       pre: ddsql
-      identifier: ddsql
+      identifier: ddsql_reference
       parent: essentials_heading
       weight: 140000
     - name: Watchdog

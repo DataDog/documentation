@@ -17,7 +17,9 @@ further_reading:
 
 {{< product-availability >}}
 
-<div class="alert alert-warning">  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. The DDSQL syntax in this documentation may not be applicable to the DDSQL Editor.</div>
+<div class="alert alert-warning">
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong> use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
+</div>
 
 ## Overview
 

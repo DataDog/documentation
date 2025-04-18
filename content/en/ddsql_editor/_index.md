@@ -2,15 +2,11 @@
 title: DDSQL Editor
 aliases:
 - /dashboards/ddsql_editor/
-- /ddsql_editor/reference/
 further_reading:
-- link: "/ddsql_editor/reference"
-  tag: "Documentation"
-  text: "References for DDSQL Queries"
 - link: "/ddsql_editor/guide/ddsql_use_cases"
   tag: "Guide"
   text: "Common queries and use cases"
-- link: "/ddsql/ddsql_editor_syntax"
+- link: "/ddsql_reference/ddsql_editor_syntax"
   tag: "Documentation"
   text: "DDSQL Editor Syntax (Preview)"
 ---
@@ -37,7 +33,7 @@ Type your question into the search box, and Datadog builds the SQL query for you
 DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
 
 <div class="alert alert-warning">
-  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong> use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
 </div>
 
 {{< code-block lang="sql" >}}
@@ -76,7 +72,7 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /dashboards/ddsql_editor/reference/tags
+[2]: /ddsql_editor/tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
 [5]: /help/
