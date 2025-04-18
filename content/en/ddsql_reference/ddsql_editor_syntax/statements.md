@@ -1,12 +1,9 @@
 ---
-title: DDSQL Statements
+title: DDSQL Editor Statements (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/statements/
+- /ddsql_editor/reference/statements/
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## SELECT
 
