@@ -113,10 +113,10 @@ You can enhance your visualizations by joining Wildcard data queries with [Refer
 - Create meaningful groupings based on your organization's structure
 - Simplify complex relationships with custom mappings
 - Enable team-based filtering and analysis
-<!-- 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
- -->
 
+{{< img src="/dashboards/guide/wildcard_examples/bar-chart-with-reference-table.png" alt="Bar chart showing log data connected with service ownership to show the ability to join with a reference table" style="width:100%;" >}}
+
+{{< img src="/dashboards/guide/wildcard_examples/bar-chart-with-reference-table-config.png" alt="Configuration code for the bar chart with reference table example." style="width:100%;" >}}
 
 {{% collapse-content title="Vega-Lite configuration" level="h4" expanded=false %}}
 ```javascript
