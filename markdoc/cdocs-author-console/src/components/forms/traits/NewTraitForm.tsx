@@ -12,7 +12,7 @@ import { FormStatus } from '../../../types';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 /**
- * A form that allows the user to choose an existing trait ID, or configure a new trait.
+ * A form that allows the user to create a new trait.
  */
 function NewTraitForm(props: {
   customizationConfig: CustomizationConfig;
@@ -181,71 +181,3 @@ function NewTraitForm(props: {
 }
 
 export default NewTraitForm;
-
-/*
-<Accordion
-      expanded={formStatus !== 'done'}
-      onChange={handleAccordionToggle}
-      aria-controls="new-option-form"
-      id="new-option-form-header-header"
-    >
-      <AccordionSummary expandIcon={<ArrowDropDownIcon />} aria-controls="panel3-content" id="panel3-header">
-        <Typography component="span">An option I need is missing from the list.</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <h4>Create a new option</h4>
-        <p>
-          Option ID
-          <TextField
-            value={newOptionConfig.id}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleFormChange({
-                ...newOptionConfig,
-                id: e.target.value
-              });
-            }}
-            variant="outlined"
-            placeholder="e.g., amazon_ec2"
-            fullWidth
-            required
-          />
-        </p>
-        <p>
-          Option label
-          <TextField
-            value={newOptionConfig.label}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleFormChange({
-                ...newOptionConfig,
-                label: e.target.value
-              });
-            }}
-            variant="outlined"
-            placeholder="e.g., Amazon EC2"
-            fullWidth
-            required
-          />
-        </p>
-
-        {formErrors.length === 0 && (
-          <ul style={{ color: 'red' }}>
-            {formErrors.map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        )}
-      </AccordionDetails>
-      <AccordionActions>
-        <Button
-          variant="contained"
-          onClick={handleSave}
-          disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}
-        >
-          Add option to selection
-        </Button>
-        <Button variant="contained" onClick={handleFormCancel}>
-          Cancel
-        </Button>
-      </AccordionActions>
-    </Accordion>
-*/

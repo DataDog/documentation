@@ -41,7 +41,7 @@ function a11yProps(index: number) {
 /**
  * A form that allows the user to choose an existing trait ID, or configure a new trait.
  */
-function TraitForm({
+function OldTraitForm({
   customizationConfig,
   onSave,
   onPending,
@@ -172,4 +172,4 @@ function TraitForm({
   );
 }
 
-export default TraitForm;
+export default OldTraitForm;
