@@ -28,22 +28,22 @@ name: firefly
 public_title: Firefly
 short_description: Actualizar tu nube según las normas
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Configuración y despliegue
-  - Categoría::Herramientas de desarrollo
-  - Categoría::Notificaciones
-  - Oferta::Integración
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  configuration: README.md#Configuración
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Notifications
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
   description: Actualizar tu nube según las normas
   media:
   - caption: Inventario completo en la nube
@@ -58,8 +58,8 @@ tile:
   - caption: Detectar y corregir infracciones de políticas
     image_url: images/FF-insights.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Firefly
 ---
 
@@ -89,9 +89,9 @@ Utiliza el motor de políticas unificado de Firefly para encontrar errores de co
 2. En la interfaz de usuario de Firefly, ve a: **Settings > Integrations > Datadog** (Parámetros > Integraciones > Datadog).
 3. Copia la tecla de aplicación y pégala en la línea correspondiente.
 4. Copia la clave API y pégala en la línea correspondiente.
-5. Haz clic en **Done** (Hecho).
+5. Haz clic en **Done** (Listo).
 
-## Agent
+## Ayuda
 ¿Tienes alguna duda? Envía un correo electrónico a [contact@gofirefly.io][1] o utiliza el chat de la aplicación.
 
 [1]: mailto:contact@gofirefly.io
