@@ -195,7 +195,7 @@ datadog:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 ...
    {{< /code-block >}}
@@ -259,7 +259,7 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 
 datadog:
