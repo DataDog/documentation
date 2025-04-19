@@ -2422,8 +2422,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 25
     - name: Test an existing rule
       url: '#test-an-existing-rule'
