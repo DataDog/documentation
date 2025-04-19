@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-With Live Debugger, you can debug running applications in real time&mdash;without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, non-breaking "breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
+With Live Debugger, you can debug running applications in real time, without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, "non-breaking breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
 
 ## Key capabilities
 
@@ -51,16 +51,16 @@ Live Debugger provides:
 Enable and disable Live Debugger on a service using one of the following methods:
 
 #### One-click enablement (recommended) ####
+
+<div class="alert alert-info">Only users with eligible permissions can use one-click enablement. Users may need to re-authenticate before using this feature.</div>
+
 1. Select the service and environment on the [Live Debugger Settings][18] page.
 1. Check that all prerequisites are met (unmet requirements display on the Settings page).
 1. Click "Enable" or "Disable":
-    - "Enable" to allow users to create Debug Sessions on the selected service and environment.
+    - "Enable" to allow users to create Debug Sessions on the selected service and environment. **Note**: Admins and security contacts receive email notifications when new services are enabled.
     - "Disable" to deactivate active Debug Sessions and prevent users from creating more.
 
-**Note:**
-    - No service restart is required.
-    - Only users with eligible permissions can use one-click enablement. Users may need to re-authenticate before using this feature.
-    - Admins and security contacts receive email notifications when new services are enabled.
+No service restart is required.
 
 #### Manual enablement ####
 1. Select the service and environment on the [Live Debugger Settings][18] page.
@@ -80,7 +80,7 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 ## Impact on performance and billing
 
-**Enabling** Live Debugger and Dynamic Instrumentation on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions or dynamic instrumentations on that service.
+Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions or dynamic instrumentations on that service.
 
 **Performance impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance; sampling logic, rate limits, and built-in budgets prevent runaway data capture. The system limits logs with variable capture to 1 per second, but permits logs _without_ variable capture a higher sampling rate (due to less overhead).
 
@@ -93,8 +93,8 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 Debug Sessions let you inspect your code at runtime with auto-expiring logpoints. To create and use a Debug Session:
 
 1. Start a Debug Session from one of the following:
-    - [Live Debugger page][14]: click **Create Debug Session**
-    - (Requires Code Origins feature) APM Traces: click **Start Debug Session** on a specific span's Code Origin section 
+    - On the [Live Debugger page][14], click **Create Debug Session**.
+    - (Requires Code Origins feature) In the [Trace Explorer][22], click on a trace to open the side panel, find the Code Origin section, and click **Start Debug Session**.
 2. Add the first logpoint to start the session.
 3. Add, remove, and modify logpoints within the session.
 
@@ -157,3 +157,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [19]: /dynamic_instrumentation/#create-a-logs-index
 [20]: /integrations/guide/source-code-integration/
 [21]: https://app.datadoghq.com/account/billing
+[22]: https://app.datadoghq.com/apm/traces
