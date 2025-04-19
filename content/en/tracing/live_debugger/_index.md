@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-With Live Debugger, you can debug running applications in real time - without redeploying code or interrupting service. Powered by Datadog’s [Dynamic Instrumentation][1], Live Debugger uses logpoints - auto-expiring, non-breaking "breakpoints" - to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
+With Live Debugger, you can debug running applications in real time&mdash;without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, non-breaking "breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
 
 ## Key capabilities
 
@@ -84,7 +84,7 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 **Performance impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance; sampling logic, rate limits, and built-in budgets prevent runaway data capture. The system limits logs with variable capture to 1 per second, but permits logs _without_ variable capture a higher sampling rate (due to less overhead).
 
-**Pricing impact**: Logs captured by Datadog are all billed the same way, whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your Datadog Plan & Usage page for any unexpected increases after utilizing a new feature.
+**Pricing impact**: Logs captured by Datadog are all billed the same way, whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your [Datadog Plan & Usage page][21] for any unexpected increases after utilizing a new feature.
 
 ## Using Live Debugger
 
@@ -156,3 +156,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [18]: https://app.datadoghq.com/debugging/settings
 [19]: /dynamic_instrumentation/#create-a-logs-index
 [20]: /integrations/guide/source-code-integration/
+[21]: https://app.datadoghq.com/account/billing
