@@ -49,7 +49,7 @@ La integración Azure Load Balancer no incluye eventos.
 
 La integración Azure Load Balancer no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

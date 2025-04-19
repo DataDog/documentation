@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - 로그 수집
 custom_kind: 통합
 dependencies:
@@ -43,7 +43,7 @@ short_description: cn=모니터링 백엔드를 사용하여 OpenLDAP 서버에�
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -135,7 +135,7 @@ OpenLDAP 통합은 에이전트와 같이 패키징되어 있습니다. 다음�
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ###### 메트릭 수집
 
@@ -162,11 +162,11 @@ OpenLDAP 통합은 에이전트와 같이 패키징되어 있습니다. 다음�
        password: "<PASSWORD>"
    ```
 
-2. [Agent를 재시작합니다][2].
+2. [에이전트를 재시작합니다][2].
 
 ###### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. Datadog Agent에서 로그 수집은 기본적으로 비활성화되어 있으므로 `datadog.yaml` 파일에서 활성화합니다.
 
@@ -186,18 +186,18 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
     `path`와 `service` 파라미터 값을 내 환경에 맞게 변경 및 설정하세요. 사용할 수 있는 설정 옵션 전체를 보려면 [openldap.d/conf.yaml 샘플][1]을 참고하세요.
 
-3. [Agent를 재시작합니다][2].
+3. [에이전트를 재시작합니다][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 ###### 메트릭 수집
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 | 파라미터            | 값                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
@@ -207,9 +207,9 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
 ###### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
+Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
 
 | 파라미터      | 값                                                 |
 | -------------- | ----------------------------------------------------- |

@@ -21,8 +21,8 @@ categories:
 - ログの収集
 - イベント管理
 - 問題追跡
-- セキュリティ
-custom_kind: integration
+- security
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

@@ -10,8 +10,8 @@ author:
 categories:
 - 自動化
 - data stores
-- developer tools
-custom_kind: integration
+- 開発ツール
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
 display_on_public_website: true
@@ -68,7 +68,7 @@ tile:
 
 EverSQL は非侵入型であり、データベースの機密データには一切アクセスしません。
 
-### 使用方法
+### 使用状況
 
 Datadog データベースモニタリングダッシュボードで見つかった遅い SQL クエリは、EverSQL を使用して最適化することができます。Datadog から遅い SQL クエリをコピーし、EverSQL の [SQL Optimization][2] プロセスに直接ペーストします。遅いクエリのトラブルシューティングについては、[データベースモニタリングの概要][3]ガイドを参照してください。
 

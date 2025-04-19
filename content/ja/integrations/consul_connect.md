@@ -19,10 +19,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- network
+- ネットワーク
 - ログの収集
-- containers
-custom_kind: integration
+- incident-teams
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
 display_on_public_website: true
@@ -72,7 +72,7 @@ tile:
 Consul Connect を実行しているサービスで [Datadog Agent][4] をインストールし、適切な環境の[コンフィギュレーション](#configuration)手順に従います。
 
 ### 構成
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
@@ -137,7 +137,7 @@ Consul Connect には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 
 [1]: https://www.consul.io/docs/connect#connect

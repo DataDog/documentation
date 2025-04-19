@@ -1,5 +1,5 @@
 ---
-app_id: container
+app_id: 컨테이너
 app_uuid: ac3cc203-5b28-457d-8737-bbe32fa7c3b9
 assets:
   dashboards:
@@ -23,25 +23,25 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
-- kubernetes
+- 컨테이너
+- 쿠버네티스(Kubernetes)
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
 draft: false
-git_integration_title: container
-integration_id: container
+git_integration_title: 컨테이너
+integration_id: 컨테이너
 integration_title: 컨테이너
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
-name: container
+name: 컨테이너
 public_title: 컨테이너
 short_description: Datadog으로 컨테이너 메트릭 추적
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -49,6 +49,7 @@ tile:
   - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog으로 컨테이너 메트릭 추적
   media: []
@@ -78,7 +79,7 @@ tile:
 
 `container` 검사를 수행하려면 자동 활성화를 위해 일부 폴더를 마운트해야 합니다. 이는 공식 Helm Chart, Datadog Operator에 의해 처리되며 Kubernetes, Docker, ECS 및 ECS Fargate에 대해 문서화된 설정으로 처리됩니다.
 
-### 구성
+### 설정
 
 `container` 검사에서는 특정 구성 설정을 노출하지 않습니다. 공통 필드를 사용자 정의하거나 `container` 검사를 강제로 활성화하려면 다음 단계를 따르세요.
 
@@ -93,7 +94,7 @@ tile:
 
 [Agent의 `status` 하위 명령을 실행][1]하고 **Checks** 섹션에서 `container`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 

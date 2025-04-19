@@ -56,7 +56,7 @@ tile:
   title: CRI
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

@@ -24,10 +24,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
 - ログの収集
-- orchestration
+- オーケストレーション
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md

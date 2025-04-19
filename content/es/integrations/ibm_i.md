@@ -48,7 +48,7 @@ tile:
   classifier_tags:
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::macOS
-  - Categoría::Sistema operativo
+  - Categoría::Sistema operativo y sistema
   - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitoriza sistemas IBM i de forma remota, incluyendo tareas, colas
@@ -59,7 +59,7 @@ tile:
   title: IBM i
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

@@ -19,9 +19,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- red
+- network
 - recopilación de logs
-- contenedores
+- rastreo
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
@@ -37,19 +37,19 @@ name: consul_connect
 public_title: Consul Connect
 short_description: Monitoriza los proxies sidecar de Consul Connect Envoy.
 supported_os:
-- linux
-- macos
-- windows
+- Linux
+- macOS
+- Windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Network
-  - Category::Log Collection
-  - Category::Containers
-  - Offering::Integration
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::macOS
+  - Sistema operativo compatible::Windows
+  - Categoría::Red
+  - Categoría::Recopilación de logs
+  - Categoría::Contenedores
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitoriza los proxies sidecar de Consul Connect Envoy.
   media: []
@@ -58,7 +58,7 @@ tile:
   title: Consul Connect
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -94,7 +94,7 @@ Sigue las instrucciones del [host de Envoy][3] para configurar la recopilación 
 [2]: https://docs.datadoghq.com/es/integrations/envoy/?tab=host#metric-collection
 [3]: https://docs.datadoghq.com/es/integrations/envoy/?tab=host#log-collection
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
@@ -127,7 +127,7 @@ Sigue las [instrucciones en contenedores de Envoy][4] para configurar la recopil
 
 Consulta la [documentación de la integración de Envoy][6] para obtener una lista de métricas recopiladas.
 
-### Checks de servicio
+### Checks de servicios
 
 Consulta la [documentación de la integración de Envoy][7] para obtener la lista de checks de servicios recopilados.
 

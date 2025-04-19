@@ -20,7 +20,7 @@ short_description: Rastrea las métricas clave de Azure Queue Storage.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Queue Storage es un servicio para almacenar grandes cantidades de mensajes a los que se puede acceder desde cualquier parte del mundo con llamadas autenticadas mediante HTTP o HTTPS.
@@ -52,7 +52,7 @@ La integración Azure Queue Storage no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_queue_storage/azure_queue_storage_metadata.csv

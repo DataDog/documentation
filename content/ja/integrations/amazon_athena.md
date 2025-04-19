@@ -1,9 +1,9 @@
 ---
 categories:
-- cloud
+- クラウド
 - aws
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon Athena のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_athena/

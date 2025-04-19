@@ -3,8 +3,8 @@ aliases: []
 categories:
 - azure
 - クラウド
-- コンテナ
-custom_kind: integration
+- incident-teams
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Container Apps からメトリクスを取得します。
 doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/

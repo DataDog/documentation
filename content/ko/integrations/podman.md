@@ -17,8 +17,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- ㅊ
-custom_kind: integration
+- 컨테이너
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md
 display_on_public_website: true
@@ -33,13 +33,13 @@ name: podman
 public_title: Podman
 short_description: Datadog로 Podman 컨테이너 메트릭 모두 추적하기
 supported_os:
-- 리눅스
+- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Category::Containers
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog로 Podman 컨테이너 메트릭 모두 추적하기
   media: []

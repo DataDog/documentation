@@ -26,6 +26,7 @@ author:
 categories:
 - 알림
 - 테스트
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -35,14 +36,13 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: neoload
 public_title: NeoLoad
 short_description: NeLoad 성능 테스트 결과 모니터링 및 분석
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -85,7 +85,7 @@ NeoLoad 구성과 관련한 자세한 지침을 보려면 [NeoLoad 설명서][3]
 Datadog에서 NeoLoad 통합을 설치해 기본 NeoLoad 대시보드를 대시보드 목록에 추가하세요.
 
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "neoload" >}}
@@ -102,7 +102,7 @@ NeoLoad에 있는 Datadog Connector의 **Push Counters** 구성에서 옵션을 
 도움이 필요하시나요? [Datadog 지원팀][6]에 문의하거나 [Tricentis NeoLoad 지원팀][7]에 문의하세요.
 
 [1]: https://www.tricentis.com/products/performance-testing-neoload
-[2]: /ko/metrics/explorer
+[2]: https://docs.datadoghq.com/ko/metrics/explorer
 [3]: https://documentation.tricentis.com/neoload/latest/en/content/reference_guide/datadog.htm
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neoload/metadata.csv
 [5]: https://docs.datadoghq.com/ko/events/

@@ -1,11 +1,11 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
-- 構成 & デプロイ
+- 構成とデプロイ
 - ログの収集
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -41,7 +41,7 @@ AWS App Runner を使用すると、ソースコードまたはコンテナイ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppRunner` が有効になっていることを確認します。
 2. [Datadog - AWS App Runner インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 AWS App Runner によって管理されるアプリケーションから Datadog と統合できるログには 2 種類あります。これらのログは、2 つの異なるロググループで CloudWatch に送信されます。1 つ目は、アプリケーションのビルドやデプロイなど、App Runner サービスのすべてのライフサイクルアクティビティログをキャプチャするサービスロググループです。2 つ目は、実行中のアプリケーションのコードからのログ出力を含むアプリケーションロググループです。
 
 #### ログを Datadog に送信する方法

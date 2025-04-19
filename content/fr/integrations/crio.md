@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
+- incident-teams
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
@@ -62,7 +62,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Présentation
+## Section Overview
 
 Ce check surveille [CRI-O][1].
 

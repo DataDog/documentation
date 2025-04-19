@@ -27,11 +27,11 @@ author:
   support_email: ara.pulido@datadoghq.com
 categories:
 - コンプライアンス
-- 構成 & デプロイ
-- コンテナ
+- 構成とデプロイ
+- incident-teams
 - ログの収集
-- セキュリティ
-custom_kind: integration
+- security
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true
@@ -90,7 +90,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
    ```shell
-   ddev config set extras ./integrations-extras
+   ddev config set repos.extras ./integrations-extras
    ```
 
 4. `open_policy_agent` パッケージをビルドするには、以下を実行します:

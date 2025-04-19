@@ -13,7 +13,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 - ネットワーク
 - snmp
 custom_kind: インテグレーション

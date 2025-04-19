@@ -1,9 +1,9 @@
 ---
 categories:
-- cloud
+- クラウド
 - aws
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon Lex のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_lex/
@@ -39,7 +39,7 @@ Amazon Lex は、音声とテキストを使用した会話型のインターフ
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Lex` が有効になっていることを確認します。
 2. [Datadog - Amazon Lex インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -71,13 +71,13 @@ Amazon Lex インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-lex
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lex/amazon_lex_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

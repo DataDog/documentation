@@ -1,9 +1,9 @@
 ---
 aliases: []
 categories:
-- cloud
+- 클라우드
 - azure
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 description: 주요 Azure Arc 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_arc/
@@ -45,7 +45,7 @@ Datadog 확장을 사용하여 Datadog Agent를 구성하고 Arc 서버에 배�
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][2]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_arc" >}}

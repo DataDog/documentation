@@ -23,7 +23,7 @@ short_description: Rastrea las métricas clave de Azure Data Lake Analytics.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Data Lake Analytics es un servicio de trabajo de análisis bajo demanda que simplifica el big data.
@@ -34,7 +34,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Data La
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
+Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
 
@@ -46,13 +46,13 @@ Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No
 
 La integración Azure Data Lake Analytics no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Azure Data Lake Analytics no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_analytics/azure_data_lake_analytics_metadata.csv
