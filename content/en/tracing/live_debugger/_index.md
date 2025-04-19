@@ -19,7 +19,7 @@ further_reading:
 ---
 
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
-    Live Debugger is in limited preview. Request access to join the waiting list.
+    Live Debugger is in Limited Preview. Request access to join the waiting list.
 {{< /beta-callout-private >}}
 
 ## Overview
