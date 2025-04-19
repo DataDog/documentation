@@ -23,16 +23,6 @@
               "type": "teams"
             }
           ]
-        },
-        {
-          "assignment": "round-robin",
-          "escalate_after_seconds": 3600,
-          "targets": [
-            {
-              "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
-              "type": "teams"
-            }
-          ]
         }
       ]
     },

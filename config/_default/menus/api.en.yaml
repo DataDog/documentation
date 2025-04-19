@@ -7478,7 +7478,7 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
-    - name: Update on call escalation policy
+    - name: Update on-call escalation policy
       url: '#update-on-call-escalation-policy'
       identifier: on-call-update-on-call-escalation-policy
       parent: on-call
@@ -7490,7 +7490,7 @@ menu:
           - UpdateOnCallEscalationPolicy
         unstable: []
         order: 6
-    - name: Get on call escalation policy
+    - name: Get on-call escalation policy
       url: '#get-on-call-escalation-policy'
       identifier: on-call-get-on-call-escalation-policy
       parent: on-call
@@ -7502,7 +7502,7 @@ menu:
           - GetOnCallEscalationPolicy
         unstable: []
         order: 7
-    - name: Delete on call escalation policy
+    - name: Delete on-call escalation policy
       url: '#delete-on-call-escalation-policy'
       identifier: on-call-delete-on-call-escalation-policy
       parent: on-call
@@ -7514,7 +7514,7 @@ menu:
           - DeleteOnCallEscalationPolicy
         unstable: []
         order: 8
-    - name: Create on call escalation policy
+    - name: Create on-call escalation policy
       url: '#create-on-call-escalation-policy'
       identifier: on-call-create-on-call-escalation-policy
       parent: on-call
