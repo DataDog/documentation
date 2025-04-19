@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps for setting up a pipeline in the UI:
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps if you are setting up a pipeline in the UI:
 
 1. Select a log [source][2].
 1. Select [destinations][3] to which you want to send your logs.
@@ -23,10 +23,17 @@ The Observability Pipelines Worker is software that runs in your environment to 
 
 After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page.
 
+If you had set up the pipeline components using the [API][6] or Terraform, to get to the Install page:
+
+1. Navigate to [Observability Pipelines][5].
+1. Select your pipeline.
+1. Click **Latest Deployment & Setup**.
+1. Click **Worker Installation Steps**.
+
 {{< img src="observability_pipelines/install_page.png" alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables" style="width:100%;" >}}
 
 1. Select the platform on which you want to install the Worker.
-1. Enter the environment variables for your sources and destinations, if applicable.
+1. Enter the [environment variables][7] for your sources and destinations, if applicable.
 1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated.
 
 {{< tabs >}}
@@ -216,3 +223,6 @@ sudo apt-get remove --purge observability-pipelines-worker
 [2]: /observability_pipelines/sources/
 [3]: /observability_pipelines/destinations/
 [4]: /observability_pipelines/processors/
+[5]: https://app.datadoghq.com/observability-pipelines
+[6]: /api/latest/observability-pipelines/#create-a-new-pipeline
+[7]: /observability_pipelines/environment_variables/
