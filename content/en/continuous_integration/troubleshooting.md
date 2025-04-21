@@ -52,6 +52,10 @@ Running pipelines support relies on data sent from CI providers indicating execu
 
 A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
 
+## Limitations on finished jobs from pipelines
+
+There is a three-day limit to process job data after completion. If a pipeline includes jobs that finish more than three days before the pipeline is received, those jobs will not be processed or displayed in CI Visibility.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
