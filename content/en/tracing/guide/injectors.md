@@ -1,9 +1,9 @@
 ---
 title: How the Injector Works with Single Step Instrumentation
 further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
+- link: tracing/trace_collection/automatic_instrumentation/single-step-apm
+  tag: Documentation
+  text: Single Step APM Instrumentation
 ---
 
 ## Overview
