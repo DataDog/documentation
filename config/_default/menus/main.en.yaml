@@ -5543,6 +5543,11 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
       weight: 913
+    - name: Custom Configuration
+      url: observability_pipelines/processors/remap_ocsf/custom_configuration
+      parent: observability_pipelines_processors_remap_ocsf
+      identifier: observability_pipelines_processors_remap_ocsf_custom_configuration
+      weight: 9131
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
