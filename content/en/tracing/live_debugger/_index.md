@@ -37,7 +37,7 @@ Live Debugger provides:
 - **Real-time inspection** of variable states, method arguments, and execution paths in running code.
 - **Non-invasive data collection** that captures debugging information without stopping applications or degrading performance.
 - **Code instrumentation** with logpoints that can be added anywhere in your code, including third-party libraries.
-- **Auto-expiring logpoints** that are automatically removed after a set time (default: 48 hours).
+- **Auto-expiring logpoints** that are automatically deactivated after a set time (default: 48 hours).
 - **Conditional logging** based on user-defined criteria to capture data only when specific conditions are met.
 - **Built-in [sensitive data scrubbing][3]** to prevent exposure of personal information, passwords, and secrets.
 
@@ -46,7 +46,7 @@ Live Debugger provides:
 ### Prerequisites
 
 1. All [Dynamic Instrumentation prerequisites][16] are met.
-2. (For one-click enablement) You have the following permissions: **Org Management**, **APM Remote Configuration Write**.
+2. (For one-click enablement) You have the following permissions: **Org Management**, **APM Remote Configuration Read**, **APM Remote Configuration Write**.
 3. You have [created a logs index][19] to store debugging information. 
 4. (Recommended) You have enabled [Source Code Integration][20] to view and select specific code locations when adding logpoints.
 
