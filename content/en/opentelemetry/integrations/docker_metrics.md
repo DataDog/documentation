@@ -172,4 +172,4 @@ Value: 0.170933
 [5]: /opentelemetry/guide/semantic_mapping/
 [6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [7]: /tracing/trace_explorer/trace_view/
-[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go#L133
+[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
