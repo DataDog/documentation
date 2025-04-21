@@ -9,7 +9,7 @@ import { OptionConfig, FormStatus } from '../../../../types';
  * Select multiple options from the customization config.
  * New options can be added.
  */
-export default function OptionSelector(props: {
+export default function FlexibleOptionSelector(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: OptionConfig[] }) => void;
 }) {
@@ -50,8 +50,6 @@ export default function OptionSelector(props: {
       .map((selection) => selection.value);
 
     const deselectedNewOptionIds = deselectedOptionIds.filter((optionId) => newOptionIds.includes(optionId));
-
-    console.log('deselectedNewOptionIds', deselectedNewOptionIds);
 
     let updatedOptionsById = { ...optionsById };
     let updatedNewOptionIds = [...newOptionIds];

@@ -3,8 +3,6 @@ import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
-import TraitForm from './forms/traits/NewTraitForm';
-import FlexibleTraitSelector from './forms/traits/FlexibleTraitSelector';
 import NewOptionGroupForm from './forms/optionGroups/NewOptionGroupForm';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
@@ -25,7 +23,12 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
     <div>
       <h1>Debug</h1>
       <h2>NewOptionGroupForm:</h2>
-      <NewOptionGroupForm customizationConfig={customizationConfig} />
+      <NewOptionGroupForm
+        customizationConfig={customizationConfig}
+        onStatusChange={(p) => {
+          console.log('[PageWizard] NewOptionGroupForm status change:', p);
+        }}
+      />
       <hr />
       {filters.length === 0 && (
         <p>

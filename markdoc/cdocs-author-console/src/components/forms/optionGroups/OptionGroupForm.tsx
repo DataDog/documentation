@@ -4,7 +4,7 @@ import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import OptionSelector from './options/OptionSelector';
+import FlexibleOptionSelector from './options/FlexibleOptionSelector';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormStatus } from '../../../types';
@@ -120,7 +120,7 @@ function OptionGroupForm(props: {
           required
         />
         <h3>Options</h3>
-        <OptionSelector
+        <FlexibleOptionSelector
           customizationConfig={props.customizationConfig}
           onStatusChange={(p) => {
             if (p.status === 'done' && p.data) {

@@ -43,3 +43,9 @@ export interface OptionConfig {
  * `done`: The form has been saved, or canceled. Either way, the form is in a valid state.
  */
 export type FormStatus = 'waiting' | 'pending' | 'done';
+
+export type OptionGroup = {
+  label: string;
+  id: string;
+  default?: boolean | undefined;
+}[];
