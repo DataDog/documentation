@@ -58,12 +58,12 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
-    ```powershell
+    {{< code-block lang="powershell" >}}
     $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DATADOG_API_KEY>"'
     if ($p.ExitCode -ne 0) {
       Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
     }
-    ```
+    {{< /code-block >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
@@ -138,12 +138,12 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 2. Run the following command to install the Datadog Agent:
 
 **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
-  ```powershell
+  {{< code-block lang="powershell" >}}
   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
   if ($p.ExitCode -ne 0) {
     Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
   }
-  ```
+  {{< /code-block >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
