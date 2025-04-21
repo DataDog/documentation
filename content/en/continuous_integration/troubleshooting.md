@@ -54,7 +54,7 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 
 ## Limitations on finished jobs from pipelines
 
-There is a three-day limit to process job data after completion. If a pipeline includes jobs that finish more than three days before the pipeline is received, those jobs will not be processed or displayed in CI Visibility.
+Job data has a three-day limit to be processed after completion. If a pipeline includes jobs that finish more than three days before the pipeline is received, those jobs are not processed and do not appear in CI Visibility.
 
 ## Further reading
 
