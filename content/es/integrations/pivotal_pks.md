@@ -17,10 +17,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
-- Kubernetes
+- rastreo
+- kubernetes
 - recopilación de logs
-- la red
+- network
 - orquestación
 custom_kind: integración
 dependencies:
@@ -37,28 +37,28 @@ name: pivotal_pks
 public_title: Servicio de contenedor Pivotal
 short_description: Oferta Kubernetes de nivel empresarial de Pivotal.
 supported_os:
-- Linux
-- macOS
+- linux
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Contenedores
-  - Categoría::Kubernetes
-  - Categoría::Recopilación de logs
-  - Categoría::Red
-  - Categoría::Orquestación
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Oferta Kubernetes de nivel empresarial de Pivotal.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Servicio de contenedor Pivotal
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -77,7 +77,7 @@ La monitorización PKS requiere que configures la integración Datadog para [Kub
 
 ### Recopilación de logs
 
-Disponible para la versión 6.0 o posteriores del Agent
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 La configuración es exactamente la misma que para Kubernetes.
 Para empezar a recopilar logs de todos tus contenedores, utiliza las [variables de entorno][4] de tu Datadog Agent.
@@ -88,7 +88,7 @@ Para obtener más información sobre esas variables de entorno y descubrir opcio
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 [1]: https://pivotal.io/platform/pivotal-container-service
 [2]: https://network.pivotal.io/products/datadog
