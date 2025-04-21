@@ -153,6 +153,30 @@ When installing a GitHub App, the following permissions are required to enable c
 If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
+
+## Upload third-party SBOM to Datadog
+
+While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest a
+third-party SBOM.
+
+Our tooling supports the following SBOM standards:
+ - [CycloneDX 1.4][18]
+ - [CycloneDX 1.5][19]
+ - [CycloneDX 1.6][20]
+
+When ingesting a third-party SBOM, ensure that the following constraints are met:
+ - The file checks the SBOM JSON schema
+ - SBOM components have the type `library`
+ - SBOM components have a valid `purl` attribute
+
+Third-party SBOM files are uploaded to Datadog using the `datadog-ci` command. You can use the following
+command to upload your third-party SBOM. Ensure the environment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
+are set to your API key, APP key, and [Datadog site][12], respectively.
+
+```bash
+datadog-ci sbom upload /path/to/third-party-sbom.json
+```
+
 ## Link results to Datadog services and teams
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
@@ -201,7 +225,6 @@ If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name closest to the filename is selected.
 
-
 ### Link results to teams
 
 Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
@@ -229,3 +252,6 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/
 [17]: https://app.datadoghq.com/ci/settings/repository
+[18]: https://cyclonedx.org/docs/1.4/json/
+[19]: https://cyclonedx.org/docs/1.5/json/
+[20]: https://cyclonedx.org/docs/1.6/json/
