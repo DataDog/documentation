@@ -130,7 +130,7 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
-- **Session duration:** Debug Sessions automatically expire after 48 hours. This limit is not currently configurable.
+- **Session duration:** Debug Sessions automatically expire after 48 hours. This limit is not configurable.
 
 ## Further Reading
 
