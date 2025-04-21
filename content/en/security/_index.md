@@ -137,7 +137,7 @@ After you [set up Sensitive Data Scanner][25], use the Summary page to see detai
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /security/cloud_security_management/
 [11]: /security/cloud_security_management/misconfigurations/
-[12]: /security/threats/
+[12]: /security/workload_protection/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/cloud_security_management/identity_risks/
