@@ -170,7 +170,8 @@ When ingesting a third-party SBOM, ensure that the following constraints are met
  - SBOM components have a valid `purl` attribute
 
 Third-party SBOM files are uploaded to Datadog using the `datadog-ci` command. You can use the following
-command to upload your third-party SBOM.
+command to upload your third-party SBOM (make sure the enviroment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
+are respectively set to your API key, APP key and [Datadog site][12]).
 
 ```bash
 datadog-ci sbom upload /path/to/third-party-sbom.json
