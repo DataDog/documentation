@@ -156,7 +156,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Upload third-party SBOM to Datadog
 
-While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest
+While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest a
 third-party SBOM.
 
 Our tooling supports the following SBOM standards:
@@ -165,13 +165,13 @@ Our tooling supports the following SBOM standards:
  - [CycloneDX 1.6][20]
 
 When ingesting a third-party SBOM, ensure that the following constraints are met:
- - the file checks the SBOM JSON schema
+ - The file checks the SBOM JSON schema
  - SBOM components have the type `library`
  - SBOM components have a valid `purl` attribute
 
 Third-party SBOM files are uploaded to Datadog using the `datadog-ci` command. You can use the following
-command to upload your third-party SBOM (make sure the enviroment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
-are respectively set to your API key, APP key and [Datadog site][12]).
+command to upload your third-party SBOM. Ensure the environment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
+are set to your API key, APP key, and [Datadog site][12], respectively.
 
 ```bash
 datadog-ci sbom upload /path/to/third-party-sbom.json
