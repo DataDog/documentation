@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: "nick/azure_migration"
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
