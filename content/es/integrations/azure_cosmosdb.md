@@ -25,7 +25,7 @@ short_description: Rastrea las métricas principales de Azure Cosmos DB.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Cosmos DB es un servicio de base de datos multimodelo distribuido globalmente que admite bases de datos de documentos, clave-valor, columnas anchas y gráficos.
@@ -36,7 +36,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Cosmos 
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -48,15 +48,15 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Cosmos DB no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Azure Cosmos DB no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

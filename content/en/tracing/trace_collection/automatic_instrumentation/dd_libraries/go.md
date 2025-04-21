@@ -66,7 +66,7 @@ Refer to the instructions in the section corresponding to your preference below:
 - Comprehensive tracing coverage:
    - Instruments your code and all dependencies, including the Go standard library
    - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
-- Exclusive [Application Security Management][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
+- Exclusive [App and API Protection][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
 
 ### Requirements
 

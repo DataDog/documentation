@@ -6,10 +6,10 @@ aliases:
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
-  text: "Getting started with CSM Misconfigurations"
+  text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
@@ -18,7 +18,7 @@ further_reading:
   text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 | Framework                                       | Supported Versions     | Framework Tag                       | Rule Type                |
 |-------------------------------------------------|------------------------|-------------------------------------|--------------------------|
@@ -55,7 +55,7 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 
 **Notes**:
 
-- CSM Misconfigurations provides visibility into whether your resources are configured in accordance with certain compliance rules. These rules address various regulatory frameworks, benchmarks, and standards (Security Posture Frameworks). CSM Misconfigurations does not provide an assessment of your actual compliance with any Security Posture Framework, and the compliance rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSM Misconfigurations in consultation with your legal counsel or compliance experts.
+- Cloud Security Misconfigurations provides visibility into whether your resources are configured in accordance with certain compliance rules. These rules address various regulatory frameworks, benchmarks, and standards (Security Posture Frameworks). Cloud Security Misconfigurations does not provide an assessment of your actual compliance with any Security Posture Framework, and the compliance rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use Cloud Security Misconfigurations in consultation with your legal counsel or compliance experts.
 - The compliance rules for the CIS benchmarks follow the CIS automated recommendations. If you're obtaining CIS certification, Datadog recommends also reviewing the manual recommendations as part of your overall security assessment.
 - Datadog also provides Essential Cloud Security Controls, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks observed by Datadog, this ruleset aims to help users that are new to cloud security remediate high-impact misconfigurations across their cloud environments.
 

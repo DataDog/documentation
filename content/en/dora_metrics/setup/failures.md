@@ -39,12 +39,34 @@ Failed deployment events, currently interpreted through failure events, are used
 ## Selecting and configuring a failure data source
 
 {{< tabs >}}
+{{% tab "Datadog Incidents" %}}
+DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. Once incidents are declared, DORA uses them to measure change failure rate and time to restore.
+
+**Note**: Only incidents that are in a `stable` or `resolved` state are used to calculate time to restore.
+
+### Requirements
+
+- **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
+
+For incidents to appear in filtered DORA metrics views, Incidents must be tagged with the following attributes:
+  - `Teams`
+  - `Services`
+  - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
+
+If provided with Incidents, the `Severity` tag will be added to failure events.
+
+[201]: /service_management/incident_management/
+[202]: https://app.datadoghq.com/ci/settings/dora
+[203]: https://app.datadoghq.com/incidents/settings?section=property-fields
+
+
+{{% /tab %}}
 {{% tab "PagerDuty" %}}
 [PagerDuty][104] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
 
 To integrate your PagerDuty account with DORA Metrics: 
 
-1. Enable PagerDuty as a failure data source in [DORA settings][111]. 
+1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][111]. 
 
 1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
@@ -132,7 +154,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a failure events data source in [DORA settings][15].
+- **datadog-ci CLI / API** is enabled as a **Failures** event data source in [DORA settings][15].
 - The following attributes are required:
   - `services` or `team` (at least one must be present)
   - `started_at`
