@@ -89,12 +89,12 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
 The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
 
 1. Follow the [Windows instructions][1] to uninstall the Datadog Agent.
-1. Run the command below to install the FIPS Agent, replacing `MY_API_KEY` with your API key:
+1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
    **Note:** FIPS support is only available on Agent versions 7.63.0 and above:
 
    {{< code-block lang="powershell" >}}
-   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-fips-agent-7.63.0-rc.7-fips-preview-2.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="MY_API_KEY" SITE="ddog-gov.com"'
+   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-fips-agent-7.63.0-rc.7-fips-preview-2.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
    if ($p.ExitCode -ne 0) {
      Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
    }
