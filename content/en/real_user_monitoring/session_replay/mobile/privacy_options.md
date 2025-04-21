@@ -463,7 +463,7 @@ To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on
 To override text and input privacy, use `dd.sessionReplayOverrides.textAndInputPrivacy` on a view instance and set a value from the `TextAndInputPrivacyLevel` enum. Setting it to `nil` removes the override.
 
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-    // Set aa text and input override on your view
+    // Set a text and input override on your view
     myView.dd.sessionReplayOverrides.textAndInputPrivacy = .maskSensitiveInputs
     // Remove a text and input override from your view
     myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
