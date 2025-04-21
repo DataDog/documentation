@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: gabedos/ecs-terraform-cdk-updates
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
