@@ -96,7 +96,6 @@ To configure a mobile test to use either EU or US hosted devices:
 
 **Notes**: 
 - Tests executed on US-hosted devices are run from AWS US West (Oregon). Similarly, tests on EU-hosted devices are run from AWS Germany (Frankfurt).
-- Device locations cannot be mixed within a single test configuration. Create separate configurations for EU-hosted and US-hosted devices if both are needed.
 - Not all devices are available in both the EU and US. For more details, see the list of [supported devices][16].
 
 {{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selecting one or more mobile devices in US and EU regions" video=true >}}
