@@ -5,7 +5,7 @@
 #
 # For example, if the user chooses "linux_apt" as their operating system
 # on one page, we want to ensure that other pages are scanning
-# for that same exact selection ID, rather than a slightly different
+# for that same exact option ID, rather than a slightly different
 # selection such as "linuxapt" or "apt_linux".
 #
 # To add a new option, add a new item to the list 
