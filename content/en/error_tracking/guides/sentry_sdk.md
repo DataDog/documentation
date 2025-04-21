@@ -19,7 +19,7 @@ You can use [Sentry SDKs][1] to send your events to Datadog, so you can start us
 
 Setting up the Sentry SDK with Datadog requires a minimal code change to point the SDK to a Datadog Data Source Name (DSN).
 
-[Events][6] and non-error events (messages) appear in Datadog as logs. Other item types (traces, attachments, sessions, etc.) are not supported.
+[Events][6] and non-error events (messages) appear in Datadog as logs in the [log explorer][12]. Other item types (traces, attachments, sessions, etc.) are not supported.
 
 ## Supported SDKs
 
@@ -428,3 +428,4 @@ keys:
 [9]: /error_tracking/manage_data_collection#rules
 [10]: https://github.com/getsentry/sentry-mirror
 [11]: https://docs.sentry.io/product/releases/setup/
+[12]: https://app.datadoghq.com/logs
