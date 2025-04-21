@@ -71,19 +71,19 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 1. Navigate to the [Trace Explorer][1].
 2. Click on any trace to view its details.
 3. In the span details panel, look for the "Code Origin" section.
+
+    {{< img src="tracing/guide/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
+
 4. Optionally, click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
   
-    {{< img src="tracing/guide/code_origins/code_origin_add_span_tags_spotlight.png" alt="Code Origin in Traces Explorer" style="width:100%;">}}  
+    {{< img src="tracing/guide/code_origins/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Add span tag with Dynamic Instrumentation" style="width:100%;">}}  
 
 ### In your IDE
 
 1. Set up your [Datadog IDE Integration][4].
-    <div class="alert alert-info">Supported IDEs: JetBrains, Visual Studio Code</div>
 2. View RED metrics (Requests, Errors, and Duration) as inline annotations above your endpoint methods.
 
     {{< img src="tracing/guide/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
-
-
 
 ## How it works
 
@@ -99,7 +99,7 @@ Code Origins identifies the source code locations where APM spans originate. Cod
 
 **Performance Impact**: Code Origins adds negligible performance overhead in production environments.
 
-**Pricing Impact**: While in Preview, Code Origins has no impact on billing.
+**Pricing Impact**: While in Preview, Code Origins has no impact on billing. Any changes related to Code Origins that have an impact on pricing will be communicated before going into effect.
 
 ## Troubleshooting
 
