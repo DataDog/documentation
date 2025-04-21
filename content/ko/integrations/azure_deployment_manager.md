@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 클라우드
 - azure
+custom_kind: 통합
 dependencies: []
 description: Datadog을 사용하여 Azure Deployment Manager에서 카나리 배포를 모니터링하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_deployment_manager
 public_title: Datadog-Microsoft Azure Deployment Manager
@@ -187,7 +187,7 @@ Azure Deployment Manager는 템플릿에 제공된 정규식을 사용하여 응
 
 `overall_status: OK`가 발견되면 검사는 정상으로 간주됩니다. 상태가 `Warn`, `No Data` 또는 `Alert`이면 검사가 비정상으로 간주되고 Azure Deployment Manager가 배포를 중지합니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
@@ -197,7 +197,7 @@ Azure Deployment Manager는 메트릭을 보고하지 않습니다.
 
 Azure Deployment Manager에는 이벤트가 포함되지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure Deployment Manager에는 서비스 검사가 포함되지 않습니다.
 
