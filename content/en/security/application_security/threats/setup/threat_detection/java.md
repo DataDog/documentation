@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Java
+title: Enabling AAP for Java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -15,10 +15,10 @@ further_reading:
   text: 'Java Datadog library source code'
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
-  text: "OOTB Application Security Management Rules"
+  text: "OOTB App and API Protection Rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting Application Security Management"
+  text: "Troubleshooting App and API Protection"
 
 ---
 
@@ -49,9 +49,9 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 {{% /tab %}}
 {{< /tabs >}}
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][2].
 
-2. **Run your Java application with ASM enabled.** From the command line:
+2. **Run your Java application with AAP enabled.** From the command line:
    ```shell
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
@@ -82,7 +82,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the AAP environment variable:
 
 ```yaml
 spec:
