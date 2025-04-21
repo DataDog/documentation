@@ -96,20 +96,34 @@ receivers:
 
 ## Correlate traces with container metrics
 
-To correlate trace and container metrics, configure [Universal Service Monitoring attributes][4] for each service, and set the following resource attributes for each service: 
+To correlate traces with container metrics, both telemetry types must share common resource attributes. These attributes provide the necessary context for correlation.
 
-| Attribute                                | Value                                                          | Description                                                                                                                                                     |
-|------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `container.id` (**Required**)            | The Docker container ID.                                       | Identifies the container and enables correlation between spans and container metrics. If the attribute is missing, container metric views are not shown in APM. |
-| `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Display name in the UI.                                                                                                                                         |
-| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.                                                                          |
+Ensure the following attributes are present on both your traces and metrics:
 
-To populate these attributes:
-- **Using the Collector**: The `docker_stats` receiver automatically sets these attributes for you.
-- **Using the Datadog Agent**: Add a container resource detector in your application code.  
+| Attribute                                | Value                                                          | Description                                                                                                                                                               |
+|------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container.id` (**Required**)            | The Docker container ID.                                       | Uniquely identifies the container. Essential for correlating spans with container metrics. Without this attribute on traces, container metric views are not shown in APM. |
+| `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Used as the display name in Datadog.                                                                                                                                      |
+| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.                                                                                    |
+
+To populate these resource attributes on **traces**:
+
+- You can use a `resourcedetectionprocessor` in your Collector config:
+   ```yaml
+   processors:
+      resourcedetection:
+         detectors: ["env", "container", "k8s"]
+   service:
+      pipelines:
+         traces:
+            processors: [resourcedetection]
+
+   ```
+
+- You can add a container resource detector in your application code.  
    For example, using Go:
    ```go
-   // resource.WithContainer() adds container.id so the Agent can tag the spans
+   // resource.WithContainer() adds container.id attribute to the trace's resource
    res, err := resource.New(
        ctx,
        resource.WithContainer(),                    
@@ -118,7 +132,11 @@ To populate these attributes:
    )
    ```
 
-See the complete example in [opentelemetry-examples][8].
+   See the complete example in [opentelemetry-examples][8].  
+   
+To populate these resource attributes on **metrics**:
+
+The `docker_stats` receiver automatically detects and adds these attributes on container metrics it emits.
 
 ## Data collected
 
