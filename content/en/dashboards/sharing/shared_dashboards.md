@@ -59,6 +59,8 @@ To share a dashboard with one or more email addresses:
 
 The maximum valid duration of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3], it defaults to no maximum.
 
+**Note**: Maximum valid duration is enforced by exact datetime. So if the org has a maximum valid duration of 1 day, an invite created at Jan 1st 11:00AM must expire before Jan 2nd 11:00AM.
+
 ### Access an invite-only shared dashboard
 
 Invitees to shared dashboards are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.

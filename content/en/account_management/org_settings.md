@@ -88,7 +88,9 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab includes settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+The **Public Sharing** tab includes org-wide settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+
+If you require sharing settings to apply accross every org you own, please reach out to Datadog Support and we can set that up for you.
 
 **Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
 
