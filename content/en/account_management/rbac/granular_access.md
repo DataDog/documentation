@@ -13,8 +13,12 @@ Use the different principals to control access patterns in your organization and
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
+| [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -25,6 +29,7 @@ Use the different principals to control access patterns in your organization and
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 
 ### Elevate access to individual resources
@@ -43,3 +48,8 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [10]: /service_management/case_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
 [12]: /reference_tables/#permissions
+[13]: /service_management/app_builder/auth/#restrict-access-to-a-specific-app
+[14]: /actions/connections/?tab=workflowautomation#connection-credentials
+[15]: /actions/connections/?tab=workflowautomation#connection-groups
+[16]: /actions/datastore/
+[17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
