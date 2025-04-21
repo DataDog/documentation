@@ -58,7 +58,7 @@ In Trace Explorer, select a span to see Code Origin details on the Overview tab:
 
 ### Enable Code Origins
 
-Run your service with the below environment variable:
+Run your service with the following environment variable:
 
 ```shell
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
@@ -89,9 +89,9 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 Code Origins identifies the source code locations where APM spans originate. Code Origin details are captured for two types of spans:
 
-**Entry spans**: The first method in your application code that handles an incoming request. The APM integration pinpoints the line of code where requests enter your system.
+**Entry spans:** These represent the first method(s) in your application code that handle incoming requests. The APM integration pinpoints the line of code where each request enters your system.
 
-**Exit spans**: The exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code.
+**Exit spans:** These represent the lines of code in your application that make outgoing requests to downstream services. The tracer examines the call stack to identify where each exit span originates, skipping third-party code.
 
 <div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
 
@@ -108,7 +108,7 @@ If Code Origin information is missing:
 1. Verify Code Origins is [enabled](#enable-code-origins) in your tracing library configuration.
 1. Confirm that your service meets all [compatibility requirements](#compatibility-requirements).
     - In particular, check whether your service's language and framework support Code Origins for entry and/or exit spans.
-1. Filter for spans that include Code Origins using the query `@_dd.code_origin.type:* in the [Trace Explorer][1].
+1. Filter for spans that include Code Origins using the query `@_dd.code_origin.type:*` in the [Trace Explorer][1].
 1. Enable [Source Code Integration][7] to see code previews in the APM Trace details.
 
 **Note**: Code Origins does not capture third-party code.
