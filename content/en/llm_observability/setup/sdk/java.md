@@ -484,6 +484,62 @@ public class MyJavaClass {
 }
 ```
 
+## Evaluations
+
+The LLM Observability SDK provides the methods `LLMObs.SubmitEvaluation()` to help your traced LLM application submit evaluations to LLM Observability.
+
+### Submit evaluations
+
+`LLMObs.SubmitEvaluation()` can be used to submit your custom evaluation associated with a given span.
+
+#### Arguments
+
+The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
+
+`llmObsSpan`
+: required - _LLMObsSpan_
+<br />The span context to associate the evaluation with.
+
+`label`
+: required - _string_
+<br />The name of the evaluation.
+
+`categoricalValue` or `scoreValue`
+: required - _string or double_
+<br />The value of the evaluation. Must be a string (for categorical evaluations) or a double (for score evaluations).
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][3].
+
+
+
+### Example
+
+```java
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public String invokeChat(String userInput) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("my-llm-span-name", "my-llm-model", "my-company", "maybe-ml-app-override", "session-141");
+    String chatResponse = "N/A";
+    try {
+      chatResponse = ... // user application logic to invoke LLM
+    } catch (Exception e) {
+      llmSpan.addThrowable(e);
+      throw new RuntimeException(e);
+    } finally {
+      llmSpan.finish();
+
+      // submit evaluations
+      LLMObs.SubmitEvaluation(llmSpan, "toxicity", "toxic", Map.of("language", "english"));
+      LLMObs.SubmitEvaluation(llmSpan, "f1-similarity", 0.02, Map.of("provider", "f1-calculator"));
+    }
+    return chatResponse;
+  }
+}
+```
+
 
 [1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [2]: /llm_observability/terms/
