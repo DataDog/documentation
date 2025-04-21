@@ -87,7 +87,15 @@ cascade:
 
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
 
-Datadog Security includes [App and API Protection](#app-and-api-protection), [Cloud SIEM](#cloud-siem), [Cloud Security](#cloud-security), [Code Security][20], [Workload Protection][26], and [Sensitive Data Scanner][24]. To learn more, check out the [30-second Product Guided Tour][14].
+Datadog Security includes: 
+- [Cloud SIEM](#cloud-siem)
+- [Code Security](#code-security)
+- [Cloud Security](#cloud-security)
+- [App and API Protection](#app-and-api-protection)
+- [Workload Protection](#workload-protection)
+- [Sensitive Data Scanner](#sensitive-data-scanner)
+ 
+To learn more, check out the [30-second Product Guided Tour][14].
 
 ## Cloud SIEM
 
