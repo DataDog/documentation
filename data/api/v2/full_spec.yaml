@@ -22938,6 +22938,139 @@ components:
       type: string
       x-enum-varnames:
       - ADD_FIELDS
+    ObservabilityPipelineAmazonS3Destination:
+      description: The `amazon_s3` destination sends your logs in Datadog-rehydratable
+        format to an Amazon S3 bucket for archiving.
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
+        bucket:
+          description: S3 bucket name.
+          example: error-logs
+          type: string
+        id:
+          description: Unique identifier for the destination component.
+          example: amazon-s3-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        key_prefix:
+          description: Optional prefix for object keys.
+          nullable: true
+          type: string
+        region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        storage_class:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3DestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - bucket
+      - region
+      - storage_class
+      type: object
+    ObservabilityPipelineAmazonS3DestinationStorageClass:
+      description: S3 storage class.
+      enum:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - INTELLIGENT_TIERING
+      - STANDARD_IA
+      - EXPRESS_ONEZONE
+      - ONEZONE_IA
+      - GLACIER
+      - GLACIER_IR
+      - DEEP_ARCHIVE
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - REDUCED_REDUNDANCY
+      - INTELLIGENT_TIERING
+      - STANDARD_IA
+      - EXPRESS_ONEZONE
+      - ONEZONE_IA
+      - GLACIER
+      - GLACIER_IR
+      - DEEP_ARCHIVE
+    ObservabilityPipelineAmazonS3DestinationType:
+      default: amazon_s3
+      description: The destination type. Always `amazon_s3`.
+      enum:
+      - amazon_s3
+      example: amazon_s3
+      type: string
+      x-enum-varnames:
+      - AMAZON_S3
+    ObservabilityPipelineAmazonS3Source:
+      description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
+
+        It supports AWS authentication and TLS encryption.
+
+        '
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: aws-s3-source
+          type: string
+        region:
+          description: AWS region where the S3 bucket resides.
+          example: us-east-1
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3SourceType'
+      required:
+      - id
+      - type
+      - region
+      type: object
+    ObservabilityPipelineAmazonS3SourceType:
+      default: amazon_s3
+      description: The source type. Always `amazon_s3`.
+      enum:
+      - amazon_s3
+      example: amazon_s3
+      type: string
+      x-enum-varnames:
+      - AMAZON_S3
+    ObservabilityPipelineAwsAuth:
+      description: "AWS authentication credentials used for accessing AWS services
+        such as S3.\nIf omitted, the system\u2019s default credentials are used (for
+        example, the IAM role and environment variables).\n"
+      properties:
+        assume_role:
+          description: The Amazon Resource Name (ARN) of the role to assume.
+          nullable: true
+          type: string
+        external_id:
+          description: A unique identifier for cross-account role assumption.
+          nullable: true
+          type: string
+        session_name:
+          description: A session identifier used for logging and tracing the assumed
+            role session.
+          nullable: true
+          type: string
+      type: object
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources,
         processors, and destinations.
@@ -22980,6 +23113,9 @@ components:
       description: A destination for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Destination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -22989,11 +23125,15 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Source'
     ObservabilityPipelineCreateRequest:
       description: Top-level schema representing a pipeline.
       properties:
@@ -23165,6 +23305,246 @@ components:
       type: string
       x-enum-varnames:
       - FILTER
+    ObservabilityPipelineGcpAuth:
+      description: 'GCP credentials used to authenticate with Google Cloud Storage.
+
+        '
+      properties:
+        credentials_file:
+          description: Path to the GCP service account key file.
+          example: /var/secrets/gcp-credentials.json
+          type: string
+      required:
+      - credentials_file
+      type: object
+    ObservabilityPipelineGenerateMetricsProcessor:
+      description: 'The `generate_datadog_metrics` processor creates custom metrics
+        from logs and sends them to Datadog.
+
+        Metrics can be counters, gauges, or distributions and optionally grouped by
+        log fields.
+
+        '
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline.
+          example: generate-metrics-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this processor.
+          example:
+          - source-id
+          items:
+            type: string
+          type: array
+        metrics:
+          description: Configuration for generating individual metrics.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetric'
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessorType'
+      required:
+      - id
+      - type
+      - inputs
+      - include
+      - metrics
+      type: object
+    ObservabilityPipelineGenerateMetricsProcessorType:
+      default: generate_datadog_metrics
+      description: The processor type. Always `generate_datadog_metrics`.
+      enum:
+      - generate_datadog_metrics
+      example: generate_datadog_metrics
+      type: string
+      x-enum-varnames:
+      - GENERATE_DATADOG_METRICS
+    ObservabilityPipelineGeneratedMetric:
+      description: 'Defines a log-based custom metric, including its name, type, filter,
+        value computation strategy,
+
+        and optional grouping fields.
+
+        '
+      properties:
+        group_by:
+          description: Optional fields used to group the metric series.
+          example:
+          - service
+          - env
+          items:
+            type: string
+          type: array
+        include:
+          description: Datadog filter query to match logs for metric generation.
+          example: service:billing
+          type: string
+        metric_type:
+          $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricMetricType'
+        name:
+          description: Name of the custom metric to be created.
+          example: logs.processed
+          type: string
+        value:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricValue'
+      required:
+      - name
+      - include
+      - metric_type
+      - value
+      type: object
+    ObservabilityPipelineGeneratedMetricIncrementByField:
+      description: The definition of `ObservabilityPipelineGeneratedMetricIncrementByField`
+        object.
+      properties:
+        field:
+          description: Name of the log field containing the numeric value to increment
+            the metric by.
+          example: errors
+          type: string
+        strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByFieldStrategy'
+      required:
+      - strategy
+      - field
+      type: object
+    ObservabilityPipelineGeneratedMetricIncrementByFieldStrategy:
+      description: Uses a numeric field in the log event as the metric increment.
+      enum:
+      - increment_by_field
+      example: increment_by_field
+      type: string
+      x-enum-varnames:
+      - INCREMENT_BY_FIELD
+    ObservabilityPipelineGeneratedMetricIncrementByOne:
+      description: The definition of `ObservabilityPipelineGeneratedMetricIncrementByOne`
+        object.
+      properties:
+        strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByOneStrategy'
+      required:
+      - strategy
+      type: object
+    ObservabilityPipelineGeneratedMetricIncrementByOneStrategy:
+      description: Increments the metric by 1 for each matching event.
+      enum:
+      - increment_by_one
+      example: increment_by_one
+      type: string
+      x-enum-varnames:
+      - INCREMENT_BY_ONE
+    ObservabilityPipelineGeneratedMetricMetricType:
+      description: Type of metric to create.
+      enum:
+      - count
+      - gauge
+      - distribution
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - GAUGE
+      - DISTRIBUTION
+    ObservabilityPipelineGoogleCloudStorageDestination:
+      description: 'The `google_cloud_storage` destination stores logs in a Google
+        Cloud Storage (GCS) bucket.
+
+        It requires a bucket name, GCP authentication, and metadata fields.
+
+        '
+      properties:
+        acl:
+          $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationAcl'
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        bucket:
+          description: Name of the GCS bucket.
+          example: error-logs
+          type: string
+        id:
+          description: Unique identifier for the destination component.
+          example: gcs-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        key_prefix:
+          description: Optional prefix for object keys within the GCS bucket.
+          nullable: true
+          type: string
+        metadata:
+          description: Custom metadata key-value pairs added to each object.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineMetadataEntry'
+          type: array
+        storage_class:
+          $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationStorageClass'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - bucket
+      - auth
+      - storage_class
+      - acl
+      - metadata
+      type: object
+    ObservabilityPipelineGoogleCloudStorageDestinationAcl:
+      description: Access control list setting for objects written to the bucket.
+      enum:
+      - private
+      - project-private
+      - public-read
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+      example: private
+      type: string
+      x-enum-varnames:
+      - PRIVATE
+      - PROJECTNOT_PRIVATE
+      - PUBLICNOT_READ
+      - AUTHENTICATEDNOT_READ
+      - BUCKETNOT_OWNERNOT_READ
+      - BUCKETNOT_OWNERNOT_FULLNOT_CONTROL
+    ObservabilityPipelineGoogleCloudStorageDestinationStorageClass:
+      description: Storage class used for objects stored in GCS.
+      enum:
+      - STANDARD
+      - NEARLINE
+      - COLDLINE
+      - ARCHIVE
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - NEARLINE
+      - COLDLINE
+      - ARCHIVE
+    ObservabilityPipelineGoogleCloudStorageDestinationType:
+      default: google_cloud_storage
+      description: The destination type. Always `google_cloud_storage`.
+      enum:
+      - google_cloud_storage
+      example: google_cloud_storage
+      type: string
+      x-enum-varnames:
+      - GOOGLE_CLOUD_STORAGE
     ObservabilityPipelineKafkaSource:
       description: The `kafka` source ingests data from Apache Kafka topics.
       properties:
@@ -23238,6 +23618,27 @@ components:
       type: string
       x-enum-varnames:
       - KAFKA
+    ObservabilityPipelineMetadataEntry:
+      description: A custom metadata entry to attach to each object uploaded to the
+        GCS bucket.
+      properties:
+        name:
+          description: The metadata key.
+          example: environment
+          type: string
+        value:
+          description: The metadata value.
+          example: production
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineMetricValue:
+      description: Specifies how the value of the generated metric is computed.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByOne'
+      - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByField'
     ObservabilityPipelineParseJSONProcessor:
       description: The `parse_json` processor extracts JSON from a specified field
         and flattens it into the event. This is useful when logs contain embedded
@@ -23527,6 +23928,131 @@ components:
       type: string
       x-enum-varnames:
       - RENAME_FIELDS
+    ObservabilityPipelineSplunkHecDestination:
+      description: 'The `splunk_hec` destination forwards logs to Splunk using the
+        HTTP Event Collector (HEC).
+
+        '
+      properties:
+        auto_extract_timestamp:
+          description: 'If `true`, Splunk tries to extract timestamps from incoming
+            log events.
+
+            If `false`, Splunk assigns the time the event was received.
+
+            '
+          example: true
+          type: boolean
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: splunk-hec-destination
+          type: string
+        index:
+          description: Optional name of the Splunk index where logs are written.
+          example: main
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        sourcetype:
+          description: The Splunk sourcetype to assign to log events.
+          example: custom_sourcetype
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineSplunkHecDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineSplunkHecDestinationType:
+      default: splunk_hec
+      description: The destination type. Always `splunk_hec`.
+      enum:
+      - splunk_hec
+      example: splunk_hec
+      type: string
+      x-enum-varnames:
+      - SPLUNK_HEC
+    ObservabilityPipelineSplunkHecSource:
+      description: 'The `splunk_hec` source implements the Splunk HTTP Event Collector
+        (HEC) API.
+
+        '
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: splunk-hec-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineSplunkHecSourceType:
+      default: splunk_hec
+      description: The source type. Always `splunk_hec`.
+      enum:
+      - splunk_hec
+      example: splunk_hec
+      type: string
+      x-enum-varnames:
+      - SPLUNK_HEC
+    ObservabilityPipelineSplunkTcpSource:
+      description: 'The `splunk_tcp` source receives logs from a Splunk Universal
+        Forwarder over TCP.
+
+        TLS is supported for secure transmission.
+
+        '
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: splunk-tcp-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineSplunkTcpSourceType:
+      default: splunk_tcp
+      description: The source type. Always `splunk_tcp`.
+      enum:
+      - splunk_tcp
+      example: splunk_tcp
+      type: string
+      x-enum-varnames:
+      - SPLUNK_TCP
     ObservabilityPipelineTls:
       description: Configuration for enabling TLS encryption.
       properties:
