@@ -1,7 +1,7 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
 further_reading:
-- link: "security/threats/workload_security_rules"
+- link: "security/workload_protection/workload_security_rules"
   tag: "Documentation"
   text: "Workload Protection Detection Rules"
 ---
@@ -79,7 +79,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to CSM [Agent Configuration][2] rules.
+1. Go to Cloud Security [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}
@@ -145,4 +145,4 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
-[4]: /security/threats/workload_security_rules
+[4]: /security/workload_protection/workload_security_rules

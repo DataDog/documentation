@@ -6,18 +6,18 @@ further_reading:
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 - link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
-  text: "Cloud Security Management Vulnerabilities"
+  text: "Cloud Security Vulnerabilities"
 - link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Enable SBOM collection in CSM Vulnerabilities"
+  text: "Enable SBOM collection in Cloud Security Vulnerabilities"
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
-  text: "Troubleshooting Cloud Security Management Vulnerabilities"
+  text: "Troubleshooting Cloud Security Vulnerabilities"
 ---
 
 ## Overview
 
-The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
+The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security][2] to help you streamline your security efforts.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
@@ -35,7 +35,7 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 ### Image collection
 
-Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
+Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security][8] vulnerabilities.
 
 #### Enable container image collection
 
@@ -101,10 +101,10 @@ container_image:
 
 #### Enable SBOM collection
 
-The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
+The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for Cloud Security Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [Cloud Security Pro and Enterprise plans][10].
 
 **Notes**:
-- The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
+- The Cloud Security Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 - SBOM collection is not compatible with the image streaming feature in Google Kubernetes Engine (GKE). To disable it, see the [Disable Image streaming][11] section of the GKE docs.
 
 {{< tabs >}}
