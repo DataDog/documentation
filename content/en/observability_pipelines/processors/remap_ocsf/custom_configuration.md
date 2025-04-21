@@ -1,5 +1,5 @@
 ---
-title: Custom OCSF Configurations
+title: Custom Configurations
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
@@ -13,7 +13,7 @@ You can import your own OCSF mapping when you add a custom mapping to the Remap 
 
 ## Mapping descriptor
 
-A mapping descriptor describes how to convert events into OCSF format. It can be in either JSON or YAML format. Out-of-the-box mappings use the filename `mapping.yaml`.
+The mapping descriptor tells the processor how to convert events into OCSF format. The mapping can be in either JSON or YAML format. Out-of-the-box mappings use the filename `mapping.yaml`.
 
 The mapping descriptor has four sections:
 
@@ -21,8 +21,8 @@ The mapping descriptor has four sections:
 |------------|-----------|-----------------------------------------------------------------------------------------------------------------------|
 | `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
 | `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class.                                                |
-| `preprocess` | No        | Lists an ordered series of preprocessing steps. These are used to rework the data to allow the field-to-field mappings that follow. Each entry is an object consisting of a `function` name (required) and parameters associated with that function. |
-| `mapping`    | Yes       | Lists an ordered series of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. Each mapping may have a `conversion` specified by a `lookup` table or post-processing `function`. |
+| `preprocess` | No        | Lists an ordered series of preprocessing steps. The preprocessors rework the data to allow the field-to-field mappings. Each entry is an object consisting of a `function` name (required) and parameters associated with that function. See [Preprocessors](#preprocessors) for more information. |
+| `mapping`    | Yes       | Lists an ordered series of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. See [Mapping](#mapping) for more information. Each mapping may have a `conversion` specified by a `lookup` table or post-processing `function`. See [Mapping lookup tables](#mapping-lookup-tables) and [Mapping functions](#mapping-functions) for more information. |
 
 ### Metadata section
 
@@ -70,9 +70,11 @@ mapping: []
 
 ### Preprocessors
 
+Preprocessors rework the data to allow field-to-field mappings. Each entry in the `preprocess` section is an object consisting of a `function` name (required) and parameters associated with that function.
+
 #### `parse_csv`
 
-This preprocessor:
+The `parse_csv` preprocessor:
 
 1. Extracts a `source` field.
 1. Parses `source` as CSV, maps the array of values to an object based on a list of field names in `columns`.
@@ -159,7 +161,6 @@ mapping:
 ```
 
 {{% /tab %}}
-
 {{% tab "JSON example" %}}
 
 ```json
@@ -188,7 +189,7 @@ All enumerated name or label fields identified in the OCSF schema are converted 
 If one of the listed `profiles` in the metadata section is `datetime`, the mapping
 automatically has all numeric timestamps identified in the OCSF schema converted into the sibling field `{DEST}_dt`. For example, the numeric `time` field is converted into `time_dt`, which contains a string representation of that timestamp. No additional work is required to support the `datetime` profile.
 
-## Mapping lookup tables
+### Mapping lookup tables
 
 A lookup table names a series of values to compare against the source column, along with the
 resulting `value` that should be used if the comparison succeeds. The comparison value is specified as one of the following operations:
@@ -275,7 +276,7 @@ mapping:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Mapping Functions
+### Mapping Functions
 
 A function applies an operation to the value extracted from the source, before assigning to the destination.
 
