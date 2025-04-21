@@ -19100,6 +19100,28 @@ components:
         meta:
           $ref: '#/components/schemas/HistoricalJobListMeta'
       type: object
+    ListPipelinesResponse:
+      description: The definition of `ResponseSchema` object.
+      properties:
+        data:
+          description: The `schema` `data`.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListPipelinesResponseMeta'
+      required:
+      - data
+      type: object
+    ListPipelinesResponseMeta:
+      description: Metadata about the response.
+      properties:
+        total_count:
+          description: The total number of pipelines.
+          example: 42
+          format: int64
+          type: integer
+      type: object
     ListPowerpacksResponse:
       description: Response object which includes all powerpack configurations.
       properties:
@@ -36695,6 +36717,53 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    ValidationError:
+      description: The definition of `ValidationError` object.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ValidationErrorMeta'
+        title:
+          description: A short, human-readable summary of the error.
+          example: Field 'region' is required
+          type: string
+      required:
+      - title
+      - meta
+      type: object
+    ValidationErrorMeta:
+      description: The definition of `ValidationErrorMeta` object.
+      properties:
+        field:
+          description: The field name that caused the error.
+          example: region
+          type: string
+        id:
+          description: The ID of the component in which the error occurred.
+          example: datadog-agent-source
+          type: string
+        message:
+          description: The detailed error message.
+          example: Field 'region' is required
+          type: string
+      required:
+      - message
+      type: object
+    ValidationErrorResponse:
+      description: Response containing validation errors.
+      example:
+        errors:
+        - meta:
+            field: region
+            id: datadog-agent-source
+            message: Field 'region' is required
+          title: Field 'region' is required
+      properties:
+        errors:
+          description: The `ValidationErrorResponse` `errors`.
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
     Version:
       description: Version of the notification rule. It is updated when the rule is
         modified.
@@ -51511,6 +51580,44 @@ paths:
       x-undo:
         type: safe
   /api/v2/remote_config/products/obs_pipelines/pipelines:
+    get:
+      description: Retrieve a list of pipelines.
+      operationId: ListPipelines
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List pipelines
+      tags:
+      - Observability Pipelines
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.'
     post:
       description: Create a new pipeline.
       operationId: CreatePipeline
@@ -51568,12 +51675,57 @@ paths:
               \     \"type\":\"pipelines\"\n   }\n}"
           step: there is a valid "pipeline" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
       x-undo:
         operationId: DeletePipeline
         parameters:
         - name: pipeline_id
           source: data.id
         type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.'
+  /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
+    post:
+      description: 'Validates a pipeline configuration without creating or updating
+        any resources.
+
+        Returns a list of validation errors, if any.
+
+        '
+      operationId: ValidatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Validate an observability pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in Preview.'
   /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
     delete:
@@ -51613,6 +51765,10 @@ paths:
       tags:
       - Observability Pipelines
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_delete
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview.'
@@ -51645,6 +51801,10 @@ paths:
       tags:
       - Observability Pipelines
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.'
@@ -51701,6 +51861,10 @@ paths:
       tags:
       - Observability Pipelines
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview.'
