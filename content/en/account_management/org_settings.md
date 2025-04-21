@@ -88,7 +88,9 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can enable different sharing features, and add additional security configuration such as maximum public access period.
+The **Public Sharing** tab includes settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+
+**Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
 
 ### OAuth Apps
 

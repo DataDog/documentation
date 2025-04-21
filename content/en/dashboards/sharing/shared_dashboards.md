@@ -26,6 +26,8 @@ further_reading:
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
 All shared dashboards and their public accesss settings are listed in the [Public Sharing Settings page][3]. On the settings page, you can also add additional security configuration such as disabling specific sharing types, or setting maximum public access period.
 
+**Note**: When the shared dashboards feature is disabled, dashboards are no longer publicly accessible. However, their configurations remain viewable and editable.Disabling the feature does **not** affect the Active/Paused status of individual dashboards — even Active shared dashboards will not be publicly accessible.
+
 Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
 ## Share states
