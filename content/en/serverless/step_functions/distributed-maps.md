@@ -8,7 +8,7 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
 
 ## Set up trace merging
 
-1. To ensure that child workflows are correctly linked to their parents, enable the **Item Batching** option for your Distributed Map state. For more information, see [ItemBatcher][2].
+1. To ensure that child workflows are correctly linked to their parents, enable the **Item Batching** option for your Distributed Map state. For more information, see [ItemBatcher][2]. If you don't want to use Item Batching, you can set `MaxItemsPerBatch` to 1 as a workaround.
 
 2. Your State Machine definition must use [JSONata][4] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
@@ -16,7 +16,7 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
 
    {{< highlight json "hl_lines=4-4" >}}
    "ItemBatcher": {
-     "MaxItemsPerBatch": 100,
+     "MaxItemsPerBatch": N,
      "BatchInput": {
        "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $merge([$ddTraceContext, {'serverless-version': 'v1', 'timestamp': $millis()}])) %}"
      }
