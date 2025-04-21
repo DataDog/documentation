@@ -15,92 +15,105 @@ Using the Sentry SDK with Error Tracking helps you migrate to Datadog. However, 
 </div>
 
 ## Overview
-You can use [Sentry SDKs][1] to send your events to Datadog. This offers you a way to start using Error Tracking on existing applications that are instrumented using Sentry SDKs.
+You can use [Sentry SDKs][1] to send your events to Datadog, so you can start using Error Tracking on existing applications that are instrumented using Sentry SDKs.
 
 Setting up the Sentry SDK with Datadog requires a minimal code change to point the SDK to a Datadog Data Source Name (DSN).
 
-[Events][6] are sent to Datadog as logs. Non-error events (messages) also show up as logs. Other item types (traces, attachments, sessions, ...) are not supported.
+[Events][6] and non-error events (messages) appear in Datadog as logs. Other item types (traces, attachments, sessions, etc.) are not supported.
+
+## Supported SDKs
+
+The following Sentry SDKs are verified to work with Error Tracking:
+
+| Platform   | Tested version                                    |
+| ---------- | ------------------------------------------------- |
+| JavaScript | `@sentry/node@9.13.0`<br>`@sentry/browser@9.13.0` |
+| Python     | `sentry-sdk==2.26.1`                              |
+| Java       | `io.sentry:sentry:8.6.0`                          |
+| .NET       | `Sentry 5.5.1`                                    |
+| Go         | `sentry-go v0.32.0`                               |
+| Ruby       | `sentry-ruby 5.23.0`                              |
 
 ## Setup
 ### Prerequisites
-- Sentry SDK events are sent into Datadog as **logs**. You must have [Error Tracking for Logs][2] enabled for errors to show up in Error Tracking.
+Sentry SDK events are sent into Datadog as logs. You must have [Error Tracking for Logs][2] enabled for errors to show up in Error Tracking.
 
-By default, enabling Error Tracking for Logs enables Error Tracking on *all* your logs. If you want, you can use [rules][9] to configure Error Tracking for Logs to *only* collect errors from the Sentry SDK. To do this, create a rule for logs with scope `source:sentry-sdk`, and create an exclusion rule for all other logs.
+**Note:** By default, enabling Error Tracking for Logs enables Error Tracking on **all** of your logs. You can use [rules][9] to configure Error Tracking for Logs to **only** collect errors from the Sentry SDK. To do this, create a rule for logs with scope `source:sentry-sdk`, and create an exclusion rule for all other logs.
 
 {{< img src="error_tracking/sentry-sdk-rules.png" alt="Error Tracking rules including only Logs from the Sentry SDK" style="width:70%;" >}}
 
 ### Service configuration
 To configure the Sentry SDK to send events into Datadog:
-- Configure a Datadog Data Source Name (DSN). Follow the [in-app instructions][3] to generate your unique DSN.
-- Set a `service` tag on all events. This is used to separate errors and is shown in the Datadog UI.
+1. Configure a Datadog Data Source Name (DSN). Follow the [in-app instructions][3] to generate your unique DSN.
+2. Set a `service` tag on all events. This is used to separate errors and is shown in the Datadog UI:
 
 {{< tabs >}}
 
-{{% tab "JavaScript" %}}
-{{< code-block lang="javascript" >}}
-Sentry.init({
-    dsn: 'https://<TOKEN>@sentry-intake.<DD_SITE>/1',
-    initialScope: {
-        tags: {
-            service: 'my-app'
-        }
-    }
-});
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "JavaScript" %}}
+  {{< code-block lang="javascript" >}}
+  Sentry.init({
+      dsn: 'https://<TOKEN>@sentry-intake.<DD_SITE>/1',
+      initialScope: {
+          tags: {
+              service: 'my-app'
+          }
+      }
+  });
+  {{< /code-block >}}
+  {{% /tab %}}
 
-{{% tab "Python" %}}
-{{< code-block lang="python" >}}
-sentry_sdk.init(
-    dsn="https://<TOKEN>@sentry-intake.<DD_SITE>/1",
-)
-sentry_sdk.set_tag("service", "my-app")
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "Python" %}}
+  {{< code-block lang="python" >}}
+  sentry_sdk.init(
+      dsn="https://<TOKEN>@sentry-intake.<DD_SITE>/1",
+  )
+  sentry_sdk.set_tag("service", "my-app")
+  {{< /code-block >}}
+  {{% /tab %}}
 
-{{% tab "Java" %}}
-{{< code-block lang="java" >}}
-Sentry.init(options -> {
-    options.setDsn("https://<TOKEN>@sentry-intake.<DD_SITE>/1");
-});
-Sentry.configureScope(scope -> {
-    scope.setTag("service", "my-app");
-});
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "Java" %}}
+  {{< code-block lang="java" >}}
+  Sentry.init(options -> {
+      options.setDsn("https://<TOKEN>@sentry-intake.<DD_SITE>/1");
+  });
+  Sentry.configureScope(scope -> {
+      scope.setTag("service", "my-app");
+  });
+  {{< /code-block >}}
+  {{% /tab %}}
 
-{{% tab "C#" %}}
-{{< code-block lang="csharp">}}
-SentrySdk.Init(options =>
-{
-    options.Dsn = "https://<TOKEN>@sentry-intake.<DD_SITE>/1";
-    options.SetBeforeSend((sentryEvent, hint) => {
-        sentryEvent.SetTag("service", "my-app");
-        return sentryEvent;
-    });
-});
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "C#" %}}
+  {{< code-block lang="csharp">}}
+  SentrySdk.Init(options =>
+  {
+      options.Dsn = "https://<TOKEN>@sentry-intake.<DD_SITE>/1";
+      options.SetBeforeSend((sentryEvent, hint) => {
+          sentryEvent.SetTag("service", "my-app");
+          return sentryEvent;
+      });
+  });
+  {{< /code-block >}}
+  {{% /tab %}}
 
-{{% tab "Go" %}}
-{{< code-block lang="go">}}
-sentry.Init(sentry.ClientOptions{
-    Dsn: "https://<TOKEN>@sentry-intake.<DD_SITE>/1",
-})
-sentry.ConfigureScope(func(scope *sentry.Scope) {
-    scope.SetTag("service", "my-app");
-})
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "Go" %}}
+  {{< code-block lang="go">}}
+  sentry.Init(sentry.ClientOptions{
+      Dsn: "https://<TOKEN>@sentry-intake.<DD_SITE>/1",
+  })
+  sentry.ConfigureScope(func(scope *sentry.Scope) {
+      scope.SetTag("service", "my-app");
+  })
+  {{< /code-block >}}
+  {{% /tab %}}
 
-{{% tab "Ruby" %}}
-{{< code-block lang="ruby">}}
-Sentry.init do |config|
-    config.dsn = https://<TOKEN>@sentry-intake.<DD_SITE>/1'
-end
-Sentry.set_tags('service': 'my-app')
-{{< /code-block >}}
-{{% /tab %}}
+  {{% tab "Ruby" %}}
+  {{< code-block lang="ruby">}}
+  Sentry.init do |config|
+      config.dsn = https://<TOKEN>@sentry-intake.<DD_SITE>/1'
+  end
+  Sentry.set_tags('service': 'my-app')
+  {{< /code-block >}}
+  {{% /tab %}}
 
 {{< /tabs >}}
 
@@ -171,30 +184,17 @@ Sentry.set_tags('git.repository_url', '<git-provider.example/me/my-repo>')
 
 {{< /tabs >}}
 
-## Supported SDKs
-
-The following Sentry SDKs are verified to work with Error Tracking:
-
-| Platform   | Tested version                                    |
-| ---------- | ------------------------------------------------- |
-| JavaScript | `@sentry/node@9.13.0`<br>`@sentry/browser@9.13.0` |
-| Python     | `sentry-sdk==2.26.1`                              |
-| Java       | `io.sentry:sentry:8.6.0`                          |
-| .NET       | `Sentry 5.5.1`                                    |
-| Go         | `sentry-go v0.32.0`                               |
-| Ruby       | `sentry-ruby 5.23.0`                              |
-
 ## Migrate to the recommended setup
 
-To get the most out of Error Tracking, it is recommended to eventually migrate to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] on how to configure this.
+To get the most out of Error Tracking, Datadog recommends migrating to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] for more information.
 
-The setup using the Sentry SDK can be used simultaneously with the recommended setup. Errors may be reported twice.
+During your migration, you can use the Sentry SDK and Datadog at the same time.
 
-## Send events to both Sentry and Datadog
-Events can be sent to both Sentry (or any other Sentry-compatible backend) and Datadog. This allows you to start using Datadog while also keeping your current solution. There are several ways to achieve this.
+**Note**: Doing so may result in errors being reported twice.
 
 ### From the Sentry SDK
-Sentry SDKs can be configured to send events to multiple DSNs at once. On most Sentry SDKs, you can override the default transport to achieve this.
+You can configure Sentry SDKs to send events to multiple DSNs at once. On most Sentry SDKs, you can override the default transport to achieve this.
+
 
 {{< tabs >}}
 
@@ -218,7 +218,7 @@ Sentry.setTag('service', 'my-app');
 {{% /tab %}}
 
 {{% tab "Python" %}}
-- Copy the following function into your code:
+1. Copy the following function into your code:
 {{< code-block lang="python" >}}
 from sentry_sdk.transport import Transport, make_transport
 def make_multi_transport(dsns):
@@ -243,7 +243,7 @@ def make_multi_transport(dsns):
     return MultiTransport
 {{< /code-block >}}
 
-- Use as follows:
+2. Use as follows:
 {{< code-block lang="python" >}}
 _SENTRY_DSN = "<SENTRY_DSN>"
 _DATADOG_DSN = "<DATADOG_DSN>"
@@ -257,7 +257,7 @@ sentry_sdk.set_tag("service", "my-app")
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- Copy the following class into your code. Make sure to define it in the **io.sentry** package.
+1. Copy the following class into your code. Make sure to define it in the **io.sentry** package.
 {{< code-block lang="java" >}}
 package io.sentry;
 
@@ -314,7 +314,7 @@ public record MultiTransportFactory(List<String> dsns) implements ITransportFact
 }
 {{< /code-block >}}
 
-- Use as follows:
+2. Use as follows:
 {{< code-block lang="java" >}}
 final var sentryDsn = "<SENTRY_DSN>"
 final var datadogDsn = "<DATADOG_DSN>"
@@ -328,7 +328,7 @@ Sentry.setTag("service", "my-app");
 {{% /tab %}}
 
 {{% tab "Go" %}}
-- Copy the following snippet into your code:
+1. Copy the following snippet into your code:
 {{< code-block lang="go" >}}
 type MultiTransport struct {
 	dsns       []string
@@ -381,7 +381,7 @@ func (mt *MultiTransport) Close() {
 }
 {{< /code-block >}}
 
-- Use as follows:
+2. Use as follows:
 {{< code-block lang="go" >}}
 sentryDSN := "<SENTRY_DSN>"
 datadogDSN := "<DATADOG_DSN>"
