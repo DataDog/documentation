@@ -7,7 +7,11 @@ aliases:
   - /service_catalog/setup
 ---
 
-Get started with Software Catalog with one of the following setup paths.
+Datadog Software Catalog provides a centralized registry to track and manage your software components, such as services, datastores, queues, frontend applications, APIs, and more. Component attributes like teams, on-call, runbooks, and source code links are managed through the [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
+
+The [automatic discovery][2] feature in the Software Catalog means that if you are an existing Datadog user of Datadog's APM, USM, or RUM products, the Software Catalog comes pre-populated with monitored components. You can extend the auto-populated Software Catalog by adding other components by creating Entity Definitions to represent any unmonitored components. 
+
+Depending on whether you are an existing APM, USM, or RUM user, you can follow one of the following setup paths.
 
 ## New to Datadog 
 
@@ -45,3 +49,6 @@ The Software Catalog write permission allows a user to modify Software Catalog d
 - Updating service metadata in the UI
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
+
+[1]: /software_catalog/service_definitions/
+[2]: /software_catalog/set_up/existing_datadog_user/#automatic-discovery-with-apm-usm-and-rum

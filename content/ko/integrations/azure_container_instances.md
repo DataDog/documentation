@@ -3,7 +3,7 @@ aliases:
 - /ko/integrations/azure_containerinstances
 categories:
 - azure
-- cloud
+- 클라우드
 - 컨테이너
 - 프로비저닝
 custom_kind: 통합
@@ -20,7 +20,7 @@ is_public: true
 manifest_version: '1.0'
 name: azure_container_instances
 public_title: Datadog-Microsoft Azure Container Instances 통합
-short_description: Azure Container Instancces의 핵심 메트릭 추적하기
+short_description: Azure Container Instances의 핵심 메트릭 추적하기
 version: '1.0'
 ---
 
@@ -37,7 +37,7 @@ Datadog Azure 통합을 사용해 Azure Container Instances 메트릭을 수집�
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_container_instances" >}}

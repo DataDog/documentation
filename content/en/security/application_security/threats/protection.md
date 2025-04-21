@@ -4,43 +4,43 @@ is_beta: true
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Application Security Management with Datadog"
+  text: "App and API Protection with Datadog"
 ---
 
 ## Overview
 
 If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
-Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+App and API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## Prerequisites 
 
 To use protection capabilities with your service:
 
 - [Update your Datadog Agent][3] to at least version 7.41.1.
-- [Enable ASM][1].
+- [Enable AAP][1].
 - [Enable Remote Configuration][2].
-- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of [Compatibility][12] for your service's language.
+- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the AAP capabilities support section of [Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
 ## Blocking attackers (IPs and authenticated users)
 
-You can block attackers that are flagged in ASM [Security Signals][5] temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
+You can block attackers that are flagged in AAP [Security Signals][5] temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
 
-From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected. See [Investigate Security Signals][20] for more information.
+From there, all AAP-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where AAP is disabled aren't protected. See [Investigate Security Signals][20] for more information.
 
 ## Respond to threats in real time by automating attacker blocking
 
-In addition to manually blocking attackers, you can configure automation rules to have ASM automatically block attackers that are flagged in Security Signals. 
+In addition to manually blocking attackers, you can configure automation rules to have AAP automatically block attackers that are flagged in Security Signals. 
 
 To get started, navigate to **Security > Application Security > Protection > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _Application security_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
 
 **Note**: You must instrument your services to be able to block authenticated attackers. See [User Monitoring and Protection][15] for more details.
 
-## Block attackers at the perimeter - integrate ASM with your existing WAF deployments
+## Block attackers at the perimeter - integrate AAP with your existing WAF deployments
 
-Datadog ASM enables customers to block attackers at the perimeter, directly from the Security Signal. ASM integrates with [Workflows][17] to push the attackers' IP addresses to perimeter Web Application Firewalls (AWS WAF, Cloudflare, Fastly) and ensure requests from these attackers are blocked at the edge even before they enter the customer's environment.
-Create workflows from the available [blueprints][18] and run them directly from ASM's Signal side panel.
+Datadog AAP enables customers to block attackers at the perimeter, directly from the Security Signal. AAP integrates with [Workflows][17] to push the attackers' IP addresses to perimeter Web Application Firewalls (AWS WAF, Cloudflare, Fastly) and ensure requests from these attackers are blocked at the edge even before they enter the customer's environment.
+Create workflows from the available [blueprints][18] and run them directly from AAP's Signal side panel.
 
 ## Denylist
 
@@ -52,15 +52,15 @@ You can use the _Passlist_ to permanently allow specific IP addresses access to 
 
 ## Blocking attack attempts with In-App WAF
 
-ASM In-App WAF (web application firewall) combines the detection techniques of perimeter-based WAFs with the rich context provided by Datadog, helping your teams protect their systems with confidence.
+AAP In-App WAF (web application firewall) combines the detection techniques of perimeter-based WAFs with the rich context provided by Datadog, helping your teams protect their systems with confidence.
 
-Because ASM is aware of an application's routes, protection can be applied granularly to specific services, and not necessarily across all applications and traffic. This contextual efficiency reduces your inspection effort, and it reduces the false positive rate compared to a perimeter WAF. There is no learning period, because most web frameworks provide a structured map of routes. ASM can help your team roll out protections against zero-day vulnerabilities automatically soon after the vulnerability is disclosed, while targeting vulnerable applications, limiting the risk of false positives.
+Because AAP is aware of an application's routes, protection can be applied granularly to specific services, and not necessarily across all applications and traffic. This contextual efficiency reduces your inspection effort, and it reduces the false positive rate compared to a perimeter WAF. There is no learning period, because most web frameworks provide a structured map of routes. AAP can help your team roll out protections against zero-day vulnerabilities automatically soon after the vulnerability is disclosed, while targeting vulnerable applications, limiting the risk of false positives.
 
 ### How In-App WAF blocks security traces
 
 In addition to the `monitoring` and `disabled` modes offered for each of the 130+ In-App WAF rules, rules also have `blocking` mode. Each rule specifies conditions on the incoming request to define what the library considers suspicious. When a given rule pattern matches an ongoing HTTP request, the request is blocked by the library. 
 
-Managed policies define the mode in which each of the In-App WAF rules behave on match: `monitoring`, `blocking`, or `disabled`. Because it has the full context of your applications, ASM knows which rules to apply to protect your applications while limiting the number of false positives. 
+Managed policies define the mode in which each of the In-App WAF rules behave on match: `monitoring`, `blocking`, or `disabled`. Because it has the full context of your applications, AAP knows which rules to apply to protect your applications while limiting the number of false positives. 
 
 For fine-grained control, you can clone a Datadog managed policy or create a custom policy and set the mode to meet your needs. If you set the policy to `auto-updating`, your applications are protected by the latest detections rolled out by Datadog. You also have the option to pin a policy to a specific version of the ruleset. 
 
@@ -70,13 +70,13 @@ Manage In-App WAF by navigating to Security --> Application Security --> Configu
 
 View blocked security traces in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
 
-{{< img src="security/application_security/app_sec_blocked.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
+{{< img src="security/application_security/app_sec_blocked.png" alt="AAP Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
 ### Configure In-App WAF
 
-1. [**Enable Remote Configuration**][2] so that your ASM-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
+1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
 
-2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Application Security > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
+2. **Associate your AAP/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Application Security > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
    If you need granular control, clone one of the available policies to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
@@ -88,7 +88,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 {{% asm-protection-page-configuration %}}
 
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as AAP blocks requests originating from blocked IPs" width="75%" >}}
 
 The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Protection > In-App Waf > [Custom Responses][16]**.
 
