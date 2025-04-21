@@ -9,6 +9,9 @@ further_reading:
     - link: '/llm_observability/setup/api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
+    - link: '/llm_observability/submit_nemo_evaluations'
+      tag: 'Documentation'
+      text: 'Learn about submitting evaluations from NVIDIA NeMo'
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
