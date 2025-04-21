@@ -20,6 +20,10 @@ further_reading:
 
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
     Live Debugger is in Limited Preview. Request access to join the waiting list.
+    <br>
+    To submit questions, feedback, or requests related to Live Debugger, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM9SV4fxrM_OvQ2CtI7CMl7evN0jasFb6X1QiPAbW6dPTQVQ/viewform?usp=header">this form</a> with details. 
+    <br>
+    For urgent issues, contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
 {{< /beta-callout-private >}}
 
 ## Overview
@@ -57,10 +61,10 @@ Enable and disable Live Debugger on a service using one of the following methods
 1. Select the service and environment on the [Live Debugger Settings][18] page.
 1. Check that all prerequisites are met (unmet requirements display on the Settings page).
 1. Click "Enable" or "Disable":
-    - "Enable" to allow users to create Debug Sessions on the selected service and environment. **Note**: Admins and security contacts receive email notifications when new services are enabled.
+    - "Enable" to allow users to create Debug Sessions on the selected service and environment.
     - "Disable" to deactivate active Debug Sessions and prevent users from creating more.
 
-No service restart is required.
+**Note**: No service restart is required for changes to take effect. Admins and security contacts receive email notifications when services are enabled or disabled.
 
 #### Manual enablement ####
 1. Select the service and environment on the [Live Debugger Settings][18] page.
