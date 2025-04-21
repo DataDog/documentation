@@ -22973,7 +22973,6 @@ components:
           type: array
       required:
       - sources
-      - processors
       - destinations
       type: object
     ObservabilityPipelineConfigDestinationItem:
@@ -22989,11 +22988,15 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineFluentSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineHttpServerSource'
     ObservabilityPipelineCreateRequest:
       description: Top-level schema representing a pipeline.
       properties:
@@ -23108,6 +23111,20 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDecoding:
+      description: The decoding format used to interpret incoming logs.
+      enum:
+      - bytes
+      - gelf
+      - json
+      - syslog
+      example: json
+      type: string
+      x-enum-varnames:
+      - DECODE_BYTES
+      - DECODE_GELF
+      - DECODE_JSON
+      - DECODE_SYSLOG
     ObservabilityPipelineFieldValue:
       description: Represents a static key-value pair used in various processors.
       properties:
@@ -23165,6 +23182,73 @@ components:
       type: string
       x-enum-varnames:
       - FILTER
+    ObservabilityPipelineFluentSource:
+      description: The `fluent` source ingests logs from a Fluentd-compatible service.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: fluent-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineFluentSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineFluentSourceType:
+      default: fluent
+      description: The source type. The value should always be `fluent`.
+      enum:
+      - fluent
+      example: fluent
+      type: string
+      x-enum-varnames:
+      - FLUENT
+    ObservabilityPipelineHttpServerSource:
+      description: The `http_server` source collects logs over HTTP POST from external
+        services.
+      properties:
+        auth_strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceAuthStrategy'
+        decoding:
+          $ref: '#/components/schemas/ObservabilityPipelineDecoding'
+        id:
+          description: Unique ID for the HTTP server source.
+          example: http-server-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceType'
+      required:
+      - id
+      - type
+      - auth_strategy
+      - decoding
+      type: object
+    ObservabilityPipelineHttpServerSourceAuthStrategy:
+      description: HTTP authentication method.
+      enum:
+      - none
+      - plain
+      example: plain
+      type: string
+      x-enum-varnames:
+      - NONE
+      - PLAIN
+    ObservabilityPipelineHttpServerSourceType:
+      default: http_server
+      description: The source type. The value should always be `http_server`.
+      enum:
+      - http_server
+      example: http_server
+      type: string
+      x-enum-varnames:
+      - HTTP_SERVER
     ObservabilityPipelineKafkaSource:
       description: The `kafka` source ingests data from Apache Kafka topics.
       properties:
@@ -23238,6 +23322,136 @@ components:
       type: string
       x-enum-varnames:
       - KAFKA
+    ObservabilityPipelineParseGrokProcessor:
+      description: The `parse_grok` processor extracts structured fields from unstructured
+        log messages using Grok patterns.
+      properties:
+        disable_library_rules:
+          default: false
+          description: If set to `true`, disables the default Grok rules provided
+            by Datadog.
+          example: true
+          type: boolean
+        id:
+          description: A unique identifier for this processor.
+          example: parse-grok-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        rules:
+          description: The list of Grok parsing rules. If multiple matching rules
+            are provided, they are evaluated in order. The first successful match
+            is applied.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessorRule'
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      - rules
+      type: object
+    ObservabilityPipelineParseGrokProcessorRule:
+      description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
+        defines how to extract structured fields
+
+        from a specific log field using Grok patterns.
+
+        '
+      properties:
+        match_rules:
+          description: 'A list of Grok parsing rules that define how to extract fields
+            from the source field.
+
+            Each rule must contain a name and a valid Grok pattern.
+
+            '
+          example:
+          - name: MyParsingRule
+            rule: '%{word:user} connected on %{date("MM/dd/yyyy"):date}'
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule'
+          type: array
+        source:
+          description: The name of the field in the log event to apply the Grok rules
+            to.
+          example: message
+          type: string
+        support_rules:
+          description: 'A list of Grok helper rules that can be referenced by the
+            parsing rules.
+
+            '
+          example:
+          - name: user
+            rule: '%{word:user.name}'
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleSupportRule'
+          type: array
+      required:
+      - source
+      - match_rules
+      - support_rules
+      type: object
+    ObservabilityPipelineParseGrokProcessorRuleMatchRule:
+      description: 'Defines a Grok parsing rule, which extracts structured fields
+        from log content using named Grok patterns.
+
+        Each rule must have a unique name and a valid Datadog Grok pattern that will
+        be applied to the source field.
+
+        '
+      properties:
+        name:
+          description: The name of the rule.
+          example: MyParsingRule
+          type: string
+        rule:
+          description: The definition of the Grok rule.
+          example: '%{word:user} connected on %{date("MM/dd/yyyy"):date}'
+          type: string
+      required:
+      - name
+      - rule
+      type: object
+    ObservabilityPipelineParseGrokProcessorRuleSupportRule:
+      description: The Grok helper rule referenced in the parsing rules.
+      properties:
+        name:
+          description: The name of the Grok helper rule.
+          example: user
+          type: string
+        rule:
+          description: The definition of the Grok helper rule.
+          example: ' %{word:user.name}'
+          type: string
+      required:
+      - name
+      - rule
+      type: object
+    ObservabilityPipelineParseGrokProcessorType:
+      default: parse_grok
+      description: The processor type. The value should always be `parse_grok`.
+      enum:
+      - parse_grok
+      example: parse_grok
+      type: string
+      x-enum-varnames:
+      - PARSE_GROK
     ObservabilityPipelineParseJSONProcessor:
       description: The `parse_json` processor extracts JSON from a specified field
         and flattens it into the event. This is useful when logs contain embedded
@@ -23332,8 +23546,8 @@ components:
         limit:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
         name:
-          description: Name for identifying the processor.
-          example: MyPipelineQuotaProcessor
+          description: Name of the quota.
+          example: MyQuota
           type: string
         overrides:
           description: A list of alternate quota rules that apply to specific sets
@@ -23527,8 +23741,60 @@ components:
       type: string
       x-enum-varnames:
       - RENAME_FIELDS
+    ObservabilityPipelineSampleProcessor:
+      description: The `sample` processor allows probabilistic sampling of logs at
+        a fixed rate.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: sample-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        percentage:
+          description: The percentage of logs to sample.
+          example: 10.0
+          format: double
+          type: number
+        rate:
+          description: Number of events to sample (1 in N).
+          example: 10
+          format: int64
+          minimum: 1
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSampleProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      type: object
+    ObservabilityPipelineSampleProcessorType:
+      default: sample
+      description: The processor type. The value should always be `sample`.
+      enum:
+      - sample
+      example: sample
+      type: string
+      x-enum-varnames:
+      - SAMPLE
     ObservabilityPipelineTls:
-      description: Configuration for enabling TLS encryption.
+      description: Configuration for enabling TLS encryption between the pipeline
+        component and external services.
       properties:
         ca_file:
           description: "Path to the Certificate Authority (CA) file used to validate
