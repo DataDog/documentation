@@ -210,6 +210,16 @@ When `true`, user principal is collected. Available for versions 0.61+.
 **Default**: `100`<br>
 Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
 
+`dd.http.server.tag.query-string`
+: **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
+**Default**: `true`<br>
+When set to `true` query string parameters and fragment get added to web server spans
+
+`dd.http.server.route-based-naming`
+: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**Default**: `true`<br>
+When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
+
 `dd.trace.http.server.path-resource-name-mapping`<br>
 : **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
 **Default**: `{}` (empty) <br>
@@ -221,16 +231,6 @@ Request path | Resource path
 `/admin/index.jsp` | `/admin-page`
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
-
-`dd.http.server.tag.query-string`
-: **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
-**Default**: `true`<br>
-When set to `true` query string parameters and fragment get added to web server spans
-
-`dd.http.server.route-based-naming`
-: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
-**Default**: `true`<br>
-When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
