@@ -317,4 +317,4 @@ See that package's [API definition][9] for the full list of supported API calls.
 [6]: /tracing/setup/python/
 [7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
 [8]: https://pypi.org/project/ddtrace-api/
-[9]: https://github.com/DataDog/dd-trace-api-py/blob/master/api.yaml
+[9]: https://datadoghq.dev/dd-trace-api-py/pdocs/ddtrace_api.html

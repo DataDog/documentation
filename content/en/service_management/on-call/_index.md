@@ -18,13 +18,13 @@ cascade:
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to processing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
+{{< img src="service_management/oncall/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to routing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
 
 ## Concepts
 
 - **Pages** represent something to get alerted for, such as a monitor, incident, or security signal. A Page can have a status of `Triggered`, `Acknowledged`, or `Resolved`.
 - **Teams** are groups configured within Datadog to handle specific types of Pages, based on expertise and operational roles.
-- **Processing rules** allow Teams to finely adjust their reactions to specific types of incoming events. These rules can set a Page's urgency level and route Pages to different escalation policies depending on the event's metadata.
+- **Routing rules** allow Teams to finely adjust their reactions to specific types of incoming events. These rules can set a Page's urgency level and route Pages to different escalation policies depending on the event's metadata.
 - **Escalation policies** determine how Pages are escalated within or across Teams.
 - **Schedules** set timetables for when specific Team members are on-call to respond to Pages.
 
@@ -34,7 +34,7 @@ Datadog On-Call integrates monitoring, paging, and incident response into one pl
 
 {{< img src="service_management/oncall/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
 
-Each Team owns **escalation policies** and **schedules**. Escalation policies define how a Page is sent to various schedules, such as _Checkout Operations - Interrupt Handler_, _Primary_, and _Secondary_ in the following screenshot. Each Team can also configure **processing rules** to route Pages to different escalation policies.
+Each Team owns **escalation policies** and **schedules**. Escalation policies define how a Page is sent to various schedules, such as _Checkout Operations - Interrupt Handler_, _Primary_, and _Secondary_ in the following screenshot. Each Team can also configure **routing rules** to route Pages to different escalation policies.
 
 {{< img src="service_management/oncall/escalation_policy.png" alt="A sample escalation policy." style="width:80%;" >}}
 

@@ -47,10 +47,6 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 : **Default**: `true`<br>
 Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
 
-`DD_TRACE_SAMPLE_RATE`
-: Enable trace volume control<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
 Enable debug logging in the tracer.
@@ -67,10 +63,6 @@ Comma-separated list of header names that are reported on the root span as tags.
 
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
-
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `[]`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `[]`<br>
