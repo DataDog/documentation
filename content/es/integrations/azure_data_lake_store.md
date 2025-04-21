@@ -23,7 +23,7 @@ short_description: Rastrea las métricas clave de Azure Data Lake Store.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Data Lake Store es un lago de datos sin límites que potencia el análisis de big data.
@@ -34,7 +34,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Data La
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -48,11 +48,11 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Data Lake Store no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Data Lake Store no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
 
