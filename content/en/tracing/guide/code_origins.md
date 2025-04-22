@@ -51,10 +51,10 @@ In Trace Explorer, select a span to see Code Origin details on the Overview tab:
 
 | Runtime Language | Tracing Library Version | Frameworks |
 |---|---|---|
-| Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers (entry spans only)|
-| Python | 2.15.0+ | Django, Flask, Starlette and derivatives (entry and exit spans)|
-| Node.js | 4.49.0+ | Fastify (entry and exit spans), all other [APM-supported integrations][8] (exit spans only)|
-| .NET | 3.15.0+ | ASP.NET, ASP.NET Core (entry and exit spans)| 
+| Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
+| Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
+| Node.js | 4.49.0+ | Fastify|
+| .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
 
 ### Enable Code Origins
 
@@ -81,25 +81,11 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### In your IDE
 
 1. Set up your [Datadog IDE Integration][4].
+    - Supported IDEs: IntelliJ, VS Code
+    - Supported Languages: Java, Python
 2. View RED metrics (Requests, Errors, and Duration) as inline annotations above your endpoint methods.
 
     {{< img src="tracing/guide/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
-
-## How it works
-
-Code Origins identifies the source code locations where APM spans originate. Code Origin details are captured for two types of spans:
-
-**Entry spans:** These represent the first method(s) in your application code that handle incoming requests. The APM integration pinpoints the line of code where each request enters your system.
-
-**Exit spans:** These represent the lines of code in your application that make outgoing requests to downstream services. The tracer examines the call stack to identify where each exit span originates, skipping third-party code.
-
-<div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
-
-## Impact on performance and billing
-
-**Performance Impact**: Code Origins adds negligible performance overhead in production environments.
-
-**Pricing Impact**: While in Preview, Code Origins has no impact on billing. Any changes related to Code Origins that have an impact on pricing will be communicated before going into effect.
 
 ## Troubleshooting
 
@@ -107,7 +93,7 @@ If Code Origin information is missing:
 
 1. Verify Code Origins is [enabled](#enable-code-origins) in your tracing library configuration.
 1. Confirm that your service meets all [compatibility requirements](#compatibility-requirements).
-    - In particular, check whether your service's language and framework support Code Origins for entry and/or exit spans.
+    - In particular, check whether your service's language and framework support Code Origins.
 1. Filter for spans that include Code Origins using the query `@_dd.code_origin.type:*` in the [Trace Explorer][1].
 1. Enable [Source Code Integration][7] to see code previews in the APM Trace side panel.
 
