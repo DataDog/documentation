@@ -1,10 +1,10 @@
 ---
 title: Guidelines for Writing Custom Workload Protection Rules
 further_reading:
-- link: "/security/threats/workload_security_rules"
+- link: "/security/workload_protection/workload_security_rules"
   tag: "Documentation"
   text: "Managing Workload Protection Rules"
-- link: "/security/threats/agent_expressions"
+- link: "/security/workload_protection/agent_expressions"
   tag: "Documentation"
   text: "Agent Expression Syntax"
 ---
@@ -45,5 +45,5 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/workload_security_rules
-[2]: /security/threats/agent_expressions/#operators
+[1]: /security/workload_protection/workload_security_rules
+[2]: /security/workload_protection/agent_expressions/#operators

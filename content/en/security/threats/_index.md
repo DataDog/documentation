@@ -60,7 +60,7 @@ Datadog is introducing a new feature called Active Protection to address the cry
 {{< whatsnext >}}
   {{< nextlink href="/security/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Workload Protection{{< /nextlink >}}
-  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/workload_protection/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -70,8 +70,8 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [3]: /security/notifications/
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
-[6]: /security/threats/agent_expressions
+[6]: /security/workload_protection/agent_expressions
 [7]: /security/threats/setup
-[8]: /security/threats/security_signals
+[8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
-[10]: /security/cloud_security_management/guide/active-protection
+[10]: /security/workload_protection/guide/active-protection

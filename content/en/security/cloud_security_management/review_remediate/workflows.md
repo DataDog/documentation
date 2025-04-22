@@ -11,7 +11,7 @@ aliases:
   - /security/cloud_security_management/workflows
 products:
   - name: Workload Protection
-    url: /security/threats/
+    url: /security/workload_protection/
     icon: cloud-security-management
   - name: Cloud Security Misconfigurations
     url: /security/cloud_security_management/misconfigurations/

@@ -6,7 +6,7 @@ products:
   url: /security/cloud_siem/
   icon: siem
 - name: Workload Protection
-  url: /security/threats/
+  url: /security/workload_protection/
   icon: cloud-security-management
 - name: App and API Protection
   url: /security/application_security/
