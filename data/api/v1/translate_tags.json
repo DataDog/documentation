@@ -85,7 +85,7 @@
   },
   "screenboards": {
     "name": "Screenboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
@@ -125,7 +125,7 @@
   },
   "timeboards": {
     "name": "Timeboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "usage-metering": {
     "name": "Usage Metering",
