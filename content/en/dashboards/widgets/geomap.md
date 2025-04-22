@@ -35,7 +35,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   {{% tab "Regions" %}}
   |  Data source    | Notes    | 
   | --------------  | -------- |
-  |Log Events   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
+  |Log Events   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
   |Metric   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
   |RUM   | See the [RUM documentation][6] to configure a RUM query. |
   |SLO | See the [SLO search documentation][7] to configure an SLO query. |
