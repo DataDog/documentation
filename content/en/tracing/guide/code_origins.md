@@ -109,9 +109,8 @@ If Code Origin information is missing:
 1. Confirm that your service meets all [compatibility requirements](#compatibility-requirements).
     - In particular, check whether your service's language and framework support Code Origins for entry and/or exit spans.
 1. Filter for spans that include Code Origins using the query `@_dd.code_origin.type:*` in the [Trace Explorer][1].
-1. Enable [Source Code Integration][7] to see code previews in the APM Trace details.
+1. Enable [Source Code Integration][7] to see code previews in the APM Trace side panel.
 
-**Note**: Code Origins does not capture third-party code.
 
 ## Further Reading
 
