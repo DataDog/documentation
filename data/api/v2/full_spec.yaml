@@ -4394,6 +4394,48 @@ components:
       required:
       - data
       type: object
+    AzureStorageDestination:
+      description: The `azure_storage` destination forwards logs to an Azure Blob
+        Storage container.
+      properties:
+        blob_prefix:
+          description: Optional prefix for blobs written to the container.
+          example: logs/
+          type: string
+        container_name:
+          description: The name of the Azure Blob Storage container to store logs
+            in.
+          example: my-log-container
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: azure-storage-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - processor-id
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/AzureStorageDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - container_name
+      type: object
+    AzureStorageDestinationType:
+      default: azure_storage
+      description: The destination type. The value should always be `azure_storage`.
+      enum:
+      - azure_storage
+      example: azure_storage
+      type: string
+      x-enum-varnames:
+      - AZURE_STORAGE
     AzureUCConfig:
       description: Azure config.
       properties:
@@ -21768,6 +21810,58 @@ components:
       - data_source
       - query
       type: object
+    MicrosoftSentinelDestination:
+      description: The `microsoft_sentinel` destination forwards logs to Microsoft
+        Sentinel.
+      properties:
+        client_id:
+          description: Azure AD client ID used for authentication.
+          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          type: string
+        dcr_immutable_id:
+          description: The immutable ID of the Data Collection Rule (DCR).
+          example: dcr-uuid-1234
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: sentinel-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        table:
+          description: The name of the Log Analytics table where logs will be sent.
+          example: CustomLogsTable
+          type: string
+        tenant_id:
+          description: Azure AD tenant ID.
+          example: abcdef12-3456-7890-abcd-ef1234567890
+          type: string
+        type:
+          $ref: '#/components/schemas/MicrosoftSentinelDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - client_id
+      - tenant_id
+      - dcr_immutable_id
+      - table
+      type: object
+    MicrosoftSentinelDestinationType:
+      default: microsoft_sentinel
+      description: The destination type. The value should always be `microsoft_sentinel`.
+      enum:
+      - microsoft_sentinel
+      example: microsoft_sentinel
+      type: string
+      x-enum-varnames:
+      - MICROSOFT_SENTINEL
     MicrosoftTeamsChannelInfoResponseAttributes:
       description: Channel attributes.
       properties:
@@ -22980,6 +23074,12 @@ components:
       description: A destination for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgDestination'
+      - $ref: '#/components/schemas/AzureStorageDestination'
+      - $ref: '#/components/schemas/MicrosoftSentinelDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -22989,11 +23089,15 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
     ObservabilityPipelineCreateRequest:
       description: Top-level schema representing a pipeline.
       properties:
@@ -23108,6 +23212,58 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineElasticsearchDestination:
+      description: The `elasticsearch` destination writes logs to an Elasticsearch
+        cluster.
+      properties:
+        api_version:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        bulk_index:
+          description: The index or datastream to write logs to in Elasticsearch.
+          example: logs-datastream
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: elasticsearch-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineElasticsearchDestinationApiVersion:
+      description: The Elasticsearch API version to use. Set to `auto` to auto-detect.
+      enum:
+      - auto
+      - v6
+      - v7
+      - v8
+      example: auto
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - V6
+      - V7
+      - V8
+    ObservabilityPipelineElasticsearchDestinationType:
+      default: elasticsearch
+      description: The destination type. The value should always be `elasticsearch`.
+      enum:
+      - elasticsearch
+      example: elasticsearch
+      type: string
+      x-enum-varnames:
+      - ELASTICSEARCH
     ObservabilityPipelineFieldValue:
       description: Represents a static key-value pair used in various processors.
       properties:
@@ -23527,6 +23683,626 @@ components:
       type: string
       x-enum-varnames:
       - RENAME_FIELDS
+    ObservabilityPipelineRsyslogDestination:
+      description: The `rsyslog` destination forwards logs to an external `rsyslog`
+        server over TCP or UDP using the syslog protocol.
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: rsyslog-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        keepalive:
+          description: Optional socket keepalive duration in milliseconds.
+          example: 60000
+          format: int64
+          minimum: 0
+          type: integer
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineRsyslogDestinationType:
+      default: rsyslog
+      description: The destination type. The value should always be `rsyslog`.
+      enum:
+      - rsyslog
+      example: rsyslog
+      type: string
+      x-enum-varnames:
+      - RSYSLOG
+    ObservabilityPipelineRsyslogSource:
+      description: The `rsyslog` source listens for logs over TCP or UDP from an `rsyslog`
+        server using the syslog protocol.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: rsyslog-source
+          type: string
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSyslogSourceMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRsyslogSourceType'
+      required:
+      - id
+      - type
+      - mode
+      type: object
+    ObservabilityPipelineRsyslogSourceType:
+      default: rsyslog
+      description: The source type. The value should always be `rsyslog`.
+      enum:
+      - rsyslog
+      example: rsyslog
+      type: string
+      x-enum-varnames:
+      - RSYSLOG
+    ObservabilityPipelineSensitiveDataScannerProcessor:
+      description: The `sensitive_data_scanner` processor detects and optionally redacts
+        sensitive data in log events.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: sensitive-scanner
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: source:prod
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - parse-json-processor
+          items:
+            type: string
+          type: array
+        rules:
+          description: A list of rules for identifying and acting on sensitive data
+            patterns.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorRule'
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      - rules
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorAction:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorAction`
+        object.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionRedact'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionHash'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedact'
+    ObservabilityPipelineSensitiveDataScannerProcessorActionHash:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionHash`
+        object.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction'
+        options:
+          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionHash`
+            `options`.
+          type: object
+      required:
+      - action
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction`
+        object.
+      enum:
+      - hash
+      example: hash
+      type: string
+      x-enum-varnames:
+      - HASH
+    ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedact:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedact`
+        object.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactAction'
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions'
+      required:
+      - action
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactAction:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactAction`
+        object.
+      enum:
+      - partial_redact
+      example: partial_redact
+      type: string
+      x-enum-varnames:
+      - PARTIAL_REDACT
+    ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions`
+        object.
+      properties:
+        characters:
+          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions`
+            `characters`.
+          example: 4
+          format: int64
+          type: integer
+        direction:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptionsDirection'
+      required:
+      - characters
+      - direction
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptionsDirection:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptionsDirection`
+        object.
+      enum:
+      - first
+      - last
+      example: last
+      type: string
+      x-enum-varnames:
+      - FIRST
+      - LAST
+    ObservabilityPipelineSensitiveDataScannerProcessorActionRedact:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionRedact`
+        object.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionRedactAction'
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions'
+      required:
+      - action
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorActionRedactAction:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactAction`
+        object.
+      enum:
+      - redact
+      example: redact
+      type: string
+      x-enum-varnames:
+      - REDACT
+    ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions`
+        object.
+      properties:
+        replace:
+          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions`
+            `replace`.
+          example: '***'
+          type: string
+      required:
+      - replace
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorCustomPattern:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorCustomPattern`
+        object.
+      properties:
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternType'
+      required:
+      - type
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions`
+        object.
+      properties:
+        rule:
+          description: A regular expression used to detect sensitive values. Must
+            be a valid regex.
+          example: \b\d{16}\b
+          type: string
+      required:
+      - rule
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternType:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternType`
+        object.
+      enum:
+      - custom
+      example: custom
+      type: string
+      x-enum-varnames:
+      - CUSTOM
+    ObservabilityPipelineSensitiveDataScannerProcessorKeywordOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorKeywordOptions`
+        object.
+      properties:
+        keywords:
+          description: A list of keywords to match near the sensitive pattern.
+          example:
+          - ssn
+          - card
+          - account
+          items:
+            type: string
+          type: array
+        proximity:
+          description: Maximum number of tokens between a keyword and a sensitive
+            value match.
+          example: 5
+          format: int64
+          type: integer
+      required:
+      - keywords
+      - proximity
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorLibraryPattern:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorLibraryPattern`
+        object.
+      properties:
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternOptions'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternType'
+      required:
+      - type
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternOptions`
+        object.
+      properties:
+        id:
+          description: Identifier for a predefined pattern from the sensitive data
+            scanner pattern library.
+          example: credit_card
+          type: string
+        use_recommended_keywords:
+          description: Whether to augment the pattern with recommended keywords (optional).
+          type: boolean
+      required:
+      - id
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternType:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorLibraryPatternType`
+        object.
+      enum:
+      - library
+      example: library
+      type: string
+      x-enum-varnames:
+      - LIBRARY
+    ObservabilityPipelineSensitiveDataScannerProcessorPattern:
+      description: Pattern detection configuration for identifying sensitive data
+        using either a custom regex or a library reference.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorCustomPattern'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorLibraryPattern'
+    ObservabilityPipelineSensitiveDataScannerProcessorRule:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorRule`
+        object.
+      properties:
+        keyword_options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorKeywordOptions'
+        name:
+          description: A name identifying the rule.
+          example: Redact Credit Card Numbers
+          type: string
+        on_match:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorAction'
+        pattern:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorPattern'
+        scope:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScope'
+        tags:
+          description: Tags assigned to this rule for filtering and classification.
+          example:
+          - pii
+          - ccn
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - tags
+      - pattern
+      - scope
+      - on_match
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorScope:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScope`
+        object.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeInclude'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeExclude'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeAll'
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeAll:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeAll`
+        object.
+      properties:
+        target:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeAllTarget'
+      required:
+      - target
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeAllTarget:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeAllTarget`
+        object.
+      enum:
+      - all
+      example: all
+      type: string
+      x-enum-varnames:
+      - ALL
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeExclude:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeExclude`
+        object.
+      properties:
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions'
+        target:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeExcludeTarget'
+      required:
+      - target
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeExcludeTarget:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeExcludeTarget`
+        object.
+      enum:
+      - exclude
+      example: exclude
+      type: string
+      x-enum-varnames:
+      - EXCLUDE
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeInclude:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeInclude`
+        object.
+      properties:
+        options:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions'
+        target:
+          $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorScopeIncludeTarget'
+      required:
+      - target
+      - options
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeIncludeTarget:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeIncludeTarget`
+        object.
+      enum:
+      - include
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+    ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions:
+      description: The definition of `ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions`
+        object.
+      properties:
+        fields:
+          description: The `ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions`
+            `fields`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - fields
+      type: object
+    ObservabilityPipelineSensitiveDataScannerProcessorType:
+      default: sensitive_data_scanner
+      description: The processor type. The value should always be `sensitive_data_scanner`.
+      enum:
+      - sensitive_data_scanner
+      example: sensitive_data_scanner
+      type: string
+      x-enum-varnames:
+      - SENSITIVE_DATA_SCANNER
+    ObservabilityPipelineSumoLogicDestination:
+      description: The `sumo_logic` destination forwards logs to Sumo Logic.
+      properties:
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
+        header_custom_fields:
+          description: A list of custom headers to include in the request to Sumo
+            Logic.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationHeaderCustomFieldsItem'
+          type: array
+        header_host_name:
+          description: Optional override for the host name header.
+          example: host-123
+          type: string
+        header_source_category:
+          description: Optional override for the source category header.
+          example: source-category
+          type: string
+        header_source_name:
+          description: Optional override for the source name header.
+          example: source-name
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: sumo-logic-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineSumoLogicDestinationEncoding:
+      description: The output encoding format.
+      enum:
+      - json
+      - raw_message
+      - logfmt
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+      - LOGFMT
+    ObservabilityPipelineSumoLogicDestinationHeaderCustomFieldsItem:
+      description: Single name-value pair used as a custom log header for Sumo Logic.
+      properties:
+        name:
+          description: The header field name.
+          example: X-Sumo-Category
+          type: string
+        value:
+          description: The header field value.
+          example: my-app-logs
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineSumoLogicDestinationType:
+      default: sumo_logic
+      description: The destination type. The value should always be `sumo_logic`.
+      enum:
+      - sumo_logic
+      example: sumo_logic
+      type: string
+      x-enum-varnames:
+      - SUMO_LOGIC
+    ObservabilityPipelineSumoLogicSource:
+      description: The `sumo_logic` source receives logs from Sumo Logic collectors.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: sumo-logic-source
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineSumoLogicSourceType:
+      default: sumo_logic
+      description: The source type. The value should always be `sumo_logic`.
+      enum:
+      - sumo_logic
+      example: sumo_logic
+      type: string
+      x-enum-varnames:
+      - SUMO_LOGIC
+    ObservabilityPipelineSyslogNgDestination:
+      description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
+        server over TCP or UDP using the syslog protocol.
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: syslog-ng-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        keepalive:
+          description: Optional socket keepalive duration in milliseconds.
+          example: 60000
+          format: int64
+          minimum: 0
+          type: integer
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSyslogNgDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineSyslogNgDestinationType:
+      default: syslog_ng
+      description: The destination type. The value should always be `syslog_ng`.
+      enum:
+      - syslog_ng
+      example: syslog_ng
+      type: string
+      x-enum-varnames:
+      - SYSLOG_NG
+    ObservabilityPipelineSyslogNgSource:
+      description: The `syslog_ng` source listens for logs over TCP or UDP from a
+        `syslog-ng` server using the syslog protocol.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: syslog-ng-source
+          type: string
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSyslogSourceMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSourceType'
+      required:
+      - id
+      - type
+      - mode
+      type: object
+    ObservabilityPipelineSyslogNgSourceType:
+      default: syslog_ng
+      description: The source type. The value should always be `syslog_ng`.
+      enum:
+      - syslog_ng
+      example: syslog_ng
+      type: string
+      x-enum-varnames:
+      - SYSLOG_NG
+    ObservabilityPipelineSyslogSourceMode:
+      description: Protocol used by the syslog source to receive messages.
+      enum:
+      - tcp
+      - udp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
     ObservabilityPipelineTls:
       description: Configuration for enabling TLS encryption.
       properties:
