@@ -4,9 +4,15 @@ code_lang: apigateway
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-- link: "/tracing/glossary/"
+- link: "/tracing/guide/tutorial-enable-go-aws-ecs-fargate/"
   tag: "Documentation"
-  text: "Explore your services, resources and traces"
+  text: "Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate"
+- link: "/integrations/ecs_fargate/"
+  tag: "Documentation"
+  text: "Amazon ECS on AWS Fargate"
+- link: "/integrations/eks_fargate"
+  tag: "Documentation"
+  text: "Amazon EKS on AWS Farate"
 
 ---
 
