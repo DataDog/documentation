@@ -27,7 +27,7 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
 Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
 
 ## Troubleshooting
-If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [Step Function Trace Merging documentation][3].
+If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [Step Function Trace Merging documentation][3]. Also validate the setup of any Lambda or Nested Step Function invocations from within the Distributed Map.
 
 
 [1]: https://docs.aws.amazon.com/step-functions/latest/dg/state-map-distributed.html

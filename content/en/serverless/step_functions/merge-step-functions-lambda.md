@@ -1,4 +1,4 @@
-mermermer---
+---
 title: Merge Step Functions and Lambda Traces
 further_reading:
     - link: '/serverless/step_functions/installation'
