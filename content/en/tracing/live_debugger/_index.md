@@ -80,14 +80,6 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 - When enabled, users with appropriate permissions can create both Debug Sessions in Live Debugger and instrumentations in Dynamic Instrumentation.
 - When disabled, all data capture stops from both active Debug Session logpoints and dynamic instrumentations.
 
-## Impact on performance and billing
-
-Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions or dynamic instrumentations on that service.
-
-**Performance impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance; sampling logic, rate limits, and built-in budgets prevent runaway data capture. The system limits logs with variable capture to 1 per second, but permits logs _without_ variable capture a higher sampling rate (due to less overhead).
-
-**Pricing impact**: Logs captured by Datadog are all billed the same way, whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your [Datadog Plan & Usage page][21] for any unexpected increases after utilizing a new feature.
-
 ## Using Live Debugger
 
 ### Creating and using a Debug Session
@@ -120,8 +112,16 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. To protect this data:
 
-1. Use Dynamic Instrumentation's built-in [sensitive data scrubbing][3] mechanisms.
+1. Use the built-in [sensitive data scrubbing][3] mechanisms.
 2. Use [Sensitive Data Scanner][15] to identify and redact sensitive information based on regular expressions.
+
+## Impact on performance and billing
+
+Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions or dynamic instrumentations on that service.
+
+**Performance impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance; sampling logic, rate limits, and built-in budgets prevent runaway data capture.
+
+**Pricing impact**: Logs captured by Datadog are all billed the same way, whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your [Datadog Plan & Usage page][21] for any unexpected increases after utilizing a new feature.
 
 ## Limitations
 
@@ -152,7 +152,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [12]: /getting_started/tagging/unified_service_tagging/
 [13]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [14]: https://app.datadoghq.com/debugging/sessions
-[15]: /security/sensitive_data_scanner/ 
+[15]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [16]: /dynamic_instrumentation/#prerequisites
 [17]: /dynamic_instrumentation/enabling
 [18]: https://app.datadoghq.com/debugging/settings
