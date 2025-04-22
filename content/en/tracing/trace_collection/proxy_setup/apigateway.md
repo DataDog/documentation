@@ -24,7 +24,7 @@ Datadog APM supports tracing for API Gateway when API Gateway proxies requests t
 
 ### Prerequisites
 - Amazon API Gateway is configured on your environment. Datadog recommends testing on a development environment before releasing to production.
-- The API Gateway is using the REST API option (API Gateway V1). The HTTP API (V2) is not supported.
+- The API Gateway is using the [REST API][5] (V1) option. The [HTTP API][6] (V2) is not supported.
 - Your underlying application is running a [supported web framework](#supported-versions-and-web-frameworks).
 
 #### Supported versions and web frameworks
@@ -50,12 +50,12 @@ To see inferred spans for Amazon API Gateway, complete the following steps:
    API Gateway must pass the following headers in the request for the tracer to create the inferred span:
    | header | value |
    | ------ | ----- |
-   | x-dd-proxy | 'aws-apigateway' |
-   | x-dd-proxy-request-time-ms | context.requestTimeEpoch |
-   | x-dd-proxy-domain-name | context.domainName |
-   | x-dd-proxy-httpmethod | context.httpMethod |
-   | x-dd-proxy-path | context.path |
-   | x-dd-proxy-stage | context.stage |
+   | `x-dd-proxy` | `'aws-apigateway'` |
+   | `x-dd-proxy-request-time-ms` | `context.requestTimeEpoch` |
+   | `x-dd-proxy-domain-name` | `context.domainName` |
+   | `x-dd-proxy-httpmethod` | `context.httpMethod` |
+   | `x-dd-proxy-path` | `context.path` |
+   | `x-dd-proxy-stage` | `context.stage` |
 
    To pass in these headers, you can use the AWS CDK or AWS Console.
 
@@ -106,3 +106,5 @@ To see inferred spans for Amazon API Gateway, complete the following steps:
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v4.50.0
 [3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.72.1
 [4]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.1.0
+[5]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html
+[6]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html
