@@ -113,7 +113,7 @@ Click the **Transformation** tile to add a cell for filtering, aggregating, and 
 
 1. Click the **Transformation** tile.
 1. Select the data source you want to transform in the **Source dataset** dropdown menu.
-1. Chose an operation like **Parse**, **Group**, or **Filter**.
+1. Choose an operation like **Parse**, **Group**, or **Filter**.
     - For **Parse**, enter [grok syntax][3] to extract data into a separate column. In the **from** dropdown menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
     - For **Group**, select what you want to group the data by in the dropdown menus.
     - For **Join**, specify the join type, source dataset and field, and target dataset and field.
