@@ -55,7 +55,7 @@ Enable and disable Live Debugger on a service using one of the following methods
 
 #### One-click enablement (recommended) ####
 
-<div class="alert alert-info">Only users with the following permissions can use one-click enablement: **Org Management**, **APM Remote Configuration Read**, **APM Remote Configuration Write**.</div>
+<div class="alert alert-info">Only users with the following permissions can use one-click enablement: <b>Org Management, APM Remote Configuration Read, APM Remote Configuration Write</b>.</div>
 
 1. Select the service and environment on the [Live Debugger Settings][18] page.
 1. Check that all prerequisites are met as indicated on the Settings page.
