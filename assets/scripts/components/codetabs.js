@@ -8,7 +8,20 @@ const initCodeTabs = () => {
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
     const codeTabParameters = allowedRegions.reduce((k,v) => ({...k, [v]: {}}), {});
 
+    const cleanupExistingTabs = () => {
+        // Remove all existing tab navigation elements
+        document.querySelectorAll('.nav-tabs').forEach(navTabs => {
+            // Only remove if it's a child of a code-tabs container
+            if (navTabs.closest('.code-tabs')) {
+                navTabs.innerHTML = '';
+            }
+        });
+    }
+
     const init = () => {
+        // Clean up existing tabs first
+        cleanupExistingTabs();
+
         renderCodeTabElements()
         addEventListeners()
         activateTabsOnLoad()
@@ -68,16 +81,26 @@ const initCodeTabs = () => {
                 const navTabsElement = codeTabsElement.querySelector('.nav-tabs')
                 const tabContent = codeTabsElement.querySelector('.tab-content')
                 const tabPaneNodeList = tabContent.querySelectorAll('.tab-pane')
+
+                // Create a map to track unique tab titles
+                const uniqueTabs = new Map();
+
                 tabPaneNodeList.forEach(tabPane => {
                     const title = tabPane.getAttribute('title')
                     const lang = tabPane.getAttribute('data-lang')
-                    const li = document.createElement('li')
-                    const anchor = document.createElement('a')
-                    anchor.dataset.lang = lang
-                    anchor.href = '#'
-                    anchor.innerText = title
-                    li.appendChild(anchor)
-                    navTabsElement.appendChild(li)
+
+                    // Only add the tab if we haven't seen this title before
+                    if (!uniqueTabs.has(title)) {
+                        uniqueTabs.set(title, true);
+
+                        const li = document.createElement('li')
+                        const anchor = document.createElement('a')
+                        anchor.dataset.lang = lang
+                        anchor.href = '#'
+                        anchor.innerText = title
+                        li.appendChild(anchor)
+                        navTabsElement.appendChild(li)
+                    }
                 })
             })
         }
@@ -264,6 +287,19 @@ const initCodeTabs = () => {
             }
             return true;
         })
+    }
+
+    /**
+     * If Cdocs is running on this page,
+     * tell it to refresh the tabs when content changes
+     */
+    if (window.clientFiltersManager) {
+        // Update the tabs after the page is initially rendered
+        // and before it is revealed
+        clientFiltersManager.registerHook('afterReveal', init);
+
+        // Update the tabs after the page is re-rendered
+        clientFiltersManager.registerHook('afterRerender', init);
     }
 
     init()
