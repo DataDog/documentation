@@ -118,7 +118,7 @@ Click the **Transformation** tile to add a cell for filtering, aggregating, and 
     - For **Group**, select what you want to group the data by in the dropdown menu.
     - For **Join**, specify the join type, source dataset and field, and target dataset and field.
     - For **Filter**, add a filter query for the dataset.
-    - Under **More Operations**
+    - Under **More Operations**:
         - For **Calculate**, specify a new calculated field name and a formula.
         - For **Limit**, enter the number of rows of the dataset you want to display.
         - For **Sort**, choose a field and ordering.
