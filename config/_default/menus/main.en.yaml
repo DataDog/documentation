@@ -6778,16 +6778,21 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
       weight: 403
+    - name: Supported Devices
+      url: synthetics/mobile_app_testing/devices/
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_devices
+      weight: 404
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 404
+      weight: 405
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 405
+      weight: 406
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
@@ -7982,15 +7987,19 @@ menu:
       url: account_management/billing/
       parent: account_management
       weight: 12
+    - name: Pricing
+      url: account_management/billing/pricing
+      parent: account_management_billing
+      weight: 1201
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 5
+      weight: 1202
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 6
+      weight: 1203
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

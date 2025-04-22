@@ -5,10 +5,19 @@
    Anything else attempts to load from dd-app-listings bucket
 */
 -}}
-{{- $app_id := .Page.Params.integration_id | default .Page.Params.name -}}
+
 {{- $img := replaceRE `(./)?images/` "" .Destination -}}
 {{- $url := split $img "/" -}}
 {{- $app_listings_bucket := cond (eq hugo.Environment "live") "dd-app-listings" "dd-app-listings-staging" -}}
+{{- $app_id := "" -}}
+
+{{- if .Page.Params.app_id -}}
+  {{- $app_id = .Page.Params.app_id -}}
+{{- else if .Page.Params.integration_id -}}
+  {{- $app_id = .Page.Params.integration_id -}}
+{{- else -}}
+  {{- $app_id = .Page.Params.name -}}
+{{- end -}}
 
 {{- if or (strings.Contains .Destination "https://raw.githubusercontent.com") (strings.Contains .Destination "https://s3.amazonaws.com/") -}}
 <img src="{{ (.Destination | safeURL) }}"
