@@ -303,7 +303,7 @@ The following security control definition affects every `sql-sanitizer` package 
 
 {{% collapse-content title=".NET" level="h4" %}}
 
-## General syntax
+### General syntax
 `TYPE:SECURE_MARKS:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
 
 <div class="alert alert-info">
