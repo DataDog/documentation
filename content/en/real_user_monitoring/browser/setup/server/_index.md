@@ -48,7 +48,7 @@ To remotely configure your RUM application:
 
 <div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
-If you don't want to manage your web servers remotely, follow the documentation for your web server type to set up your RUM application:
+If you don't want to configure your RUM applications remotely, follow the documentation for your web server type to configure your RUM application locally:
 
 <br>
 {{< partial name="rum/rum-browser-setup.html" >}}
