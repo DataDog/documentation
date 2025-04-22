@@ -51,6 +51,7 @@ further_reading:
 - [Private Action Runners](#private-action-runners)
 - [Observability Pipelines](#observability-pipelines)
 - [On-Call](#on-call)
+- [Network Device Monitoring](#network-device-monitoring)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
