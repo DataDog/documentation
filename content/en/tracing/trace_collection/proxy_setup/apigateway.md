@@ -16,8 +16,8 @@ further_reading:
 
 ---
 
-{{< callout url="#" btn_hidden="false" header="Join the Preview" >}}
-Tracing for Amazon API Gateway is in Preview.
+{{< callout url="#" btn_hidden="true" header="Tracing for Amazon API Gateway is in Preview" >}}
+This feature is in Preview.
 {{< /callout >}}
 
 Datadog APM supports tracing for API Gateway when API Gateway proxies requests to applications running in Fargate or EC2.
