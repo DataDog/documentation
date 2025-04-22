@@ -75,7 +75,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">AWS Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for Evaluations.
 
