@@ -155,12 +155,12 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 17
-    - name: Application Security Management
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
       weight: 1701
-    - name: Cloud Security Management
+    - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
@@ -812,21 +812,6 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 810
-    - name: Java
-      url: opentelemetry/integrations/runtime_metrics/java
-      identifier: otel_runtime_metrics_java
-      parent: otel_runtime_metrics
-      weight: 8101
-    - name: .NET
-      url: opentelemetry/integrations/runtime_metrics/dotnet
-      identifier: otel_runtime_metrics_dotnet
-      parent: otel_runtime_metrics
-      weight: 8102
-    - name: Go
-      url: opentelemetry/integrations/runtime_metrics/go
-      identifier: otel_runtime_metrics_go
-      parent: otel_runtime_metrics
-      weight: 8103
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
@@ -2034,7 +2019,7 @@ menu:
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
       weight: 402
-    - name: Application Security Management
+    - name: App and API Protection
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
@@ -2220,6 +2205,21 @@ menu:
       parent: error_tracking
       identifier: error_tracking_backend
       weight: 10
+    - name: Getting Started
+      url: error_tracking/backend/getting_started
+      parent: error_tracking_backend
+      identifier: error_tracking_backend_setup
+      weight: 100
+    - name: Using Single Step Instrumentation
+      url: error_tracking/backend/getting_started/single_step_instrumentation
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_ssi
+      weight: 1000
+    - name: Using Datadog Tracing Libraries
+      url: error_tracking/backend/getting_started/dd_libraries
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_libs
+      weight: 1001
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -2245,6 +2245,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Guides
+      url: error_tracking/guides
+      parent: error_tracking
+      identifier: error_tracking_guides
+      weight: 13
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -2389,10 +2394,10 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -2404,16 +2409,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Automations
+      url: service_management/on-call/automations
+      parent: oncall
+      identifier: oncall_automations
+      weight: 6
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 6
+      weight: 7
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 7
+      weight: 8
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -3009,7 +3019,7 @@ menu:
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705  
+      weight: 705
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
@@ -3162,11 +3172,16 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_redrive
       weight: 204
+    - name: Distributed Map States
+      url: serverless/step_functions/distributed-maps
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_distributed_maps
+      weight: 205
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 205
+      weight: 206
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -3729,7 +3744,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm/
+      url: /tracing/other_telemetry/rum
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
@@ -6097,42 +6112,47 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_default_rules
       weight: 4
+    - name: Threat Intelligence
+      url: /security/cloud_siem/threat_intelligence
+      parent: cloud_siem
+      identifier: cloud_siem_threat_intelligence
+      weight: 5
     - name: Investigate Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
       identifier: cloud_siem_investigate_security_signals
-      weight: 5
+      weight: 6
     - name: Investigator
       url: security/cloud_siem/investigator
       parent: cloud_siem
       identifier: cloud_siem_investigator
-      weight: 6
+      weight: 7
     - name: Historical Jobs
       url: security/cloud_siem/historical_jobs
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
-      weight: 7
+      weight: 8
     - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
-      weight: 8
+      weight: 9
     - name: Security Operational Metrics
       url: security/cloud_siem/security_operational_metrics/
       parent: cloud_siem
       identifier: siem_security_operational_metrics
-      weight: 9
+      weight: 10
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 10
-    - name: Cloud Security Management
+      weight: 11
+    - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
       pre: cloud-security-management
       identifier: csm
-      weight: 30000
+      weight: 40000
     - name: Setup
       url: security/cloud_security_management/setup
       parent: csm
@@ -6198,41 +6218,62 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
-    - name: Threats
-      url: security/threats/
-      parent: csm
-      identifier: cloud_workload_security
-      weight: 3
+    - name: Workload Protection
+      url: security/workload_protection/
+      pre: security-workload-security
+      parent: security_platform_heading
+      identifier: workload_protection
+      weight: 60000
     - name: Supported Linux Distributions
-      url: security/threats/supported_linux_distributions
-      parent: cloud_workload_security
-      identifier: cws_workload_security_linux_distributions
+      url: security/workload_protection/supported_linux_distributions
+      parent: workload_protection
+      identifier: workload_protection_workload_security_linux_distributions
       weight: 200
     - name: Detection Rules
-      url: security/threats/workload_security_rules
-      parent: cloud_workload_security
-      identifier: cws_workload_security_rules
+      url: security/workload_protection/workload_security_rules
+      parent: workload_protection
+      identifier: workload_protection_workload_security_rules
       weight: 201
-    - name: Create Policies and Custom Rules
-      url: security/threats/workload_security_rules/custom_rules
-      parent: cws_workload_security_rules
-      identifier: cws_custom_rules
+    - name: Custom Rules
+      url: security/workload_protection/workload_security_rules/custom_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_custom_rules
       weight: 101
     - name: Investigate Security Signals
-      url: security/threats/security_signals
-      parent: cloud_workload_security
-      identifier: cws_security_signals
+      url: security/workload_protection/security_signals
+      parent: workload_protection
+      identifier: workload_protection_security_signals
       weight: 202
     - name: Investigate Agent Events
-      url: security/threats/investigate_agent_events
-      parent: cloud_workload_security
-      identifier: cws_agent_events
+      url: security/workload_protection/investigate_agent_events
+      parent: workload_protection
+      identifier: workload_protection_agent_events
       weight: 203
     - name: Creating Agent Rule Expressions
-      url: security/threats/agent_expressions
-      parent: cloud_workload_security
-      identifier: cws_agent_expressions
+      url: security/workload_protection/agent_expressions
+      parent: workload_protection
+      identifier: workload_protection_agent_expressions
       weight: 204
+    - name: Linux Syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_agent_expressions
+      identifier: linux_expressions
+      weight: 1
+    - name: Windows Syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_agent_expressions
+      identifier: windows_expressions
+      weight: 2
+    - name: Guides
+      url: security/workload_protection/guide
+      parent: workload_protection
+      identifier: workload_protection_guides
+      weight: 205
+    - name: Troubleshooting
+      url: security/workload_protection/troubleshooting/threats
+      parent: workload_protection
+      identifier: workload_protection_troubleshooting
+      weight: 206
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -6343,22 +6384,17 @@ menu:
       parent: csm
       identifier: csm_troubleshooting
       weight: 12
-    - name: Threats
-      url: security/cloud_security_management/troubleshooting/threats/
-      parent: csm_troubleshooting
-      identifier: csm_troubleshooting_threats
-      weight: 1201
     - name: Vulnerabilities
       url: security/cloud_security_management/troubleshooting/vulnerabilities/
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
-    - name: Application Security Management
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
       identifier: application_security
-      weight: 40000
+      weight: 50000
     - name: Terms and Concepts
       url: security/application_security/terms/
       parent: application_security
@@ -6489,7 +6525,7 @@ menu:
       pre: sensitive-data-scanner
       identifier: sensitive_data_scanner
       parent: security_platform_heading
-      weight: 50000
+      weight: 70000
     - name: Setup
       url: /security/sensitive_data_scanner/setup/
       identifier: sds_setup
@@ -6530,7 +6566,7 @@ menu:
       url: /security/code_security/
       parent: security_platform_heading
       pre: security-code-security
-      weight: 60000
+      weight: 30000
     - name: Static Code Analysis (SAST)
       identifier: sec_static_analysis
       url: /security/code_security/static_analysis/
@@ -6651,7 +6687,7 @@ menu:
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
-      weight: 50000
+      weight: 30000
     - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
@@ -6747,16 +6783,21 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
       weight: 403
+    - name: Supported Devices
+      url: synthetics/mobile_app_testing/devices/
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_devices
+      weight: 404
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 404
+      weight: 405
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 405
+      weight: 406
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
@@ -6877,7 +6918,7 @@ menu:
       pre: continuous-testing
       identifier: continuous_testing
       parent: digital_experience_heading
-      weight: 60000
+      weight: 40000
     - name: Local and Staging Environments
       url: /continuous_testing/environments
       parent: continuous_testing
@@ -6944,12 +6985,12 @@ menu:
       identifier: continuous_testing_settings
       weight: 3
     - name: Results Explorer
-      url: continuous_testing/explorer/
+      url: continuous_testing/results_explorer/
       parent: continuous_testing
       identifier: continuous_testing_results_explorer
       weight: 4
     - name: Metrics
-      url: synthetics/metrics/
+      url: continuous_testing/metrics/
       parent: continuous_testing
       identifier: continuous_testing_metrics
       weight: 5
@@ -6963,7 +7004,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 40000
+      weight: 20000
     - name: Browser Monitoring
       url: real_user_monitoring/browser/
       parent: rum
@@ -7025,7 +7066,7 @@ menu:
       identifier: rum_frustration_signals
       weight: 109
     - name: Error Tracking
-      url: real_user_monitoring/error_tracking/browser/
+      url: real_user_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
       weight: 110
@@ -7465,7 +7506,7 @@ menu:
       identifier: rum_session_replay_browser
       weight: 502
     - name: Privacy Options
-      url: real_user_monitoring/session_replay/privacy_options
+      url: real_user_monitoring/session_replay/browser/privacy_options
       parent: rum_session_replay_browser
       identifier: rum_session_replay_privacy_options
       weight: 102
@@ -7534,8 +7575,6 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
       weight: 608
-
-# TODO: Correlate traces with opentelemetry page
     - name: Correlate RUM with Other Telemetry
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
@@ -7552,7 +7591,7 @@ menu:
       identifier: rum_correlate_with_other_telemetry_apm
       weight: 702
     - name: Correlate Synthetics with RUM
-      url: synthetics/guide/explore-rum-through-synthetics/
+      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703
@@ -7612,7 +7651,7 @@ menu:
       identifier: rum_error_tracking_suspect_commits
       weight: 908
     - name: Troubleshooting
-      url: error_tracking/troubleshooting
+      url: real_user_monitoring/error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
@@ -7953,15 +7992,19 @@ menu:
       url: account_management/billing/
       parent: account_management
       weight: 12
+    - name: Pricing
+      url: account_management/billing/pricing
+      parent: account_management_billing
+      weight: 1201
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 5
+      weight: 1202
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 6
+      weight: 1203
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
@@ -8018,6 +8061,11 @@ menu:
       url: data_security/hipaa_compliance/
       parent: data_security
       weight: 8
+    - name: Data Retention Periods
+      identifier: data_retention_periods
+      url: data_security/data_retention_periods/
+      parent: data_security
+      weight: 9
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/

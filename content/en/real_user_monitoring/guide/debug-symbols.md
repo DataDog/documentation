@@ -34,7 +34,7 @@ Datadog relies on different tags to match debug symbols with stack traces. These
 | Application type | Tag combination used for matching |
 | ---- | ---- |
 | JavaScript | `service`, `version`, `path`|
-| Android | v1.13.0: `build_id`<br/> Older versions: `service`, `version`, `variant`|
+| Android | v1.13.0+: `build_id`<br/> Older versions: `service`, `version`, `variant`|
 | iOS | `uuid` |
 | React Native | `service`, `version`, `bundle_name`, `platform`; if multiple source maps match on these fields, the one with the highest `build_number` is selected |
 | Flutter | `service`, `version`, `variant`, `architecture` |

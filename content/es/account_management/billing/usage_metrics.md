@@ -58,7 +58,6 @@ Las métricas de uso estimadas suelen estar disponibles en los siguientes tipos 
 | Hosts de bases de datos                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | Hosts de DBM únicos vistos en la última hora. |
 | Hosts ASM                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Hosts de ASM únicos vistos en la última hora. |
 | Tareas de ASM                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Tareas de ASM Fargate únicas vistas en los últimos 5 minutos. |
-| Gestión de incidencias (usuarios activos)   | `datadog.estimated_usage.incident_management.active_users` | Usuarios activos de mensajería instantánea vistos desde el mes hasta la fecha. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Modificadores de pipeline vistos desde el mes hasta la fecha. |
 | Modificadores de prueba de CI Visibility | `datadog.estimated_usage.ci_visibility.test.committers` | Modificadores de prueba vistos desde el mes hasta la fecha. |
 | Dispositivos IoT                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Dispositivos de IoT únicos vistos en la última hora. |
