@@ -30,9 +30,9 @@ The metadata section requires the following:
 
 | Name     | Required | Description                                                                                     |
 |----------|----------|-------------------------------------------------------------------------------------------------|
-| version  | Yes      | The target OCSF schema version.                                                                 |
-| class    | Yes      | The name of the OCSF event class. The event class ID, category name, and category ID are derived from this. |
-| profiles | Yes      | An array of profile names that are added to the event class schema.                             |
+| `version`  | Yes      | The target OCSF schema version.                                                                 |
+| `class`    | Yes      | The name of the OCSF event class. The event class ID, category name, and category ID are derived from this. |
+| `profiles` | Yes      | An array of profile names that are added to the event class schema.                             |
 
 
 {{< tabs >}}
@@ -191,8 +191,8 @@ automatically has all numeric timestamps identified in the OCSF schema converted
 
 ### Mapping lookup tables
 
-A lookup table names a series of values to compare against the source column, along with the
-resulting `value` that should be used if the comparison succeeds. The comparison value is specified as one of the following operations:
+A lookup table is a series of values that is compared against the source column, along with the
+resulting `value` that should be used if the comparison succeeds. The comparison can be one of the following operations:
 
 | Name            | Description                                                                                     |
 |-----------------|-------------------------------------------------------------------------------------------------|
@@ -315,7 +315,7 @@ The `concat_arrays` function looks up a second `source` and, if it exists, conca
 
 ### `reshape_array`
 
-The `reshape_array` function extracts data from a source array to create a new array of values. In particular, the function filters only array elements containing a named field matching a condition from the list in [Mapping Lookup Tables](#mapping-lookup-tables), and extracts another field into the output array.
+The `reshape_array` function extracts data from a source array to create a new array of values. In particular, the function filters only array elements containing a named field matching a condition from the list in [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
