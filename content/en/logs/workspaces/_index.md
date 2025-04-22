@@ -105,7 +105,7 @@ Add the **Visualization** cell to display your data as a:
 1. Select your visualization method in the **Visualize as** dropdown menu.
 1. Enter a filter if you want to filter to a subset of the data. For example, `status:error`. If you are using an analysis cell as your data source, you can also filter the data in SQL first.
 1. If you want to group your data, click **Add Aggregation** and select the information you want to group by.
-1. Click the download button to export the data as a CSV (for Table visualizations only).
+1. Click the download button to export the data as a CSV (for table visualizations only).
 
 ### Transformation cell
 
