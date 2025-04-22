@@ -451,9 +451,9 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on a view instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
 
 {{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
-    // Set an text and input override on your view
+    // Set a text and input override on your view
     myView.setSessionReplayTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
-    // Remove an image override from your view
+    // Remove a text and input override from your view
     myView.setSessionReplayTextAndInputPrivacy(null)
 {{< /code-block >}}
 {{% /tab %}}
@@ -463,9 +463,9 @@ To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on
 To override text and input privacy, use `dd.sessionReplayOverrides.textAndInputPrivacy` on a view instance and set a value from the `TextAndInputPrivacyLevel` enum. Setting it to `nil` removes the override.
 
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-    // Set an text and input override on your view
+    // Set a text and input override on your view
     myView.dd.sessionReplayOverrides.textAndInputPrivacy = .maskSensitiveInputs
-    // Remove an image override from your view
+    // Remove a text and input override from your view
     myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
 {{< /code-block >}}
 {{% /tab %}}
