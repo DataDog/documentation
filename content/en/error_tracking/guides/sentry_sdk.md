@@ -192,10 +192,10 @@ During your migration, you can use the Sentry SDK and Datadog at the same time.
 
 **Note**: Doing so may result in errors being reported twice.
 
-### From the Sentry SDK
+## Send events to both Sentry and Datadog
 You can configure Sentry SDKs to send events to multiple DSNs at once. On most Sentry SDKs, you can override the default transport to achieve this.
 
-
+### From the Sentry SDK
 {{< tabs >}}
 
 {{% tab "JavaScript" %}}
