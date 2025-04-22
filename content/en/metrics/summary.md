@@ -57,7 +57,7 @@ Clicking **Configure Metrics** gives you multiple options to configure more than
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
-{{< img src="metrics/summary/percentile_aggregations_toggle_2025-01-28.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+{{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
 * **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
@@ -181,19 +181,6 @@ You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to
 
 Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
-### Optimize your metric with aggregations in Advanced Mode
-
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
-
-- Configured counts/rates are queryable with time/space aggregations of `SUM`
-- Configured gauges are queryable in time/space aggregations of `AVG`
-
-{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges" style="width:80%;">}}
-
-More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
-
-**Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
-
 ### Metric origin definitions
 
 This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
@@ -203,7 +190,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
-| CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
+| Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
 | Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
 | DSM                     | Timeseries sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
