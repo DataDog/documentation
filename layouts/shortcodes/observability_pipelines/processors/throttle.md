@@ -1,4 +1,4 @@
-Use this processor to specify a limit on the number of logs sent within a specific time window, for example, if you only want to send a maximum of 100 logs per second. Setting a rate limit can help you catch any spikes in log ingestion and prevent unexpected billing costs.
+Use this processor to set a limit on the number of logs sent within a specific time window. For example, you can set a limit so that only 100 logs are sent per second. Setting a rate limit can help you catch any spikes in log ingestion and prevent unexpected billing costs.
 
 To set up the processor:
 
