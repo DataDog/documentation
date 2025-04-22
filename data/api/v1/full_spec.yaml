@@ -39144,7 +39144,7 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/pagerduty/
   name: PagerDuty Integration
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the
@@ -39254,7 +39254,7 @@ tags:
 
     Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
   name: Tags
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the
