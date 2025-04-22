@@ -27,7 +27,7 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- マーケットプレイス
+- marketplace
 - sap
 custom_kind: インテグレーション
 dependencies: []
@@ -100,7 +100,7 @@ SAP BusinessObjects インテグレーションは、SAP **BusinessObjects** シ
 - スケジュールとレポート
 - CMC と監査警告
 
-## Agent
+## サポート
 サポートや機能のリクエストについては、AGENTIL Software (support@agentil-software.com) までお問い合わせください。
 
 *SAP や他のプラットフォームとの特定のインテグレーションのための信頼できるパートナーをお探しなら、ぜひ当社にご連絡ください。*
