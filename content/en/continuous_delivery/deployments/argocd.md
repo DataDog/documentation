@@ -34,7 +34,7 @@ The setup below uses the [Webhook notification service][5] of Argo CD to send no
 First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`. For sending notifications, the setup is different depending on whether you installed Argo CD using Helm or the regular setup (using `kubectl apply`).
 
 {{< tabs >}}
-{{% tab "Regular setup (with `kubectl apply`)" %}}
+{{% tab "Regular setup (with kubectl apply)" %}}
 Modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
 
 ```yaml
