@@ -188,9 +188,10 @@ Sentry.set_tags('git.repository_url', '<git-provider.example/me/my-repo>')
 
 To get the most out of Error Tracking, Datadog recommends migrating to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] for more information.
 
-During your migration, you can use the Sentry SDK and Datadog at the same time.
+The setup using the Sentry SDK can be used simultaneously with the recommended setup. Errors may be reported twice.
 
-**Note**: Doing so may result in errors being reported twice.
+## Send events to both Sentry and Datadog
+Events can be sent to both Sentry (or any other Sentry-compatible backend) and Datadog. This allows you to start using Datadog while also keeping your current solution. There are several ways to achieve this.
 
 ### From the Sentry SDK
 You can configure Sentry SDKs to send events to multiple DSNs at once. On most Sentry SDKs, you can override the default transport to achieve this.
