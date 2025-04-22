@@ -23,7 +23,7 @@ further_reading:
     <br>
     To submit questions, feedback, or requests related to Live Debugger, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM9SV4fxrM_OvQ2CtI7CMl7evN0jasFb6X1QiPAbW6dPTQVQ/viewform?usp=header">this form</a> with details. 
     <br>
-    For urgent issues, contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
+    For time-sensitive issues, contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
 {{< /beta-callout-private >}}
 
 ## Overview
@@ -46,9 +46,8 @@ Live Debugger provides:
 ### Prerequisites
 
 1. All [Dynamic Instrumentation prerequisites][16] are met.
-2. (For one-click enablement) You have the following permissions: **Org Management**, **APM Remote Configuration Read**, **APM Remote Configuration Write**.
-3. You have [created a logs index][19] to store debugging information. 
-4. (Recommended) You have enabled [Source Code Integration][20] to view and select specific code locations when adding logpoints.
+1. You have [created a logs index][19] to store debugging information. 
+1. (Recommended) You have enabled [Source Code Integration][20] to view and select specific code locations when adding logpoints.
 
 ### Setup Live Debugger
 
@@ -56,10 +55,10 @@ Enable and disable Live Debugger on a service using one of the following methods
 
 #### One-click enablement (recommended) ####
 
-<div class="alert alert-info">Only users with eligible permissions can use one-click enablement. Users may need to re-authenticate before using this feature.</div>
+<div class="alert alert-info">Only users with the following permissions can use one-click enablement: **Org Management**, **APM Remote Configuration Read**, **APM Remote Configuration Write**.</div>
 
 1. Select the service and environment on the [Live Debugger Settings][18] page.
-1. Check that all prerequisites are met (unmet requirements display on the Settings page).
+1. Check that all prerequisites are met as indicated on the Settings page.
 1. Click "Enable" or "Disable":
     - "Enable" to allow users to create Debug Sessions on the selected service and environment.
     - "Disable" to deactivate active Debug Sessions and prevent users from creating more.
@@ -68,7 +67,6 @@ Enable and disable Live Debugger on a service using one of the following methods
 
 #### Manual enablement ####
 1. Select the service and environment on the [Live Debugger Settings][18] page.
-1. Check that all prerequisites are met.
 1. Follow the instructions to enable Live Debugger.
 1. Restart the service before using Live Debugger.
 
@@ -134,7 +132,7 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
-- **Session duration:** Debug Sessions automatically expire after 48 hours. This limit is not configurable.
+- **Session duration:** Debug Sessions automatically expire after 48 hours by default.
 
 ## Further Reading
 
