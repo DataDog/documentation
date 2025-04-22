@@ -76,9 +76,7 @@ Due to shared underlying technology, Live Debugger and Dynamic Instrumentation a
 
 Like Live Debugger, Dynamic Instrumentation allows users to create logpoints (in addition to supporting other custom instrumentation like spans, span tags, and metrics). However, Live Debugger logpoints expire automatically after a set time period, while Dynamic Instrumentation logpoints remain active until manually deactivated.
 
-When you enable or disable Live Debugger, the same action applies to Dynamic Instrumentation for that service and environment:
-- When enabled, users with appropriate permissions can create both Debug Sessions in Live Debugger and instrumentations in Dynamic Instrumentation.
-- When disabled, all data capture stops from both active Debug Session logpoints and dynamic instrumentations.
+When you enable or disable Live Debugger, the same action applies to Dynamic Instrumentation for that service and environment. When disabled, all data capture stops from both active Debug Session logpoints and dynamic instrumentations.
 
 ## Using Live Debugger
 
@@ -127,7 +125,7 @@ Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Language support:** Live Debugger is available for the same runtime languages as [Dynamic Instrumentation][1].
+- **Language support:** Live Debugger is available for the same runtime languages as [Dynamic Instrumentation][1], including: Java, Python, .NET, PHP (preview), Node.js (preview), Ruby (preview).
 - **Configuration scope:** Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
