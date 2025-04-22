@@ -30,7 +30,7 @@ ON orders.customer_id = customers.customer_id {{< /code-block >}} |
 | `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
 FROM sales 
 GROUP BY product_id {{< /code-block >}} |
-| `||` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name 
+| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name 
 FROM employees {{< /code-block >}} |
 | `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT * 
 FROM employees 
