@@ -307,7 +307,7 @@ The following security control definition affects every `sql-sanitizer` package 
 `TYPE:SECURE_MARKS:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
 
 <div class="alert alert-info">
-Parameter types must be fully qualified with their namespace. Example: `System.String`
+Parameter types must be fully qualified with their namespace. Example: <code>System.String</code><br /><br />
 Parameter indexes are comma separated. If no parameter index is provided, value is defaulted to 0 (first parameter)
 </div>
 
