@@ -128,8 +128,6 @@ await DdSdkReactNative.initialize(config);
 
 #### Sample session rates
 
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
-
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][4]. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
 
 ### Upload source maps on EAS builds
