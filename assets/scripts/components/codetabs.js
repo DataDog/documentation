@@ -7,8 +7,16 @@ const initCodeTabs = () => {
     const { allowedRegions } = regionConfig;
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
     const codeTabParameters = allowedRegions.reduce((k,v) => ({...k, [v]: {}}), {});
+    let resizeTimeout;
+    let currentActiveTab = null; // Store the current active tab
 
     const cleanupExistingTabs = () => {
+        // Store current active tab before cleanup
+        const activeTab = document.querySelector('.code-tabs .nav-tabs li.active a');
+        if (activeTab) {
+            currentActiveTab = activeTab.getAttribute('data-lang');
+        }
+
         // Remove all existing tab navigation elements
         document.querySelectorAll('.nav-tabs').forEach(navTabs => {
             // Only remove if it's a child of a code-tabs container
@@ -17,6 +25,55 @@ const initCodeTabs = () => {
             }
         });
     }
+
+    const detectTabWrapping = () => {
+        const tabContainers = document.querySelectorAll('.code-tabs');
+
+        tabContainers.forEach(container => {
+            const tabsNav = container.querySelector('.nav-tabs');
+            if (!tabsNav) return;
+
+            // Get the total width of all tabs including gaps
+            const tabsList = Array.from(tabsNav.querySelectorAll('li'));
+            const totalTabsWidth = tabsList.reduce((sum, tab) => {
+                const style = window.getComputedStyle(tab);
+                const width = tab.offsetWidth;
+                const marginLeft = parseFloat(style.marginLeft);
+                const marginRight = parseFloat(style.marginRight);
+                const paddingLeft = parseFloat(style.paddingLeft);
+                const paddingRight = parseFloat(style.paddingRight);
+                return sum + width + marginLeft + marginRight + paddingLeft + paddingRight;
+            }, 0);
+
+            // Get the container width, accounting for padding
+            const containerStyle = window.getComputedStyle(tabsNav);
+            const containerWidth = tabsNav.offsetWidth -
+                parseFloat(containerStyle.paddingLeft) -
+                parseFloat(containerStyle.paddingRight);
+
+            // Use a larger buffer (60px) and add hysteresis to prevent flickering
+            const BUFFER = 60;
+            const currentLayout = container.classList.contains('tabs-wrap-layout');
+
+            // If currently in wrap layout, require more space to switch back
+            const threshold = currentLayout ? containerWidth - BUFFER : containerWidth - (BUFFER * 0.8);
+
+            const shouldWrap = totalTabsWidth > threshold;
+
+            if (shouldWrap !== currentLayout) {
+                if (shouldWrap) {
+                    container.classList.add('tabs-wrap-layout');
+                } else {
+                    container.classList.remove('tabs-wrap-layout');
+                }
+            }
+        });
+    };
+
+    const debouncedDetectTabWrapping = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(detectTabWrapping, 100);
+    };
 
     const init = () => {
         // Clean up existing tabs first
@@ -28,47 +85,12 @@ const initCodeTabs = () => {
         getContentTabHeight()
         addObserversToCodeTabs()
 
-        // Detect when tabs wrap and apply tabs-wrap-layout class
-        const detectTabWrapping = () => {
-            const tabContainers = document.querySelectorAll('.code-tabs');
-
-            tabContainers.forEach(container => {
-                const tabsNav = container.querySelector('.nav-tabs');
-                if (!tabsNav) return;
-
-                // Get the total width of all tabs including gaps
-                const tabsList = Array.from(tabsNav.querySelectorAll('li'));
-                const totalTabsWidth = tabsList.reduce((sum, tab) => {
-                    const style = window.getComputedStyle(tab);
-                    const width = tab.offsetWidth;
-                    const marginLeft = parseFloat(style.marginLeft);
-                    const marginRight = parseFloat(style.marginRight);
-                    return sum + width + marginLeft + marginRight;
-                }, 0);
-
-                // Add a larger buffer (40px) to prevent edge case flickering
-                const containerWidth = tabsNav.offsetWidth;
-                const shouldWrap = totalTabsWidth > (containerWidth - 40);
-
-                if (shouldWrap) {
-                    container.classList.add('tabs-wrap-layout');
-                } else {
-                    container.classList.remove('tabs-wrap-layout');
-                }
-            });
-        };
-
-        // Debounce the resize handler to improve performance
-        let resizeTimeout;
-        const debouncedDetectTabWrapping = () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(detectTabWrapping, 100);
-        };
-
         // Initial detection
         detectTabWrapping();
 
-        // Recalculate on window resize with debouncing
+        // Remove any existing resize listeners
+        window.removeEventListener('resize', debouncedDetectTabWrapping);
+        // Add new resize listener
         window.addEventListener('resize', debouncedDetectTabWrapping);
     }
 
@@ -157,6 +179,16 @@ const initCodeTabs = () => {
     }
 
     const activateTabsOnLoad = () => {
+        // If we have a stored active tab from before reinitialization, use that
+        if (currentActiveTab) {
+            const selectedLanguageTab = document.querySelector(`a[data-lang="${currentActiveTab}"]`);
+            if (selectedLanguageTab) {
+                activateCodeTab(selectedLanguageTab);
+                return;
+            }
+        }
+
+        // Otherwise use URL parameter or fall back to first tab
         const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
@@ -168,7 +200,7 @@ const initCodeTabs = () => {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
                     }, 300);
                 }
-            }else{
+            } else {
                 activateCodeTab(firstTab)
             }
         } else {
@@ -296,7 +328,11 @@ const initCodeTabs = () => {
     if (window.clientFiltersManager) {
         // Update the tabs after the page is initially rendered
         // and before it is revealed
-        clientFiltersManager.registerHook('afterReveal', init);
+        clientFiltersManager.registerHook('afterReveal', () => {
+            // Reset stored tab on initial reveal
+            currentActiveTab = null;
+            init();
+        });
 
         // Update the tabs after the page is re-rendered
         clientFiltersManager.registerHook('afterRerender', init);

@@ -21,7 +21,13 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     display: inline-block;
     position: relative;
     color: rgba(0, 0, 0, 0.6);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none !important;
+    transition: none;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
   }
 
   // Common active tab styles
@@ -38,6 +44,13 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     padding-bottom: 9px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    outline: none !important;
+    transition: none;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: $tab-active-shadow !important;
+    }
   }
 
   // Common tab content styles
@@ -49,7 +62,6 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     position: relative;
     z-index: 1;
     box-shadow: $tab-shadow;
-    transition: border-radius 0.2s ease;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 4px;
@@ -133,6 +145,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
         a {
           @extend %active-tab-base;
+          transition: none;
 
           &:after {
             content: '';
@@ -147,6 +160,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
           &:hover {
             color: $tab-active-color;
+            transition: none;
           }
 
           &::before {
@@ -156,12 +170,17 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       }
 
       &:not(.active) {
-        a:hover {
-          color: $tab-active-color;
-          background: $tab-hover-bg;
-          border-color: transparent;
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
+        a {
+          transition: none;
+
+          &:hover {
+            color: $tab-active-color;
+            background: $tab-hover-bg;
+            border-color: transparent;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+          }
         }
       }
 
@@ -178,12 +197,6 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
           opacity: 0;
           transition: opacity 0.3s ease;
-        }
-
-        &:hover {
-          color: $tab-active-color;
-          border-color: $tab-border-color;
-          border-bottom-color: transparent;
         }
 
         &:active {
@@ -209,13 +222,11 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       border-bottom: none;
       margin-bottom: 16px;
       padding-top: 10px;
-      transition: all 0.2s ease-in-out;
       min-height: 40px;
       overflow-x: visible;
 
       li {
         margin-bottom: 6px;
-        transition: all 0.2s ease-in-out;
 
         &.active a {
           color: white;
@@ -229,23 +240,14 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           height: 31px;
           display: inline-flex;
           align-items: center;
-
-          &::before {
-            display: none;
-          }
-
-          &:after {
-            display: none;
-          }
+          transition: none;
 
           &:hover {
-            background-color: $tab-active-color;
-            color: white;
-            box-shadow: none;
+            transition: none;
           }
         }
 
-        a {
+        &:not(.active) a {
           color: black;
           background-color: white;
           border: 1px solid rgb(199, 199, 199);
@@ -260,17 +262,11 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           padding: 0 10px;
           position: relative;
           overflow: visible;
-          transition: all 0.2s ease-in-out;
-
-          &::before {
-            display: none;
-          }
+          transition: none;
 
           &:hover {
             color: $tab-active-color;
-            background-color: white;
-            border-color: rgb(199, 199, 199);
-            box-shadow: none;
+            transition: color 0.2s ease;
           }
 
           &:active {
@@ -287,7 +283,6 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     .tab-content {
       margin-top: 0;
       border-radius: 4px;
-      transition: all 0.2s ease-in-out;
     }
   }
 }
