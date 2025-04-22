@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-You can import your own OCSF mapping when you add a custom mapping to the Remap OCSF processor. This document explains how to format your custom mapping for the processor.
+When you add a Remap OCSF processor with custom mapping, you can import your own OCSF mapping configuration.  This document explains how to format your custom configuration for the processor.
 
 ## Mapping descriptor
 
@@ -20,7 +20,7 @@ The mapping descriptor has four sections:
 | Name       | Required  | Description                                                                                                           |
 |------------|-----------|-----------------------------------------------------------------------------------------------------------------------|
 | `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
-| `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class.                                                |
+| `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class. See [Metadata section](#metadata-section) for details.                         |
 | `preprocess` | No        | Lists an ordered series of preprocessing steps. The preprocessors rework the data to allow the field-to-field mappings. Each entry is an object consisting of a `function` name (required) and parameters associated with that function. See [Preprocessors](#preprocessors) for more information. |
 | `mapping`    | Yes       | Lists an ordered series of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. See [Mapping](#mapping) for more information. Each mapping may have a `conversion` specified by a `lookup` table or post-processing `function`. See [Mapping lookup tables](#mapping-lookup-tables) and [Mapping functions](#mapping-functions) for more information. |
 
