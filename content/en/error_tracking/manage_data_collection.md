@@ -39,27 +39,6 @@ Each error event is checked against the rules in order. The event is processed o
 
 Rules are evaluated in order, with the evaluation stopping at the first matching rule. The priority of the rules and their nested filters depends on their order in the list.
 
-{{% collapse-content title="Example" level="p" %}}
-Given a list of rules:
-- Rule 1: `env:prod`
-    - Exclusion filter 1-1: `service:api`
-    - Exclusion filter 1-2: `status:warn`
-- Rule 2: `service:web`
-- Rule 3 (this rule is disabled): `team:security`
-- Rule 4: `service:foo`
-
-
-{{< img src="error_tracking/error-tracking-filters-example.png" alt="Error Tracking Filters example of setup" style="width:75%;" >}}
-
-The processing flow is as follows:
-{{< img src="error_tracking/error-tracking-filters-diagram.png" alt="Error Tracking Filters" style="width:75%;" >}}
-
-With incoming events:
-- An event with `env:prod service:my-service status:warn` will match rule 1 and go to its exclusion filters. It won't match exclusion 1-1 so will go to exclusion 1-2. Here, there will be a match, so the event will be discarded.
-- An event with `env:staging service:web` will not match rule 1, so go to rule 2. At rule 2, there will be a match, so the event will be kept.
-
-{{% /collapse-content %}}
-
 ### Default rules
 
 By default, Error Tracking has an `*` inclusion filter and no exclusion filters. This means all error with the [requirements][2] to be fingerprinted are ingested into Error Tracking.
