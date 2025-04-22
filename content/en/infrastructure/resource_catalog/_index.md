@@ -24,14 +24,13 @@ further_reading:
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-
 ## Overview
 
 Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_new.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_new_2.png" alt="The Resource Catalog page showing the Catalog tab, sorting by service" width="100%">}}
 
 ### Use Cases
 
@@ -59,14 +58,14 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 
 **Note**: 
 - Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
-- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the Cloud Security product.
+- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Catalog tab. Enabling resource collection for the Resource Catalog does _not_ enable the Cloud Security product.
 
 ## Browse the Resource Catalog
 
-On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization are shown in the Inventory and Security tabs, with two views: List and Map.
+On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization are shown in the Catalog and Security tabs, with two views: List and Map.
 
-**Inventory Tab**:
-The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog also shows resource attributes customized for each resource type. You can search resources by specific attributes such as the instance type for a host, or the version for a database.
+**Catalog Tab**:
+The Catalog tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog also shows resource attributes customized for each resource type. You can search resources by specific attributes such as the instance type for a host, or the version for a database.
 
 **Security Tab**:
 The Security tab provides a security-centric view of your infrastructure and allows you to understand how your resources are impacted by security risks. 

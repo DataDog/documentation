@@ -12,6 +12,9 @@ further_reading:
     text: "Govern your infrastructure resources with the Datadog Resource Catalog"
 ---
 
+{{< site-region region="gov" >}}<div class="alert alert-warning"> Resource Catalog is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
   Resource Catalog Policies is in Preview.
 {{< /callout >}} 
