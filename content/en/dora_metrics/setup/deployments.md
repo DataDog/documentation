@@ -39,29 +39,43 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 [APM Deployment Tracking][15] can be configured as a data source for deployments in DORA Metrics.
 
-To ensure your service deployments tracked by APM contribute to DORA Metrics, the following requirements must be met:
+### Requirements
 
+- **APM Deployment Tracking** is enabled as a **Deployments** event data source in [DORA settings][19].
 - Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
-For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
+For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [change lead time requirements](#requirements-for-calculating-change-lead-time).
 
 [15]: /tracing/services/deployment_tracking
 [16]: /software_catalog/adding_metadata
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
+[19]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{% tab "API or CLI" %}}
 
 To send your own deployment events, use the [DORA Metrics API][21] or the [`datadog-ci dora deployment`][22] command.
 
-The following attributes are required:
-- `started_at`: The time the deployment started.
-- `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+### Requirements
 
-The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. Optionally, you can specify a `team` attribute to associate a deployment with a different `team` than is found automatically for the service. You can also specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
+- **datadog-ci CLI / API** is enabled as a **Deployments** event data source in [DORA settings][28].
+- The following attributes are required:
+  - `started_at`: The time the deployment started.
+  - `finished_at`: The time the deployment finished.
+  - `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+
+You can optionally add the following attributes to the deployment events:
+
+- `repository_url`: The source code repository of the service. Required for calculating change lead time.
+- `commit_sha`: The SHA of the HEAD commit associated with the deployment. Required for calculating change lead time.
+- `team`: Associate a deployment with a different `team` than the one found automatically for the service.
+- `env`: Filter your DORA metrics by environment on the [DORA Metrics][25] page.
+- `id`: Identify a deployment. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
+- `version`: The deployment version.
+
 
 ### API (cURL) Example
 
@@ -85,7 +99,8 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
           "repository_url": "https://github.com/organization/example-repository"
         },
         "env": "prod",
-        "team": "backend"
+        "team": "backend",
+        "version": "v1.12.07"
       }
     }
   }
@@ -123,13 +138,15 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 [25]: https://app.datadoghq.com/ci/dora
 [26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [27]: https://app.datadoghq.com/organization-settings/api-keys
+[28]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Calculating deployment frequency
 
-Deployment frequency is calculated based on the `dora.deployments.count` metric that is generated and increased with each deployment detected from your selected deployment data source. Frequency is calculated by dividing `dora.deployments.count` over a specific time frame.
+Deployment frequency is calculated based on the count of deployment events. Frequency is calculated by dividing this count over a specific time frame.
 
 ## Calculating change lead time
 
@@ -140,10 +157,11 @@ To calculate change lead time for a deployment, Datadog runs [`git log`][6] betw
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}
 
-For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `dora.deploy_time` metric is not available.
+For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `Deploy Time` metric is not available.
 
 For service deployments tracked by APM to contribute to change lead time, ensure the following:
 
+### Requirements for calculating change lead time 
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
 - Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
 
@@ -156,6 +174,9 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 
 For service deployments tracked by the DORA Metrics API or the `datadog-ci dora deployment` command to contribute to change lead time, ensure the following:
 
+### Requirements for calculating change lead time
+
+- The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
 - Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
 
 [101]: /integrations/github/
@@ -284,7 +305,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 ## Calculating change failure rate
 
-Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event.
+Change failure rate is calculated by dividing the number of failure events over the number of deployment events for the same services and/or teams associated to both a failure and a deployment event.
 
 ## Further Reading
 

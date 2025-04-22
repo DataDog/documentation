@@ -60,10 +60,6 @@ Users with the `user_access_manage` permission can set default rules on who can 
 
 ## Manage teams through an identity provider
 
-{{< callout url="/help/" header="false" >}}
-The Managed Teams feature is turned off by default. Request access by contacting support.
-{{< /callout >}}
-
 When you set up a managed team, you configure the following properties of the team externally through an identity provider integration:
  - Team name
  - Team handle

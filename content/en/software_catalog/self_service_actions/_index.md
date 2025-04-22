@@ -4,6 +4,7 @@ aliases:
   - /software_catalog/actions
   - /software_catalog/self-service
   - /service_catalog/self-service
+  - /software_catalog/self-service_actions
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
@@ -14,6 +15,9 @@ further_reading:
 - link: "/service_management/workflows/"
   tag: "Documentation"
   text: "Learn about Workflows"
+- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
+  tag: "Blog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog"
 ---
 
 [Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these predefined actions to:

@@ -132,5 +132,6 @@ Más enlaces, artículos y documentación útiles:
 [5]: https://docs.datadoghq.com/es/infrastructure
 [6]: https://docs.datadoghq.com/es/logs
 [7]: https://docs.datadoghq.com/es/tracing
+
 ---
 Esta aplicación está disponible a través del Marketplace de Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">adquiere esta aplicación en el Marketplace</a>.
