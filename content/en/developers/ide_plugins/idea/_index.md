@@ -232,4 +232,4 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [17]: https://www.datadoghq.com/legal/eula/
 [18]: /tests/
 [19]: /continuous_integration/
-[20]: /developers/ide_plugins/live_debugger/
+[20]: /developers/ide_plugins/idea/live_debugger/
