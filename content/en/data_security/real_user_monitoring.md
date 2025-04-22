@@ -123,7 +123,7 @@ Once you've initialized your RUM application, you can choose whether or not you 
 
 {{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
 
-Once you disable collection of IP data, the change is applied immediately. Any events collected prior to disabling does not remove the IP data. It is performed on the backend, which means the Browser SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.
+After you disable the collection of IP data, the change is applied immediately. Any events collected prior to disabling does not remove the IP data. It is performed on the backend, which means the Browser SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.
 
 #### Geolocation
 In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the **Collect geolocation data** box, the change is applied immediately. Any events collected prior to disabling does not remove corresponding geolocation data. Data omission is done at the backend level, which means the Browser SDK is still sending data, but geolocation data is omitted by Datadog backend pipelines and dropped at processing time.
