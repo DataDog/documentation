@@ -48,7 +48,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Filter | Query Example | Description |
 |--------|---------------|-------------|
 | Sessions with replays | `@session.has_replay:true` | A default filter (enforced) to ensure the system does not discard any sessions with session replays available. |
-| Sessions with error | `@type:error` | A default filter that can be applied to retain all sessions that contain at least 1 error. |
+| Sessions with errors | `@type:error` | A default filter that can be applied to retain all sessions that contain at least 1 error. |
 | Sessions with mobile crashes | `@type:error @error.is_crash:true` | A filter that can be applied to retain all sessions that ended with a crash. |
 | Sessions | `@type:session` | A default filter, placed last in the list, to apply to all sessions, which allows you to retain or discard a percentage of them. |
 | App versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. |
