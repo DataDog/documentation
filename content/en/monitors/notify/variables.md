@@ -642,7 +642,7 @@ The logs link is customizable with additional parameters. The most common are:
 
 ### Comments
 
-To include a comment in the monitor message that only displays in the monitor edit screen, use the syntax:
+To include a comment in the monitor message, use the syntax:
 
 ```text
 {{!-- this is a comment --}}
