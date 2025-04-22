@@ -54,6 +54,7 @@ kotlin {
     | 0.4.0                                    | 2.20.0                  |
     | 0.5.0                                    | 2.22.1                  |
     | 1.0.0                                    | 2.23.0                  |
+    | 1.1.0                                    | 2.26.0                  |
 
     #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -69,12 +70,12 @@ kotlin {
 
         pod("DatadogObjc") {
             linkOnly = true
-            version = 2.23.0
+            version = 2.26.0
         }
 
         pod("DatadogCrashReporting") {
             linkOnly = true
-            version = 2.23.0
+            version = 2.26.0
         }
     }
     ```

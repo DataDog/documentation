@@ -146,7 +146,9 @@ The following example contains a sample function with tracing and metrics set up
 ```js
 // Example of a simple Cloud Run Function with traces and custom metrics
 // dd-trace must come before any other import. 
-const tracer = require('dd-trace').init();
+const tracer = require('dd-trace').init()
+
+require('@datadog/serverless-compat').start();
 
 const functions = require('@google-cloud/functions-framework');
 
@@ -154,9 +156,9 @@ function handler(req, res) {
    tracer.dogstatsd.increment('dd.function.sent', 1, {'runtime':'nodejs'});
    return res.send('Welcome to Datadog💜!');
 }
+const handlerWithTrace = tracer.wrap('example-span', handler)
 
 functions.http('httpexample',  handlerWithTrace)
-const handlerWithTrace = tracer.wrap('example-span', handler)
 
 module.exports = handlerWithTrace
 ```

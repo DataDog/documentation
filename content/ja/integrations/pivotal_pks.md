@@ -17,12 +17,12 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
 - ログの収集
 - ネットワーク
-- orchestration
-custom_kind: integration
+- オーケストレーション
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_on_public_website: true
