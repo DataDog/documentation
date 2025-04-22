@@ -4,6 +4,7 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/regular_expression_syntax/
   - /sensitive_data_scanner/scanning_rules/custom_rules
+  - /security/sensitive_data_scanner/regular_expression_syntax
 further_reading:
     - link: "/security/sensitive_data_scanner/"
       tag: "Documentation"

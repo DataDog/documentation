@@ -2,7 +2,7 @@
 categories:
 - azure
 - 클라우드
-- 데이터 스토어
+- 데이터 저장소
 custom_kind: 통합
 dependencies: []
 description: Azure DB for MariaDB의 핵심 메트릭 추적하기
@@ -37,7 +37,7 @@ Azure Database for MariaDB 메트릭을 얻으면 다음을 할 수 있습니다
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_db_for_mariadb" >}}
