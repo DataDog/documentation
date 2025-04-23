@@ -1,6 +1,8 @@
 ---
 title: Track workflows
 disable_toc: false
+aliases:
+- /service_management/workflows/track
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:

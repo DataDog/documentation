@@ -1,6 +1,8 @@
 ---
 title: Embedded Apps
 disable_toc: false
+aliases:
+    - /service_management/app_builder/embedded_apps
 further_reading:
 - link: "https://app.datadoghq.com/app-builder/action-catalog"
   tag: "App"
