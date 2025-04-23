@@ -1,5 +1,7 @@
 ---
-title: Datadog OTLP Intake Endpoint
+title: Agentless Deployment
+aliases:
+- /opentelemetry/setup/intake_endpoint/
 further_reading:
 - link: "/opentelemetry/setup"
   tag: "Documentation"
@@ -7,19 +9,19 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP intake endpoints are in Preview. To request access, contact your account representative.
+  Agentless deployment options for OpenTelemetry with Datadog are in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 ## Overview
 
-Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send observability data directly to Datadog. With this feature, you don't need to run the [Datadog Agent][1] or [OpenTelemetry Collector + Datadog Exporter][2].
+Datadog's Agentless deployment allows you to send observability data directly to Datadog using OpenTelemetry protocol (OTLP) intake API endpoints. With this approach, you don't need to run the [Datadog Agent][1] or [OpenTelemetry Collector + Datadog Exporter][2].
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
 You might prefer this option if you're looking for a straightforward setup and want to send traces directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
-- [OTLP logs intake endpoint][3]
-- [OTLP metrics intake endpoint][4]
+- [Agentless deployment for logs][3]
+- [Agentless deployment for metrics][4]
 
 ## Further reading
 
