@@ -16,7 +16,7 @@ algolia:
     subcategory: Datadog Role Permissions
 ---
 
-## Overview
+## Permissions
 
 Permissions define the type of access a user has to a given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three managed roles and custom roles.
 
@@ -40,6 +40,8 @@ Some permissions appear in "Preview Mode" before becoming fully enforced. During
 - Administrators should configure roles appropriately during this period
 
 Preview mode gives organization administrators the ability to opt-in to certain new permissions to prevent losing access to resources that were previously unrestricted. Release notes associated with each preview mode permission indicate when the permission is created and when it will be enforced. While these permissions don't restrict access during preview, it's recommended to update role configurations before they become enforced to prevent disruption.
+
+## Roles
 
 ### Managed roles
 
