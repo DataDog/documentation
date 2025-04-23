@@ -183,7 +183,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Known issue with Github Actions
+## Known issue with GitHub Actions
 
 If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
 the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
