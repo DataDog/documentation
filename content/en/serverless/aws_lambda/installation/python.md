@@ -405,6 +405,16 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Span Auto-linking
+
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
+### Configure Auto-linking for DynamoDB Change Streams
+
+To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, set the following environment variables:
+
+- tk
+
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
 
@@ -479,3 +489,5 @@ def get_message():
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
