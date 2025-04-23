@@ -3306,26 +3306,31 @@ menu:
       parent: ndm_setup
       identifier: ndm_supported_devices
       weight: 30001
+    - name: High Availability
+      url: network_monitoring/devices/high_availability
+      parent: ndm_setup
+      identifier: ndm_high_availability
+      weight: 30002
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
       identifier: ndm_snmp_metrics
-      weight: 30002
+      weight: 30003
     - name: Ping
       url: network_monitoring/devices/ping
       parent: ndm_setup
       identifier: ndm_snmp_ping
-      weight: 30003
+      weight: 30004
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 30004
+      weight: 30005
     - name: SD-WAN
       url: network_monitoring/devices/sd-wan
       parent: ndm_setup
       identifier: ndm_sd-wan
-      weight: 30005
+      weight: 30006
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
