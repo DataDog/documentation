@@ -80,6 +80,7 @@ To set up the AAP Service Extension in your GCP environment, use the Google Clou
     4. Select all **Events** from the list where you want AAP to run detection (Request Headers and Response Headers are **required**).
 
 </br>
+
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
