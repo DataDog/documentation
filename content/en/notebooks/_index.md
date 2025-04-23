@@ -2,6 +2,8 @@
 title: Notebooks
 aliases:
   - /graphing/notebooks/
+  - /notebooks_new/
+  - /notebooks_legacy/
 further_reading:
 - link: "https://www.datadoghq.com/blog/incident-response-templates-notebooks-list/"
   tag: "Blog"
