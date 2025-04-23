@@ -592,10 +592,18 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /getting_started/opentelemetry
+      url: /opentelemetry/getting_started/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
+    - name: Datadog Example Application
+      url: /getting_started/opentelemetry
+      parent: otel_guides_getting_started
+      weight: 101
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog
+      parent: otel_guides_getting_started
+      weight: 102
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
