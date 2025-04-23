@@ -51,6 +51,10 @@ For installation instructions and lists of supported technologies, choose your l
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
+or choose your technology:
+
+{{< partial name="data_streams/setup-technologies.html" >}}
+
 <br/>
 
 ## Explore Data Streams Monitoring
@@ -86,7 +90,7 @@ Alternatively, click a service to open a detailed side panel and view the **Path
 
 Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
 
-Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup monitors on metrics like consumer lag, throughput, and latency in one click.
 
 {{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring Monitor Templates" style="width:100%;" caption="Click 'Add Monitors and Synthetic Tests' to view monitor templates" >}}
 
@@ -98,7 +102,7 @@ Click on the **Throughput** tab on any service or queue in Data Streams Monitori
 
 By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
-### Quickly pivot to identify root causes in infrastructure, logs, or traces 
+### Quickly pivot to identify root causes in infrastructure, logs, or traces
 
 Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
 
