@@ -7,7 +7,7 @@ Schemas help you monitor performance, usage, and changes in your data models, en
 
 <div class="alert alert-info">Schema Tracking is available for PostgreSQL, SQL Server and MySQL.</div>
 
-{{< img src="database_monitoring/dbm_schemas_page.png" alt="The Schemas page in Datadog" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm-schemas-page.png" alt="Schemas page displaying tracked database tables and schema-level metrics in Datadog" style="width:100%;" >}}
 
 ## Configuration
 
@@ -91,7 +91,7 @@ Recommendations are available in aggregate (at the top of the page) and per tabl
 
 ## Metrics overview
 
-The Metrics overview displays metrics dashboards for tracked Schemas across each DBMS.
+The Metrics overview displays dashboards for metrics associated with tracked tables across each DBMS.
 
 {{< img src="database_monitoring/metrics-overview.png" alt="Metrics overview showing total table instance count and key activity metrics across tracked database instances" style="width:100%;" >}}
 
