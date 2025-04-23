@@ -1,7 +1,7 @@
 ---
 categories:
-- cloud
-custom_kind: integration
+- クラウド
+custom_kind: インテグレーション
 dependencies: []
 description: Alibaba Cloud サービスを Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
@@ -46,7 +46,7 @@ Alibaba Cloud に接続して、以下からメトリクスを取得します。
 
 [Datadog-Alibaba Cloud インテグレーションコンフィギュレーションタイル][1]に移動し、_add account_ を押します。
 
-### コンフィギュレーション
+### 構成
 
 Datadog を Alibaba Cloud API と統合するには、以下のパラメーターを入力します。
 
@@ -108,7 +108,7 @@ Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集さ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

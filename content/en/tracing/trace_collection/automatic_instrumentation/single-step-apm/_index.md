@@ -347,11 +347,10 @@ This configuration creates two targets blocks:
 - The first block (named `login-service_namespace`):
   - enables APM for services in the namespace `login-service`.
   - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
-  - sets environment variables -- `DD_SERVICE`, `DD_ENV`, and `DD_PROFILING_ENABLED` -- for this target group.
+  - sets environment variables `DD_PROFILING_ENABLED`
 - The second block (named `billing-service_apps`)
   - enables APM for services in the namespace(s) with label `app:billing-service`.
   - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK.
-  - sets environment variables -- `DD_SERVICE` and `DD_ENV` -- for this target group.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -365,10 +364,6 @@ This configuration creates two targets blocks:
           ddTraceVersions:
             java: "default"
           ddTraceConfigs:
-            - name: "DD_SERVICE"
-              value: "login-service"
-            - name: "DD_ENV"
-              value: "prod"
             - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
               value: "auto"
         - name: "billing-service_apps"
@@ -377,11 +372,6 @@ This configuration creates two targets blocks:
               app: "billing-service"
           ddTraceVersions:
             python: "3.1.0"
-          ddTraceConfigs:
-            - name: "DD_SERVICE"
-              value: "billing-service"
-            - name: "DD_ENV"
-              value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -393,7 +383,7 @@ This configuration does the following:
   - `app:db-user`, which marks pods running the `db-user` application.
   - `webserver:routing`, which marks pods running the `request-router` application.
 - instructs Datadog to use the default versions of the Datadog Tracer SDKs.
-- sets several Datadog environment variables to apply to each target group.
+- sets Datadog environment variables to apply to each target group and configure the SDKs.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
@@ -407,10 +397,6 @@ This configuration does the following:
            ddTraceVersions:
              java: "default"
            ddTraceConfigs:   ## trace configs set for services in matching pods
-             - name: "DD_SERVICE"
-               value: "db-user"
-             - name: "DD_ENV"
-               value: "prod"
              - name: "DD_DSM_ENABLED"
                value: "true"
          - name: "user-request-router"
@@ -419,11 +405,6 @@ This configuration does the following:
                webserver: "user"
            ddTraceVersions:
              php: "default"
-           ddTraceConfigs:
-             - name: "DD_SERVICE"
-               value: "user-request-router"
-             - name: "DD_ENV"
-               value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -433,7 +414,7 @@ This configuration does the following:
 This configuration:
 - enables APM for pods labeled `app:password-resolver` inside the `login-service` namespace.
 - instructs Datadog to use the default version of the Datadog Java Tracer SDK.
-- sets several Datadog environment variables to apply to this target.
+- sets Datadog environment variables to apply to this target.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
@@ -450,10 +431,6 @@ This configuration:
            ddTraceVersions:
              java: "default"
            ddTraceConfigs:
-             - name: "DD_SERVICE"
-               value: "password-resolver"
-             - name: "DD_ENV"
-               value: "prod"
              - name: "DD_PROFILING_ENABLED"
                value: "auto"
 {{< /highlight >}}
