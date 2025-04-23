@@ -59,7 +59,7 @@
                                             },
                                             "group_by": [],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name ci_partial_retry:false @duration:>0 $repository_id $git.branch -@ci.allowed_to_fail:true"
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  @duration:>0 $repository_id $git.branch -@ci.allowed_to_fail:true"
                                             }
                                         }
                                     ],
@@ -111,7 +111,7 @@
                                         },
                                         "group_by": [],
                                         "search": {
-                                            "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name @duration:>0 ci_partial_retry:false $repository_id $git.branch"
+                                            "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name @duration:>0  $repository_id $git.branch"
                                         }
                                     }
                                 }
@@ -167,7 +167,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -200,7 +200,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -233,7 +233,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job  ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         }
                                     ],
@@ -330,7 +330,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true  ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -363,7 +363,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true  ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -396,7 +396,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job  ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch @ci.critical_path.parallelized:true"
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch @ci.critical_path.parallelized:true"
                                             }
                                         }
                                     ],
@@ -478,7 +478,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name ci_partial_retry:false $repository_id $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  $repository_id $git.branch"
                                             }
                                         }
                                     ]
