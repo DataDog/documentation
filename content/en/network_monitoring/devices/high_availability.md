@@ -23,124 +23,90 @@ You can configure active and standby Agents to function as an HA pair in NDM. If
 
 The following integrations are supported for High Availability in Network Device Monitoring:
 
-### Network Monitoring
-- [SNMP][1]
-- [Network Path][2]
-- [HTTP Check][3]
-
-### Vendor-Specific integrations
-- [Cisco ACI][4]
-- [Cisco SD-WAN][5]
-- Versa
-
-### Virtualization platforms
-- [vSphere][6]
-- [OpenStack Controller][7]
+| Category                | Supported Integrations       |
+|-------------------------|------------------------------|
+| **Network Monitoring**  | [SNMP][1], [Network Path][2], [HTTP Check][3] |
+| **Vendor-Specific**     | [Cisco ACI][4], [Cisco SD-WAN][5], Versa |
+| **Virtualization**      | [vSphere][6], [OpenStack Controller][7] |
 
 ## Prerequisites
 
 - Agent 7.64+
-- Remote Configuration enabled
+- [Remote Configuration][9] enabled on your hosts
 
 ## Setup
 
-HA Agent is supported on Linux, Windows, and macOS.
+HA Agent is supported on Linux, Windows, and macOS. Are there separate setup instructions for each?
 
-### Install two Agents on hosts with the same capabilities
+### Installation
 
-Two Agents with same capabilities (cpu/ram/networking) and configuration (datadog.yaml and integrations configurations)
+1. Install two Agents on like hosts (one on each host). The following setup is for hosts with similar capabilities (CPU, RAM, and networking) and configurations (including `datadog.yaml` and integration settings).
 
-1. For both Agents, setup datadog.yaml with
+2. For both Agents, on each host, configure your `datadog.yaml` with the following settings:
 
-```
-ha_agent:
-  enabled: true
-config_id: <CONFIG-NAME>  # example: "my-ndm-agents"
+   ```yaml
+   ha_agent:
+     enabled: true
+   config_id: <CONFIG-NAME>  # example: "my-ndm-agents"
                           # only use lowercase alphanumerics, hyphen and underscore
-```
+   ```
 
-2. For both Agents, setup SNMP integration
+3. Configure the SNMP integration:
 
-Setup SNMP integrations: [SNMP Metrics][1].
+   - Setup the SNMP integration on _both_ Agents by following the [SNMP Metrics][1] setup instructions.
 
-Both Monitoring individual devices and Autodiscovery are supported.
+     **Note**: Both [Monitoring individual][10] devices and [Autodiscovery][11] installation methods are supported.
 
-Usage
+At this point, the two Agents are fully configured for High Availability (HA).
 
-At this point, the two agents are configured to run as HA.
-
-SNMP integrations will only run on the Active Agent.
-
-If the Active Agent/Host crashes or is shutdown, the Standby Agent will switch to Active.
-
-Dashboard
-
-Once HA Agent is enabled, a dashboard called “HA Agent Overview” is available in Datadog at /dashboard page. It can be used for check the HA Agents status. Example:
-
-Open image-20250113-170823.png
-image-20250113-170823.png
-Testing that HA Failover works
-
-You can test that failover works by shutting down the Agent/Host that is currently Active.
-
-After that, the standby Agent should start monitoring the SNMP integrations after 1-3min.
-
-You can use the previously mentioned dashboard to monitoring the failover.
-
-Defining a Preferred Active Agent (and View HA Agent status)
-
-You can define a Preferred Active Agent like this:
-
-Go to Integrations > Fleet Automation > View Agents (or directly to /fleet url)
-
-Search for your previously configured Agents using tags, hostname, etc e.g. config_id:<CONFIG-NAME>
-
-Open image-20250222-195513.png
-image-20250222-195513.png
-Click on the Agent you would like to define as Preferred
-
-In HA Preferred Active Agent dropdown, select the one you would like to define as Preferred.
+- The SNMP integration only runs on the Active Agent.
+- If the Active Agent or host fails (crashes or shuts down), the standby Agent automatically takes over as the new active Agent, ensuring uninterrupted monitoring.
 
 
-FAQ
+### Define a preferred active Agent 
 
-How decision is made on which Agent is Active?
+1. Go to **Integrations > Fleet Automation > View Agents**.
 
-If no Preferred Active Agent is defined:
+2. Search for your previously configured Agents using tags, hostname, for example, `config_id:<CONFIG-NAME>`.
 
-The Active Agent is initially randomly picked
+**placeholder**
+{{< img src="/network_device_monitoring/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-Switching Active Agent is minimised: If Agent1 is Active and Agent2 is Standby, if Agent1 is shutdown or crashes, failover will happen and Agent2 become Active. If Agent1 become healthy again, the Agent2 will stay Active.
+3. Click on the Agent you would like to define as Preferred.
 
-If Preferred Active Agent is defined:
+4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
 
-The Preferred Active Agent will be Active in priority: If Agent1 is Active and Agent2 is Standby, if Agent1 is shutdown or crashes, failover will happen and Agent2 become Active. If Agent1 become healthy again, Agent1 will become Active and Agent2 will become Standby.
+**placeholder**
+{{< img src="/network_device_monitoring/high_availability/agent-preferred.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-Why my Agent have “unknown” HA Agent state?
+## Testing and validation
 
-One common reason is that Remote Configuration is not setup correctly.
+1. Test that failover works by shutting down the Agent/Host that is Active.
 
-Please check this page for more details: Remote Configuration 
-
-Migration from 7.62/7.63 to 7.64+
-
-Step 1/ Update datadog.yaml config from
+2. The standby Agent should start monitoring the SNMP integrations after 1-3min.
 
 
+## FAQ
 
-ha_agent:
-  enabled: true
-  group: snmp-agents-01
-to
+### How is the Active Agent determined?
 
+**If no Preferred Active Agent is defined**:
 
+- The active Agent is initially chosen randomly.
+- Switching the active Agent is minimized:
+  - If Agent1 is active and Agent2 is Standby, and Agent1 shuts down or crashes, failover occurs, and Agent2 becomes Active.
+  - If Agent1 becomes healthy again, Agent2 remains Active.
 
-ha_agent:
-  enabled: true
-config_id: snmp-agents-01
-Step 2/ Install Agent 7.64+
+**If a Preferred Active Agent is defined**:
 
- 
+- The Preferred Active Agent takes priority:
+  - If Agent1 is the Preferred active Agent and is Active, and Agent2 is Standby, failover occurs if Agent1 shuts down or crashes, making Agent2 Active.
+  - When Agent1 becomes healthy again, it automaticallyreverts to being Active,and Agent2 returns to Standby.
+
+### Why does my Agent have an `unknown` HA Agent state?
+
+- One common reason is that Remote Configuration is not setup correctly.
+
 
 ## Further reading
 
@@ -154,5 +120,8 @@ Step 2/ Install Agent 7.64+
 [6]: https://docs.datadoghq.com/integrations/vsphere/
 [7]: https://docs.datadoghq.com/integrations/vsphere/
 [8]: https://docs.datadoghq.com/integrations/openstack_controller/
+[9]: https://docs.datadoghq.com/agent/remote_config/
+[10]: /network_monitoring/devices/snmp_metrics?tab=snmpv2#monitoring-individual-devices
+[11]: /network_monitoring/devices/snmp_metrics?tab=snmpv2#autodiscovery
 
 
