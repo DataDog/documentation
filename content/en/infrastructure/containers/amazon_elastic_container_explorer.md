@@ -26,6 +26,8 @@ Ensure you have enabled [AWS resource collection][10], the [ECS on EC2 integrati
 
 If using the [task definition to install the Datadog Agent][4], add this environment variable to the Datadog Agent container to activate this feature.
 
+This feature is enabled by default in Datadog Agent version 7.64.0 and later.
+
 ```yaml
 {
   "containerDefinitions": [

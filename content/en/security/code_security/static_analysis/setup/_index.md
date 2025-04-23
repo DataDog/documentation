@@ -4,6 +4,7 @@ description: Learn about Datadog Static Code Analysis to scan code for quality i
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
+- /security/code_security/static_analysis/circleci_orbs/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
@@ -32,7 +33,6 @@ First, configure your Datadog API and application keys. Add `DD_APP_KEY` and `DD
 Next, run Static Code Analysis by following instructions for your chosen CI provider below.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
-    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -85,7 +85,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 ```
 
 If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
@@ -100,7 +100,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 
 ```
 
@@ -108,13 +108,13 @@ As you can see, the `ignore: ["**"]` from the first file was overlayed with the 
 
 #### Org level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
 
 #### Repository level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
 
@@ -328,7 +328,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "**"
+        ignore:
+          - "**"
 ```
 
 #### Ignore for a file or directory
@@ -339,7 +340,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
+        ignore:
+          - "ad-server/src/app.js"
 ```
 
 #### Ignore for a specific instance
@@ -463,6 +465,95 @@ To upload a SARIF report:
    datadog-ci sarif upload $OUTPUT_LOCATION
    ```
 
+## SARIF Support Guidelines
+
+Datadog supports ingestion of third-party SARIF files that are compliant with [the 2.1.0 SARIF schema][15]. The SARIF
+schema is used differently by static analyzer tools. If you want to send third-party SARIF files to Datadog, please
+ensure they comply with the following details:
+
+ - The violation location is specified through the `physicalLocation` object of a result.
+    - The `artifactLocation` and it's `uri` **must be relative** to the repository root.
+    - The `region` object is the part of the code highlighted in the Datadog UI.
+ - The `partialFingerprints` is used to uniquely identify a finding across a repository.
+ - `properties` and `tags` adds more information:
+    - The tag `DATADOG_CATEGORY` specifies the category of the finding. Acceptable values are `SECURITY`, `PERFORMANCE`, `CODE_STYLE`, `BEST_PRACTICES`, `ERROR_PRONE`.
+    - The violations annotated with the category `SECURITY` are surfaced in the Vulnerabilities explorer and the Security tab of the repository view.
+ - The `tool` section must have a valid `driver` section with a `name` and `version` attributes.
+
+For example, here's an example of a SARIF file processed by Datadog:
+
+
+```json
+
+{
+    "runs": [
+        {
+            "results": [
+                {
+                    "level": "error",
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "missing_timeout.py"
+                                },
+                                "region": {
+                                    "endColumn": 76,
+                                    "endLine": 6,
+                                    "startColumn": 25,
+                                    "startLine": 6
+                                }
+                            }
+                        }
+                    ],
+                    "message": {
+                        "text": "timeout not defined"
+                    },
+                    "partialFingerprints": {
+                        "DATADOG_FINGERPRINT": "b45eb11285f5e2ae08598cb8e5903c0ad2b3d68eaa864f3a6f17eb4a3b4a25da"
+                    },
+                    "properties": {
+                        "tags": [
+                            "DATADOG_CATEGORY:SECURITY",
+                            "CWE:1088"
+                        ]
+                    },
+                    "ruleId": "python-security/requests-timeout",
+                    "ruleIndex": 0
+                }
+            ],
+            "tool": {
+                "driver": {
+                    "informationUri": "https://www.datadoghq.com",
+                    "name": "<tool-name>",
+                    "rules": [
+                        {
+                            "fullDescription": {
+                                "text": "Access to remote resources should always use a timeout and appropriately handle the timeout and recovery. When using `requests.get`, `requests.put`, `requests.patch`, etc. - we should always use a `timeout` as an argument.\n\n#### Learn More\n\n - [CWE-1088 - Synchronous Access of Remote Resource without Timeout](https://cwe.mitre.org/data/definitions/1088.html)\n - [Python Best Practices: always use a timeout with the requests library](https://www.codiga.io/blog/python-requests-timeout/)"
+                            },
+                            "helpUri": "https://link/to/documentation",
+                            "id": "python-security/requests-timeout",
+                            "properties": {
+                                "tags": [
+                                    "CWE:1088"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "no timeout was given on call to external resource"
+                            }
+                        }
+                    ],
+                    "version": "<tool-version>"
+                }
+            }
+        }
+    ],
+    "version": "2.1.0"
+}
+
+
+```
+
 <!-- ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}} -->
@@ -480,3 +571,4 @@ To upload a SARIF report:
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html

@@ -62,9 +62,7 @@ Above the Setup Guidance section in the Service Information section, you can see
 
 You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
 
-{{< img src="tracing/software_catalog/svc_cat_completeness1.png" alt="Service configuration page showing configuration completeness." >}}
-
-This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
+The Setup Guidance table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
 Click a service in Software Catalog to open the side panel with the following details: 
 

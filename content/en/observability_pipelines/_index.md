@@ -38,6 +38,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/"
   tag: "blog"
   text: "Simplify your SIEM migration to Microsoft Sentinel with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/sled-observability-pipelines/"
+  tag: "blog"
+  text: "How state, local, and education organizations can manage logs flexibly and efficiently using Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 {{< site-region region="gov" >}}

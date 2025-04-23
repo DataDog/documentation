@@ -354,7 +354,7 @@ GlobalOpenTelemetry.set(new OpenTelemetry() {
     public ContextPropagators getPropagators() {
         return ContextPropagators.noop();
     }
-};
+});
 // and later on if you want to access the tracer provider
 final TracerProvider tracerProvider = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
 ```
