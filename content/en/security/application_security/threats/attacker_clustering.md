@@ -55,7 +55,7 @@ When the attacker attributes are identified, they are displayed on the signal si
 
 ### Custom HTTP request headers
 
-If you want to use custom HTTP request headers for attacker clustering, they need to be added under the path `@http.request.headers` in your traces. You can add custom headers to your traces by configuring the tracer with the `DD_TRACE_REQUEST_HEADER_TAGS` environment variable. For more information about this configuration, see [Configure the Datadog Tracing Library][5].
+If you want to use custom HTTP request headers for attacker clustering, they must be added under the path `@http.request.headers` in your traces. You can add custom headers to your traces by configuring the tracer with the `DD_TRACE_REQUEST_HEADER_TAGS` environment variable. For more information about this configuration, see [Configure the Datadog Tracing Library][5].
 
 ## Attacker clustering mechanism
 
