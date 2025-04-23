@@ -20,45 +20,37 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration sends logs to Datadog.
+This guide walks Technology Partners through creating a log pipeline for your integrations that sends logs to Datadog. A log pipeline is required to process, structure, and enrich logs for optimal usability.
 
-
-When developing your integration to send logs to Datadog follow these guidelines to ensure the best experience for your users.
+To create a Datadog integration, see the Create an integration documentation.
 
 ## Best practices
-
-Before creating a log pipeline, consider the following guidelines and best practices:
-
-The integration must use supported Datadog logs endpoints
-: Your integration must use one of the [supported endpoints][23] exposed by Datadog for log ingestion. You can otherwise use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
-
-The integration must support all Datadog sites
-: Users must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. </br></br> Your Datadog site endpoint is `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
-
-Allow users to attach custom tags while setting up your integration
-: Tags can be set as key-value attributes in the JSON body of your integration's log payload. Datadog recommends allowing users to set custom tags for an integration. If the integration [sends logs through the API][1], tags can optionally be set using the `ddtags=<TAGS>` query parameter.
-
-Set the integration's logs `source` tag to the integration name
-: Datadog recommends setting the `source` tag to `<integration_name>` (`source:okta`) for an application. `source` must be set before sending logs to Datadog's endpoints as it cannot be remapped in the Datadog UI. </br></br> The `source` tag must be in lowercase and must not be editable by users as it is used to enable integration pipelines and dashboards.
-
-Avoid sending logs that contain arrays in the JSON body whenever possible 
-: While it's possible to send array data in your logs, Datadog recommends avoiding arrays as they cannot be [faceted][24].
-
-Do not log Datadog API Keys
-: Datadog API Keys can either be passed in the Header or as part of the HTTP Path of your API requests. For examples, see [Send Logs API documentation][1]. Avoid logging the API Key in your setup.
-
-Do not use Datadog Application Keys
-: Datadog Application Keys are not required to send logs using the HTTP endpoint. 
+1. Use supported Datadog log [endpoints][23].
+- The integration must use one of Datadog's supported log ingestion endpoints.
+- Alternatively, use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
+2. Support all Datadog sites.
+- Ensure users can select between different Datadog sites when applicable.
+- Refer to [Getting Started with Datadog Sites][2] for site-specific details.
+- The Datadog site endpoint for log ingestion is: `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
+3. Allow users to attach custom tags.
+- Tags should be set as key-value attributes in the JSON body of the log payload.
+- If logs are sent using API, tags can also be set using the `ddtags=<TAGS>` query parameter
+4. Set the integration's logs source tag.
+- Define the source tag as the integration name, such as source: okta.
+- The source tag must:
+  - Be lowercase
+  - Not be user-editable (use for pipelines and dashboards)
+5. Avoid sending logs with arrays in the JSON body.
+- While arrays are supported they cannot be faceted, which limits filtering
+6. Protect Datadog API and application keys.
+- Never log Datadog API keys. These should only be passed in the request header or HTTP path.
+- Do not use application keys for log ingestion
 
 ## Create log integration assets
-
-You can create and design your log integration assets directly within your Datadog partner account.
-
-Log integrations consist of two sets of assets: [pipelines][13] and associated [facets][12]. Centralizing logs from various technologies and applications can produce many unique attributes. To use out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog's [standard naming convention][17] when creating integrations.
-
-After finalizing your Datadog Integration design and successfully sending logs to Datadog's log endpoint(s), define your log pipelines and facets to enrich and structure your integration's Logs.
-
-For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
+Log integration assets consist of:
+1. [Pipelines][13] - Process and structure logs.
+2. [Facets][12] - Attributes used for filtering and searching logs.
+Technology Partner integrations must follow Datadog's [standard naming convention][17] to ensure compatibility with out-of-the-box dashboards. 
 
 <div class="alert alert-warning">To be reviewed by Datadog's integration team, log integrations must include assets and have pipeline processors or facets.</div>
 
@@ -67,18 +59,30 @@ For information about becoming a Datadog Technology Partner, and gaining access 
 Logs sent to Datadog are processed in [log pipelines][13] using pipeline processors. These processors allow users to parse, remap, and extract attribute information, enriching and standardizing logs for use across the platform.
 
 #### Create a pipeline
-
-Create a log pipeline to process specified logs with pipeline processors.
-
-
-1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
-2. In the **Filter** field, enter the unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. 
-**Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
-3. Optionally, add tags and a description.
+1. Navigate to the [**Pipelines**][3] page and select New Pipeline.
+2. In the Filter field, enter the unique source tag for the logs. For example, `source:okta` for the Okta integration.
+3. [Optional] Add tags and a description for clarity.
 4. Click **Create**.
 
-After you set-up a pipeline, add processors to enrich and structure the logs further.
+Important: Ensure logs sent through the integration are tagged before being ingested.
+
 #### Add pipeline processors
+1. Review Datadog's [Datadog's Standard Attributes][6] for log structuring best practices.
+2. Click Add Processor and choose from the following options:
+   - Attribute Remapper - Maps from custom log attributes to standard Datadog attributes.
+   - Service Remapper - Ensures logs are linked to the correct service name.
+   - Date Remapper - Assigns the correct timestamp to logs.
+   - Status Remapper - Maps log statuses to standard Datadog attribute.
+   - Message Remapper - Assigns logs to the correct message attribute.
+3. If logs are not in JSON format, use a Grok Processor to extract attributes. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
+
+For advanced processing, conider:
+- Arithmetic Profecessor - Performs calculations on log attributes.
+- String Builder Processor - Concatenates multiple string attributes.
+
+Tips
+- Remove original attributes when remapping log attributes by using preserveSource:false. This helps avoid confusion and removes duplicates.
+- To maintain optimal grok parsing performance, avoid wildcard matchers such as 
 
 Before defining your pipeline processors, review [Datadog's Standard Attributes][6].
 
@@ -175,34 +179,23 @@ Custom facets must have the same data type as the mapped attribute
 * If you remap an attribute and keep the original using the `preserveSource:true` option, define a facet on only a single one.
 * When manually configuring facets in a pipeline's `.yaml` configuration files, note they are assigned a `source`. This refers to where the attribute is captured from and can be `log` for attributes or `tag` for tags.
 
-## Review and deploy the integration
+## Export your log pipeline
 
-Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner through GitHub. In turn, the Technology Partner reviews and makes changes accordingly.
-
-To start a review process, export your log pipeline and relevant custom facets using the **Export** icon on the [Logs Configuration page][3]. 
+Once you have create your log pipeline on the [Logs Configuration page][3] you are able to view all your log pipelines. Hover over the pipeline you would like to export and select the icon that says "export pipeline." Once you select the export pipeline two YAML files will be downloaded to your device. You will need to upload these two files into the Integraton Developer Platform.
 
 {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 
-Include sample raw logs with **all** the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source application **before** they are sent to Datadog.
-
 Exporting your log pipeline includes two YAML files:
+-**pipeline-name.yaml**: The log pipeline, including custom facets, attribute remappers, and grok parsers.
+-**pipeline_name_test.yaml**: The raw sample logs provided and an empty section result.
 
-* One with the log pipeline, which includes custom facets, attribute remappers, and grok parsers. The exported file is named `pipeline-name.yaml`.
-* One with the raw sample logs provided and an empty `result` section. The exported file is named `pipeline-name_test.yaml`.
+Note: Depending on your browser, you may need to adjust your setting to allow file downloads.
 
-**Note**: Depending on your browser, you may need to adjust your settings to allow file downloads.
+## Upload your log pipeline
+Within your integration in the Integration Developer Platform, navigate to the Data tab where you an define the data types that the integration queries or submits. Under "submitted data," toggle on "logs" within this section, specify the log source and upload the two files exported from the previous step.
 
-After you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
+"placeholder for image of data page in pub plat"
 
-Validations are run automatically in your pull request, and validate your pipelines against the raw samples provided. These will produce a result that you can set as the `result` section of your `pipeline-name_test.yaml` file.
-Once the validations runs again, if no issues are detected, the logs validation should succeed.
-
-Three common validation errors are:
-1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
-2. Not providing the `result` of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
-3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
-
-After validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
 
 ## Further reading
 
