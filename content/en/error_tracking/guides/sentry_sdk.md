@@ -119,17 +119,13 @@ To configure the Sentry SDK to send events into Datadog:
 
 ### Upload JavaScript source maps
 
-If your frontend JavaScript source code is minified, you can upload source maps to Datadog to deobfuscate stack traces in Error Tracking.
-
-See [Upload JavaScript Source Maps][4].
+If your frontend JavaScript source code is minified, you can upload source maps to Datadog to deobfuscate stack traces in Error Tracking. See [Upload JavaScript Source Maps][4].
 
 The `version` on source maps is matched with the `release` [configured][11] on the Sentry SDK.
 
 ### Source code integration
 
-[Datadog Source Code Integration][5] allows you to connect your telemetry with your Git repositories.
-
-Source Code Integration works with Sentry SDKs by configuring telemetry tags:
+[Datadog Source Code Integration][5] allows you to connect your telemetry with your Git repositories. It works with Sentry SDKs by configuring telemetry tags:
 
 {{< tabs >}}
 
@@ -188,13 +184,15 @@ Sentry.set_tags('git.repository_url', '<git-provider.example/me/my-repo>')
 
 To get the most out of Error Tracking, Datadog recommends migrating to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] for more information.
 
-During your migration, you can use the Sentry SDK and Datadog at the same time.
+The Sentry SDK setup can be used simultaneously with the recommended setup. Errors may be reported twice.
 
-**Note**: Doing so may result in errors being reported twice.
+## Send events to both Sentry and Datadog
+Events can be sent to both Sentry (or any other Sentry-compatible backend) and Datadog. This allows you to start using Datadog while also keeping your current solution. There are a couple of ways to achieve this:
+- [Using the Sentry SDK](#using-the-sentry-sdk)
+- [Using Sentry Mirror](#using-sentry-mirror)
 
-### From the Sentry SDK
+### Using the Sentry SDK
 You can configure Sentry SDKs to send events to multiple DSNs at once. On most Sentry SDKs, you can override the default transport to achieve this.
-
 
 {{< tabs >}}
 

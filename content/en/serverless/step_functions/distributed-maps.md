@@ -4,7 +4,7 @@ title: Tracing Distributed Map States
 
 In AWS Step Functions, you can set up a large-scale parallel workload by including a [`Map` state in _Distributed_ mode][1]. Datadog supports tracing your Distributed Map states.
 
-{{< img src="serverless/step_functions/distributed_map.png" alt="A visualization of a Step Function with a Distributed Map state." style="width:100%;" >}}
+{{< img src="serverless/step_functions/distributed_map.png" alt="A visualization of a Step Function with a Distributed Map state in the AWS console." style="width:100%;" >}}
 
 ## Set up trace merging
 
@@ -23,11 +23,13 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
    }
    {{< /highlight >}}
 
+{{< img src="serverless/step_functions/distributed_map_trace.png" alt="An example Datadog trace of a Step Function with a Distributed Map state." style="width:100%;" >}}
+
 ## Limitations
 Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
 
 ## Troubleshooting
-If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [Step Function Trace Merging documentation][3].
+If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [Step Function Trace Merging documentation][3]. Also, validate the setup of any Lambda or nested Step Function invocations from within the Distributed Map.
 
 
 [1]: https://docs.aws.amazon.com/step-functions/latest/dg/state-map-distributed.html
