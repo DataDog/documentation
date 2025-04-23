@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
-  Resource Catalog Policies is in Preview.
+  Resource Catalog Policies are in Preview.
 {{< /callout >}} 
 
 ## Overview
