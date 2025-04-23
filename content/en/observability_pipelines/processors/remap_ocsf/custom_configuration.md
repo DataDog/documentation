@@ -34,7 +34,6 @@ The metadata section requires the following:
 | `class`    | Yes      | The name of the OCSF event class. The event class ID, category name, and category ID are derived from this. |
 | `profiles` | Yes      | An array of profile names that are added to the event class schema.                             |
 
-
 {{< tabs >}}
 {{% tab "YAML example" %}}
 
