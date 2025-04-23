@@ -5,6 +5,7 @@ algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/trigger
+- /service_management/workflows/trigger
 further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
