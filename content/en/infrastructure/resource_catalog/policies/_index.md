@@ -21,10 +21,9 @@ further_reading:
 
 ## Overview
 
-{{< img src="/infrastructure/resource_catalog/policies/resource_catalog_policies.png" alt="The Resource Catalog page showing the Policies tab and list of custom policies" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/policies/resource_catalog_policies_2.png" alt="The Resource Catalog page showing the Policies tab and list of custom policies" width="100%">}}
 
-
-In the Resource Catalog's Policies view, you can define policies on your infrastructure resources based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
+In Resource Catalog Policies, you can define policies on the desired optimal configuration of your infrastructure resources based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
 
 Specifically, you can:
 
@@ -35,7 +34,7 @@ Specifically, you can:
 
 ## Create a custom policy
 
-{{< img src="/infrastructure/resource_catalog/policies/custom-policy-example-3.png" alt="A custom policy reflecting a compliance score." width="100%">}}
+{{< img src="/infrastructure/resource_catalog/policies/custom_policy_lambdas.png" alt="A custom policy reflecting a compliance score of 75%." width="100%">}}
 
 Custom policies require specific values in your cloud resource attributes within Datadog based on your organization's infrastructure best practices.
 
@@ -57,11 +56,11 @@ Click the new policy to review all non-compliant resources and filter them by re
 Custom policies let you define a target resource attribute and a desired value, providing flexibility in creating policies for your cloud resources without requiring complex query languages. The following features are available:
 
 * **Access data in nested attributes**:
-Validate more of your configurations (for example mandate that `TLS 1.2` stored in a nested property is used for Amazon CloudFront). 
+Validate more of your configurations (for example, require that `TLS 1.2`, which is data stored in a multi-level property, is used for Amazon CloudFront). 
 * **Use advanced condition matching**:
-Use operators like `\>`, `\<`, or `\!=` (for example, enforcing Kubernetes version \> 1.25).  
+Use advanced condition matching: Use operators like `>, <`, or `!=` (for example, enforcing Kubernetes version > 1.25).  
 * **Use multi-attribute logic**:
-Chain multiple attributes in one policy (for example, requiring AWS CloudTrail logging *and* multi-region to be enabled).
+Use multi-attribute logic: Chain multiple attributes in one policy (for example, require AWS CloudTrail logging _and_ multi-region to be enabled).
 
 {{< img src="/infrastructure/resource_catalog/policies/custom_policy.mp4" alt="Video showing how to create a custom policy with a target resource attribute and desired value" video=true >}}
 
