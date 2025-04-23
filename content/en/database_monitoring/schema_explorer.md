@@ -11,7 +11,7 @@ Schemas help you monitor performance, usage, and changes in your data models, en
 
 ## Configuration
 
-To enable the schemas feature, add the `collect_schemas: true` parameter to your Database Monitoring configuration:
+To enable the schemas feature, add the `collect_schemas` parameter to your Database Monitoring configuration:
 
 ```yaml
 init_config:
@@ -30,14 +30,14 @@ instances:
 
 The Tables overview lists all tracked tables across your databases, grouped by Table Name, with the following columns:
 
-| Column         | Description                                                                                                                                                                                       |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \# Variants    | Number of distinct versions of the table across all hosts.                                                                                                                                        |
-| \# Instances   | Total number of table instances across all hosts. For example, if a table has two variants with 7 and 8 instances respectively, the total number of instances is 15.                              |
-| \# Columns     | Count of unique columns across all variants of the table on all hosts. For example, if one variant has columns A, B, C and another has A, B, D, the total unique columns would be 4 (A, B, C, D). |
-| Databases      | Names of all databases containing this table across all hosts.                                                                                                                                    |
-| Schemas        | Schemas in which this table appears across all hosts.                                                                                                                                             |
-| Database Hosts | Hosts where this table is present.                                                                                                                                                                |
+| Column         | Description                                                                                                                                                                                          |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \# Variants    | Number of distinct versions of the table across all hosts.                                                                                                                                           |
+| \# Instances   | Total number of table instances across all hosts. For example, if a table has two variants with seven and eight instances respectively, the total number of instances is 15.                         |
+| \# Columns     | Count of unique columns across all variants of the table on all hosts. For example, if one variant has columns A, B, C and another has A, B, D, the total unique columns would be four (A, B, C, D). |
+| Databases      | Names of all databases containing this table across all hosts.                                                                                                                                       |
+| Schemas        | Schemas in which this table appears across all hosts.                                                                                                                                                |
+| Database Hosts | Hosts where this table is present.                                                                                                                                                                   |
 
 Each table row can be expanded to view its table variants and the following columns:
 
@@ -87,7 +87,7 @@ Each recommendation includes:
 - An explanation of why the issue matters and how it impacts database performance or integrity.
 - A suggested fix, often an SQL statement that can be executed on the affected database.
 
-Recommendations are available in aggregate (at the top of the page) and per table, with each applicable table showing its corresponding recommendations.
+Recommendations are available in aggregate (at the top of the page) and per table, with each applicable table showing its corresponding recommendations. For more information, see [Recommendations][1].
 
 ## Metrics overview
 
@@ -109,5 +109,5 @@ Each dashboard includes the following metrics:
 - Instances with the Longest Last Vacuum Age  
 - Instances with the Longest Last Auto Vacuum Age
 
-[1]: https://app.datadoghq.com/databases/schemas
+[1]: /database_monitoring/recommendations
 [2]: https://app.datadoghq.com/databases/list
