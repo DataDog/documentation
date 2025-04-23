@@ -22,13 +22,23 @@ description: Learn how to develop and publish a Datadog Agent integration.
 
 This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24].
 
-## Agent-based integrations
+An Agent-based integration uses the [Datadog Agent][17] to submit data through custom checks written by developers. These checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. While Agent itself can submit [logs][26], this is configured outside of the check.
+
+## When to use Agent-based integrations
+
+Agent integrations are best suited for collecting data from systems or applications running with a:
+- Local Area Network (LAN)
+- Virtual Private Cloud (VPC)
+Agent-based integrations require publishing and deploying as a Python wheel (.whl).
 
 Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check.
 
-The implementation code for these integrations is hosted by Datadog. Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). Creating an Agent integration requires you to publish and deploy your solution as a Python wheel (`.whl`).
-
-You can include out-of-the-box assets such as [monitors][27], [dashboards][28], and [log pipelines][29] with your Agent-based integration. When a user clicks **Install** on your integration tile, they are prompted to follow the setup instructions, and all out-of-the-box dashboards will appear in their account. Other assets, such as log pipelines, will appear for users after proper installation and configuration of the integration.
+Agent-based integrations can include:
+- [Monitors][27]
+- [Dashboards][28]
+- [Log Pipelines][29]
+  
+When a user installs your integration, out-of-the-box dashboards automatically appear in their account. Other assets, such as log pipelines, will become available after proper configuration.
 
 ## Development process
 
