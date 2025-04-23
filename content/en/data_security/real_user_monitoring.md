@@ -119,7 +119,7 @@ With respect to URLs, you have the option to track pageviews manually to remove 
 You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
 
 #### IP address
-Once you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the **User Data Collection** tab:
+After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the **User Data Collection** tab:
 
 {{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
 
