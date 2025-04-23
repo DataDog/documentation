@@ -59,7 +59,7 @@ To share a dashboard with one or more email addresses:
 
 The Maximum Access Period of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3]. By default, it is not configured.
 
-**Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire before Jan 2nd 11:00AM.
+**Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
 
 ### Access an invite-only shared dashboard
 
