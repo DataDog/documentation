@@ -3172,11 +3172,16 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_redrive
       weight: 204
+    - name: Distributed Map States
+      url: serverless/step_functions/distributed-maps
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_distributed_maps
+      weight: 205
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 205
+      weight: 206
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -6778,16 +6783,21 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
       weight: 403
+    - name: Supported Devices
+      url: synthetics/mobile_app_testing/devices/
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_devices
+      weight: 404
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 404
+      weight: 405
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 405
+      weight: 406
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
