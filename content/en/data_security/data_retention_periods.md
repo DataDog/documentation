@@ -40,7 +40,7 @@ attributes:
   - product: Cloud Cost Management
     data_type: | 
        - **Recommendations**: 90 days
-  - product: Cloud Security Management
+  - product: Cloud Security
     data_type: | 
        - **Findings and resolved vulnerabilities**: 15 months
   - product: Cloud SIEM
