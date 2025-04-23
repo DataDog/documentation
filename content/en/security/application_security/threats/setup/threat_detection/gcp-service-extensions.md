@@ -26,8 +26,6 @@ You can enable application security with GCP Service Extensions within GCP Cloud
 
 ## Prerequisites
 
-Before you begin, ensure you have:
-
 - The [Datadog Agent][1] is installed and configured for your application's operating system or container, cloud, or virtual environment.
 - [Remote Configuration][2] is configured to enable blocking attackers through the Datadog UI.
 - In your GCP project, you have either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
@@ -123,316 +121,317 @@ The AAP Service Extension deployment requires several components that work toget
 
 2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the AAP Service Extension, including network rules, VM instances, and load balancer configuration:
 
-  ```hcl
-  # main.tf
+   ```hcl
+   # main.tf
 
-  #----------------------------------------------------------
-  # Network Configuration
-  #----------------------------------------------------------
+   #----------------------------------------------------------
+   # Network Configuration
+   #----------------------------------------------------------
 
-  # Firewall rule to allow the Service Extension to communicate with the Datadog Agent
-  resource "google_compute_firewall" "aap_se_firewall" {
-    name    = "${var.project_prefix}-dd-agent-firewall"
-    network = "default"
+   # Firewall rule to allow the Service Extension to communicate with the Datadog Agent
+   resource "google_compute_firewall" "aap_se_firewall" {
+     name    = "${var.project_prefix}-dd-agent-firewall"
+     network = "default"
 
-    allow {
-      protocol = "tcp"
-      ports    = ["8126"]
-    }
+     allow {
+       protocol = "tcp"
+       ports    = ["8126"]
+     }
 
-    source_tags = ["http-server"]
-    target_tags = ["datadog-agent"]
-  }
+     source_tags = ["http-server"]
+     target_tags = ["datadog-agent"]
+   }
 
-  #----------------------------------------------------------
-  # Datadog Agent Configuration
-  #----------------------------------------------------------
+   #----------------------------------------------------------
+   # Datadog Agent Configuration
+   #----------------------------------------------------------
 
-  # Datadog Agent container configuration
-  module "gce-container-datadog-agent" {
-    source = "terraform-google-modules/container-vm/google"
+   # Datadog Agent container configuration
+   module "gce-container-datadog-agent" {
+     source = "terraform-google-modules/container-vm/google"
 
-    container = {
-      image = "public.ecr.aws/datadog/agent:latest"
-      env = [
-        {
-          name = "DD_API_KEY",
-          value = var.datadog_agent_api_key,
-        },
-        {
-          name = "DD_ENV",
-          value = "dev",
-        },
-      ]
-    }
-  }
+     container = {
+       image = "public.ecr.aws/datadog/agent:latest"
+       env = [
+         {
+           name = "DD_API_KEY",
+           value = var.datadog_agent_api_key,
+         },
+         {
+           name = "DD_ENV",
+           value = "dev",
+         },
+       ]
+     }
+   }
 
-  # Datadog Agent VM instance that collects traces from the Service Extension
-  resource "google_compute_instance" "datadog_agent" {
-    name         = "${var.project_prefix}-datadog-agent"
-    machine_type = "e2-medium"
-    zone         = var.zone
+   # Datadog Agent VM instance that collects traces from the Service Extension
+   resource "google_compute_instance" "datadog_agent" {
+     name         = "${var.project_prefix}-datadog-agent"
+     machine_type = "e2-medium"
+     zone         = var.zone
 
-    boot_disk {
-      auto_delete = true
+     boot_disk {
+       auto_delete = true
 
-      initialize_params {
-        image = module.gce-container-datadog-agent.source_image
-      }
+       initialize_params {
+         image = module.gce-container-datadog-agent.source_image
+       }
 
-    }
+     }
 
-    network_interface {
-      network    = "default"
-      subnetwork = var.application_vpc_subnetwork
-    }
+     network_interface {
+       network    = "default"
+       subnetwork = var.application_vpc_subnetwork
+     }
 
-    metadata = {
-      gce-container-declaration = module.gce-container-datadog-agent.metadata_value
-      google-logging-enabled    = "true"
-    }
+     metadata = {
+       gce-container-declaration = module.gce-container-datadog-agent.metadata_value
+       google-logging-enabled    = "true"
+     }
 
-    lifecycle {
-      create_before_destroy = true
-    }
+     lifecycle {
+       create_before_destroy = true
+     }
 
-    tags = ["datadog-agent"]
-  }
+     tags = ["datadog-agent"]
+   }
 
-  #----------------------------------------------------------
-  # Service Extension Callout Container Configuration
-  #----------------------------------------------------------
+   #----------------------------------------------------------
+   # Service Extension Callout Container Configuration
+   #----------------------------------------------------------
 
-  # Datadog AAP GCP Service Extension container configuration
-  module "gce-container-aap-service-extension" {
-    source = "terraform-google-modules/container-vm/google"
+   # Datadog AAP GCP Service Extension container configuration
+   module "gce-container-aap-service-extension" {
+     source = "terraform-google-modules/container-vm/google"
 
-    container = {
-      image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.72.1" # Replace with the latest version
-      env = [
-        {
-          name = "DD_AGENT_HOST",
-          value = google_compute_instance.datadog_agent.network_interface.0.network_ip,
-        }
-      ]
-    }
-  }
+     container = {
+       image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.72.1" # Replace with the latest version
+       env = [
+         {
+           name = "DD_AGENT_HOST",
+           value = google_compute_instance.datadog_agent.network_interface.0.network_ip,
+         }
+       ]
+     }
+   }
 
-  # Service Extension VM instance (callout instance)
-  resource "google_compute_instance" "default" {
-    name         = "${var.project_prefix}-instance"
-    machine_type = "e2-medium"
-    zone         = var.zone
+   # Service Extension VM instance (callout instance)
+   resource "google_compute_instance" "default" {
+     name         = "${var.project_prefix}-instance"
+     machine_type = "e2-medium"
+     zone         = var.zone
 
-    boot_disk {
-      auto_delete = true
+     boot_disk {
+       auto_delete = true
 
-      initialize_params {
-        image = module.gce-container-aap-service-extension.source_image
-      }
+       initialize_params {
+         image = module.gce-container-aap-service-extension.source_image
+       }
 
-    }
+     }
 
-    network_interface {
-      network    = var.application_vpc_network
-      subnetwork = var.application_vpc_subnetwork
-    }
+     network_interface {
+       network    = var.application_vpc_network
+       subnetwork = var.application_vpc_subnetwork
+     }
 
-    metadata = {
-      gce-container-declaration = module.gce-container-aap-service-extension.metadata_value
-      google-logging-enabled    = "true"
-    }
+     metadata = {
+       gce-container-declaration = module.gce-container-aap-service-extension.metadata_value
+       google-logging-enabled    = "true"
+     }
 
-    lifecycle {
-      create_before_destroy = true
-    }
+     lifecycle {
+       create_before_destroy = true
+     }
 
-    # http-server: Allow access on the http server for health checks
-    # https-server: Allow access on the 443 port for the AAP Service Extension
-    tags = ["http-server", "https-server", "lb-health-check"]
-  }
+     # http-server: Allow access on the http server for health checks
+     # https-server: Allow access on the 443 port for the AAP Service Extension
+     tags = ["http-server", "https-server", "lb-health-check"]
+   }
 
-  #----------------------------------------------------------
-  # Load Balancer Integration
-  #----------------------------------------------------------
+   #----------------------------------------------------------
+   # Load Balancer Integration
+   #----------------------------------------------------------
 
-  # Unmanaged Instance Group including the AAP Service Extension instance
-  resource "google_compute_instance_group" "aap_se_instance_group" {
-    name        = "${var.project_prefix}-instance-group"
-    description = "Unmanaged instance group for the AAP Service Extension"
-    zone        = var.zone
+   # Unmanaged Instance Group including the AAP Service Extension instance
+   resource "google_compute_instance_group" "aap_se_instance_group" {
+     name        = "${var.project_prefix}-instance-group"
+     description = "Unmanaged instance group for the AAP Service Extension"
+     zone        = var.zone
 
-    named_port {
-      name = "http"
-      port = 80
-    }
+     named_port {
+       name = "http"
+       port = 80
+     }
 
-    named_port {
-      name = "grpc"
-      port = "443"
-    }
+     named_port {
+       name = "grpc"
+       port = "443"
+     }
 
-    instances = [
-      google_compute_instance.default.self_link
-    ]
-  }
+     instances = [
+       google_compute_instance.default.self_link
+     ]
+   }
 
-  # Health Check for the Backend Service
-  resource "google_compute_health_check" "aap_se_health_check" {
-    name                = "${var.project_prefix}-health-check"
-    check_interval_sec  = 5
-    timeout_sec         = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+   # Health Check for the Backend Service
+   resource "google_compute_health_check" "aap_se_health_check" {
+     name                = "${var.project_prefix}-health-check"
+     check_interval_sec  = 5
+     timeout_sec         = 5
+     healthy_threshold   = 2
+     unhealthy_threshold = 2
 
-    http_health_check {
-      port         = 80
-      request_path = "/"
-    }
-  }
+     http_health_check {
+       port         = 80
+       request_path = "/"
+     }
+   }
 
-  # Backend Service that points to the Service Extension instance group
-  resource "google_compute_backend_service" "se_backend_service" {
-    name                  = "${var.project_prefix}-backend-service"
-    port_name             = "grpc"
-    protocol              = "HTTP2"
-    timeout_sec           = 10
-    health_checks         = [google_compute_health_check.aap_se_health_check.self_link]
-    load_balancing_scheme = "EXTERNAL_MANAGED"
+   # Backend Service that points to the Service Extension instance group
+   resource "google_compute_backend_service" "se_backend_service" {
+     name                  = "${var.project_prefix}-backend-service"
+     port_name             = "grpc"
+     protocol              = "HTTP2"
+     timeout_sec           = 10
+     health_checks         = [google_compute_health_check.aap_se_health_check.self_link]
+     load_balancing_scheme = "EXTERNAL_MANAGED"
 
-    backend {
-      group = google_compute_instance_group.aap_se_instance_group.self_link
-    }
-  }
+     backend {
+       group = google_compute_instance_group.aap_se_instance_group.self_link
+     }
+   }
 
-  #----------------------------------------------------------
-  # GCP Service Extension
-  #----------------------------------------------------------
+   #----------------------------------------------------------
+   # GCP Service Extension
+   #----------------------------------------------------------
 
-  # GCP Service Extension configuration for traffic interception
-  resource "google_network_services_lb_traffic_extension" "default" {
-    name        = "${var.project_prefix}-service-extension"
-    description = "Datadog AAP Service Extension"
-    location    = "global"
+   # GCP Service Extension configuration for traffic interception
+   resource "google_network_services_lb_traffic_extension" "default" {
+     name        = "${var.project_prefix}-service-extension"
+     description = "Datadog AAP Service Extension"
+     location    = "global"
 
-    load_balancing_scheme = "EXTERNAL_MANAGED"
-    forwarding_rules      = [var.load_balancer_forwarding_rule]
+     load_balancing_scheme = "EXTERNAL_MANAGED"
+     forwarding_rules      = [var.load_balancer_forwarding_rule]
 
-    extension_chains {
-      name = "${var.project_prefix}-service-extension-chain"
+     extension_chains {
+       name = "${var.project_prefix}-service-extension-chain"
 
-      match_condition {
-        cel_expression = "true" # Match all traffic
-      }
+       match_condition {
+         cel_expression = "true" # Match all traffic
+       }
 
-      extensions {
-        name      = "${var.project_prefix}-service-extension-chain-ext"
-        authority = "datadoghq.com"
-        service   = google_compute_backend_service.se_backend_service.self_link
-        timeout   = "0.5s"
-        fail_open = false # If the extension fails, the request is dropped
+       extensions {
+         name      = "${var.project_prefix}-service-extension-chain-ext"
+         authority = "datadoghq.com"
+         service   = google_compute_backend_service.se_backend_service.self_link
+         timeout   = "0.5s"
+         fail_open = false # If the extension fails, the request is dropped
 
-        # Supported events for the AAP Service Extension
-        supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
-      }
-    }
-  }
-  ```
+         # Supported events for the AAP Service Extension
+         supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
+       }
+     }
+   }
+   ```
+
 
 3. Add the following content to the `variables.tf` file. This file defines all the required input variables for your Terraform configuration:
 
-  ```hcl
-# variables.tf
+   ```hcl
+   # variables.tf
 
-variable "region" {
-  description = "The GCP region where resources will be created (e.g., us-central1)"
-  type        = string
-  validation {
-    condition     = length(var.region) > 0
-    error_message = "Region cannot be empty."
-  }
-}
+   variable "region" {
+     description = "The GCP region where resources will be created (e.g., us-central1)"
+     type        = string
+     validation {
+       condition     = length(var.region) > 0
+       error_message = "Region cannot be empty."
+     }
+   }
 
-variable "zone" {
-  description = "The GCP zone where zonal resources will be created (e.g., us-central1-a)"
-  type        = string
-  validation {
-    condition     = length(var.zone) > 0
-    error_message = "Zone cannot be empty."
-  }
-}
+   variable "zone" {
+     description = "The GCP zone where zonal resources will be created (e.g., us-central1-a)"
+     type        = string
+     validation {
+       condition     = length(var.zone) > 0
+       error_message = "Zone cannot be empty."
+     }
+   }
 
-# Project configuration
-variable "project_prefix" {
-  description = "Prefix for the project. All resource names will be prefixed with this value"
-  type        = string
-  validation {
-    condition     = length(var.project_prefix) > 0
-    error_message = "Project prefix cannot be empty."
-  }
-}
+   # Project configuration
+   variable "project_prefix" {
+     description = "Prefix for the project. All resource names will be prefixed with this value"
+     type        = string
+     validation {
+       condition     = length(var.project_prefix) > 0
+       error_message = "Project prefix cannot be empty."
+     }
+   }
 
-# Network configuration
-variable "application_vpc_network" {
+   # Network configuration
+   variable "application_vpc_network" {
 
-  description = "Name of the VPC network for the application"
-  type        = string
-  validation {
-    condition     = length(var.application_vpc_network) > 0
-    error_message = "VPC network name cannot be empty."
-  }
-}
+     description = "Name of the VPC network for the application"
+     type        = string
+     validation {
+       condition     = length(var.application_vpc_network) > 0
+       error_message = "VPC network name cannot be empty."
+     }
+   }
 
-variable "application_vpc_subnetwork" {
+   variable "application_vpc_subnetwork" {
 
-  description = "Name of the VPC subnetwork for the application"
-  type        = string
-  validation {
-    condition     = length(var.application_vpc_subnetwork) > 0
-    error_message = "VPC subnetwork name cannot be empty."
-  }
-}
+     description = "Name of the VPC subnetwork for the application"
+     type        = string
+     validation {
+       condition     = length(var.application_vpc_subnetwork) > 0
+       error_message = "VPC subnetwork name cannot be empty."
+     }
+   }
 
-# Authentication and API keys
-variable "datadog_agent_api_key" {
-  description = "Datadog API key"
-  type        = string
-  sensitive   = true
-  validation {
-    condition     = length(var.datadog_agent_api_key) > 0
-    error_message = "Datadog API key cannot be empty."
-  }
-}
+   # Authentication and API keys
+   variable "datadog_agent_api_key" {
+     description = "Datadog API key"
+     type        = string
+     sensitive   = true
+     validation {
+       condition     = length(var.datadog_agent_api_key) > 0
+       error_message = "Datadog API key cannot be empty."
+     }
+   }
 
-# Load balancer configuration
-variable "load_balancer_forwarding_rule" {
-  description = "Self link to the forwarding rule for the load balancer"
-}
-```
+   # Load balancer configuration
+   variable "load_balancer_forwarding_rule" {
+     description = "Self link to the forwarding rule for the load balancer"
+   }
+   ```
 
 4. Include the module in your main Terraform project. This example shows how to reference the module you created above:
 
-  ```hcl
-  # main.tf
+   ```hcl
+   # main.tf
 
-  module "service_extension" {
-    source                        = "./gcp-aap-service-extension"
-    zone                          = "us-central1-a"
-    region                        = "us-central1"
-    project_prefix                = "datadog-aap"
-    application_vpc_subnetwork    = "your-subnet-name"
-    datadog_agent_api_key         = "your-datadog-api-key"
-    load_balancer_forwarding_rule = "projects/your-project/regions/us-central1/forwardingRules/your-lb-rule" # or with a self link on your resource
-  }
-  ```
+   module "service_extension" {
+     source                        = "./gcp-aap-service-extension"
+     zone                          = "us-central1-a"
+     region                        = "us-central1"
+     project_prefix                = "datadog-aap"
+     application_vpc_subnetwork    = "your-subnet-name"
+     datadog_agent_api_key         = "your-datadog-api-key"
+     load_balancer_forwarding_rule = "projects/your-project/regions/us-central1/forwardingRules/your-lb-rule" # or with a self link on your resource
+   }
+   ```
 
 5. Deploy the infrastructure by running these commands in the directory where your Terraform files are located:
 
-  ```bash
-  terraform init
-  terraform plan
-  terraform apply
-  ```
+   ```bash
+   terraform init
+   terraform plan
+   terraform apply
+   ```
 
 ### Post-deployment validation
 
