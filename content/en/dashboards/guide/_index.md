@@ -33,6 +33,7 @@ cascade:
     {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/wildcard_examples" >}}Wildcard widget Examples{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
     {{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/tv_mode" >}}Using TV mode for Dashboards
@@ -41,6 +42,7 @@ cascade:
 
 {{< whatsnext desc="Functions:" >}}
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/rollup-cardinality-visualizations" >}}Understanding rollup function and cardinality in visualizations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}

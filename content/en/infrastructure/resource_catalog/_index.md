@@ -8,10 +8,10 @@ aliases:
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
-  text: "Cloud Security Management Misconfigurations"
+  text: "Cloud Security Misconfigurations"
 - link: "/security/threats/"
   tag: "Documentation"
-  text: "Cloud Security Management Threats"
+  text: "Workload Protection"
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
@@ -54,13 +54,13 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security][1] for each cloud account.
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
 **Note**: 
 - Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
-- Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
+- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the Cloud Security product.
 
 ## Browse the Resource Catalog
 
@@ -132,23 +132,28 @@ Clicking on any resource opens a side panel with details including:
   The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
-Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
+The **Recent Changes** tab displays a 7-day history of all configuration changes to [supported resources][15] across your environments. To forward change events from your cloud environments, either enable Snapshot Changes through Resource Collection or follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
    - You have [access to the Preview][9].
+   - Optionally, you can configure change event forwarding through one of the following cloud providers.
+
+#### Snapshot Changes
+
+Snapshot Changes is a generated Event Stream captured every 5 - 15 minutes through resource collection and requires no additional setup. For more frequent change updates, follow the links for your cloud providers in the following sections.
 
 #### AWS
 
-See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
+See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config. AWS Config captures configuration changes in real time, or to the extent allowed by your configuration.
 
 #### Azure
 
-To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14].
+To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14]. Azure Resource Graph captures configuration changes every 10 minutes.
 
 #### Google Cloud Platform
 
-See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
+See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription. Google Cloud Asset Inventory captures configuration changes every 10 minutes.
 
 ## Further reading
 
@@ -168,3 +173,4 @@ See the [Resource changes collection][8] section of the Google Cloud Platform in
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
 [14]: https://app.datadoghq.com/integrations/azure
+[15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/

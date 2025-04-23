@@ -44,18 +44,19 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
+
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
-<div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 {{% ci-agentless %}}
-
 {{% /tab %}}
+
 {{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Installing the .NET tracer CLI

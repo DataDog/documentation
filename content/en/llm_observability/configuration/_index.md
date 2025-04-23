@@ -28,7 +28,7 @@ Topics
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-Connect your OpenAI account to LLM Observability with your OpenAI API key.
+Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for Evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the OpenAI tile.
@@ -40,9 +40,9 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
-
 {{% tab "Azure OpenAI" %}}
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the **GPT-4o mini** model for Evaluations
+
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the **GPT-4o mini** model for Evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
@@ -54,16 +54,49 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
+
+{{% tab "Anthropic" %}}
+
+Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for Evaluations.
+
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
+1. Select **Connect** on the Anthropic tile.
+1. Follow the instructions on the tile.
+   - Provide your Anthropic API key. Ensure that this key has **write** permission for **model capabilities**.
+
+{{< img src="llm_observability/configuration/anthropic-tile.png" alt="The Anthropic configuration tile in LLM Observability. Lists instructions for configuring Anthropic and providing your Anthropic API key." style="width:100%;" >}}
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+{{% /tab %}}
+{{% tab "Amazon Bedrock" %}}
+
+Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for Evaluations.
+
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
+1. Select **Connect** on the Amazon Bedrock tile.
+1. Follow the instructions on the tile.
+
+{{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+{{% /tab %}}
 {{< /tabs >}}
 ## Select and enable evaluations
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
-1. Select **OpenAI** or **Azure OpenAI** as your LLM provider.
+   - Configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you select the edit icon to configure the evaluation for an individual LLM application.
+   - Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. If you select **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
+1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider.
 1. Select the account you want to run the evaluation on.
-1. Assign the LLM application you want to run the evaluation on.
+1. Choose whether you want the evaluation to run on traces (the root span of each trace) or spans (which include LLM, Workflow, and Agent spans).
+   - If you select to run the evaluation on spans, you must select at least one span name to save your configured evaluation.
+1. Select the span names you would like your evaluation to run on. (Optional if traces is selected).
+1. Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
+1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
 
-After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using the API key you provided.
+After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
 For more information about evaluations, see [Terms and Concepts][1].
 

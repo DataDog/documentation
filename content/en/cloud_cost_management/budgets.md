@@ -12,7 +12,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 
 ## Create a budget
 
-1. Navigate to [**Infrastructure > Cloud Cost > Plan > Budgets**][1].
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1].
 2. Click the **Create a New Budget** button.
 3. Enter the following details:
    - **Budget Name**: Enter a name for your budget.

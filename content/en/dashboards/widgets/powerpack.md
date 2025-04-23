@@ -43,7 +43,7 @@ Changes to a Powerpack sync across all dashboards where your Powerpack is used.
 
 To make changes to the look or layout of a Powerpack:
 1. Hover over the header and click the kebab menu.
-1. Select **Edit Powerpack Layout** from the Powerpack Actions menu.
+1. Select **Edit Powerpack Layout** from the Powerpack Actions menu. **Note**: Powerpack layouts cannot be edited on timeboards.
 1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes**.
 1. If this Powerpack is used in multiple dashboards, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
 

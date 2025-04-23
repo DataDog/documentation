@@ -4,6 +4,8 @@ This document is a guide to writing and editing documentation for the [Datadog D
 
 Some of these guidelines are enforced by [the Datadog docs implementation of the Vale linter][4]. After you make a PR, check its **Files changed** tab to see and fix warnings and errors flagged by the linter.
 
+See our [README][9] for additional contribution requirements, including the `<name>/<description>` branch naming convention for all pull requests.
+
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.
@@ -205,3 +207,4 @@ Use text formatting to clarify and enhance content.
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/
 [8]: https://www.markdownguide.org/basic-syntax/#reference-style-links
+[9]: https://github.com/DataDog/documentation/blob/master/README.md

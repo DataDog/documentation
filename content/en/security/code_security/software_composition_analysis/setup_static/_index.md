@@ -24,12 +24,21 @@ SCA can scan dependency management files in your repositories to statically dete
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
-To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Code Security**][1].
+You can set up Datadog Static Software Composition Analysis (SCA) in-app through [**Security** > **Code Security**][1].
+
+1. Navigate to the [Security Settings][2] page.
+2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+3. Select where to run static SCA scans.
+4. Complete the remaining steps for your provider.
 
 ## Select where to run static SCA scans
 
 ### Scan with Datadog-hosted scanning
 For GitHub repositories, you can run Datadog SCA scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+
+<div class="alert alert-info">
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a>. To scan repositories that use Large File Storage, set up SCA in your CI pipelines.
+</div>
 
 ### Scan in CI pipelines
 First, configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Please ensure your Datadog application key has the `code_analysis_read` scope.
@@ -103,8 +112,6 @@ Provide the following inputs:
 
 | Name           | Description                                                                                                                | Required | Default         |
 |----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 | `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
 ```bash
@@ -133,7 +140,8 @@ datadog-ci sbom upload /tmp/sbom.json
 
 ## Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub.
-### Set up the GitHub integration 
+
+### Set up the GitHub integration
 If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see inline code snippets and enable [pull request comments][9].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
@@ -144,6 +152,30 @@ When installing a GitHub App, the following permissions are required to enable c
 ### Other source code management providers
 If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
+
+
+## Upload third-party SBOM to Datadog
+
+While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest a
+third-party SBOM.
+
+Our tooling supports the following SBOM standards:
+ - [CycloneDX 1.4][18]
+ - [CycloneDX 1.5][19]
+ - [CycloneDX 1.6][20]
+
+When ingesting a third-party SBOM, ensure that the following constraints are met:
+ - The file checks the SBOM JSON schema
+ - SBOM components have the type `library`
+ - SBOM components have a valid `purl` attribute
+
+Third-party SBOM files are uploaded to Datadog using the `datadog-ci` command. You can use the following
+command to upload your third-party SBOM. Ensure the environment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
+are set to your API key, APP key, and [Datadog site][12], respectively.
+
+```bash
+datadog-ci sbom upload /path/to/third-party-sbom.json
+```
 
 ## Link results to Datadog services and teams
 ### Link results to services
@@ -193,14 +225,13 @@ If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name closest to the filename is selected.
 
-
 ### Link results to teams
 
 Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
@@ -221,3 +252,6 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/
 [17]: https://app.datadoghq.com/ci/settings/repository
+[18]: https://cyclonedx.org/docs/1.4/json/
+[19]: https://cyclonedx.org/docs/1.5/json/
+[20]: https://cyclonedx.org/docs/1.6/json/

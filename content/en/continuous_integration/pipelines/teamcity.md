@@ -101,9 +101,9 @@ Check these logs to get additional context on any issues with the plugin.
 [6]: https://www.jetbrains.com/help/teamcity/composite-build-configuration.html
 [7]: https://www.jetbrains.com/help/teamcity/git.html#General+Settings
 [8]: https://github.com/DataDog/ci-teamcity-plugin
-[9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
-[10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
-[11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
+[9]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Project+Hierarchy
+[10]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Root+Project
+[11]: https://www.jetbrains.com/help/teamcity/configuring-vcs-roots.html
 [12]: /continuous_integration/search/#search-for-pipelines
 [13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
 [14]: /glossary/#partial-retry

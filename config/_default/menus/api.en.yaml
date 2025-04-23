@@ -1815,6 +1815,71 @@ menu:
           - ListMonitorConfigPolicies
         unstable: []
         order: 10
+    - name: Update a monitor notification rule
+      url: '#update-a-monitor-notification-rule'
+      identifier: monitors-update-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 17
+    - name: Get a monitor notification rule
+      url: '#get-a-monitor-notification-rule'
+      identifier: monitors-get-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRule
+        unstable:
+          - v2
+        order: 14
+    - name: Delete a monitor notification rule
+      url: '#delete-a-monitor-notification-rule'
+      identifier: monitors-delete-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorNotificationRule
+        unstable:
+          - v2
+        order: 18
+    - name: Create a monitor notification rule
+      url: '#create-a-monitor-notification-rule'
+      identifier: monitors-create-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 16
+    - name: Get all monitor notification rules
+      url: '#get-all-monitor-notification-rules'
+      identifier: monitors-get-all-monitor-notification-rules
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRules
+        unstable:
+          - v2
+        order: 15
     - name: Unmute all monitors
       url: '#unmute-all-monitors'
       identifier: monitors-unmute-all-monitors
@@ -5767,6 +5832,23 @@ menu:
           - ListCostAWSCURConfigs
         unstable: []
         order: 1
+    - name: Cloud Network Monitoring
+      url: /api/latest/cloud-network-monitoring/
+      identifier: cloud-network-monitoring
+      generated: true
+    - name: Get all aggregated connections
+      url: '#get-all-aggregated-connections'
+      identifier: cloud-network-monitoring-get-all-aggregated-connections
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedConnections
+        unstable:
+          - v2
+        order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
       identifier: cloudflare-integration
@@ -7224,6 +7306,62 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: Observability Pipelines
+      url: /api/latest/observability-pipelines/
+      identifier: observability-pipelines
+      generated: true
+    - name: Update a pipeline
+      url: '#update-a-pipeline'
+      identifier: observability-pipelines-update-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePipeline
+        unstable:
+          - v2
+        order: 3
+    - name: Get a specific pipeline
+      url: '#get-a-specific-pipeline'
+      identifier: observability-pipelines-get-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPipeline
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a pipeline
+      url: '#delete-a-pipeline'
+      identifier: observability-pipelines-delete-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePipeline
+        unstable:
+          - v2
+        order: 4
+    - name: Create a new pipeline
+      url: '#create-a-new-pipeline'
+      identifier: observability-pipelines-create-a-new-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePipeline
+        unstable:
+          - v2
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -7288,6 +7426,106 @@ menu:
           - ListOktaAccounts
         unstable: []
         order: 1
+    - name: On-Call
+      url: /api/latest/on-call/
+      identifier: on-call
+      generated: true
+    - name: Update on-call schedule
+      url: '#update-on-call-schedule'
+      identifier: on-call-update-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallSchedule
+        unstable: []
+        order: 4
+    - name: Get on-call schedule
+      url: '#get-on-call-schedule'
+      identifier: on-call-get-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallSchedule
+        unstable: []
+        order: 2
+    - name: Delete on-call schedule
+      url: '#delete-on-call-schedule'
+      identifier: on-call-delete-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallSchedule
+        unstable: []
+        order: 3
+    - name: Create on-call schedule
+      url: '#create-on-call-schedule'
+      identifier: on-call-create-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallSchedule
+        unstable: []
+        order: 1
+    - name: Update on call escalation policy
+      url: '#update-on-call-escalation-policy'
+      identifier: on-call-update-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallEscalationPolicy
+        unstable: []
+        order: 6
+    - name: Get on call escalation policy
+      url: '#get-on-call-escalation-policy'
+      identifier: on-call-get-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallEscalationPolicy
+        unstable: []
+        order: 7
+    - name: Delete on call escalation policy
+      url: '#delete-on-call-escalation-policy'
+      identifier: on-call-delete-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallEscalationPolicy
+        unstable: []
+        order: 8
+    - name: Create on call escalation policy
+      url: '#create-on-call-escalation-policy'
+      identifier: on-call-create-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallEscalationPolicy
+        unstable: []
+        order: 5
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
