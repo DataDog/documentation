@@ -3,65 +3,111 @@ title: Exploring Database Schemas
 description: Explore and analyze database schemas, including tables, columns, and indexes.
 ---
 
-The [Schemas][1] page allows you to explore and analyze database structures directly in Datadog, removing the need to manually access a database to view table details and analyze schema structures.
+Schemas helps users track performance, usage, and changes of their data models within Database Monitoring to more quickly identify and remediate issues.
 
-<div class="alert alert-info">The Schemas feature is available for PostgreSQL and SQL Server.</div>
+<div class="alert alert-info">Schema Tracking is available for PostgreSQL, SQL Server and MySQL.</div>
 
 {{< img src="database_monitoring/dbm_schemas_page.png" alt="The Schemas page in Datadog" style="width:100%;" >}}
 
 ## Configuration
 
-To enable the schemas feature, add the following parameter to your Database Monitoring configuration:
+To enable the schemas feature, add the `collect_schemas: true` parameter to your Database Monitoring configuration:
 
 ```yaml
-collect_schemas: true
+init_config:
+instances:
+  - dbm: true
+    host: localhost
+    port: 5432
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    collect_schemas: true
+    ## Optional: Connect to a different database if needed for `custom_queries`
+    # dbname: '<DB_NAME>'
 ```
 
-## Exploring schemas
+## Tables overview
 
-On the [Schemas][1] page, select a table to open the table details panel.
+The Tables overview lists all tracked tables across your databases, grouped by Table Name, with the following columns:
 
-{{< img src="database_monitoring/dbm_schemas_table_details_panel.png" alt="The Schemas table details panel in Datadog" style="width:100%;" >}}
+| Column         | Description                                                                                                                                                                                       |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \# Variants    | Number of distinct versions of the table across all hosts.                                                                                                                                        |
+| \# Instances   | Total number of table instances across all hosts. For example, if a table has two variants with 7 and 8 instances respectively, the total number of instances is 15.                              |
+| \# Columns     | Count of unique columns across all variants of the table on all hosts. For example, if one variant has columns A, B, C and another has A, B, D, the total unique columns would be 4 (A, B, C, D). |
+| Databases      | Names of all databases containing this table across all hosts.                                                                                                                                    |
+| Schemas        | Schemas in which this table appears across all hosts.                                                                                                                                             |
+| Database Hosts | Hosts where this table is present.                                                                                                                                                                |
 
-### Definition
+Each table row can be expanded to view its table variants and the following columns:
 
-The Definition tab provides structural details about the table, including its schema, indexing, and constraints. It includes the following sections:
+| Column         | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| Variant ID     | Unique identifier for a variant (version) of this table.               |
+| \# Instances   | Number of instances of this table for this variant.                    |
+| \# Columns     | Number of unique columns in this table variant.                        |
+| Databases      | Alphabetically sorted list of databases containing this table variant. |
+| Schemas        | Alphabetically sorted list of schemas containing this table variant.   |
+| Database Hosts | Alphabetically sorted list of hosts where this table variant appears.  |
 
-- **Table Overview**: Displays key metrics such as table size, row counts, index size, and recent vacuum activity.
-- **Columns**: Lists the table's columns along with their data types, default values, and whether they allow null values.
-- **Indexes**: Displays the table's indexes, including their definitions, performance statistics such as scans per second, and the total storage used by the index.
-- **Foreign Keys**: Lists foreign key constraints that define relationships between this table and others.
+### Viewing table variant details
 
-### Metrics
+To view more details about a table variant, click its row to open the table variant panel.
 
-The **Metrics** tab displays performance and usage statistics for the table over time. It includes the following metrics:
+{{< img src="database_monitoring/table-variant-panel.png" alt="Table variant panel showing column definitions and an index for the inventory table" style="width:100%;" >}}
 
-- **Table Size**: The total size of the table in megabytes.
-- **Sequential Scans**: The number of sequential scans performed on the table.
-- **Live Rows**: The number of active (non-deleted) rows in the table.
-- **Dead Rows**: The number of rows that have been marked for deletion but not yet removed.
-- **Index Size**: The total size of the table's indexes in kilobytes.
-- **Access Exclusive Locks**: The number of times an exclusive lock was placed on the table.
-- **Last Vacuum**: 
-- **Last Auto Vacuum**: 
+This panel shows you information about the variant (version), such as:
 
-### Recommendations
+- **Definition**: Includes columns, indexes, and foreign keys for this table variant.
+- **Table Instances**: All instances associated with this table variant.
+- **Metrics**: Table size, sequential scans, and other related metrics (last 7 days by default).
+- **Queries**: Queries involving this table variant over the last 7 days (last 7 days by default).
+- **Changes**: Schema changes affecting this table variant (last 7 days by default).
 
-The Recommendations tab highlights potential schema issues and suggests improvements. Each recommendation includes:
+### Viewing table instance details
+
+To view details for a specific table instance, go to the **Table Instances** tab in the table variant panel and click on a row.
+
+{{< img src="database_monitoring/table-instance-details.png" alt="Table instance panel displaying column and index details for the inventory table." style="width:100%;" >}}
+
+This opens a view similar to the table variant panel, showing the following information for the selected table instance:
+
+- **Definition**: Includes columns, indexes, and foreign keys for this table instance.
+- **Metrics**: Table size, sequential scans, and other related metrics (last 7 days by default).
+- **Queries**: Queries involving this table instance (last 7 days by default).
+- **Changes**: Schema changes affecting this table instance (last 7 days by default).
+
+## Recommendations
+
+Recommendations highlight potential opportunities for schema optimization across your tables.
+
+Each recommendation includes:
 
 - A detected issue, such as a missing primary key or an inefficient index.
-- An explanation of why the issue matters and how it affects database performance or integrity.
-- A suggested fix, often in the form of an SQL statement that can be executed on the impacted database.
+- An explanation of why the issue matters and how it impacts database performance or integrity.
+- A suggested fix, often an SQL statement that can be executed on the affected database.
 
-If no schema issues are detected, this tab is empty.
+Recommendations are available in aggregate (at the top of the page) and per table, with each applicable table showing its corresponding recommendations.
 
-### Queries
+## Metrics overview
 
-The **Queries** tab displays SQL queries executed on the table in the last two hours. It provides the following details for each query:
+The Metrics overview displays metrics dashboards for tracked Schemas across each DBMS.
 
-- **Count**: The number of times the query was executed.
-- **Total duration**: The cumulative execution time for all instances of the query.
-- **Avg duration**: The average execution time per query.
+{{< img src="database_monitoring/metrics-overview.png" alt="Metrics overview showing total table instance count and key activity metrics across tracked database instances" style="width:100%;" >}}
+
+Each dashboard includes the following metrics:
+
+- Total Table Instance Count  
+- Fastest Changing Instances (%)  
+- Fastest Changes Instances (bytes)  
+- Most Accessed Instances
+- Largest Instances  
+- Instances with Most Live Rows  
+- Instances with the Largest Index Sizes  
+- Instances with Access Exclusive Locks  
+- Instances with Most Dead Rows  
+- Instances with the Longest Last Vacuum Age  
+- Instances with the Longest Last Auto Vacuum Age
 
 [1]: https://app.datadoghq.com/databases/schemas
 [2]: https://app.datadoghq.com/databases/list

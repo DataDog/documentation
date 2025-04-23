@@ -4329,7 +4329,7 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 13
-    - name: Exploring Schemas
+    - name: Exploring Database Schemas
       url: database_monitoring/schema_explorer
       parent: dbm
       identifier: dbm_schema_explorer
