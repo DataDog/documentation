@@ -1,5 +1,5 @@
 ---
-title: How the Injector Works with Single Step Instrumentation
+title: Understanding Injector Behavior with Single Step Instrumentation
 further_reading:
 - link: tracing/trace_collection/automatic_instrumentation/single-step-apm
   tag: Documentation
@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-The injector is a shared library that automatically instruments applications at runtime. With Single Step Instrumentation, the injector automates environment setup and tracer initialization, eliminating the need for manual configuration.
+The injector is a shared library that automatically instruments applications at runtime. With [Single Step Instrumentation][1], the injector automates environment setup and tracer initialization, eliminating the need for manual configuration.
 
 ## How the injector is loaded
 
@@ -48,4 +48,4 @@ After the injector is loaded into a process's memory space—regardless of platf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
+[1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm

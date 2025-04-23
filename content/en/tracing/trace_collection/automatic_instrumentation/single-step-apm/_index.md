@@ -10,7 +10,7 @@ further_reading:
     text: Enable Runtime Metrics
   - link: /tracing/guide/injectors
     tag: Documentation
-    text: How the injector works with Single Step Instrumentation
+    text: Understanding injector behavior with Single Step Instrumentation
 ---
 ## Overview
 
