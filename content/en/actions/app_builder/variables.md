@@ -2,6 +2,7 @@
 title: State Variables
 aliases:
 - /app_builder/variables
+- /service_management/app_builder/variables
 disable_toc: false
 further_reading:
 - link: "/service_management/app_builder/build/"

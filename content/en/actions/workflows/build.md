@@ -3,6 +3,7 @@ title: Build workflows
 disable_toc: false
 aliases:
 - /workflows/build
+- /service_management/workflows/build
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:

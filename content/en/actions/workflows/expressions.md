@@ -3,6 +3,7 @@ title: JavaScript Expressions
 disable_toc: false
 aliases:
 - /service_management/workflows/actions/data_transformation/
+- /service_management/workflows/expressions
 further_reading:
 - link: "/service_management/workflows/variables/"
   tag: "Documentation"

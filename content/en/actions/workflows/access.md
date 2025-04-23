@@ -4,6 +4,7 @@ description: Access and authentication for Workflow Automation
 aliases:
 - /workflows/access
 - /workflows/service_accounts
+- /service_management/workflows/access
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 disable_toc: false

@@ -1,6 +1,8 @@
 ---
 title: Access and Authentication
 description: Access and authentication for App builder
+aliases:
+    - /service_management/app_builder/auth
 ---
 
 {{< site-region region="gov" >}}

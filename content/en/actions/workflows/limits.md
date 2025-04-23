@@ -3,6 +3,8 @@ title: Limits
 description: Rate Limits for Workflow Automation
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
+aliases:
+- /service_management/workflows/limits
 disable_toc: false
 further_reading:
 - link: "/service_management/workflows/build"

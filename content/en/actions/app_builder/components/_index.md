@@ -1,6 +1,8 @@
 ---
 title: Components
 disable_toc: true
+aliases:
+    - /service_management/app_builder/components
 further_reading:
 - link: "/service_management/app_builder/tables/"
   tag: "Documentation"

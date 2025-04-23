@@ -1,6 +1,8 @@
 ---
 title: Test and debug
 disable_toc: false
+aliases:
+- /service_management/workflows/test_and_debug
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:

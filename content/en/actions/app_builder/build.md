@@ -1,7 +1,8 @@
 ---
 title: Build Apps
 aliases:
-- /app_builder/build
+  - /app_builder/build
+  - /service_management/app_builder/build
 disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"

@@ -3,6 +3,7 @@ title: Variables and parameters
 disable_toc: false
 aliases:
   - /service_management/workflows/actions/set_variables/
+  - /service_management/workflows/variables
 algolia:
   tags: ['workflow variables', 'variables', 'mutable']
 further_reading:

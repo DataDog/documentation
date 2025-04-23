@@ -2,6 +2,7 @@
 title: Events
 aliases:
 - /app_builder/events
+- /service_management/app_builder/events
 disable_toc: false
 further_reading:
 - link: "/service_management/app_builder/build/"

@@ -3,6 +3,8 @@ title: Queries
 aliases:
 - /app_builder/queries
 disable_toc: false
+aliases:
+    - /service_management/app_builder/queries
 further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
