@@ -3,7 +3,7 @@ title: Exploring Database Schemas
 description: Explore and analyze database schemas, including tables, columns, and indexes.
 ---
 
-Schemas helps users track performance, usage, and changes of their data models within Database Monitoring to more quickly identify and remediate issues.
+Schemas help you monitor performance, usage, and changes in your data models, enabling quicker issue identification and remediation.
 
 <div class="alert alert-info">Schema Tracking is available for PostgreSQL, SQL Server and MySQL.</div>
 
@@ -61,7 +61,7 @@ This panel shows you information about the variant (version), such as:
 - **Definition**: Includes columns, indexes, and foreign keys for this table variant.
 - **Table Instances**: All instances associated with this table variant.
 - **Metrics**: Table size, sequential scans, and other related metrics (last 7 days by default).
-- **Queries**: Queries involving this table variant over the last 7 days (last 7 days by default).
+- **Queries**: Queries involving this table variant (last 7 days by default).
 - **Changes**: Schema changes affecting this table variant (last 7 days by default).
 
 ### Viewing table instance details
