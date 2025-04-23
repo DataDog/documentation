@@ -1,5 +1,7 @@
 ---
 title: JavaScript Expressions
+aliases:
+    - /service_management/app_builder/expressions
 further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
