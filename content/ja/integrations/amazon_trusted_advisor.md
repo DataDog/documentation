@@ -1,11 +1,11 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
 - コスト管理
 - ログの収集
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS Trusted Advisor のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
@@ -48,7 +48,7 @@ AWS Trusted Advisor は、AWS ベストプラクティスに従ってリソー�
 2. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `Trusted Advisor` が有効になっていることを確認します。
 3. [Datadog - AWS Trusted Advisor インテグレーション][4]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -78,7 +78,7 @@ AWS Trusted Advisor インテグレーションには、イベントは含まれ
 
 AWS Trusted Advisor インテグレーションには、サービスのチェック機能は含まれません。
 
-## ダッシュボード
+## ダッシュボード  
 
 AWS Trusted Advisor インテグレーションダッシュボードにデータを反映するには
 
@@ -103,8 +103,8 @@ Datadog Trusted Advisor ダッシュボードは、[AWS Trusted Advisor チェ�
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-trusted-advisor
 [5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_trusted_advisor/amazon_trusted_advisor_metadata.csv
 [9]: https://aws.amazon.com/premiumsupport/trustedadvisor
 [10]: https://docs.datadoghq.com/ja/help/
