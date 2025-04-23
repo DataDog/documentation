@@ -62,19 +62,6 @@ You've now completed the core migration process to Datadog On-Call. To ensure co
 - **Join our Datadog community**: The Slack Community program is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks. [Join Slack Channel >][8]
 - **Stay Informed**: Subscribe to [Incident Response product updates][9] to take advantage of new features as they roll out.
 
-# Appendix: Checklist
-Here's a ready-to-use checklist you can copy-paste in your notes tool of your choice:
-
-1. Stakeholders for migration have been identified
-2. All current alerting tools have been inventoried
-3. Integration methods (webhooks, email ingest, etc.) for each tool are documented
-4. Pain points and inefficiencies in the current on-call setup are documented
-5. Migration phases (Discovery, Configuration, Testing) are clearly defined
-6. Project owners and deadlines are assigned
-7. Internal communication plan is shared across teams
-8. Direct support channels (Slack, Microsoft Teams) are set up for Q&A
-9. Datadog mobile app is recommended and set up by on-call users
-
 [1]: https://app.datadoghq.com/on-call/
 [2]: /integrations/
 [3]: /mobile/
