@@ -98,13 +98,16 @@ receivers:
 
 To correlate traces with container metrics, both telemetry types must share common resource attributes. These attributes provide the necessary context for correlation.
 
-Ensure the following attributes are present on both your traces and metrics:
+1. Configure [Unified Service Tagging][9] attributes.
+2. Configure the following attributes on both your traces and metrics:
 
 | Attribute                                | Value                                                          | Description                                                                                                                                                               |
 |------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `container.id` (**Required**)            | The Docker container ID.                                       | Uniquely identifies the container. Essential for correlating spans with container metrics. Without this attribute on traces, container metric views are not shown in APM. |
 | `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Used as the display name in Datadog.                                                                                                                                      |
-| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.                                                                                    |
+| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.
+
+### Traces
 
 To populate these resource attributes on **traces**:
 
@@ -132,11 +135,11 @@ To populate these resource attributes on **traces**:
    )
    ```
 
-   See the complete example in [opentelemetry-examples][8].  
+   See the complete example in [opentelemetry-examples][8].
    
-To populate these resource attributes on **metrics**:
-
-The `docker_stats` receiver automatically detects and adds these attributes on container metrics it emits.
+### Metrics  
+   
+To populate these resource attributes on **metrics**, the `docker_stats` receiver automatically detects and adds these attributes on container metrics it emits.
 
 ## Data collected
 
@@ -191,3 +194,4 @@ Value: 0.170933
 [6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [7]: /tracing/trace_explorer/trace_view/
 [8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
+[9]: /opentelemetry/mapping/semantic_mapping#unified-service-tagging
