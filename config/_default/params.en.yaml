@@ -7,5 +7,5 @@ announcement_banner:
   mobile_message: 'June 10-11 | Join us in NYC for DASH 2025!'
   background_color: "#000000"
   custom_classes: 'dash-announcement-banner'
-  external_link: https://dtdg.co/dash-corpsite
+  external_link: https://dtdg.co/dash-docs
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
