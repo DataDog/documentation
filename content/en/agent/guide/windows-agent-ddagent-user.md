@@ -67,7 +67,7 @@ If a user account is specified on the command line, but this user account is not
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
 {{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<DOMAIN>\<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<DOMAIN>\<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
 if ($p.ExitCode -ne 0) {
   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
