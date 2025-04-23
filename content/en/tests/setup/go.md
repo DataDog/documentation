@@ -39,7 +39,18 @@ To report test results to Datadog, you need to configure the Datadog Go library:
 {{< tabs >}}
 
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
-{{% ci-autoinstrumentation %}}
+We support auto-instrumentation for the following CI providers:
+| CI Provider | Auto-Instrumentation method |
+|---|---|
+| GitHub Actions | [Datadog Test Visibility Github Action][1] |
+| GitLab | [Datadog Test Visibility GitLab Script][2] |
+| CircleCI | [Datadog Test Visibility CircleCI Orb][3] |
+
+If you are using auto-instrumentation for one of these providers, you can skip the rest of the setup steps below.
+
+[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+[2]: https://github.com/DataDog/test-visibility-gitlab-script
+[3]: https://circleci.com/orbs/registry/orb/datadog/test-visibility-circleci-orb
 {{% /tab %}}
 
 {{% tab "Cloud CI Provider" %}}
