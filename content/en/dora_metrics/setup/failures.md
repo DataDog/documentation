@@ -53,7 +53,7 @@ For incidents to appear in filtered DORA metrics views, incidents must be tagged
   - `Services`
   - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
 
-If provided with Incidents, the `Severity` tag will be added to failure events.
+If provided with incidents, the `Severity` tag is added to failure events.
 
 ### Include historical incidents
 
