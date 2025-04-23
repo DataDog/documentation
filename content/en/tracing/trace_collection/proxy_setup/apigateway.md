@@ -32,7 +32,7 @@ Datadog APM supports tracing for API Gateway when API Gateway proxies requests t
 | Runtime | Datadog Tracer | Tracer version | Frameworks |
 | ------- | -------------- | ---------------| ---------- |
 | Node.js | `dd-trace-js` | v[4.50.0][1]+ or v[5.26.0][2]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
-| Go | `dd-trace-go` | v[1.72.1][3]+ | chi.v5 / chi, dimfeld/httptreemux.v5, echo.v4 / echo v4 / echo v3, emicklei/go-restful / go-restful / go-restful.v3, fiber / gofiber/fiber.v2, gin-gonic/gin / Gin, gorilla/mux / Gorilla Mux, julienschmidt/httprouter, valyala/fasthttp.v1, zenazn/goji.v1, 99designs/gqlgen |
+| Go | `dd-trace-go` | v[1.72.1][3]+ | chi, httptreemux, echo, go-restful, fiber, gin, gorilla mux, httprouter, fasthttp, goji |
 | Python | `dd-trace-py` | v[3.1.0][4]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
 
 ## Setup
