@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  Agentless deployment options for OpenTelemetry with Datadog are in Preview. To request access, contact your account representative.
+  Agentless deployment options for OpenTelemetry are in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 ## Overview
