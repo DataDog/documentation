@@ -59,9 +59,9 @@ Custom policies let you define a target resource attribute and a desired value, 
 * **Access data in nested attributes**:
 Validate more of your configurations (for example mandate that `TLS 1.2` stored in a nested property is used for Amazon CloudFront). 
 * **Use advanced condition matching**:
-Use operators like `\>, \<, \!=` (for example enforcing Kubernetes version \> 1.25).  
+Use operators like `\>`, `\<`, or `\!=` (for example, enforcing Kubernetes version \> 1.25).  
 * **Use multi-attribute logic**:
-Chain multiple attributes in one policy (for example requiring AWS CloudTrail logging *and* multi-region to be enabled).
+Chain multiple attributes in one policy (for example, requiring AWS CloudTrail logging *and* multi-region to be enabled).
 
 {{< img src="/infrastructure/resource_catalog/policies/custom_policy.mp4" alt="Video showing how to create a custom policy with a target resource attribute and desired value" video=true >}}
 
