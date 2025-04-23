@@ -30,7 +30,7 @@ Datadog Resource Catalog is the central hub of all your infrastructure resources
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_new.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_new.png" alt="The Resource Catalog page showing the Catalog tab, grouped by resource type" width="100%">}}
 
 ### Use Cases
 

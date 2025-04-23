@@ -35,7 +35,7 @@ Specifically, you can:
 
 ## Create a custom policy
 
-{{< img src="/infrastructure/resource_catalog/policies/custom-policy-example-2.png" alt="A custom policy reflecting a compliance score." width="100%">}}
+{{< img src="/infrastructure/resource_catalog/policies/custom-policy-example-3.png" alt="A custom policy reflecting a compliance score." width="100%">}}
 
 Custom policies require specific values in your cloud resource attributes within Datadog based on your organization's infrastructure best practices.
 
