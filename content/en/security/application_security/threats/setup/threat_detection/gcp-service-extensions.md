@@ -40,14 +40,14 @@ Before you begin, ensure you have:
 
 ## Enabling threat detection
 
-To set up the ASM Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
+To set up the AAP Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
 
-**Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog’s Application Security Management integration.
+**Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's App and API Protection integration.
 
 {{< tabs >}}
 {{% tab "Google Cloud Console" %}}
 
-1. Create a VM Compute instance using the [Datadog ASM Service Extensions Docker image][1].
+1. Create a VM Compute instance using the [Datadog AAP Service Extensions Docker image][1].
 
     See [Configuration](#configuration) for available environment variables when setting up your VM instance.
 
@@ -79,7 +79,7 @@ To set up the ASM Service Extension in your GCP environment, use the Google Clou
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**).
+    4. Select all **Events** from the list where you want AAP to run detection (Request Headers and Response Headers are **required**).
 
 </br>
 {{% appsec-getstarted-2-plusrisk %}}
@@ -91,7 +91,7 @@ To set up the ASM Service Extension in your GCP environment, use the Google Clou
 
 {{% tab "Terraform" %}}
 
-You can use Terraform to automate the deployment of the ASM GCP Service Extension. This simplifies the process of setting up the service extension to work with your existing load balancer.
+You can use Terraform to automate the deployment of the AAP GCP Service Extension. This simplifies the process of setting up the service extension to work with your existing load balancer.
 
 ### Prerequisites for Terraform deployment
 
@@ -112,16 +112,16 @@ The Terraform deployment will create the following components:
 
 ### Deployment Steps
 
-The ASM Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
+The AAP Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
 
 1. Create a new directory and the necessary Terraform files:
 
     ```bash
-    mkdir gcp-asm-service-extension && cd gcp-asm-service-extension
+    mkdir gcp-aap-service-extension && cd gcp-aap-service-extension
     touch main.tf variables.tf
     ```
 
-2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the ASM Service Extension, including network rules, VM instances, and load balancer configuration:
+2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the AAP Service Extension, including network rules, VM instances, and load balancer configuration:
 
   ```hcl
   # main.tf
@@ -131,7 +131,7 @@ The ASM Service Extension deployment requires several components that work toget
   #----------------------------------------------------------
 
   # Firewall rule to allow the Service Extension to communicate with the Datadog Agent
-  resource "google_compute_firewall" "asm_se_firewall" {
+  resource "google_compute_firewall" "aap_se_firewall" {
     name    = "${var.project_prefix}-dd-agent-firewall"
     network = "default"
 
@@ -203,8 +203,8 @@ The ASM Service Extension deployment requires several components that work toget
   # Service Extension Callout Container Configuration
   #----------------------------------------------------------
 
-  # Datadog ASM GCP Service Extension container configuration
-  module "gce-container-asm-service-extension" {
+  # Datadog AAP GCP Service Extension container configuration
+  module "gce-container-aap-service-extension" {
     source = "terraform-google-modules/container-vm/google"
 
     container = {
@@ -228,7 +228,7 @@ The ASM Service Extension deployment requires several components that work toget
       auto_delete = true
 
       initialize_params {
-        image = module.gce-container-asm-service-extension.source_image
+        image = module.gce-container-aap-service-extension.source_image
       }
 
     }
@@ -239,7 +239,7 @@ The ASM Service Extension deployment requires several components that work toget
     }
 
     metadata = {
-      gce-container-declaration = module.gce-container-asm-service-extension.metadata_value
+      gce-container-declaration = module.gce-container-aap-service-extension.metadata_value
       google-logging-enabled    = "true"
     }
 
@@ -248,7 +248,7 @@ The ASM Service Extension deployment requires several components that work toget
     }
 
     # http-server: Allow access on the http server for health checks
-    # https-server: Allow access on the 443 port for the ASM Service Extension
+    # https-server: Allow access on the 443 port for the AAP Service Extension
     tags = ["http-server", "https-server", "lb-health-check"]
   }
 
@@ -256,10 +256,10 @@ The ASM Service Extension deployment requires several components that work toget
   # Load Balancer Integration
   #----------------------------------------------------------
 
-  # Unmanaged Instance Group including the ASM Service Extension instance
-  resource "google_compute_instance_group" "asm_se_instance_group" {
+  # Unmanaged Instance Group including the AAP Service Extension instance
+  resource "google_compute_instance_group" "aap_se_instance_group" {
     name        = "${var.project_prefix}-instance-group"
-    description = "Unmanaged instance group for the ASM Service Extension"
+    description = "Unmanaged instance group for the AAP Service Extension"
     zone        = var.zone
 
     named_port {
@@ -278,7 +278,7 @@ The ASM Service Extension deployment requires several components that work toget
   }
 
   # Health Check for the Backend Service
-  resource "google_compute_health_check" "asm_se_health_check" {
+  resource "google_compute_health_check" "aap_se_health_check" {
     name                = "${var.project_prefix}-health-check"
     check_interval_sec  = 5
     timeout_sec         = 5
@@ -297,11 +297,11 @@ The ASM Service Extension deployment requires several components that work toget
     port_name             = "grpc"
     protocol              = "HTTP2"
     timeout_sec           = 10
-    health_checks         = [google_compute_health_check.asm_se_health_check.self_link]
+    health_checks         = [google_compute_health_check.aap_se_health_check.self_link]
     load_balancing_scheme = "EXTERNAL_MANAGED"
 
     backend {
-      group = google_compute_instance_group.asm_se_instance_group.self_link
+      group = google_compute_instance_group.aap_se_instance_group.self_link
     }
   }
 
@@ -312,7 +312,7 @@ The ASM Service Extension deployment requires several components that work toget
   # GCP Service Extension configuration for traffic interception
   resource "google_network_services_lb_traffic_extension" "default" {
     name        = "${var.project_prefix}-service-extension"
-    description = "Datadog ASM Service Extension"
+    description = "Datadog AAP Service Extension"
     location    = "global"
 
     load_balancing_scheme = "EXTERNAL_MANAGED"
@@ -332,7 +332,7 @@ The ASM Service Extension deployment requires several components that work toget
         timeout   = "0.5s"
         fail_open = false # If the extension fails, the request is dropped
 
-        # Supported events for the ASM Service Extension
+        # Supported events for the AAP Service Extension
         supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
       }
     }
@@ -416,10 +416,10 @@ variable "load_balancer_forwarding_rule" {
   # main.tf
 
   module "service_extension" {
-    source                        = "./gcp-asm-service-extension"
+    source                        = "./gcp-aap-service-extension"
     zone                          = "us-central1-a"
     region                        = "us-central1"
-    project_prefix                = "datadog-asm"
+    project_prefix                = "datadog-aap"
     application_vpc_subnetwork    = "your-subnet-name"
     datadog_agent_api_key         = "your-datadog-api-key"
     load_balancer_forwarding_rule = "projects/your-project/regions/us-central1/forwardingRules/your-lb-rule" # or with a self link on your resource
@@ -448,7 +448,7 @@ The service extension automatically inspects all traffic passing through your lo
 
 ## Configuration
 
-The Datadog ASM Service Extension Docker image supports the following configuration settings:
+The Datadog AAP Service Extension Docker image supports the following configuration settings:
 
 | Environment variable                   | Default value   | Description                                                       |
 |----------------------------------------|-----------------|-------------------------------------------------------------------|
@@ -467,7 +467,7 @@ Configure the container to send traces to your Datadog Agent using the following
   <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [ASM Library Configuration][8].
+The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].
 
 ## Limitations
 
