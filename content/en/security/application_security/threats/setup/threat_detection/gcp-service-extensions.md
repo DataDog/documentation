@@ -28,11 +28,11 @@ You can enable application security with GCP Service Extensions within GCP Cloud
 
 Before you begin, ensure you have:
 
-- Installed and configured the [Datadog Agent][1] for your application's operating system or container, cloud, or virtual environment.
-- [Configured Remote Configuration on the Agent][2] to enable blocking attackers through the Datadog UI.
-- In your GCP project, either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
-- A GCP project with a Cloud Load Balancer configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
-- Enabled the Compute Engine API and Network Services API:
+- The [Datadog Agent][1] is installed and configured for your application's operating system or container, cloud, or virtual environment.
+- [Remote Configuration][2] is configured to enable blocking attackers through the Datadog UI.
+- In your GCP project, you have either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
+- A GCP project with a Cloud Load Balancer is configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
+- Compute Engine API and Network Services API are enabled:
   
   ```bash
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
@@ -42,7 +42,7 @@ Before you begin, ensure you have:
 
 To set up the ASM Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
 
-**Note**: Google Cloud provides guides to create [a callout backend service][4] and [create a Service Extension as a traffic extension][5].
+**Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog’s Application Security Management integration.
 
 {{< tabs >}}
 {{% tab "Google Cloud Console" %}}
@@ -51,9 +51,9 @@ To set up the ASM Service Extension in your GCP environment, use the Google Clou
 
     See [Configuration](#configuration) for available environment variables when setting up your VM instance.
 
-  <div class="alert alert-info">
-    <strong>Note:</strong> Be sure to update your Firewall rules to allow the Load Balancer and Datadog agent to communicate with the Callout VM instance.
-  </div>
+    <div class="alert alert-info">
+      <strong>Note:</strong> Be sure to update your Firewall rules to allow the Load Balancer and Datadog agent to communicate with the Callout VM instance.
+    </div>
 
 2. Add the VM to an unmanaged instance group.
   
@@ -62,7 +62,7 @@ To set up the ASM Service Extension in your GCP environment, use the Google Clou
 3. Create a backend service with the following settings:
     - Protocol: `HTTP2`
     - Port name: `grpc`
-    - Region: Select your region
+    - Region: select your region
     - Health check port number: `80` (or your configured value)
 
 4. Add the instance group with the service extension VM as a backend to this backend service.
@@ -77,10 +77,11 @@ To set up the ASM Service Extension in your GCP environment, use the Google Clou
 6. Create an Extension Chain
 
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
-	  2. For **Programability type**, select `Callouts`.
-	  3. Select the backend service you created in the previous step.
-	  4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**).
+    2. For **Programability type**, select `Callouts`.
+    3. Select the backend service you created in the previous step.
+    4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**).
 
+</br>
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
@@ -111,238 +112,236 @@ The Terraform deployment will create the following components:
 
 ### Deployment Steps
 
-#### 1. Create Terraform configuration files
-
 The ASM Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
 
-First, create a new directory and the necessary Terraform files:
+1. Create a new directory and the necessary Terraform files:
 
-```bash
-mkdir gcp-asm-service-extension && cd gcp-asm-service-extension
-touch main.tf variables.tf
-```
+    ```bash
+    mkdir gcp-asm-service-extension && cd gcp-asm-service-extension
+    touch main.tf variables.tf
+    ```
 
-Next, add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the ASM Service Extension, including network rules, VM instances, and load balancer configuration:
+2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the ASM Service Extension, including network rules, VM instances, and load balancer configuration:
 
-```hcl
-# main.tf
+  ```hcl
+  # main.tf
 
-#----------------------------------------------------------
-# Network Configuration
-#----------------------------------------------------------
+  #----------------------------------------------------------
+  # Network Configuration
+  #----------------------------------------------------------
 
-# Firewall rule to allow the Service Extension to communicate with the Datadog Agent
-resource "google_compute_firewall" "asm_se_firewall" {
-  name    = "${var.project_prefix}-dd-agent-firewall"
-  network = "default"
+  # Firewall rule to allow the Service Extension to communicate with the Datadog Agent
+  resource "google_compute_firewall" "asm_se_firewall" {
+    name    = "${var.project_prefix}-dd-agent-firewall"
+    network = "default"
 
-  allow {
-    protocol = "tcp"
-    ports    = ["8126"]
-  }
-
-  source_tags = ["http-server"]
-  target_tags = ["datadog-agent"]
-}
-
-#----------------------------------------------------------
-# Datadog Agent Configuration
-#----------------------------------------------------------
-
-# Datadog Agent container configuration
-module "gce-container-datadog-agent" {
-  source = "terraform-google-modules/container-vm/google"
-
-  container = {
-    image = "public.ecr.aws/datadog/agent:latest"
-    env = [
-      {
-        name = "DD_API_KEY",
-        value = var.datadog_agent_api_key,
-      },
-      {
-        name = "DD_ENV",
-        value = "dev",
-      },
-    ]
-  }
-}
-
-# Datadog Agent VM instance that collects traces from the Service Extension
-resource "google_compute_instance" "datadog_agent" {
-  name         = "${var.project_prefix}-datadog-agent"
-  machine_type = "e2-medium"
-  zone         = var.zone
-
-  boot_disk {
-    auto_delete = true
-
-    initialize_params {
-      image = module.gce-container-datadog-agent.source_image
+    allow {
+      protocol = "tcp"
+      ports    = ["8126"]
     }
 
+    source_tags = ["http-server"]
+    target_tags = ["datadog-agent"]
   }
 
-  network_interface {
-    network    = "default"
-    subnetwork = var.application_vpc_subnetwork
+  #----------------------------------------------------------
+  # Datadog Agent Configuration
+  #----------------------------------------------------------
+
+  # Datadog Agent container configuration
+  module "gce-container-datadog-agent" {
+    source = "terraform-google-modules/container-vm/google"
+
+    container = {
+      image = "public.ecr.aws/datadog/agent:latest"
+      env = [
+        {
+          name = "DD_API_KEY",
+          value = var.datadog_agent_api_key,
+        },
+        {
+          name = "DD_ENV",
+          value = "dev",
+        },
+      ]
+    }
   }
 
-  metadata = {
-    gce-container-declaration = module.gce-container-datadog-agent.metadata_value
-    google-logging-enabled    = "true"
-  }
+  # Datadog Agent VM instance that collects traces from the Service Extension
+  resource "google_compute_instance" "datadog_agent" {
+    name         = "${var.project_prefix}-datadog-agent"
+    machine_type = "e2-medium"
+    zone         = var.zone
 
-  lifecycle {
-    create_before_destroy = true
-  }
+    boot_disk {
+      auto_delete = true
 
-  tags = ["datadog-agent"]
-}
-
-#----------------------------------------------------------
-# Service Extension Callout Container Configuration
-#----------------------------------------------------------
-
-# Datadog ASM GCP Service Extension container configuration
-module "gce-container-asm-service-extension" {
-  source = "terraform-google-modules/container-vm/google"
-
-  container = {
-    image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.72.1" # Replace with the latest version
-    env = [
-      {
-        name = "DD_AGENT_HOST",
-        value = google_compute_instance.datadog_agent.network_interface.0.network_ip,
+      initialize_params {
+        image = module.gce-container-datadog-agent.source_image
       }
+
+    }
+
+    network_interface {
+      network    = "default"
+      subnetwork = var.application_vpc_subnetwork
+    }
+
+    metadata = {
+      gce-container-declaration = module.gce-container-datadog-agent.metadata_value
+      google-logging-enabled    = "true"
+    }
+
+    lifecycle {
+      create_before_destroy = true
+    }
+
+    tags = ["datadog-agent"]
+  }
+
+  #----------------------------------------------------------
+  # Service Extension Callout Container Configuration
+  #----------------------------------------------------------
+
+  # Datadog ASM GCP Service Extension container configuration
+  module "gce-container-asm-service-extension" {
+    source = "terraform-google-modules/container-vm/google"
+
+    container = {
+      image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.72.1" # Replace with the latest version
+      env = [
+        {
+          name = "DD_AGENT_HOST",
+          value = google_compute_instance.datadog_agent.network_interface.0.network_ip,
+        }
+      ]
+    }
+  }
+
+  # Service Extension VM instance (callout instance)
+  resource "google_compute_instance" "default" {
+    name         = "${var.project_prefix}-instance"
+    machine_type = "e2-medium"
+    zone         = var.zone
+
+    boot_disk {
+      auto_delete = true
+
+      initialize_params {
+        image = module.gce-container-asm-service-extension.source_image
+      }
+
+    }
+
+    network_interface {
+      network    = var.application_vpc_network
+      subnetwork = var.application_vpc_subnetwork
+    }
+
+    metadata = {
+      gce-container-declaration = module.gce-container-asm-service-extension.metadata_value
+      google-logging-enabled    = "true"
+    }
+
+    lifecycle {
+      create_before_destroy = true
+    }
+
+    # http-server: Allow access on the http server for health checks
+    # https-server: Allow access on the 443 port for the ASM Service Extension
+    tags = ["http-server", "https-server", "lb-health-check"]
+  }
+
+  #----------------------------------------------------------
+  # Load Balancer Integration
+  #----------------------------------------------------------
+
+  # Unmanaged Instance Group including the ASM Service Extension instance
+  resource "google_compute_instance_group" "asm_se_instance_group" {
+    name        = "${var.project_prefix}-instance-group"
+    description = "Unmanaged instance group for the ASM Service Extension"
+    zone        = var.zone
+
+    named_port {
+      name = "http"
+      port = 80
+    }
+
+    named_port {
+      name = "grpc"
+      port = "443"
+    }
+
+    instances = [
+      google_compute_instance.default.self_link
     ]
   }
-}
 
-# Service Extension VM instance (callout instance)
-resource "google_compute_instance" "default" {
-  name         = "${var.project_prefix}-instance"
-  machine_type = "e2-medium"
-  zone         = var.zone
+  # Health Check for the Backend Service
+  resource "google_compute_health_check" "asm_se_health_check" {
+    name                = "${var.project_prefix}-health-check"
+    check_interval_sec  = 5
+    timeout_sec         = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
 
-  boot_disk {
-    auto_delete = true
-
-    initialize_params {
-      image = module.gce-container-asm-service-extension.source_image
-    }
-
-  }
-
-  network_interface {
-    network    = var.application_vpc_network
-    subnetwork = var.application_vpc_subnetwork
-  }
-
-  metadata = {
-    gce-container-declaration = module.gce-container-asm-service-extension.metadata_value
-    google-logging-enabled    = "true"
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-
-  # http-server: Allow access on the http server for health checks
-  # https-server: Allow access on the 443 port for the ASM Service Extension
-  tags = ["http-server", "https-server", "lb-health-check"]
-}
-
-#----------------------------------------------------------
-# Load Balancer Integration
-#----------------------------------------------------------
-
-# Unmanaged Instance Group including the ASM Service Extension instance
-resource "google_compute_instance_group" "asm_se_instance_group" {
-  name        = "${var.project_prefix}-instance-group"
-  description = "Unmanaged instance group for the ASM Service Extension"
-  zone        = var.zone
-
-  named_port {
-    name = "http"
-    port = 80
-  }
-
-  named_port {
-    name = "grpc"
-    port = "443"
-  }
-
-  instances = [
-    google_compute_instance.default.self_link
-  ]
-}
-
-# Health Check for the Backend Service
-resource "google_compute_health_check" "asm_se_health_check" {
-  name                = "${var.project_prefix}-health-check"
-  check_interval_sec  = 5
-  timeout_sec         = 5
-  healthy_threshold   = 2
-  unhealthy_threshold = 2
-
-  http_health_check {
-    port         = 80
-    request_path = "/"
-  }
-}
-
-# Backend Service that points to the Service Extension instance group
-resource "google_compute_backend_service" "se_backend_service" {
-  name                  = "${var.project_prefix}-backend-service"
-  port_name             = "grpc"
-  protocol              = "HTTP2"
-  timeout_sec           = 10
-  health_checks         = [google_compute_health_check.asm_se_health_check.self_link]
-  load_balancing_scheme = "EXTERNAL_MANAGED"
-
-  backend {
-    group = google_compute_instance_group.asm_se_instance_group.self_link
-  }
-}
-
-#----------------------------------------------------------
-# GCP Service Extension
-#----------------------------------------------------------
-
-# GCP Service Extension configuration for traffic interception
-resource "google_network_services_lb_traffic_extension" "default" {
-  name        = "${var.project_prefix}-service-extension"
-  description = "Datadog ASM Service Extension"
-  location    = "global"
-
-  load_balancing_scheme = "EXTERNAL_MANAGED"
-  forwarding_rules      = [var.load_balancer_forwarding_rule]
-
-  extension_chains {
-    name = "${var.project_prefix}-service-extension-chain"
-
-    match_condition {
-      cel_expression = "true" # Match all traffic
-    }
-
-    extensions {
-      name      = "${var.project_prefix}-service-extension-chain-ext"
-      authority = "datadoghq.com"
-      service   = google_compute_backend_service.se_backend_service.self_link
-      timeout   = "0.5s"
-      fail_open = false # If the extension fails, the request is dropped
-
-      # Supported events for the ASM Service Extension
-      supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
+    http_health_check {
+      port         = 80
+      request_path = "/"
     }
   }
-}
-```
 
-Now add the following content to the `variables.tf` file. This file defines all the required input variables for your Terraform configuration:
+  # Backend Service that points to the Service Extension instance group
+  resource "google_compute_backend_service" "se_backend_service" {
+    name                  = "${var.project_prefix}-backend-service"
+    port_name             = "grpc"
+    protocol              = "HTTP2"
+    timeout_sec           = 10
+    health_checks         = [google_compute_health_check.asm_se_health_check.self_link]
+    load_balancing_scheme = "EXTERNAL_MANAGED"
 
-```hcl
+    backend {
+      group = google_compute_instance_group.asm_se_instance_group.self_link
+    }
+  }
+
+  #----------------------------------------------------------
+  # GCP Service Extension
+  #----------------------------------------------------------
+
+  # GCP Service Extension configuration for traffic interception
+  resource "google_network_services_lb_traffic_extension" "default" {
+    name        = "${var.project_prefix}-service-extension"
+    description = "Datadog ASM Service Extension"
+    location    = "global"
+
+    load_balancing_scheme = "EXTERNAL_MANAGED"
+    forwarding_rules      = [var.load_balancer_forwarding_rule]
+
+    extension_chains {
+      name = "${var.project_prefix}-service-extension-chain"
+
+      match_condition {
+        cel_expression = "true" # Match all traffic
+      }
+
+      extensions {
+        name      = "${var.project_prefix}-service-extension-chain-ext"
+        authority = "datadoghq.com"
+        service   = google_compute_backend_service.se_backend_service.self_link
+        timeout   = "0.5s"
+        fail_open = false # If the extension fails, the request is dropped
+
+        # Supported events for the ASM Service Extension
+        supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
+      }
+    }
+  }
+  ```
+
+3. Add the following content to the `variables.tf` file. This file defines all the required input variables for your Terraform configuration:
+
+  ```hcl
 # variables.tf
 
 variable "region" {
@@ -411,32 +410,29 @@ variable "load_balancer_forwarding_rule" {
 }
 ```
 
-##### Module configuration
-Finally, include the module in your main Terraform project. This example shows how to reference the module you created above:
+4. Include the module in your main Terraform project. This example shows how to reference the module you created above:
 
-```hcl
-# main.tf
+  ```hcl
+  # main.tf
 
-module "service_extension" {
-  source                        = "./gcp-asm-service-extension"
-  zone                          = "us-central1-a"
-  region                        = "us-central1"
-  project_prefix                = "datadog-asm"
-  application_vpc_subnetwork    = "your-subnet-name"
-  datadog_agent_api_key         = "your-datadog-api-key"
-  load_balancer_forwarding_rule = "projects/your-project/regions/us-central1/forwardingRules/your-lb-rule" # or with a self link on your resource
-}
-```
+  module "service_extension" {
+    source                        = "./gcp-asm-service-extension"
+    zone                          = "us-central1-a"
+    region                        = "us-central1"
+    project_prefix                = "datadog-asm"
+    application_vpc_subnetwork    = "your-subnet-name"
+    datadog_agent_api_key         = "your-datadog-api-key"
+    load_balancer_forwarding_rule = "projects/your-project/regions/us-central1/forwardingRules/your-lb-rule" # or with a self link on your resource
+  }
+  ```
 
-#### 2. Initialize and apply the Terraform configuration
+5. Deploy the infrastructure by running these commands in the directory where your Terraform files are located:
 
-After you've created the necessary files, deploy the infrastructure by running these commands in the directory where your Terraform files are located:
-
-```bash
-terraform init
-terraform plan
-terraform apply
-```
+  ```bash
+  terraform init
+  terraform plan
+  terraform apply
+  ```
 
 ### Post-deployment validation
 
