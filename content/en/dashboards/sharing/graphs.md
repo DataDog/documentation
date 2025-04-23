@@ -30,7 +30,7 @@ To share a graph:
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
 
-All shared graphs are listed in the [Public Sharing Settings page][10]. On the settings page, you can also revoke individual shared graphs or disable all shared graphs.
+All shared graphs are listed in the [Public Sharing Settings page][10]. You can also revoke individual shared graphs or disable all shared graphs from this page.
 
 ## Revoke
 
