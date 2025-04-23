@@ -140,7 +140,7 @@ These options are available for the `datadog-ci trace span` command:
 **Example**: `Build Step`
 
 `--start-time`
-: Timestamp in milliseconds since the unix epoch representing the start time of the span.<br/>
+: Timestamp in milliseconds since the UNIX epoch representing the start time of the span.<br/>
 **Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
 
 `--end-time`
