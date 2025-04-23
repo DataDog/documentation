@@ -2597,119 +2597,119 @@ menu:
       identifier: case_management_troubleshooting
       weight: 6
     - name: Workflow Automation
-      url: service_management/workflows/
+      url: actions/workflows/
       pre: workflows
       identifier: workflows
       parent: actions_heading
       weight: 10000
     - name: Build Workflows
-      url: service_management/workflows/build/
+      url: actions/workflows/build/
       parent: workflows
       identifier: workflows_build
       weight: 1
     - name: Authentication
-      url: service_management/workflows/access/
+      url: actions/workflows/access/
       parent: workflows
       identifier: workflows_access
       weight: 2
     - name: Trigger Workflows
-      url: service_management/workflows/trigger/
+      url: actions/workflows/trigger/
       parent: workflows
       identifier: workflows_trigger
       weight: 3
     - name: Variables and parameters
-      url: service_management/workflows/variables/
+      url: actions/workflows/variables/
       parent: workflows
       identifier: workflows_variables
       weight: 4
     - name: Actions
-      url: service_management/workflows/actions/
+      url: actions/workflows/actions/
       parent: workflows
       identifier: workflows_actions
       weight: 5
     - name: Workflow Logic
-      url: service_management/workflows/actions/flow_control/
+      url: actions/workflows/actions/flow_control/
       parent: workflows_actions
       identifier: workflows_flow_control
       weight: 502
     - name: Save and Reuse Actions
-      url: service_management/workflows/saved_actions/
+      url: actions/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
       weight: 6
     - name: Test and Debug
-      url: service_management/workflows/test_and_debug/
+      url: actions/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
     - name: JavaScript Expressions
-      url: service_management/workflows/expressions/
+      url: actions/workflows/expressions/
       parent: workflows
       identifier: workflows_expressions
       weight: 9
     - name: Track Workflows
-      url: service_management/workflows/track
+      url: actions/workflows/track
       parent: workflows
       identifier: workflows_track
       weight: 10
     - name: Limits
-      url: service_management/workflows/limits/
+      url: actions/workflows/limits/
       parent: workflows
       identifier: workflows_limits
       weight: 11
     - name: App Builder
-      url: service_management/app_builder/
+      url: actions/app_builder/
       pre: app-builder
       identifier: app_builder
       parent: actions_heading
       weight: 20000
     - name: Build Apps
-      url: service_management/app_builder/build/
+      url: actions/app_builder/build/
       parent: app_builder
       identifier: app_builder_build
       weight: 1
     - name: Authentication
-      url: service_management/app_builder/auth/
+      url: actions/app_builder/auth/
       parent: app_builder
       identifier: app_builder_access
       weight: 2
     - name: Queries
-      url: service_management/app_builder/queries/
+      url: actions/app_builder/queries/
       parent: app_builder
       identifier: app_builder_queries
       weight: 4
     - name: Variables
-      url: service_management/app_builder/variables/
+      url: actions/app_builder/variables/
       parent: app_builder
       identifier: app_builder_variables
       weight: 5
     - name: Events
-      url: service_management/app_builder/events/
+      url: actions/app_builder/events/
       parent: app_builder
       identifier: app_builder_events
       weight: 6
     - name: Components
-      url: service_management/app_builder/components/
+      url: actions/app_builder/components/
       parent: app_builder
       identifier: app_builder_components
       weight: 7
     - name: Custom Charts
-      url: service_management/app_builder/components/custom_charts/
+      url: actions/app_builder/components/custom_charts/
       parent: app_builder_components
       identifier: app_builder_custom_charts
       weight: 701
     - name: Tables
-      url: service_management/app_builder/components/tables/
+      url: actions/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 702
     - name: JavaScript Expressions
-      url: service_management/app_builder/expressions/
+      url: actions/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
     - name: Embedded Apps
-      url: service_management/app_builder/embedded_apps/
+      url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
