@@ -1,11 +1,11 @@
 ---
 categories:
-- collaboration
-- developer tools
-- issue tracking
-custom_kind: integration
+- コラボレーション
+- 開発ツール
+- 問題追跡
+custom_kind: インテグレーション
 dependencies: []
-description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
+description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論
 doc_link: https://docs.datadoghq.com/integrations/redmine/
 draft: false
 git_integration_title: redmine
@@ -17,7 +17,7 @@ is_public: true
 manifest_version: '1.0'
 name: redmine
 public_title: Datadog-Redmine インテグレーション
-short_description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
+short_description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論
 version: '1.0'
 ---
 

@@ -49,7 +49,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### Operating system support
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example AAP, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |

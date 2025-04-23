@@ -30,6 +30,8 @@ ON orders.customer_id = customers.customer_id {{< /code-block >}} |
 | `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
 FROM sales 
 GROUP BY product_id {{< /code-block >}} |
+| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name 
+FROM employees {{< /code-block >}} |
 | `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT * 
 FROM employees 
 WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
@@ -66,7 +68,7 @@ WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
 FROM employees {{< /code-block >}}                |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
 
 ## Functions
@@ -92,12 +94,18 @@ The following SQL functions are supported. For Window function, see the separate
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `strpos(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
+| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
 | `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
-
+| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array.                                |
+| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
+| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `array_agg(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
+| `unnest(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -135,7 +143,7 @@ GROUP BY service_name
 {{< /code-block >}} 
 
 ### `CEIL`
-{{< code-block lang="sql" >}} 
+{{< code-block lang="sql" >}}
 SELECT CEIL(price) AS rounded_price 
 FROM products 
 {{< /code-block >}}
@@ -204,13 +212,14 @@ FROM
 ### `INTERVAL`  
 {{< code-block lang="sql" >}}
 SELECT
-  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date
+  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date,
+  INTERVAL '1 MILLISECOND 2 SECONDS 3 MINUTES 4 HOURS 5 DAYS'
 {{< /code-block >}} 
 
 ### `TRIM`
 {{< code-block lang="sql" >}}
 SELECT
-  trim(name) AS trimmed_name
+  TRIM(name) AS trimmed_name
 FROM
   users
 {{< /code-block >}}
@@ -218,7 +227,7 @@ FROM
 ###  `REPLACE`
 {{< code-block lang="sql" >}}
 SELECT
-  replace(description, 'old', 'new') AS updated_description
+  REPLACE(description, 'old', 'new') AS updated_description
 FROM
   products
 {{< /code-block >}}
@@ -226,9 +235,21 @@ FROM
 ### `SUBSTRING`
 {{< code-block lang="sql" >}}
 SELECT
-  substring(title, 1, 10) AS short_title
+  SUBSTRING(title, 1, 10) AS short_title
 FROM
   books
+{{< /code-block >}}
+
+### `STRPOS`
+{{< code-block lang="sql" >}}
+SELECT
+  STRPOS('foobar', 'bar')
+{{< /code-block >}}
+
+### `SPLIT_PART`
+{{< code-block lang="sql" >}}
+SELECT
+  SPLIT_PART('aaa-bbb-ccc', '-', 2)
 {{< /code-block >}}
 
 ### `EXTRACT`
@@ -251,7 +272,7 @@ Supported extraction units:
 
 {{< code-block lang="sql" >}}
 SELECT
-  extract(year FROM purchase_date) AS purchase_year
+  EXTRACT(year FROM purchase_date) AS purchase_year
 FROM
   sales
 {{< /code-block >}}
@@ -278,7 +299,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+  TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -303,7 +324,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_char(order_date, 'MM-DD-YYYY') AS formatted_date
+  TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
 {{< /code-block >}}
@@ -323,7 +344,7 @@ Supported truncations:
 
 {{< code-block lang="sql" >}}
 SELECT
-  date_trunc('month', event_time) AS month_start
+  DATE_TRUNC('month', event_time) AS month_start
 FROM
   events
 {{< /code-block >}}
@@ -335,7 +356,52 @@ SELECT
 FROM
   emails
 WHERE
-  regexp_like(email_address, '@example\.com$')
+  REGEXP_LIKE(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients)
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com')
+FROM
+  emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT 
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  ARRAY_AGG(subject) subjects, 
+  ARRAY_AGG(ALL subject) all_subjects, 
+  ARRAY_AGG(DISTINCT subject) distinct_subjects
+FROM 
+  emails
+GROUP BY 
+  sender
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  recipient 
+FROM 
+  emails,
+  UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
@@ -344,17 +410,17 @@ WHERE
 
 This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
 
-| Function                | Return Type       | Description                                                            |
-|-------------------------|-------------------|------------------------------------------------------------------------|
-| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
-| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
-| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
-| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
-| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
-| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
-| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
-| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
-| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
+| Function                      | Return Type       | Description                                                            |
+|-------------------------------|-------------------|------------------------------------------------------------------------|
+| `over`                        | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `partition by`                | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `rank()`                      | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `row_number()`                | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `lead(column n)`              | typeof column     | Returns the value from the next row in the partition.                  |
+| `lag(column n)`               | typeof column     | Returns the value from the previous row in the partition.              |
+| `first_value(column n)`       | typeof column     | Returns the first value in an ordered set of values.                   |
+| `last_value(column n)`        | typeof column     | Returns the last value in an ordered set of values.                    |
+| `nth_value(column n, offset)` | typeof column     | Returns the value at the specified offset in an ordered set of values. |
 
 
 ## Further reading

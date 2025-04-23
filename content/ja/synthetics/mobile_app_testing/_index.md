@@ -154,7 +154,7 @@ Datadog では、不安定なテストを防ぐために、ロケータのセッ
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }
