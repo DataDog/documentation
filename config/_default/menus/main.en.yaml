@@ -611,7 +611,7 @@ menu:
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs
+    - name: OTel APIs with Datadog SDKs
       url: /opentelemetry/instrument/api_support
       identifier: otel-api-dd-sdk
       parent: otel-instrumentation
@@ -649,7 +649,7 @@ menu:
       identifier: otel_instrumentation_libraries
       parent: otel-instrumentation
       weight: 303
-    - name: Environment Variables
+    - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
       parent: otel-instrumentation

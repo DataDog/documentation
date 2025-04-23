@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP intake endpoint is in Preview. To request access, contact your account representative.
+  The Datadog OTLP intake endpoints are in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 ## Overview
