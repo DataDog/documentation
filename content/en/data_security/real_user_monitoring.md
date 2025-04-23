@@ -121,7 +121,7 @@ You can also transmit all RUM events through your own (proxy) server so that end
 #### IP address
 Once you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the **User Data Collection** tab:
 
-{{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
+{{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
 
 After you disable the collection of IP data, the change is applied immediately. Any events collected prior to disabling does not remove the IP data. It is performed on the backend, which means the Browser SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.
 
