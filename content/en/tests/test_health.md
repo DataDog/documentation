@@ -23,6 +23,8 @@ further_reading:
 
 The [Test Health][5] dashboard provides analytics to help teams manage and optimize their testing in CI. This includes sections showing the current impact of test flakiness and how Test Optimization is mitigating these problems.
 
+{{< img src="tests/test-health.png" alt="Test Health dashboard" style="width:100%;" >}}
+
 ## Summary metrics
 
 Based on the current time frame and filters applied, the dashboard highlights the following key metrics:
