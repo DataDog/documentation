@@ -29,7 +29,7 @@ algolia:
   tags: ['rum traces']
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab-3.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Overview
 
@@ -616,7 +616,7 @@ The default injection style is `tracecontext`, `Datadog`.
 {{< /tabs >}}
 
 
-## How are RUM resources linked to traces?
+## How RUM resources are linked to traces
 
 Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
@@ -668,11 +668,11 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## How are APM quotas affected?
+## Affect on APM quotas
 
 Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
-## How long are traces retained?
+## Traces retention
 
 These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
