@@ -390,6 +390,8 @@ By default, Session Replay starts recording automatically. However, if you prefe
 
 {{% /tab %}}
 
+{{% tab "Kotlin Multiplatform" %}}
+
 {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
         .startRecordingImmediately(false)
