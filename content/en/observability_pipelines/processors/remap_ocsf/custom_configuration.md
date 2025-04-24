@@ -163,9 +163,9 @@ The preprocessor would reformat the data in JSON to:
 
 ### Mapping section
 
-The `mapping` section is an ordered list of field-to-field assignments. Each mapping entry consists of a `dest` path naming the destination field in the OCSF event and either a `source` path that refers to a field in the source event or a `value` that contains a literal constant to insert at that destination.
+The `mapping` section is an ordered list of field-to-field assignments. Each mapping entry consists of a `dest` path that refers to the destination field in the OCSF event and either a `source` path that refers to a field in the source event or a `value` that contains a literal constant to insert at that destination.
 
-A `source` path starting with `OCSF.` specifies a field in the output OCSF event that has been previously assigned.
+A `source` path starting with `OCSF.` refers to a field in the output OCSF event that has been previously assigned.
 
 Use the `default` value if the source path does not exist before processing is done. The mapping may also optionally specify a `function` to and/or a [lookup table](#mapping-lookup-tables).
 
@@ -362,7 +362,7 @@ The `concat_arrays` function looks up a second `source` and, if it exists, conca
 
 ### `reshape_array`
 
-The `reshape_array` function extracts data from a source array to create a new array of values. In particular, the function filters only array elements containing a field that matches a condition from the list in [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
+The `reshape_array` function extracts data from a source array to create a new array of values. The function filters only array elements containing a field that matches a condition from the list in [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
