@@ -24,8 +24,6 @@ further_reading:
 Code Origins is currently in Preview. To join the preview, follow the instructions below. 
 
 To submit questions, feedback, or requests related to Code Origins, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScyeRsF2GJjYdf9bUyeDjt8_9id-gvqiBU1SHR3ioDGe5eF3g/viewform?usp=header">this form</a> with details. 
-
-For time-sensitive issues, contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
 {{< /beta-callout >}}
 
 ## Overview
