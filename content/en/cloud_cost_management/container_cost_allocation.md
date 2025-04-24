@@ -110,7 +110,7 @@ Use the `allocated_resource` tag to visualize the spend resource associated with
 
 ### Kubernetes tag extraction
 
-Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces view the detailed guide on [Kubernetes Tag Extraction][201].
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
 
 [201]: /containers/kubernetes/tag/
 
