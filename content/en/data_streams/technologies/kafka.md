@@ -8,23 +8,53 @@ title: Kafka for Data Streams Monitoring
 
 ### Support for Kafka in Data Streams Monitoring
 
-| Language | Technology                                      | Minimal tracer version     | Recommended tracer version |
-|----------|--------------------------------------------------|-----------------------------|-----------------------------|
-| Java     | [kafka-clients][2] (v3.7 is not fully supported) | 1.9.0                       | 1.43.0                      |
-<tr>
-  <td rowspan="2">Go</td>
-  <td>[confluent-kafka-go][3]</td>
-  <td>1.56.1</td>
-  <td>1.66.0 or later</td>
-</tr>
-<tr>
-  <td>[Sarama][3]</td>
-  <td>1.56.1</td>
-  <td>1.66.0 or later</td>
-</tr>
-| Node.js  | [kafkajs][5]                                    | 2.39.0 or 3.26.0 or 4.5.0   | 5.25.0 or later             |
-| Python   | [confluent-kafka][6]                            | 1.16.0                      | 2.11.0 or later             |
-| .NET     | [Confluent.Kafka][7]                            | 2.28.0          |
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Technology</th>
+      <th>Minimal tracer version</th>
+      <th>Recommended tracer version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Java</td>
+      <td><a href="[2]">kafka-clients</a> (v3.7 is not fully supported)</td>
+      <td>1.9.0</td>
+      <td>1.43.0</td>
+    </tr>
+    <tr>
+      <td rowspan="2">Go</td>
+      <td><a href="[3]">confluent-kafka-go</a></td>
+      <td>1.56.1</td>
+      <td>1.66.0 or later</td>
+    </tr>
+    <tr>
+      <td><a href="[3]">Sarama</a></td>
+      <td>1.56.1</td>
+      <td>1.66.0 or later</td>
+    </tr>
+    <tr>
+      <td>Node.js</td>
+      <td><a href="[5]">kafkajs</a></td>
+      <td>2.39.0 or 3.26.0 or 4.5.0</td>
+      <td>5.25.0 or later</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td><a href="[6]">confluent-kafka</a></td>
+      <td>1.16.0</td>
+      <td>2.11.0 or later</td>
+    </tr>
+    <tr>
+      <td>.NET</td>
+      <td><a href="[7]">Confluent.Kafka</a></td>
+      <td>2.28.0</td>
+      <td>2.41.0 or later</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ### Note
