@@ -123,7 +123,7 @@ if ok {
 ### 모니터링 커넥터
 
 #### Confluent Cloud 커넥터
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## 참고 자료
 

@@ -42,8 +42,7 @@ environment:
 
 {{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
-### Monitoring Kinesis pipelines
-There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
+{{% data_streams/monitoring-kinesis-pipelines %}}
 
 {{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 
@@ -53,7 +52,7 @@ Data Streams Monitoring propagates context through message headers. If you are u
 ### Monitoring connectors
 
 #### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## Further reading
 

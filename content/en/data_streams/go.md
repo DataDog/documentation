@@ -127,7 +127,7 @@ if ok {
 ### Monitoring connectors
 
 #### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## Further reading
 
