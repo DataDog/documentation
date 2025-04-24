@@ -1,9 +1,9 @@
 {{ $dot := . }}
 <div class="dsm-containers">
   <div class="container cards-dd">
-    <div class="row row-cols-2 row-cols-sm-5 g-2 g-xl-3 justify-content-sm-center">
+    <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
       <div class="col">
-        <a class="card h-100" href="/data_streams/kafka/">
+        <a class="card h-100" href="/data_streams/technologies/kafka/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/kafka.png" "class" "img-fluid" "alt" "Kafka" "width" "200") }}
           </div>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="col">
-        <a class="card h-100" href="/data_streams/sqs">
+        <a class="card h-100" href="/data_streams/technologies/sqs/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/sqs.png" "class" "img-fluid" "alt" "SQS" "width" "200") }}
           </div>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="col">
-        <a class="card h-100" href="/data_streams/rabbitmq/">
+        <a class="card h-100" href="/data_streams/technologies/rabbitmq/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/rabbitmq.png" "class" "img-fluid" "alt" "RabbitMQ" "width" "200") }}
           </div>
@@ -27,7 +27,7 @@
       </div>
 
        <div class="col">
-        <a class="card h-100" href="/data_streams/kinesis/">
+        <a class="card h-100" href="/data_streams/technologies/kinesis/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_kinesis.png" "class" "img-fluid" "alt" "Kinesis" "width" "200") }}
           </div>
