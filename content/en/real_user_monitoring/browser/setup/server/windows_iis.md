@@ -81,3 +81,7 @@ See other [Limitations][1].
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
+
+## Uninstall
+
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the Windows Apps & Features tool.
