@@ -346,14 +346,10 @@ Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-For any changes to existing KMS keys, reach out to [Datadog support][3] for further assistance.
-
-Users can also set encryption directly in the object upload request by configuring encryption settings. Optionally specify the encryption when you create or update an S3 archive via [Logs Archives API][4].
+You can also optionally set encryption directly in the object upload request by configuring encryption settings when you create or update an S3 archive.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-[3]: /help/
-[4]: https://docs.datadoghq.com/api/latest/logs-archives/
 {{% /tab %}}
 
 {{< /tabs >}}
