@@ -1,5 +1,5 @@
 ---
-title: Custom Configurations
+title: Custom Mapping Configuration Format
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
