@@ -86,8 +86,6 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 ## Backgrounds
 
-
-
 A background is a snapshot of a Session Replay. Each heatmap fetches the 20 backgrounds that triggered the most actions during a given session. Changing the background shows different results depending on the action event selected. 
 
 **Note**: A heatmap's list of backgrounds cannot be modified.
