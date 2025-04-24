@@ -360,7 +360,7 @@ DdSdkReactNative.addUserExtraInfo({
 If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
 
 ```js
-DdSdkReactNative.setUserInfo({});
+DdSdkReactNative.setUser({});
 ```
 
 {{% /tab %}}
