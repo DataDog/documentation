@@ -92,6 +92,8 @@ For specific insights about the file currently open in the active editor, check 
 
 ## View in IDE
 
+<div class="alert alert-info">This feature is only available for VS Code and Cursor. Other forks of VS Code are not supported.</div>
+
 The **View in VS Code** or **View in Cursor** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][5]):
 
 {{< img src="/developers/ide_plugins/vscode/view-in-vscode-2.png" alt="A stack trace in Datadog showing the View in VS Code button" style="width:100%;" >}}
