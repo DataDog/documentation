@@ -56,7 +56,7 @@ Some commonly used error attributes include:
 | `error.message`| The message associated with the error. |
 | `error.type` | The type or class of the error. |
 | `error.stack` | The stack trace associated with the error. |
-| `error.handling` | Indicates whether the error was handled. APM errors are considered `handled` if a parent span reports success (`HTTP 200`, `gRPC OK`) or a succesful error handling (`HTTP 400`, `gRPC NOT_FOUND`). RUM errors are `unhandled` if they are not captured manually in the code. |
+| `error.handling` | Indicates whether the error was handled. APM errors are considered `handled` if a parent span reports a successful operation (`HTTP 200`, `gRPC OK`) or successful error handling (`HTTP 400`, `gRPC NOT_FOUND`). RUM errors are `unhandled` if they are not captured manually in the code. |
 
 Click the Edit icon to see the list of available facets that you can show or hide from view.
 
