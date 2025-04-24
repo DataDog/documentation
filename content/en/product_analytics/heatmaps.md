@@ -83,10 +83,9 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
-## Backgrounds
+## Snapshots
 
 A snapshot is the state of a Session Replay at a particular point in time. Changing the snapshot shows different results, depending on the snapshot selected. You can use the **Change Snapshot** button to select a particular snapshot in a replay for your heatmap.
-
 
 To select a background snapshot:
 
@@ -112,15 +111,13 @@ Heatmaps are based on Product Analytics view names. Depending on how your Produc
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the [background](#backgrounds) of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
-
-{{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the snapshot of your heatmap, you can use the **Change Snapshot** button to navigate through the different states of a replay and find the one you are looking for. If the replay you're viewing does not have the snapshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
 
 ### On the action list on the side of my heatmap, I see an icon showing an element that is not visibile in the heatmap.
 
-{{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
+The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the snapshot in the heatmap. To see that element, you can click **Change Snapshot** in the top right corner to switch the snapshot of your heatmap to one where that element is present.
 
-The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present. 
+{{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
 
