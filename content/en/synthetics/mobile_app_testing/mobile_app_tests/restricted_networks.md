@@ -29,7 +29,7 @@ To test these applications, add the following IP address ranges to your company'
 
 The following is the list of IP ranges associated with the real devices used for Datadog Mobile App Testing:
 
-### AWS device farm
+### AWS Device Farm
 
 `54.244.50.32/27`</br>
 `99.78.197.0/29`</br>
