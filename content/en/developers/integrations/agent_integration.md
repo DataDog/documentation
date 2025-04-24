@@ -44,13 +44,20 @@ When a user installs your integration, out-of-the-box dashboards automatically a
 
 The process to build an Agent-based integration looks like this:
 
-1. Once you've been accepted to the [Datadog Partner Network][32], you will meet with the Datadog Technology Partner team to discuss your offering and use cases.
-2. Request a Datadog sandbox account for development through the Datadog Partner Network portal.
-3. Begin development of your integration, which includes writing the integration code on your end as well as building and installing a Python wheel (`.whl`).
-4. Test your integration in your Datadog sandbox account.
-5. Once your development work is tested and complete, populate your tile assets by providing information like setup instructions, images, support information, and more that will make up your integration tile that's displayed on the **Integrations** or **Marketplace** page.
-6. Once your pull request is submitted and approved, the Datadog Technology Partner team will schedule a demo for a final review of your integration.
-7. You will have the option of testing the tile and integration in your Datadog sandbox account before publishing, or immediately publishing the integration for all customers.
+1. Join the Datadog Partner Network
+   - Apply to the [Datadog Partner Network][32]. Once accepted, you'll meet with the Datadog Technology Partner team to discuss your offering and use cases.
+2. Set up your development environment
+   - Request a Datadog sandbox account through the Partner Network portal.
+   - Install the necessary development tools (see Prerequisties).
+3. Prepare your integration tile content
+   - Inside of the Datadog sandbox, navigate to the **Developer Platform** and **add a new listing**
+   - Provide content such as, setup instructions, images, and support information for the **Integration or Marketplace page**.
+4. Build your agent check and test your integration
+   - After creating filling out the tile content using the Developer Platform, create your Agent Check. 
+4. Submit for review
+   - Open a PR for your Agent Check
+   - Submit your integration content through the **Developer Platform**
+   - The Datadog team will schedule a final demo to review your integration
 
 ## Prerequisites
 
