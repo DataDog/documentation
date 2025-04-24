@@ -29,7 +29,7 @@ algolia:
   tags: ['rum traces']
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab-3.png" alt="RUM and Traces" style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Overview
 
@@ -438,6 +438,25 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% /tab %}}
 {{< /tabs >}}
 
+## RUM Explorer to Traces
+
+To view traces from the RUM Explorer:
+
+1. In the RUM Explorer, navigate to your [list of sessions][21] and click on a session with traces available (you can query for `@_dd.trace_id:*`).
+1. The session panel appears with a request duration breakdown and includes a flame graph of each span, as well as a link to **View Trace in APM**.
+
+   {{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;">}}
+
+## Traces to RUM Explorer
+
+To view the RUM event from Traces:
+
+1. Within a trace view, click a RUM event from the Overview tab.
+1. Click See Session/View/Resource in RUM.
+1. You are taken to the view with the trace(s).
+
+      {{< img src="real_user_monitoring/connect_rum_and_traces/rum-traces-to-rum.png" alt="RUM and Traces" style="width:100%;">}}
+
 ## Supported libraries
 
 Below is a list of the supported backend libraries that need to be on the services receiving the network requests.
@@ -447,7 +466,7 @@ Below is a list of the supported backend libraries that need to be on the servic
 | [Python][3]      | [0.22.0][4]     |
 | [Go][5]          | [1.10.0][6]     |
 | [Java][7]        | [0.24.1][8]     |
-| [Ruby][9]        | [0.20.0][10]     |
+| [Ruby][9]        | [0.20.0][10]    |
 | [JavaScript][11] | [0.10.0][12]    |
 | [PHP][13]        | [0.33.0][14]    |
 | [.NET][15]       | [1.18.2][16]    |
@@ -700,3 +719,4 @@ These traces are available for 15 minutes in the [Live Search][19] explorer. To 
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [19]: /tracing/trace_explorer/#live-search-for-15-minutes
 [20]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[21]: https://app.datadoghq.com/rum/explorer
