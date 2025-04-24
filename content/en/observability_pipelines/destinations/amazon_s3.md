@@ -5,6 +5,8 @@ disable_toc: false
 
 The Amazon S3 destination is available for the [Archive Logs template][1]. Use this destination to send your logs in Datadog-rehydratable format to an Amazon S3 bucket for archiving. You need to set up [Datadog Log Archives][2] if you haven't already, and then set up the destination in the pipeline UI.
 
+You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-amazon-s3-destination).
+
 ## Configure Log Archives
 
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
@@ -48,6 +50,13 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
+## Route logs to Snowflake using the Amazon S3 destination
+
+You can route logs from Observability Pipelines to Snowflake using the Amazon S3 destination and configuring Snowpipe in Snowflake to automatically ingest those logs. To set this up:
+1. Configure [Log Archives](#configure-log-archives).
+1. [Set up a pipeline][6] to use Amazon S3 as the log destination. When logs are collected by Observability Pipelines, they are written to an S3 bucket using the same configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline), including AWS authentication, region settings, and permissions.
+1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][5] for instructions. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing.
+
 ## How the destination works
 
 ### Event batching
@@ -62,3 +71,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: /logs/log_configuration/archives/
 [3]: /integrations/amazon_web_services/#setup
 [4]: /observability_pipelines/destinations/#event-batching
+[5]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
+[6]: /observability_pipelines/set_up_pipelines/
