@@ -23,7 +23,7 @@ further_reading:
 
 {{< img src="/infrastructure/resource_catalog/policies/resource_catalog_policies_2.png" alt="The Resource Catalog page showing the Policies tab and list of custom policies" width="100%">}}
 
-In Resource Catalog Policies, you can define policies on the desired optimal configuration of your infrastructure resources based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
+In Resource Catalog Policies, you can define policies on the desired optimal configuration of your infrastructure resources based on governance best practices in your organization. Some examples include improving ownership tag coverage on resources, or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or Lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
 
 Specifically, you can:
 
