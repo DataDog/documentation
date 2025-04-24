@@ -409,11 +409,31 @@ module "lambda-datadog" {
 
 When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
 
-### Configure Auto-linking for DynamoDB Change Streams
+### Configure Auto-linking for DynamoDB PutItem
 
-To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, set the following environment variables:
+To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
 
-- tk
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+ddtrace.config.botocore['dynamodb_primary_key_names_for_tables'] = {
+    'table_name': {'key1', 'key2'},
+    'other_table': {'other_key'},
+}
+```
+{{% /tab %}}
+
+{{% tab "Environment variable" %}}
+```sh
+export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `dict` keyed by the table names as `str`. Each value is the set of primary key field names (as str) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
 
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.

@@ -113,11 +113,12 @@ Learn more about [tracing through .NET Azure serverless applications][15].
 ## Span Auto-linking
 {{< img src="serverless/lambda/tracing/autolink.png" alt="In Datadog, a DynamoDB trace. At the top, a message reads 'This trace is linked to other traces'. The Span Links tab is open and displays a clickable link to another DynamoDB trace." style="width:100%;" >}}
 
-Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30].  
+Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30]. These appear as **Backward** or **Forward**.
 
-If you are viewing a request that originated before the change event and the linked trace is ingested, you can see the linked span as a _Backward_ link. 
+_Backward_: The linked span was caused by the trace you are viewing.
 
-If you are viewing a request that originated after the change event and the linked trace is ingested, you can see the linked span as a _Forward_ link. 
+_Forward_: The linked span caused the trace you are viewing.
+
 
 <div class="alert alert-info">Sampling and <a href="/tracing/trace_pipeline/trace_retention/">trace retention filters</a> can interfere with Auto-linking. To improve your chances of seeing Auto-linked spans, increase your sample rate or adjust your retention filters.</div>
 
@@ -139,7 +140,7 @@ For [DynamoDB Change Streams][29], Span Auto-linking supports the following oper
 - `BatchWriteItem`
 - `TransactWriteItems`
 
-<div class="alert alert-info">The <code>PutItem</code> operation requires that you set additional environment variables. For more information, see <a href="/serverless/aws_lambda/installation/python/#span-auto-linking">Instrumenting Python Serverless Applications</a> or <a href="/serverless/aws_lambda/installation/nodejs/#span-auto-linking">Instrumenting Node.js Serverless Applications</a>.</div>
+<div class="alert alert-info">The <code>PutItem</code> operation requires additional configuration. For more information, see <a href="/serverless/aws_lambda/installation/python/#span-auto-linking">Instrumenting Python Serverless Applications</a> or <a href="/serverless/aws_lambda/installation/nodejs/#span-auto-linking">Instrumenting Node.js Serverless Applications</a>.</div>
 
 ### S3 Change Notification Auto-linking
 
