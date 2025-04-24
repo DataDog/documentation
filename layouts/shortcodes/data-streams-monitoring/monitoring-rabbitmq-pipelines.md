@@ -8,4 +8,4 @@ instances:
 ```
 This ensures that all RabbitMQ graphs populate, and that you see detailed metrics for individual exchanges as well as queues.
 
-[101]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host
+[101]: /integrations/rabbitmq/?tab=host
