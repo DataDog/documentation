@@ -63,9 +63,9 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 
 {{% tab "API" %}}
 
-You can use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+You can use Datadog API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
-See the [update a pipeline][3] endpoint if you want to make any changes to an existing pipeline.
+Pipelines created using the API is read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [2]: /observability_pipelines/install_the_worker/
@@ -74,13 +74,12 @@ See the [update a pipeline][3] endpoint if you want to make any changes to an ex
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+You can use the [datadog_observability_pipeline][1] module to create a pipeline using Terraform. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
-See [Terraform update module][3] if you want to make any changes to an existing pipeline.
+Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][1] module to make any changes to an existing pipeline.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: /observability_pipelines/install_the_worker/
-[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 
 {{% /tab %}}
 {{< /tabs >}}
