@@ -29,7 +29,7 @@ further_reading:
 #### Product-Specific Events
 - [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
+- [App and API Protection (AAP)](#app-and-api-protection)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Quality Gates](#quality-gates-events)
@@ -51,6 +51,7 @@ further_reading:
 - [Private Action Runners](#private-action-runners)
 - [Observability Pipelines](#observability-pipelines)
 - [On-Call](#on-call)
+- [Network Device Monitoring](#network-device-monitoring)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -111,7 +112,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 | [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
-### Application Security Management
+### App and API Protection
 
 {{% audit-trail-asm %}}
 
@@ -364,6 +365,22 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Enable Container Image Trends][151]  | A user enabled Container Image Trends.  | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:enabled`  |
 | [Disable Container Image Trends][152] | A user disabled Container Image Trends. | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:disabled` |
 
+### Network Device Monitoring
+| Name                                  | Description of audit event                | Query in audit explorer                                                                    |
+|---------------------------------------|-------------------------------------------|--------------------------------------------------------------------------------------------|
+| [Modify NetFlow port mappings][153]   | A user modified NetFlow port mappings.    | `@evt.name:"Network Device Monitoring" @asset.type:netflow_port_mappings @action:modified` |
+| [Delete NetFlow port mappings][154]   | A user deleted NetFlow port mappings.     | `@evt.name:"Network Device Monitoring" @asset.type:netflow_port_mappings @action:deleted`  |
+| [Access network device profiles][155] | A user accessed network device profiles.  | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device details][156]  | A user accessed network device details.   | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network interfaces][157]      | A user accessed network interfaces.       | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network devices list][158]    | A user accessed the network devices list. | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device facets][159]   | A user accessed network device facets.    | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device groups][160]   | A user accessed network device groups.    | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device tags][161]     | A user accessed network device tags.      | `@evt.name:"Network Device Monitoring" @asset.type:network_device_tags @action:accessed`   |
+| [Modify network device tags][162]     | A user modified network device tags."     | `@evt.name:"Network Device Monitoring" @asset.type:network_device_tags @action:modified`   |
+| [Access network MIB leaves][163]      | A user accessed network MIB leaves.       | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -520,3 +537,14 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [150]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Adeleted%20%40asset.type%3Aoverride
 [151]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Aenabled
 [152]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Adisabled
+[153]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetflow_port_mappings%20%40action%3Amodified
+[154]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetflow_port_mappings%20%40action%3Adeleted
+[155]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[156]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[157]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[158]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[159]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[160]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[161]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Aaccessed
+[162]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Amodified
+[163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed

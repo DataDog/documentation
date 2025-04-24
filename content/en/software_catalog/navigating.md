@@ -88,7 +88,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks.
-- Are monitored and protected by [Application Security Management][8]
+- Are monitored and protected by [App and API Protection][8]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
