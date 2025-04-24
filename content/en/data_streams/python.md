@@ -36,19 +36,16 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Monitoring Kafka Pipelines
-Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
+{{% data_streams/monitoring-kafka-pipelines %}}
 
-### Monitoring SQS Pipelines
-Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+{{% data_streams/monitoring-sqs-pipelines %}}
 
 {{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
 
-### Monitoring SNS-to-SQS pipelines
-To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][7].
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 
 ### Manual instrumentation
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][6].
@@ -65,7 +62,5 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
-[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: https://pypi.org/project/kombu/
 [6]: /data_streams/manual_instrumentation/?tab=python
-[7]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

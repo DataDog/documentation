@@ -51,7 +51,7 @@ For installation instructions and lists of supported technologies, choose your l
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
-or choose your technology:
+or choose your technology to see what languages and libraries are supported:
 
 {{< partial name="data_streams/setup-technologies.html" >}}
 

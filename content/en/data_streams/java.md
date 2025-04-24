@@ -70,8 +70,7 @@ Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from you
 1. [Add the `dd-java-agent.jar` file][7] to your Kafka Connect workers. Ensure that you are using `dd-trace-java` [v1.44+][8].
 1. Modify your Java options to include the Datadog Java tracer on your worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
 
-### Monitoring SQS pipelines
-Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+{{% data_streams/monitoring-sqs-pipelines %}}
 
 {{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
@@ -123,7 +122,6 @@ Data Streams Monitoring can collect information from your self-hosted Kafka conn
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
-[3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: /data_streams/manual_instrumentation/?tab=java
 [6]: https://github.com/DataDog/dd-trace-java
