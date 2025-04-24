@@ -42,15 +42,7 @@ Data Streams Monitoring uses message headers to propagate context through Kafka 
 ### Monitoring SQS Pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
-### Monitoring RabbitMQ Pipelines
-The [RabbitMQ Integration][8] can provide detailed monitoring and metrics of your RabbitMQ deployments. For full compatibility with Data Streams Monitoring, we recommend configuring the integration as follows:
-```yaml
-instances:
-  - prometheus_plugin:
-      url: http://<HOST>:15692
-      unaggregated_endpoint: detailed?family=queue_coarse_metrics&family=queue_consumer_count&family=channel_exchange_metrics&family=channel_queue_exchange_metrics&family=node_coarse_metrics
-```
-This will ensure that all RabbitMQ graphs populate, and that you see detailed metrics for individual exchanges as well as queues.
+{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
@@ -77,4 +69,3 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [5]: https://pypi.org/project/kombu/
 [6]: /data_streams/manual_instrumentation/?tab=python
 [7]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
-[8]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host
