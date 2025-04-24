@@ -27,7 +27,7 @@ The following integrations are supported for High Availability in Network Device
 |-------------------------|------------------------------|
 | **Network Monitoring**  | [SNMP][1], [Network Path][2], [HTTP Check][3] |
 | **Vendor-Specific**     | [Cisco ACI][4], [Cisco SD-WAN][5], Versa |
-| **Virtualization**      | [vSphere][6], [OpenStack Controller][7] |
+| **Virtualization** (7.66)     | [vSphere][6], [OpenStack Controller][7] (7.66)|
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ The following integrations are supported for High Availability in Network Device
 
 ## Setup
 
-HA Agent is supported on Linux, Windows, and macOS. Are there separate setup instructions for each?
+HA Agent is supported on Linux, Windows, and macOS. **Are there separate setup instructions for each**?
 
 ### Installation
 
