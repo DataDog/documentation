@@ -262,7 +262,7 @@ Run the following command from your [command line][4] to start the Agent. Replac
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.63.3
+export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -291,7 +291,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.63.3
+FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.checks"='{"postgres": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
 ```
