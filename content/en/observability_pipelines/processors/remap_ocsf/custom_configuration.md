@@ -9,30 +9,13 @@ further_reading:
 
 ## Overview
 
-When you add a Remap OCSF processor with custom mapping, you can import your own OCSF mapping configuration.  This document explains how to format your custom configuration for the processor.
+When you add a Remap OCSF processor with custom mapping, you can import your own OCSF mapping configuration. This document explains how to format your custom configuration for the processor.
 
 ## Mapping descriptor
 
-The mapping descriptor tells the processor how to convert events into OCSF format. The mapping can be in either JSON or YAML format. Out-of-the-box mappings use the filename `mapping.yaml`.
+Your custom mapping file can be in JSON or YAML format and contains the mapping descriptor that tells the processor how to convert events into OCSF format. Out-of-the-box mappings use the filename `mapping.yaml`.
 
-The mapping descriptor has four sections:
-
-| Name       | Required  | Description                                                                                                           |
-|------------|-----------|-----------------------------------------------------------------------------------------------------------------------|
-| `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
-| `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class. See [Metadata section](#metadata-section) for details.                         |
-| `preprocess` | No        | Lists an ordered series of preprocessing steps. The preprocessors rework the data to allow the field-to-field mappings. Each entry is an object consisting of a `function` name (required) and parameters associated with that function. See [Preprocessors](#preprocessors) for more information. |
-| `mapping`    | Yes       | Lists an ordered series of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. See [Mapping](#mapping) for more information. Each mapping may have a `conversion` specified by a `lookup` table or post-processing `function`. See [Mapping lookup tables](#mapping-lookup-tables) and [Mapping functions](#mapping-functions) for more information. |
-
-### Metadata section
-
-The metadata section requires the following:
-
-| Name     | Required | Description                                                                                     |
-|----------|----------|-------------------------------------------------------------------------------------------------|
-| `version`  | Yes      | The target OCSF schema version.                                                                 |
-| `class`    | Yes      | The name of the OCSF event class. The event class ID, category name, and category ID are derived from this. |
-| `profiles` | Yes      | An array of profile names that are added to the event class schema.                             |
+The following are examples of the mapping descriptor:
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
@@ -66,18 +49,39 @@ mapping: []
 {{% /tab %}}
 {{< /tabs >}}
 
+The mapping descriptor has four sections:
+
+| Name       | Required  | Description                                                                                                           |
+|------------|-----------|-----------------------------------------------------------------------------------------------------------------------|
+| `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
+| `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class. See [Metadata section](#metadata-section) for details.                         |
+| `preprocess` | No        | An ordered list of preprocessing steps. The preprocessors reformat raw data from the sources so that the data can be converted to OCSF format based on `mapping`. Each preprocessor entry consists of a `function` and parameters associated with that function. See [Preprocessors](#preprocessors) for more information. |
+| `mapping`    | Yes       | An ordered list of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. See  for more information. Each [mapping](#mapping) may have a `conversion` specified by a [lookup table](#mapping-lookup-tables) or post-processing [mapping function](#mapping-functions). |
+
+### Metadata section
+
+The metadata section requires the following:
+
+| Name     | Required | Description                                                                                     |
+|----------|----------|-------------------------------------------------------------------------------------------------|
+| `version`  | Yes      | The target OCSF schema version.                                                                 |
+| `class`    | Yes      | The name of the OCSF event class. The event class ID, category name, and category ID are derived from this. |
+| `profiles` | Yes      | An array of profile names that are added to the event class schema.                             |
+
+
+
 
 ### Preprocessors
 
-Preprocessors rework the data to allow field-to-field mappings. Each entry in the `preprocess` section is an object consisting of a `function` name (required) and parameters associated with that function.
+Preprocessors reformats the data to allow field-to-field mappings. Each entry in the `preprocess` section is an object consisting of a `function` and parameters associated with that function.
 
 #### `parse_csv`
 
 The `parse_csv` preprocessor:
 
-1. Extracts a `source` field.
+1. Extracts data in the `source` field.
 1. Parses `source` as CSV, maps the array of values to an object based on a list of field names in `columns`.
-1. Inserts it at `dest`.
+1. Inserts the mapped data in the `dest` field.
 
 Fields with a corresponding `null` column name are dropped. One of the field names may have a wildcard `*` in which case it is assigned a string containing all the text from the fields that remain after those before and after have been mapped.
 
@@ -90,6 +94,7 @@ preprocess:
   source: message
   dest: .
   skip_empty: true
+  columns:
   - null
   - receive_time
   - serial
@@ -183,7 +188,7 @@ mapping:
 
 #### Implicit mappings
 
-All enumerated name or label fields identified in the OCSF schema are converted to their sibling `id` field. For example, the string field `severity` is automatically converted to the numeric field `severity_id` based on the standard enum value table defined in the OCSF schema. If no matching value is found in the lookup table, the `id` field is set to `99` to represent `Other`.
+All enumerated name or label fields identified in the OCSF schema are converted to their sibling `id` field. For example, the string field `severity` is automatically converted to the numeric field `severity_id` based on the values defined in the OCSF schema. See `severity_id` in [Authentication [3002]][1] for the OCSF values. If no matching value is found in the lookup table, the `id` field is set to `99` to represent `Other`.
 
 If one of the listed `profiles` in the metadata section is `datetime`, the mapping
 automatically has all numeric timestamps identified in the OCSF schema converted into the sibling field `{DEST}_dt`. For example, the numeric `time` field is converted into `time_dt`, which contains a string representation of that timestamp. No additional work is required to support the `datetime` profile.
@@ -366,3 +371,5 @@ mapping:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: https://schema.ocsf.io/1.4.0/classes/authentication?extensions=
