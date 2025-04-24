@@ -101,7 +101,7 @@ notifications:
             }
   triggers:
     trigger.cd-visibility-trigger: |
-      - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'OutOfSync'] and app.status.health.status in ['Healthy', 'Degraded']
+      - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
         send: [cd-visibility-template]
       - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
         send: [cd-visibility-template]
