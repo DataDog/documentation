@@ -11,7 +11,7 @@ Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage p
 
 This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets, GCS buckets, and Azure Storage Accounts.
 
-Access your Storage Monitoring data by navigating to **Infrastructure -> Storage Monitoring**.
+Access your Storage Monitoring data by navigating to **Infrastructure > Storage Monitoring**.
 
 ## Setup for Amazon S3
 
@@ -382,7 +382,7 @@ curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh \
   | bash -s -- <client_id> <subscription_id> <comma_separated_storage_account_names>
 ```
 
-Ensure your [shell environment][302] is set to Bash before running the script. Ensure that the you replace the various placeholder inputs with the correct values:
+Before running the script, set your [shell environment][302] to Bash and replace the various placeholder inputs with the correct values:
 - `<client_id>`: The client ID of an App Registration already set up using the [Datadog Azure integration][302]
 - `<subscription_id>`: The subscription ID of the Azure subscription containing the storage accounts
 - `<comma_separated_storage_account_names>`: A comma-separated list of the storage accounts you want to monitor. For example, `storageaccount1,storageaccount2`
@@ -395,12 +395,12 @@ Ensure your [shell environment][302] is set to Bash before running the script. E
 
 {{% tab "Azure Portal" %}}
 
-For Each Storage Account you wish to monitor:
+For Each Storage Account you wish to monitor, follow all of the steps here:
 
 
 #### Create a blob inventory policy
 1. In the Azure portal, navigate to your Storage Account.
-2. Go to **Data management** -> **Blob inventory**.
+2. Go to **Data management** > **Blob inventory**.
 3. Click **Add**.
 4. Configure the policy:
    - Name: **datadog-storage-monitoring**
@@ -423,10 +423,10 @@ For Each Storage Account you wish to monitor:
 
 #### Add the role assignment
 1. In the Azure portal, navigate to your Storage Account.
-2. Go to **Data storage** -> **Containers**.
+2. Go to **Data storage** > **Containers**.
 3. Click on the **datadog-storage-monitoring** container.
 4. Click on **Access control (IAM)** in the left-hand menu.
-5. Click **Add** -> **Add role assignment**.
+5. Click **Add** > **Add role assignment**.
 6. Fill out the role assignment:
     - Role: Select **Storage Blob Data Reader**. Click **Next**.
     - Assign access to: **User, group, or service principal**.
@@ -439,7 +439,7 @@ For Each Storage Account you wish to monitor:
 
 ### Post-Installation
 
-Once you finish with the above steps, fill out the [post-setup form][310].
+After you finish with the above steps, fill out the [post-setup form][310].
 
 [310]: https://forms.gle/WXFbGyBwWfEo3gbM7
 
