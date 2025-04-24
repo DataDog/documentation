@@ -43,7 +43,7 @@ Click the following buttons to filter the detection rules. Security detection ru
 [1]: /security/detection_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_security_management/misconfigurations/
-[4]: /security/threats/
+[4]: /security/workload_protection/
 [5]: /security/application_security/
 [6]: /security/cloud_security_management/identity_risks/
 [7]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox

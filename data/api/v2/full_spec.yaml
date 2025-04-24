@@ -14799,6 +14799,13 @@ components:
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
           type: boolean
+        is_per_project_quota_enabled:
+          default: false
+          description: When enabled, Datadog applies the `X-Goog-User-Project` header,
+            attributing Google Cloud billing and quota usage to the project being
+            monitored rather than the default service account project.
+          example: true
+          type: boolean
         is_resource_change_collection_enabled:
           default: false
           description: When enabled, Datadog scans for all resource change data in
