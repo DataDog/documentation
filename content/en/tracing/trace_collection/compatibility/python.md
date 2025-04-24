@@ -17,23 +17,34 @@ further_reading:
 
 The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
-Two Python APM Client library release branches are supported:
+The following Python APM Client library release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `>=1.0,<2` | Maintenance          |
-| `>=2.0,<3` | General Availability |
+| Release    | Support level        | Minimum Datadog Agent |
+|------------|----------------------|-----------------------|
+|    `<2`    | End of Life          |                       |
+| `>=2.0,<3` | Maintenance          | 7.28                  |
+| `>=3.0,<4` | General Availability | 7.28                  |
+
+Support levels are defined by the following:
+| Level                | Policy |
+|----------------------|--------|
+| General Availability | Bug fixes are released on the most recent General Availability minor release line. New features are released periodically as minor version changes. Critical fixes are backported to the three most recent minor release lines. |
+| Maintenance          | The most recent Maintenance minor release line receives critical fixes. |
+| End of Life (EOl)    | Receives no updates or support | 
 
 The Python APM Client library supports the following Python runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
-|---------|-----------------------|---------|-----------------|---------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
-| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
+|---------|-----------------------|---------|-----------------|----------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
+| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   | 
 
 ## Integrations
 
