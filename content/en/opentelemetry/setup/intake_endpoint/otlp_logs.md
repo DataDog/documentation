@@ -15,8 +15,8 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP logs intake endpoint is in Preview.
-{{< /callout >}} 
+  The Datadog OTLP logs intake endpoint is in Preview. To request access, contact your account representative.
+{{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
 <div class="alert alert-warning">Datadog OTLP logs intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -117,13 +117,13 @@ service:
 If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP logs intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP logs intake endpoint.  
-   **Solution**: Verify that you are using a valid API key with appropriate permissions.
+   **Solution**: To request access, contact your account representative.
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
 
 [3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter   
+[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 {{< /site-region >}}
 
 ## Further reading
