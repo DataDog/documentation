@@ -6,6 +6,9 @@ title: Amazon SNS for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+**Note:** Java requires additional setup: [read more](https://docs.datadoghq.com/data_streams/java/?tab=environmentvariables#monitoring-sns-to-sqs-pipelines)
+
 ### Support for Amazon SNS in Data Streams Monitoring
 
 <table>
@@ -50,8 +53,4 @@ title: Amazon SNS for Data Streams Monitoring
   </tbody>
 </table>
 
-### Note
-- To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][2].
-
 [1]: /agent
-[2]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

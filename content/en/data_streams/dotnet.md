@@ -32,16 +32,13 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Monitoring Kafka Pipelines
-Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
+{{% data_streams/monitoring-kafka-pipelines %}}
 
-### Monitoring SQS pipelines
-Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+{{% data_streams/monitoring-sqs-pipelines %}}
 
 {{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
-### Monitoring SNS-to-SQS pipelines
-To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][12].
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 
 ### Monitoring Azure Service Bus
 
@@ -60,7 +57,6 @@ Setting up Data Streams Monitoring for Azure Service Bus applications requires a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
-[2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [3]: https://www.nuget.org/packages/Confluent.Kafka
 [4]: https://www.nuget.org/packages/RabbitMQ.Client
 [5]: https://www.nuget.org/packages/AWSSDK.SQS
@@ -70,4 +66,3 @@ Setting up Data Streams Monitoring for Azure Service Bus applications requires a
 [9]: #monitoring-azure-service-bus
 [10]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
 [11]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
-[12]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

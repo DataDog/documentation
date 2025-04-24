@@ -45,7 +45,4 @@ title: RabbitMQ for Data Streams Monitoring
   </tbody>
 </table>
 
-### Note
-- Data Streams Monitoring uses message headers to propagate context through RabbitMQ streams. The exchange name is tracked as part of the message metadata.
-
 [1]: /agent

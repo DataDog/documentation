@@ -6,6 +6,8 @@ title: Kafka for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-kafka-pipelines %}}
+
 ### Support for Kafka in Data Streams Monitoring
 
 <table>

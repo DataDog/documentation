@@ -6,6 +6,8 @@ title: Amazon SQS for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-sqs-pipelines %}}
+
 ### Support for Amazon SQS in Data Streams Monitoring
 
 <table>
@@ -50,8 +52,4 @@ title: Amazon SQS for Data Streams Monitoring
   </tbody>
 </table>
 
-### Note
-- Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
-
 [1]: /agent
-[2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
