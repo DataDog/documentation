@@ -59,7 +59,7 @@
                                             },
                                             "group_by": [],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name ci_partial_retry:false @duration:>0 $repository_id $git.branch -@ci.allowed_to_fail:true"
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  @duration:>0 $repository_id $git.branch -@ci.allowed_to_fail:true"
                                             }
                                         }
                                     ],
@@ -111,7 +111,7 @@
                                         },
                                         "group_by": [],
                                         "search": {
-                                            "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name @duration:>0 ci_partial_retry:false $repository_id $git.branch"
+                                            "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name @duration:>0  $repository_id $git.branch"
                                         }
                                     }
                                 }
@@ -167,7 +167,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -200,7 +200,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -233,7 +233,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         }
                                     ],
@@ -330,7 +330,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -363,7 +363,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
                                             }
                                         },
                                         {
@@ -396,7 +396,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.provider.name:gitlab ci_partial_retry:false @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch @ci.critical_path.parallelized:true"
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch @ci.critical_path.parallelized:true"
                                             }
                                         }
                                     ],
@@ -478,7 +478,7 @@
                                                 }
                                             ],
                                             "search": {
-                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name ci_partial_retry:false $repository_id $git.branch"
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  $repository_id $git.branch"
                                             }
                                         }
                                     ]
@@ -548,72 +548,6 @@
     ],
     "layout_type": "ordered",
     "notify_list": [],
-    "template_variable_presets": [
-        {
-            "name": "GitLab",
-            "template_variables": [
-                {
-                    "name": "ci_provider",
-                    "value": "gitlab"
-                }
-            ]
-        },
-        {
-            "name": "GitLab - dd-go",
-            "template_variables": [
-                {
-                    "name": "repository_id",
-                    "value": "gitlab.ddbuild.io/DataDog/dd-go"
-                },
-                {
-                    "name": "ci_provider",
-                    "value": "gitlab"
-                }
-            ]
-        },
-        {
-            "name": "GitLab - dd-go - tests",
-            "template_variables": [
-                {
-                    "name": "repository_id",
-                    "value": "gitlab.ddbuild.io/DataDog/dd-go"
-                },
-                {
-                    "name": "ci_provider",
-                    "value": "gitlab"
-                },
-                {
-                    "name": "job_name",
-                    "value": "*test*"
-                }
-            ]
-        },
-        {
-            "name": "GitLab - logs-backend",
-            "template_variables": [
-                {
-                    "name": "repository_id",
-                    "value": "gitlab.ddbuild.io/DataDog/logs-backend"
-                },
-                {
-                    "name": "ci_provider",
-                    "value": "gitlab"
-                }
-            ]
-        },
-        {
-            "name": "GitLab - web-ui",
-            "template_variables": [
-                {
-                    "name": "repository_id",
-                    "value": "gitlab.ddbuild.io/DataDog/web-ui"
-                },
-                {
-                    "name": "ci_provider",
-                    "value": "gitlab"
-                }
-            ]
-        }
-    ],
+    "template_variable_presets": [],
     "reflow_type": "fixed"
 }
