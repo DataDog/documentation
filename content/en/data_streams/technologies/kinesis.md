@@ -6,6 +6,8 @@ title: Amazon Kinesis for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-kinesis-pipelines %}}
+
 ### Support for Amazon Kinesis in Data Streams Monitoring
 
 <table>
@@ -49,8 +51,5 @@ title: Amazon Kinesis for Data Streams Monitoring
     </tr>
   </tbody>
 </table>
-
-### Note
-- There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
 
 [1]: /agent
