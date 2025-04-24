@@ -21,7 +21,7 @@ author:
   sales_email: david.bouchare@datadoghq.com
   support_email: david.bouchare@datadoghq.com
 categories:
-- メトリクス
+- モニター
 - ネットワーク
 custom_kind: integration
 dependencies:
@@ -77,7 +77,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### 設定
 
 1. sendmail のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sendmail.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sendmail.d/conf.yaml][5] を参照してください。
 
