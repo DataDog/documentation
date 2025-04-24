@@ -115,10 +115,6 @@ You **must** run an analysis of your repository on the default branch before res
 {{% /tab %}}
 {{< /tabs >}}
 
-Start the application by running:
-
-{{% tabs %}}
-
 ## Customize your configuration
 
 By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
