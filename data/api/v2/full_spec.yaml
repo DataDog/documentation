@@ -12945,6 +12945,7 @@ components:
           $ref: '#/components/schemas/EscalationPolicyDataAttributes'
         id:
           description: Specifies the unique identifier of the escalation policy.
+          example: ab000000-0000-0000-0000-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/EscalationPolicyDataRelationships'
@@ -14798,6 +14799,13 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          type: boolean
+        is_per_project_quota_enabled:
+          default: false
+          description: When enabled, Datadog applies the `X-Goog-User-Project` header,
+            attributing Google Cloud billing and quota usage to the project being
+            monitored rather than the default service account project.
+          example: true
           type: boolean
         is_resource_change_collection_enabled:
           default: false
@@ -28655,6 +28663,7 @@ components:
           $ref: '#/components/schemas/ScheduleCreateRequestDataType'
       required:
       - type
+      - attributes
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
@@ -49812,7 +49821,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on call escalation policy
+      summary: Create on-call escalation policy
       tags:
       - On-Call
       x-given:
@@ -49871,7 +49880,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on call escalation policy
+      summary: Delete on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
@@ -49915,7 +49924,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on call escalation policy
+      summary: Get on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
@@ -49965,7 +49974,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on call escalation policy
+      summary: Update on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
