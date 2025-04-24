@@ -53,15 +53,15 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 ## Route logs to Snowflake using the Amazon S3 destination
 
 You can route logs from Observability Pipelines to Snowflake using the Amazon S3 destination by configuring Snowpipe in Snowflake to automatically ingest those logs. To set this up:
-1. Configure [Log Archives](#configure-log-archives).
-1. [Set up a pipeline][6] to use Amazon S3 as the log destination. When logs are collected by Observability Pipelines, they are written to an S3 bucket using the same configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline), which includes AWS authentication, region settings, and permissions.
-1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][5] for instructions. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing.
+1. Configure [Log Archives](#configure-log-archives) if you want to [archive][2] and [rehydrate][4] your logs. If you only want to send logs to Amazon S3, skip to step 2.
+1. [Set up a pipeline][5] to use Amazon S3 as the log destination. When logs are collected by Observability Pipelines, they are written to an S3 bucket using the same configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline), which includes AWS authentication, region settings, and permissions.
+1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing.
 
 ## How the destination works
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][4] for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------| ----------------| --------------------|
@@ -70,6 +70,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: /observability_pipelines/archive_logs/
 [2]: /logs/log_configuration/archives/
 [3]: /integrations/amazon_web_services/#setup
-[4]: /observability_pipelines/destinations/#event-batching
-[5]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
-[6]: /observability_pipelines/set_up_pipelines/
+[4]: /logs/log_configuration/rehydrating/
+[5]: /observability_pipelines/set_up_pipelines/
+[6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
+[7]: /observability_pipelines/destinations/#event-batching
