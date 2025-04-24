@@ -46,7 +46,7 @@ instances:
       url: http://<HOST>:15692
       unaggregated_endpoint: detailed?family=queue_coarse_metrics&family=queue_consumer_count&family=channel_exchange_metrics&family=channel_queue_exchange_metrics&family=node_coarse_metrics
 ```
-This will ensure that all RabbitMQ dashboards populate, and that you see detailed metrics for individual exchanges as well as queues.
+This will ensure that all RabbitMQ graphs populate, and that you see detailed metrics for individual exchanges as well as queues.
 
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][12].

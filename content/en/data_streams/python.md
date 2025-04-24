@@ -50,7 +50,7 @@ instances:
       url: http://<HOST>:15692
       unaggregated_endpoint: detailed?family=queue_coarse_metrics&family=queue_consumer_count&family=channel_exchange_metrics&family=channel_queue_exchange_metrics&family=node_coarse_metrics
 ```
-This will ensure that all RabbitMQ dashboards populate, and that you see detailed metrics for individual exchanges as well as queues.
+This will ensure that all RabbitMQ graphs populate, and that you see detailed metrics for individual exchanges as well as queues.
 
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
