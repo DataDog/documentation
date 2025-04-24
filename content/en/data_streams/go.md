@@ -30,6 +30,16 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 ### Monitoring Kafka Pipelines
 Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
 
+### Monitoring RabbitMQ Pipelines
+The [RabbitMQ Integration][10] can provide detailed monitoring and metrics of your RabbitMQ deployments. For full compatibility with Data Streams Monitoring, we recommend configuring the integration as follows:
+```yaml
+instances:
+  - prometheus_plugin:
+      url: http://<HOST>:15692
+      unaggregated_endpoint: detailed?family=queue_coarse_metrics&family=queue_consumer_count&family=channel_exchange_metrics&family=channel_queue_exchange_metrics&family=node_coarse_metrics
+```
+This will ensure that all RabbitMQ dashboards populate, and that you see detailed metrics for individual exchanges as well as queues.
+
 #### Automatic Instrumentation
 
 Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
@@ -141,3 +151,4 @@ if ok {
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
 [8]: https://github.com/confluentinc/confluent-kafka-go
 [9]: https://github.com/Shopify/sarama
+[10]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host
