@@ -8,10 +8,10 @@ aliases:
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
-  text: "Cloud Security Management Misconfigurations"
+  text: "Cloud Security Misconfigurations"
 - link: "/security/threats/"
   tag: "Documentation"
-  text: "Cloud Security Management Threats"
+  text: "Workload Protection"
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
@@ -21,9 +21,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-Resource Catalog is not available in this site.
-</div>
+<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -32,11 +30,11 @@ Datadog Resource Catalog is the central hub of all your infrastructure resources
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
-{{< img src="/infrastructure/resource_catalog/resource-catalog-doc_2.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_new.png" alt="The Resource Catalog page showing the Catalog tab, grouped by resource type" width="100%">}}
 
 ### Use Cases
 
-#### Governance and reporting
+#### Resource policies and reporting
 - Gain visibility into the compliance of your infrastructure with regards to ownership, versioning, migrations, and so on.
 - Facilitate good tagging practices to optimize cross-telemetry insights.
 - Reduce application risks by identifying and fixing security vulnerabilities in the dependencies of your services.
@@ -54,13 +52,13 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security][1] for each cloud account.
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
 **Note**: 
 - Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
-- Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
+- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the Cloud Security product.
 
 ## Browse the Resource Catalog
 
@@ -82,7 +80,7 @@ The Security tab provides a security-centric view of your infrastructure and all
 
 By viewing misconfigurations, signals, identity risks, and vulnerabilities associated with resources, you can address security concerns without needing to spend time and effort to gather additional security context.
 
-{{< img src="/infrastructure/resource_catalog/resource-catalog_security_tab.png" alt="The Resource Catalog page showing the Security tab, grouped by resource type" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource-catalog_security_tab_2.png" alt="The Resource Catalog page showing the Security tab, grouped by resource type" width="100%">}}
 
 ### List view
 
@@ -90,7 +88,7 @@ Under the Security tab, you can filter, sort, and group resources in the Resourc
 
 To filter the list to see a subset of resources you're most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the **Group by** dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
 
-{{< img src="/infrastructure/resource_catalog/resource-catalog_security_tab_list.png" alt="Resource Catalog Security tab sorting by the list view" >}}
+{{< img src="/infrastructure/resource_catalog/resource-catalog_security_tab_list_2.png" alt="Resource Catalog Security tab sorting by the list view" >}}
 
 **Note**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only the resources assigned to those teams. In addition, you can export your Resource Catalog list as a CSV file from the top right corner of the list.
 
@@ -102,7 +100,7 @@ To access the relevant cloud console for any resource in your list, click on a r
 
 The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the **Fill by** selector to fill the map elements by Misconfigurations or Signals.
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_map_view.png" alt="Resource Catalog map view filled by misconfigurations, grouped by resource type" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_map_view_2_.png" alt="Resource Catalog map view filled by misconfigurations, grouped by resource type" width="100%">}}
 
 ## Investigate a host or resource
 

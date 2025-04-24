@@ -56,9 +56,9 @@ See the full feature comparison table below.
 
 | Feature | RUM | Product Analytics |
 |---------|-----|-------------------|
-| Data retention | 30 days | 15 months |
-| Session, View, and Action events | {{< X >}} |  {{< X >}} |
-| Error, Resource, and Long Task events | {{< X >}} | |
+| Data retention | 15 to 30 days | 15 months |
+| Session, View, and Action events | {{< X >}} (with 30-day retention) |  {{< X >}} |
+| Error, Resource, Long Task, and Vitals events | {{< X >}} (with 30-day retention for Errors, 15-day for the rest) | |
 | User attributes | {{< X >}} | {{< X >}} |
 | Frustration signals | {{< X >}} | {{< X >}} |
 | Core Web Vitals and Mobile Vitals | {{< X >}} | {{< X >}} |

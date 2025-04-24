@@ -5,17 +5,13 @@ further_reading:
 - link: "/dashboards/guide/using_vega_lite_in_wildcard_widgets/"
   tag: "Documentation"
   text: "Learn more about using Vega-Lite with Wildcard widgets"
+- link: "https://docs.datadoghq.com/dashboards/guide/wildcard_examples"
+  tag: "Documentation"
+  text: "Wildcard Widget Examples"
 - link: "https://vega.github.io/vega-lite/tutorials/getting_started.html"
   tag: "Vega Tutorial"
   text: "Introduction to Vega-Lite"
-- link: "https://vega.github.io/vega-lite/tutorials/explore.html"
-  tag: "Vega Tutorial"
-  text: "Exploring Data"
 ---
-
-{{< callout url="https://forms.gle/tLdC1AqhVizD3wCp7" btn_hidden="false" header="Access the Preview!">}}
-Wildcard widgets are in Preview. Sign up for access!
-{{< /callout >}}
 
 ## Overview
 

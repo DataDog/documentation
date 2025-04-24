@@ -85,7 +85,7 @@ You can add a scanner to a new AWS account or an existing AWS account.
 1. Select the AWS region in the dropdown menu.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection. **Note**: Only users with `api_keys_write` permissions can enable Remote Configuration for individual API keys.
 1. If you want to send AWS logs to Datadog, leave **Yes** selected.
-1. Select **Yes** if you want to use Datadog Cloud Security Management.
+1. Select **Yes** if you want to use Datadog Cloud Security.
 1. **Enable Sensitive Data Scanner** is automatically selected by default. This tells CloudFormation to add the AWS Managed SecurityAudit policy to your Datadog AWS Integration role and enable Agentless Scanning to start scanning your cloud data stores.
 1. Click **Launch CloudFormation Template**.
 
