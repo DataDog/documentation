@@ -6,7 +6,7 @@ title: Kafka for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
-### Supported Languages for Kafka Technologies
+### Support for Kafka in Data Streams Monitoring
 
 | Technology | Language(s) | Minimal tracer version | Recommended tracer version |
 |---|---|---|--|
@@ -18,9 +18,8 @@ title: Kafka for Data Streams Monitoring
 |[Confluent.Kafka][7] | .NET           | 2.28.0                 | 2.41.0 or later            |
 
 
-{{< callout url="#" btn_hidden="true" header="Disclaimer">}}
-[Kafka Streams][8] is partially supported for Java, and can lead to latency measurements being missed in many cases
-{{< /callout >}}
+### Note
+- [Kafka Streams][8] is partially supported for Java, and can lead to latency measurements being missed in many cases
 
 
 [1]: /agent
