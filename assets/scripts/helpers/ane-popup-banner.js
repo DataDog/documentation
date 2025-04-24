@@ -1,6 +1,4 @@
-export function initializeAnePopupBanner() {
-  const e = document.createElement('div');
-  e.id = 'TxFnCdowUQWB';
-  e.style.display = 'none';
-  document.body.appendChild(e);
-}
+const e = document.createElement('div');
+e.id = 'TxFnCdowUQWB';
+e.style.display = 'none';
+document.body.appendChild(e);

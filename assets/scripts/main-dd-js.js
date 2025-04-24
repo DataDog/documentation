@@ -18,6 +18,7 @@ import './components/bootstrap-dropdown-custom';
 import './components/navbar'; // should move this to websites-modules
 import './components/mobile-nav'; // should move this to websites-modules
 import './components/accordion-auto-open';
+import './components/signup';
 
 // Add Bootstrap Tooltip across docs
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
