@@ -107,7 +107,7 @@ Kinesis에는 컨텍스트를 전파하고 Kinesis 스트림을 통해 메시지
 ### 모니터링 커넥터
 
 #### Confluent Cloud 커넥터
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 #### 셀프호스팅 Kafka 커넥터
 

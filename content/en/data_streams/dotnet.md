@@ -50,7 +50,7 @@ Setting up Data Streams Monitoring for Azure Service Bus applications requires a
 ### Monitoring connectors
 
 #### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## Further reading
 
