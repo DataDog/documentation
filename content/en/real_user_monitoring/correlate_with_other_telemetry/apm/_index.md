@@ -444,8 +444,9 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 To view traces from the RUM Explorer:
 
-1. In the RUM Explorer, navigate to your [list of sessions][21] and click on a session with traces available (you can query for `@_dd.trace_id:*`).
-1. The session panel appears with a request duration breakdown and includes a flame graph of each span, as well as a link to **View Trace in APM**.
+1. Navigate to your [list of sessions][21] and click on a session that has traces available. You can also query for sessions with traces by using`@_dd.trace_id:*`.
+
+When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
 
 ## Traces to RUM Explorer
 
@@ -453,8 +454,8 @@ To view traces from the RUM Explorer:
 
 To view the RUM event from Traces:
 
-1. Within a trace view, click **VIEW** to sell all traces created during the view life span, or **RESOURCE** to see traces associated with the specific resource from the Overview tab view.
-1. Click **See View in RUM** or **See Resource in RUM**. You are taken to the view with the trace(s).
+1. Within a trace view, click **VIEW** to see all traces created during the view’s lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
+1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
 
 ## Supported libraries
 
@@ -686,11 +687,11 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## Affect on APM quotas
+## Effect on APM quotas
 
 Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
-## Traces retention
+## Trace retention
 
 These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
