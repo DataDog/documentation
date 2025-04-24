@@ -1,5 +1,5 @@
 ### Monitoring RabbitMQ pipelines
-The [RabbitMQ integration][1] can provide detailed monitoring and metrics of your RabbitMQ deployments. For full compatibility with Data Streams Monitoring, Datadog recommends configuring the integration as follows:
+The [RabbitMQ integration][101] can provide detailed monitoring and metrics of your RabbitMQ deployments. For full compatibility with Data Streams Monitoring, Datadog recommends configuring the integration as follows:
 ```yaml
 instances:
   - prometheus_plugin:
@@ -8,4 +8,4 @@ instances:
 ```
 This ensures that all RabbitMQ graphs populate, and that you see detailed metrics for individual exchanges as well as queues.
 
-[8]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host
+[101]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host
