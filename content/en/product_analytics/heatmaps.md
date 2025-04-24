@@ -85,16 +85,15 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 ## Backgrounds
 
-A background is a snapshot of a Session Replay. Each heatmap fetches the 20 backgrounds that triggered the most actions during a given session. Changing the background shows different results depending on the action event selected. 
+A snapshot is the state of a Session Replay at a particular point in time. Changing the snapshot shows different results, depending on the snapshot selected. You can use the **Change Snapshot** button to select a particular snapshot in a replay for your heatmap.
 
-**Note**: A heatmap's list of backgrounds cannot be modified.
 
 To select a background snapshot:
 
-1. From the heatmap view, click the **Choose Snapshot** button.
+1. From the heatmap view, click the **Change Snapshot** button.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-snapshot-zoomed.png" alt="Click the Change Snapshot button to change the background snapshot the heatmap is based on." style="width:100%;">}}
-1. Click an action event on the right to select a different background for your heatmap.
+1. Click an action event on the right to select a different snapshot for your heatmap.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-of-events.png" alt="List of action events for the session replay." style="width:100%;">}}
 
