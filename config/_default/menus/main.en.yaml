@@ -6400,6 +6400,36 @@ menu:
       parent: application_security
       identifier: appsec_howitworks
       weight: 3
+    - name: Threat Intelligence
+      url: security/application_security/how-it-works/threat-intelligence
+      parent: appsec_howitworks
+      identifier: threats_threat_intelligence
+      weight: 1
+    - name: Trace Qualification
+      url: security/application_security/how-it-works/trace_qualification
+      parent: appsec_howitworks
+      identifier: trace_qualification
+      weight: 2
+    - name: User Monitoring and Protection
+      url: security/application_security/how-it-works/add-user-info
+      parent: appsec_howitworks
+      identifier: user_monitoring_and_protection
+      weight: 3
+    - name: Protection
+      url: security/application_security/how-it-works/protection
+      parent: appsec_howitworks
+      identifier: protection
+      weight: 4
+    - name: Attack Summary
+      url: security/application_security/overview
+      parent: application_security
+      identifier: application_security_overview
+      weight: 5
+    - name: Security Signals
+      url: security/application_security/security_signals
+      parent: application_security
+      identifier: application_security_security_signals
+      weight: 6
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security
@@ -6465,11 +6495,6 @@ menu:
       parent: appsec_threats
       identifier: threats_security_signals
       weight: 719
-    - name: Threat Intelligence
-      url: security/application_security/threats/threat-intelligence/
-      parent: appsec_threats
-      identifier: threats_threat_intelligence
-      weight: 720
     - name: Trace Qualification
       url: security/application_security/threats/trace_qualification/
       parent: appsec_threats
