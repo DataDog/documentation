@@ -50,7 +50,7 @@ Order issues in the list using one of these options:
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
-Some notable error attributes are:
+Some commonly used error attributes include:
 | Attribute | Description |
 |-----------|-------------|
 | `error.message`| The message associated with the error. |
