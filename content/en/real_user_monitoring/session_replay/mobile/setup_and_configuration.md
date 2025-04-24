@@ -389,6 +389,17 @@ By default, Session Replay starts recording automatically. However, if you prefe
 {{< /code-block >}}
 
 {{% /tab %}}
+
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+        .startRecordingImmediately(false)
+        .build()
+    // Do something
+    SessionReplay.startRecording()
+    SessionReplay.stopRecording()
+{{< /code-block >}}
+{{% /tab %}}
+
 {{% tab "React Native" %}}
 {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
 import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
