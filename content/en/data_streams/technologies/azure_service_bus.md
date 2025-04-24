@@ -6,6 +6,8 @@ title: Azure Service Bus for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-azure-service-bus %}}
+
 ### Support for Azure Service Bus in Data Streams Monitoring
 
 <table>
@@ -20,7 +22,7 @@ title: Azure Service Bus for Data Streams Monitoring
   <tbody>
     <tr>
       <td><a href="https://docs.datadoghq.com/data_streams/dotnet">.NET</a></td>
-      <td><a href="https://www.nuget.org/packages/Azure.Messaging.ServiceBus">Azure.Messaging.ServiceBus</a> <b>(requires <a href="https://docs.datadoghq.com/data_streams/technologies/azure_service_bus#monitoring-azure-service-bus">additional setup</a>)</b></td>
+      <td><a href="https://www.nuget.org/packages/Azure.Messaging.ServiceBus">Azure.Messaging.ServiceBus</a></td>
       <td>2.53.0 </td>
       <td>2.53.0 or later </td>
     </tr>
