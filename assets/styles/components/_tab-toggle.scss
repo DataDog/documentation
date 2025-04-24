@@ -98,6 +98,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     list-style-type: none;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
     margin: 0;
     position: relative;
@@ -126,6 +127,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       padding: 0;
       position: relative;
       flex: 0 0 auto;
+      white-space: nowrap;
 
       &:before {
         content: '' !important;
@@ -227,6 +229,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
       li {
         margin-bottom: 6px;
+        flex: 0 0 auto;
 
         &.active a {
           color: white;

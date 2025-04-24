@@ -33,35 +33,24 @@ const initCodeTabs = () => {
             const tabsNav = container.querySelector('.nav-tabs');
             if (!tabsNav) return;
 
-            // Get the total width of all tabs including gaps
-            const tabsList = Array.from(tabsNav.querySelectorAll('li'));
-            const totalTabsWidth = tabsList.reduce((sum, tab) => {
-                const style = window.getComputedStyle(tab);
-                const width = tab.offsetWidth;
-                const marginLeft = parseFloat(style.marginLeft);
-                const marginRight = parseFloat(style.marginRight);
-                const paddingLeft = parseFloat(style.paddingLeft);
-                const paddingRight = parseFloat(style.paddingRight);
-                return sum + width + marginLeft + marginRight + paddingLeft + paddingRight;
-            }, 0);
+            // Get the first and last tab elements
+            const tabs = tabsNav.querySelectorAll('li');
+            if (tabs.length === 0) return;
 
-            // Get the container width, accounting for padding
-            const containerStyle = window.getComputedStyle(tabsNav);
-            const containerWidth = tabsNav.offsetWidth -
-                parseFloat(containerStyle.paddingLeft) -
-                parseFloat(containerStyle.paddingRight);
+            const firstTab = tabs[0];
+            const lastTab = tabs[tabs.length - 1];
 
-            // Use a larger buffer (60px) and add hysteresis to prevent flickering
-            const BUFFER = 60;
+            // Check if the last tab is on the same line as the first tab
+            const firstTabRect = firstTab.getBoundingClientRect();
+            const lastTabRect = lastTab.getBoundingClientRect();
+
+            // If the last tab's top position is greater than the first tab's top position,
+            // it means the tabs have wrapped to a new line
+            const isWrapped = lastTabRect.top > firstTabRect.top;
             const currentLayout = container.classList.contains('tabs-wrap-layout');
 
-            // If currently in wrap layout, require more space to switch back
-            const threshold = currentLayout ? containerWidth - BUFFER : containerWidth - (BUFFER * 0.8);
-
-            const shouldWrap = totalTabsWidth > threshold;
-
-            if (shouldWrap !== currentLayout) {
-                if (shouldWrap) {
+            if (isWrapped !== currentLayout) {
+                if (isWrapped) {
                     container.classList.add('tabs-wrap-layout');
                 } else {
                     container.classList.remove('tabs-wrap-layout');
