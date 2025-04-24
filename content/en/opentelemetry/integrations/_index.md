@@ -8,6 +8,14 @@ further_reading:
 
 This page covers Datadog-supported OpenTelemetry (OTel) integrations. These integrations allow you to collect and monitor your observability data using OpenTelemetry in Datadog.
 
+<div class="alert alert-info">
+  <strong>Metric Pricing</strong><br>
+  <i>Standard</i> metrics are collected at no extra cost. These are:<br>
+  &hyphen; Documented in the <strong>Data collected</strong> table for each integration.<br>
+  &hyphen; Defined in the <code>metadata.yaml</code> file of the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver">corresponding OpenTelemetry receiver.</a><br><br>
+  Ensure you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.
+</div>
+
 ## Overview
 
 OpenTelemetry (OTel) integrations are components that enable the collection of observability data (metrics, traces, and logs) from various sources using the OpenTelemetry standard. These integrations are designed to work with the OpenTelemetry Collector, which receives, processes, and exports telemetry data to observability backends like Datadog.
