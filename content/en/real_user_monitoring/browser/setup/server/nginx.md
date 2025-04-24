@@ -4,6 +4,10 @@ beta: true
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 5
+further_reading:
+- link: '/real_user_monitoring/browser/setup/server/'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
@@ -12,14 +16,7 @@ code_lang_weight: 5
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
 
-## Limitations
-
-Keep in mind the following limitations when using this setup:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
+To understand important limitations and compatibility requirements, see [Limitations][1].
 
 ## Prerequisites
 
@@ -50,6 +47,8 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
+
+To manually load the module onto your web server instead of running the installation script, follow the instructions below.
 
 To manually instrument your RUM application:
 
@@ -122,7 +121,9 @@ Since the module is in Preview, it's possible NGINX may stop serving requests, p
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
+
+### Limitations
+See other [Limitations][1].
 
 ## Uninstall
 
@@ -167,8 +168,11 @@ To manually remove RUM from your auto-instrumented web server:
 | 1.27.3 | [ngx_http_datadog-amd64-1.27.3][35] | [ngx_http_datadog-arm64-1.27.3][36] |
 | 1.27.4 | [ngx_http_datadog-amd64-1.27.4][37] | [ngx_http_datadog-arm64-1.27.4][38] |
 
+## Further reading
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [4]: https://app.datadoghq.com/rum/list
