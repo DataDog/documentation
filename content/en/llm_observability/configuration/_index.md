@@ -28,7 +28,7 @@ Topics
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-info">If you are a HIPAA organization with a Business Associate Agreement (BAA) with Datadog, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a BAA and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a BAA and configured for zero data retention.</div>
 
 Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for Evaluations.
 
