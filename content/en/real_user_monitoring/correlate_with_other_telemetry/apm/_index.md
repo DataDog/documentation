@@ -440,22 +440,21 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 ## RUM Explorer to Traces
 
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;">}}
+
 To view traces from the RUM Explorer:
 
 1. In the RUM Explorer, navigate to your [list of sessions][21] and click on a session with traces available (you can query for `@_dd.trace_id:*`).
 1. The session panel appears with a request duration breakdown and includes a flame graph of each span, as well as a link to **View Trace in APM**.
 
-   {{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;">}}
-
 ## Traces to RUM Explorer
+
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-traces-to-rum.png" alt="RUM and Traces" style="width:100%;">}}
 
 To view the RUM event from Traces:
 
-1. Within a trace view, click a RUM event from the Overview tab.
-1. Click See Session/View/Resource in RUM.
-1. You are taken to the view with the trace(s).
-
-      {{< img src="real_user_monitoring/connect_rum_and_traces/rum-traces-to-rum.png" alt="RUM and Traces" style="width:100%;">}}
+1. Within a trace view, click **VIEW** to sell all traces created during the view life span, or **RESOURCE** to see traces associated with the specific resource from the Overview tab view.
+1. Click **See View in RUM** or **See Resource in RUM**. You are taken to the view with the trace(s).
 
 ## Supported libraries
 
