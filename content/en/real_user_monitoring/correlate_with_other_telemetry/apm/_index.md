@@ -454,7 +454,7 @@ When you select a session, the session panel appears with a request duration bre
 
 To view the RUM event from Traces:
 
-1. Within a trace view, click **VIEW** to see all traces created during the view’s lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
+1. Within a trace view, click **VIEW** to see all traces created during the view's lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
 1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
 
 ## Supported libraries
