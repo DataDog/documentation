@@ -36,7 +36,7 @@ environment:
 
 {{% data_streams/monitoring-sqs-pipelines %}}
 
-{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
+{{% data_streams/monitoring-rabbitmq-pipelines %}}
 
 {{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 

@@ -29,7 +29,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
-{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
+{{% data_streams/monitoring-rabbitmq-pipelines %}}
 
 #### Automatic Instrumentation
 
