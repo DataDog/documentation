@@ -61,7 +61,7 @@ You can enable Backend Error Tracking by installing the Agent with either:
 - [Kubectl CLI][4] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster using the Datadog Operator. This enables tracing for all applications written in supported languages.
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
@@ -112,11 +112,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
-5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+5. Wait a few minutes for the Datadog Cluster Agent changes to apply, then restart your applications.
 {{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends errors for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster using Helm. This enables tracing for all applications written in supported languages.
 
 To enable Single Step Instrumentation with Helm:
 
@@ -163,7 +163,7 @@ To enable Single Step Instrumentation with Helm:
    ```shell
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+5. Wait a few minutes for the Datadog Cluster Agent changes to apply, then restart your applications.
 
 {{< /collapse-content >}}
 
