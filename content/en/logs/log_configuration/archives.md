@@ -242,7 +242,7 @@ Firewall rules are not supported.
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
+You can either select a storage class for your archive or [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
 [Rehydration][2] only supports the following storage classes:
 

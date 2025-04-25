@@ -33,10 +33,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/microsoft-365-detections/"
   tag: "Blog"
   text: "How attackers take advantage of Microsoft 365 services"
+- link: "https://www.datadoghq.com/blog/monitor-security-metrics/"
+  tag: "Blog"
+  text: "Monitor your organization's security posture with Datadog"
+- link: "https://www.datadoghq.com/blog/risky-behavior-cloud-environments/"
+  tag: "Blog"
+  text: "Identify risky behavior in cloud environments"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
 ## Overview

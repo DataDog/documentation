@@ -22,7 +22,7 @@ In a containerized environment, you should deploy the Datadog Agent once per hos
 
 You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations. 
 
-When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. 
+When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. These filtering options do not affect log collection if `containerCollectAll` is not enabled.
 
 You can set exceptions in two ways:
 
@@ -32,6 +32,8 @@ You can set exceptions in two ways:
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
 ## Agent configuration
+
+Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their container name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
 
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
@@ -47,12 +49,9 @@ In **Agent v7.20+**, use the following environment variables to exclude containe
 
 In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
 
-Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
-
-
 <div class="alert alert-info">
 
-Image name filters (`image`) are matched across full image name including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
+Image name filters (`image`) are matched across full image name, including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
 
 </div>
 

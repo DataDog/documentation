@@ -15,7 +15,7 @@ xray:BatchGetTraces,
 xray:GetTraceSummaries
 ```
 
-    The `BatchGetTraces` permission is used to return the full traces. The `GetTraceSummaries` permission is used to get a list of summaries of recent traces.
+The `BatchGetTraces` permission is used to return the full traces. The `GetTraceSummaries` permission is used to get a list of summaries of recent traces.
 
 2. [Enable the X-Ray integration within Datadog][2].
 

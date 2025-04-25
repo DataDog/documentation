@@ -210,7 +210,7 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][12] c
 
 If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
-## Restrict access
+### Restrict access
 
 {{% synthetics_grace_permissions %}}
 

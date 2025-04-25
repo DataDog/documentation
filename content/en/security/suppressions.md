@@ -9,9 +9,12 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: CSM Threats
-  url: /security/threats/
+- name: Workload Protection
+  url: /security/workload_protection/
   icon: cloud-security-management
+- name: App and API Protection
+  url: /security/application_security/
+  icon: app-sec
 ---
 
 {{< product-availability >}}

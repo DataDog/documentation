@@ -134,7 +134,7 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Bundling with Esbuild
+#### Bundling with esbuild
 
 This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
@@ -213,6 +213,12 @@ const nextConfig = {
 
 export default nextConfig;
 ```
+
+#### Unsupported Datadog features
+
+The following features are turned off by default in the Node.js tracer. They do not support bundling and cannot be used if your application is bundled.
+
+- APM: Dynamic Instrumentation
 
 #### General bundling remarks
 

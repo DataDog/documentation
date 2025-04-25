@@ -7,8 +7,8 @@ private: true
 title: Uso de componentes personalizados de OpenTelemetry con el Datadog Agent
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Unirse a la Vista previa">}}
-El Datadog Agent con el recopilador de OpenTelemetry integrado está en Vista previa. Para solicitar acceso, rellena este formulario.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  El Datadog Agent con el OpenTelemetry Collector integrado está en Vista previa. Para solicitar acceso, rellena este formulario.
 {{< /callout >}}
 
 Esta guía explica cómo crear una imagen del Datadog Agent con componentes adicionales de OpenTelemetry no incluidos en la imagen por defecto del Datadog Agent. Para ver una lista de los componentes ya incluidos en el Agent por defecto, consulta [Componentes incluidos][1].
@@ -37,16 +37,18 @@ Descargue la plantilla del archivo Docker:
    ```
 2. Descargar el archivo Docker
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
    ```
 
 El archivo Docker:
 
-- Crea una [compilación multietapa][6] con Ubuntu v24.04 y `datadog/agent:7.59.0-v1.1.0-ot-beta-jmx`.
+- Crea una [compilación multietapa][6] con Ubuntu 24.04 y `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
 - Instala Go, Python y las dependencias necesarias.
 - Descarga y descomprime el código fuente del Datadog Agent.
 - Crea un entorno virtual e instala los paquetes Python necesarios.
 - Crea el Agent OpenTelemetry y copia el binario resultante en la imagen final.
+
+<div class="alert alert-info">La rama <code>main</code> tiene la versión más actualizada del <a href="https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent-ot/Dockerfile.agent-otel">Dockerfile</a>. Sin embargo, es una rama de desarrollo que está sujeta a cambios frecuentes y es menos estable que las etiquetas (tags) de versión. Para producción y otros casos de uso estables, utiliza las versiones etiquetadas que se indican en esta guía.</div>
 
 ## Crear un manifiesto de OpenTelemetry Collector Builder
 
@@ -54,7 +56,7 @@ Crea y personaliza un archivo del manifiesto de OpenTelemetry Collector Builder 
 
 1. Descarga el manifiesto por defecto de Datadog:
    ```shell
-   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/7.59.x/comp/otelcol/collector-contrib/impl/manifest.yaml
+   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Abre el archivo `manifest.yaml` y añade los componentes adicionales de OpenTelemetry a las secciones correspondientes (extensiones, exportadores, procesadores, receptores o conectores).
    La línea resaltada en este ejemplo añade un [procesador de transformación de métricas][7]:
@@ -63,9 +65,9 @@ dist:
   módulo: github.com/DataDog/comp/otelcol/collector-contrib
   nombre: otelcol-contrib
   descripción: Datadog OpenTelemetry Collector
-  versión: 0.104.0
-  ruta_salida: ./comp/otelcol/collector-contrib/impl
-  versión_otelcol: 0.104.0
+  versión: {{< version key="collector_version" >}}
+  output_path: ./comp/otelcol/collector-contrib/impl
+  otelcol_version: {{< version key="collector_version" >}}
 
 extensions:
 # Verás una lista de extensiones ya incluidas por Datadog
@@ -77,18 +79,18 @@ exporters:
 
 procesadores:
 # añadir el procesador de transformación de métricas para modificar métricas
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.104.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v{{< version key="collector_version" >}}
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.104.0
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.104.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v0.104.0
+  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v{{< version key="collector_version" >}}
 
 conectores:
 # Verás una lista de conectores ya incluidos por Datadog
@@ -102,15 +104,17 @@ Crea tu imagen personalizada del Datadog Agent y envíala a un registro de conte
 
 1. Crea la imagen con Docker:
    ```shell
-   docker build . -t agent-otel --no-cache
+   docker build . -t agent-otel --no-cache \
+     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
+     --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
-2. Tag and push the image:
+2. Etiquetar y enviar la imagen:
    ```shell
    docker tag agent-otel <IMAGE-NAME>/<IMAGE-TAG>
    docker push <IMAGE-NAME>/<IMAGE-TAG>
    ```
-   Replace `<IMAGE-NAME>` and `<IMAGE-TAG>` with your image name and desired tag. If the target repository is not Docker Hub, you need to include the repository name.
-3. For a Helm chart installation, set the image tag in your values file:
+   Sustituye `<IMAGE-NAME>` y `<IMAGE-TAG>` por el nombre y la etiqueta de tu imagen. Si el repositorio de destino no es Docker Hub, tendrás que incluir el nombre del repositorio.
+3. Para instalar una tabla de Helm, establece la etiqueta de la imagen en tu archivo de valores:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
@@ -118,14 +122,14 @@ agents:
     tag: <IMAGE-TAG>
     doNotCheckTag: true
    {{< /code-block >}}
-   Replace `<YOUR-REPO>` and `<IMAGE-TAG>` with your repository name and desired image tag.
+   Sustituye `<YOUR-REPO>` y `<IMAGE-TAG>` por el nombre de tu repositorio y la imagen deseada etiquetar.
 
-## Test and validate
+## Testear y validar
 
-Create a sample configuration file and run your custom Agent to ensure everything is working correctly.
+Crea un archivo de configuración de ejemplo y ejecuta tu Agent personalizado para asegurarte de que todo funciona correctamente.
 
-1. Create a sample OpenTelemetry configuration file with the additional components.
-  The following example configures an additional [metrics transform processor][7]:
+1. Crea un archivo de configuración de ejemplo de OpenTelemetry con los componentes adicionales.
+  El siguiente ejemplo configura un [procesador de transformación de métricas][7] adicional:
    ```yaml
    receivers:
      otlp:
@@ -179,7 +183,7 @@ Create a sample configuration file and run your custom Agent to ensure everythin
          processors: [batch]
          exporters: [datadog]
    ```
-2. Run the Agent using the following Docker command.
+2. Ejecuta el Agent con el siguiente comando de Docker.
    ```shell
    docker run -it \
      -e DD_API_KEY=XX \
@@ -191,19 +195,19 @@ Create a sample configuration file and run your custom Agent to ensure everythin
      --entrypoint otel-agent \
      agent-otel --config /config.yaml
    ```
-3. If the Agent starts, then the build process was successful.
+3. El inicio del Agent indica que el proceso de compilación fue correcto.
 
-You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
+Ahora puedes utilizar esta nueva imagen para instalar el Agent. Esto activa las capacidades de monitorización de Datadog junto con los componentes adicionales de OpenTelemetry que añadiste.
 
-For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
+Para obtener instrucciones detalladas sobre la instalación y configuración del Agent con componentes de OpenTelemetry añadidos, consulta la guía [Instalar el Datadog Agent con el OpenTelemetry Collector integrado][9].
 
-## Troubleshooting
+## Resolución de problemas
 
-This section discusses some common issues you might encounter while building and running your custom Datadog Agent, along with their solutions:
+En esta sección, se tratan algunos de los problemas más comunes que pueden surgir durante la compilación y ejecución del Datadog Agent, junto con sus soluciones:
 
-### Compatibility issues with `awscontainerinsightreceiver`
+### Problemas de compatibilidad con `awscontainerinsightreceiver`
 
-**Problem**: You may encounter errors related to `awscontainerinsightreceiver` during the build:
+**Problema**: es posible que se produzcan errores relacionados con `awscontainerinsightreceiver` durante la compilación:
 ```text
 #0 0.879 go: downloading github.com/tidwall/gjson v1.17.1
 #0 0.889 go: downloading code.cloudfoundry.org/go-diodes v0.0.0-20240604201846-c756bfed2ed3
@@ -212,20 +216,20 @@ This section discusses some common issues you might encounter while building and
 #0 88.24 # github.com/opencontainers/runc/libcontainer/cgroups/ebpf
 #0 88.24 /go/pkg/mod/github.com/opencontainers/runc@v1.1.12/libcontainer/cgroups/ebpf/ebpf_linux.go:190:3: unknown field Replace in struct literal of type link.RawAttachProgramOptions
 #0 89.14 # github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver/internal/k8sapiserver
-#0 89.14 /go/pkg/mod/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver@v0.104.0/internal/k8sapiserver/k8sapiserver.go:47:68: undefined: record.EventRecorderLogger
+#0 89.14 /go/pkg/mod/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver@v0.115.0/internal/k8sapiserver/k8sapiserver.go:47:68: undefined: record.EventRecorderLogger
 ------
 ```
 
-**Solution**: Remove `awscontainerinsightreceiver` from the `manifest.yaml` file. This receiver has incompatible libraries and cannot be included in the build.
+**Solución**: elimina `awscontainerinsightreceiver` del archivo `manifest.yaml`. Este receptor tiene bibliotecas incompatibles y no se puede incluir en la compilación.
 
-### Build process failures
+### Errores en el proceso de compilación
 
-**Problem**: You receive the following error:
+**Problema**: recibes el siguiente error:
 ```text
 ERROR: failed to solve: process "/bin/sh -c . venv/bin/activate && invoke otel-agent.build" did not complete successfully: chown /var/lib/docker/overlay2/r75bx8o94uz6t7yr3ae6gop0b/work/work: no such file or directory
 ```
 
-**Solution**: Run the build command again:
+**Solución**: vuelve a ejecutar el comando de compilación:
 ```shell
 docker build . -t agent-otel --no-cache
 ```
