@@ -5,7 +5,10 @@
 
 <head>
   {{ partialCached "header-scripts.html" . }}
-  {{ partialCached "markdoc-assets.html" . }}
+
+  {{ if ne .Params.type "integrations" }}
+    {{ partialCached "markdoc-assets.html" . }}
+  {{ end }}
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
