@@ -88,7 +88,7 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][18] to create and update Statuspage incidents.
 - [ServiceNow][19] to create a ServiceNow ticket for an incident.
-- [Confluence] [22] to generate incident postmortems in Confluence.
+- [Confluence][22] to generate incident postmortems in Confluence.
 
 
 ## Further Reading
