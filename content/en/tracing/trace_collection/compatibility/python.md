@@ -36,15 +36,15 @@ The Python APM Client library supports the following Python runtimes:
 
 | OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
 |---------|-----------------------|---------|-----------------|----------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
 | Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
 | MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
 | Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   | 
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
 
 ## Integrations
 
