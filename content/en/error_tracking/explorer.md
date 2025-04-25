@@ -50,6 +50,14 @@ Order issues in the list using one of these options:
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
+Some commonly used error attributes include:
+| Attribute | Description |
+|-----------|-------------|
+| `error.message`| The message associated with the error. |
+| `error.type` | The type or class of the error. |
+| `error.stack` | The stack trace associated with the error. |
+| `error.handling` | Indicates whether the error was handled. APM errors are considered `handled` if a parent span reports a successful operation (`HTTP 200`, `gRPC OK`) or successful error handling (`HTTP 400`, `gRPC NOT_FOUND`). RUM errors are `unhandled` if they are not captured manually in the code. |
+
 Click the Edit icon to see the list of available facets that you can show or hide from view.
 
 {{< img src="/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
