@@ -10,6 +10,8 @@ title: Amazon Kinesis for Data Streams Monitoring
 
 ### Support for Amazon Kinesis in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>

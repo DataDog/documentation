@@ -8,6 +8,8 @@ title: Google Pub/Sub for Data Streams Monitoring
 
 ### Support for Google Pub/Sub in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>

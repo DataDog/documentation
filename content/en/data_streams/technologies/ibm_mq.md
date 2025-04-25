@@ -8,6 +8,8 @@ title: IBM MQ for Data Streams Monitoring
 
 ### Support for IBM MQ in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>

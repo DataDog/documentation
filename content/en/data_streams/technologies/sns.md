@@ -11,6 +11,8 @@ title: Amazon SNS for Data Streams Monitoring
 
 ### Support for Amazon SNS in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>

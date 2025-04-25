@@ -10,6 +10,8 @@ title: Kafka for Data Streams Monitoring
 
 ### Support for Kafka in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>

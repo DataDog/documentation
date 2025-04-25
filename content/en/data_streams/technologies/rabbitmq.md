@@ -11,6 +11,8 @@ title: RabbitMQ for Data Streams Monitoring
 
 ### Support for RabbitMQ in Data Streams Monitoring
 
+To setup DSM, please select the language of your producers and consumers
+
 <table>
   <thead>
     <tr>
