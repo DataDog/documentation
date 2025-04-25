@@ -111,7 +111,7 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 These settings can be configured from the **Rehydration settings** panel, available from the Historical Views page.
 
-{{< img src="PATH/TO/YOUR/rehydration_settings.png" alt="Rehydration settings panel" style="width:75%;" >}}
+{{< img src="logs/archives/rehydration_limits.png" alt="Rehydration settings panel" style="width:75%;" >}}
 
 ## Setting up archive rehydrating
 
