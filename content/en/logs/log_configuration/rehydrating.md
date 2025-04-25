@@ -101,7 +101,7 @@ View deleted historical views for up to 1 year in the past using the `View` drop
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
 
-### Configure organization-wide defaults
+### Set default limits for historical views
 
 Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of log rehydration across teams.
 
