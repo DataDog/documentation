@@ -6,6 +6,9 @@ title: RabbitMQ for Data Streams Monitoring
 
 * [Datadog Agent v7.34.0 or later][1]
 
+{{% data_streams/monitoring-rabbitmq-pipelines %}}
+
+
 ### Support for RabbitMQ in Data Streams Monitoring
 
 <table>
