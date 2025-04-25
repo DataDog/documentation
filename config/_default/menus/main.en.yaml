@@ -4355,26 +4355,36 @@ menu:
       identifier: data_streams
       parent: apm_heading
       weight: 50000
+    - name: Supported Languages
+      url: data_streams/#setup
+      identifier: data_streams_supported_languages
+      parent: data_streams
+      weight: 1
+    - name: Supported Technologies
+      url: data_streams/#setup
+      identifier: data_streams_supported_technologies
+      parent: data_streams
+      weight: 2
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
       parent: data_streams
-      weight: 1
+      weight: 3
     - name: Live Messages
       url: data_streams/live_messages
       identifier: data_streams_live_messages
       parent: data_streams
-      weight: 2
+      weight: 4
     - name: Data Pipeline Lineage
       url: data_streams/data_pipeline_lineage
       identifier: data_streams_pipeline_lineage
       parent: data_streams
-      weight: 3
+      weight: 5
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 4
+      weight: 6
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
