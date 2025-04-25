@@ -124,13 +124,13 @@ Clicking on any resource opens a side panel with details including:
 - **Service and team ownership** of the resource
 - **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
 
-## Recent changes
+## Resource changes
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
-  The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
+  <strong>Resource Changes</strong> is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
-The **Recent Changes** tab displays a 7-day history of all configuration changes to [supported resources][15] across your environments. To forward change events from your cloud environments, either enable Snapshot Changes through Resource Collection or follow the links for your cloud providers in the sections below.
+**Resource Changes** displays a 7-day history of all configuration changes to [supported resources][15] across your environments. To forward change events from your cloud environments, either enable Snapshot Changes through Resource Collection or follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
