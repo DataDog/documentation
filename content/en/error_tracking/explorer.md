@@ -98,7 +98,7 @@ The information shown in the issue panel varies depending on the error source. F
 
 The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you troubleshooting information such as the stack trace of the error, and the characteristics of impacted users.
 
-## Get alerted on new errors
+## Get alerted on new or impactful errors
 
 Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][7])
 

@@ -31,6 +31,8 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
 
+{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
+
 #### Automatic Instrumentation
 
 Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.

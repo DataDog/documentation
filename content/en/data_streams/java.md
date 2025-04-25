@@ -74,6 +74,8 @@ Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from you
 
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
 
+{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
+
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must perform the following additional configuration steps:
 

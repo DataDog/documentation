@@ -2765,13 +2765,13 @@ menu:
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schemat
-      weight: 20001
-    - name: Governance
-      url: infrastructure/resource_catalog/governance/
+      identifier: infrastructure_resource_catalog_schema
+      weight: 10001
+    - name: Policies
+      url: infrastructure/resource_catalog/policies/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_governance
-      weight: 20002
+      identifier: infrastructure_resource_catalog_policies
+      weight: 10002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3792,6 +3792,11 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
+    - name: Code Origins for Spans
+      url: tracing/guide/code_origins
+      parent: tracing
+      identifier: tracing_code_origins
+      weight: 7
     - name: Service Observability
       url: tracing/services/
       parent: tracing
