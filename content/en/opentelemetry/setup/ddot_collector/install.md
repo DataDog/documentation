@@ -142,7 +142,7 @@ The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4
 
 4. (Optional) Enable additional Datadog features:
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   # Enable Features
@@ -233,7 +233,7 @@ If you don't want to expose the port, you can use the Agent service instead:
 
 5. (Optional) Enable additional Datadog features:
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:

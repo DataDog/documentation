@@ -875,11 +875,25 @@
       "description": "Update Okta account returns \"OK\" response"
     }
   ],
+  "CreateOnCallEscalationPolicy": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create on-call escalation policy returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
       "description": "Create on-call schedule returns \"Created\" response"
+    }
+  ],
+  "UpdateOnCallEscalationPolicy": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update on-call escalation policy returns \"OK\" response"
     }
   ],
   "UpdateOnCallSchedule": [
