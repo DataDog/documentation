@@ -23,7 +23,7 @@ short_description: Rastrea métricas clave de AWS App Runner.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 AWS App Runner te permite desplegar una aplicación desde el código fuente o una imagen de contenedor a AWS.

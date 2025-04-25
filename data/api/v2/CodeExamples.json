@@ -879,7 +879,7 @@
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on call escalation policy returns \"Created\" response"
+      "description": "Create on-call escalation policy returns \"Created\" response"
     }
   ],
   "CreateOnCallSchedule": [
@@ -893,7 +893,7 @@
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on call escalation policy returns \"OK\" response"
+      "description": "Update on-call escalation policy returns \"OK\" response"
     }
   ],
   "UpdateOnCallSchedule": [
