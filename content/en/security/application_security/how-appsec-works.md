@@ -120,7 +120,7 @@ Datadog Application Security provides visibility into threats targeting your API
 
 Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
-[1]: /security/application_security/threats/
+[1]: /security/workload_protection/
 [2]: /tracing/software_catalog/#security-view
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information

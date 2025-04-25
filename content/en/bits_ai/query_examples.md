@@ -55,6 +55,8 @@ To learn more about querying infrastructure resource data in DDSQL Editor, see t
 `Crashes in the iOS app over the past 1 week`:
 {{< img src="bits_ai/query_examples/rum_ios_crashes_query.png" alt="Query result for iOS app crashes" style="width:90%;">}}
 
+<div class="alert alert-info"><strong>Built with Llama</strong>: Natural langauge querying is powered by Llama.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
