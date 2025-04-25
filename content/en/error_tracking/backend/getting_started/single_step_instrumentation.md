@@ -63,7 +63,6 @@ You can enable Backend Error Tracking by installing the Agent with either:
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster using the Datadog Operator. This enables tracing for all applications written in supported languages.
 
-To enable Single Step Instrumentation with the Datadog Operator:
 
 1. Install the [Datadog Operator][7] v1.14.0+ with Helm:
    ```shell
@@ -118,7 +117,6 @@ To enable Single Step Instrumentation with the Datadog Operator:
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster using Helm. This enables tracing for all applications written in supported languages.
 
-To enable Single Step Instrumentation with Helm:
 
 1. Add the Helm Datadog repo:
    ```shell
