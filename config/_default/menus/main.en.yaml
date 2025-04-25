@@ -2756,6 +2756,11 @@ menu:
       identifier: datadog_cloudcraft
       parent: infrastructure_heading
       weight: 10000
+    - name: Overlays
+      url: datadog_cloudcraft/overlays/
+      parent: datadog_cloudcraft
+      identifier: datadog_cloudcraft_overlays
+      weight: 1
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
