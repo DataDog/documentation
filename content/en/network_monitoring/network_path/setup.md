@@ -191,7 +191,9 @@ Agent `v7.59+` is required.
 
 ### Network traffic paths (experimental)
 
-**Prerequisites**: [CNM][1] must be enabled.
+#### Prerequisites
+
+- [CNM][1] must be enabled
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
