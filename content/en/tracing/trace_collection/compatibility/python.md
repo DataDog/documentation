@@ -21,9 +21,9 @@ The following Python APM Client library release branches are supported:
 
 | Release    | Support level        | Minimum Datadog Agent |
 |------------|----------------------|-----------------------|
-|    `<2`    | End of Life          |                       |
-| `>=2.0,<3` | Maintenance          | 7.28                  |
 | `>=3.0,<4` | General Availability | 7.28                  |
+| `>=2.0,<3` | Maintenance          | 7.28                  |
+|    `<2`    | End of Life          |                       |
 
 Support levels are defined by the following:
 | Level                | Policy |
