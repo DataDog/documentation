@@ -15,7 +15,7 @@ title: Amazon SNS for Data Streams Monitoring
   <thead>
     <tr>
       <th>Language</th>
-      <th>Technology</th>
+      <th>Library</th>
       <th>Minimal tracer version</th>
       <th>Recommended tracer version</th>
     </tr>
