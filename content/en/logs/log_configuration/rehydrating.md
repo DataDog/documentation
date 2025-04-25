@@ -101,6 +101,18 @@ View deleted historical views for up to 1 year in the past using the `View` drop
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
 
+### Configure organization-wide defaults
+
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of log rehydration across teams.
+
+- **Default rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
+
+- **Retention period selector**: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+
+These settings can be configured from the **Rehydration settings** panel, available from the Historical Views page.
+
+{{< img src="PATH/TO/YOUR/rehydration_settings.png" alt="Rehydration settings panel" style="width:75%;" >}}
+
 ## Setting up archive rehydrating
 
 ### Define a Datadog archive
