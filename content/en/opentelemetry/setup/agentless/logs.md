@@ -1,5 +1,5 @@
 ---
-title: Agentless Deployment for Logs
+title: Datadog OTLP Logs Intake Endpoint
 aliases:
   - /opentelemetry/otlp_logs
   - /opentelemetry/setup/intake_endpoint/otlp_logs
@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  Agentless deployment for logs is in Preview. To request access, contact your account representative.
+  The Datadog OTLP logs intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Datadog's Agentless deployment allows you to send logs directly to Datadog using a OpenTelemetry protocol (OTLP) intake API endpoints. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to send logs directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
 Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 

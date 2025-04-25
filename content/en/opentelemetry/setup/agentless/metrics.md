@@ -1,5 +1,5 @@
 ---
-title: Agentless Deployment for Metrics
+title: Datadog OTLP Metrics Intake Endpoint
 aliases:
   - "/opentelemetry/otlp_metrics"
   - "/opentelemetry/setup/intake_endpoint/otlp_metrics"
@@ -25,16 +25,16 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  Agentless deployment for metrics is in Preview. To request access, contact your account representative.
+  The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Agentless deployments are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Datadog OTLP metrics intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
 
-Datadog's Agentless deployment allows you to send metricss directly to Datadog using a OpenTelemetry protocol (OTLP) intake API endpoints. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows you to send metrics directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
 You might prefer this option if you're looking for a straightforward setup and want to send metrics directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
