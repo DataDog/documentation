@@ -42,7 +42,8 @@ Failed deployment events, currently interpreted through failure events, are used
 {{% tab "Datadog Incidents" %}}
 DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. After incidents are declared, DORA uses them to measure change failure rate and time to restore.
 
-**Note**: Time to restore is measured from the time an incident is declared to when it reaches either a `stable` or `resolved` state.
+**Note**: The time to restore is measured as the total duration an incident spends in the `active` state. For cases like `active` → `stable` → `active` → `stable`, it includes all `active` periods. The time to restore is shown only when an incident is in a `stable` or `resolved` state. If a `resolved` incident is reactivated, the metric is hidden until it's `resolved` again.
+
 
 ### Requirements
 
