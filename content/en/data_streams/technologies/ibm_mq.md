@@ -19,7 +19,7 @@ title: IBM MQ for Data Streams Monitoring
   </thead>
   <tbody>
     <tr>
-      <td><a href="https://docs.datadoghq.com/data_streams/dotnet">.NET</a></td>
+      <td><a href="/data_streams/dotnet">.NET</a></td>
       <td><a href="https://www.nuget.org/packages/IBMMQDotnetClient">IBMMQDotnetClient</a></td>
       <td>2.49.0</td>
       <td>2.49.0 or later</td>
