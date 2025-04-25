@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Ruby
+title: Enabling AAP for Ruby
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
@@ -16,10 +16,10 @@ further_reading:
       text: 'Ruby Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor application security for Ruby apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -35,13 +35,13 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'datadog', '~> 2.0' # Use 'ddtrace' if you're using v1.x
    ```
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
 
    For more information about upgrading to v2 from a `dd-trace` 1.x version, see [the Ruby tracer upgrade guide][2].
 
-2. **Enable ASM** by enabling the APM tracer. The following options describe a quick setup that covers the most common cases. Read [the Ruby tracer documentation][3] for more details.
+2. **Enable AAP** by enabling the APM tracer. The following options describe a quick setup that covers the most common cases. Read [the Ruby tracer documentation][3] for more details.
 
-   You can enable ASM either in your code:
+   You can enable AAP either in your code:
 
    {{< tabs >}}
 
@@ -57,7 +57,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      # enable the APM tracer
      c.tracing.instrument :rails
 
-     # enable ASM
+     # enable AAP
      c.appsec.enabled = true
      c.appsec.instrument :rails
    end
@@ -79,7 +79,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    Datadog.configure do |c|
      # the APM tracer is enabled by auto-instrumentation
 
-     # enable ASM
+     # enable AAP
      c.appsec.enabled = true
      c.appsec.instrument :rails
    end
@@ -99,7 +99,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      # enable the APM tracer
      c.tracing.instrument :sinatra
 
-     # enable ASM for Sinatra
+     # enable AAP for Sinatra
      c.appsec.enabled = true
      c.appsec.instrument :sinatra
    end
@@ -114,7 +114,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    Datadog.configure do |c|
      # the APM tracer is enabled by auto-instrumentation
 
-     # enable ASM for Sinatra
+     # enable AAP for Sinatra
      c.appsec.enabled = true
      c.appsec.instrument :sinatra
    end
@@ -132,7 +132,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      # enable the APM tracer
      c.tracing.instrument :rack
 
-     # enable ASM for Rack
+     # enable AAP for Rack
      c.appsec.enabled = true
      c.appsec.instrument :rack
    end
@@ -199,7 +199,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
+Initialize AAP in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
 ```shell
 env DD_APPSEC_ENABLED=true rails server
 ```

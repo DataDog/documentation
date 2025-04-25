@@ -157,14 +157,14 @@ The `ddtrace` library includes support for the following libraries:
 [26]: https://pymemcache.readthedocs.io
 [27]: https://www.mongodb.com/what-is-mongodb
 [28]: http://mongoengine.org
-[29]: https://api.mongodb.com/python/current
+[29]: https://pymongo.readthedocs.io/en/stable/
 [30]: https://www.mysql.com
 [31]: https://pypi.org/project/MySQL-python
 [32]: https://pypi.org/project/mysqlclient
 [33]: https://dev.mysql.com/doc/connector-python/en/
 [34]: https://www.postgresql.org
 [35]: https://aiopg.readthedocs.io
-[36]: http://initd.org/psycopg
+[36]: https://www.psycopg.org/
 [37]: https://pypi.org/project/PyMySQL/
 [38]: https://pynamodb.readthedocs.io/en/latest/
 [39]: https://pypi.org/project/pyodbc/

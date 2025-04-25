@@ -18,7 +18,7 @@ This metric measures latency between two points in the pipeline. The value can r
   - `full`: end-to-end latency between data origin (`start`) and another point (`end`) in the pipeline
      - `start` tag: data origin
      - `end` tag: arbitrary point where data is last tracked
-  - `edge`: latency between two services, connected through a queue or directly over HTTP/gRPC. Measures time between _before produce_ in the producer (`start`) and _after consume_ in the consumer (`end`)
+  - `edge`: latency between two services, connected through a queue or directly over HTTP/gRPC. Measures duration between time of produce in the producer (`start`) and time of consume in the consumer (`end`)
      - `start` tag: the upstream producer service
      - `end` tag: the downstream consumer service
   - `partial_edge`: latency between a service and a queue, if the producer or consumer is not known (that is, not instrumented with Data Streams Monitoring)

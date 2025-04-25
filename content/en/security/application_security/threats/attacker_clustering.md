@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Attacker Clustering improves distributed attack blocking. Datadog Application Security Management (ASM) identifies security signal traffic attacker patterns and to help you mitigate distributed attacks more efficiently.
+Attacker Clustering improves distributed attack blocking. Datadog App and API Protection (AAP) identifies security signal traffic attacker patterns and to help you mitigate distributed attacks more efficiently.
 
 Attacker clustering highlights a set of common attributes shared by a significant portion of traffic and suggests blocking based on those attributes.
 
@@ -30,9 +30,9 @@ Blocking on attacker attributes means you keep your application or API protected
 
 ## What signals are used for attacker clusters?
 
-The attacker clustering is computed for every [ASM security signal][4] emitted from a detection rule tagged with `category:account_takeover` or `category:fraud`
+The attacker clustering is computed for every [AAP security signal][4] emitted from a detection rule tagged with `category:account_takeover` or `category:fraud`
 
-Out of the box, attacker clustering is computed for the ASM detection rules that detect API abuse, credential stuffing, or brute force attacks.
+Out of the box, attacker clustering is computed for the AAP detection rules that detect API abuse, credential stuffing, or brute force attacks.
 
 If you want the attacker clustering executed on custom detection rules, add these tags in the detection rule editor (see screenshot below).
 
@@ -46,11 +46,16 @@ Attacker clustering is computed using the following request attributes:
 * OS name
 * OS version
 * User agent header
+* HTTP request headers (for example, `accept-encoding`, `content-type`)
 * [Datadog attacker fingerprinting][2]
 
 When the attacker attributes are identified, they are displayed on the signal side panel and **Signals** page. Attacker attributes can be a combination of the attributes listed above.
 
-{{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
+{{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an AAP signals with attacker attributes identified"  >}}
+
+### Custom HTTP request headers
+
+If you want to use custom HTTP request headers for attacker clustering, they must be added under the path `@http.request.headers` in your traces. You can add custom headers to your traces by configuring the tracer with the `DD_TRACE_REQUEST_HEADER_TAGS` environment variable. For more information about this configuration, see [Configure the Datadog Tracing Library][5].
 
 ## Attacker clustering mechanism
 
@@ -60,7 +65,7 @@ The algorithm tracks the changes in the attack traffic by identifying emerging t
 
 Traffic associated with threat intelligence is also considered in the clustering mechanism. The more an attribute is correlated with [Threat Intelligence][1], the higher the chance to create an attacker cluster around this attribute.
 
-The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [In-App WAF][3] or to filter out traffic in ASM Traces explorer for investigation.
+The attacker clustering attributes selected are then shown as regular expressions that can be used to block with AAP's [In-App WAF][3] or to filter out traffic in AAP Traces explorer for investigation.
 
 ## Further reading
 
@@ -69,4 +74,5 @@ The attacker clustering attributes selected are then shown as regular expression
 [1]: /security/application_security/threats/threat-intelligence/
 [2]: /security/application_security/threats/attacker_fingerprint
 [3]: /security/application_security/threats/event_rules
-[4]: /security/application_security/threats/security_signals/
+[4]: /security/workload_protection/security_signals/
+[5]: /tracing/trace_collection/library_config/

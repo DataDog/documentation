@@ -13,10 +13,6 @@ further_reading:
   text: "Build Workflows"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1NvW3I0Ep-lQo4FbiSwOEjccoFsS9Ue2wYiYDmCxKDYg/viewform?edit_requested=true" btn_hidden="false" header="Try the Preview!">}}
-Datastore is in Preview. Use this form to request access today.
-{{< /callout >}}
-
 ## Overview
 
 The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
@@ -80,6 +76,16 @@ To use values from a datastore in a workflow or app:
 
 To delete a datastore, click the **Trash (Delete Datastore)** icon in the header of the datastore you want to delete, then click **Confirm** to verify.
 
+## Limitations
+
+Datastore has the following limitations:
+
+- A datastore can contain up to 5,000 rows.
+- A primary key column of type `string` is required and must uniquely identify each row.
+- Each row can be up to 100 KB in size.
+- The primary key value is immutable, it cannot be changed after the row is created.
+
+Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
 
 ## Further reading
 
