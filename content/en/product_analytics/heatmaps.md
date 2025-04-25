@@ -49,7 +49,7 @@ Click a view to see a more detailed view of the heatmap. From here, you have the
 - To filter by action name, use the **Filter actions by** dropdown.
 - To add more granular filters, like a specific geography for example, click the **Add Filter** button.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-different-views.png" alt="The heatmaps page has multiple ways to show different views: by application, map type, device type, action name, and granular filters." style="width:100%;">}}
+{{< img src="product_analytics/heatmaps/pa-heatmaps-annotated.png" alt="The heatmaps page has multiple ways to show different views: by application, map type, device type, action name, and granular filters." style="width:100%;">}}
 
 ## Top Elements
 
