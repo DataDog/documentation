@@ -251,7 +251,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
 [15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/
-[17]: https://app.datadoghq.com/ci/settings/repository
+[17]: https://app.datadoghq.com/source-code/repositories
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/

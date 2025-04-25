@@ -7,6 +7,11 @@ aliases:
   - /tracing/metrics/runtime_metrics/nodejs
   - /tracing/metrics/runtime_metrics/python
   - /tracing/metrics/runtime_metrics/ruby
+  - /tracing/runtime_metrics/dotnet
+  - /tracing/runtime_metrics/java
+  - /tracing/runtime_metrics/nodejs
+  - /tracing/runtime_metrics/python
+  - /tracing/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated with your traces."
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
