@@ -7796,6 +7796,11 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: User Profiles
+      url: product_analytics/segmentation/user_profiles
+      parent: pa_segmentation
+      identifier: pa_segmentation_user_profiles
+      weight: 601
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
