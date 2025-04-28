@@ -1,5 +1,5 @@
 ---
-title: CI Monitor
+title: CI/CD & Test Monitor
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -20,22 +20,28 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">This feature is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or CI Test monitor.
+To create a monitor for CI pipelines, CI tests, or CD deployments, first enable the related product for your organization:
 
-CI monitors allow you to visualize CI data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
+| Monitor type     | Required product         |
+|------------------|--------------------------|
+| CI Pipeline      | [CI Visibility][1]       |
+| CI Test          | [Test Optimization][8]   |
+| CD Deployments   | [CD Visibility][9]       |
+
+CI/CD and test monitors allow you to visualize CI/CD data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
 
 ## Monitor creation
 
-To create a [CI monitor][2] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI*.
+To create a new monitor, navigate to **Monitors > New Monitor > CI/CD & Tests**.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI/CD & Test monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
-Choose between a **Pipelines** or a **Tests** monitor:
+Choose one of the monitor types:
 
 {{< tabs >}}
 {{% tab "Pipelines" %}}
@@ -72,6 +78,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 [1]: /continuous_integration/pipelines/custom_commands/
 [2]: /dashboards/functions/#overview
 {{% /tab %}}
+
 {{% tab "Tests" %}}
 
 ### Define the search query
@@ -126,7 +133,37 @@ In the `Notification message` section of your monitor, add text similar to the c
 [1]: /dashboards/functions/#overview
 [2]: /monitors/notify/variables/?tab=is_match#conditional-variables
 {{% /tab %}}
+
+{{% tab "Deployments" %}}
+
+### Define the search query
+
+1. Construct a search query using the same logic as a CD Deployments explorer search.
+3. Choose to monitor over a CD Deployment event count, facet, or measure:
+    * **CD Deployment event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CD Deployment events over a selected time frame, then compares it to the threshold conditions.
+    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
+    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CD Deployment measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+4. Group CD Deployment events by multiple dimensions (optional):
+    * All CD Deployment events matching the query are aggregated into groups based on the value of up to four facets.
+5. Configure the alerting grouping strategy (optional):
+   * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@deployment.name` to receive a separate alert for each CD Deployment name when the number of errors is high.
+
+{{< img src="monitors/monitor_types/cd_deployments/define-the-search-query.png" alt="A query for Deployment Status:Error that is being set to group by Deployment Name" style="width:100%;" >}}
+
+#### Using formulas and functions
+
+You can create CD Deployment monitors using formulas and functions. This can be used, for example, to create monitors on the **rate** of an event happening, such as the rate of a deployment failing (error rate).
+
+The following example is of a pipeline error rate monitor using a formula that calculates the ratio of "number of failed deployment events" (`deployment.status:error`) over "number of total deployment events" (no filter), grouped by `deployment.name` (to be alerted once per deployment). To learn more, see the [Functions Overview][1].
+
+{{< img src="monitors/monitor_types/cd_deployments/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:100%;" >}}
+
+<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+
+[1]: /dashboards/functions/#overview
+{{% /tab %}}
 {{< /tabs >}}
+
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
@@ -144,7 +181,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 #### Samples and breaching values top list
 
-When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
+When a CI Pipeline, CI Test, or CD Deployments monitor is triggered, samples or values can be added to the notification message.
 
 | Monitor Setup                    | Can be added to notification message |
 |----------------------------------|--------------------------------------|
@@ -153,7 +190,7 @@ When a CI Test or Pipeline monitor is triggered, samples or values can be added 
 | Grouped Multi-Alert count        | Up to 10 samples.                    |
 | Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
 | Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert measure        | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert measure      | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
@@ -212,3 +249,5 @@ For more information, see [Code Coverage][7].
 [5]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: /continuous_integration/search/#new-flaky-tests
 [7]: /continuous_integration/tests/code_coverage
+[8]: /tests/
+[9]: /continuous_delivery/

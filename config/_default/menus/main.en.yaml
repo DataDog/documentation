@@ -1645,7 +1645,7 @@ menu:
       parent: monitor_types
       identifier: monitor_types_change
       weight: 306
-    - name: CI
+    - name: CI/CD & Test
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
