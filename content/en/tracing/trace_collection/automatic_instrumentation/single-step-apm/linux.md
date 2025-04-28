@@ -17,18 +17,10 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 To enable APM on a Ubuntu host:
 
-1. Run the one-line installation command:
-
-   ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-   ```
-
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][1], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
-2. Start a new shell session.
-3. Restart the services on the host or VM.
-
-After you complete these steps, you may want to enable [runtime metrics][3] or view observability data from your application in the [Software Catalog][4].
+1. In the Datadog app, navigate to the [Install the Datadog Agent on Linux][15] page.
+1. Turn on **APM Instrumentation**.
+1. Copy and run the Agent installation command on your Linux host or VM.
+1. Restart your applications.
 
 ## Advanced Options
 
@@ -84,8 +76,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /tracing/metrics/runtime_metrics/
-[4]: /tracing/software_catalog/
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
@@ -93,5 +83,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [12]: https://github.com/DataDog/dd-trace-rb/releases
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 
 

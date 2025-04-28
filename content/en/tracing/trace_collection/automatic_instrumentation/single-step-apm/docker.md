@@ -17,30 +17,10 @@ In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to in
 
 To enable APM in a Docker Linux container:
 
-1. Run the one-line installation command:
-   ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-   ```
-2. Configure the Agent in Docker:
-   ```shell
-   docker run -d --name dd-agent \
-     -e DD_API_KEY=<YOUR_DD_API_KEY> \
-     -e DD_APM_ENABLED=true \
-     -e DD_ENV=<AGENT_ENV> \
-     -e DD_APM_NON_LOCAL_TRAFFIC=true \
-     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
-     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
-     -v /var/run/datadog:/var/run/datadog \
-     -v /var/run/docker.sock:/var/run/docker.sock:ro \
-     gcr.io/datadoghq/agent:7
-   ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
-3. Restart the Docker containers.
-4. [Explore the performance observability of your services in Datadog][2].
-
-After you complete these steps, you may want to enable [runtime metrics][3] or view observability data from your application in the [Software Catalog][4].
+1. In the Datadog app, navigate to the [Install the Datadog Agent on Docker][15] page.
+1. Turn on **APM Instrumentation**.
+1. Copy and run the Agent installation command in your Docker container.
+1. Restart your applications.
 
 ## Advanced Options
 
@@ -109,5 +89,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [12]: https://github.com/DataDog/dd-trace-rb/releases
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 
 

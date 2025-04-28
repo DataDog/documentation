@@ -52,6 +52,13 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 1. Remove any existing custom instrumentation code.
 1. Restart your application.
 
+## Next steps
+
+After setting up APM with Single Step Instrumentation, you may want to:
+
+- Enable [runtime metrics][11] to monitor CPU, memory, and other application-level stats.
+- View observability data from your services in the [Software Catalog][12].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -66,3 +73,5 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [8]: /tracing/guide/injectors
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
 [10]: /tracing/trace_collection/library_config/
+[11]: /tracing/metrics/runtime_metrics/
+[12]: /tracing/software_catalog/
