@@ -10,6 +10,9 @@ title: Kafka for Data Streams Monitoring
 
 ### Support for Kafka in Data Streams Monitoring
 
+### Note
+- [Kafka Streams][2] is partially supported for Java, and can lead to latency measurements being missed in many cases
+
 To setup DSM, please select the language of your producers and consumers
 
 <table>
@@ -59,11 +62,6 @@ To setup DSM, please select the language of your producers and consumers
     </tr>
   </tbody>
 </table>
-
-
-### Note
-- [Kafka Streams][2] is partially supported for Java, and can lead to latency measurements being missed in many cases
-
 
 [1]: /agent
 [2]: https://kafka.apache.org/documentation/streams/
