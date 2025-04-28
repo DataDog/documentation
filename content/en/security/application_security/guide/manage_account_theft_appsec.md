@@ -475,15 +475,15 @@ This gets you to the trace explorer with filters set to the flagged attributes. 
 
 {{<img src="security/ato/guide_distributed_credential_stuffing_traces.png" alt="Traces explorer filtered by the cluster attributes" style="width:100%;" >}}
 
-In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. Going back to the full page signal and scrolling down to the **Traces** section, you'll find an **Analysis** button. This will open a view where the traffic from the attack is sliced by a large variety of attributes.
+In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. Going back to the full page signal and scrolling down to the **Traces** section, you'll find an **Analysis** button. This opens a view where the traffic from the attack is sliced by a large variety of attributes.
 
 {{<img src="security/ato/guide_investigate_overview.png" alt="Analysis side panel opened with an attack and some suggested attributes in a table" style="width:100%;" >}}
 
-The most common attributes are presented at the top of a table, but you can visualize their impact by scrolling down. Each row shows the share of traffic that matches this attribute and how closely this traffic matches the "shape" of the increase in trafic. Your goal is to identify the attributes that together isolate this increase in activity while excluding the steady-state traffic. Be careful of the scale of the graphs, since not all traces may be tagged with every attribute (for instance, Threat Intelligence). Moreover, take note that some fields can't be used for blocking (Threat Intelligence, ASNs & IP geo).
+The most common attributes are presented at the top of a table, but you can visualize their impact by scrolling down. Each row shows the share of traffic that matches this attribute and how closely this traffic matches the "shape" of the increase in trafic. Your goal is to identify the attributes that together isolate this increase in activity while excluding the steady-state traffic. Be mindful of the scale of the graphs, since not all traces may be tagged with every attribute (for instance, Threat Intelligence). Moreover, take note that some fields can't be used for blocking (Threat Intelligence, ASNs & IP geo).
 
 {{<img src="security/ato/guide_investigate_correlation.png" alt="Some timeseries from the Analysis tab demonstrating sometimes low correlation, and sometimes high correlation" style="width:100%;" >}}
 
-Upon identifying the attributes, select them from the list and double check their exaustiveness by toggling on and off the **Filtering enabled** button. Once you're satisfied, click on **View Traces** to dive further into the impacted users.
+Upon identifying the attributes, select them from the list and double check their exhaustiveness by toggling on and off the **Filtering enabled** button. Once you're satisfied, click on **View Traces** to dive further into the impacted users.
 
 {{% /tab %}}
 {{< /tabs >}}
