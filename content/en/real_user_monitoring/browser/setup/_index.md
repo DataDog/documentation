@@ -22,6 +22,13 @@ Instrumenting your application allows observability data from your application t
 
 There are two ways to instrument your application: automatic or manual instrumentation.
 
+| | Auto-instrumentation (Preview) | Client-side (Manual) |
+|----------------------|--------------------------------|----------------------|
+| **SDK setup mechanism** | [Automatically](#auto-instrumentation) add RUM JS to your web app HTML. Once RUM Auto-instrumentation is set-up, manage configurations from the UI. | [Manually](#client-side-manual-instrumentation) add the RUM SDK to your application code and manage configurations in code. |
+| **Code changes required?** | No | Yes |
+| **Setup complexity** | Low | Medium |
+| **Who it's for** | SRE and engineering teams without access to frontend code, or teams who need to manage all observability needs centrally, may find this useful for: <br>  - Unlocking performance data across all applications upon setting up RUM <br>  - Holistically monitoring application performance across the organization | Frontend engineering, mobile engineering, or product teams with access to frontend code may find this method useful for: <br>  - Daily engineering needs (for example: live support, troubleshooting, and health checks for downstream services) <br>  -Product needs (for example: user flow analysis, user segmentation, and feature flag tracking) <br>  - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation |
+
 ### Auto-Instrumentation
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="true" header="Try the Auto-Instrumentation Preview!">}}
