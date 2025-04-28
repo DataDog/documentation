@@ -42,7 +42,7 @@ From this page, you can select the type of heatmap (Top Elements, Click Map, Scr
 
 {{< img src="product_analytics/heatmaps/pa-heatmaps-page.png" alt="For each view, you can select a different type of heatmap: Top Elements, Click Map, or Scroll Map." style="width:100%;">}}
 
-Click a view to see a more detailed view of the heatmap. From here, you have the additional view options:
+Click on a view name to have a more detailed look of the related heatmap. From here, you have these additional view options:
 
 - To switch the view being shown, use the **View Name** and **Application** selectors at the top.
 - To change the device view, use the **Device type** selector.
