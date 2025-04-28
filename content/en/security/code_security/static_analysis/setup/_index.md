@@ -49,6 +49,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 - `Content: Read`, which allows you to see code snippets displayed in Datadog
 - `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][3], as well as open pull requests to [fix vulnerabilities][4]
+- `Checks: Read & Write`, which allows you to create checks on SAST violations to block pull requests
 
 [1]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [2]: /integrations/guide/source-code-integration
