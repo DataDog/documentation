@@ -30,8 +30,8 @@ To create a monitor for CI pipelines, CI tests, or CD deployments, first enable 
 | Monitor type     | Required product         |
 |------------------|--------------------------|
 | CI Pipeline      | [CI Visibility][1]       |
-| CI Test          | [Test Optimization][8]   |
-| CD Deployments   | [CD Visibility][9]       |
+| CI Test          | [Test Optimization][2]   |
+| CD Deployments   | [CD Visibility][3]       |
 
 CI/CD and test monitors allow you to visualize CI/CD data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
 
@@ -173,11 +173,11 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 #### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][3] page.
+For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][4] page.
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 #### Samples and breaching values top list
 
@@ -232,22 +232,21 @@ A test run is marked as `new flaky` if that particular test has not been detecte
 For more information, see [Search and Manage CI Tests][6].
 
 ### Maintain code coverage percentage
-[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
+[Custom metrics][7], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:100%;">}}
 
-For more information, see [Code Coverage][7].
+For more information, see [Code Coverage][8].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/
-[2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /monitors/configuration/#advanced-alert-conditions
-[4]: /monitors/notify/
-[5]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[2]: /tests/
+[3]: /continuous_delivery/
+[4]: /monitors/configuration/#advanced-alert-conditions
+[5]: /monitors/notify/
 [6]: /continuous_integration/search/#new-flaky-tests
-[7]: /continuous_integration/tests/code_coverage
-[8]: /tests/
-[9]: /continuous_delivery/
+[7]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[8]: /continuous_integration/tests/code_coverage
