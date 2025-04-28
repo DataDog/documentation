@@ -56,7 +56,7 @@ Top Elements aggregate click actions on a given view by displaying the most inte
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-top-elements.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
-Click any action name in the panel to highlight the corresponding action on the map.
+Hover over any action name in the panel to highlight the corresponding action on the map.
 
 ## Click maps
 
@@ -64,10 +64,12 @@ A Click map shows you the most interacted-with actions on a given view by aggreg
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmaps.png" alt="Clickmap data overlayed on a website." style="width:100%;">}}
 
-Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
+On the left is a list of all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
 - The number of times the user performed the action and where it falls in overall analytics of top actions on a given page.
 - If that action had a frustration signal occurring on it (for example, if a user rage clicked on that button), you can view the associated frustration signals as well.
+
+From this view, you can also click the Start a Funnel button to identify user drop off.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmap-actions.png" alt="Shows an example action and the information you can get about that action." style="width:50%;">}}
 
