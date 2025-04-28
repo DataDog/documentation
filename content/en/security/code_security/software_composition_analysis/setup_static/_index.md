@@ -196,13 +196,6 @@ If you are an admin in your Azure portal, you can configure Entra apps to connec
     1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** group
 14. Click **Submit Organization**
 
-### Configure project service hooks
-Datadog needs service hooks to watch for events related to pull requests to power PR Comments and PR Gates functionality. To set this up, execute this script on the projects you wish to connect to Datadog Code Security. 
-
-```
-TODO
-```
-
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 
