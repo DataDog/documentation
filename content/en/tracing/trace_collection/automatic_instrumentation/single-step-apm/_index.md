@@ -15,11 +15,9 @@ further_reading:
 ---
 ## Overview
 
-Single Step Instrumentation (SSI) for APM installs the Datadog Agent and [instruments][4] your applications in one step, with no additional configuration steps required.
+Single Step Instrumentation (SSI) automatically installs the Datadog APM SDKs with no additional configuration required, reducing onboarding time from days to minutes.
 
-## Compatibility
-
-To see requirements for compatible languages, operating systems, and architectures, see [Single Step Instrumentation compatibility][6].
+For more information about how SSI works, read the [guide on how injectors work with SSI][8].
 
 ## Enabling APM on your applications
 
@@ -30,6 +28,20 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 {{< partial name="apm/apm-single-step.html" >}} 
 
 <br>
+
+<div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
+
+## Enabling additional APM features 
+
+After installing the Datadog APM SDK with SSI, you can configure additional tracing-based features. These features use your application traces to provide enhanced visibility, security, and performance insights.
+
+The available features and setup methods depend on your platform:
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
+| Configure in `application_monitoring.yaml` | Enable features across all services on a host without modifying application command lines. | Linux only |
+| Configure with [workload targeting][9] | By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations. | Kubernetes only |
+| [Set environment variables][10] | Enable features by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
 
 ## Troubleshooting
 
@@ -51,3 +63,6 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
 [7]: /tracing/trace_collection/custom_instrumentation/
+[8]: /tracing/guide/injectors
+[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
+[10]: /tracing/trace_collection/library_config/
