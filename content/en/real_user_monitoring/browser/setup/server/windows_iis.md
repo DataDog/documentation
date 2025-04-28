@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
 
 To understand important limitations and compatibility requirements, see [Limitations][1].
 
@@ -24,11 +24,14 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
-The auto-instrumentation method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
-
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][3] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
-3. Set up the IIS module using either the GUI installer or command line as described below:
+
+3. Configure your application parameters. See [guidance on configuring sampling][5].
+   {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
+
+4. Set up the IIS module using either the GUI installer or command line as described below:
+   {{< img src="real_user_monitoring/browser/auto-instrumentation/iis-code-snippet.png" alt="Auto-instrumentation Configuration" style="width:90%;">}}
 
 {{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 
@@ -47,8 +50,6 @@ The auto-instrumentation method leverages a Windows module that injects the RUM 
 1. Run the Powershell command line as an administrator.
 2. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 3. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
-
-[1]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
 
 {{% /collapse-content %}}
 
@@ -71,17 +72,17 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 
 ### Limitations
+
 See other [Limitations][1].
+
+## Uninstall
+
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the Windows Apps & Features tool.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
-
-## Uninstall
-
-To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the Windows Apps & Features tool.
