@@ -17,7 +17,7 @@ further_reading:
 
 Single Step Instrumentation (SSI) automatically installs the Datadog APM SDKs with no additional configuration required, reducing onboarding time from days to minutes.
 
-For more information about how SSI works, read the [guide on how injectors work with SSI][8].
+See the [injector guide for Single Step Instrumentation][8] to learn how SSI works.
 
 ## Enabling APM on your applications
 
