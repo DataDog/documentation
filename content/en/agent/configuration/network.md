@@ -182,7 +182,7 @@ Other: See [logs endpoints][202]
 [202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
-All other Agent data
+[Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
@@ -412,3 +412,6 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [23]: /llm_observability/
 [24]: /network_monitoring/cloud_network_monitoring/
 [25]: /universal_service_monitoring/
+[26]: /metrics/
+[27]: /developers/service_checks/
+[28]: /events/

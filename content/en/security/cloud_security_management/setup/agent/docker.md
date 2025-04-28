@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management on Docker
+title: Setting up Cloud Security on Docker
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 65 # a number that represents relative weight.
