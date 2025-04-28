@@ -68,6 +68,10 @@ When using a transpiler such as TypeScript, Webpack, Babel, or others, import an
 const tracer = require('dd-trace').init();
 ```
 
+**Note**: `DD_TRACE_ENABLED` is true by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
+- import the module conditionally 
+- set `DD_TRACE_ENABLED=false` (if, for example, static or top-level ESM imports prevent conditional loading)
+
 ##### TypeScript and bundlers
 
 For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
@@ -130,7 +134,7 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Bundling with Esbuild
+#### Bundling with esbuild
 
 This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
@@ -209,6 +213,12 @@ const nextConfig = {
 
 export default nextConfig;
 ```
+
+#### Unsupported Datadog features
+
+The following features are turned off by default in the Node.js tracer. They do not support bundling and cannot be used if your application is bundled.
+
+- APM: Dynamic Instrumentation
 
 #### General bundling remarks
 

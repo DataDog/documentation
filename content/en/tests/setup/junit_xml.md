@@ -83,7 +83,7 @@ datadog-ci version
 
 {{% tab "Windows" %}}
 {{< code-block lang="powershell" >}}
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 
 Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
@@ -180,6 +180,23 @@ datadog-ci junit upload --service service_name ./junit.xml
 if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 {{< /code-block >}}
 
+{{% /tab %}}
+
+{{% tab "CircleCI" %}}
+Use the [`when` attribute][1]:
+
+{{< code-block lang="yaml" >}}
+steps:
+  - run:
+      name: Run tests
+      command: ./run-tests.sh
+  - run:
+      name: Upload test results to Datadog
+      when: always
+      run: datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://circleci.com/docs/configuration-reference/#the-when-attribute
 {{% /tab %}}
 
 {{< /tabs >}}

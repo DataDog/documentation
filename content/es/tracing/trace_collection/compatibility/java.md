@@ -287,9 +287,9 @@ GraalVM Native Image es una tecnología que permite compilar aplicaciones Java e
 
 ### Requisitos
 
-Utiliza las últimas versiones de:
+Utiliza:
 
-- [GraalVM][7]
+- [GraalVM JDK 21][7]
 - [Rastreador Java de Datadog][1]
 
 ### Configuración

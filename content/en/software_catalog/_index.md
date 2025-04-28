@@ -45,6 +45,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/software-catalog/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
+- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
+  tag: "Blog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog" 
 algolia:
   tags: ['software catalog']
 ---
@@ -60,52 +63,32 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for our Internal Developer Portal!" >}}
 {{< /callout >}}
 
-### Use cases
+## Key terminology
 
-#### Governance and optimization
-- Providing engineering leadership with a high-level view of best practices across teams and services through [Service Scorecards][9].
-- Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
-- Understanding trends and identifying inefficiencies in the costs related to your services.
+Service
+: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be a group of endpoints, a group of DB queries, or a group of periodic jobs. Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12]. You can also import additional services through external sources like [Backstage][13] or [ServiceNow][14].
 
-#### Evaluate monitoring coverage  
-- Detecting which services aren’t reporting observability data or having that data monitored.
-- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
-- Spotting issues like missing SLOs, monitors, or services without ownership.
+System
+: In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
+: **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
 
-#### Streamline collaboration during incidents
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
-- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
-- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
+Component
+: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, an API, or a queue. 
 
+Endpoint
+: An endpoint refers to a specific route or path within a service that handles requests. For example, `/api/v2/messages/send`. Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][19] for an APM web service. APM provides performance metrics such as request count, latency, and error rate. Users can also add other unmonitored endpoints to Software Catalog through metadata [Definitions][17]. 
+
+API
+: In the Software Catalog, an API refers to a collection of endpoints that belong together logically. APIs offer an alternative way to group endpoints beyond APM services (the mapping between endpoints and services are not modifiable). Users can define team and add additional endpoints (regardless of whether they are monitored by APM) by providing a `kind:API` metadata [Definition][18] in Software Catalog. 
 
 ## Getting started
 
 {{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/software_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/customize/" >}}Customize Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/navigating/" >}}Navigate Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/use_cases/" >}}Learn about common use cases{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/manage/" >}}Manage a component in Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Role based access and permissions
-
-For general information, see [Role Based Access Control][2] and [Role Permissions][3].
-### Read permission
-
-The Software Catalog read permission allows a user to read Software Catalog data, which enables the following features:
-- Software Catalog list
-- Discover UI
-- Service Definition endpoint: `/api/v2/services/definition/<service_name>`
-
-The permission is enabled by default in the **Datadog Read Only Role** and **Datadog Standard Role**.
-
-### Write permission
-
-The Software Catalog write permission allows a user to modify Software Catalog data. The write permission is required for the following features:
-- Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
-- Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
-- Completing the onboarding process in the Discover Services UI
-- Updating service metadata in the UI
-
-The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
 {{< site-region region="gov" >}}
 ## Services types
@@ -155,9 +138,19 @@ The services and resources statistics, and span summaries on the **Service List*
 [1]: https://app.datadoghq.com/services
 [2]: /account_management/rbac/
 [3]: /account_management/rbac/permissions/
-[4]: /developers/guide/data-collection-resolution-retention/
+[4]: /data_security/data_retention_periods/
 [5]: /tracing/software_catalog/adding_metadata#service-definition-schema-v22
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
 [7]: /tracing/other_telemetry/
 [8]: /software_catalog/add_metadata#metadata-schema-v30-beta
 [9]: /software_catalog/scorecards/
+[10]: /glossary/#service
+[11]: /opentelemetry/integrations/trace_metrics/
+[12]: /software_catalog/customize/create_entries
+[13]: /software_catalog/customize/import_entries_backstage
+[14]: /software_catalog/customize/import_entries_servicenow
+[15]: https://backstage.io/docs/features/software-catalog/system-model/
+[16]: /tracing/services/inferred_services/?tab=agentv7551#naming-inferred-entities
+[17]: /software_catalog/service_definitions/v3-0/
+[18]: /software_catalog/service_definitions/#add-metadata-to-endpoints
+[19]: /tracing/glossary/#resources

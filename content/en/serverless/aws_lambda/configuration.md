@@ -57,13 +57,11 @@ To enable threat monitoring, add the following environment variables to your dep
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][49].
 
-[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
 A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
@@ -278,8 +276,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## Collect traces from non-Lambda resources
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
-
 Datadog can infer APM spans based on the incoming Lambda events for the AWS managed resources that trigger the Lambda function. This can be help visualize the relationship between AWS managed resources and identify performance issues in your serverless applications. See [additional product details][12].
 
 The following resources are currently supported:
@@ -319,6 +315,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
+| `lambda_msk` | `"lambda_msk:newServiceName"` |
 
 #### Rename specific services
 
@@ -334,6 +331,7 @@ For a more granular approach, use these service-specific identifiers:
 | Kinesis | Stream name | `"MyStream:newServiceName"` |
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+| MSK | Cluster name | `"ExampleCluster:newServiceName"` |
 
 #### Examples with description
 
@@ -744,3 +742,5 @@ If you have trouble configuring your installations, set the environment variable
 [46]: https://docs.datadoghq.com/tracing/glossary/#services
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
+[49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+

@@ -9,11 +9,10 @@ aliases:
   - /service_catalog/use_cases/appsec_management 
   - /tracing/service_catalog/use_cases/appsec_management  
   - /service_catalog/use_cases/application_security
-  - /service_catalog/use_cases/application-security
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"
-    text: "Datadog Application Security Management"
+    text: "Datadog App and API Protection"
 ---
 
 The Software Catalog enables organizations to seamlessly incorporate security into every development stage, ensuring a strong security posture across teams, applications, and systems.

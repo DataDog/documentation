@@ -63,14 +63,14 @@ Once you have installed the Agent Integration Developer Tool, configure it for t
 Set `integrations-extras` as the default working repository:
 
 ```shell
-ddev config set extras $HOME/dd/integrations-extras
+ddev config set repos.extras $HOME/dd/integrations-extras
 ddev config set repo extras
 ```
 
 If you used a directory other than `$HOME/dd` to clone the `integrations-extras` directory, use the following command to set your working repository:
 
 ```shell
-ddev config set extras <PATH/TO/INTEGRATIONS_EXTRAS>
+ddev config set repos.extras <PATH/TO/INTEGRATIONS_EXTRAS>
 ddev config set repo extras
 ```
 
@@ -136,14 +136,14 @@ Once you have installed the Agent Integration Developer Tool, configure it for t
 Set `marketplace` as the default working repository:
 
 ```shell
-ddev config set marketplace $HOME/dd/marketplace
+ddev config set repos.marketplace $HOME/dd/marketplace
 ddev config set repo marketplace
 ```
 
 If you used a directory other than `$HOME/dd` to clone the `marketplace` directory, use the following command to set your working repository:
 
 ```shell
-ddev config set marketplace <PATH/TO/MARKETPLACE>
+ddev config set repos.marketplace <PATH/TO/MARKETPLACE>
 ddev config set repo marketplace
 ```
 

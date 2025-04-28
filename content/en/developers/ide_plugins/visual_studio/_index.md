@@ -110,7 +110,7 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [3]: https://www.datadoghq.com/
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [5]: /tracing/error_tracking/
-[6]: /security/application_security/vulnerability_management/
+[6]: /security/code_security/software_composition_analysis/
 [8]: /profiler/
 [10]: /continuous_integration/guides/flaky_test_management/
 [12]: /integrations/guide/source-code-integration/

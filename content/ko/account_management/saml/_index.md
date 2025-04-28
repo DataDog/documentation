@@ -58,12 +58,21 @@ Datadog 계정용 [SAML(Security Assertion Markup Language)][1]을 설정하면 
 
 7. Datadog에서 SAML을 구성하고, Datadog에서 요청을 받을 수 있도록 IdP를 설정한 후 로그인할 수 있습니다.
 
-   - **SP에서 시작한 로그인**(서비스 제공자 또는 Datadog에서 시작한 로그인): [SAML 구성 페이지][19] 상단에 있는 상태 박스에 나와 있는 **Single Sign-on URL**을 사용합니다. **Single Sign-on URL**은 [팀 페이지][20]에 표시됩니다. 이 URL을 로딩하면 내 IdP의 SAML 인증이 시작됩니다. **참고**: 이 URL은 내 계정에 SAML이 활성화되어 있고 SP 시작 로그인을 한 경우에만 보입니다.
-    {{< img src="account_management/saml/saml_enabled_cropped.png" alt="SAML이 활성화되었다는 확인" >}}
+**참고**: 여러 조직용으로 SAML을 구성하려면 [여러 조직 계정 관리][21]를 참고하세요.
 
-   - **IdP 시작 로그인을 사용할 경우**(ID 제공자 또는 앱 포털에서 시작한 로그인): 앱 포털에서 앱 아이콘을 클릭(예: Google App Drawer 또는 Okta App Portal)합니다. SP 시작 로그인 URL로 로그인하는 사용자가 IdP 시작 로그인에서도 로그인을 할 수 있는 시나리오가 일부 있지만, 이는 ID 제공자의 구성과 지원에 따라 다릅니다.
+## SAML 사용
 
-**참고**: 여러 조직에 SAML을 구성하고 싶을 경우, [여러 조직 계정 관리][21]를 참고하세요.
+Datadog에서 SAML을 구성한 후, Datadog에서 IdP에서 요청을 받을 수 있도록 설정하면 로그인할 수 있습니다.
+
+### SP 시작 로그인
+
+**SP에서 시작한 로그인**(서비스 제공자 또는 Datadog에서 시작한 로그인): [SAML 구성 페이지][19] 상단에 있는 상태 박스에 나와 있는 **Single Sign-on URL**을 사용해 로그인합니다. **Single Sign-on URL**은 [팀 페이지][20]에 표시됩니다. 이 URL을 로딩하면 내 IdP의 SAML 인증이 시작됩니다. **참고**: 이 URL은 내 계정에 SAML이 활성화되어 있고 SP 시작 로그인을 한 경우에만 보입니다.
+
+{{< img src="account_management/saml/saml_enabled_cropped.png" alt="SAML이 활성화되었다는 확인" >}}
+
+사용자가 SP 시작 SAML을 통해 로그인했는데 조직에 커스텀 하위 도메인이 없는 경우, Datadog에서는 추가 보안을 요청합니다. 로그인하려면 사용자가 1회성 이메일 인증 코드를 받아 입력해야 합니다.
+
+**IdP 시작 로그인을 사용할 경우**(ID 제공자 또는 앱 포털에서 시작한 로그인): 앱 포털에서 앱 아이콘을 클릭(예: Google App Drawer 또는 Okta App Portal)해 로그인합니다. IdP 구성에 따라 SP 시작 로그인 사용자도 IdP 시작 로그인을 사용할 수 있습니다.
 
 ## 어설션과 속성
 

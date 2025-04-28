@@ -41,7 +41,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 5.1.0
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: cilium

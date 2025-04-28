@@ -24,7 +24,7 @@ further_reading:
 
 Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
 
-- Screens built with SwiftUI (iOS) or Jetpack Compose (Android)
+- SwiftUI is supported through an **experimental** feature. If this experimental support is **not enabled**, SwiftUI screens may appear blank or incomplete. 
 - Certain system elements, such as actionBar in Android, progress bars, and spinners
 - Rich system contents, such as video players, music player, and map widgets
 - Views that use direct canvas drawing

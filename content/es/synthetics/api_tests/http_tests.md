@@ -50,7 +50,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
      2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Definir solicitud**, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
      3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
 
-      {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API Synthetics" video="true" >}}
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API Synthetics" video="true" >}}
 
   - **Crea un test desde cero**:
 
@@ -65,7 +65,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
 
      4. Haz clic en **Enviar** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.<br /><br>
 
-      {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Definir splicitud HTTP" style="width:90%;" >}}
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Definir splicitud HTTP" style="width:90%;" >}}
 
      5. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
 
@@ -78,60 +78,62 @@ Puedes crear un test utilizando una de las siguientes opciones:
 {{< tabs >}}
 
 {{% tab "Opciones de solicitud" %}}
-  * **Versión HTTP**: Selecciona `HTTP/1.1 only`, `HTTP/2 only` o `HTTP/2 fallback to HTTP/1.1`.
-  * **Seguir redirecciones**: Selecciona esta opción para que tu test HTTP pueda acceder a un máximo de diez redirecciones al realizar la solicitud.
-  * **Ignorar error de certificado del servidor**: Selecciona esta opción para que tu test HTTP continúe con la conexión, aunque se produzcan errores al validar el certificado SSL.
-  * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
-  * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
-  * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-{{% /tab %}}
+   * **Versión HTTP**: Selecciona `HTTP/1.1 only`, `HTTP/2 only` o `HTTP/2 fallback to HTTP/1.1`.
+   * **Seguir redirecciones**: Selecciona esta opción para que tu test HTTP pueda acceder a un máximo de diez redirecciones al realizar la solicitud.
+   * **Ignorar error de certificado del servidor**: Selecciona esta opción para que tu test HTTP continúe con la conexión, aunque se produzcan errores al validar el certificado SSL.
+   * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
+   * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
+   * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-{{% tab "Autenticación" %}}
+   {{% /tab %}}
 
-* **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
+   {{% tab "Autenticación" %}}
 
-  ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-  ```
+   * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
-* **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
-* **Autenticación Digest**: Añade credenciales de autenticación Digest.
-* **NTLM**: añade credenciales de autenticación NTLM. Es compatible con NTLMv2 y NTLMv1.
-* **AWS Signature v4**: Introduce tu ID de clave de acceso y tu clave de acceso secreta. Datadog genera la firma para tu solicitud. Esta opción utiliza la implementación básica de SigV4. Las firmas específicas, como Amazon S3, no son compatibles de forma predefinida.
-  Para las solicitudes de transferencia "Single Chunk" a buckets de Amazon S3, añade `x-amz-content-sha256` con el cuerpo de la solicitud codificado con sha256 como cabecera (para un cuerpo vacío: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
-* **OAuth 2.0**: Elige entre conceder credenciales de cliente o una contraseña de propietario de recurso e introduce un token de acceso URL. Dependiendo de tu selección, introduce un ID de cliente y un secreto, o un nombre de usuario y una contraseña. En el menú desplegable, selecciona una opción para enviar el token de la API como encabezado de autenticación básica o envía las credenciales del cliente en el cuerpo. Opcionalmente, puedes proporcionar información adicional como la audiencia, el recurso y el contexto (así como el ID y el secreto del cliente, si seleccionaste **Contraseña del propietario del recurso**).
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-{{% /tab %}}
+   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
+   * **Autenticación Digest**: Añade credenciales de autenticación Digest.
+   * **NTLM**: añade credenciales de autenticación NTLM. Es compatible con NTLMv2 y NTLMv1.
+   * **AWS Signature v4**: Introduce tu ID de clave de acceso y tu clave de acceso secreta. Datadog genera la firma para tu solicitud. Esta opción utiliza la implementación básica de SigV4. Las firmas específicas, como Amazon S3, no son compatibles de forma predefinida.
+     Para las solicitudes de transferencia "Single Chunk" a buckets de Amazon S3, añade `x-amz-content-sha256` con el cuerpo de la solicitud codificado con sha256 como cabecera (para un cuerpo vacío: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **OAuth 2.0**: Elige entre conceder credenciales de cliente o una contraseña de propietario de recurso e introduce un token de acceso URL. Dependiendo de tu selección, introduce un ID de cliente y un secreto, o un nombre de usuario y una contraseña. En el menú desplegable, selecciona una opción para enviar el token de la API como encabezado de autenticación básica o envía las credenciales del cliente en el cuerpo. Opcionalmente, puedes proporcionar información adicional como la audiencia, el recurso y el contexto (así como el ID y el secreto del cliente, si seleccionaste **Contraseña del propietario del recurso**).
 
-{{% tab "Parámetros de consulta" %}}
+   {{% /tab %}}
 
-* **Codificar parámetros**: Añade el nombre y el valor de los parámetros de consulta que requieren codificación.
+   {{% tab "Parámetros de consulta" %}}
 
-{{% /tab %}}
+   * **Codificar parámetros**: Añade el nombre y el valor de los parámetros de consulta que requieren codificación.
 
-{{% tab "Cuerpo de la solicitud" %}}
+   {{% /tab %}}
 
-* **Tipo de cuerpo**: Selecciona el tipo de cuerpo de la solicitud (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
-* **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP.
-    * El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes para `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
-    * El cuerpo de la solicitud está limitado a un archivo de 3 megabytes para `application/octet-stream`.
-    * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`. 
-{{% /tab %}}
+   {{% tab "Cuerpo de la solicitud" %}}
 
-{{% tab "Proxy" %}}
+   * **Tipo de cuerpo**: Selecciona el tipo de cuerpo de la solicitud (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
+   * **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP.
+       * El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes para `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
+       * El cuerpo de la solicitud está limitado a un archivo de 3 megabytes para `application/octet-stream`.
+       * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`. 
+   {{% /tab %}}
 
-* **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-* **Cabecera de proxy**: Añade cabeceras para incluir en la solicitud HTTP al proxy.
+   {{% tab "Proxy" %}}
 
-{{% /tab %}}
+   * **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Cabecera de proxy**: Añade cabeceras para incluir en la solicitud HTTP al proxy.
 
-{{% tab "Privacidad" %}}
+   {{% /tab %}}
 
-* **No guardar el cuerpo de la respuesta**: Selecciona esta opción para evitar que se guarde el cuerpo de la respuesta en tiempo de ejecución. Esta opción es útil para garantizar que no se muestren datos confidenciales en los resultados del test, pero debes utilizarla con prudencia ya que puede dificultar la resolución de problemas. Para obtener recomendaciones de seguridad, consulta [Seguridad en la monitorización Synthetic][1].
+   {{% tab "Privacidad" %}}
+
+   * **No guardar el cuerpo de la respuesta**: Selecciona esta opción para evitar que se guarde el cuerpo de la respuesta en tiempo de ejecución. Esta opción es útil para garantizar que no se muestren datos confidenciales en los resultados del test, pero debes utilizarla con prudencia ya que puede dificultar la resolución de problemas. Para obtener recomendaciones de seguridad, consulta [Seguridad en la monitorización Synthetic][1].
+
 
 [1]: /es/data_security/synthetics
-{{% /tab %}}
+   {{% /tab %}}
 
 {{% tab "Javascript" %}}
 
@@ -139,7 +141,7 @@ Define variables para tus tests de API HTTP con JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Definir tests de API HTTP con Javascript" style="width:90%;" >}}
 
-{{% /tab %}}
+   {{% /tab %}}
 
 {{< /tabs >}}
 
@@ -184,16 +186,16 @@ Los tests HTTP se pueden ejecutar:
 
 ## Un clic
 
-La creación de tests de API sugiere endpoints del [Catálogo de servicios][17] y de los tests de API existentes para pre-rellenar tu formulario de tests con opciones relevantes.
-Utiliza las fuentes de datos existentes de Datadog, como las trazas (traces) APM, la detección de endpoints del Catálogo de servicios y los tests Synthetic existentes similares, creados por los usuarios.
+La creación de tests de API sugiere endpoints del [Catálogo de software][17] y de los tests de API existentes para pre-rellenar tu formulario de tests con opciones relevantes.
+Utiliza las fuentes de datos existentes de Datadog, como las trazas (traces) APM, la detección de endpoints del Catálogo de software y los tests Synthetic existentes similares, creados por los usuarios.
 
 Empieza a escribir en la entrada **URL** del test de la API para obtener sugerencias de endpoints o tests similares en la monitorización Synthetic:
 
-{{< img src="synthetics/api_tests/api-one-click.png" alt="Test de API HTTP que muestra una búsqueda GET de un test de API existente" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/api-one-click.png" alt="Test de API HTTP que muestra una búsqueda GET de un test de API existente" style="width:90%;" >}}
 
 A continuación, selecciona una sugerencia para pre-rellenar la configuración de tu test (opciones y cabeceras de solicitud, autenticación y variables):
 
-{{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Seleccionar" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Seleccionar" style="width:90%;" >}}
 
 {{% synthetics-variables %}}
 

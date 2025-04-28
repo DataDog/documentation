@@ -161,20 +161,18 @@ Single Step Instrumentation supports Node.js 16.x and above, which is available 
 
 ### Supported PHP versions
 
-<div class="alert alert-warning">Using Single Step Instrumentation with PHP applications is in Preview.</div>
-
-
 | PHP Version | Support |
 |-------------|---------|
-| 8.3.x       | Preview |
-| 8.2.x       | Preview |
-| 8.1.x       | Preview |
-| 8.0.x       | Preview |
-| 7.4.x       | Preview |
-| 7.3.x       | Preview |
-| 7.2.x       | Preview |
-| 7.1.x       | Preview |
-| 7.0.x       | Preview |
+| 8.4.x       | <i class="icon-check-bold"></i> |
+| 8.3.x       | <i class="icon-check-bold"></i> |
+| 8.2.x       | <i class="icon-check-bold"></i> |
+| 8.1.x       | <i class="icon-check-bold"></i> |
+| 8.0.x       | <i class="icon-check-bold"></i> |
+| 7.4.x       | <i class="icon-check-bold"></i> |
+| 7.3.x       | <i class="icon-check-bold"></i> |
+| 7.2.x       | <i class="icon-check-bold"></i> |
+| 7.1.x       | <i class="icon-check-bold"></i> |
+| 7.0.x       | <i class="icon-check-bold"></i> |
 
 ### PHP extensions
 
@@ -191,6 +189,21 @@ SSI disables automatically when it detects:
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
+
+## Tracer libraries
+
+The following tracer library versions are supported for Single Step Instrumentation: 
+
+| Tracer Language  | Version   |
+|------------------|-----------|
+| Java             | 1.44.0+   | 
+| Python           | 2.20.1+   | 
+| Node.js          | 4+        | 
+| .NET             | 3.7.0+    | 
+| Ruby             | 2.5.0+    |  
+| PHP              | 1.6.0+    |  
+
+Single Step Instrumentation automatically downloads the tracer version compatible with your application's language version. 
 
 ## Further reading
 

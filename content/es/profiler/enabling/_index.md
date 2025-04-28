@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/faq/profiling_migration/
-- /tracing/profiler/enabling/
+- /es/tracing/faq/profiling_migration/
+- /es/tracing/profiler/enabling/
 further_reading:
 - link: getting_started/profiler
   tag: Documentación

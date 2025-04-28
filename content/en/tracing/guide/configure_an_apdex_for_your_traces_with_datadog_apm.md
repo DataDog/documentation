@@ -34,21 +34,27 @@ Apdex thresholds must be set by administrators, per service, before Apdex scores
 
 To visualize your web application or service Apdex: 
 
-1. On the [Software Catalog][3], click into a web service. On the upper right-hand graph, select Apdex instead of Latency. If you don't see this option, check that you have clicked into a web service:
+1. In [Software Catalog][3], hover over your web service and select **Service Page**.
 
-   {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection" >}}
+1. Click the **Latency** graph title to open a drop-down menu, and select **Apdex**. 
 
-2. Use the pencil icon on the top left of your widget to configure your Apdex (you must be an administrator to see this icon):
+   **Note**: The Apdex option is only available for web services. 
 
-   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit" >}}
+   {{< img src="tracing/faq/apdex_selection_2.png" alt="Latency graph drop-down menu showing Apdex option" >}}
 
-3. Enter your threshold directly to visualize your request distribution:
+1. Use the pencil icon on the top left of your widget to edit your Apdex configuration.
 
-   {{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" >}}
+   **Note**: You must be an administrator to see this icon.
 
-4. Save your widget to follow your Apdex evolution over time:
+   {{< img src="tracing/faq/apdex_edit.png" alt="Pencil icon above Apdex graph, which can be selected to edit tolerable threshold" >}}
 
-   {{< img src="tracing/faq/apm_save.png" alt="Apdex Save" >}}
+1. Enter your threshold to visualize your request distribution.
+
+   {{< img src="tracing/faq/apdex_update.png" alt="Apdex Configuration edit screen, showing text box to set tolerable threshold" >}}
+
+1. Save your widget to follow your Apdex evolution over time.
+
+   {{< img src="tracing/faq/apm_save.png" alt="Apdex graph after saving configuration changes" >}}
 
 ## Display your Apdex on the Software Catalog
 

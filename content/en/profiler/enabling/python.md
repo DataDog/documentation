@@ -121,13 +121,13 @@ You can configure the profiler using the [environment variables][6].
 
 The Python profiler supports code provenance reporting, which provides
 insight into the library that is running the code. While this is
-disabled by default, you can turn it on by setting
-`DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
+enabled by default, you can turn it off by setting
+`DD_PROFILING_ENABLE_CODE_PROVENANCE=0`.
 
 
 ### Stack V2
 
-Stack V2 is the new stack sampler implementation for CPython 3.8+ on x86_64 Linux.
+Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on Linux.
 It enhances the performance, accuracy, and reliability of Python CPU profiling.
 The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
 using the most recent release of the library to benefit from latest improvements
