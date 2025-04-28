@@ -71,7 +71,6 @@ Application Security capabililties for PHP support the following architectures:
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
 | Linux GNU arm64 (aarch64-linux-gnu)       | GA                    | > `0.95.0`                             |
 | Linux MUSL arm64 (aarch64-linux-musl)     | GA                    | > `0.95.0`                             |
-| Windows                                   | Not supported         |                                        |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
@@ -88,6 +87,7 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 - Distributed Tracing to see attack flows through your applications
 
 ##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
 - **Code Security** is not supported
 
 The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
@@ -97,16 +97,20 @@ The following frameworks aren't directly instrumented by Application Security, b
 | CakePHP       | 2.x       |  {{< X >}} | {{< X >}} |
 | CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
 | FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
-| Laravel       | 4.2, 5.x, 6.x, 8.x(tracer 0.52.0+), 9.x, 10.x        | {{< X >}} | {{< X >}} |
+| Laravel       | 4.2, 5.x, 6.x        | {{< X >}} | {{< X >}} |
+| Laravel 8     | 8.x (tracer 0.52.0+) | {{< X >}} | {{< X >}} |
 | Lumen         | 1.9-2.29    |  {{< X >}} | {{< X >}} |
 | Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
 | Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
 | Slim          | 3.1+        |  {{< X >}} | {{< X >}} |
-| Symfony     | 3.1+, 4.x, 5.x, 6.x        |  {{< X >}} | {{< X >}} |
-| Wordpress     | 3.1+, 4.x, 5.x, 6.x    |  {{< X >}} | {{< X >}} |
+| Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
+| Symfony 4     | 3.1+        |  {{< X >}} | {{< X >}} |
+| Symfony 5     | 3.1+        |  {{< X >}} | {{< X >}} |
+| Wordpress     | 3.1+        |  {{< X >}} | {{< X >}} |
 | Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
 | Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
+| Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
 | RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
 
 
@@ -119,6 +123,7 @@ The following frameworks aren't directly instrumented by Application Security, b
 - error and stacktrace capturing
 
 ##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
 - **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 

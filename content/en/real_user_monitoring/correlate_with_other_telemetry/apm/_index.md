@@ -29,7 +29,7 @@ algolia:
   tags: ['rum traces']
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM and Traces" style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Overview
 
@@ -438,25 +438,6 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% /tab %}}
 {{< /tabs >}}
 
-## RUM Explorer to Traces
-
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;">}}
-
-To view traces from the RUM Explorer:
-
-1. Navigate to your [list of sessions][21] and click on a session that has traces available. You can also query for sessions with traces by using`@_dd.trace_id:*`.
-
-When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
-
-## Traces to RUM Explorer
-
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum-traces-to-rum.png" alt="RUM and Traces" style="width:100%;">}}
-
-To view the RUM event from Traces:
-
-1. Within a trace view, click **VIEW** to see all traces created during the view's lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
-1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
-
 ## Supported libraries
 
 Below is a list of the supported backend libraries that need to be on the services receiving the network requests.
@@ -466,7 +447,7 @@ Below is a list of the supported backend libraries that need to be on the servic
 | [Python][3]      | [0.22.0][4]     |
 | [Go][5]          | [1.10.0][6]     |
 | [Java][7]        | [0.24.1][8]     |
-| [Ruby][9]        | [0.20.0][10]    |
+| [Ruby][9]        | [0.20.0][10]     |
 | [JavaScript][11] | [0.10.0][12]    |
 | [PHP][13]        | [0.33.0][14]    |
 | [.NET][15]       | [1.18.2][16]    |
@@ -635,7 +616,7 @@ The default injection style is `tracecontext`, `Datadog`.
 {{< /tabs >}}
 
 
-## How RUM resources are linked to traces
+## How are RUM resources linked to traces?
 
 Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
@@ -687,11 +668,11 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## Effect on APM quotas
+## How are APM quotas affected?
 
 Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
-## Trace retention
+## How long are traces retained?
 
 These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
@@ -719,4 +700,3 @@ These traces are available for 15 minutes in the [Live Search][19] explorer. To 
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [19]: /tracing/trace_explorer/#live-search-for-15-minutes
 [20]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[21]: https://app.datadoghq.com/rum/explorer

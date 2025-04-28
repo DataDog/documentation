@@ -30,8 +30,6 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 ### Monitoring Kafka Pipelines
 Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
 
-{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
-
 #### Automatic Instrumentation
 
 Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.

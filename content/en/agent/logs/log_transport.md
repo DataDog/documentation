@@ -107,9 +107,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 [2]: /agent/basic_agent_usage/#agent-overhead
 [3]: /agent/configuration/proxy/
 {{% /tab %}}
-
 {{% tab "TCP" %}}
-{{< site-region region="us,eu,us3,us5,ap1" >}}
 
 To enforce TCP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
@@ -124,13 +122,6 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-The TCP endpoint is not supported for this site.
-
-{{< /site-region >}}
 
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}

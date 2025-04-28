@@ -22,8 +22,8 @@ author:
   support_email: david.bouchare@datadoghq.com
 categories:
 - métricas
-- network
-custom_kind: integración
+- la red
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -54,7 +54,7 @@ tile:
   title: Sendmail
 ---
 
-<!--  CON ORIGEN EN https://github.com/DataDog/integrations-extras -->
+<!--  FUENTE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general

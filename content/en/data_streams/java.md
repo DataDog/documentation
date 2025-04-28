@@ -73,8 +73,6 @@ Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from you
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
-{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
-
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must perform the following additional configuration steps:
 

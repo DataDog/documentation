@@ -2765,13 +2765,13 @@ menu:
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
-      weight: 10001
-    - name: Policies
-      url: infrastructure/resource_catalog/policies/
+      identifier: infrastructure_resource_catalog_schemat
+      weight: 20001
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_policies
-      weight: 10002
+      identifier: infrastructure_resource_catalog_governance
+      weight: 20002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
