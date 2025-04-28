@@ -60,7 +60,7 @@ If provided with incidents, the `Severity` tag is added to failure events.
 
 ### Include historical incidents
 
-You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][202]. This action will create failures from those incidents and can take up to an hour to complete.
+You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][202], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
 
 [201]: /service_management/incident_management/
 [202]: https://app.datadoghq.com/ci/settings/dora
