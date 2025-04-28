@@ -448,12 +448,12 @@ multifiltersearch:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Cloud Cost Recommendations is in Preview with support for AWS, Azure, and Google Cloud, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
+Cloud Cost Recommendations is now GA with support for AWS, Azure, and Google Cloud, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
 {{< /callout >}}
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data to identify orphaned, legacy, or over-provisioned cloud resources.
+[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider billing data to identify orphaned, legacy, or over-provisioned cloud resources.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
@@ -462,7 +462,7 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
-You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
+You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page. 
 
 ## Recommendation categories
 
@@ -491,6 +491,15 @@ For each cloud account that you would like to receive recommendations for:
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4] or [Azure integration tile][8].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
+
+*Cloud Cost Recommendations now supports customers' non-USD billing currencies. 
+
+## Recommendation action-taking
+You can now take action on recommendations as easily as possible to save money and optimize your costs. Cloud Cost Recommendations now supports Jira, 1-click Workflow Automation actions, and Datadog Case Management. Today, unused EBS volume and GP2 EBS volume recommendations support 1-click Workflow Automation actions and more will support soon. More details for each action-taking option are below:
+
+- Jira: Jira issue creation is supported in both the recommendation side panel and "Active Recommendations" list. Users can click "Crea Jira issue" in the side panel or multi-select recommendations in the "Active Recommendations" list and create Jira issues from there. Jira issues are auto-tagged indicating they relate to a cost recommendation and include a link back to the recommendation referenced.
+- 1-click Workflow Automation actions: Actions are supported for a select set of recommendations today (and will expand to more soon) wherein a user can click an action button like "Delete EBS Volume" to quickly perform the recommended action directly from Cloud Cost Management.
+- Datadog Case Management: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations. 
 
 ## Recommendation and resource descriptions
 
