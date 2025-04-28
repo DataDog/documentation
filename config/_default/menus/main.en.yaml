@@ -2715,7 +2715,7 @@ menu:
       weight: 9
     - name: Datastore
       url: actions/datastore/
-      pre: server
+      pre: datastores-wui
       parent: actions_heading
       identifier: datastore
       weight: 30000
