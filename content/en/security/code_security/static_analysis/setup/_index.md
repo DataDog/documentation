@@ -70,7 +70,7 @@ If GitLab is your source code management provider, you must request access to th
 {{% tab "Azure DevOps" %}}
 
 <div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="TODO">Join the Preview</a>.
+Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://forms.gle/csqe6w82gY1UHW5AA">Join the Preview</a>.
 </div>
 
 If Azure DevOps is your source code management provider, you must request access to the closed preview using the form above before you can begin installation. After being granted access, follow these instructions to complete the setup process.
