@@ -74,7 +74,7 @@ If GitLab is your source code management provider, you must request access to th
 Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://forms.gle/csqe6w82gY1UHW5AA">Join the Preview</a>.
 </div>
 
-If Azure DevOps is your source code management provider, you must request access to the closed preview using the form above before you can begin installation. After being granted access, follow these instructions to complete the setup process.
+If Azure DevOps is your source code management provider, you must request access to the closed preview using the form above before you can begin installation. After being granted access, follow the instructions below to complete the setup process.
 
 ### Create and register an Microsoft Entra app
 If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
