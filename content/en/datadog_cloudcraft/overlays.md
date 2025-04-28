@@ -10,8 +10,6 @@ further_reading:
 <div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Overview
-
 Cloudcraft supports overlays that integrate data from multiple sources, making it easier to apply groupings and filters to your diagrams so you can focus on specific parts of your architecture.
 
 Cloudcraft provides the following built-in overlays: 
@@ -21,50 +19,54 @@ Cloudcraft provides the following built-in overlays:
 - [Security](#security)
 - [Cloud Cost Management (CCM)](#cloud-cost-management)
 
-{{< img src="datadog_cloudcraft/presets_2.png" alt="Screenshot of the available overlays in Cloudcraft" style="width:80%;" >}}
-
 ### Infrastructure
 
 The infrastructure view provides a broad overview, grouping resources by Account, Region, and VPC. This view is ideal for generating architecture diagrams for troubleshooting or high-level review.
 
 The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway, among others, to give you an uncluttered diagram, showing you the most important parts of your architecture.
 
-{{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_2.png" alt="Screenshot of the Infrastructure diagram in Cloudcraft" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_with_ccm.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
 
 ### Agent 
 
-The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a grey dot indicates it is not installed on that resource.
+The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend at the bottom of the screen. A green dot signifies the Agent is installed, while a grey dot indicates it is not installed on that resource.
 
-{{< img src="datadog_cloudcraft/agent_overlay_2.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
+{{< img src="datadog_cloudcraft/agent_overlay_with_ccm.png" alt="Agent overlay in Cloudcraft, highlighting the collapsible legend at the bottom left hand side of the screen." width="100%" >}}
 
 ### Security
 
-The security view focuses on potential security exposures, grouping resources by Region, VPC, and Security Group. This view is essential for identifying security risks and understanding rules governing inbound and outbound service communications, and is perfect for mapping attack surfaces during penetration testing or security audits. 
+The security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays misconfigurations detected by Cloud Security, helping you:
 
-This diagram excludes EBS, NAT Gateway, and other components that might clutter the security view. 
-
-**Note**: By default, when you select the Security diagram view, the [Overlay](#overlays) feature defaults to **Security Findings**.
-
-{{< img src="datadog_cloudcraft/cloudcraft_security_diagram.png" alt="Screenshot of the Security diagram in Cloudcraft" style="width:100%;" >}}
-
-The security findings overlay in Cloudcraft provides an overlay from Cloud Security misconfigurations, allowing you to quickly identify Cloud Security findings. This allows you to:
-
-- Identify security issues in infrastructure diagrams.  
-- View misconfigurations in context to analyze their impact and prioritize remediation.
+- Identify security issues directly in infrastructure diagrams.
+- Analyze misconfigurations in context to prioritize remediation.
 - Assess security posture before deploying applications.
 
-By default, the security overlay shows Critical, High, and Medium misconfigurations, but can be filtered at the bottom of the screen:
+You can click on any resource to open a side panel with more details, allowing deeper investigation without leaving the diagram.
 
-{{< img src="datadog_cloudcraft/csm_misconfigurations.png" alt="Screenshot of the Cloud Security Misconfigurations hover in the Cloudcraft overlay section" width="50%" >}}
+This view is ideal for mapping attack surfaces during penetration tests or security audits. To keep the diagram focused, components like EBS volumes and NAT Gateways are excluded. 
+
+By default, the security overlay shows Critical, High, and Medium misconfigurations, which you can filter at the bottom of the screen.
+
+{{< img src="datadog_cloudcraft/cloudcraft_security_overlay_with_ccm.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 ### Cloud Cost Management 
 
-The Cloud Cost Management (CCM) diagram
+The Cloud Cost overlay helps you identify and act on savings opportunities within your AWS architecture diagrams.
+In this view:
 
-{{< img src="datadog_cloudcraft/cloudcraft_ccm_diagram.png" alt="Screenshot of the Cloud Cost Management diagram in Cloudcraft" style="width:100%;" >}}
+- Recommendations are shown directly on resources with estimated monthly savings (for example, terminate unused RDS instances, migrate storage classes).
+- Use the filter at the bottom of the screen to narrow recommendations by potential monthly savings range and recommendation type (**Terminate**, **Migrate**, **Downsize**, **Purchase**).
 
+Clicking a resource opens a detailed side panel with:
 
+- Current and projected monthly costs.
+- A description of recommended changes.
+- Quick actions to create a Jira issue or support case.
+- Metrics and usage patterns explaining the recommendation.
 
+This enables faster, in-context cost optimization without switching views.
+
+{{< img src="datadog_cloudcraft/cloudcraft_ccm_overlay.png" alt="Cloud Cost Management(CCM) overlay in Cloudcraft, highlighting the collapsible savings legend at the bottom left hand side of the screen." style="width:100%;" >}}
 
 ## Further reading
 
