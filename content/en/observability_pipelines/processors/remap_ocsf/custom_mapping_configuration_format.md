@@ -56,7 +56,7 @@ The mapping descriptor has four main sections:
 | `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
 | `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class. See [Metadata section](#metadata-section) for details.                         |
 | `preprocess` | No        | An ordered list of preprocessing steps. The preprocessors reformat raw data from the sources so that the data can be converted to OCSF format based on `mapping`. Each preprocessor entry consists of a `function` and parameters associated with that function. See [Preprocessors](#preprocess-section) for more information. |
-| `mapping`    | Yes       | An ordered list of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. See  for more information. Each [mapping](#mapping-section) may have a `conversion` specified by a [lookup table](#mapping-lookup-tables) or post-processing [mapping function](#mapping-functions). |
+| `mapping`    | Yes       | An ordered list of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. Each [mapping](#mapping-section) may have a `conversion` specified by a [lookup table](#mapping-lookup-tables) or post-processing [mapping function](#mapping-functions). |
 
 ### Metadata section
 
@@ -362,7 +362,7 @@ The `concat_arrays` function looks up a second `source` and, if it exists, conca
 
 ### `reshape_array`
 
-The `reshape_array` function extracts data from a source array to create a new array of values. The function filters array elements, selecting only those that contain a field matching a condition from the [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
+The `reshape_array` function extracts data from a source array to create a new array of values. The function filters array elements, selecting only those that contain a field that matches a condition from the [Mapping lookup tables](#mapping-lookup-tables), and extracts the corresponding field value into the output array. For example, if an array contains `[{"a":1},{"a":2}]`, then you can extract field `a` to get the resulting array: `[1,2]`.
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
