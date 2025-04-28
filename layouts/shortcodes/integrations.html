@@ -1,14 +1,15 @@
 {{ $dot := . }}
 
 <!-- manual mappings of integration to pmm categories - WEB-6040 -->
-{{ $s : = newScratch }}
-{{ $s.SetInMap "manualfilters" "CCM" $ccm_integration_ids }}
-{{ $s.SetInMap "manualfilters" "DSM" $dsm_integration_ids }}
-{{ $s.SetInMap "manualfilters" "DJM" $djm_integration_ids }}
-{{ $s.SetInMap "manualfilters" "LLM" $llm_integration_ids }}
-{{ $s.SetInMap "manualfilters" "Product Analytics" $pa_integration_ids }}
-{{ $s.SetInMap "manualfilters" "NDM" $ndm_integration_ids }}
-{{ $s.SetInMap "manualfilters" "DBM" $dbm_integration_ids }}
+{{ $s1 := newScratch }}
+{{ $ccm_integration_ids := (slice "fastly" "snowflake-web" "confluent-cloud" "mongodb" "databricks" "openai" "twilio" "elastic-cloud") }}
+{{ $s1.SetInMap "manualfilters" "CCM" $ccm_integration_ids }}
+{{ $s1.SetInMap "manualfilters" "DSM" (slice "kafka" "confluent-cloud" "confluent-platform" "amazon-msk-cloud" "amazon-msk" "rabbitmq" "amazon-sqs") }}
+{{ $s1.SetInMap "manualfilters" "DJM" (slice "databricks") }}
+{{ $s1.SetInMap "manualfilters" "LLM" (slice "openai" "azure-openai" "anthropic" "amazon-bedrock") }}
+{{ $s1.SetInMap "manualfilters" "Product Analytics" (slice "snowflake-web" "servicenow" "salesforce" "databricks") }}
+{{ $s1.SetInMap "manualfilters" "NDM" (slice "snmp-arista" "snmp-aruba" "cisco-sdwan" "meraki" "cisco-aci" "velocloud-sd-wan") }}
+{{ $s1.SetInMap "manualfilters" "DBM" (slice "postgres" "mysql" "sql-server" "oracle" "mongodb") }}
 
 
 <!-- From data file -->
@@ -24,8 +25,10 @@
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
 
-<!-- Manual filters -->
-{{ $.Scratch.Set "filters" (union ($.Scratch.Get "filters") (slice "CCM" "DSM" "DJM" "LLM" "Product Analytics" "NDM" "DBM")) }}
+<!-- Add Manual filters -->
+{{- range $key, $e := $s1.Get "manualfilters" }}
+  {{- $.Scratch.Add "filters" ($key | lower) -}}
+{{- end -}}
 
 <!-- build tiles -->
 {{- $s := newScratch -}}
@@ -62,8 +65,16 @@
     {{- $curr_categories = $curr_categories | append (print "cat-" (replace $e "/" "" | urlize)) -}}
   {{- end -}}
 
-  {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
   {{- $basename := $enpage.Params.integration_id | default ($enpage.Params.name | lower) | default ($enpage.File.TranslationBaseName | lower) }}
+
+  <!-- inject manual filters to categories -->
+  {{- range $key, $ids := $s1.Get "manualfilters" }}
+    {{ if in $ids $basename }}
+      {{- $curr_categories = $curr_categories | append (print "cat-" (replace $key "/" "" | urlize)) -}}
+    {{ end }}
+  {{- end -}}
+
+  {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
   <!-- we need to overwrite system or network tiles to be more specific -->
   {{- if in (slice "system" "network") $enpage.Params.integration_id  -}}
     {{- $basename = ($enpage.Params.name | lower) | default ($v.File.TranslationBaseName | lower) -}}
