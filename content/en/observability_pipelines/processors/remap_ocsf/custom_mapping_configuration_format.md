@@ -362,7 +362,7 @@ The `concat_arrays` function looks up a second `source` and, if it exists, conca
 
 ### `reshape_array`
 
-The `reshape_array` function extracts data from a source array to create a new array of values. The function filters only array elements containing a field that matches a condition from the list in [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
+The `reshape_array` function extracts data from a source array to create a new array of values. The function filters array elements, selecting only those that contain a field matching a condition from the [Mapping lookup tables](#mapping-lookup-tables), and extracts another field into the output array.
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
