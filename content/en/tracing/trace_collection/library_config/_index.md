@@ -76,10 +76,15 @@ The following configuration options behave consistently across the latest versio
 
 ### Traces
 
+`DD_APM_TRACING_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Description**: Enables or disables sending traces from the application, without impacting other library features such as profiling, ASM, DSM, and more.
+
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Description**: Enables or disables sending traces from the application.
+**Description**: Enables or disables sending traces from the application. This may also disable all other library features such as profiling, ASM, runtime metrics, and more.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false` <br>
