@@ -6,34 +6,34 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App and API Protection"
 - link: "/security/application_security/event_rules/"
   tag: "Documentation"
   text: "Creating event rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog Application Security Management issues"
+  text: "Troubleshoot common Datadog App and API Protection issues"
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 - link: "/tracing/trace_explorer/query_syntax/"
   tag: "Documentation"
-  text: "Syntax for defining the ASM query"
+  text: "Syntax for defining the AAP query"
 ---
 
 ## Overview
 
-Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
+App and API Protection (AAP) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
 
 However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
-Another example is customizing a rule to exclude an internal security scanner. ASM detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
+Another example is customizing a rule to exclude an internal security scanner. AAP detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
-In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
+In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for AAP.
 
 ## Business logic abuse detection rule
 
-ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
+AAP offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
 Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
 
@@ -45,13 +45,13 @@ See the section below to see how to configure your rules.
 
 To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
 
-### Define an ASM query
+### Define an AAP query
 
-Construct an ASM query using the [same query syntax as in the ASM Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
+Construct an AAP query using the [same query syntax as in the AAP Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 
-Use the preview section to see which ASM traces match the search query. You can also add additional queries with the Add Query button.
+Use the preview section to see which AAP traces match the search query. You can also add additional queries with the Add Query button.
 
 ##### Joining queries
 

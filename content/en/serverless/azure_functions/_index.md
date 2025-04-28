@@ -7,7 +7,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 ## Setup
 
-{{< programming-lang-wrapper langs="nodejs,python" >}}
+{{< programming-lang-wrapper langs="nodejs,python,java" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
@@ -64,6 +64,36 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 [2]: /tracing/metrics/runtime_metrics/python/
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+1. **Install dependencies**. Download the Datadog JARs and deploy them with your function:
+   ```bash
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
+   ```
+   See Datadog's [Maven Repository][4] for any specific version of the Datadog Serverless Compatibility Layer.
+
+   To use [automatic instrumentation][1], you must use `dd-java-agent` v1.48.0+.
+
+   Datadog recommends regularly upgrading to the latest versions of both `dd-serverless-compat-java-agent` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
+
+2. **Start the Datadog serverless compatibility layer and initialize the Java tracer**. Add the following `-javaagent` arguments to the JVM options.:
+
+   ```bash
+   -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
+   ```
+
+   **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][5] for more details on the appropriate environment variable for your hosting plan.
+
+3. (Optional) **Enable runtime metrics**. See [Java Runtime Metrics][2].
+
+4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[2]: /tracing/metrics/runtime_metrics/?tab=java#environment-variables
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java
+[4]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
+[5]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 5. **Deploy your function**.
@@ -93,10 +123,26 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 [Trace metrics][3] are enabled by default. To configure trace metrics, use the following environment variable:
 
+{{< programming-lang-wrapper langs="nodejs,python,java" >}}
+{{< programming-lang lang="nodejs" >}}
 `DD_TRACE_STATS_COMPUTATION_ENABLED`
 : Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
 
   **Values**: `true`, `false`
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+`DD_TRACE_STATS_COMPUTATION_ENABLED`
+: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
+
+  **Values**: `true`, `false`
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+`DD_TRACE_TRACER_METRICS_ENABLED`
+: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
+
+  **Values**: `true`, `false`
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Troubleshooting
 

@@ -4,7 +4,7 @@ categories:
 - nube
 - almacenes de datos
 - recopilación de logs
-- la red
+- network
 - seguridad
 custom_kind: integración
 dependencies: []
@@ -28,7 +28,7 @@ short_description: Incorpora logs de Amazon Security Lake.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Amazon Security Lake es un lago de datos de seguridad para agregar y gestionar datos de eventos y logs de seguridad.
@@ -45,7 +45,7 @@ Esta integración incorpora los logs de seguridad almacenados en Amazon Security
 
 **Nota:** Si solo quieres integrar esta cuenta de AWS para usar la integración de Amazon Security Lake, puedes deshabilitar la recopilación de métricas en la [página de la integración de AWS][5] a fin de que Datadog no monitorice tu infraestructura de AWS y no se te facture por la [monitorización de infraestructura][6].
 
-### APM
+### Recopilación de logs
 1. Añade la siguiente política de IAM a tu rol de IAM `DatadogIntegrationRole` existente para que Datadog pueda incorporar archivos de log nuevos añadidos a tu lago de seguridad.
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -117,11 +117,11 @@ La integración de Amazon Security Lake no incluye métricas.
 
 La integración de Amazon Security Lake no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon Security Lake no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Permisos
 
@@ -133,7 +133,7 @@ Consulta la [guía del usuario de Amazon Security Lake][1] sobre cómo crear un 
 
 ¿Necesitas ayuda adicional? Ponte en contacto con el [servicio de asistencia de Datadog][10].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

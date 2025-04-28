@@ -45,6 +45,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/software-catalog/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
+- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
+  tag: "Blog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog" 
 algolia:
   tags: ['software catalog']
 ---
