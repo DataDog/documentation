@@ -1275,6 +1275,26 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "CreateOnCallEscalationPolicy": {
+    "description": "Create a new on-call escalation policy",
+    "summary": "Create on-call escalation policy",
+    "request_description": "",
+    "request_schema_description": "Represents a request to create a new escalation policy, including the policy data."
+  },
+  "DeleteOnCallEscalationPolicy": {
+    "description": "Delete an on-call escalation policy",
+    "summary": "Delete on-call escalation policy"
+  },
+  "GetOnCallEscalationPolicy": {
+    "description": "Get an on-call escalation policy",
+    "summary": "Get on-call escalation policy"
+  },
+  "UpdateOnCallEscalationPolicy": {
+    "description": "Update an on-call escalation policy",
+    "summary": "Update on-call escalation policy",
+    "request_description": "",
+    "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new on-call schedule",
     "summary": "Create on-call schedule",
