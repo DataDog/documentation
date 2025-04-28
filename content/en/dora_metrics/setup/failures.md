@@ -56,7 +56,7 @@ To avoid having unlabeled failures, Datadog strongly recommends adding the follo
 
 If provided with incidents, the `Severity` tag is added to failure events.
 
-**Pro tips**: In the [Incident Settings][203], set attributes field `Prompted` to `At Resolution` to ensure you never forget to add these attributes to your incidents.
+**Recommended**: In the [Incident Settings][203], set attributes field `Prompted` to `At Resolution` to ensure you never forget to add these attributes to your incidents.
 
 ### Include historical incidents
 
