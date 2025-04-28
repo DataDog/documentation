@@ -70,7 +70,7 @@ The metadata section requires the following:
 
 ### Preprocess section
 
-The `preprocess` section lists the preprocessors that reformats the data to allow field-to-field mappings. Each entry in this section consists of a `function` and the parameters associated with that function.
+The `preprocess` section lists the preprocessors that reformat the data to enable field-to-field mappings. Each entry in this section consists of a `function` and the parameters associated with that function.
 
 #### `parse_csv`
 
@@ -163,7 +163,7 @@ The preprocessor would reformat the data in JSON to:
 
 ### Mapping section
 
-The `mapping` section is an ordered list of field-to-field assignments. Each mapping entry consists of a `dest` path that refers to the destination field in the OCSF event and either a `source` path that refers to a field in the source event or a `value` that contains a literal constant to insert at that destination.
+The `mapping` section is an ordered list of field-to-field assignments. Each mapping entry consists of a `dest` path that refers to the destination field in the OCSF event, and either a `source` path that refers to a field in the source event, or a `value` that contains a literal constant to insert at that destination.
 
 A `source` path starting with `OCSF.` refers to a field in the output OCSF event that has been previously assigned.
 
@@ -231,7 +231,7 @@ Then based on the example `mapping` above, the data is converted to the mapping 
 
 #### Implicit mappings
 
-All enumerated name or label fields identified in the OCSF schema are converted to their sibling `id` field. For example, the string field `severity` is automatically converted to the numeric OSCF field `severity_id` based on the values defined in the OCSF schema. See `severity_id` in [Authentication [3002]][1] for the OCSF values. If no matching value is found in the lookup table, the `id` field is set to `99` to represent `Other`.
+All enumerated name or label fields identified in the OCSF schema are converted to their sibling `id` field. For example, the string field `severity` is automatically converted to the numeric OSCF field `severity_id` based on the values defined in the OCSF schema. See `severity_id` in [Authentication][1] for the OCSF values. If no matching value is found in the lookup table, the `id` field is set to `99` to represent `Other`.
 
 If one of the listed `profiles` in the metadata section is `datetime`, the mapping
 automatically has all numeric timestamps identified in the OCSF schema converted into the sibling field `{DEST}_dt`. For example, the numeric `time` field is converted into `time_dt`, which contains a string representation of that timestamp. No additional work is required to support the `datetime` profile.
