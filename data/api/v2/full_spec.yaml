@@ -12945,6 +12945,7 @@ components:
           $ref: '#/components/schemas/EscalationPolicyDataAttributes'
         id:
           description: Specifies the unique identifier of the escalation policy.
+          example: ab000000-0000-0000-0000-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/EscalationPolicyDataRelationships'
@@ -28662,6 +28663,7 @@ components:
           $ref: '#/components/schemas/ScheduleCreateRequestDataType'
       required:
       - type
+      - attributes
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
@@ -49819,7 +49821,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on call escalation policy
+      summary: Create on-call escalation policy
       tags:
       - On-Call
       x-given:
@@ -49878,7 +49880,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on call escalation policy
+      summary: Delete on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
@@ -49922,7 +49924,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on call escalation policy
+      summary: Get on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
@@ -49972,7 +49974,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on call escalation policy
+      summary: Update on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
