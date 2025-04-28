@@ -495,7 +495,7 @@ For each cloud account that you would like to receive recommendations for:
 *Cloud Cost Recommendations now supports customers' non-USD billing currencies. 
 
 ## Recommendation action-taking
-You can now take action on recommendations as easily as possible to save money and optimize your costs. Cloud Cost Recommendations now supports Jira, 1-click Workflow Automation actions, and Datadog Case Management. Today, unused EBS volume and GP2 EBS volume recommendations support 1-click Workflow Automation actions and more will support soon. More details for each action-taking option are below:
+You can now easily act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
 
 - Jira: Jira issue creation is supported in both the recommendation side panel and "Active Recommendations" list. Users can click "Crea Jira issue" in the side panel or multi-select recommendations in the "Active Recommendations" list and create Jira issues from there. Jira issues are auto-tagged indicating they relate to a cost recommendation and include a link back to the recommendation referenced.
 - 1-click Workflow Automation actions: Actions are supported for a select set of recommendations today (and will expand to more soon) wherein a user can click an action button like "Delete EBS Volume" to quickly perform the recommended action directly from Cloud Cost Management.
