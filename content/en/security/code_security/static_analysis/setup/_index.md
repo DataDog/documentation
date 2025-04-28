@@ -87,7 +87,7 @@ If you are an admin in your Azure portal, you can configure Entra apps to connec
 4. Select your desired scan types
 5. Select **Azure DevOps** as your source code management provider
 6. If this is your first time connecting an Azure DevOps organization to Datadog, click **+ Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process ensure that: 
+7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure that: 
    1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type
    2. Set the redirect URI to **Web** and paste the URI given to you in the instructions
 8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog
