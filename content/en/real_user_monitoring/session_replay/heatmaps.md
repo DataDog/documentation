@@ -92,7 +92,7 @@ To select a background snapshot:
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-snapshot-button.png" alt="Click the Change Snapshot button to change the background snapshot the heatmap is based on." style="width:100%;">}}
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-of-events.png" alt="List of action events for the session replay." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events.png" alt="List of action events for the session replay." style="width:100%;">}}
 
 1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired snapshot, you can return to the list of replays by clicking **Choose Another Replay**.
 1. Click the **Select Snapshot** button to apply the snapshot at the paused point to the heatmap.
