@@ -23,7 +23,7 @@ further_reading:
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
 
-1. Datadog supports the Opentelemetry standard of 128-bit Trace IDs by default, but the `SpanId` formats differ between vendors. Therefore it's necessary to translate the `SpanId` from its OpenTelemetry format ([a 16-hex-character lowercase string][2]) into its Datadog Formats([a 64bit unsigned int][3]). 
+1. Datadog supports the OpenTelemetry standard of 128-bit Trace IDs by default, but the `SpanId` formats differ between vendors. Therefore, it's necessary to translate the `SpanId` from its OpenTelemetry format ([a 16-hex-character lowercase string][2]) into its Datadog format ([a 64bit unsigned int][3]). 
 
 2. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
