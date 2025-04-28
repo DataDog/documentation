@@ -176,6 +176,8 @@ Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOp
 
 If Azure DevOps is your source code management provider, you must request access to the closed preview using the form above before you can begin installation. After being granted access, follow the instructions below to complete the setup process.
 
+_Note: Azure DevOps Server is not supported._
+
 ### Create and register an Microsoft Entra app
 If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
 
