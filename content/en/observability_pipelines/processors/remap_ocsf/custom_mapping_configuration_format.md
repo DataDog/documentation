@@ -80,7 +80,7 @@ The `parse_csv` preprocessor:
 1. Parses `source` as CSV and maps the values to the `columns` listed.
 1. Inserts the mapped data in the `dest` field.
 
-Columns with a `null` value are dropped. One of the columns can have a wildcard (`*`), in which case it is assigned a string containing all the text from the fields that remain after those before and after have been mapped.
+Columns with a `null` value are dropped. One of the columns can have a wildcard (`*`), where the column with the wildcard is assigned a string containing all of the remaining field values that have not been mapped.
 
 The following is an example of a `preprocess` section:
 
