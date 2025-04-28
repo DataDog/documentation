@@ -22,19 +22,25 @@ To enable APM in a Docker Linux container:
 1. Copy and run the Agent installation command in your Docker container.
 1. Restart your applications.
 
-## Advanced Options
+## Setting Unified Service Tags
 
-When you run the one-line installation command, there are options to customize your experience:
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 
-### Customize APM libraries
+Learn how to set [USTs for Docker environments][16].
 
-By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
+## Controlling SDK tracer versions
 
-Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
+By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
 
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 3 respectively.
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
+You may want to customize SDK versions based on your application's language version or specific environment requirements. You can control the major and minor versions used by customizing library versions during setup.
+
+To customize tracer versions:
+
+1. After you turn on **APM Instrumentation**, click **Customize library versions**.
+1. Find your language(s) and use the dropdown to either:
+   - Pin an exact tracer version, or
+   - Select the major version you want to use.
+1. Copy and run the updated installation command.
 
 Available versions are listed in source repositories for each language:
 
@@ -90,5 +96,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
+[16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 
 
