@@ -12945,6 +12945,7 @@ components:
           $ref: '#/components/schemas/EscalationPolicyDataAttributes'
         id:
           description: Specifies the unique identifier of the escalation policy.
+          example: ab000000-0000-0000-0000-000000000000
           type: string
         relationships:
           $ref: '#/components/schemas/EscalationPolicyDataRelationships'
@@ -14798,6 +14799,13 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          type: boolean
+        is_per_project_quota_enabled:
+          default: false
+          description: When enabled, Datadog applies the `X-Goog-User-Project` header,
+            attributing Google Cloud billing and quota usage to the project being
+            monitored rather than the default service account project.
+          example: true
           type: boolean
         is_resource_change_collection_enabled:
           default: false
@@ -18328,6 +18336,8 @@ components:
           $ref: '#/components/schemas/LayerRelationships'
         type:
           $ref: '#/components/schemas/LayerType'
+      required:
+      - type
       type: object
     LayerAttributes:
       description: Describes key properties of a Layer, including rotation details,
@@ -18461,12 +18471,16 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/LayerRelationshipsMembersDataItemsType'
+      required:
+      - type
+      - id
       type: object
     LayerRelationshipsMembersDataItemsType:
       default: members
       description: Members resource type.
       enum:
       - members
+      example: members
       type: string
       x-enum-varnames:
       - MEMBERS
@@ -18475,6 +18489,7 @@ components:
       description: Layers resource type.
       enum:
       - layers
+      example: layers
       type: string
       x-enum-varnames:
       - LAYERS
@@ -28648,6 +28663,7 @@ components:
           $ref: '#/components/schemas/ScheduleCreateRequestDataType'
       required:
       - type
+      - attributes
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
@@ -28835,15 +28851,20 @@ components:
       properties:
         id:
           description: A unique identifier for the team.
+          example: ''
           type: string
         type:
           $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
       type: object
     ScheduleCreateRequestDataRelationshipsTeamsDataItemsType:
       default: teams
       description: Teams resource type.
       enum:
       - teams
+      example: teams
       type: string
       x-enum-varnames:
       - TEAMS
@@ -28870,6 +28891,8 @@ components:
           $ref: '#/components/schemas/ScheduleDataRelationships'
         type:
           $ref: '#/components/schemas/ScheduleDataType'
+      required:
+      - type
       type: object
     ScheduleDataAttributes:
       description: Provides core properties of a schedule object, such as its name,
@@ -28925,6 +28948,9 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItemsType'
+      required:
+      - type
+      - id
       type: object
     ScheduleDataRelationshipsLayersDataItemsType:
       default: layers
@@ -28954,6 +28980,9 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
       type: object
     ScheduleDataRelationshipsTeamsDataItemsType:
       default: teams
@@ -28969,6 +28998,7 @@ components:
       description: Schedules resource type.
       enum:
       - schedules
+      example: schedules
       type: string
       x-enum-varnames:
       - SCHEDULES
@@ -28983,6 +29013,8 @@ components:
           $ref: '#/components/schemas/ScheduleMemberRelationships'
         type:
           $ref: '#/components/schemas/ScheduleMemberType'
+      required:
+      - type
       type: object
     ScheduleMemberRelationships:
       description: Defines relationships for a schedule member, primarily referencing
@@ -28996,6 +29028,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ScheduleMemberRelationshipsUserData'
+      required:
+      - data
       type: object
     ScheduleMemberRelationshipsUserData:
       description: Points to the user data associated with this schedule member, including
@@ -29007,12 +29041,16 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ScheduleMemberRelationshipsUserDataType'
+      required:
+      - type
+      - id
       type: object
     ScheduleMemberRelationshipsUserDataType:
       default: users
       description: Users resource type.
       enum:
       - users
+      example: users
       type: string
       x-enum-varnames:
       - USERS
@@ -29021,6 +29059,7 @@ components:
       description: Schedule Members resource type.
       enum:
       - members
+      example: members
       type: string
       x-enum-varnames:
       - MEMBERS
@@ -29198,6 +29237,12 @@ components:
           example: '2025-02-01T00:00:00Z'
           format: date-time
           type: string
+      required:
+      - effective_date
+      - interval
+      - members
+      - name
+      - rotation_start
       type: object
     ScheduleUpdateRequestDataAttributesLayersItemsInterval:
       description: 'Specifies how the rotation repeats: number of days, plus optional
@@ -29318,12 +29363,16 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
       type: object
     ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType:
       default: teams
       description: Teams resource type.
       enum:
       - teams
+      example: teams
       type: string
       x-enum-varnames:
       - TEAMS
@@ -29347,6 +29396,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ScheduleUserType'
+      required:
+      - type
       type: object
     ScheduleUserAttributes:
       description: Provides basic user information for a schedule, including a name
@@ -29366,6 +29417,7 @@ components:
       description: Users resource type.
       enum:
       - users
+      example: users
       type: string
       x-enum-varnames:
       - USERS
@@ -35065,6 +35117,8 @@ components:
           $ref: '#/components/schemas/TeamReferenceRelationships'
         type:
           $ref: '#/components/schemas/TeamReferenceType'
+      required:
+      - type
       type: object
     TeamReferenceAttributes:
       description: Encapsulates the basic attributes of a Team reference, such as
@@ -35110,12 +35164,16 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
+      required:
+      - type
+      - id
       type: object
     TeamReferenceRelationshipsOncallUsersDataItemsType:
       default: users
       description: Users resource type.
       enum:
       - users
+      example: users
       type: string
       x-enum-varnames:
       - USERS
@@ -35124,6 +35182,7 @@ components:
       description: Teams resource type.
       enum:
       - teams
+      example: teams
       type: string
       x-enum-varnames:
       - TEAMS
@@ -49762,7 +49821,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on call escalation policy
+      summary: Create on-call escalation policy
       tags:
       - On-Call
       x-given:
@@ -49821,7 +49880,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on call escalation policy
+      summary: Delete on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
@@ -49865,7 +49924,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on call escalation policy
+      summary: Get on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
@@ -49915,7 +49974,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on call escalation policy
+      summary: Update on-call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
