@@ -49,7 +49,7 @@ DORA Metrics can automatically identify and track failures through [Datadog Inci
 
 - **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
 
-To avoid having unlabeled failures, we strongly recommend to add the following attributes to incidents:
+To avoid having unlabeled failures, Datadog strongly recommends adding the following attributes to incidents:
   - `Teams`
   - `Services`
   - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
