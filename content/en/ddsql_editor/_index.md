@@ -6,9 +6,9 @@ further_reading:
 - link: "/ddsql_editor/guide/ddsql_use_cases"
   tag: "Guide"
   text: "Common queries and use cases"
-- link: "/ddsql_reference/ddsql_editor_syntax"
+- link: "/ddsql_reference/ddsql_preview"
   tag: "Documentation"
-  text: "DDSQL Editor Syntax (Preview)"
+  text: "DDSQL Reference (Preview)"
 ---
 
 
@@ -33,7 +33,7 @@ Type your question into the search box, and Datadog builds the SQL query for you
 DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
 
 <div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, use the syntax documented in the <a href="/ddsql_reference/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>.
+  There are two different <strong>variants</strong> of DDSQL. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
 </div>
 
 {{< code-block lang="sql" >}}
