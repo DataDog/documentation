@@ -3,7 +3,7 @@ title: Amazon S3 Destination
 disable_toc: false
 ---
 
-Use the Amazon S3 destination to send logs to Amazon S3. You can also send your logs in Datadog-rehydratable format to Amazon S3 for [archiving][1] and then [rehydrate][2] the archive in Datadog when you need to analyze and investigate them. To do that, you need to [Configure Log Archives](#configure-log-archives) and then set up the Amazon S3 destination in your pipeline.
+Use the Amazon S3 destination to send logs to Amazon S3. To send logs in Datadog-rehydratable format to Amazon S3 for [archiving][1] and [rehydration][2], [configure Log Archives](#configure-log-archives) and then set up the Amazon S3 destination in your pipeline.
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-amazon-s3-destination).
 
