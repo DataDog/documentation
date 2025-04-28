@@ -41,7 +41,7 @@ Data types, attributes, objects, and arrays are the main components of the OCSF 
 
 | Name | Description |
 | ---- | ----------- |
-| Data types | Data types define the data elements as integers, string, floating point numbers, boolean values.  |
+| Data types | Data types define data elements as integers, strings, floating-point numbers, and boolean values.  |
 | Attributes | Attributes are the building blocks of the framework. They are used to provide the common language for your data, regardless of the source. See the [attribute dictionary][1] for a list of all attributes.  |
 | Objects | Objects are collections of related attributes that represent the entities, such as a process, device, user, malware, or file.  |
 | Arrays | Arrays support any of the data types, including complex types.  |
@@ -52,7 +52,7 @@ Security events within the OCSF model are organized into categories, which are h
 
 ### Profiles
 
-Profiles are a class of attributes that you can optionally overlay on event classes and objects that reference the classes. It adds additional information to an existing event class and is independent of event categories. See [OCSF Profiles][5] for a list of profiles and the [OCSF Profiles documentation][6] for more information.
+Profiles are a class of attributes that you can optionally overlay onto event classes and the objects that reference them. It adds additional information to an existing event class and is independent of event categories. See [OCSF Profiles][5] for a list of profiles and the [OCSF Profiles documentation][6] for more information.
 
 ### Extensions
 
@@ -68,26 +68,26 @@ The following Log Management integrations support out-of-the-box OCSF pipelines:
 
 ## View Security Pipelines \- OCSF
 
-Cloud SIEM OCSF remaps log data in Log Management's [integration pipelines][8]. See [Support out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details.
+Cloud SIEM OCSF remaps log data in Log Management's [integration pipelines][8]. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details.
 
-To see the Integration Pipeline Library for a source:
+To view the Integration Pipeline Library for a source:
 
 1. Navigate to [Logs Pipelines][9].
 1. Click **Browse Pipeline Library**.
 1. Search and click on the integration you are interested in (for example, Okta).
-1. To see the OCSF pipelines for Okta, scroll down to the end of the list of processors for the Okta integration.
+1. To view the OCSF pipelines for Okta, scroll down to the end of the list of processors for the Okta integration.
 
 To view the read-only OCSF pipeline for a source integration:
 1. Navigate to [Logs Pipelines][9].
 1. Select your pipeline.
 1. Scroll to the OCSF pipelines at end of the pipeline's processors.
-1. Click the OCSF pipeline to see the associated remap processors.
-1. Click the eye icon on the OCSF pipeline to see information such as the:
+1. Click the OCSF pipeline to view the associated remap processors.
+1. Click the eye icon on the OCSF pipeline to view information such as the following:
     - OCSF schema version
     - Class
     - Profile
 
-**Note**: If you clone the main pipeline, the OCSF pipelines are log pipelines and not Security pipelines in the cloned version.
+**Note**: Cloning the main pipeline converts OCSF pipelines into log pipelines rather than Security pipelines.
 
 ## View OCSF data in logs
 
