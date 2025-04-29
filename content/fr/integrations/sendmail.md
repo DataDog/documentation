@@ -21,8 +21,9 @@ author:
   sales_email: david.bouchare@datadoghq.com
   support_email: david.bouchare@datadoghq.com
 categories:
-- metrics
+- monitors
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sendmail
 public_title: Sendmail
@@ -45,6 +45,7 @@ tile:
   - Category::Metrics
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Intégration Sendmail pour surveiller les files d'attente d'e-mails
   media: []
@@ -56,15 +57,15 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 
 Ce check permet de surveiller [Sendmail][1] avec l'Agent Datadog.
 
-## Formule et utilisation
+## Configuration
 
 Le check Sendmail n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
-### Liste des infrastructures
+### Installation
 
 Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Sendmail sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
@@ -76,7 +77,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 2. Configurez votre intégration comme une [intégration][4] de base.
 
-### Dépannage de la solution Browser
+### Configuration
 
 1. Modifiez le fichier `sendmail.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Sendmail. Consultez le [fichier d'exemple sendmail.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
@@ -86,21 +87,21 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 [Lancez la sous-commande status de l'Agent][7] et cherchez `sendmail` dans la section Checks.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "sendmail" >}}
 
 
-### Aide
+### Événements
 
 Sendmail n'inclut aucun événement.
 
-### Aide
+### Checks de service
 {{< get-service-checks-from-git "sendmail" >}}
 
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 

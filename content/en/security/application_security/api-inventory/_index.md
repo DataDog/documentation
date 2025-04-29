@@ -128,7 +128,7 @@ Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[2]: /security/application_security/threats/
+[2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header

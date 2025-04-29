@@ -22,9 +22,9 @@ author:
   support_email: tsein@brightcove.com
 categories:
 - aws
-- cloud
+- クラウド
 - コスト管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_on_public_website: true
