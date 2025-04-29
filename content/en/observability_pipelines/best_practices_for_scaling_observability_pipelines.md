@@ -24,14 +24,15 @@ This guide walks you through the recommended aggregator architecture for new Obs
 
 ### Instance sizing
 
-Use compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are ideal units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. To improve availability, choose a size that allows for at least two Observability Pipelines Worker instances for your data volume.
+Based on performance benchmarking, with an average number of Observability Pipelines processors, the Worker can handle approximately 1TB per vCPU per day. For example, if you have 4TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][1] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data-loss. It also insures high availability should a Worker go down for any reason.
 
-| Cloud Provider| Recommendation                                    	|
-| ------------- | ----------------------------------------------------- |
-| AWS           | c6i.2xlarge (recommended) or c6g.2xlarge          	|
-| Azure         | f8                                                	|
-| Google Cloud  | c2 (8 vCPUs, 16 GiB memory)                       	|
-| Private       | 8 vCPUs, 16 GiB of memory                         	|
+| Cloud Provider| Recommendation  |
+| ------------- | --------------- |
+| AWS           | c7i.xlarge      |
+| Azure         | F4s v2       	  |
+| Google Cloud  | c2-standard-4   |
+
+1 vCPU = 1 ARM physical CPU or 0.5 Intel physical CPU with hyperthreading.
 
 ### CPU sizing
 
@@ -138,3 +139,5 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L70-L85
