@@ -370,129 +370,104 @@ Log:
       notes: Logger, handler, and formatter created for DataDog log management on Laravel framework.
       authors: Aurélien SCHILTZ
 Community:
-  - name: dog-watcher
-    link: https://github.com/BrightcoveOS/dog-watcher
-    authors: Brightcove
-    notes: JavaScript library for backing up Dashboard definitions as code
-    tags: dashboard
-  - name: kennel
-    link: https://github.com/zendesk/kennel
-    authors: Zendesk
-    notes: Ruby library for backing up Dashboard definitions as code
-    tags: dashboard
-  - name: interferon
-    link: https://github.com/airbnb/interferon
-    authors: Airbnb
-    notes: Ruby library for maintaining and managing monitors
-    tags: monitor
-  - name: terraform-datadog
-    link: https://www.terraform.io/docs/providers/datadog/
-    authors: Terraform
-    notes: Official Terraform provider for Datadog
-    tags: monitor
-  - name: datadog-to-terraform
-    link: https://github.com/intercom/datadog-to-terraform
-    authors: Intercom
-    notes: Tool to convert Datadog resources to Terraform configuration
-    tags: monitor
-  - name: ansible-modules-extras
-    link: https://github.com/ansible/ansible-modules-extras
-    notes: Contains modules that interact with Datadog in the monitoring section
-    tags: integration
-  - name: aptible-datadog
-    link: https://www.aptible.com/documentation/deploy-containers/configuration/datadog.html
-    notes: Platform integration for delivering container logs and metrics to Datadog
-    tags: integration
-  - name: datadog-cli
-    link: https://github.com/DataDog/datadog-cli
-    notes: CLI tools for backup/restore dashboards and monitors, and user configuration
-    tags: integration
-  - name: consul-datadog
-    link: https://github.com/DataDog/consul-datadog
-    notes: Library to publish Consul service counts into Datadog via DogStatsD
-    tags: integration
-  - name: dogscaler
-    link: https://github.com/DataDog/dogscaler
-    notes: Tool to scale auto-scale groups based on Datadog query results
-    tags: integration
-  - name: freeswitch-datadog
-    link: https://github.com/wimactel/freeswitch-datadog
-    authors: WiMacTel
-    notes: FreeSwitch ESL application to export statistics to Datadog
-    tags: integration
-  - name: heroku-datadog
-    link: https://devcenter.heroku.com/articles/datadog
-    notes: Integration for sending Heroku logs to Datadog
-    tags: integration
-  - name: heroku-php-tracer
-    link: https://github.com/speedcurve/heroku-buildpack-datadog-php
-    authors: SpeedCurve
-    notes: Heroku buildpack for PHP tracer and profiler
-    tags: integration
-  - name: k6-datadog
-    link: https://k6.io/docs/results-output/real-time/datadog/
-    notes: Integration for sending K6 test results to Datadog
-    tags: integration
-  - name: launchdarkly-datadog
-    link: https://github.com/launchdarkly/datadog-webhook
-    notes: Webhook handler for recording LaunchDarkly changes as Datadog events
-    tags: integration
-  - name: logstash-datadog
-    link: https://github.com/DataDog/logstash-output-datadog
-    notes: Logstash output plugin for Datadog
-    tags: integration
-  - name: logstash-dogstatsd
-    link: https://github.com/DataDog/logstash-output-dogstatsd
-    notes: Logstash output plugin for DogStatsD
-    tags: integration
-  - name: nginx-lua-datadog
-    link: https://github.com/DataDog/nginx_lua_datadog
-    notes: Module for emitting custom metrics from NGINX configurations
-    tags: integration
-  - name: lua-resty-dogstatsd
-    link: https://github.com/mediba-system/lua-resty-dogstatsd
-    authors: mediba inc
-    notes: Extension for emitting metrics, events, and service checks through DogStatsD
-    tags: integration
-  - name: openvpn-datadog
-    link: https://github.com/DataDog/openvpn-datadog
-    notes: Integration for sending OpenVPN licensing information to Datadog
-    tags: integration
-  - name: passenger-datadog
-    link: https://github.com/stevensonjp/passenger-datadog-monitor
-    authors: Stevenson Jean-Pierre
-    notes: Tool for sending health metrics from Phusion Passenger server
-    tags: integration
-  - name: pid-stats
-    link: https://github.com/gitterHQ/pid-stats
-    authors: GitterHQ
-    notes: Library for generating process information from StatsD using pid files
-    tags: integration
-  - name: pulumi-datadog
-    link: https://www.pulumi.com/registry/packages/datadog/
-    notes: Datadog resource provider for Pulumi
-    tags: integration
-  - name: saltstack-datadog
-    link: https://github.com/DataDog/datadog-formula
-    notes: SaltStack formula for Datadog
-    tags: integration
-  - name: sensu-datadog
-    link: https://github.com/sensu-plugins/sensu-plugins-datadog
-    notes: Sensu handlers for sending metrics and events to Datadog
-    tags: integration
-  - name: stackstorm-datadog
-    link: https://github.com/StackStorm-Exchange/stackstorm-datadog
-    notes: StackStorm integration pack for Datadog
-    tags: integration
-  - name: winston-datadog
-    link: https://github.com/DataDog/winston-datadog
-    notes: Winston transport for Datadog
-    tags: integration
-  - name: freebsd-dd-agent
-    link: https://www.freshports.org/net-mgmt/dd-agent/
-    notes: FreeBSD port of the Datadog agent
-    tags: agent
-  - name: nixos-dd-agent
-    link: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
-    notes: NixOS package for the Datadog agent
-    tags: agent
+  - Dashboards:
+    - name: dog-watcher
+      link: https://github.com/BrightcoveOS/dog-watcher
+      authors: Brightcove
+      notes: JavaScript library for backing up Dashboard definitions as code
+    - name: kennel
+      link: https://github.com/zendesk/kennel
+      authors: Zendesk
+      notes: Ruby library for backing up Dashboard definitions as code
+  - Monitors:
+    - name: interferon
+      link: https://github.com/airbnb/interferon
+      authors: Airbnb
+      notes: Ruby library for maintaining and managing monitors
+    - name: terraform-datadog
+      link: https://www.terraform.io/docs/providers/datadog/
+      authors: Terraform
+      notes: Official Terraform provider for Datadog
+    - name: datadog-to-terraform
+      link: https://github.com/intercom/datadog-to-terraform
+      authors: Intercom
+      notes: Tool to convert Datadog resources to Terraform configuration
+  - Integrations:
+    - name: ansible-modules-extras
+      link: https://github.com/ansible/ansible-modules-extras
+      notes: Contains modules that interact with Datadog in the monitoring section
+    - name: aptible-datadog
+      link: https://www.aptible.com/documentation/deploy-containers/configuration/datadog.html
+      notes: Platform integration for delivering container logs and metrics to Datadog
+    - name: datadog-cli
+      link: https://github.com/DataDog/datadog-cli
+      notes: CLI tools for backup/restore dashboards and monitors, and user configuration
+    - name: consul-datadog
+      link: https://github.com/DataDog/consul-datadog
+      notes: Library to publish Consul service counts into Datadog via DogStatsD
+    - name: dogscaler
+      link: https://github.com/DataDog/dogscaler
+      notes: Tool to scale auto-scale groups based on Datadog query results
+    - name: freeswitch-datadog
+      link: https://github.com/wimactel/freeswitch-datadog
+      authors: WiMacTel
+      notes: FreeSwitch ESL application to export statistics to Datadog
+    - name: heroku-datadog
+      link: https://devcenter.heroku.com/articles/datadog
+      notes: Integration for sending Heroku logs to Datadog
+    - name: heroku-php-tracer
+      link: https://github.com/speedcurve/heroku-buildpack-datadog-php
+      authors: SpeedCurve
+      notes: Heroku buildpack for PHP tracer and profiler
+    - name: k6-datadog
+      link: https://k6.io/docs/results-output/real-time/datadog/
+      notes: Integration for sending K6 test results to Datadog
+    - name: launchdarkly-datadog
+      link: https://github.com/launchdarkly/datadog-webhook
+      notes: Webhook handler for recording LaunchDarkly changes as Datadog events
+    - name: logstash-datadog
+      link: https://github.com/DataDog/logstash-output-datadog
+      notes: Logstash output plugin for Datadog
+    - name: logstash-dogstatsd
+      link: https://github.com/DataDog/logstash-output-dogstatsd
+      notes: Logstash output plugin for DogStatsD
+    - name: nginx-lua-datadog
+      link: https://github.com/DataDog/nginx_lua_datadog
+      notes: Module for emitting custom metrics from NGINX configurations
+    - name: lua-resty-dogstatsd
+      link: https://github.com/mediba-system/lua-resty-dogstatsd
+      authors: mediba inc
+      notes: Extension for emitting metrics, events, and service checks through DogStatsD
+    - name: openvpn-datadog
+      link: https://github.com/DataDog/openvpn-datadog
+      notes: Integration for sending OpenVPN licensing information to Datadog
+    - name: passenger-datadog
+      link: https://github.com/stevensonjp/passenger-datadog-monitor
+      authors: Stevenson Jean-Pierre
+      notes: Tool for sending health metrics from Phusion Passenger server
+    - name: pid-stats
+      link: https://github.com/gitterHQ/pid-stats
+      authors: GitterHQ
+      notes: Library for generating process information from StatsD using pid files
+    - name: pulumi-datadog
+      link: https://www.pulumi.com/registry/packages/datadog/
+      notes: Datadog resource provider for Pulumi
+    - name: saltstack-datadog
+      link: https://github.com/DataDog/datadog-formula
+      notes: SaltStack formula for Datadog
+    - name: sensu-datadog
+      link: https://github.com/sensu-plugins/sensu-plugins-datadog
+      notes: Sensu handlers for sending metrics and events to Datadog
+    - name: stackstorm-datadog
+      link: https://github.com/StackStorm-Exchange/stackstorm-datadog
+      notes: StackStorm integration pack for Datadog
+    - name: winston-datadog
+      link: https://github.com/DataDog/winston-datadog
+      notes: Winston transport for Datadog
+  - Agent Ports:
+    - name: freebsd-dd-agent
+      link: https://www.freshports.org/net-mgmt/dd-agent/
+      notes: FreeBSD port of the Datadog agent
+    - name: nixos-dd-agent
+      link: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
+      notes: NixOS package for the Datadog agent
