@@ -42,7 +42,7 @@ To automatically instrument your RUM application:
    error_log <file> info;
    ```
 
-Alternatively, you can also [manually](#alternative-manual-installation) install and configure the module.
+Alternatively, you can [manually](#alternative-manual-installation) install and configure the module.
 
 ## Updating your RUM application
 
