@@ -114,13 +114,13 @@ ECMAScript Modules (ESM) applications require an _additional_ command line argum
 For example, in Node.js 22, if initializing the tracer using option one from above, you would start it like this:
 
 ```sh
-node --loader dd-trace/loader-hook.mjs app.js
+node --import dd-trace/register.js app.js
 ```
 
 This can also be combined with the `--require dd-trace/init` command line argument (option two):
 
 ```sh
-node --loader dd-trace/loader-hook.mjs --require dd-trace/init app.js
+node --import dd-trace/register.js --require dd-trace/init app.js
 ```
 
 A shorthand exists to combine both command line arguments in Node.js v20.6 and above:
