@@ -35,7 +35,7 @@ The logical flow of retention filters is the following:
 
 ## How retention filters work with replays
 
-Session sampling with replays can be managed through retention filters. Whenever such a session is billed, both the session events and the video recording are kept and billed. This means that if you collect 100% of sessions and 100% of replays from SDKs, whenever a retention filter keeps a session, Datadog keeps and charges for both the session and the replay.
+You can manage session sampling with replays using retention filters. Whenever a session with replays is billed, both the session events and the video recording are kept and billed. This means that if you collect 100% of sessions and 100% of replays from SDKs, whenever a retention filter keeps a session, Datadog keeps and charges for both the session and the replay.
 
 Replays collected through the [force collection][1] mechanism are kept by the default retention filter, positioned first in the list (see below).
 
@@ -46,7 +46,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 To create a retention filter:
 
-1. Navigate to [Digital Experience > Manage Applications][2].
+1. Navigate to [**Digital Experience** > **Manage Applications**][2].
 1. Create a RUM application or click an existing application.
 1. Under Product Settings, go to the **Retention Filters** page.
 1. Click the **+ Add Retention Filter** button.
