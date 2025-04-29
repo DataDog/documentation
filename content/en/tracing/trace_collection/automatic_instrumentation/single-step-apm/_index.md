@@ -21,7 +21,7 @@ See the [injector guide for Single Step Instrumentation][8] to learn how SSI wor
 
 ## Automatically enable APM with Single Step Instrumentation
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation** option selected, the Agent automatically loads the appropriate APM SDKs for your applications.  This enables distributed tracing without any additional installation or configuration steps.
+If you [install or update a Datadog Agent][1] with **APM Instrumentation** enabled, your applications are automatically instrumented, without additional installation or configuration steps.
 
 Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
