@@ -24,6 +24,8 @@ algolia:
 
 Configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy.
 
+This is typically used to send traffic from a host that is not directly connected to the public internet.
+
 ### Configuration
 
 You can configure the proxy using either the main Agent configuration file or environment variables. Environment variables override configuration file settings.
