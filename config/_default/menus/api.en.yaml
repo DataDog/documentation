@@ -7397,6 +7397,19 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Validate an observability pipeline
+      url: '#validate-an-observability-pipeline'
+      identifier: observability-pipelines-validate-an-observability-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidatePipeline
+        unstable:
+          - v2
+        order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
       identifier: observability-pipelines-create-a-new-pipeline
@@ -7410,6 +7423,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List pipelines
+      url: '#list-pipelines'
+      identifier: observability-pipelines-list-pipelines
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPipelines
+        unstable:
+          - v2
+        order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration

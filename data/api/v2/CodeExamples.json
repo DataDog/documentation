@@ -861,6 +861,13 @@
       "description": "Update a pipeline returns \"OK\" response"
     }
   ],
+  "ValidatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Validate an observability pipeline returns \"OK\" response"
+    }
+  ],
   "CreateOktaAccount": [
     {
       "group": "okta_integration",
