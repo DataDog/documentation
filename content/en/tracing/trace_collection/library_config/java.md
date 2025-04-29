@@ -58,7 +58,8 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
-When `false` tracing agent is disabled.
+When `false` tracing agent is disabled.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -620,3 +621,4 @@ Deprecated since version 1.9.0
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
 [19]: /security/application_security/threats/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
+[21]: /tracing/trace_collection/library_config/#traces

@@ -113,7 +113,8 @@ The default app name.
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
 **Default**: `1`<br>
-Enable the tracer globally.
+Enable the tracer globally.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
@@ -679,3 +680,4 @@ When the application runs in a docker container, the path `/proc/self` should al
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
 [20]: /opentelemetry/interoperability/environment_variable_support
+[21]: /tracing/trace_collection/library_config/#traces
