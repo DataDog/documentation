@@ -256,6 +256,20 @@ components:
       required: true
       schema:
         type: string
+    CustomFrameworkHandle:
+      description: The framework handle
+      in: path
+      name: handle
+      required: true
+      schema:
+        type: string
+    CustomFrameworkVersion:
+      description: The framework version
+      in: path
+      name: version
+      required: true
+      schema:
+        type: string
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -8933,6 +8947,22 @@ components:
       - id
       - type
       type: object
+    CreateCustomFrameworkRequest:
+      description: Request object to create a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFrameworkData'
+      required:
+      - data
+      type: object
+    CreateCustomFrameworkResponse:
+      description: Response object to create a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/FrameworkHandleAndVersionResponseData'
+      required:
+      - data
+      type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
       properties:
@@ -10219,6 +10249,146 @@ components:
             $ref: '#/components/schemas/CustomDestinationResponseDefinition'
           type: array
       type: object
+    CustomFrameworkControl:
+      description: Framework Control.
+      properties:
+        name:
+          description: Control Name.
+          example: A1.2
+          type: string
+        rules_id:
+          description: Rule IDs.
+          example:
+          - '["def-000-abc"]'
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - rules_id
+      type: object
+    CustomFrameworkData:
+      description: Contains type and attributes for custom frameworks.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomFrameworkDataAttributes'
+        type:
+          $ref: '#/components/schemas/CustomFrameworkType'
+      required:
+      - type
+      - attributes
+      type: object
+    CustomFrameworkDataAttributes:
+      description: Framework Data Attributes.
+      properties:
+        description:
+          description: Framework Description
+          type: string
+        handle:
+          description: Framework Handle
+          example: sec2
+          type: string
+        icon_url:
+          description: Framework Icon URL
+          type: string
+        name:
+          description: Framework Name
+          example: security-framework
+          type: string
+        requirements:
+          description: Framework Requirements
+          items:
+            $ref: '#/components/schemas/CustomFrameworkRequirement'
+          type: array
+        version:
+          description: Framework Version
+          example: '2'
+          type: string
+      required:
+      - handle
+      - version
+      - name
+      - requirements
+      type: object
+    CustomFrameworkDataHandleAndVersion:
+      description: Framework Handle and Version.
+      properties:
+        handle:
+          description: Framework Handle
+          example: sec2
+          type: string
+        version:
+          description: Framework Version
+          example: '2'
+          type: string
+      type: object
+    CustomFrameworkMetadata:
+      description: Metadata for custom frameworks.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomFrameworkWithoutRequirements'
+        id:
+          description: The ID of the custom framework.
+          example: handle-version
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomFrameworkType'
+      type: object
+    CustomFrameworkRequirement:
+      description: Framework Requirement.
+      properties:
+        controls:
+          description: Requirement Controls.
+          items:
+            $ref: '#/components/schemas/CustomFrameworkControl'
+          type: array
+        name:
+          description: Requirement Name.
+          example: criteria
+          type: string
+      required:
+      - name
+      - controls
+      type: object
+    CustomFrameworkType:
+      default: custom_framework
+      description: The type of the resource. The value must be `custom_framework`.
+      enum:
+      - custom_framework
+      example: custom_framework
+      type: string
+      x-enum-varnames:
+      - CUSTOM_FRAMEWORK
+    CustomFrameworkWithoutRequirements:
+      description: Framework without requirements.
+      properties:
+        description:
+          description: Framework Description
+          example: this is a security description
+          type: string
+        handle:
+          description: Framework Handle
+          example: sec2
+          type: string
+        icon_url:
+          description: Framework Icon URL
+          example: https://example.com/icon.png
+          type: string
+        name:
+          description: Framework Name
+          example: security-framework
+          type: string
+        version:
+          description: Framework Version
+          example: '2'
+          type: string
+      required:
+      - handle
+      - version
+      - name
+      - description
+      - icon_url
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -10767,6 +10937,14 @@ components:
       required:
       - id
       - type
+      type: object
+    DeleteCustomFrameworkResponse:
+      description: Response object to delete a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFrameworkMetadata'
+      required:
+      - data
       type: object
     DependencyLocation:
       description: Static library vulnerability location.
@@ -14586,6 +14764,22 @@ components:
         order:
           $ref: '#/components/schemas/QuerySortOrder'
       type: object
+    FrameworkHandleAndVersionResponseData:
+      description: Contains type and attributes for custom frameworks.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomFrameworkDataHandleAndVersion'
+        id:
+          description: The ID of the custom framework.
+          example: handle-version
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomFrameworkType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     FullAPIKey:
       description: Datadog API key.
       properties:
@@ -14695,6 +14889,58 @@ components:
       type: object
       x-merge-override:
         properties: false
+    FullCustomFrameworkData:
+      description: Contains type and attributes for custom frameworks.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullCustomFrameworkDataAttributes'
+        id:
+          description: The ID of the custom framework.
+          example: handle-version
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomFrameworkType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FullCustomFrameworkDataAttributes:
+      description: Full Framework Data Attributes.
+      properties:
+        description:
+          description: Framework Description
+          example: this is a security framework
+          type: string
+        handle:
+          description: Framework Handle
+          example: sec2
+          type: string
+        icon_url:
+          description: Framework Icon URL
+          example: https://example.com/icon.png
+          type: string
+        name:
+          description: Framework Name
+          example: security-framework
+          type: string
+        requirements:
+          description: Framework Requirements
+          items:
+            $ref: '#/components/schemas/CustomFrameworkRequirement'
+          type: array
+        version:
+          description: Framework Version
+          example: '2'
+          type: string
+      required:
+      - handle
+      - version
+      - name
+      - description
+      - icon_url
+      - requirements
+      type: object
     GCPMetricNamespaceConfig:
       description: Configuration for a GCP metric namespace.
       properties:
@@ -14978,6 +15224,14 @@ components:
             description: An individual tag for the app.
             type: string
           type: array
+      type: object
+    GetCustomFrameworkResponse:
+      description: Response object to get a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullCustomFrameworkData'
+      required:
+      - data
       type: object
     GetDeviceAttributes:
       description: The device attributes
@@ -35898,6 +36152,22 @@ components:
             type: string
           type: array
       type: object
+    UpdateCustomFrameworkRequest:
+      description: Request object to update a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFrameworkData'
+      required:
+      - data
+      type: object
+    UpdateCustomFrameworkResponse:
+      description: Response object to update a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/FrameworkHandleAndVersionResponseData'
+      required:
+      - data
+      type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
       properties:
@@ -37470,7 +37740,7 @@ components:
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit and delete individual monitors.
+            monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
@@ -41046,6 +41316,182 @@ paths:
         - ci_visibility_read
       x-undo:
         type: safe
+  /api/v2/cloud_security_management/custom_frameworks:
+    post:
+      description: Create a custom framework.
+      operationId: CreateCustomFramework
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomFrameworkRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomFrameworkResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      summary: Create a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        custom_framework:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\":\"custom_framework\",\n    \"attributes\":{\n
+              \     \"name\":\"name\",\n      \"handle\":\"create-framework-new\",\n
+              \     \"version\":\"10\",\n      \"icon_url\":\"test-url\",\n      \"requirements\":[{\n
+              \       \"name\":\"requirement\",\n        \"controls\":[{\n          \"name\":\"control\",\n
+              \         \"rules_id\":\n            [\"def-000-be9\"]\n        }]\n
+              \     }]\n    }\n  }\n}"
+          step: there is a valid "custom_framework" in the system
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      x-undo:
+        operationId: DeleteCustomFramework
+        parameters:
+        - name: handle
+          source: data.attributes.handle
+        - name: version
+          source: data.attributes.version
+        type: unsafe
+  /api/v2/cloud_security_management/custom_frameworks/{handle}/{version}:
+    delete:
+      description: Delete a custom framework.
+      operationId: DeleteCustomFramework
+      parameters:
+      - $ref: '#/components/parameters/CustomFrameworkHandle'
+      - $ref: '#/components/parameters/CustomFrameworkVersion'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomFrameworkResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      summary: Delete a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a custom framework.
+      operationId: GetCustomFramework
+      parameters:
+      - $ref: '#/components/parameters/CustomFrameworkHandle'
+      - $ref: '#/components/parameters/CustomFrameworkVersion'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomFrameworkResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
+      x-undo:
+        type: safe
+    put:
+      description: Update a custom framework.
+      operationId: UpdateCustomFramework
+      parameters:
+      - $ref: '#/components/parameters/CustomFrameworkHandle'
+      - $ref: '#/components/parameters/CustomFrameworkVersion'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomFrameworkRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCustomFrameworkResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      summary: Update a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
   /api/v2/container_images:
     get:
       description: Get all Container Images for your organization.
@@ -56356,11 +56802,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_rules_read
       summary: Get a rule's version history
       tags:
       - Security Monitoring
