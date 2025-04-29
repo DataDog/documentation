@@ -14,6 +14,8 @@ further_reading:
     text: Analyze Performance with Metrics
 ---
 
+<div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
+
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-overview.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 
 ## Overview
@@ -26,8 +28,6 @@ RUM without Limits provides you flexibility over your RUM sessions volumes by de
 Even if you retain only a fraction of your sessions, Datadog provides performance metrics for all ingested sessions. This ensures an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained.
 
 This page identifies key components of RUM without Limits that can help you manage your RUM sessions volumes within your observability budget.
-
-## Setting up RUM without Limits
 
 ### For new applications
 
