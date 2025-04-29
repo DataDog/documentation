@@ -75,7 +75,7 @@ See other [Limitations][1].
 
 ## Uninstall
 
-To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the Windows Apps & Features tool.
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the **Windows Apps & Features** tool.
 
 ## Further reading
 
