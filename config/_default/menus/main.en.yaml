@@ -2715,7 +2715,7 @@ menu:
       weight: 9
     - name: Datastore
       url: actions/datastore/
-      pre: server
+      pre: datastores-wui
       parent: actions_heading
       identifier: datastore
       weight: 30000
@@ -2765,13 +2765,13 @@ menu:
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schemat
-      weight: 20001
-    - name: Governance
-      url: infrastructure/resource_catalog/governance/
+      identifier: infrastructure_resource_catalog_schema
+      weight: 10001
+    - name: Policies
+      url: infrastructure/resource_catalog/policies/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_governance
-      weight: 20002
+      identifier: infrastructure_resource_catalog_policies
+      weight: 10002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -5573,6 +5573,11 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 916
+    - name: Throttle
+      url: observability_pipelines/processors/throttle
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_throttle
+      weight: 917
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -7665,16 +7670,31 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
+    - name: RUM Without Limits
+      url: real_user_monitoring/rum_without_limits/
+      parent: rum
+      identifier: rum_without_limits
+      weight: 10
+    - name: Metrics
+      url: real_user_monitoring/rum_without_limits/metrics
+      parent: rum_without_limits
+      identifier: rum_without_limits_metrics
+      weight: 1001
+    - name: Retention Filters
+      url: real_user_monitoring/rum_without_limits/retention_filters
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention
+      weight: 1002
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 10
+      weight: 11
     - name: Data Security
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 11
+      weight: 12
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics

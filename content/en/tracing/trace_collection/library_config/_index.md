@@ -76,9 +76,15 @@ The following configuration options behave consistently across the latest versio
 
 ### Traces
 
+`DD_APM_TRACING_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Description**: Enables or disables sending traces from the application, without impacting other library features such as profiling, Datadog App and API Protection (AAP), Data Streams Monitoring (DSM), and more.
+
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
+**Caveats**: Fully disables the library, including other library features, in Node.js, PHP, Ruby, .NET, and C++. Partially disables the library in Java and Python. Behaves identically to `DD_APM_TRACING_ENABLED` in Go.<br>
 **Description**: Enables or disables sending traces from the application.
 
 `DD_LOGS_INJECTION`
@@ -172,7 +178,7 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
 **Supported Values**: `all`, `DD_TAGS` (Java, .NET), `DD_LOGS_INJECTION` (Java) <br>
 **Caveats**: Only supported in Java and .NET <br>
-**Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. Each feature must be explicitly listed to be enabled.
+**Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. You can enable all experimental features using the keyword `all`, or list individual features explicitly.
 
 ### Integrations
 
