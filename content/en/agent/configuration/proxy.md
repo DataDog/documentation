@@ -51,7 +51,7 @@ proxy:
   # Recommended: Set to true to ensure no_proxy behaves in a standard way
   no_proxy_nonexact_match: true
 
-  # Recommended: Force the Agent to use HTTP for logs collection (if logs is enabled)
+  # Recommended: Force the Agent to use HTTP to send logs (if logs is enabled)
   logs_config:
     force_use_http: true
 ```
