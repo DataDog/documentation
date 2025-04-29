@@ -18,7 +18,7 @@ Static Infrastructure as Code (IaC) scanning integrates with version control sys
 
 When you click on a finding, the side panel reveals additional details, including a short description of the IaC rule related to the finding and a preview of the offending code.
 
-{{< img src="security/csm/iac_scanning_finding.png" alt="Finding side panel highlighting undefined EBS volume encryption in Terraform code." width="100%">}}
+{{< img src="security/csm/iac_scanning_finding_2.png" alt="Finding side panel highlighting undefined EBS volume encryption in Terraform code." width="100%">}}
 
 ## Further reading
 
