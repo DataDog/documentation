@@ -10,7 +10,11 @@ further_reading:
 <div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Cloudcraft supports overlays that integrate data from multiple sources, making it easier to apply groupings and filters to your diagrams so you can focus on specific parts of your architecture.
+## Overview
+
+Cloudcraft supports overlays that integrate data from multiple sources, enriching your diagrams with real-time insights. These views let you group and filter resources by key attributes, helping you focus on different parts of your architecture for troubleshooting, cost optimization, or security analysis. Each overlay is designed to address a specific operational goal, making it easy to adapt the diagram to your needs.
+
+## Available overlays
 
 Cloudcraft provides the following built-in overlays: 
 
