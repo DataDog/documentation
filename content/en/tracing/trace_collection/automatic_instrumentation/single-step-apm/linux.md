@@ -18,7 +18,7 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 To enable APM on a Ubuntu host:
 
 1. In the Datadog app, navigate to the [Install the Datadog Agent on Linux][15] page.
-1. Turn on **APM Instrumentation**.
+1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 

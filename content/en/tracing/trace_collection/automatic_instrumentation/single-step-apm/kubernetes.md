@@ -11,6 +11,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.</div>
+
 In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][10] your applications in one step, with no additional configuration required. 
 
 ## Requirements
@@ -19,136 +21,25 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 - [`Helm`][1] for deploying the Datadog Operator.
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
-<div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.</div>
-
 ## Enable APM on your applications
 
-You can enable APM by installing the Agent with either:
+<div class="alert alert-info">Single Step Instrumentation does not instrument applications in the namespace where the Datadog Agent is installed. Install the Agent in a separate namespace where you do not run your applications.</div>
 
-- Datadog Operator
-- Datadog Helm chart
+Follow these steps to enable Single Step Instrumentation across your entire cluster. This automatically sends traces from all applications written in supported languages.
 
-<div class="alert alert-info">Single Step Instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
+**Note:** To instrument only specific namespaces or pods, see [Advanced options](#advanced-options).
 
-{{< tabs >}}
-{{% tab "Installing with Datadog Operator" %}}
+1. In the Datadog app, go to the [Install the Datadog Agent on Kubernetes][11] page.
+1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
+1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
+1. Deploy the Agent using the generated configuration file.
+1. Restart your applications.
 
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
+## Setting Unified Service Tags
 
-**Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 
-To enable Single Step Instrumentation with the Datadog Operator:
-
-1. Install the [Datadog Operator][5] with Helm:
-   ```shell
-   helm repo add datadog https://helm.datadoghq.com
-   helm repo update
-   helm install my-datadog-operator datadog/datadog-operator
-   ```
-2. Create a Kubernetes secret to store your Datadog [API key][6]:
-   ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
-   ```
-3. Create `datadog-agent.yaml` with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
-   ```yaml
-   apiVersion: datadoghq.com/v2alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     override:
-       clusterAgent:
-         image:
-           tag: 7.64.1
-     global:
-       site: <DATADOG_SITE>
-       tags:
-         - env:<AGENT_ENV>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-     features:
-       apm:
-         instrumentation:
-           enabled: true
-           targets:
-             - name: "default-target"
-               ddTraceVersions:
-                 java: "1"
-                 dotnet: "3"
-                 python: "2"
-                 js: "5"
-                 php: "1"
-   ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][7] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
-
-4. Run the following command:
-   ```shell
-   kubectl apply -f /path/to/your/datadog-agent.yaml
-   ```
-5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-
-[5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site
-
-{{% /tab %}}
-
-{{% tab "Installing with Helm" %}}
-
-Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
-
-**Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
-
-To enable Single Step Instrumentation with Helm:
-
-1. Add the Helm Datadog repo:
-   ```shell
-    helm repo add datadog https://helm.datadoghq.com
-    helm repo update
-    ```
-2. Create a Kubernetes secret to store your [Datadog API key][10]:
-   ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
-   ```
-3. Create `datadog-values.yaml` and add the following configuration:
-   ```
-   datadog:
-    apiKeyExistingSecret: datadog-secret
-    site: <DATADOG_SITE>
-    tags:
-         - env:<AGENT_ENV>
-    apm:
-      instrumentation:
-         enabled: true
-         targets:
-           - name: "default-target"
-             ddTraceVersions:
-               java: "1"
-               dotnet: "3"
-               python: "2"
-               js: "5"
-               php: "1"
-   ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
-
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
-
-4. Run the following command:
-   ```shell
-   helm install datadog-agent -f datadog-values.yaml datadog/datadog
-   ```
-5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-
-[10]: https://app.datadoghq.com/organization-settings/api-keys
-[12]: /getting_started/site
-
-{{% /tab %}}
-{{< /tabs >}}
-
-After you complete these steps, you may want to enable [runtime metrics][3] or view observability data from your application in the [Software Catalog][4].
+In Kubernetes, set Unified Service Tags on both your Deployment objects and Pod template specs to ensure complete telemetry correlation. For details, see [how to set USTs for Kubernetes workloads][link].
 
 ## Advanced options
 
@@ -615,6 +506,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
 [10]: /tracing/glossary/#instrumentation
+[11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 
 
