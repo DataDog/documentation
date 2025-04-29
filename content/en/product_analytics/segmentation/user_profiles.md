@@ -16,9 +16,14 @@ All features in Product Analytics are in limited availability. To request access
 {{< /callout >}}
 
 ## Overview 
+<!-- Add language from
+   https://docs.datadoghq.com/product_analytics/guide/rum_and_product_analytics/ 
+  and from https://datadoghq.atlassian.net/wiki/spaces/GTMSEH/pages/5007933651/Product+Analytics#Who-are-our-Target-Personas%3F 
+to emphasize the benefits of the user profiles to the persona  -->
+
 The User Profiles page allows you to list, search, and configure end-user profiles. While Product Analytics provides insight into user behavior overall, User Profiles helps to track key user behavior patterns at the individual user level. The User Profiles page also allows you to create a segment of users who have used your product in order to analyze and understand specific groups of users.
 
-In the User Profile page, you can filter users based on all the available attributes. For ease of find (for an easier view into the available attributes, this document separates them into three types):
+In the User Profile page, you can filter users based on all the available attributes. To easiliy find the available attributes, this document separates them into four sections:
 
 <!-- the table might be easier to read -->
 
@@ -35,9 +40,11 @@ In the User Profile page, you can filter users based on all the available attrib
 
 #### Personal identifying attributes 
 User ID
-: `type:string` <br>  Unique user identifier. 
+: `type:string` <br> Unique user identifier.
+
 User Email
 : <add context>
+
 User Name
 : `type:string` <br> User friendly name, displayed by default in the RUM UI.
 
@@ -47,17 +54,23 @@ First Seen
 
 #### Location based attributes 
 First City
-: <add context>
+: `type:string` <br> 
+
 Last City
-: <add context>
+: `type:string` <br> 
+
 First Region
-: <add context>
+: `type:string` <br> 
+
 Last Region
-: <add context>
+: `type:string` <br> 
+
 First Seen Country 
-: <add context>
+: `type:string` <br> 
+
 Last Seen Country
-: <add context>
+: `type:string` <br> 
+
 
 #### Device and Browser related attributes 
 First Device Type
