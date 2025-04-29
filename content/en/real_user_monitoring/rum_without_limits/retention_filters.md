@@ -95,9 +95,13 @@ Drag and drop filters to reorder filters to their new position.
 
 See [Retention Filter Best Practices][4].
 
+## API
+
+Retention filters can be managed through [APIs][5] or Datadog's dedicated [Terraform modules][6].
+
 ## Next steps
 
-Analyze performance with [metrics][5].
+Analyze performance with [metrics][7].
 
 ## Further reading
 
@@ -107,4 +111,6 @@ Analyze performance with [metrics][5].
 [2]: https://app.datadoghq.com/rum/list
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/guide/retention_filter_best_practices
-[5]: /real_user_monitoring/rum_without_limits/metrics
+[5]: /api/latest/rum-retention-filters/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/rum_retention_filters
+[7]: /real_user_monitoring/rum_without_limits/metrics
