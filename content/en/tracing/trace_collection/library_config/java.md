@@ -59,7 +59,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
 When `false` tracing agent is disabled.<br/>
-See also [DD_APM_TRACING_ENABLED][20].
+See also [DD_APM_TRACING_ENABLED][21].
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -220,6 +220,21 @@ When set to `true` query string parameters and fragment get added to web server 
 : **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
 **Default**: `true`<br>
 When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
+
+`dd.trace.http.server.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP request paths to custom resource names. Provide a comma‑separated list of `pattern:resource_name` pairs:<br>
+&nbsp;&nbsp;&nbsp;&ndash; `pattern`: An [Ant‑style path pattern][20] that must match the value of the `http.path_group` span tag.<br>
+&nbsp;&nbsp;&nbsp;&ndash; `resource_name`: The custom resource name to assign if the pattern matches.<br>
+If `*` is used as the `resource_name` for a matching pattern, the original, unnormalized request path combined with the HTTP method is used as the resource name. For example, given the rule `/test/**:*`, a `GET` request for `/test/some/path` results in the resource name `GET /test/some/path`.<br>
+Mappings are evaluated in order of priority, and the first matching rule applies. Unmatched request paths use the default normalization behavior.<br>
+**Example**: Using `-Ddd.trace.http.server.path-resource-name-mapping=/admin/*.jsp:/admin-page,/admin/user/**:/admin/user` yields:<br>
+Request path | Resource path
+------------ | -------------
+`/admin/index.jsp` | `/admin-page`
+`/admin/user/12345/delete` | `/admin/user`
+`/user/12345` | `/user/?`
 
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
@@ -605,4 +620,5 @@ Deprecated since version 1.9.0
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
 [19]: /security/application_security/threats/setup/threat_detection/java/
-[20]: /tracing/trace_collection/library_config/#traces
+[20]: https://ant.apache.org/manual/dirtasks.html#patterns
+[21]: /tracing/trace_collection/library_config/#traces
