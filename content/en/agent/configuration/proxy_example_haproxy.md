@@ -12,7 +12,7 @@ private: true
 ## Overview
 
 <div class="alert alert-warning">
-Using TCP proxies like HAProxy is generally discouraged because they require you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+Forwarding traffic to Datadog using software like HAProxy or Nginx is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
 This list can change, leading to potential data loss if not kept up-to-date.
 </div>
 

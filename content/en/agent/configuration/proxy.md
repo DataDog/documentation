@@ -28,7 +28,7 @@ Configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy.
 
 You can configure the proxy using either the main Agent configuration file or environment variables. Environment variables override configuration file settings.
 
-#### 1. `datadog.yaml` Configuration File
+#### 1. Configuration File
 
 Edit the main Agent configuration file (`datadog.yaml`). Locate or add the `proxy` section:
 
@@ -45,11 +45,11 @@ proxy:
   #   - 192.168.0.0/24
   #   - localhost
   #   - .myinternaldomain.com
-  # Note: no_proxy_nonexact_match defaults to false for backwards compatibility, we recommend setting it to true
-  no_proxy_nonexact_match: true
   no_proxy:
     - <HOST_TO_BYPASS_1>
     - <HOST_TO_BYPASS_2>
+  # Recommended: Set to true to ensure no_proxy behaves in a standard way
+  no_proxy_nonexact_match: true
 
   # Recommended: Force the Agent to use HTTP for logs collection (if logs is enabled)
   logs_config:
@@ -84,10 +84,10 @@ DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 If you don't have an existing proxy server, we recommend using an HTTP proxy like **Squid**.
 
 1. **Squid (Recommended)**: A robust HTTP/HTTPS proxy that simplifies configuration by automatically handling Datadog endpoints. [See Squid Example Setup][2].
-2. **HAProxy (Not Recommended)**: Can function as a TCP proxy, but this requires maintaining an up-to-date list of Datadog domains and is more complex to manage. [See HAProxy Example Setup][3].
-3. **Nginx (Not Recommended)**: Similar to HAProxy, using Nginx as a TCP proxy is discouraged due to the maintenance overhead of keeping domain lists current. [See Nginx Example Setup][4].
+2. **HAProxy (Not Recommended)**: Can forward traffic to Datadog, but this requires maintaining an up-to-date list of Datadog domains and is more complex to manage. [See HAProxy Example Setup][3].
+3. **Nginx (Not Recommended)**: Similar to HAProxy, using Nginx to forward traffic to Datadog is discouraged due to the maintenance overhead of keeping domain lists current. [See Nginx Example Setup][4].
 
-Using TCP proxies like HAProxy or Nginx is generally discouraged because they require you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+Forwarding traffic to Datadog using software like HAProxy or Nginx is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
 This list can change, leading to potential data loss if not kept up-to-date.
 
 ### Verification
