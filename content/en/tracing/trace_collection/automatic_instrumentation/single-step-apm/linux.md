@@ -17,18 +17,18 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 To enable APM on a Ubuntu host:
 
-1. In the Datadog app, navigate to the [Install the Datadog Agent on Linux][15] page.
+1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
 1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
-## Setting Unified Service Tags
+## Set Unified Service Tags
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 
 Learn how to set [USTs for non-containerized environments][16].
 
-## Controlling SDK tracer versions
+## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
 
@@ -36,6 +36,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
+1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 1. Find your language(s) and use the dropdown to either:
    - Pin an exact tracer version, or
