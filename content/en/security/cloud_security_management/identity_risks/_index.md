@@ -62,7 +62,7 @@ In Misconfigurations, Identity Risks, and the Security Inbox, you can click the 
 
 This example shows all the principals that can access this EC2 instance:
 
-{{< img src="security/csm/access_insights.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
+{{< img src="security/csm/access_insights_2.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
 
 In the **What can this resource access?** section, you can:
 - See the account associated with each entity, and details about the access type
