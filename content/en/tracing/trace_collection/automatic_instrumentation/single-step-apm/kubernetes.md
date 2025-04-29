@@ -39,7 +39,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 
-In Kubernetes, set Unified Service Tags on both your Deployment objects and Pod template specs to ensure complete telemetry correlation. For details, see [how to set USTs for Kubernetes workloads][link].
+In Kubernetes, set Unified Service Tags on both your Deployment objects and Pod template specs to ensure complete telemetry correlation. For details, see [how to set USTs for Kubernetes workloads][12].
 
 ## Advanced options
 
@@ -431,6 +431,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
 [10]: /tracing/glossary/#instrumentation
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[12]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 
 
