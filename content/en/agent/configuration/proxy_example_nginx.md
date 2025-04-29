@@ -9,6 +9,11 @@ private: true
 
 ## Overview
 
+<div class="alert alert-warning">
+Using TCP proxies like NGINX is generally discouraged because they require you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+This list can change, leading to potential data loss if not kept up-to-date.
+</div>
+
 [NGINX][2] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`

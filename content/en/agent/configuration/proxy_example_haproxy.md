@@ -12,11 +12,9 @@ private: true
 ## Overview
 
 <div class="alert alert-warning">
-This setup is **not recommended** as it requires maintaining an up-to-date list of domains to proxy.
-Instead, we recommend using an HTTP proxy like Squid.
+Using TCP proxies like HAProxy is generally discouraged because they require you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+This list can change, leading to potential data loss if not kept up-to-date.
 </div>
-
-## HAProxy Configuration
 
 [HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
