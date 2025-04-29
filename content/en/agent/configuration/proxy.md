@@ -63,7 +63,7 @@ proxy:
 
 #### 2. Environment Variables
 
-The following environment variables correspond to the `datadog.yaml` configuration file settings above.
+Alternatively, you can set the following environment variables:
 
 ```bash
 DD_PROXY_HTTP="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
