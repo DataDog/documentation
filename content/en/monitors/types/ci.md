@@ -20,7 +20,9 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">This feature is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The CI/CD & Test Monitor is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 {{< /site-region >}}
 
 ## Overview
@@ -33,7 +35,7 @@ To create a monitor for CI pipelines, CI tests, or CD deployments, first enable 
 | CI Test          | [Test Optimization][2]   |
 | CD Deployments   | [CD Visibility][3]       |
 
-CI/CD and test monitors allow you to visualize CI/CD data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
+CI/CD and Test monitors allow you to visualize CI/CD data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
 
 ## Monitor creation
 
@@ -154,7 +156,7 @@ In the `Notification message` section of your monitor, add text similar to the c
 
 You can create CD Deployment monitors using formulas and functions. This can be used, for example, to create monitors on the **rate** of an event happening, such as the rate of a deployment failing (error rate).
 
-The following example is of a pipeline error rate monitor using a formula that calculates the ratio of "number of failed deployment events" (`deployment.status:error`) over "number of total deployment events" (no filter), grouped by `deployment.name` (to be alerted once per deployment). To learn more, see the [Functions Overview][1].
+The following example demonstrates a deployment error rate monitor. It uses a formula to calculate the ratio of "failed deployment events" (`deployment.status:error`) over "total deployment events" (without filters), grouped by `deployment.name`, to trigger alerts for each deployment individually. To learn more, see the [Functions Overview][1].
 
 {{< img src="monitors/monitor_types/cd_deployments/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:100%;" >}}
 
