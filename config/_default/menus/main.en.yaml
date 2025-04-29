@@ -6234,6 +6234,16 @@ menu:
       parent: security_platform_heading
       identifier: workload_protection
       weight: 60000
+    - name: Setup
+      url: security/workload_protection/setup
+      parent: workload_protection
+      identifier: workload_protection_setup
+      weight: 100
+    - name: Supported Deployment Types
+      url: security/workload_protection/setup/supported_deployment_types
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_deployment_types
+      weight: 100
     - name: Supported Linux Distributions
       url: security/workload_protection/supported_linux_distributions
       parent: workload_protection
