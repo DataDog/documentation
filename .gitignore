@@ -163,7 +163,7 @@ layouts/shortcodes/semantic-color.md
 
 # AWS resource collection permissions tables
 layouts/shortcodes/aws-resource-collection-cloud-cost-management.md
-layouts/shortcodes/aws-resource-collection-cloud-craft.md
+layouts/shortcodes/aws-resource-collection-cloudcraft.md
 layouts/shortcodes/aws-resource-collection-cloud-security-monitoring.md
 layouts/shortcodes/aws-resource-collection-network-performance-monitoring.md
 layouts/shortcodes/aws-resource-collection-resource-catalog.md
