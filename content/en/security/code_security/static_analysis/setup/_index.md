@@ -99,8 +99,28 @@ If you are an admin in your Azure portal, you can configure Entra apps to connec
     1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
 14. Click **Submit Organization**.
 
+### Configure project service hooks
+
+To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
+
+First, set your environment variables (note: the Datadog UI will fill these values out for you):
+```shell
+export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
+export DD_API_KEY="..."                         # Datadog API Key
+``` 
+
+Then, run the following with your Azure DevOps organization name to configure the service hooks:
+```shell
+curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
+./setup-hooks.py --dd-site={{< region-param key="dd_site" code="true" >}} --az-devops-org="<org-name>"
+```
+
+Click [here][4] to see our CLI that automates this process.
+
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://github.com/DataDog/azdevops-sci-hooks
 
 {{% /tab %}}
 {{% tab "Other" %}}
