@@ -52,7 +52,7 @@ You have the following additional view options:
 
 ## Top Elements
 
-Top Elements aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
+Top Elements heatmaps aggregate click actions on a given view by displaying the elements that are most interacted with, in addition to their interaction rank. The ranking on the map itself corresponds to the action name on the side.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-top-elements.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
@@ -60,7 +60,7 @@ Hover over any action name in the panel to highlight the corresponding action on
 
 ## Click maps
 
-A Click map shows you the most interacted-with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
+A Click map shows you the actions most interacted with on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmaps.png" alt="Clickmap data overlayed on a website." style="width:100%;">}}
 
@@ -115,7 +115,7 @@ Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-the-snapshot.mp4" alt="Select a different background by clicking the Change Snapshot button" video=true >}}
 
-### On the action list on the side of my heatmap, I see an icon showing an element that is not visibile in the heatmap.
+### On the action list on the side of my heatmap, I see an icon showing an element that is not visible in the heatmap.
 
 The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the snapshot in the heatmap. To see that element, you can click **Change Snapshot** in the top right corner to switch the snapshot of your heatmap to one where that element is present.
 
