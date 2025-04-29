@@ -1,7 +1,6 @@
 ---
 title: Analyze Performance with Metrics
 description: Understand the out-of-the-box performance metrics that are available with RUM without Limits.
-private: true
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation

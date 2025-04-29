@@ -44,7 +44,8 @@ Sets the version of the service.
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
 Submit or not traces to the Datadog Agent. <br>
-When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.
+When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.<br/>
+See also [DD_APM_TRACING_ENABLED][6].
 
 `DD_TRACE_AGENT_PORT`
 : **Since**: v0.1.0 <br>
@@ -154,3 +155,4 @@ When multiple values are given, the order of matching is based on the order of v
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
 [5]: /agent/remote_config
+[6]: /tracing/trace_collection/library_config/#traces
