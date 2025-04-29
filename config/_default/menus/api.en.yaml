@@ -2863,6 +2863,54 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update a custom framework
+      url: '#update-a-custom-framework'
+      identifier: security-monitoring-update-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomFramework
+        unstable: []
+        order: 4
+    - name: Get a custom framework
+      url: '#get-a-custom-framework'
+      identifier: security-monitoring-get-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomFramework
+        unstable: []
+        order: 4
+    - name: Delete a custom framework
+      url: '#delete-a-custom-framework'
+      identifier: security-monitoring-delete-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomFramework
+        unstable: []
+        order: 4
+    - name: Create a custom framework
+      url: '#create-a-custom-framework'
+      identifier: security-monitoring-create-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomFramework
+        unstable: []
+        order: 4
     - name: Change the triage state of a security signal
       url: '#change-the-triage-state-of-a-security-signal'
       identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -7349,6 +7397,19 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Validate an observability pipeline
+      url: '#validate-an-observability-pipeline'
+      identifier: observability-pipelines-validate-an-observability-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidatePipeline
+        unstable:
+          - v2
+        order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
       identifier: observability-pipelines-create-a-new-pipeline
@@ -7362,6 +7423,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List pipelines
+      url: '#list-pipelines'
+      identifier: observability-pipelines-list-pipelines
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPipelines
+        unstable:
+          - v2
+        order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -7478,7 +7552,7 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
-    - name: Update on call escalation policy
+    - name: Update on-call escalation policy
       url: '#update-on-call-escalation-policy'
       identifier: on-call-update-on-call-escalation-policy
       parent: on-call
@@ -7490,7 +7564,7 @@ menu:
           - UpdateOnCallEscalationPolicy
         unstable: []
         order: 6
-    - name: Get on call escalation policy
+    - name: Get on-call escalation policy
       url: '#get-on-call-escalation-policy'
       identifier: on-call-get-on-call-escalation-policy
       parent: on-call
@@ -7502,7 +7576,7 @@ menu:
           - GetOnCallEscalationPolicy
         unstable: []
         order: 7
-    - name: Delete on call escalation policy
+    - name: Delete on-call escalation policy
       url: '#delete-on-call-escalation-policy'
       identifier: on-call-delete-on-call-escalation-policy
       parent: on-call
@@ -7514,7 +7588,7 @@ menu:
           - DeleteOnCallEscalationPolicy
         unstable: []
         order: 8
-    - name: Create on call escalation policy
+    - name: Create on-call escalation policy
       url: '#create-on-call-escalation-policy'
       identifier: on-call-create-on-call-escalation-policy
       parent: on-call
