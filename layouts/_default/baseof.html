@@ -6,7 +6,7 @@
 <head>
   {{ partialCached "header-scripts.html" . }}
 
-  {{ if ne .Params.type "integrations" }}
+  {{ if ne (lower .Type) "integrations" }}
     {{ partialCached "markdoc-assets.html" . }}
   {{ end }}
 
