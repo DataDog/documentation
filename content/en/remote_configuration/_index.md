@@ -115,10 +115,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
-
-
-
-< **HH**: if needed, insert section to deal with older configurations >
+1. Follow the [product-specific configuration](#product-specific-configuration) below to finish setting up Remote Configuration.
 
 ### Product-specific configuration
 
@@ -134,9 +131,6 @@ After you've enabled Remote Configuration in your organization, consult the docu
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
 
-
-< **HH**: BOOKMARK (I haven't worked on anything below this line yet) >
-
 ## Best practices
 
 ### Datadog Audit Trail
@@ -147,104 +141,9 @@ Use [Datadog Audit Trail][13] to monitor organization access and Remote Configur
 
 Configure [monitors][14] to receive notifications when an event of interest is encountered.
 
-## Troubleshooting
-
-If you experience issues using Remote Configuration, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][15].
-
-### Restart the Agent
-
-After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for this change to take effect.
-
-### Ensure Datadog Remote Configuration endpoints are reachable from your environment
-
-To use Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Configuration [endpoints][17]. For private network connection between your environment and Datadog, you can also connect to Remote Configuration Virtual Private Cloud [endpoints][25]. Ensure that outbound HTTPS has access to Remote Configuration endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Configuration endpoints.
-
-### Enable Remote Configuration at the organization level
-
-To enable Remote Configuration at the [Organization][8] level in the Datadog UI, go to the [Remote Configuration Setup][26] page in your **Organization Settings**. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][7] RBAC permission can enable Remote Configuration at the Organization level.
-
-### Enable Remote Configuration on the API key
-
-To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][5] RBAC permission can enable Remote Configuration on the API Key.
-
-**Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
-
-### Review Remote Configuration status of Agents and Tracing libraries
-
-Gain visibility into the Remote Configuration status of your Agent and Tracing library through the [Remote Configuration UI][8].
-
-The following table describes the meaning of each Agent status:
-
-  | Agent Status     | Description                                      |
-  |------------------|--------------------------------------------------|
-  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully to Datadog. This is the optimal state you want your Agents to be in for Remote Configuration.                                               |
-  | UNAUTHORIZED          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 |
-  | CONNECTION ERROR        |   The Agent deployed in your environment has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause is that the Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, allow outbound HTTPS access to Remote Configuration endpoints from your environment. This status displays when the Agent version is `7.45.0` or higher.
-  | DISABLED       |   The Agent deployed in your environment has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. Set `remote_config.enabled` to true if you want to enable Remote Configuration on the Agent. This status displays when the Agent version is `7.45.0` or higher. |
-  | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            |
-  | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
-
-The following table describes the meaning of each Tracing library status:
-
-  | Tracing library Status| Description                                      |
-  |------------------|--------------------------------------------------|
-  | CONNECTED      | The Tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your Tracing library to be in for Remote Configuration.                                               |
-  | UNAUTHORIZED          | The Tracing library is associated with an Agent which doesn't have `Remote Config Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the Tracing library.|
-  | CONNECTION ERROR        |   The Tracing library deployed in your environment is associated with an Agent that has remote_config.enabled set to true in its `datadog.yaml` configuration file, however, the agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.
-  | DISABLED       |   The Tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  |
-  | NOT CONNECTED       | The Tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.|
-  | UNSUPPORTED AGENT   | The Tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
-  | NOT DETECTED   | The Tracing library does not support Remote Configuration. To fix this issue, update the Tracing library software to the latest available version. |
-  | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
-
 ## Opting out of Remote Configuration
 
-To opt out of Remote Configuration use, you can disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and Agent level.
-
-### At the Organization level
-
-Disable Remote Configuration at the organization level on the [Remote Configuration][8] page. This disables Datadog components across your organization to receive configurations from Datadog. You need the [`org_management`][7] permission to disable Remote Configuration at the organization level.
-
-### At the API key level
-Disable the API key of your choice on the [API Keys][24] page. You need the [`api_keys_write`][5] permission to disable Remote Configuration on an API key.
-
-### At the Agent level
-Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
-
-To receive configurations from Datadog, you also need to take the following steps:
-- Enable Remote Configuration at the organization level.
-- Enable Remote Configuration capability on your API Key from the Datadog UI.
-- Allow outbound HTTPS access to Remote Configuration [endpoints][17] from your environment.
-
-If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
-
-{{< tabs >}}
-{{% tab "Configuration YAML file" %}}
-Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][101]:
-```yaml
-remote_configuration:
-  enabled: false
-```
-
-[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest:
-```yaml
-DD_REMOTE_CONFIGURATION_ENABLED=false
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-Add the following to your Helm chart:
-```yaml
-datadog:
-  remoteConfiguration:
-    enabled: false
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+To opt out, disable Remote Configuration [at the organization level][6]. For additional product-specific steps on disabling Remote Configuration, see [the documentation for the relevant product](#product-specific-configuration).
 
 ## Further Reading
 

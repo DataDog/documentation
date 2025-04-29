@@ -56,7 +56,6 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
 
-
 ## Control access to Fleet Automation
 
 Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
