@@ -21,7 +21,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 **Notes**:
 - The **Default** cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
-- If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both the OOTB and custom metrics are computed based on 100% of the traffic ingested.
+- If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
 
 | Metric Name | Description | Dimensions | Platform |
 |-------------|-------------|------------|----------|
