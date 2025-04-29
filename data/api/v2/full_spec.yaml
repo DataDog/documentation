@@ -37470,7 +37470,7 @@ components:
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit and delete individual monitors.
+            monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
