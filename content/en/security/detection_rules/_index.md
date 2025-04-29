@@ -164,7 +164,7 @@ The rule deprecation process is as follows:
 [2]: /security/default_rules/
 [3]: /security/cloud_siem/
 [4]: /security/cloud_security_management/misconfigurations/
-[5]: /security/threats/
+[5]: /security/workload_protection/
 [6]: /security/cloud_security_management/identity_risks/
 [7]: /security/application_security/
 [8]: /tracing/
@@ -173,5 +173,5 @@ The rule deprecation process is as follows:
 [11]: /security/cloud_siem/detection_rules/
 [12]: /security/application_security/threats/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
-[14]: /security/threats/workload_security_rules?tab=host#create-custom-rules
+[14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/

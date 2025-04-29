@@ -23,5 +23,5 @@ Workload Protection supports the following Linux distributions:
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][1].
 - Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 
-[1]: /security/cloud_security_management/troubleshooting/threats
+[1]: /security/workload_protection/troubleshooting/threats
 [2]: /security/cloud_security_management/guide/ebpf-free-agent

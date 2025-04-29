@@ -13,10 +13,6 @@ further_reading:
   text: "Build Workflows"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1NvW3I0Ep-lQo4FbiSwOEjccoFsS9Ue2wYiYDmCxKDYg/viewform?edit_requested=true" btn_hidden="false" header="Try the Preview!">}}
-Datastore is in Preview. Use this form to request access today.
-{{< /callout >}}
-
 ## Overview
 
 The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
