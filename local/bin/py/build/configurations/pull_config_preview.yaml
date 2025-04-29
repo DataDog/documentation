@@ -533,7 +533,7 @@
           options:
             base_path: ""
             dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-cloud-craft.md"
+            file_name: "aws-resource-collection-cloudcraft.md"
         - action: pull-and-push-file
           branch: main
           globs:
