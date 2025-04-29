@@ -276,7 +276,8 @@ The following configuration variables are available **only** when using automati
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
+**Default**: `true`<br/>
+See also [DD_APM_TRACING_ENABLED][22].
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
@@ -381,3 +382,4 @@ The following configuration variables are for features that are available for us
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
+[22]: /tracing/trace_collection/library_config/#traces

@@ -7,7 +7,7 @@ Use Observability Pipelines' Microsoft Sentinel destination to send logs to Micr
 
 ## Setup
 
-Set up the Microsoft Sentinel destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Microsoft Sentinel destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI, except for [Prerequisites](#prerequisites) which provides instructions on how to find the information you need in Microsoft Azure.
 
 ### Set up the destination
 
