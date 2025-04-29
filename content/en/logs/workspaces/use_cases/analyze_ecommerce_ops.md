@@ -71,7 +71,7 @@ ORDER BY
     cart_value DESC
 {{< /code-block >}}
 
-#### Query breakdown
+{{% collapse-content title="Query breakdown" level="h4" expanded=false %}}
 
 This SQL query performs several important functions:
 
@@ -82,6 +82,7 @@ This SQL query performs several important functions:
 5. **Prioritization**: Orders results by cart value to highlight highest revenue impact first
 
 The query focuses on payment errors that also received bad ratings, providing a view of technical issues that directly affected customer satisfaction.
+{{% /collapse-content %}}
 
 ### Query output
 
