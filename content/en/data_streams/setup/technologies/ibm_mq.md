@@ -1,14 +1,10 @@
 ---
-title: IBM MQ for Data Streams Monitoring
+title: Data Streams Monitoring for IBM MQ
 ---
 
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-
-### Support for IBM MQ in Data Streams Monitoring
-
-To setup DSM, please select the language of your producers and consumers
 
 <table>
   <thead>
@@ -29,4 +25,8 @@ To setup DSM, please select the language of your producers and consumers
   </tbody>
 </table>
 
+### Setting up Data Streams Monitoring
+See setup instructions for [.NET][2].
+
 [1]: /agent
+[2]: /data_streams/setup/language/dotnet

@@ -43,15 +43,31 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
 * Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
 
-## Setup
+### Supported languages and technologies
 
 Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
-For installation instructions and lists of supported technologies, choose your language:
+|   | Java | Python | .NET | Node.js | Go |
+| - | ---- | ------ | ---- | ------- | -- |
+| Apache Kafka | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Azure Service Bus | | | {{< X >}} | | |
+| Google Pub/Sub | {{< X >}} | | | {{< X >}} | |
+| IBM MQ | | | {{< X >}} | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+
+Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
+
+## Setup
+
+### By language
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
-or choose your technology to see what languages and libraries are supported:
+
+### By technology
 
 {{< partial name="data_streams/setup-technologies.html" >}}
 

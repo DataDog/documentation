@@ -1,14 +1,10 @@
 ---
-title: Google Pub/Sub for Data Streams Monitoring
+title: Data Streams Monitoring for Google Pub/Sub 
 ---
 
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-
-### Support for Google Pub/Sub in Data Streams Monitoring
-
-To setup DSM, please select the language of your producers and consumers
 
 <table>
   <thead>
@@ -35,4 +31,10 @@ To setup DSM, please select the language of your producers and consumers
   </tbody>
 </table>
 
+### Setting up Data Streams Monitoring
+See setup instructions for [Java][2] or [Node.js][3].
+
+
 [1]: /agent
+[2]: /data_streams/setup/language/java
+[3]: /data_streams/setup/language/nodejs

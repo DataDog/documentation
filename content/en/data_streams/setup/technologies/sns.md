@@ -1,17 +1,10 @@
 ---
-title: Amazon SNS for Data Streams Monitoring
+title: Data Streams Monitoring for Amazon SNS
 ---
 
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-
-{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
-**Note:** Java requires additional setup: [read more](/data_streams/java/?tab=environmentvariables#monitoring-sns-to-sqs-pipelines)
-
-### Support for Amazon SNS in Data Streams Monitoring
-
-To setup DSM, please select the language of your producers and consumers
 
 <table>
   <thead>
@@ -55,4 +48,37 @@ To setup DSM, please select the language of your producers and consumers
   </tbody>
 </table>
 
+### Setting up Data Streams Monitoring
+See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
+
+For Java, perform the following additional configuration steps:
+
+{{< tabs >}}
+{{% tab "SQS v1" %}}
+- Set the environment variable `DD_TRACE_SQS_BODY_PROPAGATION_ENABLED` to `true`.
+
+   For example:
+   ```yaml
+   environment:
+     - DD_DATA_STREAMS_ENABLED: "true"
+     - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+     - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
+   ```
+- Ensure that you are using [Java tracer v1.44.0+][1].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases
+{{% /tab %}}
+{{% tab "SQS v2" %}}
+Enable [Amazon SNS raw message delivery][1].
+
+[1]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+
 [1]: /agent
+[2]: /data_streams/setup/language/java
+[3]: /data_streams/setup/language/nodejs
+[4]: /data_streams/setup/language/python
+[5]: /data_streams/setup/language/dotnet

@@ -1,16 +1,10 @@
 ---
-title: Amazon Kinesis for Data Streams Monitoring
+title: Data Streams Monitoring for Amazon Kinesis
 ---
 
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-
-{{% data_streams/monitoring-kinesis-pipelines %}}
-
-### Support for Amazon Kinesis in Data Streams Monitoring
-
-To setup DSM, please select the language of your producers and consumers
 
 <table>
   <thead>
@@ -54,4 +48,14 @@ To setup DSM, please select the language of your producers and consumers
   </tbody>
 </table>
 
+### Setting up Data Streams Monitoring
+See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
+
+{{% data_streams/monitoring-kinesis-pipelines %}}
+
+
 [1]: /agent
+[2]: /data_streams/setup/language/java
+[3]: /data_streams/setup/language/nodejs
+[4]: /data_streams/setup/language/python
+[5]: /data_streams/setup/language/dotnet

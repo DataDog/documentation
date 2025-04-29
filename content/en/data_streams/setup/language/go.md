@@ -4,6 +4,8 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
+aliases:
+  - /data_streams/go
 ---
 
 The following instrumentation types are available:

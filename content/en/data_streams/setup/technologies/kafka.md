@@ -1,19 +1,10 @@
 ---
-title: Kafka for Data Streams Monitoring
+title: Data Streams Monitoring for Kafka
 ---
 
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-
-{{% data_streams/monitoring-kafka-pipelines %}}
-
-### Support for Kafka in Data Streams Monitoring
-
-### Note
-- [Kafka Streams][2] is partially supported for Java, and can lead to latency measurements being missed in many cases
-
-To setup DSM, please select the language of your producers and consumers
 
 <table>
   <thead>
@@ -63,5 +54,16 @@ To setup DSM, please select the language of your producers and consumers
   </tbody>
 </table>
 
+<div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
+
+### Setting up Data Streams Monitoring
+See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.NET][6].
+
+{{% data_streams/monitoring-kafka-pipelines %}}
+
 [1]: /agent
-[2]: https://kafka.apache.org/documentation/streams/
+[2]: /data_streams/setup/language/java
+[3]: /data_streams/setup/language/go
+[4]: /data_streams/setup/language/nodejs
+[5]: /data_streams/setup/language/python
+[6]: /data_streams/setup/language/dotnet
