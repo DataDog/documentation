@@ -711,7 +711,7 @@ The following chart shows how we apply different touch interaction strategies, u
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {% x/ %}  | {% x/ %}  | {% x/ %}  |
 
-### Image masking
+### Image masking {% #image-masking-definition %}
 
 The following chart shows how we apply different image masking strategies:
 
