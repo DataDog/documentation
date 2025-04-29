@@ -108,17 +108,17 @@ Cost allocation divides host compute and other resource costs from your cloud pr
 
 Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
 
-### Kubernetes tag extraction
-
-Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
-
-[201]: /containers/kubernetes/tag/
-
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 These divided costs are enriched with tags from nodes, pods, tasks, and volumes. You can use these tags to break down costs by any associated dimensions.
+
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
 
 ### Compute
 
@@ -168,6 +168,12 @@ Datadog supports data transfer cost allocation using [standard 6 workload resour
 {{% /tab %}}
 {{% tab "Azure" %}}
 
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
+
 ### Compute
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
@@ -183,6 +189,12 @@ All other costs are given the same value and tags as the source metric `azure.co
 
 {{% /tab %}}
 {{% tab "Google" %}}
+
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
 
 ### Compute
 
