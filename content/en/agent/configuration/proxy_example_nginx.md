@@ -10,8 +10,9 @@ private: true
 ## Overview
 
 <div class="alert alert-warning">
-Forwarding traffic to Datadog using software like HAProxy or Nginx is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
-This list can change, leading to potential data loss if not kept up-to-date.
+Forwarding traffic to Datadog using software like HAProxy or NGINX is discouraged because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX
+as they allow you to drop disable TLS and inspect the traffic.
 </div>
 
 [NGINX][2] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
@@ -278,7 +279,7 @@ stream {
 
 #### Datadog Agent configuration
 
-Edit each Agent configuration file to point to Nginx by setting its `dd_url` to the address of Nginx, for example: `nginx.example.com`.
+Edit each Agent configuration file to point to NGINX by setting its `dd_url` to the address of NGINX, for example: `nginx.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: "<SCHEME>://nginx.example.com:3834"`

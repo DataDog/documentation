@@ -85,12 +85,13 @@ DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 
 If you don't have an existing proxy server, we recommend using an HTTP proxy like **Squid**.
 
-1. **Squid (Recommended)**: A robust HTTP/HTTPS proxy that simplifies configuration by automatically handling Datadog endpoints. [See Squid Example Setup][2].
+1. **Squid (Recommended)**: A robust HTTP/HTTPS proxy that simplifies configuration by transparently proxying all outbound HTTP/HTTPS Agent traffic. [See Squid Example Setup][2].
 2. **HAProxy (Not Recommended)**: Can forward traffic to Datadog, but this requires maintaining an up-to-date list of Datadog domains and is more complex to manage. [See HAProxy Example Setup][3].
-3. **Nginx (Not Recommended)**: Similar to HAProxy, using Nginx to forward traffic to Datadog is discouraged due to the maintenance overhead of keeping domain lists current. [See Nginx Example Setup][4].
+3. **NGINX (Not Recommended)**: Similar to HAProxy, using NGINX to forward traffic to Datadog is discouraged due to the maintenance overhead of keeping domain lists current. [See NGINX Example Setup][4].
 
-Forwarding traffic to Datadog using software like HAProxy or Nginx is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
-This list can change, leading to potential data loss if not kept up-to-date.
+Forwarding traffic to Datadog using software like HAProxy or NGINX is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
+This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX
+as they allow you to drop disable TLS and inspect the traffic.
 
 ### Verification
 
