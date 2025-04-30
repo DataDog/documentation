@@ -27,7 +27,7 @@ The [Datadog Agent][2] is installed and configured.
 
 To automatically instrument your RUM application:
 
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][4] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Apache httpd**.
 3. Configure your application parameters. See [guidance on configuring sampling][5].
    {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
@@ -66,10 +66,10 @@ See other [Limitations][1].
 
 To manually remove RUM from your auto-instrumented web server:
 
-1. Locate the Apache (`httpd`) configuration file by running `httpd -V`. Depending on the Linux distribution used, this binary file could be named `http`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example. In this instance, the file location could be: `/usr/local/apache2/conf/httpd.conf`.
-2. At the end of the httpd configuration file, remove the line: `Include /opt/datadog-httpd/datadog.conf`.
+1. Locate the IBM HTTP server (`httpd`) configuration file by running `httpd -V`. Depending on the Linux distribution used, this binary file could be named `http`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example. In this instance, the file location could be: `/usr/local/apache2/conf/httpd.conf`.
+2. At the end of the file, remove the line: `Include /opt/datadog-httpd/datadog.conf`.
 3. Delete the directory `/opt/datadog-httpd/` and all of its contents.
-4. Restart or reload Apache httpd.
+4. Restart or reload the IBM HTTP Server.
 
 ## Alternative installation method
 

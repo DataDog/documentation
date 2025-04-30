@@ -24,9 +24,8 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][3] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
-
 3. Configure your application parameters. See [guidance on configuring sampling][5].
    {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
 
