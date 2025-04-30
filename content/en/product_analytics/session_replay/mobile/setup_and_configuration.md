@@ -1,7 +1,10 @@
 ---
 title: Mobile Session Replay Setup and Configuration
 description: Setting up and configuring Mobile Session Replay.
-aliases:
+content_filters:
+  - trait_id: platform
+    option_group_id: rum_session_replay_sdk_options
+    label: "SDK"
 further_reading:
     - link: '/product_analytics/session_replay/mobile'
       tag: Documentation
@@ -20,6 +23,4 @@ further_reading:
       text: Session Replay
 ---
 
-!!! ⛔ THIS PAGE IS BROKEN, DO NOT MERGE IT LIKE THIS ⛔ !!!
-
-A Markdoc partial will go here. It needs to be a copy of the contents of real_user_monitoring/session_replay/mobile/setup_and_configuration.
+{% partial file="rum/session_replay/setup_and_configuration.mdoc.md" /%}
