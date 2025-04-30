@@ -208,10 +208,10 @@ export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
 export DD_API_KEY="..."                         # Datadog API Key
 ``` 
 
-Then, run the following with your Azure DevOps organization name to configure the service hooks:
+Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
 ```shell
 curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site={{< region-param key="dd_site" code="true" >}} --az-devops-org="<org-name>"
+./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
 ```
 
 Click [here][4] to see our CLI that automates this process.
@@ -220,6 +220,7 @@ Click [here][4] to see our CLI that automates this process.
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/DataDog/azdevops-sci-hooks
+[5]: /getting_started/site/
 
 {{% /tab %}}
 {{% tab "Other" %}}
