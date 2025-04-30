@@ -134,15 +134,15 @@ When multiple values are given, the order of matching is based on the order of v
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+**Default**: `datadog,tracecontext,baggage` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3`, `baggage` <br>
 Comma separated list of propagation styles to use when injecting tracing context.
 When multiple values are given, the order of matching is based on the order of values.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+**Default**: `datadog,tracecontext,baggage` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3`, `baggage`  <br>
 Comma separated list of propagation styles to use when extracting tracing context.
 When multiple values are given, the order of matching is based on the order of values.
 

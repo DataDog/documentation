@@ -12,7 +12,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 
 ## Create a budget
 
-1. Navigate to [**Cloud Cost > Plan > Budgets**][1].
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
 2. Click the **Create a New Budget** button.
 3. Enter the following details:
    - **Budget Name**: Enter a name for your budget.
@@ -64,3 +64,4 @@ To delete a budget, click the trash icon on the Budgets page.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
+[2]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-or-update-a-budget
