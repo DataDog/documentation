@@ -27,8 +27,10 @@
 {{ $.Scratch.Set "filters" (slice)}}
 
 <!-- Add Manual filters to the filter tag cloud -->
+{{ $manualfilterkeys := slice }}
 {{- range $key, $e := $s1.Get "manualfilters" }}
   {{- $.Scratch.Add "filters" ($key | lower) -}}
+  {{- $manualfilterkeys = $manualfilterkeys | append ($key | lower) -}}
 {{- end -}}
 
 <!-- build tiles -->
@@ -110,14 +112,14 @@
     <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
         <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">{{ i18n "all" }}</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }} {{ cond (in $manualfilterkeys $e) "d-none" "" }} ">{{ $e | upper }}</a>
         {{ end }}
     </div>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
     <a data-ref="filter" data-filter="all" href="#all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }} {{ cond (in $manualfilterkeys $e) "d-none" "" }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
 <div class="input-group mt-4 mb-4">
