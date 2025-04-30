@@ -431,61 +431,54 @@ SessionReplay.stopRecording();
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK:
 
-{{< tabs >}}
-{{% tab "Android" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+<!-- Android -->
+{% if equals($platform, "android") %}
+```kotlin {% filename="build.gradle.kts" %}
 Datadog.setVerbosity(Log.DEBUG)
-{{< /code-block >}}
+```
+{% /if %}
+<!-- end Android -->
 
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+```swift {% filename="AppDelegate.swift" %}
 Datadog.verbosityLevel = .debug
-{{< /code-block >}}
+```
 
 If everything is fine, following logs should appear in the Xcode debug console in about 30 seconds after launching the app:
 
-{{< code-block lang="bash" filename="Xcode console" disable_copy="true" >}}
-
+```bash {% filename="Xcode console" %}
 [DATADOG SDK] 🐶 → 10:21:29.812 ⏳ (session-replay) Uploading batch...
 [DATADOG SDK] 🐶 → 10:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
+```
+{% /if %}
+<!-- end iOS -->
 
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="build.gradle.kts" %}
 Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
-{{< /code-block >}}
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
-{{% /tab %}}
-{{% tab "React Native" %}}
-
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
 Set the verbosity to `DEBUG` when you initialize the SDK:
 
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
+```typescript {% filename="App.tsx" %}
 import { SdkVerbosity } from "@datadog/mobile-react-native";
 
 ...
 
 config.verbosity = SdkVerbosity.DEBUG;
-
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+```
+{% /if %}
+<!-- end React Native -->
 
 ### Privacy options
 
 See [Privacy Options][2].
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
