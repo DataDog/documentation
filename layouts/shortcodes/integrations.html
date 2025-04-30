@@ -2,6 +2,7 @@
 
 <!-- manual mappings of integration to pmm categories - WEB-6040 -->
 {{ $s1 := newScratch }}
+<!-- AWS, Azure, GCP are also part of ccm filter, we add them later -->
 {{ $ccm_integration_ids := (slice "fastly" "snowflake-web" "confluent-cloud" "mongodb" "databricks" "openai" "twilio" "elastic-cloud") }}
 {{ $s1.SetInMap "manualfilters" "CCM" $ccm_integration_ids }}
 {{ $s1.SetInMap "manualfilters" "DSM" (slice "kafka" "confluent-cloud" "confluent-platform" "amazon-msk-cloud" "amazon-msk" "rabbitmq" "amazon-sqs") }}
@@ -25,7 +26,7 @@
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
 
-<!-- Add Manual filters -->
+<!-- Add Manual filters to the filter tag cloud -->
 {{- range $key, $e := $s1.Get "manualfilters" }}
   {{- $.Scratch.Add "filters" ($key | lower) -}}
 {{- end -}}
@@ -65,9 +66,14 @@
     {{- $curr_categories = $curr_categories | append (print "cat-" (replace $e "/" "" | urlize)) -}}
   {{- end -}}
 
+  <!-- AWS, Azure, GCP are also part of ccm, manually attach this to integrations too -->
+  {{ if (collections.Intersect (slice "cat-aws" "cat-azure" "cat-google-cloud") $curr_categories) }}
+    {{- $curr_categories = $curr_categories | append (print "cat-ccm") -}}
+  {{ end }}
+
   {{- $basename := $enpage.Params.integration_id | default ($enpage.Params.name | lower) | default ($enpage.File.TranslationBaseName | lower) }}
 
-  <!-- inject manual filters to categories -->
+  <!-- inject manual filters to categories for matched integration -->
   {{- range $key, $ids := $s1.Get "manualfilters" }}
     {{ if in $ids $basename }}
       {{- $curr_categories = $curr_categories | append (print "cat-" (replace $key "/" "" | urlize)) -}}
