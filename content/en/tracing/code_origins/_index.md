@@ -1,6 +1,8 @@
 ---
 title: Code Origins for Spans
 description: "Learn how to use Code Origins to understand where your spans originate in your codebase"
+aliases:
+  - /tracing/guide/code_origins/
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
