@@ -27,7 +27,7 @@ To set up Mobile Session Replay for Android:
     ```
 
 3. Enable Session Replay in your app:
-    ```kotlin {% filename="build.gradle.kts" %}
+    ```kotlin {% filename="Application.kt" %}
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
       // in case you need Material extension support
       .addExtensionSupport(MaterialExtensionSupport())
@@ -99,7 +99,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 3. Enable Session Replay in your app:
 
-    ```kotlin {% filename="build.gradle.kts" %}
+    ```kotlin {% filename="Application.kt" %}
     // in common source set
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
       .build()
@@ -267,7 +267,7 @@ This sample rate is applied in addition to the RUM sample rate. For example, if 
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
   ...
   .build()
@@ -287,7 +287,7 @@ var sessionReplayConfig = SessionReplay.Configuration(
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
   ...
   .build()
@@ -313,7 +313,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
   .startRecordingImmediately(false)
   .build()
@@ -341,7 +341,7 @@ SessionReplay.stopRecording()
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
       .startRecordingImmediately(false)
       .build()
@@ -375,7 +375,7 @@ To validate whether Session Replay data is being sent from the app, you can enab
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 Datadog.setVerbosity(Log.DEBUG)
 ```
 {% /if %}
@@ -398,7 +398,7 @@ If everything is fine, following logs should appear in the Xcode debug console i
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-```kotlin {% filename="build.gradle.kts" %}
+```kotlin {% filename="Application.kt" %}
 Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 ```
 {% /if %}
