@@ -168,7 +168,7 @@ Added in version 1.26.0.
 ### Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext` <br>
+: **Default**: `datadog,tracecontext,baggage` <br>
 Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
 
 ## Configure APM environment name
