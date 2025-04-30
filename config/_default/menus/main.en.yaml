@@ -1645,7 +1645,7 @@ menu:
       parent: monitor_types
       identifier: monitor_types_change
       weight: 306
-    - name: CI
+    - name: CI/CD & Test
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
@@ -4614,6 +4614,11 @@ menu:
       identifier: cd_features_rollbacks_detection
       parent: cd_features
       weight: 302
+    - name: Monitors
+      url: monitors/types/ci/?tab=deployments
+      parent: cd
+      identifier: cd_monitors
+      weight: 4
     - name: Test Optimization
       url: tests/
       pre: ci
