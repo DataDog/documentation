@@ -22,12 +22,6 @@ To enable APM in a Docker Linux container:
 1. Copy and run the Agent installation command in your Docker container.
 1. Restart your applications.
 
-## Set Unified Service Tags
-
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
-
-Learn how to set [USTs for Docker environments][16].
-
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.

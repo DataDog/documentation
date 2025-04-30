@@ -35,12 +35,6 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 1. Deploy the Agent using the generated configuration file.
 1. Restart your applications.
 
-## Set Unified Service Tags
-
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
-
-In Kubernetes, set Unified Service Tags on both your Deployment objects and Pod template specs to ensure complete telemetry correlation. For details, see [how to set USTs for Kubernetes workloads][12].
-
 ## Advanced options
 
 When you run the one-line installation command, there are a few options to customize your experience:

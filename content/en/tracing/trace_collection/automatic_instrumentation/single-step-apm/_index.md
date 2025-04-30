@@ -24,7 +24,7 @@ To learn more about how it works, see the [injector guide for Single Step Instru
 When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog APM SDK into supported processes.  
 This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
 
-You can optionally configure [Unified Service Tags (USTs)][ust-link] or enable additional tracing-powered products such as Continuous Profiler or Application Security Monitoring.
+After instrumentation, you can optionally configure [Unified Service Tags (USTs)](#set-universal-service-tags) or [enable additional tracing-powered products](#configure-additional-apm-related-products) such as Continuous Profiler or Application Security Monitoring.
 
 Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
@@ -33,6 +33,18 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 <br>
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
+
+## Set Universal Service Tags
+
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
+
+Learn how to set USTs for:
+- [Linux][14]
+- [Docker][15]
+- [Kubernetes][16]
+
+   **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
+
 
 ## Configure additional APM-related products
 
@@ -70,3 +82,6 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [11]: /tracing/metrics/runtime_metrics/
 [12]: /tracing/software_catalog/
 [13]: /tracing/glossary/#instrumentation
+[14]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
+[15]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
+[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes

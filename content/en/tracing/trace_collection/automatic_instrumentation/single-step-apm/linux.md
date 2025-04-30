@@ -22,12 +22,6 @@ To enable APM on a Ubuntu host:
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
-## Set Unified Service Tags
-
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
-
-Learn how to set [USTs for non-containerized environments][16].
-
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
@@ -91,6 +85,5 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
-[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 
