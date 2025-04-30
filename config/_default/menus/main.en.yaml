@@ -6248,17 +6248,32 @@ menu:
       url: security/workload_protection/setup/supported_deployment_types
       parent: workload_protection_setup
       identifier: workload_protection_setup_deployment_types
-      weight: 100
+      weight: 1
     - name: Supported Linux Distributions
       url: security/workload_protection/supported_linux_distributions
-      parent: workload_protection
+      parent: workload_protection_setup
       identifier: workload_protection_workload_security_linux_distributions
-      weight: 200
+      weight: 2
+    - name: Deploy the Agent
+      url: security/workload_protection/setup/agent
+      parent: workload_protection_setup
+      identifier: workload_protection_workload_setup_agent
+      weight: 3
+    - name: Workload Protection Agent Variables
+      url: security/workload_protection/setup/agent_variables
+      parent: workload_protection_setup
+      identifier: workload_protection_agent_variables
+      weight: 4
     - name: Detection Rules
       url: security/workload_protection/workload_security_rules
       parent: workload_protection
       identifier: workload_protection_workload_security_rules
       weight: 201
+    - name: OOTB Rules
+      url: /security/workload_protection/setup/ootb_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_ootb_rules
+      weight: 100
     - name: Custom Rules
       url: security/workload_protection/workload_security_rules/custom_rules
       parent: workload_protection_workload_security_rules
