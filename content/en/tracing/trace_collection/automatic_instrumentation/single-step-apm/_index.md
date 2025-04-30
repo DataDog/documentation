@@ -17,11 +17,14 @@ further_reading:
 
 Single Step Instrumentation (SSI) automatically installs the Datadog APM SDKs with no additional configuration required, reducing onboarding time from days to minutes.
 
-See the [injector guide for Single Step Instrumentation][8] to learn how SSI works.
+To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
-## Enable APM with Single Step Instrumentation
+## Instrument APM SDKs across applications
 
-If you [install or update a Datadog Agent][1] with **APM Instrumentation** enabled, your applications are automatically [instrumented][13], without additional installation or configuration steps.
+When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog APM SDK into supported processes.  
+This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
+
+You can optionally configure [Unified Service Tags (USTs)][ust-link] or enable additional tracing-powered products such as Continuous Profiler or Application Security Monitoring.
 
 Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
@@ -31,11 +34,11 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
-## Configure additional APM features 
+## Configure additional APM-related products
 
-After installing the Datadog APM SDK with SSI, you can configure additional tracing-based features. These features use your application traces to provide enhanced visibility, security, and performance insights.
+Once SSI loads the Datadog APM SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
-The available features and setup methods depend on your platform:
+The available setup methods depend on your platform:
 
 | Configuration method | Description | Supported platforms |
 |:---|:---|:---|
@@ -45,19 +48,10 @@ The available features and setup methods depend on your platform:
 
 ## Troubleshooting
 
-### Single Step Instrumentation is not taking effect
-
 Single Step Instrumentation automatically disables when it detects [custom instrumentation][7] in your application. If you want to use SSI, you'll need to:
 
 1. Remove any existing custom instrumentation code.
 1. Restart your application.
-
-## Next steps
-
-After setting up APM with Single Step Instrumentation, you may want to:
-
-- Enable [runtime metrics][11] to monitor CPU, memory, and other application-level stats.
-- View observability data from your services in the [Software Catalog][12].
 
 ## Further reading
 
