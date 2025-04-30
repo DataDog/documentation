@@ -95,7 +95,7 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
 {{% tab "Helm" %}}
 <div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a>.</div>
 
-2. **Add the Datadog Helm repository**
+2. **DatadogのHelmリポジトリを追加する。**
 
    Run:
    ```shell
@@ -104,22 +104,22 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
 
-   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
+   - `<DATADOG_API_KEY>` をお使いの [Datadog API key][1] に置き換えます。
 
-3. **Configure `datadog-values.yaml`**
+3. **`datadog-values.yaml` を設定する。**
 
-   Create a file, `datadog-values.yaml`, that contains:
+   `datadog-values.yaml` を作成し、以下の内容を記述します。
    ```yaml
    datadog:
     apiKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
    ```
 
-   - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+   - `<DATADOG_SITE>` を、ご使用の [Datadog サイト][2]に置き換えます。お使いのサイトは {{< region-param key="dd_site" code="true" >}} です (右側で正しいサイトが選択されていることを確認してください)。
 
-4. **Deploy Agent with the above configuration file**
+5. **上記の設定ファイルを使用してエージェントを展開する。**
 
-   Run:
+   以下のコマンドを実行します。
 
    ```shell
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
@@ -135,9 +135,9 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
 {{% /tab %}}
 {{< /tabs >}}
 
-5. **Confirm Agent installation**
+5. **エージェントのインストールを確認する。**
 
-   Verify that Agent pods (tagged with `app.kubernetes.io/component:agent`) appear on the [Containers][13] page in Datadog. Agent pods are detected within a few minutes of deployment.
+   Datadog の [Containers][13] ページに、エージェントポッド（`app.kubernetes.io/component:agent` タグ付き）が表示されていることを確認します。エージェントポッドは、デプロイ後数分以内に検出されます。
 
 ### Unprivileged installation
 
