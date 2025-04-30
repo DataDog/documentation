@@ -13,7 +13,7 @@ further_reading:
 
 Datadog Network Device Monitoring uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
-NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [glossary][1].
+NDM profiles use SNMP concepts. For basic details on SNMP, reference the [glossary][1].
 
 <div class="alert alert-info">
 This guide is for advanced users. Most devices can be configured using the GUI based experience in the <a href="/network_monitoring/devices/guide/device_profiles/">Getting Started with Device Profiles</a> documentation, or by using <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
