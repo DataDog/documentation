@@ -531,14 +531,14 @@ The following code security capabilities are supported in the .NET library, for 
 The minimum tracer version to get all supported code security capabilities for .NET is 2.42.0.
 
 #### Supported deployment types
-| Type               | Runtime Software Composition Analysis (SCA) |
-|------------------- | ------------------------------------------- |
-| Docker            | <i class="icon-check-bold"></i>              |
-| Kubernetes        | <i class="icon-check-bold"></i>              |
-| Amazon ECS        | <i class="icon-check-bold"></i>              |
-| AWS Fargate       | <i class="icon-check-bold"></i>              |
-| AWS Lambda        |                                              |
-| Azure App Service | <i class="icon-check-bold"></i>              |
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
+|------------------ | ------------------------------------------- | ----------------------------------- |
+| Docker            | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Kubernetes        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Amazon ECS        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| AWS Fargate       | <i class="icon-check-bold"></i>             | Preview (2.42.0)                    |
+| AWS Lambda        |                                             |                                     |
+| Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
 **Note**: Azure App Service is supported for **web applications only**. Code Security capabilities are not supported for Azure Functions.
 
@@ -726,7 +726,7 @@ Datastore tracing provides:
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/

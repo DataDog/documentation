@@ -15,6 +15,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
       tag: "Blog"
       text: "Practical tips for rightsizing your Kubernetes workloads"
+    - link: "https://www.datadoghq.com/blog/process-tag-rules/"
+      tag: "Blog"
+      text: "Increase visibility into your infrastructure processes with Process Tag Rules"
 ---
 
 ## Overview

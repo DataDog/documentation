@@ -32,12 +32,12 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
+You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
-- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
-- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
+- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
+- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
+- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -162,3 +162,12 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/profiler_troubleshooting/ruby/#unexpected-failures-or-errors-from-ruby-gems-that-use-native-extensions
+[16]: https://www.freedesktop.org/wiki/Software/pkg-config/
+[17]: https://github.com/pkgconf/pkgconf
+[18]: https://formulae.brew.sh/formula/pkgconf
+[19]: https://packages.debian.org/search?keywords=pkg-config
+[20]: https://packages.ubuntu.com/search?keywords=pkg-config
+[21]: https://archlinux.org/packages/?q=pkgconf
+[22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
+[23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
+[24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config

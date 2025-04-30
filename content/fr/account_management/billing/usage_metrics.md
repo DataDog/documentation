@@ -55,7 +55,6 @@ Les métriques d'estimation de l'utilisation sont généralement disponibles pou
 | Hosts de base de données                | `datadog.estimated_usage.dbm.hosts` | Hosts Database Monitoring uniques détectés lors de l'heure précédente. |
 | Hosts ASM                     | `datadog.estimated_usage.asm.hosts` | Hosts ASM uniques détectés lors de l'heure précédente. |
 | Tâches ASM                     | `datadog.estimated_usage.asm.tasks` | Tâches Fargate ASM uniques détectées lors des cinq dernières minutes. |
-| Incident Management (utilisateurs actifs)   | `datadog.estimated_usage.incident_management.active_users` | Utilisateurs Incident Management actifs détectés durant le mois (calendaire) en cours. |
 | Responsables de commit de pipeline CI Visibility | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Responsables de commit de pipeline détectés durant le mois (calendaire) en cours. |
 | Responsables de commit de test CI Visibility | `datadog.estimated_usage.ci_visibility.test.committers` | Responsables de commit de test détectés durant le mois (calendaire) en cours. |
 | Appareils IoT                   | `datadog.estimated_usage.iot.devices` | Appareils IoT uniques détectés lors de l'heure précédente. |

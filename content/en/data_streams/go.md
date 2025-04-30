@@ -1,5 +1,9 @@
 ---
 title: Setup Data Streams Monitoring for Go
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+      tag: 'Blog'
+      text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 The following instrumentation types are available:
@@ -22,6 +26,11 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 | Kafka      | [Sarama][9]                                                             | 1.56.1                 | 1.66.0 or later            |
 
 ### Installation
+
+### Monitoring Kafka Pipelines
+Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
+
+{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
 
 #### Automatic Instrumentation
 
@@ -115,6 +124,16 @@ if ok {
 ```go
 	ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
+
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/

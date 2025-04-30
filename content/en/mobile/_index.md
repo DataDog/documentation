@@ -31,13 +31,13 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog using your default iOS/Android browser. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
 1. In the mobile app, select your data center region (for example, US1) in the upper right corner.
 2. Press the log-in button.
 3. Click the "Using Single Sign-On (SAML)?" link.
 4. Enter your company email and send the email.
-5. While on your mobile device, open the email and click on the indicated link.
+5. While on your mobile device, open the email and click on the indicated link through your default browser.
 6. Enter your org's SAML credentials to be rerouted to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
@@ -77,6 +77,28 @@ For example, to filter on metric monitors related to the SRE team that is being 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+
+## Traces
+
+{{< img src="service_management/mobile/traces_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
+
+## Logs
+
+{{< img src="service_management/mobile/logs_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+
+On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][29].
+
+You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][28].
+
+## Services
+
+{{< img src="service_management/mobile/services_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][30].
 
 ## Incidents
 
@@ -409,12 +431,6 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 {{% /tab %}}
 {{< /tabs >}}
 
-## Traces
-
-On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
-
-For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
-
 ## Notifications
 
 The mobile app is able to send out regular as well as critical notifications. Critical notifications can circumvent your Do Not Disturb (DnD) mode, but you must **explicitly** grant Datadog permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
@@ -436,7 +452,6 @@ For more information on configuring Incident Notification Rules, see the [Incide
 
 ### Push notifications from Workflow Automation
 It is also possible to trigger push notifications directly from Workflows using the [Send mobile push notification message action][27]. Provide the target user and the body of the push notification. Before the user can receive push notifications, they must log into the Datadog Mobile application and allow the Datadog mobile application to receive push notifications.
-
 
 ## Quick actions
 
@@ -483,6 +498,18 @@ For more information about Handoff, read the [Apple Handoff documentation][19].
 
 Switch organizations or log out from the Account page.
 
+## Frequently Asked Question
+### How do I remain logged into the mobile app?
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+
+### Will I still receive notifications if I am automatically signed out?
+If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+
+**Note**: If you manually log out from the app, you will stop receiving notifications.
+
+### Why am I not receiving notifications?
+Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
 ## Troubleshooting
 
 For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
@@ -518,3 +545,6 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [25]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [26]: https://app.datadoghq.com/on-call/profile
 [27]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.push_notification/com.datadoghq.dd.push_notification.sendPushNotification
+[28]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[29]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[30]: https://docs.datadoghq.com/software_catalog/manage/

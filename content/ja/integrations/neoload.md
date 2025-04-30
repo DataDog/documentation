@@ -26,7 +26,7 @@ author:
 categories:
 - notifications
 - テスト
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -54,7 +54,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
-  description: NeoLoad によるパフォーマンステストの結果のモニタリングと分析
+  description: NeoLoad によるパフォーマンステスト結果のモニタリングと分析
   media:
   - caption: NeoLoad パフォーマンステストダッシュボード
     image_url: images/neoload-dashboard.png
@@ -102,7 +102,7 @@ NeoLoad は、テストの終了時と開始時に Datadog API  にイベント�
 ヘルプが必要ですか？[Datadog サポート][6]または [Tricentis NeoLoad サポート][7]にお問い合わせください。
 
 [1]: https://www.tricentis.com/products/performance-testing-neoload
-[2]: /ja/metrics/explorer
+[2]: https://docs.datadoghq.com/ja/metrics/explorer
 [3]: https://documentation.tricentis.com/neoload/latest/en/content/reference_guide/datadog.htm
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neoload/metadata.csv
 [5]: https://docs.datadoghq.com/ja/events/

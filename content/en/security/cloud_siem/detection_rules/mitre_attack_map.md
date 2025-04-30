@@ -7,6 +7,9 @@ further_reading:
 - link: "/security/cloud_siem/detection_rules/"
   tag: "Documentation"
   text: "Create custom detection rules"
+- link: "https://www.datadoghq.com/blog/cloud-siem-mitre-attack-map/"
+  tag: "Blog"
+  text: "Identify gaps to strengthen detection coverage with the Datadog Cloud SIEM MITRE ATT&CK Map"
 ---
 
 ## Overview

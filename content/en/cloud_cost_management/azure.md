@@ -36,41 +36,28 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*. The Azure portal screens look different from the images below if the "Improved exports (Preview)" is enabled for your account, or if you are accessing the Azure portal through the `https://preview.portal.azure.com` address.
+1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
+  {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
+2. Select the export scope located next to the search filter. 
+    
+   **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
+3. After the scope is selected, click **Schedule export**.
 
-   {{< tabs >}}
-   {{% tab "Regular exports" %}}
+   {{< img src="cloud_cost/azure_exports_page.png" alt="In Azure portal highlighting the export scope and schedule button" style="width:100%" >}}
 
-2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
-3. After the scope is selected, click **Add**.
+4. Select the **Cost and usage (actual + amortized)** template
+    {{< img src="cloud_cost/azure_new_export.png" alt="New export page with template and manual options highlighted" style="width:100%" >}}
 
-   {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" style="width:100%" >}}
+5. Click **Edit** on each export and confirm the following details:
+    - Frequency: **Daily export of month-to-date costs**
+    - Dataset version:
+      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
+      - Unsupported versions: `2019-10-01`
+    {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
 
-4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
-    - Export type: **Daily export of month-to-date costs**
-    - File Partitioning: `On`
+6. Enter an "Export prefix" for the new exports. For example, enter `datadog` to avoid conflicts with existing exports.
 
-   {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" style="width:100%" >}}
-
-5. Choose a storage account, container, and directory for the exports.
-    - **Note:** Do not use special characters like `.` in these fields.
-    - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-6. Select **Create**.
-
-   {{% /tab %}}
-
-   {{% tab "Improved exports (Preview)" %}}
-
-2. In the left hand navigation panel, select **Cost Management**, then **Reporting + analytics**.
-3. Select the export scope. **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
-4. Click **Create**.
-
-   {{< img src="cloud_cost/improved_exports_scope.png" alt="The Azure portal, with the Exports option highlighted in navigation and the export scope defined" style="width:100%" >}}
-
-5. Select "Cost and usage (actual + amortized)".
-6. Enter an "Export prefix" for the new exports. For example, enter "datadog" to avoid conflicts with existing exports.
-7. Click "Edit" on each export and confirm the following details:
+7. Click **Edit** on each export and confirm the following details:
     - Frequency: **Daily export of month-to-date costs**
     - Dataset version:
       - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
@@ -78,7 +65,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
 
-8. In the destination tab, select the following details:
+8. In the **Destination** tab, select the following details:
     - Choose **Azure blob storage** as the storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
@@ -91,10 +78,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-9. Click **Next**, then **Review + Create**.
-
-   {{% /tab %}}
-   {{< /tabs >}}
+9. On the **Review + create** tab, select **Create**.
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 
@@ -150,7 +134,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure Cloud Costs in Datadog
+### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Cost types
@@ -246,7 +230,7 @@ You can create historical data in your storage account using the [Microsoft API]
 [2]:  https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]:  https://app.datadoghq.com/cost/setup?cloud=azure
 [4]:  https://app.datadoghq.com/integrations/azure
-[5]:  https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[5]:  https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/config
 [6]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
 [7]:  https://support.microsoft.com
 [8]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports

@@ -121,7 +121,7 @@ Datadog은 실제 기기에서 이러한 테스트를 실행하여 주요 애플
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }

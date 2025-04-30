@@ -12,18 +12,14 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
+<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
 
 Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
-
-## Prerequisites
-
-[CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
@@ -150,9 +146,52 @@ instances:
     port: 443 # optional port number, default is 80
 ```
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+
+  ```yaml
+  datadog:
+    traceroute:
+      enabled: true
+    confd:
+      network_path.yaml: |-
+        init_config:
+          min_collection_interval: 60 # in seconds, default 60 seconds
+        instances:
+          # configure the endpoints you want to monitor, one check instance per endpoint
+          # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+
+          - hostname: api.datadoghq.eu # endpoint hostname or IP
+            protocol: TCP
+            port: 443
+            tags:
+              - "tag_key:tag_value"
+              - "tag_key2:tag_value2"
+          ## optional configs:
+          # max_ttl: 30 # max traderoute TTL, default is 30
+          # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+
+          # more endpoints
+          - hostname: 1.1.1.1 # endpoint hostname or IP
+            protocol: UDP
+            tags:
+              - "tag_key:tag_value"
+              - "tag_key2:tag_value2"
+```
+
+Agent `v7.59+` is required.
+
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Network traffic paths (experimental)
+
+**Prerequisites**: [CNM][1] must be enabled.
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
