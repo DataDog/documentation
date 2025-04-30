@@ -326,6 +326,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             tags:  
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
+            # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
             gcp:
               project_id: '<PROJECT_ID>'
               instance_id: '<INSTANCE_ID>'
