@@ -20,4 +20,6 @@ further_reading:
       text: Session Replay
 ---
 
-{{< include-markdown "real_user_monitoring/session_replay/mobile/setup_and_configuration" >}}
+!!! ⛔ THIS PAGE IS BROKEN, DO NOT MERGE IT LIKE THIS ⛔ !!!
+
+A Markdoc partial will go here. It needs to be a copy of the contents of real_user_monitoring/session_replay/mobile/setup_and_configuration.
