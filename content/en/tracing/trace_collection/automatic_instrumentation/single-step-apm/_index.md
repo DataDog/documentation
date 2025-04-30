@@ -54,8 +54,8 @@ The available setup methods depend on your platform:
 
 | Configuration method | Description | Supported platforms |
 |:---|:---|:---|
-| Configure in `application_monitoring.yaml` | Enable features across all services on a host without modifying application command lines. | Linux only |
-| Configure with [workload targeting][9] | By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations. | Kubernetes only |
+| [Configure in `application_monitoring.yaml`][17] | Enable features across all services on a host without modifying application command lines. | Linux only |
+| [Configure with workload targeting][9] | By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations. | Kubernetes only |
 | [Set environment variables][10] | Enable features by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
 
 ## Troubleshooting
@@ -85,3 +85,4 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [14]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 [15]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/configure-apm-features-linux/
