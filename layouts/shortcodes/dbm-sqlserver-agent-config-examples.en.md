@@ -48,8 +48,13 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    include_ao_metrics: true  # If Availability Groups is enabled
-    include_fci_metrics: true   # If Failover Clustering is enabled
+    database_metrics:
+      # If Availability Groups is enabled
+      ao_metrics:
+        enabled: true
+      # If Failover Clustering is enabled
+      fci_metrics:
+        enabled: true
 ```
 
 ### Monitoring SQL Server Agent Jobs
@@ -94,8 +99,10 @@ instances:
     database_autodiscovery: true
     schemas_collection:
       enabled: true
-    # Optional: enable metric collection for indexes
-    include_index_usage_metrics: true
+    database_metrics:
+      # Optional: enable metric collection for indexes
+      index_usage_metrics:
+        enabled: true
 # This instance only collects schemas and index metrics from the `users` database
   - dbm: true
         host: 'shopist-prod,1433'
@@ -106,7 +113,10 @@ instances:
     database: users
     schemas_collection:
       enabled: true
-    include_index_usage_metrics: true
+    database_metrics:
+      # Optional: enable metric collection for indexes
+      index_usage_metrics:
+        enabled: true
 ```
 
 ### One Agent connecting to multiple hosts
