@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/azure_apimanagement
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure API Management のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_api_management/

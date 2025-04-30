@@ -61,6 +61,10 @@ If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your 
 
 If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][11] the older version before you can install the new version of the Worker.
 
+## No Worker logs in Log Explorer
+
+If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -72,3 +76,4 @@ If you try to install a new version of the Worker in an instance that is running
 [9]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
 [10]: /observability_pipelines/set_up_pipelines/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
+[12]: https://app.datadoghq.com/logs

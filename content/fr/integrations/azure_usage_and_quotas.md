@@ -2,8 +2,9 @@
 categories:
 - azure
 - cloud
-- gestion des coûts
+- cost management
 - network
+custom_kind: integration
 dependencies: []
 description: Surveillez votre utilisation des ressources réseau, de calcul et de stockage
   Azure en la comparant aux limites prédéfinies pour votre abonnement.
@@ -15,7 +16,6 @@ integration_id: azure-usage-and-quotas
 integration_title: Utilisation et quotas Microsoft Azure
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Intégration Datadog/Utilisation et quotas Microsoft Azure
@@ -25,34 +25,34 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Votre utilisation des ressources Azure doit respecter certaines limites prédéfinies en fonction de votre abonnement. Pour éviter tout problème de provisionnement inattendu, il est important de tenir compte de ces limites lors de la création ou de la mise à l'échelle de votre environnement Azure. Recueillez des métriques via l'intégration Utilisation et quotas Azure pour :
 
 - Comparer votre utilisation des ressources réseau, de calcul et de stockage par rapport à vos quotas
 - Identifier et éviter les échecs de provisionnement liés à l'atteinte de vos quotas
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "azure_usage_and_quotas" >}}
 
 
-### Aide
+### Événements
 
 L'intégration Quotas Azure n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Quotas Azure n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

@@ -365,6 +365,26 @@
     "request_description": "",
     "request_schema_description": "The request for a tests search."
   },
+  "CreateCustomFramework": {
+    "description": "Create a custom framework.",
+    "summary": "Create a custom framework",
+    "request_description": "",
+    "request_schema_description": "Request object to create a custom framework."
+  },
+  "DeleteCustomFramework": {
+    "description": "Delete a custom framework.",
+    "summary": "Delete a custom framework"
+  },
+  "GetCustomFramework": {
+    "description": "Get a custom framework.",
+    "summary": "Get a custom framework"
+  },
+  "UpdateCustomFramework": {
+    "description": "Update a custom framework.",
+    "summary": "Update a custom framework",
+    "request_description": "",
+    "request_schema_description": "Request object to update a custom framework."
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.",
     "summary": "Get all Container Images"
@@ -412,6 +432,24 @@
     "summary": "Update Cloud Cost Management Azure config",
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
+  },
+  "UpsertBudget": {
+    "description": "Create a new budget or update an existing one.",
+    "summary": "Create or update a budget",
+    "request_description": "",
+    "request_schema_description": "The definition of the `BudgetWithEntries` object."
+  },
+  "DeleteBudget": {
+    "description": "Delete a budget.",
+    "summary": "Delete a budget"
+  },
+  "GetBudget": {
+    "description": "Get a budget.",
+    "summary": "Get a budget"
+  },
+  "ListBudgets": {
+    "description": "List budgets.",
+    "summary": "List budgets"
   },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
@@ -1197,6 +1235,30 @@
     "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "GetMonitorNotificationRules": {
+    "description": "Returns a list of all monitor notification rules.",
+    "summary": "Get all monitor notification rules"
+  },
+  "CreateMonitorNotificationRule": {
+    "description": "Creates a monitor notification rule.",
+    "summary": "Create a monitor notification rule",
+    "request_description": "Request body to create a monitor notification rule.",
+    "request_schema_description": "Request for creating a monitor notification rule."
+  },
+  "DeleteMonitorNotificationRule": {
+    "description": "Deletes a monitor notification rule by `rule_id`.",
+    "summary": "Delete a monitor notification rule"
+  },
+  "GetMonitorNotificationRule": {
+    "description": "Returns a monitor notification rule by `rule_id`.",
+    "summary": "Get a monitor notification rule"
+  },
+  "UpdateMonitorNotificationRule": {
+    "description": "Updates a monitor notification rule by `rule_id`.",
+    "summary": "Update a monitor notification rule",
+    "request_description": "Request body to update the monitor notification rule.",
+    "request_schema_description": "Request for updating a monitor notification rule."
+  },
   "ListMonitorConfigPolicies": {
     "description": "Get all monitor configuration policies.",
     "summary": "Get all monitor configuration policies"
@@ -1250,6 +1312,46 @@
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
+  },
+  "CreateOnCallEscalationPolicy": {
+    "description": "Create a new on-call escalation policy",
+    "summary": "Create on-call escalation policy",
+    "request_description": "",
+    "request_schema_description": "Represents a request to create a new escalation policy, including the policy data."
+  },
+  "DeleteOnCallEscalationPolicy": {
+    "description": "Delete an on-call escalation policy",
+    "summary": "Delete on-call escalation policy"
+  },
+  "GetOnCallEscalationPolicy": {
+    "description": "Get an on-call escalation policy",
+    "summary": "Get on-call escalation policy"
+  },
+  "UpdateOnCallEscalationPolicy": {
+    "description": "Update an on-call escalation policy",
+    "summary": "Update on-call escalation policy",
+    "request_description": "",
+    "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
+  },
+  "CreateOnCallSchedule": {
+    "description": "Create a new on-call schedule",
+    "summary": "Create on-call schedule",
+    "request_description": "",
+    "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
+  },
+  "DeleteOnCallSchedule": {
+    "description": "Delete an on-call schedule",
+    "summary": "Delete on-call schedule"
+  },
+  "GetOnCallSchedule": {
+    "description": "Get an on-call schedule",
+    "summary": "Get on-call schedule"
+  },
+  "UpdateOnCallSchedule": {
+    "description": "Update a new on-call schedule",
+    "summary": "Update on-call schedule",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -1399,6 +1501,36 @@
     "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest CSM Threats policy"
   },
+  "ListPipelines": {
+    "description": "Retrieve a list of pipelines.",
+    "summary": "List pipelines"
+  },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "ValidatePipeline": {
+    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.\n",
+    "summary": "Validate an observability pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "DeletePipeline": {
+    "description": "Delete a pipeline.",
+    "summary": "Delete a pipeline"
+  },
+  "GetPipeline": {
+    "description": "Get a specific pipeline by its ID.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Update a pipeline.",
+    "summary": "Update a pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -1408,7 +1540,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
