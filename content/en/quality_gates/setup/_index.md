@@ -1,33 +1,33 @@
 ---
-title: Set up Quality Gate Rules
-description: Learn how to set up Quality Gate rules in Datadog.
+title: Set up PR Gate Rules
+description: Learn how to set up PR Gate rules in Datadog.
 further_reading:
 - link: "/quality_gates"
   tag: "Documentation"
-  text: "Learn about Quality Gates"
+  text: "Learn about PR Gates"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-To use Datadog Quality Gates, you can define one or more rules on the [**Quality Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
+To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
 
-{{< img src="quality_gates/rules_list_2.png" alt="Quality Gates page in Datadog" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_2.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
-Quality Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
+PR Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
 
 ## Create a rule
 
-To create a Quality Gates rule in Datadog:
+To create a PR Gates rule in Datadog:
 
-1. Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Rules**][2] and click **+ New Rule**.
+1. Navigate to [**Software Delivery** > **PR Gates** > **PR Gate Rules**][2] and click **+ New Rule**.
 2. Select a type of rule: `Test`, `Static Analysis`, or `Software Composition Analysis`.
 3. Set the rule scope, which defines when the rule should be evaluated, by selecting `Always evaluate` or `Select when to evaluate`. You can add branches or repositories to include or exclude from the rule scope, or add a custom scope.
 
-   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
+   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
 
    You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
 
@@ -47,13 +47,13 @@ To create a Quality Gates rule in Datadog:
 
 5. Specify a rule name that describes the rule that you are creating.
 6. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
-7. Integrate the Quality Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-quality-gates-in-your-cicd-pipeline).
-8. Enable a [GitHub status check](#enable-github-check-creation) for your Quality Gate rule by setting the appropriate permissions (such as `Checks: Write`) in your GitHub apps. To set this check as blocking in your pull requests, you must click the **Required** checkbox in your GitHub app's [Protected Branches settings][14].
+7. Integrate the PR Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-pr-gates-in-your-cicd-pipeline).
+8. Enable a [GitHub status check](#enable-github-check-creation) for your PR Gate rule by setting the appropriate permissions (such as `Checks: Write`) in your GitHub apps. To set this check as blocking in your pull requests, you must click the **Required** checkbox in your GitHub app's [Protected Branches settings][14].
 9. Click **Create Rule**.
 
-### Integrate Quality Gates in your CI/CD pipeline
+### Integrate PR Gates in your CI/CD pipeline
 
-Invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command. Quality Gates requires [`datadog-ci`][7] version `2.27.0` or later.
+Invoke the PR Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command. PR Gates requires [`datadog-ci`][7] version `2.27.0` or later.
 
 <div class="alert alert-info">For the command to work properly, ensure that events (tests, static analysis, and software composition analysis violations) are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command executes. Otherwise, the rules may demonstrate incorrect behavior due to the absence of these events.
 </div>
@@ -67,7 +67,7 @@ This command:
 | Environment Variables | Description |
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
-| `DD_APP_KEY` | Point to your [Datadog application key][6]. The application key must have the `Quality Gates Evaluations` permission enabled.|
+| `DD_APP_KEY` | Point to your [Datadog application key][6]. The application key must have the `PR Gates Evaluations` permission enabled.|
 | `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). **Note**: `DATADOG_SITE` is not supported. |
 
 For example:
@@ -112,19 +112,19 @@ To enable GitHub Checks:
 
 After the permission is granted, you can see the checks in GitHub.
 
-**Note**: Re-running a check does not re-run the corresponding Quality Gates rule.
+**Note**: Re-running a check does not re-run the corresponding PR Gates rule.
 
 ## Manage rules
 
-You can edit and delete Quality Gates rules by hovering over a rule on the [**Quality Gates Rules** page][2]. 
+You can edit and delete PR Gates rules by hovering over a rule on the [**PR Gates Rules** page][2]. 
 
-{{< img src="quality_gates/setup/delete_2.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
+{{< img src="quality_gates/setup/delete_2.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
 
 Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
 
 ## Permissions
 
-Only users with the `quality_gate_rules_write` permission can create and edit Quality Gate rules. Users with the `quality_gate_rules_read` permission can view Quality Gate rules.
+Only users with the `quality_gate_rules_write` permission can create and edit PR Gate rules. Users with the `quality_gate_rules_read` permission can view PR Gate rules.
 
 For more information, see the [RBAC Permissions documentation][1].
 

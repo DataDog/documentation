@@ -12,7 +12,7 @@ further_reading:
     text: "Learn about Flaky Test Management"
   - link: "/quality_gates"
     tag: "Documentation"
-    text: "Learn about Quality Gates"
+    text: "Learn about PR Gates"
 ---
 
 {{< site-region region="gov" >}}
@@ -38,7 +38,7 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 {{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
 
-You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
+You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
 ## Setup
 

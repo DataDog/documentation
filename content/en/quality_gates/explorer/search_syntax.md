@@ -1,21 +1,21 @@
 ---
-title: Quality Gates Explorer Search Syntax
-description: Search all of your quality gates or rule executions.
+title: PR Gates Explorer Search Syntax
+description: Search all of your PR gates or rule executions.
 further_reading:
 - link: "/quality_gates/search"
   tag: "Documentation"
-  text: "Filter and group quality gates"
+  text: "Filter and group PR gates"
 - link: "/quality_gates/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Quality Gates is in Preview.
+PR Gates is in Preview.
 {{< /callout >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
