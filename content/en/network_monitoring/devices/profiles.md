@@ -13,17 +13,26 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of OIDs associated with a device. 
+Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of {{< tooltip text="OIDs (Object Identifiers)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} associated with a device. 
 
 ## Configuration
+
+You can enable device profiles in Datadog using either the recommended GUI-based (SNMP Profile Manager) workflow, or through an advanced configuration-based setup:
+
+**[SNMP Profile Manager][9] (recommended)**  
+- Enable preconfigured device profiles directly from the [Network Device Monitoring Configuration][8] page.   
+- Requires no manual configuration.
+- Recommended for most use cases.
+
+**[Advanced Setup][10]** 
+- Create and enable custom profiles manually with `.yaml` files, specifying the device metrics and tags.   
+- Ideal for large or dynamic environments.  
 
 By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
 **Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, and other devices.
 
-<div class="alert alert-info">
-If you would like to build a device profile using the GUI based experience, review the <a href="/network_monitoring/devices/guide/device_profiles/">Getting Started with Device Profiles</a> documentation.
-</div>
+## Terms and concepts
 
 ### sysOID mapped devices
 
