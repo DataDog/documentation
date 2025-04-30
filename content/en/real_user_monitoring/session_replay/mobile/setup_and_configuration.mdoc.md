@@ -369,49 +369,51 @@ SessionReplay.enable({
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
 
-{{< tabs >}}
-{{% tab "Android" %}}
+<!-- Android -->
+{% if equals($platform, "android") %}
+```kotlin {% filename="build.gradle.kts" %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
+    .startRecordingImmediately(false)
+    .build()
+// Do something
+SessionReplay.startRecording()
+SessionReplay.stopRecording()
+```
+{% /if %}
+<!-- end Android -->
 
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-        .startRecordingImmediately(false)
-        .build()
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-    let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate,
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+```swift {% filename="AppDelegate.swift" %}
+let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: <SAMPLE_RATE>,
         startRecordingImmediately: false
     )
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
+    
+// Do something
+SessionReplay.startRecording()
+SessionReplay.stopRecording()
+```
+{% /if %}
+<!-- end iOS -->
 
-{{% /tab %}}
-
-{{% tab "Kotlin Multiplatform" %}}
-
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="build.gradle.kts" %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
         .startRecordingImmediately(false)
         .build()
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
-{{% /tab %}}
 
-{{% tab "React Native" %}}
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+// Do something
+SessionReplay.startRecording()
+SessionReplay.stopRecording()
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
+```typescript {% filename="App.tsx" %}
 import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
 SessionReplay.enable({
@@ -421,9 +423,9 @@ SessionReplay.enable({
 // Do something
 SessionReplay.startRecording();
 SessionReplay.stopRecording();
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+```
+{% /if %}
+<!-- end React Native -->
 
 ### Validate whether Session Replay data is being sent
 
