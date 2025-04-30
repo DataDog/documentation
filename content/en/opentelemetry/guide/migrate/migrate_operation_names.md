@@ -91,15 +91,7 @@ otlp_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Implementing the change
-
-The new operation name mapping logic is enabled by default starting with:
-
-- **Datadog Agent v7.66** (OTLP Ingest, May 2025)
-- **Datadog Agent v7.65** (DDOT Collector, May 2025)
-- **OpenTelemetry Collector v0.126.0** (Datadog Exporter, May 2025)
-
-### Migrating (Recommended)
+## Migrating (Recommended)
 
 Datadog strongly recommends using the new default mappings. If you are using the versions listed above or newer, the logic is enabled automatically. Ensure you have completed the prerequisite steps.
 
@@ -139,7 +131,7 @@ To replicate `span_name_as_resource_name` or `span_name_remappings`: The recomme
 {{% /tab %}}
 {{% /tabs %}}
 
-### Opting out
+## Opting out
 
 If you cannot migrate your dashboards or monitors immediately, you can temporarily opt-out and retain the old operation name behavior by explicitly disabling the feature flag.
 
