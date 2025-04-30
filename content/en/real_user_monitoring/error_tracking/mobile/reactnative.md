@@ -51,6 +51,78 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
+### Add ANR Reporting
+
+An “Application Not Responding” (ANR) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+
+ANRs are only reported through the SDK (not through Logs).
+
+#### Report fatal ANRs
+Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
+
+- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result into several **individual issues** being created
+- By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][7] (available since *[Android 30+][8]*), which can be read on the next app launch.
+- In *[Android 29][9] and below*, reporting on fatal ANRs is not possible.
+
+#### Report non-fatal ANRs
+Non-fatal ANRs may or may not have led to the application being terminated (crashing).
+
+- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
+- By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
+
+You can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
+
+### Add app hang reporting
+
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
+
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold][17] for more guidance on what to set this value to.
+
+App hangs are reported through RUM (not through Logs).
+
+When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
+
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
+
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
+
+#### Disable app hang monitoring
+
+To explicitly disable app hang monitoring, update the initialization configuration and set the `appHangThreshold` parameter to `undefined`.
+
+### Add watchdog terminations reporting
+
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][18]).
+
+By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
+
+Watchdog terminations are reported through RUM only (not through Logs).
+
+When enabled, a watchdog termination is reported and attached to the previous RUM Session on the next application launch, based on heuristics:
+
+- The application was not upgraded in the meantime,
+
+- And it did not call either `exit`, or `abort`,
+
+- And it did not crash, either because of an exception, or because of a fatal [app hang][19],
+
+- And it was not force-quitted by the user,
+
+- And the device did not reboot (which includes upgrades of the operating system).
+
+#### Enable watchdog terminations reporting
+
+To enable watchdog terminations reporting:
+
+1. [Enable Crash Reporting][20]
+
+2. Set the SDK initialization configuration parameter `trackWatchdogTerminations` to `true`.
+
+#### Troubleshoot watchdog terminations
+
+When an application is terminated by the iOS Watchdog, it doesn't get any termination signal. As a result of this lack of a termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, Datadog recommends looking at the [vitals][21] of the parent RUM View (CPU Ticks, Memory).
+
+
 ## Get deobfuscated stack traces
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
@@ -482,3 +554,8 @@ Inside the loop, add the following snippet:
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
+[17]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
+[18]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
+[19]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking#add-app-hang-reporting
+[20]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking#add-crash-reporting
+[21]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=reactnative#telemetry
