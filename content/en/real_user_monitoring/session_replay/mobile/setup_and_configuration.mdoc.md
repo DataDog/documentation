@@ -272,63 +272,49 @@ You can record the entire user journey across both [web and native views][1] on 
 
 The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
 
-{{< tabs >}}
-{{% tab "Android" %}}
-
+<!-- Android -->
+{% if equals($platform, "android") %}
 To instrument your consolidated web and native Session Replay views for Android:
 
-1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
-2. Enable [webview tracking][3] for your mobile application.
-3. Enable [Session Replay][4] for your web application.
+1. Ensure you are using version [`2.8.0`][android-wvi-2] or higher of the Android SDK.
+2. Enable [webview tracking][android-wvi-3] for your mobile application.
+3. Enable [Session Replay][android-wvi-4] for your web application.
 4. Enable Session Replay for your mobile application (see setup instructions above).
+{% /if %}
+<!-- end Android -->
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
-[2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
-[4]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
+<!-- iOS -->
+{% if equals($platform, "ios") %}
 To instrument your consolidated web and native Session Replay views for iOS:
 
-1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
-2. Enable [webview tracking][2] for your mobile application.
-3. Enable [Session Replay][3] for your web application.
+1. Ensure you are using version [`2.13.0`][200-1] or higher of the iOS SDK.
+2. Enable [webview tracking][200-2] for your mobile application.
+3. Enable [Session Replay][200-3] for your web application.
 4. Enable Session Replay for your mobile application (see setup instructions above).
+{% /if %}
+<!-- end iOS -->
 
-[1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
-[3]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
 To instrument your consolidated web and native Session Replay views for Kotlin Multiplatform:
 
-1. Enable [webview tracking][1] for your mobile application.
-2. Enable [Session Replay][2] for your web application.
+1. Enable [webview tracking][201-1] for your mobile application.
+2. Enable [Session Replay][201-2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
-[2]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
 To instrument your consolidated web and native Session Replay views for React Native:
 
-1. Enable [webview tracking][1] for your React Native application.
-2. Enable [Session Replay][2] for your web application.
+1. Enable [webview tracking][202-1] for your React Native application.
+2. Enable [Session Replay][202-2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 
-**Note**: This feature is not compatible with React Native's [New Architecture][3] for Android.
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
-[2]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{< /tabs >}}
+**Note**: This feature is not compatible with React Native's [New Architecture][202-3] for Android.
+{% /if %}
+<!-- end React Native -->
 
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
@@ -518,3 +504,18 @@ See [Privacy Options][2].
 [rn-setup-4]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
 [rn-setup-5]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
 [rn-setup-A]: https://github.com/DataDog/dd-sdk-reactnative
+
+[android-wvi-2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
+[android-wvi-3]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
+[android-wvi-4]: /real_user_monitoring/session_replay/browser/#setup
+
+[200-1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
+[200-2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
+[200-3]: /real_user_monitoring/session_replay/browser/#setup
+
+[201-1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
+[201-2]: /real_user_monitoring/session_replay/browser/#setup
+
+[202-1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
+[202-2]: /real_user_monitoring/session_replay/browser/#setup
+[202-3]: https://reactnative.dev/architecture/landing-page
