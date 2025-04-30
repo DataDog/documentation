@@ -2,6 +2,7 @@
 title: DDSQL Common Queries and Use Cases
 aliases:
 - /dashboards/guide/ddsql_use_cases
+- /ddsql_editor/guide/ddsql_use_cases
 further_reading:
 - link: "ddsql_editor/"
   tag: "Documentation"

@@ -72,7 +72,7 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /ddsql_editor/tags
+[2]: /ddsql_reference/ddsql_preview/tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
 [5]: /help/

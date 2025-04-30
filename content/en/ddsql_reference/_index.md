@@ -21,4 +21,4 @@ DDSQL is a query language for Datadog data. It implements several standard SQL o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ddsql_editor/tags
+[1]: /ddsql_reference/ddsql_preview/tags
