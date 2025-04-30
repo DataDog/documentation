@@ -34,6 +34,8 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 |---|---|---|
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
 | [Custom spans][15] | Custom spans | Configure custom spans for your pipelines. |
+| [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
 
@@ -157,3 +159,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /integrations/azure_devops/
 [17]: /continuous_integration/search/#search-for-pipelines
 [18]: /logs/guide/best-practices-for-log-management/
+[19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[20]: /glossary/#pipeline-execution-time
