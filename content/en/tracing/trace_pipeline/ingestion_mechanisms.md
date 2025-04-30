@@ -134,7 +134,7 @@ Read more about sampling controls in the [Python tracing library documentation][
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
 [2]: /tracing/trace_collection/dd_libraries/python
-[3]: https://docs.datadoghq.com/tracing/guide/resource_based_sampling/
+[3]: /tracing/guide/resource_based_sampling/
 {{% /tab %}}
 {{% tab "Ruby" %}}
 **Remote configuration**
