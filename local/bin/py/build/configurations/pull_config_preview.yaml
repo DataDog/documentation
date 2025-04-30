@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: emma.chiu/preview-changes-to-integrations-internal-core-1560
+          branch: emma.chiu/COLAB-1926/snow-doc-v2.7.0
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
