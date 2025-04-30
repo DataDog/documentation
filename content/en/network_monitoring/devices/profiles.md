@@ -107,3 +107,8 @@ See the [Profile Format Reference][5] for more information about profiles format
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [6]: https://app.datadoghq.com/devices/
 [7]: /network_monitoring/devices/guide/device_profiles/
+[8]: https://app.datadoghq.com/devices/profiles
+[9]: /network_monitoring/devices/guide/device_profiles/
+[10]: /network_monitoring/devices/guide/build-ndm-profile/
+
+
