@@ -124,6 +124,8 @@ spec:
       enabled: true
       containerImage:
         enabled: true
+      host:
+        enabled: true
 ```
 
 {{% /tab %}}
@@ -135,7 +137,10 @@ Add the following to your `datadog-values.yaml` Helm configuration file:
 ```yaml
 datadog:
   sbom:
+    enabled: true
     containerImage:
+      enabled: true
+    host:
       enabled: true
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
@@ -159,6 +164,10 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][1],
               },
               {
                 "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
                 "value": "true"
               }
             ]
@@ -194,6 +203,8 @@ Add the following to your `datadog.yaml` configuration file:
 sbom:
   enabled: true
   container_image:
+    enabled: true
+  host:
     enabled: true
 ```
 

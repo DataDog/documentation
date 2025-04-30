@@ -69,6 +69,7 @@ In the `datadog-values.yaml` file for the Agent, set the following configuration
 # datadog-values.yaml file
 datadog:
   sbom:
+    enabled: flase
     containerImage:
       enabled: false
 
