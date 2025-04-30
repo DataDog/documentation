@@ -7168,11 +7168,16 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
       weight: 108
+    - name: Jetpack Compose Instrumentation
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_jetpack_compose_instrumentation
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 109
+      weight: 110
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
