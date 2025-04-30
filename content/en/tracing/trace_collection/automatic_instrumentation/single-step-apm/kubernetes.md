@@ -41,7 +41,7 @@ When you run the one-line installation command, there are a few options to custo
 
 {{< tabs >}}
 
-{{% tab "Kubernetes (Agent v7.64+)" %}}
+{{% tab "Agent v7.64+ (Recommended)" %}}
 
 ### Configure instrumentation for namespaces and pods
 
@@ -209,7 +209,7 @@ This configuration enables APM for all pods except those that have either of the
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
+{{% tab "Agent <=v7.63 (Legacy)" %}}
 
 ### Enable or disable instrumentation for namespaces
 
