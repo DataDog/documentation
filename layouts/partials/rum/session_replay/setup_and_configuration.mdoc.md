@@ -82,19 +82,19 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 2. Declare Datadog Session Replay as a dependency:
    ```kotlin {% filename="build.gradle.kts" %}
-    kotlin {
-      sourceSets {
-        commonMain.dependencies {
-          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
-          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
-        }
+   kotlin {
+     sourceSets {
+       commonMain.dependencies {
+         implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
+         implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
+       }
 
-        // in case you need Material support on Android
-        androidMain.dependencies {
-          implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-        }
-      }
-    }
+       // in case you need Material support on Android
+       androidMain.dependencies {
+         implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+       }
+     }
+   }
    ```
 
 3. Enable Session Replay in your app:
@@ -172,42 +172,37 @@ To set up Mobile Session Replay for React Native:
 
    - If you use the `DdSdkReactNative.initialize` method:
 
-     ```typescript {% filename="App.tsx" %}
+   ```typescript {% filename="App.tsx" %}
+   import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
+   import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
-     import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
-     import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+   const configuration = new DdSdkReactNativeConfiguration(/* ... */)
 
-     const configuration = new DdSdkReactNativeConfiguration(/* ... */)
-
-    DdSdkReactNative.initialize(configuration)
-      .then(() => SessionReplay.enable())
-      .catch((error) => { /* handle error */ });
-    ```
+   DdSdkReactNative.initialize(configuration)
+     .then(() => SessionReplay.enable())
+     .catch((error) => { /* handle error */ });
+   ```
 
 3. Enable Session Replay in your app, after initializing the Datadog SDK:
    ```typescript {% filename="App.tsx" %}
-
    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
    SessionReplay.enable();
-
    ```
 
 4. Define the configuration for Session Replay:
 
    ```typescript {% filename="App.tsx" %}
-
-      SessionReplay.enable({
-        replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
-      });
-
+   SessionReplay.enable({
+     replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
+   });
    ```
 
    During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
 5. (iOS only) Update your iOS pods.
    ```shell
-      cd ios && pod install
+   cd ios && pod install
    ```
 6. Rebuild your iOS and Android apps.
 {% /if %}
@@ -320,8 +315,8 @@ By default, Session Replay starts recording automatically. However, if you prefe
 {% if equals($platform, "android") %}
 ```kotlin {% filename="build.gradle.kts" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
-    .startRecordingImmediately(false)
-    .build()
+  .startRecordingImmediately(false)
+  .build()
 // Do something
 SessionReplay.startRecording()
 SessionReplay.stopRecording()
