@@ -387,9 +387,6 @@ Community:
     authors: Intercom
     notes: Tool to convert Datadog resources to Terraform configuration
 - Integrations:
-  - name: ansible-modules-extras
-    link: https://github.com/ansible/ansible-modules-extras
-    notes: Contains modules that interact with Datadog in the monitoring section
   - name: k6-datadog
     link: https://k6.io/docs/results-output/real-time/datadog/
     notes: Integration for sending K6 test results to Datadog
