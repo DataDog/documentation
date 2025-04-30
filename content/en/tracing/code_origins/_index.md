@@ -35,7 +35,7 @@ Code Origins captures the exact locations in your codebase where APM spans are c
 - Identify performance bottlenecks
 
 In Trace Explorer, select a span to see Code Origin details on the Overview tab:
-{{< img src="tracing/guide/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
+{{< img src="tracing/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
 
 
 ## Getting started
@@ -74,7 +74,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 4. Optionally, click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
   
-    {{< img src="tracing/guide/code_origins/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Add span tag with Dynamic Instrumentation" style="width:100%;">}}  
+    {{< img src="tracing/code_origins/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Add span tag with Dynamic Instrumentation" style="width:100%;">}}  
 
 ### In your IDE
 
@@ -83,7 +83,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
     - Supported Languages: Java, Python
 2. View RED metrics (Requests, Errors, and Duration) as inline annotations above your endpoint methods.
 
-    {{< img src="tracing/guide/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
+    {{< img src="tracing/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
 
 ## Troubleshooting
 
