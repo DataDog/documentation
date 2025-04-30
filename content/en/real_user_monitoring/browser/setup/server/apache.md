@@ -38,7 +38,7 @@ To automatically instrument your RUM application:
 5. After the installer successfully installs the SDK Injector, restart Apache HTTP Server to begin collecting RUM sessions.
 6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
 
-Alternatively, you can [manually](#alternative-manual-installation) install and configure the module.
+Alternatively, you can [manually](#alternative-installation-method) install and configure the module.
 
 ## Updating your RUM application
 
@@ -71,7 +71,7 @@ To manually remove RUM from your auto-instrumented web server:
 3. Delete the directory `/opt/datadog-httpd/` and all of its contents.
 4. Restart or reload Apache httpd.
 
-## (Alternative) Manual installation
+## Alternative installation method
 
 To manually load the module onto your web server instead of running the installation script, follow the instructions below.
 

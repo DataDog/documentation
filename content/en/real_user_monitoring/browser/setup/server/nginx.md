@@ -42,7 +42,7 @@ To automatically instrument your RUM application:
    error_log <file> info;
    ```
 
-Alternatively, you can [manually](#alternative-manual-installation) install and configure the module.
+Alternatively, you can [manually](#alternative-installation-method) install and configure the module.
 
 ## Updating your RUM application
 
@@ -93,7 +93,7 @@ To manually remove RUM from your auto-instrumented web server:
 4. Delete the directory `/opt/datadog-nginx/` and all of its contents.
 5. Restart or reload your NGINX web server.
 
-## (Alternative) Manual installation
+## Alternative installation method
 
 To manually load the module onto your web server instead of running the installation script, follow the instructions below.
 

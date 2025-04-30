@@ -35,13 +35,11 @@ The [Datadog Agent][2] is installed and configured.
 
 {{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 
-1. Download the [Datadog RUM installer][1].
+1. Download the [Datadog RUM installer][5].
 2. Follow the installer as an administrator by opening the `.msi` file.
 3. Follow the prompts and accept the license agreement.
 4. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 5. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
-
-[1]: https://rum-auto-instrumentation.s3.us-east-1.amazonaws.com/iis/latest/x64/injector_IIS.msi
 
 {{% /collapse-content %}}
 
@@ -77,12 +75,14 @@ See other [Limitations][1].
 
 ## Uninstall
 
-To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the Windows Apps & Features tool.
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the **Windows Apps & Features** tool.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
+[5]: https://rum-auto-instrumentation.s3.us-east-1.amazonaws.com/iis/latest/x64/injector_IIS.msi
