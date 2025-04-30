@@ -3,6 +3,7 @@ title: Querying Tags in DDSQL
 aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
+- /ddsql_editor/tags
 further_reading:
 - link: "/ddsql_reference/"
   tag: "Documentation"

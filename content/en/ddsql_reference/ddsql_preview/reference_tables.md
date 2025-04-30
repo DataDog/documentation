@@ -1,5 +1,7 @@
 ---
 title: Reference Tables in DDSQL
+aliases:
+- /ddsql_editor/reference_tables/
 further_reading:
 - link: "/integrations/guide/reference-tables/"
   tag: "Documentation"

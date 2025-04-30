@@ -18,6 +18,8 @@ DDSQL Editor is in Preview.
     {{< nextlink href="ddsql_reference/ddsql_preview/data_types" >}}Data Types{{< /nextlink >}}
     {{< nextlink href="ddsql_reference/ddsql_preview/expressions_and_operators" >}}Expressions and Operators{{< /nextlink >}}
     {{< nextlink href="ddsql_reference/ddsql_preview/statements" >}}Statements{{< /nextlink >}}
+    {{< nextlink href="ddsql_reference/ddsql_preview/reference_tables" >}}Reference Tables in DDSQL{{< /nextlink >}}
+    {{< nextlink href="ddsql_reference/ddsql_preview/tags" >}}Querying Tags in DDSQL{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
