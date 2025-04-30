@@ -113,7 +113,6 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | CCM Recommendations Page              | Permission Required                         | N/A                                               |
 | CCM Explorer Page                     | Permission Required                         | N/A                                               |
 | CCM Plan Page                         | Permission Required                         | Permission Required to view Budgets               |
-| CCM Settings Page                     | Permission Required                         | See below                                         |
 | CCM Settings Page - Custom Costs      | Permission Required                         | Permission Required to upload custom costs        |
 | CCM Settings Page - Tag Pipelines     | Permission Required                         | Permission Required to create tag pipelines       |
 | CCM Settings Page - SaaS Integrations | Permission Required                         | Permission Required to enable integration for CCM |
