@@ -592,10 +592,18 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /getting_started/opentelemetry
+      url: /opentelemetry/getting_started/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
+    - name: Datadog Example Application
+      url: /getting_started/opentelemetry
+      parent: otel_guides_getting_started
+      weight: 101
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog
+      parent: otel_guides_getting_started
+      weight: 102
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -611,7 +619,7 @@ menu:
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs
+    - name: OTel APIs with Datadog SDKs
       url: /opentelemetry/instrument/api_support
       identifier: otel-api-dd-sdk
       parent: otel-instrumentation
@@ -649,7 +657,7 @@ menu:
       identifier: otel_instrumentation_libraries
       parent: otel-instrumentation
       weight: 303
-    - name: Environment Variables
+    - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
       parent: otel-instrumentation
@@ -694,17 +702,17 @@ menu:
       identifier: otel-setup-otlp-ingest
       parent: otel_collect
       weight: 402
-    - name: Direct OTLP Ingest
-      url: /opentelemetry/setup/intake_endpoint
+    - name: Agentless Deployment
+      url: /opentelemetry/setup/agentless/
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
       weight: 403
     - name: Logs Endpoint
-      url: /opentelemetry/setup/intake_endpoint/otlp_logs
+      url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
       weight: 301
     - name: Metrics Endpoint
-      url: /opentelemetry/setup/intake_endpoint/otlp_metrics
+      url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
       weight: 302
     - name: Semantic Mapping
