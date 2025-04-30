@@ -32,7 +32,7 @@ Based on performance benchmarking for a pipeline transforming data using 12 proc
 | Azure         | F4s v2       	  |
 | Google Cloud  | c2-standard-4   |
 
-1 vCPU = 1 ARM physical CPU or 0.5 Intel physical CPU with hyperthreading.
+**Note**: 1 vCPU = 1 ARM physical CPU or 0.5 Intel physical CPU with hyperthreading.
 
 ### CPU sizing
 
