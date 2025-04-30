@@ -60,13 +60,6 @@ Using the [Operator instructions in Kubernetes and Integrations][5] as a referen
                     - 'env:<CUSTOM_ENV>'
     ```
 
-    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
-
-    ```yaml
-    pg_stat_statements_view: datadog.pg_stat_statements()
-    pg_stat_activity_view: datadog.pg_stat_activity()
-    ```
-
 2. Apply the changes to the Datadog Operator using the following command:
 
     ```shell

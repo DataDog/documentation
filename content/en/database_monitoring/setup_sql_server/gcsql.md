@@ -224,7 +224,75 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 {{% tab "Kubernetes" %}}
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
+If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]:
+
+### Operator
+
+Using the [Operator instructions in Kubernetes and Integrations][6] as a reference, follow the steps below to set up the SQL Server integration:
+
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              sqlserver.yaml: |-
+                cluster_check: true # Make sure to include this flag
+                init_config:
+                instances:
+                - host: <HOSTNAME>,<PORT>
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  connector: 'odbc'
+                  driver: 'ODBC Driver 18 for SQL Server'
+                  dbm: true
+                  # Optional: For AlwaysOn users
+                  database_metrics: 
+                    ao_metrics: 
+                      enabled: true
+                  # Optional: For monitoring SQL Server Agent jobs               
+                  agent_jobs: 
+                    enabled: true
+                    collection_interval: 15
+                    history_row_limit: 10000 
+                  # Optional: For additional tags
+                  tags:  
+                    - 'service:<CUSTOM_SERVICE>'
+                    - 'env:<CUSTOM_ENV>'
+                  # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+                  gcp:
+                    project_id: '<PROJECT_ID>'
+                    instance_id: '<INSTANCE_ID>'
+    ```
+
+2. Apply the changes to the Datadog Operator using the following command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
 
 ### Helm
 
@@ -240,13 +308,22 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
           init_config:
           instances:
           - dbm: true
-            host: <HOSTNAME>
-            port: 1433
+            host: <HOSTNAME>,<PORT>
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: '{ODBC Driver 18 for SQL Server}'
-            tags:  # Optional
+            driver: 'ODBC Driver 18 for SQL Server'
+            # Optional: For AlwaysOn users
+            database_metrics: 
+              ao_metrics: 
+                enabled: true
+            # Optional: For monitoring SQL Server Agent jobs
+            agent_jobs: 
+              enabled: true
+              collection_interval: 15
+              history_row_limit: 10000
+            # Optional: For additional tags
+            tags:  
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
             gcp:
@@ -266,10 +343,6 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
-
 ### Configure with mounted files
 
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/sqlserver.yaml`:
@@ -279,13 +352,22 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>'
-    port: <SQL_PORT>
+    host: <HOSTNAME>,<PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    connector: "odbc"
-    driver: '{ODBC Driver 18 for SQL Server}'
-    tags:  # Optional
+    connector: 'odbc'
+    driver: 'ODBC Driver 18 for SQL Server'
+    # Optional: For AlwaysOn users
+    database_metrics: 
+      ao_metrics: 
+        enabled: true
+    # Optional: For monitoring SQL Server Agent jobs               
+    agent_jobs: 
+      enabled: true
+      collection_interval: 15
+      history_row_limit: 10000
+    # Optional: For additional tags  
+    tags: 
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
@@ -311,13 +393,22 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<HOSTNAME>",
-          "port": <SQL_PORT>,
+          "host": "<HOSTNAME>,<PORT>",
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "database_metrics": {
+            "ao_metrics": {
+              "enabled": true
+            }
+          },
+          "agent_jobs": {
+            "enabled": true,
+            "collection_interval": 15,
+            "history_row_limit": 10000
+          },
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -340,9 +431,10 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /agent/configuration/secrets-management
+[6]: /containers/kubernetes/integrations/?tab=datadogoperator
 {{% /tab %}}
 {{< /tabs >}}
 

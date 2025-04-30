@@ -366,13 +366,6 @@ Using the [Operator instructions in Kubernetes and Integrations][6] as a referen
                     fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
     ```
 
-    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
-
-    ```yaml
-    pg_stat_statements_view: datadog.pg_stat_statements()
-    pg_stat_activity_view: datadog.pg_stat_activity()
-    ```
-
 2. Apply the changes to the Datadog Operator using the following command:
 
     ```shell
