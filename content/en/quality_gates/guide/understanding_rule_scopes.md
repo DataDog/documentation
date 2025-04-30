@@ -1,16 +1,16 @@
 ---
-title: Understanding How Rule Scopes Work in Quality Gates
+title: Understanding How Rule Scopes Work in PR Gates
 
-description: Learn how to configure rule scopes for Quality Gate rules.
+description: Learn how to configure rule scopes for PR Gate rules.
 further_reading:
   - link: "/quality_gates/setup"
     tag: "Documentation"
-    text: "Learn how to set up Quality Gates"
+    text: "Learn how to set up PR Gates"
 ---
 
 ## Overview
 
-Quality Gates allows you to gate your workflows based on signals in Datadog. When creating a rule, you can define a rule scope, which states when the rule should be evaluated. 
+PR Gates allows you to gate your workflows based on signals in Datadog. When creating a rule, you can define a rule scope, which states when the rule should be evaluated. 
 
 To filter rules that are evaluated for a specific CI pipeline, you can add a custom scope when creating a rule. This process requires you to use the `--scope` option with the [`datadog-ci gate evaluate` command][1] in your build configuration.
 
@@ -47,7 +47,7 @@ For example, if a rule does not contain the `repository` scope, it is evaluated 
 
 In addition to branch and repository, you can define custom scopes to filter rules that are evaluated for a specific CI pipeline.
 
-{{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
+{{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
 
 To add a custom scope when creating a rule:
 

@@ -4825,7 +4825,7 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 15
-    - name: Quality Gates
+    - name: PR Gates
       url: quality_gates/
       pre: ci
       parent: software_delivery_heading
