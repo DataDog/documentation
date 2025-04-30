@@ -4,6 +4,8 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
+aliases:
+  - /data_streams/go
 ---
 
 The following instrumentation types are available:
@@ -27,10 +29,9 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 ### Installation
 
-### Monitoring Kafka Pipelines
-Data Streams Monitoring uses message headers to propagate context through Kafka streams. If `log.message.format.version` is set in the Kafka broker configuration, it must be set to `0.11.0.0` or higher. Data Streams Monitoring is not supported for versions lower than this.
+{{% data_streams/monitoring-kafka-pipelines %}}
 
-{{% data-streams-monitoring/monitoring-rabbitmq-pipelines %}}
+{{% data_streams/monitoring-rabbitmq-pipelines %}}
 
 #### Automatic Instrumentation
 
@@ -128,7 +129,7 @@ if ok {
 ### Monitoring connectors
 
 #### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## Further reading
 
@@ -136,7 +137,7 @@ if ok {
 
 [1]: /agent/
 [2]: https://github.com/DataDog/dd-trace-go
-[3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[3]: /tracing/trace_collection/library_config/go/
 [4]: https://datadoghq.dev/orchestrion/
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
