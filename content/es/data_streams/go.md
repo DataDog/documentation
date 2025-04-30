@@ -117,7 +117,7 @@ si ok {
 ```
 [1]: /es/agent/
 [2]: https://github.com/DataDog/dd-trace-go
-[3]: https://docs.datadoghq.com/es/tracing/trace_collection/library_config/go/
+[3]: /es/tracing/trace_collection/library_config/go/
 [4]: https://datadoghq.dev/orchestrion/
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37

@@ -631,9 +631,24 @@ For example, here's an example of a SARIF file processed by Datadog:
     ],
     "version": "2.1.0"
 }
-
-
 ```
+
+## SARIF to CVSS severity mapping
+
+The [SARIF format][15] defines four severities: none, note, warning, and error.
+However, Datadog reports violations and vulnerabilities severity using the [Common Vulnerability Scoring System][16] (CVSS),
+which defined five severities: critical, high, medium, low and none.
+
+When ingesting SARIF files, Datadog maps SARIF severities into CVSS severities using the mapping rules below.
+
+
+| SARIF severity | CVSS severity |
+|----------------|---------------|
+| Error          | Critical      |
+| Warning        | High          |
+| Notice         | Medium        |
+| Info           | Low           |
+
 
 <!-- ## Further Reading
 
@@ -653,3 +668,4 @@ For example, here's an example of a SARIF file processed by Datadog:
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
+[16]: https://www.first.org/cvss/

@@ -40,20 +40,27 @@ Failed deployment events, currently interpreted through failure events, are used
 
 {{< tabs >}}
 {{% tab "Datadog Incidents" %}}
-DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. Once incidents are declared, DORA uses them to measure change failure rate and time to restore.
+DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. After incidents are declared, DORA uses them to measure change failure rate and time to restore.
 
-**Note**: Only incidents that are in a `stable` or `resolved` state are used to calculate time to restore.
+**Note**: The time to restore is measured as the total duration an incident spends in the `active` state. For cases like `active` → `stable` → `active` → `stable`, it includes all `active` periods. The time to restore is shown only when an incident is in a `stable` or `resolved` state. If a `resolved` incident is reactivated, the metric is hidden until it's `resolved` again.
+
 
 ### Requirements
 
 - **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
 
-For incidents to appear in filtered DORA metrics views, Incidents must be tagged with the following attributes:
+To avoid having unlabeled failures, Datadog strongly recommends adding the following attributes to incidents:
   - `Teams`
   - `Services`
   - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
 
-If provided with Incidents, the `Severity` tag will be added to failure events.
+If provided with incidents, the `Severity` tag is added to failure events.
+
+**Recommended**: In the [Incident Settings][203], set attributes field `Prompted` to `At Resolution` to ensure you never forget to add these attributes to your incidents.
+
+### Include historical incidents
+
+You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][202], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
 
 [201]: /service_management/incident_management/
 [202]: https://app.datadoghq.com/ci/settings/dora

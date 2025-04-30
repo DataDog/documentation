@@ -101,7 +101,7 @@ container_image:
 
 #### Enable SBOM collection
 
-The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for Cloud Security Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [Cloud Security Pro and Enterprise plans][10].
+The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for [Cloud Security Vulnerabilities][8]. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour.
 
 **Notes**:
 - The Cloud Security Vulnerabilities feature is not available for AWS Fargate or Windows environments.
@@ -231,6 +231,5 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
-[10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products
 [11]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
 [12]: /integrations/amazon_web_services/#resource-collection
