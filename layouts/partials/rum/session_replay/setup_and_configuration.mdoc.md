@@ -1,4 +1,6 @@
 <!--
+Pages using this partial must declare these filters:
+
 content_filters:
   - trait_id: platform
     option_group_id: rum_session_replay_sdk_options
