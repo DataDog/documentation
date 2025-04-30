@@ -48,22 +48,7 @@ Available versions are listed in source repositories for each language:
 
 ## Remove Single Step APM instrumentation from your Agent
 
-If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
-
-### Remove instrumentation for specific services
-
-To remove APM instrumentation and stop sending traces from a specific service:
-
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
-
-   ```shell
-   DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
-   ```
-2. Restart the service.
-
-### Remove APM for all services on the infrastructure
-
-To stop producing traces, uninstall APM and restart the infrastructure:
+To stop producing traces for all services on your infrastructure:
 
 1. Run:
    ```shell
