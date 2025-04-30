@@ -122,6 +122,7 @@ The Datadog Python SDK supports the following trace context formats, including d
 |------------------------|---------------------------------|
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
+| [Baggage][10]          | `baggage`                       |
 | [B3 Single][3]         | `b3`                            |
 |                        | `b3 single header` (deprecated) |
 | [B3 Multi][4]          | `b3multi`                       |
@@ -145,6 +146,7 @@ The Datadog Ruby SDK supports the following trace context formats, including dep
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][10]          | `baggage`           |
 | [B3 Single][3]         | `b3`                |
 | [B3 Multi][4]          | `b3multi`           |
 | [None][5]              | `none`              |
@@ -181,6 +183,7 @@ The Datadog Go SDK supports the following trace context formats, including depre
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][10]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
@@ -204,6 +207,7 @@ The Datadog Node.js SDK supports the following trace context formats, including 
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][10]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
@@ -227,6 +231,7 @@ The Datadog PHP SDK supports the following trace context formats, including depr
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][10]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
