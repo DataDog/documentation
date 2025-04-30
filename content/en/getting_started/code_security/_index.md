@@ -52,9 +52,9 @@ To start running code scans in your IDE, see the respective documentation for yo
 ### Customize your repository settings
 In [Code Security Settings][3], you can manage which repositories have PR comments enabled, as well as [customize the configuration][11] of which Static Code Analysis (SAST) rules are applied across or within repositories. For all the default rules provided by Datadog, see the [SAST Rules][4].
 
-### Set up Quality Gates
+### Set up PR Gates
 
-Datadog provides [Quality Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [Quality Gate setup][7].
+Datadog provides [PR Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [PR Gate setup][7].
 
 ## Prioritize vulnerabilities with runtime context
 
