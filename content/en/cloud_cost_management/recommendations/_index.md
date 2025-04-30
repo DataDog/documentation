@@ -495,7 +495,7 @@ For each cloud account that you would like to receive recommendations for:
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
 
 - **Jira**: Jira issue creation is available in both the recommendation side panel and the "Active Recommendations" list. You can create a Jira issue by clicking "Create Jira issue" in the side panel or by selecting multiple recommendations in the "Active Recommendations" list. Created Jira issues are automatically tagged to indicate their connection to a cost recommendation and include a link back to the referenced recommendation.
-- 1-click Workflow Automation actions: Actions are supported for a select set of recommendations today (and will expand to more soon) wherein a user can click an action button like "Delete EBS Volume" to quickly perform the recommended action directly from Cloud Cost Management.
+- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - Datadog Case Management: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations. 
 
 ## Recommendation and resource descriptions
