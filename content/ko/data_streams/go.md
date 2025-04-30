@@ -123,7 +123,7 @@ if ok {
 ### 모니터링 커넥터
 
 #### Confluent Cloud 커넥터
-{{% dsm_confluent_connectors %}}
+{{% data_streams/dsm-confluent-connectors %}}
 
 ## 참고 자료
 
@@ -131,7 +131,7 @@ if ok {
 
 [1]: /ko/agent/
 [2]: https://github.com/DataDog/dd-trace-go
-[3]: https://docs.datadoghq.com/ko/tracing/trace_collection/library_config/go/
+[3]: /ko/tracing/trace_collection/library_config/go/
 [4]: https://datadoghq.dev/orchestrion/
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
