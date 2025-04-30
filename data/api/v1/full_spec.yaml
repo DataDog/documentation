@@ -24291,10 +24291,11 @@ components:
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
