@@ -447,7 +447,6 @@ multifiltersearch:
       recommendation_prerequisites: ""
 ---
 
-{{< /callout >}}
 
 ## Overview
 
