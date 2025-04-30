@@ -14,16 +14,19 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
 2. Click the **Create a New Budget** button.
-3. Enter the following details:
+3. You can either add budget information by **uploading a CSV** using the provided template in the UI, or **enter your budget directly** using the details below.
+
+   {{< img src="cloud_cost/budgets/budgets-upload-a-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
+
    - **Budget Name**: Enter a name for your budget.
    - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - **End Date**: Set an end date for the budget (can be in the future).
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-    {{< img src="cloud_cost/budgets/budget-create-define-1.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
+4. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, hover over the row and click the **copy** button.
 
-4. Fill in all budgets in the table. You can automatically copy values from the first month to the rest of the months by clicking the copy button.
+   {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
 5. Click **Save** in the bottom right.
 
