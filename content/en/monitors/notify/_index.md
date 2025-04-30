@@ -79,11 +79,11 @@ If a notification channel is set, you can route notifications to a specific Team
 
 {{% /collapse-content %}}
 
-### Bulk editing Monitor @-handles
-Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace @-handles in the monitor message body. Use cases include:
+### Bulk editing monitor @-handles
+Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
 
 - **Swap a handle**: Replace one handle with another across multiple monitors. For example, change `@pagerduty-sre` to `@oncall-sre`. You can also swap a single handle with multiple handles, such as replacing `@pagerduty-sre` with both `@pagerduty-sre` and `@oncall-sre`, to support dual paging or expanded alerting coverage.
-- **Add a handle**: Add a new recipient without removing existing ones. For example, add `@slack-infra-leads` to all selected Monitors.
+- **Add a handle**: Add a new recipient without removing existing ones. For example, add `@slack-infra-leads` to all selected monitors.
 - **Remove a handle**: Remove a specific handle from monitor messages. For example, remove `@webhook-my-legacy-event-intake`.
 
 ## Workflows
