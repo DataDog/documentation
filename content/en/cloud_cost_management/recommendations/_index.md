@@ -447,7 +447,6 @@ multifiltersearch:
       recommendation_prerequisites: ""
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 Cloud Cost Recommendations is now GA with support for AWS, Azure, and Google Cloud, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
 {{< /callout >}}
 
