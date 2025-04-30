@@ -489,7 +489,7 @@ For each cloud account that you would like to receive recommendations for:
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4] or [Azure integration tile][8].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
-*Cloud Cost Recommendations now supports customers' non-USD billing currencies. 
+**Note**: Cloud Cost Recommendations supports customers' non-USD billing currencies. 
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
