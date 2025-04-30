@@ -323,44 +323,47 @@ The sample rate is an optional parameter in the Session Replay configuration. It
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
-{{< tabs >}}
-{{% tab "Android" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+<!-- Android -->
+{% if equals($platform, "android") %}
+```kotlin {% filename="build.gradle.kts" %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
   ...
   .build()
-{{< /code-block >}}
+```
+{% /if %}
+<!-- end Android -->
 
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+```swift {% filename="AppDelegate.swift" %}
 var sessionReplayConfig = SessionReplay.Configuration(
-    replaySampleRate: sampleRate
+    replaySampleRate: <SAMPLE_RATE>
 )
-{{< /code-block >}}
+```
+{% /if %}
+<!-- end iOS -->
 
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="build.gradle.kts" %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
   ...
   .build()
-{{< /code-block >}}
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
-{{% /tab %}}
-{{% tab "React Native" %}}
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
+```typescript {% filename="App.tsx" %}
 import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
 SessionReplay.enable({
-  replaySampleRate: [sampleRate]
+  replaySampleRate: <SAMPLE_RATE>
 });
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+```
+{% /if %}
+<!-- end React Native -->
 
 ### Start or stop the recording manually
 
