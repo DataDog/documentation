@@ -71,7 +71,7 @@ The figure below illustrates the difference between cumulative and rolling time 
 
 A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom time window of up to 1 month.
 
-**Note**: [Log monitors][18] have a maximum rolling time window of `2 days`.
+**Note**: [Log monitors][6] have a maximum rolling time window of `2 days`.
 
 #### Cumulative time windows
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
@@ -125,6 +125,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [3]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [4]: /monitors/guide/custom_schedules
 [5]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/types/log/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -339,4 +340,3 @@ To restore general access to a monitor with restricted access, follow the steps 
 [15]: /account_management/rbac/
 [16]: /account_management/rbac/granular_access
 [17]: /account_management/teams/
-[18]: /monitors/types/log/
