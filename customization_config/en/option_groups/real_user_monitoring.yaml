@@ -4,6 +4,13 @@ rum_sdk_platform_options:
   - id: ios
   - id: react_native
 
+rum_session_replay_sdk_options:
+  - id: android
+    default: true
+  - id: ios
+  - id: kotlin_multiplatform
+  - id: react_native
+
 rum_mobile_proxy_protocol_options:
   - id: http_https
     default: true
