@@ -213,15 +213,65 @@ This configuration enables APM for all pods except those that have either of the
 
 ### Enable or disable instrumentation for namespaces
 
-You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enable namespaces or disable namespaces, not both.
+You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Kubernetes][11] page.
-1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**.
-1. Under **APM Instrumentation**, you can do one of the following:
-   - List the namespaces you want to enable in the **Target Namespaces** text box.
-   - List the namespaces you want to disable in the  **Disabled Namespaces** text box.
-1. Deploy the Agent using the generated configuration file.
-1. Restart your applications.
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+         enabledNamespaces: # Add namespaces to instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+         disabledNamespaces: # Add namespaces to not instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          enabledNamespaces: # Add namespaces to instrument
+             - namespace_1
+             - namespace_2
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          disabledNamespaces: # Add namespaces to not instrument
+            - namespace_1
+            - namespace_2
+{{< /highlight >}}
+
+{{< /collapse-content >}}
 
 ### Specify tracing library versions
 
@@ -280,16 +330,41 @@ spec:
 
 If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages will be instrumented, using the specified library versions.
 
-To specify SDK tracer versions at the cluster level:
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Kubernetes][11] page.
-1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**.
-1. Under **APM Instrumentation**, click **Customize library versions**.
-1. Find your language(s) and use the dropdown to either:
-   - Pin an exact tracer version, or
-   - Select the major version you want to use.
-1. Deploy the Agent using the generated configuration file.
-1. Restart your applications.
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-agent.yaml` file:
+
+{{< highlight yaml "hl_lines=5-8" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+         libVersions: # Add any libraries and versions you want to set
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-values.yaml` file:
+
+{{< highlight yaml "hl_lines=5-8" >}}
+   datadog:
+     apm:
+       instrumentation:
+         enabled: true
+         libVersions: # Add any libraries and versions you want to set
+            dotnet: "3.2.0"
+            python: "1.20.6"
+            js: "4.17.0"
+{{< /highlight >}}
+
+{{< /collapse-content >}}
 
 #### Container registries
 
