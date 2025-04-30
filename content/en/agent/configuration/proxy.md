@@ -97,6 +97,10 @@ as they allow you to drop disable TLS and inspect the traffic.
 
 Check the Agent status command and review the Agent logs (`agent.log`, `trace-agent.log`, etc.) for any connection errors after restarting.
 
+### FIPS Proxy (US1-FED)
+
+For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][5]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -105,3 +109,4 @@ Check the Agent status command and review the Agent logs (`agent.log`, `trace-ag
 [2]: /agent/configuration/proxy_example_squid/
 [3]: /agent/configuration/proxy_example_haproxy/
 [4]: /agent/configuration/proxy_example_nginx/
+[5]: /agent/configuration/fips-compliance/
