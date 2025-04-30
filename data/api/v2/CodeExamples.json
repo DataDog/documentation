@@ -861,6 +861,13 @@
       "description": "Update a pipeline returns \"OK\" response"
     }
   ],
+  "ValidatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Validate an observability pipeline returns \"OK\" response"
+    }
+  ],
   "CreateOktaAccount": [
     {
       "group": "okta_integration",
@@ -1113,6 +1120,13 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateCustomFramework": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a custom framework returns \"OK\" response"
+    }
+  ],
   "CreateSignalNotificationRule": [
     {
       "group": "security_monitoring",
@@ -1205,6 +1219,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCustomFramework": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a custom framework returns \"OK\" response"
     }
   ],
   "UpdateSecurityFilter": [

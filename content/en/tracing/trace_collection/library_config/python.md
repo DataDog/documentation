@@ -45,7 +45,8 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
-Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][15].
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
@@ -126,3 +127,4 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/library_config/#traces

@@ -315,6 +315,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
+| `lambda_msk` | `"lambda_msk:newServiceName"` |
 
 #### Rename specific services
 
@@ -330,6 +331,7 @@ For a more granular approach, use these service-specific identifiers:
 | Kinesis | Stream name | `"MyStream:newServiceName"` |
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+| MSK | Cluster name | `"ExampleCluster:newServiceName"` |
 
 #### Examples with description
 
