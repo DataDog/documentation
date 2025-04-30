@@ -20,7 +20,7 @@ further_reading:
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Agentless deployments are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Datadog OTLP logs intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
