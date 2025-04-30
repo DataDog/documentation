@@ -1028,7 +1028,7 @@
   "UpdateHostTags": {
     "description": "This endpoint allows you to update/replace all tags in\nan integration source with those supplied in the request.",
     "summary": "Update host tags",
-    "request_description": "Add tags to host",
+    "request_description": "Add tags to host.",
     "request_schema_description": "Set of tags to associate with your host."
   },
   "GetUsageAnalyzedLogs": {

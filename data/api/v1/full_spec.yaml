@@ -36055,7 +36055,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/HostTags'
-        description: Add tags to host
+        description: Add tags to host.
         required: true
       responses:
         '201':
