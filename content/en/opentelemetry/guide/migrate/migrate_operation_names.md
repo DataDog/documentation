@@ -93,7 +93,7 @@ otlp_config:
 
 ## Migrating (Recommended)
 
-Datadog strongly recommends using the new default mappings. If you are using the versions listed above or newer, the logic is enabled automatically. Ensure you have completed the prerequisite steps.
+Datadog strongly recommends using the new default mappings, which are enabled by default. Ensure you have completed the prerequisite steps.
 
 If you previously used the removed configurations (`span_name_as_resource_name` or `span_name_remappings`) and need equivalent functionality, you must now use different methods:
 
