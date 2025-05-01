@@ -6,7 +6,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Engineering Reports is in Preview. Request access [here][LINK].
+Engineering Reports are in Preview. Request access [here][LINK].
 {{< /callout >}}
 
 ## Overview

@@ -23,25 +23,41 @@ Access the Reliability Overview report by clicking on the "Overview" tab in IDP 
 
 ## Interact with your Reliability Overview report
 
-By default, the Reliability Overview report aggregates data by service or team, using the `service` or `team` tags from your SLOs and properties from your Incidents. This allows you assess SLO performance across service or team groupings to identify top- and bottom-performing areas.
+### Adjust your view
 
-### Summary score
+You can update your Reliability Overview report view in the following ways:
+ 
+- **Switch the aggregation between "Service" or "Team"**: View your organization's SLO and Incident performance by service/team groupings to identify top- and bottom-performing areas. 
 
-{{% summary_score %}}
+   **Note**: Service/team groupings are based on the `service` or `team` tags from your SLOs and properties from your Incidents.
 
-### Customize your report
-
-{{% customize_reports %}}
+- **View "Daily", "Weekly", or "Monthly" historical information**: Update the historical SLO and Incident trends to your desired granularity.
+- **Apply additional filters to scope the data**: Filter by teams, services, and incident severity and state.
 
 ### Schedule reports
 
-You can set up scheduled reports for your stakeholders that will be delivered via Email or Slack on a recurring basis. Refer to the [Scheduled Reports documentation][1] for more information.
+Set up scheduled reports for your stakeholders that will be delivered as PDFs through Email or Slack on a recurring basis.
+
+To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
+
+### Customize your report 
+
+On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. The dashboard reflects the "team" aggregated view and includes weekly historical trends. 
+
+To customize the dashboard, you can:
+- Update the SLO Summary table to group by any tag you have added to your SLOs (for example, you can create a view grouped by "user journey")
+- Add widgets that are not included in the default view
+- Add filters to the existing widgets (for example, you can filter Incidents based on "Detection Method" not provided in the out-of-the-box report)
+
+### Use the SLO summary score
+
+{{% summary_score %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/dashboards/sharing/scheduled_reports/
+[1]: /dashboards/sharing/scheduled_reports/
 
 
 
