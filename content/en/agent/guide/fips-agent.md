@@ -12,17 +12,11 @@ algolia:
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
 ---
 
-{{< callout btn_hidden="true" header="Try the Preview!">}}
-The FIPS Agent is in Preview.
-{{< /callout >}}
-
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-warning">The FIPS Agent is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
 
 The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent replaces the [FIPS proxy][2] and includes limited support for integrations that need to collect observability data that is external to the host.
-
-**The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads. For production workloads, see [Datadog FIPS Compliance][2].**
 
 ## Requirements
 
@@ -89,13 +83,16 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
 The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
 
 1. Follow the [Windows instructions][1] to uninstall the Datadog Agent.
-1. Run the command below to install the FIPS Agent, replacing `MY_API_KEY` with your API key:
+1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
    **Note:** FIPS support is only available on Agent versions 7.63.0 and above:
 
-   ```powershell
-   Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-fips-agent-7.63.0-rc.7-fips-preview-2.msi" APIKEY="MY_API_KEY" SITE="ddog-gov.com"'
-   ```
+   {{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7.64.3.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
+if ($p.ExitCode -ne 0) {
+   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
    To install a different preview version of the FIPS Agent, search the [list of stable Agent versions][2] for `datadog-fips-agent` and replace the MSI in the command above with your desired version.
 
@@ -111,7 +108,7 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 **Note**: The program name for the FIPS Agent in **Add or Remove Programs** is "Datadog FIPS Agent."
 
 [1]: /agent/basic_agent_usage/windows/#uninstall-the-agent
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/beta/installers_v2.json
+[2]: https://windows-agent.datadoghq.com/installers_v2.json
 
 {{% /tab %}}
 {{< /tabs >}}
