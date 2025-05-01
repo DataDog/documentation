@@ -1,5 +1,5 @@
 ---
-title: Querying Tags in DDSQL
+title: Querying Tags in DDSQL (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
@@ -11,7 +11,7 @@ The DDSQL Editor is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
+  There are two different <strong>variants</strong> of DDSQL. The examples in this guide use DDSQL (Preview) Syntax. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
 </div>
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
