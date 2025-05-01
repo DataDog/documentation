@@ -2,6 +2,7 @@
 title: Datadog OTLP Traces Intake Endpoint
 aliases:
   - /opentelemetry/otlp_endpoint
+  - /opentelemetry/setup/intake_endpoint/otlp_traces
 private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"

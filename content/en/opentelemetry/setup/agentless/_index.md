@@ -1,5 +1,7 @@
 ---
 title: Datadog OTLP Intake Endpoint
+aliases:
+- /opentelemetry/setup/intake_endpoint/
 further_reading:
 - link: "/opentelemetry/setup"
   tag: "Documentation"

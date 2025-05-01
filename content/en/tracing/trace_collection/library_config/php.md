@@ -482,23 +482,25 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+  - [Baggage][22]
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,tracecontext,b3multi,B3 single header`<br>
+**Default**: `Datadog,tracecontext,b3multi,B3 single header,baggage`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+  - [Baggage][22]
 
 ### Integrations
 
@@ -681,3 +683,4 @@ When the application runs in a docker container, the path `/proc/self` should al
 [19]: /tracing/trace_collection/compatibility/php/
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/library_config/#traces
+[22]: https://www.w3.org/TR/baggage/
