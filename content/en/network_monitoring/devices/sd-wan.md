@@ -9,7 +9,7 @@ further_reading:
       tag: 'Doc'
       text: 'NDM Data Collected'
     - link: "https://www.datadoghq.com/blog/monitor-software-defined-networks"
-      tag: "blog"
+      tag: "Blog"
       text: "Monitor software-defined networks with Datadog"
     - link: "https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/"
       tag: "Architecture Center"
