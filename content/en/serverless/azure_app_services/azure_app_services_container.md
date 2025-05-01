@@ -206,11 +206,13 @@ In your **App settings** in Azure, set the following environment variables:
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When enabled this automatically configures log collecting for the addition file path - `/home/LogFiles/*$COMPUTERNAME*.log`
 
-***NOTE:*** If your application has multiple instances it is important to have the application’s log file to include the `COMPUTERNAME` environment variable. This ensures only one instance of the sidecar will tail the file. Otherwise duplicate log entries will appear.
+***NOTE:*** If your application has multiple instances, it is important to have the application’s log filename to include the `COMPUTERNAME` environment variable. 
+This ensures only one instance of the sidecar will tail the file and prevent duplicate logs from being ingested.
 
 ![image](https://github.com/user-attachments/assets/57d355e9-7cee-45bf-b1fa-940d6fcb3350)
 
-The above application settings will be either needed to be added to the sidecar or to the main application by setting ***Allow access to all app settings*** is checked.
+The above application settings need to be added to the sidecar through setting the environment variables of sidecar.
+Alternatively, the environment variables can be set in the main container using the ***Allow access to all app settings*** option.
 
 <details open>
 <summary>
