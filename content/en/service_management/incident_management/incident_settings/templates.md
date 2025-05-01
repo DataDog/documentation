@@ -35,7 +35,7 @@ To create a postmortem template:
 
 1. Click the **+ New Postmortem Template** button
 2. Give the template a name
-3. Select either a Datadog Notebook or a Confluence Page to be created at generation
+3. Select either a Datadog Notebook or a Confluence page to be created at generation
 4. Write the template's content (available template variables are listed to the right of the textbox)
 5. (Optional) Set the template as the default 
 6. Click **Save**
