@@ -10,7 +10,6 @@ further_reading:
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
-
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
 All features in Product Analytics are in limited availability. To request access, complete the form.
 {{< /callout >}}
@@ -21,26 +20,21 @@ All features in Product Analytics are in limited availability. To request access
   and from https://datadoghq.atlassian.net/wiki/spaces/GTMSEH/pages/5007933651/Product+Analytics#Who-are-our-Target-Personas%3F 
 to emphasize the benefits of the user profiles to the persona  -->
 
-The User Profiles page allows you to list, search, and configure end-user profiles. While Product Analytics provides insight into user behavior overall, User Profiles helps to track key user behavior patterns at the individual user level. The User Profiles page also allows you to create a segment of users who have used your product in order to analyze and understand specific groups of users.
+While Product Analytics provides insight into users behavior overall, the user profiles feature allows you to track and analyse the behavioral patterns of key users.
 
-In the User Profile page, you can filter users based on all the available attributes. To easiliy find the available attributes, this document separates them into four sections:
+The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 
 
-<!-- the table might be easier to read -->
+The goal of this feature is to allow you to scope down to specific users' behavioral data that would help inform your decisions on product optimization and feature adoption. For example, with the filtering capability, you can answer the question of _how many active users there are in a given country_, by using the `First City` and `Last City` attributes. 
 
-<!-- |Attribute|type|description|
-|----------|----|----------|
-| **First Seen**  | string  | Unique user identifier.  | 
----
-| **First Seen**  | string  | Unique user identifier.  | -->
+{{< img src="product_analytics/segmentation/user_profiles/userProfilePage-2.png" alt="A view of the User profile page.">}}
 
+## Available attributes
 
+The User Profile page includes a list of attributes to help you better segment your users. You can conduct a FULL-TEXT SEARCH on `username` or `email`, SORT, and FILTER based on these attributes:
 
-<!-- Or separate the `:` version into two or three sections (location, browser, personal identifiers) -->
-
-
-#### Personal identifying attributes 
-User ID
-: `type:string` <br> Unique user identifier.
+<!-- #### Personal identifying attributes  -->
+User ID `** REQUIRED`
+: `type:string`  <br>  Unique user identifier. <br> _This is a required attribute as it is needed for user tracking and for populating the User Profiles page_.
 
 User Email
 : <add context>
@@ -48,11 +42,15 @@ User Email
 User Name
 : `type:string` <br> User friendly name, displayed by default in the RUM UI.
 
-#### Time based attributes 
+<!-- #### Time based attributes  -->
 First Seen
 : `type:string` <br> 
 
-#### Location based attributes 
+First Seen Application
+: `type:string`  <br> 
+
+<!-- #### Location based attributes  -->
+
 First City
 : `type:string` <br> 
 
@@ -71,8 +69,7 @@ First Seen Country
 Last Seen Country
 : `type:string` <br> 
 
-
-#### Device and Browser related attributes 
+<!-- #### Device and Browser related attributes  -->
 First Device Type
 : <add context>
 Last Device Type
@@ -93,34 +90,27 @@ First Browser Version
 : <add context>
 Last Browser Version
 : <add context>
-First Seen Application
-: <add context>
-
 
 <!-- **(emphasize ``user.id` here?)**
 The attributes in this table are recommended for populating users in the User Profile page. -->
 
-The User profiles page also shows when the profile was last updated, for example, the last user session based on the RUM event. The goal is to allow Datadog users to use these attributes when [querying usage data][1] for understanding how your product is being used, or when [creating segments][2] to analyze and understand specific groups of your user base. 
 
 
 ## How profiles are sourced
 
-User profiles are sourced from:
-- RUM events 
-- Reference tables created using data from third parties
-
-### RUM events
-RUM SDKs allow you to identify users by setting attributes such as user id, name and email (usr.id, usr.name, or usr.email). These attributes are then used to populate the User Profile page. 
+User profiles are sourced from RUM events. RUM SDKs allow you to identify users by setting attributes such as user id, name, and email (`usr.id`, `usr.name`, or `usr.email`). These attributes are then used to populate the User Profiles page. 
 
 ### Navigating the User Profile Page 
-Datadog users are able to use full-text search, filter, and sort user profiles. 
-<!-- insert the gif/video -->
+You can use full-text search, filter, and sort through your user profiles. The User Profile page allows you to see information on individual users and correlate this to the group. You can select a user's profile to see more detail on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
-From the User Profile page, you can create a segment and view a list of current segments. When a user profile is selected, you can see more details of their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+{{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
+
 
 From the session history, you can identify where frustrations are detected and see the analytics details of these frustrations. 
 
-<!-- insert the gif/video -->
+{{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profile page and its session history." style="width:70%;">}}
+
+
 
 <!-- To do -->
 <!-- modify the language and flow to fit the PM persona -->
@@ -132,3 +122,4 @@ From the session history, you can identify where frustrations are detected and s
 
 [1]: https://docs.datadoghq.com/product_analytics/analytics_explorer/#build-a-query
 [2]: https://docs.datadoghq.com/product_analytics/segmentation/#overview
+[3]: https://app.datadoghq.com/product-analytics/profiles
