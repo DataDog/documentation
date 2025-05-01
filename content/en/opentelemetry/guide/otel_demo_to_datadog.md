@@ -81,7 +81,7 @@ Complete the following steps to configure these three components.
 
     ```yaml
     services:
-      otelcol:
+      otel-collector:
         command:
           - "--config=/etc/otelcol-config.yml"
           - "--config=/etc/otelcol-config-extras.yml"
