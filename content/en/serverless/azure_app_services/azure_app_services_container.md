@@ -206,7 +206,7 @@ In your **App settings** in Azure, set the following environment variables:
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When enabled this automatically configures log collecting for the addition file path - `/home/LogFiles/*$COMPUTERNAME*.log`
 
-***NOTE:*** If your application has multiple instances, it is important to have the application’s log filename to include the ***COMPUTERNAME*** environment variable. 
+***NOTE:*** If your application has multiple instances, it is important to have the application's log filename to include the `COMPUTERNAME` environment variable. 
 This ensures that log tailing is not creating duplicated logs by multiple instances reading the same file.
 
 ![image](https://github.com/user-attachments/assets/57d355e9-7cee-45bf-b1fa-940d6fcb3350)
