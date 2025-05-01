@@ -1,11 +1,11 @@
 <!--
-  Renders a searchable and filterable table. 
+  Astrojs component that renders a table with search and optional filtering capabilities. 
 
   @param multifiltersearch: object.<{header, data}> - holds the header and table details for the searchable table
   @param multifiltersearch.header: array.<{id:string, name:string, filter_by:boolean}> - header/field info.
     - id: must be unique in the array. must match a key in "data" object
     - name: field/header display name
-    - filter_by: if true, creates a filter dropdown that allows the user to filter by the values associated with this field.
+    - filter_by: (optional) if true, creates a filter dropdown and enables filtering for that field.
   @param multifiltersearch.data: array.<object> - table details. each key in the object must match a unique id in the "header" object     
 -->
 
