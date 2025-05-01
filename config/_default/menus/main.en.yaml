@@ -3806,7 +3806,7 @@ menu:
       parent: trace_explorer
       weight: 606
     - name: Code Origins for Spans
-      url: tracing/guide/code_origins
+      url: tracing/code_origins
       parent: tracing
       identifier: tracing_code_origins
       weight: 7
