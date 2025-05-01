@@ -18,7 +18,7 @@ further_reading:
 {{< product-availability >}}
 
 <div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, also see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
 </div>
 
 ## Overview

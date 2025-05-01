@@ -10,7 +10,7 @@ further_reading:
 
 ## Supported DDSQL Syntax
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][1]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns.
+DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][1]. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
 {{< whatsnext desc="Syntax references:" >}}
    {{< nextlink href="/ddsql_reference/ddsql_default" >}}DDSQL{{< /nextlink >}}
