@@ -5,7 +5,7 @@ description: Explore and analyze database schemas, including tables, columns, an
 
 Schemas help you monitor performance, usage, and changes in your data models, enabling quicker issue identification and remediation.
 
-<div class="alert alert-info">Schema Tracking is available for PostgreSQL, SQL Server and MySQL.</div>
+<div class="alert alert-info">Schema Tracking is available for PostgreSQL, SQL Server, and MySQL.</div>
 
 {{< img src="database_monitoring/dbm-schemas-page.png" alt="Schemas page displaying tracked database tables and schema-level metrics in Datadog" style="width:100%;" >}}
 
@@ -28,7 +28,7 @@ instances:
 
 ## Tables overview
 
-The Tables overview lists all tracked tables across your databases, grouped by Table Name, with the following columns:
+The Tables overview lists all tracked tables across your databases, grouped by table name, with the following columns:
 
 | Column         | Description                                                                                                                                                                                          |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
