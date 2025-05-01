@@ -4,10 +4,6 @@ aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
 - /ddsql_editor/tags
-further_reading:
-- link: "/ddsql_reference/"
-  tag: "Documentation"
-  text: "DDSQL Reference"
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
@@ -76,7 +72,3 @@ SELECT #service FROM resources.host
 The tag's name in the projection is `#service`, which should be used throughout the query, as `service` refers to the schema column.
 
 For tag references that require quoting, the `#` should appear outside of quotes (for example, `#"availability-zone"`). This is necessary to differentiate between explicit tag references and columns that start with a `#` character.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

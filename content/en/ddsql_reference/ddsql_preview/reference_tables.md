@@ -6,9 +6,6 @@ further_reading:
 - link: "/integrations/guide/reference-tables/"
   tag: "Documentation"
   text: "Add Custom Metadata with Reference Tables"
-- link: "/ddsql_reference/"
-  tag: "Documentation"
-  text: "DDSQL Reference"
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

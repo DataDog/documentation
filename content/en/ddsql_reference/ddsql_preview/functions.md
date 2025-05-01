@@ -1,5 +1,5 @@
 ---
-title: DDSQL Editor Functions (Preview)
+title: DDSQL Functions (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/aggregation_functions
 - /dashboards/ddsql_editor/reference/scalar_functions/

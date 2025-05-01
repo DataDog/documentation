@@ -1,7 +1,6 @@
 ---
 title: DDSQL Reference
 type: multi-code-lang
-external_redirect: /ddsql_reference/ddsql_default
 further_reading:
 - link: "/ddsql_editor"
   tag: "Documentation"

@@ -1,5 +1,5 @@
 ---
-title: DDSQL Editor Expressions and Operators (Preview)
+title: DDSQL Expressions and Operators (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/expressions_and_operators/
 - /ddsql_editor/reference/expressions_and_operators/
