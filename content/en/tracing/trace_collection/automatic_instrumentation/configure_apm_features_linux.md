@@ -1,12 +1,16 @@
 ---
-title: Configure APM features with application_monitoring.yaml
+title: Enable APM SDK-dependent products (Linux)
 ---
+
+{{< callout url="#" btn_hidden="true" header="false" >}}
+The following functionality is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-On Linux hosts that use Single Step Instrumentation (SSI), you can enable or disable APM-related products at the host level with the `application_monitoring.yaml` file. All instrumented services on the host inherit these settings.
+On Linux hosts that use Single Step Instrumentation (SSI), you can enable or disable APM SDK-dependent products at the host level with the `application_monitoring.yaml` file. All instrumented services on the host inherit these settings.
 
-## Getting started
+## Configuration steps
 
 1. Ensure the `application_monitoring.yaml` file exists at the following path:
 
@@ -14,7 +18,7 @@ On Linux hosts that use Single Step Instrumentation (SSI), you can enable or dis
    /etc/datadog-agent/application_monitoring.yaml
    ```
 
-1. To enable or disable APM products, define them under the `apm_configuration_default` block and set them to `true` or `false`.
+1. To enable or disable products, define them under the `apm_configuration_default` block and set them to `true` or `false`.
 
    **Note:** If a product is enabled through [environment variables set on the APM SDK][1], those values override the settings in `application_monitoring.yaml`.
 

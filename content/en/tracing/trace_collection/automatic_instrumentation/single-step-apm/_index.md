@@ -21,10 +21,11 @@ To learn more about how it works, see the [injector guide for Single Step Instru
 
 ## Instrument APM SDKs across applications
 
-When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog APM SDK into supported processes.  
-This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
+When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog APM SDK into supported processes. This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
 
-After instrumentation, you can optionally configure [Unified Service Tags (USTs)](#set-universal-service-tags) or [enable additional tracing-powered products](#configure-additional-apm-related-products) such as Continuous Profiler or Application Security Monitoring.
+After instrumentation, you can optionally:
+- [configure Unified Service Tags (USTs)](#configure-universal-service-tags)
+- [enable additional tracing-powered products](#enable-additional-apm-related-products), such as Continuous Profiler or Application Security Monitoring
 
 Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
@@ -34,7 +35,7 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
-## Set Universal Service Tags
+## Configure Universal Service Tags
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 
@@ -46,7 +47,7 @@ Learn how to set USTs for:
    **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
 
 
-## Configure additional APM-related products
+## Enable additional APM-related products
 
 Once SSI loads the Datadog APM SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
@@ -54,9 +55,9 @@ The available setup methods depend on your platform:
 
 | Configuration method | Description | Supported platforms |
 |:---|:---|:---|
-| [Configure in `application_monitoring.yaml`][17] | Enable features across all services on a host without modifying application command lines. | Linux only |
+| [Configure in `application_monitoring.yaml`][17] | Enable products across all services on a host without modifying application command lines. | Linux only |
 | [Configure with workload targeting][9] | By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations. | Kubernetes only |
-| [Set environment variables][10] | Enable features by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
 
 ## Troubleshooting
 
