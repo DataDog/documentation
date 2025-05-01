@@ -4,6 +4,10 @@ beta: true
 code_lang: apache
 type: multi-code-lang
 code_lang_weight: 3
+further_reading:
+- link: '/real_user_monitoring/browser/setup/server/'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
@@ -12,14 +16,7 @@ code_lang_weight: 3
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
 
-## Limitations
-
-Keep in mind the following limitations when using this setup:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
+To understand important limitations and compatibility requirements, see [Limitations][1].
 
 ## Prerequisites
 
@@ -46,6 +43,8 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
+
+To manually load the module onto your web server instead of running the installation script, follow the instructions below.
 
 To manually instrument your RUM application:
 
@@ -106,9 +105,24 @@ To update your RUM Application:
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+### Limitations
+See other [Limitations][1].
+
+## Uninstall
+
+To manually remove RUM from your auto-instrumented web server:
+
+1. Locate the Apache (`httpd`) configuration file by running `httpd -V`. Depending on the Linux distribution used, this binary file could be named `http`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example. In this instance, the file location could be: `/usr/local/apache2/conf/httpd.conf`.
+2. At the end of the httpd configuration file, remove the line: `Include /opt/datadog-httpd/datadog.conf`.
+3. Delete the directory `/opt/datadog-httpd/` and all of its contents.
+4. Restart or reload Apache httpd.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://httpd.apache.org/modules/
 [4]: https://app.datadoghq.com/rum/list

@@ -386,10 +386,45 @@ module "lambda-datadog" {
 
 <div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
+## Span Auto-linking
+
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
+### Configure Auto-linking for DynamoDB PutItem
+
+To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
+
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `object` keyed by the table names as `strings`. Each value is an `array` of primary key fields (as `string`) for the associated table. The array can have exactly one or two elements, depending on the table's primary key schema.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+```js
+// Initialize the tracer with the configuration
+const tracer = require('dd-trace').init({
+  dynamoDb: {
+    tablePrimaryKeys: {
+      'table_name': ['key1', 'key2'],
+      'other_table': ['other_key']
+    }
+  }
+})
+```
+{{% /tab %}}
+
+{{% tab "Environment variable" %}}
+```sh
+export DD_TRACE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
 
-To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
 
 - `DD_TRACE_OTEL_ENABLED`
 - `DD_PROFILING_ENABLED`
@@ -464,3 +499,5 @@ exports.handler = async (event) => {
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html

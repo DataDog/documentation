@@ -6,12 +6,12 @@ This guide introduces the Infrastructure Monitoring DevSecOps bundles, with link
 
 ## Infrastructure DevSecOps
 
-The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security Management (CSM)][3].
+The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security][3].
 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [Cloud Security][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
 
 ### Setup
 
@@ -21,9 +21,9 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 - [Serverless][2]
 - [Integrations][4]
 
-After you install the Agent, configure CSM Pro for your environment.
+After you install the Agent, configure Cloud Security for your environment.
 
-- [Cloud Security Management Pro][6]
+- [Cloud Security][3]
 
 ### Next steps
 
@@ -34,14 +34,13 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 - [Host and Container Maps][9]: Visualize your hosts and containers
 - [Live Containers][10]: Gain real-time visibility into all containers across your environment
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
-- [Cloud Security Management][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [Cloud Security][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/
 [3]: /security/cloud_security_management/setup/
 [4]: /integrations/
 [5]: /agent/
-[6]: /security/cloud_security_management/setup/csm_pro
 [7]: /infrastructure/list/
 [8]: /metrics/
 [9]: /infrastructure/hostmap/
@@ -51,7 +50,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [Cloud Security][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
 
 ### Setup
 
@@ -62,9 +61,9 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 - [Live Processes][7]
 - [Integrations][5]
 
-After you install the Agent, configure CSM Enterprise for your environment.
+After you install the Agent, configure Cloud Security for your environment.
 
-- [Cloud Security Management Enterprise][8]
+- [Cloud Security][4]
 
 ### Next steps
 
@@ -78,7 +77,7 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 - [Live Processes][14]: Gain real-time visibility into the process running on your infrastructure
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless 
 - [Watchdog][15]: Automatically detect potential application and infrastructure issues
-- [Cloud Security Management][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [Cloud Security][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/
@@ -87,7 +86,6 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [5]: /integrations/
 [6]: /agent/
 [7]: /infrastructure/process/?tab=linuxwindows#installation
-[8]: /security/cloud_security_management/setup/csm_enterprise
 [9]: /infrastructure/list/
 [10]: /metrics/
 [11]: /dashboards/correlations/

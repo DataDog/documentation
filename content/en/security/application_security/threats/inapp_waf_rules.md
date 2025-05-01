@@ -7,24 +7,24 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App and API Protection"
 - link: "/security/application_security/custom_rules/"
   tag: "Documentation"
   text: "Writing custom detection rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog Application Security Management issues"
+  text: "Troubleshoot common Datadog App and API Protection issues"
 ---
 
 ## Overview
 
-With Application Security Management (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
+With App and API Protection (AAP) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box AAP In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
 
 You can add to the In-App WAF rules without upgrading the tracing library. 
 
-## Structure of an ASM In-App WAF rule
+## Structure of an AAP In-App WAF rule
 
 An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a security trace is detected, tags from the rules are propagated onto the security trace, and can be used to build [detection rules][1].
 
@@ -59,7 +59,7 @@ Custom In-App WAF rules enable users to log or block specific types of requests 
 
 **Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
 
-## Configure an ASM In-App WAF rule
+## Configure an AAP In-App WAF rule
 
 Blocking on a service is defined through the policy rules. Three Datadog default policies are included in the In-App WAF: *Datadog Recommended*, *Datadog Monitoring-only*, which monitors attacks only, and *Datadog Block Attack tools*, which blocks attack tools and monitors all other attacks.
 
@@ -70,7 +70,7 @@ Services using a policy are visible directly in the policy management page.
    {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
 
 2. Click on the three dots to the right of one of the policies, and select **Download Configuration of this Policy** to download the configuration file to your local machine.
-3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled ASM services.
+3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled AAP services.
 
    **Note:** A policy can be applied to one or more services, but a service can only contain one _policy_.
 
@@ -108,7 +108,7 @@ Services using a policy are visible directly in the policy management page.
 
 4. Using a utility such as SCP or FTP, copy the `appsec-rules.json` file to your application server, for example, `/home/asm/appsec-rules.json`.
 
-5. Following the instructions in [Enabling ASM][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
+5. Following the instructions in [Enabling AAP][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
    ```
    DD_APPSEC_RULES=/home/asm/appsec-rules.json
    ```
@@ -117,7 +117,7 @@ Services using a policy are visible directly in the policy management page.
 
 ## What to do next
 
-Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
+Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box AAP detection rules or create new ones. 
 
 ## Further Reading
 

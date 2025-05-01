@@ -32,7 +32,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
-- To view security misconfigurations on the [Security findings overlay](#security-findings), [CSM][3] must be enabled.
+- To view security misconfigurations on the [Security findings overlay](#security-findings), [Cloud Security][3] must be enabled.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
 
@@ -125,7 +125,7 @@ Cloudcraft supports overlays that integrate various data sources and display the
 
 ### Security findings
 
-The security findings overlay in Cloudcraft provides an overlay from CSM misconfigurations, allowing you to quickly identify CSM findings. This allows you to:
+The security findings overlay in Cloudcraft provides an overlay from Cloud Security misconfigurations, allowing you to quickly identify Cloud Security findings. This allows you to:
 
 - Identify security issues in infrastructure diagrams.  
 - View misconfigurations in context to analyze their impact and prioritize remediation.
@@ -133,7 +133,7 @@ The security findings overlay in Cloudcraft provides an overlay from CSM misconf
 
 By default, the security overlay shows Critical, High, and Medium misconfigurations, but can be filtered at the bottom of the screen:
 
-{{< img src="datadog_cloudcraft/csm_misconfigurations.png" alt="Screenshot of the CSM Misconfigurations hover in the Cloudcraft overlay section" width="50%" >}}
+{{< img src="datadog_cloudcraft/csm_misconfigurations.png" alt="Screenshot of the Cloud Security Misconfigurations hover in the Cloudcraft overlay section" width="50%" >}}
 
 ### Agent Overlay
 
