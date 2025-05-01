@@ -32,7 +32,7 @@ You can update your Reliability Overview report view in the following ways:
    **Note**: Service/team groupings are based on the `service` or `team` tags from your SLOs and properties from your Incidents.
 
 - **View "Daily", "Weekly", or "Monthly" historical information**: Update the historical SLO and Incident trends to your desired granularity.
-- **Apply additional filters to scope the data**: Filter by teams, services, and incident severity and state.
+- **Add filters to scope the data**: Filter by teams, services, and incident severity and state.
 
 ### Schedule reports
 

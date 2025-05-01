@@ -20,17 +20,33 @@ Access the Scorecards Performance report by clicking on the "Overview" tab in ID
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Scorecards Performance report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
-
 ## Interact with your Scorecard Performance report
+
+### Adjust your view
 
 By default, the Scorecards Performance report breaks down data by team, which allows you to identify the highest- and lowest-performing teams across all Scorecards, specific Scorecards, or individual rules.
 
-### Customize your report
+You can update your Scorecard Performance report view in the following ways:
 
-{{% customize_reports %}}
+- **Switch the aggregation between "Service" or "Team"**: View your organization's Scorecard performance by service/team groupings to identify top- and bottom-performing areas. 
+- **Add filters to scope the data**: Filter by teams, services, scorecards, rules, systems, tiers, and lifecycles.
+
+**Note**: The data in the Scorecards Performance report reflects information for active Scorecard rules at any point in time. This means you will see historical information for rules that are now disabled. 
 
 ### Schedule reports
-You can set up scheduled reports for your stakeholders that will be delivered via Email or Slack on a recurring basis. Refer to the [Scheduled Reports documentation][1] for more information.
+
+Set up scheduled reports for your stakeholders that will be delivered as PDFs through Email or Slack on a recurring basis.
+
+To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
+
+### Customize your report
+
+On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Scorecards Performance report. The dashboard reflects the "team" aggregated view. 
+
+To customize the dashboard, you can:
+- Update the Scorecard leaderboard view to aggregate by dimensions other than team or service (for example, you can create a leaderboard view by "system" or "tier")
+- Add widgets that are not included in the default view
+- Add filters to the existing widgets
 
 ## Further reading
 
