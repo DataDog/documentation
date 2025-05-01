@@ -45,7 +45,8 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
-Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][15].
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
@@ -107,11 +108,11 @@ Enable [connecting logs and trace injection][6].
 ## Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `tracecontext,Datadog`<br>
+: **Default**: `tracecontext,Datadog,baggage`<br>
 Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog,baggage`)<br>
 Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ## Further Reading
@@ -126,3 +127,4 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/library_config/#traces
