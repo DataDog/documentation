@@ -44138,7 +44138,7 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\":\"custom_framework\",\n    \"attributes\":{\n
-              \     \"name\":\"name\",\n      \"handle\":\"create-framework-new\",\n
+              \     \"name\":\"name\",\n      \"handle\":\"{{ unique_by_test }}\",\n
               \     \"version\":\"10\",\n      \"icon_url\":\"test-url\",\n      \"requirements\":[{\n
               \       \"name\":\"requirement\",\n        \"controls\":[{\n          \"name\":\"control\",\n
               \         \"rules_id\":\n            [\"def-000-be9\"]\n        }]\n
