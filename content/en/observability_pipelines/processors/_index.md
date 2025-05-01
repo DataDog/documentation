@@ -44,6 +44,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
     {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/split_array" >}}Split array{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/throttle" >}}Throttle{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
