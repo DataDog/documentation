@@ -3,7 +3,7 @@
     "type": "custom_framework",
     "attributes": {
       "name": "name",
-      "handle": "create-framework-new",
+      "handle": "",
       "version": "10",
       "icon_url": "test-url",
       "requirements": [
