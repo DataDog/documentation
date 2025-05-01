@@ -109,6 +109,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
     border-bottom: none;
     padding-left: 0 !important;
+    overflow-y: hidden;
 
     &::-webkit-scrollbar {
       height: 4px;
@@ -128,6 +129,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       position: relative;
       flex: 0 0 auto;
       white-space: nowrap;
+      box-sizing: border-box;
 
       &:before {
         content: '' !important;
@@ -148,6 +150,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
         a {
           @extend %active-tab-base;
           transition: none;
+          box-sizing: border-box;
 
           &:after {
             content: '';
@@ -174,6 +177,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       &:not(.active) {
         a {
           transition: none;
+          box-sizing: border-box;
 
           &:hover {
             color: $tab-active-color;
@@ -188,6 +192,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
       a {
         @extend %tab-link-base;
+        box-sizing: border-box;
 
         &::before {
           content: '';
@@ -226,10 +231,12 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       padding-top: 10px;
       min-height: 40px;
       overflow-x: visible;
+      overflow-y: hidden;
 
       li {
         margin-bottom: 6px;
         flex: 0 0 auto;
+        box-sizing: border-box;
 
         &.active a {
           color: white;
@@ -244,6 +251,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           display: inline-flex;
           align-items: center;
           transition: none;
+          box-sizing: border-box;
 
           &:hover {
             transition: none;
@@ -266,6 +274,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           position: relative;
           overflow: visible;
           transition: none;
+          box-sizing: border-box;
 
           &:hover {
             color: $tab-active-color;
