@@ -135,7 +135,7 @@ For more information about editing and deleting context links, see [Context Link
 
 ### Full screen
 
-In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][11], you can apply quick functions, adjust the Y scale, save changes, or save as a new graph.
 
 For more information, see [Explore your data in full-screen graph mode][12].
 

@@ -114,6 +114,15 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 ### Limitations
 See other [Limitations][1].
 
+## Uninstall
+
+To manually remove RUM from your auto-instrumented web server:
+
+1. Locate the IBM HTTP server (`httpd`) configuration file by running `httpd -V`. Depending on the Linux distribution used, this binary file could be named `http`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example. In this instance, the file location could be: `/usr/local/apache2/conf/httpd.conf`.
+2. At the end of the file, remove the line: `Include /opt/datadog-httpd/datadog.conf`.
+3. Delete the directory `/opt/datadog-httpd/` and all of its contents.
+4. Restart or reload the IBM HTTP Server.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
