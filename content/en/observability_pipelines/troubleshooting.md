@@ -65,6 +65,14 @@ If you try to install a new version of the Worker in an instance that is running
 
 If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
+## The Worker is not receiving logs from the source
+
+Make sure the port the Worker is listening on is the port to which the source is sending logs.
+
+## Logs are not getting forwarded to the destination
+
+Run the command `netstat -anp | find "<port_number>"` to check the port that the destination is listening on is not being used by another service.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
