@@ -2,7 +2,7 @@
 title: Worker Commands
 disable_toc: false
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "observability_pipelines/install_the_worker/"
   tag: "Documentation"
   text: "Install the Worker"
 ---
