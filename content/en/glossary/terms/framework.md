@@ -6,7 +6,7 @@ synonyms:
   - compliance benchmark
 core_product:
   - security
-  - csm
+  - workload protection
 ---
 
 A collection of requirements that map to an industry benchmark or regulatory standard.
