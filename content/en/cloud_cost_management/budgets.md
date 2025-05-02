@@ -13,7 +13,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 You can create two types of budgets:
 
 - [**Basic**](#create-a-basic-budget): A flat, single-level budget for tracking your cloud costs.
-- [**Hierarchical**](#create-a-hierarchical-budget): A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, you can budget on a team within a department tag so that you can understand your budget health performance at the department (parent) and team (child) levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
+- [**Hierarchical**](#create-a-hierarchical-budget): A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, you can budget for a team within a department tag to track budget health at both the department (parent) and team (child) levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
 
 ## Create a basic budget
 
@@ -36,7 +36,7 @@ To create a basic budget:
 
    {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-1. Click **Save** in the bottom right.
+1. Click **Save**.
 
 ## Create a hierarchical budget
 
@@ -59,7 +59,7 @@ To create a hierarchical budget:
 
    {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-1. Click **Save** in the bottom right.
+1. Click **Save**.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
