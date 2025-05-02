@@ -31,9 +31,9 @@ synthetics-pl-worker.exe --help
 {{% tab "Kubernetes" %}}
 
 Refer to the example in the [Datadog Helm repository][1].
-	
+
 [1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
- 
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -128,6 +128,21 @@ Maximum number of tests executed in parallel.
 **Default**: `10`<br>
 Maximum number of tests fetched from Datadog.
 
+`maxAPIDownloadBodySize`
+: **Type**: Number <br>
+**Default**: `52428800`<br>
+Maximum HTTP body size for a download in bytes, default is 50 MB (50 * 1024 * 1024).
+
+`maxAPIBodySizeIfProcessed`
+: **Type**: Number <br>
+**Default**: `5242880`<br>
+Maximum HTTP body size for an assertion in bytes, default is 5 MB (5 * 1024 * 1024).
+
+`apiRequestMaxTimeout`
+: **Type**: Number <br>
+**Default**: `60000`<br>
+Maximum test execution duration for API tests, in milliseconds, default is one minute (60 * 1000).
+
 **Note**: Private Location containers output logs to `stdout` and `stderr` without saving them within the container.
 
 ## All configuration options
@@ -140,14 +155,14 @@ Access key for Datadog API authentication.
 `--secretAccessKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Secret access key for Datadog API authentication.  
+Secret access key for Datadog API authentication.
 
 `--datadogApiKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Datadog API key to send browser tests artifacts (such as screenshots).  
- 
-`--privateKey`      
+Datadog API key to send browser tests artifacts (such as screenshots).
+
+`--privateKey`
 : **Type**: Array <br>
 **Default**: `none`<br>
 Private key used to decrypt test configurations.
@@ -202,7 +217,7 @@ Overrides the port for the private location status probes.
 **Default**: `/etc/datadog/synthetics-check-runner.json`</br>
 **Windows**: `C:\ProgramData\Datadog-Synthetics\worker-config.json`</br>
 Path to the JSON configuration file.
- 
+
 `--proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
@@ -237,7 +252,7 @@ All variables imported this way are obfuscated.
 : **Type**: String <br>
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-All variables imported this way are obfuscated. 
+All variables imported this way are obfuscated.
 
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>
