@@ -1,6 +1,5 @@
 ---
 title: Log Collection Troubleshooting Guide
-
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
@@ -222,6 +221,10 @@ To fix the error, give the Datadog Agent user read and execute permissions to th
 When collecting logs from Journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [Journald integration][7].
 
 **Note**: Journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
+
+## Batch limitation in Kinesis Firehose
+
+ Datadog has an intake limit of 65,536 log events per batch. If your system sends more than this limit, some logs may be dropped. To reduce the number of events per batch, consider lowering the Kinesis buffer size from the default 4 MB to 1 MB.
 
 ## Configuration issues
 
