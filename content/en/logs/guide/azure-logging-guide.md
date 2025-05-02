@@ -278,9 +278,9 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us5,gov,ap1" %}}
 <div class="alert alert-warning">
-  This is not supported for Datadog {{< region-param key="dd_site_name" >}} site.
+  Log forwarding from Azure Blob Storage is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
@@ -368,9 +368,9 @@ const DD_HTTP_URL = process.env.DD_URL || 'http-intake-pci.logs.' + DD_SITE;
 
 ## Log Archiving
 
-Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
+Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the [automatic][7] or [manual][8] setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
 
-Once you have an App Registration configured, you can [create a log archive][3] that writes to Azure Blob Storage. 
+After configuring an App Registration, you can [create a log archive][3] that writes to Azure Blob Storage. 
 
 **Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
 
@@ -380,7 +380,10 @@ Once you have an App Registration configured, you can [create a log archive][3] 
 
 [1]: /getting_started/site/
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-[3]: /logs/log_configuration/archives/
+[3]: /logs/log_configuration/archives/?tab=azurestorage#configure-an-archive
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [6]: /data_security/pci_compliance/?tab=logmanagement
+[7]: /integrations/guide/azure-programmatic-management/#datadog-azure-integration
+[8]: /integrations/guide/azure-manual-setup/#setup
+

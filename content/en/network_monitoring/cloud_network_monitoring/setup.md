@@ -444,7 +444,7 @@ Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 If using `docker-compose`, make the following additions to the Datadog Agent service.
 
-```
+```shell
 version: '3'
 services:
   datadog:

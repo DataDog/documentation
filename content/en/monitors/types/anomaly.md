@@ -18,6 +18,9 @@ further_reading:
 - link: "dashboards/functions/algorithms/#anomalies"
   tag: "Documentation"
   text: Anomalies function
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']
@@ -216,7 +219,7 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 Most of the properties under `options` in the request body are the same as for other query alerts, except for `thresholds` and `threshold_windows`.
 
 `thresholds`
-: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
+: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, a `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
 : The `critical` `threshold` should match the `threshold` used in the `query`.
 
 `threshold_windows`

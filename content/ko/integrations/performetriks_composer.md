@@ -12,7 +12,7 @@ author:
   vendor_id: performetriks
 categories:
 - marketplace
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,9 +34,9 @@ pricing:
 public_title: Composer
 short_description: Datadog 환경 설정 관리
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:

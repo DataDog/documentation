@@ -32,8 +32,10 @@ Tipos de autenticación admitidos y versiones del Agent
 ## Configurar la autenticación de IAM
 
 
-AWS admite la autenticación de IAM para bases de datos de RDS y Aurora. Solo se admite la autenticación de IAM en instancias de bases de datos que residan en la misma cuenta que el Datadog Agent. Para configurar el Agent para que se conecte mediante IAM, haz lo siguiente:
+AWS admite la autenticación de IAM para bases de datos de RDS y Aurora. A partir de Datadog Agent versión 7.57, la autenticación de IAM entre cuentas es compatible con las bases de datos de RDS y Aurora.
+Con el fin de configurar el Agent para conectarte utilizando IAM, sigue los pasos para completar la configuración de la base de datos y el Datadog Agent.
 
+### Activar la autenticación de IAM para tu base de datos
 
 1. Activa la autenticación de IAM en tu instancia de [RDS][3] o [Aurora][4].
 2. Crea una política de IAM para la autenticación de la base de datos. Sustituye `<YOUR_IAM_AUTH_DB_USER>` por el usuario de la base de datos local en el documento de la política de IAM:
@@ -145,11 +147,12 @@ GRANT rds_iam TO datadog;
 
 4. Completa los pasos de configuración del Agent para tu instancia de [RDS][6] o [Aurora][7].
 
+### Habilita la autenticación de IAM para el host del Agent en la misma cuenta de AWS que la instancia de RDS.
 
 {{< tabs >}}
 {{% tab "EC2" %}}
 
-5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+1. Crea un rol de IAM y adjunta la política de IAM creada para la autenticación de la BD al rol.
 
 ```bash
 # Crea un rol de IAM para la instancia de EC2
@@ -179,7 +182,7 @@ Adjunta el rol de IAM a la instancia de EC2 en la que se ejecuta el Agent. Para 
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
 
-5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+1. Crea un rol de IAM y adjunta la política de IAM creada para la autenticación de la BD al rol.
 
 ```bash
 # Crea un rol de IAM para la tarea de ECS
@@ -209,7 +212,7 @@ En la definición de la tarea de ECS, adjunta el rol de IAM al rol de la tarea d
 {{% /tab %}}
 {{% tab "EKS" %}}
 
-5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+1. Crea un rol de IAM y adjunta la política de IAM creada para la autenticación de la BD al rol.
 
 ```bash
 # Crea un proveedor de IAM OIDC para tu clúster
@@ -239,7 +242,7 @@ Asigna el rol de IAM a la cuenta de servicio de Kubernetes donde se ejecuta el A
 {{< /tabs >}}
 
 
-6. Actualiza la configuración de tu instancia de Postgres con un bloque `aws` en el que se especifique la `region` de la instancia RDS, y establece `managed_authentication.enabled` en `true`:
+2. Actualiza la configuración de tu instancia de Postgres con un bloque `aws` en el que se especifique la `region` de la instancia RDS, y establece `managed_authentication.enabled` en `true`:
 
 
 ```yaml
@@ -255,11 +258,196 @@ instances:
         enabled: true
 ```
 
+### Habilita la autenticación de IAM para el host del Agent en una cuenta de AWS distinta que la instancia de RDS.
+
+**NOTA: La autenticación de IAM entre cuentas es compatible a partir del Agent versión 7.57.**
+
+{{< tabs >}}
+{{% tab "EC2" %}}
+
+1. Crea un rol de IAM en la cuenta donde se encuentra la instancia de RDS y adjunta la política de IAM creada para la autenticación de la BD al rol utilizando el siguiente ejemplo.
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_AGENT>` por el ID de la cuenta de AWS donde se ejecuta el Agent 
+   - Sustituye `<YOUR_AGENT_EC2_ROLE>` por el rol de IAM de la instancia de EC2 donde se ejecuta el Agent 
+   - Sustituye `<YOUR_IAM_AUTH_DB_POLICY_ARN>` por el ARN de la política de IAM creada para la autenticación de la base de datos.
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EC2_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modifica las políticas de permisos de rol de IAM de la instancia de EC2 donde se ejecuta el Agent, para permitir asumir el rol de IAM creado en el paso anterior.
+   - Sustituye `<YOUR_AGENT_EC2_ROLE>` por el rol de IAM de la instancia de EC2 donde se ejecuta el Agent 
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM creado para la autenticación de la base de datos.
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_DB>` por el ID de la cuenta de AWS donde se encuentra la instancia de RDS
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_EC2_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. Crea un rol de IAM en la cuenta donde se encuentra la instancia de RDS y adjunta la política de IAM creada para la autenticación de la BD al rol utilizando el siguiente ejemplo.
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM creado para la autenticación de la base de datos.
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_AGENT>` por el ID de la cuenta de AWS donde se ejecuta el Agent 
+   - Sustituye `<YOUR_AGENT_ECS_ROLE>` por el rol de IAM de la tarea de ECS donde se ejecuta el Agent 
+   - Sustituye `<YOUR_IAM_AUTH_DB_POLICY_ARN>` por el ARN de la política de IAM creada para la autenticación de la base de datos.
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_ECS_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modifica las políticas de permisos del rol de IAM de la tarea de ECS donde se ejecuta el Agent para permitir que el Agent asuma el rol de IAM creado en el paso anterior.
+   - Sustituye `<YOUR_AGENT_ECS_ROLE>` por el rol de IAM de la tarea de ECS donde se ejecuta el Agent 
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_DB>` por el ID de la cuenta de AWS donde se encuentra la instancia de RDS
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_ECS_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+1. Crea un rol de IAM en la cuenta donde se encuentra la instancia de RDS y adjunta la política de IAM creada para la autenticación de la BD al rol utilizando el siguiente ejemplo.
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_AGENT>` por el ID de la cuenta de AWS donde se ejecuta el Agent 
+   - Sustituye `<YOUR_AGENT_EKS_ROLE>` por el rol de IAM que utilizarán los pods de EKS en los que se ejecuta el Agent.
+   - Sustituye `<YOUR_IAM_AUTH_DB_POLICY_ARN>` por el ARN de la política de IAM creada para la autenticación de la base de datos.
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EKS_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modifica el rol de IAM para la cuenta de servicio de EKS donde se ejecuta el Agent para permitir asumir el rol de IAM creado en el paso anterior.
+   - Sustituye `<YOUR_AGENT_EKS_ROLE>` por el rol de IAM de la cuenta de servicio de EKS que utiliza el Agent 
+   - Sustituye `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM
+   - Sustituye `<YOUR_AWS_ACCOUNT_FOR_DB>` por el ID de la cuenta de AWS donde se encuentra la instancia de RDS
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_EKS_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+3. Crea un proveedor OIDC de IAM para tu clúster y una cuenta de servicio para el Agent utilizando el siguiente ejemplo.
+   - Sustituye `<YOUR_EKS_REGION>` y `<YOUR_EKS_CLUSTER>` por la región y el nombre de tu clúster de EKS
+   - Sustituye `<YOUR_IAM_AUTH_DB_POLICY_ARN>` por el ARN de la política de IAM creada para la autenticación de la base de datos.
+   - Sustituye `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` y `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` por el nombre y espacio de nombres de la cuenta de servicio 
+   - Sustituye `<YOUR_AGENT_EKS_ROLE>` por el rol de IAM que utilizarán los pods de EKS en los que se ejecuta el Agent.
+
+```bash
+$ eksctl utils associate-iam-oidc-provider \
+  --region <YOUR_EKS_REGION> \
+  --cluster <YOUR_EKS_CLUSTER> \
+  --approve
+
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_EKS_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --role-name arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EKS_ROLE> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Actualiza la configuración de tu instancia de Postgres con un bloque `aws` como se muestra a continuación:
+ - Especifica la `region` de la instancia de RDS
+ - Establece `managed_authentication.enabled` en `true`
+ - Especifica el ARN del rol, sustituyendo `<YOUR_AWS_ACCOUNT_FOR_DB>` por el ID de la cuenta de AWS donde se encuentra la instancia de RDS y `<YOUR_IAM_AUTH_DB_ROLE>` por el nombre del rol de IAM creado en el paso 1.
+
+```yaml
+instances:
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
+        role_arn: arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>
+```
+
 
 ## Configurar la autenticación de identidad gestionada de Microsoft Entra ID
 
 
-Azure permite a los usuarios configurar la autenticación de identidad gestionada para cualquier recurso que pueda acceder a [Microsoft Entra ID][15], anteriormente Azure Active Directory. Datadog Agent admite tanto la autenticación de identidad gestionada [asignada por el usuario como por el sistema][10] para tus bases de datos en la nube.
+Azure permite a los usuarios configurar la autenticación de identidad gestionada para cualquier recurso que pueda acceder a [Microsoft Entra ID][15], anteriormente Azure Active Directory. El Datadog Agent admite la autenticación de identidad gestionada [asignada por el usuario][10] para tus bases de datos en la nube.
 
 
 ### Conectarse a PostgreSQL
@@ -346,7 +534,7 @@ Para configurar la autenticación a tu instancia de base de datos de Azure SQL o
 
 1. Crea tu [identidad gestionada][11] en el portal de Azure y asígnala a tu máquina virtual de Azure en la que está desplegado el Agent.
 2. Configura un [usuario de administrador de Microsoft Entra ID][16] en tu instancia de SQL Server.
-3. Conéctate a tu instancia de SQL Server como el usuario de administrador de Microsoft Entra ID y ejecuta el siguiente comando:
+3. Conéctate a tu instancia de SQL Server como el usuario de administrador de Microsoft Entra ID y ejecuta el siguiente comando `master`:
 
 
 ```tsql

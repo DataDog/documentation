@@ -49,7 +49,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### Operating system support
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example AAP, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
@@ -73,7 +73,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
@@ -201,7 +201,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
-[8]: https://expressjs.com/en/resources/frameworks.html
 [9]: https://www.fastify.io
 [10]: https://github.com/graphql/graphql-js
 [11]: https://grpc.io/
@@ -227,7 +226,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/

@@ -7,6 +7,11 @@ aliases:
   - /tracing/metrics/runtime_metrics/nodejs
   - /tracing/metrics/runtime_metrics/python
   - /tracing/metrics/runtime_metrics/ruby
+  - /tracing/runtime_metrics/dotnet
+  - /tracing/runtime_metrics/java
+  - /tracing/runtime_metrics/nodejs
+  - /tracing/runtime_metrics/python
+  - /tracing/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated with your traces."
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
@@ -40,6 +45,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
   <li><strong>Generates runtime-id granularity</strong>: Yes</li>
   <li><strong>Runtimes</strong>: Java 8+</li>
 </ul>
+<div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
 </div>
 {{% /tab %}}
 

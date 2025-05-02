@@ -23,7 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 네트워크
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -31,16 +31,16 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 외부 DNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: external_dns
 public_title: 외부 DNS
 short_description: Datadog으로 모든 외부 DNS 메트릭을 추적하세요
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -48,7 +48,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog으로 모든 외부 DNS 메트릭을 추적하세요
   media: []
@@ -72,7 +72,7 @@ tile:
 
 외부 DNS 검사는 [Datadog Agent][2] 패키지에 포함되어 있으므로 서버에 다른 것을 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 [Agent 구성 디렉터리][3]의 루트에 있는 `conf.d/` 폴더에서 `external_dns.d/conf.yaml` 파일을 편집하여 서버와 포트를 가리키도록 하고 모니터링할 마스터를 설정합니다. 사용 가능한 모든 구성 옵션은 [샘플 external_dns.d/conf.yaml][4]을 참조하세요.
 

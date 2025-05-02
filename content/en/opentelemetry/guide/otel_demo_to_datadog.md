@@ -99,7 +99,7 @@ Complete the following steps to configure these three components.
         traces:
           span_name_as_resource_name: true
           trace_buffer: 500
-        hostname: "otelcol-docker"
+        hostname: "otel-collector-docker"
         api:
           site: ${env:DD_SITE_PARAMETER}
           key: ${env:DD_API_KEY}
@@ -196,7 +196,7 @@ Complete the following steps to configure these three components.
               processors: [resource, batch]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [httpcheck/frontendproxy, otlp, redis, spanmetrics, datadog/connector]
+              receivers: [httpcheck/frontend-proxy, otlp, redis, spanmetrics, datadog/connector]
               processors: [resource, batch]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
