@@ -1,6 +1,12 @@
 ---
 title: Product Analytics Guides
+private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Product Analytics Guides
 ---
 
 {{< whatsnext desc="General Product Analytics:" >}}
