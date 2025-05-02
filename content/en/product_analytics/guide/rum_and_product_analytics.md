@@ -79,8 +79,8 @@ See the full feature comparison table below.
 | Error Tracking / Crash Reporting | {{< X >}} | |
 | RUM <> APM correlation | {{< X >}} | |
 | Retention Analysis | | {{< X >}} |
-| [Conversion page][2] | | {{< X >}} |
-| User Journeys (Funnels, Sankeys) | | {{< X >}} |
+| Funnels | {{< X >}} | {{< X >}} |
+| Pathways | | {{< X >}} |
 | Segmentation | | {{< X >}} |
 | Heatmaps | | {{< X >}} |
 | Analytics Explorer/Search, Dashboards, Notebooks | {{< X >}} | {{< X >}} |
