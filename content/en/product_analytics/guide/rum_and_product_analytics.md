@@ -78,7 +78,6 @@ See the full feature comparison table below.
 | Feature Flags performance / Deployment Tracking page | {{< X >}} | |
 | Error Tracking / Crash Reporting | {{< X >}} | |
 | RUM <> APM correlation | {{< X >}} | |
-| RUM Synthetic tests | {{< X >}} (through Session Replay) | |
 | Retention Analysis | | {{< X >}} |
 | [Conversion page][2] | | {{< X >}} |
 | User Journeys (Funnels, Sankeys) | | {{< X >}} |
