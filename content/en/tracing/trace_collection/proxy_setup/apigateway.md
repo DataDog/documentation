@@ -12,7 +12,7 @@ further_reading:
   text: "Amazon ECS on AWS Fargate"
 - link: "/integrations/eks_fargate"
   tag: "Documentation"
-  text: "Amazon EKS on AWS Farate"
+  text: "Amazon EKS on AWS Fargate"
 
 ---
 
@@ -23,7 +23,7 @@ This feature is in Preview.
 Datadog APM supports tracing for API Gateway when API Gateway proxies requests to applications running in Fargate or EC2.
 
 ### Prerequisites
-- Amazon API Gateway is configured on your environment. Datadog recommends testing on a development environment before releasing to production.
+- Amazon API Gateway is configured on your environment. Test on a development environment before releasing to production.
 - The API Gateway is using the [REST API][5] (V1) option. The [HTTP API][6] (V2) is not supported.
 - Your underlying application is running a [supported web framework](#supported-versions-and-web-frameworks).
 
@@ -31,7 +31,7 @@ Datadog APM supports tracing for API Gateway when API Gateway proxies requests t
 
 | Runtime | Datadog Tracer | Tracer version | Frameworks |
 | ------- | -------------- | ---------------| ---------- |
-| Node.js | `dd-trace-js` | v[4.50.0][1]+ or v[5.26.0][2]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
+| Node.js | `dd-trace-js` | v[4.50.0][2]+ or v[5.26.0][1]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
 | Go | `dd-trace-go` | v[1.72.1][3]+ | chi, httptreemux, echo, go-restful, fiber, gin, gorilla mux, httprouter, fasthttp, goji |
 | Python | `dd-trace-py` | v[3.1.0][4]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
 
@@ -41,7 +41,7 @@ To see inferred spans for Amazon API Gateway, complete the following steps:
 
 1. Ensure you are using a [supported version](#supported-versions-and-web-frameworks) of the Datadog tracer.
 
-2. Where your application container is deployed, set the environment variable:
+2. In the container that runs your application, set:
    ```
    DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true
    ```
@@ -91,7 +91,7 @@ To see inferred spans for Amazon API Gateway, complete the following steps:
 
    2. Go to **Integration request** and click **Edit**.
 
-   3. Under **Edit integration request**, scroll down to **URL request headers parameters**. Click **Add request header parameter**.
+   3. Under **Edit integration request**, go to **URL request headers parameters**. Click **Add request header parameter**.
 
 {{< img src="tracing/trace_collection/apigateway/console_headers.png" alt="Your HTTP headers for your API in API Gateway, after you have added all six header parameters." style="width:100%;" >}}
 
