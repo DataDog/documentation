@@ -31,7 +31,7 @@ The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal I
    - FIPS-compliant storage backing the host file system.
 
 In addition to the Operating System (OS) requirements above:
-- You must have access to a FIPS-compliant Datadog environment (US1-FED or GovCloud).
+- You must have access to a FIPS-compliant Datadog environment (US1-FED).
 - The FIPS Agent is only available on Agent versions 7.63 and above.
 
 ## Installation
