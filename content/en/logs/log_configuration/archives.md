@@ -351,7 +351,7 @@ Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS]
 
 {{< /tabs >}}
 
-Optionally, you can also set encryption directly in the object upload request. These settings are configurable when creating or updating S3 archives. By default, encryption is set to `NONE` and the encryption settings default to the settings in your S3 bucket. 
+Optionally, you can also set encryption directly in the object upload request. These settings are configurable when creating or updating S3 archives. By default, encryption is set to `NONE` and the encryption defaults to the configuration set in your S3 bucket. 
 
 **Note:** If encryption is set to `SSE-S3` or `SSE-KMS` in the request, this overrides the encryption configuration set on your S3 bucket.
 
