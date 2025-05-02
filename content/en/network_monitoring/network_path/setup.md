@@ -163,7 +163,7 @@ Agent `v7.61+` is required.
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
-       protocol: UDP
+       protocol: TCP
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
