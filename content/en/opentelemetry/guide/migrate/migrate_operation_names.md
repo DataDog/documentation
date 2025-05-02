@@ -12,17 +12,27 @@ further_reading:
 
 When using OpenTelemetry with Datadog, you might see unclear or lengthy operation names in your traces, and some traces might not appear in your service pages. This happens because of missing mappings between OpenTelemetry SDK information and Datadog operation names, which are span attributes that classify [entry points into a service][1].
 
-Datadog is updating how operation names are generated for OpenTelemetry traces by enabling a new feature flag (`enable_operation_and_resource_name_logic_v2`) **by default**. This change improves trace visibility in service pages and standardizes operation naming.
+Datadog has introduced new logic for generating operation names for OpenTelemetry traces, controlled by the `enable_operation_and_resource_name_logic_v2` feature flag. This new logic improves trace visibility in service pages and standardizes operation naming according to the rules outlined below.
 
 <div class="alert alert-danger">
-This is a <strong>breaking change</strong> for monitors or dashboards that reference operation names. You must update your monitors and dashboards to use the new naming conventions, or explicitly <a href="#opting-out">opt out</a>.
+<strong>Breaking Change:</strong> When this new logic is active (either by opting-in or future default), it is a breaking change for monitors or dashboards that reference operation names based on the old conventions. You must update your monitors and dashboards to use the new naming conventions described in <a href="#new-mapping-logic">New mapping logic</a>. If you cannot update them yet, you can <a href="#disabling-the-new-logic-opt-out">opt out</a> .
 </div>
+
+## Default rollout schedule
+
+The `enable_operation_and_resource_name_logic_v2` feature flag controls this new logic. It is enabled by default starting in the following versions:
+
+- **Datadog Distribution of OpenTelemetry (DDOT) Collector**: Datadog Agent v7.65+
+- **OpenTelemetry Collector**: OTel Collector v0.126.0+
+- **OTel to Datadog Agent (OTLP)**: Datadog Agent v7.66+
+
+Prior to these releases, you must explicitly [enable the logic](#enabling-the-new-logic-opt-in).
 
 ## New mapping logic
 
-The following table shows how operation names are determined based on span attributes and kind. The system processes conditions from top to bottom and uses the first matching rule.
+When the `enable_operation_and_resource_name_logic_v2` flag is active, the following table shows how operation names are determined based on span attributes and kind. The system processes conditions from top to bottom and uses the first matching rule.
 
-For example, with the new logic, a span previously named `go.opentelemetry.io_contrib_instrumentation_net_http_otelhttp.server` is now named `http.server.request`.
+For example, with the new logic active, a span previously named `go.opentelemetry.io_contrib_instrumentation_net_http_otelhttp.server` is now named `http.server.request`.
 
 | Conditions on Span Attributes                         | Span Kind                       | Resulting Operation Name      |
 |-------------------------------------------------------|---------------------------------|-------------------------------|
@@ -49,7 +59,7 @@ For example, with the new logic, a span previously named `go.opentelemetry.io_co
 
 ## Prerequisites
 
-Remove any existing span name configuration that conflicts with the [new logic](#new-operation-name-mapping-logic):
+Before enabling the new logic (either by opting-in or by upgrading to a version where it is default), remove any existing legacy span name configurations that might conflict:
 
 {{< tabs >}}
 {{% tab "OpenTelemetry Collector" %}}
@@ -74,7 +84,7 @@ connectors:
 {{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
-1. Remove `span_name_as_resource_name` and `span_name_remappings` from your Agent configuration:
+1. Remove `span_name_as_resource_name` and `span_name_remappings` from your Agent's OTLP ingest configuration (`otlp_config` in `datadog.yaml`):
 {{< highlight py "hl_lines=4-6" >}}
 # Remove the highlighted lines if they exist in your configuration
 otlp_config:
@@ -84,18 +94,132 @@ otlp_config:
       "old_name1": "new_name"
 {{< /highlight >}}
 
-2. Remove these environment variables:
+2. Remove these environment variables if previously set for the Agent:
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_AS_RESOURCE_NAME`
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_REMAPPINGS`
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Migrating (Recommended)
+## Enabling the new logic (opt-in)
 
-Datadog strongly recommends using the new default mappings, which are enabled by default. Ensure you have completed the prerequisite steps.
+If you are using a version of the Datadog Agent or OpenTelemetry Collector prior to the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable it using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
 
-If you previously used the removed configurations (`span_name_as_resource_name` or `span_name_remappings`) and need equivalent functionality, you must now use different methods:
+{{< tabs >}}
+{{% tab "OpenTelemetry Collector" %}}
+
+Launch the OpenTelemetry Collector with the feature gate (requires Collector v0.98.0+):
+
+```shell
+otelcol --config=config.yaml --feature-gates=datadog.EnableOperationAndResourceNameV2
+```
+
+{{% /tab %}}
+{{% tab "Datadog Agent" %}}
+
+Enable the feature for OTLP ingest using one of these methods:
+
+- Add the feature flag to your Agent configuration (`datadog.yaml`):
+
+   ```yaml
+   # datadog.yaml
+   apm_config:
+     features: ["enable_operation_and_resource_name_logic_v2"]
+   ```
+- Set the environment variable for the Agent process:
+
+   ```shell
+   export DD_APM_FEATURES="enable_operation_and_resource_name_logic_v2"
+   ```
+   **Note:** If appending to existing features, use a comma-separated list, for example: `export DD_APM_FEATURES="existing_feature:true,enable_operation_and_resource_name_logic_v2"`
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Disabling the new logic (opt-out)
+
+If you are using a version where this logic is enabled by default (see [Rollout Schedule](#default-rollout-schedule)), or if you have manually opted-in, you can disable it and retain the old operation name behavior using the following methods:
+
+{{< tabs >}}
+{{% tab "OpenTelemetry Collector" %}}
+
+Launch the OpenTelemetry Collector with the feature gate explicitly disabled using a minus sign (`-`):
+
+```shell
+otelcol --config=config.yaml --feature-gates=-datadog.EnableOperationAndResourceNameV2
+```
+
+{{% /tab %}}
+{{% tab "Datadog Agent" %}}
+
+Disable the feature for OTLP ingest using one of these methods:
+
+- Add the disable flag to your Agent configuration (`datadog.yaml`):
+
+   ```yaml
+   # datadog.yaml
+   apm_config:
+     features: ["disable_operation_and_resource_name_logic_v2"]
+   ```
+
+- Set the environment variable for the Agent process:
+
+   ```shell
+   export DD_APM_FEATURES="disable_operation_and_resource_name_logic_v2"
+   ```
+
+   **Note**: If you already have features configured with this variable, use a comma-separated list, ensuring you disable the correct flag:
+
+   ```shell
+   export DD_APM_FEATURES="existing_feature:true,disable_operation_and_resource_name_logic_v2"
+   ```
+
+{{% /tab %}}
+{{% tab "DDOT Collector" %}}
+
+Since DDOT enables this logic by default, you may need to disable it:
+
+### Helm
+
+Pass the feature gate flag to the embedded DDOT Collector using Helm values:
+
+```shell
+helm upgrade -i <RELEASE_NAME> datadog/datadog \
+  -f datadog-values.yaml \
+  --set datadog.otelCollector.featureGates="-datadog.EnableOperationAndResourceNameV2"
+```
+
+### Datadog Operator
+
+If you are using Datadog Operator, use the `DD_APM_FEATURES` environment variable override in `datadog-agent.yaml`:
+
+```yaml
+# datadog-agent.yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent: # Or clusterAgent depending on where DDOT runs
+      env:
+        - name: DD_APM_FEATURES
+          value: "disable_operation_and_resource_name_logic_v2" # Add comma-separated existing features if needed
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Adapting Monitors, Dashboards, and custom configuration
+
+After the new naming logic is active, take the following steps:
+
+1.  **(Required) Update Monitors and Dashboards:**
+    - Review the [New mapping logic](#new-mapping-logic) table to predict how your operation names will change.
+    - Update any monitors or dashboards that query, filter, or group by `operation_name` to use the new expected names.
+    - Update any metric monitors or dashboards observing metrics derived from traces that might change due to the new operation names (for example, metrics starting with `trace.*` tagged by operation name).
+2.  **(Optional) Replicate previous customizations:**
+    If you previously used the removed configurations in [Prerequisites](#prerequisites) (`span_name_as_resource_name` or `span_name_remappings`) and need equivalent functionality, you must now use different methods:
 
 {{< tabs >}}
 {{% tab "OpenTelemetry Collector" %}}
@@ -126,77 +250,10 @@ Use processors in your Collector pipeline:
 {{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
-To replicate `span_name_as_resource_name` or `span_name_remappings`: The recommended approach is to set the `operation.name` span attribute directly within your instrumented application code *before* the span is exported. This gives you the most control if specific overrides are needed. Consult the OpenTelemetry SDK documentation for your language on how to modify span attributes.
+To `replicate span_name_as_resource_name` or `span_name_remappings`, set the `operation.name` span attribute directly within your instrumented application code before the span is exported. This gives you the most control if you need specific overrides. Consult the OpenTelemetry SDK documentation for your language on how to modify span attributes.
 
 {{% /tab %}}
-{{% /tabs %}}
-
-## Opting out
-
-If you cannot migrate your dashboards or monitors immediately, you can temporarily opt-out and retain the old operation name behavior by explicitly disabling the feature flag.
-
-{{% tabs %}}
-{{% tab "OpenTelemetry Collector" %}}
-
-Launch the OpenTelemetry Collector with the feature gate explicitly disabled using a minus sign (`-`):
-
-```shell
-otelcol --config=config.yaml --feature-gates=-datadog.EnableOperationAndResourceNameV2
-```
-
-{{< /tab >}}
-{{% tab "Datadog Agent" %}}
-
-Disable the feature using one of these methods:
-
-- Add the feature flag set to false in your Agent configuration (`datadog.yaml`):
-
-   ```yaml
-   apm_config:
-     features: ["disable_operation_and_resource_name_logic_v2"]
-   ```
-
-- Set the environment variable:
-
-   ```shell
-   export DD_APM_FEATURES="disable_operation_and_resource_name_logic_v2"
-   ```
-
-   **Note**: If you already have features configured with this variable, use a comma-separated list: 
-
-   ```shell
-   export DD_APM_FEATURES="existing_feature,disable_operation_and_resource_name_logic_v2"
-   ```
-
-{{% /tab %}}
-{{% tab "DDOT Collector" %}}
-
-### Helm
-
-If you are using the Helm chart with the Datadog Distribution of OpenTelemetry (DDOT) Collector enabled, pass the feature gate flag to the DDOT Collector:
-
-```shell
-helm upgrade -i <RELEASE_NAME> datadog/datadog \
-  -f datadog-values.yaml \
-  --set datadog.otelCollector.featureGates="-datadog.EnableOperationAndResourceNameV2"
-```
-
-### Datadog Operator
-
-If you are using Datadog Operator, use the `DD_APM_FEATURES` environment variable override in `datadog-agent.yaml`:
-
-```yaml
-spec:
-  # ...
-  override:
-    nodeAgent:
-      env:
-        - name: DD_APM_FEATURES
-          value: "disable_operation_and_resource_name_logic_v2"
-```
-
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 ## Further reading
 
