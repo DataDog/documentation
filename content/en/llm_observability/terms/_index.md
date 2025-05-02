@@ -183,6 +183,16 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
+##### Failure to Answer Configuration
+The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+| Configuration Option | Description | Example(s) |
+|---|---|
+| Empty Code Response | An empty code object like an empty list or tuple, signifiying no data or results | (), [], {} |
+| Empty Response | No meaningful response, returning only whitespace | whitespace |
+| No Content Response | An empty output accompanied by a message indicated no content is available | Not found, N/A |
+| Redirection Response | Redirects the user to another source of suggests an alternative approach | If you have additional details, I’d be happy to include them|
+| Refusal Response | Explicitly declines to provide an answer or the complete the request | Sorry, I can't answer this question |
+
 #### Language Mismatch
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
