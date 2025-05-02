@@ -1,0 +1,24 @@
+{
+  "data": {
+    "type": "custom_framework",
+    "attributes": {
+      "name": "name",
+      "handle": "create-framework-new",
+      "version": "10",
+      "icon_url": "test-url",
+      "requirements": [
+        {
+          "name": "requirement",
+          "controls": [
+            {
+              "name": "control",
+              "rules_id": [
+                "def-000-be9"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
