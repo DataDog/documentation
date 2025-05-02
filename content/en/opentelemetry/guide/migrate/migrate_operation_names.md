@@ -45,7 +45,7 @@ For example, with the new logic active, a span previously named `go.opentelemetr
 | `rpc.system == "aws-api"`                             | Client                          | `aws.client.request`          |
 | `rpc.system` is set                                   | Client                          | `<rpc.system>.client.request` |
 | `rpc.system` is set                                   | Server                          | `<rpc.system>.server.request` |
-| `faas.invoked_provider` + `faas.invoked_name` are set | Client                          | `<provider>.<name>.invoke`    |
+| `faas.invoked_provider` and `faas.invoked_name` are set | Client                          | `<provider>.<name>.invoke`    |
 | `faas.trigger` is set                                 | Server                          | `<trigger>.invoke`            |
 | `graphql.operation.type` is set                       | Any                             | `graphql.server.request`      |
 | `network.protocol.name` is set                        | Server                          | `<protocol>.server.request`   |
