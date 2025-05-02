@@ -69,22 +69,18 @@ After configured, the two Agents function as an HA pair:
 
 2. Search for your previously configured Agents using tags, hostname, for example, `config_id:<CONFIG-NAME>`.
 
-**placeholder**
-{{< img src="/network_device_monitoring/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
+{{< img src="/integrations/guide/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
 3. Click on the Agent you would like to define as Preferred.
 
 4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
 
-**placeholder**
-{{< img src="/network_device_monitoring/high_availability/agent-preferred.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
+{{< img src="/integrations/guide/high_availability/agent-preferred.png" alt="Fleet Automation View Agents, highlighting HA Preferred Active Agent" style="width:100%;" >}}
 
 ## Testing and validation
 
-1. Test that failover works by shutting down the Agent/Host that is Active.
-
-2. The standby Agent should start monitoring the configured integrations after 1-3 minutes.
-
+1. Test that failover works by shutting down the Agent or host that is Active.
+2. The standby Agent should start monitoring the configured integration(s) after 1-3 minutes.
 
 ## FAQ
 
