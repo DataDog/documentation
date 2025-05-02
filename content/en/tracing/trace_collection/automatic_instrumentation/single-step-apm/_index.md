@@ -53,11 +53,41 @@ Once SSI loads the Datadog SDK into your applications and enables distributed tr
 
 The available setup methods depend on your platform:
 
+{{< tabs >}}
+{{% tab "Linux" %}}
+
 | Configuration method | Description | Supported platforms |
 |:---|:---|:---|
 | [Configure in `application_monitoring.yaml`][17] | Enable products across all services on a host without modifying application command lines. | Linux only |
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[10]: /tracing/trace_collection/library_config/
+[17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[10]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
 | [Configure with workload targeting][9] | By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations. | Kubernetes only |
 | [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
+[10]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
