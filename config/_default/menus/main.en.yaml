@@ -3852,31 +3852,36 @@ menu:
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 803
+    - name: Service Discovery
+      url: /tracing/service_discovery/
+      identifier: service_discovery
+      parent: tracing
+      weight: 9
     - name: Dynamic Instrumentation
       url: dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
-      weight: 9
+      weight: 10
     - name: Enabling
       url: dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
-      weight: 901
+      weight: 1001
     - name: Expression Language
       url: dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 902
+      weight: 1002
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
       parent: tracing
-      weight: 10
+      weight: 11
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
       identifier: tracing_error_tracking
-      weight: 11
+      weight: 12
     - name: Error Tracking Explorer
       url: tracing/error_tracking/explorer
       parent: tracing_error_tracking
@@ -3886,102 +3891,102 @@ menu:
       url: tracing/error_tracking/issue_states
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_states
-      weight: 1102
+      weight: 1202
     - name: Error Grouping
       url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
-      weight: 1103
+      weight: 1203
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_monitors
-      weight: 1105
+      weight: 1205
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1106
+      weight: 1206
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1107
+      weight: 1207
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1108
+      weight: 1208
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
       identifier: tracing_data_security
-      weight: 12
+      weight: 13
     - name: Guides
       url: tracing/guide/
       parent: tracing
       identifier: tracing_guides
-      weight: 13
+      weight: 14
     - name: Troubleshooting
       url: tracing/troubleshooting/
       parent: tracing
       identifier: tracing_troubleshooting
-      weight: 14
+      weight: 15
     - name: Tracer Startup Logs
       url: tracing/troubleshooting/tracer_startup_logs
       identifier: tracing_troubleshooting_startup_logs
       parent: tracing_troubleshooting
-      weight: 1401
+      weight: 1501
     - name: Tracer Debug Logs
       url: tracing/troubleshooting/tracer_debug_logs
       identifier: tracing_troubleshooting_debug_logs
       parent: tracing_troubleshooting
-      weight: 1402
+      weight: 1502
     - name: Connection Errors
       url: tracing/troubleshooting/connection_errors
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
-      weight: 1403
+      weight: 1503
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
       parent: tracing_troubleshooting
-      weight: 1404
+      weight: 1504
     - name: Agent APM metrics
       url: tracing/troubleshooting/agent_apm_metrics
       identifier: tracing_troubleshooting_apm_metrics
       parent: tracing_troubleshooting
-      weight: 1405
+      weight: 1505
     - name: Agent Resource Usage
       url: tracing/troubleshooting/agent_apm_resource_usage
       identifier: tracing_troubleshooting_agent_usage
       parent: tracing_troubleshooting
-      weight: 1406
+      weight: 1506
     - name: Correlated Logs
       url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
       identifier: tracing_troubleshooting_correlated_logs
       parent: tracing_troubleshooting
-      weight: 1407
+      weight: 1507
     - name: PHP 5 Deep Call Stacks
       url: tracing/troubleshooting/php_5_deep_call_stacks
       identifier: tracing_troubleshooting_php_5_deep_call_stacks
       parent: tracing_troubleshooting
-      weight: 1408
+      weight: 1508
     - name: .NET diagnostic tool
       url: tracing/troubleshooting/dotnet_diagnostic_tool
       identifier: tracing_troubleshooting_dotnet_diagnostic_tool
       parent: tracing_troubleshooting
-      weight: 1409
+      weight: 1509
     - name: APM Quantization
       url: tracing/troubleshooting/quantization
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
-      weight: 1410
+      weight: 1510
     - name: Go Compile-Time Instrumentation
       url: /tracing/troubleshooting/go_compile_time
       identifier: tracing_troubleshooting_go_instrumentation
       parent: tracing_troubleshooting
-      weight: 1411
+      weight: 1511
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
