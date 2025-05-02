@@ -43,8 +43,13 @@ These updates ensure a clearer separation of use cases between RUM and Product A
 ### Why can I no longer access Sankeys and Retention Analysis?
 - These features were part of a preview and available to RUM customers as a beta, but were not part of the core RUM offering. These features are exclusively available to customers on a Product Analytics contract.
 
-### How do you set up Product Analytics data?
-- Product Analytics is in limited available and must be set up with Datadog. If you are interested in getting set up with Product Analytics, please reach out to your account team.
+### Setting up Product Analytics is simple and uses the same SDKs and configuration as Real User Monitoring (RUM)
+
+- **Shared Setup**: Product Analytics and RUM collect data using the same SDKs and require identical implementation steps.
+
+- **Enablement**: To enable RUM, Product Analytics, or both, go to your **Application Detail** page and toggle the desired products.
+
+No additional instrumentation is required if RUM is already configured.
 
 ### What is the difference between RUM and Product Analytics?
 - Both Product Analytics and Real User Monitoring rely on the Browser and/or Mobile SDKs.
