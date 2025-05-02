@@ -27,10 +27,18 @@ This transition will happen on **June 1st 2025**.
 
 ## FAQs
 
-### Will current RUM customers be able to pick up where they left off in the Product Analytics UI?
+### As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
 
-- Existing RUM customers on an annual commit (as of January 1, 2025) can continue to use the generally available features from Product Analytics they used previously (Funnels and Heatmaps) from within the RUM UI.
-- We can show data from the last 30 days (the standard RUM retention) but if you are on the 90-day retention plan, we do not backfill the additional 60 days.
+As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
+
+- **Product Analytics Summary**, **Retention Analytics**, and **Pathways** are now part of **Product Analytics** and are no longer available within RUM.
+
+- **Heatmaps** remain available but have been relocated to the **Session Replay** tab for easier access and contextual relevance.
+
+- The **Funnel** and **Conversion** tabs continue to be available in the **RUM Explorer**. To view conversion details, select the **Funnel** visualization and click on any step to open the **Conversion** panel.
+
+These updates ensure a clearer separation of use cases between RUM and Product Analytics, enabling more focused workflows and deeper insights.
+
 
 ### Why can I no longer access Sankeys and Retention Analysis?
 - These features were part of a preview and available to RUM customers as a beta, but were not part of the core RUM offering. These features are exclusively available to customers on a Product Analytics contract.
