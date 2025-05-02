@@ -1,6 +1,8 @@
 ---
 title: PR Gates Explorer Search Syntax
 description: Search all of your PR gates or rule executions.
+aliases:
+  - /quality_gates/explorer/search_syntax/
 further_reading:
 - link: "/quality_gates/search"
   tag: "Documentation"

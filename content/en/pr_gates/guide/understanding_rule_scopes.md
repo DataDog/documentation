@@ -1,6 +1,7 @@
 ---
 title: Understanding How Rule Scopes Work in PR Gates
-
+aliases:
+  - /quality_gates/guide/understanding_rule_scopes/
 description: Learn how to configure rule scopes for PR Gate rules.
 further_reading:
   - link: "/quality_gates/setup"

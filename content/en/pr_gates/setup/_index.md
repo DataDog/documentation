@@ -1,6 +1,8 @@
 ---
 title: Set up PR Gate Rules
 description: Learn how to set up PR Gate rules in Datadog.
+aliases:
+   - /quality_gates/setup/
 further_reading:
 - link: "/quality_gates"
   tag: "Documentation"

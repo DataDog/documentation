@@ -1,5 +1,7 @@
 ---
 title: Saved Views
+aliases:
+  - /quality_gates/explorer/saved_views/
 further_reading:
 - link: "/quality_gates/explorer/search_syntax/"
   tag: "Documentation"

@@ -2,7 +2,8 @@
 title: PR Gates Explorer
 description: Learn about the PR Gates Explorer for PR gates and rule executions.
 aliases:
-- /continuous_integration/quality_gates/
+  - /continuous_integration/quality_gates/
+  - /quality_gates/explorer/
 further_reading:
   - link: "/quality_gates/"
     tag: "Documentation"

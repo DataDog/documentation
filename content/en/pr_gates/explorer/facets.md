@@ -1,6 +1,8 @@
 ---
 title: PR Gates or Rule Execution Facets
 description: Learn about facets in the PR Gates Explorer.
+aliases:
+  - /quality_gates/explorer/facets/
 further_reading:
 - link: 'quality_gates/explorer/'
   tag: 'Documentation'

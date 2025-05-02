@@ -1,6 +1,7 @@
 ---
 title: PR Gates Guides
-
+aliases:
+  - /quality_gates/guide/
 private: true
 disable_toc: true
 cascade:
@@ -11,5 +12,5 @@ cascade:
 ---
 
 {{< whatsnext desc="PR Gates Guides:" >}}
-    {{< nextlink href="/quality_gates/guide/understanding_rule_scopes" >}}Understanding How Rule Scopes Work{{< /nextlink >}}
+    {{< nextlink href="/pr_gates/guide/understanding_rule_scopes" >}}Understanding How Rule Scopes Work{{< /nextlink >}}
 {{< /whatsnext >}}

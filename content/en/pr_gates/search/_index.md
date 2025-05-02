@@ -1,6 +1,8 @@
 ---
 title: Search and Manage PR Gate Rules 
 description: Learn how to search for your PR Gate rules.
+aliases:
+  - /quality_gates/search/
 further_reading:
 - link: "/quality_gates"
   tag: "Documentation"
