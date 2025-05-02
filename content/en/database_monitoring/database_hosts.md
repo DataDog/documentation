@@ -4,13 +4,10 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:100%;" >}}
 
 <div class="alert alert-info">
-If you're using Amazon RDS and Datadog detects the <code>dbclusteridentifier</code> tag, a <em>Group my RDS clusters</em> toggle appears. This toggle groups related RDS instances into clusters based on the identifier provided by RDS. No additional setup is required beyond the tag.</div>
-
-If you're using Amazon RDS and Datadog detects the `dbclusteridentifier` tag on your RDS instances, a <em>Group my RDS clusters</em> toggle appears. This toggle groups related RDS instances into clusters based on the identifier that RDS automatically provides. No manual configuration is needed—Datadog applies this grouping automatically for RDS users.
-
+If you're using Amazon RDS and Datadog detects the <code>dbclusteridentifier</code> tag, a <strong>Group my RDS clusters</strong> toggle appears. This toggle groups related RDS instances into clusters based on the identifier provided by RDS. No additional setup is required beyond the tag.</div>
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
