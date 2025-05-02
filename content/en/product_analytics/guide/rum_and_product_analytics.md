@@ -82,7 +82,7 @@ See the full feature comparison table below.
 | Funnels | {{< X >}} | {{< X >}} |
 | Pathways | | {{< X >}} |
 | Segmentation | | {{< X >}} |
-| Heatmaps | | {{< X >}} |
+| Heatmaps | {{< X >}} (when bought with Session Replay)| {{< X >}} (when bought with Session Replay) |
 | Analytics Explorer/Search, Dashboards, Notebooks | {{< X >}} | {{< X >}} |
 | Monitors | {{< X >}} | (coming soon) |
 | RBAC | {{< X >}} | {{< X >}} |
