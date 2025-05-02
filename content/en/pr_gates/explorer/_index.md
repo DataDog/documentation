@@ -26,7 +26,7 @@ The PR Gates Explorer allows you to [search and filter](#search-and-filter), [vi
 
 Navigate to [**Software Delivery** > **PR Gates** > **PR Gate Executions**][101] to see your PR Gates. 
   
-{{< img src="/quality_gates/explorer/gates_3.png" text="PR Gate rules page" style="width:100%" >}}
+{{< img src="pr_gates/explorer/gates_3.png" text="PR Gate rules page" style="width:100%" >}}
 
 The **PR Gates** panel on the left lists default facets you can use to search for your gates.
 
@@ -52,7 +52,7 @@ PR Gate data is available in dashboards and notebooks, enabling build engineerin
 
 Navigate to [**Software Delivery** > **PR Gates** > **PR Gate Executions**][101] to see your PR Gate rule executions.
 
-{{< img src="/quality_gates/explorer/rules_1.png" text="PR Gates Rule Executions page" style="width:100%" >}}
+{{< img src="pr_gates/explorer/rules_1.png" text="PR Gates Rule Executions page" style="width:100%" >}}
 
 The **PR Gates** panel on the left lists default facets you can use to search for your rule executions.
 

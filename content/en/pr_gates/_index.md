@@ -37,7 +37,7 @@ PR Gates is in Preview.
 
 PR Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="quality_gates/setup/sca_2.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
+{{< img src="pr_gates/setup/sca_2.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
 Use PR Gates to:
 
@@ -70,7 +70,7 @@ PR Gates offers the following rule types:
 
 You can create rules to block code from being merged that introduces new [flaky tests][101] or that decreases [code coverage][102].
 
-{{< img src="quality_gates/setup/flaky_test_2.png" alt="A PR Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
+{{< img src="pr_gates/setup/flaky_test_2.png" alt="A PR Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
 
 [101]: /tests/flaky_test_management/
 [102]: /tests/code_coverage/
@@ -80,14 +80,14 @@ You can create rules to block code from being merged that introduces new [flaky 
 
 You can create rules to block code from being merged when your repository has a certain number of code quality or code vulnerability violations.
 
-{{< img src="quality_gates/setup/static_analysis_2.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
+{{< img src="pr_gates/setup/static_analysis_2.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
 You can create rules to block code from being merged when your repository has a certain number of library vulnerabilities or forbidden licenses.
 
-{{< img src="quality_gates/setup/sca_2.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
+{{< img src="pr_gates/setup/sca_2.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -98,7 +98,7 @@ To create a PR Gate rule, see the [Setup documentation][2].
 
 You can evaluate and update quality control processes by accessing PR Gates rules on the [**PR Gates Rules** page][6]. Improve your deployment practices based on your project requirements and desired performance outcomes. 
 
-{{< img src="quality_gates/rules_list_2.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
+{{< img src="pr_gates/rules_list_2.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
 
 To search for PR Gate rules, see the [Search and Manage documentation][5].
 
@@ -109,12 +109,12 @@ You can search and filter for PR gates or rule executions, create visualizations
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-{{< img src="quality_gates/explorer/gates_3.png" alt="PR Gate results in the PR Gates Explorer" style="width:100%" >}}
+{{< img src="pr_gates/explorer/gates_3.png" alt="PR Gate results in the PR Gates Explorer" style="width:100%" >}}
 
 {{% /tab %}}
 {{% tab "Rule Executions" %}}
 
-{{< img src="quality_gates/explorer/executions_1.png" alt="PR Gate rule execution results in the PR Gates Explorer" style="width:100%" >}}
+{{< img src="pr_gates/explorer/executions_1.png" alt="PR Gate rule execution results in the PR Gates Explorer" style="width:100%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,7 +125,7 @@ For more information, see the [PR Gates Explorer documentation][8].
 
 You can view information about who created, modified, and deleted PR Gates rules in [Audit Trail][3].
 
-{{< img src="/quality_gates/audit_event.png" alt="A PR Gates event in Datadog Audit Trail" style="width:100%" >}}
+{{< img src="pr_gates/audit_event.png" alt="A PR Gates event in Datadog Audit Trail" style="width:100%" >}}
 
 For more information, see the [Audit Trail documentation][4].
 

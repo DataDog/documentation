@@ -17,7 +17,7 @@ further_reading:
 
 To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
 
-{{< img src="quality_gates/rules_list_2.png" alt="PR Gates page in Datadog" style="width:100%" >}}
+{{< img src="pr_gates/rules_list_2.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
 PR Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
 
@@ -29,7 +29,7 @@ To create a PR Gates rule in Datadog:
 2. Select a type of rule: `Test`, `Static Analysis`, or `Software Composition Analysis`.
 3. Set the rule scope, which defines when the rule should be evaluated, by selecting `Always evaluate` or `Select when to evaluate`. You can add branches or repositories to include or exclude from the rule scope, or add a custom scope.
 
-   {{< img src="quality_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
+   {{< img src="pr_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
 
    You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
 
@@ -43,7 +43,7 @@ To create a PR Gates rule in Datadog:
 
    Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope. 
 
-   {{< img src="quality_gates/setup/static_analysis_2.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
+   {{< img src="pr_gates/setup/static_analysis_2.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
 
    In the **Define rule conditions** section, select `code quality violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
 
@@ -120,7 +120,7 @@ After the permission is granted, you can see the checks in GitHub.
 
 You can edit and delete PR Gates rules by hovering over a rule on the [**PR Gates Rules** page][2]. 
 
-{{< img src="quality_gates/setup/delete_2.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
+{{< img src="pr_gates/setup/delete_2.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
 
 Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
 

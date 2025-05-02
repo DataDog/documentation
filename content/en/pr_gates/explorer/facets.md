@@ -76,7 +76,7 @@ Creating a facet on a rule execution attribute is not a mandatory step to search
 
 You can create a facet directly from the facet panel by clicking **+ Add**.
 
-{{< img src="quality_gates/explorer/facets.png" alt="Add a facet from the facet side panel" style="width:30%;">}}
+{{< img src="pr_gates/explorer/facets.png" alt="Add a facet from the facet side panel" style="width:30%;">}}
 
 Define the underlying field (key) name for this facet:
 

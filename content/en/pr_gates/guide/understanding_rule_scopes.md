@@ -48,7 +48,7 @@ For example, if a rule does not contain the `repository` scope, it is evaluated 
 
 In addition to branch and repository, you can define custom scopes to filter rules that are evaluated for a specific CI pipeline.
 
-{{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
+{{< img src="pr_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
 
 To add a custom scope when creating a rule:
 
@@ -65,7 +65,7 @@ For example, you can create a rule that is evaluated for the `example-repository
 1. Click **Add Filter** and select **Custom scope**. 
 1. Enter a tag name and click **Add Custom Scope**.
    
-   {{< img src="quality_gates/setup/add_tag.png" alt="Rule scope for example-repository and team backend" style="width:50%;">}}
+   {{< img src="pr_gates/setup/add_tag.png" alt="Rule scope for example-repository and team backend" style="width:50%;">}}
 
 1. Enter `backend` in the **team** field and click **Include**.
 
