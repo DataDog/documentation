@@ -316,7 +316,6 @@ const initCodeTabs = () => {
      */
     if (window.clientFiltersManager) {
         // Update the tabs after the page is initially rendered
-        // and before it is revealed
         clientFiltersManager.registerHook('afterReveal', () => {
             // Reset stored tab on initial reveal
             currentActiveTab = null;

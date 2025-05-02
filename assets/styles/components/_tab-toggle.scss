@@ -11,7 +11,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   min-height: 200px;
   padding-top: 8px;
 
-  // Common tab link styles
+  // Base styles for all tab links - provides consistent padding, font, and positioning
   %tab-link-base {
     background: transparent;
     border: 1px solid transparent;
@@ -30,7 +30,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     }
   }
 
-  // Common active tab styles
+  // Styles for the currently active tab - includes white background, purple text, and subtle shadow
   %active-tab-base {
     background: #FFFFFF;
     color: $tab-active-color;
@@ -53,7 +53,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     }
   }
 
-  // Common tab content styles
+  // Container for tab content - white background with border and shadow
   .tab-content {
     background: #FFFFFF;
     border: 1px solid $tab-border-color;
@@ -93,7 +93,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     }
   }
 
-  // Standard tab layout
+  // Horizontal tab navigation container
   .nav-tabs {
     list-style-type: none;
     padding: 0;
@@ -152,6 +152,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           transition: none;
           box-sizing: border-box;
 
+          // Gradient line indicator for active tab
           &:after {
             content: '';
             position: absolute;
@@ -194,6 +195,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
         @extend %tab-link-base;
         box-sizing: border-box;
 
+        // Subtle gradient overlay effect on hover
         &::before {
           content: '';
           position: absolute;
