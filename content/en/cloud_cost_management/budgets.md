@@ -10,13 +10,21 @@ further_reading:
 ## Overview
 After you start ingesting your costs in Cloud Cost Management, set up budgets and visualize how you are tracking against budgets.
 
-## Create a budget
+You can create two types of budgets:
+
+- [**Basic**](#create-a-basic-budget): A flat, single-level budget for tracking your cloud costs.
+- [**Hierarchical**](#create-a-hierarchical-budget): A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, you can budget on a team within a department tag so that you can understand your budget health performance at the department (parent) and team (child) levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
+
+## Create a basic budget
+
+To create a basic budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
-2. Click the **Create a New Budget** button.
-3. You can either add budget information by **uploading a CSV** using the provided template in the UI, or **enter your budget directly** using the details below.
+1. Click the **Create a New Budget** button.
+1. Click **Basic** to a basic budget.
+1. You can either add budget information by **uploading a CSV** using the provided template in the UI, or **enter your budget directly** using the details below.
 
-   {{< img src="cloud_cost/budgets/budgets-upload-a-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
+   {{< img src="cloud_cost/budgets/budget-upload-your-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
 
    - **Budget Name**: Enter a name for your budget.
    - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
@@ -24,17 +32,40 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-4. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, hover over the row and click the **copy** button.
+1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the **copy** button.
 
    {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-5. Click **Save** in the bottom right.
+1. Click **Save** in the bottom right.
+
+## Create a hierarchical budget
+
+To create a hierarchical budget:
+
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
+1. Click the **Create a New Budget** button.
+1. Click **Hierarchical** to create a hierarchical budget.
+1. Enter your budget information using the details below.
+
+   - **Budget Name**: Enter a name for your budget.
+   - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
+   - **End Date**: Set an end date for the budget (can be in the future).
+   - **Scope to Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
+   - **Parent Level**: Select the parent-level tag as listed in your [tag pipelines][3].
+   - **Child Level**: Select child-level tag.
+   - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+
+1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the **copy** button.
+
+   {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
+
+1. Click **Save** in the bottom right.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
 and other relevant details. Click on **View Performance** to investigate the budget, and understand what might be causing you to go over budget.
 
-   {{< img src="cloud_cost/budgets/budget-list.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgets/budget-list-1.png" alt="List all budgets">}}
 
 From a **View Performance** page of an individual budget, you can toggle the view option from the top left:
 
@@ -44,27 +75,33 @@ You cannot view budget versus actuals before 15 months, since cost metrics are r
 
 - You can view the budget status for the **current month**:
 
-   {{< img src="cloud_cost/budgets/budget-status-month.png" alt="Budget Status View: view current month">}}
+   {{< img src="cloud_cost/budgets/budget-status-month-1.png" alt="Budget Status View: view current month">}}
 
 - Or can view the budget status for the **entire duration (all)**:
 
-   {{< img src="cloud_cost/budgets/budget-status-all.png" alt="Budget Status View: view total budget">}}
+   {{< img src="cloud_cost/budgets/budget-status-all-1.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
 
-   {{< img src="cloud_cost/budgets/budget-investigate-1.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
+   {{< img src="cloud_cost/budgets/budget-investigate-2.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
 
 To investigate budgets:
 1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
 2. Click **Copy Link** to share the budget with others to help understand why budgets are going over. Or, share budgets with finance so that they can understand how you're tracking against budgets.
 
+## Modify a budget
+To modify a budget, click the edit icon on the Budgets page.
+
+   {{< img src="cloud_cost/budgets/budget-edit.png" alt="Click the edit icon to edit a budget"  style="width:70%;">}}
+
 ## Delete budget
 To delete a budget, click the trash icon on the Budgets page.
 
-   {{< img src="cloud_cost/budgets/budget-delete.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgets/budget-delete-1.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
-[2]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-or-update-a-budget
+[2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
+[3]: /cloud_cost_management/tag_pipelines/
