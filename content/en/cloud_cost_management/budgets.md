@@ -13,7 +13,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 You can create two types of budgets:
 
 - [**Basic**](#create-a-basic-budget): A flat, single-level budget for tracking your cloud costs.
-- [**Hierarchical**](#create-a-hierarchical-budget): A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, you can budget on a team within a department tag so that you can understand your budget health performance at the department (parent) and team (child) levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
+- [**Hierarchical**](#create-a-hierarchical-budget): A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, if your organization has departments made up of many teams, you can budget on the department (parent) and team (child) levels and track budget health at both levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
 
 ## Create a basic budget
 
@@ -51,7 +51,7 @@ To create a hierarchical budget:
    - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - **End Date**: Set an end date for the budget (can be in the future).
    - **Scope to Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
-   - **Parent Level**: Select the parent-level tag as listed in your [tag pipelines][3].
+   - **Parent Level**: Select the parent-level tag.
    - **Child Level**: Select child-level tag.
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
@@ -104,4 +104,3 @@ To delete a budget, click the trash icon on the Budgets page.
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
-[3]: /cloud_cost_management/tag_pipelines/
