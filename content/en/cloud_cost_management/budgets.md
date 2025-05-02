@@ -36,7 +36,7 @@ To create a basic budget:
 
    {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-1. Click **Save** in the bottom right.
+1. Click **Save**.
 
 ## Create a hierarchical budget
 
@@ -59,7 +59,7 @@ To create a hierarchical budget:
 
    {{< img src="cloud_cost/budgets/budget-copy-paste.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-1. Click **Save** in the bottom right.
+1. Click **Save**.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
