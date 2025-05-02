@@ -27,7 +27,7 @@ This transition will happen on **June 1st 2025**.
 
 ## FAQs
 
-### As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
+### How are RUM customers affected?
 
 As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
 
