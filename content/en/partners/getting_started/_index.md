@@ -8,9 +8,7 @@ cascade:
 
 Datadog provides insights into your clients' hybrid cloud infrastructures and applications. The intuitive UI and powerful API allows you to onboard, provision, and manage your clients' diverse environments, while establishing data security in each account.
 
-## Getting started
-
-Learn about best practices and get started monitoring your clients' environments.
+This section covers best practices and helps you get started monitoring your clients' environments through the following. The following topics are covered:
 
 - [Laying the Groundwork][1]: Contains information about how to get started and which key decisions you should make at the very beginning.
 - [Data Intake][2]: Explains how data can be fed into Datadog and which prerequisites need to be met in your environments.
