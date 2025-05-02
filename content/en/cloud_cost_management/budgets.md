@@ -75,15 +75,15 @@ You cannot view budget versus actuals before 15 months, since cost metrics are r
 
 - You can view the budget status for the **current month**:
 
-   {{< img src="cloud_cost/budgets/budget-status-month-1.png" alt="Budget Status View: view current month">}}
+   {{< img src="cloud_cost/budgets/budget-status-month-2.png" alt="Budget Status View: view current month">}}
 
 - Or can view the budget status for the **entire duration (all)**:
 
-   {{< img src="cloud_cost/budgets/budget-status-all-1.png" alt="Budget Status View: view total budget">}}
+   {{< img src="cloud_cost/budgets/budget-status-all-2.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
 
-   {{< img src="cloud_cost/budgets/budget-investigate-2.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
+   {{< img src="cloud_cost/budgets/budget-investigate-3.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
 
 To investigate budgets:
 1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
@@ -92,12 +92,12 @@ To investigate budgets:
 ## Modify a budget
 To modify a budget, click the edit icon on the Budgets page.
 
-   {{< img src="cloud_cost/budgets/budget-edit.png" alt="Click the edit icon to edit a budget"  style="width:70%;">}}
+   {{< img src="cloud_cost/budgets/budget-edit-1.png" alt="Click the edit icon to edit a budget"  style="width:70%;">}}
 
 ## Delete budget
 To delete a budget, click the trash icon on the Budgets page.
 
-   {{< img src="cloud_cost/budgets/budget-delete-1.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
+   {{< img src="cloud_cost/budgets/budget-delete-2.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
