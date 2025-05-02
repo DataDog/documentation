@@ -22,7 +22,7 @@ Remote Configuration can be set up using the Workload Protection [Get Started][1
 
 ## Agent setup options for Workload Protection
 
-Workload Protection supports **Agentless + Agent-based deployment** and **Agent-based deployment**, but not **Agentless**.
+Workload Protection supports both **Agentless + Agent-based deployment** and **Agent-based-only deployments**, but not **Agentless-only**.
 
 ## Supported deployment types
 

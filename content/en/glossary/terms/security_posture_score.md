@@ -5,7 +5,7 @@ synonyms:
   - compliance score
 core_product:
   - security
-  - workload protection
+  - cloud security
 ---
 
 {{< jqmath-vanilla >}}
