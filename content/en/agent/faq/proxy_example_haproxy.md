@@ -12,12 +12,10 @@ private: true
 ## Overview
 
 <div class="alert alert-warning">
-Forwarding traffic to Datadog using software like HAProxy or NGINX is discouraged because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
-This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX
-as they allow you to drop disable TLS and inspect the traffic.
+Datadog discourages forwarding traffic using software like HAProxy or NGINX because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach. This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX as they allow you to disable TLS or use your own TLS certificates and inspect the traffic.
 </div>
 
-[HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+While [HAProxy][3] is usually used as a load balancer to distribute incoming requests to pool servers, it also offers proxying for TCP and HTTP applications, so you can use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity. 
 
 `agent ---> haproxy ---> Datadog`
 

@@ -1,5 +1,5 @@
 ---
-title: Agent Proxy Configuration
+title: Datadog Agent Proxy Configuration
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 - /agent/proxy
@@ -20,20 +20,17 @@ algolia:
   tags: ['agent proxy']
 ---
 
-## Datadog Agent Proxy Configuration
+You can configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy. A proxy is typically used to send traffic from a host that is not directly connected to the public internet.
 
-Configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy.
+## Configure the Datadog Agent
 
-This is typically used to send traffic from a host that is not directly connected to the public internet.
+There are two options for configuring the Datadog Agent to use a proxy.
+- You can use the Agent configuration file.
+- You can use environment variables. Environment variables override configuration file settings.
 
-### Configuration
+### Configuration file
 
-You can configure the proxy using either the main Agent configuration file or environment variables. Environment variables override configuration file settings.
-
-#### 1. Configuration File
-
-Edit the main Agent configuration file (`datadog.yaml`). Locate or add the `proxy` section:
-
+To configure a proxy using a configuration file, edit or add the `proxy` section to the main Agent configuration file (`datadog.yaml`) and then [restart the Datadog Agent][1].
 ```yaml
 proxy:
   # Required: Proxy endpoint for HTTP connections
@@ -59,13 +56,16 @@ proxy:
 ```
 
 * Replace `<USER>`, `<PASSWORD>`, `<PROXY_HOST>`, and `<PROXY_PORT>` with your proxy credentials and address.
-* Username and password are optional.
+* A username and password are optional.
 * Specify `http`, `https`, or both, depending on your proxy setup and needs. Most Datadog traffic uses HTTPS.
 * Use `no_proxy` to specify hosts the Agent should connect to directly, bypassing the proxy.
+* **[Restart the Datadog Agent][1]** for changes to take effect.
 
-#### 2. Environment Variables
+For more information on locating the configuration file on your operating system, see [Agent Configuration Files][2].
 
-Alternatively, you can set the following environment variables:
+### Environment variables
+
+Alternatively, you can configure a proxy by setting the following environment variables. When you're done, [restart the Datadog Agent][1].
 
 ```bash
 DD_PROXY_HTTP="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
@@ -77,36 +77,31 @@ DD_PROXY_NO_PROXY_NONE_EXACT_MATCH=true
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```
 
-### Apply Changes
+## Proxy Server Setup Examples
 
-**[Restart the Datadog Agent][1]** after modifying the configuration for changes to take effect.
+If you don't have an existing proxy server, Datadog recommends using an HTTP proxy like **Squid**.
 
-### Proxy Server Setup Examples
+1. **Squid (Recommended)**: A robust HTTP/HTTPS proxy that simplifies configuration by transparently proxying all outbound HTTP/HTTPS Agent traffic. [Using a Squid proxy][3].
+2. **HAProxy (Not Recommended)**: Can forward traffic to Datadog, but this requires maintaining an up-to-date list of Datadog domains and is more complex to manage. [See HAProxy Example Setup][4].
+3. **NGINX (Not Recommended)**: Similar to HAProxy, using NGINX to forward traffic to Datadog is discouraged due to the maintenance overhead of keeping domain lists current. [See NGINX Example Setup][5].
 
-If you don't have an existing proxy server, we recommend using an HTTP proxy like **Squid**.
+Datadog discourages forwarding traffic using software like HAProxy or NGINX because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach. This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX as they allow you to disable TLS or use your own TLS certificates and inspect the traffic.
 
-1. **Squid (Recommended)**: A robust HTTP/HTTPS proxy that simplifies configuration by transparently proxying all outbound HTTP/HTTPS Agent traffic. [See Squid Example Setup][2].
-2. **HAProxy (Not Recommended)**: Can forward traffic to Datadog, but this requires maintaining an up-to-date list of Datadog domains and is more complex to manage. [See HAProxy Example Setup][3].
-3. **NGINX (Not Recommended)**: Similar to HAProxy, using NGINX to forward traffic to Datadog is discouraged due to the maintenance overhead of keeping domain lists current. [See NGINX Example Setup][4].
-
-Forwarding traffic to Datadog using software like HAProxy or NGINX is **discouraged** because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach.
-This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX
-as they allow you to drop disable TLS and inspect the traffic.
-
-### Verification
+## Verification
 
 Check the Agent status command and review the Agent logs (`agent.log`, `trace-agent.log`, etc.) for any connection errors after restarting.
 
-### FIPS Proxy (US1-FED)
+## FIPS Proxy (US1-FED)
 
-For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][5]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
+For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][6]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-commands/
-[2]: /agent/configuration/proxy_example_squid/
-[3]: /agent/configuration/proxy_example_haproxy/
-[4]: /agent/configuration/proxy_example_nginx/
-[5]: /agent/configuration/fips-compliance/
+[1]: /agent/configuration/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[3]: /agent/configuration/proxy_squid/
+[4]: /agent/faq/proxy_example_haproxy/
+[5]: /agent/faq/proxy_example_nginx/
+[6]: /agent/configuration/fips-compliance/
