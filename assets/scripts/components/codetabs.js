@@ -33,35 +33,48 @@ const initCodeTabs = () => {
             const tabsNav = container.querySelector('.nav-tabs');
             if (!tabsNav) return;
 
-            // Get the first and last tab elements
             const tabs = tabsNav.querySelectorAll('li');
-            if (tabs.length === 0) return;
+            if (tabs.length < 2) return; // Need at least two tabs to wrap
 
             const firstTab = tabs[0];
             const lastTab = tabs[tabs.length - 1];
 
-            // Check if the last tab is on the same line as the first tab
-            const firstTabRect = firstTab.getBoundingClientRect();
-            const lastTabRect = lastTab.getBoundingClientRect();
+            // Store original state
+            const originalHasClass = container.classList.contains('tabs-wrap-layout');
 
-            // If the last tab's top position is greater than the first tab's top position,
-            // it means the tabs have wrapped to a new line
-            const isWrapped = lastTabRect.top > firstTabRect.top;
-            const currentLayout = container.classList.contains('tabs-wrap-layout');
+            // Ensure measurement happens in the unwrapped state
+            container.classList.remove('tabs-wrap-layout');
 
-            if (isWrapped !== currentLayout) {
-                if (isWrapped) {
+            // Force layout recalculation
+            void tabsNav.offsetHeight;
+
+            const firstTop = firstTab.offsetTop;
+            const lastTop = lastTab.offsetTop;
+            const heightDifference = lastTop - firstTop;
+
+            // Determine if it *should* be wrapped based on measurement in unwrapped state
+            // Use a small buffer (e.g., 2px) to account for rendering variations
+            const shouldBeWrapped = heightDifference > 2;
+
+            // Apply the correct class if the state needs to change
+            if (shouldBeWrapped !== originalHasClass) {
+                if (shouldBeWrapped) {
                     container.classList.add('tabs-wrap-layout');
                 } else {
                     container.classList.remove('tabs-wrap-layout');
                 }
+            } else {
+                 // If no change needed, ensure the class is restored if it was removed for measurement
+                 if (originalHasClass) {
+                     container.classList.add('tabs-wrap-layout');
+                 }
             }
         });
     };
 
     const debouncedDetectTabWrapping = () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(detectTabWrapping, 100);
+        resizeTimeout = setTimeout(detectTabWrapping, 150); // Increased debounce time
     };
 
     const init = () => {
@@ -74,8 +87,17 @@ const initCodeTabs = () => {
         getContentTabHeight()
         addObserversToCodeTabs()
 
-        // Initial detection
-        detectTabWrapping();
+        // Initial detection with font loading check
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => {
+                // Force reflow after fonts are loaded
+                document.body.offsetHeight;
+                detectTabWrapping();
+            });
+        } else {
+            // Fallback for browsers without font loading API
+            detectTabWrapping();
+        }
 
         // Remove any existing resize listeners
         window.removeEventListener('resize', debouncedDetectTabWrapping);
@@ -152,6 +174,9 @@ const initCodeTabs = () => {
                     firstTabPane.classList.add('active', 'show')
                 }
             })
+
+            // Run tab wrapping detection after tab activation with slight delay
+            setTimeout(detectTabWrapping, 10);
         }
 
         updateUrl(activeLang)
@@ -327,6 +352,12 @@ const initCodeTabs = () => {
     }
 
     init()
+
+    // Add window load event to handle final detection after everything is loaded
+    window.addEventListener('load', () => {
+        // Final check after page is fully loaded (all resources)
+        setTimeout(detectTabWrapping, 50);
+    });
 }
 
 export default initCodeTabs
