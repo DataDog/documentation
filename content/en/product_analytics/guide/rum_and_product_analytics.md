@@ -16,14 +16,14 @@ Product Analytics is a dedicated offering built for product managers, product ow
 
 ## Product Analytics and RUM
 
-Previously, Product Analytics data was available as a preview in the RUM offering. All Product Analytics features that used to live in RUM are now exclusively in the Product Analytics UI, including the following:
+Since its inception, many users have leveraged Real User Monitoring (RUM) to track adoption, retention, and other business-specific metrics. To further support these use cases, features such as **Pathways** and **Retention Analysis** were initially introduced in preview within RUM.
 
-- Funnels
-- Sankey
-- User Retention Analysis
-- Heatmaps
+Datadog’s **Product Analytics** is a dedicated solution designed to provide a comprehensive toolkit for customer journey optimization, product usage analysis, and data-driven growth. It includes a minimum of 15 months of retention for clickstream events—such as sessions, views, and actions—enabling long-term insights and trend analysis.
 
-Session Replay remains a part of both RUM and Product Analytics.
+As part of this transition, the **Retention** and **Pathways** features will completely move from RUM to Product Analytics. This ensures these capabilities can continue to evolve and deliver deeper, more actionable value across your applications.
+
+This transition will happen on **June 1st 2025**.
+
 
 ## FAQs
 
