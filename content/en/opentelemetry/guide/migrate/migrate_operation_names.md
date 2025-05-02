@@ -26,7 +26,7 @@ The `enable_operation_and_resource_name_logic_v2` feature flag controls this new
 - **OpenTelemetry Collector**: OTel Collector v0.126.0+
 - **OTel to Datadog Agent (OTLP)**: Datadog Agent v7.66+
 
-Prior to these releases, you must explicitly [enable the logic](#enabling-the-new-logic-opt-in).
+If you are using an earlier version and want to use the new logic without upgrading, you can [explicitly enable the new logic](#enabling-the-new-logic-opt-in).
 
 ## New mapping logic
 
@@ -34,7 +34,7 @@ When the `enable_operation_and_resource_name_logic_v2` flag is active, the follo
 
 For example, with the new logic active, a span previously named `go.opentelemetry.io_contrib_instrumentation_net_http_otelhttp.server` is now named `http.server.request`.
 
-| Conditions on Span Attributes                         | Span Kind                       | Resulting Operation Name      |
+| Condition on Span Attributes                         | Span Kind                       | Resulting Operation Name      |
 |-------------------------------------------------------|---------------------------------|-------------------------------|
 | `operation.name` is set                               | Any                             | Value of `operation.name`     |
 | `http.request.method` or `http.method` is set         | Server                          | `http.server.request`         |
@@ -103,7 +103,7 @@ otlp_config:
 
 ## Enabling the new logic (opt-in)
 
-If you are using a version of the Datadog Agent or OpenTelemetry Collector prior to the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable it using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
+If you are using a version of the Datadog Agent or OpenTelemetry Collector prior to the versions listed in [Rollout Schedule](#default-rollout-schedule), you can enable the new logic using the following methods. Datadog strongly recommends enabling this logic and adapting your monitors and dashboards.
 
 {{< tabs >}}
 {{% tab "OpenTelemetry Collector" %}}
@@ -210,11 +210,11 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adapting Monitors, Dashboards, and custom configuration
+## Adapting monitors, dashboards, and custom configuration
 
 After the new naming logic is active, take the following steps:
 
-1.  **(Required) Update Monitors and Dashboards:**
+1.  **(Required) Update monitors and dashboards:**
     - Review the [New mapping logic](#new-mapping-logic) table to predict how your operation names will change.
     - Update any monitors or dashboards that query, filter, or group by `operation_name` to use the new expected names.
     - Update any metric monitors or dashboards observing metrics derived from traces that might change due to the new operation names (for example, metrics starting with `trace.*` tagged by operation name).
