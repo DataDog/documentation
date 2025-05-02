@@ -10,7 +10,7 @@ further_reading:
   - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
-  - link: "/quality_gates"
+  - link: "/pr_gates"
     tag: "Documentation"
     text: "Learn about PR Gates"
 ---
@@ -146,8 +146,8 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [1]: /glossary/#flaky-test
 [2]: /tests/flaky_test_management
 [3]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
-[4]: /quality_gates/
-[5]: /quality_gates/setup
+[4]: /pr_gates/
+[5]: /pr_gates/setup
 [6]: /tests
 [7]: https://app.datadoghq.com/ci/settings/test-optimization
 [8]: /tests/explorer/

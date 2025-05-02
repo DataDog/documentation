@@ -4,10 +4,10 @@ description: Search all of your PR gates or rule executions.
 aliases:
   - /quality_gates/explorer/search_syntax/
 further_reading:
-- link: "/quality_gates/search"
+- link: "/pr_gates/search"
   tag: "Documentation"
   text: "Filter and group PR gates"
-- link: "/quality_gates/explorer/facets"
+- link: "/pr_gates/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
 ---
@@ -77,7 +77,7 @@ When searching for an attribute or tag value that contains special characters or
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /quality_gates/explorer/facets
+[1]: /pr_gates/explorer/facets
 [2]: /getting_started/tagging/using_tags
 [3]: /infrastructure
 [4]: /integrations

@@ -5,10 +5,10 @@ aliases:
   - /continuous_integration/quality_gates/
   - /quality_gates/explorer/
 further_reading:
-  - link: "/quality_gates/"
+  - link: "/pr_gates/"
     tag: "Documentation"
     text: "Learn about PR Gates"
-  - link: "/quality_gates/explorer/saved_views/"
+  - link: "/pr_gates/explorer/saved_views/"
     tag: "Documentation"
     text: "Learn about Saved Views"
 ---
@@ -106,8 +106,8 @@ Export your view in the [PR Gates Explorer][5] to reuse it later or in different
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /quality_gates/search
-[2]: /quality_gates/explorer/search_syntax
-[3]: /quality_gates/explorer/facets
-[4]: /quality_gates/explorer/saved_views
-[5]: /quality_gates/explorer
+[1]: /pr_gates/search
+[2]: /pr_gates/explorer/search_syntax
+[3]: /pr_gates/explorer/facets
+[4]: /pr_gates/explorer/saved_views
+[5]: /pr_gates/explorer

@@ -3,7 +3,7 @@ title: Saved Views
 aliases:
   - /quality_gates/explorer/saved_views/
 further_reading:
-- link: "/quality_gates/explorer/search_syntax/"
+- link: "/pr_gates/explorer/search_syntax/"
   tag: "Documentation"
   text: "Learn how to create a search query"
 ---
@@ -63,4 +63,4 @@ From your current default saved view, take actions to update the view to a diffe
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/quality-gates/executions
-[2]: /quality_gates/explorer/
+[2]: /pr_gates/explorer/

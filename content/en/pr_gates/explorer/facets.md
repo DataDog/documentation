@@ -4,10 +4,10 @@ description: Learn about facets in the PR Gates Explorer.
 aliases:
   - /quality_gates/explorer/facets/
 further_reading:
-- link: 'quality_gates/explorer/'
+- link: 'pr_gates/explorer/'
   tag: 'Documentation'
   text: 'Learn about the PR Gates Explorer'
-- link: 'quality_gates/search/'
+- link: 'pr_gates/search/'
   tag: 'Documentation'
   text: 'Learn how to search your rules and executions'
 ---
@@ -91,6 +91,6 @@ Autocomplete based on the content in PR gates of the current views helps you to 
 [1]: /monitors/types/ci
 [2]: /dashboards/
 [3]: /notebooks/
-[4]: /quality_gates/explorer
-[5]: /quality_gates/search
-[6]: /quality_gates/explorer/search_syntax/
+[4]: /pr_gates/explorer
+[5]: /pr_gates/search
+[6]: /pr_gates/explorer/search_syntax/

@@ -199,8 +199,8 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [3]: https://app.datadoghq.com/security/configuration/code-security/setup
 [4]: /security/code_security/static_analysis/static_analysis_rules/
 [5]: /security/code_security/dev_tool_int/ide_plugins/
-[6]: /quality_gates/
-[7]: /quality_gates/setup
+[6]: /pr_gates/
+[7]: /pr_gates/setup
 [8]: /security/code_security/software_composition_analysis/#datadog-severity-score
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/

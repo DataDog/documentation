@@ -14,7 +14,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
   tag: "Blog"
   text: "Use Datadog monitors as quality gates for GitHub Actions deployments"
-- link: "/quality_gates/explorer"
+- link: "/pr_gates/explorer"
   tag: "Documentation"
   text: "Learn about the PR Gates Explorer"
 - link: "/account_management/audit_trail/"
@@ -134,13 +134,13 @@ For more information, see the [Audit Trail documentation][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/flaky_test_management/
-[2]: /quality_gates/setup/
+[2]: /pr_gates/setup/
 [3]: /account_management/audit_trail/
 [4]: /account_management/audit_trail/events/#ci-visibility-events
-[5]: /quality_gates/search/
+[5]: /pr_gates/search/
 [6]: https://app.datadoghq.com/ci/quality-gates
 [7]: https://github.com/DataDog/datadog-ci
-[8]: /quality_gates/explorer/
+[8]: /pr_gates/explorer/
 [9]: /tests/
 [10]: /continuous_integration/
 [11]: /security/code_security/static_analysis

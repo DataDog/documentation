@@ -43,7 +43,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Testing</strong></p></td>
         <td>
             <ul>
-                <li>Block faulty code from deploying to production with <a href="/quality_gates/">PR Gates</a>.</li>
+                <li>Block faulty code from deploying to production with <a href="/pr_gates/">PR Gates</a>.</li>
                 <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>

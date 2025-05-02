@@ -4,7 +4,7 @@ description: Learn how to search for your PR Gate rules.
 aliases:
   - /quality_gates/search/
 further_reading:
-- link: "/quality_gates"
+- link: "/pr_gates"
   tag: "Documentation"
   text: "Learn about PR Gates"
 ---

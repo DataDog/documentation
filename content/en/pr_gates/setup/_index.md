@@ -4,7 +4,7 @@ description: Learn how to set up PR Gate rules in Datadog.
 aliases:
    - /quality_gates/setup/
 further_reading:
-- link: "/quality_gates"
+- link: "/pr_gates"
   tag: "Documentation"
   text: "Learn about PR Gates"
 ---
@@ -146,5 +146,5 @@ For more information, see the [RBAC Permissions documentation][1].
 [10]: https://app.datadoghq.com/integrations/github
 [11]: https://docs.datadoghq.com/integrations/github/
 [12]: /getting_started/site/
-[13]: /quality_gates/guide/understanding_rule_scopes
+[13]: /pr_gates/guide/understanding_rule_scopes
 [14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches

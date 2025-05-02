@@ -4,7 +4,7 @@ aliases:
   - /quality_gates/guide/understanding_rule_scopes/
 description: Learn how to configure rule scopes for PR Gate rules.
 further_reading:
-  - link: "/quality_gates/setup"
+  - link: "/pr_gates/setup"
     tag: "Documentation"
     text: "Learn how to set up PR Gates"
 ---
