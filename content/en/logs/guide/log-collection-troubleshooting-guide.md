@@ -224,7 +224,8 @@ When collecting logs from Journald, make sure that the Datadog Agent user is add
 
 ## Batch limitation in Kinesis Firehose
 
- Datadog has an intake limit of 65,536 log events per batch. If your system sends more than this limit, some logs may be dropped. To reduce the number of events per batch, consider lowering the Kinesis buffer size from the default 4 MB to 1 MB.
+Datadog has an intake limit of 65,536 events per batch and recommends setting the Kinesis buffer size to 2 MiB. If your system exceeds this limit, some logs may be dropped. To reduce the number of events per batch, consider lowering the buffer size.
+
 
 ## Configuration issues
 
