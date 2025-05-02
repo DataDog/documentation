@@ -27,12 +27,6 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
-Daily Datadog costs in Cloud Cost Management are in Preview. If you're interested in this feature, complete the form to request access.
-
-<p>Only customers with a direct contract through Datadog or an External Marketplace drawdown contract are eligible for the Preview.</p>
-{{< /callout >}}
-
 ## Overview
 
 Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Explorer, along with your entire organization's cloud provider and [SaaS costs][3].
