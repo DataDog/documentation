@@ -72,7 +72,7 @@ See the full feature comparison table below.
 | Frustration signals | {{< X >}} | {{< X >}} |
 | Core Web Vitals and Mobile Vitals | {{< X >}} | {{< X >}} |
 | Performance Summary | {{< X >}} | |
-| Analytics Summary | {{< X >}} | {{< X >}} |
+| Analytics Summary | {{< X >}} (offered as a preview in Product Analytics) | {{< X >}} |
 | Vitals troubleshooting | {{< X >}} (browser only) | |
 | Custom Vitals | {{< X >}} (browser only) | |
 | Feature Flags performance / Deployment Tracking page | {{< X >}} | |
