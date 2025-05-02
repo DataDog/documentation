@@ -135,7 +135,6 @@ spec:
 ```yaml
 datadog:
   sbom:
-    enabled: true
     containerImage:
       enabled: true
     host:

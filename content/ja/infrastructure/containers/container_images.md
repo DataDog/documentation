@@ -135,7 +135,6 @@ Helm のコンフィギュレーションファイル `datadog-values.yaml` に�
 ```yaml
 datadog:
   sbom:
-    enabled: true
     containerImage:
       enabled: true
     host:

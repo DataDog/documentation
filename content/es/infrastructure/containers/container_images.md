@@ -136,7 +136,6 @@ Añade lo siguiente a tu archivo de configuración de Helm `datadog-values.yaml`
 ```yaml
 datadog:
   sbom:
-    enabled: true
     containerImage:
       enabled: true
     host:
