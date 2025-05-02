@@ -56,10 +56,6 @@ No additional instrumentation is required if RUM is already configured.
 - Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions). Real User Monitoring is dedicated to performance monitoring.
 - Users have the option to purchase both products together, or each individually.
 
-### Will the funnel widget be removed?
-- RUM users can continue to use it as part of their contractual grandfathering, but the use of it is limited to the sample rate and data retention they have in their RUM configuration.
-- After January 1, 2025, the funnel widget is exclusively available to Product Analytics customers.
-
 ### Is Session Replay available with Product Analytics?
 
 [Session Replay][1] is a standalone offering that can be purchased alongside Product Analytics.
