@@ -212,7 +212,7 @@ This ensures that log tailing is not creating duplicated logs by multiple instan
 ![image](https://github.com/user-attachments/assets/57d355e9-7cee-45bf-b1fa-940d6fcb3350)
 
 The above application settings need to be added to the sidecar through setting the environment variables of sidecar.
-Alternatively, the environment variables can be set in the main container using the ***Allow access to all app settings*** option.
+Alternatively, you can set the variable in the main container and enable the ***Allow access to all app settings*** option so that the sidecar can read it.
 
 <details open>
 <summary>
