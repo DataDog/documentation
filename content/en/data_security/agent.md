@@ -185,7 +185,9 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
 | **Events**                                  |                                                                                                                        |
-| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled) |
+| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled)       |
+| **Service Discovery**                       |                                                                                                                        |
+| service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

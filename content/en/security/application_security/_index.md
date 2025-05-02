@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/understanding-your-waf/"
   tag: "Blog"
   text: "Understanding your WAF: How to address common gaps in web application security"
+- link: "https://www.datadoghq.com/blog/mitigate-account-takeovers/"
+  tag: "Blog"
+  text: "Mitigate account takeovers with Datadog App and API Protection"
 algolia:
   tags: ["asm", "application security"]
 ---
