@@ -4,6 +4,9 @@ canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
 
+# don't publish cdocs source files
+ignoreFiles: ["\\.mdoc\\.md$"]
+
 publishDir: "./public"
 
 # taxonomies
