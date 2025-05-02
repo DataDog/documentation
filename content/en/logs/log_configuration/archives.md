@@ -271,12 +271,10 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Server side encryption (SSE)
+#### Server-side encryption (SSE) for AWS S3 archives
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
-
-##### SSE-S3
+{{% tab "SSE-S3" %}}
 
 The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
 
@@ -286,9 +284,11 @@ To confirm your S3 bucket is encrypted with SSE-S3:
 1. Click the **Properties** tab.
 1. In the **Default Encryption** section, check that the **Encryption key type** is **Amazon S3 managed keys (SSE-S3)**.
 
-##### SSE-KMS
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
+{{% /tab %}}
+{{% tab "SSE-KMS" %}}
 
-Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
+Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][1]. To enable it, take the following steps:
 
 1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
@@ -346,13 +346,12 @@ Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-Optionally, you can also set encryption directly in the object upload request by configuring encryption settings when creating or updating an S3 archive.
-
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 
 {{< /tabs >}}
+
+Optionally, you can also set encryption directly in the object upload request. These settings are configurable when creating or updating S3 archives. By default, encryption is set to `NONE` and the encryption settings will default to the settings in your S3 bucket. Note that if the encryption is set to `SSE-S3` or `SSE-KMS`, this will override the encryption configuration set on your S3 bucket.
 
 ### Validation
 
