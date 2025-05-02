@@ -185,8 +185,9 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 
 ##### Failure to Answer Configuration
 The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+
 | Configuration Option | Description | Example(s) |
-|---|---|
+|---|---|---|
 | Empty Code Response | An empty code object like an empty list or tuple, signifiying no data or results | (), [], {} |
 | Empty Response | No meaningful response, returning only whitespace | whitespace |
 | No Content Response | An empty output accompanied by a message indicated no content is available | Not found, N/A |
