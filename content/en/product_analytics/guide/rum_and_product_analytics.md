@@ -16,16 +16,18 @@ Product Analytics is a dedicated offering built for product managers, product ow
 
 ## Product Analytics and RUM
 
-Since its inception, many users have leveraged Real User Monitoring (RUM) to track adoption, retention, and other business-specific metrics. To further support these use cases, features such as **Pathways** and **Retention Analysis** were initially introduced in preview within RUM.
-
-Datadog’s **Product Analytics** is a dedicated solution designed to provide a comprehensive toolkit for customer journey optimization, product usage analysis, and data-driven growth. It includes a minimum of 15 months of retention for clickstream events—such as sessions, views, and actions—enabling long-term insights and trend analysis.
-
-As part of this transition, the **Retention** and **Pathways** features will completely move from RUM to Product Analytics. This ensures these capabilities can continue to evolve and deliver deeper, more actionable value across your applications.
+Previously, **Pathways** and **Retention Analysis** were part of Datadog Real User Monitoring (RUM). These features are moving to Datadog Product Analytics.
 
 This transition will happen on **June 1st 2025**.
 
 
 ## FAQs
+
+### What is the difference between RUM and Product Analytics?
+
+- Both Product Analytics and Real User Monitoring rely on the Browser and/or Mobile SDKs.
+- Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions). Real User Monitoring is dedicated to performance monitoring.
+- Users have the option to purchase both products together, or each individually.
 
 ### How are RUM customers affected?
 
@@ -39,22 +41,14 @@ As part of the introduction of Product Analytics, the following changes are bein
 
 These updates ensure a clearer separation of use cases between RUM and Product Analytics, enabling more focused workflows and deeper insights.
 
+###  How do I set up Product Analytics?
+
+Product Analytics uses the same SDKs and configuration as RUM. To enable Product Analytics go to your [Application management][3] page and toggle the desired products
+
+If RUM is already configured, no additional instrumentation is required for Product Analytics.
 
 ### Why can I no longer access Sankeys and Retention Analysis?
 - These features were part of a preview and available to RUM customers as a beta, but were not part of the core RUM offering. These features are exclusively available to customers on a Product Analytics contract.
-
-### Setting up Product Analytics is simple and uses the same SDKs and configuration as Real User Monitoring (RUM)
-
-- **Shared Setup**: Product Analytics and RUM collect data using the same SDKs and require identical implementation steps.
-
-- **Enablement**: To enable RUM, Product Analytics, or both, go to your **Application Detail** page and toggle the desired products.
-
-No additional instrumentation is required if RUM is already configured.
-
-### What is the difference between RUM and Product Analytics?
-- Both Product Analytics and Real User Monitoring rely on the Browser and/or Mobile SDKs.
-- Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions). Real User Monitoring is dedicated to performance monitoring.
-- Users have the option to purchase both products together, or each individually.
 
 ### Is Session Replay available with Product Analytics?
 
@@ -91,3 +85,4 @@ See the full feature comparison table below.
 
 [1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
 [2]: /product_analytics/journeys/#conversion
+[3]: https://app.datadoghq.com/rum/list?
