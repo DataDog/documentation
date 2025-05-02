@@ -1,5 +1,5 @@
 ---
-title: DDSQL Common Queries and Use Cases
+title: DDSQL (Preview) Common Queries and Use Cases
 aliases:
 - /dashboards/guide/ddsql_use_cases
 - /ddsql_editor/guide/ddsql_use_cases
@@ -8,6 +8,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn more about the DDSLQ Editor"
 ---
+
+<div class="alert alert-warning">
+  There are two different <strong>variants</strong> of DDSQL. The examples in this guide use DDSQL (Preview) Syntax. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
+</div>
 
 ## General queries
 ### List all libraries across services in production
