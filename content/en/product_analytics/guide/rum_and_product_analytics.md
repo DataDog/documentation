@@ -12,7 +12,7 @@ further_reading:
 
 Product Analytics is a dedicated offering built for product managers, product owners, engineering leaders, and others who want to leverage real user behavior to drive product and business insights, without requiring knowledge of other Datadog observability products.
 
-{{< img src="product_analytics/guide/rum_and_product_analytics/product-analytics-transition-1.png" alt="Product Analytics is for anyone who wants to leverage real user behavior to drive product and business insights." style="width:100%;" >}}
+{{< img src="product_analytics/guide/understanding-PANA-RUM-summary.png" alt="Product Analytics is for anyone who wants to leverage real user behavior to drive product and business insights." style="width:100%;" >}}
 
 ## Product Analytics and RUM
 
