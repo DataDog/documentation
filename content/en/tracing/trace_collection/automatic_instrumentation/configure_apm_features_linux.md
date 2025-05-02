@@ -1,5 +1,5 @@
 ---
-title: Enable APM SDK-dependent products on Linux
+title: Enable SDK-dependent products on Linux
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -8,7 +8,7 @@ The following functionality is in Preview.
 
 ## Overview
 
-On Linux hosts that use Single Step Instrumentation (SSI), you can enable or disable APM SDK-dependent products at the host level with the `application_monitoring.yaml` file. All instrumented services on the host inherit these settings.
+On Linux hosts that use Single Step Instrumentation (SSI), you can enable or disable Datadog SDK-dependent products at the host level with the `application_monitoring.yaml` file. All instrumented services on the host inherit these settings.
 
 ## Configuration steps
 
@@ -20,27 +20,16 @@ On Linux hosts that use Single Step Instrumentation (SSI), you can enable or dis
 
 1. To enable or disable products, define them under the `apm_configuration_default` block and set them to `true` or `false`.
 
-   **Note:** If a product is enabled through [environment variables set on the APM SDK][1], those values override the settings in `application_monitoring.yaml`.
+   **Note:** If a product is enabled through [environment variables set on the SDK][1], those values override the settings in `application_monitoring.yaml`.
 
-## Configuration examples 
+   As an example, the following enables profiling and Data Streams Monitoring, and disables tracing:
 
-### Example 1: Enable profiling, Data Streams Monitoring, and tracing
-
-```
-apm_configuration_default:
-  DD_PROFILING_ENABLED: true
-  DD_DATA_STREAMS_ENABLED: true
-  DD_APM_TRACING_ENABLED: true
-  DD_LOGS_INJECTION: true
-```
-
-### Example 2: Enable Application Security Management, disable tracing
-
-```
-apm_configuration_default:
-  DD_APM_TRACING_ENABLED: false
-  DD_APPSEC_ENABLED: true
-```
+   ```
+   apm_configuration_default:
+     DD_PROFILING_ENABLED: true
+     DD_DATA_STREAMS_ENABLED: true
+     DD_APM_TRACING_ENABLED: false
+   ```
 
 ## Supported products and configuration keys
 
@@ -64,10 +53,10 @@ The following minimum SDK versions support configuration via `application_monito
 | Java       | v1.47.0             |           
 | Python     | v3.2.0              |           
 | Node.js    | v5.41.0             |           
-| .NET       | WIP                 |
+| .NET       | Not yet supported   |
 | PHP        | v1.8.0              |
-| Ruby       | WIP                 |
-| Go         | WIP                 |
+| Ruby       | Not yet supported   |
+| Go         | Not yet supported   |
 
 
 

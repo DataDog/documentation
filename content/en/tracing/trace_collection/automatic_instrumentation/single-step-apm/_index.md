@@ -15,13 +15,13 @@ further_reading:
 ---
 ## Overview
 
-Single Step Instrumentation (SSI) automatically installs the Datadog APM SDKs with no additional configuration required, reducing onboarding time from days to minutes.
+Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with no additional configuration required, reducing onboarding time from days to minutes.
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
-## Instrument APM SDKs across applications
+## Instrument SDKs across applications
 
-When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog APM SDK into supported processes. This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
+When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog SDK into supported processes. This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
 
 After instrumentation, you can optionally:
 - [configure Unified Service Tags (USTs)](#configure-universal-service-tags)
@@ -47,9 +47,9 @@ Learn how to set USTs for:
    **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
 
 
-## Enable additional APM-related products
+## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog APM SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 The available setup methods depend on your platform:
 
