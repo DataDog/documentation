@@ -67,7 +67,7 @@ See the full feature comparison table below.
 |---------|-----|-------------------|
 | Data retention | 15 to 30 days | 15 months |
 | Session, View, and Action events | {{< X >}} (with 30-day retention) |  {{< X >}} |
-| Error, Resource, Long Task, and Vitals events | {{< X >}} (with 30-day retention for Errors, 15-day for the rest) | |
+| Error, Resource, Long Task, and Vitals events | {{< X >}} (with 30-day retention for Errors, <br> 15-day for the rest) | |
 | User attributes | {{< X >}} | {{< X >}} |
 | Frustration signals | {{< X >}} | {{< X >}} |
 | Core Web Vitals and Mobile Vitals | {{< X >}} | {{< X >}} |
