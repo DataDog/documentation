@@ -145,6 +145,53 @@ If you see a permission denied error while port binding in agent logs, the port 
    - privKey
    - privProtocol
 
+### Traps or Flows not being received at all
+
+A common cause of missing SNMP traps or NetFlow traffic is that firewall rules are blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow use the UDP protocol and rely on the ports defined in your datadog.yaml configuration.
+
+Use the following platform-specific commands to check for firewall rules that may be preventing traffic from reaching the Agent.
+
+#### Linux
+
+Linux have multiple types of firewall (such as `iptables`, `nftables`, or `ufw`), depending on which one is in use, the following commands can be used:
+
+- `sudo iptables -S`
+
+- `sudo nft list ruleset`
+
+- `sudo ufw status`
+
+Look for any rules that block UDP traffic on the configured ports.
+
+#### Windows
+
+```
+Get-NetFirewallRule -Action Block | ForEach-Object {
+    $rule = $_
+    Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
+        @{Name="Name"; Expression={$rule.Name}},
+        @{Name="DisplayName"; Expression={'"' + $rule.DisplayName + '"'}},
+        @{Name="Direction"; Expression={$rule.Direction}},
+        @{Name="Protocol"; Expression={$_.Protocol}},
+        @{Name="LocalPort"; Expression={$_.LocalPort}},
+        @{Name="RemotePort"; Expression={$_.RemotePort}}
+} | Format-Table -AutoSize
+```
+
+Look for rules where:
+
+- Direction is Inbound
+- Protocol is UDP
+- LocalPort matches the configured ports
+
+#### MacOS
+
+```
+sudo pfctl -sr
+```
+
+Look for any rules that block UDP traffic on the configured ports, such as: `block drop in proto UDP from any to any port = <CONFIG_PORT>`.
+
 ### Traps not being received for devices
 
 1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
