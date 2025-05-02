@@ -13427,9 +13427,8 @@ components:
       oneOf:
       - $ref: '#/components/schemas/TeamReference'
       - $ref: '#/components/schemas/EscalationPolicyStep'
-      - $ref: '#/components/schemas/UserTarget'
-      - $ref: '#/components/schemas/ScheduleTarget'
-      - $ref: '#/components/schemas/TeamTarget'
+      - $ref: '#/components/schemas/EscalationPolicyUser'
+      - $ref: '#/components/schemas/ScheduleData'
     EscalationPolicyStep:
       description: Represents a single step in an escalation policy, including its
         attributes, relationships, and resource type.
@@ -13675,6 +13674,44 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+    EscalationPolicyUser:
+      description: Represents a user object in the context of an escalation policy,
+        including their `id`, type, and basic attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyUserAttributes'
+        id:
+          description: The unique user identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUserType'
+      required:
+      - type
+      type: object
+    EscalationPolicyUserAttributes:
+      description: Provides basic user information for an escalation policy, including
+        a name and email address.
+      properties:
+        email:
+          description: The user's email address.
+          example: jane.doe@example.com
+          type: string
+        name:
+          description: The user's name.
+          example: Jane Doe
+          type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
+      type: object
+    EscalationPolicyUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -32386,6 +32423,8 @@ components:
           description: The user's name.
           example: Jane Doe
           type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
       type: object
     ScheduleUserType:
       default: users
@@ -39230,6 +39269,17 @@ components:
           description: Whether the user is verified.
           type: boolean
       type: object
+    UserAttributesStatus:
+      description: The user's status.
+      enum:
+      - active
+      - deactivated
+      - pending
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - DEACTIVATED
+      - PENDING
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
