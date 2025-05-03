@@ -41,18 +41,18 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ddot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag" %}}`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Datadog Agent source code.
 - Creates a virtual environment and installs required Python packages.
 - Builds the OpenTelemetry agent and copies the resulting binary to the final image.
 
-<div class="alert alert-info">The <code>main</code> branch has the most up-to-date version of the <a href="https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent-ot/Dockerfile.agent-otel">Dockerfile</a>. However, it is a development branch that is subject to frequent changes and is less stable than the release tags. For production and other stable use cases, use the tagged versions as listed in this guide.</div>
+<div class="alert alert-info">The <code>main</code> branch has the most up-to-date version of the <a href="https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent-ddot/Dockerfile.agent-otel">Dockerfile</a>. However, it is a development branch that is subject to frequent changes and is less stable than the release tags. For production and other stable use cases, use the tagged versions as listed in this guide.</div>
 
 ## Create an OpenTelemetry Collector Builder manifest
 
@@ -111,8 +111,9 @@ Build your custom Datadog Agent image and push it to a container registry.
 1. Build the image with Docker:
    ```shell
    docker build . -t agent-otel --no-cache \
-     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
-     --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
+     --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
+     --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}" \
+     --build-arg AGENT_REPO="datadog/agent" 
    ```
 2. Tag and push the image:
    ```shell
@@ -122,6 +123,10 @@ Build your custom Datadog Agent image and push it to a container registry.
    Replace `<IMAGE-NAME>` and `<IMAGE-TAG>` with your image name and desired tag. If the target repository is not Docker Hub, you need to include the repository name.
 3. For a Helm chart installation, set the image tag in your values file:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:  
+  env:
+    - name: DD_OTELCOLLECTOR_ENABLED
+      value: true   
 agents:
   image:
     repository: <YOUR-REPO>
@@ -195,6 +200,7 @@ Create a sample configuration file and run your custom Agent to ensure everythin
      -e DD_API_KEY=XX \
      -e DD_SITE=datadoghq.com \
      -e DD_HOSTNAME=datadog \
+     -e DD_OTELCOLLECTOR_ENABLED=true \
      -v $(pwd)/config.yaml:/config.yaml \
      -p 4317:4317 \
      -p 4318:4318 \
