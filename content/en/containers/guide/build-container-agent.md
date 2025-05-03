@@ -24,7 +24,9 @@ Follow the instructions below to build the Datadog Docker Agent image for a give
     git branch <AGENT_VERSION> && git checkout <AGENT_VERSION>
     ```
 
-4. Download the Agent Debian package that corresponds to the Agent version you want. Choose between the AMD and ARM architecture:
+4. Choose the archive that matches your Agent version and architecture. Choose <ARCH> (`amd64` or `arm64`) as appropriate.
+
+Recommended for Agent ≥ 7.44 — release tarball.
 
     {{< tabs >}}
 {{% tab "AMD" %}}
