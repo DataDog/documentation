@@ -3,7 +3,11 @@ title: Set up Fleet Automation
 disable_toc: false
 ---
 
+To ensure you have access to all Fleet Automation features, upgrade your Agents to version 7.41.1 or later and ensure you've followed the setup instructions below. Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
+
 ## Enable Remote Configuration
+
+To use Fleet Automation, you must enable Remote Configuration.
 
 ### Prerequisites
 
@@ -11,11 +15,11 @@ disable_toc: false
 
 ### Setup
 
-1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
+1. Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
 
-2. Ensure your RBAC permissions include [`api_keys_write`][5], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+2. Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 
-3. On the [Remote Configuration][8] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
+3. On the [Remote Configuration][3] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
 
 4. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key. If your new organization fulfills the conditions mentioned in step 3, Remote Configuration is enabled on your API keys be default.
 
@@ -23,7 +27,7 @@ disable_toc: false
 
 5. Update your Agent configuration file:
 
-   **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
+   **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section](#opting-out-of-remote-configuration).
 
    {{< tabs >}}
    {{% tab "Configuration YAML file" %}}
@@ -72,17 +76,6 @@ Sources from highest to lowest priority:
 
 Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
-## Configure Fleet Automation
-
-Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
-
-If you're using an older Agent, you might still be able to enable the following Datadog features individually:
-- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
-- **Agent configuration**: Agent version 7.39/6.39 or later is required to enable the Agent configuration tab. It is enabled by default in Agent versions 7.47.0/6.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
-
-Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
-
 ## Control access to Fleet Automation
 
 Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
@@ -92,12 +85,12 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 | `API keys read`| Restricts which users can view and search Agents by API key. |
 | `Agent flare collection` | Restricts which users can remotely send flares. |
 
-For information on setting up roles and permissions, see [Access Control][5].
+For information on setting up roles and permissions, see [Access Control][2].
 
 
 ### Review Remote Configuration status of Agents
 
-Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][8].
+Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][6].
 
 The following table describes the meaning of each Agent status:
 
@@ -176,3 +169,39 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /account_management/rbac/permissions#api-and-application-keys
+[2]: /account_management/rbac/permissions#access-management
+[3]: https://app.datadoghq.com/organization-settings/remote-config
+
+
+/getting_started/site/
+/security/threats/setup
+/observability_pipelines/#observability-pipelines-worker
+
+[6]: /security/application_security/threats/setup/compatibility/
+
+
+[9]: /security/default_rules/#cat-workload-security
+[10]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
+[11]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[12]: /security/application_security/how-appsec-works/#built-in-protection
+[13]: /account_management/audit_trail
+[14]: /monitors/
+[15]: /help/
+[16]: /agent/remote_config/?tab=configurationyamlfile#setup
+[17]: /agent/configuration/network
+[18]: /agent/configuration/proxy/
+[19]: /tracing/software_catalog/
+[20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
+[21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[22]: /tracing/trace_collection/runtime_config/
+[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
+[24]: https://app.datadoghq.com/organization-settings/api-keys
+[25]: /agent/guide/
+[26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
+[27]: /agent/fleet_automation/#send-a-remote-flare
+[28]: /security/sensitive_data_scanner/?tab=usingtheagent
+[29]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[30]: /actions/private_actions/use_private_actions/
+[31]: /agent/fleet_automation/setup/
