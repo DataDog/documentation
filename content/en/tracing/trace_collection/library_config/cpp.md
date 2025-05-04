@@ -153,4 +153,4 @@ When multiple values are given, the order of matching is based on the order of v
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
-[5]: /agent/remote_config
+[5]: /remote_configuration

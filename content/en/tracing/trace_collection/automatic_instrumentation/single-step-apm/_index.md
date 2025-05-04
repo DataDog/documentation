@@ -250,7 +250,7 @@ Available versions are listed in source repositories for each language:
 - [PHP][13] (`php`)
 
 
-[2]: /agent/remote_config
+[2]: /remote_configuration
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases

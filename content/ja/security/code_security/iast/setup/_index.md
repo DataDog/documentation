@@ -511,7 +511,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 
 [1]: /ja/tracing/trace_collection/compatibility/java/
-[2]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /ja/remote_configuration
 [3]: /ja/security/code_security/software_composition_analysis/
 
 {{% /collapse-content %}} 

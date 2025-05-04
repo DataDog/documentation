@@ -68,7 +68,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 
 [1]: /tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
-[3]: /agent/remote_config
+[3]: /remote_configuration
 [4]: /account_management/rbac/permissions/
 [5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1

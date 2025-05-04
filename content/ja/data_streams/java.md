@@ -64,5 +64,5 @@ Data Streams Monitoring はメッセージヘッダーを介してコンテキ�
 [1]: /ja/agent
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[4]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /ja/remote_configuration
 [5]: /ja/data_streams/manual_instrumentation/?tab=java

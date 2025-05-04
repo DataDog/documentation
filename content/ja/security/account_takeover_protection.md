@@ -256,7 +256,7 @@ Datadog は、攻撃者の属性の類似性によって攻撃者をクラスタ
 [1]: https://docs.datadoghq.com/ja/security/application_security/threats/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
-[4]: https://docs.datadoghq.com/ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: https://docs.datadoghq.com/ja/remote_configuration
 [5]: https://app.datadoghq.com/security/appsec/business-logic
 [6]: https://docs.datadoghq.com/ja/security/notifications/rules/
 [7]: https://app.datadoghq.com/integrations?category=Collaboration

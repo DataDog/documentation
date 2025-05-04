@@ -122,7 +122,7 @@ Data Streams Monitoring은 자체 호스팅 Kafka 커넥터에서 정보를 수�
 [1]: /ko/agent
 [2]: /ko/tracing/trace_collection/dd_libraries/java/
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[4]: /ko/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /ko/remote_configuration
 [5]: /ko/data_streams/manual_instrumentation/?tab=java
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: /ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget

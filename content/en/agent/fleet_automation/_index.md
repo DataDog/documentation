@@ -2,7 +2,7 @@
 title: Fleet Automation
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"
@@ -75,7 +75,7 @@ For information on setting up roles and permissions, see [Access Control][5].
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/configuration/agent-configuration-files/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration
 [4]: /infrastructure/list/#agent-configuration
 [5]: https://docs.datadoghq.com/account_management/rbac/
 [6]: /agent/fleet_automation/remote_management/

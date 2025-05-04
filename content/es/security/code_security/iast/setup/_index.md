@@ -555,7 +555,7 @@ Las integraciones a los marcos de autenticación de usuarios proporcionan:
 
 
 [1]: /es/tracing/trace_collection/compatibility/java/
-[2]: /es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /es/remote_configuration
 [3]: /es/security/application_security/vulnerability_management/#manage-code-level-vulnerabilities
 
 {{% /collapse-content %}} 

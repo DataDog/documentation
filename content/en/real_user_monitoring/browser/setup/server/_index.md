@@ -67,5 +67,5 @@ Keep in mind the following limitations when using this setup:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /remote_configuration
 [2]: https://app.datadoghq.com/rum/list

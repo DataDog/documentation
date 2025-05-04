@@ -508,6 +508,6 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
-[3]: /agent/remote_config
+[3]: /remote_configuration
 [4]: /agent/fleet_automation/
-[5]: /agent/remote_config#enabling-remote-configuration
+[5]: /remote_configuration#enabling-remote-configuration

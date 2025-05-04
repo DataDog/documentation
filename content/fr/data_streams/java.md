@@ -56,4 +56,4 @@ La solution Data Streams Monitoring utilise un [attribut de message][4] pour s
 [2]: /fr/tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /fr/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[5]: /fr/remote_configuration

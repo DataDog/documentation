@@ -107,7 +107,7 @@ As important as it is for you to be able to apply protection granularly and redu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/threats/setup/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: /agent/versions/upgrade_between_agent_minor_versions
 [4]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal

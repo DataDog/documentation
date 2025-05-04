@@ -121,7 +121,7 @@ In comparison, setting the label on a Kubernetes service only affects metric tag
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /remote_configuration
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [4]: /software_catalog/service_definitions/

@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -32,7 +32,7 @@ To enable Remote Agent Management:
 
 1. Use the generated Agent installation command to upgrade your Agent.
 
-   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.
+   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.
 
 ## Remotely upgrade your Agents
 ### Supported platforms

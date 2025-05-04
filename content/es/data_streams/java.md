@@ -92,5 +92,5 @@ Data Streams Monitoring propaga el contexto a través de las cabeceras de los me
 [1]: /es/agent
 [2]: /es/tracing/trace_collection/dd_libraries/java/
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[4]: /es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /es/remote_configuration
 [5]: /es/data_streams/manual_instrumentation/?tab=java

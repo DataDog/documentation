@@ -1,7 +1,7 @@
 ---
 title: Configuration at Runtime
 further_reading:
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -85,7 +85,7 @@ The following table describes the meaning of each Tracing library status:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /remote_configuration
 [2]: /agent/
 [3]: /tracing/software_catalog/
 [4]: /account_management/rbac/permissions/
