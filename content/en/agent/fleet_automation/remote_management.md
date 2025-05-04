@@ -102,7 +102,7 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#do
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /agent/fleet_automation/setup/
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
