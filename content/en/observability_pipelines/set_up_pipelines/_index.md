@@ -65,7 +65,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 
 You can use Datadog API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
-Pipelines created using the API is read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
+Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [2]: /observability_pipelines/install_the_worker/
