@@ -18,7 +18,10 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 To enable APM on a Linux host:
 
 1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
-1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
+1. In the **Customize your observability coverage** section, go to **Additional features** > **Application Observability**, and turn on **APM Instrumentation**.
+   
+   {{< img src="tracing/trace_collection/linux-apm-instrumentation-toggle.png" alt="The 'Customize your observability coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
@@ -32,6 +35,9 @@ To customize tracer versions:
 
 1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
+
+   {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+
 1. Find your language(s) and use the dropdown to either:
    - Pin an exact tracer version, or
    - Select the major version you want to use.
