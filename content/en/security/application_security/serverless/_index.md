@@ -52,7 +52,7 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable AAP by updating your `serverless.yml` with the `enableAAP` configuration parameter:
+2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
