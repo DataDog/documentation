@@ -14,7 +14,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 /**
  * A form that allows the user to create a new trait.
  */
-function NewTraitForm(props: {
+function CreateTraitForm(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: TraitConfig }) => void;
 }) {
@@ -184,4 +184,4 @@ function NewTraitForm(props: {
   );
 }
 
-export default NewTraitForm;
+export default CreateTraitForm;

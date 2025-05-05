@@ -15,7 +15,7 @@ import FlexibleOptionSelector from './options/FlexibleOptionSelector';
 /**
  * A form that allows the user to create a new option group.
  */
-function NewOptionGroupForm(props: {
+function OptionGroupBuilder(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: {
     status: FormStatus;
@@ -169,4 +169,4 @@ function NewOptionGroupForm(props: {
   );
 }
 
-export default NewOptionGroupForm;
+export default OptionGroupBuilder;

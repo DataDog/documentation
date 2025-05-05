@@ -8,9 +8,7 @@ import FlexibleOptionGroupSelector from './optionGroups/FlexibleOptionGroupSelec
 function FilterForm(props: {
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
-  onSave: (filter: WizardFilter) => void;
-  onPending: () => void;
-  onClean: () => void;
+  onStatusChange: (p: { status: FormStatus; data?: WizardFilter }) => void;
 }) {
   const formHeaderStyles: React.CSSProperties = {
     backgroundColor: '#eff1f5',
@@ -46,7 +44,7 @@ function FilterForm(props: {
     setTraitFormStatus('done');
 
     if (optionGroupFormStatus === 'done') {
-      props.onSave(updatedFilter);
+      props.onStatusChange({ status: 'done', data: updatedFilter });
     }
   };
 
@@ -78,7 +76,7 @@ function FilterForm(props: {
     setOptionGroupFormStatus('done');
 
     if (traitFormStatus === 'done') {
-      props.onSave(updatedFilter);
+      props.onStatusChange({ status: 'done', data: updatedFilter });
     }
   };
 
@@ -96,7 +94,7 @@ function FilterForm(props: {
           }
         }}
       />
-      <h2 style={formHeaderStyles}>Choose an option group</h2>
+      <h2 style={{ ...formHeaderStyles, marginTop: '30px' }}>Choose an option group</h2>
       <p style={{ fontSize: '0.9em' }}>
         The list of options the user can select for this filter. For example, if you've chosen the{' '}
         <code>prog_lang</code> trait above, your option group would contain options like Python and JavaScript.

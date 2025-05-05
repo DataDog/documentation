@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
 import { FormStatus, OptionGroup } from '../../../types';
-import NewOptionGroupForm from './NewOptionGroupForm';
+import OptionGroupBuilder from './OptionGroupBuilder';
 
 export default function FlexibleOptionGroupSelector(props: {
   customizationConfig: CustomizationConfig;
@@ -60,7 +60,7 @@ export default function FlexibleOptionGroupSelector(props: {
         }}
         onChange={handleOptionGroupIdChange}
       />
-      <NewOptionGroupForm
+      <OptionGroupBuilder
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
           if (p.status === 'done' && p.data) {

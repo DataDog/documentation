@@ -22,11 +22,14 @@ function FilterList({
   const [savedFiltersByUuid, setSavedFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
+
+  // TODO: Upsert any required new config after a filter is added or edited
   const [newConfig, setNewConfig] = useState<CustomizationConfig>({
     traitsById: {},
     optionsById: {},
     optionGroupsById: {}
   });
+
   const [saveButtonIsDisabled, setSaveButtonIsDisabled] = useState(true);
 
   const addFilter = () => {
@@ -110,12 +113,14 @@ function FilterList({
               <FilterForm
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
-                onSave={handleFilterFormSave}
-                onPending={() => {
-                  setSaveButtonIsDisabled(true);
-                }}
-                onClean={() => {
-                  setSaveButtonIsDisabled(true);
+                onStatusChange={(p) => {
+                  if (p.status === 'done' && p.data) {
+                    handleFilterFormSave(p.data);
+                  } else if (p.status !== 'done') {
+                    setSaveButtonIsDisabled(true);
+                  } else {
+                    setSaveButtonIsDisabled(false);
+                  }
                 }}
               />
             )}
@@ -129,10 +134,10 @@ function FilterList({
       )}
       {currentFilterUuid && (
         <>
-          <Button disabled={saveButtonIsDisabled} sx={{ marginTop: '1rem' }} variant="contained" onClick={handleSave}>
+          <Button disabled={saveButtonIsDisabled} sx={{ marginTop: '2rem' }} variant="contained" onClick={handleSave}>
             Save
           </Button>{' '}
-          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleCancel}>
+          <Button sx={{ marginTop: '2rem' }} variant="contained" onClick={handleCancel}>
             Cancel
           </Button>
         </>

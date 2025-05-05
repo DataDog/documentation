@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
-import NewTraitForm from './NewTraitForm';
+import CreateTraitForm from './CreateTraitForm';
 import { FormStatus, TraitConfig } from '../../../types';
 
 export default function FlexibleTraitSelector(props: {
@@ -62,7 +62,7 @@ export default function FlexibleTraitSelector(props: {
         }}
         onChange={handleSelection}
       />
-      <NewTraitForm
+      <CreateTraitForm
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
           console.log('NewTraitForm status change:', p);

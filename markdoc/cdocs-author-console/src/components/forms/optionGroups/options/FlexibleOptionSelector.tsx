@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
-import NewOptionForm from './NewOptionForm';
+import OptionBuilder from './OptionBuilder';
 import { OptionConfig, FormStatus } from '../../../../types';
 
 /**
@@ -138,7 +138,7 @@ export default function FlexibleOptionSelector(props: {
         }}
         onChange={handleSelectionChange}
       />
-      <NewOptionForm customizationConfig={props.customizationConfig} onStatusChange={handleNewOptionStatusChange} />
+      <OptionBuilder customizationConfig={props.customizationConfig} onStatusChange={handleNewOptionStatusChange} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { OptionConfig, FormStatus } from '../../../../types';
 
-function NewOptionForm(props: {
+function OptionBuilder(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: OptionConfig }) => void;
 }) {
@@ -160,4 +160,4 @@ function NewOptionForm(props: {
   );
 }
 
-export default NewOptionForm;
+export default OptionBuilder;

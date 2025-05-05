@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import StrictTraitSelector from './forms/traits/StrictTraitSelector';
-import ExistingOptionGroupSelector from './forms/optionGroups/ExistingOptionGroupSelector';
+import StrictOptionGroupSelector from './forms/optionGroups/StrictOptionGroupSelector';
 import Code from './Code';
 import { DocTemplater } from './DocTemplater';
 import { buildWizardFilter } from '../dataUtils';
@@ -70,10 +70,7 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
 
       <h3>Option group</h3>
       <p>Select the list of options to offer for the filter, such as "Linux, Windows, and MacOS".</p>
-      <ExistingOptionGroupSelector
-        customizationConfig={props.customizationConfig}
-        onSelect={handleOptionGroupIdSelect}
-      />
+      <StrictOptionGroupSelector customizationConfig={props.customizationConfig} onSelect={handleOptionGroupIdSelect} />
 
       {traitId && optionGroupId && (
         <>
