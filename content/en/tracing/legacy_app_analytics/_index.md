@@ -35,7 +35,7 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-App Analytics is available starting in version 0.19.0 of the Python tracing client. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
+App Analytics is available starting in version 0.19.0 of the Python tracing client. This configuration is only available for versions of ddtrace < 3.x. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
