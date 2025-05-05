@@ -898,7 +898,7 @@ Compute the number of elements in an array.
 
 Add an attribute value to the end of a target array attribute in the log.
 
-**Note**: Note: If the target array attribute does not exist in the log, it is automatically created.
+**Note**: If the target array attribute does not exist in the log, it is automatically created.
 
 
 {{< tabs >}}
