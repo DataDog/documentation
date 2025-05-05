@@ -122,6 +122,8 @@ spec:
       enabled: true
       containerImage:
         enabled: true
+      host:
+        enabled: true
 ```
 
 {{% /tab %}}
@@ -134,6 +136,8 @@ spec:
 datadog:
   sbom:
     containerImage:
+      enabled: true
+    host:
       enabled: true
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
@@ -157,6 +161,10 @@ datadog:
               },
               {
                 "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
                 "value": "true"
               }
             ]
@@ -192,6 +200,8 @@ datadog:
 sbom:
   enabled: true
   container_image:
+    enabled: true
+  host:
     enabled: true
 ```
 
