@@ -189,7 +189,7 @@ By default, only the creator of the runner receives **Editor** access. The creat
 ### Permission levels
 
 Viewer
-: Can view the runner and connections attached to it
+: Can view the runner and the connections attached to it
 
 Contributor
 : Can view and contribute to the runner by attaching new connections to it
