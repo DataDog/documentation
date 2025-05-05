@@ -63,7 +63,7 @@ You can optionally add extensions, such as new attributes, objects, categories, 
 The following Log Management integrations support out-of-the-box OCSF pipelines:
 
 - Okta
-- Cloudtrail
+- CloudTrail
 - GitHub
 
 ## View Security Pipelines \- OCSF
