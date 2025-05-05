@@ -27,56 +27,59 @@ The **developer overview page** centralizes information from different platforms
 
 ### Getting started
 
-1. Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
-1. Choose **+ Connect data** to link Jira, GitHub, and Datadog. The widgets, powered by [Datadog App Builder][1], show demo data until you complete this step. 
-1. 
+Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
 
-Each user must provide values for the 4 filters at the top of the overview page to customize their view:
-- Team: Name of your Datadog Team 
-- Github_Org: Name of your GitHub Organization
-- Github_Team: Name of your GitHub Team
-- Github_Username: Your GitHub username
-
-Note: Once you set the filter values, they will persist when you return to "My Workspace". 
+1. **Connect data sources**: Choose **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
+1. **Set page filters**: Provide values for the page-level filters. These filters persist when you return to **My Workspace**. 
+   - **Team**: Name of your [Datadog Team][8] 
+   - **Github_Org**: Name of your GitHub Organization
+   - **Github_Team**: Name of your GitHub Team
+   - **Github_Username**: Your GitHub username
+1. **(Optional) Customize your view**: Select **Clone as dashboard** to add or remove widgets, embed third-party data, or edit the layout. For example, you can:
+   - Create a widget to PagerDuty on call information. 
+   - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
+   
+   See the [Embedded Apps][2] documentation to learn more about creating widgets.
 
 ### Page features
 
 #### Monitors, incidents, and SLOs
 
-This information is based on Datadog Monitors, Incident, and SLOs. If you are not yet using these Datadog products, this information will not be populated.
+Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until those products are enabled.
 
 #### Jira Tickets
 
-The “My Jira Tickets” widget displays open Jira tickets that are assigned to you based on your email. Tickets with a status of “Done” are filtered out. 
+Lists open Jira issues assigned to your email. Tickets with the status **Done** are excluded.
 
 #### GitHub PRs
 
-- “My Open PRs” shows open PRs that you have created. “My Assigned PRs” shows open PRs where you’re a reviewer. Both of these widgets show all PRs across your GitHub organization. 
-- “My Team’s PRs” shows all PRs created by members of your GitHub team based on the dashboard’s time window.
+- **My open PRs** — Pull requests you have opened.  
+- **My assigned PRs** — Pull requests you are assigned to review.
+- **My team's PRs** — Pull requests opened by teammates in the selected GitHub team.
 
-#### Team's services and scorecard performance
+#### Team services and scorecard performance
 
-“My Team’s Services” and “Scorecard Performance by Service” includes information based on the “Team” filter value you provide. The Score is based on the average score across all Scorecards for each service.
+- **My team's services** — Lists services owned by the selected **Team** filter.  
+- **Scorecard performance by service** — Displays the average score across all scorecards for each service.
 
-#### Issues and errors
+#### Issues and Errors Watchdog alerts
 
-This information is based on Datadog Incidents and Error Tracking. If you are not yet using these Datadog products, this information will not be populated.
+Surfaces issues and errors detected by [Datadog Incidents][3] and [Error Tracking][4]. Widgets remain empty until these products are enabled.
 
 #### Watchdog alerts
 
-Refer to Datadog Watchdog docs for more information.
-
-## Customize your developer overview
-
-To customize your view, click the “Clone as Dashboard” button at the top right hand side. This will create a Dashboard with content from the “My Workspace” page. Here are some example customizations you can do with the cloned Dashboard:
-
-- Display additional types of 3rd party data by creating new Embedded Apps using Datadog’s Action Catalog (e.g., display PagerDuty on call info)
-- Update the overall layout and design of your view by re-sizing, re-arranging, and adding/removing widgets
-- Add an announcement and updates section with relevant information for your organization (using a Note widget)
+Captures alerts from [Datadog Watchdog][5].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /actions/app_builder
+[2]: /actions/app_builder/embedded_apps/
+[3]: /service_management/incident_management/
+[4]: /error_tracking/
+[5]: /watchdog/
+[6]: /monitors/
+[7]: /service_management/service_level_objectives/
+[8]: /account_management/teams/
 
