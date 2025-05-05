@@ -84,7 +84,7 @@ Auto multi-line detection uses an algorithm to detect *any* datetime format that
 
 Your datetime format must include both a _date_ and _time_ component to be detected. 
 
-Examples of formats that are long enough to be detected:
+Examples of valid formats that include enough context to be detected:
  - `2021-03-28 13:45:30`
  - `2023-03-28T14:33:53.743350Z`
  - `Jun 14 15:16:01`
