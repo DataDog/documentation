@@ -195,7 +195,7 @@ title: Database Monitoring Monitor
 {{#is_recovery}}
 {{host.name}}의 일일 평균 설명 플랜 비용이 지난주 동일 비용 대비  {{threshold}} 이내로 복원되었습니다..
 {{/is_recovery}}
-{< /code-block >}}
+{{< /code-block >}}
 1. **Notify your services and your team members** 상자에서 이름을 입력하고 선택하여 알림 수신자에 자신을 추가합니다.
 
 #### 모니터 확인 및 저장하기
