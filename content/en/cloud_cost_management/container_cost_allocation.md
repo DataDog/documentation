@@ -94,7 +94,7 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
-**Note**: [GKE Autopilot][105] is only supported as an agentless kubernetes experience subject to [limitations](#agentless-kubernetes-costs).
+**Note**: [GKE Autopilot][105] is only supported as an Agentless Kubernetes setup that is subject to [limitations](#agentless-kubernetes-costs).
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
