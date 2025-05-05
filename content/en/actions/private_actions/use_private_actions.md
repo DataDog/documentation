@@ -184,7 +184,7 @@ Use [role-based access control (RBAC)][18] to control access to your private act
 
 You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**. 
 
-By default, only the creator of the runner receives **Editor** access. The creator can choose to grant access to additional users, service accounts, roles, or teams.
+By default, only the runner's creator has **Editor** access. The creator can grant access to additional users, service accounts, roles, or teams.
 
 ### Permission levels
 
