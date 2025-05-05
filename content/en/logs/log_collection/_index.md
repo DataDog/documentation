@@ -328,6 +328,8 @@ The TCP endpoint is not supported for this site.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
+> 📣 **Preview available**: You can now submit logs up to **7 days** old, instead of the current 18h limit. [Register for the Preview](https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/)
+
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
 There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
