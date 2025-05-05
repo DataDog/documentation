@@ -12,17 +12,11 @@ algolia:
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
 ---
 
-{{< callout btn_hidden="true" header="Try the Preview!">}}
-The FIPS Agent is in Preview.
-{{< /callout >}}
-
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-warning">The FIPS Agent is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
 
 The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent replaces the [FIPS proxy][2] and includes limited support for integrations that need to collect observability data that is external to the host.
-
-**The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads. For production workloads, see [Datadog FIPS Compliance][2].**
 
 ## Requirements
 
@@ -37,7 +31,7 @@ The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal I
    - FIPS-compliant storage backing the host file system.
 
 In addition to the Operating System (OS) requirements above:
-- You must have access to a FIPS-compliant Datadog environment (US1-FED or GovCloud).
+- You must have access to a FIPS-compliant Datadog environment (US1-FED).
 - The FIPS Agent is only available on Agent versions 7.63 and above.
 
 ## Installation

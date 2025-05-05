@@ -592,10 +592,18 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /getting_started/opentelemetry
+      url: /opentelemetry/getting_started/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
+    - name: Datadog Example Application
+      url: /getting_started/opentelemetry
+      parent: otel_guides_getting_started
+      weight: 101
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog
+      parent: otel_guides_getting_started
+      weight: 102
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -611,7 +619,7 @@ menu:
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs
+    - name: OTel APIs with Datadog SDKs
       url: /opentelemetry/instrument/api_support
       identifier: otel-api-dd-sdk
       parent: otel-instrumentation
@@ -649,7 +657,7 @@ menu:
       identifier: otel_instrumentation_libraries
       parent: otel-instrumentation
       weight: 303
-    - name: Environment Variables
+    - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
       parent: otel-instrumentation
@@ -704,17 +712,17 @@ menu:
       identifier: otel-setup-otlp-ingest
       parent: otel-setup-agent
       weight: 4022
-    - name: Direct OTLP Ingest
-      url: /opentelemetry/setup/intake_endpoint
+    - name: Agentless
+      url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
       weight: 403
     - name: Logs Endpoint
-      url: /opentelemetry/setup/intake_endpoint/otlp_logs
+      url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
       weight: 301
     - name: Metrics Endpoint
-      url: /opentelemetry/setup/intake_endpoint/otlp_metrics
+      url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
       weight: 302
     - name: Semantic Mapping
@@ -1051,6 +1059,11 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
+    - name: Live Debugger
+      url: developers/ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
+      weight: 7011
     - name: VS Code
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -1659,7 +1672,7 @@ menu:
       parent: monitor_types
       identifier: monitor_types_change
       weight: 306
-    - name: CI
+    - name: CI/CD & Test
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
@@ -2729,7 +2742,7 @@ menu:
       weight: 9
     - name: Datastore
       url: actions/datastore/
-      pre: server
+      pre: datastores-wui
       parent: actions_heading
       identifier: datastore
       weight: 30000
@@ -3807,7 +3820,7 @@ menu:
       parent: trace_explorer
       weight: 606
     - name: Code Origins for Spans
-      url: tracing/guide/code_origins
+      url: tracing/code_origins
       parent: tracing
       identifier: tracing_code_origins
       weight: 7
@@ -4348,47 +4361,57 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 13
+    - name: Exploring Database Schemas
+      url: database_monitoring/schema_explorer
+      parent: dbm
+      identifier: dbm_schema_explorer
+      weight: 14
     - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
-      weight: 14
+      weight: 15
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 15
+      weight: 16
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 16
+      weight: 17
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
       identifier: data_streams
       parent: apm_heading
       weight: 50000
+    - name: Setup
+      url: data_streams/setup
+      identifier: data_streams_setup
+      parent: data_streams
+      weight: 1
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
       parent: data_streams
-      weight: 1
+      weight: 2
     - name: Live Messages
       url: data_streams/live_messages
       identifier: data_streams_live_messages
       parent: data_streams
-      weight: 2
+      weight: 3
     - name: Data Pipeline Lineage
       url: data_streams/data_pipeline_lineage
       identifier: data_streams_pipeline_lineage
       parent: data_streams
-      weight: 3
+      weight: 4
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 4
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -4628,6 +4651,11 @@ menu:
       identifier: cd_features_rollbacks_detection
       parent: cd_features
       weight: 302
+    - name: Monitors
+      url: monitors/types/ci/?tab=deployments
+      parent: cd
+      identifier: cd_monitors
+      weight: 4
     - name: Test Optimization
       url: tests/
       pre: ci
@@ -7684,16 +7712,31 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
+    - name: RUM Without Limits
+      url: real_user_monitoring/rum_without_limits/
+      parent: rum
+      identifier: rum_without_limits
+      weight: 10
+    - name: Metrics
+      url: real_user_monitoring/rum_without_limits/metrics
+      parent: rum_without_limits
+      identifier: rum_without_limits_metrics
+      weight: 1001
+    - name: Retention Filters
+      url: real_user_monitoring/rum_without_limits/retention_filters
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention
+      weight: 1002
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 10
+      weight: 11
     - name: Data Security
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 11
+      weight: 12
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics

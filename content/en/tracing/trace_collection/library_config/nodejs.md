@@ -52,7 +52,8 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
-Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+Whether to enable dd-trace. Setting this to `false` disables all features of the library.<br/>
+See also [DD_APM_TRACING_ENABLED][16].
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -275,17 +276,17 @@ For information about valid values and using the following configuration options
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Configuration**: `tracePropagationStyle.extract`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Configuration**: `tracePropagationStyle`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
 For more examples of how to work with the library see [API documentation][2].
@@ -303,3 +304,4 @@ For more examples of how to work with the library see [API documentation][2].
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
+[16]: /tracing/trace_collection/library_config/#traces

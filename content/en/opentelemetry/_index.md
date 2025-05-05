@@ -129,7 +129,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Additional setup options
 
-For other setup options, including direct OTLP intake, see [Send Data to Datadog][7].
+For other setup options, including Agentless deployment, see [Send Data to Datadog][7].
 
 ## Further reading
 

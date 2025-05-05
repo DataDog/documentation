@@ -198,12 +198,17 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 
 ### Application settings
 
-In your **App settings** in Azure, set the following environment variables:
+In your **App settings** in Azure, set the following environment variables on both your main container and the sidecar container. Alternatively, set these variables on your main container and enable the **Allow access to all app settings** option.
+
+{{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
 
 - `DD_API_KEY`: Your [Datadog API key][3]
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
+- `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+
+   <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
 
 <details open>
 <summary>
@@ -239,7 +244,7 @@ const logger = createLogger({
  level: 'info',
  exitOnError: false,
  format: format.json(),
- transports: [new transports.File({ filename: `/home/LogFiles/app.log`}),
+ transports: [new transports.File({ filename: `/home/LogFiles/app-${process.env.COMPUTERNAME}.log`}),
   ],
 });
 
@@ -269,6 +274,7 @@ app.listen(port);
 ```python
 from flask import Flask, Response
 from datadog import initialize, statsd
+import os
 import ddtrace
 import logging
 
@@ -277,7 +283,7 @@ ddtrace.patch(logging=True)
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
          '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
          '- %(message)s')
-logging.basicConfig(filename='/home/LogFiles/app.log', format=FORMAT)
+logging.basicConfig(filename=f'/home/LogFiles/app-{os.getenv(COMPUTERNAME)}.log', format=FORMAT)
 log = logging.getLogger(__name__)
 log.level = logging.INFO
 
@@ -377,7 +383,8 @@ func main() {
    if err != nil {
        panic(err)
    }
-   logFilePath := filepath.Join(logDir, "app.log")
+
+   logFilePath := filepath.Join(logDir, fmt.Sprintf("app-%s.log", os.Getenv("COMPUTERNAME")))
    log.Println("Saving logs in ", logFilePath)
    logFileLocal, err := os.OpenFile(logFilePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
    if err != nil {
@@ -422,7 +429,7 @@ $statsd = new DogStatsd(
 $log = new logger('datadog');
 $formatter = new JsonFormatter();
 
-$stream = new StreamHandler('/home/LogFiles/app.log', Logger::DEBUG);
+$stream = new StreamHandler('/home/LogFiles/app-'.getenv("COMPUTERNAME").'.log', Logger::DEBUG);
 $stream->setFormatter($formatter);
 
 $log->pushHandler($stream);
