@@ -36,11 +36,11 @@ You can set exceptions in two ways:
 Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
 - container name (`name`)
 - container image name (`image`)
-- Kubernetes namespace (`kube_namespace`).
+- Kubernetes namespace (`kube_namespace`)
 
 <div class="alert alert-warning">
 
-the `name` parameter only apply to container name and not to pod name even if the container run in a Kubernetes pod.
+The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 
 <div>
 
