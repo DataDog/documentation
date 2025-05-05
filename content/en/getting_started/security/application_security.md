@@ -121,11 +121,11 @@ For information on disabling AAP or its related capabilities, see the following:
 [12]: /security/notifications/rules/
 [13]: /security/application_security/risk_management
 [14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
-[15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
+[15]: /remote_configuration
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
 [20]: /getting_started/application_security/#setup-asm
-[21]: /remote_configuration?tab=configurationyamlfile#setup
+[21]: /remote_configuration#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
 [24]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

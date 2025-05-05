@@ -99,7 +99,7 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agentless_scanning#setup
-[2]: /remote_configuration?tab=configurationyamlfile
+[2]: /remote_configuration
 [3]: https://cyclonedx.org/
 [4]: /security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm

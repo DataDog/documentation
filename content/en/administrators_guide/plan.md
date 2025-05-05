@@ -349,7 +349,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [33]: /software_catalog/endpoints/
 [34]: /agent/fleet_automation/
 [35]: /remote_configuration
-[36]: /remote_configuration?tab=configurationyamlfile\#supported-products-and-feature-capabilities
+[36]: /remote_configuration#supported-products-and-features
 [37]: /notebooks/
 [38]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [39]: /account_management/billing/aws/#aws-resource-exclusion

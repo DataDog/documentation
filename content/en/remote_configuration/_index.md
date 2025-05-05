@@ -163,14 +163,14 @@ To opt out, disable Remote Configuration [at the organization level][6]. For add
 [13]: /account_management/audit_trail
 [14]: /monitors/
 [15]: /help/
-[16]: /remote_configuration?tab=configurationyamlfile#setup
+[16]: /remote_configuration
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
 [19]: /tracing/software_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
-[23]: /remote_configuration?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
+[23]: /remote_configuration#opting-out-of-remote-configuration
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step

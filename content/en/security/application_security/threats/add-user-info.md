@@ -739,7 +739,7 @@ This will open a menu in which you may define your custom WAF rule. By selecting
 Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
 
 
-[1]: /remote_configuration?tab=configurationyamlfile#application-security-management-asm
+[1]: /remote_configuration
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
