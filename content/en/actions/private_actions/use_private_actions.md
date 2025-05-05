@@ -178,7 +178,7 @@ When you see the **Ready to use** status, you can create a new connection for th
 
 See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 
-## Private action runner permissions
+## Manage access
 
 Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
 
