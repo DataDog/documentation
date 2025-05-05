@@ -182,7 +182,7 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
 
-Set permissions on the runner to restrict its modifications or attachment of new connections to it. The granular permissions include **Viewer**, **Contributor**, and **Editor**. 
+You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**. 
 
 By default, only the creator of the runner receives **Editor** access. The creator can choose to grant access to additional users, service accounts, roles, or teams.
 
