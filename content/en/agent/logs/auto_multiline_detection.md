@@ -82,7 +82,7 @@ logs:
 
 Auto multi-line detection uses an algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. To prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
 
-Your datetime format should include both a _date_ and _time_ component to be detected. 
+Your datetime format must include both a _date_ and _time_ component to be detected. 
 
 Examples of formats that are long enough to be detected:
  - `2021-03-28 13:45:30`
