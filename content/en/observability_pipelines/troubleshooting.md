@@ -25,6 +25,8 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  The Observability Pipelines Worker API allows you to interact with the Worker's processes with the `tap` command. If you are using the Helm charts provided when you [set up a pipeline][4], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. See [Bootstrap options][5] for more information. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
 
+ **Note**: When `DD_OP_API_ENABLED` is set to `true`, the `/health` endpoint is exposed. Configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
+
 ### Use `top` to find the component ID
 
 You need the source's or processor's component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
