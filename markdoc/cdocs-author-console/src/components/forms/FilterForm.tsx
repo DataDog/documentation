@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import OptionGroupForm, { OptionGroup } from './optionGroups/OptionGroupForm';
+import { OptionGroup } from './optionGroups/OptionGroupForm';
 import { WizardFilter, TraitConfig, FormStatus } from '../../types';
 import FlexibleTraitSelector from './traits/FlexibleTraitSelector';
+import FlexibleOptionGroupSelector from './optionGroups/FlexibleOptionGroupSelector';
 
 function FilterForm(props: {
   filter: WizardFilter;
@@ -100,7 +101,14 @@ function FilterForm(props: {
         The list of options the user can select for this filter. For example, if you've chosen the{' '}
         <code>prog_lang</code> trait above, your option group would contain options like Python and JavaScript.
       </p>
-      <OptionGroupForm customizationConfig={props.customizationConfig} onSave={handleOptionGroupSave} />
+      <FlexibleOptionGroupSelector
+        customizationConfig={props.customizationConfig}
+        onStatusChange={(p) => {
+          if (p.status === 'done' && p.data) {
+            handleOptionGroupSave({ optionGroupId: p.data.optionGroupId, optionGroup: p.data.optionGroup });
+          }
+        }}
+      />
     </div>
   );
 }

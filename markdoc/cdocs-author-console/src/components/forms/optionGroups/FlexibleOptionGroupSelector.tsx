@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
-import { OptionGroup } from '../../../types';
+import { FormStatus, OptionGroup } from '../../../types';
 import NewOptionGroupForm from './NewOptionGroupForm';
 
 export default function FlexibleOptionGroupSelector(props: {
   customizationConfig: CustomizationConfig;
-  onSelect: (optionGroupId: string) => void;
+  onStatusChange: (p: { status: FormStatus; data?: { optionGroupId: string; optionGroup: OptionGroup } }) => void;
 }) {
   const [optionGroupsById, setOptionGroupsById] = useState<Record<string, OptionGroup>>(
     props.customizationConfig.optionGroupsById
@@ -36,7 +36,13 @@ export default function FlexibleOptionGroupSelector(props: {
       value: optionGroupId,
       label: buildOptionGroupLabel({ optionGroupId, optionGroup: optionGroupsById[optionGroupId] })
     });
-    props.onSelect(optionGroupId);
+    props.onStatusChange({
+      status: 'done',
+      data: {
+        optionGroupId,
+        optionGroup: optionGroupsById[optionGroupId]
+      }
+    });
   };
 
   return (
@@ -56,16 +62,24 @@ export default function FlexibleOptionGroupSelector(props: {
       />
       <NewOptionGroupForm
         customizationConfig={props.customizationConfig}
-        onStatusChange={(args) => {
-          console.log('[OptionGroupForm] NewOptionGroupForm status change:', args);
-          if (args.status === 'done' && args.data) {
-            const { optionGroupId, optionGroup } = args.data;
+        onStatusChange={(p) => {
+          if (p.status === 'done' && p.data) {
+            const { optionGroupId, optionGroup } = p.data;
             setOptionGroupsById((prev) => ({
               ...prev,
               [optionGroupId]: optionGroup
             }));
-            setSelectedOptionGroup({ value: optionGroupId, label: optionGroupId });
-            props.onSelect(optionGroupId);
+            setSelectedOptionGroup({
+              value: optionGroupId,
+              label: buildOptionGroupLabel({ optionGroupId, optionGroup })
+            });
+            props.onStatusChange({
+              status: 'done',
+              data: {
+                optionGroupId,
+                optionGroup
+              }
+            });
           }
         }}
       />

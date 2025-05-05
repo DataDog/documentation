@@ -3,9 +3,6 @@ import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
-import NewOptionGroupForm from './forms/optionGroups/NewOptionGroupForm';
-import UpdatedOptionGroupForm from './forms/optionGroups/UpdatedOptionGroupForm';
-import FlexibleOptionGroupSelector from './forms/optionGroups/FlexibleOptionGroupSelector';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -23,15 +20,6 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
-      <h1>Debug</h1>
-      <h2>FlexibleOptionGroupSelector:</h2>
-      <FlexibleOptionGroupSelector
-        customizationConfig={customizationConfig}
-        onSelect={(p) => {
-          console.log('[PageWizard] FlexibleOptionGroupSelector triggered onSelect callback:', p);
-        }}
-      />
-      <hr />
       {filters.length === 0 && (
         <p>
           Click the button below to configure a filter and generate instructions for setting up a new customizable doc.
