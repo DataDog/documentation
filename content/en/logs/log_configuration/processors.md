@@ -833,7 +833,7 @@ Extract a specific value from an object inside an array when it matches a condit
 {
   "httpRequest": {
     "headers": [
-      {"name": "Referer", "value": "https://example.com"},
+      {"name": "Referrer", "value": "https://example.com"},
       {"name": "Accept", "value": "application/json"}
     ]
   }
@@ -843,9 +843,9 @@ Extract a specific value from an object inside an array when it matches a condit
 **Configuration steps:**
 
 - **Array path**: `httpRequest.headers`
-- **Condition**: `name:"Referer"`
+- **Condition**: `name:Referrer`
 - **Extract value of**: `value`
-- **Target attribute**: `extractedValue`
+- **Target attribute**: `referrer`
 
 **Result:**
 
@@ -854,7 +854,7 @@ Extract a specific value from an object inside an array when it matches a condit
   "httpRequest": {
     "headers": [...]
   },
-  "extractedValue": "https://example.com"
+  "referrer": "https://example.com"
 }
 ```
 
