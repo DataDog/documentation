@@ -114,7 +114,7 @@ function OptionGroupBuilder(props: {
         onChange={handleAccordionToggle}
       >
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-          <Typography component="span">I can't find a suitable option group in the list.</Typography>
+          <Typography component="span">I couldn't find the option group I need.</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <h3>Create a new option group</h3>

@@ -168,7 +168,7 @@ function FilterRow({
 
   const getFilterSummaryText = () => {
     if (!filter.trait_id || !filter.option_group_id) {
-      return 'New filter';
+      return 'Creating a new filter ...';
     }
     const optionLabels = filter.customizationConfig.optionGroupsById[filter.option_group_id]?.map(
       (option) => option.label
