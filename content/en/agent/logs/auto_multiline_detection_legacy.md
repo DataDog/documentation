@@ -77,7 +77,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info"> In Agent versions 7.65+ you can opt into the legacy behavior by setting to <strong>true</strong> the following:<br> <strong>- logs_config.force_auto_multi_line_detection_v1</strong> in your datadog.yaml file <br>OR <br> <strong>- LOGS_CONFIG_FORCE_AUTO_MULTI_LINE_DETECTION_V1</strong> in your environment variable.</div>
+<div class="alert alert-info"> In Agent versions 7.65+, you can opt into the legacy behavior by setting to <strong>true</strong> the following:<br> <strong>- logs_config.force_auto_multi_line_detection_v1</strong> in your datadog.yaml file <br>OR <br> <strong>- LOGS_CONFIG_FORCE_AUTO_MULTI_LINE_DETECTION_V1</strong> in your environment variable.</div>
 
 ## Enable multi-line aggregation per integration
 Alternatively, you can enable or disable multi-line aggregation for an individual integration's log collection. Changing the multi-line aggregation for an integration overrides the global configuration.
