@@ -36,7 +36,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 {{% /tab %}}
 {{< /tabs >}}
 
-### Default Settings
+### Default settings
 By default, the following features are enabled:
 
 - `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format will be used to aggregate logs. 
