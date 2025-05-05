@@ -31,7 +31,7 @@ algolia:
 
 
 ## Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][1] automatically for **all** log integrations it sets up.
+With Agent 7.37+, you can enable `auto_multi_line_detection` to automatically detect [common multi-line patterns][1] across **all** configured log integrations.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
