@@ -7839,11 +7839,16 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Guides
+      url: product_analytics/guide/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 7
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 7
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2
