@@ -1,7 +1,8 @@
 ---
 title: Migrate to the Datadog Distribution of OTel Collector
 aliases:
-- "/opentelemetry/agent/migration/"
+- /opentelemetry/agent/migration/
+- /opentelemetry/guide/migrate/ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
