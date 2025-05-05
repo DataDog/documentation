@@ -178,6 +178,35 @@ When you see the **Ready to use** status, you can create a new connection for th
 
 See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 
+## Private action runner permissions
+
+Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
+
+Set permissions on the runner to restrict its modifications or attachment of new connections to it. The granular permissions include **Viewer**, **Contributor**, and **Editor**. 
+
+By default, only the creator of the runner receives **Editor** access. The creator can choose to grant access to additional users, service accounts, roles, or teams.
+
+### Permission levels
+
+Viewer
+: Can view the runner and connections attached to it
+
+Contributor
+: Can view and contribute to the runner by attaching new connections to it
+
+Editor
+: Can view, contribute (attach new connections), and edit the runner
+
+### Set permissions on a runner
+
+1. Navigate to the Edit page of the runner.
+2. Go to the **Who Has Access?** section and click on the button **Edit access** .
+3. Select a user, a service account, a role or a team from the dropdown menu. Click **Add**. The principal you selected populates into the bottom of the dialog box.
+4. Next to the principal name, select your desired permission from the dropdown menu.
+5. If you would like to remove access from a principal, in the dropdown for permissions choose **Remove access**.
+6. Click **Done** to finalize the permissions setup.
+7. Click **Save** to apply the new permissions to the runner.
+
 ## Connect a runner
 
 Before you can use an action runner, you must pair it with one or more connections.
@@ -413,3 +442,5 @@ To edit the allowlist for a Private Action Runner:
 [14]: /service_management/app_builder/build
 [15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [17]: /actions/private_actions/
+[18]: /account_management/rbac/
+[19]: /account_management/rbac/permissions/#app-builder--workflow-automations
