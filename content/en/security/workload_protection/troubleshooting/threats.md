@@ -1,16 +1,8 @@
 ---
 title: Troubleshooting Workload Protection
-aliases:
-  - /security_platform/cloud_workload_security/troubleshooting/
-  - /security_platform/cloud_security_management/troubleshooting/
-  - /security/cloud_security_management/troubleshooting/threats/
-further_reading:
-- link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
-  tag: "Documentation"
-  text: "Troubleshooting Cloud Security Vulnerabilities"
 ---
 
-If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Workload Protection, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 
@@ -114,7 +106,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
 
 Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime config:
 
-1. Disable CSM in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+1. Disable Workload Protection in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
     {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################
@@ -127,7 +119,7 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
 
     runtime_security_config:
     ## @param enabled - boolean - optional - default: false
-    ## Set to true to enable full CSM.
+    ## Set to true to enable full Workload Protection.
     #
     enabled: false
 
@@ -140,7 +132,7 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
     #
     # socket: /opt/datadog-agent/run/runtime-security.sock
     {{< /code-block >}}
-2. Disable CSM in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+2. Disable Workload Protection in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
     {{< code-block lang="yaml" filename="security-agent.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################
@@ -163,9 +155,5 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
     # socket: /opt/datadog-agent/run/runtime-security.sock
     {{< /code-block >}}
 3. Restart your agents.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
