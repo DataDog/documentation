@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import { OptionGroup } from './../../types';
+import { OptionGroup } from '../../types';
 import { WizardFilter, TraitConfig, FormStatus } from '../../types';
 import FlexibleTraitSelector from './traits/FlexibleTraitSelector';
 import FlexibleOptionGroupSelector from './optionGroups/FlexibleOptionGroupSelector';
 
-function FilterForm(props: {
+function FilterBuilder(props: {
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: WizardFilter }) => void;
@@ -102,4 +102,4 @@ function FilterForm(props: {
   );
 }
 
-export default FilterForm;
+export default FilterBuilder;

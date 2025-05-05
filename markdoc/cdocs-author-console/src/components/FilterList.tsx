@@ -3,7 +3,7 @@ import { CustomizationConfig } from 'cdocs-data';
 import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
-import FilterForm from './forms/FilterForm';
+import FilterBuilder from './forms/FilterBuilder';
 import { WizardFilter } from '../types';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -110,7 +110,7 @@ function FilterList({
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
             <FilterRow filter={filtersByUuid[uuid]} onDelete={onDelete} onEdit={onEdit} />
             {currentFilterUuid === uuid && (
-              <FilterForm
+              <FilterBuilder
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
                 onStatusChange={(p) => {
