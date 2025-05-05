@@ -4,7 +4,6 @@ aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/
   - /serverless/troubleshooting/serverless_apm_metrics/
-  - /serverless/distributed_tracing/serverless_trace_propagation
   - /serverless/distributed_tracing
 further_reading:
 - link: "/tracing/"
@@ -152,7 +151,19 @@ _Supported runtimes_: Python, Node.js, Java
 
 _Supported AWS services_: SNS, SQS, Kinesis, S3, EventBridge
 
-### Passing trace context
+### Span Auto-linking
+
+Datadog uses [Span Auto-linking][9] to link spans when segments of your asynchronous requests cannot propagate trace context. Span Auto-linking is enabled by default in supported runtimes, but the DynamoDB `PutItem` operation requires additional configuration. See [Instrumenting Python Lambda Applications][10] or [Instrumenting Node.js Lambda Applications][11] for details.
+
+_Supported runtimes_: Python, Node.js
+
+### Manual trace propagation
+
+TK
+
+For configuration instructions and further details, see [Manual Trace Propagation][12].
+
+_Supported runtimes_: Python, Node.js
 
 ### Merging AWS X-Ray traces
 
@@ -174,3 +185,7 @@ _Supported runtimes_: Python, Node.js
 [6]: /tracing/trace_explorer/
 [7]: /tracing/guide/aws_payload_tagging/
 [8]: /serverless/guide/lambda-xray-trace-merging
+[9]: /serverless/guide/lambda-span-autolinking
+[10]: /serverless/aws_lambda/installation/python/#span-auto-linking
+[11]: /serverless/aws_lambda/installation/nodejs/#span-auto-linking
+[12]: /serverless/guide/manual-trace-propagation
