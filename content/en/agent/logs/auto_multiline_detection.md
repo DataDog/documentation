@@ -60,9 +60,6 @@ logs_config:
 ```shell
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_DATETIME_DETECTION=false
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_DETECTION=false
-
-
-  
 ```
 {{% /tab %}}
 {{< /tabs >}}
