@@ -17,8 +17,8 @@ Kubernetes Security Posture Management (KSPM) for Cloud Security helps you proac
 
 To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations. For detailed instructions, see the following articles:
 
-- Cloud Security Enterprise ([Agent][14] and [cloud integrations][15])
-- Cloud Security Pro ([Agent][12] and [cloud integrations][13])
+- [Deploying Cloud Security on the Agent][12]
+- [Deploying Cloud Security via Cloud Integrations][13]
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
@@ -56,9 +56,9 @@ To view the security posture score for your Kubernetes deployments, navigate to 
 
 ### View detailed reports for Kubernetes frameworks
 
-To view a detailed report that gives you insight into how you score against the framework's requirements and rules, click **Framework Overview**. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
+Click a framework to view a detailed report that gives you insight into how you score against the framework's requirements and rules. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
 
-{{< img src="security/csm/kubernetes_posture_score.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
+{{< img src="security/csm/kubernetes_posture_score_2.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
 
 ## Create your own Kubernetes detection rules
 
@@ -81,7 +81,5 @@ After you create the detection rule, you can customize its severity (`Critical`,
 [9]: https://app.datadoghq.com/security/compliance/home
 [10]: /api/latest/security-monitoring/#list-findings
 [11]: https://app.datadoghq.com/security/compliance
-[12]: /security/cloud_security_management/setup/csm_pro/agent/kubernetes
-[13]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
-[14]: /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes
-[15]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+[12]: /security/cloud_security_management/setup/agent/
+[13]: /security/cloud_security_management/setup/cloud_integrations/
