@@ -146,4 +146,4 @@ The following frameworks aren't directly instrumented by Application Security, b
 | Wordpress | 4.8                       |
 
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /remote_configuration#enabling-remote-configuration
+[2]: /tracing/guide/remote_config

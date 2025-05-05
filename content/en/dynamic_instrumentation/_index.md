@@ -217,7 +217,7 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: /remote_configuration
+[2]: /tracing/guide/remote_config
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet

@@ -146,7 +146,7 @@ The Go packages listed in this page are relevant for Application Security capabi
 {{% /tab %}}
 {{% /tabs %}}
 
-[1]: /remote_configuration#enabling-remote-configuration
+[1]: /tracing/guide/remote_config
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance

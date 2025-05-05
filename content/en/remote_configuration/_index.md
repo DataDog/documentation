@@ -124,7 +124,7 @@ After you've enabled Remote Configuration in your organization, consult the docu
 | Product | Setup instructions |
 | ------- | --------------------- |
 | Fleet Automation | [Setup Fleet Automation][31] |
-| APM | [Configuration at runtime](/tracing/trace_collection/runtime_config/) |
+| APM | [Configuration at runtime](/tracing/guide/remote_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
 | Workload Protection | [Workload Protection](/security/threats/) |
 | Observability Pipelines | [Advanced Configurations](/observability_pipelines/advanced_configurations/#bootstrap-options) |
