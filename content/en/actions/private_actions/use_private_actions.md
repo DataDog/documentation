@@ -203,7 +203,7 @@ Editor
 2. Go to the **Who Has Access?** section and click on the button **Edit access** .
 3. Select a user, a service account, a role or a team from the dropdown menu. Click **Add**. The principal you selected populates into the bottom of the dialog box.
 4. Next to the principal name, select your desired permission from the dropdown menu.
-5. If you would like to remove access from a principal, in the dropdown for permissions choose **Remove access**.
+5. To remove access from a principal, select **Remove access** from the permissions dropdown menu.
 6. Click **Done** to finalize the permissions setup.
 7. Click **Save** to apply the new permissions to the runner.
 
