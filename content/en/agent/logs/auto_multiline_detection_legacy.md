@@ -27,7 +27,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning">This document is for Agents older than <strong>v7.65.0</strong> or if you have explicitly enabled the legacy implementation of auto multi-line detection. For more recent Agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a></div>
+<div class="alert alert-warning">This document applies to Agent versions earlier than <strong>v7.65.0</strong>, or when the legacy auto multi-line detection is explicitly enabled. For more recent Agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a>.</div>
 
 
 ## Global automatic multi-line aggregation
