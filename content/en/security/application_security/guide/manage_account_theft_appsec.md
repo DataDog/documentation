@@ -715,7 +715,7 @@ This is general guidance. Depending on your applications and environments, there
 [8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
 [9]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
 [10]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[11]: /remote_configuration
+[11]: /tracing/guide/remote_config/
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [13]: /security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat

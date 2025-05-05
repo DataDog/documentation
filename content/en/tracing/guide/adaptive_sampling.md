@@ -95,7 +95,7 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 
 [1]: /tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.53.0
-[3]: /remote_configuration
+[3]: /tracing/guide/remote_config
 [4]: /account_management/rbac/permissions/
 [5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.68.0

@@ -211,7 +211,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: /agent/fleet_automation/setup
+[3]: /tracing/guide/remote_config
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces

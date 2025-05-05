@@ -30,7 +30,7 @@ Services exposed to application attacks are highlighted directly in the security
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/remote_configuration#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/tracing/guide/remote_config/">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Compatibility
 
@@ -137,7 +137,7 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [16]: /security/cloud_siem/
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[26]: /remote_configuration#enabling-remote-configuration
+[26]: /tracing/guide/remote_config/
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: https://docs.datadoghq.com/security/code_security/
