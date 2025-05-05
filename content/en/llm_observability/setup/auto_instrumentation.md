@@ -198,14 +198,14 @@ The following operations are supported:
 
 ## LangGraph
 
-The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][43].
 
 ### Traced methods
 
 The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
 
-- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
-- [RunnableSeq.invoke()][35]
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][44]
+- [RunnableSeq.invoke()][45]
 
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
