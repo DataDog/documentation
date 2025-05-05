@@ -5412,7 +5412,7 @@ menu:
       parent: observability_pipelines
       weight: 2
     - name: Commands
-      url: observability_pipelines/worker_commands/
+      url: observability_pipelines/install_the_worker/worker_commands/
       identifier: install_the_worker_commands
       parent: observability_pipelines_install_the_worker
       weight: 201

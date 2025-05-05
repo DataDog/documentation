@@ -11,6 +11,8 @@ further_reading:
 
 Usage example: `observability-pipelines-worker <COMMAND>`
 
+If you are using a containerized environment, use the `docker exec` or `kubectl exec` command to get a shell into the container to run the command.
+
 | Command   | Description                                                                 |
 |-----------|-----------------------------------------------------------------------------|
 | `run`     | Run the observability pipeline worker.                                      |
