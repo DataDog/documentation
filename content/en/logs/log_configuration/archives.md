@@ -54,7 +54,9 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud and GermanyCloud, and GovCloud is not supported.
+
+**Note:** Archiving to Azure GovCloud is supported in Preview. Contact support to request access.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
