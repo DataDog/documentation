@@ -603,7 +603,7 @@ Deprecated since version 1.9.0
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
-[3]: /remote_configuration
+[3]: agent/fleet_automation/setup
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/setup/docker/
 [6]: /agent/configuration/network/#configure-ports

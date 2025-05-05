@@ -21,7 +21,7 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
   - .NET: `2.46.0` or greater
 
 ### Send a flare
-To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][3] on the Agent.
 {{% remote-flare %}}
 For example:
 
@@ -508,6 +508,5 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
-[3]: /remote_configuration
-[4]: /agent/fleet_automation/
+[3]: /agent/fleet_automation/setup
 [5]: /remote_configuration#enabling-remote-configuration

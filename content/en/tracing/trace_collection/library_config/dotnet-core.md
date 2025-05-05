@@ -360,7 +360,7 @@ The following configuration variables are for features that are available for us
 [13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /tracing/configure_data_security#telemetry-collection
-[16]: /remote_configuration
+[16]: /agent/fleet_automation/setup
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
