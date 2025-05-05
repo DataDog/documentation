@@ -96,7 +96,7 @@ Examples of formats that do not have enough context to be detected:
 - `2024/05/16`
 
 
-## Custom Pattern Configuration
+## Custom pattern configuration
 
 If datetime aggregation is not sufficient, or if your format is too short to be detected automatically, you can customize the feature in two ways:
 - [Custom Samples](#custom-samples)
