@@ -6,6 +6,10 @@ further_reading:
   text: "Learn more about App Builder"
 ---
 
+{{< callout url="#" btn_hidden="true" header="false" >}}
+The Developer Landing Page is in Preview. Request access [here][LINK].
+{{< /callout >}}
+
 ## Overview
 
 Datadog's Internal Developer Platform (IDP) ships with **overview pages** that surface the information most relevant to each stakeholder:
@@ -13,13 +17,9 @@ Datadog's Internal Developer Platform (IDP) ships with **overview pages** that s
 - **Developers** see their open tickets, pull-request queues, and team's service information.
 - **SREs** and **engineering managers** track metrics like product reliability, service health, and scorecard performance.
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-The Developer Landing Page is in Preview. Request access [here][LINK].
-{{< /callout >}}
-
 ## Developer overview page
 
-The **developer overview page** centralizes information from different platforms so you can view and manage your team and services in one place. The overview page includes:
+The developer overview page centralizes the following information about your team and services:
 - Your team's Monitors, Incidents, and SLOs
 - Your Jira tickets and GitHub PRs
 - Your team's Services and Scorecard performance
@@ -29,23 +29,28 @@ The **developer overview page** centralizes information from different platforms
 
 Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
 
-1. **Connect data sources**: Choose **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
-1. **Set page filters**: Provide values for the page-level filters. These filters persist when you return to **My Workspace**. 
+1. **Connect widgets to data sources**: Click **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
+1. **Set page filters**: Provide values for the page-level filters:
    - **Team**: Name of your [Datadog Team][8] 
    - **Github_Org**: Name of your GitHub Organization
    - **Github_Team**: Name of your GitHub Team
    - **Github_Username**: Your GitHub username
-1. **(Optional) Customize your view**: Select **Clone as dashboard** to add or remove widgets, embed third-party data, or edit the layout. For example, you can:
-   - Create a widget to PagerDuty on call information. 
+
+   **Note**: These filters persist when you return to **My Workspace**. 
+
+1. **(Optional) Customize your view**: Select **Clone as dashboard** to create a customizable dashboard where you can add or remove widgets, embed third-party data, or edit the layout. For example, you can:
+   - Create a widget to capture PagerDuty on call information. 
    - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
    
    See the [Embedded Apps][2] documentation to learn more about creating widgets.
 
-### Page features
+### Default widgets
+
+The following widgets are included by default on the developer overview page.
 
 #### Monitors, incidents, and SLOs
 
-Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until those products are enabled.
+Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
 
 #### Jira Tickets
 
