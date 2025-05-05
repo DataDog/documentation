@@ -109,7 +109,7 @@ La funcionalidad disponible para la versión `1.71.0` de extensiones de servicio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/es/remote_configuration
+[2]: https://docs.datadoghq.com/es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: https://cloud.google.com/service-extensions/docs/lb-extensions-overview#supported-lbs
 [4]: https://cloud.google.com/service-extensions/docs/configure-callout-backend-service
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions

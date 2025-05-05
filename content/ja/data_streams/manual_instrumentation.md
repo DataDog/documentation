@@ -105,4 +105,4 @@ set_consume_checkpoint(
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /ja/remote_configuration
+[5]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

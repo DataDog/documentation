@@ -115,7 +115,7 @@ Por defecto, el Inventario de seguridad de la API evalúa una de cada diez solic
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /es/remote_configuration
+[1]: /es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /es/security/application_security/threats/
 [3]: /es/security/application_security/software_composition_analysis/
 [4]: /es/agent/remote_config/
