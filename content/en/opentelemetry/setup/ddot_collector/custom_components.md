@@ -31,14 +31,14 @@ To complete this guide, you need the following:
 
 Download the Dockerfile template:
 
-1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-with-otel`) and cd into it.
+1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-ddot`) and cd into it.
    ```shell
-   mkdir -p agent-with-otel
-   cd agent-with-otel
+   mkdir -p agent-ddot
+   cd agent-ddot
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ddot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
@@ -107,13 +107,14 @@ Build your custom Datadog Agent image and push it to a container registry.
 
 1. Build the image with Docker:
    ```shell
-   docker build . -t agent-otel --no-cache \
+   docker build . -t agent-ddot --no-cache \
+     --build-arg AGENT_REPO="datadog/agent" \
      --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
      --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
 2. Tag and push the image:
    ```shell
-   docker tag agent-otel datadog/agent:<IMAGE-TAG>
+   docker tag agent-ddot datadog/agent:<IMAGE-TAG>
    docker push datadog/agent:<IMAGE-TAG>
    ```
    Ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
@@ -193,7 +194,7 @@ Create a sample configuration file and run your custom Agent to ensure everythin
      -p 4317:4317 \
      -p 4318:4318 \
      --entrypoint otel-agent \
-     agent-otel --config /config.yaml
+     agent-ddot --config /config.yaml
    ```
 3. If the Agent starts, then the build process was successful.
 
