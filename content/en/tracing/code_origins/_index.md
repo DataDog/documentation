@@ -64,6 +64,11 @@ Run your service with the following environment variable:
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
+<div class="alert alert-info">
+  For TypeScript applications, run your Node.js application with the 
+  <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a> flag to see code previews.
+</div>
+
 ## Using Code Origins
 
 ### In the Trace Explorer
@@ -72,7 +77,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 2. Click on any trace to view its details.
 3. In the span details panel, look for the "Code Origin" section.
 
-    {{< img src="tracing/guide/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
+    {{< img src="tracing/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
 
 4. Optionally, click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
   
@@ -96,6 +101,7 @@ If Code Origin information is missing:
     - In particular, check whether your service's language and framework support Code Origins.
 1. Filter for spans that include Code Origins using the query `@_dd.code_origin.type:*` in the [Trace Explorer][1].
 1. Enable [Source Code Integration][7] to see code previews in the APM Trace side panel.
+1. For Typescript applications, ensure that you run your application with the `--enable-source-maps` flag to see code previews ([learn more][9]).
 
 
 ## Further Reading
@@ -110,3 +116,4 @@ If Code Origin information is missing:
 [6]: /tracing/trace_collection/
 [7]: /integrations/guide/source-code-integration/
 [8]: /tracing/trace_collection/compatibility/nodejs#web-framework-compatibility
+[9]: /integrations/guide/source-code-integration/?tab=nodejs#embed-git-information-in-your-build-artifacts
