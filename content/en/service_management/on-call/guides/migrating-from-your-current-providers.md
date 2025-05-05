@@ -51,7 +51,7 @@ Many organizations opt to route alerts to both their existing provider and Datad
 - Validate escalations across systems
 - Reduce risk during the switchover
 
-Use Datadog's monitor bulk editor[3] to append new on-call handles while maintaining existing ones. Cleanly phase out the old system once validation is complete.
+Use Datadog's [monitor bulk editor][3] to append new on-call handles while maintaining existing ones. Cleanly phase out the old system once validation is complete.
 
 ## 4. Prepare and Configure Datadog On-Call
 Before configuration, spend time reviewing the ["Teams" concept][4] in Datadog On-Call. Teams serve as the core building blocks for:
@@ -112,7 +112,7 @@ You’ve now completed the core migration to Datadog On-Call. To ensure long-ter
 
 - **Review Post-Mortems**: Incorporate incidents that occurred during or after the migration into your incident review process. Identify alerting or escalation issues missed during testing.
 
-- **Monitor On-Call Health**: Use On-Call Analytics[8] to track alert volume per responder, MTTA/MTTR, notification fatigue, and recurring escalations.
+- **Monitor On-Call Health**: Use [On-Call Analytics][8] to track alert volume per responder, MTTA/MTTR, notification fatigue, and recurring escalations.
 
 - **Stay Informed**: Subscribe to [Incident Response product updates][9] to keep up with new features, improvements, and deprecations.
 
@@ -130,5 +130,5 @@ You’ve now completed the core migration to Datadog On-Call. To ensure long-ter
 [6]: /service_management/incident_management
 [7]: /service_management/on-call/schedules/
 [8]: https://app.datadoghq.com/on-call/analytics
-[0]: https://app.datadoghq.com/release-notes?category=Incident%20Response
+[9]: https://app.datadoghq.com/release-notes?category=Incident%20Response
 [10]: https://chat.datadoghq.com/
