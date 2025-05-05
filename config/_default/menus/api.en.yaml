@@ -5784,6 +5784,54 @@ menu:
           - ListCustomCostsFiles
         unstable: []
         order: 10
+    - name: List budgets
+      url: '#list-budgets'
+      identifier: cloud-cost-management-list-budgets
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBudgets
+        unstable: []
+        order: 17
+    - name: Get a budget
+      url: '#get-a-budget'
+      identifier: cloud-cost-management-get-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBudget
+        unstable: []
+        order: 16
+    - name: Delete a budget
+      url: '#delete-a-budget'
+      identifier: cloud-cost-management-delete-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteBudget
+        unstable: []
+        order: 15
+    - name: Create or update a budget
+      url: '#create-or-update-a-budget'
+      identifier: cloud-cost-management-create-or-update-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertBudget
+        unstable: []
+        order: 14
     - name: Update Cloud Cost Management Azure config
       url: '#update-cloud-cost-management-azure-config'
       identifier: cloud-cost-management-update-cloud-cost-management-azure-config

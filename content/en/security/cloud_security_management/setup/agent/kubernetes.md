@@ -137,6 +137,14 @@ Add the following settings to the `env` section of `security-agent` and `system-
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
                 value: "true"
+              - name: DD_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_ENABLED
+                value: "true"
+              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_HOST_ENABLED
+                value: "true"
               - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
                 value: "true"
           [...]

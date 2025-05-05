@@ -433,6 +433,24 @@
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
   },
+  "UpsertBudget": {
+    "description": "Create a new budget or update an existing one.",
+    "summary": "Create or update a budget",
+    "request_description": "",
+    "request_schema_description": "The definition of the `BudgetWithEntries` object."
+  },
+  "DeleteBudget": {
+    "description": "Delete a budget.",
+    "summary": "Delete a budget"
+  },
+  "GetBudget": {
+    "description": "Get a budget.",
+    "summary": "Get a budget"
+  },
+  "ListBudgets": {
+    "description": "List budgets.",
+    "summary": "List budgets"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
