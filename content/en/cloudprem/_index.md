@@ -1,6 +1,6 @@
 ---
 title: CloudPrem
-description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log solution for cost-effective log ingestion, indexing, and search capabilities
+description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
 private: true # This removes this page from search and limits the availability of this doc to only those that have the link
 further_reading:
 - link: "/cloudprem/installation/"
@@ -22,40 +22,20 @@ further_reading:
 
 ## Overview
 
-Datadog CloudPrem is a self-hosted log solution which provides cost-effective log ingestion, indexing, and search capabilities in your own infrastructure. Designed to address data residency, security or high-volume requirements, CloudPrem seamlessly integrates with the Datadog platform to offer powerful log analysis, visualization, and alerting while ensuring that your sensitive log data remains within your own infrastructure.
+Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting - all while keeping your log data at rest within your infrastructure boundaries.
 
 {{< img src="/cloudprem/cloudprem_overview_diagram.png" alt="CloudPrem product overview diagram" style="width:100%;" >}}
 
-### Core Capabilities
-<!-- This sections was populated with Cursor, we can delete if it's not relevant -->
-
-CloudPrem enhances your log management strategy through several fundamental capabilities:
-- **Data Sovereignty**<br>
-  Process and store logs within your own infrastructure while maintaining full integration with Datadog's analysis tools. This gives you complete oversight of your data's location and handling.
-
-- **Infrastructure Efficiency**<br>
-  Scale log processing and storage according to your needs by leveraging your existing infrastructure. This provides flexibility in resource allocation and management as your requirements evolve.
-
-- **Deployment Flexibility**<br>
-  Adapt the deployment to match your infrastructure requirements and security controls while preserving seamless integration with Datadog's platform features and functionality.
-
 ## Architecture
 
-CloudPrem uses a modular architecture that separates processing tasks from data storage:
-
-- Processing tasks like indexing and searching run independently
-- Log data is stored separately in object storage (like S3)
-- Each component can be scaled separately to match your needs
-- This separation allows you to optimize resources based on your specific workload
-
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD CloudPrem architecture and component diagram" style="width:100%;" >}} -->
+CloudPrem uses a decoupled architecture which separates the compute (indexing and searching), and data on an object storage. This allows for independent scaling and optimization of different cluster components based on workload demands.
 
 ### Components
 
 The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of several components:
 
 **Indexers**
-: Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called splits to the object storage (such as Amazon S3).
+: Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called splits to the object storage (ex: Amazon S3).
 
 **Searchers**
 : Handle search queries from the Datadog UI, reading metadata from Metastore and index data from the object storage.
@@ -67,7 +47,8 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 : Responsible for tasks like indexing tasks scheduling and delete tasks.
 
 
-## Prerequisites for getting started
+## Get started
+### Prerequisites
 
 Before getting started with CloudPrem, ensure you have:
 
@@ -75,28 +56,18 @@ Before getting started with CloudPrem, ensure you have:
 - Kubernetes cluster (EKS recommended)
 - S3 bucket for log storage
 - PostgreSQL database (RDS recommended)
-- Datadog agent installed
-- Required tools: `kubectl`, `helm`
+- Datadog agent
+- `kubectl`
+- `helm`
+
+### Installation
+
+1. [Install CloudPrem][2]
+2. [Send logs to CloudPrem](2)
+3. [Configure logs processing](3)(optional)
+4. [Configure your Datadog account to connect the Log Explorer to CloudPrem](2)
 
 For detailed instructions, see the [Installation][2] documentation.
-
-## Additional considerations
-
-### Log processing capabilities
-
-CloudPrem includes basic log processing capabilities out-of-the-box. For more advanced use cases such as dual shipping, sensitive data redaction, or log volume control, Datadog recommends using [Observability Pipelines][3] in conjunction with CloudPrem.
-
-### Billing and usage
-
-Logs sent to CloudPrem components are counted toward your Datadog usage, you will be billed for CloudPrem's internal telemetry.
-
-### Network and cost
-
-CloudPrem sends query results outside your network for display in the Datadog UI. These query results are compressed, resulting in negligible egress costs for most deployments.
-
-### Deployment options
-
-You cannot deploy multiple CloudPrem clusters.
 
 ## Further reading
 
@@ -104,4 +75,4 @@ You cannot deploy multiple CloudPrem clusters.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/ 
 [2]: /cloudprem/installation/
-[3]: /observability_pipelines/
+[3]: /cloudprem/processing/

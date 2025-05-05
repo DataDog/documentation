@@ -24,7 +24,7 @@ This document walks you through the process of installing CloudPrem in your envi
 
 - AWS account
 - Kubernetes `1.25+` ([EKS][1] preferred)
-- [AWS Load Balancer Controller][2]
+- [AWS Load Balancer Controller installed][2]
 - PostgreSQL database ([RDS][3] preferred)
 - S3 bucket
 - Datadog agent
@@ -33,18 +33,14 @@ This document walks you through the process of installing CloudPrem in your envi
 
 ## Installation steps
 
-1. Install and configure [AWS Load Balancer Controller][4] on Kubernetes cluster.
-2. Create an S3 bucket.
-3. [Install CloudPrem Helm chart](#install-cloudprem-helm-chart).
-4. Set up DNS records.
-<!-- Does this have separate instructions? -->
-5. [Configure Datadog Agent to send Kuberentes logs](#5-send-kubernetes-logs-to-cloudprem).
-6. [Configure your Datadog account](#6-configure-your-datadog-agent).
-7. [Search your CloudPrem logs in the Logs Explorer](#7-search-your-cloudprem-logs-in-the-logs-explorer).
-8. [Uninstall](#8-uninstall).
+1. [Install CloudPrem Helm chart](#1-install-cloudprem-helm-chart).
+2. [Configure Ingress](#2-configure-ingress)
+3. [Configure Datadog Agent to send Kuberentes logs](#3-send-kubernetes-logs-to-cloudprem).
+4. [Configure your Datadog account](#4-configure-your-datadog-agent).
+5. [Search your CloudPrem logs in the Logs Explorer](#7-search-your-cloudprem-logs-in-the-logs-explorer).
+6. [Uninstall](#8-uninstall).
 
 ## Install CloudPrem Helm chart 
-<!-- Can you verify the ordering of these instructions? Right now they're all listed under Install CloudPrem Helm chart, but in the installation steps above, they're split out into separate steps. Which of the following is actually installing the CloudPrem Helm chart? -->
 
 ### 1. Add and update the Datadog Helm repository
 
@@ -182,42 +178,82 @@ indexer:
 # - Data access patterns (cache hit rates)
 #
 # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
+searcher:
+  replicaCount: 2
+
+  resources:
+    requests:
+      cpu: "4"
+      memory: "16Gi"
+    limits:
+      cpu: "4"
+      memory: "16Gi"
+
 ```
 
-### 5. Send Kubernetes logs to CloudPrem
+To check if the deployment went well:
+- Look at the logs from the metastore or indexer pod.
+- Look at the deployment resources status like the ingress ones.
+If you spot some errors, check out our troubleshooting section.
 
-Configure your Kubernetes cluster to send logs to CloudPrem:
+## Send Kubernetes logs to CloudPrem with the Datadog agent
+
+Follow the “Getting started with Datadog Operator” [guide](https://docs.datadoghq.com/getting_started/containers/datadog_operator/) and use the following configuration datadog-agent.yaml:
 
 ```yaml
-# In your Agent configuration
-logs:
-  enabled: true
-  config:
-    logs_config:
-      use_cloudprem: true
-      cloudprem_endpoint: <your-cloudprem-internal-endpoint>
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <cluster name>
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    env:
+      - name: DD_LOGS_CONFIG_LOGS_DD_URL
+        value: http://<release name>-indexer.<namespace>.svc.cluster.local:7280
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+      
+    otlp:
+      receiver:
+        protocols:
+          grpc:
+            enabled: true
+            endpoint: 0.0.0.0:4417
+
+    prometheusScrape:
+      enabled: true
+      enableServiceEndpoints: true
+
 ```
 
-### 6. Configure your Datadog account
 
-Configure your Datadog account to use CloudPrem for log management:
+- Within the cluster: use the indexer service for the logs endpoint url: DD_LOGS_CONFIG_LOGS_DD_URL:http://<release name>-indexer.<namespace>.svc.cluster.local:7280.
+- Outside the cluster: use the host of the internal ingress.
+- To send cluster metrics to Datadog SaaS, enable prometheusScrape.
+- To send cluster logs to Datadog Saas, enable OTLP/gRPC.
 
-1. Navigate to your [Datadog organization settings][10].
-2. Under "CloudPrem Configuration", add your CloudPrem endpoint.
-3. Verify the connection status.
 
-### 7. Search your CloudPrem logs in the Logs Explorer
+## Configure your Datadog account
 
-After configuration, you can search your logs in the Logs Explorer:
+Currently, you need to reach out to [Datadog support][12] and give the public DNS of CloudPrem so that you can search into your CloudPrem cluster from Datadog UI.
 
-1. Navigate to [**Logs > Explorer**][11].
-2. Use the Index filter on the left hand side to find CloudPrem logs.
-<!-- To verify, the original doc list this as Source, but the image shows Index -->
-3. Verify that logs are being indexed and are searchable.
+### Searching your CloudPrem logs in the Logs Explorer
+
+Once your Datadog account is configured, you are ready to search into the ‘cloudprem’ index by typing it in the search bar or selecting it in facets.
+Note that you cannot query the cloudprem index and other indexes together. 
 
 <!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Log Explorer filtered by index:cloudprem" style="width:100%;" >}} -->
 
-### 8. Uninstall
+## Uninstall
 
 To uninstall CloudPrem:
 
@@ -235,3 +271,4 @@ helm uninstall <deployment name>
 [4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
 [10]: https://app.datadoghq.com/organization-settings
 [11]: https://app.datadoghq.com/logs
+[12]: /getting_started/support/
