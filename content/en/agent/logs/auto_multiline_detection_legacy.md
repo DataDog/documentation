@@ -145,7 +145,7 @@ spec:
 
 ## Customize multi-line aggregation configuration
 
-Automatic multi-line detection uses a list of [common regular expressions][1] to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns and thresholds for detection.
+Automatic multi-line detection uses a list of [common regular expressions][1] to match logs. If the built-in list is not sufficient, you can also add custom patterns and thresholds for detection.
 
 ### Custom Patterns
 {{< tabs >}}
