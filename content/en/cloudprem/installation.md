@@ -198,7 +198,7 @@ If you spot some errors, check out our troubleshooting section.
 
 ## Send Kubernetes logs to CloudPrem with the Datadog agent
 
-Follow the “Getting started with Datadog Operator” [guide](https://docs.datadoghq.com/getting_started/containers/datadog_operator/) and use the following configuration datadog-agent.yaml:
+Follow the [Getting started with Datadog Operator guide](https://docs.datadoghq.com/getting_started/containers/datadog_operator/) and use the following configuration datadog-agent.yaml:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -236,8 +236,8 @@ spec:
 ```
 
 
-- Within the cluster: use the indexer service for the logs endpoint url: DD_LOGS_CONFIG_LOGS_DD_URL:http://<release name>-indexer.<namespace>.svc.cluster.local:7280.
-- Outside the cluster: use the host of the internal ingress.
+- Within the cluster, use the indexer service for the logs endpoint url: DD_LOGS_CONFIG_LOGS_DD_URL:http://<release name>-indexer.<namespace>.svc.cluster.local:7280.
+- Outside the cluster, use the host of the internal ingress.
 - To send cluster metrics to Datadog SaaS, enable prometheusScrape.
 - To send cluster logs to Datadog Saas, enable OTLP/gRPC.
 
@@ -248,8 +248,8 @@ Currently, you need to reach out to [Datadog support][12] and give the public DN
 
 ### Searching your CloudPrem logs in the Logs Explorer
 
-Once your Datadog account is configured, you are ready to search into the ‘cloudprem’ index by typing it in the search bar or selecting it in facets.
-Note that you cannot query the cloudprem index and other indexes together. 
+After your Datadog account is configured, you are ready to search into the ‘cloudprem’ index by typing it in the search bar or selecting it in facets.
+**Note**: You cannot query the CloudPrem index and other indexes together. 
 
 <!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Log Explorer filtered by index:cloudprem" style="width:100%;" >}} -->
 

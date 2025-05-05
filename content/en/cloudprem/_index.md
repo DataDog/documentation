@@ -35,7 +35,7 @@ CloudPrem uses a decoupled architecture which separates the compute (indexing an
 The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of several components:
 
 **Indexers**
-: Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called splits to the object storage (ex: Amazon S3).
+: Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called splits to the object storage (for example, Amazon S3).
 
 **Searchers**
 : Handle search queries from the Datadog UI, reading metadata from Metastore and index data from the object storage.

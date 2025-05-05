@@ -21,13 +21,13 @@ further_reading:
 
 ## Overview
 
-CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. This processing is designed to be equivalent to [Datadog SaaS Pipelines](https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source). Supported and unsupported processors are documented in the last section.
+CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. This processing is designed to be equivalent to [Datadog SaaS Pipelines][1]. For a list of supported and unsupported processors, see [Compatibility with Datadog SaaS Pipelines](#compatibility-with-datadog-saas-pipelines).
 
 You configure log processing pipelines using a JSON file that adheres to the same format as Datadog SaaS pipeline configurations.
 
 ## Setting up processing
 
-1. Retrieve from SaaS (Optional): If you have existing pipelines in Datadog SaaS, you can fetch their configuration using the API:
+1. (Optional) Retrieve from SaaS: If you have existing pipelines in Datadog SaaS, you can fetch their configuration using the API:
 
 ```bash
 curl -X GET "https://api.datadoghq.com/api/v1/logs/config/pipelines" \
@@ -45,8 +45,8 @@ helm repo update
 helm upgrade <release-name> -n <namespace> --set-file pipelinesConfig=./pipelines_config.json -f <custom_values_file.yaml>
 ```
 
-CloudPrem will log an informational message (`Successfully read pipeline config file`) upon successfully reading the file. Any processors listed in the configuration that are not supported by CloudPrem will be ignored during startup.
-**Helm limitation**: Be aware that Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.  
+CloudPrem logs an informational message (Successfully read pipeline config file) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
+**Helm limitation**: Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.  
 
 ## Configuration file format
 
@@ -100,20 +100,20 @@ The order of elements in the array defines the sequential execution order of the
 
 ## Compatibility with Datadog SaaS Pipelines
 
-CloudPrem processing aims for parity with Datadog SaaS, allowing direct use of existing SaaS pipeline configurations by ignoring unknown or faulty processors. However, some differences currently exist:
-Some filter queries can’t be parsed: e.g. combining wildcards `@data.message:+*`
-Filter on `message` has a different matching behaviour (also affects e.g. category processor)
-The current implementation is using a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored currently.
-Some grok syntax differs in behaviour: Groks are using regular expressions internally. The regex engines may have slightly different matching behavior.
-Some grok patterns can’t be parsed (e.g. `%{?>notSpace:db.severity}`)
+CloudPrem processing is designed to align closely with Datadog SaaS, allowing direct use of existing SaaS pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+- Some filter queries can’t be parsed, such as combining wildcards `@data.message:+*`.
+- Filter on `message` has a different matching behavior (also affects e.g. category processor).
+- CloudPrem uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
+- Groks are using regular expressions internally. The regex engines may have slightly different matching behavior.
+- Some grok patterns can’t be parsed (for example, `%{?>notSpace:db.severity}`)
 
-Ignored processors will appear as a warning in the indexer logs.
+Ignored processors appear as a warning in the indexer logs.
 
 ### Supported Processors:
 - attribute-remapper (overrideOnConflict is unsupported)
 - category-processor
 - date-remapper
-- grok-parser (currently 80% compatibility)
+- grok-parser (limited compatibility)
 - message-remapper
 - pipeline
 - service-remapper
@@ -131,3 +131,5 @@ Ignored processors will appear as a warning in the indexer logs.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}} 
+
+[1]: /logs/log_configuration/pipelines/?tab=source

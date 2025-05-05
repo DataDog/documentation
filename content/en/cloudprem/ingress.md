@@ -28,8 +28,7 @@ This setup ensures that only authenticated Datadog services can access the Cloud
 
 <!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Public ingress diagram" style="width:100%;" >}} -->
 
-⚠️💀
-Only the CloudPrem gRPC API endpoints (paths starting with `/cloudprem`) perform mutual TLS authentication. Exposing any other endpoints through the public ingress would create a security vulnerability, as they would be accessible without authentication over the internet. Always restrict non-gRPC endpoints to the internal ingress only.
+<div class="alert alert-warning">Only the CloudPrem gRPC API endpoints (paths starting with `/cloudprem`) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
 
 ### IP Ranges
 The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog IP Ranges API, specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
