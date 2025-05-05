@@ -131,17 +131,17 @@ Maximum number of tests fetched from Datadog.
 `maxAPIDownloadBodySize`
 : **Type**: Number <br>
 **Default**: `52428800`<br>
-Maximum HTTP body size for a download in bytes, default is 50 MB (50 * 1024 * 1024).
+Maximum HTTP body size for a download, in bytes. Default is 50 MB (50 * 1024 * 1024).
 
 `maxAPIBodySizeIfProcessed`
 : **Type**: Number <br>
 **Default**: `5242880`<br>
-Maximum HTTP body size for an assertion in bytes, default is 5 MB (5 * 1024 * 1024).
+Maximum HTTP body size for an assertion, in bytes. Default is 5 MB (5 * 1024 * 1024).
 
 `apiRequestMaxTimeout`
 : **Type**: Number <br>
 **Default**: `60000`<br>
-Maximum test execution duration for API tests, in milliseconds, default is one minute (60 * 1000).
+Maximum duration for API test execution, in milliseconds. Default is one minute (60 * 1000).
 
 **Note**: Private Location containers output logs to `stdout` and `stderr` without saving them within the container.
 
