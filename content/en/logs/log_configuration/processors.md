@@ -817,7 +817,6 @@ Each operation is configured through a dedicated processor.
 
 Define the array processor on the [**Pipelines** page][1].
 
----
 
 ### Select value from matching element
 
