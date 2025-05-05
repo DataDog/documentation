@@ -207,17 +207,17 @@ Note that UDS is only supported on .NET Core 3.1 and above.<br>
 For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
 Available since version `2.20.0`
 
@@ -259,7 +259,8 @@ The following configuration variables are available **only** when using automati
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
+**Default**: `true`<br/>
+See also [DD_APM_TRACING_ENABLED][22].
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
@@ -365,3 +366,4 @@ The following configuration variables are for features that are available for us
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
+[22]: /tracing/trace_collection/library_config/#traces
