@@ -150,7 +150,7 @@ Then, to send your Step Functions logs to Datadog:
 [5]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
-1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2].
+1. Ensure you have deployed the [Datadog Lambda Forwarder][1], and that you are using v3.130.0+. You might need to [update your Forwarder][1].
 
 1. Install [Datadog's CDK Construct Library][3], which automatically sets up logging and subscribes the Forwarder to the log group.
 
@@ -186,7 +186,7 @@ For sample stacks and additional code examples, see [CDK Examples for Instrument
 [4]: /serverless/guide/step_functions_cdk
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
-1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2].
+1. Ensure you have deployed the [Datadog Lambda Forwarder][1], and that you are using v3.130.0+. You might need to [update your Forwarder][1].
 
 1. Add the following to your `template.yaml`:
    ```yaml
@@ -203,9 +203,9 @@ For sample stacks and additional code examples, see [CDK Examples for Instrument
          tags: "<TAGS>" # optional, e.g. "custom-tag-1:tag-value-1,custom-tag-2:tag-value-2"
    ```
 
-For additional settings, [see the documentation on GitHub][3].
-
-[3]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
+For additional settings, [see the documentation on GitHub][2].
+[1]: /logs/guide/forwarder
+[2]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
 {{% /tab %}}
 {{< /tabs >}}
 
