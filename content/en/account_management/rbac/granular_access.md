@@ -55,4 +55,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [15]: /actions/connections/?tab=workflowautomation#connection-groups
 [16]: /actions/datastore/
 [17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
-[18]: /actions/private_actions/s
+[18]: /actions/private_actions
