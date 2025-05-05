@@ -203,7 +203,9 @@ For sample stacks and additional code examples, see [CDK Examples for Instrument
          tags: "<TAGS>" # optional, e.g. "custom-tag-1:tag-value-1,custom-tag-2:tag-value-2"
    ```
 
-For additional settings, [see the documentation on GitHub][17].
+For additional settings, [see the documentation on GitHub][3].
+
+[3]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -251,4 +253,3 @@ If you cannot see your traces, see [Troubleshooting][5].
 [14]: /getting_started/integrations/aws/
 [15]: https://app.datadoghq.com/integrations/aws
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
-[17]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
