@@ -53336,6 +53336,10 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/ndm/devices/{device_id}:
