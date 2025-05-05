@@ -185,6 +185,26 @@ For sample stacks and additional code examples, see [CDK Examples for Instrument
 [3]: https://github.com/DataDog/datadog-cdk-constructs
 [4]: /serverless/guide/step_functions_cdk
 {{% /tab %}}
+{{% tab "AWS SAM" %}}
+1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2].
+
+1. Add the following to your `template.yaml`:
+   ```yaml
+   Transform:
+   - AWS::Serverless-2016-10-31
+   - Name: DatadogServerless
+      Parameters:
+         stackName: !Ref "AWS::StackName"
+         apiKey: "<DATADOG_API_KEY>"
+         env: "<ENV>" # e.g. "dev"
+         service: "<SERVICE>" # e.g. "my-sam-service"
+         version: "<VERSION>" # e.g. "1.0.0"
+         stepFunctionForwarderArn: "<FORWARDER_ARN>" # "arn:test:forwarder:sa-east-1:12345678:1"
+         tags: "<TAGS>" # optional, e.g. "custom-tag-1:tag-value-1,custom-tag-2:tag-value-2"
+   ```
+
+For additional settings, [see the documentation on GitHub][17].
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-info">Enhanced metrics are automatically enabled if you enable tracing. Therefore, if tracing is enabled, you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
@@ -231,3 +251,4 @@ If you cannot see your traces, see [Troubleshooting][5].
 [14]: /getting_started/integrations/aws/
 [15]: https://app.datadoghq.com/integrations/aws
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
+[17]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
