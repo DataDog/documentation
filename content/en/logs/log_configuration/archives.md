@@ -269,6 +269,18 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 [1]: /logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
+
+Archiving and [Rehydration][1] supports the following access tiers:
+
+- Standard
+- Nearline
+- Coldline
+- Archive
+
+[1]: /logs/archives/rehydrating/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 #### Server side encryption (SSE)
