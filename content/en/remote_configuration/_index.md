@@ -115,7 +115,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
-1. Follow the [product-specific configuration](#product-specific-configuration) below to finish setting up Remote Configuration.
+1. If needed, follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
 
 ### Product-specific configuration
 
@@ -127,7 +127,7 @@ After you've enabled Remote Configuration in your organization, consult the docu
 | APM | [Configuration at runtime](/tracing/guide/remote_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
 | Workload Protection | [Workload Protection](/security/threats/) |
-| Observability Pipelines | [Advanced Configurations](/observability_pipelines/advanced_configurations/#bootstrap-options) |
+| Observability Pipelines | No further setup requirements. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
 
