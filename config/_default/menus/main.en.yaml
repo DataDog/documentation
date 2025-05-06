@@ -592,7 +592,6 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /opentelemetry/getting_started/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
