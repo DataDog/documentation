@@ -624,7 +624,7 @@ The following examples show how to track login events or custom events (using si
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. In dd-trace-js v5.48.0, new methods were introduced under the `eventTrackingV2` namespace, while the existing ones were retained for compatibility.
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. Version v5.48.0 of dd-trace-js introduces new methods under the `eventTrackingV2` namespace. Existing event tracking methods are retained for compatibility.
 
 
 The following examples show how to track login events or custom events (using signup as an example).
@@ -636,7 +636,7 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory, if no ID is available, any unique identifier will do (username, email...)
+id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
 const user = 'user-id' // user could be just the ID
@@ -689,7 +689,7 @@ The new methods in `eventTrackingV2` introduce a more intuitive parameter order 
 
 **Note**: the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
 
-In the examples above, the commented code is no longer necessary.
+In the following example, the commented code is no longer necessary.
 
 {{< tabs >}}
 {{% tab "Login success" %}}
@@ -700,12 +700,12 @@ const tracer = require('dd-trace')
 const user = {
   id: 'user-id',
   email: 'user@email.com'
-} // same as before, but now the object is optional. Providing a user id will nonetheless help with post-compromised activity correlation
+} // same as before, but now the object is optional. Providing a user ID will nonetheless help with post-compromised activity correlation
 
 const login = 'user@email.com' // new mandatory argument
 
 const metadata = { 
-//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main argument
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the main argument
   'key': 'value'
 }
 
@@ -718,11 +718,11 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 const tracer = require('dd-trace')
 
 // in a controller with the deprecated method:
-const userId = 'user-id' // not mandatory anymore, but still helpful when available
+const userId = 'user-id' // No longer mandatory, but helpful when available
 const login = 'user@email.com' // new mandatory argument
 const userExists = true
 const metadata = { 
-//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the first argument
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the first argument
   'usr.id': userId, // Helps with correlating login failures with the rest of the user activity
   'key': 'value'
 }
