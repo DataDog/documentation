@@ -44,7 +44,7 @@ In Trace Explorer, select a span to see Code Origin details on the Overview tab:
 
 ### Prerequisites
 - [Datadog APM][6] is configured to capture spans.
-- [Source Code Integration][7] is enabled (recommended for code previews).
+- [Source Code Integration][7] is enabled (required for code previews).
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
 ### Compatibility requirements
