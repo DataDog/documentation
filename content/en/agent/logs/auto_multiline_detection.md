@@ -139,7 +139,7 @@ java.lang.Exception: Something bad happened!
     at Main.main(Main.java:29)
 ```
 
-#### How Custom Samples Work
+#### How custom samples work
 
 Custom samples tokenize the first 60 bytes of a log line and also tokenize the provided sample. 
 Tokens include 
