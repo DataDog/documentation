@@ -24580,7 +24580,6 @@ components:
       - auth
       - storage_class
       - acl
-      - metadata
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
