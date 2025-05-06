@@ -7,6 +7,8 @@ disable_toc: false
 
 For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
+This document goes through updating the pipeline in the UI. You can also use the API or Terraform to update existing pipelines.
+
 ## Update an existing pipeline
 
 1. Navigate to [Observability Pipelines][1].
