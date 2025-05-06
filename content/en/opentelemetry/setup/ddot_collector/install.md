@@ -132,6 +132,18 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   ...
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
+        pullPolicy: Always
+      containers:
+        otel-agent:
+          env:
+            - name: DD_OTELCOLLECTOR_ENABLED
+              value: "true"
+  ...
   # Enable Features
   features:
     otelCollector:
@@ -412,6 +424,11 @@ spec:
       image:
         name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
+      containers:
+        otel-agent:
+          env:
+            - name: DD_OTELCOLLECTOR_ENABLED
+              value: "true"
 
   # Enable Features
   features:
