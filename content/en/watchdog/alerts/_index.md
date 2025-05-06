@@ -102,7 +102,7 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Watchdog requires at least 0.5req/seconds for an endpoint to be monitored. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Watchdog requires at least 0.5 requests per second for an endpoint to be monitored. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
 #### Required data history
 
