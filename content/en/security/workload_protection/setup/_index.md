@@ -22,15 +22,41 @@ Remote Configuration can be set up using the Workload Protection [Get Started][1
 
 ## Agent setup options for Workload Protection
 
-Workload Protection supports both **Agentless + Agent-based deployment** and **Agent-based-only deployments**, but not **Agentless-only**.
+Workload Protection supports **Agent-based-only deployments**.
 
 ## Supported deployment types
 
-For a summary of supported Workload Protection deployment types, see [Supported Deployment Types][4].
+The following table summarizes Workload Protection relative to deployment types.
+
+|          | Docker    | Kubernetes | Linux     | Amazon ECS/EKS | Windows   | AWS Fargate ECS/EKS | AWS Account | Azure Account | GCP Account | Terraform |
+|------------------------|-----------|------------|-----------|----------------|-----------|---------------------|-------------|---------------|-------------|-----------|
+| Agent Required (7.46+) | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}}      | {{< X >}} | {{< X >}}           |             |               |             |           |
+| Workload Protection    | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}}      | {{< X >}} | {{< X >}}           |             |               |             |           |
+
 
 ## Supported Linux distributions
 
-Workload Protection supports multiple [Linux distributions][5].
+Workload Protection supports the following Linux distributions:
+
+| Linux Distributions                                           | Supported Versions      |
+|---------------------------------------------------------------|-------------------------|
+| Ubuntu LTS                                                    | 18.04, 20.04, 22.04     |
+| Debian                                                        | 10 or later             |
+| Amazon Linux 2                                                | Kernels 4.14 and higher |
+| Amazon Linux 2023                                             | All versions            |
+| SUSE Linux Enterprise Server                                  | 12 and 15               |
+| Red Hat Enterprise Linux                                      | 7, 8, and 9             |
+| Oracle Linux                                                  | 7, 8, and 9             |
+| CentOS                                                        | 7                       |
+| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher           |
+
+**Notes:**
+
+- Custom kernel builds are not supported.
+- The [Workload Protection eBPF-less solution for eBPF disabled environments][8] uses a ptrace-based Datadog Agent. The ptrace-based Datadog Agent supports Linux kernel versions from 3.4.43 to 4.9.85.
+- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][9].
+- Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
+
 
 ## Deploy the Agent
 
@@ -43,7 +69,7 @@ The Datadog Agent has several [environment variables][7] that can be enabled for
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
 [2]: /account_management/rbac/permissions/
 [3]: /agent/remote_config/?tab=configurationyamlfile
-[4]: /security/workload_protection/setup/supported_deployment_types
-[5]: /security/workload_protection/supported_linux_distributions
 [6]: /security/workload_protection/setup/agent
 [7]: /security/workload_protection/setup/agent_variables
+[8]: /security/workload_protection/guide/ebpf-free-agent
+[9]: /security/workload_protection/troubleshooting/threats

@@ -6301,16 +6301,6 @@ menu:
       parent: workload_protection
       identifier: workload_protection_setup
       weight: 100
-    - name: Supported Deployment Types
-      url: security/workload_protection/setup/supported_deployment_types
-      parent: workload_protection_setup
-      identifier: workload_protection_setup_deployment_types
-      weight: 1
-    - name: Supported Linux Distributions
-      url: security/workload_protection/supported_linux_distributions
-      parent: workload_protection_setup
-      identifier: workload_protection_workload_security_linux_distributions
-      weight: 2
     - name: Deploy the Agent
       url: security/workload_protection/setup/agent
       parent: workload_protection_setup
