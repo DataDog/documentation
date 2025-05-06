@@ -6444,10 +6444,10 @@ menu:
       identifier: appsec_terms
       weight: 1
     - name: How It Works
-      url: security/application_security/how-appsec-works/
+      url: security/application_security/how-it-works/
       parent: application_security
       identifier: appsec_howitworks
-      weight: 3
+      weight: 2
     - name: Threat Intelligence
       url: security/application_security/how-it-works/threat-intelligence
       parent: appsec_howitworks
@@ -6463,116 +6463,161 @@ menu:
       parent: appsec_howitworks
       identifier: user_monitoring_and_protection
       weight: 3
-    - name: Protection
-      url: security/application_security/how-it-works/protection
-      parent: appsec_howitworks
-      identifier: protection
-      weight: 4
-    - name: Attack Summary
-      url: security/application_security/overview
-      parent: application_security
-      identifier: application_security_overview
-      weight: 5
-    - name: Security Signals
-      url: security/application_security/security_signals
-      parent: application_security
-      identifier: application_security_security_signals
-      weight: 6
-    - name: Threat Management
-      url: security/application_security/threats/
-      parent: application_security
-      identifier: appsec_threats
-      weight: 7
     - name: Setup
-      url: security/application_security/threats/setup/
-      parent: appsec_threats
+      url: security/application_security/setup/
+      parent: application_security
       identifier: appsec_threats_management_setup
-      weight: 700
+      weight: 3
     - name: Library Compatibility
-      url: security/application_security/threats/setup/compatibility/
+      url: security/application_security/setup/compatibility/
       parent: appsec_threats_management_setup
       identifier: appsec_compat_threats_mgmt
-      weight: 701
+      weight: 1
     - name: Using Datadog Tracing Libraries
-      url: security/application_security/threats/setup/threat_detection/
+      url: security/application_security/setup/threat_detection/
       parent: appsec_threats_management_setup
       identifier: appsec_threats_setup_threat_detection_setup
-      weight: 703
-    - name: Attack Summary
-      url: security/application_security/threats/attack-summary/
-      parent: appsec_threats
-      identifier: attack_summary_overview
-      weight: 704
-    - name: Attacker Explorer
-      url: security/application_security/threats/attacker-explorer/
-      parent: appsec_threats
-      identifier: threats_attackers
-      weight: 705
-    - name: Custom Detection Rules
-      url: security/application_security/threats/custom_rules/
-      parent: appsec_threats
-      identifier: threats_custom_rules
-      weight: 706
-    - name: Exploit Prevention
-      url: security/application_security/threats/exploit-prevention/
-      parent: appsec_threats
-      identifier: exploit_prevention
-      weight: 707
-    - name: WAF Integrations
-      url: security/application_security/threats/waf-integration/
-      parent: appsec_threats
-      identifier: aws_waf_int
-      weight: 708
-    - name: In-App WAF Rules
-      url: security/application_security/threats/inapp_waf_rules/
-      parent: appsec_threats
-      identifier: threats_event_rules
-      weight: 709
-    - name: OOTB Rules
-      url: security/default_rules/#cat-application-security
-      parent: appsec_threats
-      identifier: appsec_default_rules
-      weight: 710
-    - name: Protection
-      url: security/application_security/threats/protection/
-      parent: appsec_threats
-      identifier: threats_protection
-      weight: 718
-    - name: Security Signals
-      url: security/application_security/threats/security_signals/
-      parent: appsec_threats
-      identifier: threats_security_signals
-      weight: 719
-    - name: Trace Qualification
-      url: security/application_security/threats/trace_qualification/
-      parent: appsec_threats
-      identifier: threats_trace_qualification
-      weight: 721
-    - name: User Monitoring and Protection
-      url: security/application_security/threats/add-user-info/
-      parent: appsec_threats
-      identifier: threats_user_info
-      weight: 722
-    - name: Attacker Fingerprint
-      url: security/application_security/threats/attacker_fingerprint/
-      parent: appsec_threats
-      identifier: threats_attacker_fingerprint
-      weight: 723
-    - name: Attacker Clustering
-      url: security/application_security/threats/attacker_clustering/
-      parent: appsec_threats
-      identifier: threats_attacker_clustering
-      weight: 724
+      weight: 2
     - name: Application Security for Serverless
       url: security/application_security/serverless/
-      parent: application_security
+      parent: appsec_threats_management_setup
       identifier: asm_serverless
-      weight: 8
+      weight: 4
     - name: Library Compatibility
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
+      weight: 1      
+    - name: Overview
+      url: security/application_security/overview
+      parent: application_security
+      identifier: application_security_overview
+      weight: 4
+    - name: Security Signals
+      url: security/application_security/security_signals
+      parent: application_security
+      identifier: application_security_security_signals
+      weight: 5
+    - name: Attacker Explorer
+      url: security/application_security/security_signals/attacker-explorer/
+      parent: application_security_security_signals
+      identifier: threats_attackers
       weight: 1
+    - name: Attacker Fingerprint
+      url: security/application_security/security_signals/attacker_fingerprint/
+      parent: application_security_security_signals
+      identifier: threats_attacker_fingerprint
+      weight: 2
+    - name: Attacker Clustering
+      url: security/application_security/security_signals/attacker_clustering/
+      parent: application_security_security_signals
+      identifier: threats_attacker_clustering
+      weight: 3
+    - name: Policies
+      url: security/application_security/policies/
+      parent: application_security
+      identifier: application_security_policies
+      weight: 6
+    - name: Custom Rules
+      url: security/application_security/policies/custom_rules/
+      parent: application_security_policies
+      identifier: application_security_policies_custom_rules
+      weight: 1
+    - name: OOTB Rules
+      url: security/default_rules/
+      parent: application_security_policies
+      identifier: application_security_policies_ootb_rules
+      weight: 2
+    - name: Exploit Prevention
+      url: security/application_security/exploit-prevention/
+      parent: application_security
+      identifier: exploit_prevention
+      weight: 7
+    - name: WAF Integrations
+      url: security/application_security/waf-integration/
+      parent: application_security
+      identifier: aws_waf_int
+      weight: 8
+    # - name: Threat Management
+    #   url: security/application_security/threats/
+    #   parent: application_security
+    #   identifier: appsec_threats
+    #   weight: 6
+    # - name: Setup
+    #   url: security/application_security/setup/
+    #   parent: application_security
+    #   identifier: appsec_threats_management_setup
+    #   weight: 700
+    # - name: Library Compatibility
+    #   url: security/application_security/setup/compatibility/
+    #   parent: appsec_threats_management_setup
+    #   identifier: appsec_compat_threats_mgmt
+    #   weight: 701
+    # - name: Using Datadog Tracing Libraries
+    #   url: security/application_security/setup/threat_detection/
+    #   parent: appsec_threats_management_setup
+    #   identifier: appsec_threats_setup_threat_detection_setup
+    #   weight: 703
+    # - name: Attack Summary
+    #   url: security/application_security/threats/attack-summary/
+    #   parent: appsec_threats
+    #   identifier: attack_summary_overview
+    #   weight: 704
+    # - name: Custom Detection Rules
+    #   url: security/application_security/threats/custom_rules/
+    #   parent: appsec_threats
+    #   identifier: threats_custom_rules
+    #   weight: 706
+    # - name: Exploit Prevention
+    #   url: security/application_security/threats/exploit-prevention/
+    #   parent: appsec_threats
+    #   identifier: exploit_prevention
+    #   weight: 707
+    # - name: WAF Integrations
+    #   url: security/application_security/threats/waf-integration/
+    #   parent: appsec_threats
+    #   identifier: aws_waf_int
+    #   weight: 708
+    # - name: In-App WAF Rules
+    #   url: security/application_security/threats/inapp_waf_rules/
+    #   parent: appsec_threats
+    #   identifier: threats_event_rules
+    #   weight: 709
+    # - name: OOTB Rules
+    #   url: security/default_rules/#cat-application-security
+    #   parent: appsec_threats
+    #   identifier: appsec_default_rules
+    #   weight: 710
+    # - name: Protection
+    #   url: security/application_security/threats/protection/
+    #   parent: appsec_threats
+    #   identifier: threats_protection
+    #   weight: 718
+    # - name: Security Signals
+    #   url: security/application_security/threats/security_signals/
+    #   parent: appsec_threats
+    #   identifier: threats_security_signals
+    #   weight: 719
+    # - name: Trace Qualification
+    #   url: security/application_security/threats/trace_qualification/
+    #   parent: appsec_threats
+    #   identifier: threats_trace_qualification
+    #   weight: 721
+    # - name: User Monitoring and Protection
+    #   url: security/application_security/threats/add-user-info/
+    #   parent: appsec_threats
+    #   identifier: threats_user_info
+    #   weight: 722
+    # - name: Application Security for Serverless
+    #   url: security/application_security/serverless/
+    #   parent: application_security
+    #   identifier: asm_serverless
+    #   weight: 9
+    # - name: Library Compatibility
+    #   url: security/application_security/serverless/compatibility/
+    #   parent: asm_serverless
+    #   identifier: asm_serverless_compat
+    #   weight: 1
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security

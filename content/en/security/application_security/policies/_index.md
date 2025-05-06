@@ -1,13 +1,7 @@
 ---
-title: Protection
-is_beta: true
-further_reading:
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "App and API Protection with Datadog"
+title: Policies
+disable_toc: false
 ---
-
-## Overview
 
 If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
