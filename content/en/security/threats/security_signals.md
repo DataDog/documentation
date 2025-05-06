@@ -5,7 +5,7 @@ further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
     text: "Explore Workload Protection detection rules"
-  - link: "/security/threats/workload_security_rules"
+  - link: "/security/workload_protection/workload_security_rules"
     tag: "Documentation"
     text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
@@ -79,4 +79,4 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [6]: /service_management/case_management/
 [7]: /security/cloud_security_management/workflows
 [8]: /service_management/workflows
-[9]: /security/threats/
+[9]: /security/workload_protection/

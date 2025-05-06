@@ -97,7 +97,7 @@ Focus on exploitable vulnerabilities first, using the Datadog Severity Score, co
 
 For vulnerabilities with available fixes, the Findings page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
@@ -118,13 +118,7 @@ The [Infrastructure Packages Catalog][19] provides a real-time inventory of all 
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 
-{{< img src="security/vulnerabilities/csm_package_explorer.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
-
-## Video walkthrough
-
-The following video provides an overview of how to enable and use Cloud Security Vulnerabilities:
-
-{{< img src="security/csm/how-to-use-csm-vulnerabilities.mp4" alt="Video that provides an overview of how to install and use Cloud Security Vulnerabilities" video=true >}}
+{{< img src="security/vulnerabilities/csm_package_explorer_2.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images

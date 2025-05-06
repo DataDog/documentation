@@ -97,18 +97,6 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td>Real time</td>
   </tr>
   <tr>
-    <td><strong><a href="/security/threats">Workload Protection</a></strong></td>
-    <td></td>
-    <td>{{< X >}}</td>
-    <td>{{< X >}}</td>
-  </tr>
-  <tr>
-    <td style="padding-left: 20px;">Threat detection</td>
-    <td></td>
-    <td>{{< X >}}</td>
-    <td>{{< X >}}</td>
-  </tr>
-  <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}<br />With more accurate insights</td>
@@ -139,7 +127,6 @@ Monitor your compliance security coverage and secure your cloud infrastructure a
 For information on disabling Cloud Security, see the following:
 
 - [Disable Cloud Security Vulnerabilities][8]
-- [Disable Workload Protection][9]
 
 ## Further reading
 
@@ -153,5 +140,5 @@ For information on disabling Cloud Security, see the following:
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[9]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[9]: /security/workload_protection/troubleshooting/threats/#disable-csm-threats
 [10]: /security/cloud_security_management/setup/iac_scanning

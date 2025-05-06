@@ -49,6 +49,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [psycopg][34]          | {{< X >}} |           |                     |                     |                      |
 |             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
 |                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
@@ -489,3 +490,4 @@ View historical performance of similar queries to those executed in your trace, 
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
 [33]: https://github.com/mongodb/node-mongodb-native
+[34]: https://www.psycopg.org/psycopg3/
