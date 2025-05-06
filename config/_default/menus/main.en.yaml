@@ -469,6 +469,11 @@ menu:
       url: agent/configuration/proxy/
       parent: agent_configuration
       weight: 606
+    - name: Squid proxy configuration
+      identifier: proxy_squid
+      url: agent/configuration/proxy_squid
+      parent: agent_configuration_proxy
+      weight: 6001
     - name: FIPS Compliance
       identifier: agent_configuration_fips_compliance
       url: agent/configuration/fips-compliance/
