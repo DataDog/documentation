@@ -1,7 +1,8 @@
 ---
 title: Migrate to New Operation Name Mappings
 aliases:
-- "/opentelemetry/guide/migrate_operation_names/"
+- /opentelemetry/guide/migrate_operation_names/
+- /opentelemetry/guide/migrate/migrate_operation_names/
 further_reading:
 - link: "/opentelemetry/schema_semantics/"
   tag: "Documentation"

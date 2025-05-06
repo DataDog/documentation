@@ -1,5 +1,7 @@
 ---
 title: Migrate to OpenTelemetry Collector version 0.120.0+
+aliases:
+- /opentelemetry/guide/migrate/collector_0_120_0
 further_reading:
 - link: "/opentelemetry/guide/switch_from_processor_to_connector"
   tag: "Documentation"
