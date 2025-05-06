@@ -127,7 +127,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[{"sample": "SEVERE Mai
 {{% /tab %}}
 {{< /tabs >}}
 
-This will aggregate logs where `"SEVERE Main main Exception occurred"` matches the first line. For example:
+This aggregates logs where `"SEVERE Main main Exception occurred"` matches the first line. For example:
 
 ```text
 SEVERE Main main Exception occurred
