@@ -81,19 +81,19 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 7. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
-8. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+7. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-8. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+7. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
-9. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section.
+8. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section.
 Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
-10. Click **Next**.
-11. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section.
-12. Attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to enable [resource collection][5].
-13. Click **Next**.
-14. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description.
-15. Click **Create Role**.
+9. Click **Next**.
+10. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section.
+11. Attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to enable [resource collection][5].
+12. Click **Next**.
+13. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description.
+14. Click **Create Role**.
 
 ### AWS IAM Policy for Datadog
 Create an inline IAM policy with the [necessary permissions](#aws-integration-iam-policy) and link it to Datadog's integration role in your AWS account to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change.
