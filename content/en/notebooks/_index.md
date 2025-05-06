@@ -115,7 +115,7 @@ Notebooks automatically generate a table of contents from any headers you insert
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using either the [image cell](#image-cell).
+You can add images to your notebook using the [image cell](#image-cell).
 
 #### Image cell
 
