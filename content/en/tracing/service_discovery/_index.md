@@ -27,21 +27,21 @@ Service Discovery is accessed through the **[Fleet Automation > Services][1]** p
 
 ### How it works
 
-1.  The Datadog Agent inspects running processes and container metadata on supported hosts.
-2.  Processes are automatically grouped into services based on a defined naming hierarchy (see [Discovered service naming](#discovered-service-naming).
-3.  Datadog checks if discovered services are emitting traces to Datadog APM.
-4.  Services are displayed in **Fleet Automation > Services** under either **Monitored with APM** or **Not Sending Traces**.
-5.  Contextual metadata (CPU, memory, network I/O, tags, infrastructure links) is associated with each service to aid prioritization.
-6.  Short-lived processes (running for less than 1 minute) are automatically ignored to reduce noise.
+1. The Datadog Agent inspects running processes and container metadata on supported hosts.
+2. Processes are automatically grouped into services based on a defined naming hierarchy (see [Discovered service naming](#discovered-service-naming).
+3. Datadog checks if discovered services are emitting traces to Datadog APM.
+4. Services are displayed in **Fleet Automation > Services** under either **Monitored with APM** or **Not Sending Traces**.
+5. Contextual metadata (CPU, memory, network I/O, tags, infrastructure links) is associated with each service to aid prioritization.
+6. Short-lived processes (running for less than 1 minute) are automatically ignored to reduce noise.
 
 ### Discovered service naming
 
 Service Discovery automatically identifies and names services based on a priority order of available identifiers:
 
-1.  Existing Datadog service tags (like `DD_SERVICE`) if present.
-2.  Container labels (for containerized services).
-3.  Command-line arguments and process information.
-4.  Language-specific manifest files (for example, `package.json` for Node.js).
+1. Existing Datadog service tags (like `DD_SERVICE`) if present.
+2. Container labels (for containerized services).
+3. Command-line arguments and process information.
+4. Language-specific manifest files (for example, `package.json` for Node.js).
 
 For Java enterprise web applications (specifically JBoss, Websphere, Tomcat, Jetty, and Weblogic), multiple web applications running in the same process are displayed as individual services in the unmonitored services list, with visual indicators showing they belong to the same process.
 
@@ -60,112 +60,53 @@ Service Discovery requires the Datadog Agent and is supported on specific operat
 
 ## Setup
 
-Enable Service Discovery through the Datadog Agent configuration.
-
-Choose the method corresponding to your environment:
+Enable Service Discovery by installing the latest version of the Datadog Agent with the Service Discovery feature turned on.
 
 {{< tabs >}}
 {{% tab "Linux hosts" %}}
 
-You can enable Service Discovery using either a configuration file change or an environment variable.
+To enable Service Discovery on Linux hosts, install the latest version of the Datadog Agent and use the toggle in the installation UI:
 
-**Method 1: Configuration file**
+1. Navigate to [**Fleet Automation > Install Agents**][100]
+2. Follow the installation instructions
+3. During setup, ensure that the **Service Discovery** toggle is turned on
 
-1.  Edit the Agent's System Probe configuration file: `/etc/datadog-agent/system-probe.yaml`.
-2.  Add the `discovery` section and set `enabled` to `true`:
-    ```yaml
-    # /etc/datadog-agent/system-probe.yaml
-    discovery:
-      enabled: true
-    ```
-3.  Restart the Datadog Agent:
-    ```bash
-    sudo systemctl restart datadog-agent
-    ```
+After installation, Service Discovery is automatically enabled.
 
-**Method 2: Environment variable**
-
-1.  Set the following environment variable for the Agent process:
-    ```bash
-    export DD_DISCOVERY_ENABLED=true
-    ```
-2.  Restart the Datadog Agent:
-    ```bash
-    sudo systemctl restart datadog-agent
-    ```
+[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 
 {{% /tab %}}
 
-{{% tab "Docker containers" %}}
+{{% tab "Docker" %}}
 
-Add the environment variable to your Docker run command or Compose file:
+To enable Service Discovery for Docker containers:
 
-**`docker run` example:**
-```bash
-docker run -e DD_DISCOVERY_ENABLED=true [other options] datadog/agent:[latest Agent version tag]
-```
+1. Navigate to [**Fleet Automation > Install Agents**][200]
+2. Follow the installation instructions
+3. Ensure that the **Service Discovery** toggle is turned on during setup
 
-**docker-compose.yml example:**
-```yaml
-# docker-compose.yml
-services:
-  datadog-agent:
-    image: datadog/agent:[latest Agent version tag]
-    environment:
-      - DD_DISCOVERY_ENABLED=true
-```
+The generated Docker `run` command includes the necessary settings to enable Service Discovery.
 
-Ensure you restart your container after making changes.
+[200]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-**Method 1: Helm chart**
+To enable Service Discovery for Kubernetes environments:
 
-If you install the Agent using the official Datadog Helm chart (version `[Helm chart version, for example, 3.x.x+]` or later):
+1. Navigate to [**Fleet Automation > Install Agents**][300]
+2. Follow the installation instructions for either Helm chart or Datadog Operator
+3. Ensure that the **Service Discovery** toggle is turned on during setup
 
-1.  Update your `datadog-values.yaml` file (or use `--set` flags) to include:
-    ```yaml
-    # datadog-values.yaml
-    datadog:
-      discovery:
-        enabled: true
-      # Ensure you are using a compatible Agent image tag
-      agents:
-        image:
-          tag: "[Agent version, for example, 7.xx.x]" # Use the required Agent version or later
-    ```
-2.  Upgrade your Helm release:
-    ```bash
-    helm upgrade <your-release-name> datadog/datadog -f datadog-values.yaml -n <your-namespace>
-    ```
+The generated configuration includes the necessary settings to enable Service Discovery.
 
-**Method 2: Datadog Operator**
-
-If you install the Agent using the Datadog Operator (version `[Operator version, for example, 1.x.x+]` or later):
-
-1.  Edit your `DatadogAgent` custom resource definition (`datadog-agent.yaml` or similar):
-    ```yaml
-    # datadog-agent.yaml
-    spec:
-      features:
-        serviceDiscovery:
-          enabled: true
-      override:
-        nodeAgent:
-          image:
-            tag: "[Agent version, for example, 7.xx.x]" # Use the required Agent version or later
-    ```
-2.  Apply the changes:
-    ```bash
-    kubectl apply -f datadog-agent.yaml -n <your-namespace>
-    ```
+[300]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 {{% /tab %}}
 {{< /tabs >}}
 
-After enabling Service Discovery and restarting the Agent(s), allow a few minutes for data to appear on the **Fleet Automation > Services** page.
+Allow a few minutes for data to appear on the **Fleet Automation > Services** page.
 
 ## Explore discovered services
 
@@ -210,9 +151,9 @@ For services you decide to monitor, click the **Enable APM** button. Datadog pro
 
 - **No services listed under "Not Sending Traces"**:
   - Verify the Datadog Agent version meets the minimum requirement.
-  - Confirm that Service Discovery is correctly enabled in the Agent configuration (`discovery.enabled: true` or `DD_DISCOVERY_ENABLED=true`) and that the Agent has been restarted.
+  - Confirm that Service Discovery is correctly enabled during Agent installation.
   - Ensure services have been running for more than 1 minute on supported platforms.
-  - Allow a few minutes after Agent restart for data to populate.
+  - Allow a few minutes after Agent installation for data to populate.
 - **Some expected services are missing**:
   - Check if the service runs for less than 1 minute.
   - Confirm the service is running on a supported platform (Linux x86-64).
@@ -227,3 +168,4 @@ If issues persist, collect an [Agent flare][4] and contact [Datadog Support][2].
 [2]: /help/
 [3]: /data_streams/
 [4]: /agent/troubleshooting/send_a_flare/
+
