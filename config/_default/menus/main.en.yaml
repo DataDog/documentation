@@ -5686,21 +5686,26 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
       weight: 1015
+    - name: Environment Variables
+      url: observability_pipelines/environment_variables/
+      parent: observability_pipelines
+      identifier: observability_pipelines_environment_variables
+      weight: 11
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 11
+      weight: 12
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 12
+      weight: 13
     - name: Troubleshooting
       url: observability_pipelines/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines
-      weight: 13
+      weight: 14
     - name: Log Management
       url: logs/
       pre: log
@@ -7839,11 +7844,16 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Guides
+      url: product_analytics/guide/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 7
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 7
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2
