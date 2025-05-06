@@ -21,9 +21,7 @@ further_reading:
 
 ## Overview
 
-This document offers comprehensive guidance on dimensioning and managing CloudPrem cluster components, covering indexers, searchers, and auxiliary services.
-
-Find specific resource requirements (CPU, RAM, storage) for each component, along with practical examples for capacity planning. Use these guidelines to properly size your initial deployment and scale components as your needs grow. The recommendations provided help you maintain optimal performance while efficiently utilizing your infrastructure resources.
+This document gives recommendations on dimensioning your CloudPrem cluster components, particularly indexers and searchers.
 
 <div class="alert alert-info">
 These are starting recommendations. Monitor your cluster's performance and resource utilization closely and adjust sizing as needed.
@@ -36,7 +34,7 @@ These are starting recommendations. Monitor your cluster's performance and resou
   - 2 vCPUs and 4GB of RAM
   - 4 vCPUs and 8GB of RAM
   - 8 vCPUs and 16GB of RAM
-- **Storage:** An indexer stores temporary data and requires persistent storage (e.g., AWS EBS).
+- **Storage:** Indexers require persistent storage (preferably SSDs, but local HDDs or remote EBS volumes can also be used) to store temporary data while constructing the index files.
   - Minimum: 100GB per pod
   - Recommendation (for pods > 4 vCPUs): 200GB per pod
 - **Example Calculation:** To index 1 TB per day (~11.6 MB/s):
