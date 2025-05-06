@@ -160,7 +160,7 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
-### Custom Threshold
+### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
 If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][3].
@@ -187,10 +187,10 @@ In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULT
 ```
 **Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 
-### Custom Threshold
+### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
-If your multi-line logs are not getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. 
+If your multi-line logs are not getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. 
 
 Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. 
 
@@ -228,10 +228,10 @@ datadog:
 ```
 **Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 
-### Custom Threshold
+### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
-If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
+If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 
@@ -259,7 +259,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Detection Process
+## Detection process
 Automatic multi-line detection detects logs that begin and comply with the following date/time formats: 
 - ANSIC
 - RFC822
@@ -281,14 +281,9 @@ After the detection threshold is met, all future logs for that source are aggreg
 
 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-
-
-
-
-

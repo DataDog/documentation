@@ -152,11 +152,11 @@ Tokens include
 Each log token is compared to each token in the sample. If 75% of the log’s tokens match the sample’s, the log is marked for aggregation.
 Datadog recommends using sample-based matching if your logs have a stable format. If you need more flexible matching, you can use regex. 
 
-### Regex Patterns
+### Regex patterns
 
 Regex patterns work similarly to a `multi_line` rule. If the regex pattern matches the log, it is used for aggregation. 
 
-To configure custom regex patterns, you can use the `logs_config` in your `datadog.yaml`  file or set an environment variable. 
+To configure custom regex patterns, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable. 
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -205,24 +205,24 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Previously configured `auto_multi_line_extra_patterns` are automatically supported [when migrating from V1][2].
+**Note**: Existing `auto_multi_line_extra_patterns` configurations are automatically supported [when migrating from V1][2].
 
-## Advanced Customization
+## Advanced customization
 
-Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step will assign a label to logs, and the aggregation step will aggregate the logs based on the labels that were assigned. 
+Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step assigns a label to each log, and the aggregation step aggregates logs based on those labels.
 
 ### Labels
 `start_group`
-: Defines _beginning of a multi-line log_<br> - Flushes any buffered multi-line log if present<br> - Starts new multi-line log<br> - Only one multi-line log can be buffered at a time
+: Defines _beginning of a multi-line log_<br> - Flushes any buffered multi-line log, if present<br> - Starts a new multi-line log<br> - Only one multi-line log can be buffered at a time
 
 `aggregate`
 : Is _added to existing multi-line log_<br> - If no multi-line log exists, flushes immediately<br> - Default label when nothing else matches
 
 `no_aggregate`
-: Declares logs that are _never part of aggregation_<br> - Flushes buffered multi-line log if present<br> - Flushes sample immediately <br>- Used for JSON logs
+: Declares logs that are _never part of aggregation_<br> - Flushes buffered multi-line log, if present<br> - Flushes sample immediately <br>- Used for JSON logs
 
 
-### Label Configuration
+### Label configuration
 
 You can provide custom labels to each regex or sample to change the aggregation behavior based on the label rules. This is useful if you want to explicitly include or exclude certain log formats in multi-line aggregation. 
 
@@ -252,7 +252,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 {{% /tab %}}
 {{< /tabs >}}
 
-## Monitoring and Debugging
+## Monitoring and debugging
 
 You can search for multiline logs or truncated logs by enabling the following settings:
 
@@ -262,15 +262,15 @@ logs_config:
   tag_truncated_logs: true
 ```
 
-These settings add the following _tags_ to your logs so you can search for them in the logs explorer:
+These settings add the following _tags_ to your logs, allowing you to search for them in the logs explorer:
 
-- `multiline`: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
-- `truncated`: Shows truncation source (e.g., `single_line`, `multi_line`)
+- `multiline`: Shows the aggregation source (for example, `auto_multiline`, `multiline_regex`)
+- `truncated`: Shows truncation source (for example, `single_line`, `multi_line`)
 
-**Note:** Truncation can occur if the log is too long for the agent to process. If a line is too long before multiline aggregation, it will get the `single_line` tag. If an incorrect pattern caused a log to aggregate and overflow the aggregation buffer, the `multi_line` tag will be used. 
+**Note:** The Agent truncates logs that are too long to process. If a line is too long before multiline aggregation, the Agent assigns it the `single_line` tag. If an incorrect pattern causes a log to overflow the aggregation buffer, the Agent applies the `multi_line` tag.
 
 
-## Configuration Reference
+## Configuration reference
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
@@ -281,7 +281,7 @@ These settings add the following _tags_ to your logs so you can search for them 
 | `logs_config.auto_multi_line.tokenizer_max_input_bytes` | Int | 60 | Bytes to tokenize |
 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
