@@ -40,7 +40,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 By default, the following features are enabled:
 
 - `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format are used to aggregate logs. 
-- `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs will never be aggregated. 
+- `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs are never aggregated. 
 
 You can disable these features by setting the following to `false` in your configuration file or in your environment variable:
 
