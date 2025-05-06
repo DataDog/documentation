@@ -1,5 +1,5 @@
 ---
-title: Agent FIPS proxy (deprecated)
+title: Agent FIPS proxy
 disable_toc: false
 private: true
 further_reading:
