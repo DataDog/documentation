@@ -98,7 +98,7 @@ Examples of formats that do not have enough context to be detected:
 
 ## Custom pattern configuration
 
-If datetime aggregation is not sufficient, or if your format is too short to be detected automatically, you can customize the feature in two ways:
+If datetime aggregation is insufficient or your format is too short to be detected automatically, you can customize the feature in two ways:
 - [Custom Samples](#custom-samples)
 - [Regex Patterns](#regex-patterns) 
 
