@@ -385,6 +385,16 @@
     "request_description": "",
     "request_schema_description": "Request object to update a custom framework."
   },
+  "GetResourceEvaluationFilters": {
+    "description": "List resource filters.",
+    "summary": "List resource filters"
+  },
+  "UpdateResourceEvaluationFilters": {
+    "description": "Update resource filters.",
+    "summary": "Update resource filters",
+    "request_description": "",
+    "request_schema_description": "Request object to update a resource filter."
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.",
     "summary": "Get all Container Images"
