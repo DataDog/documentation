@@ -11,6 +11,8 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
+{{< img src="tracing/eng_reports/reliability_overview.mp4" video=true alt="A video scrolling through the Reliability Overview report, which includes sections for SLO Performance and Incident Trends, grouped by team" style="width:100%;" >}}
+
 The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this report, you can:
 - Customize your SLO or Incident groupings to be based on service, team, or other tags or properties that have been added to your SLOs or Incidents.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.

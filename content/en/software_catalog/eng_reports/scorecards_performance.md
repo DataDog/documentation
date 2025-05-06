@@ -11,6 +11,8 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
+{{< img src="tracing/eng_reports/scorecards_performance.mp4" video=true alt="A video scrolling through the Scorecards Performance report, which includes sections for Performance by Scorecard, Historical Trends by Scorecard, Performance by Rule, and Historical Trends by Rule" style="width:100%;" >}}
+
 The Scorecards Performance report includes an organization-wide view of Scorecard performance by teams and rules, including historical trends. With this report, you can:
 - Identify highest and lowest performing teams by Scorecards and rules. 
 - Filter information based on team, scorecard, rule, application, tier, and lifecycle.
