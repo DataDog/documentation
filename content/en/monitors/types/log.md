@@ -27,6 +27,8 @@ Logs are essential for security investigations, aiding in threat detection, comp
 
 Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
+**Note**: Log monitors have a maximum rolling time window of `2 days`.
+
 ## Monitor creation
 
 To create a log monitor in Datadog, use the main navigation: [**Monitors > New Monitor > Logs**][3].

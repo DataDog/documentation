@@ -113,7 +113,7 @@ metadata:
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://github.com/kubernetes-incubator/external-dns
 [2]: https://app.datadoghq.com/account/settings/agent/latest

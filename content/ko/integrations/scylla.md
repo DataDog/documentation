@@ -26,43 +26,43 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 캐싱(caching)
-- 데이터 스토어
+- 캐싱
+- 데이터 저장소
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: scylla
 integration_id: scylla
-integration_title: Scylla
+integration_title: 실라
 integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: scylla
-public_title: Scylla
+public_title: 실라
 short_description: 클러스터 리소스, 지연 시간, 상태 등을 추적하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::캐싱(Caching)
-  - 카테고리::데이터 저장
+  - Category::Caching
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: 클러스터 리소스, 지연 시간, 상태 등을 추적하세요.
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Scylla
+  title: 실라
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -82,17 +82,17 @@ Scylla는 "드롭인 방식의 Apache Cassandra 대안"으로 사용할 수 있�
 
 Scylla 점검은 [Datadog 에이전트][2] 패키지 에 포함되어 있습니다. 서버에 추가 설치가 필요하지 않습니다.
 
-### 구성
+### 설정
 
 1. 에이전트 설정 디렉터리 루트의 `conf.d/` 폴더에 있는 `scylla.d/conf.yaml` 파일을 편집하여 스카일라 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 scylla.d/conf.yaml][3]을 참조하세요. 이전에 통합을 구현한 경우 [레거시 예제][4]를 참조하세요.
 
-2. [Agent를 재시작합니다][5].
+2. [에이전트를 재시작하세요][5].
 
 ##### 로그 수집
 
 Scylla는 실행 중인 환경에 따라 로그를 출력하는 모드가 다릅니다. 애플리케이션이 로그를 생성하는 방법에 대한 자세한 내용은 [Scylla 설명서][6]를 참조하세요.
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
       ```yaml
        logs_enabled: true
@@ -113,7 +113,7 @@ Scylla는 실행 중인 환경에 따라 로그를 출력하는 모드가 다릅
            #    name: new_log_start_with_date
      ```
 
-3. [Agent를 재시작합니다][5].
+3. [에이전트를 재시작하세요][5].
 
 쿠버네티스(Kubernetes) 환경에 대한 로그를 활성화하려면 [쿠버네티스 로그 수집][7]을 참조하세요.
 

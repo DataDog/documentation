@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "Blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/soar/"
+  tag: "Blog"
+  text: "Automate identity protection, threat containment, and threat intelligence with Datadog SOAR workflows"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -36,10 +39,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-security-metrics/"
   tag: "Blog"
   text: "Monitor your organization's security posture with Datadog"
+- link: "https://www.datadoghq.com/blog/risky-behavior-cloud-environments/"
+  tag: "Blog"
+  text: "Identify risky behavior in cloud environments"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
 ## Overview
