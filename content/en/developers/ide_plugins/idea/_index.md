@@ -19,6 +19,12 @@ further_reading:
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    The Datadog extension for JetBrains IDEs is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Log Explorer][5], [Error Tracking][6], [Code Security][7], [Continuous Profiler][10], [Test Optimization][18] and [CI Visibility][19] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
