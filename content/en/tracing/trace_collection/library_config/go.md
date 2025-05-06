@@ -80,7 +80,8 @@ See all available options in the [configuration documentation][3] (or [configura
 
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
+Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
@@ -167,7 +168,7 @@ Added in version 1.26.0.
 ### Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext` <br>
+: **Default**: `datadog,tracecontext,baggage` <br>
 Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
 
 ## Configure APM environment name
@@ -195,3 +196,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
+[21]: /tracing/trace_collection/library_config/#traces
