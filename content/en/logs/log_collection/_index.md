@@ -329,7 +329,7 @@ The TCP endpoint is not supported for this site.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 <div class="alert alert-info">
-**Preview available**: You can submit logs up to **7 days** old, instead of the current 18h limit. [Register for the Preview](https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/)
+<b>Preview available</b>: You can submit logs from the past 7 days, instead of the current 18-hour limit. <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">Register for the Preview</a>.
 </div>
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
