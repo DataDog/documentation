@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management on Kubernetes
+title: Setting up Cloud Security on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight.
@@ -136,6 +136,14 @@ Add the following settings to the `env` section of `security-agent` and `system-
               - name: DD_COMPLIANCE_CONFIG_ENABLED
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                value: "true"
+              - name: DD_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_ENABLED
+                value: "true"
+              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_HOST_ENABLED
                 value: "true"
               - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
                 value: "true"

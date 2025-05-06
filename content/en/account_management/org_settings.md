@@ -88,7 +88,11 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
+The **Public Sharing** tab includes org-wide settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+
+To apply sharing settings across all your orgs, reach out to [Datadog Support][16].
+
+**Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
 
 ### OAuth Apps
 
@@ -171,3 +175,4 @@ The session duration can be configured within the following limits:
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/safety_center
 [15]: /account_management/org_settings/oauth_apps
+[16]: /help/

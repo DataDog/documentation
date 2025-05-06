@@ -196,7 +196,7 @@ Complete the following steps to configure these three components.
               processors: [resource, batch]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [httpcheck/frontendproxy, otlp, redis, spanmetrics, datadog/connector]
+              receivers: [httpcheck/frontend-proxy, otlp, redis, spanmetrics, datadog/connector]
               processors: [resource, batch]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
