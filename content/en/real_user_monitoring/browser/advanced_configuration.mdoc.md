@@ -1302,10 +1302,6 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 - View events (but you can [override default RUM view names][21] instead)
 - CORS and CSP violations
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
