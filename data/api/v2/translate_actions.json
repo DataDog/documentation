@@ -1333,6 +1333,24 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "CreateOnCallPage": {
+    "description": "Trigger a new On-Call Page.\n\nNote: This endpoint may be available even if the corresponding Datadog site is unavailable.\n\n| Datadog Site  | On-Call Paging endpoint |\n|---------------|----------------------------------------------------------------------------------|\n| AP1           | `POST` https://saffron.oncall.datadoghq.com/api/v2/on-call/pages                 |\n| EU            | `POST` https://beige.oncall.datadoghq.com/api/v2/on-call/pages/                  |\n| US1           | `POST` https://navy.oncall.datadoghq.com/api/v2/on-call/pages/                   |\n| US3           | `POST` https://teal.oncall.datadoghq.com/api/v2/on-call/pages/                   |\n| US5           | `POST` https://coral.oncall.datadoghq.com/api/v2/on-call/pages/                  |\n",
+    "summary": "Create On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "AcknowledgeOnCallPage": {
+    "description": "Acknowledges an On-Call Page.\n\nNote: This endpoint may be available even if the corresponding Datadog site is unavailable.\n\n| Datadog Site  | On-Call Paging endpoint |\n|---------------|---------------------------------------------------------------------------------------------------|\n| AP1           | `POST` https://saffron.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/acknowledge            |\n| EU            | `POST` https://beige.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/acknowledge              |\n| US1           | `POST` https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/acknowledge               |\n| US3           | `POST` https://teal.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/acknowledge               |\n| US5           | `POST` https://coral.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/acknowledge              |\n",
+    "summary": "Acknowledge On-Call Page"
+  },
+  "EscalateOnCallPage": {
+    "description": "Escalates an On-Call Page.\n\nNote: This endpoint may be available even if the corresponding Datadog site is unavailable.\n\n| Datadog Site  | On-Call Paging endpoint |\n|---------------|---------------------------------------------------------------------------------------------------|\n| AP1           | `POST` https://saffron.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/escalate               |\n| EU            | `POST` https://beige.oncall.datadoghq.eu/api/v2/on-call/pages/{page_id}/escalate                 |\n| US1           | `POST` https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/escalate                  |\n| US3           | `POST` https://teal.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/escalate                  |\n| US5           | `POST` https://coral.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/escalate                 |\n",
+    "summary": "Escalate On-Call Page"
+  },
+  "ResolveOnCallPage": {
+    "description": "Resolves an On-Call Page.\n\nNote: This endpoint may be available even if the corresponding Datadog site is unavailable.\n\n| Datadog Site  | On-Call Paging endpoint |\n|---------------|---------------------------------------------------------------------------------------------------|\n| AP1           | `POST` https://saffron.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve                |\n| EU            | `POST` https://beige.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve                  |\n| US1           | `POST` https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve                   |\n| US3           | `POST` https://teal.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve                   |\n| US5           | `POST` https://coral.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve                  |\n",
+    "summary": "Resolve On-Call Page"
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new on-call schedule",
     "summary": "Create on-call schedule",
