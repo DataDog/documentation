@@ -3,12 +3,12 @@ title: Agent FIPS proxy (deprecated)
 disable_toc: false
 private: true
 further_reading:
-- link: "/agent/fips-compliance"
+- link: "/agent/configuration/fips-compliance"
   tag: "Documentation"
   text: "FIPS Compliance"
 ---
 
-<div class="alert alert-danger">The Datadog FIPS Proxy is no longer the recommended solution for FIPS-compliant encryption of the Datadog Agent. Use the <a href="/agent/fips-compliance">Datadog FIPS Agent</a> instead.</div>
+<div class="alert alert-danger">The Datadog FIPS Proxy is no longer the recommended solution for FIPS-compliant encryption of the Datadog Agent. Use the <a href="/agent/configuration/fips-compliance">Datadog FIPS Agent</a> instead.</div>
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
