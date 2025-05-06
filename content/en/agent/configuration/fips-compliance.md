@@ -75,8 +75,6 @@ In addition to the Operating System (OS) requirements above:
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
-
 1. Remove any `fips-proxy` installations on the host by uninstalling the `datadog-fips-proxy` package with your OS package manager. For example:
 
    **Red Hat**
@@ -116,8 +114,6 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
 
 {{% tab "Windows" %}}
 
-The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
-
 1. Follow the [Windows instructions][1] to uninstall the Datadog Agent.
 1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
@@ -129,8 +125,6 @@ if ($p.ExitCode -ne 0) {
    Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
 {{< /code-block >}}
-
-   To install a different preview version of the FIPS Agent, search the [list of stable Agent versions][2] for `datadog-fips-agent` and replace the MSI in the command above with your desired version.
 
 1. Run the Agent `status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
