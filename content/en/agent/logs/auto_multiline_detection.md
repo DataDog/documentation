@@ -150,7 +150,7 @@ Tokens include
 - datetime components. 
 
 Each log token is compared to each token in the sample. If 75% of the log’s tokens match the sample’s, the log is marked for aggregation.
-Datadog recommends using sample based matching if your logs have a stable format. If you need more flexible matching you can use regex. 
+Datadog recommends using sample-based matching if your logs have a stable format. If you need more flexible matching, you can use regex. 
 
 ### Regex Patterns
 
