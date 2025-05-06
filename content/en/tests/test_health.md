@@ -81,10 +81,10 @@ This table shows how much CI usage time [Test Impact Analysis][4] and [Auto Test
 ## Use cases
 
 ### Enhance developer experience
-By looking at **Dev Experience - Test Failure Breakdown** and **Dev Experience - Time Lost Breakdown**, you can identify how often flaky tests in particular are causing failures and wasting CI time. 
+Use **Dev Experience - Test Failure Breakdown** and **Dev Experience - Time Lost Breakdown** to identify how often flaky tests in particular cause failures and waste CI time. 
 
 These Test Optimization features improve developer experience by alleviating test failures and wasted time:
-- **[Auto Test Retries][1]** reduces the likelihood a flaky test will cause your pipeline to fail. This includes your known flaky tests and flaky tests that have yet to be identified. This also provides developers with confidence in test results when a test is actually broken, as it will have failed all retries.
+- **[Auto Test Retries][1]** reduces the likelihood a flaky test causes a pipeline to fail. This includes your known flaky tests and flaky tests that have yet to be identified. This also provides developers with confidence in test results when a test is actually broken, as it will have failed all retries.
 - **[Early Flake Detection][2]**, combined with **[Quality Gates][3]**, prevents new tests that are flaky from entering your default branch.
 - **[Test Impact Analysis][4]** minimizes the flaky tests that run, by only running relevant tests based on code coverage. Skipping irrelevant tests also shortens the feedback loop for developers. 
 
