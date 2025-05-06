@@ -104,7 +104,7 @@ If datetime aggregation is insufficient or your format is too short to be detect
 
 ### Custom samples
 
-A custom sample is a sample of a log on which you want to aggregate. For example, if you want to aggregate a stack trace, the first line of the stack trace would be good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
+A custom sample is a sample of a log on which you want to aggregate. For example, if you want to aggregate a stack trace, the first line of the stack trace would be a good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
 
 To configure custom samples, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable. In the following example, the multi-line detection is looking for the sample `"SEVERE Main main Exception occurred"`:
 
