@@ -155,7 +155,7 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 
 ## Data and telemetry
 
-Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12].
+Datadog collects certain information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. This data is used to help improve the extension's performance and features, including transitions to and from the extension and the applicable Datadog login page for accessing the Services.
 
 If you don't wish to send this data to [Datadog][3], you can disable this at any time in the extension's settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
