@@ -198,6 +198,13 @@ components:
       required: true
       schema:
         type: string
+    BudgetID:
+      description: Budget id.
+      in: path
+      name: budget_id
+      required: true
+      schema:
+        type: string
     CaseIDPathParameter:
       description: Case's UUID or key
       example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
@@ -4782,6 +4789,135 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/BillingDimensionsMappingBody'
+      type: object
+    Budget:
+      description: A budget.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetAttributes'
+        id:
+          description: The id of the budget.
+          type: string
+        type:
+          description: The type of the object, must be `budget`.
+          type: string
+      type: object
+    BudgetArray:
+      description: An array of budgets.
+      example:
+        data:
+        - attributes:
+            created_at: 1741011342772
+            created_by: user1
+            end_month: 202502
+            metrics_query: aws.cost.amortized{service:ec2} by {service}
+            name: my budget
+            org_id: 123
+            start_month: 202501
+            total_amount: 1000
+            updated_at: 1741011342772
+            updated_by: user2
+          id: 00000000-0a0a-0a0a-aaa0-00000000000a
+          type: budget
+      properties:
+        data:
+          description: The `BudgetArray` `data`.
+          items:
+            $ref: '#/components/schemas/Budget'
+          type: array
+      type: object
+    BudgetAttributes:
+      description: The attributes of a budget.
+      properties:
+        created_at:
+          description: The timestamp when the budget was created.
+          example: 1738258683590
+          format: int64
+          type: integer
+        created_by:
+          description: The id of the user that created the budget.
+          example: 00000000-0a0a-0a0a-aaa0-00000000000a
+          type: string
+        end_month:
+          description: The month when the budget ends.
+          example: 202502
+          format: int64
+          type: integer
+        entries:
+          description: The entries of the budget.
+          items:
+            $ref: '#/components/schemas/BudgetEntry'
+          type: array
+        metrics_query:
+          description: The cost query used to track against the budget.
+          example: aws.cost.amortized{service:ec2} by {service}
+          type: string
+        name:
+          description: The name of the budget.
+          example: my budget
+          type: string
+        org_id:
+          description: The id of the org the budget belongs to.
+          example: 123
+          format: int64
+          type: integer
+        start_month:
+          description: The month when the budget starts.
+          example: 202501
+          format: int64
+          type: integer
+        total_amount:
+          description: The sum of all budget entries' amounts.
+          example: 1000
+          format: double
+          type: number
+        updated_at:
+          description: The timestamp when the budget was last updated.
+          example: 1738258683590
+          format: int64
+          type: integer
+        updated_by:
+          description: The id of the user that created the budget.
+          example: 00000000-0a0a-0a0a-aaa0-00000000000a
+          type: string
+      type: object
+    BudgetEntry:
+      description: The entry of a budget.
+      properties:
+        amount:
+          description: The `amount` of the budget entry.
+          example: 500
+          format: double
+          type: number
+        month:
+          description: The `month` of the budget entry.
+          example: 202501
+          format: int64
+          type: integer
+        tag_filters:
+          description: The `tag_filters` of the budget entry.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+          type: array
+      type: object
+    BudgetWithEntries:
+      description: The definition of the `BudgetWithEntries` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/BudgetWithEntriesData'
+      type: object
+    BudgetWithEntriesData:
+      description: A budget and all its entries.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetAttributes'
+        id:
+          description: The `BudgetWithEntriesData` `id`.
+          example: 00000000-0a0a-0a0a-aaa0-00000000000a
+          type: string
+        type:
+          description: The type of the object, must be `budget`.
+          type: string
       type: object
     BulkMuteFindingsRequest:
       description: The new bulk mute finding request.
@@ -13291,9 +13427,8 @@ components:
       oneOf:
       - $ref: '#/components/schemas/TeamReference'
       - $ref: '#/components/schemas/EscalationPolicyStep'
-      - $ref: '#/components/schemas/UserTarget'
-      - $ref: '#/components/schemas/ScheduleTarget'
-      - $ref: '#/components/schemas/TeamTarget'
+      - $ref: '#/components/schemas/EscalationPolicyUser'
+      - $ref: '#/components/schemas/ScheduleData'
     EscalationPolicyStep:
       description: Represents a single step in an escalation policy, including its
         attributes, relationships, and resource type.
@@ -13539,6 +13674,44 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+    EscalationPolicyUser:
+      description: Represents a user object in the context of an escalation policy,
+        including their `id`, type, and basic attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyUserAttributes'
+        id:
+          description: The unique user identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUserType'
+      required:
+      - type
+      type: object
+    EscalationPolicyUserAttributes:
+      description: Provides basic user information for an escalation policy, including
+        a name and email address.
+      properties:
+        email:
+          description: The user's email address.
+          example: jane.doe@example.com
+          type: string
+        name:
+          description: The user's name.
+          example: Jane Doe
+          type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
+      type: object
+    EscalationPolicyUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -32250,6 +32423,8 @@ components:
           description: The user's name.
           example: Jane Doe
           type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
       type: object
     ScheduleUserType:
       default: users
@@ -37556,6 +37731,18 @@ components:
           format: double
           type: number
       type: object
+    TagFilter:
+      description: Tag filter for the budget's entries.
+      properties:
+        tag_key:
+          description: The key of the tag.
+          example: service
+          type: string
+        tag_value:
+          description: The value of the tag.
+          example: ec2
+          type: string
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -39082,6 +39269,17 @@ components:
           description: Whether the user is verified.
           type: boolean
       type: object
+    UserAttributesStatus:
+      description: The user's status.
+      enum:
+      - active
+      - deactivated
+      - pending
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - DEACTIVATED
+      - PENDING
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -44617,6 +44815,121 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+  /api/v2/cost/budget:
+    put:
+      description: Create a new budget or update an existing one.
+      operationId: UpsertBudget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetWithEntries'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetWithEntries'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Create or update a budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 14
+      x-undo:
+        operationId: DeleteBudget
+        parameters:
+        - name: budget_id
+          source: data.id
+        type: unsafe
+  /api/v2/cost/budget/{budget_id}:
+    delete:
+      description: Delete a budget.
+      operationId: DeleteBudget
+      parameters:
+      - $ref: '#/components/parameters/BudgetID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete a budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 15
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a budget.
+      operationId: GetBudget
+      parameters:
+      - $ref: '#/components/parameters/BudgetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetWithEntries'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get a budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 16
+      x-undo:
+        type: safe
+  /api/v2/cost/budgets:
+    get:
+      description: List budgets.
+      operationId: ListBudgets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List budgets
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 17
+      x-undo:
+        type: safe
   /api/v2/cost/custom_costs:
     get:
       description: List the Custom Costs files.

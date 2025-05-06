@@ -338,6 +338,22 @@ These errors indicate that the Datadog Agent FIPS Proxy is not able to contact b
 
 For more information about outbound connections from the Agent, see the [Network Traffic][5] guide.
 
+### Name resolver configuration for the FIPS Proxy
+Replace `<Your DNS Resolver>:<Port>` with the appropriate DNS Server IP addresses and port for your network. These IP addresses must correspond to your designated name resolver servers to maintain proper functionality and ensure accurate domain name resolution. In the `datadog-fips-proxy.cfg` configuration file, locate the section listed below and configure your DNS accordingly:
+```
+# This section is to reload DNS Records
+
+# Replace these addresses with your DNS Server IP addresses.
+
+resolvers my-dns
+
+    parse-resolv-conf
+
+    nameserver dns1 <Your DNS IP>:<Port>
+
+    nameserver dns2 <Your DNS IP>:<Port>
+```
+
 If you're still unsure about your issue, contact [Datadog support][6].
 
 ## Further reading

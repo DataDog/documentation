@@ -155,9 +155,9 @@ Some resources have specific tags. The following tags are available in addition 
 | **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
 |---------------------|------------------------|--------------------------|
 | **Cluster**         | ~15 minutes             | ~15 minutes               |
-| **Task**            | ~15 seconds             | ~24 hours                 |
-| **Task Definition** | ~15 seconds             | ~24 hours                 |
-| **Service**         | ~15 seconds             | ~24 hours                 |
+| **Task**            | ~15 seconds             | ~15 minutes                 |
+| **Task Definition** | ~15 seconds             | ~15 minutes                 |
+| **Service**         | ~15 seconds             | ~15 minutes                 |
 | **Container Instance**         | ~24 hours               | ~24 hours                 |
 
 * A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
