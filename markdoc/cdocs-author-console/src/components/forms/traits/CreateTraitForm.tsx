@@ -103,9 +103,10 @@ function CreateTraitForm(props: {
         onChange={handleAccordionToggle}
       >
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-          <Typography component="span">I couldn't find the trait I need.</Typography>
+          <Typography component="span">Add a new trait</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ paddingTop: '0px', marginTop: '-15px' }}>
+          <h3>Create a new trait</h3>
           <p>
             Trait ID
             <TextField

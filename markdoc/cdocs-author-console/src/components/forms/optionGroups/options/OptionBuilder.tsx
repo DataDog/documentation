@@ -99,9 +99,9 @@ function OptionBuilder(props: {
       sx={{ border: '1.5px solid #b48fe1' }}
     >
       <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-        <Typography component="span">An option I need is missing from the list.</Typography>
+        <Typography component="span">Add a new option</Typography>
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails sx={{ paddingTop: '0px', marginTop: '-15px' }}>
         <h4>Create a new option</h4>
         <p>
           Option ID

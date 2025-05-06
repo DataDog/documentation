@@ -56,7 +56,7 @@ export default function FlexibleTraitSelector(props: {
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {
-            params.inputProps.placeholder = 'Type here to search available traits';
+            params.inputProps.placeholder = 'Type here to search existing traits';
           }
           return <TextField {...params} />;
         }}

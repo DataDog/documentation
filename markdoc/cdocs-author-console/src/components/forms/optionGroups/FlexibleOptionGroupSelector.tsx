@@ -54,7 +54,7 @@ export default function FlexibleOptionGroupSelector(props: {
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {
-            params.inputProps.placeholder = 'Type here to search available option groups';
+            params.inputProps.placeholder = 'Type here to search existing option groups';
           }
           return <TextField {...params} />;
         }}

@@ -132,7 +132,7 @@ export default function FlexibleOptionSelector(props: {
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {
-            params.inputProps.placeholder = 'Type here to search available options';
+            params.inputProps.placeholder = 'Type here to search existing options';
           }
           return <TextField {...params} />;
         }}
