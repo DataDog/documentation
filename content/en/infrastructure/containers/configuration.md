@@ -241,8 +241,8 @@ Follow these steps to collect the custom resources that these CRDs define:
       ```yaml
       apiVersion: datadoghq.com/v2alpha1
       kind: DatadogAgent
-        metadata:
-          name: datadog
+      metadata:
+        name: datadog
       spec:
         #(...)
         features:
