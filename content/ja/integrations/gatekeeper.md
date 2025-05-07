@@ -28,10 +28,10 @@ author:
 categories:
 - クラウド
 - コンプライアンス
-- 構成 & デプロイ
-- コンテナ
-- セキュリティ
-custom_kind: integration
+- 構成とデプロイ
+- incident-teams
+- security
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
 display_on_public_website: true
@@ -103,7 +103,7 @@ gatekeeper チェックを Kubernetes クラスターにインストールする
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
    ```shell
-   ddev config set extras ./integrations-extras
+   ddev config set repos.extras ./integrations-extras
    ```
 
 4. `gatekeeper` パッケージをビルドするには、次を実行します。

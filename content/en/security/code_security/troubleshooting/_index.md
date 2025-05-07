@@ -159,6 +159,11 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
 
+### Datadog-hosted scan did not run for a repository with `\\` in the file path
+
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\\`). If your repository includes such paths,
+you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
+
 ## No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
@@ -227,7 +232,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [1]: /help/
 [2]: /security/code_security/static_analysis/github_actions
 [3]: /security/code_security/static_analysis/github_actions#inputs
-[4]: https://app.datadoghq.com/ci/settings/repository
+[4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
 [7]: https://github.com/DataDog/osv-scanner
