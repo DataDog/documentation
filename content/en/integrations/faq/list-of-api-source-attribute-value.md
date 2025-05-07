@@ -189,7 +189,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Consul                          | consul                            | consul                             |
 | Conviva                         | conviva                           | conviva                            |
 | Couchbase                       | couchbase                         | couchbase                          |
-| Couchdb                         | couchdb                           | couchdb                            |
+| CouchDB                         | couchdb                           | couchdb                            |
 | Crowdstrike                     | crowdstrike                       | crowdstrike                        |
 | Desk                            | desk                              | desk                               |
 | Dingtalk                        | dingtalk                          | dingtalk                           |
