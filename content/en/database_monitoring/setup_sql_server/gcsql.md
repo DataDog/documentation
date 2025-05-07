@@ -61,7 +61,7 @@ Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
@@ -137,7 +137,7 @@ Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/con
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: odbc
@@ -269,15 +269,6 @@ Using the [Operator instructions in Kubernetes and Integrations][6] as a referen
                   connector: 'odbc'
                   driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
-                  # Optional: For AlwaysOn users
-                  database_metrics: 
-                    ao_metrics: 
-                      enabled: true
-                  # Optional: For monitoring SQL Server Agent jobs               
-                  agent_jobs: 
-                    enabled: true
-                    collection_interval: 15
-                    history_row_limit: 10000 
                   # Optional: For additional tags
                   tags:  
                     - 'service:<CUSTOM_SERVICE>'
@@ -313,15 +304,6 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
-            # Optional: For AlwaysOn users
-            database_metrics: 
-              ao_metrics: 
-                enabled: true
-            # Optional: For monitoring SQL Server Agent jobs
-            agent_jobs: 
-              enabled: true
-              collection_interval: 15
-              history_row_limit: 10000
             # Optional: For additional tags
             tags:  
               - 'service:<CUSTOM_SERVICE>'
@@ -358,15 +340,6 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For AlwaysOn users
-    database_metrics: 
-      ao_metrics: 
-        enabled: true
-    # Optional: For monitoring SQL Server Agent jobs               
-    agent_jobs: 
-      enabled: true
-      collection_interval: 15
-      history_row_limit: 10000
     # Optional: For additional tags  
     tags: 
       - 'service:<CUSTOM_SERVICE>'
@@ -399,16 +372,6 @@ metadata:
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "database_metrics": {
-            "ao_metrics": {
-              "enabled": true
-            }
-          },
-          "agent_jobs": {
-            "enabled": true,
-            "collection_interval": 15,
-            "history_row_limit": 10000
-          },
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],
           "gcp": {
             "project_id": "<PROJECT_ID>",
