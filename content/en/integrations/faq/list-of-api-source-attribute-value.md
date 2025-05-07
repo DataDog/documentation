@@ -190,7 +190,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Conviva                         | conviva                           | conviva                            |
 | Couchbase                       | couchbase                         | couchbase                          |
 | CouchDB                         | couchdb                           | couchdb                            |
-| Crowdstrike                     | crowdstrike                       | crowdstrike                        |
+| CrowdStrike                     | crowdstrike                       | crowdstrike                        |
 | Desk                            | desk                              | desk                               |
 | Dingtalk                        | dingtalk                          | dingtalk                           |
 | Docker                          | docker                            | docker                             |
