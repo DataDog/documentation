@@ -671,6 +671,23 @@ components:
       required: true
       schema:
         type: string
+    ResourceFilterAccountID:
+      description: Filter resource filters by cloud provider account ID. This parameter
+        is only valid when provider is specified.
+      in: query
+      name: account_id
+      required: false
+      schema:
+        description: The cloud provider account ID (e.g. AWS account ID, GCP project
+          ID, Azure subscription ID)
+        type: string
+    ResourceFilterProvider:
+      description: Filter resource filters by cloud provider (e.g. aws, gcp, azure).
+      in: query
+      name: cloud_provider
+      required: false
+      schema:
+        $ref: '#/components/schemas/ResourceFilterProviderEnum'
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
@@ -15537,6 +15554,25 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetResourceEvaluationFiltersResponse:
+      description: The definition of `GetResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    GetResourceEvaluationFiltersResponseData:
+      description: The definition of `GetResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
     GetRuleVersionHistoryData:
       description: Data for the rule version history.
       properties:
@@ -29528,6 +29564,57 @@ components:
       required:
       - data
       type: object
+    ResourceFilterAttributes:
+      description: Attributes of a resource filter.
+      properties:
+        cloud_provider:
+          additionalProperties:
+            additionalProperties:
+              items:
+                description: Tag filter in format "key:value"
+                example: environment:production
+                type: string
+              type: array
+            type: object
+          description: A map of cloud provider names (e.g., "aws", "gcp", "azure")
+            to a map of account/resource IDs and their associated tag filters.
+          example:
+            aws:
+              '123456789':
+              - environment:production
+              - team:devops
+            azure:
+              sub-001:
+              - app:frontend
+            gcp:
+              project-abc:
+              - region:us-central1
+          type: object
+        uuid:
+          description: The UUID of the resource filter.
+          type: string
+      required:
+      - cloud_provider
+      type: object
+    ResourceFilterProviderEnum:
+      description: The name of the cloud provider.
+      enum:
+      - aws
+      - gcp
+      - azure
+      type: string
+      x-enum-varnames:
+      - AWS
+      - GCP
+      - AZURE
+    ResourceFilterRequestType:
+      description: Constant string to identify the resource type.
+      enum:
+      - csm_resource_filter
+      example: csm_resource_filter
+      type: string
+      x-enum-varnames:
+      - CSM_RESOURCE_FILTER
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -32955,9 +33042,11 @@ components:
       example: true
       type: boolean
     SecurityMonitoringRuleKeepAlive:
-      description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window. For third
-        party detection method, this field is not used."
+      description: 'Once a signal is generated, the signal will remain "open" if a
+        case is matched at least once within
+
+        this keep alive window. For third party detection method, this field is not
+        used.'
       enum:
       - 0
       - 60
@@ -32987,9 +33076,10 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleMaxSignalDuration:
-      description: "A signal will \u201Cclose\u201D regardless of the query being
-        matched once the time exceeds the maximum duration.\nThis time is calculated
-        from the first seen timestamp."
+      description: 'A signal will "close" regardless of the query being matched once
+        the time exceeds the maximum duration.
+
+        This time is calculated from the first seen timestamp.'
       enum:
       - 0
       - 60
@@ -39289,6 +39379,44 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateResourceEvaluationFiltersRequest:
+      description: Request object to update a resource filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequestData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersRequestData:
+      description: The definition of `UpdateResourceFilterRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `UpdateResourceEvaluationFiltersRequestData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
+    UpdateResourceEvaluationFiltersResponse:
+      description: The definition of `UpdateResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersResponseData:
+      description: The definition of `UpdateResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
     UpdateRuleRequest:
       description: Request to update a scorecard rule.
       properties:
@@ -44679,6 +44807,79 @@ paths:
         permissions:
         - security_monitoring_rules_read
         - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+  /api/v2/cloud_security_management/resource_filters:
+    get:
+      description: List resource filters.
+      operationId: GetResourceEvaluationFilters
+      parameters:
+      - $ref: '#/components/parameters/ResourceFilterProvider'
+      - $ref: '#/components/parameters/ResourceFilterAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: List resource filters
+      tags:
+      - Security Monitoring
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
+      x-undo:
+        type: safe
+    put:
+      description: Update resource filters.
+      operationId: UpdateResourceEvaluationFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Update resource filters
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/container_images:
