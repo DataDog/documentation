@@ -205,7 +205,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Fluentd                         | fluentd                           | fluentd                            |
 | Git                             | git                               | git                                |
 | GitHub                          | github                            | github                             |
-| Github Apps                     | github apps                       | github_apps                        |
+| GitHub Apps                     | github apps                       | github_apps                        |
 | GitLab                          | gitlab                            | gitlab                             |
 | G Suite                         | g suite                           | g_suite                            |
 | Go                              | go                                | go                                 |
