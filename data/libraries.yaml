@@ -323,10 +323,12 @@ Classic:
     link: https://docs.rs/cadence/latest/cadence/
     dogstatsd: true
     authors: Nick Pillitteri
+    notes: ''
   - name: metrics-exporter-statsd
     link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
     dogstatsd: true
     authors: GitHub
+    notes: ''
   - name: datadog-api-client-rust
     link: https://github.com/DataDog/datadog-api-client-rust
     official: true
@@ -361,6 +363,7 @@ Classic:
       for your mobile applications. It provides Swift and Objective-C libraries to
       collect logs, traces, and Real User Monitoring (RUM) events, with support for
       WebView tracking to monitor hybrid apps.
+- Swift:
   - name: Swift-Dogstatsd
     link: https://github.com/datadog/swift-dogstatsd/
     dogstatsd: true
@@ -370,6 +373,7 @@ Classic:
       Vapor applications. It supports both UDP and UDS transports for metrics delivery
       and integrates seamlessly with Application and Request contexts, allowing you
       to increment counters, set gauges, and more with simple method calls.
+- Swift:
   - name: SwiftDog
     link: https://github.com/jaronoff97/SwiftDog
     api: true
@@ -385,22 +389,37 @@ Tracing:
     link: https://github.com/DataDog/dd-trace-cpp
     official: true
     authors: Datadog
+    notes: C++ library for instrumenting applications with Datadog distributed tracing.
+      It allows developers to create and manage spans, propagate trace context, and
+      add custom tags. Compatible with C++17, dd-trace-cpp can be built as a static
+      or shared library and is tested on major platforms, including Linux, Windows,
+      and macOS.
 - .NET:
   - name: dd-trace-dotnet
     link: https://github.com/DataDog/dd-trace-dotnet
     official: true
-    notes: NuGet package is `Datadog.Trace`.
+    notes: The Datadog .NET Tracer enables distributed tracing, application performance
+      monitoring, application security management, continuous integration visibility,
+      and dynamic instrumentation. It supports a wide range of libraries out-of-the-box,
+      with options for custom instrumentation. Also includes a continuous profiler
+      for automatic application profiling.
     authors: Datadog
 - Rust/C++/C:
   - name: ddprof
     link: https://github.com/DataDog/ddprof
     official: true
     authors: Datadog
-    notes: A profiler for compiled languages.
+    notes: ddprof is a command-line profiler for compiled languages that collects
+      CPU and memory allocation data, capturing profiling information with minimal
+      performance overhead.
 - Elixir:
   - name: spandex
     link: https://github.com/zachdaniel/spandex
     authors: Zach Daniel
+    notes: Spandex is an Elixir library for instrumenting applications with distributed
+      tracing, with built-in support for exporting trace data to Datadog. It provides
+      macros and functions to create and manage spans, supports asynchronous trace
+      propagation, and integrates with Phoenix via middleware plugs.
 - Go:
   - name: dd-trace-go (v1)
     link: https://github.com/DataDog/dd-trace-go
@@ -422,74 +441,124 @@ Tracing:
     link: https://github.com/DataDog/dd-trace-java
     official: true
     authors: Datadog
-    notes: Java package 'tracer'.
+    notes: dd-trace-java is Datadog's Java tracer library for Application Performance
+      Monitoring (APM). It enables automatic and manual tracing and profiling of Java
+      applications, providing features such as distributed tracing, continuous profiling,
+      error tracking, CI visibility, deployment tracking, and code hotspot identification.
+      The library supports automatic instrumentation of common Java frameworks and
+      libraries, and offers APIs for custom instrumentation and advanced configuration.
   - name: apm-client
     link: https://github.com/chonton/apm-client
     authors: Chas Honton
+    notes: The apm-client library provides Java-based instrumentation for tracing
+      servlet requests, JAX-RS client and server requests, and CDI bean methods. It
+      generates spans containing resource and method names, wall time, and duration,
+      which are then sent to a local Datadog APM collector via REST.
 - Node.js:
   - name: dd-trace-js
     link: https://github.com/DataDog/dd-trace-js
     official: true
     authors: Datadog
-    notes: OpenTracing API implementation in JavaScript for Node.js.
+    notes: dd-trace-js is Datadog's APM (Application Performance Monitoring) tracer
+      library for Node.js applications. It enables automatic and manual tracing of
+      application performance, distributed traces, and integrates with the Datadog
+      Agent to report telemetry data. Supports integration with the OpenTelemetry
+      API for custom instrumentation.
 - PHP:
   - name: dd-trace-php
     link: https://github.com/DataDog/dd-trace-php/
     official: true
     authors: Datadog
-    notes: composer package is 'datadog/dd-trace'.
+    notes: dd-trace-php is Datadog’s PHP tracing library that enables Application
+      Performance Monitoring (APM) and distributed tracing for PHP applications. It
+      provides automatic and manual instrumentation for popular PHP frameworks, libraries,
+      and datastores.
 - Python:
   - name: dd-trace-py
     link: https://github.com/DataDog/dd-trace-py
     official: true
     authors: Datadog
-    notes: pip package is called 'ddtrace'.
+    notes: The dd-trace-py library enables Datadog APM features for Python applications,
+      including distributed tracing, continuous profiling, error tracking, CI visibility,
+      deployment tracking, code hotspots, and dynamic instrumentation. It provides
+      automatic and manual instrumentation for various Python frameworks and libraries.
 - Ruby:
   - name: dd-trace-rb
     link: https://github.com/DataDog/dd-trace-rb
     official: true
     authors: Datadog
-    notes: gem is called 'datadog'.
+    notes: Datadog's official Application Performance Monitoring (APM) tracer. Collects
+      distributed traces and performance metrics from Ruby applications and supports
+      automatic instrumentation for popular Ruby frameworks and libraries.
   - name: ddtrace-rb-method-wrapper
     link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
     authors: Brandfolder
-    notes: gem is called `ddtrace-method-wrapper`.
+    notes: ddtrace-method-wrapper is an extension for ddtrace, Datadog's Ruby tracing
+      library, that provides a convenient way to instrument specific methods within
+      a class or module. By extending your class with DatadogTraceWrapper and specifying
+      methods to trace, this wrapper automatically creates custom spans for those
+      methods.
 - Rust:
   - name: datadog-apm
     link: https://github.com/pipefy/datadog-apm-rust
     authors: Pipefy
+    notes: An unofficial library for integrating Datadog Application Performance Monitoring
+      (APM) with Rust applications. Enables collection and reporting of tracing data
+      to Datadog, allowing developers to monitor and analyze application performance.
+      See the documentation and examples for integration details.
 Serverless:
 - Lambda:
   - name: datadog-lambda-python
     official: true
     link: https://github.com/DataDog/datadog-lambda-python
     authors: Datadog
-    notes: Official Datadog Python Lambda library
+    notes: Provides automatic collection of enhanced Lambda metrics, distributed tracing,
+      and enables custom metric submission to Datadog. The library supports tagging
+      telemetry, capturing Lambda request and response payloads, filtering sensitive
+      information from logs and traces, and advanced cold start tracing options. Optional
+      continuous profiling allows collection of CPU and memory snapshots during Lambda
+      execution.
   - name: datadog-lambda-js
     official: true
     link: https://github.com/DataDog/datadog-lambda-js
     authors: Datadog
-    notes: Official Datadog Node.js Lambda library
+    notes: datadog-lambda-js library captures traces, logs, and metrics, and provides
+      options to tag telemetry, scrub sensitive data, and capture Lambda request/response
+      payloads. It also supports cold start tracing, fine-grained payload depth controls,
+      and profiling.
   - name: datadog-lambda-rb
     official: true
     link: https://github.com/DataDog/datadog-lambda-rb
     authors: Datadog
-    notes: Official Datadog Ruby Lambda library
+    notes: The datadog-lambda-rb library enables enhanced metrics, distributed tracing,
+      and custom metric submission for AWS Lambda functions written in Ruby, with
+      automatic correlation between logs and traces.
   - name: datadog-lambda-go
     official: true
     link: https://github.com/DataDog/datadog-lambda-go
     authors: Datadog
-    notes: Official Datadog Go Lambda library
+    notes: Offical library for Go-based AWS Lambda functions to send enhanced Lambda
+      metrics, custom metrics, and distributed traces to Datadog. It supports integration
+      with Datadog tracing by injecting spans into the function context, allowing
+      for trace propagation and creation of custom spans using dd-trace-go. The library
+      can also unify traces from AWS X-Ray and Datadog.
   - name: datadog-lambda-java
     official: true
     link: https://github.com/DataDog/datadog-lambda-java
     authors: Datadog
-    notes: Official Datadog Java Lambda library
+    notes: Official Java client library for AWS Lambda functions that enables enhanced
+      Lambda metrics, distributed tracing, and submission of custom metrics to Datadog.
+      It supports automatic injection of trace headers for outbound HTTP requests
+      3, allowing for distributed tracing across serverless and serverful environments.
   - name: serverless-plugin-datadog
     official: true
     link: https://github.com/DataDog/serverless-plugin-datadog
     authors: Datadog
-    notes: Plugin to automatically instrument your Lambda functions with Datadog.
+    notes: serverless-plugin-datadog is a Serverless Framework plugin that automates
+      Datadog integration for AWS Lambda applications. . The plugin enables collection
+      of enhanced metrics, distributed traces, and logs, and supports features like
+      AWS X-Ray tracing, App and API Protection (AAP), source code integration, and
+      continuous profiling. Supports Node.js, Python, Ruby, Java, Go, and .NET runtimes.
   - name: serverless-datadog-metrics
     link: https://github.com/DanteInc/serverless-datadog-metrics
     api: true
@@ -508,7 +577,11 @@ Community:
   - name: interferon
     link: https://github.com/airbnb/interferon
     authors: Airbnb
-    notes: Ruby library for maintaining and managing monitors
+    notes: The Interferon gem enables you to manage alert configurations as code by
+      defining alerts, hosts, and engineer groups in Ruby DSL and YAML files. It supports
+      integration with Datadog as the alerting destination, allowing you to programmatically
+      generate and update Datadog alerts based on custom logic and inventory sources
+      (such as AWS resources or SmartStack services).
   - name: terraform-datadog
     link: https://www.terraform.io/docs/providers/datadog/
     authors: Terraform
@@ -516,18 +589,22 @@ Community:
   - name: datadog-to-terraform
     link: https://github.com/intercom/datadog-to-terraform
     authors: Intercom
-    notes: Tool to convert Datadog resources to Terraform configuration
+    notes: datadog-to-terraform is a browser extension that converts Datadog monitor
+      and dashboard JSON configurations into Terraform code. Users can copy JSON from
+      the Datadog UI, provide a resource name, and generate Terraform HCL for use
+      in infrastructure-as-code workflows.
 - Integrations:
-  - name: ansible-modules-extras
-    link: https://github.com/ansible/ansible-modules-extras
-    notes: Contains modules that interact with Datadog in the monitoring section
   - name: k6-datadog
     link: https://k6.io/docs/results-output/real-time/datadog/
     notes: Integration for sending K6 test results to Datadog
   - name: pid-stats
     link: https://github.com/gitterHQ/pid-stats
     authors: GitterHQ
-    notes: Library for generating process information from StatsD using pid files
+    notes: The pid-stats integration collects resource usage metrics for processes
+      specified by PID files and sends them to StatsD, allowing monitoring in Datadog.
+      It samples metrics such as CPU usage (user, system, guest), memory usage (resident,
+      virtual, percent), memory faults (major, minor), and disk I/O (read, write,
+      cancelled) for each target process.
   - name: pulumi-datadog
     link: https://www.pulumi.com/registry/packages/datadog/
     notes: Datadog resource provider for Pulumi
@@ -539,7 +616,11 @@ Community:
     notes: Sensu handlers for sending metrics and events to Datadog
   - name: stackstorm-datadog
     link: https://github.com/StackStorm-Exchange/stackstorm-datadog
-    notes: StackStorm integration pack for Datadog
+    notes: Enables StackStorm to interact with Datadog by providing actions for managing
+      monitors, events, metrics, dashboards (screenboards and timeboards), downtimes,
+      tags, hosts, users, and embeds. It supports posting and querying time-series
+      data, managing and muting monitors, handling events and comments, scheduling
+      downtimes, and managing visualizations.
 - Agent Ports:
   - name: nixos-dd-agent
     link: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
