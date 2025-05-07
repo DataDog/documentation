@@ -6,11 +6,19 @@ content_filters:
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
     label: "SDK source"
+  - trait_id: rum_browser_sdk_version
+    option_group_id: rum_browser_sdk_version_for_proxying_options
 further_reading:
   - link: '/real_user_monitoring/'
     tag: 'Documentation'
     text: 'Learn about Real User Monitoring'
 ---
+
+{% if equals($rum_browser_sdk_version, "lt_4_34_0") %}
+{% alert level="danger" %}
+Upgrade to Browser SDK `4.34.0` or later to avoid security vulnerabilities in your proxy configuration.
+{% /alert %}
+{% /if %}
 
 ## Overview
 
@@ -52,7 +60,10 @@ The Datadog intake origins for each site are listed below:
 | US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
 | AP1     | `ap1.datadoghq.com`       | `https://browser-intake-ap1-datadoghq.com` |
 
-## Recommended SDK setup
+## SDK setup
+
+<!-- SDK version >4.34.0 and up -->
+{% if or(equals($rum_browser_sdk_version, "gte_5_4_0"),equals($rum_browser_sdk_version, "gte_4_34_0")) %}
 
 Configure the URL of the proxy in the `proxy` initialization parameter. The RUM Browser SDK adds a `ddforward` query parameter to all requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
@@ -82,6 +93,7 @@ window.DD_RUM.onReady(function() {
     });
 });
 ```
+
 {% /if %}
 <!-- end CDN async -->
 
@@ -100,21 +112,16 @@ window.DD_RUM &&
 
 For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to a URL like this: `https://example.org/datadog-intake-proxy?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`. The proxy forwards the request to `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
-## Alternate SDK setup
+<!-- SDK version >=5.4.0 -->
+{% if equals($rum_browser_sdk_version, "gte_5_4_0") %}
+### Passing a function to the `proxy` initialization parameter
 
-From Browser SDK v5.4.0, the `proxy` initialization parameter supports a function input. This function allows you to have more control on how the path and parameters are added to the proxy URL.
+The `proxy` initialization parameter also supports a function input. This function allows you to have more control on how the path and parameters are added to the proxy URL.
 
 This function receives an object with the following properties:
 
 - `path`: the path for the Datadog requests (example: `/api/v2/rum`)
 - `parameters`: the parameters of the Datadog requests (example: `ddsource=browser&...`)
-
-**Note**:
-
-- **JSP web applications** need to use the `\` escape character to properly propagate these parameters to the browser. For example:
-    ```javascript
-    proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
-    ```
 
 <!-- NPM -->
 {% if equals($lib_src, "npm") %}
@@ -163,14 +170,25 @@ For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration f
 **Note:**
 - Some privacy blockers already target the intake [URL patterns][2], so you may want to take that into account when building your proxy URL.
 - The `proxy` function is called for each request, so it should avoid any heavy computation.
+- **JSP web applications** need to use the `\` escape character to properly propagate these parameters to the browser. For example:
+    ```javascript
+    proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
+    ```
+{% /if %}
+<!-- end SDK version >=5.4.0 -->
 
-## Legacy SDK setup (<4.34.0)
+{% /if %}
+<!-- end SDK version >4.34.0 and up -->
 
+<!-- SDK version <4.34.0 -->
+{% if equals($rum_browser_sdk_version, "lt_4_34_0") %}
 Before Browser SDK v4.34.0, the `proxyUrl` initialization parameter was used, and the Datadog intake origin was included in the `ddforward` attribute. The proxy implementation was in charge of validating this host, and failure to do so resulted in various vulnerabilities.
 
-The Datadog intake origin needs to be defined in your proxy implementation to ensure security. <strong>If you are still using a proxy with an older version of the Browser SDK, upgrade to a newer version of the Browser SDK to avoid vulnerabilities.</strong>
+The Datadog intake origin needs to be defined in your proxy implementation to ensure security.
+
+**To avoid security vulnerabilities, you must upgrade to Browser SDK `4.34.0` or later.**
+{% /if %}
+<!-- end SDK version <4.34.0 -->
 
 [1]: /real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
-
-
