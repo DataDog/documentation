@@ -1,7 +1,7 @@
 ---
 title: Wildcard Widget Examples
 further_reading:
-- link: "/dashboards/wildcard_widget"
+- link: "/dashboards/widgets/wildcard"
   tag: "Documentation"
   text: "Learn more about the Wildcard widget"
 - link: "/dashboards/guide/using_vega_lite_in_wildcard_widgets"
