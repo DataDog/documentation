@@ -15,26 +15,26 @@ further_reading:
 title: Cluster Agent 트러블슈팅
 ---
 
-이 설명서에는 다음 구성 요소에 대한 트러블슈팅 정보가 포함되어 있습니다.
+이 문서에는 다음 구성 요소의 트러블슈팅 정보가 포함되어 있습니다.
 
 - [Datadog Cluster Agent](#datadog-cluster-agent)
 - [Node Agent](#node-agent)
 
 ## Datadog Cluster Agent
 
-Cluster Agent에 대한 트러블슈팅 명령을 실행하려면, 먼저 Cluster Agent 또는 노드 기반 Agent 파드 내부에 있어야 합니다. 이를 위해 다음을 사용하세요:
+Cluster Agent에 트러블슈팅 명령을 실행하려면 먼저 사용자가 Cluster Agent 또는 노드 기반 에이전트 포드 내에 있어야 합니다. 다음을 사용할 수 있습니다.
 
 ```text
 kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
 ```
 
-Datadog Cluster Agent가 제공하는 클러스터 수준 메타데이터를 확인하려면 다음을 실행하세요:
+Datadog Cluster Agent에서 제공하는 클러스터 수준 메타데이터를 확인하려면 다음을 실행합니다.
 
 ```text
 agent metamap
 ```
 
-다음 결과가 표시됩니다:
+다음과 같은 결과가 표시됩니다.
 
 ```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# agent metamap
@@ -70,7 +70,7 @@ Node detected: gke-test-default-pool-068cb9c0-wntj
         Services: [metrics-server]
 ```
 
-Datadog Cluster Agent가 쿼리되고 있는지 확인하려면 다음을 찾으세요:
+Datadog Cluster Agent가 쿼리되고 있는지 확인하려면 다음을 찾으세요.
 
 ```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-agent.log
@@ -78,15 +78,15 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
 ```
 
-이벤트를 제대로 수집하지 않는 경우, `DD_LEADER_ELECTION`과 `DD_COLLECT_KUBERNETES_EVENTS`가 `true`으로 설정되어 있는지 확인하고, RBAC에 나열된 적절한 동사(특히 `watch events`)를 확인하세요.
+이벤트가 제대로 수집되지 않는 경우 `DD_LEADER_ELECTION` 및 `DD_COLLECT_KUBERNETES_EVENTS`가 `true`로 설정되어 있는지, 그리고 RBAC 목록에 적절한 동사(특히, `watch events`)가 설정되어 있는지 확인하세요.
 
-이를 활성화한 경우, 다음 명령을 사용하여 리더 선출 상태와  `kube_apiserver` 검사를 확인하세요: 
+이를 활성화한 경우 다음 명령으로 리더 선출 상태와 `kube_apiserver` 점검을 확인합니다.
 
 ```text
 agent status
 ```
 
-이것으로 다음과 같은 결과가 생성됩니다:
+그러면 다음과 같은 결과가 표시됩니다.
 
 ```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# agent status
@@ -112,9 +112,9 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# agent status
 
 ## Node Agent
 
-Agent 상태 명령을 실행하여 Datadog Cluster Agent의 상태를 점검할 수 있습니다: `agent status`
+`agent status` 에이전트 상태 명령을 실행해 Datadog Cluster Agent의 상태를 확인할 수 있습니다.
 
-Datadog Cluster Agent가 활성화되고 올바르게 설정된 경우 다음과 같이 표시됩니다:
+Datadog Cluster Agent가 활성화되어 있고 올바르게 설정되었다면 다음과 같이 표시됩니다.
 
 ```text
 [...]
@@ -126,7 +126,7 @@ Datadog Cluster Agent가 활성화되고 올바르게 설정된 경우 다음과
    - Running: {Major:1 Minor:0 Pre:xxx Meta:xxx Commit:xxxxx}
 ```
 
-Cluster Agent 서비스가 Agent의 파드보다 먼저 생성되었는지 확인하여 환경 변수에서 DNS를 사용할 수 있도록 합니다:
+에이전트 포드보다 Cluster Agent 서비스가 먼저 생성되었는지 확인하여 환경 변수에서 DNS를 사용할 수 있도록 합니다.
 
 ```text
 root@datadog-agent-9d5bl:/# env | grep DATADOG_CLUSTER_AGENT | sort
