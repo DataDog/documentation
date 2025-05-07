@@ -361,7 +361,6 @@ Classic:
       for your mobile applications. It provides Swift and Objective-C libraries to
       collect logs, traces, and Real User Monitoring (RUM) events, with support for
       WebView tracking to monitor hybrid apps.
-- Swift:
   - name: Swift-Dogstatsd
     link: https://github.com/datadog/swift-dogstatsd/
     dogstatsd: true
@@ -371,7 +370,6 @@ Classic:
       Vapor applications. It supports both UDP and UDS transports for metrics delivery
       and integrates seamlessly with Application and Request contexts, allowing you
       to increment counters, set gauges, and more with simple method calls.
-- Swift:
   - name: SwiftDog
     link: https://github.com/jaronoff97/SwiftDog
     api: true
