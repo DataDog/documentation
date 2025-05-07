@@ -143,10 +143,10 @@ datadog-ci sbom upload /path/to/sbom-file.json
 
 ### Services or teams in SCA libraries are not updating
 
-Service and team in Software Composition Analysis (SCA) results are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository’s default branch.
-If you’ve made changes to these files in a feature branch, those updates will not be reflected in the vulnerability or library data for that branch.
+Results for services and teams in SCA are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability or library data for that branch.
 
-After updating either file on your default branch, it may take up to 6 hours for the changes to appear in subsequent scan results.
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
 
 ### Results are not being surfaced in the Datadog UI
 
