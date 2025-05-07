@@ -4,7 +4,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/tracing/trace_collection/single_step_apm"
+- link: "/tracing/trace_collection/automatic_instrumentation/single-step-apm/"
   tag: "Documentation"
   text: "Single Step APM Instrumentation"
 - link: "/data_streams/"
