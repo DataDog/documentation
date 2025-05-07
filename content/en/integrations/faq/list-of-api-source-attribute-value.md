@@ -182,7 +182,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Chatwork                        | chatwork                          | chatwork                           |
 | Chef                            | chef                              | chef                               |
 | CircleCI                        | circleci                          | circleci                           |
-| Cisco Aci                       | cisco aci                         | cisco_aci                          |
+| Cisco ACI                       | cisco aci                         | cisco_aci                          |
 | Cloudflare                      | cloudflare                        | cloudflare                         |
 | CloudHealth                     | cloudhealth                       | cloudhealth                        |
 | Confluent Cloud                 | confluent cloud                   | confluent_cloud                    |
