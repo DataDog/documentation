@@ -32,6 +32,8 @@ Add widgets on your homescreen to quickly access real-time critical information 
 {{< /tabs >}}
 
 ### Incident widgets
+{{< img src="service_management/mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 View your [open incidents][1] from your mobile home screen with Datadog widgets. To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.
 
 Also, you can customize your Open Incidents widgets by filtering on:
@@ -91,7 +93,6 @@ You can display open incidents from multiple organizations on your mobile home s
 {{< /tabs >}}
 
 ### SLOs widget
-
 {{< img src="service_management/mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [SLOs][2] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
@@ -216,6 +217,7 @@ All organizations you've logged-in are displayed in the configuration screen. If
 {{< /tabs >}}
 
 ### On-Call widget
+
 View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
 
 You can customize your On-Call shifts widgets by filtering on:
@@ -232,6 +234,8 @@ You can customize your On-Call pages widgets by filtering on:
 **Note**: You can add additonal filters for the On-Call pages widget.
 
 #### Edit a On-Call shift widget
+{{< img src="service_management/mobile/on_call_shift_widget.png" alt="Configured lockscreen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -254,6 +258,8 @@ You can customize your On-Call pages widgets by filtering on:
 {{< /tabs >}}
 
 #### Edit a On-Call pages widget
+{{< img src="service_management/mobile/on_call_page_widget.png" alt="Configured lockscreen on-call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -279,6 +285,8 @@ You can customize your On-Call pages widgets by filtering on:
 
 
 ## Lock screen widgets
+{{< img src="service_management/mobile/Lock Screen widget.png" alt="Configured lockscreen widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 Lockscreen widgets for monitors, SlOs, Incidents, and Dashboards are supported on iOS.
 
 1. Long press on your lock screen.
