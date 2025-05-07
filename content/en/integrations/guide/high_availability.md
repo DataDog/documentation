@@ -31,9 +31,9 @@ The following integrations are supported for High Availability in Network Device
 ## Prerequisites
 
 - Agent 7.64+
-- [Remote Configuration][9] enabled on your hosts
+- [Remote Configuration][9] enabled for your organization.
 
-**Supported Operating Systems for HA Agent**:
+**Supported Operating Systems**:
 
 - Linux
 - Windows
