@@ -64,19 +64,23 @@ When configuring the Datadog Agent, specify one check instance for each applicat
 ```yaml
 init_config:
 instances:
-  - host: '<SERVER_NAME>.database.windows.net,1433'
+  - host: '<SERVER_NAME>.database.windows.net,<PORT>'
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
       fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 
-  - host: '<SERVER_NAME>.database.windows.net,1433'
+  - host: '<SERVER_NAME>.database.windows.net,<PORT>'
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
@@ -142,7 +146,7 @@ Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
@@ -215,7 +219,7 @@ Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/con
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: odbc
@@ -268,7 +272,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
-    "driver": "ODBC Driver 18 for SQL Server",
+    "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -345,17 +349,8 @@ Using the [Operator instructions in Kubernetes and Integrations][6] as a referen
                   username: datadog
                   password: 'ENC[datadog_user_database_password]'
                   connector: 'odbc'
-                  driver: 'ODBC Driver 18 for SQL Server'
+                  driver: 'FreeTDS'
                   dbm: true
-                  # Optional: For AlwaysOn users
-                  database_metrics: 
-                    ao_metrics: 
-                      enabled: true
-                  # Optional: For monitoring SQL Server Agent jobs               
-                  agent_jobs: 
-                    enabled: true
-                    collection_interval: 15
-                    history_row_limit: 10000 
                   # Optional: For additional tags
                   tags:  
                     - 'service:<CUSTOM_SERVICE>'
@@ -390,16 +385,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
-            # Optional: For AlwaysOn users
-            database_metrics: 
-              ao_metrics: 
-                enabled: true
-            # Optional: For monitoring SQL Server Agent jobs
-            agent_jobs: 
-              enabled: true
-              collection_interval: 15
-              history_row_limit: 10000
+            driver: 'FreeTDS'
             # Optional: For additional tags
             tags: 
               - 'service:<CUSTOM_SERVICE>'
@@ -435,16 +421,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
-    driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For AlwaysOn users
-    database_metrics: 
-      ao_metrics: 
-        enabled: true
-    # Optional: For monitoring SQL Server Agent jobs               
-    agent_jobs: 
-      enabled: true
-      collection_interval: 15
-      history_row_limit: 10000
+    driver: 'FreeTDS'
     # Optional: For additional tags  
     tags: 
       - 'service:<CUSTOM_SERVICE>'
@@ -458,7 +435,6 @@ instances:
 ### Configure with Kubernetes service annotations
 
 Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
-
 
 ```yaml
 apiVersion: v1
@@ -476,17 +452,7 @@ metadata:
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "ODBC Driver 18 for SQL Server",
-          "database_metrics": {
-            "ao_metrics": {
-              "enabled": true
-            }
-          },
-          "agent_jobs": {
-            "enabled": true,
-            "collection_interval": 15,
-            "history_row_limit": 10000
-          },
+          "driver": "FreeTDS",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
