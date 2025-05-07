@@ -13,11 +13,11 @@ Usage example: `observability-pipelines-worker <COMMAND>`
 
 If you are using a containerized environment, use the `docker exec` or `kubectl exec` command to get a shell into the container to run the command.
 
-| Command   | Description                                                                 |
-|-----------|-----------------------------------------------------------------------------|
-| `run`     | Run the observability pipeline worker.                                      |
-| `tap`     | Tap a pipeline to observe events from source or transform components. See [tap options](#tap-options). |
-| `top`     | Lists the components.                                                       |
+| Command   | Description                                                                                                           |
+|-----------|-----------------------------------------------------------------------------------------------------------------------|
+| `run`     | Run the observability pipeline worker.                                                                                |
+| `tap`     | Tap a pipeline to observe events from source or transform components. See [tap options](#tap-options).                |
+| `top`     | Lists the components of the pipeline and provides statistics such as input and output data rates for each component.  |
 
 ### Tap options
 
