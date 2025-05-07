@@ -71,7 +71,7 @@ If you have configured your source to send logs to the Worker, make sure the por
 
 ## Logs are not getting forwarded to the destination
 
-Run the command `netstat -anp | find "<port_number>"` to check the port that the destination is listening on is not being used by another service.
+Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
