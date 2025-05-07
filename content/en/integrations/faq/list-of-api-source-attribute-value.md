@@ -142,7 +142,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Azure Db For Mysql              | azure db for mysql                | azure_db_for_mysql                 |
 | Azure Db For Postgresql         | azure db for postgresql           | azure_db_for_postgresql            |
 | Azure Cosmosdb For Postgresql   | azure cosmosdb for postgresql     | azure_cosmosdb_for_postgresql      |
-| Azure Devops                    | azure devops                      | azure_devops                       |
+| Azure DevOps                    | azure devops                      | azure_devops                       |
 | Azure Event Grid                | azure event grid                  | azure_event_grid                   |
 | Azure Event Hub                 | azure event hub                   | azure_event_hub                    |
 | Azure Express Route             | azure express route               | azure_express_route                |
