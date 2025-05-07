@@ -103,23 +103,14 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 
 ## Enabling Remote Configuration
 
-### Enable Remote Configuration in your organization
-
-<div class="alert alert-info">
-<p>Beginning April 8, 2024, Remote Configuration is enabled by default for:
-<ul>
-   <li>New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level and are in the same Datadog site as their parent organization.</li>
-   <li>Organizations created by new Datadog customers.</li>
-</ul></p></div>
-
-To enable Remote Configuration:
+In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
-1. If needed, follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
+1. Follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
 
 ### Product-specific configuration
 
-After you've enabled Remote Configuration in your organization, consult the documentation below for instructions specific to the product you're configuring.
+Consult the documentation below for instructions specific to the product you're configuring.
 
 | Product | Setup instructions |
 | ------- | --------------------- |
@@ -127,7 +118,7 @@ After you've enabled Remote Configuration in your organization, consult the docu
 | APM | [Configuration at runtime](/tracing/guide/remote_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
 | Workload Protection | [Workload Protection](/security/threats/) |
-| Observability Pipelines | No further setup requirements. |
+| Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
 
@@ -143,7 +134,7 @@ Configure [monitors][14] to receive notifications when an event of interest is e
 
 ## Opting out of Remote Configuration
 
-To opt out, disable Remote Configuration [at the organization level][6]. For additional product-specific steps on disabling Remote Configuration, see [the documentation for the relevant product](#product-specific-configuration).
+Instead of disabling Remote Configuration globally, Datadog recommends opting out for specific Datadog products. For more information, see [the documentation for the relevant product](#product-specific-configuration).
 
 ## Further Reading
 
@@ -179,3 +170,4 @@ To opt out, disable Remote Configuration [at the organization level][6]. For add
 [29]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
 [30]: /actions/private_actions/use_private_actions/
 [31]: /agent/fleet_automation/setup/
+[32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1

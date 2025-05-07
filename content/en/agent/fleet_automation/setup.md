@@ -29,7 +29,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 ### Setup
 
-1. Enable [Remote Configuration for your organization][3].
+1. Ensure that [Remote Configuration is enabled for your organization][3].
 1. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key if it is not already enabled.
 
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
