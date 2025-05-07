@@ -184,7 +184,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Circleci                        | circleci                          | circleci                           |
 | Cisco Aci                       | cisco aci                         | cisco_aci                          |
 | Cloudflare                      | cloudflare                        | cloudflare                         |
-| Cloudhealth                     | cloudhealth                       | cloudhealth                        |
+| CloudHealth                     | cloudhealth                       | cloudhealth                        |
 | Confluent Cloud                 | confluent cloud                   | confluent_cloud                    |
 | Consul                          | consul                            | consul                             |
 | Conviva                         | conviva                           | conviva                            |
