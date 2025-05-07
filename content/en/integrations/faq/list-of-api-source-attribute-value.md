@@ -161,7 +161,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Azure Search                    | azure search                      | azure_search                       |
 | Azure Service Bus               | azure service bus                 | azure_service_bus                  |
 | Azure SQL Database              | azure sql database                | azure_sql_database                 |
-| Azure Sql Elastic Pool          | azure sql elastic pool            | azure_sql_elastic_pool             |
+| Azure SQL Elastic Pool          | azure sql elastic pool            | azure_sql_elastic_pool             |
 | Azure Stream Analytics          | azure stream analytics            | azure_stream_analytics             |
 | Azure Table Storage             | azure table storage               | azure_table_storage                |
 | Azure Usage And Quotas          | azure usage and quotas            | azure_usage_and_quotas             |
