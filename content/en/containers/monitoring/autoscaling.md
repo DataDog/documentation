@@ -173,41 +173,34 @@ If you do not enable Cloud Cost Management, all workload recommendations and aut
 
 ## Usage
 
-### Automate Kubernetes scaling in Datadog
-<!-- is this the usual flow of logic? hunt for a cluster first, then choose a workload? -->
-1. In Datadog, navigate to **Containers** > [**Kubernetes Explorer**][8] and select the [**Autoscaling**][9] tab.
+### Identifying resources to scale
+In Datadog, navigate to **Containers** > [**Kubernetes Explorer**][8] and select the [**Autoscaling**][9] tab. Use the [**Cluster Scaling**][9] view to see a list of your clusters, sortable by total idle CPU or total idle memory. If you [enabled Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management), you can also see cost information and a trailing 30-day cost breakdown.
 
-1. **Choose a cluster**. Use the [**Cluster Scaling**][9] view to see a list of your clusters, sortable by total idle CPU or total idle memory. If you [enabled Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management), you can also see cost information and a trailing 30-day cost breakdown.
+{{< img src="containers/autoscaling/explorer_view.png" alt="In Datadog, Infrastructure > Containers > Kubernetes Explorer > Autoscaling > Cluster Scaling. A table of clusters, displaying each cluster's idle CPU, idle memory, and costs. Each cluster has an 'Optimize Cluster' option." style="width:90%;" >}}
 
-   {{< img src="containers/autoscaling/explorer_view.png" alt="In Datadog, Infrastructure > Containers > Kubernetes Explorer > Autoscaling > Cluster Scaling. A table of clusters, displaying each cluster's idle CPU, idle memory, and costs. Each cluster has an 'Optimize Cluster' option." style="width:80%;" >}}
+Click **Optimize cluster** to open a detailed view of the selected cluster, including a table of this cluster's workloads.
 
-   Datadog recommends selecting a non-production cluster with an existing cluster autoscaling solution.
-   <!-- todo: why? and is this only during preview? are there general reasons behind cluster selection — e.g. high percentage idle?-->
+{{< img src="containers/autoscaling/cluster_detail.png" alt="A detailed cluster view. At the top, widgets displaying cost metrics and scaling events. Below, a table of this cluster's workloads, displaying each deployment's idle CPU, idle memory, and costs. Each workload has an 'Optimize' option." style="width:90%;" >}}
 
-1. Click **Optimize cluster** to open a detailed view of the selected cluster.
+You can also use the [**Workload Scaling**][11] view to see a filterable list of all workloads across all clusters.
 
-   {{< img src="containers/autoscaling/cluster_detail.png" alt="A detailed cluster view. At the top, widgets displaying cost metrics and scaling events. Below, a table of this cluster's workloads, displaying each deployment's idle CPU, idle memory, and costs. Each workload has an 'Optimize' option." style="width:80%;" >}}
+Select a workload and click **Optimize** to see its **Scaling Recommendations**. You can inspect the metrics backing the recommendation for each container within the deployment. 
 
-1. **Choose a workload**. On your cluster's detailed view, locate the **Workloads** section. Select a workload...
-   <!-- todo: what types of workloads are best suited for autoscaling? -->
-
-   You can also select a workload from the [**Workload Scaling**][11] view, which provides a filterable list of all workloads across all clusters.
-
-1. Click **Optimize** to open a side panel with detailed view of the selected workload.
-
-   {{< img src="containers/autoscaling/workload_sidepanel.png" alt="A side panel is opened over the detailed cluster view. A section titled 'Scaling Recommendation' displays the text 'Set Memory on 2 containers and decrease replicas to 5'." style="width:80%;" >}}
-   <!-- todo: will need a screenshot where the Enable Autoscaling button is active (need user with Workload Scaling Write permissions) -->
-
-   In this side panel, you can see a **scaling recommendation** and inspect the metrics backing the recommendation for each container within the deployment. 
-
-1. Select **Enable Autoscaling** to automatically apply your recommendations.
-
-   Alternatively, if you want to apply your changes with `kubectl patch`, select **Apply** to see a generated `kubectl patch` command.
-
-{{< img src="containers/autoscaling/kubectl_patch.png" alt="A modal is opened over the workload side panel. At the top, a copyable text box containing a generated kubectl patch. Below, a manifest diff." style="width:80%;" >}}
+{{< img src="containers/autoscaling/workload_sidepanel.png" alt="A side panel is opened over the detailed cluster view. A section titled 'Scaling Recommendation' displays the text 'Set Memory on 2 containers and decrease replicas to 5'." style="width:90%;" >}}
+<!-- todo: will need a screenshot where the Enable Autoscaling button is active (need user with Workload Scaling Write permissions) -->
 
 
-### Autoscale a workload with a custom resource
+### Deploying recommendations
+
+You can deploy scaling recommendations:
+- **automatically**, with Datadog Kubernetes Autoscaling.
+
+   Select **Enable Autoscaling** to automatically apply your recommendations.
+- **manually**, with `kubectl patch`.
+
+   Select **Apply** to see a generated `kubectl patch` command.
+
+#### Autoscale a workload with a custom resource
 
 You can also deploy a `DatadogPodAutoscaler` custom resource to enable autoscaling for a workload. This custom resource targets a deployment.
 
