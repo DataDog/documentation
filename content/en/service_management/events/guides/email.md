@@ -30,8 +30,8 @@ The **Events API emails** section displays all the emails available for your app
 | Name | Description | Example |
 |---|---|---|
 | Description | A short text for clarifying the email usage | "Used for MyService notifications" |
-| Tags | List of tags that will be appended to each event received through the email. If other tags are present in the JSON message, they are all added | `tag1:val1`, `tag2:val2` |
-| Recipients | List of handles that will be added in the beginning of the texts for all events created through the email, without `@` prefix. See more: [Notifications](/service_management/events/explorer/notifications). | `my@email.com`, `@slack-acc-ch` |
+| Tags | List of tags that to be appended to each event received through the email. If other tags are present in the JSON message, they are all added | `tag1:val1`, `tag2:val2` |
+| Recipients | List of handles to be added in the beginning of the texts for all events created through the email, without `@` prefix. See more: [Notifications](/service_management/events/explorer/notifications). | `my@email.com`, `@slack-acc-ch` |
 | Alert Type | The alert type for events created from the event email. When present, the `alertType` field in a JSON email has priority. | `Info` |
 
 ## Submission
@@ -135,4 +135,4 @@ The maximum allowed email size, including content and attachments, is 20MB. Emai
 [6]: /integrations/guide/events-from-sns-emails/
 
 ### Usage tracking
-In order to help understand which emails are currently used and receiving events, there is a column in the **Events API emails** called `Last Used`. That date will reflect the last time an email was processed for each address, or `No data` when there are no records of it being used.
+In order to help understand which emails are being used and receiving events, there is a column in the **Events API emails** called `Last Used`. That date reflects the last time an email was processed for each address, or `No data` when there are no records of it being used.
