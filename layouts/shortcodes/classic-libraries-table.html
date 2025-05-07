@@ -16,11 +16,11 @@
     <table class="table table-responsive table-fixed">
     <thead>
       <tr>
-        <th style="width: 13%">{{ i18n "language" }}</th>
+        <th style="width: 15%">{{ i18n "language" }}</th>
         <th style="width: 15%">{{ i18n "library" }}</th>
         <th style="width: 15%">{{ i18n "features" }}</th>
         <th style="width: 15%">{{ i18n "author" }}</th>
-        <th style="width: 42%">{{ i18n "notes" }}</th>
+        <th style="width: 40%">{{ i18n "notes" }}</th>
       </tr>
     </thead>
     <tbody>
@@ -31,9 +31,9 @@
                 <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
                 <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
                 <td>
-                  {{ if $el.official}}Official{{ end }}
-                  {{ if $el.api}} | API{{ end }}
-                  {{ if $el.dogstatsd}} | DogStatsD{{ end }}
+                  {{ if $el.official}}Official<br>{{ end }}
+                  {{ if $el.api}}API<br>{{ end }}
+                  {{ if $el.dogstatsd}}DogStatsD{{ end }}
                 </td>
                 <td>{{ if $el.authors }}{{ $el.authors }}{{ end }}</td>
                 <td>{{ if $el.notes }}{{ $el.notes }}{{ end }}</td>
