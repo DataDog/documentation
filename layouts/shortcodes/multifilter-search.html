@@ -12,6 +12,27 @@
 {{ $navigation := newScratch }}
 {{ $table := newScratch }}
 
+{{ $headers := slice }}
+{{ $data := slice }}
+
+{{ $resource_path := print "_data" (.Get "resource")}}
+{{ $resource := resources.Get $resource_path}}
+
+{{/*  Determine data source  */}}
+{{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource) }}
+  {{ errorf "No data source provided for multifilter-search component"}}
+{{ else if isset $.Page.Params "multifiltersearch" }}
+  {{/*  Get Frontmatter dataset  */}}
+  {{ $headers = $.Page.Params.multifiltersearch.headers}}
+  {{ $data = $.Page.Params.multifiltersearch.data}}
+{{ else if $resource }}
+  {{/*  Get JSON dataset  */}}
+  {{ $resource_data := unmarshal $resource}}
+  {{ $headers = (index $resource_data "multifiltersearch" "headers")}}
+  {{ $data = (index $resource_data "multifiltersearch" "data")}}
+{{ end }}
+
+
 <div 
 class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
 x-data="{
@@ -76,7 +97,7 @@ x-data="{
       
       // setup empty filterTypes object
       this.filterTypes = {
-          {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers `filter_by` true)}}
+          {{ range $k, $h := (where $headers `filter_by` true)}}
           '{{ $h.id }}': [],
           {{ end }}
       }
@@ -118,7 +139,7 @@ x-data="{
           url.searchParams.set('search', this.searchValue)
           if(!this.searchValue) {
               url.searchParams.delete('search')
-          }
+          } 
       }
 
       window.history.pushState(null,'', newURL || url.toString())
@@ -136,7 +157,7 @@ x-data="{
 
 }"
 x-init="initFilterSearchValues()">
-  {{/* DATA TABLE  */}}
+  {{/* DATA TABLE */}}
   <div class="col-12 order-1">
     <div class="table-wrapper pb-3">
       <table>
@@ -144,17 +165,19 @@ x-init="initFilterSearchValues()">
         {{ $table.Set "search_keys" slice }}
         {{/*  TABLE HEADER  */}}  
         <thead class="table-header">
-          {{ range $.Page.Params.multifiltersearch.headers }}
-            <th>{{.name}}</th>
-            {{ if .filter_by }}
-            {{ $table.Add "filter_keys" (slice .id)}}
-            {{ else }}
-            {{ $table.Add "search_keys" (slice .id)}}
+          <tr>
+            {{ range $headers }}
+              <th>{{.name}}</th>
+              {{ if .filter_by }}
+              {{ $table.Add "filter_keys" (slice .id)}}
+              {{ else }}
+              {{ $table.Add "search_keys" (slice .id)}}
+              {{ end }}
             {{ end }}
-          {{ end }}
+          </tr>
         </thead>
         <tbody>
-        {{ range $idx, $row := $.Page.Params.multifiltersearch.data }}
+        {{ range $idx, $row := $data }}
           {{/*  
               build a string with lookup info for filtering and searching against. must maintain filter_info order to align with filterTypes property.
           */}}
@@ -174,7 +197,7 @@ x-init="initFilterSearchValues()">
           data-id='{{print "record-" $idx}}'
           data-info="{{ $all_info }}"
           x-cloak x-show.important="shouldShowRecord($el)">
-            {{ range $.Page.Params.multifiltersearch.headers }}
+            {{ range $headers }}
               <td>{{ (index $row .id) | markdownify }}</td>
             {{ end }}
           </tr>
@@ -187,7 +210,7 @@ x-init="initFilterSearchValues()">
                   Resource Type: []
               }
           */}}
-          {{ range where $.Page.Params.multifiltersearch.headers "filter_by" true}}
+          {{ range where $headers "filter_by" true}}
               {{ $navigation.SetInMap "dropdown" .name (union (index ($navigation.Get "dropdown") .name) (slice (index $row .id))) }}
           {{ end }}
 
@@ -209,7 +232,7 @@ x-init="initFilterSearchValues()">
   {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
   <nav id="multifilter-search-nav" class="container px-0">
     <div class="filters__multifilter row">
-        {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers "filter_by" true)}}
+        {{ range $k, $h := (where $headers "filter_by" true)}}
         {{ $filter_type := $h.id }}
         <div class='filter-type flex-column col-12 col-md-{{cond (not $k) "12" "6" }}' data-id="{{$filter_type}}" >
             <p class="filter-type-name fw-semibold">{{ $h.name }}</p>

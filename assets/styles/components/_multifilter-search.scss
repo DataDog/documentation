@@ -128,6 +128,14 @@
         }
     }
 
+    .table-wrapper {
+        table {
+            td {
+                max-width: 200px;
+            }
+        }
+    }
+
     // static-analysis
     .ruleset {
         .ruleset-header {
