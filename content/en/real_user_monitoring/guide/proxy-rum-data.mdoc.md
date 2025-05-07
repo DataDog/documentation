@@ -1,8 +1,11 @@
 ---
 title: Proxy Your Browser RUM Data
-
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
+content_filters:
+  - trait_id: lib_src
+    option_group_id: rum_browser_sdk_source_options
+    label: "SDK source"
 further_reading:
   - link: '/real_user_monitoring/'
     tag: 'Documentation'
@@ -22,13 +25,11 @@ To successfully forward a request to Datadog, your proxy must
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
-<div class="alert alert-warning">
-<ul>
-<li>For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the <code>cookie</code> header.</li>
-<li>The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.</li>
-<li>Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).</li>  
-</ul>
-</div>
+{% alert level="warning" %}
+- For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the `cookie` header.
+- The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.
+- Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).
+{% /alert %}
 
 ### Build the Datadog intake URL
 
@@ -55,9 +56,8 @@ The Datadog intake origins for each site are listed below:
 
 Configure the URL of the proxy in the `proxy` initialization parameter. The RUM Browser SDK adds a `ddforward` query parameter to all requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
+<!-- NPM -->
+{% if equals($lib_src, "npm") %}
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
@@ -68,9 +68,11 @@ datadogRum.init({
     proxy: '<YOUR_PROXY_URL>',
 });
 ```
+{% /if %}
+<!-- end NPM -->
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+<!-- CDN async -->
+{% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -80,9 +82,11 @@ window.DD_RUM.onReady(function() {
     });
 });
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+<!-- end CDN async -->
 
+<!-- CDN sync -->
+{% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -91,9 +95,8 @@ window.DD_RUM &&
         proxy: '<YOUR_PROXY_URL>'
     });
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end CDN sync -->
 
 For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to a URL like this: `https://example.org/datadog-intake-proxy?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`. The proxy forwards the request to `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
@@ -109,13 +112,12 @@ This function receives an object with the following properties:
 **Note**:
 
 - **JSP web applications** need to use the `\` escape character to properly propagate these parameters to the browser. For example:
-  ```javascript
-  proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
-  ```
+    ```javascript
+    proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
+    ```
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
+<!-- NPM -->
+{% if equals($lib_src, "npm") %}
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
@@ -126,9 +128,11 @@ datadogRum.init({
     proxy: (options) => `https://www.proxy.com/foo${options.path}/bar?${options.parameters}`,
 });
 ```
+{% /if %}
+<!-- end NPM -->
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+<!-- CDN async -->
+{% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -138,9 +142,11 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+<!-- end CDN async -->
 
+<!-- CDN sync -->
+{% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -149,9 +155,8 @@ window.DD_RUM &&
         proxy: (options) => `https://www.proxy.com/foo${options.path}/bar?${options.parameters}`
     });
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end CDN sync -->
 
 For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
