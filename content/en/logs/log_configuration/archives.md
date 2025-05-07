@@ -277,16 +277,16 @@ When creating or updating an S3 archive in Datadog, you can optionally configure
 
 - **Default S3 Bucket-Level Encryption** (Default): Datadog does not override your S3 bucket's default encryption settings.
 - **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][1]), regardless of the S3 bucket's default encryption.
-- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2]. You will need to provide the CMK ARN. 
+- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN. 
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{< tabs >}}
 {{% tab "Default S3 Bucket-Level Encryption" %}}
 
 When this option is selected, Datadog does not specify any encryption headers in the upload request. The default encryption from your S3 bucket will apply.
 
-To set or check your S3 bucket's default encryption:
+To set or check your S3 bucket's encryption configuration:
 
 1. Navigate to your S3 bucket.
 2. Click the **Properties** tab.
@@ -297,14 +297,15 @@ To set or check your S3 bucket's default encryption:
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-This option ensure that all archives objects are uploaded with **SSE_S3**, using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
+This option ensure that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
 
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-This option ensure that all archives objects are uploaded using a customer-managed key (CMK) from **[AWS KMS][1]**. This overrides any default encryption setting on the S3 bucket. 
+This option ensure that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
 
-Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this setting. 
+Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this encryption type. 
 
 1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
@@ -362,12 +363,7 @@ Ensure that you have completed the following steps to create a valid CMK and CMK
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
-
 {{< /tabs >}}
-
-Optionally, you can also set encryption directly in the object upload request. These settings are configurable in Datadog when creating or updating S3 archives.
-
-**Note:** By default, encryption is set to `NO_OVERRIDE`. If encryption is set to `SSE-S3` or `SSE-KMS` in the request, this overrides the encryption configuration in your S3 bucket settings.
 
 ### Validation
 
