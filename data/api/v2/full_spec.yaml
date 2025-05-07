@@ -53290,22 +53290,8 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - description: The page number to fetch.
-        example: 0
-        in: query
-        name: page[number]
-        required: false
-        schema:
-          format: int64
-          type: integer
-      - description: The number of devices to return per page.
-        example: 10
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          format: int64
-          type: integer
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
       - description: The field to sort the devices by.
         example: status
         in: query
@@ -53337,6 +53323,10 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/ndm/devices/{device_id}:
