@@ -37,7 +37,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Amazon CloudFront               | amazon cloudfront                 | amazon_cloudfront                  |
 | AWS CloudHSM                    | amazon cloudhsm                   | amazon_cloudhsm                    |
 | Amazon CloudSearch              | amazon cloudsearch                | amazon_cloudsearch                 |
-| AWS Cloudtrail                  | amazon cloudtrail                 | amazon_cloudtrail                  |
+| AWS CloudTrail                  | amazon cloudtrail                 | amazon_cloudtrail                  |
 | AWS CodeBuild                   | amazon codebuild                  | amazon_codebuild                   |
 | AWS CodeDeploy                  | amazon codedeploy                 | amazon_codedeploy                  |
 | Amazon Cognito                  | amazon cognito                    | amazon_cognito                     |
