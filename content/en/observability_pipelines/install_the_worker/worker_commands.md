@@ -23,14 +23,14 @@ If you are using a containerized environment, use the `docker exec` or `kubectl 
 
 Usage example: `observability-pipelines-worker tap <OPTIONS> <COMPONENT_ID>`
 
-| Options                        | Descriptions                                                                                                   |
-|--------------------------------|---------------------------------------------------------------------------------------------------------------|
-| `-i`, `--interval <INTERVAL>`    | Interval to sample events at, in milliseconds (default: `500`)  .                                                |
+| Options                          | Descriptions                                                                                                   |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `-i`, `--interval <INTERVAL>`    | Interval to sample events at, in milliseconds (default: `500`).                                                |
 | `-u`, `--url <URL>`              | GraphQL API server endpoint.                                                                                   |
-| `-l`, `--limit <LIMIT>`          | Maximum number of events to sample each interval (default: `100`).                                               |
-| `-f`, `--format <FORMAT>`        | Encoding format for events printed to screen.<br>default: `json`<br>possible values: `json`, `yaml`, `logfmt`            |
-| `--outputs-of <OUTPUTS_OF>`    | Source or processor IDs whose outputs you want to observe (comma-separated; accepts glob patterns).         |
-| `--inputs-of <INPUTS_OF>`      | Processor or destination IDs whose inputs you want to observe (comma-separated; accepts glob patterns).            |
+| `-l`, `--limit <LIMIT>`          | Maximum number of events to sample each interval (default: `100`).                                             |
+| `-f`, `--format <FORMAT>`        | Encoding format for events printed to screen.<br>default: `json`<br>possible values: `json`, `yaml`, `logfmt`  |
+| `--outputs-of <OUTPUTS_OF>`      | Source or processor IDs whose outputs you want to observe (comma-separated; accepts glob patterns).            |
+| `--inputs-of <INPUTS_OF>`        | Processor or destination IDs whose inputs you want to observe (comma-separated; accepts glob patterns).        |
 | `-q`, `--quiet`                  | Quiet output includes only events.                                                                             |
 | `-m`, `--meta`                   | Include metadata such as the event's associated component ID.                                                  |
 | `-n`, `--no-reconnect`           | Whether to reconnect if the underlying API connection drops. By default, `tap` attempts to reconnect if the connection drops. |
