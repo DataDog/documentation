@@ -26,7 +26,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Alibaba Cloud                   | alibaba cloud                     | alibaba_cloud                      |
 | Amazon AppStream                | amazon appstream                  | amazon_appstream                   |
 | AWS AppSync                     | amazon appsync                    | amazon_appsync                     |
-| Amazon Api Gateway              | amazon api gateway                | amazon_api_gateway                 |
+| Amazon API Gateway              | amazon api gateway                | amazon_api_gateway                 |
 | Amazon Athena                   | amazon athena                     | amazon_athena                      |
 | AWS Auto Scaling                | amazon auto scaling               | amazon_auto_scaling                |
 | Bigpanda                        | bigpanda                          | bigpanda                           |
