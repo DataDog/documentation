@@ -170,10 +170,6 @@ Before Browser SDK v4.34.0, the `proxyUrl` initialization parameter was used, an
 
 The Datadog intake origin needs to be defined in your proxy implementation to ensure security. <strong>If you are still using a proxy with an older version of the Browser SDK, upgrade to a newer version of the Browser SDK to avoid vulnerabilities.</strong>
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 
