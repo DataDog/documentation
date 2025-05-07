@@ -11,6 +11,10 @@ More than 100 Datadog integrations support events collection, including Kubernet
     {{< nextlink href="https://app.datadoghq.com/integrations" >}}Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Send your integration events through Datadog API:">}}
+    {{< nextlink href="/service_management/events/ingest/list_of_integration_id_value" >}}Integration ID List{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Custom events
 You can also submit your own custom events using the Datadog API, Custom Agent Check, DogStatsD, or the Events Email API.
 
