@@ -49,12 +49,12 @@ The Datadog Agent FIPS Proxy does **not** support the following:
 - Serverless Monitoring
 - Communication between Cluster Agent and Node Agents
 - Agent integrations
-- Outbound communication to anything other than GovCloud
+- Outbound communication to anything other than the US1-FED region site
 
 ## Prerequisites
 
 - TCP port range available: 9803 to 9818
-- Datadog Agent >= v7.41
+- Datadog Agent >= v7.45
 
 ## Install the Agent with FIPS support
 
@@ -204,7 +204,7 @@ For instructions on installing the FIPS proxy on Amazon ECS, see [FIPS proxy for
 
 You, the Datadog customer, are responsible for **host** security and hardening.
 
-Security considerations:
+**Security considerations:**
 - While the Datadog images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
 - If you rebuild, reconfigure, or modify the Datadog Agent FIPS Proxy to fit your deployment or testing needs, you might end up with a technically working setup, but Datadog cannot guarantee FIPS compliance if the Datadog Agent FIPS Proxy is not used exactly as explained in the documentation.
 - If you did not follow the installation steps listed above exactly as documented, Datadog cannot guarantee FIPS compliance. Correct configuration includes having your Datadog Agent configured to communicate to the Datadog Agent FIPS Proxy by setting the `fips.enabled` option, and having a running Datadog Agent FIPS Proxy.
