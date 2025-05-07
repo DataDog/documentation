@@ -1,5 +1,7 @@
 ---
 title: Instrument Azure App Service - Linux Containers
+aliases:
+  - /serverless/guide/azure_app_service_linux_sidecar
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
