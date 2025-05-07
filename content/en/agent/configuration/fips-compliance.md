@@ -1,7 +1,7 @@
 ---
 title: Datadog FIPS Compliance
 disable_toc: false
-alias:
+aliases:
 - /agent/guide/agent-fips-proxy
 - /configuration/agent-fips-proxy
 further_reading:
@@ -337,6 +337,22 @@ haproxy[1808]: [ALERT] (1808) : backend 'datadog-metrics' has no server availabl
 These errors indicate that the Datadog Agent FIPS Proxy is not able to contact backend systems, possibly due to being blocked by a firewall or due to another network issue. Datadog Agent FIPS Proxy requires internet access to the Datadog intake endpoints. You can find the IP addresses for these endpoints [through the API][4].
 
 For more information about outbound connections from the Agent, see the [Network Traffic][5] guide.
+
+### Name resolver configuration for the FIPS Proxy
+Replace `<Your DNS Resolver>:<Port>` with the appropriate DNS Server IP addresses and port for your network. These IP addresses must correspond to your designated name resolver servers to maintain proper functionality and ensure accurate domain name resolution. In the `datadog-fips-proxy.cfg` configuration file, locate the section listed below and configure your DNS accordingly:
+```
+# This section is to reload DNS Records
+
+# Replace these addresses with your DNS Server IP addresses.
+
+resolvers my-dns
+
+    parse-resolv-conf
+
+    nameserver dns1 <Your DNS IP>:<Port>
+
+    nameserver dns2 <Your DNS IP>:<Port>
+```
 
 If you're still unsure about your issue, contact [Datadog support][6].
 

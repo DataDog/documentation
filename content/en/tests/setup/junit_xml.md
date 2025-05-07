@@ -83,7 +83,7 @@ datadog-ci version
 
 {{% tab "Windows" %}}
 {{< code-block lang="powershell" >}}
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 
 Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
@@ -180,6 +180,23 @@ datadog-ci junit upload --service service_name ./junit.xml
 if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 {{< /code-block >}}
 
+{{% /tab %}}
+
+{{% tab "CircleCI" %}}
+Use the [`when` attribute][1]:
+
+{{< code-block lang="yaml" >}}
+steps:
+  - run:
+      name: Run tests
+      command: ./run-tests.sh
+  - run:
+      name: Upload test results to Datadog
+      when: always
+      run: datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://circleci.com/docs/configuration-reference/#the-when-attribute
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -288,10 +305,6 @@ You can specify these special tags using the `--tags` parameter when calling `da
 
 All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
 
-`test.bundle`
-: Used to execute groups of test suites separately.<br/>
-**Examples**: `ApplicationUITests`, `ModelTests`
-
 `os.platform`
 : Name of the operating system.<br/>
 **Examples**: `windows`, `linux`, `darwin`
@@ -335,7 +348,7 @@ To add [codeowners][9] information to your JUnit XML tests, you can use the [Git
 
 As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
 
-### Using the GitHub integration (recommended)
+### Using the GitHub integration
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
@@ -372,8 +385,7 @@ The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 6. Give the app a name, for example, `Datadog Test Optimization`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-### Manually providing the `test.source.file` tag
-This is an alternative to using the GitHub integration.
+#### Manually providing the `test.source.file` tag
 
 For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
 There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]

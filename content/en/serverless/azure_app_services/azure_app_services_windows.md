@@ -80,7 +80,7 @@ For example:
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
-**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the [App Service extension section][12] of Datadog's [Azure Portal guide][13].
+**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the **App Service extension section** of Datadog's [Azure Portal guide][13].
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -267,7 +267,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
    - `DD_ENV`: Your environment name
    - `DD_SERVICE`: Your service name (defaults to your Web App name)
    - `DD_RUNTIME_METRICS_ENABLED`: `true` to enable runtime metrics
-   - `DD_APPSEC_ENABLED`: `true` to enable [Application Security Management][11]
+   - `DD_APPSEC_ENABLED`: `true` to enable [App and API Protection][11]
 
    See the full list of [optional configuration settings][5].
 6. Select **Save**. This restarts your application.

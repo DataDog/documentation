@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -124,19 +124,19 @@ AWS Lambda インテグレーションは、パフォーマンスを監視し最
 
 
 
-[1]: /ja/integrations/amazon_web_services/
+[1]: https://app.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: /ja/integrations/amazon_web_services/#installation
+[3]: https://app.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
 [5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: /ja/serverless
+[7]: https://app.datadoghq.com/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: /ja/serverless/deployment_tracking
-[10]: /ja/serverless/enhanced_lambda_metrics/
-[11]: /ja/serverless/custom_metrics/#custom-metrics
-[12]: /ja/serverless/forwarder/
-[13]: /ja/serverless/distributed_tracing/
+[9]: https://app.datadoghq.com/serverless/deployment_tracking
+[10]: https://app.datadoghq.com/serverless/enhanced_lambda_metrics/
+[11]: https://app.datadoghq.com/serverless/custom_metrics/#custom-metrics
+[12]: https://app.datadoghq.com/serverless/forwarder/
+[13]: https://app.datadoghq.com/serverless/distributed_tracing/
 [14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
 [15]: https://app.datadoghq.com/monitors/recommended
-[16]: /ja/help/
+[16]: https://app.datadoghq.com/help/

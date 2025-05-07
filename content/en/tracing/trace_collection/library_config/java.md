@@ -58,7 +58,8 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
-When `false` tracing agent is disabled.
+When `false` tracing agent is disabled.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -95,6 +96,10 @@ The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` 
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
 **Default**: `10`<br>
 Timeout in seconds for network interactions with the Datadog Agent.
+
+`dd.trace.client-ip.enabled`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans. Automatically enabled when `dd.appsec.enabled=true`.
 
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
@@ -216,6 +221,21 @@ When set to `true` query string parameters and fragment get added to web server 
 **Default**: `true`<br>
 When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
+`dd.trace.http.server.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP request paths to custom resource names. Provide a comma‑separated list of `pattern:resource_name` pairs:<br>
+&nbsp;&nbsp;&nbsp;&ndash; `pattern`: An [Ant‑style path pattern][20] that must match the value of the `http.path_group` span tag.<br>
+&nbsp;&nbsp;&nbsp;&ndash; `resource_name`: The custom resource name to assign if the pattern matches.<br>
+If `*` is used as the `resource_name` for a matching pattern, the original, unnormalized request path combined with the HTTP method is used as the resource name. For example, given the rule `/test/**:*`, a `GET` request for `/test/some/path` results in the resource name `GET /test/some/path`.<br>
+Mappings are evaluated in order of priority, and the first matching rule applies. Unmatched request paths use the default normalization behavior.<br>
+**Example**: Using `-Ddd.trace.http.server.path-resource-name-mapping=/admin/*.jsp:/admin-page,/admin/user/**:/admin/user` yields:<br>
+Request path | Resource path
+------------ | -------------
+`/admin/index.jsp` | `/admin-page`
+`/admin/user/12345/delete` | `/admin/user`
+`/user/12345` | `/user/?`
+
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
@@ -288,6 +308,14 @@ When set to `true` db spans get assigned the instance name as the service name
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
+
+### AAP
+
+`dd.appsec.enabled`
+: **Environment Variable**: `DD_APPSEC_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+For more information, see [Enabling AAP for Java][19].
 
 ### Errors
 
@@ -372,7 +400,7 @@ Additional metrics configuration file for JMX metrics collection. The Java Agent
 
 `dd.jmxfetch.check-period`
 : **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
+**Default**: `15000`<br>
 How often to send JMX metrics (in ms).
 
 `dd.jmxfetch.refresh-beans-period`
@@ -419,7 +447,7 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
-`trace.cassandra.keyspace.statement.extraction.enabled`
+`dd.trace.cassandra.keyspace.statement.extraction.enabled`
 : **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
 **Default**: `false`<br>
 By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
@@ -432,6 +460,13 @@ By default, the keyspace is extracted only if it is configured during session cr
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+
+### UDS
+
+`dd.jdk.socket.enabled`
+: **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
+**Default**: `false`<br>
+Enable native JDK support for unix domain sockets.
 
 ### Examples
 
@@ -591,3 +626,6 @@ Deprecated since version 1.9.0
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
+[19]: /security/application_security/threats/setup/threat_detection/java/
+[20]: https://ant.apache.org/manual/dirtasks.html#patterns
+[21]: /tracing/trace_collection/library_config/#traces

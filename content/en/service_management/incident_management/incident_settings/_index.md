@@ -25,6 +25,7 @@ To create an incident type:
 | Setting     | Description    |
 | ---  | ----------- |
 | Analytics&nbsp;Dashboard | Customize the dashboard for the Analytics button on the Incidents homepage. By default, this links to the template Incident Management Overview dashboard for [Analytics][1]. |
+| Monitor&nbsp;Automations| Create incident @-mentions that can be used in a [monitor's notification message][2] to automatically create incidents when the monitor triggers. |
 
 ## Customize incident response
 
@@ -38,3 +39,4 @@ To create an incident type:
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings
+[2]: /monitors/notify/

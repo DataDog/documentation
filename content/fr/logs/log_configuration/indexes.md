@@ -1,7 +1,7 @@
 ---
 aliases:
-- /logs/dynamic_volume_control
-- /logs/indexes/
+- /fr/logs/dynamic_volume_control
+- /fr/logs/indexes/
 description: Contrôler le volume de logs indexés par Datadog
 further_reading:
 - link: /logs/explorer/#visualiser-les-donnees

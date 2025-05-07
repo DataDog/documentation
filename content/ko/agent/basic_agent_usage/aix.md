@@ -27,6 +27,7 @@ Datadog UNIX Agent는 특정 시스템 아키텍처용으로 개발되고 있으
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
+* AIX 7.3 TL3 SP0+
 
 ## 설치
 
@@ -55,7 +56,7 @@ installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog
 
 `dd-aix-install.log` 파일에서 에이전트 설치 로그를 찾을 수 있습니다. 이 로깅을 비활성화하려면 설치 명령에서 `-e dd-aix-install.log` 매개변수를 제거하십시오.
 
-## 명령 
+## 명령
 
 | 설명                     | 명령(루트로)           |
 |---------------------------------|-----------------------------|

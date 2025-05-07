@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security_platform/cloud_security_management/guide/writing_rego_rules/
+- /es/security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:
 - link: /security/default_rules
   tag: Documentación

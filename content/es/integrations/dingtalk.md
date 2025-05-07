@@ -2,7 +2,7 @@
 categories:
 - colaboración
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Envía alertas y gráficos de Datadog al grupo DingTalk de tu equipo.
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/
@@ -20,7 +20,7 @@ short_description: Envía alertas y gráficos de Datadog al grupo DingTalk de tu
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Aprovecha la integración con DingTalk para:
@@ -60,7 +60,7 @@ La integración DingTalk no no incluye eventos.
 
 La integración DingTalk no no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

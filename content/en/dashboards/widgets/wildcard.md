@@ -5,17 +5,13 @@ further_reading:
 - link: "/dashboards/guide/using_vega_lite_in_wildcard_widgets/"
   tag: "Documentation"
   text: "Learn more about using Vega-Lite with Wildcard widgets"
+- link: "https://docs.datadoghq.com/dashboards/guide/wildcard_examples"
+  tag: "Documentation"
+  text: "Wildcard Widget Examples"
 - link: "https://vega.github.io/vega-lite/tutorials/getting_started.html"
   tag: "Vega Tutorial"
   text: "Introduction to Vega-Lite"
-- link: "https://vega.github.io/vega-lite/tutorials/explore.html"
-  tag: "Vega Tutorial"
-  text: "Exploring Data"
 ---
-
-{{< callout url="https://forms.gle/tLdC1AqhVizD3wCp7" btn_hidden="false" header="Access the Preview!">}}
-Wildcard widgets are in Preview. Sign up for access!
-{{< /callout >}}
 
 ## Overview
 
@@ -149,7 +145,7 @@ The Wildcard Widget supports data requests from all data sources supported in na
 For simplicity and brevity, opt for Vega-Lite. The system supports Vega-Lite version 5.18.1. Reserve Vega for more complex or advanced visualization needs.
 
 ### Terraform Integration
-Use the `datadog_dashboard_json` resource when working with Wildcard widgets in Terraform dashboards.
+Use the [`datadog_dashboard_json`][19] resource when working with Wildcard widgets in Terraform dashboards.
 
 ### Known Limitations
 Avoid using Wildcard widgets for the following scenarios:
@@ -172,4 +168,5 @@ Avoid using Wildcard widgets for the following scenarios:
 [16]: /api/latest/dashboards/
 [17]: /dashboards/graphing_json/widget_json/
 [18]: /dashboards/functions/
+[19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard_json
 

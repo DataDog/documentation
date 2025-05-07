@@ -29,6 +29,10 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
+| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
+| [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
+| [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
+
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -49,14 +53,8 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True)
-patch(langchain=True)
-patch(anthropic=True)
-patch(gemini=True)
-patch(botocore=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True)
 ```
-
-**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -111,8 +109,12 @@ The Amazon Bedrock integration instruments the following methods:
   - `InvokeModel`
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
+- [Chat messages][31]:
+  - `Converse` (requires ddtrace>=3.4.0)
+- [Streamed chat messages][32]:
+  - `ConverseStream` (requires ddtrace>=3.5.0)
 
-**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
 ## Anthropic
 
@@ -155,6 +157,57 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
+## Crew AI
+
+The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
+
+### Traced methods
+
+The Crew AI integration instruments the following methods:
+
+- [Crew Kickoff][27]:
+  - `crew.kickoff()`
+  - `crew.kickoff_async()`
+  - `crew.kickoff_for_each()`
+  - `crew.kickoff_for_each_async()`
+
+- [Task Execution][28]:
+  - `task.execute_sync()`
+  - `task.execute_async()`
+
+- [Agent Execution][29]:
+  - `agent.execute_task()`
+
+- [Tool Invocation][30]:
+  - `tool.invoke()`
+
+## OpenAI Agents
+
+The OpenAI Agents integration converts the [built-in tracing][33] from the [OpenAI Agents SDK][34] into
+LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
+
+The following operations are supported:
+- [`traces`][35]
+- [`agent`][36]
+- [`generation`][37] using Datadog's [OpenAI](#openai) integration
+- [`response`][38]
+- [`guardrail`][39]
+- [`handoff`][40]
+- [`function`][41]
+- [`custom`][42]
+
+## LangGraph
+
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][43].
+
+### Traced methods
+
+The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
+
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][44]
+- [RunnableSeq.invoke()][45]
+
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -180,6 +233,26 @@ The Vertex AI integration instruments the following methods:
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
+[26]: https://docs.crewai.com/introduction
+[27]: https://docs.crewai.com/concepts/crews#kicking-off-a-crew 
+[28]: https://docs.crewai.com/concepts/tasks
+[29]: https://docs.crewai.com/concepts/agents
+[30]: https://docs.crewai.com/concepts/tools
+[31]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[32]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+[33]: https://openai.github.io/openai-agents-python/tracing/
+[34]: https://openai.github.io/openai-agents-python/
+[35]: https://openai.github.io/openai-agents-python/ref/tracing/traces/
+[36]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.agent_span
+[37]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.generation_span
+[38]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.response_span
+[39]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.guardrail_span
+[40]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
+[41]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
+[42]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
+[43]: https://langchain-ai.github.io/langgraph/concepts/sdk/
+[44]: https://blog.langchain.dev/langgraph/#compile
+[45]: https://blog.langchain.dev/langgraph/#nodes
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -193,6 +266,8 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 |-----------------------------------------|--------------------|---------------------------------------------|
 | [OpenAI](#openai)                       | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
+| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -253,6 +328,10 @@ The OpenAI integration instruments the following methods, including streamed cal
 
 The LangChain integration provides automatic tracing for the [LangChain Node.js SDK's][9] LLM, chat model, chain, and OpenAI embeddings calls.
 
+### Traced methods
+
+The LangChain integration instruments the following methods:
+
 - [LLMs][10]:
   - `llm.invoke()`
 - [Chat models][11]
@@ -260,9 +339,35 @@ The LangChain integration provides automatic tracing for the [LangChain Node.js 
 - [Chains][12]
   - `chain.invoke()`
   - `chain.batch()`
-- [OpenAI embeddings][13]
+- [Embeddings][13]
   - `embeddings.embedQuery()`
   - `embeddings.embedDocuments()`
+
+## Amazon Bedrock
+
+The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Node.js SDK's chat model calls (using [BedrockRuntimeClient][20]).
+
+### Traced methods
+
+The Amazon Bedrock integration instruments the following methods:
+
+- [Chat messages][16]:
+  - `InvokeModel`
+
+## Vertex AI
+
+The Vertex AI integration automatically traces content generation and chat message calls made through [Google's Vertex AI Node.js SDK][17].
+
+### Traced methods
+
+The Vertex AI integration instruments the following methods:
+
+- [Generating content][18]:
+  - `model.generateContent()`
+  - `model.generateContentStream()`
+- [Chat Messages][19]:
+  - `chat.sendMessage()`
+  - `chat.sendMessageStream()`
 
 ### ESM support
 
@@ -353,8 +458,14 @@ module.exports = {
 [10]: https://js.langchain.com/docs/integrations/llms/
 [11]: https://js.langchain.com/docs/concepts/chat_models
 [12]: https://js.langchain.com/docs/how_to/sequence/
-[13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
+[13]: https://js.langchain.com/docs/integrations/text_embedding/
 [14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[15]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
+[16]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[17]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest
+[18]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
+[19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
+[20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 {{% /tab %}}
 {{< /tabs >}}
 

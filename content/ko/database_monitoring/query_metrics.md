@@ -10,36 +10,38 @@ further_reading:
 - link: /integrations/mysql/
   tag: 설명서
   text: MySQL 통합
-- link: /데이터 베이스_모니터링/데이터_수집됨/
+- link: /integrations/sqlserver/
   tag: 설명서
-  text: 수집한 데이터
+  text: SQL 서버 통합
+- link: /integrations/oracle/
+  tag: 설명서
+  text: Oracle 통합
+- link: /database_monitoring/data_collected/
+  tag: 설명서
+  text: 수집된 데이터
 - link: /database_monitoring/troubleshooting/
   tag: 설명서
   text: 트러블슈팅
 title: 쿼리 메트릭 탐색
 ---
 
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
-
 쿼리 메트릭 보기는 표준화된 쿼리에 대해한 쿼리 성능 기록을 보여줍니다. 데이터 센터 가용성 영역 등 커스텀 태그나 인프라별로 성능 트렌드를 시각화하고 이상 징후에 대한 알림을 받습니다.
 
-UI에서 **[APM > 데이터베이스][1]**를 클릭하여 데이터베이스 모니터링 내 쿼리 메트릭 보기로 이동합니다. 
+Datadog에서 [쿼리 메트릭 페이지][1]로 이동합니다.
 
 보기는 _상위_ 200개 쿼리를 보여줍니다. 즉, 선택한 시간 동안 가장 오래 실행된 200개 쿼리입니다. 상세 정보는 [추적되는 쿼리][2]를 참조하세요. 일회성 또는 자주 실행되지 않는 단기 쿼리에 대한 메트릭 총계는 쿼리 메트릭 보기에 표시되지 않지만 지난 15일 내 실행된 경우 [쿼리 샘플][3]에서 스냅샷을 찾아볼 수 있습니다. 
 
 ## 필터링 및 그룹화
 
-상단의 **소스** 선택기에서 데이터베이스 소스 Postgres 또는 MySQL을 선택합니다. 검색 태그를 지정해 쿼리 목록을 필터링하고 태그별로 그룹화하여 목록을 정리합니다.
+상단의 **소스** 선택기에서 데이터베이스 소스(예: Postgres)를 선택합니다. 검색 태그를 지정해 쿼리 목록 또는 [저장 프로시저][7] 목록(해당되는 경우)을 필터링하고 태그별로 그룹화하여 목록을 정리합니다.
 
 예를 들어, 호스트 또는 클러스터별로 그룹화하는 것이 유용한 경우가 많습니다. 그러면 쿼리가 실행되는 인프라를 빠르게 확인할 수 있습니다.
 
-{{< img src="database_monitoring/dbm_qm_group_by.png" alt="env 태그별로 그룹화" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-2.png" alt="env 태그별로 그룹화" style="width:100%;">}}
 
 예를 들어 호스트, env, 데이터 센터 등 최대 세 개 항목으로 그룹화하여 그룹화된 일련의 필터링된 결과를 얻을 수 있습니다.
 
-{{< img src="database_monitoring/dbm_qm_group_by_three.png" alt="세 개 태그별 그룹화" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-three-2.png" alt="세 개 태그별로 그룹화" style="width:100%;">}}
 
 그룹을 확장하여 쿼리 목록을 확인합니다. **이 그룹에 있는 모든 쿼리 보기**를 클릭하여 기준에 따라 해당 그룹을 필터 모음의 검색 필드로 이동시킵니다. 페이지 콘텐츠가 해당 검색 결과로 필터링됩니다.
 
@@ -71,11 +73,12 @@ UI에서 **[APM > 데이터베이스][1]**를 클릭하여 데이터베이스 �
 데이터베이스 모니터링 보기에 사용되는 메트릭은 주로 다음과 같습니다.
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
-
+- **SQL 서버**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## 쿼리 상세 정보 페이지
 
-쿼리 메트릭 목록에서 쿼리를 클릭하면 해당 쿼리에 대한 쿼리 상세 정보 페이지가 열립니다. 페이지 상단에 [표준화된 쿼리][4] 및 쿼리에 연결된 모든 태그 목록의 전체 텍스트가 표시됩니다. 태그 목록은 쿼리가 실행되는 각 호스트의 모든 태그를 표시합니다. 목록을 탐색하여 쿼리가 실행되는 서버 등의 정보를 봅니다. 
+쿼리 메트릭 목록에서 쿼리를 클릭하면 해당 쿼리에 대한 쿼리 상세 정보 페이지가 열립니다. 페이지 상단에 [표준화된 쿼리][4] 및 쿼리에 연결된 모든 태그 목록의 전체 텍스트가 표시됩니다. 태그 목록은 쿼리가 실행되는 각 호스트의 모든 태그의 집합입니다. 목록을 탐색하여 쿼리가 실행되는 서버 등의 정보를 봅니다. 
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Tags list for a query" style="width:100%;">}}
 
@@ -95,11 +98,11 @@ UI에서 **[APM > 데이터베이스][1]**를 클릭하여 데이터베이스 �
 
 **메트릭** 탭을 클릭해 이 쿼리에 대한 더 많은 메트릭 그래프를 확인합니다.
 
-### 설명 플랜
+### 실행 계획
 
-Datadog는 지속적으로 실행 계획을 수집합니다. 그러므로 하나의 쿼리에 여러 계획이 있을 수 있습니다. 해당 계획은 표준화되고 별도로 표시되므로 쿼리가 더 잘 실행되는 계획을 포함하는지, 또는 다른 쿼리 대비 상대적 비용이 더 높은지 확인할 수 있습니다. 예를 들어, 다음은 쿼리에 대한 두 실행 계획을 표시하고 한 쿼리가 더 낮은 평균 지연을 보인다는 것을 나타냅니다.
+Datadog는 지속적으로 실행 계획을 수집합니다. 그러므로 하나의 쿼리에 여러 계획이 있을 수 있습니다. 해당 계획은 표준화되고 별도로 표시되므로 쿼리가 더 잘 실행되는 계획을 포함하는지, 또는 다른 쿼리 대비 상대적 비용이 더 높은지 확인할 수 있습니다. 예를 들어, 다음은 쿼리 정보가 포함된 실행 계획입니다.
 
-{{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Explain plans information for a query" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qd-explain-plans-2.png" alt="쿼리에 대한 실행 계획 정보" style="width:100%;">}}
 
 계획을 선택하여 비용 메트릭 또는 JSON을 확인합니다. **이 계획에 대한 모든 샘플 보기**를 클릭하여 [이와 연결된 샘플]에 대한 쿼리 샘플 보기로 이동합니다.
 
@@ -119,9 +122,10 @@ Datadog는 지속적으로 실행 계획을 수집합니다. 그러므로 하나
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/queries
 [2]: /ko/database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /ko/database_monitoring/query_samples/
 [4]: /ko/database_monitoring/data_collected/#normalized-queries
 [5]: /ko/database_monitoring/query_samples/#sample-details
 [6]: /ko/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[7]: /ko/database_monitoring/database_hosts/#stored-procedures

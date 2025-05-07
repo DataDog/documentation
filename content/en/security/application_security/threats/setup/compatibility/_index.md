@@ -4,15 +4,15 @@ type: multi-code-lang
 further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting Application Security Management"
+  text: "Troubleshooting App and API Protection"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Management Works in Datadog"
+  text: "How App and API Protection Works in Datadog"
 ---
 
-The following ASM capabilities are supported relative to each language's tracing library:
+The following AAP capabilities are supported relative to each language's tracing library:
 
-| ASM capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
+| AAP capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
 | Threat Detection                       | 1.8.0   | 2.23.0   | 4.0.0                                            | 1.9.0         | 1.47.0          | 1.9.0         | 0.84.0        |
 | API Security                           | 1.31.0  | 2.42.0   | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ | 2.6.0         | 1.59.0          | 2.4.0        | 0.98.0        |

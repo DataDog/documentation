@@ -29,6 +29,7 @@ cascade:
     {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Application Monitoring for VMware Tanzu{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Cluster Monitoring for VMware Tanzu{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS guides:" >}}
@@ -54,7 +55,7 @@ cascade:
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure troubleshooting{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure architecture and configuration{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure status and count metrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-count-metric" tag=" Azure" >}}Azure count metric{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commands to install the Azure Datadog extension{{< /nextlink >}}
@@ -66,6 +67,7 @@ cascade:
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Use Bean regexes to filter your JMX metrics and supply additional tags{{< /nextlink >}}
     {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmxfetch-fips/" tag=" jmx" >}}JMXFetch FIPS-140 mode{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Database guides:" >}}

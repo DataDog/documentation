@@ -1,7 +1,7 @@
 ---
 aliases:
-- /serverless/serverless_tagging/
-- /serverless/troubleshooting/serverless_tagging/
+- /es/serverless/serverless_tagging/
+- /es/serverless/troubleshooting/serverless_tagging/
 further_reading:
 - link: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
   tag: Documentación
