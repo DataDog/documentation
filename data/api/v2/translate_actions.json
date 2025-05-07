@@ -1208,7 +1208,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
+    "description": "Returns the estimated cardinality for a metric with a given tag and percentile configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "DeleteTagConfiguration": {

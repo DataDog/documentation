@@ -21291,6 +21291,7 @@ components:
       - ZSTD1
       - GZIP
     MetricCustomAggregation:
+      deprecated: true
       description: A time and space aggregation combination for use in query.
       example:
         space: sum
@@ -21305,6 +21306,7 @@ components:
       - space
       type: object
     MetricCustomAggregations:
+      deprecated: true
       description: 'A list of queryable aggregation combinations for a count, rate,
         or gauge metric.
 
@@ -21337,13 +21339,9 @@ components:
 
         Can only be applied to non_distribution metrics that have a `metric_type`
         of `count`, `rate`, or `gauge`.'
-      example:
-      - space: sum
-        time: sum
-      - space: sum
-        time: count
       items:
         $ref: '#/components/schemas/MetricCustomAggregation'
+        deprecated: true
       type: array
     MetricCustomSpaceAggregation:
       description: A space aggregation for use in query.
@@ -21813,6 +21811,7 @@ components:
         time: count
       items:
         $ref: '#/components/schemas/MetricCustomAggregation'
+        deprecated: true
       type: array
     MetricSuggestedTagsAndAggregations:
       description: Object for a single metric's actively queried tags and aggregations.
@@ -21838,6 +21837,7 @@ components:
       properties:
         active_aggregations:
           $ref: '#/components/schemas/MetricSuggestedAggregations'
+          deprecated: true
         active_tags:
           description: List of tag keys that have been actively queried.
           example:
@@ -21877,6 +21877,7 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+          deprecated: true
         created_at:
           description: Timestamp when the tag configuration was created.
           example: '2020-03-25T09:48:37.463835Z'
@@ -21921,6 +21922,7 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+          deprecated: true
         exclude_tags_mode:
           description: 'When set to true, the configuration will exclude the configured
             tags and include any other submitted tags.
@@ -22032,6 +22034,7 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+          deprecated: true
         exclude_tags_mode:
           description: 'When set to true, the configuration will exclude the configured
             tags and include any other submitted tags.
@@ -52340,9 +52343,8 @@ paths:
         type: safe
   /api/v2/metrics/{metric_name}/estimate:
     get:
-      description: Returns the estimated cardinality for a metric with a given tag,
-        percentile and number of aggregations configuration using Metrics without
-        Limits&trade;.
+      description: Returns the estimated cardinality for a metric with a given tag
+        and percentile configuration using Metrics without Limits&trade;.
       operationId: EstimateMetricsOutputSeries
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -52364,8 +52366,9 @@ paths:
           maximum: 2147483647
           minimum: 49
           type: integer
-      - description: The number of aggregations that a `count`, `rate`, or `gauge`
-          metric is configured to use. Max number of aggregation combos is 9.
+      - deprecated: true
+        description: This argument has no effect as all time and space combinations
+          are now available with no impact on customer bills.
         example: 1
         in: query
         name: filter[num_aggregations]
@@ -65520,15 +65523,31 @@ tags:
     See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)
     for details on how to add restriction queries.'
   name: Logs Restriction Queries
-- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
-    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period
-    (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags
-    and volumes for metrics\n\n**Note**: A graph can only contain a set number of
-    points\nand as the timeframe over which a metric is viewed increases,\naggregation
-    between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
-    `manage_tags` API methods can only be performed by\na user who has the `Manage
-    Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/)
-    for more information."
+- description: 'The metrics endpoint allows you to:
+
+
+    - Post metrics data so it can be graphed on Datadog dashboards
+
+    - Query metrics from any time period (timeseries and scalar)
+
+    - Modify tag configurations for metrics
+
+    - View tags and volumes for metrics
+
+
+    **Note**: A graph can only contain a set number of points
+
+    and as the timeframe over which a metric is viewed increases,
+
+    aggregation between points occurs to stay below that set number.
+
+
+    The Post, Patch, and Delete `manage_tags` API methods can only be performed by
+
+    a user who has the `Manage Tags for Metrics` permission.
+
+
+    See the [Metrics page](https://docs.datadoghq.com/metrics/) for more information.'
   name: Metrics
 - description: 'Configure your [Datadog Microsoft Teams integration](https://docs.datadoghq.com/integrations/microsoft_teams/)
 

@@ -157,7 +157,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
   "microsoft-teams-integration": {
     "name": "Microsoft Teams Integration",
