@@ -43,17 +43,8 @@ Using the [Operator instructions in Kubernetes and Integrations][5] as a referen
                   username: datadog
                   password: 'ENC[datadog_user_database_password]'
                   connector: 'odbc'
-                  driver: 'ODBC Driver 18 for SQL Server'
+                  driver: 'FreeTDS'
                   dbm: true
-                  # Optional: For AlwaysOn users
-                  database_metrics: 
-                    ao_metrics: 
-                      enabled: true
-                  # Optional: For monitoring SQL Server Agent jobs               
-                  agent_jobs: 
-                    enabled: true
-                    collection_interval: 15
-                    history_row_limit: 10000 
                   # Optional: For additional tags
                   tags:  
                     - 'service:<CUSTOM_SERVICE>'
@@ -84,16 +75,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
-            # Optional: For AlwaysOn users
-            database_metrics: 
-              ao_metrics: 
-                enabled: true
-            # Optional: For monitoring SQL Server Agent jobs
-            agent_jobs: 
-              enabled: true
-              collection_interval: 15
-              history_row_limit: 10000
+            driver: 'FreeTDS'
             # Optional: For additional tags
             tags: 
               - 'service:<CUSTOM_SERVICE>'
@@ -125,16 +107,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
-    driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For AlwaysOn users
-    database_metrics: 
-      ao_metrics: 
-        enabled: true
-    # Optional: For monitoring SQL Server Agent jobs               
-    agent_jobs: 
-      enabled: true
-      collection_interval: 15
-      history_row_limit: 10000
+    driver: 'FreeTDS'
     # Optional: For additional tags  
     tags: 
       - 'service:<CUSTOM_SERVICE>'
@@ -161,17 +134,7 @@ metadata:
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "ODBC Driver 18 for SQL Server",
-          "database_metrics": {
-            "ao_metrics": {
-              "enabled": true
-            }
-          },
-          "agent_jobs": {
-            "enabled": true,
-            "collection_interval": 15,
-            "history_row_limit": 10000
-          },
+          "driver": "FreeTDS",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"]  
         }
       ]

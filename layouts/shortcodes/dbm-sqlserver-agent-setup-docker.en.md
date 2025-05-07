@@ -14,17 +14,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>,<SQL_PORT>",
+    "host": "<HOSTNAME>,<PORT>",
     "connector": "odbc",
     "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
-    "include_ao_metrics": true,  # Optional: For AlwaysOn users
-    "agent_jobs": {              # Optional: For monitoring SQL Server Agent jobs
-      "enabled": true
-      "collection_interval": 15
-      "history_row_limit": 10000
-    }
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"
