@@ -18,9 +18,7 @@
       <tr>
         <th>{{ i18n "language" }}</th>
         <th>{{ i18n "library" }}</th>
-        <th>{{ i18n "official" }}</th>
-        <th>{{ i18n "api" }}</th>
-        <th>{{ i18n "dogstatsd" }}</th>
+        <th>{{ i18n "features" }}</th>
         <th>{{ i18n "author" }}</th>
         <th>{{ i18n "notes" }}</th>
       </tr>
@@ -32,9 +30,13 @@
               <tr>
                 <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
                 <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
-                <td>{{ if $el.official}}<i class="icon-check-bold"></i>{{ end }}</td>
-                <td>{{ if $el.api}}<i class="icon-check-bold"></i>{{ end }}</td>
-                <td>{{ if $el.dogstatsd }}<i class="icon-check-bold"></i>{{ end }}</td>
+                <td>
+                  {{ if $el.official}}<span title="Official">Official</span>{{ end }}
+                  {{ if and $el.official (or $el.api $el.dogstatsd)}} | {{ end }}
+                  {{ if $el.api}}<span title="API">API</span>{{ end }}
+                  {{ if and $el.api $el.dogstatsd}} | {{ end }}
+                  {{ if $el.dogstatsd}}<span title="DogStatsD">DogStatsD</span>{{ end }}
+                </td>
                 <td>{{ if $el.authors }}{{ $el.authors }}{{ end }}</td>
                 <td>{{ if $el.notes }}{{ $el.notes }}{{ end }}</td>
               </tr>
