@@ -8,7 +8,7 @@ further_reading:
 
 ## Use case
 
-Log Workspaces allows you to bring in log data to analyze login attempts and audit access to electronic protected health information (e-PHI). To start monitoring and identifying failed login attempts, using Workspaces' flexible querying and visualization options by following these steps.
+Log Workspaces allows you to bring in log data to analyze login attempts and audit access to electronic protected health information (e-PHI). To start monitoring and identifying failed login attempts, use Workspaces' flexible querying and visualization options by following these steps.
 
 ## Setup
 
