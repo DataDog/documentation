@@ -1,7 +1,7 @@
 ---
 title: Datadog FIPS Compliance
 disable_toc: false
-alias:
+aliases:
 - /agent/guide/agent-fips-proxy
 - /agent/guide/fips-agent
 - /configuration/agent-fips-proxy
