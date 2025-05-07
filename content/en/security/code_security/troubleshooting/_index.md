@@ -141,6 +141,13 @@ npm install -g @datadog/datadog-ci
 datadog-ci sbom upload /path/to/sbom-file.json
 ```
 
+### Services or teams in SCA libraries are not updating
+
+Results for services and teams in SCA are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability or library data for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
 **If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
