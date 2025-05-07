@@ -155,12 +155,17 @@ const initCodeTabs = () => {
 
                 if (activeLangTab && activePane) {
                     // Hide all tab content and remove 'active' class from all tab elements.
-                    tabsList.forEach(tab => tab.classList.remove('active'))
-                    tabPanesList.forEach(pane => pane.classList.remove('active', 'show'))
+                    // Also, remove any inline display style to let CSS classes control visibility.
+                    tabsList.forEach(tab => tab.classList.remove('active'));
+                    tabPanesList.forEach(pane => {
+                        pane.classList.remove('active', 'show');
+                        pane.style.removeProperty('display');
+                    });
 
                     // Show the active content and highlight active tab.
-                    activeLangTab.closest('li').classList.add('active')
-                    activePane.classList.add('active', 'show')
+                    activeLangTab.closest('li').classList.add('active');
+                    activePane.classList.add('active', 'show');
+                    activePane.style.removeProperty('display');
                 }
 
                 const currentActiveTab = codeTabsElement.querySelector('.nav-tabs li.active')

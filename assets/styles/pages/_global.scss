@@ -227,8 +227,11 @@ details {
 }
 
 .programming-lang-wrapper {
-    .code-snippet-wrapper {
+    .code-snippet-wrapper.tab-pane {
         display: none;
+    }
+    .code-snippet-wrapper.tab-pane.active.show {
+        display: block;
     }
 }
 
@@ -371,6 +374,7 @@ details {
     }
 }
 
+/*
 .code-lang-list-container {
     padding: 0 !important;
     margin-bottom: 20px;
@@ -410,6 +414,7 @@ details {
         }
     }
 }
+*/
 
 p {
     // todo: can i set this with a bootstrap variable?
@@ -590,7 +595,7 @@ h5 {
         }
     }
 
-    ol ol {    
+    ol ol {
         list-style-type: lower-alpha;
         ol {
             list-style-type: lower-roman;
@@ -605,7 +610,7 @@ h5 {
             }
         }
     }
-    
+
     ul,
     ol,
     dl,
