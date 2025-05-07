@@ -14,7 +14,7 @@ further_reading:
   text: "Monitor highly regulated workloads with Datadog's FIPS-enabled Agent"
 algolia:
   rank: 80
-  tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
+  tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud", "fips agent"]
 ---
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
@@ -32,7 +32,7 @@ Supported platforms:
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12<br>Windows Server >= 2016<br>Windows >= 10|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
 
-Supported products (Agent 7.45+):
+Supported products (Agent 7.65.0 and above):
 - Metrics
 - Logs
 - APM traces
@@ -68,7 +68,7 @@ The Datadog FIPS Agent does **not** support the following:
 
 In addition to the Operating System (OS) requirements above:
 - You must have access to a FIPS-compliant Datadog environment (US1-FED).
-- The FIPS Agent is only available on Agent versions 7.63 and above.
+- The FIPS Agent is only available on Agent versions 7.65.0 and above.
 
 ## Installation
 
@@ -89,7 +89,7 @@ In addition to the Operating System (OS) requirements above:
 1. Use the [instructions for your OS][3] to uninstall the Datadog Agent.
 1. Install the Agent with FIPS support.
 
-   **Note:** FIPS support is only available on Agent versions 7.63.0 and above:
+   **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
    1. If you're using the Agent install script, specify the `DD_AGENT_FLAVOR="datadog-fips-agent"` environment variable in your installation command. For example:
 
       ```sh
@@ -117,10 +117,10 @@ In addition to the Operating System (OS) requirements above:
 1. Follow the [Windows instructions][1] to uninstall the Datadog Agent.
 1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
-   **Note:** FIPS support is only available on Agent versions 7.63.0 and above:
+   **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
 
    {{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7.64.3.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7.65.0.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
 if ($p.ExitCode -ne 0) {
    Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
