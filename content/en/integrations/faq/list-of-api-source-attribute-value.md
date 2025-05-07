@@ -34,7 +34,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | AWS Backup                      | amazon backup                     | amazon_backup                      |
 | AWS Billing                     | amazon billing                    | amazon_billing                     |
 | AWS Certificate Manager         | amazon certificate manager        | amazon_certificate_manager         |
-| Amazon Cloudfront               | amazon cloudfront                 | amazon_cloudfront                  |
+| Amazon CloudFront               | amazon cloudfront                 | amazon_cloudfront                  |
 | AWS CloudHSM                    | amazon cloudhsm                   | amazon_cloudhsm                    |
 | Amazon CloudSearch              | amazon cloudsearch                | amazon_cloudsearch                 |
 | AWS Cloudtrail                  | amazon cloudtrail                 | amazon_cloudtrail                  |
