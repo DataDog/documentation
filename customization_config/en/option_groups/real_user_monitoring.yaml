@@ -8,3 +8,9 @@ rum_mobile_proxy_protocol_options:
   - id: http_https
     default: true
   - id: socks
+
+rum_browser_sdk_source_options:
+  - id: npm
+    default: true
+  - id: cdn_async
+  - id: cdn_sync
