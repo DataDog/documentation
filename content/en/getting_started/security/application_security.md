@@ -101,10 +101,7 @@ For information on disabling AAP or its related capabilities, see the following:
 ## Reports and notifications
 
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
-3. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
-
-
-Interested in best practices to go further? View the [in-product Quickstart Guide.][19]
+2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
 
 ## Further reading
 
@@ -127,7 +124,6 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
-[19]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [20]: /getting_started/application_security/#setup-asm
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
