@@ -1,21 +1,21 @@
 ---
-title: Enabling AAP for GCP Service Extensions
+title: Enabling Application & API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
-      text: "AAP Service Extension's source code"
+      text: "Application & API Protection Service Extension's source code"
     - link: 'https://cloud.google.com/service-extensions/docs/overview'
       tag: "Documentation"
       text: "Google Cloud Service Extensions overview"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB App and API Protection Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting App and API Protection"
+      text: "Troubleshooting App & API Protection"
 ---
 
 {{< callout url="#" btn_hidden="true" header="AAP Service Extensions is in Preview" >}}
