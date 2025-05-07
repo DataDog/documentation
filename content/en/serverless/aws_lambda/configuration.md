@@ -350,9 +350,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-**Notes**: 
+**Notes**:
    - The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
-   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.   
+   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -675,7 +675,7 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 ## Configure the Datadog Lambda extension for local testing
 
-To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
+Not all Lambda emulators support the AWS Lambda Telemetry API. To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_SERVERLESS_FLUSH_STRATEGY` to `periodically,1` in your local testing environment. Otherwise, the extension waits for responses from the AWS Lambda Telemetry API and blocks the invocation.
 
 ## Instrument AWS Lambda with the OpenTelemetry API
 
