@@ -67,7 +67,7 @@ If you do not see Worker logs in [Log Explorer][12], make sure they are not gett
 
 ## Too many files error
 
-If you see the error `Too many files` and the Worker processes repeatedly restarts, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
+If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
