@@ -433,6 +433,24 @@
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
   },
+  "UpsertBudget": {
+    "description": "Create a new budget or update an existing one.",
+    "summary": "Create or update a budget",
+    "request_description": "",
+    "request_schema_description": "The definition of the `BudgetWithEntries` object."
+  },
+  "DeleteBudget": {
+    "description": "Delete a budget.",
+    "summary": "Delete a budget"
+  },
+  "GetBudget": {
+    "description": "Get a budget.",
+    "summary": "Get a budget"
+  },
+  "ListBudgets": {
+    "description": "List budgets.",
+    "summary": "List budgets"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1334,6 +1352,16 @@
     "summary": "Update on-call schedule",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
+  },
+  "GetOnCallTeamRoutingRules": {
+    "description": "Get a team's on-call routing rules",
+    "summary": "Get on-call team routing rules"
+  },
+  "SetOnCallTeamRoutingRules": {
+    "description": "Set a team's on-call routing rules",
+    "summary": "Set on-call team routing rules",
+    "request_description": "",
+    "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
