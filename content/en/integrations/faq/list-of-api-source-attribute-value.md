@@ -166,7 +166,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Azure Table Storage             | azure table storage               | azure_table_storage                |
 | Azure Usage And Quotas          | azure usage and quotas            | azure_usage_and_quotas             |
 | Azure Virtual Network           | azure virtual network             | azure_virtual_network              |
-| Azure Vm Scale Set              | azure vm scale set                | azure_vm_scale_set                 |
+| Azure VM Scale Set              | azure vm scale set                | azure_vm_scale_set                 |
 | Azure Vm                        | azure vm                          | azure_vm                           |
 | Azure                           | azure                             | azure                              |
 | Bitbucket                       | bitbucket                         | bitbucket                          |
