@@ -128,6 +128,7 @@ code_language_ids:
     apache: "Apache HTTP Server"
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
+    apigateway: "Amazon API Gateway"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -186,7 +187,10 @@ core_product:
         - 'core_product:synthetic monitoring'
         - 'core_product:digital experience monitoring'
         - 'specific_interest:testing'
-    - name: csm
+    - name: cloud security
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: workload protection
       requires_all_keyvals:
         - 'core_product:security'
     - name: cspm

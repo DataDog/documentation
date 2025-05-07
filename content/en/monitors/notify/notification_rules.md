@@ -13,7 +13,6 @@ further_reading:
 Monitor Notification Rules are in Preview.
 {{< /beta-callout >}}
 
-
 ## Overview
 
 Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
@@ -58,6 +57,8 @@ In your monitor configuration, you can view the notification recipients that are
 Notification rules apply to recipients of all monitor notifications that match the scopes defined in the rule configuration.
 - Multiple tags apply an AND logic to the scope.
 - Multiple rules can match a single monitor notification, and all recipients are added to the monitor alert without duplication.
+
+{{< img src="/monitors/notifications/notification_rules/diagram_notification-rules.png" alt="Flowchart showing how Monitor notification rules match tags, combine recipients from monitors and rules, and remove duplicates before sending alerts" style="width:100%;" >}}
 
 {{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
