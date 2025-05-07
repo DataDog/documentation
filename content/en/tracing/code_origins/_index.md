@@ -47,14 +47,14 @@ In Trace Explorer, select a span to see Code Origin details on the Overview tab:
 - [Source Code Integration][7] is enabled (recommended for code previews).
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
+{{% tabs %}}
+
+{{% tab ".NET" %}}
+
 ### Compatibility requirements
 
-| Runtime Language | Tracing Library Version | Frameworks |
-|---|---|---|
-| Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
-| Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
-| Node.js | 4.49.0+ | Fastify|
-| .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
+- **Tracing Library Version:** 3.15.0+
+- **Supported frameworks:** ASP.NET, ASP.NET Core
 
 ### Enable Code Origins
 
@@ -63,6 +63,57 @@ Run your service with the following environment variable:
 ```shell
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+
+### Compatibility requirements
+
+- **Tracing Library Version:** 1.47.0+
+- **Supported frameworks:** Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers
+
+### Enable Code Origins
+
+Run your service with the following environment variable:
+
+```shell
+export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
+```
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+### Compatibility requirements
+
+- **Tracing Library Version:** 4.49.0+
+- **Supported frameworks:** Fastify
+
+### Enable Code Origins
+
+Code Origin for Spans is enabled by default.
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+### Compatibility requirements
+
+- **Tracing Library Version:** 2.15.0+
+- **Supported frameworks:** Django, Flask, Starlette and derivatives
+
+### Enable Code Origins
+
+Run your service with the following environment variable:
+
+```shell
+export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
+```
+
+{{% /tab %}}
+
+{{% /tabs %}}
 
 ## Using Code Origins
 
