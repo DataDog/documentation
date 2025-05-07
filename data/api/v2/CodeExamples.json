@@ -896,6 +896,13 @@
       "description": "Create on-call schedule returns \"Created\" response"
     }
   ],
+  "SetOnCallTeamRoutingRules": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Set on-call team routing rules returns \"OK\" response"
+    }
+  ],
   "UpdateOnCallEscalationPolicy": [
     {
       "group": "on-call",
