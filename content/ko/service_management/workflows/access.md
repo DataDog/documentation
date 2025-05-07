@@ -22,7 +22,7 @@ further_reading:
 title: 액세스 및 인증
 ---
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})는 워크플로우 자동화를 지원하지 않습니다.</div>
 {{< /site-region >}}
 
