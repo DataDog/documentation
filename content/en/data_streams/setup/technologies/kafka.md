@@ -18,7 +18,7 @@ title: Data Streams Monitoring for Kafka
   <tbody>
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
-      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (v3.7 is not fully supported)</td>
+      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7)</td>
       <td>1.9.0</td>
       <td>1.43.0</td>
     </tr>
