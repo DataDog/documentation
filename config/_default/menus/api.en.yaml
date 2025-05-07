@@ -7552,6 +7552,30 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
+    - name: Set on-call team routing rules
+      url: '#set-on-call-team-routing-rules'
+      identifier: on-call-set-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SetOnCallTeamRoutingRules
+        unstable: []
+        order: 10
+    - name: Get on-call team routing rules
+      url: '#get-on-call-team-routing-rules'
+      identifier: on-call-get-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallTeamRoutingRules
+        unstable: []
+        order: 9
     - name: Update on-call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule
