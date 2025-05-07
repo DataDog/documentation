@@ -181,7 +181,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Ceph                            | ceph                              | ceph                               |
 | Chatwork                        | chatwork                          | chatwork                           |
 | Chef                            | chef                              | chef                               |
-| Circleci                        | circleci                          | circleci                           |
+| CircleCI                        | circleci                          | circleci                           |
 | Cisco Aci                       | cisco aci                         | cisco_aci                          |
 | Cloudflare                      | cloudflare                        | cloudflare                         |
 | CloudHealth                     | cloudhealth                       | cloudhealth                        |
