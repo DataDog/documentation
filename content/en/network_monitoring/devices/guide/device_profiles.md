@@ -34,7 +34,7 @@ For more information on advanced profile details, review the [Profile Format Ref
 ## Prerequisites 
 
 - The minimum Agent version required is `7.65` or higher.
-- [Remote Configuration][14] enabled on your Datadog Agent.
+- [Remote Configuration][14] enabled for your organization.
 - Permissions required:
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
   - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
