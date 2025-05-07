@@ -67,7 +67,7 @@ If you do not see Worker logs in [Log Explorer][12], make sure they are not gett
 
 ## The Worker is not receiving logs from the source
 
-If you have to configure your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
+If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
 
 ## Logs are not getting forwarded to the destination
 
