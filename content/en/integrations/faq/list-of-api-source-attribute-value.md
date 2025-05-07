@@ -204,7 +204,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Flowdock                        | flowdock                          | flowdock                           |
 | Fluentd                         | fluentd                           | fluentd                            |
 | Git                             | git                               | git                                |
-| Github                          | github                            | github                             |
+| GitHub                          | github                            | github                             |
 | Github Apps                     | github apps                       | github_apps                        |
 | GitLab                          | gitlab                            | gitlab                             |
 | G Suite                         | g suite                           | g_suite                            |
