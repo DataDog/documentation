@@ -69,7 +69,7 @@ To get started, follow the instructions below.
 
 4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
 
-   The `PATH_TO_AIRFLOW_LOGS` value should be set to `$AIRFLOW_HOME/logs`. Add the following annotation to your pod:
+   The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
    ```yaml
    ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
    ```
