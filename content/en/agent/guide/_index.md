@@ -16,6 +16,7 @@ cascade:
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}Linux key rotation 2024{{< /nextlink >}}
     {{< nextlink href="agent/guide/fips-agent" >}}Install and configure the FIPS Agent{{< /nextlink >}}
+    {{< nextlink href="agent/guide/setup_remote_config" >}}Set up Remote Configuration for Fleet Automation{{< /nextlink >}}
 
 {{< /header-list >}}
 

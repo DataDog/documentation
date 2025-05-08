@@ -24,7 +24,7 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 ## Setup
 
 To enable Remote Agent Management:
-1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
+1. Ensure that [Remote Configuration is enabled for your organization][1].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
 
@@ -33,6 +33,10 @@ To enable Remote Agent Management:
 1. Use the generated Agent installation command to upgrade your Agent.
 
    **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.
+1. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key if it is not already enabled.
+
+   {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
+1. Restart your Agent.
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -102,7 +106,7 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#do
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/fleet_automation/setup/
+[1]: https://app.datadoghq.com/organization-settings/remote-config
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades

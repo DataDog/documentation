@@ -1,10 +1,13 @@
 ---
-title: Set up Fleet Automation
+title: Set up Remote Configuration for Fleet Automation
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
+- link: "/agent/fleet_automation"
+  tag: "Documentation"
+  text: "Fleet Automation"
 - link: "/infrastructure/list/#agent-configuration"
   tag: "Documentation"
   text: "Learn about the Agent configuration view"
@@ -13,29 +16,22 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-To ensure you have access to all Fleet Automation features, upgrade your Agents to version 7.47.0 or later and follow the instructions below to set up Remote Configuration for your Agents.
+This page covers configuring Remote Configuration for Fleet Automation. The following Fleet Automation features require Remote Configuration:
 
-## Remote Configuration
-
-To use Fleet Automation, you must enable Remote Configuration.
-
-### Prerequisites
-
-- Datadog Agent version `7.47.0`
-- Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
-- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+- **[Agent flares][9]**: Send a flare from the Datadog site using Fleet Automation.
+- **[Remote Agent upgrades][10]**: (**{{< tooltip glossary="preview" case="title" >}}**) Remotely upgrade your Agents.
+- **[Remote Agent configuration][11]**: (**{{< tooltip glossary="preview" case="title" >}}**) Remotely configure your Agents.
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
-### Setup
+## Prerequisites
 
-1. Ensure that [Remote Configuration is enabled for your organization][3].
-1. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key if it is not already enabled.
+- Datadog Agent version `7.47.0` or later.
+- Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
+- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+- Ensure that [Remote Configuration is enabled for your organization][3].
 
-   {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
-1. Restart your Agent.
-
-### Agent Remote Configuration status
+## Agent Remote Configuration status
 
 Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][3].
 
@@ -50,24 +46,17 @@ The following table describes the meaning of each Agent status:
   | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            |
   | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
 
-### Opting out of Remote Configuration
+## Opting out of Remote Configuration for Fleet Automation
 
-To opt out of Remote Configuration use, you can disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and Agent level.
+You can disable Remote Configuration capabilities at the API key level and Agent level.
 
-#### At the Organization level
+### At the API key level
 
-Disable Remote Configuration at the organization level on the [Remote Configuration][3] page. This disables Datadog components across your organization to receive configurations from Datadog. You need the [`org_management`][1] permission to disable Remote Configuration at the organization level.
-
-#### At the API key level
 Disable the API key of your choice on the [API Keys][5] page. You need the [`api_keys_write`][2] permission to disable Remote Configuration on an API key.
 
-#### At the Agent level
-Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
+### At the Agent level
 
-To receive configurations from Datadog, you also need to take the following steps:
-- Enable Remote Configuration at the organization level.
-- Enable Remote Configuration capability on your API Key from the Datadog UI.
-- Allow outbound HTTPS access to Remote Configuration [endpoints][4] from your environment.
+Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
 
 If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
 
@@ -99,19 +88,6 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration order precedence
-
-Configurations set by higher-priority sources take precedence in the active configuration displayed in Fleet Automation.
-
-Sources from highest to lowest priority:
-
-1. Remote Configuration.
-   **Note**: Configuration changes applied through Remote Configuration are not shown in your local configuration file (`datadog.yaml`).
-2. Environment variables set by tools like Helm.
-3. Configuration files (`datadog.yaml`) that are managed locally or by configuration management tools like Ansible, Chef, or Puppet.
-
-Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
-
 ## Troubleshooting
 
 If you experience issues using Remote Configuration, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][6].
@@ -138,6 +114,9 @@ To authenticate and authorize the Agent to receive configuration, enable Remote 
 [6]: /help/
 [7]: /agent/guide#cloud-infrastructure-guides
 [8]: /agent/configuration/proxy/
+[9]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[10]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[11]: /agent/fleet_automation
 
 ## Further reading
 
