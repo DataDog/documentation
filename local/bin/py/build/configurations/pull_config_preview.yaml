@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: emma.chiu/COLAB-1926/fix-snow-doc-v2.7.0
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
