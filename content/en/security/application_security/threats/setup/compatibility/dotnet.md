@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-## Application Security capabilities support
+## App and API Protection capabilities support
 
-The following application security capabilities are supported in the .NET library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the .NET library, for the specified tracer version:
 
-| Application Security capability  | Minimum .NET tracer version |
+| App and API Protection capability  | Minimum .NET tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
@@ -19,7 +19,7 @@ The following application security capabilities are supported in the .NET librar
 | Automatic user activity event tracking | 2.32.0 |
 | API Security | 2.42.0 |
 
-The minimum tracer version to get all supported application security capabilities for .NET is 2.42.0.
+The minimum tracer version to get all supported App and API Protection capabilities for .NET is 2.42.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
 
@@ -33,7 +33,7 @@ The minimum tracer version to get all supported application security capabilitie
 | AWS Lambda        | {{< X >}}                |                                          |
 | Azure App Service | {{< X >}}                | {{< X >}}                                |
 
-**Note**: Azure App Service is supported for **web applications only**. Application Security capabilities are not supported for Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. App and API Protection capabilities are not supported for Azure Functions.
 
 ## Language and framework compatibility
 
@@ -62,7 +62,7 @@ These are supported on the following architectures:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks.
 - If your framework is not listed below, **Code Security** will still detect Insecure Cookie vulnerabilities.
 
@@ -82,7 +82,7 @@ These are supported on the following architectures:
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported? | Code Security? |

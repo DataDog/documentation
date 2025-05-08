@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 50
 ---
 
-## Application Security capabilities
+## App and API Protection capabilities
 
-The following application security capabilities are supported in the Node.js library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the Node.js library, for the specified tracer version:
 
-| Application Security capability        | Minimum Node.js tracer version                     |
+| App and API Protection capability        | Minimum Node.js tracer version                     |
 |----------------------------------------|----------------------------------------------------|
 | Threat Detection                       | 4.0.0                                              |
 | Threat Protection                      | 4.0.0                                              |
@@ -19,7 +19,7 @@ The following application security capabilities are supported in the Node.js lib
 | Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
 | API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
-The minimum tracer version to get all supported application security capabilities for Node.js is 4.30.0.
+The minimum tracer version to get all supported App and API Protection capabilities for Node.js is 4.30.0.
 
 
 **Note**:
@@ -52,7 +52,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### Operating system support
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example application security capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example App and API Protection capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 
 | Operating System | Architectures | Minimum Versions                         |
@@ -72,7 +72,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 - Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using `body-parser` library.
@@ -97,7 +97,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis**  is supported on all frameworks
 
 
@@ -119,7 +119,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis**  is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 

@@ -5,9 +5,9 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-The following table lists the support for application security capabilities in the AAP GCP Service Extensions according to the specified version:
+The following table lists the support for App and API Protection capabilities in the AAP GCP Service Extensions according to the specified version:
 
-| Application Security capability        | Minimum AAP Service Extensions image version  |
+| App and API Protection capability        | Minimum AAP Service Extensions image version  |
 |----------------------------------------|----------------------------------------------|
 | Threat Detection                       | 1.71.0                                       |
 | Threat Protection                      | 1.71.0                                       |

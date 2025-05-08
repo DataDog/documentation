@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## Application Security capabilities support
+## App and API Protection capabilities support
 
-The following application security capabilities are supported in the PHP library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the PHP library, for the specified tracer version:
 
-| Application Security capability                   | Minimum PHP tracer version |
+| App and API Protection capability                   | Minimum PHP tracer version |
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
@@ -52,7 +52,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
 
-Application Security capabililties for PHP support the following SAPI's:
+App and API Protection capabililties for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -63,7 +63,7 @@ Application Security capabililties for PHP support the following SAPI's:
 
 ## Supported processor architectures
 
-Application Security capabililties for PHP support the following architectures:
+App and API Protection capabililties for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
@@ -87,10 +87,10 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Code Security** is not supported
 
-The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
+The following frameworks aren't directly instrumented by App and API Protection, but indirectly supported through runtime instrumentation.
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -118,7 +118,7 @@ The following frameworks aren't directly instrumented by Application Security, b
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 

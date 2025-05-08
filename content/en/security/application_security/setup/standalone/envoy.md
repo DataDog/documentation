@@ -19,7 +19,7 @@ further_reading:
 To try the preview of Application & API Protection for Envoy, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable application security for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
+You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites
 

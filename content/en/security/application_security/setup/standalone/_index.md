@@ -30,9 +30,9 @@ Before setting up Application & API Protection, ensure the following prerequisit
 If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
 
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
-2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by Application Security products.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
 
-For more details, see [Standalone Application Security][3].
+For more details, see [Standalone App and API Protection][3].
 
 ## Language-specific configuration
 

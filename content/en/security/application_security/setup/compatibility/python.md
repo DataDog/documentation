@@ -4,11 +4,11 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
 ---
-## Application Security capabilities support
+## App and API Protection capabilities support
 
-The following application security capabilities are supported in the Python library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the Python library, for the specified tracer version:
 
-| Application Security capability        | Minimum Python tracer version |
+| App and API Protection capability        | Minimum Python tracer version |
 |----------------------------------------|-------------------------------|
 | Threat Detection                       | 1.9.0                         |
 | Threat Protection                      | 1.10.0                        |
@@ -34,7 +34,7 @@ The following application security capabilities are supported in the Python libr
 
 ### Supported Python versions
 
-The Python Application Security Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
+The Python App and API Protection Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
 
 Two release branches are supported:
 
@@ -58,7 +58,7 @@ And the library supports the following runtimes:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 
 ### Supported frameworks
@@ -82,7 +82,7 @@ And the library supports the following runtimes:
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks.
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 -

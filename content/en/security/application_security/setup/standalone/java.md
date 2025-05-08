@@ -22,7 +22,7 @@ further_reading:
 
 ---
 
-You can monitor application security for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can monitor App and API Protection for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted-standalone %}}
 

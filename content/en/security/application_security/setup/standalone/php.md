@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting App & API Protection"
 ---
 
-You can monitor application security for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
+You can monitor App and API Protection for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
 
 {{% appsec-getstarted-standalone %}}
 

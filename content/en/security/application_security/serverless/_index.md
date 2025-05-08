@@ -6,7 +6,7 @@ aliases:
 further_reading:
     - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
-      text: "How Application Security Works"
+      text: "How App and API Protection Works"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB App and API Protection Rules"
@@ -15,7 +15,7 @@ further_reading:
       text: "Troubleshooting App and API Protection"
     - link: "/security/application_security/threats/"
       tag: "Documentation"
-      text: "Application Threat Management"
+      text: "App and API Protection"
     - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
@@ -953,7 +953,7 @@ To enable AAP on your application, begin by adding the following key-value pairs
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_APPSEC_ENABLED` value should be 1 in order to enable Application Security
+- `DD_APPSEC_ENABLED` value should be 1 in order to enable App and API Protection
 
 ### Identifying your startup command
 

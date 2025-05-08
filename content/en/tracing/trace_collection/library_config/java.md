@@ -314,7 +314,7 @@ When set to `true` db spans get assigned the remote database hostname as the ser
 `dd.appsec.enabled`
 : **Environment Variable**: `DD_APPSEC_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+When `true`, enables Datadog App and API Protection Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
 For more information, see [Enabling AAP for Java][19].
 
 ### Errors

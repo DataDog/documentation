@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting App & API Protection"
 ---
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
+You can monitor App and API Protection for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted-standalone %}}
 - Your service is [supported][2].

@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can monitor App and API Protection for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 

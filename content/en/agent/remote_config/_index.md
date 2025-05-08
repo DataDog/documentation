@@ -4,9 +4,6 @@ aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
 further_reading:
-- link: "/security/application_security/how-appsec-works/#built-in-protection"
-  tag: "Documentation"
-  text: "How Application Security Monitoring Works"
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"

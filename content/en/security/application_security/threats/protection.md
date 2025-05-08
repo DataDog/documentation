@@ -33,7 +33,7 @@ From there, all AAP-protected services block incoming requests performed by the 
 
 In addition to manually blocking attackers, you can configure automation rules to have AAP automatically block attackers that are flagged in Security Signals. 
 
-To get started, navigate to **Security > Application Security > Protection > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _Application security_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
+To get started, navigate to **Security > App and API Protection > Protection > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _App and API Protection_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
 
 **Note**: You must instrument your services to be able to block authenticated attackers. See [User Monitoring and Protection][15] for more details.
 
@@ -66,7 +66,7 @@ For fine-grained control, you can clone a Datadog managed policy or create a cus
 
 As In-App WAF rules are toggled between modes, the changes are reflected in near real-time for services with [Remote Configuration enabled][2]. For other services, you can update the policy on the [In-App WAF page][9] and then [define In-App WAF rules][10] for the change in behavior to be applied.
 
-Manage In-App WAF by navigating to Security --> Application Security --> Configuration --> [In-App WAF][9].
+Manage In-App WAF by navigating to Security --> App and API Protection --> Configuration --> [In-App WAF][9].
 
 View blocked security traces in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
 
@@ -76,7 +76,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
 
-2. **Associate your AAP/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Application Security > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
+2. **Associate your AAP/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
    If you need granular control, clone one of the available policies to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
@@ -90,7 +90,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as AAP blocks requests originating from blocked IPs" width="75%" >}}
 
-The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Protection > In-App Waf > [Custom Responses][16]**.
+The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > App and API Protection > Protection > In-App Waf > [Custom Responses][16]**.
 
 You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
 
@@ -100,7 +100,7 @@ You can also optionally redirect attackers to a custom deny page and away from y
 
 Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and security traces from In-App WAF.
 
-As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [In-App WAF][9]** and toggle **Allow Request Blocking** to off.
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]** and toggle **Allow Request Blocking** to off.
 
 ## Further reading
 

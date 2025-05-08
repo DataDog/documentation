@@ -5,12 +5,12 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## Application Security capabilities support
+## App and API Protection capabilities support
 
-The following application security capabilities are supported in the nginx integration, for the
+The following App and API Protection capabilities are supported in the nginx integration, for the
 specified tracer version:
 
-| Application Security capability        | Minimum nginx module version |
+| App and API Protection capability        | Minimum nginx module version |
 |----------------------------------------|------------------------------|
 | Threat Detection                       | 1.2.0                        |
 | Threat Protection                      | 1.3.0                        |

@@ -22,7 +22,7 @@ further_reading:
 To try the preview of AAP Service Extensions for GCP, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable application security with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection (AAP) Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
+You can enable App and API Protection with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection (AAP) Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
 
 ## Prerequisites
 

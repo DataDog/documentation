@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/terms"
   tag: "Documentation"
-  text: "Application Security terms and concepts"
+  text: "App and API Protection terms and concepts"
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How App and API Protection works"
@@ -44,7 +44,7 @@ These security insights are detected from data reported by APM. The insights hel
 ## Enable AAP
 
 ### Enable AAP with in-app instructions
-- To enable Threat Management in-app, navigate to [**Application Security > Setup**][29].
+- To enable App and API Protection in-app, navigate to [**App and API Protection > Setup**][29].
 - To enable Code Security in-app, navigate to [**Code Security > Setup**][29].
 
 
@@ -54,7 +54,7 @@ These security insights are detected from data reported by APM. The insights hel
 - Restarting your services. </br>
 
 1. Click **Get Started with AAP**.
-2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Runtime Code Analysis), and find and enable threat detection on your services (Threat Management).
+2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Runtime Code Analysis), and find and enable threat detection on your services (App and API Protection).
 3. Follow the instructions to get started with AAP.
 
    {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}} -->

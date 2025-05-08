@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 0
 ---
 
-## Application Security capabilities
+## App and API Protection capabilities
 
-The following application security capabilities are supported in the Java library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the Java library, for the specified tracer version:
 
-| Application Security capability  | Minimum Java tracer version |
+| App and API Protection capability  | Minimum Java tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
 | API Security | 1.31.0 |
@@ -19,7 +19,7 @@ The following application security capabilities are supported in the Java librar
 | Code Security  | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
-The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
+The minimum tracer version to get all supported App and API Protection capabilities for Java is 1.31.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
@@ -33,7 +33,7 @@ The minimum tracer version to get all supported application security capabilitie
 | AWS Lambda        | {{< X >}}                |                               |
 | Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**Note**: Azure App Service is supported for **web applications only**. Application Security doesn't support Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. App and API Protection doesn't support Azure Functions.
 
 ## Language and framework compatibility
 
@@ -58,7 +58,7 @@ Datadog does not officially support any early-access versions of Java.
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
@@ -90,7 +90,7 @@ Datadog does not officially support any early-access versions of Java.
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
@@ -118,7 +118,7 @@ Datadog does not officially support any early-access versions of Java.
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 - If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].

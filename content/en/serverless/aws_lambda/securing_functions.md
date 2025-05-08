@@ -6,7 +6,7 @@ further_reading:
   text: "App and API Protection"
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
-  text: "How Application Security Works"
+  text: "How App and API Protection Works"
 ---
 
 [Datadog App and API Protection (AAP)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.

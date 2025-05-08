@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-## Application Security capabilities
+## App and API Protection capabilities
 
-The following application security capabilities are supported in the Go library, for the specified tracer version:
+The following App and API Protection capabilities are supported in the Go library, for the specified tracer version:
 
-| Application Security capability                   | Minimum Go tracer version |
+| App and API Protection capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
 | API Security | 1.59.0 |
@@ -19,7 +19,7 @@ The following application security capabilities are supported in the Go library,
 | Code Security  | not supported |
 | Automatic user activity event tracking | not supported |
 
-The minimum tracer version to get all supported application security capabilities for Go is 1.59.0.
+The minimum tracer version to get all supported App and API Protection capabilities for Go is 1.59.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
@@ -42,13 +42,13 @@ The Datadog Go Tracing Library has a [version support policy][3] defined for Go 
 
 You must be running Datadog Agent v5.21.1+
 
-Starting from tracer version 1.53.0, application security capabilities do not require [CGO][15].
+Starting from tracer version 1.53.0, App and API Protection capabilities do not require [CGO][15].
 
 ## Integrations
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 
-The Go packages listed in this page are relevant for Application Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
+The Go packages listed in this page are relevant for App and API Protection capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
 {{% tabs %}}
 {{% tab "v1" %}}
