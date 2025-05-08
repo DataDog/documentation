@@ -73,6 +73,14 @@ If you do not see Worker logs in [Log Explorer][12], make sure they are not gett
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
+## The Worker is not receiving logs from the source
+
+If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
+
+## Logs are not getting forwarded to the destination
+
+Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
