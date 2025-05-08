@@ -41,24 +41,49 @@ To successfully forward a request to Datadog, your proxy must
 
 ### Build the Datadog intake URL
 
-A Datadog intake URL (example: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) has three parts:
+Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETERS>` (for example, `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`).
 
-- the Datadog intake origin corresponding to your `site` [initialization parameter][1] (example: `https://browser-intake-datadoghq.eu`)
-- the path containing the API version and the product (example: `/api/v2/rum` for RUM data or `/api/v2/replay` for Session Replay data)
-- the parameters (example: `ddsource=browser&...`)
+{% table %}
+---
+* intake origin
+* 
+    The Datadog intake origin corresponds to your `site` [initialization parameter][1]. The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 
-The Datadog intake origin corresponding to your `site` parameter should be defined in your proxy implementation. The path and parameters for each request sent to the proxy can be accessed in the request's `ddforward` parameter (for example, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
+    {% site-region region="us" %}
+    The intake origin for your Datadog site is `https://browser-intake-datadoghq.com`.
+    {% /site-region %}
 
-The Datadog intake origins for each site are listed below:
+    {% site-region region="us3" %}
+    The intake origin for your Datadog site is `https://browser-intake-us3-datadoghq.com`.
+    {% /site-region %}
 
-| Site    | Site Parameter            | Datadog intake origin                      |
-|---------|---------------------------|--------------------------------------------|
-| US1     | `datadoghq.com` (default) | `https://browser-intake-datadoghq.com`     |
-| US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
-| US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
-| EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
-| US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
-| AP1     | `ap1.datadoghq.com`       | `https://browser-intake-ap1-datadoghq.com` |
+    {% site-region region="us5" %}
+    The intake origin for your Datadog site is `https://browser-intake-us5-datadoghq.com`.
+    {% /site-region %}
+
+    {% site-region region="eu" %}
+    The intake origin for your Datadog site is `https://browser-intake-datadoghq.eu`.
+    {% /site-region %}
+
+    {% site-region region="ap1" %}
+    The intake origin for your Datadog site is `https://browser-intake-ap1-datadoghq.com`.
+    {% /site-region %}
+
+    {% site-region region="fed" %}
+    The intake origin for your Datadog site is `https://browser-intake-ddog-gov.com`.
+    {% /site-region %}
+---
+* path
+* 
+    The path contains the API version and the product (for example, `/api/v2/rum` for RUM data or `/api/v2/replay` for Session Replay data). 
+    
+    The path for each request can be accessed in the request's `ddforward` parameter (for example, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
+---
+* parameters
+* 
+    The request parameters (for example, `ddsource=browser&...`) can be accessed in the request's `ddforward` parameter (for example, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
+
+{% /table %}
 
 ## SDK setup
 
@@ -75,7 +100,7 @@ import { Datacenter, datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{% region-param key="dd_site" /%}',
     proxy: '<YOUR_PROXY_URL>',
 });
 ```
@@ -131,7 +156,7 @@ import { Datacenter, datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{% region-param key="dd_site" /%}',
     proxy: (options) => `https://www.proxy.com/foo${options.path}/bar?${options.parameters}`,
 });
 ```
@@ -165,7 +190,7 @@ window.DD_RUM &&
 {% /if %}
 <!-- end CDN sync -->
 
-For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
+For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks like this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
 **Note:**
 - Some privacy blockers already target the intake [URL patterns][2], so you may want to take that into account when building your proxy URL.
@@ -190,5 +215,5 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 {% /if %}
 <!-- end SDK version <4.34.0 -->
 
-[1]: /real_user_monitoring/browser/setup/#initialization-parameters
+[1]: /real_user_monitoring/browser/setup/client/?tab=rum#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
