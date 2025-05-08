@@ -70,7 +70,7 @@ az provider register --namespace Microsoft.EventHub
 
 Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
 
-Ensure that you have not exceeded your [daily quota][5] for log retention.
+Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 **Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
@@ -81,4 +81,4 @@ Ensure that you have not exceeded your [daily quota][5] for log retention.
 [1]: https://portal.azure.com
 [2]: https://manage.windowsazure.com
 [3]: /help/
-[5]: /logs/indexes/#set-daily-quota
+[4]: /logs/indexes/#set-daily-quota
