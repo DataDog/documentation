@@ -30,7 +30,7 @@ To set up this processor:
 
 ##### Path notation example {#path-notation-example-parse-xml}
 
-For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+For the following message structure:
 
 ```json
 {
@@ -45,6 +45,9 @@ For the following message structure, use `outer_key.inner_key.double_inner_key` 
     "d": "d value"
 }
 ```
+
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 ##### Always use text key example
 

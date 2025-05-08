@@ -40,7 +40,7 @@ attributes:
   - product: Cloud Cost Management
     data_type: | 
        - **Recommendations**: 90 days
-  - product: Cloud Security Management
+  - product: Cloud Security
     data_type: | 
        - **Findings and resolved vulnerabilities**: 15 months
   - product: Cloud SIEM
@@ -64,8 +64,8 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: | 
-       - **Profiles (not displayed in the UI)**: 8 days
-       - **Profiles (displayed in the UI)**: 1 year
+       - **Individual profiles (not opened in the UI)**: 8 days
+       - **Individual profiles (opened in the UI at least once)**: 1 year
        - **Profile metrics**: 90 days
   - product: Continuous Testing
     data_type: | 
@@ -113,7 +113,7 @@ attributes:
     data_type: | 
        - **Netflow**: 30 days
        - **SNMP traps**: 15 days
-  - product: Network Performance Monitoring
+  - product: Cloud Network Monitoring
     data_type: | 
        - **Netflow**: 14 days
   - product: Product Analytics

@@ -7,12 +7,16 @@ further_reading:
   - link: "/security/application_security/threats/threat-intelligence/"
     tag: "documentation"
     text: "AAP Threat Intelligence"
+  - link: "/security/cloud_siem/threat_intelligence/"
+    tag: "documentation"
+    text: "Cloud SIEM Threat Intelligence"
+
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
 - name: Workload Protection
-  url: /security/threats/
+  url: /security/workload_protection/
   icon: cloud-security-management
 - name: App and API Protection
   url: /security/application_security/
