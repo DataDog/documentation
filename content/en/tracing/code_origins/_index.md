@@ -65,7 +65,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
 <div class="alert alert-info">
-  For transpiled Node.js applications (eg. Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a> flag. Otherwise, code previews will not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
+  For transpiled Node.js applications (for example, Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a> flag. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
 </div>
 
 ## Using Code Origins
@@ -83,7 +83,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
     {{< img src="tracing/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
 
 1. From the Code Origin section:
-    - Kick off a [Live Debugger][11] session on the running service by clicking "Start Debug Session" to capture logs at the Code Origin method location. Or select a breakpoint in the gutter of the code preview to capture logs at the selected line of code.
+    - Kick off a [Live Debugger][11] session on the running service by clicking "Start Debug Session" to capture logs at the Code Origin method location. Or, select a breakpoint in the gutter of the code preview to capture logs at the selected line of code.
       
         {{< img src="tracing/code_origins/code_origin_start_debug_session.png" alt="Code Origin - Start Live Debugger Session" style="width:100%;">}}  
 
@@ -106,8 +106,8 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### Code Origin section is missing ###
 
 - Verify Code Origins is [enabled](#enable-code-origins) in your tracing library configuration.
-- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (ie. service language, supported frameworks, and minimum tracer version).
-- For most services, Code Origins data will be captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version).
+- For most services, Code Origins data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
 
@@ -115,7 +115,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ### Code preview is not visible ###
 - Ensure that all [Source Code Integration][7] setup requirements are met.
-- For transpiled Node.js applications (eg. Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details. 
+- For transpiled Node.js applications (for example, Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews do not work. See the Node.js [Source Code Integration][9] documentation for more details. 
 
 
 
