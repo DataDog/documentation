@@ -16,10 +16,12 @@ further_reading:
 - link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
+- link: "/tracing/live_debugger/"
+  tag: "Documentation"
+  text: "Learn how to debug production services with Live Debugger"
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
   text: "Learn how to add custom spans with Dynamic Instrumentation"
-
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
