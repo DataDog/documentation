@@ -143,23 +143,6 @@ The following configuration variables are available for both automatic and custo
 
 #### Traces
 
-`DD_TRACE_SAMPLE_RATE`
-: **TracerSettings property**: `GlobalSamplingRate` <br>
-**Default**: Defaults to the rates returned by the Datadog Agent<br>
-Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][6]. <br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Software Catalog][17] UI.
-
-`DD_TRACE_SAMPLING_RULES`
-: **TracerSettings property**: `CustomSamplingRules`<br>
-**Default**: `null`<br>
-A JSON array of objects. Each object must have a `sample_rate`. The `name` and `service` fields are optional. The `sample_rate` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
-For more information, see [Ingestion Mechanisms][6].<br>
-**Examples:**<br>
-  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
-
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
@@ -241,17 +224,17 @@ Note that Unix Domain Sockets (UDS) are not supported on .NET Framework.<br>
 For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
 Available since version `2.20.0`
 
@@ -293,7 +276,8 @@ The following configuration variables are available **only** when using automati
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
+**Default**: `true`<br/>
+See also [DD_APM_TRACING_ENABLED][22].
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
@@ -398,3 +382,4 @@ The following configuration variables are for features that are available for us
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
+[22]: /tracing/trace_collection/library_config/#traces

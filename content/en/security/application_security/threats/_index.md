@@ -79,7 +79,7 @@ For information on disabling threat management and protection, see [Disabling th
 [5]: /security/application_security/threats/inapp_waf_rules/
 [6]: /security/application_security/threats/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
-[8]: /security/application_security/threats/security_signals/
+[8]: /security/workload_protection/security_signals/
 [9]: /security/application_security/threats/exploit-prevention/
 [10]: /security/default_rules/?category=cat-application-security
 [11]: /security/account_takeover_protection/

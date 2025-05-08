@@ -21,6 +21,12 @@ further_reading:
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    The Datadog extension for Visual Studio is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 The Datadog extension for Visual Studio helps you find and fix bugs, security issues, and performance bottlenecks based on real-time observability data from your services and runtime environments.

@@ -26,7 +26,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 ## Use cases
 
 With the Fleet Automation platform, you can:
-- View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
+- View the latest Agent configurations and historical changes to help confirm deployment updates and ensure configuration consistency.
 - Send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
@@ -57,13 +57,15 @@ Selecting an Agent gives you more information about it, including its configurat
 
 {{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
 
+### Send a remote flare
+
+After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
+
+When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
+
 ## Remote Agent Management
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
-
-## Send a remote flare
-
-After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
 
 ## Control access to Fleet Automation
@@ -72,8 +74,10 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 
 | Permission | Description |
 |--------------|---------------|
-| `API keys read`| Restricts which users can view and search Agents by API key. |
-| `Agent flare collection` | Restricts which users can remotely send flares. |
+| `API Keys Read`| Restricts which users can view and search Agents by API key. |
+| `Agent Flare Collection` | Restricts which users can remotely send flares from Fleet Automation. |
+| `Agent Upgrade` | Restricts which users have access to upgrade Agents from Fleet Automation. |
+| `Agent Configuration Management` | Restricts which users have access to configure Agents from Fleet Automation. |
 
 For information on setting up roles and permissions, see [Access Control][5].
 
