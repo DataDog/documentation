@@ -12520,7 +12520,6 @@ components:
           type: array
         repositoryURL:
           description: The repository path of the source code of the entity.
-          pattern: url
           type: string
       type: object
     EntityV3DatadogCodeLocations:
@@ -13194,7 +13193,7 @@ components:
         request. Contains assignment strategy, escalation timeout, and a list of targets.
       properties:
         assignment:
-          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsAssignment'
+          $ref: '#/components/schemas/EscalationPolicyStepAttributesAssignment'
         escalate_after_seconds:
           description: Defines how many seconds to wait before escalating to the next
             step.
@@ -13203,47 +13202,14 @@ components:
           type: integer
         targets:
           description: Specifies the collection of escalation targets for this step.
+          example:
+          - users
           items:
-            $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItems'
+            $ref: '#/components/schemas/EscalationPolicyStepTarget'
           type: array
       required:
       - targets
       type: object
-    EscalationPolicyCreateRequestDataAttributesStepsItemsAssignment:
-      description: Specifies how this escalation step will assign targets (example
-        `default` or `round-robin`).
-      enum:
-      - default
-      - round-robin
-      example: default
-      type: string
-      x-enum-varnames:
-      - DEFAULT
-      - ROUND_ROBIN
-    EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItems:
-      description: Defines a single escalation target within a step for an escalation
-        policy creation request. Contains `id` and `type`.
-      properties:
-        id:
-          description: Specifies the unique identifier for this target.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItemsType'
-      type: object
-    EscalationPolicyCreateRequestDataAttributesStepsItemsTargetsItemsType:
-      description: Specifies the type of escalation target (example `users`, `schedules`,
-        or `teams`).
-      enum:
-      - users
-      - schedules
-      - teams
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
-      - SCHEDULES
-      - TEAMS
     EscalationPolicyCreateRequestDataRelationships:
       description: Represents relationships in an escalation policy creation request,
         including references to teams.
@@ -13427,9 +13393,8 @@ components:
       oneOf:
       - $ref: '#/components/schemas/TeamReference'
       - $ref: '#/components/schemas/EscalationPolicyStep'
-      - $ref: '#/components/schemas/UserTarget'
-      - $ref: '#/components/schemas/ScheduleTarget'
-      - $ref: '#/components/schemas/TeamTarget'
+      - $ref: '#/components/schemas/EscalationPolicyUser'
+      - $ref: '#/components/schemas/ScheduleData'
     EscalationPolicyStep:
       description: Represents a single step in an escalation policy, including its
         attributes, relationships, and resource type.
@@ -13475,6 +13440,30 @@ components:
         targets:
           $ref: '#/components/schemas/EscalationTarget'
       type: object
+    EscalationPolicyStepTarget:
+      description: Defines a single escalation target within a step for an escalation
+        policy creation request. Contains `id` and `type`.
+      properties:
+        id:
+          description: Specifies the unique identifier for this target.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyStepTargetType'
+      type: object
+    EscalationPolicyStepTargetType:
+      description: Specifies the type of escalation target (example `users`, `schedules`,
+        or `teams`).
+      enum:
+      - users
+      - schedules
+      - teams
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+      - SCHEDULES
+      - TEAMS
     EscalationPolicyStepType:
       default: steps
       description: Indicates that the resource is of type `steps`.
@@ -13572,7 +13561,7 @@ components:
         ID, and a list of targets.
       properties:
         assignment:
-          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsAssignment'
+          $ref: '#/components/schemas/EscalationPolicyStepAttributesAssignment'
         escalate_after_seconds:
           description: Defines how many seconds to wait before escalating to the next
             step.
@@ -13586,46 +13575,11 @@ components:
         targets:
           description: Specifies the collection of escalation targets for this step.
           items:
-            $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItems'
+            $ref: '#/components/schemas/EscalationPolicyStepTarget'
           type: array
       required:
       - targets
       type: object
-    EscalationPolicyUpdateRequestDataAttributesStepsItemsAssignment:
-      description: Specifies how this escalation step will assign targets (example
-        `default` or `round-robin`).
-      enum:
-      - default
-      - round-robin
-      example: default
-      type: string
-      x-enum-varnames:
-      - DEFAULT
-      - ROUND_ROBIN
-    EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItems:
-      description: Defines a single escalation target within a step for an escalation
-        policy update request. Contains `id` and `type`.
-      properties:
-        id:
-          description: Specifies the unique identifier for this target.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItemsType'
-      type: object
-    EscalationPolicyUpdateRequestDataAttributesStepsItemsTargetsItemsType:
-      description: Specifies the type of escalation target (example `users`, `schedules`,
-        or `teams`).
-      enum:
-      - users
-      - schedules
-      - teams
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
-      - SCHEDULES
-      - TEAMS
     EscalationPolicyUpdateRequestDataRelationships:
       description: Represents relationships in an escalation policy update request,
         including references to teams.
@@ -13675,6 +13629,44 @@ components:
       type: string
       x-enum-varnames:
       - POLICIES
+    EscalationPolicyUser:
+      description: Represents a user object in the context of an escalation policy,
+        including their `id`, type, and basic attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EscalationPolicyUserAttributes'
+        id:
+          description: The unique user identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationPolicyUserType'
+      required:
+      - type
+      type: object
+    EscalationPolicyUserAttributes:
+      description: Provides basic user information for an escalation policy, including
+        a name and email address.
+      properties:
+        email:
+          description: The user's email address.
+          example: jane.doe@example.com
+          type: string
+        name:
+          description: The user's name.
+          example: Jane Doe
+          type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
+      type: object
+    EscalationPolicyUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -15748,7 +15740,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentials'
@@ -15773,7 +15764,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentialsUpdate'
@@ -17522,6 +17512,7 @@ components:
       description: The incident severity.
       enum:
       - UNKNOWN
+      - SEV-0
       - SEV-1
       - SEV-2
       - SEV-3
@@ -17531,6 +17522,7 @@ components:
       type: string
       x-enum-varnames:
       - UNKNOWN
+      - SEV_0
       - SEV_1
       - SEV_2
       - SEV_3
@@ -30415,6 +30407,93 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    RoutingRule:
+      description: Represents a routing rule, including its attributes, relationships,
+        and unique identifier.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoutingRuleAttributes'
+        id:
+          description: Specifies the unique identifier of this routing rule.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RoutingRuleRelationships'
+        type:
+          $ref: '#/components/schemas/RoutingRuleType'
+      required:
+      - type
+      type: object
+    RoutingRuleAction:
+      description: Defines an action that is executed when a routing rule matches
+        certain criteria.
+      oneOf:
+      - $ref: '#/components/schemas/SlackAction'
+      - $ref: '#/components/schemas/TeamsAction'
+    RoutingRuleAttributes:
+      description: Defines the configurable attributes of a routing rule, such as
+        actions, query, time restriction, and urgency.
+      properties:
+        actions:
+          description: Specifies the list of actions to perform when the routing rule
+            matches.
+          items:
+            $ref: '#/components/schemas/RoutingRuleAction'
+          type: array
+        query:
+          description: Defines the query or condition that triggers this routing rule.
+          type: string
+        time_restriction:
+          $ref: '#/components/schemas/TimeRestrictions'
+        urgency:
+          $ref: '#/components/schemas/Urgency'
+      type: object
+    RoutingRuleRelationships:
+      description: Specifies relationships for a routing rule, linking to associated
+        policy resources.
+      properties:
+        policy:
+          $ref: '#/components/schemas/RoutingRuleRelationshipsPolicy'
+      type: object
+    RoutingRuleRelationshipsPolicy:
+      description: Defines the relationship that links a routing rule to a policy.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoutingRuleRelationshipsPolicyData'
+      required:
+      - data
+      type: object
+    RoutingRuleRelationshipsPolicyData:
+      description: Represents the policy data reference, containing the policy's ID
+        and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the policy.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/RoutingRuleRelationshipsPolicyDataType'
+      required:
+      - type
+      - id
+      type: object
+    RoutingRuleRelationshipsPolicyDataType:
+      default: policies
+      description: Indicates that the resource is of type 'policies'.
+      enum:
+      - policies
+      example: policies
+      type: string
+      x-enum-varnames:
+      - POLICIES
+    RoutingRuleType:
+      default: team_routing_rules
+      description: Team routing rules resource type.
+      enum:
+      - team_routing_rules
+      example: team_routing_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_ROUTING_RULES
     RuleAttributes:
       description: Details of a rule.
       properties:
@@ -32386,6 +32465,8 @@ components:
           description: The user's name.
           example: Jane Doe
           type: string
+        status:
+          $ref: '#/components/schemas/UserAttributesStatus'
       type: object
     ScheduleUserType:
       default: users
@@ -36541,6 +36622,26 @@ components:
       type: string
       x-enum-varnames:
       - AGGREGATED_CONNECTION
+    SlackAction:
+      description: Sends a message to a Slack channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        type:
+          description: Must be set to "send_slack_message".
+          example: send_slack_message
+          type: string
+        workspace:
+          description: The workspace ID.
+          example: WORKSPACE
+          type: string
+      required:
+      - type
+      - channel
+      - workspace
+      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -38195,6 +38296,212 @@ components:
         data:
           $ref: '#/components/schemas/Team'
       type: object
+    TeamRoutingRules:
+      description: Represents a complete set of team routing rules, including data
+        and optionally included related resources.
+      example:
+        data:
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          relationships:
+            rules:
+              data:
+              - id: 03aff2d6-6cbf-496c-997f-a857bbe9a94a
+                type: team_routing_rules
+              - id: 03aff2d6-6cbf-496c-997f-a857bbe9a94a
+                type: team_routing_rules
+          type: team_routing_rules
+        included:
+        - attributes:
+            actions: null
+            query: tags.service:test
+            time_restriction:
+              restrictions:
+              - end_day: monday
+                end_time: '17:00:00'
+                start_day: monday
+                start_time: 09:00:00
+              - end_day: tuesday
+                end_time: '17:00:00'
+                start_day: tuesday
+                start_time: 09:00:00
+              time_zone: ''
+            urgency: high
+          id: 03aff2d6-6cbf-496c-997f-a857bbe9a94a
+          relationships:
+            policy:
+              data: null
+          type: team_routing_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamRoutingRulesData'
+        included:
+          description: Provides related routing rules or other included resources.
+          items:
+            $ref: '#/components/schemas/TeamRoutingRulesIncluded'
+          type: array
+      type: object
+    TeamRoutingRulesData:
+      description: Represents the top-level data object for team routing rules, containing
+        the ID, relationships, and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of this team routing rules
+            record.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamRoutingRulesDataRelationships'
+        type:
+          $ref: '#/components/schemas/TeamRoutingRulesDataType'
+      required:
+      - type
+      type: object
+    TeamRoutingRulesDataRelationships:
+      description: Specifies relationships for team routing rules, including rule
+        references.
+      properties:
+        rules:
+          $ref: '#/components/schemas/TeamRoutingRulesDataRelationshipsRules'
+      type: object
+    TeamRoutingRulesDataRelationshipsRules:
+      description: Holds references to a set of routing rules in a relationship.
+      properties:
+        data:
+          description: An array of references to the routing rules associated with
+            this team.
+          items:
+            $ref: '#/components/schemas/TeamRoutingRulesDataRelationshipsRulesDataItems'
+          type: array
+      type: object
+    TeamRoutingRulesDataRelationshipsRulesDataItems:
+      description: Defines a relationship item to link a routing rule by its ID and
+        type.
+      properties:
+        id:
+          description: Specifies the unique identifier for the related routing rule.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamRoutingRulesDataRelationshipsRulesDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    TeamRoutingRulesDataRelationshipsRulesDataItemsType:
+      default: team_routing_rules
+      description: Indicates that the resource is of type 'team_routing_rules'.
+      enum:
+      - team_routing_rules
+      example: team_routing_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_ROUTING_RULES
+    TeamRoutingRulesDataType:
+      default: team_routing_rules
+      description: Team routing rules resource type.
+      enum:
+      - team_routing_rules
+      example: team_routing_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_ROUTING_RULES
+    TeamRoutingRulesIncluded:
+      description: Represents additional included resources for team routing rules,
+        such as associated routing rules.
+      oneOf:
+      - $ref: '#/components/schemas/RoutingRule'
+    TeamRoutingRulesRequest:
+      description: Represents a request to create or update team routing rules, including
+        the data payload.
+      example:
+        data:
+          attributes:
+            rules:
+            - actions: null
+              policy_id: ''
+              query: tags.service:test
+              time_restriction:
+                restrictions:
+                - end_day: monday
+                  end_time: '17:00:00'
+                  start_day: monday
+                  start_time: 09:00:00
+                - end_day: tuesday
+                  end_time: '17:00:00'
+                  start_day: tuesday
+                  start_time: 09:00:00
+                time_zone: ''
+              urgency: high
+            - actions:
+              - channel: channel
+                type: send_slack_message
+                workspace: workspace
+              policy_id: fad4eee1-13f5-40d8-886b-4e56d8d5d1c6
+              query: ''
+              time_restriction: null
+              urgency: low
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: team_routing_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamRoutingRulesRequestData'
+      type: object
+    TeamRoutingRulesRequestData:
+      description: Holds the data necessary to create or update team routing rules,
+        including attributes, ID, and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamRoutingRulesRequestDataAttributes'
+        id:
+          description: Specifies the unique identifier for this set of team routing
+            rules.
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamRoutingRulesRequestDataType'
+      required:
+      - type
+      type: object
+    TeamRoutingRulesRequestDataAttributes:
+      description: Represents the attributes of a request to update or create team
+        routing rules.
+      properties:
+        rules:
+          description: A list of routing rule items that define how incoming pages
+            should be handled.
+          items:
+            $ref: '#/components/schemas/TeamRoutingRulesRequestRule'
+          type: array
+      type: object
+    TeamRoutingRulesRequestDataType:
+      default: team_routing_rules
+      description: Team routing rules resource type.
+      enum:
+      - team_routing_rules
+      example: team_routing_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_ROUTING_RULES
+    TeamRoutingRulesRequestRule:
+      description: Defines an individual routing rule item that contains the rule
+        data for the request.
+      properties:
+        actions:
+          description: Specifies the list of actions to perform when the routing rule
+            is matched.
+          items:
+            $ref: '#/components/schemas/RoutingRuleAction'
+          type: array
+        policy_id:
+          description: Identifies the policy to be applied when this routing rule
+            matches.
+          type: string
+        query:
+          description: Defines the query or condition that triggers this routing rule.
+          type: string
+        time_restriction:
+          $ref: '#/components/schemas/TimeRestrictions'
+        urgency:
+          $ref: '#/components/schemas/Urgency'
+      type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
         the team's ID and resource type.
@@ -38296,6 +38603,31 @@ components:
           $ref: '#/components/schemas/TeamUpdate'
       required:
       - data
+      type: object
+    TeamsAction:
+      description: Sends a message to a Microsoft Teams channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        team:
+          description: The team ID.
+          example: TEAM
+          type: string
+        tenant:
+          description: The tenant ID.
+          example: TENANT
+          type: string
+        type:
+          description: Must be set to "send_teams_message".
+          example: send_teams_message
+          type: string
+      required:
+      - type
+      - channel
+      - tenant
+      - team
       type: object
     TeamsField:
       description: Supported teams field.
@@ -38428,6 +38760,38 @@ components:
       example: 86400
       format: int64
       type: integer
+    TimeRestriction:
+      description: Defines a single time restriction rule with start and end times
+        and the applicable weekdays.
+      properties:
+        end_day:
+          $ref: '#/components/schemas/Weekday'
+        end_time:
+          description: Specifies the ending time for this restriction.
+          type: string
+        start_day:
+          $ref: '#/components/schemas/Weekday'
+        start_time:
+          description: Specifies the starting time for this restriction.
+          type: string
+      type: object
+    TimeRestrictions:
+      description: Holds time zone information and a list of time restrictions for
+        a routing rule.
+      properties:
+        restrictions:
+          description: Defines the list of time-based restrictions.
+          items:
+            $ref: '#/components/schemas/TimeRestriction'
+          type: array
+        time_zone:
+          description: Specifies the time zone applicable to the restrictions.
+          example: ''
+          type: string
+      required:
+      - time_zone
+      - restrictions
+      type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
       properties:
@@ -39055,6 +39419,18 @@ components:
       description: Upsert entity response included item.
       oneOf:
       - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+    Urgency:
+      description: Specifies the level of urgency for a routing rule (low, high, or
+        dynamic).
+      enum:
+      - low
+      - high
+      - dynamic
+      type: string
+      x-enum-varnames:
+      - LOW
+      - HIGH
+      - DYNAMIC
     UrlParam:
       description: The definition of `UrlParam` object.
       properties:
@@ -39230,6 +39606,17 @@ components:
           description: Whether the user is verified.
           type: boolean
       type: object
+    UserAttributesStatus:
+      description: The user's status.
+      enum:
+      - active
+      - deactivated
+      - pending
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - DEACTIVATED
+      - PENDING
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -40134,6 +40521,25 @@ components:
       - X_CONTENT_TYPE_HEADER_MISSING
       - X_PATH_INJECTION
       - XSS
+    Weekday:
+      description: A day of the week.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
     WidgetLiveSpan:
       description: The available timeframes depend on the widget you are using.
       enum:
@@ -40489,10 +40895,11 @@ components:
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
@@ -52882,22 +53289,8 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - description: The page number to fetch.
-        example: 0
-        in: query
-        name: page[number]
-        required: false
-        schema:
-          format: int64
-          type: integer
-      - description: The number of devices to return per page.
-        example: 10
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          format: int64
-          type: integer
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
       - description: The field to sort the devices by.
         example: status
         in: query
@@ -52929,6 +53322,10 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/ndm/devices/{device_id}:
@@ -53513,6 +53910,94 @@ paths:
       tags:
       - On-Call
       x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/on-call/teams/{team_id}/routing-rules:
+    get:
+      description: Get a team's on-call routing rules
+      operationId: GetOnCallTeamRoutingRules
+      parameters:
+      - description: The team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          example: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `rules`, `rules.policy`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamRoutingRules'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get on-call team routing rules
+      tags:
+      - On-Call
+      x-menu-order: 9
+      x-undo:
+        type: safe
+    put:
+      description: Set a team's on-call routing rules
+      operationId: SetOnCallTeamRoutingRules
+      parameters:
+      - description: The team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          example: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `rules`, `rules.policy`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamRoutingRulesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamRoutingRules'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Set on-call team routing rules
+      tags:
+      - On-Call
+      x-given:
+        routing_rules:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"rules\": [\n
+              \       {\n          \"query\": \"\",\n          \"policy_id\": \"{{
+              escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"time_restriction\":
+              null,\n          \"actions\": []\n        }\n      ]\n    }\n  }\n}"
+          step: there are valid "routing_rules" in the system
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/org_configs:
