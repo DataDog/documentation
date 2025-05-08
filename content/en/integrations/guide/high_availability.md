@@ -21,7 +21,7 @@ You can configure Agents as active-standby pairs in several [supported integrati
 
 ## Supported integrations
 
-The following integrations are supported for High Availability in Network Device Monitoring:
+The following integrations are supported for High Availability:
 
 | Category                | Supported Integrations       |
 |-------------------------|------------------------------|
