@@ -1,8 +1,8 @@
 ---
 aliases:
-- /security_platform/cspm/signals_explorer
-- /security/cspm/signals_explorer
-- /security/misconfigurations/signals_explorer
+- /es/security_platform/cspm/signals_explorer
+- /es/security/cspm/signals_explorer
+- /es/security/misconfigurations/signals_explorer
 further_reading:
 - link: security/default_rules
   tag: Documentación

@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/guides/rum_integration
-- /continuous_integration/integrate_tests/browser_tests
-- /continuous_integration/tests/browser_tests
+- /fr/continuous_integration/guides/rum_integration
+- /fr/continuous_integration/integrate_tests/browser_tests
+- /fr/continuous_integration/tests/browser_tests
 description: Découvrez comment utiliser CI Visibility et RUM pour associer les résultats
   de vos tests aux sessions Browser et aux replays.
 further_reading:

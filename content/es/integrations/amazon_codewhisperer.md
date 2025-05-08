@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.codewhisperer.invocations
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.codewhisperer.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -101,5 +101,5 @@ La integración de Amazon CodeWhisperer no incluye ningún check de servicio.
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-codewhisperer
-[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_codewhisperer/metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_codewhisperer/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/es/help/

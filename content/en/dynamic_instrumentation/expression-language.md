@@ -29,43 +29,55 @@ The following sections summarize the variables and operations that the Dynamic I
 
 ## Contextual variables
 
+The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are only available within predicate expressions for filtering and transforming collections.
+
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
-| `@return`   | Provides access to the return value                                        |
-| `@duration` | Provides access to the call execution duration                             |
-| `@exception`| Provides access to the current uncaught exception                          |
-
-**Note**: These variables are **only available** when instrumenting an **entire method**, and **not** for individual lines of code.
+| `@return`   | Provides access to the method return value. |
+| `@duration` | Provides access to the method call execution duration. |
+| `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists). |
+| `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
+| `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
+| `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
 
 ## String operations
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | `isEmpty("Hello")` -> `False` |
-| `len(value_src)` | Gets the string length. | `len("Hello")` -> `5` |
-| `substring(value_src, startIndex, endIndex)` | Gets a substring. | `substring("Hello", 0, 2)` -> `"He"` |
-| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | `startsWith("Hello", "He")` -> `True` |
-| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | `endsWith("Hello", "lo")` -> `True` |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | `contains("Hello", "ll")` -> `True` |
-| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | `matches("Hello", "^H.*o$")` -> `True` |
+| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | {{< expression-language-evaluator expression="isEmpty(\"Hello\")" >}} |
+| `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(\"Hello\")" >}} |
+| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(\"Hello\", 0, 2)" >}} |
+| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(\"Hello\", \"He\")" >}} |
+| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(\"Hello\", \"lo\")" >}} |
+| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-language-evaluator expression="contains(\"Hello\", \"ll\")" >}} |
+| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(\"Hello\", \"^H.*o$\")" >}} |
 
 ## Collection operations
 
-When working with collections (lists, maps, etc.), a variable `@it` is available which provides access to the current value in a collection during iteration.
+When working with collections (lists, maps, and so on), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
 
 The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, {@it > 2})` -> `True` |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, {@it < 4})` -> `True` |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, {@it > 1})` -> `[2,3]` |
-| `len(value_src)` | Gets the collection size. | `len(myCollection)` -> `3` |
-| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | `myCollection[1]` -> `2` |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="any(myCollection, {@it > 2})" >}} |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(myCollection, {@it < 4})" >}} |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(myCollection, {@it > 1})" >}} |
+| `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(myCollection)" >}} |
+| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | {{< expression-language-evaluator expression="myCollection[1]" >}} |
 
-[1]: /metrics/types/?tab=count#metric-types
-[2]: /metrics/types/?tab=gauge#metric-types
-[3]: /metrics/types/?tab=histogram#metric-types
-[4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
-[6]: /dynamic_instrumentation/symdb/
+## Try It Out
+
+This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether a log line will be generated when instrumenting a method.
+
+Enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
+
+Available variables in this example:
+
+- `loops`: The route parameter hardcoded to `5`
+- `a`: An array of integers `[6, 7, 8, 9, 10]`
+- `b`: A dictionary/object `{"a": 1, "b": 2, "c": 3}`
+- `c`: A string `"hello world"`
+- `i`: The current loop iteration index
+
+{{< expression-language-simulator >}}

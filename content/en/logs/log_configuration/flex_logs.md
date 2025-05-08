@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "/logs/guide/flex_compute"
+  tag: "Documentation"
+  text: "Monitor Flex Compute Usage"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -19,6 +22,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 ## Overview
@@ -63,7 +69,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 

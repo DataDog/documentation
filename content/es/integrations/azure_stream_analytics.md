@@ -22,7 +22,7 @@ short_description: Rastrea las métricas clave de Azure Stream Analytics.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Stream Analytics es un motor de procesamiento de eventos que te permite examinar grandes volúmenes de transmisión de datos procedentes de dispositivos.
@@ -45,13 +45,13 @@ Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No
 
 La integración Azure Stream Analytics no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Stream Analytics no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_stream_analytics/azure_stream_analytics_metadata.csv

@@ -40,7 +40,7 @@ The following table presents the list of collected features and the minimal Agen
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 | Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
 
-1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
@@ -69,7 +69,7 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
@@ -90,14 +90,17 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
+
+**Note**: [GKE Autopilot][105] is only supported as an Agentless Kubernetes setup that is subject to [limitations](#agentless-kubernetes-costs).
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
+[105]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,10 +111,17 @@ Cost allocation divides host compute and other resource costs from your cloud pr
 
 Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
 
+
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 These divided costs are enriched with tags from nodes, pods, tasks, and volumes. You can use these tags to break down costs by any associated dimensions.
+
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
 
 ### Compute
 
@@ -161,6 +171,12 @@ Datadog supports data transfer cost allocation using [standard 6 workload resour
 {{% /tab %}}
 {{% tab "Azure" %}}
 
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
+
 ### Compute
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
@@ -177,6 +193,12 @@ All other costs are given the same value and tags as the source metric `azure.co
 {{% /tab %}}
 {{% tab "Google" %}}
 
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
+
 ### Compute
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
@@ -189,7 +211,7 @@ All other costs are given the same value and tags as the source metric `gcp.cost
 
 ### Agentless Kubernetes costs
 
-To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set.
+To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with a number of limitations (see below).
 
 #### Limitations and differences from the Datadog Agent
 

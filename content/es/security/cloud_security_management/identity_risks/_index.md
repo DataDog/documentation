@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security/identity_risks/
+- /es/security/identity_risks/
 further_reading:
 - link: /security/cloud_security_management/
   tag: Documentación

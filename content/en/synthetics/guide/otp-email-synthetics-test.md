@@ -2,7 +2,7 @@
 title: Extract a One-Time Passcode from an Email Body using Synthetic Browser Tests
 description: Learn how to extract a OTP from an email body using Synthetic Browser Tests.
 further_reading:
-- link: "//synthetics/browser_tests/?tab=requestoptions#overview"
+- link: "/synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
   text: "Learn about Synthetic Browser Tests"
 - link: "/synthetics/api_tests/http_tests#variables"
@@ -135,7 +135,7 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[6]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
 [7]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#email
 [8]: /synthetics/guide/email-validation/#create-an-email-variable
 [9]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage

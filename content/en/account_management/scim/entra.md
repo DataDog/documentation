@@ -6,6 +6,10 @@ algolia:
   tags: ["scim", "identity provider", "IdP", "Azure AD", "Entra ID"]
 ---
 
+<div class="alert alert-info">
+SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+</div>
+
 See the following instructions to synchronize your Datadog users with Microsoft Entra ID using SCIM.
 
 For capabilities and limitations of this feature, see [SCIM][1].

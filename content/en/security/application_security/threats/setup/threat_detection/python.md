@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Python
+title: Enabling AAP for Python
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
@@ -16,10 +16,10 @@ further_reading:
       text: 'Python Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor the security of your Python apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -34,9 +34,9 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    pip install --upgrade ddtrace
    ```
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
 
-2. **Enable ASM when starting the Python application**.
+2. **Enable AAP when starting the Python application**.
 
    ```bash
    DD_APPSEC_ENABLED=true ddtrace-run python app.py
@@ -96,7 +96,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    {{% /tab %}}
    {{% tab "AWS Fargate" %}}
 
-   Initialize ASM in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+   Initialize AAP in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
    ```shell
    DD_APPSEC_ENABLED=true ddtrace-run python app.py
    ```

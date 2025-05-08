@@ -19,7 +19,7 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
 
 ### Jupyter notebooks
 
-To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time. 
+To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time.
 
 ## Command line
 
@@ -67,7 +67,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2]. 
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2].
 
    For more information about required environment variables, see [the SDK documentation][1].
 
