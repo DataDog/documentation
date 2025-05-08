@@ -22,7 +22,7 @@ author:
   sales_email: kealan.maas@datadoghq.com
   support_email: kealan.maas@datadoghq.com
 categories: []
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flume/README.md
 display_on_public_website: true
@@ -55,7 +55,7 @@ tile:
   title: flume
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -100,9 +100,9 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][10] y busca `flume` en la sección **Checks**.
+[Ejecuta el subcomando `status` de estado del Agent][10] y busca `flume` en la sección **Checks**.
 
-### Métricas de componentes
+### Métricas de componente
 
 Las métricas recuperadas por este check dependen de la fuente, del canal y del sumidero utilizados por tu Agent Flume. Para ver una lista completa de las métricas expuestos por cada componente, consulta [Métricas de componentes disponibles][9] de la documentación de Apache Flume. Para ver una lista de las métricas que puedes ver en Datadog, consulta la sección [Métricas](#métricas) de esta página.
 
@@ -116,7 +116,7 @@ Las métricas recuperadas por este check dependen de la fuente, del canal y del 
 
 Flume no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "flume" >}}
 
 
