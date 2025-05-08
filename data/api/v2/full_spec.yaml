@@ -12520,7 +12520,6 @@ components:
           type: array
         repositoryURL:
           description: The repository path of the source code of the entity.
-          pattern: url
           type: string
       type: object
     EntityV3DatadogCodeLocations:
@@ -15741,7 +15740,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentials'
@@ -15766,7 +15764,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentialsUpdate'
@@ -17515,6 +17512,7 @@ components:
       description: The incident severity.
       enum:
       - UNKNOWN
+      - SEV-0
       - SEV-1
       - SEV-2
       - SEV-3
@@ -17524,6 +17522,7 @@ components:
       type: string
       x-enum-varnames:
       - UNKNOWN
+      - SEV_0
       - SEV_1
       - SEV_2
       - SEV_3
