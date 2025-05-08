@@ -12,9 +12,12 @@ further_reading:
 - link: "/cloudprem/cluster/"
   tag: "Documentation"
   text: "Cluster Sizing and Operations"
-- link: "/cloudprem/advanced/"
+- link: "/cloudprem/processing/"
   tag: "Documentation"
-  text: "Advanced Configurations"
+  text: "CloudPrem Log Processing"
+- link: "/cloudprem/aws_config"
+  tag: "Documentation"
+  text: "AWS Configuration"
 - link: "/cloudprem/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
@@ -24,11 +27,11 @@ further_reading:
 
 Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting - all while keeping your log data at rest within your infrastructure boundaries.
 
-{{< img src="/cloudprem/cloudprem_overview_diagram.png" alt="CloudPrem product overview diagram" style="width:100%;" >}}
-
 ## Architecture
 
 CloudPrem uses a decoupled architecture which separates the compute (indexing and searching), and data on an object storage. This allows for independent scaling and optimization of different cluster components based on workload demands.
+
+{{< img src="/cloudprem/overview_architecture.png" alt="CloudPrem architecture showing Indexers, Searchers, Metastore, and Control Plane components interacting with object storage" style="width:100%;" >}}
 
 ### Components
 
@@ -62,10 +65,10 @@ Before getting started with CloudPrem, ensure you have:
 
 ### Installation
 
-1. [Install CloudPrem][2]
-2. [Send logs to CloudPrem](2)
-3. [Configure logs processing](3)(optional)
-4. [Configure your Datadog account to connect the Log Explorer to CloudPrem](2)
+1. Install CloudPrem.
+2. Send logs to CloudPrem.
+3. (Optional) [Configure logs processing][3].
+4. Configure your Datadog account to connect the Log Explorer to CloudPrem.
 
 For detailed instructions, see the [Installation][2] documentation.
 

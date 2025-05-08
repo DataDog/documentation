@@ -2,19 +2,33 @@
 title: CloudPrem Ingress Configuration
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
 further_reading:
+- link: "/cloudprem/"
+  tag: "Documentation"
+  text: "Learn more about CloudPrem"
 - link: "/cloudprem/installation/"
   tag: "Documentation"
   text: "CloudPrem Installation"
-- link: "/cloudprem/security/"
+- link: "/cloudprem/cluster/"
   tag: "Documentation"
-  text: "CloudPrem Security"
+  text: "Cluster Sizing and Operations"
+- link: "/cloudprem/processing/"
+  tag: "Documentation"
+  text: "CloudPrem Log Processing"
+- link: "/cloudprem/aws_config"
+  tag: "Documentation"
+  text: "AWS Configuration"
+- link: "/cloudprem/troubleshooting/"
+  tag: "Documentation"
+  text: "Troubleshooting"
 ---
 
 ## Overview
 
-Ingress is a critical component of your CloudPrem deployment, CloudPrem has one public ingress and one private one.
+Ingress is a critical component of your CloudPrem deployment. CloudPrem includes one public ingress and one private ingress.
 
 ## Public ingress
+
+<div class="alert alert-warning">Only the CloudPrem gRPC API endpoints (paths starting with `/cloudprem`) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
 
 The public ingress is essential for enabling Datadog's control plane and query service to manage and query CloudPrem clusters over the public internet. It provides secure access to the CloudPrem gRPC API through the following mechanisms:
 - Creates an internet-facing AWS Application Load Balancer (ALB) that accepts traffic from Datadog services
@@ -26,9 +40,7 @@ The public ingress is essential for enabling Datadog's control plane and query s
 
 This setup ensures that only authenticated Datadog services can access the CloudPrem cluster while maintaining secure encrypted communication end-to-end.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Public ingress diagram" style="width:100%;" >}} -->
-
-<div class="alert alert-warning">Only the CloudPrem gRPC API endpoints (paths starting with `/cloudprem`) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
+{{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
 ### IP Ranges
 The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog IP Ranges API, specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
@@ -43,7 +55,7 @@ curl -X GET "https://ip-ranges.datadoghq.eu/" \
 
 The internal ingress enables log ingestion from Datadog Agents and other log collectors within your environment through HTTP.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Internal ingress with ALB provisioned by Helm chart" style="width:100%;" >}} -->
+{{< img src="/cloudprem/ingress/internal_ingress.png" alt=" Internal ingress with ALB provisioned by Helm chart" style="width:100%;" >}}
 
 By default, the chart creates an internal AWS Application Load Balancer (ALB) to route HTTP traffic to the appropriate CloudPrem services based on the requested API endpoint path. However, if you prefer to use your own ingress controller (such as HAProxy, NGINX, or Traefik), you can disable the default internal ALB and configure your controller with the following routing rules:
 
@@ -99,7 +111,7 @@ rules:
 
 ```
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Internal ingress using NGINX ingress controller" style="width:100%;" >}} -->
+{{< img src="/cloudprem/ingress/internal_ingress_nginx_controller.png" alt="CloudPrem internal ingress configuration using NGINX ingress controller showing path routing to indexer, metastore, and searcher services" style="width:100%;" >}}
 
 ## Further reading
 

@@ -2,6 +2,9 @@
 title: Processing Configuration
 description: Learn how to configure your processing pipelines in CloudPrem
 further_reading:
+- link: "/logs/log_configuration/processors/"
+  tag: "Documentation"
+  text: "Datadog Log Management Processors"
 - link: "/cloudprem/"
   tag: "Documentation"
   text: "Learn more about CloudPrem"
@@ -21,36 +24,37 @@ further_reading:
 
 ## Overview
 
-CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. This processing is designed to be equivalent to [Datadog SaaS Pipelines][1]. For a list of supported and unsupported processors, see [Compatibility with Datadog SaaS Pipelines](#compatibility-with-datadog-saas-pipelines).
+CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. This processing is designed to be equivalent to [Datadog Log Management Pipelines][1]. For a list of supported and unsupported processors, see [Compatibility with Datadog Pipelines](#compatibility-with-datadog-pipelines).
 
-You configure log processing pipelines using a JSON file that adheres to the same format as Datadog SaaS pipeline configurations.
+You configure log processing pipelines using a JSON file that adheres to the same format as Datadog pipeline configurations.
 
 ## Setting up processing
 
-1. (Optional) Retrieve from SaaS: If you have existing pipelines in Datadog SaaS, you can fetch their configuration using the API:
+1. (Optional) If you have existing pipelines in Datadog, you can fetch the configuration using the [Logs Pipelines API][2]:
 
-```bash
-curl -X GET "https://api.datadoghq.com/api/v1/logs/config/pipelines" \
- -H "Accept: application/json" \
- -H "DD-API-KEY: ${DD_API_KEY}" \
- -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > my-pipelines_config.json
-```
+   ```bash
+   curl -X GET "https://api.datadoghq.com/api/v1/logs/config/pipelines" \
+    -H "Accept: application/json" \
+    -H "DD-API-KEY: ${DD_API_KEY}" \
+    -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > my-pipelines_config.json
+   ```
 
-This JSON file can be used directly with CloudPrem.
+   This JSON file can be used directly with CloudPrem.
 
-2. Set in Helm Chart: Provide the path to your JSON configuration file using the pipelinesConfig parameter in the CloudPrem Helm chart.
+2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the CloudPrem Helm chart:
 
-```bash
-helm repo update
-helm upgrade <release-name> -n <namespace> --set-file pipelinesConfig=./pipelines_config.json -f <custom_values_file.yaml>
-```
+   ```bash
+   helm repo update
+   helm upgrade <release-name> -n <namespace> --set-file pipelinesConfig=./pipelines_config.json -f <custom_values_file.yaml>
+   ```
 
-CloudPrem logs an informational message (Successfully read pipeline config file) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
-**Helm limitation**: Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.  
+   CloudPrem logs an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
+   **Note**: Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.
 
 ## Configuration file format
 
 The configuration is a JSON array, where each element represents a processor or a nested pipeline.  
+
 The order of elements in the array defines the sequential execution order of the processors.  The structure mirrors the output of the Datadog API endpoint `api/v1/logs/config/pipelines`.
 
 
@@ -98,14 +102,14 @@ The order of elements in the array defines the sequential execution order of the
 ]
 ```
 
-## Compatibility with Datadog SaaS Pipelines
+## Compatibility with Datadog Pipelines
 
-CloudPrem processing is designed to align closely with Datadog SaaS, allowing direct use of existing SaaS pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
-- Some filter queries can’t be parsed, such as combining wildcards `@data.message:+*`.
-- Filter on `message` has a different matching behavior (also affects e.g. category processor).
+CloudPrem processing is designed to align closely with [Datadog Log Log Management][3], allowing direct use of existing pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+- Some filter queries can't be parsed, such as combining wildcards `@data.message:+*`.
+- Filter on `message` has a different matching behavior (it also affects the category processor).
 - CloudPrem uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
-- Groks are using regular expressions internally. The regex engines may have slightly different matching behavior.
-- Some grok patterns can’t be parsed (for example, `%{?>notSpace:db.severity}`)
+- Groks use regular expressions internally. The regex engines may have slightly different matching behavior.
+- Some grok patterns can't be parsed (for example, `%{?>notSpace:db.severity}`).
 
 Ignored processors appear as a warning in the indexer logs.
 
@@ -133,3 +137,5 @@ Ignored processors appear as a warning in the indexer logs.
 {{< partial name="whats-next/whats-next.html" >}} 
 
 [1]: /logs/log_configuration/pipelines/?tab=source
+[2]: /api/latest/logs-pipelines/#get-all-pipelines
+[3]: /logs/log_configuration/processors/

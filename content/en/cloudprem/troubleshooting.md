@@ -13,9 +13,12 @@ further_reading:
 - link: "/cloudprem/cluster/"
   tag: "Documentation"
   text: "Cluster Sizing and Operations"
-- link: "/cloudprem/advanced/"
+- link: "/cloudprem/processing/"
   tag: "Documentation"
-  text: "Advanced Configurations"
+  text: "CloudPrem Log Processing"
+- link: "/cloudprem/aws_config"
+  tag: "Documentation"
+  text: "AWS Configuration"
 ---
 
 If you experience unexpected behavior with CloudPrem, there are a few common issues you can investigate. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
