@@ -103,7 +103,7 @@ database_monitoring:
       discovery_interval: 300
 ```
 
-The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
+The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if the tag `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
 
 ```yaml
 database_monitoring:
