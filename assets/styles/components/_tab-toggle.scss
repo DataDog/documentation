@@ -5,6 +5,107 @@ $tab-hover-bg: rgba($ddpurple, 0.05);
 $tab-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
+// Multi-code-lang tabs specific styles
+.code-lang-list-container {
+  background: #fff;
+  z-index: 2;
+  position: relative;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 0;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 6px;
+  }
+
+  .nav-item {
+    margin-right: 10px;
+    padding-bottom: 6px;
+
+    .nav-link {
+      background: #fff;
+      border: none;
+      color: #444;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 6px 10px 7px 10px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 0.625rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+        border: none;
+        color: $tab-active-color;
+        background: #fff;
+      }
+
+      &.active {
+        background: $tab-active-color;
+        color: #fff;
+        box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        border: none;
+      }
+    }
+  }
+
+  .nav-item::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  li::marker {
+    content: none;
+    display: none;
+  }
+}
+
+// API docs response toggle specific styles
+.nav-tabs.response-toggle {
+  margin-bottom: 20px;
+  border-bottom: none;
+
+  .nav-item {
+    margin-right: 10px;
+    padding-bottom: 6px;
+
+    .nav-link {
+      background: #fff;
+      border: none;
+      color: #444;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 6px 10px 7px 10px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 0.625rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+        border: none;
+        color: $tab-active-color;
+        background: #fff;
+      }
+
+      &[aria-expanded="true"], &.active {
+        background: $tab-active-color;
+        color: #fff;
+        box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        border: none;
+      }
+    }
+  }
+}
+
 // Common tab styles
 .code-tabs {
   position: relative;
@@ -58,14 +159,15 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     background: #FFFFFF;
     border: 1px solid $tab-border-color;
     padding: 24px;
-    margin: -1px 0 32px 0;
-    position: relative;
     z-index: 1;
+    position: relative;
+    margin: -1px 0 32px 0;
     box-shadow: $tab-shadow;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    border-top: 1px solid $tab-border-color;
 
     dl {
       background-color: transparent;
@@ -301,40 +403,47 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   }
 }
 
-// Styles for API page response tabs
-.nav-tabs.response-toggle {
-    margin-bottom: 20px;
+.code-tabs .nav-tabs,
+.code-tabs .code-lang-list-container {
+  position: relative;
+  border-bottom: none;
+  background: #fff;
+  z-index: 2;
+}
 
-    a {
-        -moz-osx-font-smoothing: grayscale;
-        font-size: 16px;
-        background: #ffffff;
-        border: transparent;
-        padding: 6px 10px 7px 10px;
-        font-weight: 600;
-        border-radius: 3px;
-        display: inline-block;
-        &.active,
-        &[aria-expanded="true"] {
-            box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
-            background-color: $ddpurple;
-            color: white;
-        }
+.code-tabs .nav-tabs::after,
+.code-tabs .code-lang-list-container::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-bottom: 1px solid $tab-border-color;
+  z-index: 1;
+  pointer-events: none;
+}
 
-        &:hover {
-            box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-            border: none;
-        }
+.code-tabs .nav-tabs li,
+.code-tabs .code-lang-list-container li {
+  border-bottom: none;
+}
 
-        &:active {
-            box-shadow: 0px 1px 4px rgba(30, 5, 36, 0.24),
-                        0px 1px 1px rgba(30, 5, 36, 0.16);
-            border-radius: 3px;
-        }
-    }
+.code-tabs .nav-tabs li.active,
+.code-tabs .code-lang-list-container li.active {
+  border-bottom: none;
+}
 
-    .nav-item::before {
-        content: "";
-    }
+.code-tabs .nav-tabs li.active a {
+  background: #fff;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 3;
+  display: block;
+  border-bottom: 1px solid #fff;
+}
+
+.code-tabs .nav-tabs li {
+  height: 100%;
 }
