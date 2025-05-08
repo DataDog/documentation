@@ -5,6 +5,8 @@ disable_toc: false
 
 Use Observability Pipelines' HTTP/S Server source to collect HTTP client logs. Select and set up this source when you [set up a pipeline][1].
 
+You can also [send AWS vended logs with Datadog Lambda Forwarder to Observability Pipelines](#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines).
+
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/http_server %}}
