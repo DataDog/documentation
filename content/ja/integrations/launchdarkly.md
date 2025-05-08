@@ -25,7 +25,7 @@ author:
 categories:
 - 構成 & デプロイ
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
 display_on_public_website: true
@@ -48,10 +48,11 @@ tile:
   classifier_tags:
   - Category::Configuration & Deployment
   - Category::Notifications
-  - Offering::UI Extension
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
   media:
@@ -59,12 +60,6 @@ tile:
     image_url: images/video-thumbnail.png
     media_type: ビデオ
     vimeo_id: 637675972
-  - caption: LaunchDarkly のフラグウィジェットとイベントインテグレーションで構成された LaunchDarkly ダッシュボード。
-    image_url: images/dashboard.png
-    media_type: image
-  - caption: フラグ変更サイドパネルを開けた LaunchDarkly ダッシュボード。
-    image_url: images/toggle-flag.png
-    media_type: image
   overview: README.md#Overview
   resources:
   - resource_type: その他
@@ -95,10 +90,6 @@ Datadog の [LaunchDarkly][1] イベントインテグレーションは、モ�
 ### 機能フラグ追跡インテグレーション
 
 LaunchDarkly の機能フラグ追跡インテグレーションは、RUM データを機能フラグで強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーにユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
-
-### ダッシュボードウィジェット
-
-LaunchDarkly のダッシュボードウィジェットでは、サブセット機能のフラグターゲティングトグルを Datadog ダッシュボードに固定し、1 つのウィンドウから機能の稼働を監視・実行することができます。
 
 ### リレープロキシメトリクスのインテグレーション
 
@@ -132,29 +123,9 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 });
 ```
 
-### ダッシュボードウィジェット
-
-1. [LaunchDarkly インテグレーションタイル][6]で、LaunchDarkly インテグレーションがインストールされていることを確認します。
-1. Datadog で、既存のダッシュボードに移動するか、新しいダッシュボードを作成します。
-1. **Add Widgets** ボタンを押すと、ウィジェットドローワが表示されます。
-1. **LaunchDarkly** と検索すると、ウィジェットドローワの **Apps** セクションに LaunchDarkly ウィジェットが見つかります。
-1. LaunchDarkly ウィジェットアイコンをクリックまたはドラッグしてダッシュボードに追加し、**LaunchDarkly editor** モーダルを開きます。
-1. LaunchDarkly アカウントを接続するには、**Connect** ボタンを押します。新しいウィンドウが開き、Datadog を認証するよう促されます。
-1. **Authorize** をクリックすると、Datadog に戻ります。
-1. 次に、**LaunchDarkly editor** で、以下のウィジェットオプションを構成します。
-
-   - **LaunchDarkly project**: ダッシュボードウィジェットに関連付けたい LaunchDarkly プロジェクトの名前です。
-   - **LaunchDarkly environment**: ダッシュボードウィジェットに関連付けたい LaunchDarkly 環境の名前です。
-   - **Environment template variable**: **LaunchDarkly environment** オプションを上書きするために使用されるオプションの [Datadog テンプレート変数][7]です。
-   - **LaunchDarkly tag filter**: オプションの `+` 区切りリストタグで、ウィジェットに表示される機能フラグをフィルタリングすることができます。複数のタグが含まれている場合、含まれているすべてのタグにマッチするフラグのみがウィジェットに表示されます。省略された場合は、プロジェクトのすべての機能フラグがウィジェットに表示されます。
-   - **Sort**: ウィジェットに表示されるフラグの順番。デフォルトは **Newest** です。
-
-1. オプションでウィジェットのタイトルを指定します。
-1. **Save** を押して、Datadog ダッシュボードウィジェットの構成を完了します。
-
 ### Relay Proxy メトリクス
 
-Relay Proxy の[メトリクスインテグレーションのドキュメント][8]に従って、この機能を構成することができます。
+Relay Proxy の[メトリクスインテグレーションのドキュメント][6]に従って、この機能を構成することができます。
 
 ## 収集データ
 
@@ -164,7 +135,7 @@ LaunchDarkly Relay Proxy は、以下のメトリクスを Datadog に送信す�
 
 - **`connections`**: SDK から Relay Proxy への現在存在するストリーム接続数。
 - **`newconnections`**: Relay Proxy が起動してからのストリーム接続の累積数。
-- **`requests`**: Relay Proxy のすべての[サービスエンドポイント][9] (ステータスエンドポイントを除く) が起動してから受け取ったリクエストの累積数。
+- **`requests`**: Relay Proxy のすべての[サービスエンドポイント][7] (ステータスエンドポイントを除く) が起動してから受け取ったリクエストの累積数。
 
 ### イベント
 
@@ -176,7 +147,7 @@ LaunchDarkly インテグレーションには、サービスのチェック機�
 
 ## サポート
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
@@ -187,8 +158,6 @@ LaunchDarkly インテグレーションには、サービスのチェック機�
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.launchdarkly.com/integrations/datadog/events
 [5]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
-[6]: https://app.datadoghq.com/integrations/launchdarkly
-[7]: https://docs.datadoghq.com/ja/dashboards/template_variables/
-[8]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/metrics.md
-[9]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/endpoints.md
-[10]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/metrics.md
+[7]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/endpoints.md
+[8]: https://docs.datadoghq.com/ja/help/

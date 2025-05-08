@@ -110,10 +110,17 @@ The `string` used for `resourceKey` in both calls must be unique for the resourc
 
 ### Track custom errors
 
-To track specific errors, notify `DdRum` when an error occurs with the message, source, exception, and additional attributes.
+To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
 
 ```cs
-DatadogSdk.Instance.Rum.AddError("This is an error message.");
+try
+{
+  // Error prone code
+}
+catch(Exception e)
+{
+  DatadogSdk.Instance.Rum.AddError(e, RumErrorSource.Source);
+}
 ```
 
 ## Track custom global attributes
@@ -139,13 +146,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
 
-The following attributes are **optional**, provide **at least** one of them:
-
-| Attribute | Type   | Description                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use `DatadogSdk.SetUserInfo`.
 

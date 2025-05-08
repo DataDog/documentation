@@ -72,8 +72,6 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo
@@ -121,14 +119,16 @@ code_language_ids:
     otel: "OpenTelemetry API"
     status_legacy: "Status Page (Legacy)"
     status_page: "Status Page"
-    notebooks_legacy: "Notebooks (Legacy)"
-    notebooks_new: "Notebooks (New)"
     envoy: "Envoy"
     httpd: "Apache HTTP Server"
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
+    windows_iis: "Windows IIS" 
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
+    apigateway: "Amazon API Gateway"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -187,7 +187,10 @@ core_product:
         - 'core_product:synthetic monitoring'
         - 'core_product:digital experience monitoring'
         - 'specific_interest:testing'
-    - name: csm
+    - name: cloud security
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: workload protection
       requires_all_keyvals:
         - 'core_product:security'
     - name: cspm

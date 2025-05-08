@@ -54,7 +54,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud and Azure GermanyCloud is not supported. Archiving to Azure GovCloud is supported in Preview. To request access, contact Datadog support.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -242,7 +242,7 @@ Firewall rules are not supported.
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
+You can either select a storage class for your archive or [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
 [Rehydration][2] only supports the following storage classes:
 
@@ -269,6 +269,18 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 [1]: /logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
+
+Archiving and [Rehydration][1] supports the following access tiers:
+
+- Standard
+- Nearline
+- Coldline
+- Archive
+
+[1]: /logs/archives/rehydrating/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 #### Server side encryption (SSE)

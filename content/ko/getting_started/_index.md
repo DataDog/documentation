@@ -1,7 +1,7 @@
 ---
 aliases:
-- /overview
-- /getting_started/faq/
+- /ko/overview
+- /ko/getting_started/faq/
 cascade:
   algolia:
     category: 시작하기
@@ -35,7 +35,7 @@ Datadog는 모든 스택에서 소프트웨어 개발 단계를 관찰할 수 �
         <td><p><strong>개발</strong></p></td>
         <td>
         <ul>
-        <li> <a href="/code_analysis/?tab=codevulnerabilities">코드 분석</a>으로 텍스트 편집기나 GitHub의 코드 취약성을 강조 표시.</li>
+        <li> <a href="/security/code_security/">코드 보안</a>으로 텍스트 편집기나 GitHub의 코드 취약성을 강조 표시.</li>
         <li><a href="/coscreen/">CoScreen</a>으로 원격 페어 프로그래밍 세션을 가능하게 함.</li></ul>
         </td>
     </tr>
@@ -81,7 +81,7 @@ Datadog는 모든 스택에서 소프트웨어 개발 단계를 관찰할 수 �
 
 ## 자세히 알아보기
 
-{{< learning-center-callout header="활성화 웨비나 세션 참여하기" btn_title="신청하기" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+{{< learning-center-callout header="활성화 웨비나 세션 참여하기" hide_image="true" btn_title="신청하기" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
   이 기초 활성화 세션에 참여하면 "Datadog란 무엇이고 어떤 일을 할 수 있나요?"와 같은 핵심 질문에 답을 얻을 수 있습니다. Datadog에 데이터를 보내는 방법과 다양한 환경, 애플리케이션, 인프라스트럭처의 상태를 알아보려면 어떤 페이지를 방문해야 하는지 알아봅니다.
 {{< /learning-center-callout >}}
 
@@ -113,7 +113,7 @@ Datadog 탐색 방법을 빠르게 배울 좋은 방법은 [빠르게 시작하�
 {{< whatsnext desc="제품">}}
 {{< nextlink href="/getting_started/containers" >}}<u>컨테이너</u>: 에이전트 자동 탐지와 Datadog 연산자 사용 방법 알아보기{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>AWS Lambda용 서버리스</u>: 서버리스 인프라스트럭처에서 메트릭, 로그, 트레이스를 수집하는 방법 알아보기{{< /nextlink >}}
-{{< nextlink href="/getting_started/service_catalog" >}}<u>서비스 카탈로그</u>: 서비스 카탈로그에서 대규모 서비스 소유권, 신뢰성, 성능 관리하기{{< /nextlink >}}
+{{< nextlink href="/getting_started/software_catalog" >}}<u>Software Catalog</u>: Software Catalog에서 대규모 서비스 소유권, 신뢰성, 성능 관리하기{{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>추적</u>: 소규모 애플리케이션을 추적하도록 에이전트 설정하기{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>프로파일러</u>: 연속적 프로파일러를 사용해 코드의 성능 문제를 찾고 수정하기{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>데이터베이스 모니터링</u>: 데이터베이스의 상태와 성능을 확인하고 발생한 오류를 빠르게 트러블슈팅하기{{< /nextlink >}}
@@ -125,9 +125,9 @@ Datadog 탐색 방법을 빠르게 배울 좋은 방법은 [빠르게 시작하�
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: 팀에서 Cloud SIEM 사용하기 전에 모범 사례 알아보기{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>로그</u>: 첫 로그를 전송하고 로그 처리를 사용해 로그 보강하기{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI 가시성</u>: CI 공급자 통합을 설정해 CI 파이프라인 데이터 수집하기{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_visibility" >}}<u>테스트 가시성</u>: Datadog에 테스트 서비스를 설정해 CI 테스트 데이터 수집하기{{< /nextlink >}}
-{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>지능형 테스트 실행기</u>: 코드 변경과 관련된 테스트만 실행해 스위트를 최적화하고 CI 비용 줄이기{{< /nextlink >}}
-{{< nextlink href="/getting_started/code_analysis" >}}<u>코드 분석</u>: 품질 및 보안 문제와 관련한 리포지토리 분석하기{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_optimization" >}}<u>테스트 최적화</u>: Datadog에 테스트 서비스를 설정해 CI 테스트 데이터 수집하기{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_impact_analysis" >}}<u>테스트 영향 분석</u>: 코드 변경과 관련된 테스트만 실행해 스위트를 최적화하고 CI 비용 줄이기{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_security" >}}<u>코드 보안</u>: 개발에서 런타임까지 애플리케이션에서 자사 코드와 오픈 소스 라이브러리 분석하기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

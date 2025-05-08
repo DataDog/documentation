@@ -45,11 +45,11 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 
 La integración Azure Blob Storage no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Azure Blob Storage no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

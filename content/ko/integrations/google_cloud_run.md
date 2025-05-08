@@ -29,9 +29,25 @@ categories:
 - orchestration
 custom_kind: integration
 dependencies: []
+description: 클러스터 전체에서 메트릭, 트레이스, 로그를 수집하고 Datadog에서 분석하세요.
 display_on_public_website: true
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitoring-cloud-run-datadog/
+  tag: 블로그
+  text: Datadog으로 Cloud Run 모니터링
+- link: https://www.datadoghq.com/blog/collecting-cloud-run-metrics/
+  tag: 블로그
+  text: Google Cloud Run 메트릭을 수집하는 방법
+- link: https://www.datadoghq.com/blog/key-metrics-for-cloud-run-monitoring/
+  tag: 블로그
+  text: Google Cloud Run 모니터링을 위한 주요 메트릭
+- link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
+  tag: 설명서
+  text: Anthos용 Google Cloud Run
 git_integration_title: google_cloud_run
+has_logo: true
 integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
@@ -65,6 +81,7 @@ tile:
     url: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
   support: README.md#Support
   title: Google Cloud Run
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->

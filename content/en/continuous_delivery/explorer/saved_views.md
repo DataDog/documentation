@@ -17,7 +17,7 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 
 ## Overview
 
-Saved views allow you to save the state of the [CD Visibility Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Deployment Executions page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range.
 
 Saved views can keep track of your:
 
@@ -30,7 +30,7 @@ You can also use saved views to share common queries and configurations with you
 
 ## Saved views
 
-To access your saved views, expand **> Views** to the left in the [CD Visibility Explorer][1].
+To access your saved views, expand **> Views** to the left in the [Deployment Executions page][1].
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your Explorer.
 
@@ -50,7 +50,7 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [CD Visibility Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [Deployment Executions page][1]. Default views are set per user and have no impact on your organization.
 
 {{< img src="continuous_delivery/explorer/default_view.png" alt="Default view in the CD Visibility Explorer" width="100%" >}}
 
@@ -67,4 +67,3 @@ In the default view entry in the **Views** panel, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployments/executions
-[2]: /continuous_delivery/explorer/

@@ -101,7 +101,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 | Module         | Versions                                | Support Type                | Instrumentation level           |
 |:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
-| CakePHP        | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | All supported PHP versions  | Framework-level instrumentation |
 | CodeIgniter    | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
 | CodeIgniter    | 3.x                                     | All supported PHP versions  | Generic web tracing             |
 | Drupal         |                                         | All supported PHP versions  | Framework-level instrumentation |
@@ -133,7 +133,7 @@ Tracing from the CLI SAPI is enabled by default. To selectively disable tracing 
 
 | Module          | Versions            | Support Type               |
 |:----------------|:--------------------|:---------------------------|
-| CakePHP Console | 2.x                 | All supported PHP versions |
+| CakePHP Console | 2.x, 3.x            | All supported PHP versions |
 | Laravel Artisan | 5.x, 8.x, 9.x, 10.x | All supported PHP versions |
 | Symfony CLI     | 4.x, 5.x, 6.x, 7.x  | All supported PHP versions |
 

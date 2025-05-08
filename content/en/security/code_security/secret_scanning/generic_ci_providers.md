@@ -1,6 +1,6 @@
 ---
-title: Secrets Scanning with Generic CI Providers
-description: Use Datadog Static Secrets Scanning to scan pre-prod code for quality issues and security vulnerabilities.
+title: Secret Scanning with Generic CI Providers
+description: Use Datadog Static Secret Scanning to scan pre-prod code for quality issues and security vulnerabilities.
 is_beta: true
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
@@ -13,7 +13,7 @@ algolia:
 {{% /site-region %}}
 
 
-If you don't use [GitHub Actions][5] to set up secrets scanning, you can run the [Datadog CI][4] CLI directly in your CI pipeline platform and upload Static Analysis Results Interchange Format (SARIF) reports to Datadog.
+If you don't use [GitHub Actions][5] to set up Secret Scanning, you can run the [Datadog CI][4] CLI directly in your CI pipeline platform and upload Static Analysis Results Interchange Format (SARIF) reports to Datadog.
 
 Prerequisites:
 
@@ -65,7 +65,7 @@ datadog-ci sarif upload /tmp/report.sarif
 ```
 
 <div class="alert alert-info">
-  This example uses the x86_64 Linux version of Datadog's static analyzer for secrets scanning. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
+  This example uses the x86_64 Linux version of Datadog's static analyzer for Secret Scanning. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.

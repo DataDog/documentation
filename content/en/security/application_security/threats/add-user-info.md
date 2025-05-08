@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App and API Protection"
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Other setup considerations and configuration options"
@@ -16,7 +16,7 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for AAP to block authenticated attackers. This allows AAP to associate attacks and business logic events to users.
 
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
@@ -623,7 +623,9 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events.
+
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. Version v5.48.0 of dd-trace-js introduces new methods under the `eventTrackingV2` namespace. Existing event tracking methods are retained for compatibility.
+
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -634,13 +636,16 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
+id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const user = 'user-id' // user could be just the ID
+const login = 'user@email.com'
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
 // Log a successful user authentication event
-tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
+// user and metadata are optional
+tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /tab %}}
 
@@ -649,12 +654,14 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
+const login = 'user-id' // the string used by the user to log in
 const userExists = true // if the user login exists in database for example
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
+// Log a failed user authentication event
+// userExists is optional and it is defaulted to false
 // metadata is optional
-tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
+tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /tab %}}
 
@@ -672,6 +679,60 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 {{< /tabs >}}
 
+#### Migrating to the new login success and failure methods 
+
+The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+
+**Note**: the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{< tabs >}}
+{{% tab "Login success" %}}
+```javascript
+const tracer = require('dd-trace')
+
+// in a controller:
+const user = {
+  id: 'user-id',
+  email: 'user@email.com'
+} // same as before, but now the object is optional. Providing a user ID will nonetheless help with post-compromised activity correlation
+
+const login = 'user@email.com' // new mandatory argument
+
+const metadata = { 
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the main argument
+  'key': 'value'
+}
+
+// tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // deprecated
+tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
+```
+{{% /tab %}}
+{{% tab "Login failure" %}}
+```javascript
+const tracer = require('dd-trace')
+
+// in a controller with the deprecated method:
+const userId = 'user-id' // No longer mandatory, but helpful when available
+const login = 'user@email.com' // new mandatory argument
+const userExists = true
+const metadata = { 
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the first argument
+  'usr.id': userId, // Helps with correlating login failures with the rest of the user activity
+  'key': 'value'
+}
+
+// tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata) // deprecated
+tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 {{< /programming-lang >}}
 
@@ -726,13 +787,13 @@ track_custom_event(tracer, event_name, metadata)
 
 ### Tracking business logic information without modifying the code
 
-If your service has ASM enabled and [Remote Configuration][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+If your service has AAP enabled and [Remote Configuration][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
 
 To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the AAP homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
 
-This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to AAP. If you don't need the condition, you may set a broad condition to match everything.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
 
@@ -744,7 +805,7 @@ Once saved, the rule is deployed to instances of the service that have Remote Co
 
 ## Automatic user activity event tracking
 
-When ASM is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
+When AAP is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -769,7 +830,7 @@ Automatic user activity tracking offers the following modes:
 - `anonymization` mode (short name: `anon`):
   - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
 - `disabled` mode:
-  - ASM libraries do *not* collect any user ID from their automated instrumentations. 
+  - AAP libraries do *not* collect any user ID from their automated instrumentations. 
   - User login events are not emitted.
 
 <div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
@@ -795,7 +856,7 @@ The following modes are deprecated:
 
 ## Disabling user activity event tracking 
 
-To disable automated user activity detection through your [ASM Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 

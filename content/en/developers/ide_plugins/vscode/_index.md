@@ -21,7 +21,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-    The Datadog extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
+    The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
@@ -162,7 +162,7 @@ Datadog anonymously collects information about your usage of this IDE, including
 
 If you don't wish to send this data to [Datadog][1], you can opt out at any time in the VS Code extension settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
-<div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> telemetry setting.</div>
+<div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/configure/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> setting.</div>
 
 ## Help and feedback
 

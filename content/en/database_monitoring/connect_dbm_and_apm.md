@@ -49,12 +49,14 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [psycopg][34]          | {{< X >}} |           |                     |                     |                      |
 |             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
 |                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
 |                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |                      |
 |                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |                      |
 |                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymongo][35]          |           |           |                     |                     | {{< X >}} *****      |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |                      |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |                      |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |                      |
@@ -90,6 +92,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
   - Prerequisite:
     - Node.js tracer 5.37.0 or greater
 
+\*\*\*\*\* Service/Full mode MongoDB for Python:
+  - Prerequisite:
+    - Python tracer 3.5.0 or greater
+
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
 
@@ -104,6 +110,8 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
 ```
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
+
+<div class="alert alert-danger">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -219,7 +227,7 @@ Enable the prepared statements tracing for Postgres using **one** of the followi
 - Set the system property `dd.dbm.trace_prepared_statements=true`
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
-**Note**: The prepared statements instrumentation overwrites the `Application` property, leading to an extra round trip to the database. While this has a negligible impact on latency, the overwritten property inflates metrics aggregated by application name.
+**Note**: The prepared statements instrumentation overwrites the `Application` property with the text `_DD_overwritten_by_tracer`, and causes an extra round trip to the database. This additional round trip normally has a negligible impact on the SQL statement execution time.
 
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
@@ -284,17 +292,21 @@ Update your app dependencies to include [dd-trace-py>=1.9.0][1]:
 pip install "ddtrace>=1.9.0"
 ```
 
-Install [psycopg2][2]:
+For Postgres, install [psycopg2][2]:
 ```
 pip install psycopg2
+```
+
+For MongoDB (requires dd-trace-py>=3.5.0), install pymongo:
+```
+pip install pymongo
 ```
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_DBM_PROPAGATION_MODE=full`
 
-Full example:
+Postgres example:
 ```python
-
 import psycopg2
 
 POSTGRES_CONFIG = {
@@ -311,6 +323,24 @@ cursor = conn.cursor()
 # execute sql queries
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+MongoDB example:
+```python
+from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client['test_database']
+collection = db['test_collection']
+
+# Insert a document
+collection.insert_one({"name": "test", "value": 1})
+
+# Query documents
+results = collection.find({"name": "test"})
+for doc in results:
+    print(doc)
 ```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
@@ -487,3 +517,5 @@ View historical performance of similar queries to those executed in your trace, 
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
 [33]: https://github.com/mongodb/node-mongodb-native
+[34]: https://www.psycopg.org/psycopg3/
+[35]: https://pymongo.readthedocs.io/en/stable/
