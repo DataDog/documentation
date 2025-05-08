@@ -79,7 +79,7 @@ If the previous conditions are true, an organization drop-down selector appears 
 
 The following screenshot shows an example of a cross-organization formula query. The widget graphs the number of ingested events per service. To get the total number of events, the cross-organization formula query sums the data from organization A (in the query **a**) and organization B (in the query **b**).
 
-{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query.png" alt="Screenshot showing configuration of a Dashboard widget with a cross-organization query" >}}
+{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query-1.png" alt="Screenshot showing configuration of a Dashboard widget with a cross-organization query" >}}
 
 ### In the API
 

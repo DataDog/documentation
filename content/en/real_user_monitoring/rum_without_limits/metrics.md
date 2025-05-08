@@ -54,7 +54,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.view.network_settled` | Network settled | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.refresh_rate` | Average of user's refresh rate (FPS) | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
-| `rum.measure.rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
+| `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
 
 ## API
 
