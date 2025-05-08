@@ -25,7 +25,7 @@ When you [install or update the Datadog Agent][1] with **APM Instrumentation** e
 
 After instrumentation, you can optionally:
 - [configure Unified Service Tags (USTs)](#configure-universal-service-tags)
-- [enable additional tracing-powered products](#enable-additional-apm-related-products), such as Continuous Profiler or Application Security Monitoring
+- [enable additional SDK-dependent products and features](#enable-sdk-dependent-products-and-features), such as Continuous Profiler or Application Security Monitoring
 
 Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
@@ -35,7 +35,7 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
-## Configure Universal Service Tags
+## Configure Unified Service Tags
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
 

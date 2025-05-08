@@ -66,8 +66,6 @@ To stop producing traces for all services on your infrastructure:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/site/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases

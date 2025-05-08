@@ -33,7 +33,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
 1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
    
-   {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernets through the Datadog app" style="width:100%;" >}}
+   {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernetes through the Datadog app" style="width:100%;" >}}
 
 1. Deploy the Agent using the generated configuration file.
 1. Restart your applications.
@@ -497,13 +497,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[3]: /tracing/metrics/runtime_metrics/
-[4]: /tracing/software_catalog/
-[8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
-[10]: /tracing/glossary/#instrumentation
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[12]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 
 

@@ -1,5 +1,9 @@
 ---
 title: Enable SDK-dependent products on Linux
+further_reading:
+  - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+    tag: Documentation
+    text: Learn more about Single Step Instrumentation
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -33,7 +37,10 @@ On Linux hosts that use Single Step Instrumentation (SSI), you can enable or dis
 
 ## Supported products and configuration keys
 
-| Feature                          | Configuration key             |
+The following table lists the products and their respective configuration keys:
+
+
+| Product                          | Configuration key             |
 |----------------------------------|-------------------------------|
 | [APM Tracing][2]                      | `DD_APM_TRACING_ENABLED`      |
 | [Continuous Profiler][3]              | `DD_PROFILING_ENABLED`        |

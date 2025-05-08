@@ -87,9 +87,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /tracing/software_catalog/
-[3]: /tracing/metrics/runtime_metrics/
-[4]: /tracing/software_catalog/
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
