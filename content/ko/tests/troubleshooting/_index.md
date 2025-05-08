@@ -166,7 +166,7 @@ title: 테스트 가시성 트러블슈팅
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /ko/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /ko/continuous_integration/intelligent_test_runner/
 [13]: /ko/tests/#parameterized-test-configurations
 [14]: /ko/tests/#supported-features
