@@ -92,35 +92,35 @@ The following SQL functions are supported. For Window function, see the separate
 
 | Function                                         | Return Type                           | Description                                                                 |
 |--------------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------|
-| `min(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
-| `max(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
-| `count(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
-| `sum(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
-| `avg(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
-| `ceil(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
-| `floor(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
-| `round(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
-| `lower(string s)`                                | string                                | Returns the string as lowercase.                                            |
-| `upper(string s)`                                | string                                | Returns the string as uppercase.                                            |
-| `abs(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
-| `coalesce(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
-| `cast(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
-| `length(string s)`                               | integer                               | Returns the number of characters in the string.                             |
-| `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
-| `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
-| `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `strpos(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
-| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
-| `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
-| `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
-| `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
-| `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
-| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array.                                |
-| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
-| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
-| `array_agg(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
-| `unnest(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
+| `MIN(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
+| `MAX(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
+| `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
+| `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
+| `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
+| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
+| `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
+| `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
+| `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                            |
+| `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                            |
+| `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
+| `COALESCE(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
+| `CAST(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
+| `LENGTH(string s)`                               | integer                               | Returns the number of characters in the string.                             |
+| `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
+| `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
+| `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
+| `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
+| `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
+| `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
+| `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
+| `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
+| `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
+| `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
+| `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
+| `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
+| `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -234,7 +234,7 @@ SELECT
 ### `TRIM`
 {{< code-block lang="sql" >}}
 SELECT
-  trim(name) AS trimmed_name
+  TRIM(name) AS trimmed_name
 FROM
   users
 {{< /code-block >}}
@@ -242,7 +242,7 @@ FROM
 ###  `REPLACE`
 {{< code-block lang="sql" >}}
 SELECT
-  replace(description, 'old', 'new') AS updated_description
+  REPLACE(description, 'old', 'new') AS updated_description
 FROM
   products
 {{< /code-block >}}
@@ -250,7 +250,7 @@ FROM
 ### `SUBSTRING`
 {{< code-block lang="sql" >}}
 SELECT
-  substring(title, 1, 10) AS short_title
+  SUBSTRING(title, 1, 10) AS short_title
 FROM
   books
 {{< /code-block >}}
@@ -287,7 +287,7 @@ Supported extraction units:
 
 {{< code-block lang="sql" >}}
 SELECT
-  extract(year FROM purchase_date) AS purchase_year
+  EXTRACT(year FROM purchase_date) AS purchase_year
 FROM
   sales
 {{< /code-block >}}
@@ -314,7 +314,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+  TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -339,7 +339,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_char(order_date, 'MM-DD-YYYY') AS formatted_date
+  TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
 {{< /code-block >}}
@@ -359,7 +359,7 @@ Supported truncations:
 
 {{< code-block lang="sql" >}}
 SELECT
-  date_trunc('month', event_time) AS month_start
+  DATE_TRUNC('month', event_time) AS month_start
 FROM
   events
 {{< /code-block >}}
@@ -371,7 +371,7 @@ SELECT
 FROM
   emails
 WHERE
-  regexp_like(email_address, '@example\.com$')
+  REGEXP_LIKE(email_address, '@example\.com$')
 {{< /code-block >}}
 
 ### `CARDINALITY`
