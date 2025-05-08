@@ -26,11 +26,11 @@ This guide walks you through the recommended aggregator architecture for new Obs
 
 Based on performance benchmarking for a pipeline transforming data using 12 processors, the Worker can handle approximately 1TB per vCPU per day. For example, if you have 4TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][1] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data-loss. It also insures high availability should a Worker go down for any reason.
 
-| Cloud Provider| Recommendation  |
-| ------------- | --------------- |
-| AWS           | c7i.xlarge (minimum) |
-| Azure         | F4s v2       	  |
-| Google Cloud  | c2-standard-4   |
+| Cloud Provider| Recommendation (minimum) |
+| ------------- | ------------------------ |
+| AWS           | c7i.xlarge               |
+| Azure         | F4s v2       	           |
+| Google Cloud  | c2-standard-4            |
 
 **Note**: 1 vCPU = 1 ARM physical CPU or 0.5 Intel physical CPU with hyperthreading.
 
