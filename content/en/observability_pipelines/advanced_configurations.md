@@ -104,4 +104,4 @@ The following is a list of bootstrap options, their related pipeline environment
 [3]: /getting_started/site/
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
-[6]: /agent/remote_config/
+[6]: /remote_configuration

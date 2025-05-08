@@ -149,11 +149,11 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile
+[1]: /remote_configuration
 [2]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/data-security
-[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[5]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration-on-the-api-key
+[4]: /remote_configuration
+[5]: /remote_configuration
 [6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
 [7]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [8]: mailto:success@datadoghq.com

@@ -2,7 +2,7 @@
 title: Fleet Automation
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"
@@ -31,17 +31,6 @@ With the Fleet Automation platform, you can:
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
-## Configure Fleet Automation
-
-Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
-
-If you're using an older Agent, you might still be able to enable the following Datadog features individually:
-- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
-- **Agent configuration**: Agent version 7.39/6.39 or later is required to enable the Agent configuration tab. It is enabled by default in Agent versions 7.47.0/6.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
-
-Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
-
 ## Observe your fleet
 
 Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
@@ -67,7 +56,6 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
 
-
 ## Control access to Fleet Automation
 
 Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
@@ -87,7 +75,7 @@ For information on setting up roles and permissions, see [Access Control][5].
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/configuration/agent-configuration-files/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration
 [4]: /infrastructure/list/#agent-configuration
 [5]: https://docs.datadoghq.com/account_management/rbac/
 [6]: /agent/fleet_automation/remote_management/

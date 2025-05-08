@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -32,7 +32,7 @@ To enable Remote Agent Management:
 
 1. Use the generated Agent installation command to upgrade your Agent.
 
-   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.
+   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -82,7 +82,7 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 
 ### Upgrade precedence
 
-For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version .
+For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 ### Mirrors and proxies
 
@@ -102,7 +102,7 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#do
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /agent/fleet_automation/setup/
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
