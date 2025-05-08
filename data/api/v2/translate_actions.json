@@ -1353,6 +1353,16 @@
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
+  "GetOnCallTeamRoutingRules": {
+    "description": "Get a team's on-call routing rules",
+    "summary": "Get on-call team routing rules"
+  },
+  "SetOnCallTeamRoutingRules": {
+    "description": "Set a team's on-call routing rules",
+    "summary": "Set on-call team routing rules",
+    "request_description": "",
+    "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
