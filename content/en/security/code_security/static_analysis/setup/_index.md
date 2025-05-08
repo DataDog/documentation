@@ -646,8 +646,8 @@ When ingesting SARIF files, Datadog maps SARIF severities into CVSS severities u
 |----------------|---------------|
 | Error          | Critical      |
 | Warning        | High          |
-| Notice         | Medium        |
-| Info           | Low           |
+| Note           | Medium        |
+| None           | Low           |
 
 
 <!-- ## Further Reading
