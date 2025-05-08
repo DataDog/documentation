@@ -58,7 +58,8 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
-When `false` tracing agent is disabled.
+When `false` tracing agent is disabled.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -446,7 +447,7 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
-`trace.cassandra.keyspace.statement.extraction.enabled`
+`dd.trace.cassandra.keyspace.statement.extraction.enabled`
 : **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
 **Default**: `false`<br>
 By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
@@ -459,6 +460,13 @@ By default, the keyspace is extracted only if it is configured during session cr
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+
+### UDS
+
+`dd.jdk.socket.enabled`
+: **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
+**Default**: `false`<br>
+Enable native JDK support for unix domain sockets.
 
 ### Examples
 
@@ -620,3 +628,4 @@ Deprecated since version 1.9.0
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
 [19]: /security/application_security/threats/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
+[21]: /tracing/trace_collection/library_config/#traces

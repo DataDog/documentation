@@ -68,13 +68,13 @@ When using a transpiler such as TypeScript, Webpack, Babel, or others, import an
 const tracer = require('dd-trace').init();
 ```
 
-**Note**: `DD_TRACE_ENABLED` is true by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
+**Note**: `DD_TRACE_ENABLED` is `true` by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
 - import the module conditionally 
 - set `DD_TRACE_ENABLED=false` (if, for example, static or top-level ESM imports prevent conditional loading)
 
 ##### TypeScript and bundlers
 
-For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
+For TypeScript and bundlers that support ECMAScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
 
 ```typescript
 // server.ts
@@ -106,16 +106,27 @@ node --require dd-trace/init app.js
 
 #### ESM applications only: Import the loader
 
-EcmaScript Modules (ESM) applications require an additional command line argument. Run this command regardless of how the tracer is imported and initialized.
+ECMAScript Modules (ESM) applications require an _additional_ command line argument. Add this argument regardless of how the tracer is otherwise imported and initialized:
 
-**Node.js < v20.6**
-```shell
-node --loader dd-trace/loader-hook.mjs entrypoint.js
+- **Node.js < v20.6:** `--loader dd-trace/loader-hook.mjs`
+- **Node.js >= v20.6:** `--import dd-trace/register.js`
+
+For example, in Node.js 22, if initializing the tracer using option one from above, you would start it like this:
+
+```sh
+node --import dd-trace/register.js app.js
 ```
 
-**Node.js >= v20.6**
-```shell
-node --import dd-trace/register.js entrypoint.js
+This can also be combined with the `--require dd-trace/init` command line argument (option two):
+
+```sh
+node --import dd-trace/register.js --require dd-trace/init app.js
+```
+
+A shorthand exists to combine both command line arguments in Node.js v20.6 and above:
+
+```sh
+node --import dd-trace/initialize.mjs app.js
 ```
 
 ### Bundling

@@ -22,7 +22,7 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Proactively block threats with Active Protection
 
