@@ -28,7 +28,7 @@ Based on performance benchmarking for a pipeline transforming data using 12 proc
 
 | Cloud Provider| Recommendation  |
 | ------------- | --------------- |
-| AWS           | c7i.xlarge      |
+| AWS           | c7i.xlarge (minimum) |
 | Azure         | F4s v2       	  |
 | Google Cloud  | c2-standard-4   |
 
