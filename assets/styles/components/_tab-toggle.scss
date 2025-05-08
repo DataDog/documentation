@@ -357,6 +357,11 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           transition: none;
           box-sizing: border-box;
 
+          // Remove gradient line for wrapped tabs
+          &:after {
+            display: none;
+          }
+
           &:hover {
             transition: none;
           }
