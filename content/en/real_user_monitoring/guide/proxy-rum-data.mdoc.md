@@ -90,7 +90,7 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
 <!-- SDK version >4.34.0 and up -->
 {% if or(equals($rum_browser_sdk_version, "gte_5_4_0"),equals($rum_browser_sdk_version, "gte_4_34_0")) %}
 
-Configure the URL of the proxy in the `proxy` initialization parameter. The RUM Browser SDK adds a `ddforward` query parameter to all requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
+Configure the URL of the proxy in the `proxy` initialization parameter:
 
 <!-- NPM -->
 {% if equals($lib_src, "npm") %}
@@ -134,6 +134,8 @@ window.DD_RUM &&
 ```
 {% /if %}
 <!-- end CDN sync -->
+
+The RUM Browser SDK adds a `ddforward` query parameter to all requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
 For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to a URL like this: `https://example.org/datadog-intake-proxy?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`. The proxy forwards the request to `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
