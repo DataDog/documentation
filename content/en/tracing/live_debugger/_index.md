@@ -30,7 +30,7 @@ further_reading:
 
 With Live Debugger, you can debug running applications in real time, without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, "non-breaking breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
 
-{{< img src="tracing/live_debugger/live-debugger-demo_202505071" alt="Live Debugger Product Demo" video="true" >}}
+{{< img src="tracing/live_debugger/live-debugger-demo_202505072" alt="Live Debugger Product Demo" video="true" >}}
 
 ## Key capabilities
 
