@@ -1,5 +1,5 @@
 ---
-title: Accessibility
+title: iOS Accessibility
 aliases:
 - /service_management/mobile/
 algolia:
@@ -10,7 +10,7 @@ algolia:
 
 {{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][17] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
+Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][1] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -32,7 +32,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][18].
+For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][2].
 
 ## Handoff
 
@@ -45,6 +45,22 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information about Handoff, read the [Apple Handoff documentation][19].
+For more information about Handoff, read the [Apple Handoff documentation][3].
 
+## Apple Watch
+To enable notifications for the Apple Watch when paired with your iPhone:
+1. Open the Watch app on your mobile device.
+2. Tap on **Notifications**.
+3. Toggle on **Notifications Indicator**. 
+
+**Note:** If your iPhone is locked or asleep, you'll receive notifications on your Apple Watch. If you could like to always recieve notifications on your phone, head to the Watch App and disable Notifications.
+Read the [Notifications on your Apple Watch documentation] [4] for more information. 
+
+**Note:** In order to recieve notifications, you must be paired with your iPhone and remain within the bluetooth vacinity of your paired phone.
+
+
+[1]: https://app.datadoghq.com/dashboard/lists/preset/5
+[2]: https://support.apple.com/en-us/HT209055
+[3]: https://support.apple.com/en-us/HT209455
+[4]: https://support.apple.com/en-au/108369
 
