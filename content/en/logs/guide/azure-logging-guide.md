@@ -128,13 +128,10 @@ PCI DSS compliance for APM and Log Management is only available for Datadog orga
 </div>
 
 To set up PCI-compliant Log Management, you must meet the requirements outlined in [PCI DSS Compliance][6]. Send your logs to the dedicated PCI compliant endpoint:
-- `agent-http-intake-pci.logs.datadoghq.com:443` for Agent traffic
-- `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
 
-```
-const DD_SITE = process.env.DD_SITE || 'datadoghq.com';
-const DD_HTTP_URL = process.env.DD_URL || 'http-intake-pci.logs.' + DD_SITE;
-```
+Under **Settings > Environment variables**, click **Add** to set the following environment variable:
+- Name: `DD_URL`
+- Value: `http-intake-pci.logs.datadoghq.com`
 
 ## Log Archiving
 
