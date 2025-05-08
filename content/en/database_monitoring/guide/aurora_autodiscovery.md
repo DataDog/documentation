@@ -114,7 +114,7 @@ database_monitoring:
         - "use_dbm:true"
 ```
 
-The `%%extra_dbm%%` value will be true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
+The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
 
 
 ### Create a configuration template
