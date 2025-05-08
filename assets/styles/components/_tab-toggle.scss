@@ -447,3 +447,9 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 .code-tabs .nav-tabs li {
   height: 100%;
 }
+
+// Hide the bottom border line under the tabs when wrapped
+.code-tabs.tabs-wrap-layout .nav-tabs::after,
+.code-tabs.tabs-wrap-layout .code-lang-list-container::after {
+  display: none;
+}
