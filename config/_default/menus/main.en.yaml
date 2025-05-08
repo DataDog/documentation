@@ -1147,12 +1147,18 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
+    - name: DDSQL Reference
+      url: ddsql_reference/
+      pre: ddsql
+      identifier: ddsql_reference
+      parent: essentials_heading
+      weight: 110000
     - name: CoScreen
       url: coscreen/
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1163,7 +1169,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 120000
+      weight: 130000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1184,7 +1190,7 @@ menu:
       pre: cloudcraft
       identifier: cloudcraft
       parent: essentials_heading
-      weight: 130000
+      weight: 270000
     - name: Getting Started
       url: cloudcraft/getting-started/
       identifier: cloudcraft_getting_started
@@ -1355,12 +1361,6 @@ menu:
       identifier: cloudcraft_api_users_info
       parent: cloudcraft_api_users
       weight: 1
-    - name: DDSQL Reference
-      url: ddsql_reference/
-      pre: ddsql
-      identifier: ddsql_reference
-      parent: essentials_heading
-      weight: 140000
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
