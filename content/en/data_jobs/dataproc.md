@@ -54,6 +54,9 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    SECRET_NAME=dd_api_key
    export DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
 
+   # Optional: turn on to send spark driver and worker logs to Datadog
+   export DD_DATAPROC_LOGS_ENABLED=true
+
    # Download and run the latest init script
    curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
    ```
