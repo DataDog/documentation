@@ -1,7 +1,7 @@
 <!--
   Astrojs component that renders a table with search and optional filtering capabilities. 
 
-  @param multifiltersearch: object.<{header, data}> - holds the header and table details for the searchable table
+  @param multifiltersearch: object.<{header, data}> - holds the header and details for the searchable table
   @param multifiltersearch.header: array.<{id:string, name:string, filter_by:boolean}> - header/field info.
     - id: must be unique in the array. must match a key in "data" object
     - name: field/header display name
@@ -18,7 +18,7 @@
 {{ $resource_path := print "_data" (.Get "resource")}}
 {{ $resource := resources.Get $resource_path}}
 
-{{/*  Determine data source  */}}
+{{/*  Determine data source, if any  */}}
 {{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource) }}
   {{ errorf "No data source provided for multifilter-search component"}}
 {{ else if isset $.Page.Params "multifiltersearch" }}
