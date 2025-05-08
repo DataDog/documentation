@@ -67,16 +67,16 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
-4. Optionally, set up Log Collection for correlating Task logs to DAG run executions in DJM. Correlation requires the logs directory to follow the [default log filename format][6]. 
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
 
    The `PATH_TO_AIRFLOW_LOGS` value should be set to `$AIRFLOW_HOME/logs`. Add the following annotation to your pod:
    ```yaml
    ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
    ```
 
-   Adding `"source":"airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] Logs Pipeline.
+   Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
 
-   For more methods to set up logs collection on Kubernetes, see the [Datadog Kubernetes integrations logs configuration page][7].
+   For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
    
 
 [1]: https://github.com/apache/airflow/releases/tag/2.5.0
