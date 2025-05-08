@@ -1,15 +1,12 @@
 ---
 title: Use Custom OpenTelemetry Components with Datadog Agent
-private: true
+aliases:
+- "/opentelemetry/agent/agent_with_custom_components"
 further_reading:
-- link: "/opentelemetry/agent/install_agent_with_collector"
+- link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
-
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
-{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
@@ -23,7 +20,7 @@ To complete this guide, you need the following:
 
 - [Docker][2]
 - GitHub and access to the [Datadog Agent][3] source code.
-- The OpenTelemetry components you plan to include in the Agent must be compatible with embedded OpenTelemetry Collector version.
+- The OpenTelemetry components you plan to include in the Agent must be compatible with DDOT Collector version.
 
 **Recommended**:
 
@@ -34,19 +31,19 @@ To complete this guide, you need the following:
 
 Download the Dockerfile template:
 
-1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-with-otel`) and cd into it.
+1. Go to your preferred file location in a terminal. Run the following commands to create a new folder (for example, named `agent-ddot`) and cd into it.
    ```shell
-   mkdir -p agent-with-otel
-   cd agent-with-otel
+   mkdir -p agent-ddot
+   cd agent-ddot
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ddot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag" %}}`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Datadog Agent source code.
 - Creates a virtual environment and installs required Python packages.
@@ -110,16 +107,21 @@ Build your custom Datadog Agent image and push it to a container registry.
 
 1. Build the image with Docker:
    ```shell
-   docker build . -t agent-otel --no-cache \
-     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
+   docker build . -t agent-ddot --no-cache \
+     --build-arg AGENT_REPO="datadog/agent" \
+     --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
      --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
 2. Tag and push the image:
    ```shell
-   docker tag agent-otel <IMAGE-NAME>/<IMAGE-TAG>
-   docker push <IMAGE-NAME>/<IMAGE-TAG>
+   docker tag agent-ddot datadog/agent:<IMAGE-TAG>
+   docker push datadog/agent:<IMAGE-TAG>
    ```
-   Replace `<IMAGE-NAME>` and `<IMAGE-TAG>` with your image name and desired tag. If the target repository is not Docker Hub, you need to include the repository name.
+   Ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
+   ```shell
+   docker push <REPOSITORY-NAME>/datadog/agent:<IMAGE-TAG>
+   ```
+
 3. For a Helm chart installation, set the image tag in your values file:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -164,29 +166,22 @@ Create a sample configuration file and run your custom Agent to ensure everythin
          key: ${env:DD_API_KEY}
 
    connectors:
-       datadog/connector:
-           traces:
-             compute_top_level_by_span_kind: true
-             peer_tags_aggregation: true
-             compute_stats_by_span_kind: true
+     datadog/connector:
+       traces:
 
    service:
      pipelines:
-       metrics:
-         receivers: [otlp, datadog/connector]
-         processors: [metricstransform, batch]
-         exporters: [datadog]
        traces:
          receivers: [otlp]
-         processors: [batch]
-         exporters: [datadog/connector]
-       traces/2:
-         receivers: [datadog/connector]
-         processors: [batch]
+         processors: [infraattributes, batch]
+         exporters: [datadog, datadog/connector]
+       metrics:
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [metricstransform, infraattributes, batch]
          exporters: [datadog]
        logs:
          receivers: [otlp]
-         processors: [batch]
+         processors: [infraattributes, batch]
          exporters: [datadog]
    ```
 2. Run the Agent using the following Docker command.
@@ -199,13 +194,13 @@ Create a sample configuration file and run your custom Agent to ensure everythin
      -p 4317:4317 \
      -p 4318:4318 \
      --entrypoint otel-agent \
-     agent-otel --config /config.yaml
+     agent-ddot --config /config.yaml
    ```
 3. If the Agent starts, then the build process was successful.
 
 You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
 
-For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
+For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Distribution of OTel Collector][9] guide.
 
 ## Troubleshooting
 
@@ -264,4 +259,4 @@ docker system prune -a
 [6]: https://docs.docker.com/build/building/multi-stage/
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/jmxreceiver/README.md
-[9]: /opentelemetry/agent/install_agent_with_collector
+[9]: /opentelemetry/setup/ddot_collector/install/

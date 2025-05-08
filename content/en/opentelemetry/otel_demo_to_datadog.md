@@ -1,5 +1,7 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
+aliases:
+- /opentelemetry/guide/otel_demo_to_datadog
 further_reading:
 - link: "/software_catalog/"
   tag: "Documentation"

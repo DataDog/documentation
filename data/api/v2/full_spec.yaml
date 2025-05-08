@@ -40896,10 +40896,11 @@ components:
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
@@ -53289,22 +53290,8 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - description: The page number to fetch.
-        example: 0
-        in: query
-        name: page[number]
-        required: false
-        schema:
-          format: int64
-          type: integer
-      - description: The number of devices to return per page.
-        example: 10
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          format: int64
-          type: integer
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
       - description: The field to sort the devices by.
         example: status
         in: query
@@ -53336,6 +53323,10 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/ndm/devices/{device_id}:
