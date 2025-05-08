@@ -41,7 +41,7 @@ To get started, click the button below and fill in the form on Azure Portal. The
 
 ### Azure platform logs
 
-When the template deployment finishes, to send Azure platform logs (including resource logs), create diagnostic settings for each of the log sources, with the destination being the eventhub created by the deployment.
+After the template deployment finishes, set up diagnostic settings for each log source to send Azure platform logs (including resource logs) to the Event Hub created during deployment.
 
 **Note**: Resources can only stream to Event Hubs in the same Azure region.
 
