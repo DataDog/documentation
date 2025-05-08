@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "/opentelemetry/correlate/"
   tag: "Documentation"
-  text: "Explore Data in Datadog"
+  text: "Correlate Data"
 ---
 
 OpenTelemetry uses semantic conventions to standardize names for different types of telemetry data, ensuring consistency across systems.
