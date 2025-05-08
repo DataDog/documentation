@@ -171,6 +171,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "oci-integration": {
+    "name": "OCI Integration",
+    "description": "Configure your Datadog-OCI integration directly through the Datadog API.\nFor more information, see the [OCI integration page](https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/)."
+  },
   "observability-pipelines": {
     "name": "Observability Pipelines",
     "description": "Observability Pipelines allows you to collect and process logs within your own infrastructure, and then route them to downstream integrations."
