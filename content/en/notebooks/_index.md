@@ -36,7 +36,7 @@ In the [Template Gallery][2], see ready-to-use templates which you can create ne
 
 ## Editing a notebook
 
-With Notebooks, you can start typing using markdown shortcuts such as `#` for headers or <code>```</code> for code blocks. Notebooks automatically save your text content as you type. For graphs, save all edits in the graph editor for the widget to be saved in the notebook.
+With Notebooks, you can start typing using markdown shortcuts, such as `#` for headers or <code>```</code> for code blocks. Notebooks automatically save your text content as you type. For graphs, save all edits in the graph editor for the widget to be saved in the notebook.
 
 ### Cell types
 Notebooks support various cell types, including but not limited to:
@@ -65,9 +65,9 @@ Additional graph configuration options are accessible under the three-dot ellips
 
 ### Markdown and rich text features
 
-Markdown content can be added directly to text. Use markdown in Notebooks for the following features:
-- Text Tables  
-- Syntax Highlighting in codeblocks  
+Markdown content can be added directly to text. Use Markdown in Notebooks for the following features:
+- Text tables  
+- Syntax highlighting in code blocks  
 - Inline template variables  
 - @Mentions
 
