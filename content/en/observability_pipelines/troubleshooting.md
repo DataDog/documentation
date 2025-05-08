@@ -100,7 +100,7 @@ Failed to connect to ab52a1d16fxxxxxxxabd90c7526a1-1xxxx.us-west-2.elb.amazonaws
 And you:
 
 - Have a firewall between your source and your Workers, ensure traffic is allowed over your chosen port between the source and the Worker.
-- Have a firewall between the Workers and your destination, make sure to allow traffic over the port defined for your destination from your Workers.
+- Have a firewall between the Workers and your destination, make sure it allows traffic from your Workers to the destination over the defined port.
 
 You can test your connectivity with curl. For example, if you have a Datadog Agent source, the curl command looks something like this:
 
@@ -108,7 +108,7 @@ You can test your connectivity with curl. For example, if you have a Datadog Age
 curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.com:80/api/v2/logs' -d '{"ddsource": "my_datadog","ddtags": "env:test","hostname": "i-02a4fxxxxx","message": "hello","service": "test"}' -v
 ```
 
-The curl command you use is based on the port you are using and the path and expected payload based on your source.
+The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
