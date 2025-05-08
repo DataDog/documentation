@@ -2809,6 +2809,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_policies
       weight: 10002
+    - name: Resource Changes
+      url: infrastructure/resource_catalog/resource_changes/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_changes
+      weight: 10003
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
