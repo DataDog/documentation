@@ -190,8 +190,6 @@ window.DD_RUM &&
 {% /if %}
 <!-- end CDN sync -->
 
-For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks like this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
-
 **Note:**
 - Some privacy blockers already target the intake [URL patterns][2], so you may want to take that into account when building your proxy URL.
 - The `proxy` function is called for each request, so it should avoid any heavy computation.
