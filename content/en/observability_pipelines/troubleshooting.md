@@ -81,6 +81,30 @@ If you have configured your source to send logs to the Worker, make sure the por
 
 Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
 
+## Failed to connect error
+
+If you see an error similar to one of these errors:
+
+```
+Failed to connect to 34.44.228.240 port 80 after 56 ms: Couldn't connect to server
+```
+
+```
+connect to 35.82.252.23 port 80  failed: Operation timed out
+```
+
+```
+Failed to connect to ab52a1d16fxxxxxxxabd90c7526a1-1xxxx.us-west-2.elb.amazonaws.com port 80 after 225027 ms: Couldn't connect to server
+```
+
+And if you have a firewall between your source and your Workers, ensure traffic is allowed over your chosen port between the source and the Worker. If you have a firewall between the Workers and your destination, make sure to allow traffic over the port defined for your destination from your Workers. You can test your connectivity with curl. For example, if you have a Datadog Agent source, the curl command looks something like this:
+
+```
+curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.com:80/api/v2/logs' -d '{"ddsource": "my_datadog","ddtags": "env:test","hostname": "i-02a4fxxxxx","message": "hello","service": "test"}' -v
+```
+
+The curl command you use is based on the port you are using and the path and expected payload based on your source.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
