@@ -29,7 +29,7 @@ After searching, select one or more monitors to update using the checkboxes next
 
 | Option     | Description                                                                      |
 |------------|----------------------------------------------------------------------------------|
-| Mute       | [Mute][3] the selected monitors for a predefined duration (such as one hour, one day, or one week) or specify a custom timeframe.|
+| Mute       | [Mute][3] the selected monitors for a predefined duration (such as one hour, one day, or forever) or specify a custom timeframe.|
 | Unmute     | If the selected monitors are muted, unmute them.                                 |
 | Resolve    | [Resolve][4] the alert for the selected monitors.                                |
 | Delete     | Delete the selected monitors.                                                    |
