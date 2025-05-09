@@ -20,7 +20,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default overhead is not acceptable, you can either [fine tune][4] the
+If the default overhead is not acceptable, you can either [fine-tune][4] the
 sampling distances, or disable some of the sample types the profiler gathers by
 changing the following INI settings:
 
