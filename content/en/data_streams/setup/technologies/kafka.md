@@ -56,6 +56,8 @@ title: Data Streams Monitoring for Kafka
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
+<div class="alert alert-info"><a href="https://docs.aws.amazon.com/msk/latest/developerguide/before-you-begin.html">Amazon MSK</a> is supported for all languages. After following instrumentation instructions for your desired language below, install the <a href="https://docs.datadoghq.com/integrations/amazon_msk_cloud/">Amazon MSK</a> or <a href="https://docs.datadoghq.com/integrations/amazon_msk/">Amazon MSK (Agent)</a> integration to gain additional insights into the health of your Kafka pipelines.</div>
+
 ### Setting up Data Streams Monitoring
 See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.NET][6].
 
