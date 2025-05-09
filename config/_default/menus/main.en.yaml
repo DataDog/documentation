@@ -3580,6 +3580,21 @@ menu:
       parent: automatic_instrumentation
       identifier: single_step_apm
       weight: 2011
+    - name: Single Step APM Instrumentation on Linux
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+      parent: single_step_apm
+      identifier: single_step_apm_linux
+      weight: 20111
+    - name: Single Step APM Instrumentation on Docker
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
+      parent: single_step_apm
+      identifier: single_step_apm_docker
+      weight: 20112
+    - name: Single Step APM Instrumentation on Kubernetes
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
+      parent: single_step_apm
+      identifier: single_step_apm_kubernetes
+      weight: 20113
     - name: Using Datadog Tracing Libraries
       url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
       parent: automatic_instrumentation
@@ -5437,9 +5452,14 @@ menu:
       weight: 7023
     - name: Install the Worker
       url: observability_pipelines/install_the_worker/
-      identifier: install_the_worker
+      identifier: observability_pipelines_install_the_worker
       parent: observability_pipelines
       weight: 2
+    - name: Commands
+      url: observability_pipelines/install_the_worker/worker_commands/
+      identifier: install_the_worker_commands
+      parent: observability_pipelines_install_the_worker
+      weight: 201
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -6296,16 +6316,31 @@ menu:
       parent: security_platform_heading
       identifier: workload_protection
       weight: 60000
-    - name: Supported Linux Distributions
-      url: security/workload_protection/supported_linux_distributions
+    - name: Setup
+      url: security/workload_protection/setup
       parent: workload_protection
-      identifier: workload_protection_workload_security_linux_distributions
-      weight: 200
+      identifier: workload_protection_setup
+      weight: 100
+    - name: Deploy the Agent
+      url: security/workload_protection/setup/agent
+      parent: workload_protection_setup
+      identifier: workload_protection_workload_setup_agent
+      weight: 3
+    - name: Workload Protection Agent Variables
+      url: security/workload_protection/setup/agent_variables
+      parent: workload_protection_setup
+      identifier: workload_protection_agent_variables
+      weight: 4
     - name: Detection Rules
       url: security/workload_protection/workload_security_rules
       parent: workload_protection
       identifier: workload_protection_workload_security_rules
       weight: 201
+    - name: OOTB Rules
+      url: /security/workload_protection/setup/ootb_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_ootb_rules
+      weight: 100
     - name: Custom Rules
       url: security/workload_protection/workload_security_rules/custom_rules
       parent: workload_protection_workload_security_rules

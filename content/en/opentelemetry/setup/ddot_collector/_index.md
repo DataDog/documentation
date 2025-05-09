@@ -3,9 +3,9 @@ title: Datadog Distribution of OpenTelemetry Collector
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-agent-with-otel-collector/"
+- link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
-  text: "Unify OpenTelemetry and Datadog with the Datadog distribution of OpenTelemetry (DDOT) Collector in the Agent"
+  text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
 {{< site-region region="gov" >}}
