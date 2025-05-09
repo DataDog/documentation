@@ -129,11 +129,12 @@ http://example.com/session_id%3A123456
 ### Email size
 The maximum allowed email size, including content and attachments, is 20MB. Emails exceeding this limit are ignored.
 
+### Usage tracking
+To understand which emails are being used and receiving events, check the `Last Used` column in the **Events API Emails** tab in organization settings. This displays the most recent date that an email was processed for each address, or `No data` if there are no records of it being used.
+
 [1]: /integrations/
 [2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
 [6]: /integrations/guide/events-from-sns-emails/
 [7]: /monitors/notify/#notification-recipients
-### Usage tracking
-To understand which emails are being used and receiving events, check the `Last Used` column in the **Events API Emails** tab in organization settings. This displays the most recent date that an email was processed for each address, or `No data` if there are no records of it being used.
