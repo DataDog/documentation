@@ -18785,7 +18785,7 @@ components:
           description: An optional list of time restrictions for when this layer is
             in effect.
           items:
-            $ref: '#/components/schemas/LayerAttributesRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time when the rotation starts (ISO 8601).
@@ -18809,63 +18809,6 @@ components:
           maximum: 2592000
           type: integer
       type: object
-    LayerAttributesRestrictionsItems:
-      description: 'Represents a time restriction within a layer, specifying the days
-        and times
-
-        when this layer is active or inactive.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsEndDay'
-        end_time:
-          description: The time of day the restriction ends (hh:mm:ss).
-          example: '17:00:00'
-          type: string
-        start_day:
-          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsStartDay'
-        start_time:
-          description: The time of day the restriction begins (hh:mm:ss).
-          example: 09:00:00
-          type: string
-      type: object
-    LayerAttributesRestrictionsItemsEndDay:
-      description: Defines the end day of the restriction within a Layer.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    LayerAttributesRestrictionsItemsStartDay:
-      description: Defines the start day of the restriction within a Layer.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     LayerRelationships:
       description: Holds references to objects related to the Layer entity, such as
         its members.
@@ -31776,7 +31719,7 @@ components:
           description: Zero or more time-based restrictions (for example, only weekdays,
             during business hours).
           items:
-            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time when the rotation for this layer starts (in ISO
@@ -31825,62 +31768,6 @@ components:
           example: 00000000-aba1-0000-0000-000000000000
           type: string
       type: object
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems:
-      description: 'Defines a time restriction for a schedule layer, including which
-        day of the week
-
-        it starts and ends, along with start/end times.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
-        end_time:
-          description: The time of day when the restriction ends (hh:mm:ss).
-          type: string
-        start_day:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
-        start_time:
-          description: The time of day when the restriction begins (hh:mm:ss).
-          type: string
-      type: object
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
-      description: The weekday when the restriction period ends (Monday through Sunday).
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
-      description: The weekday when the restriction period starts (Monday through
-        Sunday).
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     ScheduleCreateRequestDataRelationships:
       description: Gathers relationship objects for the schedule creation request,
         including the teams to associate.
@@ -32284,7 +32171,7 @@ components:
         restrictions:
           description: Any time restrictions that define when this layer is active.
           items:
-            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time at which the rotation begins (ISO 8601 format).
@@ -32334,63 +32221,6 @@ components:
           example: 00000000-aba1-0000-0000-000000000000
           type: string
       type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems:
-      description: 'Defines a time restriction object for a layer within a schedule
-        update, including
-
-        start and end days, as well as times.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
-        end_time:
-          description: The time at which this restriction ends (hh:mm:ss).
-          example: '17:00:00'
-          type: string
-        start_day:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
-        start_time:
-          description: The time at which this restriction starts (hh:mm:ss).
-          example: 09:00:00
-          type: string
-      type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
-      description: Defines the day of the week on which the time restriction ends.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
-      description: Defines the day of the week on which the time restriction starts.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     ScheduleUpdateRequestDataRelationships:
       description: Houses relationships for the schedule update, typically referencing
         teams.
