@@ -1,4 +1,4 @@
-name: Code Owners Approval Check
+name: Check for required approvals
 
 on:
   pull_request_review:
@@ -11,14 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check-code-owners-approval:
+  check-for-required-approvals:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
     steps:
-      - name: Check Code Owners Approval
-        id: check_approvals
+      - id: check_approvals
         uses: actions/github-script@v7
         with:
           github-token: ${{secrets.CODEOWNER_WORKFLOW_TOKEN}}
