@@ -4,10 +4,10 @@ further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"
     text: "Explore AAP threat detection OOTB rules"
-  - link: "/security/application_security/threats/custom_rules/"
+  - link: "/security/application_security/policies/custom_rules/"
     tag: "Documentation"
     text: "Configure custom AAP threat detection rules"
-  - link: "/security/application_security/threats/threat-intelligence/"
+  - link: "/security/application_security/how-it-works/threat-intelligence/"
     tag: "Documentation"
     text: "AAP threat intelligence"
 ---
@@ -155,5 +155,5 @@ To see all of the saved views, click **Views** next to the **Signals Explorer** 
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/notifications/rules/
 [9]: /account_management/rbac/permissions/#cloud-security-platform
-[10]: /security/application_security/threats/protection/#respond-to-threats-in-real-time-by-automating-attacker-blocking
-[11]: /security/application_security/threats/protection/#blocking-attack-attempts-with-in-app-waf
+[10]: /security/application_security/policies/#respond-to-threats-in-real-time-by-automating-attacker-blocking
+[11]: /security/application_security/policies/#blocking-attack-attempts-with-in-app-waf

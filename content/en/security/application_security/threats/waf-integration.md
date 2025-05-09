@@ -7,11 +7,11 @@ further_reading:
   text: "Monitor AWS WAF activity with Datadog"
 ---
 
-Protecting web applications and APIs requires a multi-layered approach that combines in-app monitoring and perimeter defenses. These complementary strategies enable you to have a defense-in-depth application security approach leveraging AWS Web Application Firewall (WAF) as the first line of defense, followed by AAP Threat Management to block attacks that slip by the WAF.
+Protecting web applications and APIs requires a multi-layered approach that combines in-app monitoring and perimeter defenses. These complementary strategies enable you to have a defense-in-depth App and API Protection approach leveraging AWS Web Application Firewall (WAF) as the first line of defense, followed by App and API Protection to block attacks that slip by the WAF.
 
 ### In-app monitoring: deep visibility with distributed tracing
 
-At the application level, Datadog AAP Threat Management leverages distributed tracing to monitor microservices in real time. The AAP approach provides detailed, context-rich insights into the behavior of requests as they traverse various services. These insights detect sophisticated threats such as:
+At the application level, Datadog App and API Protection leverages distributed tracing to monitor microservices in real time. The AAP approach provides detailed, context-rich insights into the behavior of requests as they traverse various services. These insights detect sophisticated threats such as:
 
 - SQL Injection (SQLi) and Local File Inclusion (LFI) attempts.
 - Application logic abuse, such as bypassing business rules or exploiting edge cases.

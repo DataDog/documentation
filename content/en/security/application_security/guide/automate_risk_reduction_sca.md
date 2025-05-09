@@ -35,7 +35,7 @@ The Libraries catalog displays the libraries and versions used across your servi
 
 The catalog surfaces all library details using several public data sources (GuardDog, NIST, osv.dev, OpenSSF scores, etc.) and private data sources (including Datadog’s Security Research group). 
 
-To use the Libraries catalog, see [Libraries][1] or select **Security > Application Security > Catalogs > Libraries**.
+To use the Libraries catalog, see [Libraries][1] or select **Security > App and API Protection > Catalogs > Libraries**.
 
 {{< img src="/security/code_security/software_composition_analysis/libraries_catalog.png" alt="Libraries catalog dashboard" style="width:100%;" >}}
 

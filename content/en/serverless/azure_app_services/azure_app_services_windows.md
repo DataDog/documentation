@@ -92,7 +92,7 @@ For example:
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
     - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
-    - Set `DD_APPSEC_ENABLED:true` to enable [Application Security][15].
+    - Set `DD_APPSEC_ENABLED:true` to enable [App and API Protection][15].
     - See a full list of [optional configuration variables][6].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>

@@ -4,7 +4,7 @@ aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"
 further_reading:
-  - link: "/security/application_security/threats/threat-intelligence/"
+  - link: "/security/application_security/how-it-works/threat-intelligence/"
     tag: "documentation"
     text: "AAP Threat Intelligence"
   - link: "/security/cloud_siem/threat_intelligence/"

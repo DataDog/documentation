@@ -197,7 +197,7 @@ This tab has overview graphs that show which resources have the most issues and 
 {{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
-Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [App and API Protection][18].
 
 The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
@@ -283,7 +283,7 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security/application_security/how-appsec-works/
+[18]: /security/application_security/how-it-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/

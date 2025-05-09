@@ -59,7 +59,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (Application Security, Cloud Security, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (App and API Protection, Cloud Security, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -119,7 +119,7 @@ Use Rule Version History to:
 
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
-    - For AAP: Click **Application Security** and then click **Detection Rules**.
+    - For AAP: Click **App and API Protection** and then click **Detection Rules**.
     - For Cloud Security: Click **Cloud Security** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
 1. Click on the rule you are interested in.
@@ -171,7 +171,7 @@ The rule deprecation process is as follows:
 [9]: /agent/
 [10]: https://app.datadoghq.com/security/configuration/
 [11]: /security/cloud_siem/detection_rules/
-[12]: /security/application_security/threats/custom_rules/
+[12]: /security/application_security/policies/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
 [14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/

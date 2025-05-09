@@ -3,7 +3,7 @@ title: Library Configuration
 aliases:
   - /security_platform/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
-  - /security/application_security/threats/setup_and_configure
+  - /security/application_security/setup_and_configure
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -17,7 +17,7 @@ further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting AAP"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
@@ -113,8 +113,8 @@ See [Automatic user activity event tracking modes][10] for information on automa
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /help/
-[7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[7]: /security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
 [9]: https://github.com/google/re2/wiki/Syntax
-[10]: /security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking-modes
+[10]: /security/application_security/how-it-works/add-user-info/?tab=set_user#automatic-user-activity-event-tracking-modes
 

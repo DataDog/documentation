@@ -12,7 +12,7 @@ further_reading:
   text: "Synthetic API Tests"
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Application Security Monitoring"
+  text: "App and API Protection Monitoring"
 aliases:
     - /tracing/api_catalog/monitor_apis/
     - /api_catalog/monitor_apis/

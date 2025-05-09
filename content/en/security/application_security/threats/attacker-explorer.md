@@ -2,7 +2,7 @@
 title: Attacker Explorer
 disable_toc: false
 further_reading:
-- link: "/security/application_security/threats/protection"
+- link: "/security/application_security/policies"
   tag: "Documentation"
   text: "Protection"
 ---

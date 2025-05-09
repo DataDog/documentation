@@ -8,12 +8,12 @@ aliases:
   - /security/application_security/enabling
   - /security/application_security/getting_started
 further_reading:
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Management"
+  text: "App and API Protection"
 - link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
@@ -36,7 +36,7 @@ further_reading:
   tag: "Blog"
   text: "Mitigate account takeovers with Datadog App and API Protection"
 algolia:
-  tags: ["asm", "application security"]
+  tags: ["asm", "App and API Protection"]
 ---
 
 {{< site-region region="gov" >}}
@@ -57,7 +57,7 @@ With AAP, you can cut through the noise of continuous trace data to focus on sec
 
 Until you fully remediate the potential vulnerabilities in your application code, AAP enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click.
 
-## Understanding how application security is implemented in Datadog
+## Understanding how App and API Protection is implemented in Datadog
 
 If you're curious how App and API Protection is structured and how it uses tracing data to identify security problems, read [How App and API Protection Works][3].
 
@@ -82,7 +82,7 @@ For information on disabling AAP or its features, see the following:
 
 [1]: /tracing/
 [2]: /agent/
-[3]: /security/application_security/how-appsec-works/
+[3]: /security/application_security/how-it-works/
 [4]: /security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec

@@ -6,7 +6,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog App and API Protection"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
@@ -553,7 +553,7 @@ AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the App and API Protection product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
