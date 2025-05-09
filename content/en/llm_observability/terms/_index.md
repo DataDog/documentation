@@ -187,6 +187,8 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
 
+Language mismatch is only supported for natural language prompts. Input/output pairs mainly consisting of structured data such as JSON, code snippets or special characters are not flagged as a language mismatch.
+
 {{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
