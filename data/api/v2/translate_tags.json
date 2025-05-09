@@ -183,6 +183,10 @@
     "name": "On-Call",
     "description": "Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\ndirectly through the Datadog API."
   },
+  "on-call-paging": {
+    "name": "On-Call Paging",
+    "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
