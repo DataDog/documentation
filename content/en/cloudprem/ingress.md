@@ -35,14 +35,14 @@ The public ingress is essential for enabling Datadog's control plane and query s
 - Implements TLS encryption with termination at the load balancer level
 - Uses HTTP/2 (gRPC) for communication between the ALB and CloudPrem cluster
 - Requires mutual TLS (mTLS) authentication where Datadog services must present valid client certificates
-- Configures the ALB in TLS passthrough mode to forward client certificates to CloudPrem pods via the `X-Amzn-Mtls-Clientcert` header
+- Configures the ALB in TLS passthrough mode to forward client certificates to CloudPrem pods with the `X-Amzn-Mtls-Clientcert` header
 - Rejects requests that are missing valid client certificates or the certificate header
 
 This setup ensures that only authenticated Datadog services can access the CloudPrem cluster while maintaining secure encrypted communication end-to-end.
 
 {{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
-### IP Ranges
+### IP ranges
 The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog IP Ranges API, specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
 ```
 curl -X GET "https://ip-ranges.datadoghq.eu/" \

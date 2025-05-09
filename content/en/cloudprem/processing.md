@@ -45,7 +45,7 @@ You configure log processing pipelines using a JSON file that adheres to the sam
 
    ```bash
    helm repo update
-   helm upgrade <release-name> -n <namespace> --set-file pipelinesConfig=./pipelines_config.json -f <custom_values_file.yaml>
+   helm upgrade <RELEASE_NAME> -n <NAMESPACE> --set-file pipelinesConfig=./pipelines_config.json -f your_custom_values_file.yaml
    ```
 
    CloudPrem logs an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
@@ -104,8 +104,8 @@ The order of elements in the array defines the sequential execution order of the
 
 ## Compatibility with Datadog Pipelines
 
-CloudPrem processing is designed to align closely with [Datadog Log Log Management][3], allowing direct use of existing pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
-- Some filter queries can't be parsed, such as combining wildcards `@data.message:+*`.
+CloudPrem processing is designed to align closely with [Datadog Log Management][3], allowing direct use of existing pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+- Some filter queries can't be parsed, such as filters with combined wildcards (for example, `@data.message:+*`).
 - Filter on `message` has a different matching behavior (it also affects the category processor).
 - CloudPrem uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
 - Groks use regular expressions internally. The regex engines may have slightly different matching behavior.

@@ -42,13 +42,13 @@ These are starting recommendations. Monitor your cluster's performance and resou
   - Recommendation (for pods > 4 vCPUs): 200GB per pod
 - **Example Calculation:** To index 1 TB per day (~11.6 MB/s):
   - Required vCPUs: `(11.6 MB/s / 5 MB/s/vCPU) ≈ 2.3 vCPUs`
-  - Rounding up, you might start with one indexer pod configured with 3 vCPUs and 6GB RAM, requiring a 100GB EBS volume. (Adjust based on observed performance and redundancy needs)
+  - Rounding up, you might start with one indexer pod configured with 3 vCPUs and 6GB RAM, requiring a 100GB EBS volume. (Adjust this configuration based on observed performance and redundancy needs.)
 
 ## Searchers
 
-- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, data scanned)
-- **Rule of Thumb:** A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers
-- **Memory:** We recommend 4GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests
+- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, data scanned).
+- **Rule of Thumb:** A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers.
+- **Memory:** We recommend 4GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
 ## Other services
 

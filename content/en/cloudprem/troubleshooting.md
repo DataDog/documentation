@@ -25,7 +25,7 @@ If you experience unexpected behavior with CloudPrem, there are a few common iss
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. The easiest way to troubleshoot this is to use `kubectl` and verify logs from CloudPrem components: indexer pods, metastore pods, searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. The easiest way to troubleshoot this is to use `kubectl` and verify logs from CloudPrem components: indexer pods, metastore pods, and searcher pods.
 
 ## Storage errors
 
