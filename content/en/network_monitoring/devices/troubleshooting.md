@@ -12,7 +12,7 @@ further_reading:
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-### Device not visible in Datadog
+## Device not visible in Datadog
 
 The following assumes you are running Datadog Agent v7.61.0+.
 
@@ -80,15 +80,15 @@ The output should look similar to the following:
 
     Refer to your vendor specific documentation for additional information on running these commands.
 
-### Troubleshooting SNMP Errors
+## Troubleshooting SNMP Errors
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
-#### Permission denied
+### Permission denied
 
 If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
 
-#### Unreachable or misconfigured device:
+### Unreachable or misconfigured device:
 
    **Error**:
    ```plaintext
@@ -112,7 +112,7 @@ If you see a permission denied error while port binding in agent logs, the port 
       ```
    3. Ensure your community string matches.
 
-#### Incorrect SNMPv2 credentials
+### Incorrect SNMPv2 credentials
 
    **Error**:
    ```
@@ -123,7 +123,7 @@ If you see a permission denied error while port binding in agent logs, the port 
 
    If using SNMPv2, ensure that a community string is set.
 
-#### Incorrect SNMPv3 privacy protocol
+### Incorrect SNMPv3 privacy protocol
 
    **Error**:
    ```
@@ -145,7 +145,7 @@ If you see a permission denied error while port binding in agent logs, the port 
    - privKey
    - privProtocol
 
-### Traps not being received for devices
+## Traps not being received for devices
 
 1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
 
@@ -160,7 +160,7 @@ If you see a permission denied error while port binding in agent logs, the port 
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-#### Traps incorrectly formatted
+## Traps incorrectly formatted
 
 1. Navigate to the troubleshooting dashboard in NDM:
 
