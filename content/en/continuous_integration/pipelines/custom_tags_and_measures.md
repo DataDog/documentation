@@ -64,7 +64,7 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 To install the standalone binary on Windows, run:
 
 ```shell
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 ```
 {{% /tab %}}
 {{< /tabs >}}
