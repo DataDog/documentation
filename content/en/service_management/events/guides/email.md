@@ -31,8 +31,8 @@ The **Events API emails** section displays all the emails available for your app
 | Name | Description | Example |
 |---|---|---|
 | Description | A description of the email's purpose | "Used for MyService notifications" |
-| Tags | List of tags to be appended to each event received through the email. If other tags are present in the JSON message, they are all added | `tag1:val1`, `tag2:val2` |
-| Recipients | List of handles to be added to the beginning of the message for all events created through the email, without `@` prefix. For more information, see [Notification recipients][7]. | `my@email.com`, `slack-acc-ch` |
+| Tags | List of tags to be appended to each event received through the email. If other tags are present in the JSON message, they are all added.<br>There is a limit of **20** tags per email. | `tag1:val1`, `tag2:val2` |
+| Recipients | List of handles to be added to the beginning of the message for all events created through the email, without `@` prefix. For more information, see [Notification recipients][7].<br>There is a limit of **10** recipients per email. | `my@email.com`, `slack-acc-ch` |
 | Alert Type | The alert type for events created from the event email. When present, the `alertType` field in a JSON email takes precedence over any other `alertType` values. | `Info` |
 
 ## Submission
