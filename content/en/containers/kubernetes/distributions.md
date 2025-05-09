@@ -240,7 +240,7 @@ datadog:
   site: <DATADOG_SITE>
 
   # This option uses the API server to retrieve the node-level pod list from the API server.
-  # This is necessary to migrate away from the deprecated read-only kubelet port.
+  # This setting is necessary to migrate away from the deprecated read-only kubelet port.
   # Requires Agent 7.65.0+ and Datadog Helm chart version 3.113.0+.
   kubelet:
     useApiServer: true
