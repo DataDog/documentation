@@ -8,12 +8,13 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const appendEmptyElements = () => {
-        container.appendChild(aisHits);
+        container?.appendChild(aisHits);
         aisHits.appendChild(aisHitsList);
     };
 
     const addHitsToEmptyElements = () => {
-        container.querySelector('.ais-Hits-list').innerHTML = joinedListItemsHTML;
+        const target = container?.querySelector('.ais-Hits-list');
+        if (target) target.innerHTML = joinedListItemsHTML;
     };
 
     const getTitleHierarchyHTML = (hit) => {
