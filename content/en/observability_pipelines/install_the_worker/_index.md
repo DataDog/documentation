@@ -5,6 +5,9 @@ further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"
   text: "Set up pipelines"
+- link: "observability_pipelines/worker_commands/"
+  tag: "Documentation"
+  text: "Worker commands"
 ---
 
 ## Overview
