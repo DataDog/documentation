@@ -30,7 +30,7 @@ The **Events API emails** section displays all the emails available for your app
 
 | Name | Description | Example |
 |---|---|---|
-| Description | A short text for clarifying the email usage | "Used for MyService notifications" |
+| Description | A description of the email's purpose | "Used for MyService notifications" |
 | Tags | List of tags that to be appended to each event received through the email. If other tags are present in the JSON message, they are all added | `tag1:val1`, `tag2:val2` |
 | Recipients | List of handles to be added in the beginning of the texts for all events created through the email, without `@` prefix. See more: [Notifications](/service_management/events/explorer/notifications). | `my@email.com`, `@slack-acc-ch` |
 | Alert Type | The alert type for events created from the event email. When present, the `alertType` field in a JSON email has priority. | `Info` |
