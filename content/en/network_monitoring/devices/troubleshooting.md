@@ -147,13 +147,13 @@ If you see a permission denied error while port binding in agent logs, the port 
 
 ### Traps or Flows not being received at all
 
-A common cause of missing SNMP traps or NetFlow traffic is that firewall rules are blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow use the UDP protocol and rely on the ports defined in your `datadog.yaml` configuration.
+If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
 
-Use the following platform-specific commands to check for firewall rules that may be preventing traffic from reaching the Agent.
+Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
 
 #### Linux
 
-Linux have multiple types of firewall (such as `iptables`, `nftables`, or `ufw`), depending on which one is in use, the following commands can be used:
+Linux has multiple types of firewall such as `iptables`, `nftables`, or `ufw`. Depending on which one is in use, the following commands can be used:
 
 - `sudo iptables -S`
 
@@ -161,11 +161,15 @@ Linux have multiple types of firewall (such as `iptables`, `nftables`, or `ufw`)
 
 - `sudo ufw status`
 
-Look for any rules that block UDP traffic on the configured ports.
+Check for rules blocking UDP traffic on the configured ports.
 
 #### Windows
 
-```
+The Agent's `datadog-agent diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
+
+To manually inspect firewall rules:
+
+```powershell
 Get-NetFirewallRule -Action Block | ForEach-Object {
     $rule = $_
     Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
@@ -179,18 +183,19 @@ Get-NetFirewallRule -Action Block | ForEach-Object {
 ```
 
 Look for rules where:
+- **Direction** is Inbound
+- **Protocol** is UDP
+- **LocalPort** matches one of your configured ports
 
-- Direction is Inbound
-- Protocol is UDP
-- LocalPort matches the configured ports
+#### macOS
 
-#### MacOS
+Run the following command to review packet filter (pf) rules:
 
-```
+```shell
 sudo pfctl -sr
 ```
 
-Look for any rules that block UDP traffic on the configured ports, such as: `block drop in proto UDP from any to any port = <CONFIG_PORT>`.
+Check for any rules blocking UDP traffic on your configured ports, e.g. `block drop in proto udp from any to any port = <CONFIG_PORT>`.
 
 ### Traps not being received for devices
 
@@ -266,3 +271,4 @@ Look for any rules that block UDP traffic on the configured ports, such as: `blo
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
+[9]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
