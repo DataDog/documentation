@@ -143,10 +143,10 @@ The following is the list of neutral tags available for use:
 | `gateway_id`            | Unique identifier for the AWS gateway resource.                                               |
 | `gateway_type`          | Type of AWS gateway (Internet, NAT, or Transit).                                              |
 | `gateway_region`        | AWS region of the gateway (for example, `us-east-1`).                                                |
-| `gateway_availability-zone` | Availability Zone hosting the gateway (for examle, `us-east-1a`).                                |
+| `gateway_availability-zone` | Availability zone hosting the gateway (for example, `us-east-1a`).                                |
 | `gateway_public_ip`     | Public IP address assigned to the NAT gateway.                                                |
 | `tgw_attachment_id`     | Unique identifier for the AWS Transit Gateway attachment.                                     |
-| `tgw_attachment_type`   | Type of Transit Gateway attachment (e.g., VPC, VPN, Direct Connect).                          |
+| `tgw_attachment_type`   | Type of Transit Gateway attachment (for example, VPC, VPN, Direct Connect).                          |
 | `vpc_endpoint_id`       | Unique identifier for the VPC endpoint.                                                       |
 
 ## Summary graphs
