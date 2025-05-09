@@ -131,7 +131,8 @@
     .table-wrapper {
         table {
             td {
-                max-width: 200px;
+                min-width: 75px;
+                max-width: 175px;
             }
         }
     }
