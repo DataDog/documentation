@@ -20,7 +20,7 @@
 
 {{/*  Determine data source, if any  */}}
 {{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource) }}
-  {{ errorf "No data source provided for multifilter-search component"}}
+  {{ errorf "No data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
 {{ else if isset $.Page.Params "multifiltersearch" }}
   {{/*  Get Frontmatter dataset  */}}
   {{ $headers = $.Page.Params.multifiltersearch.headers}}
