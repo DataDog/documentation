@@ -51,6 +51,8 @@ network_devices:
 
 After saving your changes, [restart the Agent][4].
 
+**Note**: Ensure that your [firewall rules][9] allow incoming UDP traffic on the configured ports.
+
 ## Aggregation
 
 The Datadog Agent automatically aggregates the data received into NetFlow to limit the number of records sent to the platform while maintaining most of the information. By default, flow recordings that have the same identifiers, such as `source`, `destination address`, `port`, and `protocol`, are aggregated together in five minute intervals. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
@@ -87,7 +89,7 @@ Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames as
 
 By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
-Search for **DNS** in the Flow grouping of the facets section to locate flows associated with Reverse DNS IP enrichment: 
+Search for **DNS** in the Flow grouping of the facets section to locate flows associated with Reverse DNS IP enrichment:
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
 
@@ -283,3 +285,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [6]: /monitors/types/netflow/
 [7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
 [8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
+[9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
