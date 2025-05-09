@@ -32,40 +32,36 @@ Integration tiles are a component of integrations at Datadog.
 
 ## Building an integration overview
 
-Follow these steps to start creating a new integration with Datadog.
+Follow these steps to create a new integration with Datadog.
 
 **1. Apply to the Datadog Partner Network.**
-Once accepted, a member of the Datadog Technology Partner team will reach out to discuss your offering and use cases. You should also receive details on getting a Datadog sandbox account and get access to the publishing platform via email.
+Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
 2. **Request a Datadog sandbox account** for development via the Datadog Partner Network portal.
 3. **Start developing your integration** using the Integration Developer Platform.
-    a. Define your integration’s configuration method based on specific requirements of your use case. Different scenarios call for different configuration approaches, and your choice will impact your development process.
-    b. Create your dashboards, monitors, and security rules
-        i. Note: Dashboards are required.
+    a. Define the basic details about your integration. 
+    b. Define and write your integration code by following the instructions to create either 1) [an Agent-based integration][5], or 2) [an API-based integration][6]. Select the appropriate configuration method depending on your integration.
+    c. Specify what type of data types your integration queries or submits.
+    c. Create a dashboard, and optionally monitors or security rules. 
     c. Fill in the remaining fields:
-        * Setup instructions
+        * Setup and uninstallation instructions
         * Images
-        * Data
-        * Content
         * Support details
-        * Other key details that help describe the integration
+        * Other key details that help describe the value of your integration
 4. **Test your integration** in your Datadog sandbox account.
 5. **Submit your integration for review.**
-A live demo will be scheduled for final approval. 
-6. **Your integration is published.**
+6. **Once approved, your integration is published.**
 
-## Out-of-the-box Integrations vs. Marketplace Integrations
+## Out-of-the-box Integrations vs. Marketplace Offerings
 
-Datadog offers two types of integrations:
+**Out-of-the-Box Integrations**:integrations developed both by Datadog and Technology Partners, available at no cost on the [Integrations page][2]. 
 
-**Out-of-the-Box Integrations**: The Integrations page includes integrations developed both by Datadog and Technology Partners, available at no cost. 
-
-**Marketplace Integrations**: 
+**Marketplace Offerings**: 
 The Datadog Marketplace is a commercial platform for Technology Partners to _sell_ a variety of offerings to Datadog customers. Marketplace offerings include:
-* Paid Integrations: Function like standard integration but require an additional fee.
-* Software Licenses: Allow customers to purchase a partner’s software product directly through Datadog for consolidated billing.
-* Professional Services: Enable customers to pay a one-time fee for partner-delievered services that enhance Datadog usage
-
-Marketplace integrations are built and monetized by partners, offering specialized functionality that complements Datadog’s platforms without overlapping with core offerings. They are ideal for:
+* Paid Integrations
+* Software Licenses
+* Professional Services
+  
+Marketplace integrations are ideal for:
 * System integrators with specialized Datadog product expertise.
 * Partners offering professional services to enhance Datadog adoption.
 
@@ -76,7 +72,7 @@ See the [Build a Marketplace Offering documentation][4] to learn more about how 
 | **Purpose**              | Provides a way to connect and transfer data between Datadog and partner platforms     | Enhance the Datadog experience, including extended capabilities, partner services, and legacy tech coverage    |
 | **Availability**         | Included on the Integrations Page                                                     | Paid, available on the Marketplace                                                                             |
 | **Built & Maintained by**| Datadog or Technology Partners                                                        | Technology Partners                                                                                            |
-| **Billing**              | Included in Datadog subscription                                                      | Purchased through Datadog’s Marketplace for consolidated billing                                               |
+| **Billing**              | Included in Datadog subscription                                                      | Additional fees                                               |
 
 ## Go-to-Market (GTM) opportunities
 
@@ -90,3 +86,5 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 [2]: /integrations
 [3]: /marketplace
 [4]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
+[5]: << link to agent integration docs >> 
+[6]: << link to API integration docs>> 
