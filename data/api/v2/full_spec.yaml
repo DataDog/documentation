@@ -53688,6 +53688,10 @@ paths:
               \ }\n}"
           step: there is a valid "escalation_policy" in the system
       x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         operationId: DeleteOnCallEscalationPolicy
         parameters:
@@ -53725,6 +53729,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
     get:
@@ -53769,6 +53777,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
@@ -53819,6 +53831,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
   /api/v2/on-call/schedules:
@@ -53882,6 +53898,10 @@ paths:
               \   \"type\": \"schedules\"\n  }\n}"
           step: there is a valid "schedule" in the system
       x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         operationId: DeleteOnCallSchedule
         parameters:
@@ -53919,6 +53939,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
     get:
@@ -53961,6 +53985,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
@@ -54011,6 +54039,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
   /api/v2/on-call/teams/{team_id}/routing-rules:
@@ -54048,6 +54080,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
@@ -54099,6 +54135,10 @@ paths:
               null,\n          \"actions\": []\n        }\n      ]\n    }\n  }\n}"
           step: there are valid "routing_rules" in the system
       x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
   /api/v2/org_configs:
