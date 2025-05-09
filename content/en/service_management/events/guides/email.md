@@ -21,7 +21,7 @@ Before you can send events with email, you need a dedicated email address from D
 2. From the **Account** menu at the bottom left, select **Organization Settings**.
 3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
-5. [Optional] Define other attributes (more information in the next section).
+5. Optionally, define any of the other attributes listed in this page's [attribute definitions section](#attribute-definitions).
 6. Click the **Create Email** button.
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
