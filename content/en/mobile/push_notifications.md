@@ -26,11 +26,11 @@ However, by default, the mobile app is not allowed to send you notifications. To
 
 1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
 
-   {{< img src="service_management/oncall/app_settings_iOS.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
+   {{< img src="service_management/mobile/ios_settings_may_2025.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
 
 2. Enable the **Allow Notifications** toggle. If this is your first time enabling notifications, this opens up a permissions prompt. Grant permission, then touch **Enable Notifications** again to go to the iOS system settings.
 
-   {{< img src="service_management/oncall/system_notifications_settings_iOS.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
+   {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
 
 3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
 
@@ -40,11 +40,11 @@ Make sure you grant the mobile app the necessary permissions.
 {{% tab "Android" %}}
 1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
 
-   {{< img src="service_management/oncall/app_settings_android.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:35%;" >}}
+   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:35%;" >}}
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-   {{< img src="service_management/oncall/system_notifications_settings_android.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
+   {{< img src="service_management/mobile/android_notification_may_2024.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -55,13 +55,13 @@ On both iOS and Android, you have the option to override the default system noti
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
 
-For more infromation, here is a full guide on [how to set up your mobile device for On-Call][]
+For more information, here is a full guide on [how to set up your mobile device for On-Call][]
 
 ### Critical push notifications
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/oncall/override_dnd_push_iOS.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%;" >}}
+{{< img src="service_management/mobile/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
@@ -74,7 +74,7 @@ For more infromation, here is a full guide on [how to set up your mobile device 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/oncall/override_dnd_push_android.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
