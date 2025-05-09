@@ -432,7 +432,7 @@ Enable the allocation size and allocation bytes profile type. Added in version `
 
 `DD_PROFILING_ALLOCATION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.allocation_sampling_distance`.
-**Default**: `4194304` (4MB)<br>
+**Default**: `4194304` (4 MB)<br>
 Configure the sampling distance for allocations. The higher the sampling distance, the fewer samples are created and the lower the overhead. Added in version `1.9.0`.
 
 `DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
