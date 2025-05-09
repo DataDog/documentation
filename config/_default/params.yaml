@@ -129,6 +129,8 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    ddsql_preview: "DDSQL (Preview)"
+    ddsql_default: "DDSQL"
 branch: ""
 
 signupclass: sign-up-trigger
