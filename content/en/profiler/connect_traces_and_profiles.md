@@ -22,7 +22,7 @@ You can move directly from span information to profiling data on the **Profiles*
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,eBPF" >}}
 {{< programming-lang lang="java" >}}
 The Trace to Profiling integration is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
@@ -111,6 +111,13 @@ The Trace to Profiling integration is enabled when you [turn on profiling for yo
 - You set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /profiler/enabling/php
+{{< /programming-lang >}}
+{{< programming-lang lang="ebpf" >}}
+
+The Trace to Profiling integration is enabled when you:
+- Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
+
+[1]: /profiler/enabling/ebpf
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
