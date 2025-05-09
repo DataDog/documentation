@@ -447,7 +447,7 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
-`trace.cassandra.keyspace.statement.extraction.enabled`
+`dd.trace.cassandra.keyspace.statement.extraction.enabled`
 : **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
 **Default**: `false`<br>
 By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
@@ -460,6 +460,13 @@ By default, the keyspace is extracted only if it is configured during session cr
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+
+### UDS
+
+`dd.jdk.socket.enabled`
+: **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
+**Default**: `false`<br>
+Enable native JDK support for unix domain sockets.
 
 ### Examples
 
