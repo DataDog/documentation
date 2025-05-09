@@ -93,6 +93,38 @@ For incidents, you can sort by:
 
 Ascending or descending
 
+### CD deployments
+
+#### Sorting by
+
+For CD deployments, you can sort by:
+
+* Deployment Status
+* Service
+* Deployment Name
+* Environment
+* Duration
+* Revision Value
+* Repository URL
+* Timestamp
+
+Ascending or descending
+
+### CI pipelines
+
+#### Sorting by
+
+For CI pipelines, you can sort by:
+
+* CI Status
+* Pipeline Name
+* Duration
+* Pipeline ID
+* Branch
+* Timestamp
+
+Ascending or descending
+
 ## API
 
 This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
