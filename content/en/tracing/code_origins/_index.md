@@ -67,7 +67,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
 <div class="alert alert-info">
-  For transpiled Node.js applications (for example, Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a> flag. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
 </div>
 
 ## Using Code Origins
@@ -105,7 +105,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ## Troubleshooting
 
-### Code Origin section is missing ###
+### Code Origin section is missing
 
 - Verify Code Origins is [enabled](#enable-code-origins) in your tracing library configuration.
 - Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version).
@@ -115,9 +115,10 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 - To search for all spans that include Code Origins, use the query `@_dd.code_origin.type:*` in the [APM Trace Explorer][1].
 
-### Code preview is not visible ###
+### Code preview is not visible
+
 - Ensure that all [Source Code Integration][7] setup requirements are met.
-- For transpiled Node.js applications (for example, Typescript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews do not work. See the Node.js [Source Code Integration][9] documentation for more details. 
+- For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews do not work. See the Node.js [Source Code Integration][9] documentation for more details. 
 
 
 
@@ -134,6 +135,6 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [7]: /integrations/guide/source-code-integration/
 [8]: /tracing/trace_collection/compatibility/nodejs#web-framework-compatibility
 [9]: /integrations/guide/source-code-integration/?tab=nodejs#setup
-[10]: https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps
+[10]: https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps
 [11]: /tracing/live_debugger/
 [12]: /glossary/#service-entry-span
