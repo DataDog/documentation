@@ -126,7 +126,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and apply the tags using the `env`, `service`, `version` and `tags` parameters. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     env: "dev",
     service: "web",
@@ -213,7 +213,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and set the `captureLambdaPayload` parameter to `true`. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     captureLambdaPayload: true
 });
@@ -408,7 +408,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: true
 });
@@ -461,7 +461,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: false
 });
