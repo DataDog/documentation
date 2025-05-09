@@ -1,9 +1,5 @@
 ---
 title: Resource Changes
-aliases:
-  - /infrastructure/resource_catalog/resource_changes/
-  - /infrastructure/configuration_changes/
-  - /security/resource_changes/
 further_reading:
 - link: "/infrastructure/resource_catalog/"
   tag: "Documentation"
@@ -37,7 +33,7 @@ Resource Changes supports a variety of resources, including:
 - Networking
 - Monitoring
 - Identity
-- Data Processing (for example, GCP Dataproc)
+- Data Processing
 
 For a comprehensive list of supported resources, see the [Supported resources](#supported-resources) section.
 
@@ -45,11 +41,11 @@ For a comprehensive list of supported resources, see the [Supported resources](#
 
 To view configuration changes for your resources:
 
-1.  **Enable Resource Collection**: Ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog setup page][2] or the relevant [cloud provider integration tile][3].
+1.  **Enable Resource Collection**: Ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3].
 2.  **Cloud Provider Event Forwarding**: For real-time or more frequent change updates, configure event forwarding from your cloud provider:
     - **AWS**: Set up change event forwarding through AWS Config. See the [AWS Config integration page][4] for details.
-    - **Azure**: Enable Resource Collection for your Azure subscriptions in the [Azure integration tile][5]. Azure Resource Graph captures configuration changes.
-    - **Google Cloud Platform**: Follow the instructions on the [Google Cloud Platform integration page][6] to forward change events using a Pub/Sub topic and subscription using Google Cloud Asset Inventory.
+    - **Azure**: Enable Resource Collection for your Azure subscriptions in the [Azure integration tile][5].
+    - **Google Cloud Platform**: Follow the instructions on the [Google Cloud Platform integration page][6] to receive resource events in Datadog when Google's Cloud Asset Inventory detects changes in your cloud resources.
     
  <div class="alert alert-info">If you only enable Resource Collection without specific cloud provider event forwarding, Datadog uses <strong>Snapshot Changes</strong>.</div>   
 
@@ -65,17 +61,16 @@ Key characteristics of Snapshot Changes:
 
 Cloud provider changes (AWS Config, Azure Resource Graph, Google Cloud Asset Inventory) are available in Event Management with a default retention of 15 months. Forwarding these events does not incur charges for custom events from Datadog.
 
-## Navigating and viewing resource changes
+## Navigating and viewing Resource Changes
 
 You can access Resource Changes in the Datadog platform in the following ways:
 
-1.  **Main Navigation**: Go to **Infrastructure > Resources > Resource Changes**.
-2.  **Within Resource Catalog**: Navigate to the [Resource Catalog][1] and click on the **Changes*- tab at the top of the page.
-3.  **Within a Resource's Side Panel**:
-    - Open the side panel for a specific resource (for example, by clicking on a host in the Resource Catalog or a related host view).
-    - Scroll down to the **Recent Changes*- section.
+-  **Main Navigation**: Go to [**Infrastructure > Resources > Resource Changes**][8].
+-  **Within a Resource's Side Panel**:
+    1. Open the side panel for a specific resource (for example, by clicking on a host in the Resource Catalog or a related host view).
+    2. Scroll down to the **Recent Changes** section.
 
-## Querying resource changes
+## Querying Resource Changes
 
 The Resource Changes view allows you to search and filter changes using various attributes.
 
@@ -94,7 +89,7 @@ The Resource Changes view allows you to search and filter changes using various 
 - **Union (OR)**: Use `OR` for multiple values (not available for resource types or categories). Example: `service:(service_a OR service_b)`
 - **Exclusion (Empty/Not Empty)**: Use `-` prefix to exclude. Example: `-service:*` (shows resources where the service tag is not set).
 
-## Troubleshooting with resource changes
+## Troubleshooting with Resource Changes
 
 Resource Changes are invaluable during incident troubleshooting to answer the critical question: "What changed?".
 
@@ -110,115 +105,115 @@ By correlating infrastructure changes with incident timelines, you can significa
 
 Resource Changes supports a wide array of resources across AWS, Azure, and Google Cloud Platform.
 
-| Cloud Provider | Service / Resource Type          |
-| :------------- | :------------------------------- |
-| **AWS*- | `ec2 instance`                   |
-|                | `docdb cluster`                  |
-|                | `dynamodb table`                 |
-|                | `ebs volume`                     |
-|                | `eks cluster`                    |
-|                | `elasticache cluster`            |
-|                | `elb load balancer`              |
-|                | `elbv2 load balancer`            |
-|                | `iam account settings`           |
-|                | `iam policy`                     |
-|                | `iam role`                       |
-|                | `iam user`                       |
-|                | `lambda function`                |
-|                | `mq broker`                      |
-|                | `rds instance`                   |
-|                | `redshift cluster`               |
-|                | `s3 bucket`                      |
-|                | `sqs queue`                      |
-|                | `acm certificate`                |
-|                | `ami image`                      |
-|                | `cloudfront distribution`        |
-|                | `cloudtrail trail`               |
-|                | `ebs snapshot`                   |
-|                | `elasticsearch domain`           |
-|                | `iam server certificate`         |
-|                | `kms key`                        |
-|                | `network acl`                    |
-|                | `rds db snapshot`                |
-|                | `s3 account public access block` |
-|                | `security group`                 |
-|                | `sns topic`                      |
-|                | `vpc endpoint`                   |
-|                | `eni`                            |
-|                | `vpc nat gateway`                |
-|                | `vpc`                            |
-| **Azure*- | `virtual machine instance`       |
-|                | `aks cluster`                    |
-|                | `app service plan` / `app service` |
-|                | `function app`                   |
-|                | `managed disk`                   |
-|                | `mysql server`                   |
-|                | `policy assignment`              |
-|                | `postgresql server`              |
-|                | `sql server`                     |
-|                | `sql server database`            |
-|                | `storage account`                |
-|                | `storage blob container`         |
-|                | `activity log alert`             |
-|                | `automation account`             |
-|                | `container apps`                 |
-|                | `container registry`             |
-|                | `diagnostic setting`             |
-|                | `key vault key`                  |
-|                | `key vault secret`               |
-|                | `key vault`                      |
-|                | `load balancer probe`            |
-|                | `log analytics storage insight`  |
-|                | `log analytics workspace`        |
-|                | `network interface`              |
-|                | `network public ip address`      |
-|                | `network subnet`                 |
-|                | `network vnet peering`           |
-|                | `network vnet`                   |
-|                | `network watcher`                |
-|                | `postgresql firewall rule`       |
-|                | `role assignment`                |
-|                | `role definition`                |
-|                | `security center auto provisioning`|
-|                | `security contact`               |
-|                | `security group`                 |
-|                | `sql firewall rule`              |
-|                | `subscription`                   |
-| **GCP*- | `bigquery table`                 |
-|                | `cloudfunctions function`        |
-|                | `compute disk`                   |
-|                | `sql database instance`          |
-|                | `storage bucket`                 |
-|                | `compute instance`               |
-|                | `bigquery dataset`               |
-|                | `compute external vpn gateway`   |
-|                | `compute firewall`               |
-|                | `compute network`                |
-|                | `compute project metadata`       |
-|                | `compute route`                  |
-|                | `compute router`                 |
-|                | `compute ssl policy`             |
-|                | `compute subnetwork`             |
-|                | `compute target http proxy`      |
-|                | `compute target https proxy`     |
-|                | `compute target ssl proxy`       |
-|                | `compute target vpn gateway`     |
-|                | `compute vpn gateway`            |
-|                | `compute vpn tunnel`             |
-|                | `dataproc cluster`               |
-|                | `dns managed zone`               |
-|                | `dns policy`                     |
-|                | `folder`                         |
-|                | `iam policy` (for project/org/folder) |
-|                | `iam service account key`        |
-|                | `iam service account`            |
-|                | `kms crypto key`                 |
-|                | `logging log bucket`             |
-|                | `logging log metric`             |
-|                | `logging log sink`               |
-|                | `monitoring alert policy`        |
-|                | `organization`                   |
-|                | `project`                        |
+| Cloud Provider | Service / Resource Type             |
+|:---------------|:------------------------------------|
+| **AWS**        | `ec2 instance`                      |
+| **AWS**        | `docdb cluster`                     |
+| **AWS**        | `dynamodb table`                    |
+| **AWS**        | `ebs volume`                        |
+| **AWS**        | `eks cluster`                       |
+| **AWS**        | `elasticache cluster`               |
+| **AWS**        | `elb load balancer`                 |
+| **AWS**        | `elbv2 load balancer`               |
+| **AWS**        | `iam account settings`              |
+| **AWS**        | `iam policy`                        |
+| **AWS**        | `iam role`                          |
+| **AWS**        | `iam user`                          |
+| **AWS**        | `lambda function`                   |
+| **AWS**        | `mq broker`                         |
+| **AWS**        | `rds instance`                      |
+| **AWS**        | `redshift cluster`                  |
+| **AWS**        | `s3 bucket`                         |
+| **AWS**        | `sqs queue`                         |
+| **AWS**        | `acm certificate`                   |
+| **AWS**        | `ami image`                         |
+| **AWS**        | `cloudfront distribution`           |
+| **AWS**        | `cloudtrail trail`                  |
+| **AWS**        | `ebs snapshot`                      |
+| **AWS**        | `elasticsearch domain`              |
+| **AWS**        | `iam server certificate`            |
+| **AWS**        | `kms key`                           |
+| **AWS**        | `network acl`                       |
+| **AWS**        | `rds db snapshot`                   |
+| **AWS**        | `s3 account public access block`    |
+| **AWS**        | `security group`                    |
+| **AWS**        | `sns topic`                         |
+| **AWS**        | `vpc endpoint`                      |
+| **AWS**        | `eni`                               |
+| **AWS**        | `vpc nat gateway`                   |
+| **AWS**        | `vpc`                               |
+| **Azure**      | `virtual machine instance`          |
+| **Azure**      | `aks cluster`                       |
+| **Azure**      | `app service plan` / `app service`  |
+| **Azure**      | `function app`                      |
+| **Azure**      | `managed disk`                      |
+| **Azure**      | `mysql server`                      |
+| **Azure**      | `policy assignment`                 |
+| **Azure**      | `postgresql server`                 |
+| **Azure**      | `sql server`                        |
+| **Azure**      | `sql server database`               |
+| **Azure**      | `storage account`                   |
+| **Azure**      | `storage blob container`            |
+| **Azure**      | `activity log alert`                |
+| **Azure**      | `automation account`                |
+| **Azure**      | `container apps`                    |
+| **Azure**      | `container registry`                |
+| **Azure**      | `diagnostic setting`                |
+| **Azure**      | `key vault key`                     |
+| **Azure**      | `key vault secret`                  |
+| **Azure**      | `key vault`                         |
+| **Azure**      | `load balancer probe`               |
+| **Azure**      | `log analytics storage insight`     |
+| **Azure**      | `log analytics workspace`           |
+| **Azure**      | `network interface`                 |
+| **Azure**      | `network public ip address`         |
+| **Azure**      | `network subnet`                    |
+| **Azure**      | `network vnet peering`              |
+| **Azure**      | `network vnet`                      |
+| **Azure**      | `network watcher`                   |
+| **Azure**      | `postgresql firewall rule`          |
+| **Azure**      | `role assignment`                   |
+| **Azure**      | `role definition`                   |
+| **Azure**      | `security center auto provisioning` |
+| **Azure**      | `security contact`                  |
+| **Azure**      | `security group`                    |
+| **Azure**      | `sql firewall rule`                 |
+| **Azure**      | `subscription`                      |
+| **GCP**        | `bigquery table`                    |
+| **GCP**        | `cloudfunctions function`           |
+| **GCP**        | `compute disk`                      |
+| **GCP**        | `sql database instance`             |
+| **GCP**        | `storage bucket`                    |
+| **GCP**        | `compute instance`                  |
+| **GCP**        | `bigquery dataset`                  |
+| **GCP**        | `compute external vpn gateway`      |
+| **GCP**        | `compute firewall`                  |
+| **GCP**        | `compute network`                   |
+| **GCP**        | `compute project metadata`          |
+| **GCP**        | `compute route`                     |
+| **GCP**        | `compute router`                    |
+| **GCP**        | `compute ssl policy`                |
+| **GCP**        | `compute subnetwork`                |
+| **GCP**        | `compute target http proxy`         |
+| **GCP**        | `compute target https proxy`        |
+| **GCP**        | `compute target ssl proxy`          |
+| **GCP**        | `compute target vpn gateway`        |
+| **GCP**        | `compute vpn gateway`               |
+| **GCP**        | `compute vpn tunnel`                |
+| **GCP**        | `dataproc cluster`                  |
+| **GCP**        | `dns managed zone`                  |
+| **GCP**        | `dns policy`                        |
+| **GCP**        | `folder`                            |
+| **GCP**        | `iam policy`                        |
+| **GCP**        | `iam service account key`           |
+| **GCP**        | `iam service account`               |
+| **GCP**        | `kms crypto key`                    |
+| **GCP**        | `logging log bucket`                |
+| **GCP**        | `logging log metric`                |
+| **GCP**        | `logging log sink`                  |
+| **GCP**        | `monitoring alert policy`           |
+| **GCP**        | `organization`                      |
+| **GCP**        | `project`                           |
 
 If you have a request for an additional resource type, contact [Datadog Support][7].
 
@@ -230,6 +225,7 @@ If you have a request for an additional resource type, contact [Datadog Support]
 [2]: https://app.datadoghq.com/infrastructure/catalog/configuration
 [3]: https://app.datadoghq.com/integrations
 [4]: /integrations/amazon_config/#resource-changes-collection
-[5]: [https://app.datadoghq.com/integrations/azure
+[5]: https://app.datadoghq.com/integrations/azure
 [6]: /integrations/google_cloud_platform/#resource-changes-collection
 [7]: /help/
+[8]: https://app.datadoghq.com/infrastructure/catalog/changes
