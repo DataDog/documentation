@@ -134,6 +134,6 @@ The maximum allowed email size, including content and attachments, is 20MB. Emai
 [3]: https://app.datadoghq.com
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
 [6]: /integrations/guide/events-from-sns-emails/
-
+[7]: /monitors/notify/#notification-recipients
 ### Usage tracking
 In order to help understand which emails are being used and receiving events, there is a column in the **Events API emails** called `Last Used`. That date reflects the last time an email was processed for each address, or `No data` when there are no records of it being used.
