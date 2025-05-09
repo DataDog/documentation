@@ -2165,6 +2165,89 @@ components:
       - id
       - base_severity
       type: object
+    AlertEventCustomAttributes:
+      additionalProperties: false
+      description: Object representing custom alert event attributes.
+      properties:
+        custom:
+          $ref: '#/components/schemas/AlertEventCustomAttributesCustom'
+        links:
+          $ref: '#/components/schemas/AlertEventCustomAttributesLinks'
+        priority:
+          $ref: '#/components/schemas/AlertEventCustomAttributesPriority'
+        status:
+          $ref: '#/components/schemas/AlertEventCustomAttributesStatus'
+      type: object
+    AlertEventCustomAttributesCustom:
+      additionalProperties: {}
+      description: Custom attributes. Support up to 100 properties and a maximum nesting
+        depth of 10 levels.
+      example: {}
+      type: object
+    AlertEventCustomAttributesLinks:
+      description: The links related to the event.
+      items:
+        $ref: '#/components/schemas/AlertEventCustomAttributesLinksItems'
+      maxItems: 20
+      minItems: 1
+      type: array
+    AlertEventCustomAttributesLinksItems:
+      description: A link.
+      properties:
+        category:
+          $ref: '#/components/schemas/AlertEventCustomAttributesLinksItemsCategory'
+        title:
+          description: The title of the link. Limited to 300 characters.
+          example: Runbook Link
+          maxLength: 300
+          type: string
+        url:
+          description: The URL of the link. Limited to 2048 characters.
+          example: https://app.datadoghq.com/runbook
+          maxLength: 2048
+          type: string
+      required:
+      - url
+      - category
+      type: object
+    AlertEventCustomAttributesLinksItemsCategory:
+      description: The category of the link.
+      enum:
+      - runbook
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+    AlertEventCustomAttributesPriority:
+      description: The priority of the alert.
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      example: '1'
+      type: string
+      x-enum-varnames:
+      - PRIORITY_ONE
+      - PRIORITY_TWO
+      - PRIORITY_THREE
+      - PRIORITY_FOUR
+      - PRIORITY_FIVE
+    AlertEventCustomAttributesStatus:
+      description: The status of the alert.
+      enum:
+      - info
+      - warn
+      - error
+      - ok
+      example: warn
+      type: string
+      x-enum-varnames:
+      - INFO
+      - WARN
+      - ERROR
+      - OK
     Annotation:
       description: A list of annotations used in the workflow. These are like sticky
         notes for your workflow!
@@ -13784,15 +13867,16 @@ components:
           type: string
       type: object
     EventCategory:
-      description: Event category to identify the type of event. Only the value `change`
-        is supported. Support for other categories are coming. please reach out to
-        datadog support if you're interested.
+      description: Event category to identify the type of event. For example, `change`
+        or `alert`.
       enum:
       - change
+      - alert
       example: change
       type: string
       x-enum-varnames:
       - CHANGE
+      - ALERT
     EventCreateRequest:
       description: Object representing an event creation request.
       properties:
@@ -13800,12 +13884,17 @@ components:
           $ref: '#/components/schemas/EventPayload'
         type:
           $ref: '#/components/schemas/EventCreateRequestType'
+      required:
+      - type
+      - attributes
       type: object
     EventCreateRequestPayload:
       description: Payload for creating an event.
       properties:
         data:
           $ref: '#/components/schemas/EventCreateRequest'
+      required:
+      - data
       type: object
     EventCreateRequestType:
       description: Entity type.
@@ -13820,6 +13909,12 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/EventCreateResponseAttributes'
+        id:
+          description: A numerical ID compatible with the V1 endpoint. This field
+            is not populated in response from the V2 endpoint. To retrieve this ID,
+            refer to the event attributes in the Event Explorer.
+          example: _
+          type: string
         type:
           description: Event type
           example: event
@@ -13841,8 +13936,10 @@ components:
     EventCreateResponseAttributesAttributesEvt:
       description: JSON object of event system attributes.
       properties:
-        id:
-          description: Event id
+        uid:
+          description: A unique identifier for the event. You can use this ID to query
+            or reference the event in the V2 endpoint.
+          example: ABCDEFGHIJKLMNOPQRSTUVWX
           type: string
       type: object
     EventCreateResponsePayload:
@@ -13850,6 +13947,17 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/EventCreateResponse'
+        links:
+          $ref: '#/components/schemas/EventCreateResponsePayloadLinks'
+      type: object
+    EventCreateResponsePayloadLinks:
+      description: Links attributes.
+      properties:
+        self:
+          description: The URL of the event. This link is only functional when using
+            the `app` subdomain.
+          example: https://app.datadoghq.com/event/event?uid=ABCDEFGHIJKLMNOPQRSTUVWX
+          type: string
       type: object
     EventPayload:
       description: Event attributes.
@@ -13857,12 +13965,15 @@ components:
         aggregation_key:
           description: An arbitrary string to use for aggregation when correlating
             events. Limited to 100 characters.
+          example: aggregation_key_123
           maxLength: 100
           type: string
         attributes:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
+        integration_id:
+          $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
           description: The body of the event. Limited to 4000 characters.
           example: payment_processed feature flag has been enabled
@@ -13876,7 +13987,10 @@ components:
           - env:test
           items:
             description: A tag.
+            maxLength: 200
             type: string
+          maxItems: 100
+          minItems: 1
           type: array
         timestamp:
           description: 'Timestamp when the event occurred. Must follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
@@ -13902,6 +14016,16 @@ components:
         event category.
       oneOf:
       - $ref: '#/components/schemas/ChangeEventCustomAttributes'
+      - $ref: '#/components/schemas/AlertEventCustomAttributes'
+    EventPayloadIntegrationId:
+      description: Integration IDs sourced from integration manifests. Currently,
+        only `custom-events` is supported.
+      enum:
+      - custom-events
+      example: custom-events
+      type: string
+      x-enum-varnames:
+      - CUSTOM_EVENTS
     EventPriority:
       description: The priority of the event's monitor. For example, `normal` or `low`.
       enum:
@@ -46770,7 +46894,8 @@ paths:
         type: safe
     post:
       description: "This endpoint allows you to post events.\n\n\u2705 **Only events
-        with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        with the `change` or `alert` category** are in General Availability. For change
+        events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
         please use the V1 endpoint."
       operationId: CreateEvent
@@ -46782,6 +46907,7 @@ paths:
                 value:
                   data:
                     attributes:
+                      aggregation_key: aggregation_key_123
                       attributes:
                         author:
                           name: datadog@datadog.com
@@ -46810,6 +46936,7 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
+                      integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:
                       - env:test
@@ -46820,7 +46947,7 @@ paths:
         description: Event request object
         required: true
       responses:
-        '200':
+        '202':
           content:
             application/json:
               schema:
@@ -46843,6 +46970,38 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - ap1.datadoghq.com
+            - datadoghq.eu
+            - ddog-gov.com
+          subdomain:
+            default: event-management-intake
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: event-management-intake.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: event-management-intake
+            description: The subdomain where the API is deployed.
       summary: Post an event
       tags:
       - Events
