@@ -136,4 +136,4 @@ The maximum allowed email size, including content and attachments, is 20MB. Emai
 [6]: /integrations/guide/events-from-sns-emails/
 [7]: /monitors/notify/#notification-recipients
 ### Usage tracking
-In order to help understand which emails are being used and receiving events, there is a column in the **Events API emails** called `Last Used`. That date reflects the last time an email was processed for each address, or `No data` when there are no records of it being used.
+To understand which emails are being used and receiving events, check the `Last Used` column in the **Events API Emails** tab in organization settings. This displays the most recent date that an email was processed for each address, or `No data` if there are no records of it being used.
