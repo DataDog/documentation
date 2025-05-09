@@ -26,7 +26,8 @@ Before you can send events with email, you need a dedicated email address from D
 
 The **Events API emails** section displays all the emails available for your applications and who created them.
 
-### Attributes definition
+### Attribute definitions
+
 | Name | Description | Example |
 |---|---|---|
 | Description | A short text for clarifying the email usage | "Used for MyService notifications" |
