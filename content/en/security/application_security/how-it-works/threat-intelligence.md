@@ -89,7 +89,7 @@ On a new [references table][4] page:
 4. Save the table.
 5. In [Threat Intel][5], locate the new table, and then select the toggle to enable it. 
    
-   {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="Enabled reference table" style="width:100%;" >}}
+   <!-- {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="Enabled reference table" style="width:100%;" >}} -->
 
 #### Using cloud storage
 
@@ -139,7 +139,7 @@ To join a trace with a Reference Table:
 4. In **where field**, select the Datadog traces field to use for the join.
 5. In **column**, select the Reference Table field to use for the join.
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="Your image description" style="width:100%;" >}}
+<!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="Your image description" style="width:100%;" >}} -->
 
 ### Enriching traces for detection rules
 
@@ -151,11 +151,11 @@ Enriching traces includes the threat intelligence attributes in AAP traces when 
 
 When viewing the traces in the AAP Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
+<!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}} -->
 
-Under `@threat_intel.results` you can always see the full details of what was matched from which source:
+Under `@threat_intel.results` you can always see the full details of what was matched from which source.
 
- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
+ <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}} -->
 
 ## Further Reading
 

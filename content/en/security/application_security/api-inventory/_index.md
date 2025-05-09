@@ -26,7 +26,7 @@ Using the API Security Inventory you can:
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 - See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history.
 
-{{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}}
+<!-- {{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}} -->
 
 ## Configuration
 

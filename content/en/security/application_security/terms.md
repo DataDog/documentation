@@ -2,7 +2,7 @@
 title: Terms and Concepts
 disable_toc: false
 further_reading:
-- link: "/security/application_security/how-appsec-works"
+- link: "/security/application_security/how-it-works"
   tag: "Documentation"
   text: "How App and API Protection Works"
 - link: "/security/application_security/threats/"
@@ -151,9 +151,9 @@ Object-Graph Navigation Language Injection (OGNLi)
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /security/application_security/threats/inapp_waf_rules
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
-[14]: /security/application_security/threats/add-user-info/
-[15]: /security/application_security/threats/trace_qualification/
-[16]: /security/application_security/threats/threat-intelligence/
-[17]: /security/application_security/threats/attacker-explorer/
-[18]: /security/application_security/threats/attacker_fingerprint/
-[19]: /security/application_security/threats/attacker_clustering/
+[14]: /security/application_security/how-it-works/add-user-info/
+[15]: /security/application_security/how-it-works/trace_qualification/
+[16]: /security/application_security/how-it-works/threat-intelligence/
+[17]: /security/application_security/security_signals/attacker-explorer/
+[18]: /security/application_security/security_signals/attacker_fingerprint/
+[19]: /security/application_security/security_signals/attacker_clustering/

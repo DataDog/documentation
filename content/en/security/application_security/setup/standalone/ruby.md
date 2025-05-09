@@ -228,6 +228,6 @@ env DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false rails server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility/ruby/
+[1]: /security/application_security/setup/compatibility/ruby/
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide2.md
 [3]: /tracing/trace_collection/dd_libraries/ruby/

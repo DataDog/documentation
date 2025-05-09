@@ -1,7 +1,7 @@
 ---
 title: App and API Protection
 further_reading:
-- link: "/security/application_security/threats/add-user-info/"
+- link: "/security/application_security/how-it-works/add-user-info/"
   tag: "Documentation"
   text: "Tracking User Activity"
 - link: "/security/application_security/threats/library_configuration/"
@@ -10,7 +10,7 @@ further_reading:
 - link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How AAP Works"
 ---
@@ -75,12 +75,12 @@ For information on disabling threat management and protection, see [Disabling th
 
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
-[4]: /security/application_security/how-appsec-works/
+[4]: /security/application_security/how-it-works/
 [5]: /security/application_security/threats/inapp_waf_rules/
-[6]: /security/application_security/threats/custom_rules/
+[6]: /security/application_security/policies/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/workload_protection/security_signals/
-[9]: /security/application_security/threats/exploit-prevention/
+[9]: /security/application_security/exploit-prevention/
 [10]: /security/default_rules/?category=cat-application-security
 [11]: /security/account_takeover_protection/
 [12]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

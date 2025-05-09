@@ -106,10 +106,10 @@ As important as it is for you to be able to apply protection granularly and redu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/
+[1]: /security/application_security/setup/
 [2]: /agent/remote_config/#enabling-remote-configuration
 [3]: /agent/versions/upgrade_between_agent_minor_versions
-[4]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[4]: /security/application_security/how-it-works/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal
 [6]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [7]: https://app.datadoghq.com/security/appsec/denylist
@@ -117,9 +117,9 @@ As important as it is for you to be able to apply protection granularly and redu
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
-[12]: /security/application_security/threats/setup/compatibility/
+[12]: /security/application_security/setup/compatibility/
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
-[15]: /security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[15]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [16]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-responses
 [17]: https://docs.datadoghq.com/service_management/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY

@@ -17,7 +17,7 @@ further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
@@ -37,4 +37,4 @@ Select your application language for details on how to enable AAP Threat Detecti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility
+[1]: /security/application_security/setup/compatibility

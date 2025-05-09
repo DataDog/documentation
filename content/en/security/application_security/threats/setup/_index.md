@@ -16,6 +16,6 @@ Add an environment variable or a new argument to your [Datadog Tracing Library c
 
 By following these steps, you'll successfully set up App and API Protection for your application or service, monitoring services that are under attack and protecting them against attacks.
 
-[1]: /security/application_security/threats/setup/compatibility
-[3]: /security/application_security/threats/setup/threat_detection
+[1]: /security/application_security/setup/compatibility
+[3]: /security/application_security/setup/threat_detection
 [4]: /agent/

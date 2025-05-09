@@ -41,6 +41,6 @@ For Code Security, add the `DD_APM_TRACING_ENABLED=false DD_IAST_ENABLED=true` e
 [1]: /security/workload_protection/
 [2]: /security/application_security/code_security/
 [3]: /tracing/
-[4]: /security/application_security/threats/setup/
+[4]: /security/application_security/setup/
 [5]: /security/application_security/code_security/setup/
 [6]: /agent/

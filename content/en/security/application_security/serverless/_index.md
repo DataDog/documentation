@@ -4,7 +4,7 @@ aliases:
   - /security/application_security/getting_started/serverless
   - /security/application_security/enabling/serverless
 further_reading:
-    - link: "/security/application_security/how-appsec-works/"
+    - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
       text: "How App and API Protection Works"
     - link: "/security/default_rules/?category=cat-application-security"

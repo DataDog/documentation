@@ -283,7 +283,7 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security/application_security/how-appsec-works/
+[18]: /security/application_security/how-it-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/

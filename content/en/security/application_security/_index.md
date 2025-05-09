@@ -8,7 +8,7 @@ aliases:
   - /security/application_security/enabling
   - /security/application_security/getting_started
 further_reading:
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works"
 - link: "/security/application_security/threats/"
@@ -82,7 +82,7 @@ For information on disabling AAP or its features, see the following:
 
 [1]: /tracing/
 [2]: /agent/
-[3]: /security/application_security/how-appsec-works/
+[3]: /security/application_security/how-it-works/
 [4]: /security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec

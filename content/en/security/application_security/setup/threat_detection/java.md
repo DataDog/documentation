@@ -139,8 +139,8 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security/application_security/threats/setup/compatibility/java/
-[3]: /security/application_security/threats/setup/compatibility/java/
+[2]: /security/application_security/setup/compatibility/java/
+[3]: /security/application_security/setup/compatibility/java/
 [4]: https://app.datadoghq.com/security/appsec/vm
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/

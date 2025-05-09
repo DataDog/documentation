@@ -136,7 +136,7 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /security/cloud_siem/
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
-[25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[25]: /security/application_security/how-it-works/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/

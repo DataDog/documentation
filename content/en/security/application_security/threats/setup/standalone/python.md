@@ -119,4 +119,4 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility/php/
+[1]: /security/application_security/setup/compatibility/php/

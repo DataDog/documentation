@@ -115,6 +115,6 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 [4]: /monitors/notify/?tab=is_alert#integrations
 [5]: /security/notifications/variables/
 [6]: /security/notifications/variables/#template-variables
-[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[8]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[7]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 

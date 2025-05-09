@@ -2,10 +2,10 @@
 title: Attacker Clustering
 disable_toc: false
 further_reading:
-- link: "/security/application_security/threats/attacker_fingerprint"
+- link: "/security/application_security/security_signals/attacker_fingerprint"
   tag: "Documentation"
   text: "Attacker Fingerprint"
-- link: "/security/application_security/threats/threat-intelligence/"
+- link: "/security/application_security/how-it-works/threat-intelligence/"
   tag: "Documentation"
   text: "Threat Intelligence"
 - link: "/security/application_security/threats/event_rules"
@@ -71,8 +71,8 @@ The attacker clustering attributes selected are then shown as regular expression
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/threat-intelligence/
-[2]: /security/application_security/threats/attacker_fingerprint
+[1]: /security/application_security/how-it-works/threat-intelligence/
+[2]: /security/application_security/security_signals/attacker_fingerprint
 [3]: /security/application_security/threats/event_rules
 [4]: /security/workload_protection/security_signals/
 [5]: /tracing/trace_collection/library_config/

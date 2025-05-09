@@ -2,7 +2,7 @@
 title: Attacker Explorer
 disable_toc: false
 further_reading:
-- link: "/security/application_security/threats/protection"
+- link: "/security/application_security/policies"
   tag: "Documentation"
   text: "Protection"
 ---
@@ -29,7 +29,7 @@ To understand the difference between the different explorers, review these appro
 - **Protect:** Automated blocking using AAP Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the AAP Attacker Explorer navigation"  >}}
+<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the AAP Attacker Explorer navigation"  >}} -->
 
 Each explorer focuses on a specific use case:
 
@@ -46,7 +46,7 @@ Each explorer focuses on a specific use case:
 
 To start reviewing attackers, go to [Attacker Explorer][1].
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attacker Explorer"  >}}
+<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attacker Explorer"  >}} -->
 
 There are two sections to the Attacker Explorer:
 
@@ -58,7 +58,7 @@ There are two sections to the Attacker Explorer:
 
 Click on any row to view the history and attributes of the IP.
 
-{{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attacker Explorer"  >}}
+<!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attacker Explorer"  >}} -->
 
 IPs can be blocked or added to the Passlist from the IP drawer.
 
