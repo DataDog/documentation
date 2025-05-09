@@ -48,7 +48,7 @@ than necessary, increasing its activity and resulting in higher overhead.
 
 To better manage this, you can adjust the respective sampling distances:
 
-- For exceptions, increase the sampling distance via the `datadog.profiling.exception_sampling_distance` INI setting (default: `100`). Alternatively, disable exception profiling entirely with `datadog.profiling.exception_enabled=0`.
+- For exceptions, increase the sampling distance through the `datadog.profiling.exception_sampling_distance` INI setting (default: `100`). Alternatively, disable exception profiling entirely with `datadog.profiling.exception_enabled=0`.
 - For allocations, increase the sampling distance using `datadog.profiling.allocation_sampling_distance` (change the default `4194304` bytes, which is equivalent 4 MB, for example). You can also disable allocation profiling with `datadog.profiling.allocation_enabled=0`.
 
 Increasing the sampling distance reduces the frequency of collected samples,
