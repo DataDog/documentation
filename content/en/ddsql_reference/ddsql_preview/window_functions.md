@@ -1,13 +1,10 @@
 ---
-title: DDSQL Window Functions
+title: DDSQL Window Functions (Preview)
 private: true
 aliases:
 - /dashboards/ddsql_editor/reference/window_functions/
+- /ddsql_editor/reference/window_functions/
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## Overview
 
@@ -70,4 +67,4 @@ The functions below can be used in windows, along with the [aggregation function
 | last_value(value *T*) | *T* | Returns the value evaluated at the row that is the last row of the window frame. |
 
 [1]: https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS
-[2]: /ddsql_editor/reference/functions/#aggregation_functions
+[2]: /ddsql_reference/ddsql_preview/functions/#aggregation-functions

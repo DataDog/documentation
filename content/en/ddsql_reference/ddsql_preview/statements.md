@@ -1,12 +1,9 @@
 ---
-title: DDSQL Statements
+title: DDSQL Statements (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/statements/
+- /ddsql_editor/reference/statements/
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## SELECT
 
@@ -191,4 +188,4 @@ SET variableName = expression
 [1]: /logs/explorer/search_syntax/#full-text-search
 [2]: /logs/log_configuration/indexes/
 [3]: /ddsql_editor/#use-sql-syntax-ddsql
-[4]: /ddsql_editor/reference/expressions_and_operators
+[4]: /ddsql_reference/ddsql_preview/expressions_and_operators

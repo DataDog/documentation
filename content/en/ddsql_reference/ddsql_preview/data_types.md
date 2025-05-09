@@ -1,12 +1,9 @@
 ---
-title: DDSQL Data Types
+title: DDSQL Editor Data Types (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/data_types/
+- /ddsql_editor/reference/data_types/
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## Data types
 

@@ -1,10 +1,20 @@
 ---
-title: Reference Tables in DDSQL
+title: Reference Tables in DDSQL (Preview)
+aliases:
+- /ddsql_editor/reference_tables/
 further_reading:
 - link: "/integrations/guide/reference-tables/"
   tag: "Documentation"
   text: "Add Custom Metadata with Reference Tables"
 ---
+
+{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
+The DDSQL Editor is in Preview.
+{{< /callout >}}
+
+<div class="alert alert-warning">
+  There are two different <strong>variants</strong> of DDSQL. The examples in this guide use DDSQL (Preview) Syntax. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
+</div>
 
 # Overview
 

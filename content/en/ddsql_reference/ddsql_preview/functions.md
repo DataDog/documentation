@@ -1,15 +1,12 @@
 ---
-title: DDSQL Functions
+title: DDSQL Functions (Preview)
 aliases:
 - /dashboards/ddsql_editor/reference/aggregation_functions
 - /dashboards/ddsql_editor/reference/scalar_functions/
 - /ddsql_editor/reference/scalar_functions
 - /ddsql_editor/reference/aggregation_functions
+- /ddsql_editor/reference/functions
 ---
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## Aggregation functions
 

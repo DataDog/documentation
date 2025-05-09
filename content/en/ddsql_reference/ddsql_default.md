@@ -1,14 +1,29 @@
 ---
-title: SQL Reference
+title: DDSQL
+aliases:
+- /logs/workspaces/sql_reference
+code_lang: ddsql_default
+type: multi-code-lang
+code_lang_weight: 1
+products: 
+- name: Log Workspaces
+  url: /logs/workspaces/
+  icon: logs
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
   text: "Learn more about Log Workspaces"
 ---
 
+{{< product-availability >}}
+
+<div class="alert alert-warning">
+  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
+</div>
+
 ## Overview
 
-SQL in [Analysis cells][1] allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
+SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
@@ -77,35 +92,35 @@ The following SQL functions are supported. For Window function, see the separate
 
 | Function                                         | Return Type                           | Description                                                                 |
 |--------------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------|
-| `min(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
-| `max(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
-| `count(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
-| `sum(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
-| `avg(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
-| `ceil(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
-| `floor(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
-| `round(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
-| `lower(string s)`                                | string                                | Returns the string as lowercase.                                            |
-| `upper(string s)`                                | string                                | Returns the string as uppercase.                                            |
-| `abs(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
-| `coalesce(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
-| `cast(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
-| `length(string s)`                               | integer                               | Returns the number of characters in the string.                             |
-| `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
-| `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
-| `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `strpos(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
-| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
-| `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
-| `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
-| `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
-| `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
-| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array.                                |
-| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
-| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
-| `array_agg(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
-| `unnest(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
+| `MIN(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
+| `MAX(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
+| `COUNT(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
+| `SUM(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
+| `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
+| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
+| `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
+| `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
+| `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                            |
+| `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                            |
+| `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
+| `COALESCE(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
+| `CAST(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
+| `LENGTH(string s)`                               | integer                               | Returns the number of characters in the string.                             |
+| `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
+| `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
+| `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
+| `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
+| `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
+| `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
+| `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
+| `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
+| `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
+| `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
+| `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
+| `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
+| `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -408,19 +423,19 @@ FROM
 
 ## Window functions
 
-This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
+This table provides an overview of the supprted window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
 
-| Function                      | Return Type       | Description                                                            |
-|-------------------------------|-------------------|------------------------------------------------------------------------|
-| `over`                        | N/A               | Defines a window for a set of rows for other window functions to operate on. |
-| `partition by`                | N/A               | Divides the result set into partitions, specifically for applying window functions. |
-| `rank()`                      | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
-| `row_number()`                | integer           | Assigns a unique sequential number to each row within a partition.     |
-| `lead(column n)`              | typeof column     | Returns the value from the next row in the partition.                  |
-| `lag(column n)`               | typeof column     | Returns the value from the previous row in the partition.              |
-| `first_value(column n)`       | typeof column     | Returns the first value in an ordered set of values.                   |
-| `last_value(column n)`        | typeof column     | Returns the last value in an ordered set of values.                    |
-| `nth_value(column n, offset)` | typeof column     | Returns the value at the specified offset in an ordered set of values. |
+| Function                | Return Type       | Description                                                            |
+|-------------------------|-------------------|------------------------------------------------------------------------|
+| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
+| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
+| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
+| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
+| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
 ## Further reading

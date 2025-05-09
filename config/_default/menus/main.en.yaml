@@ -1147,12 +1147,18 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
+    - name: DDSQL Reference
+      url: ddsql_reference/
+      pre: ddsql
+      identifier: ddsql_reference
+      parent: essentials_heading
+      weight: 110000
     - name: CoScreen
       url: coscreen/
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1163,7 +1169,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 120000
+      weight: 130000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1574,41 +1580,6 @@ menu:
       parent: ddsql_editor
       identifier: ddsql_editor_getting_started
       weight: 1
-    - name: Statements
-      url: ddsql_editor/reference/statements
-      parent: ddsql_editor
-      identifier: ddsql_editor_statements
-      weight: 2
-    - name: Expressions and Operators
-      url: ddsql_editor/reference/expressions_and_operators
-      parent: ddsql_editor
-      identifier: ddsql_editor_expressions_and_operators
-      weight: 3
-    - name: Data Types
-      url: ddsql_editor/reference/data_types
-      parent: ddsql_editor
-      identifier: ddsql_editor_data_types
-      weight: 4
-    - name: Functions
-      url: ddsql_editor/reference/functions
-      parent: ddsql_editor
-      identifier: ddsql_editor_functions
-      weight: 5
-    - name: Querying Tags
-      url: ddsql_editor/reference/tags
-      parent: ddsql_editor
-      identifier: ddsql_editor_tags
-      weight: 6
-    - name: Querying Reference Tables
-      url: ddsql_editor/reference_tables
-      parent: ddsql_editor
-      identifier: ddsql_editor_reference_tables
-      weight: 7
-    - name: Guides
-      url: ddsql_editor/guide
-      parent: ddsql_editor
-      identifier: ddsql_editor_guide
-      weight: 10
     - name: Reference Tables
       url: reference_tables/
       pre: inventories
@@ -5992,21 +5963,16 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
-    - name: SQL Reference
-      url: logs/workspaces/sql_reference/
-      parent: logs_workspaces
-      identifier: logs_workspaces_sql_reference
-      weight: 601
     - name: Use Cases
       url: logs/workspaces/use_cases/
       parent: logs_workspaces
       identifier: logs_workspaces_use_cases
-      weight: 602
+      weight: 601
     - name: Time Selection
       url: logs/workspaces/time_selection/
       parent: logs_workspaces
       identifier: logs_workspaces_time_selection
-      weight: 603
+      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
