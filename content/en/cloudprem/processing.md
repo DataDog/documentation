@@ -8,6 +8,9 @@ further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
   text: "Learn more about CloudPrem"
+- link: "/cloudprem/architecture/"
+  tag: "Documentation"
+  text: "CloudPrem Architecture"
 - link: "/cloudprem/installation/"
   tag: "Documentation"
   text: "CloudPrem Installation"
@@ -17,10 +20,15 @@ further_reading:
 - link: "/cloudprem/cluster/"
   tag: "Documentation"
   text: "Cluster Sizing and Operations"
+- link: "/cloudprem/aws_config"
+  tag: "Documentation"
+  text: "AWS Configuration"
 - link: "/cloudprem/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting CloudPrem"
 ---
+
+<div class="alert alert-warning">CloudPrem is in Preview.</div>
 
 ## Overview
 
@@ -60,45 +68,49 @@ The order of elements in the array defines the sequential execution order of the
 
 ```json
 [
- {...processor1},
- {...processor2}
+  {
+    // processor1 details
+  },
+  {
+    // processor2 details
+  }
 ]
 ```
 
 ```json
 [
-    {
-            "type": "pipeline",
-            "id": "U73LOMZ9QG2iM-04OcXypA",
-            "name": "cluster agent logs parsing",
-            "enabled": true,
-            "filter": {
-                "query": "service:cluster-agent"
-            },
-            "processors": [
-                {
-                    "type": "grok-parser",
-                    "id": "xn2WAzysQ1asaasdfakjf",
-                    "enabled": true,
-                    "grok": {
-                        "supportRules": "",
-                        "matchRules": "agent_rule %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{notSpace:agent} \\| %{word:level} \\| \\(%{notSpace:filename}:%{number:lineno} in %{word:process}\\) \\|( %{data::keyvalue(\":\")} \\|)?( - \\|)?( \\(%{notSpace:pyFilename}:%{number:pyLineno}\\) \\|)?%{data}\nagent_rule_pre_611 %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{word:level} \\| \\(%{notSpace:filename}:%{number:lineno} in %{word:process}\\)%{data}\njmxfetch_rule     %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{notSpace:agent} \\| %{word:level}\\s+\\| %{word:class} \\| %{data}"
-                    }
-                },
-                {
-                    "id": "xnsd5oanXq2893utcsQ",
-                    "type": "status-remapper",
-                    "enabled": true,
-                    "sources": ["level"]
-                },
-                {
-                    "type": "date-remapper",
-                    "id": "xn2WAzysQ1asdjJsb9dfb",
-                    "enabled": true,
-                    "sources": ["timestamp"]
-                }
-            ]
-    }
+  {
+    "type": "pipeline",
+    "id": "U73LOMZ9QG2iM-04OcXypA",
+    "name": "cluster agent logs parsing",
+    "enabled": true,
+    "filter": {
+      "query": "service:cluster-agent"
+    },
+    "processors": [
+      {
+        "type": "grok-parser",
+        "id": "xn2WAzysQ1asaasdfakjf",
+        "enabled": true,
+        "grok": {
+          "supportRules": "",
+          "matchRules": "agent_rule %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{notSpace:agent} \\| %{word:level} \\| \\(%{notSpace:filename}:%{number:lineno} in %{word:process}\\) \\|( %{data::keyvalue(\":\")} \\|)?( - \\|)?( \\(%{notSpace:pyFilename}:%{number:pyLineno}\\) \\|)?%{data}\nagent_rule_pre_611 %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{word:level} \\| \\(%{notSpace:filename}:%{number:lineno} in %{word:process}\\)%{data}\njmxfetch_rule     %{date(\"yyyy-MM-dd HH:mm:ss z\"):timestamp} \\| %{notSpace:agent} \\| %{word:level}\\s+\\| %{word:class} \\| %{data}"
+        }
+      },
+      {
+        "id": "xnsd5oanXq2893utcsQ",
+        "type": "status-remapper",
+        "enabled": true,
+        "sources": ["level"]
+      },
+      {
+        "type": "date-remapper",
+        "id": "xn2WAzysQ1asdjJsb9dfb",
+        "enabled": true,
+        "sources": ["timestamp"]
+      }
+    ]
+  }
 ]
 ```
 

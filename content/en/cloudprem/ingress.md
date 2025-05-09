@@ -5,26 +5,31 @@ further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
   text: "Learn more about CloudPrem"
+- link: "/cloudprem/architecture/"
+  tag: "Documentation"
+  text: "CloudPrem Architecture"
 - link: "/cloudprem/installation/"
   tag: "Documentation"
   text: "CloudPrem Installation"
 - link: "/cloudprem/cluster/"
   tag: "Documentation"
   text: "Cluster Sizing and Operations"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "CloudPrem Log Processing"
 - link: "/cloudprem/aws_config"
   tag: "Documentation"
   text: "AWS Configuration"
+- link: "/cloudprem/processing/"
+  tag: "Documentation"
+  text: "CloudPrem Log Processing"
 - link: "/cloudprem/troubleshooting/"
   tag: "Documentation"
-  text: "Troubleshooting"
+  text: "Troubleshooting CloudPrem"
 ---
+
+<div class="alert alert-warning">CloudPrem is in Preview.</div>
 
 ## Overview
 
-Ingress is a critical component of your CloudPrem deployment. CloudPrem includes one public ingress and one private ingress.
+Ingress is a critical component of your CloudPrem deployment. The Helm chart automatically creates two ingress configurations called public ingress and internal ingress. If the AWS Load Balancer Controller is installed on the cluster, it provisions one ALB per ingress configuration. Each load balancer can be further configured using ingress annotations.
 
 ## Public ingress
 
@@ -42,7 +47,7 @@ This setup ensures that only authenticated Datadog services can access the Cloud
 
 {{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
-### IP ranges
+### IP ranges API
 The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog IP Ranges API, specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
 ```
 curl -X GET "https://ip-ranges.datadoghq.eu/" \
@@ -68,28 +73,28 @@ rules:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: <release name>-indexer
+            name: <RELEASE_NAME>-indexer
             port:
               name: rest
       - path: /api/v1/_elastic/bulk
         pathType: Prefix
         backend:
           service:
-            name: <release name>-indexer
+            name: <RELEASE_NAME>-indexer
             port:
               name: rest
       - path: /api/v1/_elastic/*/_bulk
         pathType: ImplementationSpecific
         backend:
           service:
-            name: <release name>-indexer
+            name: <RELEASE_NAME>-indexer
             port:
               name: rest 
       - path: /api/v2/logs
         pathType: Prefix
         backend:
           service:
-            name: <release name>-indexer
+            name: <RELEASE_NAME>-indexer
             port:
               name: rest
       # Index management API endpoints to metastores
@@ -97,7 +102,7 @@ rules:
         pathType: Prefix
         backend:
           service:
-            name: <release name>-metastore
+            name: <RELEASE_NAME>-metastore
             port:
               name: rest
       # Everything else to searchers
@@ -105,7 +110,7 @@ rules:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: <release name>-searcher
+            name: <RELEASE_NAME>-searcher
             port:
               name: rest
 

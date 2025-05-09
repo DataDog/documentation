@@ -5,6 +5,9 @@ further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
   text: "Learn more about CloudPrem"
+- link: "/cloudprem/architecture/"
+  tag: "Documentation"
+  text: "CloudPrem Architecture"
 - link: "/cloudprem/ingress/"
   tag: "Documentation"
   text: "CloudPrem Ingress Configuration"
@@ -22,17 +25,21 @@ further_reading:
   text: "Troubleshooting"
 ---
 
+<div class="alert alert-warning">CloudPrem is in Preview.</div>
+
 ## Overview
 
 This document walks you through the process of installing CloudPrem in your environment. CloudPrem can be installed on any Kubernetes cluster that meets the prerequisites.
 
 ## Prerequisites
 
-- AWS account
-- Kubernetes `1.25+` ([EKS][1] preferred)
+Before getting started with CloudPrem, ensure you have:
+
+- AWS account with necessary permissions
+- Kubernetes `1.25+` ([EKS][1] recommended)
 - [AWS Load Balancer Controller installed][2]
-- PostgreSQL database ([RDS][3] preferred)
-- S3 bucket
+- PostgreSQL database ([RDS][3] recommended)
+- S3 bucket for log storage
 - Datadog Agent
 - Kubernetes command line tool (`kubectl`)
 - Helm command line tool (`helm`)
@@ -40,7 +47,6 @@ This document walks you through the process of installing CloudPrem in your envi
 ## Installation steps
 
 1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart).
-2. [Configure Ingress][6].
 3. [Configure the Datadog Agent to send Kubernetes logs](#send-kubernetes-logs-to-cloudprem-with-the-datadog-agent).
 4. [Configure your Datadog account](#configure-your-datadog-account).
 
@@ -157,7 +163,7 @@ This document walks you through the process of installing CloudPrem in your envi
    # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
    # Resource requests and limits should be tuned based on your indexing workload.
    #
-   # The default values are suitable for moderate indexing loads of up to 20MB/s per indexer pod.
+   # The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
    indexer:
      replicaCount: 2
 
@@ -201,7 +207,7 @@ This document walks you through the process of installing CloudPrem in your envi
 
 ## Send Kubernetes logs to CloudPrem with the Datadog Agent
 
-Follow the [Getting started with Datadog Operator guide][5] and use the following configuration in `datadog-agent.yaml`:
+Follow the [Getting Started with Datadog Operator][5] guide for installation and deployment. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -245,14 +251,15 @@ spec:
 
 ## Configure your Datadog account
 
-You need to reach out to [Datadog support][7] and give the public DNS of CloudPrem so that you can search into your CloudPrem cluster from Datadog UI.
+You need to reach out to [Datadog support][6] and give the public DNS of CloudPrem so that you can search into your CloudPrem cluster from Datadog UI.
 
 ### Searching your CloudPrem logs in the Logs Explorer
 
 After your Datadog account is configured, you are ready to search into the `cloudprem` index by typing it in the search bar or selecting it in facets.
-**Note**: You cannot query the CloudPrem index and other indexes together. 
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Log Explorer filtered by index:cloudprem" style="width:100%;" >}} -->
+**Note**: You cannot query CloudPrem indexes alongside other indexes. Additionally, Flex Logs are not supported with CloudPrem indexes.
+
+{{< img src="/cloudprem/installation/filter_index_cloudprem.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:70%;" >}}
 
 ## Uninstall
 
@@ -270,6 +277,5 @@ helm uninstall <DEPLOYMENT_NAME>
 [2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller
 [3]: https://aws.amazon.com/rds/
 [4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[5]:/getting_started/containers/datadog_operator/
-[6]: /cloudprem/ingress/
-[7]: /getting_started/support/
+[5]: /getting_started/containers/datadog_operator/#installation-and-deployment
+[6]: /getting_started/support/
