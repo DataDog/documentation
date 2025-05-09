@@ -30,7 +30,6 @@ further_reading:
 
 To get started with Cloud Security, review the following:
 
-- [Overview](#overview)
 - [Enable Agentless Scanning](#enable-agentless-scanning)
 - [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
 - [Enable additional features](#enable-additional-features)
