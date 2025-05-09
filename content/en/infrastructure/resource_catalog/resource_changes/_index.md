@@ -23,6 +23,8 @@ further_reading:
 
 Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps application developers and shared infrastructure teams monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
 
+{{< img src="/infrastructure/resource_catalog/resource-changes.png" alt="Datadog Resource Changes interface showing a list of infrastructure configuration changes. The screen displays a VM instance named \"vm-new-jmcintyre-kafka\" with a StorageProfile update, including a side-by-side diff view highlighting changes in JSON format. The table shows multiple resources with timestamps, change types (mostly \"UPDATE\"), and details of the modifications. Filters are available at the top for cloud, region, environment, and other attributes." width="100%">}}
+
 Resource Changes supports a variety of resources, including:
 - Hosts
 - Containers
