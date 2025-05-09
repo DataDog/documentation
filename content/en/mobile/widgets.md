@@ -5,10 +5,10 @@ further_reading:
   tag: "Blog"
   text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
-The Datadog mobile app supports SLO, incident, dashboard, on-call, and monitor widgets on your device's homescreen or lockscreen. 
+The Datadog mobile app supports SLO, incident, dashboard, on-call, and monitor widgets on your device's home screen or lock screen. 
 
-## Homescreen widgets
-Add widgets on your homescreen to quickly access real-time critical information direcly from your homescreen without ever having to open the Datadog mobile app.
+## Home screen widgets
+Add widgets on your home screen to quickly access real-time critical information directly from your home screen without ever having to open the Datadog mobile app.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -17,7 +17,7 @@ Add widgets on your homescreen to quickly access real-time critical information 
 2. Search for "Datadog" widgets.
 3. Tap your desired widget and your preferred size (small, medium, or large).
 4. Tap **Add Widget** and configure the widget fields. When accessing the mobile app from the widget, these are the fields that will be queried in the app.
-5. Drag, minimize, or expand widget to customize the location and size of the widget on your homescreen.
+5. Drag, minimize, or expand the widget to customize the location and size of the widget on your home screen.
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -48,7 +48,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 
 1. Long press the widget to configure.
 2. Tap **Edit Widget**.
-2. Tap **Choose** next to the **Organzation** label to fetch open incidents from the selected organization.
+2. Tap **Choose** next to the **Organization** label to fetch open incidents from the selected organization.
 3. Tap **SEV-1 and SEV-2** next to the Severities label to specify severity filters.
 4. Tap **Both** next to the **Customer Impacted** label to filter on open incidents that have impacted customers.
 5. Type in the **Type additional filters** text box to specify any further filtering.
@@ -231,10 +231,10 @@ You can customize your On-Call pages widgets by filtering on:
 - Team
 - Order
 
-**Note**: You can add additonal filters for the On-Call pages widget.
+**Note**: You can add additional filters for the On-Call pages widget.
 
 #### Edit a On-Call shift widget
-{{< img src="service_management/mobile/on_call_shift_widget.png" alt="Configured lockscreen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/on_call_shift_widget_may_2025.png" alt="Configured lock screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 
 {{< tabs >}}
@@ -258,7 +258,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{< /tabs >}}
 
 #### Edit a On-Call pages widget
-{{< img src="service_management/mobile/on_call_page_widget.png" alt="Configured lockscreen on-call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/on_call_page_widget_may_2025.png" alt="Configured lock screen on-call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 
 {{< tabs >}}
@@ -285,20 +285,20 @@ You can customize your On-Call pages widgets by filtering on:
 
 
 ## Lock screen widgets
-{{< img src="service_management/mobile/Lock Screen widget.png" alt="Configured lockscreen widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/lockscreen_widget_may_2025.png" alt="Configured lock screen widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-Lockscreen widgets for monitors, SlOs, Incidents, and Dashboards are supported on iOS.
+Lock screen widgets for monitors, SLOs, Incidents, and Dashboards are supported on iOS.
 
 1. Long press on your lock screen.
 2. Tap the **Customize** >> **Lock Screen**.
-3. Tap space on lock screen where you would like widget to pull up Add Widgets card.
+3. Tap on lock screen widget space to pull up **Add Widgets** card.
 4. Scroll and tap on **Datadog** app.
 4. Tap the lock screen widget you would like to add.
-5. Tap the widget on the lock screen to pull up configuration panel.
-6. Confgure the widget according to the fields specified for the selected widget.
-7. Drag, minimize, or expand widget to customize the location and size of the widget on your lock screen.
+5. Tap the widget on the lock screen to pull up the configuration panel.
+6. Configure the widget according to the fields specified for the selected widget.
+7. Drag, minimize, or expand the widget to customize the location and size of the widget on your lock screen.
 
-**Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widget by tapping **-** button on top left of widget you would like to delete.
+**Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widget by tapping **-** button on top left of the widget you would like to delete.
 
 ## Further Reading
 
