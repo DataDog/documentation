@@ -37,14 +37,14 @@ See the [configuration docs][2] for other INI settings and their corresponding e
 ## Fine-tuning sampling distances
 
 Both the exception and allocation profilers are designed to have minimal impact
-under normal conditions. However, under high-load scenarios—such as frequent
-exception throwing or massive memory allocations—the sampling mechanism can
+under normal conditions. However, under high-load scenarios, such as frequent
+exception throwing or massive memory allocations, the sampling mechanism can
 contribute noticeable runtime cost.
 
 For exceptions, this situation often arises when exceptions are used for
 control flow. For allocations, this is common when working with or processing
 large volumes of data. In both cases, the profiler may collect more samples
-than necessary, increasing its activity and resulting in higher overhead.
+than necessary - increasing its activity and resulting in higher overhead.
 
 To better manage this, you can adjust the respective sampling distances:
 
