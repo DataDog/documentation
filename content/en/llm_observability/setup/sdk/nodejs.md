@@ -102,7 +102,7 @@ These options can be set on the general tracer configuration:
 
 ### AWS Lambda setup
 
-Use the `llmobs.flush()` function to flush all remaining spans from the tracer to LLM Observability at the end of the Lambda function.
+See the [AWS Lambda Quickstart Guide][7] to quickly integrate LLM Observability into your Lambda functions.
 
 #### Application naming guidelines
 
@@ -709,3 +709,4 @@ tracer.use('http', false) // disable the http integration
 [4]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 [5]: /llm_observability/setup/auto_instrumentation/?tab=nodejs
 [6]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
+[7]: /llm_observability/quickstart?tab=nodejs#aws-lambda
