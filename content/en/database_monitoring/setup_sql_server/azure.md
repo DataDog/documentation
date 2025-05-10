@@ -64,19 +64,23 @@ When configuring the Datadog Agent, specify one check instance for each applicat
 ```yaml
 init_config:
 instances:
-  - host: '<SERVER_NAME>.database.windows.net,1433'
+  - host: '<SERVER_NAME>.database.windows.net,<PORT>'
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
       fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 
-  - host: '<SERVER_NAME>.database.windows.net,1433'
+  - host: '<SERVER_NAME>.database.windows.net,<PORT>'
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
@@ -142,7 +146,7 @@ Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
@@ -215,7 +219,7 @@ Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/con
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: odbc
@@ -258,7 +262,7 @@ Replace the values to match your account and environment. See the [sample conf f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.51.0
+export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -266,9 +270,9 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>,<SQL_PORT>",
+    "host": "<HOSTNAME>,<PORT>",
     "connector": "odbc",
-    "driver": "ODBC Driver 18 for SQL Server",
+    "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -302,7 +306,66 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 {{% tab "Kubernetes" %}}
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
+If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]:
+
+### Operator
+
+Using the [Operator instructions in Kubernetes and Integrations][6] as a reference, follow the steps below to set up the SQL Server integration:
+
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              sqlserver.yaml: |-
+                cluster_check: true # Make sure to include this flag
+                init_config:
+                instances:
+                - host: <HOSTNAME>,<PORT>
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  connector: 'odbc'
+                  driver: 'FreeTDS'
+                  dbm: true
+                  # Optional: For additional tags
+                  tags:  
+                    - 'service:<CUSTOM_SERVICE>'
+                    - 'env:<CUSTOM_ENV>'
+                  # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+                  azure:
+                    deployment_type: '<DEPLOYMENT_TYPE>'
+                    fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
+    ```
+
+2. Apply the changes to the Datadog Operator using the following command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
 
 ### Helm
 
@@ -314,19 +377,20 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     clusterAgent:
       confd:
         sqlserver.yaml: |-
-          cluster_check: true
+          cluster_check: true # Make sure to include this flag
           init_config:
           instances:
           - dbm: true
-            host: <HOSTNAME>,1433
+            host: <HOSTNAME>,<PORT>
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: '{ODBC Driver 18 for SQL Server}'
-            include_ao_metrics: true  # Optional: For AlwaysOn users
-            tags:  # Optional
+            driver: 'FreeTDS'
+            # Optional: For additional tags
+            tags: 
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
+            # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
             azure:
               deployment_type: '<DEPLOYMENT_TYPE>'
               fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -353,12 +417,13 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: <HOSTNAME>,<PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    connector: "odbc"
-    driver: '{ODBC Driver 18 for SQL Server}'
-    tags:  # Optional
+    connector: 'odbc'
+    driver: 'FreeTDS'
+    # Optional: For additional tags  
+    tags: 
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -370,7 +435,6 @@ instances:
 ### Configure with Kubernetes service annotations
 
 Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
-
 
 ```yaml
 apiVersion: v1
@@ -384,12 +448,12 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<HOSTNAME>,<SQL_PORT>",
+          "host": "<HOSTNAME>,<PORT>",
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
@@ -416,6 +480,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [3]: /containers/kubernetes/installation/?tab=helm#installation
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /agent/configuration/secrets-management
+[6]: /containers/kubernetes/integrations/?tab=datadogoperator
 {{% /tab %}}
 {{< /tabs >}}
 
