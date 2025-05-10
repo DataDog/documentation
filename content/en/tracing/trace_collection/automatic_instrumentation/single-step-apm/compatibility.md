@@ -21,6 +21,10 @@ The following operating systems and architectures are compatible:
 | Debian       | 10-12     | x86_64, arm64 |
 | Red Hat      | 7+        | x86_64, arm64 |
 | Ubuntu       | 20+ (LTS) | x86_64, arm64 |
+| Fedora       | 40        | x86_64, arm64 |
+| AlmaLinux    | 8+        | x86_64, arm64 |
+| Oracle Linux | 8+        | x86_64, arm64 |
+| Rocky Linux  | 8+        | x86_64, arm64 |
 
 <div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
 
