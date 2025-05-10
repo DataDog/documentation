@@ -4061,6 +4061,11 @@ menu:
       parent: profiler_enabling
       identifier: profiler_enabling_linux
       weight: 109
+    - name: eBPF
+      url: profiler/enabling/ebpf/
+      parent: profiler_enabling
+      identifier: profiler_enabling_ebpf
+      weight: 110
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler
@@ -4126,6 +4131,11 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
       weight: 608
+    - name: eBPF
+      url: profiler/profiler_troubleshooting/ebpf/
+      parent: profiler_troubleshooting
+      identifier: profiler_troubleshooting_ebpf
+      weight: 609
     - name: Guides
       url: profiler/guide/
       parent: profiler

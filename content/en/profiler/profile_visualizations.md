@@ -109,7 +109,7 @@ To access the timeline view:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ebpf" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -180,6 +180,12 @@ Fibers that run in this **thread** are represented in the same lane.
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ebpf" >}}
+Each lane represents a **process** or **kernel-level thread**. Lanes are grouped by executable or container to help correlate system activity. You can expand a group to view details for each thread or process.
+
+Lanes at the top often correspond to high-impact activity—such as CPU hotspots, kernel scheduling, or I/O wait—that may affect application performance.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
