@@ -42,19 +42,19 @@ To create a segment using external or third-party data:
 
 ## Leverage segments across Product Analytics
 
-### In sankeys
+### In pathways
 
-In the Sankey page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Sankey diagram only for users in the "Premium users" segment.
+In the Pathway page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
 
-{{< img src="product_analytics/segmentation/segmentation-3.png" alt="Filter down the Sankey visualization to reflect a selected segment of users.">}}
+{{< img src="product_analytics/segmentation/segmentation-pathways.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
 
-### In Analytics Explorer
+### In analytics explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium users" segment who were active in the last month, organized by the number of sessions they had.
+You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the number of sessions they had.
 
-{{< img src="product_analytics/segmentation/segmentation-4.png" alt="Show a list of users in the Premium users segment who were active in the last month, organized by the number of sessions they had.">}}
+{{< img src="product_analytics/segmentation/analytics-explorer.png" alt="Show a list of users in the Premium users segment who were active in the last month, organized by the number of sessions they had.">}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
