@@ -1,7 +1,8 @@
 <!-- Normalize lang param, these are curated manually and may be inconsistent -->
 {{ $lang_param := (.Get ("lang")) }}
 {{ $lang := cond (eq $lang_param ".NET") "dotnet" (lower $lang_param) }}
+{{ $title := index site.Params.code_language_ids $lang | default (.Get "lang") }}
 
-<div class="js-code-block code-snippet-wrapper" data-code-lang-block="{{ $lang }}">
+<div class="js-code-block code-snippet-wrapper tab-pane" title="{{ $title }}" data-lang="{{ $lang }}">
     {{- .Inner | markdownify -}}
 </div>

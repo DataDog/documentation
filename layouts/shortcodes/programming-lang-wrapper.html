@@ -16,7 +16,9 @@
     {{ end }}
 {{ end }}
 
-<div class="programming-lang-wrapper js-code-snippet-wrapper {{ with $class }}{{ . }}{{ end }}">
+<div class="programming-lang-wrapper js-code-snippet-wrapper code-tabs {{ with $class }}{{ . }}{{ end }}">
     {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs "sort" $sort) }}
-    {{ .Inner }}
+    <div class="tab-content">
+        {{ .Inner }}
+    </div>
 </div>
