@@ -11,7 +11,7 @@
             {{ with $page.File }}
               {{ $rel_path = (print .Lang "/" .Path) }}
             {{ end }}
-            {{ $object_id := md5 $rel_path }}
+            {{ $id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
@@ -39,8 +39,7 @@
             {{- if eq $headingCount 0 -}}
                 {{- /* Full page record */ -}}
                 {{- $record := (
-                    dict "objectID" $object_id
-                    "id" $object_id
+                    dict "id" $id
                     "title" $title
                     "section_header" ""
                     "content" $content
