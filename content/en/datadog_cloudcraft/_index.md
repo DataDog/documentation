@@ -38,7 +38,9 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 ## Getting started
 
-To get started using Cloudcraft, navigate to [**Infrastructure > Resources > Cloudcraft**][7]. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
+To get started using Cloudcraft, use the following steps:
+1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
+2. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
 
 {{< img src="datadog_cloudcraft/getting_started_2.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
