@@ -90,7 +90,7 @@ To manually remove RUM from your auto-instrumented web server:
 
 ## Alternative installation method
 
-To manually load the module onto your web server instead of running the installation script, follow the instructions below.
+If you need finer control over more parameters than what the automatic instrumentation provides, you can manually load the module onto your web server instead of running the installation script.
 
 To manually instrument your RUM application:
 
