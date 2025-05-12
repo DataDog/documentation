@@ -2,8 +2,6 @@
 title: Container Cost Allocation
 private: true
 description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
-aliases:
-- /cloud_cost_management/container_cost_allocation
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -112,7 +110,6 @@ The following table presents the list of collected features and the minimal Agen
 Cost allocation divides host compute and other resource costs from your cloud provider into individual tasks or pods associated with them. These divided costs are then enriched with tags from related resources so you can break down costs by any associated dimensions.
 
 Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
-
 
 {{< tabs >}}
 {{% tab "AWS" %}}

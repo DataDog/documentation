@@ -3,6 +3,8 @@ title: Custom Costs
 is_beta: true
 private: true
 disable_toc: false
+aliases:
+- /cloud_cost_management/custom
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

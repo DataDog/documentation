@@ -1,8 +1,6 @@
 ---
 title: Custom Allocation Rules
 description: "Allocate cloud costs based on custom allocation rules."
-aliases:
-- /cloud_cost_management/custom_allocation_rules/
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"

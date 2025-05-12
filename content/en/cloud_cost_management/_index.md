@@ -56,8 +56,8 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
   {{< nextlink href="/cloud_cost_management/setup/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog Costs</u>: Visualize daily Datadog spending and utilization metrics. {{< /nextlink >}}
  {{< /whatsnext >}}
 
@@ -130,5 +130,5 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 [1]: https://app.datadoghq.com/cost/explorer
 [2]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [3]: /monitors/types/cloud_cost/
-[4]: /cloud_cost_management/cost_allocation
+[4]: /cloud_cost_management/container_cost_allocation
 [5]: /cloud_cost_management/tag_pipelines

@@ -3401,140 +3401,135 @@ menu:
       identifier: cloud_cost_setup
       weight: 1
     - name: AWS
-      url: cloud_cost_management/provider_setup/aws/
+      url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
       identifier: cloud_cost_aws
       weight: 101
     - name: Azure
-      url: cloud_cost_management/provider_setup/azure/
+      url: cloud_cost_management/setup/azure/
       parent: cloud_cost_setup
       identifier: cloud_cost_azure
       weight: 102
     - name: Google Cloud
-      url: cloud_cost_management/provider_setup/google_cloud/
+      url: cloud_cost_management/setup/google_cloud/
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
       weight: 103
     - name: SaaS Cost Integrations
-      url: cloud_cost_management/saas_costs/
-      parent: cloud_cost
+      url: cloud_cost_management/setup/saas_costs/
+      parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 2
+      weight: 104
     - name: Databricks
-      url: cloud_cost_management/saas_costs/?tab=databricks#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_databricks
-      weight: 201
+      weight: 101
     - name: Confluent Cloud
-      url: cloud_cost_management/saas_costs/?tab=confluentcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 202
+      weight: 102
     - name: MongoDB
-      url: cloud_cost_management/saas_costs/?tab=mongodb#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 203
+      weight: 103
     - name: Snowflake
-      url: cloud_cost_management/saas_costs/?tab=snowflake#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
-      weight: 204
+      weight: 104
     - name: Elastic Cloud
-      url: cloud_cost_management/saas_costs/?tab=elasticcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 205
+      weight: 105
     - name: OpenAI
-      url: cloud_cost_management/saas_costs/?tab=openai#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
-      weight: 206
+      weight: 106
     - name: Fastly
-      url: cloud_cost_management/saas_costs/?tab=fastly#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 207
+      weight: 107
     - name: Twilio
-      url: cloud_cost_management/saas_costs/?tab=twilio#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 208
+      weight: 108
     - name: Custom Costs
-      url: cloud_cost_management/custom
-      parent: cloud_cost
+      url: cloud_cost_management/setup/custom
+      parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 3
+      weight: 105
     - name: Datadog Costs
       url: cloud_cost_management/datadog_costs
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
-      weight: 4
-    - name: Multisource Querying
-      url: cloud_cost_management/multisource_querying
+      weight: 2
+    - name: Container Cost Allocation
+      url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
-      identifier: cloud_cost_multisource_querying
-      weight: 5
+      identifier: cloud_cost_container_cost_allocation
+      weight: 3
+    - name: AWS
+      url: cloud_cost_management/container_cost_allocation/?tab=aws
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_aws
+      weight: 301
+    - name: Azure
+      url: cloud_cost_management/container_cost_allocation/?tab=azure
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_azure
+      weight: 302
+    - name: Google Cloud
+      url: cloud_cost_management/container_cost_allocation/?tab=google
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_google
+      weight: 303
+    - name: Custom Allocation Rules
+      url: cloud_cost_management/custom_allocation_rules
+      parent: cloud_cost
+      identifier: cloud_cost_custom_allocation_rules
+      weight: 4
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 6
+      weight: 5
     - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
-      weight: 7
-    - name: Container Cost Allocation
-      url: cloud_cost_management/cost_allocation
+      weight: 6
+    - name: Multisource Querying
+      url: cloud_cost_management/multisource_querying
       parent: cloud_cost
-      identifier: cloud_cost_container_cost_allocation
-      weight: 9
-    - name: AWS
-      url: cloud_cost_management/cost_allocation/?tab=aws
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 901
-    - name: Azure
-      url: cloud_cost_management/cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 902
-    - name: Google Cloud
-      url: cloud_cost_management/cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 903
-    - name: Custom Allocation Rules
-      url: cloud_cost_management/cost_allocation/custom_allocation_rules
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_custom_allocation_rules
-      weight: 904
+      identifier: cloud_cost_multisource_querying
+      weight: 7
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 10
+      weight: 8
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 11
+      weight: 9
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 12
-    - name: Cost Reporting
-      url: /cloud_cost_management/cost_reporting
-      parent: cloud_cost
-      identifier: cloud_cost_reporting
-      weight: 13
+      weight: 10
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 14
+      weight: 11
     - name: APM
       url: tracing/
       pre: apm

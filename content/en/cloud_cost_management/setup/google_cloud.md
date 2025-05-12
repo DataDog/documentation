@@ -201,6 +201,6 @@ The following out-of-the-box tags are available:
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
 [13]: /cloud_cost_management/setup/google_cloud/#enable-detailed-usage-cost-export
-[14]: /cloud_cost_management/cost_allocation/
+[14]: /cloud_cost_management/container_cost_allocation/
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage

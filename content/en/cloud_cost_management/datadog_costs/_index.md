@@ -16,10 +16,10 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
-- link: "/cloud_cost_management/saas_costs"
+- link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/custom"
+- link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
@@ -74,7 +74,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 
 [1]: /cloud_cost_management/
 [2]: /cloud_cost_management/monitors
-[3]: /cloud_cost_management/saas_costs
+[3]: /cloud_cost_management/setup/saas_costs
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [6]: /account_management/rbac/

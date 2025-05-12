@@ -398,7 +398,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
 [9]: /cloud_cost_management/setup/aws/#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
-[11]: /cloud_cost_management/cost_allocation/#applying-tags
+[11]: /cloud_cost_management/container_cost_allocation/#applying-tags
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html

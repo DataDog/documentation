@@ -511,7 +511,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [3]: /integrations/amazon_web_services/#resource-collection
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/
-[6]: /cloud_cost_management/cost_allocation/?tab=aws#cost-metrics
+[6]: /cloud_cost_management/container_cost_allocation/?tab=aws#cost-metrics
 [7]: /integrations/amazon_s3_storage_lens/
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/#resource-collection
