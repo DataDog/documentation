@@ -9471,6 +9471,108 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    CreatePageRequest:
+      description: Full request to trigger an On-Call Page.
+      example:
+        data:
+          attributes:
+            description: Page details.
+            tags:
+            - service:test
+            target:
+              identifier: my-team
+              type: team_handle
+            title: Page title
+            urgency: low
+          type: pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatePageRequestData'
+      type: object
+    CreatePageRequestData:
+      description: The main request body, including attributes and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreatePageRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/CreatePageRequestDataType'
+      required:
+      - type
+      type: object
+    CreatePageRequestDataAttributes:
+      description: Details about the On-Call Page you want to create.
+      properties:
+        description:
+          description: A short summary of the issue or context.
+          type: string
+        tags:
+          description: Tags to help categorize or filter the page.
+          items:
+            type: string
+          type: array
+        target:
+          $ref: '#/components/schemas/CreatePageRequestDataAttributesTarget'
+        title:
+          description: The title of the page.
+          example: 'Service: Test is down'
+          type: string
+        urgency:
+          $ref: '#/components/schemas/PageUrgency'
+      required:
+      - target
+      - title
+      - urgency
+      type: object
+    CreatePageRequestDataAttributesTarget:
+      description: Information about the target to notify (such as a team or user).
+      properties:
+        identifier:
+          description: A unique ID for the target (for example, team handle or user
+            UUID).
+          type: string
+        type:
+          description: The kind of target, `team_uuid` | `team_handle` | `user_uuid`.
+          type: string
+      type: object
+    CreatePageRequestDataType:
+      default: pages
+      description: The type of resource used when creating an On-Call Page.
+      enum:
+      - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+      - PAGES
+    CreatePageResponse:
+      description: The full response object after creating a new On-Call Page.
+      example:
+        data:
+          id: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          type: pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatePageResponseData'
+      type: object
+    CreatePageResponseData:
+      description: The information returned after successfully creating a page.
+      properties:
+        id:
+          description: The unique ID of the created page.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreatePageResponseDataType'
+      required:
+      - type
+      type: object
+    CreatePageResponseDataType:
+      default: pages
+      description: The type of resource used when creating an On-Call Page.
+      enum:
+      - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+      - PAGES
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -27511,6 +27613,17 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+    PageUrgency:
+      default: high
+      description: On-Call Page urgency level.
+      enum:
+      - low
+      - high
+      example: high
+      type: string
+      x-enum-varnames:
+      - LOW
+      - HIGH
     Pagination:
       description: Pagination object.
       properties:
@@ -39527,6 +39640,7 @@ components:
       - low
       - high
       - dynamic
+      example: low
       type: string
       x-enum-varnames:
       - LOW
@@ -53837,6 +53951,243 @@ paths:
         - on_call_write
       x-undo:
         type: idempotent
+  /api/v2/on-call/pages:
+    post:
+      description: 'Trigger a new On-Call Page.
+
+        '
+      operationId: CreateOnCallPage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePageResponse'
+          description: OK.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Create On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 1
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/acknowledge:
+    post:
+      description: 'Acknowledges an On-Call Page.
+
+        '
+      operationId: AcknowledgeOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Acknowledge On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 2
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/escalate:
+    post:
+      description: 'Escalates an On-Call Page.
+
+        '
+      operationId: EscalateOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Escalate On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 3
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/resolve:
+    post:
+      description: 'Resolves an On-Call Page.
+
+        '
+      operationId: ResolveOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Resolve On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 4
+      x-undo:
+        parameters: []
+        type: unsafe
   /api/v2/on-call/schedules:
     post:
       description: Create a new on-call schedule
@@ -65872,6 +66223,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/service_management/on-call/
   name: On-Call
+- description: 'Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)
+
+    pages directly through the Datadog API.'
+  externalDocs:
+    url: https://docs.datadoghq.com/service_management/on-call/
+  name: On-Call Paging
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
