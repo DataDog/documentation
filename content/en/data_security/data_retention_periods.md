@@ -80,6 +80,7 @@ attributes:
   - product: Database Monitoring
     data_type: | 
        - **Query samples**: 15 days
+       - **Query metrics**: 15 months
   - product: Datadog App
     data_type: | 
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
@@ -113,7 +114,7 @@ attributes:
     data_type: | 
        - **Netflow**: 30 days
        - **SNMP traps**: 15 days
-  - product: Network Performance Monitoring
+  - product: Cloud Network Monitoring
     data_type: | 
        - **Netflow**: 14 days
   - product: Product Analytics
