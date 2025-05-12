@@ -49,6 +49,7 @@ To install the Datadog Browser SDK to support Electron apps:
 The same-origin policy prevents tracking an application for the same session in which pages load from both local (`file://`) and remote (`http(s)://`).
 
 This means that an application that uses Electron to embed a landing page, then later redirects the user to a website hosted on the Internet results in two sessions being created for that user - one for the embedded local files (`file://`) landing part of the application, and one for the remote part (`https://` files available on the internet).
+   **Note**: Unminified stack traces are not available when monitoring Electron applications that load embedded local files, when stack traces start with `file://`. To obtain unminified stack traces in this scenario, you must manually overwrite them using the [`beforeSend()` callback][2]. For further assistance, contact [Datadog customer support][5].
 
 ### Short-lived sessions for instances with multiple windows at once
 An issue with local storage replication latency between windows can cause a short-lived session to be created (<1 second). To work around this, ensure multiple windows are created and initialized with a gap of more than 10 ms.
@@ -60,3 +61,4 @@ An issue with local storage replication latency between windows can cause a shor
 [2]: /real_user_monitoring/browser/setup/
 [3]: https://www.electronjs.org/docs/latest/tutorial/process-model#the-renderer-process
 [4]: /real_user_monitoring/explorer/
+[5]: https://www.datadoghq.com/support/
