@@ -41133,6 +41133,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41175,6 +41177,8 @@ paths:
       responses:
         '204':
           description: The resource was deleted successfully.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41221,6 +41225,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41270,6 +41276,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41305,6 +41313,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AwsScanOptionsListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -41334,6 +41344,8 @@ paths:
           description: Agentless scan options enabled successfully.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -41362,6 +41374,8 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -41391,6 +41405,8 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -41415,6 +41431,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AwsOnDemandListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -41450,6 +41468,8 @@ paths:
           description: AWS on demand task created successfully.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -41480,6 +41500,8 @@ paths:
           description: OK.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -41525,6 +41547,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41565,6 +41589,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41606,6 +41632,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41643,6 +41671,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIKeyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41693,6 +41723,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41766,6 +41798,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41811,6 +41845,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41868,6 +41904,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41934,6 +41972,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -41998,6 +42038,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42043,6 +42085,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SpansMetricsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -42079,6 +42123,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -42121,6 +42167,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42149,6 +42197,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SpansMetricResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42189,6 +42239,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42217,6 +42269,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RetentionFiltersResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -42257,6 +42311,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -42306,6 +42362,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -42335,6 +42393,8 @@ paths:
       responses:
         '200':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42364,6 +42424,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RetentionFilterResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42406,6 +42468,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -42447,6 +42511,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42564,6 +42630,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42604,6 +42672,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42671,6 +42741,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42735,6 +42807,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42797,6 +42871,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42846,6 +42922,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42897,6 +42975,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42946,6 +43026,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -42979,6 +43061,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43023,6 +43107,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43071,6 +43157,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43168,6 +43256,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -43215,6 +43305,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -43266,6 +43358,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthNMappingsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43305,6 +43399,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43357,6 +43453,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43393,6 +43491,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthNMappingResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43440,6 +43540,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -43666,6 +43768,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -44030,6 +44134,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListEntityCatalogResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -44068,6 +44174,8 @@ paths:
           description: ACCEPTED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -44147,6 +44255,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -44264,6 +44374,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44351,6 +44463,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44400,6 +44514,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44445,6 +44561,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44532,6 +44650,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44581,6 +44701,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -44625,6 +44747,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
         '429':
@@ -44682,6 +44808,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
         '500':
@@ -44719,6 +44849,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
         '500':
@@ -44760,6 +44894,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
         '500':
@@ -44839,6 +44977,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -44922,6 +45062,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -44959,6 +45101,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AwsCURConfigsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45004,6 +45148,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45042,6 +45188,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -45084,6 +45234,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AwsCURConfigsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45118,6 +45270,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AzureUCConfigsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45163,6 +45317,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45201,6 +45357,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -45248,6 +45408,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45292,6 +45454,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -45322,6 +45488,10 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -45349,6 +45519,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -45375,6 +45549,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/BudgetArray'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -45399,6 +45577,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45434,6 +45614,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileUploadResponse'
           description: Accepted
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45462,6 +45644,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45493,6 +45677,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileGetResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45530,6 +45716,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -45658,6 +45846,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -45731,6 +45921,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CsmAgentsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -45756,6 +45948,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -45781,6 +45975,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -45806,6 +46002,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CsmServerlessCoverageAnalysisResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -45863,6 +46061,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CsmAgentsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -45898,6 +46098,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45944,6 +46146,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -45983,6 +46187,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46019,6 +46225,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationKeyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46067,6 +46275,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46127,6 +46337,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46166,6 +46378,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DashboardListItems'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46226,6 +46440,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46295,6 +46511,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46327,6 +46545,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAllowlistResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -46360,6 +46582,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAllowlistResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -46416,6 +46642,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -46469,6 +46697,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -46523,6 +46753,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListDowntimesResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46573,6 +46805,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46631,6 +46865,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46694,6 +46930,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46754,6 +46992,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46845,6 +47085,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -46933,6 +47175,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -46978,6 +47222,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -48086,6 +48332,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AWSAccountsResponse'
           description: AWS Accounts List object
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -48121,6 +48369,8 @@ paths:
           description: AWS Account object
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
@@ -48179,6 +48429,8 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48212,6 +48464,8 @@ paths:
           description: AWS Account object
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48251,6 +48505,8 @@ paths:
           description: AWS Account object
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48283,6 +48539,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AWSNamespacesResponse'
           description: AWS Namespaces List object
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -48311,6 +48569,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AWSNewExternalIDResponse'
           description: AWS External ID object
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -48339,6 +48599,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AWSLogsServicesResponse'
           description: AWS Logs Services List object
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -48368,6 +48630,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GCPSTSServiceAccountsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -48448,6 +48712,8 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -48482,6 +48748,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -48513,6 +48781,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GCPSTSDelegateAccountResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -48546,6 +48816,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GCPSTSDelegateAccountResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -48581,6 +48853,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48612,6 +48886,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48645,6 +48921,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48690,6 +48968,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '412':
@@ -48717,6 +48997,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48752,6 +49034,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48789,6 +49073,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48823,6 +49109,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48864,6 +49152,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '412':
@@ -48891,6 +49181,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48927,6 +49219,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -48955,6 +49249,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/OpsgenieServicesResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -48988,6 +49284,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
@@ -49032,6 +49330,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49062,6 +49362,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49101,6 +49403,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49137,6 +49441,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49171,6 +49477,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49219,6 +49527,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49254,6 +49564,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49295,6 +49607,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49328,6 +49642,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49363,6 +49679,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49407,6 +49725,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49437,6 +49757,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49474,6 +49796,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49509,6 +49833,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49547,6 +49873,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49577,6 +49905,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49609,6 +49939,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49648,6 +49980,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49680,6 +50014,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49714,6 +50050,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49756,6 +50094,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49786,6 +50126,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49822,6 +50164,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49857,6 +50201,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49893,6 +50239,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49929,6 +50277,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49960,6 +50310,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -49997,6 +50349,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50031,6 +50385,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50065,6 +50421,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50114,6 +50472,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50149,6 +50509,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50190,6 +50552,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50222,6 +50586,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/IPAllowlistResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50261,6 +50627,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -50553,6 +50921,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -50581,6 +50951,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsArchiveOrder'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50631,6 +51003,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50667,6 +51041,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsArchives'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50708,6 +51084,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50746,6 +51124,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50788,6 +51168,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50842,6 +51224,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50888,6 +51272,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50931,6 +51317,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -50976,6 +51364,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51013,6 +51403,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomDestinationsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51051,6 +51443,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
@@ -51097,6 +51491,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -51127,6 +51523,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -51166,6 +51564,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -51196,6 +51596,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsMetricsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -51232,6 +51634,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -51280,6 +51684,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -51308,6 +51714,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsMetricResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -51348,6 +51756,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -51379,6 +51789,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestrictionQueryListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51422,6 +51834,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51467,6 +51881,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51507,6 +51923,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51543,6 +51961,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51590,6 +52010,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51642,6 +52064,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51691,6 +52115,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51739,6 +52165,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51787,6 +52215,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -51915,6 +52345,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -51970,6 +52402,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -52106,6 +52540,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52170,6 +52606,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52240,6 +52678,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52309,6 +52749,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52357,6 +52799,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52410,6 +52854,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: API error response.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52505,6 +52951,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: API error response.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52543,6 +52991,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52583,6 +53033,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricTagConfigurationResponse'
           description: Success
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52652,6 +53104,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52718,6 +53172,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52785,6 +53241,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52834,6 +53292,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorNotificationRuleListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52883,6 +53343,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52937,6 +53399,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -52996,6 +53460,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorNotificationRuleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53058,6 +53524,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53102,6 +53570,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorConfigPolicyListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53148,6 +53618,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53201,6 +53673,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53243,6 +53717,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorConfigPolicyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53297,6 +53773,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorConfigPolicyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -53357,6 +53835,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/MonitorDowntimeMatchResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -53415,6 +53897,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -53448,6 +53932,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetDeviceResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -53486,6 +53972,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetInterfacesResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -53515,6 +54003,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListTagsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -53551,6 +54041,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListTagsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -53615,6 +54107,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all aggregated connections
@@ -54070,6 +54564,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamRoutingRules'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -54116,6 +54614,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamRoutingRules'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -54257,6 +54759,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -54420,6 +54924,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/FindingsBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
@@ -54470,6 +54976,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/FindingsBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
@@ -54525,6 +55033,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/FindingsBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
@@ -54568,6 +55078,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListPowerpacksResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -54612,6 +55126,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -54654,6 +55172,10 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -54694,6 +55216,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/PowerpackResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -54747,6 +55273,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -54848,6 +55378,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -54974,6 +55506,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55003,6 +55537,8 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -55045,6 +55581,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55072,6 +55610,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55106,6 +55646,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55133,6 +55675,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationSecurityWafExclusionFiltersResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55174,6 +55718,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -55218,6 +55764,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55249,6 +55797,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55289,6 +55839,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55322,6 +55874,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55352,6 +55906,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -55390,6 +55946,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55416,6 +55974,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55452,6 +56012,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55478,6 +56040,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentPoliciesListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55508,6 +56072,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -55552,6 +56118,8 @@ paths:
                 format: binary
                 type: string
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55573,6 +56141,8 @@ paths:
           description: OK
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55598,6 +56168,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55633,6 +56205,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55664,6 +56238,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55697,6 +56273,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -55759,6 +56337,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55788,6 +56368,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -55836,6 +56418,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ObservabilityPipeline'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -55880,6 +56464,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -55910,6 +56496,8 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -55941,6 +56529,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56067,6 +56657,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56123,6 +56715,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RolesResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56168,6 +56762,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56212,6 +56808,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56250,6 +56848,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56301,6 +56901,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56365,6 +56967,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56432,6 +57036,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56474,6 +57080,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PermissionsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56524,6 +57132,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56592,6 +57202,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56654,6 +57266,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UsersResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56703,6 +57317,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -56762,6 +57378,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56791,6 +57409,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/RUMApplicationsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -56823,6 +57445,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a new RUM application
@@ -56876,6 +57502,8 @@ paths:
           description: Ordered
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56900,6 +57528,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RumRetentionFiltersResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56934,6 +57564,8 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -56955,6 +57587,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -56980,6 +57614,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RumRetentionFilterResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -57017,6 +57653,8 @@ paths:
           description: Updated
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -57044,6 +57682,10 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57075,6 +57717,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/RUMApplicationResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57114,6 +57760,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '422':
@@ -57150,6 +57800,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RumMetricsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -57182,6 +57834,8 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -57221,6 +57875,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -57245,6 +57901,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/RumMetricResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -57281,6 +57939,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -57365,6 +58025,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -57414,6 +58076,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -57459,6 +58123,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -57526,6 +58192,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -57577,6 +58247,10 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -57612,6 +58286,10 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57648,6 +58326,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57711,6 +58393,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57770,6 +58456,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '409':
@@ -57833,6 +58523,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -57880,6 +58574,10 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -57915,6 +58613,10 @@ paths:
           description: No Content
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -57949,6 +58651,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExternalUser'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -58004,6 +58710,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -58063,6 +58771,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -58152,6 +58864,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58194,6 +58908,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58286,6 +59002,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58327,6 +59045,8 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58370,6 +59090,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -58411,6 +59133,8 @@ paths:
           description: Rule updated successfully
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58589,6 +59313,8 @@ paths:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Bad request: The server cannot process the request due to
             invalid syntax in the request.'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -58636,6 +59362,8 @@ paths:
                 format: binary
                 type: string
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -58693,6 +59421,8 @@ paths:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Bad request: The server cannot process the request due to
             invalid syntax in the request.'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -58728,6 +59458,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/NotificationRulesList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58773,6 +59505,8 @@ paths:
           description: Successfully created the notification rule.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -58822,6 +59556,8 @@ paths:
       responses:
         '204':
           description: Rule successfully deleted.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -58862,6 +59598,8 @@ paths:
           description: Notification rule details.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -58909,6 +59647,8 @@ paths:
           description: Notification rule successfully patched.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -59288,6 +60028,8 @@ paths:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Bad request: The server cannot process the request due to
             invalid syntax in the request.'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -59324,6 +60066,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/NotificationRulesList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -59369,6 +60113,8 @@ paths:
           description: Successfully created the notification rule.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -59418,6 +60164,8 @@ paths:
       responses:
         '204':
           description: Rule successfully deleted.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -59458,6 +60206,8 @@ paths:
           description: Notification rule details.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -59505,6 +60255,8 @@ paths:
           description: Notification rule successfully patched.
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -59540,6 +60292,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -59573,6 +60327,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -59612,6 +60368,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59640,6 +60398,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59679,6 +60439,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59709,6 +60471,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityFiltersResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -59752,6 +60516,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -59798,6 +60564,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59836,6 +60604,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityFilterResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59880,6 +60650,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -59915,6 +60687,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -59949,6 +60723,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '409':
@@ -59989,6 +60765,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60018,6 +60796,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringSuppressionResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60056,6 +60836,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60091,6 +60873,10 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -60126,6 +60912,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -60302,6 +61090,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -60331,6 +61121,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60364,6 +61156,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -60453,6 +61249,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60536,6 +61334,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -60619,6 +61419,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -60666,6 +61468,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -60704,6 +61508,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringSignalResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
@@ -60749,6 +61557,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -60800,6 +61610,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -60851,6 +61663,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -60893,6 +61707,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -60936,6 +61752,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -60987,6 +61805,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61050,6 +61870,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61103,6 +61925,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61157,6 +61981,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61220,6 +62046,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61272,6 +62100,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61310,6 +62140,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61373,6 +62205,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61425,6 +62259,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61482,6 +62318,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61530,6 +62368,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61576,6 +62416,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61613,6 +62455,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PartialApplicationKeyResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61662,6 +62506,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -61806,6 +62652,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceDefinitionsListResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -61848,6 +62696,8 @@ paths:
           description: CREATED
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
@@ -61902,6 +62752,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -61938,6 +62790,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -62118,6 +62972,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
@@ -62284,6 +63140,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -62377,6 +63235,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -62437,6 +63297,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -62484,6 +63346,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -62534,6 +63398,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -62625,6 +63491,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/SpansBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/SpansForbiddenResponse'
         '422':
@@ -62676,6 +63544,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/SpansBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/SpansForbiddenResponse'
         '422':
@@ -62710,6 +63580,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the on-demand concurrency cap
@@ -62739,6 +63613,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/OnDemandConcurrencyCapResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Save new value for on-demand concurrency cap
@@ -62806,6 +63684,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -62847,6 +63727,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamResponse'
           description: CREATED
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
@@ -62904,6 +63786,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -62948,6 +63832,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63006,6 +63892,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: API error response.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63060,6 +63948,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinksResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63108,6 +63998,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63176,6 +64068,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63224,6 +64118,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63278,6 +64174,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63336,6 +64234,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamsResponse'
           description: Represents a user's association to a team
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63388,6 +64288,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
           description: Represents a user's association to a team
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63455,6 +64357,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63509,6 +64413,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
           description: Represents a user's association to a team
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63555,6 +64461,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamPermissionSettingsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63610,6 +64518,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamPermissionSettingResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -63904,6 +64814,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -63972,6 +64884,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64046,6 +64960,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64153,6 +65069,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64237,6 +65155,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64381,6 +65301,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64448,6 +65370,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64515,6 +65439,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64583,6 +65509,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -64633,6 +65561,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64685,6 +65615,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserInvitationResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64775,6 +65707,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64825,6 +65759,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64872,6 +65808,8 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64915,6 +65853,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -64971,6 +65911,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65026,6 +65968,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65068,6 +66012,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PermissionsResponse'
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65118,6 +66064,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamsResponse'
           description: Represents a user's association to a team
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -65165,6 +66115,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65213,6 +66165,8 @@ paths:
       responses:
         '204':
           description: Successfully deleted a workflow.
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65260,6 +66214,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65313,6 +66269,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad request
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           content:
             application/json:
@@ -65359,6 +66317,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -65399,6 +66359,8 @@ paths:
           description: Created
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
@@ -65436,6 +66398,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
@@ -65474,6 +66438,8 @@ paths:
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':

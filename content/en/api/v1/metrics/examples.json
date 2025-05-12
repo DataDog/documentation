@@ -15,6 +15,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -104,6 +112,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -140,6 +156,14 @@
           "unit": "byte"
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Metric description.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">integration</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the integration that sent the metric if applicable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">per_unit</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Per unit of the metric such as <code>second</code> in <code>bytes per second</code>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">short_name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A more human-readable and abbreviated version of the metric name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">statsd_interval</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>StatsD flush interval of the metric in seconds if applicable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Metric type such as <code>gauge</code> or <code>rate</code>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">unit</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Primary unit of the metric such as <code>byte</code> or <code>operation</code>.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
         "json": {
@@ -187,6 +211,14 @@
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Metric description.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">integration</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the integration that sent the metric if applicable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">per_unit</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Per unit of the metric such as <code>second</code> in <code>bytes per second</code>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">short_name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A more human-readable and abbreviated version of the metric name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">statsd_interval</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>StatsD flush interval of the metric in seconds if applicable.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Metric type such as <code>gauge</code> or <code>rate</code>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">unit</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Primary unit of the metric such as <code>byte</code> or <code>operation</code>.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "401": {
         "json": {
           "errors": [
             "Bad Request"
@@ -285,6 +317,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -326,6 +366,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -358,6 +406,14 @@
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The status of the intake payload.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "401": {
         "json": {
           "errors": [
             "Bad Request"

@@ -15,6 +15,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -46,6 +54,14 @@
   },
   "DeletePagerDutyIntegrationService": {
     "responses": {
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -85,6 +101,14 @@
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">service_name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Your service name associated service key in PagerDuty.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
+      "401": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
       "403": {
         "json": {
           "errors": [
@@ -119,6 +143,14 @@
   "UpdatePagerDutyIntegrationService": {
     "responses": {
       "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "401": {
         "json": {
           "errors": [
             "Bad Request"
