@@ -65,7 +65,7 @@ To apply a saved view to your diagram:
 
 ### Explore resources
 
-Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource reveals a hover panel with basic information. Clicking on a resource opens a side panel that displays its Datadog observability, cost information, and security data, with cross-links to other Datadog products where relevant.
+Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
 {{< img src="datadog_cloudcraft/cloudcraft_with_ccm.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 

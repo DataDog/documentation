@@ -27,7 +27,7 @@ Cloudcraft provides the following built-in overlays:
 
 The infrastructure view provides a broad overview, grouping resources by Account, Region, and VPC. This view is ideal for generating architecture diagrams for troubleshooting or high-level review.
 
-The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway, among others, to give you an uncluttered diagram, showing you the most important parts of your architecture.
+The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway to reduce visual clutter and highlight the most important parts of your architecture.
 
 {{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_with_ccm.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
 
@@ -43,7 +43,7 @@ The security overlay highlights potential security exposures in your architectur
 
 - Identify security issues directly in infrastructure diagrams.
 - Analyze misconfigurations in context to prioritize remediation.
-- Assess security posture before deploying applications.
+- Assess your security posture before deploying applications.
 
 You can click on any any resource with findings to open a side panel with more details, allowing deeper investigation without leaving the diagram.
 
