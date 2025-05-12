@@ -96,11 +96,11 @@ Each rule lists a score for the percentage of services that are passing. Each sc
 
 You can group rules into levels to categorize them by their criticality. There are three predefined levels: 
 
-- Level 1 - Basic Rules: These rules reflect the baseline expectations for every production service, such as having an on-call owner, monitoring in place, or a team defined.
-- Level 2 - Intermediate Rules: These rules reflect strong engineering practices that should be adopted across most services. Examples might include defining SLOs or linking documentation within Software Catalog.
-- Level 3 - Advanced Rules: These aspirational rules represent mature engineering practices. These may not apply to every service but are valuable goals for teams.
+- Level 1 - Basic rules: These rules reflect the baseline expectations for every production service, such as having an on-call owner, monitoring in place, or a team defined.
+- Level 2 - Intermediate rules: These rules reflect strong engineering practices that should be adopted across most services. Examples might include defining SLOs or linking documentation within Software Catalog.
+- Level 3 - Advanced rules: These aspirational rules represent mature engineering practices. These may not apply to every service but are valuable goals for teams.
 
-You can set levels for any out-of-the-box or custom rules. By default, rules without levels are automatically placed in level 3. This default level can be changed by editing the rule. 
+You can set levels for any out-of-the-box or custom rules. By default, rules without levels are automatically placed in level 3. You can change this default assignment by editing the rule.
 
 {{< img src="/tracing/software_catalog/scorecard-levels.png" alt="Scorecards UI grouped by levels" style="width:90%;" >}}
 
@@ -110,13 +110,13 @@ You can group rules by scorecard or level in the Scorecards UI. In the Software 
 
 ## Scope scorecard rules 
 
-Scopes allow you to define which entities a rule applies to, using metadata from entity definitions in Software Catalog. Without a scope defined, a rule will apply to all defined services in the catalog. You can scope by any field within an entity definition, including `team`, `tier`, and custom tags. 
+Scopes allow you to define which entities a rule applies to, using metadata from entity definitions in Software Catalog. Without a scope defined, a rule applies to all defined services in the catalog. You can scope by any field within an entity definition, including `team`, `tier`, and custom tags. 
 
 By default, a service must match all specified conditions to be evaluated against the rule. You can use `OR` statements to include multiple values for the same field. 
 
 {{< img src="/tracing/software_catalog/scorecard-edit-scope.png" alt="Scorecards setup page" style="width:90%;" >}}
 
-You can set scopes for both out-of-the-box and custom rules. Any previously existing outcomes for newly scoped rules will no longer show in the UI and will not contribute to the overall score of the rule. If the scope is removed, these outcomes will reappear. 
+You can set scopes for both out-of-the-box and custom rules. When you add a scope to a rule, any previously recorded outcomes for services that no longer match the scope are hidden from the UI and excluded from score calculations. If you later remove the scope, these outcomes reappear and are counted again.
 
 ## Further reading
 
