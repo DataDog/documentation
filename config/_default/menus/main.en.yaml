@@ -3415,7 +3415,7 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
       weight: 103
-    - name: SaaS Cost Integrations
+    - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
@@ -3460,7 +3460,7 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
       weight: 108
-    - name: Custom Costs
+    - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
@@ -3510,12 +3510,12 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
-    - name: Cost Recommendations
+    - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 8
-    - name: Cost Monitors
+    - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
