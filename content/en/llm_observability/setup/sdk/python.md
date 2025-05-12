@@ -766,4 +766,4 @@ def server_process_request(request):
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/setup/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
-[15]: /llm_observability/quickstart?tab=python#aws-lambda
+[15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
