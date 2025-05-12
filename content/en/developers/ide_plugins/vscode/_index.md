@@ -23,7 +23,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-    The Datadog extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
+    The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 

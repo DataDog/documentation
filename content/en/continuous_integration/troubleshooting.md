@@ -68,7 +68,7 @@ Job data has a three-day limit to be processed after completion. If a pipeline i
 [6]: /tracing/troubleshooting/tracer_debug_logs
 [7]: /continuous_integration/tests/containers/
 [8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[9]: https://app.datadoghq.com/ci/settings/repository
+[9]: https://app.datadoghq.com/source-code/repositories
 [10]: /tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
