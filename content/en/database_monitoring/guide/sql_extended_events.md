@@ -13,13 +13,13 @@ further_reading:
 ---
 
 This feature enables collection of deobfuscated queries and query error events from your SQL Server instances using Extended Events (XE). It provides clear insights into:
-	•	Metrics and behavior of SQL queries with deobfuscated parameter values
-	•	What query errors or timeouts occurred
+- Metrics and behavior of SQL queries with deobfuscated parameter values
+- What query errors or timeouts occurred
 
 This is useful for:
-	•	Performance analysis
-	•	Debugging app behavior
-	•	Auditing unexpected errors or timeouts
+- Performance analysis
+- Debugging app behavior
+- Auditing unexpected errors or timeouts
 
 
 ## Before you begin
@@ -378,7 +378,7 @@ In order to collect deobfuscated versions of query_completion and query_error ev
 
 To access the query error view, navigate to the **APM** > **Database Monitoring** > **Samples** tab, and use the SQLServer In Query Errors dropdown selector to view a list of Query Errors
 
-# Exploring deobfuscated queries
+## Exploring deobfuscated queries
 
 Workflow is still a work in progress.
 
