@@ -9,7 +9,7 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/container_cost_allocation"
+- link: "/cloud_cost_management/cost_allocation"
   tag: "Documentation"
   text: "Learn about Container Cost Allocation"
 ---
@@ -113,9 +113,9 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/aws
-[2]: /cloud_cost_management/azure
-[3]: /cloud_cost_management/google_cloud
+[1]: /cloud_cost_management/setup/aws
+[2]: /cloud_cost_management/setup/azure
+[3]: /cloud_cost_management/setup/google_cloud
 [4]: /cloud_cost_management/saas_costs
 [5]: /cloud_cost_management/datadog_costs
 [6]: https://app.datadoghq.com/cost/explorer
@@ -125,5 +125,5 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 [10]: /cloud_cost_management
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://focus.finops.org/#obtain
-[13]: /cloud_cost_management/container_cost_allocation
-[14]: /cloud_cost_management/container_cost_allocation/?tab=aws#applying-tags
+[13]: /cloud_cost_management/cost_allocation
+[14]: /cloud_cost_management/cost_allocation/?tab=aws#applying-tags

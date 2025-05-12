@@ -333,7 +333,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [42]: /integrations/google_cloud_run/
 [43]: /integrations/google_cloud_run/#log-collection
 [44]: /cloud_cost_management/
-[45]: /cloud_cost_management/google_cloud/
+[45]: /cloud_cost_management/setup/google_cloud/
 [46]: /getting_started/cloud_siem/
 [47]: https://console.cloud.google.com/projectselector2/security/command-center/overview?supportedpurview=organizationId,folder,project
 [48]: /integrations/google_cloud_security_command_center/#installation
