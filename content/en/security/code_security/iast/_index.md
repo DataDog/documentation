@@ -22,7 +22,7 @@ For a list of supported services, see the [Library Compatibility Requirements][5
 | Critical | Command Injection                     | COMMAND_INJECTION           | TRUE | TRUE | TRUE | TRUE |
 | High | LDAP Injection                        | LDAP_INJECTION              | TRUE | TRUE | TRUE | FALSE |
 | High | Email HTML Injection | EMAIL_HTML_INJECTION                            | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | Hardcoded Secrets                     | HARDCODED_SECRET            | TRUE | TRUE | FALSE | FALSE |
+| High | Hardcoded Secrets                     | HARDCODED_SECRET            | TRUE | TRUE | TRUE | FALSE |
 | High | Hardcoded Passwords                   | HARDCODED_PASSWORD          | FALSE | FALSE | TRUE | FALSE |
 | High | Path Traversal                        | PATH_TRAVERSAL              | TRUE | TRUE | TRUE | TRUE |
 | High | Trust Boundary Violation              | TRUST_BOUNDARY_VIOLATION    | TRUE | TRUE | FALSE | FALSE |

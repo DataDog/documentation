@@ -71,7 +71,7 @@ If GitLab is your source code management provider, before you can begin installa
 {{% tab "Azure DevOps" %}}
 
 <div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://forms.gle/csqe6w82gY1UHW5AA">Join the Preview</a>.
+Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
 If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
@@ -646,8 +646,8 @@ When ingesting SARIF files, Datadog maps SARIF severities into CVSS severities u
 |----------------|---------------|
 | Error          | Critical      |
 | Warning        | High          |
-| Notice         | Medium        |
-| Info           | Low           |
+| Note           | Medium        |
+| None           | Low           |
 
 
 <!-- ## Further Reading
