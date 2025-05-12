@@ -1,10 +1,10 @@
 ---
 title: Migrating from your current on-call provider
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "/service_management/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "https://docs.datadoghq.com/service_management/incident_management/"
+- link: "/service_management/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 ---
