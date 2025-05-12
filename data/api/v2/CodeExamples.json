@@ -200,6 +200,13 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent policy returns \"OK\" response"
+    }
+  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -214,11 +221,11 @@
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
-  "UpdateCSMThreatsAgentRule": [
+  "UpdateCSMThreatsAgentPolicy": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+      "description": "Update a CSM Threats Agent policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -894,6 +901,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Create on-call schedule returns \"Created\" response"
+    }
+  ],
+  "SetOnCallTeamRoutingRules": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Set on-call team routing rules returns \"OK\" response"
     }
   ],
   "UpdateOnCallEscalationPolicy": [

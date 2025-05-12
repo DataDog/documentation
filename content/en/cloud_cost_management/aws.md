@@ -145,6 +145,8 @@ Use Account Filtering to control which AWS member accounts to pull into Cloud Co
 
 Using Account Filtering requires an AWS management account. You can configure account filters during setup and after an account has been configured in Cloud Cost Management.
 
+**Note:** Account filters are not supported for Recommendations or tag search.
+
 #### Configure account filters for a new account
 
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][18], and then click **Add Account** on the AWS account card.
