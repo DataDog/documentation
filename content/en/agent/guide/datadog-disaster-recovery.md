@@ -86,7 +86,7 @@ Datadog provides a tool called [Datadog sync-cli][3] to copy your dashboards, mo
 
 Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization. `Sync-cli can be configured for bidirectional syncing, but this is not yet fully tested and should be considered experimental at this moment`(**should we mention this? it doesn't sound like we recommned this at the moment**).
 
-Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here’s an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering.
+Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here’s an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
 
 ```shell 
 destination_api_url="https://api.us5.datadoghq.com"
@@ -127,7 +127,7 @@ Remote configuration will be turned on by default on your new organization and y
 
 ### Update your Datadog Agent configuration 
 Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery. 
-Configure your Datadog Agents’ `datadog.yaml` configuration file as shown below and restart the Agent.
+Configure your Datadog Agent's `datadog.yaml` configuration file as shown below for a `US5` site and restart the Agent.
 
 ```shell 
 multi_region_failover:
@@ -136,7 +136,7 @@ multi_region_failover:
   failover_logs: false
   failover_traces: false
   site: us5.datadoghq.com
-  api_key: ***us5_site_api_key***
+  api_key: us5_site_api_key
 
 
 ```
