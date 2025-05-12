@@ -103,7 +103,7 @@ WITH (
     MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
-    MAX_DISPATCH_LATENCY = 3 SECONDS,
+    MAX_DISPATCH_LATENCY = 30 SECONDS,
     STARTUP_STATE = ON
 );
 GO
@@ -182,11 +182,6 @@ You can customize the Extended Events sessions to better fit your specific needs
   )
   ```
 
-**Dispatch Latency**
-- Default is `MAX_DISPATCH_LATENCY = 3 SECONDS` for query completions and `30 SECONDS` for errors
-- Lower values provide more real-time data but may increase server load
-- Higher values reduce performance impact but increase reporting delay
-
 **Performance Considerations**
 - Extended Events are designed to be lightweight but still have some overhead
 - If you observe performance issues, consider:
@@ -201,6 +196,11 @@ You can customize the Extended Events sessions to better fit your specific needs
       enabled: true
     query_errors:
       enabled: true
+```
+In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`.
+```yaml
+  collect_raw_query_statement:
+    enabled: true
 ```
 
 {{% /tab %}}
@@ -270,7 +270,7 @@ WITH (
     MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
-    MAX_DISPATCH_LATENCY = 3 SECONDS,
+    MAX_DISPATCH_LATENCY = 30 SECONDS,
     STARTUP_STATE = ON
 );
 GO
@@ -355,10 +355,6 @@ You can customize the Extended Events sessions to better fit your specific needs
 - Consider using more restrictive filtering if you're on lower-tier service levels
 - For elastic pools, monitor performance impact across all databases
 
-**Dispatch Latency**
-- Default is `MAX_DISPATCH_LATENCY = 3 SECONDS` for query completions and `30 SECONDS` for errors
-- Lower values provide more real-time data but may increase database load
-- Higher values reduce performance impact but increase reporting delay
 
 2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
 ```yaml
@@ -367,6 +363,11 @@ You can customize the Extended Events sessions to better fit your specific needs
       enabled: true
     query_errors:
       enabled: true
+```
+In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`.
+```yaml
+  collect_raw_query_statement:
+    enabled: true
 ```
 
 {{% /tab %}}

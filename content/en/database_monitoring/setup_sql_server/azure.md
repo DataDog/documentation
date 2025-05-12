@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_deadlock/"
   tag: "Documentation"
   text: "Configure Deadlock Monitoring"
+- link: "/database_monitoring/guide/sql_extended_events/"
+  tag: "Documentation"
+  text: "Configure Query Errors and Query Deobfuscation"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
