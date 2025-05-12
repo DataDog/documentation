@@ -195,7 +195,7 @@ Run the following command to review Packet Filter (pf) rules:
 sudo pfctl -sr
 ```
 
-Check for any rules blocking UDP traffic on your configured ports, e.g. `block drop in proto udp from any to any port = <CONFIG_PORT>`.
+Check for any rules blocking UDP traffic on your configured ports. For example:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
 
 ### Traps not being received for devices
 
