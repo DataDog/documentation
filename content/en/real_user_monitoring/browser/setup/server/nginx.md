@@ -7,15 +7,14 @@ code_lang_weight: 5
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
+  text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
-identified as HTML.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 To understand important limitations and compatibility requirements, see [Limitations][1].
 
@@ -30,11 +29,7 @@ To automatically instrument your RUM application:
 1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **NGINX**.
 3. Configure your application parameters. See [guidance on configuring sampling][5].
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
-
 4. Copy and run the installer command to load the Datadog NGINX Module with the RUM SDK Injector onto NGINX.
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/nginx-code-snippet.png" alt="Auto-instrumentation Configuration" style="width:90%;">}}
-
 5. After the installer successfully installs the SDK Injector, restart NGINX to begin collecting RUM sessions.
 6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the [NGINX error logs][39] for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
 

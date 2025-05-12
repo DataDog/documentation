@@ -7,15 +7,15 @@ code_lang_weight: 4
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
+  text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [Apache httpd Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
-identified as HTML.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [IBM httpd Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
+identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 To understand important limitations and compatibility requirements, see [Limitations][1].
 
@@ -28,15 +28,11 @@ The [Datadog Agent][2] is installed and configured.
 To automatically instrument your RUM application:
 
 1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
-2. Select **Auto-Instrumentation** and **Apache httpd**.
+2. Select **Auto-Instrumentation** and **IBM httpd**.
 3. Configure your application parameters. See [guidance on configuring sampling][5].
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
-
 4. Copy and run the installer command to load the Datadog httpd Module with the RUM SDK Injector onto httpd.
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/httpd-code-snippet.png" alt="Auto-instrumentation Configuration" style="width:90%;">}}
-
-5. After the installer successfully installs the SDK Injector, restart Apache HTTP Server to begin collecting RUM sessions.
-6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
+5. After the installer successfully installs the SDK Injector, restart IBM HTTP Server to begin collecting RUM sessions.
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the error logs for relevant messages. The module logs important steps during the injection process. Ensure that IBM HTTP Server is configured with at least the `info` log level.
 
 Alternatively, you can [manually](#alternative-installation-method) install and configure the module.
 
@@ -80,9 +76,9 @@ To manually instrument your RUM application:
 ### Download the module file
 
 1. Download the [zipped module][6].
-2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that Apache HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
+2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that IBM HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
-### Update Apache HTTP server configuration
+### Update IBM HTTP server configuration
 
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
@@ -113,8 +109,8 @@ To manually instrument your RUM application:
 
 ### Restart your server
 
-1. Restart the Apache HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
-2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
+1. Restart the IBM HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that IBM HTTP Server is configured with at least the `info` log level.
 
 ## Further reading
 

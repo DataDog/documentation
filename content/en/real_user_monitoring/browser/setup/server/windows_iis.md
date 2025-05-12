@@ -7,14 +7,14 @@ code_lang_weight: 6
 further_reading:
 - link: '/real_user_monitoring/browser/setup/server/'
   tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
+  text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 To understand important limitations and compatibility requirements, see [Limitations][1].
 
@@ -26,11 +26,8 @@ The [Datadog Agent][2] is installed and configured.
 
 1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
-3. Configure your application parameters. See [guidance on configuring sampling][5].
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/auto-instrumentation-configuration.png" alt="Configure your application" style="width:90%;">}}
-
+3. Configure your application parameters. See [guidance on configuring sampling][4].
 4. Set up the IIS module using either the GUI installer or command line as described below:
-   {{< img src="real_user_monitoring/browser/auto-instrumentation/iis-code-snippet.png" alt="Auto-instrumentation Configuration" style="width:90%;">}}
 
 {{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 

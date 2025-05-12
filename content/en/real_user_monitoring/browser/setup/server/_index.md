@@ -1,5 +1,5 @@
 ---
-title: Browser Monitoring Auto-Instrumentation (Server-Side)
+title: Auto-Instrumentation
 beta: true
 code_lang: server
 type: multi-code-lang
@@ -17,13 +17,13 @@ further_reading:
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
+RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 ## Getting started
 
-### Select a platform to start collecting RUM data on your application
+Select a platform to start collecting RUM data on your application:
 
-<div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
+<div class="alert alert-info">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
 <br>
 {{< partial name="rum/rum-browser-setup.html" >}}
@@ -42,4 +42,4 @@ Keep in mind the following limitations when using auto-instrumentation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /real_user_monitoring/browser/advanced_configuration/
