@@ -45,7 +45,7 @@ The security overlay highlights potential security exposures in your architectur
 - Analyze misconfigurations in context to prioritize remediation.
 - Assess security posture before deploying applications.
 
-You can click on any resource to open a side panel with more details, allowing deeper investigation without leaving the diagram.
+You can click on any any resource that contains security findings to open a side panel with more details, allowing deeper investigation without leaving the diagram.
 
 This view is ideal for mapping attack surfaces during penetration tests or security audits. To keep the diagram focused, components like EBS volumes and NAT Gateways are excluded. 
 
