@@ -189,7 +189,7 @@ Look for rules where:
 
 #### macOS
 
-Run the following command to review packet filter (pf) rules:
+Run the following command to review Packet Filter (pf) rules:
 
 ```shell
 sudo pfctl -sr
