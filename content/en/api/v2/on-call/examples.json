@@ -934,7 +934,7 @@
                   ],
                   "time_zone": ""
                 },
-                "urgency": "string"
+                "urgency": "low"
               }
             ]
           },
