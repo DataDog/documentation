@@ -79,7 +79,7 @@ Reach out to [Datadog support][19] to enable this feature.
 
 Org-level (or folder-level) monitoring is recommended for comprehensive coverage of all projects, including any future projects that may be created in an org or folder. To set up monitoring for individual projects, see the main [Google Cloud integration page][41].
 
-**Note**: Your [Google Cloud Identity user account][66] must have the `Admin` role assigned to it at the desired scope to complete the setup in Google Cloud (for example, `Organization Admin`).
+**Note**: Your [Google Cloud Identity][66] user account must have the `Admin` role assigned to it at the desired scope to complete the setup in Google Cloud (for example, `Organization Admin`).
 
 {{% collapse-content title="1. Create a Google Cloud service account in the default project" level="h5" %}}
 1. Open your [Google Cloud console][10].
