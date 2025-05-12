@@ -709,4 +709,4 @@ tracer.use('http', false) // disable the http integration
 [4]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 [5]: /llm_observability/setup/auto_instrumentation/?tab=nodejs
 [6]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
-[7]: /llm_observability/quickstart?tab=nodejs#aws-lambda
+[7]: /llm_observability/quickstart?tab=nodejs#trace-an-llm-application-in-aws-lambda
