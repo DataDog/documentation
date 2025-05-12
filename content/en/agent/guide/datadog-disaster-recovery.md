@@ -140,7 +140,7 @@ multi_region_failover:
 
 
 ```
-During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. Your Datadog contact will work with you on scheduling dedicated windows for game day testing to measure performance and RTO.
+During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. Your Datadog contact will work with you on scheduling dedicated windows for game day testing to measure performance and Recovery Time Objective(RTO).
 
 
 ### Activate and test DDR failover
