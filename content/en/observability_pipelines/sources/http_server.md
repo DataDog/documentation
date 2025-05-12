@@ -53,6 +53,6 @@ You can find the installed forwarder Lambda function under the stack's **Resourc
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/
 [3]: /observability_pipelines/processors/
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation#installation
+[4]: /logs/guide/forwarder/?tab=cloudformation#installation
 [5]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
 [6]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
