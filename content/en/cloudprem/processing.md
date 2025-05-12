@@ -32,13 +32,17 @@ further_reading:
 
 ## Overview
 
-CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. This processing is designed to be equivalent to [Datadog Log Management Pipelines][1]. For a list of supported and unsupported processors, see [Compatibility with Datadog Pipelines](#compatibility-with-datadog-pipelines).
+CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. 
+
+<div class="alert alert-info">CloudPrem log pipelines and processors are designed to be match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
+
+For a list of supported and unsupported processors, see [Compatibility with cloud-based pipelines](#compatibility-with-cloud-based-pipelines).
 
 You configure log processing pipelines using a JSON file that adheres to the same format as Datadog pipeline configurations.
 
 ## Setting up processing
 
-1. (Optional) If you have existing pipelines in Datadog, you can fetch the configuration using the [Logs Pipelines API][2]:
+1. (Optional) If you have existing cloud-based pipelines in Datadog, you can fetch the configuration using the [Logs Pipelines API][2]:
 
    ```bash
    curl -X GET "https://api.datadoghq.com/api/v1/logs/config/pipelines" \
@@ -114,9 +118,9 @@ The order of elements in the array defines the sequential execution order of the
 ]
 ```
 
-## Compatibility with Datadog Pipelines
+## Compatibility with cloud-based pipelines
 
-CloudPrem processing is designed to align closely with [Datadog Log Management][3], allowing direct use of existing pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+CloudPrem processing is designed to align closely with cloud-based [Datadog Log Management][3], allowing direct use of existing log pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
 - Some filter queries can't be parsed, such as filters with combined wildcards (for example, `@data.message:+*`).
 - Filter on `message` has a different matching behavior (it also affects the category processor).
 - CloudPrem uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
