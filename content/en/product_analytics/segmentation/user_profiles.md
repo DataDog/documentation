@@ -15,11 +15,6 @@ All features in Product Analytics are in limited availability. To request access
 {{< /callout >}}
 
 ## Overview 
-<!-- Add language from
-   https://docs.datadoghq.com/product_analytics/guide/rum_and_product_analytics/ 
-  and from https://datadoghq.atlassian.net/wiki/spaces/GTMSEH/pages/5007933651/Product+Analytics#Who-are-our-Target-Personas%3F 
-to emphasize the benefits of the user profiles to the persona  -->
-
 While Product Analytics provides insight into users behavior overall, the user profiles feature allows you to track and analyse the behavioral patterns of key users.
 
 The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 

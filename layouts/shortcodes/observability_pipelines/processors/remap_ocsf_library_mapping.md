@@ -19,4 +19,5 @@ These are the library mappings available:
 | GitHub                 | Create User                                   | Account Change (3001)         | 1.1.0                  |
 | Google Workspace Admin | addPrivilege                                  | User Account Management (3005)| 1.1.0                  |
 | Okta                   | User session start                            | Authentication (3002)         | 1.1.0                  |
+| Microsoft 365 Defender | Incident                                      | Incident Finding (2005)        | 1.3.0<br>1.1.0 |
 | Palo Alto Networks     | Traffic                                       | Network Activity (4001)       | 1.1.0                  |

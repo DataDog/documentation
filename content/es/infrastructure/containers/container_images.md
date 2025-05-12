@@ -123,6 +123,8 @@ spec:
       enabled: true
       containerImage:
         enabled: true
+      host:
+        enabled: true
 ```
 
 {{% /tab %}}
@@ -135,6 +137,8 @@ Añade lo siguiente a tu archivo de configuración de Helm `datadog-values.yaml`
 datadog:
   sbom:
     containerImage:
+      enabled: true
+    host:
       enabled: true
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
@@ -158,6 +162,10 @@ Para habilitar el escaneo de vulnerabilidades de imágenes de contenedor en tus 
               },
               {
                 "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
                 "value": "true"
               }
             ]
@@ -193,6 +201,8 @@ Añade lo siguiente a tu archivo de configuración `datadog.yaml`:
 sbom:
   enabled: true
   container_image:
+    enabled: true
+  host:
     enabled: true
 ```
 
