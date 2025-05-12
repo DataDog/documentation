@@ -153,7 +153,7 @@ Use the following platform-specific commands to check for firewall rules that ma
 
 #### Linux
 
-Linux has multiple types of firewall such as `iptables`, `nftables`, or `ufw`. Depending on which one is in use, the following commands can be used:
+Linux has multiple types of firewalls, such as `iptables`, `nftables`, or `ufw`. Depending on which is in use, the following commands can be used:
 
 - `sudo iptables -S`
 
