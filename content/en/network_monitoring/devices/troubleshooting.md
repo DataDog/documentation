@@ -183,7 +183,7 @@ Get-NetFirewallRule -Action Block | ForEach-Object {
 ```
 
 Look for rules where:
-- **Direction** is Inbound
+- **Direction** is inbound
 - **Protocol** is UDP
 - **LocalPort** matches one of your configured ports
 
