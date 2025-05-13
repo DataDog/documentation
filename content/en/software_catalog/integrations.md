@@ -114,6 +114,22 @@ Asana project management integration for task tracking and post-incident workflo
 ### GitHub
 GitHub integration that supports creating issues or PRs, managing repo files, and automating team access. This is useful for tying alert workflows to code changes. Full setup steps are in the integration documentation, and the GitHub actions are detailed in the Action Catalog.
 
+#### Metadata Ingestion
+
+Configure the [GitHub integration][20] to directly link from where you view the service's definition in the Software Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
+
+To install the GitHub integration:
+1. Navigate to the [integration tile][21].
+2. Click **Link GitHub Account** in the **Repo Configuration** tab.
+
+When the GitHub integration is set up for your definitions, an **Edit in GitHub** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
+
+{{< img src="tracing/software_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Software Catalog" style="width:90%;" >}}
+
+After you update the YAML files for your repositories, your changes propagate to the Software Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+
+To prevent accidental overwriting, create and modify your definition files with either the GitHub integration or the [Definition API endpoints][22]. Updating the same service using both the GitHub and the API may result in unintended overwriting.
+
 ### GitLab
 GitLab integration covers issues, merge requests, branches, and commits. Datadog actions include creating MRs, commenting, managing branches, and querying pipeline status. Get started with the integration setup and explore available GitLab actions in the Action Catalog.
 
@@ -221,3 +237,6 @@ spec:
 [17]: https://docs.datadoghq.com/actions/actions_catalog/?search=servicenow
 [18]: https://docs.datadoghq.com/integrations/statuspage/
 [19]: https://docs.datadoghq.com/actions/actions_catalog/?search=statuspage
+[20]: /integrations/github/
+[21]: https://app.datadoghq.com/integrations/github
+[22]: /api/latest/software-catalog/
