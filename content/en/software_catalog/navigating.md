@@ -130,7 +130,7 @@ To access additional details describing your CI status and static analysis viola
 [5]: /tracing/guide/configuring-primary-operation/
 [6]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
 [7]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[8]: /security/application_security/how-appsec-works/
+[8]: /security/application_security/how-it-works/
 [9]: /cloud_cost_management/
 [10]: /cloud_cost_management/?tab=aws
 [11]: /cloud_cost_management/tag_pipelines

@@ -10,7 +10,7 @@ further_reading:
 - link: "/synthetics/api_tests/http_tests/"
   tag: "Documentation"
   text: "Synthetic API Tests"
-- link: "/security/application_security/how-appsec-works/#api-security"
+- link: "/security/application_security/how-it-works/#api-security"
   tag: "Documentation"
   text: "AAP API Security"
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"

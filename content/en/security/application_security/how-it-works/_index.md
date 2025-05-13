@@ -1,8 +1,9 @@
 ---
-title: How Application Security Works in Datadog
+title: How App and API Protection Works in Datadog
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
+  - /security/application_security/how-appsec-works/
   - /security/guide/how-appsec-works/
 ---
 
@@ -12,7 +13,7 @@ aliases:
 
 ## Overview
 
-Datadog Application Security provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
+Datadog App and API Protection provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
 
 - **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
 - **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
@@ -23,44 +24,44 @@ Datadog Application Security provides observability into application-level attac
 
 ### Identify services exposed to application attacks
 
-Datadog Application Security [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling Application Security in the tracing library is necessary to effectively monitor and protect your services.
+Datadog App and API Protection [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Software Catalog][2], [Service Page][3], [Traces][4]).
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable App and API Protection</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Compatibility
 
-For Datadog Application Security to be compatible with your Datadog configuration, you must have APM enabled and [sending traces to Datadog][6]. Application Security uses the same libraries used by APM, so you don't need to deploy and maintain another library. 
+For Datadog App and API Protection to be compatible with your Datadog configuration, you must have APM enabled and [sending traces to Datadog][6]. App and API Protection uses the same libraries used by APM, so you don't need to deploy and maintain another library. 
 
-Steps to enable Datadog Application Security are specific to each runtime language. Check to see if your language is supported in the Application Security prerequisites for each product.
+Steps to enable Datadog App and API Protectionon are specific to each runtime language. Check to see if your language is supported in the App and API Protection prerequisites for each product.
 
 ## Serverless monitoring
 
-Datadog Application Security for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
+Datadog App and API Protection for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
 
-Read [Enabling Application Security for Serverless][8] for information on setting it up.
+Read [Enabling App and API Protection for Serverless][8] for information on setting it up.
 
 ## Performance
 
-Datadog Application Security uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. 
+Datadog App and API Protection uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. 
 
-When APM is enabled, the Datadog library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
+When APM is enabled, the Datadog library generates distributed traces. Datadog App and API Protection flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
 {{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
 ## Data sampling and retention
 
-In the tracing library, Datadog Application Security collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
+In the tracing library, Datadog App and API Protection collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
 
 Data for security traces is kept for 90 days. The underlying trace data is kept for 15 days.
 
 ## Data privacy
 
-By default, Application Security collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, Application Security scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
+By default, App and API Protection collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, App and API Protection scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
 Here are some examples of data that is flagged as sensitive by default:
 * `pwd`, `password`, `ipassword`, `pass_phrase`
@@ -74,7 +75,7 @@ Here are some examples of data that is flagged as sensitive by default:
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-To configure the information redacted by Application Security, refer to the [data security configuration][17]
+To configure the information redacted by App and API Protection, refer to the [data security configuration][17]
 
 ## Threat detection methods
 
@@ -101,7 +102,7 @@ Leveraging distributed tracing information, attacks attempts are qualified as sa
 ## Threat monitoring coverage
 
 
-Datadog Application Security includes over 100 attack signatures that help protect against [many different kinds of attacks][14], including, but not limited to, the following categories:
+Datadog App and API Protection includes over 100 attack signatures that help protect against [many different kinds of attacks][14], including, but not limited to, the following categories:
 
 * SQL injections
 * Code injections
@@ -114,11 +115,11 @@ Datadog Application Security includes over 100 attack signatures that help prote
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Software Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog App and API Protection provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Software Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both App and API Protection and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
-## How Datadog Application Security protects against Log4Shell
+## How Datadog App and API Protection protects against Log4Shell
 
-Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+Datadog App and API Protection identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
 [1]: /security/workload_protection/
 [2]: /tracing/software_catalog/#security-view
@@ -136,7 +137,7 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /security/cloud_siem/
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
-[25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[25]: /security/application_security/how-it-works/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
