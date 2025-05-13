@@ -53,6 +53,18 @@ aliases:
   - /tracing/service_catalog/browsing
   - /service_catalog/browsing
   - /service_catalog/navigating
+  - /software_catalog/manage ## aliases for Manage page 
+  - /tracing/software_catalog/investigating
+  - /software_catalog/investigating/
+  - /tracing/software_catalog/guides/understanding-service-configuration
+  - /software_catalog/guides/understanding-service-configuration/
+  - /tracing/service_catalog/investigating
+  - /service_catalog/investigating/
+  - /tracing/service_catalog/guides/understanding-service-configuration
+  - /service_catalog/guides/understanding-service-configuration/
+  - /api_catalog/add_metadata
+  - /api_catalog/owners_and_tags
+  - /service_catalog/manage
 further_reading:
   - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
     tag: "External Site"
@@ -79,7 +91,7 @@ further_reading:
 
 Software Catalog components are defined through [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
 
-If you're new to Datadog, you can [automatically populate Software Catalog][2] by setting up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs.
+If you're new to Datadog, you can [automatically populate Software Catalog](#automatically-discover-components-from-datadog) by setting up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs.
 
 Alternatively, or to extend the auto-populated Software Catalog, you can:
 
@@ -216,7 +228,7 @@ Datadog provides a [JSON Schema][53] for definitions so that when you are editin
 
 The [JSON schema for Datadog definitions][55] is registered with the open source [Schema Store][54].
 
-## Discover components from other Datadog products
+## Automatically discover components from Datadog
 
 Software Catalog automatically discovers components from Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), and Real User Monitoring (RUM). You can also configure it to import components from infrastructure metrics and logs.
 
@@ -374,7 +386,6 @@ The Software Catalog write permission allows a user to modify Software Catalog d
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
 [1]: /internal_developer_portal/software_catalog/entity_model
-[2]: /software_catalog/set_up/existing_datadog_user/#discover-components-from-other-datadog-products
 [3]: https://app.datadoghq.com/software/settings/get-started
 [4]: /software_catalog/set_up/existing_datadog_user
 [5]: https://app.datadoghq.com/software
