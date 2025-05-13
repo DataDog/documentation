@@ -142,7 +142,7 @@ Or use the `{{else}}` parameter in the first example:
 {{/is_match}}
 ```
 
-**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
+**Note**: To check if a `<TAG_VARIABLE>` exists, use an empty string for the `<COMPARISON_STRING>`.
 ```text
 {{#is_match "role.name" ""}}
   This displays if the attribute or tag exists, including empty value
@@ -193,6 +193,14 @@ To notify your dev team if the value that breached the threshold of your monitor
   This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
 {{/is_exact_match}}
 ```
+
+The `is_exact_match` conditional variable also support an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exists
+```text
+{{#is_exact_match "host.datacenter" ""}}
+  This displays if the attribute or tag does not exists or if it's empty
+{{/is_match}}
+```
+
 
 {{% /tab %}}
 {{% tab "is_renotify" %}}
