@@ -77,24 +77,23 @@ further_reading:
     text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
-Datadog Software Catalog provides a centralized registry to track and manage your software components, such as services, datastores, queues, frontend applications, APIs, and more. Component attributes like teams, on-call, runbooks, and source code links are managed through the [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
+Software Catalog components are defined through [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
 
-If you're new to Datadog, you can [automatically populate Software Catalog][4] by setting up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs.
+If you're new to Datadog, you can [automatically populate Software Catalog][2] by setting up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs.
 
-Alternatively, or to extend the auto-populated Software Catalog, you can add components by:
+Alternatively, or to extend the auto-populated Software Catalog, you can:
 
--  Manually creating service definitions through the Datadog UI, the Datadog API, Terraform, or a GitHub integration.
--  Importing existing services from sources like ServiceNow or Backstage.
+- Create definitions through the Datadog UI.
+- Create definitions in platforms like GitHub and leverage Datadog integrations to automatically import them. 
+- Import existing components from sources like ServiceNow or Backstage.
 
 By default, these services are not associated with Datadog telemetry, but you can link telemetry data from Datadog or external sources manually using entity definition YAML files.
 
 ## Add components
 
 To add components, you can:
-- manually add through the Datadog UI 
-- automate import through GitHub, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API
-
-By default, these services are not associated with Datadog telemetry, but you can link telemetry data from Datadog or external sources manually using entity definition YAML files.
+- manually add through the Datadog UI.
+- automate import through GitHub, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API.
 
 ### Through the Datadog UI
 
@@ -109,7 +108,7 @@ To create component definitions in the Datadog UI:
 
 1. Submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
-   **Note**: You must have Software Catalog Write permission to save the entry. 
+   **Note**: You must have [Software Catalog Write permission](#role-based-access-and-permissions) to save the entry. 
 
 ### Through automation
 
@@ -175,9 +174,9 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 
 {{< img src="tracing/software_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 
-[1]: integrations/github/
+[1]: /integrations/github/
 [2]: https://app.datadoghq.com/integrations/github
-[3]: software_catalog/apis/
+[3]: /software_catalog/apis/
 [4]: https://app.datadoghq.com/event/explorer
 
 {{% /tab %}}
@@ -263,7 +262,7 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 
 {{< img src="tracing/software_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Software Catalog setup and configuration section" style="width:90%;" >}}
 
-[31]: getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[31]: getting_started/tagging/unified_service_tagging/
 [32]: https://app.datadoghq.com/software/settings/get-started
 [34]: software_catalog/apis/
 [35]: integrations/github/
@@ -323,21 +322,38 @@ spec:
     - service:email-service
 {{< /code-block >}}
 
+[1]: https://app.datadoghq.com/software/settings/get-started
+
 {{% /tab %}}
 
 {{% tab "ServiceNow" %}}
 
-To populate your Datadog Software Catalog with services from your ServiceNow Configuration Management Database (CMDB), use the Service Ingestion feature in the [Datadog-ServiceNow integration][3].
+To populate your Datadog Software Catalog with services from your ServiceNow Configuration Management Database (CMDB), use the Service Ingestion feature in the [Datadog-ServiceNow integration][1].
 
 {{< img src="integrations/servicenow/service-metadata.jpg" alt="Screenshot of the Service Configuration panel showing metadata populated from ServiceNow" >}}
+
+[1]: /integrations/servicenow/#service-ingestion
 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configuration completeness 
+
+Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Software Catalog provides automatic checks for these recommended setups. 
+
+To view the configuration completeness for a service, click the service in the [Software Catalog][5], then find the **Setup Guidance** tab:
+
+{{< img src="tracing/software_catalog/software-catalog-setup-guidance.png" alt="Software Catalog with the Setup Guidance tab highlighted." >}}
+
+Alternatively, on the [*Service* page][24], click **Service Config** on the lower-left side:
+
+{{< img src="tracing/software_catalog/service-page-service-config.png" alt="Service page with the Service Config link highlighted." >}}
+
+The Setup Guidance table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][2] and [Role Permissions][3].
+For general information, see [Role Based Access Control][25] and [Role Permissions][26].
 ### Read permission
 
 The Software Catalog read permission allows a user to read Software Catalog data, which enables the following features:
@@ -357,10 +373,11 @@ The Software Catalog write permission allows a user to modify Software Catalog d
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
-[1]: /software_catalog/service_definitions/
-[2]: /software_catalog/set_up/existing_datadog_user/#automatic-discovery-with-apm-usm-and-rum
+[1]: /internal_developer_portal/software_catalog/entity_model
+[2]: /software_catalog/set_up/existing_datadog_user/#discover-components-from-other-datadog-products
 [3]: https://app.datadoghq.com/software/settings/get-started
 [4]: /software_catalog/set_up/existing_datadog_user
+[5]: https://app.datadoghq.com/software
 [6]: /integrations/github/
 [7]: https://app.datadoghq.com/integrations/github
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
@@ -379,6 +396,9 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [21]: /software_catalog/endpoints/
 [22]: https://app.datadoghq.com/software/settings/get-started?currentTab=import
 [23]: /tracing/services/inferred_services
+[24]: /tracing/services/service_page/
+[25]: /account_management/rbac/?tab=datadogapplication
+[26]: /account_management/rbac/permissions
 [53]: http://json-schema.org/
 [54]: https://www.schemastore.org/json/
 [55]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
