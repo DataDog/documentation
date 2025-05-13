@@ -6191,6 +6191,11 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_threat_intelligence
       weight: 5
+    - name: Open Cybersecurity Schema Framework
+      url: /security/cloud_siem/open_cybersecurity_schema_framework
+      parent: cloud_siem
+      identifier: cloud_siem_open_cybersecurity_schema_framework
+      weight: 5
     - name: Investigate Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
