@@ -23,11 +23,11 @@ PagerDuty and OpsGenie integrations for Software Catalog are not supported in th
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Software Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
+When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Software Catalog][9]. You can leverage Datadog's [Action Catalog][24] to both query external data and take action directly.
 
 ## Collaboration, Incident Management, and Ticketing
 
-### PagerDuty integration
+### PagerDuty
 
 You can add PagerDuty metadata to a service so that the Software Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
 
@@ -214,6 +214,10 @@ spec:
     - service:email-service
 {{< /code-block >}}
 
+## Cloud Resources
+
+Datadog's Infrastructure integrations and [Resource Catalog][23] provides a comprehensive inventory of integrations across AWS, Azure, and GCP. You can also leverage Datadog's 1000+ actions in the [Action Catalog][24] to create custom visualizations, actions, and automations.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -240,3 +244,5 @@ spec:
 [20]: /integrations/github/
 [21]: https://app.datadoghq.com/integrations/github
 [22]: /api/latest/software-catalog/
+[23]: https://app.datadoghq.com/infrastructure/catalog
+[24]: https://docs.datadoghq.com/actions/actions_catalog/
