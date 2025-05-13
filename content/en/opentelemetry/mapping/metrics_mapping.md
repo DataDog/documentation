@@ -31,6 +31,7 @@ To differentiate the metrics captured by the `hostmetrics` receiver from Datadog
 
 Metrics mappings between Datadog and OpenTelemetry are defined on [OTel integration][11] pages. Select the integration you are using for more information.
 
+{{< multifilter-search resource="_data/semantic-core/unified_semantic_core.json">}}
 
 ## Further reading
 
