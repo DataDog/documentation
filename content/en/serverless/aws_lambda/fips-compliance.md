@@ -1,0 +1,125 @@
+---
+title: AWS Lambda FIPS Compliance
+further_reading:
+- link: '/serverless/aws_lambda/installation/'
+  tag: 'Documentation'
+  text: 'Install Serverless Monitoring for AWS Lambda'
+- link: '/serverless/aws_lambda/configuration/'
+  tag: 'Documentation'
+  text: 'Configure Serverless Monitoring for AWS Lambda'
+algolia:
+  rank: 80
+  tags: ["fips", "compliance", "fedramp", "govcloud", "aws lambda"]
+---
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-warning">The FIPS-compliant Datadog Lambda extension is available all AWS regions but should only be used for sending data to the US1-FED region.</div>
+{{< /site-region >}}
+
+Datadog provides FIPS-compliant monitoring for AWS Lambda functions through the use of FIPS-certified cryptographic modules and specially designed Lambda extension layers.
+
+## FIPS-Compliant Components
+
+Datadog's FIPS compliance for AWS Lambda is implemented through two main components:
+
+1. **FIPS-Compliant Lambda Extension**:
+   - The "compatibility" version of the extension is a Go binary built using the [BoringCrypto FIPS-certified module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4407).
+   - The "optimized" version of the extension is a Rust binary built with the [AWS-LC FIPS-certified cryptographic module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4816).
+
+2. **Runtime Libraries Support**:
+   - The Python and JavaScript Datadog Lambda Layers, and the Go Datadog Lambda Library offer FIPS-compliant operation controlled by the `DD_LAMBDA_FIPS_MODE` environment variable.
+   - When FIPS mode is enabled, the runtime libraries use AWS FIPS endpoints for Datadog API key retrieval and disable direct metric submission to Datadog.
+
+## FIPS Extension Layers
+
+Datadog provides separate Lambda extension layers for FIPS compliance in both x86 and ARM architectures:
+
+{{< tabs >}}
+{{% tab "AWS GovCloud Regions" %}}
+
+```
+# For x86-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+
+# For arm64-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+```
+
+Replace `<AWS_REGION>` with a valid AWS GovCloud region such as `us-gov-west-1`.
+
+{{% /tab %}}
+{{% tab "AWS Commercial Regions" %}}
+
+```
+# For x86-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+
+# For arm64-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+```
+
+Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Runtime Support
+
+### Python, JavaScript, and Go
+
+For Python, JavaScript, and Go Lambda functions, FIPS compliance is controlled using the `DD_LAMBDA_FIPS_MODE` environment variable:
+
+- In GovCloud environments, `DD_LAMBDA_FIPS_MODE` defaults to `true`.
+- In commercial regions, `DD_LAMBDA_FIPS_MODE` defaults to `false`.
+
+When FIPS mode is enabled:
+
+- AWS FIPS endpoints are used for Datadog API key lookups in AWS secure datastores.
+- Direct metric submission to the Datadog API is disabled, requiring the FIPS-compliant extension or forwarder for metric submission.
+
+### Ruby, .NET, and Java
+
+Ruby, .NET, and Java runtime libraries do not require the `DD_LAMBDA_FIPS_MODE` environment variable as these runtimes do not:
+
+- Contact AWS APIs directly
+- Send metrics directly to Datadog
+
+## Installation and Configuration
+
+To use FIPS-compliant monitoring for your AWS Lambda functions:
+
+1. **Select the FIPS-compliant extension layer**:
+   - Use the appropriate FIPS extension layer ARN for your architecture (x86 or ARM) and region (commercial or GovCloud)
+
+2. **Configure environment variables**:
+   - For GovCloud environments, `DD_LAMBDA_FIPS_MODE` is enabled by default
+   - For commercial regions, set `DD_LAMBDA_FIPS_MODE=true` to enable FIPS mode
+   - Set `DD_SITE` to `ddog-gov.com` to send data to the US1-FED site
+
+3. **Follow the standard installation instructions**:
+   - Refer to the [installation guides][1] for language-specific configurations
+   - Use the FIPS extension layer ARNs instead of the standard extension layers
+
+For detailed installation instructions specific to your language runtime and deployment method, see the [installation documentation][1].
+
+## Limitations and Considerations
+
+- **US1-FED Region**: The FIPS-compliant Lambda components should only be used for sending telemetry to the US1-FED region (`ddog-gov.com`).
+
+- **Customer Responsibility**: You, the Datadog customer, are responsible for:
+  - The security posture of your own Lambda function code
+  - Ensuring all other code you may be running in your Lambda execution environment maintains FIPS compliance as required
+
+- **FIPS Compliance Scope**: FIPS compliance only applies to communication between the Datadog Lambda components and Datadog's intake API endpoints. Other forms of communication originating from or terminating at your Lambda functions are not made FIPS-compliant by this solution.
+
+- **Version Requirements**: Use the latest versions of the Datadog Lambda extension and libraries to ensure full functionality and up-to-date security.
+
+## Further Reading
+
+- [Agent FIPS Compliance][2] - Note: these guidelines apply to Agent deployments only and not to serverless environments.
+- [AWS Lambda Security Overview][3] - AWS's documentation on Lambda security and compliance.
+
+
+[1]: /serverless/aws_lambda/installation/
+[2]: /agent/configuration/fips-compliance/
+[3]: https://docs.aws.amazon.com/whitepapers/latest/security-overview-aws-lambda/lambda-and-compliance.html
