@@ -1,7 +1,6 @@
 ---
 title: Analyze Performance with Metrics
 description: Understand the out-of-the-box performance metrics that are available with RUM without Limits.
-private: true
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
@@ -22,6 +21,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 **Notes**:
 - The **Default** cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
+- If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
 
 | Metric Name | Description | Dimensions | Platform |
 |-------------|-------------|------------|----------|
@@ -54,10 +54,17 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.view.network_settled` | Network settled | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.refresh_rate` | Average of user's refresh rate (FPS) | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
-| `rum.measure.rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
+| `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
+
+## API
+
+Metrics can be managed through [APIs][3] or Datadog's dedicated [Terraform modules][4].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
+[2]: /real_user_monitoring/platform/generate_metrics/
+[3]: /api/latest/rum-metrics/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/3.60.0/docs/resources/rum_metric

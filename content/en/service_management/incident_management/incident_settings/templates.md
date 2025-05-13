@@ -29,15 +29,16 @@ To create a message template:
 
 ## Postmortems
 
-Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][2] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem templates have Markdown support so that the resulting notebook includes text formatting, tables, indented lists, and hyperlinks.
+Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][2] or [Confluence page][3] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. 
 
 To create a postmortem template:
 
 1. Click the **+ New Postmortem Template** button
 2. Give the template a name
-3. Write the template's content (available template variables are listed to the right of the textbox)
-4. (Optional) Set the template as the default 
-5. Click **Save**
+3. Select either a Datadog Notebook or a Confluence page to be created at generation
+4. Write the template's content (available template variables are listed to the right of the textbox)
+5. (Optional) Set the template as the default 
+6. Click **Save**
 
 ## Further reading
 
@@ -45,3 +46,4 @@ To create a postmortem template:
 
 [1]: /service_management/incident_management/notifications
 [2]: /notebooks/
+[3]: /integrations/confluence/
