@@ -180,7 +180,7 @@ After you update the YAML files for your repositories, your changes propagate to
 
 To prevent accidental overwriting, create and modify your definition files with either the GitHub integration or the [Definition API endpoints][3]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
 
-#### Integration validation
+##### Integration validation
 
 To validate your service definitions ingested by Datadog's GitHub integration, you can view events when services are updated or when there is an error. To view validation errors in [Event Management][4], filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
 
@@ -219,14 +219,6 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 {{% /tab %}}
 {{< /tabs >}}
-
-### IDE plugin 
-
-Datadog provides a [JSON Schema][53] for definitions so that when you are editing a definition in a [supporting IDE][54], features such as autocomplete and validation are provided.
-
-{{< img src="tracing/software_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
-
-The [JSON schema for Datadog definitions][55] is registered with the open source [Schema Store][54].
 
 ## Automatically discover components from Datadog
 
@@ -410,7 +402,4 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [24]: /tracing/services/service_page/
 [25]: /account_management/rbac/?tab=datadogapplication
 [26]: /account_management/rbac/permissions
-[53]: http://json-schema.org/
-[54]: https://www.schemastore.org/json/
-[55]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
 

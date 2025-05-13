@@ -1,6 +1,7 @@
 ---
 title: Definitions and Supported Versions
 aliases:
+  - /software_catalog/service_definitions/
   - /software_catalog/adding_metadata
   - /tracing/software_catalog/service_metadata_structure
   - /tracing/software_catalog/adding_metadata
@@ -282,14 +283,15 @@ V3.0 contains the following changes from v2.2:
 
 ### Explicit and implicit metadata inheritance 
 
-#### Explicit Inheritance 
+#### Explicit inheritance 
+
+The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
+
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
-The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
-
-#### Implicit Inheritance 
+#### Implicit inheritance 
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the system that they belong to under the following conditions:
 - There is only one system defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
@@ -534,6 +536,14 @@ extensions:
           schedule: "* * * * 1"
 {{< /code-block >}}
 
+## Schema validation through IDE plugin 
+
+Datadog provides a [JSON Schema][18] for definitions so that when you are editing a definition in a [supporting IDE][19], features such as autocomplete and validation are provided.
+
+{{< img src="tracing/software_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
+
+The [JSON schema for Datadog definitions][20] is registered with the open source [Schema Store][19].
+
 
 ## Further reading
 
@@ -552,3 +562,6 @@ extensions:
 [15]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
 [16]: /api/latest/software-catalog/#create-or-update-entities
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
+[18]: http://json-schema.org/
+[19]: https://www.schemastore.org/json/
+[20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
