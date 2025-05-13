@@ -109,6 +109,10 @@ Atlassian Jira integration to create and update issues directly from Datadog. Co
 
 Asana project management integration for task tracking and post-incident workflows. Datadog can create and update Asana tasks, assign users, and apply tags. Full setup is described in the integration guide, and Asana actions are available in the Action Catalog.
 
+### LaunchDarkly
+
+Track feature flag changes, let developers make changes without leaving the platform, and drive automation based on changes. Full setup is described in the integration guide, and LaunchDarkly actions are available in the Action Catalog.
+
 ## Source Code Management
 
 ### GitHub
