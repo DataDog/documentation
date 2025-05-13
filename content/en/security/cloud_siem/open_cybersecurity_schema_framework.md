@@ -9,8 +9,8 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-Open Cybersecurity Schema Framework (OCSF) in Datadog is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/ocsf/" btn_hidden="false" >}}
+Open Cybersecurity Schema Framework (OCSF) in Datadog is in Preview. Fill out the form to request access.
 {{< /callout >}}
 
 Cloud SIEM collects and analyzes data from a wide range of sources such as cloud services, firewalls, networks, applications, and IT systems. Since these services emit data in different formats, it often requires significant effort to normalize and prepare logs before meaningful threat analysis can occur.
