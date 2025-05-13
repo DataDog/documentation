@@ -1418,11 +1418,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1982,11 +1977,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Software Catalog
       url: software_catalog/
       pre: service-catalog
