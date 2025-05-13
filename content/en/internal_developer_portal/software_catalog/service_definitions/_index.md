@@ -10,6 +10,14 @@ aliases:
   - /tracing/service_catalog/adding_metadata
   - /service_catalog/add_metadata
   - /service_catalog/service_definitions
+  - /service_catalog/service_definitions/v2-0  ## aliases for child version pages
+  - /software_catalog/service_definitions/v2-0
+  - /service_catalog/service_definitions/v2-1
+  - /software_catalog/service_definitions/v2-1
+  - /service_catalog/service_definitions/v2-2
+  - /software_catalog/service_definitions/v2-2
+  - /service_catalog/service_definitions/v3-0
+  - /software_catalog/service_definitions/v3-0
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -39,10 +47,10 @@ Software Catalog uses definition schemas to store and display relevant metadata 
 
 Datadog supports four versions of the definition schema:
 
-- [v3.0][1]: Latest version with expanded data model, multi-ownership support, manual dependency declaration, and enhanced features for complex infrastructure.
-- [v2.2][2]: Supports user annotations for custom metadata and CI pipeline associations to link services with their build processes.
-- [v2.1][3]: Supports service groupings for improved organization and introduces additional fields for more comprehensive service descriptions.
-- [v2][4]: Earliest supported version, providing essential fields for basic service metadata and documentation.
+- **v3.0**: Latest version with expanded data model, multi-ownership support, manual dependency declaration, and enhanced features for complex infrastructure.
+- **v2.2**: Supports user annotations for custom metadata and CI pipeline associations to link services with their build processes.
+- **v2.1**: Supports service groupings for improved organization and introduces additional fields for more comprehensive service descriptions.
+- **v2**: Earliest supported version, providing essential fields for basic service metadata and documentation.
 
 Each version builds upon the previous one, adding new functionality while maintaining backwards compatibility. Choose the version that best suits your needs and infrastructure complexity.
 
@@ -62,64 +70,412 @@ The following features are supported in each version:
 
 For detailed information about each version, including full schemas and example YAML files, see the individual version pages in [Supported versions](#supported-versions).
 
+## Version details
 
-### Add metadata to endpoints
-TODO: move this to API specific page 
+{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the latest version of Software Catalog." >}}
+{{< /callout >}}
 
-You can add metadata to APIs through the Datadog UI or [API][16], or use automated pipelines through the [GitHub integration](#store-and-edit-definitions-in-github) or [Terraform][17].
+{{< tabs >}}
+{{% tab "v3.0" %}}
 
-Combine [metadata schema v3.0][1] with OpenAPI definitions by setting `kind: api` and specifying the `owner` field:
+### Key features
+- **Expanded data model**: v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
+- **Multi-ownership**: You can assign multiple owners to any objects defined through the v3.0 schema to specify multiple points of contact.
+- **Enhanced relationship mapping**: With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
+- **Inheritance of system metadata**: Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+- **Precise code location**: Add the mapping of your code location for your service. The `codeLocations` section in v3.0 specifies the locations of the code with the repository that contains the code and its associated `paths`. The `paths` attribute is a list of [globs][4] that should match paths in the repository.
+- **(In Preview) Custom entities**: Define custom entity types beyond Service, System, Datastore, Queue, and API. Scope scorecards and actions to specific entity types.
+- **(In Preview) Integrations**: Integrate with third-party tools to dynamically source information related to your components (for example, GitHub pull requests, PagerDuty incidents, and GitLab pipelines). Report on and write scorecard rules against any third-party source.
+- **(In Preview) Group by product or domain**: Organize components by product, enabling multiple layers of hierarchical grouping.
 
+### Schema structure
+
+You can see the [full schema definitions on Github][1]. 
+
+V3.0 contains the following changes from v2.2:
+- `schema_version` is now `apiVersion`
+- `kind` field is new and defines the type of component: service, queue, datastore, system, or API
+- `dd-service` is now `metadata.name`
+- `team` is now `owner` and `additionalOwners` if there are multiple teams
+- `lifecycle`, `tier`, `languages`, and `type` are now under `spec`
+- `links`, `contacts`, and `description`, and `tags` are now under metadata
+- `application` has been enhanced to become its own kind: `system`. It no longer exists as a discrete field on a service.
+
+### Example YAML files
+
+{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+  apiVersion: v3
+  kind: system
+  metadata:
+    name: myapp
+    displayName: My App
+    tags:
+      - tag:value
+    links:
+      - name: shopping-cart runbook
+        type: runbook
+        url: https://runbook/shopping-cart
+      - name: shopping-cart architecture
+        provider: gdoc
+        url: https://google.drive/shopping-cart-architecture
+        type: doc
+      - name: shopping-cart Wiki
+        provider: wiki
+        url: https://wiki/shopping-cart
+        type: doc
+      - name: shopping-cart source code
+        provider: github
+        url: http://github/shopping-cart
+        type: repo
+    contacts:
+      - name: Support Email
+        type: email
+        contact: team@shopping.com
+      - name: Support Slack
+        type: slack
+        contact: https://www.slack.com/archives/shopping-cart
+    owner: myteam
+    additionalOwners:
+      - name: opsTeam
+        type: operator
+  integrations:
+    pagerduty:
+      serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+    opsgenie:
+      serviceURL: https://www.opsgenie.com/service/shopping-cart
+      region: US
+  spec:
+    components:
+      - service:myservice
+      - service:otherservice
+  extensions:
+    datadoghq.com/shopping-cart:
+      customField: customValue
+  datadog:
+    codeLocations:
+      - repositoryURL: https://github.com/myorganization/myrepo.git
+        paths:
+          - path/to/service/code/**
+    events:
+      - name: "deployment events"
+        query: "app:myapp AND type:github"
+      - name: "event type B"
+        query: "app:myapp AND type:github"
+    logs:
+      - name: "critical logs"
+        query: "app:myapp AND type:github"
+      - name: "ops logs"
+        query: "app:myapp AND type:github"
+    pipelines:
+      fingerprints:
+        - fp1
+        - fp2
+  {{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Component of <code>kind:custom.library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+  apiVersion: v3
+  kind: custom.library
+  metadata:
+    name: my-library
+    displayName: My Library
+    tags:
+      - tag:value
+    links:
+      - name: shopping-cart runbook
+        type: runbook
+        url: https://runbook/shopping-cart
+      - name: shopping-cart architecture
+        provider: gdoc
+        url: https://google.drive/shopping-cart-architecture
+        type: doc
+      - name: shopping-cart Wiki
+        provider: wiki
+        url: https://wiki/shopping-cart
+        type: doc
+      - name: shopping-cart source code
+        provider: github
+        url: http://github/shopping-cart
+        type: repo
+    contacts:
+      - name: Support Email
+        type: email
+        contact: team@shopping.com
+      - name: Support Slack
+        type: slack
+        contact: https://www.slack.com/archives/shopping-cart
+    owner: myteam
+    additionalOwners:
+      - name: opsTeam
+        type: operator
+  {{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="id-for-anchoring" %}}
+  If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
+
+  For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:
+  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+  apiVersion: v3
+  kind: system
+  spec:
+    components:
+      - datastore:orders-postgres
+      - datastore:foo-postgres
+      - datastore:bar-postgres
+  metadata:
+    name: managed-postgres
+    owner: db-team
+  {{< /code-block >}}
+
+  For the web application (`shopping-cart`), declare a separate definition for `kind:system`:
+  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+
+  apiVersion: v3
+  kind: system
+  spec:
+    lifecycle: production
+    tier: critical
+    components:
+      - service:shopping-cart-api
+      - service:shopping-cart-processor
+      - queue:orders-queue
+      - datastore:orders-postgres
+  metadata:
+    name: shopping-cart
+    owner: shopping-team
+    additionalOwners:
+      - name: sre-team
+        type: operator
+  ---
+  apiVersion: v3
+  kind: datastore
+  metadata:
+    name: orders-postgres
+    additionalOwners:
+      - name: db-team
+        type: operator
+  ---
+  apiVersion: v3
+  kind: service
+  metadata:
+    name: shopping-cart-api
+  ---
+  apiVersion: v3
+  kind: service
+  metadata:
+    name: shopping-cart-processor
+  ---
+  {{< /code-block >}}
+{{% /collapse-content %}}
+
+### Explicit and implicit metadata inheritance 
+
+#### Explicit Inheritance 
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+inheritFrom:<entity_kind>:<name>
+{{< /code-block >}}
+
+The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
+
+#### Implicit Inheritance 
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the system that they belong to under the following conditions:
+- There is only one system defined in the YAML file.
+- The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
+
+### Migrating to v3.0
+v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform module][6] for v3.0.
+
+[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[2]: https://github.com/DataDog/schema/tree/main/service-catalog
+[3]: /code_analysis/faq/#identifying-the-code-location-in-the-service-catalog
+[4]: https://en.wikipedia.org/wiki/Glob_(programming)
+[5]: /api/latest/software-catalog/
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
+[7]: software_catalog/customize/import_entries_backstage
+
+{{% /tab %}}
+
+{{% tab "v2.2" %}}
+
+### Key features
+- User annotations
+- Overwriting auto-detected service type and languages using `type` and `languages`
+- Associate CI pipeline with a service using `ci-pipeline-fingerprints`
+- Less restrictive validation logic for `contact.type` and `link.type`
+
+### Schema structure
+
+The [full schema is available on GitHub][1].
+
+Example YAML:
 ```yaml
-apiVersion: v3
-kind: api
-metadata:
-  name: API Name
-  description: API Description 
-  displayName: API Name
-  owner: dd-team
-spec:
-  type: openapi
-  interface:
-    definition:
-      info:
-        title: API Name
-      openapi: 3.0.2
-      paths:
-        /api/v2/customers/{id}:
-          get:
-            summary: get customer information
-            operationId: getCustomerInfo
-            tags:
-              - public
-              - important
-            parameters:
-              - in: path
-                name: id
-            responses:
-              '200':
-                description: Successful operation
-                content:
-                  application/vnd.api+json:
-                    schema:
-                      type: object
-                      properties:
-                        data:
-                          type: array
-                          description: Contains customer information
-              '400':
-                description: Invalid arguments
-              '401':
-                description: Unauthorized operation
-              '500':
-                description: Internal server error
+schema-version: v2.2
+dd-service: shopping-cart
+team: e-commerce
+application: shopping-app
+tier: "1"
+type: web
+languages:
+  - go
+  - python
+contacts:
+  - type: slack
+    contact: https://yourorg.slack.com/archives/e-commerce
+  - type: email
+    contact: ecommerce@example.com
+  - type: microsoft-teams
+    contact: https://teams.microsoft.com/example
+links:
+  - name: Runbook
+    type: runbook
+    url: http://runbook/shopping-cart
+  - name: Source
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Deployment
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Config
+    type: repo
+    provider: github
+    url: https://github.com/consul-config/shopping-cart
+  - name: E-Commerce Team
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce
+  - name: Shopping Cart Architecture
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce/shopping-cart
+  - name: Shopping Cart RFC
+    type: doc
+    provider: google doc
+    url: https://doc.google.com/shopping-cart
+tags:
+  - business-unit:retail
+  - cost-center:engineering
+integrations:
+  pagerduty:
+    service-url: https://www.pagerduty.com/service-directory/PSHOPPINGCART
+  opsgenie:
+    service-url: "https://www.opsgenie.com/service/uuid"
+    region: "US"
+ci-pipeline-fingerprints:
+  - id1
+  - id2
+extensions:
+  additionalProperties:
+    customField1: customValue1
+    customField2: customValue2
 ```
+
+[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
+
+{{% /tab %}}
+
+{{% tab "v2.1" %}}
+
+### Key features
+- New UI elements such as service groupings and fields for `application`, `tier`, and `lifecycle`
+- `Application` and `Teams` can be used as grouping variables in Software Catalog
+- `Lifecycle` field indicates development stage to differentiate between `production`, `experimental`, or `deprecated` services
+- `Tier` field indicates service criticality for prioritizing during incident triage
+
+### Schema structure
+
+The [full schema is available on GitHub][1].
+
+Example YAML:
+```yaml
+schema-version: v2.1
+dd-service: delivery-state-machine
+team: serverless
+application: delivery-state-machine
+tier: tier0
+lifecycle: production
+contacts:
+  - type: slack
+    contact: https://datadogincidents.slack.com/archives/C01EWN6319S
+links:
+  - name: Demo Dashboard
+    type: dashboard
+    url: https://app.datadoghq.com/dashboard/krp-bq6-362
+  - name: Source
+    provider: github
+    url: https://github.com/DataDog/shopist-serverless/tree/main/delivery-state-machine
+    type: repo
+  - name: Deployment
+    provider: github
+    url: https://github.com/DataDog/shopist-serverless/blob/main/delivery-state-machine/serverless.yml
+    type: repo
+  - name: Datadog Doc
+    provider: link
+    url: https://docs.datadoghq.com/
+    type: doc
+tags:
+  - "app:serverless-delivery"
+  - "tier:3"
+  - "business-unit:operations"
+```
+
+[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.1
+
+{{% /tab %}}
+
+{{% tab "v2.0" %}}
+
+### Key features
+- Basic service metadata
+- Team associations
+- Contact information
+- External links
+
+### Schema structure
+
+The [full schema is available on GitHub][1].
+
+Example YAML:
+```yaml
+schema-version: v2
+dd-service: delivery-api
+team: distribution-management
+contacts:
+  - type: slack
+    contact: https://datadogincidents.slack.com/archives/C01EWN6319S
+links:
+  - name: Demo Dashboard
+    type: dashboard
+    url: https://app.datadoghq.com/dashboard/krp-bq6-362
+repos:
+  - name: Source
+    provider: github
+    url: https://github.com/DataDog/shopist/tree/prod/rails-storefront
+docs:
+  - name: Datadog Doc
+    provider: link
+    url: https://docs.datadoghq.com/
+tags: []
+integrations:
+  pagerduty: https://datadog.pagerduty.com/service-directory/PXZNFXP
+```
+
+[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ## Build custom extensions
 
 <div class="alert alert-info">Custom extensions are in Limited Availability.</div>
 
-The `extensions` field is supported in all versions including v2.0. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+The `extensions` field is supported in all version. You can incorporate this custom field into deployment processes to standardize and codify best practices.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2.2
@@ -143,10 +499,6 @@ extensions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /software_catalog/service_definitions/v3-0
-[2]: /software_catalog/service_definitions/v2-2
-[3]: /software_catalog/service_definitions/v2-1
-[4]: /software_catalog/service_definitions/v2-0
 [5]: https://app.datadoghq.com/services
 [6]: /integrations/github/
 [7]: https://app.datadoghq.com/integrations/github
