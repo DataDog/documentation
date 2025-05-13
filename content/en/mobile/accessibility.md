@@ -54,7 +54,7 @@ To enable notifications for the Apple Watch when paired with your iPhone:
 3. Toggle on **Notifications Indicator**. 
 
 **Note:** Apple does not support notifications to both iPhone and Apple Watch. If your iPhone is locked or asleep, you'll receive notifications on your Apple Watch. If you could like to always receive notifications on your phone, head to the Watch App and disable Notifications.
-Read the [Notifications on your Apple Watch documentation] [4] for more information. 
+Read the [Notifications on your Apple Watch documentation][4] for more information. 
 
 **Note:** In order to receive notifications, you must be paired with your iPhone and remain within the bluetooth vicinity of your paired phone.
 
