@@ -564,8 +564,9 @@ When building dynamic handles with attributes that might not always be present, 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
 ```text
-{{#is_match "kube_namespace.owner" ""}}
+{{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
+  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exists.
 {{/is_match}}
 ```
 
