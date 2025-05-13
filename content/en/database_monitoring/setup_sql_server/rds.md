@@ -107,17 +107,17 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 
 #### Microsoft ADO
 
-The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
+The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the Agent is running.
 ```yaml
 connector: adodbapi
 adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
 ```
 
-The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
+The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should not be used.
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included by default in the Linux Agent. For Windows, ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
@@ -148,7 +148,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+On Linux, you must also install an ODBC SQL Server driver, such as  [Microsoft ODBC driver][2]. After installation, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
 
 Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
@@ -171,7 +171,7 @@ instances:
       instance_endpoint: '<INSTANCE_ENDPOINT>'
 ```
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] for details on how these tags are used across Datadog.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
@@ -241,13 +241,11 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 {{% tab "Kubernetes" %}}
 {{% dbm-alwayson %}}
 
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
-
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]:
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding.
 
 ### Operator
 
-Using the [Operator instructions in Kubernetes and Integrations][6] as a reference, follow the steps below to set up the SQL Server integration:
+Follow the steps below to set up the SQL Server integration, using the [Operator instructions in Kubernetes and Integrations][6] as a reference.
 
 1. Create or update the `datadog-agent.yaml` file with the following configuration:
 
@@ -279,7 +277,7 @@ Using the [Operator instructions in Kubernetes and Integrations][6] as a referen
           extraConfd:
             configDataMap:
               sqlserver.yaml: |-
-                cluster_check: true # Make sure to include this flag
+                cluster_check: true # Required for cluster checks
                 init_config:
                 instances:
                 - host: <HOSTNAME>,<PORT>
@@ -313,7 +311,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     clusterAgent:
       confd:
         sqlserver.yaml: |-
-          cluster_check: true # Make sure to include this flag
+          cluster_check: true # Required for cluster checks
           init_config:
           instances:
           - dbm: true
@@ -348,7 +346,7 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/sqlserver.yaml`:
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # Required for cluster checks
 init_config:
 instances:
   - dbm: true
@@ -368,7 +366,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
 ```yaml
 apiVersion: v1
