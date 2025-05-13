@@ -361,6 +361,8 @@ Ensure that you have completed the following steps to create a valid CMK and CMK
 }
 ```
 
+3. After selecting **AWS Key Management Service** as your **Encryption Type** in Datadog, input your AWS KMS key ARN.
+
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 {{< /tabs >}}
