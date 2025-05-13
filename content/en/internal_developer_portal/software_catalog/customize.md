@@ -24,6 +24,7 @@ aliases:
     - /service_catalog/guides/best-practices
     - /service_catalog/use_cases/best_practices
     - /software_catalog/use_cases/best_practices
+    - /software_catalog/customize
 ---
 
 Customize your engineering team's experience in Software Catalog with the following features.

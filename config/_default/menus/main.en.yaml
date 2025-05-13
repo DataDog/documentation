@@ -2010,157 +2010,137 @@ menu:
       identifier: bits_ai_natural_language_querying
       parent: bits_ai
       weight: 3
-    - name: Software Catalog
-      url: software_catalog/
+    - name: Internal Developer Portal
+      url: internal_developer_portal/
       pre: service-catalog
       parent: platform_heading
-      identifier: software_catalog
+      identifier: internal_developer_portal
       weight: 110000
+    - name: Software Catalog
+      url: internal_developer_portal/software_catalog/
+      parent: internal_developer_portal
+      identifier: software_catalog
+      weight: 1
     - name: Set Up
-      url: software_catalog/set_up
+      url: internal_developer_portal/software_catalog/set_up
       parent: software_catalog
       identifier: software_catalog_set_up
-      weight: 1
+      weight: 101
     - name: New to Datadog
-      url: software_catalog/set_up/new_to_datadog
+      url: internal_developer_portal/software_catalog/set_up/new_to_datadog
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_new_to_dd
-      weight: 101
+      weight: 1011
     - name: Existing Datadog User
-      url: software_catalog/set_up/existing_datadog_user
+      url: internal_developer_portal/software_catalog/set_up/existing_datadog_user
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_existing_dd_user
-      weight: 102
-    - name: Customize
-      url: software_catalog/customize
-      parent: software_catalog
-      identifier: software_catalog_customize
-      weight: 2
-    - name: Navigate
-      url: software_catalog/navigating
-      parent: software_catalog
-      identifier: software_catalog_browse
-      weight: 3
-    - name: Use Cases
-      url: software_catalog/use_cases
-      parent: software_catalog
-      identifier: software_catalog_use_cases
-      weight: 4
-    - name: API Management
-      url: software_catalog/use_cases/api_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_api_management
-      weight: 401
-    - name: Cloud Cost Management
-      url: software_catalog/use_cases/cloud_cost_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_cloud_cost_management
-      weight: 402
-    - name: App and API Protection
-      url: software_catalog/use_cases/appsec_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_appsec_management
-      weight: 403
-    - name: Developer Onboarding
-      url: software_catalog/use_cases/dev_onboarding
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dev_onboarding
-      weight: 404
-    - name: Dependency Management
-      url: software_catalog/use_cases/dependency_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dependency_management
-      weight: 405
-    - name: Production Readiness
-      url: software_catalog/use_cases/production_readiness
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_production_readiness
-      weight: 406
-    - name: Incident Response
-      url: software_catalog/use_cases/incident_response
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_incident_response
-      weight: 407
-    - name: CI Pipeline Visibility
-      url: software_catalog/use_cases/pipeline_visibility
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_pipeline_visibility
-      weight: 408
+      weight: 1012
     - name: Manage a Component
-      url: software_catalog/manage
+      url: internal_developer_portal/software_catalog/manage
       parent: software_catalog
       identifier: software_catalog_investigate
-      weight: 5
-    - name: Definitions
-      url: software_catalog/service_definitions/
+      weight: 1013
+    - name: Customize
+      url: internal_developer_portal/software_catalog/customize
       parent: software_catalog
-      identifier: software_catalog_definitions_versions
-      weight: 6
-    - name: v3.0
-      url: /software_catalog/service_definitions/v3-0/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_3-0
-      weight: 601
-    - name: v2.2
-      url: /software_catalog/service_definitions/v2-2/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-2
-      weight: 602
-    - name: v2.1
-      url: /software_catalog/service_definitions/v2-1/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-1
-      weight: 603
-    - name: v2.0
-      url: /software_catalog/service_definitions/v2-0/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-0
-      weight: 604
-    - name: Scorecards
-      url: software_catalog/scorecards
+      identifier: software_catalog_customize
+      weight: 1014
+    - name: Entity Model
+      url: internal_developer_portal/software_catalog/entity_model
       parent: software_catalog
-      identifier: software_catalog_scorecards
-      weight: 7
-    - name: Scorecard Configuration
-      url: software_catalog/scorecards/scorecard_configuration
-      parent: software_catalog_scorecards
-      identifier: scorecard_configuration
-      weight: 701
-    - name: Custom Rules
-      url: software_catalog/scorecards/custom_rules
-      parent: software_catalog_scorecards
-      identifier: scorecard_custom_rules
-      weight: 702
-    - name: Using Scorecards
-      url: software_catalog/scorecards/using_scorecards
-      parent: software_catalog_scorecards
-      identifier: using_scorecards
-      weight: 703
-    - name: Self-Service Actions
-      url: software_catalog/self_service_actions
+      identifier: software_catalog_entity_model
+      weight: 1015
+    - name: Navigate
+      url: internal_developer_portal/software_catalog/navigating
       parent: software_catalog
-      identifier: self_service_actions
-      weight: 8
-    - name: Software Templates
-      url: software_catalog/self_service_actions/software_templates
-      parent: self_service_actions
-      identifier: software_templates
-      weight: 801
-    - name: Definition APIs
-      url: software_catalog/apis
+      identifier: software_catalog_browse
+      weight: 102
+    - name: Use Cases
+      url: internal_developer_portal/software_catalog/use_cases
       parent: software_catalog
-      identifier: software_catalog_apis
-      weight: 9
-    - name: Integrations
-      url: software_catalog/integrations
-      parent: software_catalog
-      identifier: software_catalog_integrations
-      weight: 10
+      identifier: software_catalog_use_cases
+      weight: 103
+    - name: API Management
+      url: internal_developer_portal/software_catalog/use_cases/api_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_api_management
+      weight: 1031
+    - name: Cloud Cost Management
+      url: internal_developer_portal/software_catalog/use_cases/cloud_cost_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_cloud_cost_management
+      weight: 1032
+    - name: App and API Protection
+      url: internal_developer_portal/software_catalog/use_cases/appsec_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_appsec_management
+      weight: 1034
+    - name: Developer Onboarding
+      url: internal_developer_portal/software_catalog/use_cases/dev_onboarding
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_dev_onboarding
+      weight: 1035
+    - name: Dependency Management
+      url: internal_developer_portal/software_catalog/use_cases/dependency_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_dependency_management
+      weight: 1036
+    - name: Production Readiness
+      url: internal_developer_portal/software_catalog/use_cases/production_readiness
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_production_readiness
+      weight: 1037
+    - name: Incident Response
+      url: internal_developer_portal/software_catalog/use_cases/incident_response
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_incident_response
+      weight: 1038
+    - name: CI Pipeline Visibility
+      url: internal_developer_portal/software_catalog/use_cases/pipeline_visibility
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_pipeline_visibility
+      weight: 1039
     - name: Troubleshooting
-      url: software_catalog/troubleshooting
+      url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 11
+      weight: 104
+    - name: Scorecards
+      url: internal_developer_portal/scorecards
+      parent: internal_developer_portal
+      identifier: idp_scorecards
+      weight: 2
+    - name: Scorecard Configuration
+      url: internal_developer_portal/scorecards/scorecard_configuration
+      parent: idp_scorecards
+      identifier: scorecard_configuration
+      weight: 201
+    - name: Custom Rules
+      url: internal_developer_portal/scorecards/custom_rules
+      parent: idp_scorecards
+      identifier: scorecard_custom_rules
+      weight: 202
+    - name: Using Scorecards
+      url: internal_developer_portal/scorecards/using_scorecards
+      parent: idp_scorecards
+      identifier: using_scorecards
+      weight: 203
+    - name: Self-Service Actions
+      url: internal_developer_portal/self_service_actions
+      parent: internal_developer_portal
+      identifier: self_service_actions
+      weight: 3
+    - name: Software Templates
+      url: internal_developer_portal/self_service_actions/software_templates
+      parent: self_service_actions
+      identifier: software_templates
+      weight: 301
+    - name: Integrations
+      url: internal_developer_portal/integrations
+      parent: internal_developer_portal
+      identifier: idp_integrations
+      weight: 4
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -3840,7 +3820,7 @@ menu:
       identifier: tracing_services
       weight: 7
     - name: Software Catalog
-      url: /software_catalog/
+      url: /internal_developer_portal/software_catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
       weight: 701
@@ -3875,17 +3855,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 707
     - name: Endpoint Observability
-      url: /software_catalog/endpoints/
+      url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 8
     - name: Explore Endpoints
-      url: /software_catalog/endpoints/explore_endpoints
+      url: internal_developer_portal/software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 802
     - name: Monitor Endpoints
-      url: /software_catalog/endpoints/monitor_endpoints
+      url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 803
