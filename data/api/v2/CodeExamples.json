@@ -854,6 +854,13 @@
       "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
+  "UpdateTenancyConfig": [
+    {
+      "group": "oci_integration",
+      "suffix": "",
+      "description": "Update tenancy config returns \"OK\" response"
+    }
+  ],
   "CreatePipeline": [
     {
       "group": "observability_pipelines",
