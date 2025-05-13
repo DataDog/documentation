@@ -2036,26 +2036,11 @@ menu:
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_existing_dd_user
       weight: 1012
-    - name: Manage a Component
-      url: internal_developer_portal/software_catalog/manage
-      parent: software_catalog
-      identifier: software_catalog_investigate
-      weight: 1013
-    - name: Customize
-      url: internal_developer_portal/software_catalog/customize
-      parent: software_catalog
-      identifier: software_catalog_customize
-      weight: 1014
     - name: Entity Model
       url: internal_developer_portal/software_catalog/entity_model
       parent: software_catalog
       identifier: software_catalog_entity_model
       weight: 1015
-    - name: Navigate
-      url: internal_developer_portal/software_catalog/navigating
-      parent: software_catalog
-      identifier: software_catalog_browse
-      weight: 102
     - name: Use Cases
       url: internal_developer_portal/software_catalog/use_cases
       parent: software_catalog
