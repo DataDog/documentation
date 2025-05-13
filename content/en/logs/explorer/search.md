@@ -21,7 +21,7 @@ The [Logs Explorer][5] lets you search and view individual logs as a list. Howev
 
 ## Natural language query
 
-<div class="alert alert-info">Natural language query is in Preview. To access this feature, reach out to your Datadog account representative</div>
+<div class="alert alert-info">Natural language queries for Logs is in Preview. To access this feature, request through <a href="https://www.datadoghq.com/product-preview/natural-language-queries-for-logs/">this form</a>.</div>
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click **Ask** in the search field.
 
