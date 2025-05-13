@@ -1074,7 +1074,7 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
       weight: 7011
-    - name: VS Code
+    - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
       identifier: ide_plugins_vscode
@@ -1131,12 +1131,18 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 90000
+    - name: Partners
+      url: partners/
+      pre: colab
+      identifier: partners
+      parent: essentials_heading
+      weight: 100000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -1412,11 +1418,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1976,11 +1977,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Software Catalog
       url: software_catalog/
       pre: service-catalog
@@ -2764,6 +2760,11 @@ menu:
       identifier: datadog_cloudcraft
       parent: infrastructure_heading
       weight: 10000
+    - name: Overlays
+      url: datadog_cloudcraft/overlays/
+      parent: datadog_cloudcraft
+      identifier: datadog_cloudcraft_overlays
+      weight: 1
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
@@ -3395,136 +3396,141 @@ menu:
       pre: cloud-cost-management
       parent: cloud_cost_heading
       weight: 10000
-    - name: AWS
-      url: cloud_cost_management/aws/
+    - name: Setup
+      url: cloud_cost_management/setup/
       parent: cloud_cost
-      identifier: cloud_cost_aws
+      identifier: cloud_cost_setup
       weight: 1
+    - name: AWS
+      url: cloud_cost_management/setup/aws/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_aws
+      weight: 101
     - name: Azure
-      url: cloud_cost_management/azure/
-      parent: cloud_cost
+      url: cloud_cost_management/setup/azure/
+      parent: cloud_cost_setup
       identifier: cloud_cost_azure
-      weight: 2
+      weight: 102
     - name: Google Cloud
-      url: cloud_cost_management/google_cloud/
-      parent: cloud_cost
+      url: cloud_cost_management/setup/google_cloud/
+      parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
-      weight: 3
-    - name: SaaS Cost Integrations
-      url: cloud_cost_management/saas_costs/
-      parent: cloud_cost
+      weight: 103
+    - name: SaaS Integrations
+      url: cloud_cost_management/setup/saas_costs/
+      parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 4
+      weight: 104
     - name: Databricks
-      url: cloud_cost_management/saas_costs/?tab=databricks#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_databricks
-      weight: 401
+      weight: 101
     - name: Confluent Cloud
-      url: cloud_cost_management/saas_costs/?tab=confluentcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 402
+      weight: 102
     - name: MongoDB
-      url: cloud_cost_management/saas_costs/?tab=mongodb#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 403
+      weight: 103
     - name: Snowflake
-      url: cloud_cost_management/saas_costs/?tab=snowflake#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
-      weight: 404
+      weight: 104
     - name: Elastic Cloud
-      url: cloud_cost_management/saas_costs/?tab=elasticcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 405
+      weight: 105
     - name: OpenAI
-      url: cloud_cost_management/saas_costs/?tab=openai#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
-      weight: 406
+      weight: 106
     - name: Fastly
-      url: cloud_cost_management/saas_costs/?tab=fastly#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 407
+      weight: 107
     - name: Twilio
-      url: cloud_cost_management/saas_costs/?tab=twilio#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 408
-    - name: Custom Costs
-      url: cloud_cost_management/custom
-      parent: cloud_cost
+      weight: 108
+    - name: Custom
+      url: cloud_cost_management/setup/custom
+      parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 5
+      weight: 105
     - name: Datadog Costs
       url: cloud_cost_management/datadog_costs
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
+      weight: 2
+    - name: Container Cost Allocation
+      url: cloud_cost_management/container_cost_allocation
+      parent: cloud_cost
+      identifier: cloud_cost_container_cost_allocation
+      weight: 3
+    - name: AWS
+      url: cloud_cost_management/container_cost_allocation/?tab=aws
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_aws
+      weight: 301
+    - name: Azure
+      url: cloud_cost_management/container_cost_allocation/?tab=azure
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_azure
+      weight: 302
+    - name: Google Cloud
+      url: cloud_cost_management/container_cost_allocation/?tab=google
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_google
+      weight: 303
+    - name: Custom Allocation Rules
+      url: cloud_cost_management/custom_allocation_rules
+      parent: cloud_cost
+      identifier: cloud_cost_custom_allocation_rules
+      weight: 4
+    - name: Tag Pipelines
+      url: cloud_cost_management/tag_pipelines
+      parent: cloud_cost
+      identifier: cloud_cost_tag_pipelines
+      weight: 5
+    - name: Tag Explorer
+      url: cloud_cost_management/tag_explorer
+      parent: cloud_cost
+      identifier: cloud_cost_tag_explorer
       weight: 6
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
-    - name: Tag Pipelines
-      url: cloud_cost_management/tag_pipelines
-      parent: cloud_cost
-      identifier: cloud_cost_tag_pipelines
-      weight: 8
-    - name: Custom Allocation Rules
-      url: cloud_cost_management/custom_allocation_rules
-      parent: cloud_cost
-      identifier: cloud_cost_custom_allocation_rules
-      weight: 9
-    - name: Tag Explorer
-      url: cloud_cost_management/tag_explorer
-      parent: cloud_cost
-      identifier: cloud_cost_tag_explorer
-      weight: 10
-    - name: Container Cost Allocation
-      url: cloud_cost_management/container_cost_allocation
-      parent: cloud_cost
-      identifier: cloud_cost_container_cost_allocation
-      weight: 11
-    - name: AWS
-      url: cloud_cost_management/container_cost_allocation/?tab=aws
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 1001
-    - name: Azure
-      url: cloud_cost_management/container_cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 1002
-    - name: Google Cloud
-      url: cloud_cost_management/container_cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 1003
-    - name: Cost Recommendations
+    - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 12
-    - name: Cost Monitors
+      weight: 8
+    - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 12
+      weight: 9
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 13
+      weight: 10
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 14
+      weight: 11
     - name: APM
       url: tracing/
       pre: apm
@@ -6174,6 +6180,11 @@ menu:
       url: /security/cloud_siem/threat_intelligence
       parent: cloud_siem
       identifier: cloud_siem_threat_intelligence
+      weight: 5
+    - name: Open Cybersecurity Schema Framework
+      url: /security/cloud_siem/open_cybersecurity_schema_framework
+      parent: cloud_siem
+      identifier: cloud_siem_open_cybersecurity_schema_framework
       weight: 5
     - name: Investigate Security Signals
       url: /security/cloud_siem/investigate_security_signals
