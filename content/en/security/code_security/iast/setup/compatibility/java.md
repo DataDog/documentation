@@ -47,7 +47,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 Datadog does not officially support any early-access versions of Java.
 
-Versions 22 and above are supported as preview.
+Versions 22 and above are supported as in Preview.
 
 ### Web framework compatibility
 
