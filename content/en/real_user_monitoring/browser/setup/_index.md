@@ -23,9 +23,9 @@ There are two ways to instrument your application: automatic or manual instrumen
 | | Auto-instrumentation (Preview) | Client-side (Manual) |
 |----------------------|--------------------------------|----------------------|
 | **SDK setup mechanism** | [Automatically][1] add RUM JS to your web app HTML. Once RUM Auto-instrumentation is set-up, manage configurations from the UI. | [Manually][2] add the RUM SDK to your application code and manage configurations in code. |
-| **Code changes required?** | No | Yes |
+| **Code changes required** | No | Yes |
 | **Setup complexity** | Low | Medium |
-| **User personas** | **SRE and engineering teams** without access to frontend code, or **teams who need to manage** all observability needs centrally, may find this useful for: <br>  - Unlocking performance data across all applications upon setting up RUM <br>  - Holistically monitoring application performance across the organization | **Frontend engineering, mobile engineering, or product teams** with access to frontend code may find this method useful for: <br>  - Daily engineering needs (for example: live support, troubleshooting, and health checks for downstream services) <br>  -Product needs (for example: user flow analysis, user segmentation, and feature flag tracking) <br>  - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation |
+| **User groups** | **SRE and engineering teams** without access to frontend code, or **teams who need to manage** all observability needs centrally, may find this useful for: <br>  - Unlocking performance data across all applications upon setting up RUM <br>  - Holistically monitoring application performance across the organization | **Frontend engineering, mobile engineering, or product teams** with access to frontend code may find this method useful for: <br>  - Daily engineering needs (for example: live support, troubleshooting, and health checks for downstream services) <br>  -Product needs (for example: user flow analysis, user segmentation, and feature flag tracking) <br>  - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation |
 
 ## Further reading
 

@@ -1333,6 +1333,24 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "CreateOnCallPage": {
+    "description": "Trigger a new On-Call Page.\n",
+    "summary": "Create On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "AcknowledgeOnCallPage": {
+    "description": "Acknowledges an On-Call Page.\n",
+    "summary": "Acknowledge On-Call Page"
+  },
+  "EscalateOnCallPage": {
+    "description": "Escalates an On-Call Page.\n",
+    "summary": "Escalate On-Call Page"
+  },
+  "ResolveOnCallPage": {
+    "description": "Resolves an On-Call Page.\n",
+    "summary": "Resolve On-Call Page"
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new on-call schedule",
     "summary": "Create on-call schedule",
@@ -1352,6 +1370,10 @@
     "summary": "Update on-call schedule",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
+  },
+  "GetScheduleOnCallUser": {
+    "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
+    "summary": "Get the schedule of an on-call user"
   },
   "GetOnCallTeamRoutingRules": {
     "description": "Get a team's on-call routing rules",
