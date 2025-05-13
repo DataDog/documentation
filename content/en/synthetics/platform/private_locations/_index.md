@@ -229,7 +229,8 @@ You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`
 
 Launch your private location on:
 
-{{% collapse-content title="Docker" level="h4" expanded=false %}}
+{{< tabs >}}
+{{% tab "Docker" %}}
 
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
@@ -241,9 +242,9 @@ docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Docker Compose" level="h4" expanded=false %}}
+{{% tab "Docker Compose" %}}
 
 1. Create a `docker-compose.yml` file with:
 
@@ -262,9 +263,9 @@ This command starts a Docker container and makes your private location ready to 
     ```shell
     docker-compose -f docker-compose.yml up
     ```
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Podman" level="h4" expanded=false %}}
+{{% tab "Podman" %}}
 The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests.
 
 1. Run `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` from the host where the container runs.
@@ -277,10 +278,9 @@ The Podman configuration is very similar to Docker, however, you must set `NET_R
    If you have configured blocked reserved IP addresses, add the `NET_ADMIN` Linux capabilities to your private location container.
 
 This command starts a Podman container and makes your private location ready to run tests. Datadog recommends running the container in detached mode with proper restart policy.
-{{% /collapse-content %}}
+{{< /tab >}}
 
-
-{{% collapse-content title="Kubernetes Deployment" level="h4" expanded=false %}}
+{{% tab "Kubernetes Deployment" %}}
 
 To deploy the private locations worker in a secure manner, set up and mount a Kubernetes Secret resource in the container under `/etc/datadog/synthetics-check-runner.json`.
 
@@ -333,9 +333,9 @@ For OpenShift, run the private location with the `anyuid` SCC. This is required 
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Helm Chart" level="h4" expanded=false %}}
+{{% tab "Helm Chart" %}}
 
 You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3].
 
@@ -359,9 +359,9 @@ Alternatively:
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="ECS" level="h4" expanded=false %}}
+{{% tab "ECS" %}}
 
 Create a new EC2 task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
@@ -392,15 +392,14 @@ Create a new EC2 task definition that matches the following. Replace each parame
     ...
 }
 ```
-
 **Notes:**
 
 - If you have blocked reserved IPs, configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Fargate" level="h4" expanded=false %}}
+{{% tab "Fargate" %}}
 
 Create a new Fargate task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
@@ -435,9 +434,9 @@ Create a new Fargate task definition that matches the following. Replace each pa
 
 **Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Fargate with AWS Secret Manager" level="h4" expanded=false %}}
+{{% tab "Fargate with AWS Secret Manager" %}}
 
 Create a secret in AWS secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. For example:
 
@@ -522,9 +521,9 @@ If you didn't save all the configuration in the secret manager, you can still pa
 
 **Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="EKS" level="h4" expanded=false %}}
+{{% tab "EKS" %}}
 
 Because Datadog already integrates with Kubernetes and AWS, it is ready-made to monitor EKS.
 
@@ -575,9 +574,9 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Windows via GUI" level="h4" expanded=false %}}
+{{% tab "Windows via GUI" %}}
 
 1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on.
 1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
@@ -617,9 +616,9 @@ Once the process is complete, click **Finish** on the installation completion pa
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
-{{% /collapse-content %}}
+{{< /tab >}}
 
-{{% collapse-content title="Windows via CLI" level="h4" expanded=false %}}
+{{% tab "Windows via CLI" %}}
 
 1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on.
 2. Run one of the following commands inside the directory where you downloaded the installer:
@@ -649,7 +648,8 @@ Additional parameters can be added:
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
-{{% /collapse-content %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 For more information about private locations parameters for admins, see [Configuration][32].
 
