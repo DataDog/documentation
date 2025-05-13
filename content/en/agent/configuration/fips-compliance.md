@@ -25,12 +25,16 @@ The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal I
 
 ## Supported platforms and limitations
 
+The FIPS Agent's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions.
+
+**It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
+
 Supported platforms:
 
 |||
 | ---  | ----------- |
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12<br>Windows Server >= 2016<br>Windows >= 10|
-| Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
+| Cloud and container| Amazon ECS<br>AWS EKS (Helm)<br>Docker|
 
 Supported products (Agent 7.65.0 and above):
 - Metrics
@@ -143,9 +147,20 @@ if ($p.ExitCode -ne 0) {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Security and hardening
+
+You, the Datadog customer, are responsible for **host** security and hardening.
+
+**Security considerations:**
+- While the Datadog images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
+- If you rebuild, reconfigure, or modify the Datadog FIPS Agent to fit your deployment or testing needs, you might end up with a technically working setup, but Datadog cannot guarantee FIPS compliance if the Datadog FIPS Agent is not used exactly as explained in the documentation.
+- If you did not follow the installation steps listed above exactly as documented, Datadog cannot guarantee FIPS compliance.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
+[2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [2]: /agent/configuration/fips-compliance/
 [3]: /integrations/guide/fips-integrations
