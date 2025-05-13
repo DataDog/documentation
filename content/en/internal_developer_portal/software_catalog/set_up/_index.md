@@ -47,6 +47,12 @@ aliases:
   - /service_catalog/guides/best-practices
   - /service_catalog/use_cases/best_practices
   - /software_catalog/use_cases/best_practices
+  - /software_catalog/navigating  ## aliases for Navigate page 
+  - /tracing/software_catalog/browsing
+  - /software_catalog/browsing
+  - /tracing/service_catalog/browsing
+  - /service_catalog/browsing
+  - /service_catalog/navigating
 further_reading:
   - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
     tag: "External Site"
@@ -211,7 +217,6 @@ Datadog provides a [JSON Schema][53] for definitions so that when you are editin
 
 The [JSON schema for Datadog definitions][55] is registered with the open source [Schema Store][54].
 
-
 ## Discover components from other Datadog products
 
 Software Catalog automatically discovers components from Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), and Real User Monitoring (RUM). You can also configure it to import components from infrastructure metrics and logs.
@@ -232,11 +237,17 @@ RUM is responsible for discovering `frontend apps` components.
 
 For information about discovering endpoints, see [Discovering Endpoints from APM][45].
 
+**Note**: The [performance metrics][46] for a component are tied to its [primary operations][47]. If a service is detected only by USM, the performance view shows [USM metrics][49]; if a component is detected only by APM, or by both APM and USM, the performance view shows APM [trace metrics][48].
+
 [41]: tracing/
 [42]: universal_service_monitoring/
 [43]: tracing/services/inferred_services/
 [44]: tracing/guide/service_overrides/#remove-service-overrides
 [45]: software_catalog/endpoints/
+[46]: https://app.datadoghq.com/software?lens=performance
+[47]: tracing/guide/configuring-primary-operation/
+[48]: tracing/metrics/metrics_namespace/
+[49]: universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
 
 {{% /collapse-content %}}
 
