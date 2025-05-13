@@ -1,10 +1,8 @@
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
-
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]:
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding.
 
 ### Operator
 
-Using the [Operator instructions in Kubernetes and Integrations][5] as a reference, follow the steps below to set up the SQL Server integration:
+Follow the steps below to set up the SQL Server integration, using the [Operator instructions in Kubernetes and Integrations][5] as a reference.
 
 1. Create or update the `datadog-agent.yaml` file with the following configuration:
 
@@ -36,7 +34,7 @@ Using the [Operator instructions in Kubernetes and Integrations][5] as a referen
           extraConfd:
             configDataMap:
               sqlserver.yaml: |-
-                cluster_check: true # Make sure to include this flag
+                cluster_check: true # Required for cluster checks
                 init_config:
                 instances:
                 - host: <HOSTNAME>,<PORT>
@@ -67,7 +65,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     clusterAgent:
       confd:
         sqlserver.yaml: |-
-          cluster_check: true # Make sure to include this flag
+          cluster_check: true # Required for cluster checks
           init_config:
           instances:
           - dbm: true
