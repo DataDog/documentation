@@ -143,11 +143,11 @@ Bitbucket & Azure DevOps repositories are not natively supported in Datadog’s 
 ## CI/CD
 
 ### Github Actions
-GitHub Actions – GitHub Actions integration to coordinate CI/CD workflows on GitHub. Datadog actions allow you to trigger a GitHub Actions workflow dispatch and fetch workflow run statuses programmatically.
+GitHub Actions integration to view, launch, and coordinate CI/CD workflows on GitHub. Datadog actions allow you to trigger a GitHub Actions workflow dispatch and fetch workflow run statuses programmatically.
 
 ### Gitlab Pipelines
 
-GitLab CI/CD integration covering pipelines and jobs. You can trigger GitLab project pipelines, cancel or retry jobs, and query pipeline results.
+GitLab CI/CD integration covering projects, pipelines, and jobs. You can trigger GitLab project pipelines, cancel or retry jobs, and query pipeline results.
 
 ### Jenkins
 
