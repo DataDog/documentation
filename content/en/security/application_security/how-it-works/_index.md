@@ -3,6 +3,7 @@ title: How App and API Protection Works in Datadog
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
+  - /security/application_security/how-appsec-works/
   - /security/guide/how-appsec-works/
 ---
 
