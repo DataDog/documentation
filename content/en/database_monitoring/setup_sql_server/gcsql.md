@@ -222,13 +222,11 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
-
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]:
+If you're using a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding..
 
 ### Operator
 
-Using the [Operator instructions in Kubernetes and Integrations][6] as a reference, follow the steps below to set up the SQL Server integration:
+Follow the steps below to set up the SQL Server integration, using the [Operator instructions in Kubernetes and Integrations][6] as a reference.
 
 1. Create or update the `datadog-agent.yaml` file with the following configuration:
 
@@ -260,7 +258,7 @@ Using the [Operator instructions in Kubernetes and Integrations][6] as a referen
           extraConfd:
             configDataMap:
               sqlserver.yaml: |-
-                cluster_check: true # Make sure to include this flag
+                cluster_check: true # Required for cluster checks
                 init_config:
                 instances:
                 - host: <HOSTNAME>,<PORT>
