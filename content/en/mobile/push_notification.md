@@ -12,7 +12,7 @@ further_reading:
   text: "Workflow Automation Documentation"
 ---
 
-Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notification), so you can stay informed in real time from the Datadog mobile app.
+Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notifications), so you can stay informed in real time from the Datadog mobile app.
 
 ## Set up push notifications
 <div class="alert alert-info">
@@ -44,7 +44,7 @@ Make sure you grant the mobile app the necessary permissions.
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-   {{< img src="service_management/mobile/android_notification_may_2024.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
+   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -69,7 +69,7 @@ For more information, here is a full guide on [how to set up your mobile device 
 
 3. Within the iOS system settings, make sure you enable the **Critical Alerts** toggle. Make sure you grant the mobile app the necessary permissions.
 
-4. Test the setup of your critical push notification by tapping **Test push notifications**
+4. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -82,7 +82,7 @@ For more information, here is a full guide on [how to set up your mobile device 
 
 3. Tap the **Override system volume** and enable toggle. This leads you to your system settings. Find the row for the Datadog mobile app and ensure that the toggle is enabled.
 
-4. Test the setup of your critical push notification by tapping **Test push notifications**
+4. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-danger">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
@@ -96,13 +96,13 @@ For high-urgency notifications, Datadog strongly recommends customizing your sys
 ## Incident notifications
 Receive status updates on your active incidents by setting up [Notification Rules for incidents on the Web][2]. 
 
-1. In Incidents, navigate to **Settings** > [**Notification Rules**][1] 
+1. In Incidents, navigate to **Settings** > [**Notification Rules**][1].
 2. Click **+ New Rule** button on the top right.
 3. Enter your desired condition fields for **When an incident is...** and **And meets the following conditions...**. By default, these filters are empty, and a notification rule triggers for any incident.
 4. Under **Nofity...** select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 5. **With Template:** Select the desired message template you want the notification rule to use.
 6. **Renotify on updates to:** Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change.
-7. Click **Save**
+7. Click **Save**.
 
 By default if you have push notifications enabled and are assigned as a commander to an incident, you automatically receive push notification for the incident.
 
@@ -110,9 +110,9 @@ By default if you have push notifications enabled and are assigned as a commande
 Create [workflow automations][3] that send mobile push notifications.
 
 1. On the workflow canvas, click the **+icon**.
-2. Search for **Send mobile push notification**
+2. Search for **Send mobile push notification**.
 3. Under **To** select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
-4. Enter the message **Body**
+4. Enter the message **Body**.
 
 ### Further Reading
 
