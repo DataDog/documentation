@@ -24,13 +24,13 @@ To begin, select a team from the list displayed on the left side of the screen. 
 {{< img src="service_management/oncall/pagerduty_migration_import_team.png" alt="Import your PagerDuty Team into Datadog." style="width:95%;" >}}
 
 ### Team & Member mapping
-Next, you’ll need to map your PagerDuty team to an existing Datadog team or create a new one. If you have a corresponding team in Datadog, simply select it from the list. Otherwise, you can choose to create a new team in Datadog to associate with your PagerDuty team. This step ensures that your on-call responsibilities are correctly aligned in Datadog.
+Next, you'll need to map your PagerDuty team to an existing Datadog team or create a new one. If you have a corresponding team in Datadog, simply select it from the list. Otherwise, you can choose to create a new team in Datadog to associate with your PagerDuty team. This step ensures that your on-call responsibilities are correctly aligned in Datadog.
 
 If you choose to create a new Datadog team based on your selected PagerDuty team, you'll be prompted to enter a name for the new Datadog team. This new team will then be built using the structure and members from your PagerDuty team.
 
 {{< img src="service_management/oncall/pagerduty_migration_map_users.png" alt="Map your PagerDuty users into Datadog. Invite or dismiss selectively." style="width:95%;" >}}
 
-Datadog will automatically attempt to map your PagerDuty users to existing Datadog users based on their email addresses. If a match is found, those users will be added to the new Datadog team. However, if a PagerDuty user doesn't have a corresponding Datadog user, you’ll have the option to either not import those users at all or invite them to Datadog. If you choose to invite them, an invitation will be sent, allowing them to join the team in Datadog.
+Datadog will automatically attempt to map your PagerDuty users to existing Datadog users based on their email addresses. If a match is found, those users will be added to the new Datadog team. However, if a PagerDuty user doesn't have a corresponding Datadog user, you'll have the option to either not import those users at all or invite them to Datadog. If you choose to invite them, an invitation will be sent, allowing them to join the team in Datadog.
 
 Hit "Import Team" once you are ready!
 
@@ -47,7 +47,7 @@ Next, you'll need to choose how you want to manage incoming alerts. Select one o
 Choose the template that best aligns with your team's needs, or start from scratch to tailor everything to your requirements.
 
 ### Selectively export escalation policies and schedules
-Once you're editing your routing rules in Datadog, you can easily re-use your existing escalation policies and schedules from PagerDuty. You don’t have to recreate these elements from scratch – just choose the ones you want to bring over, and Datadog will automatically apply them to your new on-call setup.
+Once you're editing your routing rules in Datadog, you can easily re-use your existing escalation policies and schedules from PagerDuty. You don't have to recreate these elements from scratch, just choose the ones you want to bring over, and Datadog will automatically apply them to your new on-call setup.
 
 {{< img src="service_management/oncall/pagerduty_migration_migrate_escalation_policies_and_schedules.png" alt="Selectively import escalation policies and schedules from PagerDuty into Datadog." style="width:95%;" >}}
 
