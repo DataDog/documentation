@@ -242,6 +242,8 @@ docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
+
 {{< /tab >}}
 
 {{% tab "Docker Compose" %}}
@@ -263,6 +265,8 @@ This command starts a Docker container and makes your private location ready to 
     ```shell
     docker-compose -f docker-compose.yml up
     ```
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
+
 {{< /tab >}}
 
 {{% tab "Podman" %}}
@@ -331,7 +335,7 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
 
 For OpenShift, run the private location with the `anyuid` SCC. This is required for your browser test to run.
 
-[1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
 {{< /tab >}}
 
@@ -341,7 +345,7 @@ You can set environment variables in your configuration parameters that point to
 
 Alternatively:
 
-1. Add the [Datadog Synthetics Private Location][30] to your Helm repositories:
+1. Add the [Datadog Synthetics Private Location][2] to your Helm repositories:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -356,8 +360,9 @@ Alternatively:
 
 **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
-[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[2]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
 {{< /tab >}}
 
@@ -521,6 +526,8 @@ If you didn't save all the configuration in the secret manager, you can still pa
 
 **Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
 
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+
 {{< /tab >}}
 
 {{% tab "EKS" %}}
@@ -572,7 +579,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
     kubectl apply -f private-location-worker-deployment.yaml
     ```
 
-[1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
 {{< /tab >}}
 
