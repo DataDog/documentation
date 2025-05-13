@@ -22,6 +22,8 @@ Tag pipelines are applied to Cloud Cost metrics from all providers. Tag pipeline
 
 ## Create a ruleset
 
+To create a ruleset, navigate to [**Cloud Cost > Settings > Tag Pipelines**][1].
+
 <div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
 Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**.
@@ -38,9 +40,12 @@ Add a new tag (key + value) based on the presence of existing tags on your Cloud
 
 For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of.
 
-{{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." style="width:60%;" >}}
+{{< img src="cloud_cost/tag-pipelines-add-new-tag.png" alt="Add new business unit tag to resources with service:process-agent or service:process-billing." style="width:60%;" >}}
 
-To ensure the rule only applies if the `business_unit` tag doesn't already exist, click the toggle in the **Additional options** section.
+Under the **Additional options** section, you have the following options:
+
+- **Only apply if tag `{tag}` doesn't exist** - Ensures the rule only applies if the specified tag (`business-unit` in the example above) doesn't already exist.
+- **Apply case-insensitive matching to resource tags** - Enables tags defined in the `To resources with tag(s)` field and tags from the cost data to be case insensitive. For example, if resource tags from the UI is: `foo:bar` and the tag from the cost data is `Foo:bar`, then the two can be matched.
 
 ### Alias tag keys
 
@@ -56,13 +61,18 @@ To ensure the rule only applies if the `application` tag doesn't already exist, 
 
 ### Map multiple tags
 
-Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
+Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This maps the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
 
 For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags.
 
-{{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" style="width:60%;" >}}
+{{< img src="cloud_cost/tag-pipelines-multiple-tags.png" alt="Add account metadata like customer_name using reference tables for tag pipelines" style="width:60%;" >}}
 
 Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after a first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
+
+Under the **Additional options** section, you have the following options:
+
+- **Only apply if columns don't exist** - Ensures the defined columns are only added if they do not already exist with the associated tags from the cost data.
+- **Apply case-insensitive matching for primary key values** - Enables the primary key value from the reference table and tag value from the primary key tag from the cost data to be case insensitive. For example: if the primary key value pair from UI is: foo:Bar, the tag from cost data is foo:bar, then the two can be matched.
 
 ## Reserved tags
 
