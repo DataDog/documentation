@@ -1,9 +1,12 @@
 ---
 title: High Availability support of the Datadog Agent
 further_reading:
+- link: "/agent/fleet_automation/"
+  tag: "Documentation"
+  text: "Learn more about Fleet Automation"
 - link: "/network_monitoring/devices/glossary"
   tag: "Documentation"
-  text: "NDM Terms and Concepts"
+  text: "Network Device Monitoring Terms and Concepts"
 ---
 
 {{< site-region region="gov" >}}
