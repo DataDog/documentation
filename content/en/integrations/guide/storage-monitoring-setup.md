@@ -20,30 +20,30 @@ Access your Storage Monitoring data by navigating to **Infrastructure > Storage 
 {{< tabs >}}
 {{% tab "Recommended: Storage Monitoring UI" %}}
 
-The fastest way to set up Storage Monitoring is going to Infrastructure -> Storage Monitoring -> [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true]. In the Add Buckets page you can configure multiple S3 buckets for Storage Monitoring in one go.
+The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
 
 1. Go to Datadog > Infrastructure > Storage Monitoring.
 
-2. Click [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true]
+2. Click [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true].
 
 {{< img src="integrations/guide/storage-monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
 
-  Note: For each AWS account that has the S3 buckets you want to monitor, make sure your Datadog IAM role(s) includes the following permissions: `s3:GetObject`, `s3:ListObjects`, `s3:PutInventoryConfiguration`
+  **Note**: For each AWS account that has the S3 buckets you want to monitor, make sure your Datadog IAM roles include the following permissions: `s3:GetObject`, `s3:ListObjects`, and `s3:PutInventoryConfiguration`.
 
-4. Select the S3 buckets you want to monitor with Storage Monitoring. Tip: You can select buckets from multiple AWS accounts at once.
+4. Select the S3 buckets you want to monitor with Storage Monitoring. You can select buckets from multiple AWS accounts at once.
 
 {{< img src="integrations/guide/storage-monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-5. Assign a destination bucket (may already exist, or create a new one in AWS) per region to store S3 inventory reports from the source buckets.
+5. Assign a destination bucket per region to store S3 inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
 
 - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
 - Destination bucket: Used to store inventory reports (one per AWS region, can be reused)
 
-6. Complete the configuration. The inventory generation process will start within AWS (may take up to 24 hours for first report).
+6. Complete the configuration. The inventory generation process will start within AWS within 24 hours of the first report.
 
-7. Return to Infrastructure > Storage Monitoring to see your bucket(s) appear.
+7. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
