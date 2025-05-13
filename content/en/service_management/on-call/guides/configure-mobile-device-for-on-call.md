@@ -53,8 +53,6 @@ On both iOS and Android, you have the option to override the default system noti
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
 
-For more information, here is a full guide on [how to set up your mobile device for On-Call][]
-
 ### Critical push notifications
 {{< tabs >}}
 {{% tab "iOS" %}}
