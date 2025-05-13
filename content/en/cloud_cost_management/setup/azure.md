@@ -1,13 +1,15 @@
 ---
 title: Azure
+aliases:
+- /cloud_cost_management/azure/
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
-- link: "/cloud_cost_management/aws"
+- link: "/cloud_cost_management/setup/aws"
   tag: "Documentation"
   text: "Gain insights into your AWS bill"
-- link: "/cloud_cost_management/google_cloud"
+- link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
 ---

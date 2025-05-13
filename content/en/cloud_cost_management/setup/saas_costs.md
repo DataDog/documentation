@@ -3,20 +3,22 @@ title: SaaS Cost Integrations
 is_beta: true
 private: true
 disable_toc: false
+aliases:
+- /cloud_cost_management/saas_costs
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
-- link: "/cloud_cost_management/aws"
+- link: "/cloud_cost_management/setup/aws"
   tag: "Documentation"
   text: "Gain insights into your AWS bill"
-- link: "/cloud_cost_management/azure"
+- link: "/cloud_cost_management/setup/azure"
   tag: "Documentation"
   text: "Gain insights into your Azure bill"
-- link: "/cloud_cost_management/google_cloud"
+- link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
-- link: "/cloud_cost_management/custom"
+- link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
@@ -413,7 +415,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/custom
+[1]: /cloud_cost_management/setup/custom
 [2]: /cloud_cost_management
 [3]: https://app.datadoghq.com/cost/explorer
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
