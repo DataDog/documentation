@@ -80,9 +80,7 @@ Because AWS does not grant direct host access, the Datadog Agent must be install
 {{% tab "Windows Host" %}}
 {{% dbm-alwayson %}}
 
-To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
-
-Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][2] for all available configuration options.
+To start collecting SQL Server telemetry, [install the Datadog Agent][1], then create the SQL Server Agent conf file at `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. Refer to the [sample conf file][2] for all available configuration options.
 
 ```yaml
 init_config:
