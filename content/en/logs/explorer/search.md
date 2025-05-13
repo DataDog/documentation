@@ -31,7 +31,7 @@ The system translates natural language input into Datadog queries and understand
 
 ## Search query
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+A log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
 
 To filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
 
