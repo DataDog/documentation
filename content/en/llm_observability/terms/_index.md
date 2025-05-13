@@ -188,7 +188,7 @@ The types of Failure to Answer are defined below and can be configured when the 
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
-| Empty Code Response | An empty code object like an empty list or tuple, signifiying no data or results | (), [], {} |
+| Empty Code Response | An empty code object like an empty list or tuple, signifiying no data or results | (), [], {}, "", '' |
 | Empty Response | No meaningful response, returning only whitespace | whitespace |
 | No Content Response | An empty output accompanied by a message indicated no content is available | Not found, N/A |
 | Redirection Response | Redirects the user to another source of suggests an alternative approach | If you have additional details, I’d be happy to include them|
