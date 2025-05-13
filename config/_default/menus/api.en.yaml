@@ -7636,6 +7636,18 @@ menu:
           - GetOnCallTeamRoutingRules
         unstable: []
         order: 9
+    - name: Get the schedule of an on-call user
+      url: '#get-the-schedule-of-an-on-call-user'
+      identifier: on-call-get-the-schedule-of-an-on-call-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallUser
+        unstable: []
+        order: 11
     - name: Update on-call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule

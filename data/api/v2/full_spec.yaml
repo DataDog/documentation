@@ -36718,6 +36718,115 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    Shift:
+      description: The definition of `Shift` object.
+      example:
+        data:
+          attributes:
+            end: '2025-05-07T03:53:01.206662873Z'
+            start: '2025-05-07T02:53:01.206662814Z'
+          id: 00000000-0000-0000-0000-000000000000
+          relationships:
+            user:
+              data:
+                id: 00000000-aba1-0000-0000-000000000000
+                type: users
+          type: shifts
+        included:
+        - attributes:
+            email: foo@bar.com
+            name: User 1
+            status: ''
+          id: 00000000-aba1-0000-0000-000000000000
+          type: users
+      properties:
+        data:
+          $ref: '#/components/schemas/ShiftData'
+          nullable: true
+        included:
+          description: The `Shift` `included`.
+          items:
+            $ref: '#/components/schemas/ShiftIncluded'
+          type: array
+      type: object
+    ShiftData:
+      description: The definition of `ShiftData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ShiftDataAttributes'
+        id:
+          description: The `ShiftData` `id`.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ShiftDataRelationships'
+        type:
+          $ref: '#/components/schemas/ShiftDataType'
+      required:
+      - type
+      type: object
+    ShiftDataAttributes:
+      description: The definition of `ShiftDataAttributes` object.
+      properties:
+        end:
+          description: The end time of the shift.
+          format: date-time
+          type: string
+        start:
+          description: The start time of the shift.
+          format: date-time
+          type: string
+      type: object
+    ShiftDataRelationships:
+      description: The definition of `ShiftDataRelationships` object.
+      properties:
+        user:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUser'
+      type: object
+    ShiftDataRelationshipsUser:
+      description: Defines the relationship between a shift and the user who is working
+        that shift.
+      properties:
+        data:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUserData'
+      required:
+      - data
+      type: object
+    ShiftDataRelationshipsUserData:
+      description: Represents a reference to the user assigned to this shift, containing
+        the user's ID and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUserDataType'
+      required:
+      - type
+      - id
+      type: object
+    ShiftDataRelationshipsUserDataType:
+      default: users
+      description: Indicates that the related resource is of type 'users'.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ShiftDataType:
+      default: shifts
+      description: Indicates that the resource is of type 'shifts'.
+      enum:
+      - shifts
+      example: shifts
+      type: string
+      x-enum-varnames:
+      - SHIFTS
+    ShiftIncluded:
+      description: The definition of `ShiftIncluded` object.
+      oneOf:
+      - $ref: '#/components/schemas/ScheduleUser'
     SingleAggregatedConnectionResponseArray:
       description: List of aggregated connections.
       example:
@@ -54396,6 +54505,59 @@ paths:
         - on_call_write
       x-undo:
         type: idempotent
+  /api/v2/on-call/schedules/{schedule_id}/on-call:
+    get:
+      description: Retrieves the user who is on-call for the specified schedule at
+        a given time.
+      operationId: GetScheduleOnCallUser
+      parameters:
+      - description: 'Specifies related resources to include in the response as a
+          comma-separated list. Allowed value: `user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule.
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      - description: Retrieves the on-call user at the given timestamp (ISO-8601).
+          Defaults to the current time if omitted."
+        in: query
+        name: filter[at_ts]
+        schema:
+          example: '2025-05-07T02:53:01Z'
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shift'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get the schedule of an on-call user
+      tags:
+      - On-Call
+      x-menu-order: 11
+      x-undo:
+        type: safe
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
       description: Get a team's on-call routing rules
