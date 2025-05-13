@@ -25,7 +25,7 @@ PagerDuty and OpsGenie integrations for Software Catalog are not supported in th
 
 When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Software Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
 
-## Collaboration & Incident Management
+## Collaboration, Incident Management, and Ticketing
 
 ### PagerDuty integration
 
@@ -52,7 +52,7 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
    ...
    ```
    
-You can also create other visualizations, actions, or automations to integrate with Pagerduty by leveraging Datadog's [Action Catalog][15].
+You can also create other visualizations, actions, or automations to integrate with Pagerduty by leveraging Datadog's [Action Catalog][15]. These actions can be used to query & act upon services, incidents, schedules, and more from PagerDuty.
 
 
 ### OpsGenie
@@ -83,7 +83,63 @@ Once you've completed these steps, an **On Call** information box appears in the
 
 {{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
 
-You can also create other visualizations, actions, or automations to integrate with Pagerduty by leveraging Datadog's [Action Catalog][16].
+You can also create other visualizations, actions, or automations to integrate with OpsGenie by leveraging Datadog's [Action Catalog][16].  These actions can be used to query & act upon services, schedules, incidents, and more from OpsGenie.
+
+### Atlassian Statuspage
+
+Atlassian Statuspage integration to create and update status incidents and components. You can automatically post incidents to your Statuspage, retrieve incident details, and update component status to keep users informed. Learn more about configuring the [integration][18]. You can also leverage Datadog's [Action Catalog][19] to query & act upon pages and incidents.
+
+### Freshservice
+
+Freshservice (Freshworks) service desk integration for IT incident tickets. Allows Datadog to create, update, and query Freshservice tickets—for example, opening a new incident in Freshservice when a monitor alerts. Learn more about configuring the integration. You can also explore Datadog’s Action Catalog for available Freshservice actions.
+
+### Slack
+
+Slack collaboration integration to send incident alerts or updates to Slack channels (and perform channel management). Datadog can post messages to Slack, create channels, invite users, and more—ideal for setting up incident war rooms. Learn more in the integration documentation, or explore Slack-specific workflows in the Action Catalog.
+
+### Microsoft Teams
+
+Microsoft Teams integration for incident collaboration. Enables Datadog to send messages or prompts to Teams channels—for example, notifying on-call responders. Read more in the integration documentation and browse the Teams actions in Datadog’s Action Catalog.
+
+### Jira
+
+Atlassian Jira integration to create and update issues directly from Datadog. Common actions include creating tickets, adding comments, or updating status fields when a monitor triggers. Read more in the integration documentation and find Jira actions in the Action Catalog.
+
+### Asana
+
+Asana project management integration for task tracking and post-incident workflows. Datadog can create and update Asana tasks, assign users, and apply tags. Full setup is described in the integration guide, and Asana actions are available in the Action Catalog.
+
+## Source Code Management
+
+### GitHub
+GitHub integration that supports creating issues or PRs, managing repo files, and automating team access. This is useful for tying alert workflows to code changes. Full setup steps are in the integration documentation, and the GitHub actions are detailed in the Action Catalog.
+
+### GitLab
+GitLab integration covers issues, merge requests, branches, and commits. Datadog actions include creating MRs, commenting, managing branches, and querying pipeline status. Get started with the integration setup and explore available GitLab actions in the Action Catalog.
+
+### Other Source Code Providers
+Bitbucket & Azure DevOps repositories are not natively supported in Datadog’s Software or Action Catalog. If you use Bitbucket or other git platforms, you can use the generic HTTP action to call their APIs (for example, to create issues or commits via Bitbucket’s REST API) (Similarly, Azure DevOps Repos can be automated via HTTP requests if needed, since Datadog currently focuses on ADO pipelines.)
+
+## CI/CD
+
+### Github Actions
+GitHub Actions – GitHub Actions integration to coordinate CI/CD workflows on GitHub. Datadog actions allow you to trigger a GitHub Actions workflow dispatch and fetch workflow run statuses programmatically.
+
+### Gitlab Pipelines
+
+GitLab CI/CD integration covering pipelines and jobs. You can trigger GitLab project pipelines, cancel or retry jobs, and query pipeline results.
+
+### Jenkins
+
+Jenkins CI server integration that allows you to trigger and manage Jenkins jobs from Datadog. You can submit new builds, delete jobs, or fetch job status as part of a workflow. See the full integration setup and Jenkins actions in the Action Catalog.
+
+### CircleCI
+
+CircleCI integration to interact with your CI pipelines. Datadog can approve workflows and retrieve pipeline/job details (e.g. job artifacts or status), enabling automated pipeline control. Read more in the integration docs and CircleCI section of the Action Catalog.
+
+### Azure DevOps Pipelines
+
+Integration for Azure DevOps Pipelines (ADO). You can trigger pipelines and fetch run data—ideal for launching deployments or QA workflows based on monitor activity. Configure it via the integration guide and reference pipeline actions in the Action Catalog.
 
 ## CMDB or Internal Developer Portals
 
@@ -163,4 +219,5 @@ spec:
 [15]: https://docs.datadoghq.com/actions/actions_catalog/?search=pagerduty
 [16]: https://docs.datadoghq.com/actions/actions_catalog/?search=opsgenie
 [17]: https://docs.datadoghq.com/actions/actions_catalog/?search=servicenow
-
+[18]: https://docs.datadoghq.com/integrations/statuspage/
+[19]: https://docs.datadoghq.com/actions/actions_catalog/?search=statuspage
