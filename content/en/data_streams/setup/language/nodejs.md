@@ -36,6 +36,7 @@ For example:
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
 {{% data_streams/monitoring-kafka-pipelines %}}
