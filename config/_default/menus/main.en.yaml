@@ -2040,7 +2040,7 @@ menu:
       url: internal_developer_portal/software_catalog/entity_model
       parent: software_catalog
       identifier: software_catalog_entity_model
-      weight: 1015
+      weight: 102
     - name: Use Cases
       url: internal_developer_portal/software_catalog/use_cases
       parent: software_catalog
