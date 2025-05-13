@@ -140,96 +140,101 @@ menu:
       url: getting_started/monitors/
       parent: getting_started
       weight: 14
+    - name: OpenTelemetry
+      identifier: getting_started_opentelemetry
+      url: getting_started/opentelemetry/
+      parent: getting_started
+      weight: 15
     - name: Profiler
       identifier: getting_started_profiler
       url: getting_started/profiler/
       parent: getting_started
-      weight: 15
+      weight: 16
     - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
-      weight: 16
+      weight: 17
     - name: Security
       identifier: getting_started_security
       url: getting_started/security/
       parent: getting_started
-      weight: 17
+      weight: 18
     - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
-      weight: 1701
+      weight: 1801
     - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
-      weight: 1702
+      weight: 1802
     - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
-      weight: 1703
+      weight: 1803
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
-      weight: 1704
+      weight: 1804
     - name: Serverless for AWS Lambda
       identifier: getting_started_serverless
       url: getting_started/serverless/
       parent: getting_started
-      weight: 18
+      weight: 19
     - name: Software Catalog
       identifier: getting_started_software_catalog
       url: getting_started/software_catalog/
       parent: getting_started
-      weight: 19
+      weight: 20
     - name: Software Delivery
       identifier: getting_started_software_delivery
       url: getting_started/software_delivery/
       parent: getting_started
-      weight: 20
+      weight: 21
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
-      weight: 2001
+      weight: 2101
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2002
+      weight: 2102
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2003
+      weight: 2103
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
       parent: getting_started
-      weight: 21
+      weight: 22
     - name: API Tests
       identifier: getting_started_api_test
       url: getting_started/synthetics/api_test
       parent: getting_started_synthetics
-      weight: 2101
+      weight: 2201
     - name: Browser Tests
       identifier: getting_started_browser_test
       url: getting_started/synthetics/browser_test
       parent: getting_started_synthetics
-      weight: 2102
+      weight: 2202
     - name: Mobile App Tests
       identifier: getting_started_mobile_app
       url: getting_started/synthetics/mobile_app_testing
       parent: getting_started_synthetics
-      weight: 2103
+      weight: 2203
     - name: Continuous Testing
       identifier: getting_started_continuous_testing
       url: getting_started/continuous_testing/
       parent: getting_started_synthetics
-      weight: 2104
+      weight: 2204
     - name: Private Locations
       identifier: getting_started_private_location
       url: getting_started/synthetics/private_location
@@ -607,15 +612,16 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
+      url: /opentelemetry/getting_started/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
     - name: Datadog Example Application
-      url: /getting_started/opentelemetry
+      url: /opentelemetry/getting_started/datadog_example
       parent: otel_guides_getting_started
       weight: 101
     - name: OpenTelemetry Demo Application
-      url: /opentelemetry/otel_demo_to_datadog
+      url: /opentelemetry/getting_started/otel_demo_to_datadog
       parent: otel_guides_getting_started
       weight: 102
     - name: Feature Compatibility
