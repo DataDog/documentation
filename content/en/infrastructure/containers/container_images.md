@@ -244,4 +244,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [9]: https://app.datadoghq.com/container-images/image-trends
 [11]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
 [12]: /integrations/amazon_web_services/#resource-collection
-[13]: https://docs.datadoghq.com/security/cloud_security_management/setup/agentless_scanning/compatibility
+[13]: /security/cloud_security_management/setup/agentless_scanning/compatibility
