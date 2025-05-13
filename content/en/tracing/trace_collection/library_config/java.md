@@ -452,6 +452,27 @@ When set to `true`, the query string parameters are added to Elasticsearch and O
 **Default**: `false`<br>
 By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
 
+`dd.trace.websocket.messages.enabled`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_ENABLED` <br>
+**Default**: `false`<br>
+Enables tracing sent and received websocket messages (text and binary) and connection close events.
+
+`dd.trace.websocket.messages.inherit.sampling`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING` <br>
+**Default**: `true`<br>
+By default, websocket messages preserve the same sampling as the span captured during the handshake. This ensures that, if a handshake span has been sampled, all the messages in its session will also be sampled. To disable that behavior and sample each websocket message independently, set this configuration to `false`.
+
+`dd.trace.websocket.messages.separate.traces`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_SEPARATE_TRACES` <br>
+**Default**: `true`<br>
+By default, each received message generates a new trace. The handshake is linked to it as a span link. Setting this parameter to `false` causes all the spans captured during the session to be in the same trace.
+
+`dd.trace.websocket.tag.session.id`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_TAG_SESSION_ID` <br>
+**Default**: `false`<br>
+When set to `true`, the websocket spans have the tag `websocket.session.id` containing the session ID when available.
+
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
