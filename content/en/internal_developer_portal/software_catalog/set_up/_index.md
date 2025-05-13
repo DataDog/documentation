@@ -349,7 +349,7 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration completeness 
+## Verify configuration completeness 
 
 Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Software Catalog provides automatic checks for these recommended setups. 
 
