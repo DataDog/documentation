@@ -61,4 +61,4 @@ An issue with local storage replication latency between windows can cause a shor
 [2]: /real_user_monitoring/browser/setup/
 [3]: https://www.electronjs.org/docs/latest/tutorial/process-model#the-renderer-process
 [4]: /real_user_monitoring/explorer/
-[5]: https://www.datadoghq.com/support/
+[5]: https://docs.datadoghq.com/help/
