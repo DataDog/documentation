@@ -16,7 +16,7 @@ Before starting the migration, make sure you have the [PagerDuty integration][1]
 Also, make sure your user has the `on_call_write` and the `teams_manage` permissions.
 
 ## Onboard a team
-Once all the prerequisites are met, the UI will display all your teams from PagerDuty, allowing you to select and migrate them to Datadog On-Call.
+Once all the prerequisites are met, visit the [On-Call Teams list][2] and select "Add Team to On-Call", the UI will display all your teams from PagerDuty, allowing you to select and migrate them to Datadog On-Call.
 
 ### Select team to migrate
 To begin, select a team from the list displayed on the left side of the screen. Once selected, the right side will show a preview of your current PagerDuty team, including its members and settings. You can easily find a specific team by using the search bar at the top of the list to filter through your teams. Hit "Next" once you picked your team.
@@ -55,9 +55,5 @@ Once you're editing your routing rules in Datadog, you can easily re-use your ex
 Once imported, you can always make changes and add or configurations in your escalation policy and schedules.
 
 
-
-
-
-
-
 [1]: https://app.datadoghq.com/integrations/pagerduty
+[2]: https://app.datadoghq.com/on-call/teams
