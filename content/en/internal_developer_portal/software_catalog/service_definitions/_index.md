@@ -18,6 +18,15 @@ aliases:
   - /software_catalog/service_definitions/v2-2
   - /service_catalog/service_definitions/v3-0
   - /software_catalog/service_definitions/v3-0
+  - /software_catalog/apis   ## aliases for definitions/apis page
+  - /tracing/faq/service_definition_api/    
+  - /tracing/software_catalog/service_definition_api
+  - /software_catalog/service_definition_api
+  - /tracing/service_catalog/service_definition_api
+  - /service_catalog/service_definition_api
+  - /tracing/api_catalog/api_catalog_api/
+  - /api_catalog/api_catalog_api
+  - /service_catalog/apis
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -288,6 +297,9 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit a
 ### Migrating to v3.0
 v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform module][6] for v3.0.
 
+### API reference documentation
+To create, get, and delete definitions for all entity types like endpoints, systems, datastores, and queues, see the [Software Catalog API reference][8].
+
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [2]: https://github.com/DataDog/schema/tree/main/service-catalog
 [3]: /code_analysis/faq/#identifying-the-code-location-in-the-service-catalog
@@ -295,6 +307,7 @@ v3.0 supports the same methods of creating metadata as previous versions, includ
 [5]: /api/latest/software-catalog/
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
 [7]: software_catalog/customize/import_entries_backstage
+[8]: /api/latest/software-catalog/
 
 {{% /tab %}}
 
@@ -374,7 +387,16 @@ extensions:
     customField2: customValue2
 ```
 
+### API reference documentation
+
+- To create, get, and delete service definitions, see the [Service Definitions API reference][4].
+- To create, get, and delete definitions for new component types like systems, datastores, and queues, see the [Software Catalog API reference][3].
+- To create and update service scorecard rules and outcomes, see the [Service Scorecards API reference][2].
+
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
+[2]: /api/latest/service-scorecards/
+[3]: /api/latest/software-catalog/
+[4]: /api/latest/service-definition/
 
 {{% /tab %}}
 
@@ -423,7 +445,16 @@ tags:
   - "business-unit:operations"
 ```
 
+### API reference documentation
+
+- To create, get, and delete service definitions, see the [Service Definitions API reference][4].
+- To create, get, and delete definitions for new component types like systems, datastores, and queues, see the [Software Catalog API reference][3].
+- To create and update service scorecard rules and outcomes, see the [Service Scorecards API reference][2].
+
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.1
+[2]: /api/latest/service-scorecards/
+[3]: /api/latest/software-catalog/
+[4]: /api/latest/service-definition/
 
 {{% /tab %}}
 
@@ -464,7 +495,16 @@ integrations:
   pagerduty: https://datadog.pagerduty.com/service-directory/PXZNFXP
 ```
 
+### API reference documentation
+
+- To create, get, and delete service definitions, see the [Service Definitions API reference][4].
+- To create, get, and delete definitions for new component types like systems, datastores, and queues, see the [Software Catalog API reference][3].
+- To create and update service scorecard rules and outcomes, see the [Service Scorecards API reference][2].
+
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2
+[2]: /api/latest/service-scorecards/
+[3]: /api/latest/software-catalog/
+[4]: /api/latest/service-definition/
 
 {{% /tab %}}
 
