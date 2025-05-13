@@ -2,6 +2,7 @@
 title: AWS
 aliases:
 - /integrations/awsbilling/
+- /cloud_cost_management/aws/
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -395,7 +396,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
-[9]: /cloud_cost_management/aws/#prerequisite-generate-a-cost-and-usage-report
+[9]: /cloud_cost_management/setup/aws/#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [11]: /cloud_cost_management/container_cost_allocation/#applying-tags
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
