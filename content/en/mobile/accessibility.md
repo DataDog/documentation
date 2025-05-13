@@ -1,5 +1,5 @@
 ---
-title: iOS Accessibility
+title: Accessibility
 aliases:
 - /service_management/mobile/
 algolia:
@@ -20,7 +20,7 @@ Long-press the app icon to display a quick-action sheet of your top five [Freque
 
 ## Shortcuts and Siri suggestions
 
-**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
+**Android**: Create shortcut icons for your dashboards by long pressing the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
 **iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
 
