@@ -24,7 +24,7 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 
 1. Go to Datadog > Infrastructure > Storage Monitoring.
 
-2. Click [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true].
+2. Click [Add Buckets][1].
 
 {{< img src="integrations/guide/storage-monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -44,6 +44,8 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 6. Complete the configuration. The inventory generation process will start within AWS within 24 hours of the first report.
 
 7. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
+
+[1]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
