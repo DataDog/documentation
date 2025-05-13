@@ -32,7 +32,7 @@ The following container platforms are compatible:
 |-----------------|--------------------------------------------------------|---------|
 | Linux           | Not supported on hardened environments such as SELinux | GA      |
 | Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | Preview |
+| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
 
 ### Platform-specific requirements
 
