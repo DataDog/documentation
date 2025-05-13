@@ -1,6 +1,7 @@
 ---
 title: Set Up Software Catalog
 aliases:
+  - /software_catalog/set_up/new_to_datadog ## aliases for New to Datadog page
   - /tracing/software_catalog/setup
   - /software_catalog/setup
   - /tracing/service_catalog/setup
@@ -28,7 +29,13 @@ aliases:
   - /service_catalog/guides/validating-service-definition
   - /service_catalog/use_cases/validating_service_definition
   - /software_catalog/use_cases/validating_service_definition
-  - software_catalog/set_up/new_to_datadog ## alias for New to Datadog page
+  - /software_catalog/set_up/existing_datadog_user ## aliases for Existing Datadog User page
+  - /software_catalog/import_entries_dd/
+  - /software_catalog/enrich_default_catalog/import_entries_dd
+  - /service_catalog/import_entries_dd/
+  - /service_catalog/enrich_default_catalog/import_entries_dd
+  - /service_catalog/customize/import_entries_dd
+  - /software_catalog/customize/import_entries_dd
 further_reading:
   - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
     tag: "External Site"
