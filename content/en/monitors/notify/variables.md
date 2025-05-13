@@ -143,6 +143,11 @@ Or use the `{{else}}` parameter in the first example:
 ```
 
 **Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
+```text
+{{#is_match "role.name" ""}}
+  This displays if the attribute or tag exists, including empty value
+{{/is_match}}
+```
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
