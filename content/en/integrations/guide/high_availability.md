@@ -57,21 +57,21 @@ The following integrations are supported for High Availability:
 3. Configure one of the [supported integrations](#supported-integrations) for High Availability:
 
    For example, to set up the SNMP integration, install it on both Agents using the [SNMP Metrics][1] setup guide.
-   **Note**: Both [individual device monitoring][10] and [autodiscovery][11] methods are supported for the SNMP integration.
+   **Note**: Both [individual device monitoring][10] and [Autodiscovery][11] methods are supported for the SNMP integration.
 
-After configured, the two Agents function as an HA pair:
-- The installed integration runs only on the active Agent.
-- If the active Agent or host fails (due to a crash or shutdown), the standby Agent automatically takes over, maintaining uninterrupted monitoring.
+   After configured, the two Agents function as an HA pair:
+   - The installed integration runs only on the _active_ Agent.
+   - If the active Agent or host fails (due to a crash or shutdown), the standby Agent automatically takes over, maintaining uninterrupted monitoring.
 
 ### Define a preferred active Agent 
 
-1. Go to **Integrations > Fleet Automation > View Agents**.
+1. Go to [**Integrations > Fleet Automation > View Agents**][13].
 
-2. Search for your previously configured Agents using tags, hostname, for example, `config_id:<CONFIG-NAME>`.
+2. Search for your previously configured Agents using tags or hostname, for example, `config_id:<CONFIG-NAME>`.
 
 {{< img src="/integrations/guide/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-3. Click on the Agent you would like to define as Preferred.
+3. Click on the Agent you want to designate as the Preferred active Agent to open a side-panel.
 
 4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
 
@@ -101,7 +101,7 @@ After configured, the two Agents function as an HA pair:
 
 ### Why does my Agent have an `unknown` HA Agent state?
 
-- Remote Configuration is not setup correctly.
+- Remote Configuration may not be setup correctly. Review the [prerequisites](#prerequisites) and [Remote Configuration setup][12] documentation for more information.
 
 
 ## Further reading
@@ -119,5 +119,6 @@ After configured, the two Agents function as an HA pair:
 [9]: https://docs.datadoghq.com/agent/remote_config/
 [10]: /network_monitoring/devices/snmp_metrics?tab=snmpv2#monitoring-individual-devices
 [11]: /network_monitoring/devices/snmp_metrics?tab=snmpv2#autodiscovery
-
+[12]: /agent/remote_config/?tab=configurationyamlfile#setup
+[13]: https://app.datadoghq.com/fleet
 
