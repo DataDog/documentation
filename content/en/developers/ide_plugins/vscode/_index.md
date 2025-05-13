@@ -120,7 +120,7 @@ When you start editing a source file, the extension checks for [`static-analysis
 
 {{< img src="/developers/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
 
-After you create the configuration file, the analyzer runs automatically in the background whenever you open a file. If you need to enable Static Code Analysis for a particular language, use the `Datadog: Configure Static Analysis Languages` command from the command palette (`Shift` + `Cmd` + `P`, then search for the command).
+After you create the configuration file, the analyzer runs automatically in the background whenever you open a file. If you need to enable Static Code Analysis for a particular language, search for the command `Datadog: Configure Static Analysis Languages` in the command palette (`Shift` + `Cmd` + `P` in macOS; `Ctrl` + `Shift` + `P` in Windows).
 
 You can also run a batch analysis for individual folders and even the entire workspace. In the IDE's file explorer view, right-click a folder and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
 
