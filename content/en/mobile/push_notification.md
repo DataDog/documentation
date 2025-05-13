@@ -78,11 +78,19 @@ For more information, here is a full guide on [how to set up your mobile device 
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
-2. Tap **Bypass Do Not Disturb** and enable **Allow notifications** for High urgency On-Call.
+{{< img src="service_management/mobile/android_allow_notification_may_2025" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
-3. Tap the **Override system volume** and enable toggle. This leads you to your system settings. Find the row for the Datadog mobile app and ensure that the toggle is enabled.
+2. If notification permissiongs are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
 
-4. Test the setup of your critical push notification by tapping **Test push notifications**.
+{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+
+3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High urgency On-Call.
+
+{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+
+5. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
+
+6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-danger">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
