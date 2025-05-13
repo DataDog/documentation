@@ -112,3 +112,176 @@ From the session history, you can identify where frustrations are detected and s
 [1]: https://docs.datadoghq.com/product_analytics/analytics_explorer/#build-a-query
 [2]: https://docs.datadoghq.com/product_analytics/segmentation/#overview
 [3]: https://app.datadoghq.com/product-analytics/profiles
+
+
+
+<!-- var usersCoreDataModel = map[string]Field{
+    // Timestamps
+    "first_seen": {
+       FieldID:     "first_seen",
+       DisplayName: "First Seen",
+       Type:        Timestamp,
+       Description: "The date of the user's first session.",
+       Groups:      []string{},
+    },
+    "last_seen": {
+       FieldID:     "last_seen",
+       DisplayName: "Last Seen",
+       Type:        Timestamp,
+       Description: "The date of the user's most recent session.",
+       Groups:      []string{},
+    },
+    // User Attributes
+    "user_id": {
+       FieldID:     "user_id",
+       DisplayName: "User ID",
+       Type:        String,
+       Description: "A unique identifier for the user.",
+       Groups:      []string{"User"},
+    },
+    "user_email": {
+       FieldID:     "user_email",
+       DisplayName: "User Email",
+       Type:        String,
+       Description: "The user's email address.",
+       Groups:      []string{"User"},
+    },
+    "user_name": {
+       FieldID:     "user_name",
+       DisplayName: "User Name",
+       Type:        String,
+       Description: "The user's full name.",
+       Groups:      []string{"User"},
+    },
+    // Application Attributes
+    "first_application_id": {
+       FieldID:     "first_application_id",
+       DisplayName: "First Application ID",
+       Type:        String,
+       Description: "The ID of the first application the user accessed.",
+       Groups:      []string{"Application"},
+    },
+    "last_application_id": {
+       FieldID:     "last_application_id",
+       DisplayName: "Last Application ID",
+       Type:        String,
+       Description: "The ID of the last application the user accessed.",
+       Groups:      []string{"Application"},
+    },
+    // Geo Attributes
+    "first_country_code": {
+       FieldID:     "first_country_code",
+       DisplayName: "First Country Code",
+       Type:        String,
+       Description: "The ISO code of the country for the user's first session.",
+       Groups:      []string{"Geo"},
+    },
+    "last_country_code": {
+       FieldID:     "last_country_code",
+       DisplayName: "Last Country Code",
+       Type:        String,
+       Description: "The ISO code of the country for the user's last session.",
+       Groups:      []string{"Geo"},
+    },
+    "first_city": {
+       FieldID:     "first_city",
+       DisplayName: "First City",
+       Type:        String,
+       Description: "The city of the user's first session.",
+       Groups:      []string{"Geo"},
+    },
+    "last_city": {
+       FieldID:     "last_city",
+       DisplayName: "Last City",
+       Type:        String,
+       Description: "The city of the user's last session.",
+       Groups:      []string{"Geo"},
+    },
+    "first_region": {
+       FieldID:     "first_region",
+       DisplayName: "First Region",
+       Type:        String,
+       Description: "The region of the user's first session.",
+       Groups:      []string{"Geo"},
+    },
+    "last_region": {
+       FieldID:     "last_region",
+       DisplayName: "Last Region",
+       Type:        String,
+       Description: "The region of the user's last session.",
+       Groups:      []string{"Geo"},
+    },
+    // Device Attributes
+    "first_device_type": {
+       FieldID:     "first_device_type",
+       DisplayName: "First Device Type",
+       Type:        String,
+       Description: "The device used in the user's first session (e.g., desktop, tablet).",
+       Groups:      []string{"Device"},
+    },
+    "last_device_type": {
+       FieldID:     "last_device_type",
+       DisplayName: "Last Device Type",
+       Type:        String,
+       Description: "The device used in the user's last session (e.g., desktop, tablet).",
+       Groups:      []string{"Device"},
+    },
+    // OS Attributes
+    "first_os_name": {
+       FieldID:     "first_os_name",
+       DisplayName: "First OS Name",
+       Type:        String,
+       Description: "The operating system of the user's first session (e.g., Windows, iOS).",
+       Groups:      []string{"OS"},
+    },
+    "last_os_name": {
+       FieldID:     "last_os_name",
+       DisplayName: "Last OS Name",
+       Type:        String,
+       Description: "The operating system of the user's last session (e.g., Windows, iOS).",
+       Groups:      []string{"OS"},
+    },
+    "first_os_version": {
+       FieldID:     "first_os_version",
+       DisplayName: "First OS Version",
+       Type:        String,
+       Description: "The OS version of the user's first session.",
+       Groups:      []string{"OS"},
+    },
+    "last_os_version": {
+       FieldID:     "last_os_version",
+       DisplayName: "Last OS Version",
+       Type:        String,
+       Description: "The OS version of the user's last session.",
+       Groups:      []string{"OS"},
+    },
+    // Browser Attributes
+    "first_browser_name": {
+       FieldID:     "first_browser_name",
+       DisplayName: "First Browser Name",
+       Type:        String,
+       Description: "The browser used in the user's first session (e.g., Chrome, Safari).",
+       Groups:      []string{"Browser"},
+    },
+    "last_browser_name": {
+       FieldID:     "last_browser_name",
+       DisplayName: "Last Browser Name",
+       Type:        String,
+       Description: "The browser used in the user's last session (e.g., Chrome, Safari).",
+       Groups:      []string{"Browser"},
+    },
+    "first_browser_version": {
+       FieldID:     "first_browser_version",
+       DisplayName: "First Browser Version",
+       Type:        String,
+       Description: "The browser version from the user's first session.",
+       Groups:      []string{"Browser"},
+    },
+    "last_browser_version": {
+       FieldID:     "last_browser_version",
+       DisplayName: "Last Browser Version",
+       Type:        String,
+       Description: "The browser version from the user's last session.",
+       Groups:      []string{"Browser"},
+    },
+} -->
