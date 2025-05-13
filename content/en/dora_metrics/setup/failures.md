@@ -30,11 +30,10 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
-Failed deployment events, currently interpreted through failure events, are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
+Failure events are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
 
 ## Selecting and configuring a failure data source
 
