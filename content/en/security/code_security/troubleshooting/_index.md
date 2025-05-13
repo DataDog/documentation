@@ -141,6 +141,13 @@ npm install -g @datadog/datadog-ci
 datadog-ci sbom upload /path/to/sbom-file.json
 ```
 
+### Services or teams in SCA libraries are not updating
+
+Results for services and teams in SCA are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability or library data for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
 **If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
@@ -159,9 +166,9 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
 
-### Datadog-hosted scan did not run for a repository with `\\` in the file path
+### Datadog-hosted scan did not run for a repository with a backslash (`\`) in the file path
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\\`). If your repository includes such paths,
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\`). If your repository includes such paths,
 you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
 
 ## No vulnerabilities detected by Software Composition Analysis
