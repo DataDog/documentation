@@ -10,10 +10,6 @@ further_reading:
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview 
 While Product Analytics provides insight into users behavior overall, the user profiles feature allows you to track and analyse the behavioral patterns of key users.
 
@@ -28,14 +24,15 @@ The goal of this feature is to allow you to scope down to specific users' behavi
 The User Profile page includes a list of attributes to help you better segment your users. You can conduct a FULL-TEXT SEARCH on `username` or `email`, SORT, and FILTER based on these attributes:
 
 <!-- #### Personal identifying attributes  -->
-User ID `** REQUIRED`
-: `type:string`  <br>  Unique user identifier. <br> _This is a required attribute as it is needed for user tracking and for populating the User Profiles page_.
+User ID `**REQUIRED`
+: `type:string`  <br> Unique user identifier,  displayed by default in the User Profile page.<br> 
+_This is a required attribute needed for user tracking and populating on the User Profiles page_.<br>
 
 User Email
 : <add context>
 
 User Name
-: `type:string` <br> User friendly name, displayed by default in the RUM UI.
+: `type:string` <br> User friendly name, displayed by default in the User Profile page.
 
 <!-- #### Time based attributes  -->
 First Seen
@@ -90,13 +87,14 @@ Last Browser Version
 The attributes in this table are recommended for populating users in the User Profile page. -->
 
 
-
 ## How profiles are sourced
 
-User profiles are sourced from RUM events. RUM SDKs allow you to identify users by setting attributes such as user id, name, and email (`usr.id`, `usr.name`, or `usr.email`). These attributes are then used to populate the User Profiles page. 
+User profiles are sourced from RUM events using `usr.id` as the aggregating attribute. 
+
+The RUM SDK allows you to identify users by setting attributes such as User ID, Name, and Email (`usr.id`, `usr.name`, and `usr.email`). These attributes are then used to populate users onto the User Profiles page. 
 
 ### Navigating the User Profile Page 
-You can use full-text search, filter, and sort through your user profiles. The User Profile page allows you to see information on individual users and correlate this to the group. You can select a user's profile to see more detail on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+The User Profile page allows you to see information on individual users and correlate this to the group. You can use full-text search, filter, and sort through your user profiles. You can select an individual user's profile to see more detail on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
 {{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
@@ -105,10 +103,6 @@ From the session history, you can identify where frustrations are detected and s
 
 {{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profile page and its session history." style="width:70%;">}}
 
-
-
-<!-- To do -->
-<!-- modify the language and flow to fit the PM persona -->
 
 
 ## Further reading
