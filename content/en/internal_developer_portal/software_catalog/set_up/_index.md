@@ -36,6 +36,17 @@ aliases:
   - /service_catalog/enrich_default_catalog/import_entries_dd
   - /service_catalog/customize/import_entries_dd
   - /software_catalog/customize/import_entries_dd
+  - /software_catalog/customize/   ## aliases for Customize page 
+  - /software_catalog/manage_entries/     
+  - /software_catalog/enrich_default_catalog/
+  - /service_catalog/manage_entries/
+  - /service_catalog/enrich_default_catalog/
+  - /service_catalog/customize/
+  - /software_catalog/best-practices
+  - /software_catalog/guides/best-practices
+  - /service_catalog/guides/best-practices
+  - /service_catalog/use_cases/best_practices
+  - /software_catalog/use_cases/best_practices
 further_reading:
   - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
     tag: "External Site"

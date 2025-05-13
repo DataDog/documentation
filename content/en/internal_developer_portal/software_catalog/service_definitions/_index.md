@@ -62,9 +62,9 @@ The following features are supported in each version:
 
 For detailed information about each version, including full schemas and example YAML files, see the individual version pages in [Supported versions](#supported-versions).
 
-## Add metadata to Software Catalog
 
 ### Add metadata to endpoints
+TODO: move this to API specific page 
 
 You can add metadata to APIs through the Datadog UI or [API][16], or use automated pipelines through the [GitHub integration](#store-and-edit-definitions-in-github) or [Terraform][17].
 
@@ -138,13 +138,6 @@ extensions:
           schedule: "* * * * 1"
 {{< /code-block >}}
 
-## IDE Plugins
-
-Datadog provides a [JSON Schema][13] for definitions so that when you are editing a definition in a [supporting IDE][14], features such as autocomplete and validation are provided.
-
-{{< img src="tracing/software_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
-
-The [JSON schema for Datadog definitions][15] is registered with the open source [Schema Store][14].
 
 ## Further reading
 
