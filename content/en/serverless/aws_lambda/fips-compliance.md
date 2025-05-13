@@ -1,12 +1,12 @@
 ---
 title: AWS Lambda FIPS Compliance
 further_reading:
-- link: '/serverless/aws_lambda/installation/'
-  tag: 'Documentation'
-  text: 'Install Serverless Monitoring for AWS Lambda'
-- link: '/serverless/aws_lambda/configuration/'
-  tag: 'Documentation'
-  text: 'Configure Serverless Monitoring for AWS Lambda'
+    - link: '/serverless/aws_lambda/installation/'
+      tag: 'Documentation'
+      text: 'Install Serverless Monitoring for AWS Lambda'
+    - link: '/serverless/aws_lambda/configuration/'
+      tag: 'Documentation'
+      text: 'Configure Serverless Monitoring for AWS Lambda'
 algolia:
   rank: 80
   tags: ["fips", "compliance", "fedramp", "govcloud", "aws lambda"]
