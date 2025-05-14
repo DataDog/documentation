@@ -194,10 +194,10 @@ To notify your dev team if the value that breached the threshold of your monitor
 {{/is_exact_match}}
 ```
 
-The `is_exact_match` conditional variable also support an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exists
+The `is_exact_match` conditional variable also supports an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exist.
 ```text
 {{#is_exact_match "host.datacenter" ""}}
-  This displays if the attribute or tag does not exists or if it's empty
+  This displays if the attribute or tag does not exist or if it's empty
 {{/is_match}}
 ```
 
@@ -566,7 +566,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 ```text
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
-  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exists.
+  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
 {{/is_match}}
 ```
 
