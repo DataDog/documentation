@@ -25,7 +25,7 @@ In your Datadog sandbox, from the [**Dashboard List**][12], click **+ New Dashbo
 [Follow the best practices in this guide](#follow-dashboard-best-practices) when adding elements to your dashboard.
 
 ### Upload your dashboard
-Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **import dashboard** to choose from a list of available dashboards. You can upload up to 10 dashboards to include with your integration.
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **import dashboard** to choose from a list of available dashboards. You can select up to 10 dashboards to include with your integration.
 
 {{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="Click the Share icon and Export dashboard JSON to export your dashboard as a JSON file" width="100%">}}
 
