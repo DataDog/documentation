@@ -3537,6 +3537,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_anomalies
       weight: 11
+    - name: Cost Reports
+      url: /cloud_cost_management/reports
+      parent: cloud_cost
+      identifier: cloud_cost_reports
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -6534,7 +6539,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security
