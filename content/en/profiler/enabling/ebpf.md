@@ -86,33 +86,7 @@ TBD
 
 ## Configuration
 
-The `environment`, `service`, and `service_version` settings are recommended, as they are used by the Profiling UI.
-
-See the [full list of parameters][5] or use the command line.
-
-```bash
-ebpf --help
-```
-
-### Logging
-
-You can configure logging to one of several endpoints:
-- `stdout` prints the logs to standard output stream (the default).
-- `stderr` prints the logs to the standard error stream.
-- `syslog` publishes the logs to syslog, attempting to adhere to the specification in RFC 3164.
-- `disable` disables the logs entirely.
-- Any other value is treated as a file path, with a leading `/` designating an absolute path.
-
-### Global
-
-If you want to instrument all running process, you can try out the `--global` option.
-Global mode is intended for debug purposes. This requires elevated permissions. Depending on your setup, this can mean running as root, granting `CAP_PERFMON`, `CAP_SYSADMIN`, or setting `perf_event_paranoid` to `-1`.
-
-```bash
-./ebpf --environment staging --global --service_version full-host-profile
-```
-
-For most configurations, this consists of all processes visible within the profiler's PID namespace.
+TBD
 
 ## Not sure what to do next?
 
