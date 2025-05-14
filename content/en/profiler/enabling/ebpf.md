@@ -34,10 +34,10 @@ Serverless
 : `ebpf` is not supported on serverless platforms, such as AWS Lambda.
 
 OS Settings
-: `perf_event_paranoid` kernel setting is 2 or less (see [Troubleshooting][1])
+: TBD
 
 Debugging information
-: Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
+: Symbols should be available locallly or can be  uploaded in CI via `datadog-ci` 
 
 ## Installation
 
@@ -122,7 +122,6 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/profiler_troubleshooting
 [2]: shttps://github.com/DataDog/dd-otel-host-profiler/releases/
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
