@@ -8,6 +8,8 @@ further_reading:
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
+If you are using [EMR on EKS][13], follow our [instructions for setting up DJM on Kubernetes[14].
+
 ## Requirements
 
 [Amazon EMR Release 6.0.1][10] or later is required.
@@ -178,3 +180,5 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
 [11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/emr.go
+[13]: https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html
+[14]: https://docs.datadoghq.com/data_jobs/kubernetes/
