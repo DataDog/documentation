@@ -13,7 +13,6 @@ The Developer Landing Page is in Preview. Request access [here][LINK].
 ## Overview
 
 Datadog's Internal Developer Platform (IDP) ships with **overview pages** that surface the information most relevant to each stakeholder:
-
 - **Developers** see their open tickets, pull-request queues, and team's service information.
 - **SREs** and **engineering managers** track metrics like product reliability, service health, and scorecard performance.
 
@@ -27,9 +26,19 @@ The developer overview page centralizes the following information about your tea
 
 ### Getting started
 
+Before your team can use the developer overview page, a platform admin must connect the page widgets to data sources:
+
+1. Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
+1. Click **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
+
+Once this is complete, all team members can use the page and see live data. 
+
+### Personalize your view
+
+Each developer using the overview page will need to "set page filters" to get their personalized view
+
 Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
 
-1. **Connect widgets to data sources**: Click **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
 1. **Set page filters**: Provide values for the page-level filters:
    - **Team**: Name of your [Datadog Team][8] 
    - **Github_Org**: Name of your GitHub Organization
