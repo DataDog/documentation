@@ -78,7 +78,7 @@ For more information, here is a full guide on [how to set up your mobile device 
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 2. If notification permissiongs are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
 
