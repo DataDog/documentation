@@ -10,6 +10,7 @@ further_reading:
 - link: "/opentelemetry/guide/semantic_mapping"
   tag: "Documentation"
   text: "Resource attribute mapping from OpenTelemetry to Datadog"
+disable_sidebar: true
 ---
 
 ## Overview
@@ -29,6 +30,8 @@ To differentiate the metrics captured by the `hostmetrics` receiver from Datadog
 ## Metrics mappings
 
 Metrics mappings between Datadog and OpenTelemetry are defined on [OTel integration][11] pages. Select the integration you are using for more information.
+
+{{< multifilter-search resource="_data/semantic-core/unified_semantic_core.json">}}
 
 ## Further reading
 
