@@ -41,7 +41,7 @@ Follow the steps below to set up the SQL Server integration, using the [Operator
                   username: datadog
                   password: 'ENC[datadog_user_database_password]'
                   connector: 'odbc'
-                  driver: 'FreeTDS'
+                  driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
                   # Optional: For additional tags
                   tags:  
@@ -73,7 +73,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'FreeTDS'
+            driver: 'ODBC Driver 18 for SQL Server'
             # Optional: For additional tags
             tags: 
               - 'service:<CUSTOM_SERVICE>'
@@ -105,7 +105,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     # Optional: For additional tags  
     tags: 
       - 'service:<CUSTOM_SERVICE>'

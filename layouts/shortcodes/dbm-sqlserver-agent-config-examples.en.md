@@ -31,7 +31,7 @@
         username: datadog
         password: 'ENC[datadog_user_database_password]'
         connector: 'odbc'
-        driver: '{ODBC Driver 18 for SQL Server}' # This is the section header of odbcinst.ini
+        driver: 'ODBC Driver 18 for SQL Server' # This is the section header of odbcinst.ini
         dsn: 'datadog' # This is the section header of odbc.ini
     ```
 5. Restart the Agent.
