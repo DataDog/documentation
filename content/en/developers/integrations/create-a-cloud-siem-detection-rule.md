@@ -25,15 +25,15 @@ To enhance security insights for users, partners can create their own out-of-the
 
 In your Datadog sandbox, [create a new rule][4].
 
-"placeholder image for detection rule home page"
+<< placeholder image for detection rule home page >>
 
 Follow [best practices](#configuration-best-practices) outlined in this guide to configure the detection rule.
 
 ### Upload your Detection Rule
 
-Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select 'Import Detection Rule' to choose from a list of available detection rules. You can upload up to 10 detection rules to include with your integration.
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **'Import Detection Rule'** to choose from a list of available detection rules. You can select up to 10 detection rules to include with your integration.
 
-'placeholder image for pub plat content tab'
+<< placeholder image for pub plat content tab >> 
 
 ## Verify your detection rule in production
 
