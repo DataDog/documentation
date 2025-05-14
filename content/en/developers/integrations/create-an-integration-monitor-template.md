@@ -24,9 +24,9 @@ In your Datadog sandbox, create a monitor.
 Follow the [best practices](#configuration-best-practices) listed in this guide to configure your monitor.
 
 ## Upload your monitor 
-Within your integration in the Integration Developer Platform, navigate to the Content tab. From there, select **import monitor** to choose from a list of available monitors. You can upload up to 10 monitors to include with your integration.
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From there, select **import monitor** to choose from a list of available monitors. You can select up to 10 monitors to include with your integration.
 
-"placeholder for picture of publishing platform content page"
+<< placeholder for picture of publishing platform content page >> 
 
 ## Verify your monitor in production
 
