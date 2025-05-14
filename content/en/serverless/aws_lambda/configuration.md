@@ -57,9 +57,7 @@ To enable threat monitoring, add the following environment variables to your dep
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
-
-[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][49].
 
 To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
@@ -128,7 +126,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and apply the tags using the `env`, `service`, `version` and `tags` parameters. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     env: "dev",
     service: "web",
@@ -215,7 +213,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and set the `captureLambdaPayload` parameter to `true`. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     captureLambdaPayload: true
 });
@@ -317,6 +315,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
+| `lambda_msk` | `"lambda_msk:newServiceName"` |
 
 #### Rename specific services
 
@@ -332,6 +331,7 @@ For a more granular approach, use these service-specific identifiers:
 | Kinesis | Stream name | `"MyStream:newServiceName"` |
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+| MSK | Cluster name | `"ExampleCluster:newServiceName"` |
 
 #### Examples with description
 
@@ -408,7 +408,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: true
 });
@@ -461,7 +461,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: false
 });
@@ -742,3 +742,5 @@ If you have trouble configuring your installations, set the environment variable
 [46]: https://docs.datadoghq.com/tracing/glossary/#services
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
+[49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+

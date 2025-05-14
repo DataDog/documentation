@@ -189,7 +189,7 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /tests/test_impact_analysis/
 [13]: /tests/#parameterized-test-configurations
 [14]: /tests/#supported-features
