@@ -92,7 +92,7 @@ An example task definition:
   "cpu": "256",
   "memory": "512"
 }
-````
+```
 
 ## Configure the ECS service
 
