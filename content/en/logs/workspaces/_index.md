@@ -7,10 +7,6 @@ further_reading:
   text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="Access the Preview!" >}}
-  Log Workspaces is in Preview.
-{{< /callout >}}
-
 ## Overview
 During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Log Workspaces to run queries to:
 
