@@ -54323,7 +54323,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get the schedule of an on-call user
+      summary: Get the schedule on-call user
       tags:
       - On-Call
       x-menu-order: 11
