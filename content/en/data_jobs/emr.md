@@ -181,4 +181,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/emr.go
 [13]: https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html
-[14]: https://docs.datadoghq.com/data_jobs/kubernetes/
+[14]: /data_jobs/kubernetes/
