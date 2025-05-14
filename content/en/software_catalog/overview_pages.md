@@ -52,7 +52,7 @@ Provide values for the page-level filters to tailor the developer overview page 
 
 #### Clone for further customization
 
-If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard outside of the IDP overview page.
+If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard that lives outside of IDP.
 
 1. Select **Clone as dashboard** to create a customizable dashboard with content from the **My Workspace** page.
 1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
