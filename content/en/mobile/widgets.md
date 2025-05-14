@@ -58,7 +58,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_incident_widget_may_2025.png" alt="Datadog incident mobile widget displayed on Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/android_incidents_widget_may_2025.png" alt="Datadog incident mobile widget displayed on Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap the widget title to configure.
 2. Tap **Organization** to fetch open incidents from the selected organization.
@@ -116,7 +116,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_slo_widget_may_2025" alt="Application Uptime SLO widgets displayed iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/ios_slo_widget_may_2025.png" alt="Application Uptime SLO widgets displayed iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget**.
@@ -302,7 +302,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_shift_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/ios_shifts_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget** to bring up the configure screen.
@@ -313,7 +313,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_shift_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/android_shifts_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
 2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts.
