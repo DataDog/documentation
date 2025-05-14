@@ -1,8 +1,6 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
 disable_toc: false
-aliases:
-- /opentelemetry/getting_started
 further_reading:
 - link: "/opentelemetry/guide"
   tag: "Documentation"
