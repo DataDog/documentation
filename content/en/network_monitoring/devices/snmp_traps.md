@@ -37,7 +37,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
          authKey: myAuthKey
          authProtocol: "SHA"
          privKey: myPrivKey
-         privProtocol: "AES" 
+         privProtocol: "AES"
        - user: "user"
          authKey: myAuthKey
          authProtocol: "MD5"
@@ -51,6 +51,8 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
    ```
 
    **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
+
+   **Note**: Ensure that your [firewall rules][7] allow incoming UDP traffic on the configured port.
 
 2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][2] with the following search query: `source:snmp-traps`.
 
@@ -88,9 +90,9 @@ Binding to a port number under 1024 requires elevated permissions. To bind to a 
 
 As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
 
-The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap. 
+The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap.
 
-It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither. 
+It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither.
 
 ## Resolution
 
@@ -175,3 +177,4 @@ If there are errors due to missing dependencies and you have access to the missi
 [4]: /developers/integrations/python
 [5]: https://pypi.org/project/pysmi/
 [6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
