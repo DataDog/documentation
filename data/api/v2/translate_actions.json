@@ -1373,7 +1373,7 @@
   },
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
-    "summary": "Get the schedule of an on-call user"
+    "summary": "Get the schedule on-call user"
   },
   "GetOnCallTeamRoutingRules": {
     "description": "Get a team's on-call routing rules",
