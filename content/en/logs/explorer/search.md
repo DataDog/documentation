@@ -19,7 +19,7 @@ further_reading:
 
 The [Logs Explorer][5] lets you search and view individual logs as a list. However, the most valuable insights often come from aggregating logs at scale. Using the search feature, you can filter logs and visualize them as timeseries charts, top lists, tree maps, pie charts, or tables to better understand trends, patterns, and outliers across your log data.
 
-## Natural language query
+## Natural language queries
 
 <div class="alert alert-info">Natural language queries for Logs is in Preview. To access this feature, request through <a href="https://www.datadoghq.com/product-preview/natural-language-queries-for-logs/">this form</a>.</div>
 
