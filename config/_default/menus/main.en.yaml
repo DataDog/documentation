@@ -1571,11 +1571,16 @@ menu:
       pre: notebook
       parent: platform_heading
       weight: 20000
+    - name: Advanced Analysis
+      url: notebooks/computation/
+      parent: notebooks
+      identifier: notebooks_computation
+      weight: 1
     - name: Guides
       url: notebooks/guide
       parent: notebooks
       identifier: notebooks_guide
-      weight: 1
+      weight: 2
     - name: DDSQL Editor
       url: ddsql_editor/
       pre: ddsql
