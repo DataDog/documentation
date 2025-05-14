@@ -132,7 +132,7 @@ metadata:
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"]  
         }
       ]
