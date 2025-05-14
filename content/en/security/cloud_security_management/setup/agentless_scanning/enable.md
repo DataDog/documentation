@@ -27,29 +27,47 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
-- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process.<br><br>
-  {{< collapse-content title="AWS Host and container scanning permissions" level="h5" >}}
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are limited to the strict necessary scope of the target scans.<br><br>
+  {{< collapse-content title="AWS scanning permissions" level="h5" >}}
+  <p>Scanning permissions:</p>
   <ul>
-    <li><code>ec2:DescribeVolumes</code></li>
-    <li><code>ec2:CreateTags</code></li>
-    <li><code>ec2:CreateSnapshot</code></li>
-    <li><code>ec2:DeleteSnapshot</code></li>
-    <li><code>ec2:DescribeSnapshots</code></li>
-    <li><code>ec2:DescribeSnapshotAttribute</code></li>
-    <li><code>ebs:ListSnapshotBlocks</code></li>
-    <li><code>ebs:ListChangedBlocks</code></li>
     <li><code>ebs:GetSnapshotBlock</code></li>
+    <li><code>ebs:ListChangedBlocks</code></li>
+    <li><code>ebs:ListSnapshotBlocks</code></li>
+    <li><code>ec2:CopyImage</code></li>
+    <li><code>ec2:CopySnapshot</code></li>
+    <li><code>ec2:CreateSnapshot</code></li>
+    <li><code>ec2:CreateTags</code></li>
+    <li><code>ec2:DeleteSnapshot</code></li>
+    <li><code>ec2:DeregisterImage</code></li>
+    <li><code>ec2:DescribeSnapshotAttribute</code></li>
+    <li><code>ec2:DescribeSnapshots</code></li>
+    <li><code>ec2:DescribeVolumes</code></li>
+    <li><code>ecr:BatchGetImage</code></li>
     <li><code>ecr:GetAuthorizationToken</code></li>
     <li><code>ecr:GetDownloadUrlForLayer</code></li>
-    <li><code>ecr:BatchGetImage</code></li>
+    <li><code>kms:CreateGrant</code></li>
+    <li><code>kms:Decrypt</code></li>
+    <li><code>kms:DescribeKey</code></li>
+    <li><code>lambda:GetFunction</code></li>
+    <li><code>lambda:GetLayerVersion</code></li>
+  </ul>
+  <p>Autoscaling permissions on the `DatadogAgentlessScanner` resource:</p>
+  <ul>
+    <li><code>autoscaling:DescribeAutoScalingGroups</code></li>
+    <li><code>autoscaling:SetDesiredCapacity</code></li>
+    <li><code>autoscaling:StartInstanceRefresh</code></li>
+    <li><code>ec2:GetConsoleOutput</code></li>
+  </ul>
+  <p>Only when Sensitive Data Scanning (DSPM) is enabled:</p>
+  <ul>
+    <li><code>kms:GenerateDataKey</code></li>
+    <li><code>s3:GetObject</code></li>
+    <li><code>s3:ListBucket</code></li>
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="AWS Lambda scanning permissions" level="h5" >}}
-  <ul><li><code>lambda:GetFunction</code></li></ul>
-  {{< /collapse-content >}}
-
-  {{< collapse-content title="Azure Host scanning permissions" level="h5" >}}
+  {{< collapse-content title="Azure scanning permissions" level="h5" >}}
   <ul>
     <li><code>Microsoft.Compute/virtualMachines/read</code></li>
     <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
