@@ -102,7 +102,7 @@ And you:
 - Have a firewall between your source and your Workers, ensure traffic is allowed over your chosen port between the source and the Worker.
 - Have a firewall between the Workers and your destination, make sure it allows traffic from your Workers to the destination over the defined port.
 
-You can test your connectivity with curl. For example, if you have a Datadog Agent source, the curl command looks something like this:
+You can test your connectivity to your Observability Pipelines Worker endpoint using the `curl` command from your source location, provided that you have shell access to the source machine. For example, if you have a Datadog Agent source, the curl command looks something like this:
 
 ```
 curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.com:80/api/v2/logs' -d '{"ddsource": "my_datadog","ddtags": "env:test","hostname": "i-02a4fxxxxx","message": "hello","service": "test"}' -v
