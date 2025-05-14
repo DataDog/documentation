@@ -31,7 +31,7 @@ You can update your Reliability Overview report view in the following ways:
  
 - **Switch the aggregation between "Service" or "Team"**: View your organization's SLO and Incident performance by service/team groupings to identify top- and bottom-performing areas. 
 
-   **Note**: Service/team groupings are based on the `service` or `team` tags from your SLOs and properties from your Incidents.
+   **Note**: Service/team groupings are based on the **service** or **team** tag added to your SLOs, and the **services** or **teams** properties added to your Incidents.
 
 - **View "Daily", "Weekly", or "Monthly" historical information**: Update the historical SLO and Incident trends to your desired granularity.
 - **Add filters to scope the data**: Filter by teams, services, and incident severity and state.
@@ -51,7 +51,7 @@ To customize the dashboard, you can:
 - Add widgets that are not included in the default view
 - Add filters to the existing widgets (for example, you can filter Incidents based on "Detection Method" not provided in the out-of-the-box report)
 
-### Use the SLO summary score
+## Use the SLO summary score
 
 {{% summary_score %}}
 

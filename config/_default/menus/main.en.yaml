@@ -2320,21 +2320,16 @@ menu:
       parent: slos
       identifier: burn_rate
       weight: 5
-    - name: OOTB Dashboard
-      url: service_management/service_level_objectives/ootb_dashboard/
-      parent: slos
-      identifier: slos_ootb_dashboard
-      weight: 6
     - name: Engineering Reports
       url: service_management/service_level_objectives/eng_reports/
       parent: slos
       identifier: slos_eng_reports
-      weight: 7
+      weight: 6
     - name: Guides
       url: service_management/service_level_objectives/guide/
       parent: slos
       identifier: slos_guides
-      weight: 8
+      weight: 7
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents

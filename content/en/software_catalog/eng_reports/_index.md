@@ -11,7 +11,7 @@ Engineering Reports are in Preview. Request access [here][LINK].
 
 ## Overview
 
-With Engineering Reports, you get access to out-of-the-box reports on product reliability, product health, and engineering standards and processes. You can use these reports to uncover key insights, identify gaps, and drive improvements across your organization. Additionally, Engineering Reports include aggregated views of key engineering metrics that are well suited for directors and executive leadership.
+Engineering Reports provide you with out-of-the-box, executive-level reports on product reliability, adherence to engineering standards, DORA metrics, and more. You can use these reports to uncover key insights, identify gaps, and drive improvements across your organization. The reports include aggregated views of key engineering metrics that are well suited for directors and executive leadership.
 
 {{< whatsnext desc="Explore the following reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
