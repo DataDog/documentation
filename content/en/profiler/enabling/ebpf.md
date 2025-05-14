@@ -25,7 +25,7 @@ The eBPF profiler is our eBPF-based host profiler built on OpenTelemetry and des
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
 
 Supported operating systems
-: Linux (glibc or musl)
+: Linux
 
 Supported architecture
 : `amd64` or `arm64` processors
