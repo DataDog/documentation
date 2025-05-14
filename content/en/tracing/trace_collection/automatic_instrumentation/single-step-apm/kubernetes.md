@@ -13,7 +13,7 @@ further_reading:
 
 <div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.</div>
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][10] your applications in one step, with no additional configuration required. 
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications in one step, with no additional configuration required. 
 
 ## Requirements
 
@@ -497,6 +497,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[3]: /tracing/glossary/#instrumentation
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 
