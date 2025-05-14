@@ -1,5 +1,5 @@
 ---
-title: Lambda Web Adapter (Beta)
+title: Lambda Web Adapter (Preview)
 ---
 
 [Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) is a technology that allows you to run web applications on AWS Lambda. Datadog offers support for Lambda Web Adapter for NodeJs and Python runtimes, allowing you to monitor your web applications running on AWS Lambda.
