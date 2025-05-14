@@ -34,7 +34,7 @@ Integration tiles are a component of integrations at Datadog.
 
 Follow these steps to create a new integration with Datadog.
 
-**1. Apply to the Datadog Partner Network.**
+1. **Apply to the Datadog Partner Network.**
 Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
 2. **Request a Datadog sandbox account** for development via the Datadog Partner Network portal.
 3. **Start developing your integration** using the Integration Developer Platform.
@@ -64,8 +64,6 @@ The Datadog Marketplace is a commercial platform for Technology Partners to _sel
 Marketplace integrations are ideal for:
 * System integrators with specialized Datadog product expertise.
 * Partners offering professional services to enhance Datadog adoption.
-
-See the [Build a Marketplace Offering documentation][4] to learn more about how to start building for the Datadog Marketplace. 
 
 |                          | **OOTB Integrations**                                                                 | **Marketplace Integrations**                                                                                   |
 |--------------------------|----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
