@@ -56,7 +56,7 @@ Share your organization name with your Datadog contact(`IS THIS THE CSM`?) and t
 
 
 <!---------------------------------------- GROUP 2------------------------------------------------------------->
-#### when Datadog confirms your new organization to be your secondary failover organization
+#### when Datadog confirms your new organization as your secondary failover organization
 {{% collapse-content title=" 3. Confirm the public IDs of your orgs" level="h5" %}}
 Once the Datadog team has completed the configuration of the designated orgs, they will share with you the public IDs of the primary org and the DDR org. You can confirm these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
 
@@ -105,14 +105,16 @@ curl -v -H "Content-Type: application/json" -H
 {{% collapse-content title=" 5. Create your Datadog API and App key for syncing" level="h5" %}}
 At the secondary Datadog site, create a set of API key and App key. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
 
-For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your agent.
+For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your Agent.
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 6. Configure Single Sign On for the Datadog App" level="h5" %}}
-Go to your [Organization Settings][1] to configure SAML or Google Login for your users. **Single Sign On (SSO) is highly recommended** to enable all your users to be able to seamlessly be able to login to your DR organization during an outage. 
+Go to your [Organization Settings][1] to configure SAML or Google Login for your users. **Single Sign On (SSO) is highly recommended** to enable all your users to be able to seamlessly login to your Disater Recovery organization during an outage. 
 
-You must invite your users to your Disaster Recorvery organization and give them appropriate roles and permissions. Alternatively to streamline this operation you can use [Just-in-Time provisioning with SAML][2].
+You must invite your users to your Disaster Recovery organization and give them appropriate roles and permissions. 
+
+Alternatively to streamline this operation you can use [Just-in-Time provisioning with SAML][2].
 {{% /collapse-content %}}
 
 
@@ -158,9 +160,9 @@ Verify that your secondary org is accessible and that your Dashboards and Monito
 
 
 {{% collapse-content title=" 9. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
-Remote configuration (RC) is a Datadog capability that allows you to remotely configure and change the behavior of Datadog agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control; alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
+Remote configuration (RC) is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control; alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
 
-Remote configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your agent. See the documentation for [Remote configuration][7] for more information.
+Remote configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
 {{% /collapse-content %}}
 
 
@@ -188,7 +190,7 @@ During the preview, we recommend having `failover_metrics`, `failover_logs` and 
 {{% collapse-content title=" 11. Activate and test DDR failover" level="h5" %}}
 There are several methods that can be used for activating/testing the DDR failover. 
 
-For Agent deployments in non-containerized environments, use the below agent CLI commands:
+For Agent deployments in non-containerized environments, use the below Agent CLI commands:
 
 ```shell
 agent config set multi_region_failover.failover_metrics true
