@@ -89,16 +89,16 @@ Ruby, .NET, and Java runtime libraries do not require the `DD_LAMBDA_FIPS_MODE` 
 To use FIPS-compliant monitoring for your AWS Lambda functions:
 
 1. **Select the FIPS-compliant extension layer**:
-   - Use the appropriate FIPS extension layer ARN for your architecture (x86 or ARM) and region (commercial or GovCloud)
+   - Use the appropriate FIPS extension layer ARN for your architecture (x86 or ARM) and region (commercial or GovCloud).
 
 2. **Configure environment variables**:
-   - For GovCloud environments, `DD_LAMBDA_FIPS_MODE` is enabled by default
-   - For commercial regions, set `DD_LAMBDA_FIPS_MODE=true` to enable FIPS mode
-   - For complete end-to-end FIPS compliance, set `DD_SITE` to `ddog-gov.com` to send data to the US1-FED site
+   - For GovCloud environments, `DD_LAMBDA_FIPS_MODE` is enabled by default.
+   - For commercial regions, set `DD_LAMBDA_FIPS_MODE=true` to enable FIPS mode.
+   - For complete end-to-end FIPS compliance, set `DD_SITE` to `ddog-gov.com` to send data to the US1-FED site.
 
 3. **Follow the standard installation instructions**:
-   - Refer to the [installation guides][1] for language-specific configurations
-   - Use the FIPS extension layer ARNs instead of the standard extension layers
+   - Refer to the [installation guides][1] for language-specific configurations.
+   - Use the FIPS extension layer ARNs instead of the standard extension layers.
 
 For detailed installation instructions specific to your language runtime and deployment method, see the [installation documentation][1].
 

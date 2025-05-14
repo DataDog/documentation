@@ -608,7 +608,7 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
    - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
-   - Note that while the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
 
 ## Propagate trace context over AWS resources
 
