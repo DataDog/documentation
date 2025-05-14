@@ -1,0 +1,87 @@
+---
+title: APM Recommendations
+description: Learn how to optimize your application's performance and reliability with APM Recommendations.
+algolia:
+  tags:
+    - apm recommendations
+    - apm recommendation
+    - application performance monitoring
+    - performance recommendations
+    - reliability recommendations
+    - tracing
+further_reading:
+  - link: "/tracing/"
+    tag: "Documentation"
+    text: "Learn about Application Performance Monitoring (APM)"
+  - link: "/tracing/guide/apm_dashboard/"
+    tag: "Documentation"
+    text: "APM Dashboard Guide"
+  - link: "/cloud_cost_management/recommendations/"
+    tag: "Documentation"
+    text: "Cloud Cost Recommendations"
+  - link: "/database_monitoring/recommendations/"
+    tag: "Documentation"
+    text: "DBM Recommendations"
+
+multifiltersearch:
+  # "id" must match the corresponding key in the "data" object
+  headers:
+    - name: Recommendation Category
+      id: category
+      filter_by: true
+    - name: Recommendation Type
+      id: recommendation_type
+      filter_by: true
+    - name: Scope of Recommendation
+      id: scope
+      filter_by: true
+    - name: Recommendation Description
+      id: recommendation_description
+    - name: Recommendation Prerequisite
+      id: recommendation_prerequisite
+  data:
+    - category: Performance
+      recommendation_type: N+1 queries on Database
+      scope: Backend application
+      recommendation_description: A backend application calls sequentially the same Database instead of batching queries.
+      recommendation_prerequisite: APM
+    - category: Reliability
+      recommendation_type: <Recommendation Type>
+      scope: <Scope of Recommendation>
+      recommendation_description: <Description of the reliability recommendation.>
+      recommendation_prerequisite: <Prerequisites or integrations required.>
+    - category: Error rate
+      recommendation_type: New errors
+      scope: Backend applications
+      recommendation_description: A backend application started to generate a new Error signature.
+      recommendation_prerequisite: Error Tracking
+
+---
+
+<div class="alert alert-warning">APM Recommendations are in Preview. Features and recommendations may change before general availability.</div>
+
+# APM Recommendations
+
+APM Recommendations help you optimize your applications' performance, reliability, and error rates by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to help you:
+
+- Identify and resolve performance bottlenecks
+- Improve service reliability and uptime
+- Reduce error rates and improve end-user experience
+
+## How it works
+
+APM Recommendations are based on data collected from different parts of your stack:
+
+- Sessions and user journeys from Real User Monitoring (RUM)
+- Distributed traces from Application Performance Monitoring (APM)
+- Error data from Error Tracking
+- Database telemetry from Database Monitoring (DBM)
+
+By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
+
+## Supported Recommendations
+
+
+<!-- The table below is auto-generated. Replace the placeholder data with actual recommendations as they become available. -->
+
+{{< multifiltersearch >}} 
