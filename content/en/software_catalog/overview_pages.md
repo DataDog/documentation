@@ -7,14 +7,14 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-The Developer Landing Page is in Preview. Request access [here][LINK].
+The Developer Overview Page is in Preview. Request access [here][LINK].
 {{< /callout >}}
 
 ## Overview
 
 Datadog's Internal Developer Platform (IDP) ships with **overview pages** that surface the information most relevant to each stakeholder:
-- **Developers** see their open tickets, pull-request queues, and team's service information.
-- **SREs** and **engineering managers** track metrics like product reliability, service health, and scorecard performance.
+- Developers get a centralized view of their action items, issues, and team's service information.
+- SREs and engineering managers get a big-picture view of product reliability, service health, scorecard performance, and other key metrics across their teams. 
 
 ## Developer overview page
 
@@ -31,8 +31,15 @@ The developer overview page centralizes the following information about your tea
 Before your team can use the developer overview page, a platform admin must connect the page widgets to data sources:
 
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
-1. Select `+ Connect data` on each widget to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
+1. Select `+ Connect data` on each widget to connect to GitHub and Jira: 
+   - "My Jira Tickets"
+   - "My Open PRs"
+   - "My Assigned PRs"
+   - "My Team's PRs"
+   - "My Services"
 
+The widgets are powered by [Datadog App Builder][9] and show demo data until you complete this step.
+   
 #### Personalizing your view
 
 Provide values for the page-level filters to tailor the developer overview page to your username and team: 
@@ -47,14 +54,14 @@ Provide values for the page-level filters to tailor the developer overview page 
 
 If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard outside of the IDP overview page.
 
-1. Select **Clone as dashboard** to create a customizable dashboard.
+1. Select **Clone as dashboard** to create a customizable dashboard with content from the **My Workspace** page.
 1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
    - Create a widget to capture PagerDuty on call information. 
    - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
    
    See the [Embedded Apps][2] documentation to learn more about creating widgets.
 
-### Default widgets
+### Page features
 
 The following widgets are included by default on the developer overview page.
 
@@ -68,7 +75,7 @@ Lists open Jira issues assigned to your email. Tickets with the status **Done** 
 
 #### GitHub PRs
 
-- **My open PRs** — Pull requests you have opened.  
+- **My open PRs** — Pull requests you have created.  
 - **My assigned PRs** — Pull requests you are assigned to review.
 - **My team's PRs** — Pull requests opened by teammates in the selected GitHub team.
 
@@ -97,4 +104,5 @@ Captures alerts from [Datadog Watchdog][5].
 [6]: /monitors/
 [7]: /service_management/service_level_objectives/
 [8]: /account_management/teams/
+[9]: /actions/app_builder/#apps-created-by-datadog
 
