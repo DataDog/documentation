@@ -72,11 +72,11 @@ To create a cost report:
 
 1. Navigate to **Cloud Cost** > **Analyze** > **Report**
 2. From this page, you can select a report template to start with, or click **New Report** to build a custom report
-3. [Filter][#filters] by provider(s), tags, and tag values to show costs from
-4. Use the dropdown to [group the data][#grouping-and-visualization] by specific attributes
+3. [Filter](#filters) by provider(s), tags, and tag values to show costs from
+4. Use the dropdown to [group the data](#grouping-and-visualization) by specific attributes
 5. Select a timeframe view
 6. Change the visualization to surface the information you need
-7. Optionally, configure any [advanced options][#additional-options], such as cost type, container allocation, or show usage charges only
+7. Optionally, configure any [advanced options](#additional-options), such as cost type, container allocation, or show usage charges only
 8. Click **Save** at the top right of the page
 
 ## Share reports with your team
