@@ -314,7 +314,7 @@ When set to `true` db spans get assigned the remote database hostname as the ser
 `dd.appsec.enabled`
 : **Environment Variable**: `DD_APPSEC_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+When `true`, enables Datadog App and API Protection Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
 For more information, see [Enabling AAP for Java][19].
 
 ### Errors
@@ -647,6 +647,6 @@ Deprecated since version 1.9.0
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
-[19]: /security/application_security/threats/setup/threat_detection/java/
+[19]: /security/application_security/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces

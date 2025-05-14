@@ -17,13 +17,23 @@ further_reading:
 
 ## Overview
 
-While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
+The [Logs Explorer][5] lets you search and view individual logs as a list. However, the most valuable insights often come from aggregating logs at scale. Using the search feature, you can filter logs and visualize them as timeseries charts, top lists, tree maps, pie charts, or tables to better understand trends, patterns, and outliers across your log data.
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+## Natural language query
+
+<div class="alert alert-info">Natural language queries for Logs is in Preview. To access this feature, request through <a href="https://www.datadoghq.com/product-preview/natural-language-queries-for-logs/">this form</a>.</div>
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click **Ask** in the search field.
+
+{{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Natural language query in Log Explorer showing how to search for logs using plain English phrases" video=true >}}
+
+The system translates natural language input into Datadog queries and understands context such as services, attributes, tags, and time ranges. It also detects relevant fields automatically and enables users to create visualizations using simple descriptions—for example, "Top 20 services by errors" or "Show errors from service X in the past 24 hours."
 
 ## Search query
 
-For example, to filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
+A log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+
+To filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
 
 {{< img src="logs/explorer/search_filter.png" alt="Create a search query in the Log Explorer that filters for error logs of rejected payments for a web store service" style="width:100%;" >}}
 

@@ -232,7 +232,7 @@ Click **View in AAP** to investigate further using [Datadog App and API Protecti
 
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
-[1]: /security/application_security/how-appsec-works/
+[1]: /security/application_security/how-it-works/
 {{% /tab %}}
 {{% tab "Profiles" %}}
 
