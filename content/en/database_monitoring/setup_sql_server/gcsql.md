@@ -102,7 +102,7 @@ The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 18 for SQL Server}'
+driver: 'ODBC Driver 18 for SQL Server'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
