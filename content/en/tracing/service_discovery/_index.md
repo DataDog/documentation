@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Service Discovery provides visibility into the monitoring coverage of your application services within Datadog. It automatically discovers services running across your infrastructure, helping you identify potential observability gaps, such as services running without APM enabled.
+Service Discovery provides visibility into the monitoring coverage of your services within Datadog. It automatically discovers services running across your infrastructure, helps you identify potential observability gaps, and provides relevant information to triage and take action.
 
 Service Discovery is accessed through the **[Fleet Automation > Services][1]** page.
 
@@ -22,7 +22,7 @@ Service Discovery is accessed through the **[Fleet Automation > Services][1]** p
 
 - **Discover all services**: View both monitored and unmonitored services running in your fleet in one centralized location.
 - **Demystify services**: Understand the potential importance of unmonitored services using contextual information like infrastructure footprint, resource consumption, network activity, configuration details, and tags.
-- **Close observability gaps**: Receive recommendations and guided instructions to instrument services with APM or enable other relevant Datadog products such as [Data Streams Monitoring (DSM)][3], prioritizing Single Step Instrumentation where available.
+- **Close observability gaps**: Receive recommendations and guided instructions to instrument services with APM or enable other relevant Datadog products such as [Data Streams Monitoring (DSM)][3].
 - **Triage effectively**: Prioritize which services to monitor using sortable metadata columns, facet filtering, and an organization-wide ignore list for noisy or irrelevant services.
 
 ### How it works
@@ -38,10 +38,11 @@ Service Discovery is accessed through the **[Fleet Automation > Services][1]** p
 
 Service Discovery automatically identifies and names services based on a priority order of available identifiers:
 
-1. Existing Datadog service tags (like `DD_SERVICE`) if present.
+1. Existing Datadog service name set using [Unified Service Tagging][5].
 2. Container labels (for containerized services).
-3. Command-line arguments and process information.
-4. Language-specific manifest files (for example, `package.json` for Node.js).
+3. Language-specific manifest files (for example, `package.json` for Node.js).
+4. Command-line arguments and process information.
+
 
 For Java enterprise web applications (specifically JBoss, Websphere, Tomcat, Jetty, and Weblogic), multiple web applications running in the same process are displayed as individual services in the unmonitored services list, with visual indicators showing they belong to the same process.
 
@@ -62,49 +63,11 @@ Service Discovery requires the Datadog Agent and is supported on specific operat
 
 Enable Service Discovery by installing the latest version of the Datadog Agent with the Service Discovery feature turned on.
 
-{{< tabs >}}
-{{% tab "Linux hosts" %}}
-
 To enable Service Discovery on Linux hosts, install the latest version of the Datadog Agent and use the toggle in the installation UI:
 
-1. Navigate to [**Fleet Automation > Install Agents**][100]
-2. Follow the installation instructions
-3. During setup, ensure that the **Service Discovery** toggle is turned on
-
-After installation, Service Discovery is automatically enabled.
-
-[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
-
-{{% /tab %}}
-
-{{% tab "Docker" %}}
-
-To enable Service Discovery for Docker containers:
-
-1. Navigate to [**Fleet Automation > Install Agents**][200]
-2. Follow the installation instructions
-3. Ensure that the **Service Discovery** toggle is turned on during setup
-
-The generated Docker `run` command includes the necessary settings to enable Service Discovery.
-
-[200]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
-
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-To enable Service Discovery for Kubernetes environments:
-
-1. Navigate to [**Fleet Automation > Install Agents**][300]
-2. Follow the installation instructions for either Helm chart or Datadog Operator
-3. Ensure that the **Service Discovery** toggle is turned on during setup
-
-The generated configuration includes the necessary settings to enable Service Discovery.
-
-[300]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-
-{{% /tab %}}
-{{< /tabs >}}
+1. Navigate to [**Fleet Automation > Install Agents**][6].
+2. Select your platform.
+3. Follow the installation instructions, and ensure that the **Service Discovery** toggle is turned on.
 
 Allow a few minutes for data to appear on the **Fleet Automation > Services** page.
 
@@ -168,4 +131,6 @@ If issues persist, collect an [Agent flare][4] and contact [Datadog Support][2].
 [2]: /help/
 [3]: /data_streams/
 [4]: /agent/troubleshooting/send_a_flare/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 
