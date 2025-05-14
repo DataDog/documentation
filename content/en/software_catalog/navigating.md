@@ -88,7 +88,7 @@ The **Security tab** provides several ways to assess and improve the security po
 - Are receiving the most attack attempts.
 - Are targeted by the most attackers.
 - Have the most severe threats, where the services are impacted by the attacks.
-- Are monitored and protected by [Application Security Management][8]
+- Are monitored and protected by [App and API Protection][8]
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
@@ -130,7 +130,7 @@ To access additional details describing your CI status and static analysis viola
 [5]: /tracing/guide/configuring-primary-operation/
 [6]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
 [7]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[8]: /security/application_security/how-appsec-works/
+[8]: /security/application_security/how-it-works/
 [9]: /cloud_cost_management/
 [10]: /cloud_cost_management/?tab=aws
 [11]: /cloud_cost_management/tag_pipelines

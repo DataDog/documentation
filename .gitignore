@@ -161,6 +161,14 @@ data/workflows/
 # semantic tag colors
 layouts/shortcodes/semantic-color.md
 
+# AWS resource collection permissions tables
+layouts/shortcodes/aws-resource-collection-cloud-cost-management.md
+layouts/shortcodes/aws-resource-collection-cloudcraft.md
+layouts/shortcodes/aws-resource-collection-cloud-security-monitoring.md
+layouts/shortcodes/aws-resource-collection-network-performance-monitoring.md
+layouts/shortcodes/aws-resource-collection-resource-catalog.md
+layouts/shortcodes/aws-resource-collection-upcoming-permissions.md
+
 # Runtime data
 pids
 *.pid
@@ -282,6 +290,10 @@ local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/pull_config_preview.yaml
 !local/bin/py/build/configuration/pull_config.yaml
 !local/bin/py/build/configuration/integration_merge.yaml
+
+# CDOCS
+layouts/partials/markdoc-assets.html
+static/cdocs
 
 # Cursor editor configuration
 .cursor/

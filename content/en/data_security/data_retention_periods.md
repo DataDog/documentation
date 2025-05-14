@@ -18,7 +18,7 @@ attributes:
        - **Indexed spans**: 15 or 30 days, determined by customer plan
        - **Services/resources statistics**: 30 days
        - **Viewed traces**: 15 months
-  - product: Application Security Management
+  - product: App and API Protection
     data_type: |
        - **Security signals**: 15 months
        - **Spans**: 90 days
@@ -40,14 +40,14 @@ attributes:
   - product: Cloud Cost Management
     data_type: | 
        - **Recommendations**: 90 days
-  - product: Cloud Security Management
+  - product: Cloud Security
     data_type: | 
        - **Findings and resolved vulnerabilities**: 15 months
   - product: Cloud SIEM
     data_type: | 
        - **Signals**: 15 months
        - **Detections, notifications, suppressions**: Retained for the duration of the account
-  - product: Cloud Workload Security
+  - product: Workload Protection
     data_type: | 
        - **Events**: 90 days
        - **Security signals**: 15 months
@@ -64,8 +64,8 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: | 
-       - **Profiles (not displayed in the UI)**: 8 days
-       - **Profiles (displayed in the UI)**: 1 year
+       - **Individual profiles (not opened in the UI)**: 8 days
+       - **Individual profiles (opened in the UI at least once)**: 1 year
        - **Profile metrics**: 90 days
   - product: Continuous Testing
     data_type: | 
@@ -80,6 +80,7 @@ attributes:
   - product: Database Monitoring
     data_type: | 
        - **Query samples**: 15 days
+       - **Query metrics**: 15 months
   - product: Datadog App
     data_type: | 
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
@@ -113,7 +114,7 @@ attributes:
     data_type: | 
        - **Netflow**: 30 days
        - **SNMP traps**: 15 days
-  - product: Network Performance Monitoring
+  - product: Cloud Network Monitoring
     data_type: | 
        - **Netflow**: 14 days
   - product: Product Analytics

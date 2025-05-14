@@ -10,9 +10,9 @@ further_reading:
 - link: "/synthetics/api_tests/http_tests/"
   tag: "Documentation"
   text: "Synthetic API Tests"
-- link: "/security/application_security/how-appsec-works/#api-security"
+- link: "/security/application_security/how-it-works/#api-security"
   tag: "Documentation"
-  text: "ASM API Security"
+  text: "AAP API Security"
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary risks to API security"
@@ -25,6 +25,12 @@ aliases:
     - /service_catalog/endpoints/discover_endpoints
     - /service_catalog/endpoints/
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+ Endpoint Observability is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 {{< img src="tracing/software_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
