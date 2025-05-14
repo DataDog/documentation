@@ -1506,54 +1506,54 @@
     "request_schema_description": "Request object for updating a single WAF exclusion filter."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Cloud Security Management Threats Agent rules",
-    "summary": "Get all CSM Threats Agent rules"
+    "description": "Get the list of Workload Protection Agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get all Workload Protection Agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Cloud Security Management Threats Agent rule with the given parameters",
-    "summary": "Create a CSM Threats Agent rule",
+    "description": "Create a new Workload Protection Agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Create a Workload Protection Agent rule",
     "request_description": "The definition of the new Agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Cloud Security Management Threats Agent rule",
-    "summary": "Delete a CSM Threats Agent rule"
+    "description": "Delete a specific Workload Protection Agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Delete a Workload Protection Agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Cloud Security Management Threats Agent rule",
-    "summary": "Get a CSM Threats Agent rule"
+    "description": "Get the details of a specific Workload Protection Agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get a Workload Protection Agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Cloud Security Management Threats Agent rule.\nReturns the Agent rule object when the request is successful.",
-    "summary": "Update a CSM Threats Agent rule",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the Agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Update a Workload Protection Agent rule",
     "request_description": "New definition of the Agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListCSMThreatsAgentPolicies": {
-    "description": "Get the list of Cloud Security Management Threats Agent policies",
-    "summary": "Get all CSM Threats Agent policies"
+    "description": "Get the list of Workload Protection Agent policies",
+    "summary": "Get all Workload Protection Agent policies"
   },
   "CreateCSMThreatsAgentPolicy": {
-    "description": "Create a new Cloud Security Management Threats Agent policy with the given parameters",
-    "summary": "Create a CSM Threats Agent policy",
+    "description": "Create a new Workload Protection Agent policy with the given parameters",
+    "summary": "Create a Workload Protection Agent policy",
     "request_description": "The definition of the new Agent policy",
     "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
-    "summary": "Get the latest CSM Threats policy"
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Cloud Security Management Threats Agent policy",
-    "summary": "Delete a CSM Threats Agent policy"
+    "description": "Delete a specific Workload Protection Agent policy",
+    "summary": "Delete a Workload Protection Agent policy"
   },
   "GetCSMThreatsAgentPolicy": {
-    "description": "Get the details of a specific Cloud Security Management Threats Agent policy",
-    "summary": "Get a CSM Threats Agent policy"
+    "description": "Get the details of a specific Workload Protection Agent policy",
+    "summary": "Get a Workload Protection Agent policy"
   },
   "UpdateCSMThreatsAgentPolicy": {
-    "description": "Update a specific Cloud Security Management Threats Agent policy.\nReturns the Agent policy object when the request is successful.",
-    "summary": "Update a CSM Threats Agent policy",
+    "description": "Update a specific Workload Protection Agent policy.\nReturns the Agent policy object when the request is successful.",
+    "summary": "Update a Workload Protection Agent policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
@@ -1858,8 +1858,8 @@
     "summary": "List vulnerable assets"
   },
   "DownloadCloudWorkloadPolicyFile": {
-    "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
-    "summary": "Get the latest Cloud Workload Security policy"
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Download the Workload Protection policy (US1-FED)"
   },
   "GetSBOM": {
     "description": "Get a single SBOM related to an asset by its type and name.\n",
@@ -1918,26 +1918,26 @@
     "request_schema_description": "Body of the notification rule patch request."
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "Get the list of Agent rules",
-    "summary": "Get all Cloud Workload Security Agent rules"
+    "description": "Get the list of Agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Get all Workload Protection Agent rules (US1-FED)"
   },
   "CreateCloudWorkloadSecurityAgentRule": {
-    "description": "Create a new Agent rule with the given parameters.",
-    "summary": "Create a Cloud Workload Security Agent rule",
+    "description": "Create a new Agent rule with the given parameters.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Create a Workload Protection Agent rule (US1-FED)",
     "request_description": "The definition of the new Agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCloudWorkloadSecurityAgentRule": {
-    "description": "Delete a specific Agent rule",
-    "summary": "Delete a Cloud Workload Security Agent rule"
+    "description": "Delete a specific Agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Delete a Workload Protection Agent rule (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "Get the details of a specific Agent rule",
-    "summary": "Get a Cloud Workload Security Agent rule"
+    "description": "Get the details of a specific Agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Get a Workload Protection Agent rule (US1-FED)"
   },
   "UpdateCloudWorkloadSecurityAgentRule": {
-    "description": "Update a specific Agent rule.\nReturns the Agent rule object when the request is successful.",
-    "summary": "Update a Cloud Workload Security Agent rule",
+    "description": "Update a specific Agent rule.\nReturns the Agent rule object when the request is successful.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Update a Workload Protection Agent rule (US1-FED)",
     "request_description": "New definition of the Agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },

@@ -55,10 +55,6 @@
     "name": "CSM Coverage Analysis",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
   },
-  "csm-threats": {
-    "name": "CSM Threats",
-    "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
-  },
   "case-management": {
     "name": "Case Management",
     "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
@@ -282,5 +278,9 @@
   "workflow-automation": {
     "name": "Workflow Automation",
     "description": "Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/)."
+  },
+  "workload-protection": {
+    "name": "Workload Protection",
+    "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   }
 }

@@ -200,41 +200,6 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCSMThreatsAgentPolicy": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent policy returns \"OK\" response"
-    }
-  ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCSMThreatsAgentPolicy": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Update a CSM Threats Agent policy returns \"OK\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
   "ArchiveCase": [
     {
       "group": "case_management",
@@ -1510,6 +1475,41 @@
       "group": "workflow_automation",
       "suffix": "",
       "description": "Update an existing Workflow returns \"Successfully updated a workflow.\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "workload_protection",
+      "suffix": "",
+      "description": "Create a Workload Protection Agent policy returns \"OK\" response"
+    }
+  ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "workload_protection",
+      "suffix": "",
+      "description": "Create a Workload Protection Agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "workload_protection",
+      "suffix": "",
+      "description": "Create a Workload Protection Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentPolicy": [
+    {
+      "group": "workload_protection",
+      "suffix": "",
+      "description": "Update a Workload Protection Agent policy returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "workload_protection",
+      "suffix": "",
+      "description": "Update a Workload Protection Agent rule (US1-FED) returns \"OK\" response"
     }
   ]
 }

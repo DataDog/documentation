@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "description": "My Agent rule",
+      "enabled": true,
+      "expression": "exec.file.name == \"sh\"",
+      "filters": [],
+      "name": "exampleworkloadprotection",
+      "policy_id": "6517fcc1-cec7-4394-a655-8d6e9d085255",
+      "product_tags": []
+    },
+    "type": "agent_rule"
+  }
+}
