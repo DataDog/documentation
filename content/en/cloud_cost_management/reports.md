@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Datadog’s Cost Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
+Datadog's Cost Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
 
 With Cost Reports, you get:
 
@@ -18,11 +18,11 @@ With Cost Reports, you get:
 * **Flexible filtering**: Filter, group, and analyze costs to gain insights into spending patterns.
 * **Optimization insights**: Identify areas for cost optimization and better budget management.
 
-## Getting started with Cost Reports
+## Getting started with cost reports
 
 Access cost reports from **Cloud Cost** > **Analyze** > **Reports**. You can create a cost report from scratch or choose a pre-built template to accelerate your workflow.
 
-### Available Templates
+### Available templates
 
 {{< img src="cloud_cost/cost_reports/templates.png" alt="Diagram illustrating available Cost Report templates" style="width:90%;" >}}
 
@@ -56,7 +56,7 @@ Cost reports can be organized by various dimensions, including:
 Visualization options include bar charts, summaries, or day-over-day views, which help in spotting trends and anomalies in cloud spending.
 
 
-### Additional Options
+### Additional options
 
 {{< img src="cloud_cost/cost_reports/advanced_options.png" alt="Diagram illustrating available Cost Report advanced options" style="width:90%;" >}}
 
@@ -88,9 +88,9 @@ Once you've built a report, it's easy to save and share it across your organizat
 * Share URLs with teammates to collaborate in real-time
 * Export report views to Dashboards, CSV, or PNGs
 
-### Start Creating Cost Reports Today
+### Start creating cost reports today
 
-Whether you're a FinOps analyst or part of a finance team, Datadog’s Cost Reports helps you take control of your cloud costs—quickly, clearly, and collaboratively.
+Whether you're a FinOps analyst or part of a finance team, Datadog's Cost Reports helps you take control of your cloud costs—quickly, clearly, and collaboratively.
 
 [1]: /cloud_cost_management/aws/
 [2]: /cloud_cost_management/azure/?tab=billingaccounts
