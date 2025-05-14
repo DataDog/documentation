@@ -20,7 +20,7 @@ Access your Storage Monitoring data by navigating to **Infrastructure > Storage 
 {{< tabs >}}
 {{% tab "Recommended: Storage Monitoring UI" %}}
 
-The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][https://app.datadoghq.com/storage-monitoring?mConfigure=true]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
+The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][1]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
 
 1. Go to Datadog > Infrastructure > Storage Monitoring.
 
