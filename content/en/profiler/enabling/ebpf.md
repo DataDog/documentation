@@ -41,7 +41,7 @@ Debugging information
 
 ## Installation
 
-The profiler can be used either as a standalone executable or as a library. Skip to [library installation instructions](#library) if you want to use it as a library.
+The profiler can be used as a standalone executable.
 
 ### Running the Profiler
 If the host is running workloads inside containers, it is recommended to run the profiler inside a container as well. A container image is [available][5].
