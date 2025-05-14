@@ -69,7 +69,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
@@ -80,7 +80,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
@@ -184,7 +184,7 @@ The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 18 for SQL Server}'
+driver: 'ODBC Driver 18 for SQL Server'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
@@ -347,7 +347,7 @@ Follow the steps below to set up the SQL Server integration, using the [Operator
                   username: datadog
                   password: 'ENC[datadog_user_database_password]'
                   connector: 'odbc'
-                  driver: 'FreeTDS'
+                  driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
                   # Optional: For additional tags
                   tags:  
@@ -383,7 +383,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'FreeTDS'
+            driver: 'ODBC Driver 18 for SQL Server'
             # Optional: For additional tags
             tags: 
               - 'service:<CUSTOM_SERVICE>'
@@ -419,7 +419,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     # Optional: For additional tags  
     tags: 
       - 'service:<CUSTOM_SERVICE>'
