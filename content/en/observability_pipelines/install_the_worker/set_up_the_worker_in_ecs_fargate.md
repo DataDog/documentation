@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-This document goes over one of the ways how you can set up the Observability Pipelines Worker in ECS Fargate.
+This document goes over one of the ways you can set up the Observability Pipelines Worker in ECS Fargate.
 
 ## Setup
 
