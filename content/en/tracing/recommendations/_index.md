@@ -84,4 +84,4 @@ By looking at these sources together, Datadog finds ways to help you improve per
 
 <!-- The table below is auto-generated. Replace the placeholder data with actual recommendations as they become available. -->
 
-{{< multifiltersearch >}} 
+{{< multifilter-search >}} 
