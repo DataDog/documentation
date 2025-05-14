@@ -24803,7 +24803,8 @@ components:
           description: Optional prefix for object keys within the GCS bucket.
           type: string
         metadata:
-          description: Custom metadata key-value pairs added to each object.
+          description: Custom metadata to attach to each object uploaded to the GCS
+            bucket.
           items:
             $ref: '#/components/schemas/ObservabilityPipelineMetadataEntry'
           type: array
@@ -24819,7 +24820,6 @@ components:
       - auth
       - storage_class
       - acl
-      - metadata
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -25098,8 +25098,7 @@ components:
       x-enum-varnames:
       - LOGSTASH
     ObservabilityPipelineMetadataEntry:
-      description: A custom metadata entry to attach to each object uploaded to the
-        GCS bucket.
+      description: A custom metadata entry.
       properties:
         name:
           description: The metadata key.
