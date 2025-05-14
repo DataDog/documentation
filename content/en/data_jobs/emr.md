@@ -8,7 +8,7 @@ further_reading:
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
-If you are using [EMR on EKS][13], follow our [instructions for setting up DJM on Kubernetes[14].
+If you are using [EMR on EKS][13], follow our [instructions for setting up DJM on Kubernetes][14].
 
 ## Requirements
 
