@@ -1,5 +1,5 @@
 {
-    "Alert": {
+    "Alert box": {
         "prefix": ";;alert",
         "body": ["{% alert level=\"${1|info,warning,danger|}\" %}", "${2:This is an alert message.}", "{% /alert %}"],
         "description": "Markdoc alert block with a level attribute (info, warning, danger)"
@@ -23,6 +23,25 @@
             "```"
         ],
         "description": "Markdoc code block with attributes and tabstop choices"
+    },
+
+    "Definition list": {
+        "prefix": ";;list",
+        "body": [
+            "Service",
+            "",
+            ": Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.",
+            "",
+            "Resource",
+            "",
+            ": Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.",
+            "",
+            "`clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`",
+            ": Required. A list of node selector terms. The terms are ORed.",
+            "`site`",
+            ": Set the site of the Datadog intake for Agent data:  {{< region-param key=\"dd_site\" code=\"true\" >}}. Defaults to `datadoghq.com`."
+        ],
+        "description": "Description list"
     },
 
     "If": {
@@ -49,7 +68,7 @@
         "description": "Markdoc video tag using img with video attribute"
     },
 
-    "DD site (region param)": {
+    "Region site address": {
         "prefix": ";;region-param",
         "body": [
             "{% region-param key=\"${1:dd_site}\" code=${2|false,true|} link=${3|false,true|} text=\"${4:Custom link text}\" /%}"
@@ -57,8 +76,8 @@
         "description": "Markdoc region-param tag with attribute choices"
     },
 
-    "Site region": {
-        "prefix": ";;site-region",
+    "Region selector": {
+        "prefix": ";;region",
         "body": [
             "{% site-region region=\"${1|us,us3,us5,eu,ap1,gov|}\" %}",
             "${2:Content for this region.}",
@@ -102,8 +121,8 @@
         "description": "Markdoc tabs block with two labeled tabs"
     },
 
-    "X (checkmark)": {
-        "prefix": ";;x",
+    "Check mark": {
+        "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"
     }
