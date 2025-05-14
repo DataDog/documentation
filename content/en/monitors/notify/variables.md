@@ -141,13 +141,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-
-**Note**: To check if a `<TAG_VARIABLE>` exists, use an empty string for the `<COMPARISON_STRING>`.
-```text
-{{#is_match "role.name" ""}}
-  This displays if the attribute or tag exists, including empty value
-{{/is_match}}
-```
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details. 
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
