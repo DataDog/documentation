@@ -606,8 +606,9 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed, as these runtimes do not make direct API calls.
 
-4. Configure your Lambda function to use the US1-FED Datadog site:
-   - Set the `DD_SITE` to `ddog-gov.com` (required for FIPS compliance)
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
+   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
+   - Note that while the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints
 
 ## Propagate trace context over AWS resources
 

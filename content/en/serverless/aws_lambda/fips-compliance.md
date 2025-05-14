@@ -13,7 +13,7 @@ algolia:
 ---
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The FIPS-compliant Datadog Lambda extension is available all AWS regions but should only be used for sending data to the US1-FED region.</div>
+<div class="alert alert-warning">The FIPS-compliant Datadog Lambda extension is available in all AWS regions. While you can use these FIPS-compliant Lambda components with any Datadog site, end-to-end FIPS compliance requires sending data to the US1-FED site (ddog-gov.com).</div>
 {{< /site-region >}}
 
 Datadog provides FIPS-compliant monitoring for AWS Lambda functions through the use of FIPS-certified cryptographic modules and specially designed Lambda extension layers.
@@ -94,7 +94,7 @@ To use FIPS-compliant monitoring for your AWS Lambda functions:
 2. **Configure environment variables**:
    - For GovCloud environments, `DD_LAMBDA_FIPS_MODE` is enabled by default
    - For commercial regions, set `DD_LAMBDA_FIPS_MODE=true` to enable FIPS mode
-   - Set `DD_SITE` to `ddog-gov.com` to send data to the US1-FED site
+   - For complete end-to-end FIPS compliance, set `DD_SITE` to `ddog-gov.com` to send data to the US1-FED site
 
 3. **Follow the standard installation instructions**:
    - Refer to the [installation guides][1] for language-specific configurations
@@ -104,7 +104,7 @@ For detailed installation instructions specific to your language runtime and dep
 
 ## Limitations and Considerations
 
-- **US1-FED Region**: The FIPS-compliant Lambda components should only be used for sending telemetry to the US1-FED region (`ddog-gov.com`).
+- **End-to-end FIPS Compliance**: For complete FIPS compliance, the FIPS-compliant Lambda components must be used to send telemetry to the US1-FED region (`ddog-gov.com`). While the Lambda components themselves implement FIPS-compliant cryptography regardless of the destination, only the US1-FED site has FIPS-compliant intake endpoints.
 
 - **Customer Responsibility**: You, the Datadog customer, are responsible for:
   - The security posture of your own Lambda function code

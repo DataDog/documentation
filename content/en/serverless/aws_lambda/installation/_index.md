@@ -32,7 +32,7 @@ For the detailed installation instructions, select the Lambda runtime below:
 
 ## FIPS Compliance Support
 
-Datadog provides FIPS-compliant monitoring for AWS Lambda functions through dedicated FIPS-compliant Lambda extension layers and runtime-specific configurations. If you need to maintain FIPS compliance while monitoring your Lambda functions, see the [AWS Lambda FIPS Compliance][4] documentation page for details.
+Datadog provides FIPS-compliant monitoring for AWS Lambda functions through dedicated FIPS-compliant Lambda extension layers and runtime-specific configurations. The FIPS-compliant components implement FIPS-certified cryptography and work with any Datadog site, but end-to-end FIPS compliance requires using the US1-FED site. If you need to maintain FIPS compliance while monitoring your Lambda functions, see the [AWS Lambda FIPS Compliance][4] documentation page for details.
 
 ## Advanced Configurations
 
