@@ -276,6 +276,9 @@ All organizations you've logged into are displayed in the configuration screen. 
 3. Select a new organization (you may need to sign in).
 4. Size the widget to fit your preference.
 5. Tap **Save** or **Apply**.
+   
+{{% /tab %}}
+{{< /tabs >}}
 
 ### On-Call widget
 
