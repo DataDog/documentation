@@ -277,7 +277,7 @@ When creating or updating an S3 archive in Datadog, you can optionally configure
 
 - **Default S3 Bucket-Level Encryption** (Default): Datadog does not override your S3 bucket's default encryption settings.
 - **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][1]), regardless of the S3 bucket's default encryption.
-- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN. 
+- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -297,13 +297,13 @@ To set or check your S3 bucket's encryption configuration:
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-This option ensure that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-This option ensure that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
 
 Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this encryption type. 
 
