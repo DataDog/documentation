@@ -53,7 +53,8 @@ data:
   kubernetes_apiserver.yaml: |-
     init_config:
     instances:
-      - filtering_enabled: false
+      -
+        filtering_enabled: false
         unbundle_events: false
 ---
 # Source: datadog/templates/install_info-configmap.yaml
@@ -81,8 +82,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "e0448824-7eda-4cd0-bfd2-b40c752641c8"
-  install_time: "1731489756"
+  install_id: "a9730f5c-722e-4441-88a3-732764afb858"
+  install_time: "1740515778"
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -214,7 +215,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -253,7 +254,7 @@ spec:
             - name: DD_STRIP_PROCESS_ARGS
               value: "false"
             - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-              value: "false"
+              value: "true"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
@@ -331,6 +332,9 @@ spec:
               mountPath: /host/sys/fs/cgroup
               mountPropagation: None
               readOnly: true
+            - name: passwd
+              mountPath: /etc/passwd
+              readOnly: true
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -361,90 +365,9 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
-        - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.59.0"
-          imagePullPolicy: IfNotPresent
-          command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
-          resources: {}
-          env:
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog"
-                  key: api-key
-            - name: DD_REMOTE_CONFIGURATION_ENABLED
-              value: "true"
-            - name: DD_AUTH_TOKEN_FILE_PATH
-              value: /etc/datadog-agent/auth/token
-            - name: KUBERNETES
-              value: "yes"
-            - name: DD_LANGUAGE_DETECTION_ENABLED
-              value: "false"
-            - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
-              value: "false"
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_OTLP_CONFIG_LOGS_ENABLED
-              value: "false"
-            - name: DD_CLUSTER_AGENT_ENABLED
-              value: "false"
-            - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
-              value: "false"
-            - name: DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED
-              value: "true"
-            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
-              value: "true"
-            - name: DD_STRIP_PROCESS_ARGS
-              value: "false"
-            - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-              value: "false"
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_SYSTEM_PROBE_ENABLED
-              value: "false"
-            - name: DD_DOGSTATSD_SOCKET
-              value: "/var/run/datadog/dsd.socket"
-            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-              value: "false"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/datadog-agent
-              readOnly: true
-            - name: logdatadog
-              mountPath: /var/log/datadog
-              readOnly: false # Need RW to write logs
-            - name: auth-token
-              mountPath: /etc/datadog-agent/auth
-              readOnly: true
-            - name: dsdsocket
-              mountPath: /var/run/datadog
-              readOnly: false # Need RW for UDS DSD socket
-            - name: tmpdir
-              mountPath: /tmp
-              readOnly: false # Need RW to write to tmp directory
-            - name: os-release-file
-              mountPath: /host/etc/os-release
-              readOnly: true
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
-            - name: cgroups
-              mountPath: /host/sys/fs/cgroup
-              mountPropagation: None
-              readOnly: true
-            - name: passwd
-              mountPath: /etc/passwd
-              readOnly: true
-            - name: procdir
-              mountPath: /host/proc
-              mountPropagation: None
-              readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -455,7 +378,7 @@ spec:
               readOnly: false # Need RW for config path
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command:
             - bash

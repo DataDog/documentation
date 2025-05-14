@@ -26,9 +26,12 @@ categories:
 - ログの収集
 custom_kind: インテグレーション
 dependencies: []
+description: クエリ数、実行回数、アップロードされたバイト数および行数などを追跡
 display_on_public_website: true
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_alloydb/
 draft: false
 git_integration_title: google_cloud_alloydb
+has_logo: true
 integration_id: google-cloud-alloydb
 integration_title: Google Cloud AlloyDB
 integration_version: ''
@@ -52,6 +55,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Google Cloud AlloyDB
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->

@@ -18,14 +18,15 @@
     - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
     - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
     - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
-1. Optionally, add tags you want to associate with the matched events.
+1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
 1. Click **Add Rule**.
 
 ##### Path notation example {#path-notation-example-custom}
 
- For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+ For the following message structure:
+
 ```json
 {
     "outer_key": {
@@ -39,3 +40,6 @@
     "d": "d value"
 }
 ```
+
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.

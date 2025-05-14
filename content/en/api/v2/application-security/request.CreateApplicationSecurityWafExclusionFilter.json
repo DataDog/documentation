@@ -1,0 +1,27 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Exclude false positives on a path",
+      "enabled": true,
+      "parameters": [
+        "list.search.query"
+      ],
+      "path_glob": "/accounts/*",
+      "rules_target": [
+        {
+          "tags": {
+            "category": "attack_attempt",
+            "type": "lfi"
+          }
+        }
+      ],
+      "scope": [
+        {
+          "env": "www",
+          "service": "prod"
+        }
+      ]
+    },
+    "type": "exclusion_filter"
+  }
+}

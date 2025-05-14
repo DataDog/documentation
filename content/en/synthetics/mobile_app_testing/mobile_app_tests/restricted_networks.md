@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
 - link: "/synthetics/mobile_app_testing/settings"
@@ -15,6 +15,9 @@ cascade:
   algolia:
     tags: ['mobile_testing']
 ---
+
+{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -26,20 +29,48 @@ To test these applications, add the following IP address ranges to your company'
 
 The following is the list of IP ranges associated with the real devices used for Datadog Mobile App Testing:
 
+### AWS Device Farm
+
 `54.244.50.32/27`</br>
 `99.78.197.0/29`</br>
 `15.248.40.40/29`</br>
 `54.239.50.200/29`</br>
+
+### US West 
+
 `34.125.90.96/27`</br>
 `34.125.246.157/32`</br>
 `44.225.33.89/32`</br>
 `66.85.48.0/21`</br>
 `162.222.72.0/21`</br>
+
+### US East
+
+`66.85.48.0/21`</br>
+`162.222.72.0/21`</br>
+`34.145.254.128/27`</br>
+
+### EU Central 
+
 `34.107.82.96/27`</br>
 `34.141.28.96/32`</br>
 `162.222.79.0/27`</br>
 `185.94.24.0/22`</br>
-`34.96.70.78`</br>
+
+### HTTP steps
+
+Below is the list of IP ranges required for executing HTTP steps within Synthetic Mobile Application Tests. You may disregard these ranges if your tests do not use HTTP steps.
+
+`52.13.151.244/32`<br>
+`54.201.250.26/32`<br>
+`44.236.137.143/32`<br>
+`52.35.189.191/32`<br>
+`34.208.32.189/32`<br>
+`52.35.61.232/32`<br>
+`52.89.221.151/32`<br>
+`3.120.223.25/32`<br>
+`3.121.24.234/32`<br>
+`18.195.155.52/32`<br>
 
 ## Troubleshooting
 

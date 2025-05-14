@@ -53,6 +53,7 @@ title: "AWS Components"
 {{< whatsnext desc="Database:" >}}
     {{< nextlink href="cloudcraft/components-aws/rds">}}RDS{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/documentdb">}}DocumentDB{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/dynamodb">}}DynamoDB{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/elasticache">}}ElastiCache{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/neptune">}}Neptune{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/timestream">}}Timestream{{< /nextlink >}}

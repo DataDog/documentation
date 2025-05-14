@@ -36,7 +36,7 @@ By default, your service is linked to CI pipelines through its repository URL. T
 
 1. Click on your service in [Software Catalog][4] to open the service side panel, click on the Ownership tab, and find the edit options for Entity Metadata.
 
-   **Note**: This is only available for [Software Catalog schema v2.2][3].
+   **Note**: This is only available for Software Catalog schema v2.2 and above.
 
    {{< img src="tracing/software_catalog/edit_metadata.png" alt="The detailed side panel view for a service, highlighting metadata editing options" style="width:100%;" >}}
 
@@ -60,7 +60,6 @@ For more details on CI status and static analysis violations for the pipelines a
 
 [1]: /security/code_security/static_analysis/
 [2]: /dora_metrics/
-[3]: /software_catalog/service_definitions/v2-2/
 [4]: https://app.datadoghq.com/software
 [5]: https://app.datadoghq.com/ci/pipelines
 [6]: /software_catalog/service_definitions/v2-2/#example-yaml

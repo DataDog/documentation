@@ -45,9 +45,13 @@ network_devices:
         port: 4739
       - flow_type: sflow5
         port: 6343
+    ## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records
+    reverse_dns_enrichment_enabled: false
 ```
 
 After saving your changes, [restart the Agent][4].
+
+**Note**: Ensure that your [firewall rules][9] allow incoming UDP traffic on the configured ports.
 
 ## Aggregation
 
@@ -78,6 +82,18 @@ You can also add your own custom enrichments to map ports and protocols to speci
 From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
+
+### Reverse DNS private IP enrichment
+
+Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
+
+By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
+
+Search for **DNS** in the Flow grouping of the facets section to locate flows associated with Reverse DNS IP enrichment:
+
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
+
+**Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, see the [full configuration file][8].
 
 ## Visualization
 
@@ -156,6 +172,7 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Destination MAC | The Media Access Control (MAC) address associated with the destination IP. |
 | Destination Mask | The subnet mask associated with the destination IP. |
 | Destination Port | The destination port number. |
+| Destination Reverse DNS Hostname | The DNS hostname associated with the destination IP. |
 | Destination Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the destination IP. |
 | Destination Subdivision Name | The name of the subdivision (such as state or province) associated with the destination IP. |
 | Destination Timezone | The timezone associated with the destination IP. |
@@ -184,6 +201,7 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source MAC | The Media Access Control (MAC) address associated with the source IP. |
 | Source Mask | The subnet mask associated with the source IP. |
 | Source Port | The source port number. |
+| Source Reverse DNS Hostname | The DNS hostname associated with the source IP. |
 | Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
@@ -265,3 +283,6 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
 [6]: /monitors/types/netflow/
+[7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
+[8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
+[9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
