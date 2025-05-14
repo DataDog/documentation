@@ -1,0 +1,7 @@
+{
+    "Test Snippet": {
+        "prefix": ";;test",
+        "body": ["Hello from a snippet!"],
+        "description": "Just a test snippet"
+    }
+}
