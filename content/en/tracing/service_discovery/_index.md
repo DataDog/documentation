@@ -18,6 +18,8 @@ Service Discovery provides visibility into the monitoring coverage of your servi
 
 Service Discovery is accessed through the **[Fleet Automation > Services][1]** page.
 
+{{< img src="/tracing/service_discovery/service_discovery.png" alt="Datadog Fleet Automation Services page showing a list of discovered services not sending traces. Each service entry includes tags, container count, CPU and memory usage, and network activity." style="width:100%;" >}}
+
 ### Key benefits
 
 - **Discover all services**: View both monitored and unmonitored services running in your fleet in one centralized location.
