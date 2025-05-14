@@ -22,8 +22,6 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 
 This guide walks Technology Partners through creating a log pipeline for your integrations that sends logs to Datadog. A log pipeline is required to process, structure, and enrich logs for optimal usability.
 
-To create a Datadog integration, see the Create an integration documentation.
-
 ## Best practices
 1. Use supported Datadog log [endpoints][23].
 - The integration must use one of Datadog's supported log ingestion endpoints.
@@ -67,14 +65,15 @@ Logs sent to Datadog are processed in [log pipelines][13] using pipeline process
 Important: Ensure logs sent through the integration are tagged before being ingested.
 
 #### Add pipeline processors
-1. Review Datadog's [Datadog's Standard Attributes][6] for log structuring best practices.
-2. Click Add Processor and choose from the following options:
+1. Review [Datadog's Standard Attributes][6] for log structuring best practices.
+   > Standard Attributes are reserved attributes that apply across the platform.  
+3. Click **Add Processor** and choose from the following options:
    - Attribute Remapper - Maps from custom log attributes to standard Datadog attributes.
    - Service Remapper - Ensures logs are linked to the correct service name.
    - Date Remapper - Assigns the correct timestamp to logs.
    - Status Remapper - Maps log statuses to standard Datadog attribute.
    - Message Remapper - Assigns logs to the correct message attribute.
-3. If logs are not in JSON format, use a Grok Processor to extract attributes. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
+4. If logs are not in JSON format, use a Grok Processor to extract attributes. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
 
 For advanced processing, conider:
 - Arithmetic Profecessor - Performs calculations on log attributes.
@@ -82,9 +81,7 @@ For advanced processing, conider:
 
 Tips
 - Remove original attributes when remapping log attributes by using preserveSource:false. This helps avoid confusion and removes duplicates.
-- To maintain optimal grok parsing performance, avoid wildcard matchers such as 
-
-Before defining your pipeline processors, review [Datadog's Standard Attributes][6].
+- To maintain optimal grok parsing performance, avoid wildcard matchers.
 
 Use processors within your pipelines to enrich and restructure your data, and generate log attributes. For a list of all log processors, see the [Processors][10] documentation.
 
@@ -181,7 +178,7 @@ Custom facets must have the same data type as the mapped attribute
 
 ## Export your log pipeline
 
-Once you have create your log pipeline on the [Logs Configuration page][3] you are able to view all your log pipelines. Hover over the pipeline you would like to export and select the icon that says "export pipeline." Once you select the export pipeline two YAML files will be downloaded to your device. You will need to upload these two files into the Integraton Developer Platform.
+Hover over the pipeline you would like to export and select **export pipeline**. 
 
 {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 
@@ -192,7 +189,7 @@ Exporting your log pipeline includes two YAML files:
 Note: Depending on your browser, you may need to adjust your setting to allow file downloads.
 
 ## Upload your log pipeline
-Within your integration in the Integration Developer Platform, navigate to the Data tab where you an define the data types that the integration queries or submits. Under "submitted data," toggle on "logs" within this section, specify the log source and upload the two files exported from the previous step.
+Navigate to the **Integration Developer Platform**, under the Data tab > Submitted logs, specify the log source and upload the two files exported from the previous step.
 
 "placeholder for image of data page in pub plat"
 
