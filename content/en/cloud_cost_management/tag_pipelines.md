@@ -72,7 +72,7 @@ Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each 
 Under the **Additional options** section, you have the following options:
 
 - **Only apply if columns don't exist** - Ensures the defined columns are only added if they do not already exist with the associated tags from the cost data.
-- **Apply case-insensitive matching for primary key values** - Enables the primary key value from the reference table and tag value from the primary key tag from the cost data to be case insensitive. For example: if the primary key value pair from UI is: foo:Bar, the tag from cost data is foo:bar, then the two can be matched.
+- **Apply case-insensitive matching for primary key values** - Enables case-insensitive matching between the primary key value from the reference table and the value of the tag in the cost data where the tag key matches the primary key. For example, if the primary key value pair from UI is: foo:Bar and the tag from the cost data is foo:bar, then the two can be matched.
 
 ## Reserved tags
 
