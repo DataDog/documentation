@@ -225,7 +225,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
   The Node.js client library version 3.21.0 or later is required.
   </br>
   </br>
-  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code links and snippets do not work.
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code links and snippets will not work.
 </div>
 
 #### Containers
