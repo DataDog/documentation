@@ -15,7 +15,11 @@ The setup configuration for this example consists of a Fargate task, Fargate ser
 
 ## Configure the task definition
 
+<<<<<<< Updated upstream
 The task definition describes which containers to run, the configuration (such as the environment variables and ports), and the CPU and memory resources allocated for the task.
+=======
+[Create a task definition][1]. The task definition describes which containers to run, the configuration (such as the environment variables and ports), and the CPU and memory resources allocated for the task.
+>>>>>>> Stashed changes
 
 Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` are used to allow the load balancer to do health checks on the routing targets. The CPU and memory resources should be increased for the production usage.
 
@@ -96,8 +100,12 @@ An example task definition:
 
 ## Configure the ECS service
 
-The service configuration sets the number of Worker replicas to run and the scaling policy. In this example, the scaling policy is set to target an average CPU utilization of 70% with a minimum of two replicas and a maximum of five replicas.
+[Create a ECS service][2]. The service configuration sets the number of Worker replicas to run and the scaling policy. In this example, the scaling policy is set to target an average CPU utilization of 70% with a minimum of two replicas and a maximum of five replicas.
 
 ## Set up load balancing
 
-Configure an application load balancer to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
+[Configure an application load balancer][3] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-task-definition.html
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html
+[3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
