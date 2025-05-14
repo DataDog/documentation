@@ -1,8 +1,8 @@
 ---
 aliases:
 - /developers/integrations/oauth_for_data_integrations/
-title: OAuth for Integrations
-description: Use OAuth to authenticate integrations.
+title: Create an API-based integration
+description: Learn how to develop and publish a Datadog API integration.
 further_reading:
 - link: "/developers/authorization/oauth2_in_datadog/"
   tag: "Documentation"
@@ -18,15 +18,34 @@ further_reading:
 
 ## Overview
 
+This page walks Technology Partners through creating a Datadog API integration. 
+
+Use [Datadog API endpoints][21] to enrich the customer's experience by submitting data from your backend and pulling data from a user's Datadog account. Technology Partners write and host their code within their environment. 
+
+API integrations are ideal for Technology Partners that are SaaS-based, and have an existing platform that authenticates users.
+
+API integrations can send the following types of data to Datadog:
+
+- [Metrics][22]
+- [Logs][23]
+- [Events][24]
+- [Service Checks][25]
+- [Traces][26]
+- [Incidents][27]
+
+## Development process
+
+### OAuth
+
+Instead of requesting API and Application keys directly from a user, Datadog requires using an [OAuth client][14] to handle authorization and access for API-based integrations. OAuth implementations must support all [Datadog sites][12].
+
 OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
 
 Note: This functionality is only available for approved Technology Partners intending on building integrations. OAuth clients for other purposes are not supported.
 
-For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 documentation][1].
-
 Publishing an OAuth client does not result in a published integration. Your integration only appears on the [Integrations page][16] after you've completed a separate publication process. For information on creating and publishing an integration, see [Build an integration][18].
 
-## When to use OAuth in an integration
+### When to use OAuth in an integration
 
 OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks.
 
@@ -190,6 +209,7 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 
 If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.com][11]. Only one secret can be active at a time. After you regenerate your secret, the existing secret is deleted. You do not need to re-authorize the integration.
 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -215,3 +235,10 @@ If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.c
 [18]: /developers/integrations/
 [19]: /agent/configuration/network/
 [20]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints
+[21]: https://docs.datadoghq.com/api/latest/using-the-api/
+[22]: https://docs.datadoghq.com/api/latest/metrics/
+[23]: https://docs.datadoghq.com/logs/faq/partner_log_integration/
+[24]: https://docs.datadoghq.com/api/latest/events/
+[25]: https://docs.datadoghq.com/api/latest/service-checks/
+[26]: https://docs.datadoghq.com/tracing/guide/send_traces_to_agent_by_api/
+[27]: https://docs.datadoghq.com/api/latest/incidents/
