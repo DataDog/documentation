@@ -272,7 +272,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<HOSTNAME>,<PORT>",
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -450,7 +450,7 @@ metadata:
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
