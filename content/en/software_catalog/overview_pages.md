@@ -24,30 +24,31 @@ The developer overview page centralizes the following information about your tea
 - Your team's Services and Scorecard performance
 - Your Issues, Errors, and Watchdog alerts
 
-### Getting started
+### Using the developer overview page 
+
+#### Getting started
 
 Before your team can use the developer overview page, a platform admin must connect the page widgets to data sources:
 
-1. Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
-1. Click **+ Connect data** to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
+1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
+1. Select `+ Connect data` on each widget to link Jira, GitHub, and Datadog. The widgets show demo data until you complete this step. 
 
-Once this is complete, all team members can use the page and see live data. 
+#### Personalizing your view
 
-### Personalize your view
+Provide values for the page-level filters to tailor the developer overview page to your username and team: 
+- **Team**: Name of your [Datadog Team][8] 
+- **Github_Org**: Name of your GitHub Organization
+- **Github_Team**: Name of your GitHub Team
+- **Github_Username**: Your GitHub username
 
-Each developer using the overview page will need to "set page filters" to get their personalized view
+**Note**: These filters persist when you return to **My Workspace**. 
 
-Find the developer overview page by clicking on the **Overview** tab in IDP and selecting **My Workspace** in the lefthand menu. 
+#### Clone for further customization
 
-1. **Set page filters**: Provide values for the page-level filters:
-   - **Team**: Name of your [Datadog Team][8] 
-   - **Github_Org**: Name of your GitHub Organization
-   - **Github_Team**: Name of your GitHub Team
-   - **Github_Username**: Your GitHub username
+If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard outside of the IDP overview page.
 
-   **Note**: These filters persist when you return to **My Workspace**. 
-
-1. **(Optional) Customize your view**: Select **Clone as dashboard** to create a customizable dashboard where you can add or remove widgets, embed third-party data, or edit the layout. For example, you can:
+1. Select **Clone as dashboard** to create a customizable dashboard.
+1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
    - Create a widget to capture PagerDuty on call information. 
    - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
    
@@ -76,7 +77,7 @@ Lists open Jira issues assigned to your email. Tickets with the status **Done** 
 - **My team's services** — Lists services owned by the selected **Team** filter.  
 - **Scorecard performance by service** — Displays the average score across all scorecards for each service.
 
-#### Issues and Errors Watchdog alerts
+#### Issues and Errors
 
 Surfaces issues and errors detected by [Datadog Incidents][3] and [Error Tracking][4]. Widgets remain empty until these products are enabled.
 
