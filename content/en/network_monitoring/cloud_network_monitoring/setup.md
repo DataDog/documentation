@@ -90,7 +90,7 @@ Cloud Network Monitoring supports use of the following provisioning systems:
 
 ## Setup
 
-Cloud Network Monitoring is designed to analyze traffic _between_ network endpoints and map network dependencies. Datadog recommends to install CNM on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
+Cloud Network Monitoring is designed to analyze traffic _between_ network endpoints and map network dependencies. Datadog recommends installing CNM on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
