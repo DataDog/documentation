@@ -26,7 +26,7 @@ The developer overview page centralizes the following information about your tea
 
 ### Using the developer overview page 
 
-#### Getting started
+#### Get started
 
 Before your team can use the developer overview page, a platform admin must connect the page widgets to data sources:
 
@@ -40,7 +40,7 @@ Before your team can use the developer overview page, a platform admin must conn
 
 The widgets are powered by [Datadog App Builder][9] and show demo data until you complete this step.
    
-#### Personalizing your view
+#### Personalize your view
 
 Provide values for the page-level filters to tailor the developer overview page to your username and team: 
 - **Team**: Name of your [Datadog Team][8] 
