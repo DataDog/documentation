@@ -79,9 +79,12 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. Example: `env:staging,team:data_engineering` |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster. |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Configure log processing rules. See [Advanced Log Collection][3] for more details. |
+
 
 [1]: /getting_started/tagging/
 [2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
+[3]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
 {{% /tab %}}
 
