@@ -1,5 +1,5 @@
 ---
-title: Advanced Computational Analysis #Need to lock down consistent reference for this product/feature
+title: Advanced Analysis Features
 further_reading:
 - link: "/notebooks"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 
 The computational functionality within Notebooks supports complex operations, such as combining attributes from multiple sources or transforming data, while still providing all the powerful features that Notebooks offer. 
 
-Notebooks are collaborative text editors that let you embed Datadog graphs directly into your documents. While this is great for exploration and storytelling, investigations may require more advanced control over data queries. Use computations to run queries that help you:
+Notebooks are collaborative text editors that let you embed Datadog graphs directly into your documents. While this is great for exploration and storytelling, investigations may require more advanced control over data queries. Use analysis features to run queries that help you:
 
 * Correlate multiple data sources  
 * Aggregate multiple levels of data  
@@ -42,13 +42,13 @@ To run complex queries in a notebook, you first need to add a **Data Source** ce
 
 After adding a data source cell to a notebook, you can continue modifying it to structure the data to suit your analysis needs. 
 
-### Change the timeframe for the data
+### Change the time frame for the data
 
-By default, data source cells created from Notebooks use the global timeframe. Data source cells created from the Log Explorer use a local time fixed to the time frame at the time of export.
+By default, data source cells created from Notebooks use the global time frame. Data source cells created from the Log Explorer use a local time fixed to the time frame at the time of export.
 
-You can switch any data source cell between a local or global timeframe using the toggle button in the top right corner of the cell. 
+You can switch any data source cell between a local or global time frame using the toggle button in the top right corner of the cell. 
 
-### Filter the datasource
+### Filter the data source
 
 Regardless of how you create the data source cell, you can modify the query using the search bar. Any changes to the query automatically re-run the data source cell and any downstream cells, updating the preview of the data. 
 
@@ -82,7 +82,7 @@ After adding the transformation cell, you can add any number of transformation o
 | Sort | Select the sort order and column to sort on. |
 | Convert | Select the column and the column type to be converted. |
 
-### Analysis Cell
+### Analysis cell
 
 You can also transform your data using SQL by adding an analysis cell to your notebook.
 
@@ -105,7 +105,7 @@ You can download the data produced by your queries in CSV format for use outside
 
 ## Visualizing transformed data
 
-You can graph the data you've transformed using computational cells inside a notebook, customizing the visualization's appearance and adding aggregations or filters as needed.
+You can graph the data you've transformed using computational cells inside a notebook, customizing the visualization with filters, aggregations, and appearance settings.
 
 To graph your data:
 
