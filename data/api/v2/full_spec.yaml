@@ -7524,6 +7524,50 @@ components:
           type: string
         kill:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleKill'
+        metadata:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata'
+        set:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
+      type: object
+    CloudWorkloadSecurityAgentRuleActionMetadata:
+      description: The metadata action applied on the scope matching the rule
+      properties:
+        image_tag:
+          description: The image tag of the metadata action
+          type: string
+        service:
+          description: The service of the metadata action
+          type: string
+        short_image:
+          description: The short image of the metadata action
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleActionSet:
+      description: The set action applied on the scope matching the rule
+      properties:
+        append:
+          description: Whether the value should be appended to the field
+          type: boolean
+        field:
+          description: The field of the set action
+          type: string
+        name:
+          description: The name of the set action
+          type: string
+        scope:
+          description: The scope of the set action
+          type: string
+        size:
+          description: The size of the set action
+          format: int64
+          type: integer
+        ttl:
+          description: The time to live of the set action
+          format: int64
+          type: integer
+        value:
+          description: The value of the set action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
@@ -7539,6 +7583,11 @@ components:
         agentConstraint:
           description: The version of the Agent
           type: string
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         category:
           description: The category of the Agent rule
           example: Process Activity
@@ -7562,6 +7611,11 @@ components:
           description: The description of the Agent rule
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
           description: Whether the Agent rule is enabled
           example: true
@@ -7572,6 +7626,11 @@ components:
           type: string
         filters:
           description: The platforms the Agent rule is supported on
+          items:
+            type: string
+          type: array
+        monitoring:
+          description: The monitoring policies that the rule belongs to
           items:
             type: string
           type: array
@@ -7609,10 +7668,20 @@ components:
     CloudWorkloadSecurityAgentRuleCreateAttributes:
       description: Create a new Cloud Workload Security Agent rule.
       properties:
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         description:
           description: The description of the Agent rule.
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
           description: Whether the Agent rule is enabled
           example: true
@@ -7623,6 +7692,11 @@ components:
           type: string
         filters:
           description: The platforms the Agent rule is supported on
+          items:
+            type: string
+          type: array
+        monitoring:
+          description: The monitoring policies that the rule belongs to
           items:
             type: string
           type: array
@@ -7716,10 +7790,20 @@ components:
     CloudWorkloadSecurityAgentRuleUpdateAttributes:
       description: Update an existing Cloud Workload Security Agent rule
       properties:
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         description:
           description: The description of the Agent rule
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
           description: Whether the Agent rule is enabled
           example: true
@@ -7728,6 +7812,11 @@ components:
           description: The SECL expression of the Agent rule
           example: exec.file.name == "sh"
           type: string
+        monitoring:
+          description: The monitoring policies that the rule belongs to
+          items:
+            type: string
+          type: array
         policy_id:
           description: The ID of the policy where the Agent rule is saved
           example: a8c8e364-6556-434d-b798-a4c23de29c0b
@@ -55621,9 +55710,10 @@ paths:
             value: "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\":
               {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
-              \     \"enabled\": true,\n      \"product_tags\": [\"security:attack\",
-              \"technique:T1059\"],\n      \"policy_id\": \"{{ policy.data.id }}\"\n
-              \    }\n  }\n}"
+              \     \"actions\": [{\"set\": {\"name\": \"test_set\", \"value\": \"test_value\",
+              \"scope\": \"process\"}}],\n      \"enabled\": true,\n      \"product_tags\":
+              [\"security:attack\", \"technique:T1059\"],\n      \"policy_id\": \"{{
+              policy.data.id }}\"\n     }\n  }\n}"
           step: there is a valid "agent_rule_rc" in the system
       x-menu-order: 4
       x-undo:
