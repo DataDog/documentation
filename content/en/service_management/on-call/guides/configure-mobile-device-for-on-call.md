@@ -42,7 +42,7 @@ Make sure you grant the mobile app the necessary permissions.
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-   {{< img src="service_management/mobile/android_notification_may_2024.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
+   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -74,7 +74,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 2. If notification permissiongs are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
 
