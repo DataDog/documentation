@@ -60,13 +60,13 @@ multifiltersearch:
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Missing index
-      scope: Database
+      scope: Databases
       recommendation_description: The query’s execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
       recommendation_prerequisite: DBM
     - category: User experience
       recommendation_type: User frustration action
       scope: Browser applications
-      recommendation_description: 
+      recommendation_description: Rage or dead actions are detected on elements on a page
       recommendation_prerequisite: RUM
     - category: Error rate
       recommendation_type: New issue
