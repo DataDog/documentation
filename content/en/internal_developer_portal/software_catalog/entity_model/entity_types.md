@@ -1,5 +1,5 @@
 ---
-title: Entity Tpes
+title: Entity Types
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
@@ -8,6 +8,8 @@ further_reading:
 ---
 
 ## Overview
+
+TODO
 
 ## Entity groups: System and API Pages in Software Catalog
 

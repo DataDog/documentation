@@ -1990,7 +1990,7 @@ menu:
       weight: 3
     - name: Internal Developer Portal
       url: internal_developer_portal/
-      pre: service-catalog
+      pre: internal-developer-portal-wui
       parent: platform_heading
       identifier: internal_developer_portal
       weight: 110000
@@ -2025,7 +2025,7 @@ menu:
       identifier: software_catalog_entity_model
       weight: 102
     - name: Entity Types
-      url: internal_developer_portal/software_catalog/entity_types
+      url: internal_developer_portal/software_catalog/entity_model/entity_types
       parent: software_catalog_entity_model
       identifier: software_catalog_entity_types
       weight: 1021
