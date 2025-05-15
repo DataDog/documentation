@@ -130,7 +130,7 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_O
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
 
 ## Trace an LLM application in AWS Lambda
-This generates an LLM Observability trace in an AWS Lambda environment and creates an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
+The following steps generate an LLM Observability trace in an AWS Lambda environment and create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
 1. Create a [Lambda function chatbot using Amazon Bedrock][13].
 2. Instrument your Lambda function:
