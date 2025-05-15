@@ -59,7 +59,7 @@ title: Data Streams Monitoring for Kafka
 
 ### Supported Kafka Deployments
 
-Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready to go metrics][7] independently of how Kafka is deployed. However, the following Kafka deployments have further integration support, providing additional insights into the health of your Kafka cluster.
+Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready-to-go metrics][7] independently of how Kafka is deployed. Additionally, the following Kafka deployments have further integration support, providing more insights into the health of your Kafka cluster:
 
 |Model             |Integration                                 |
 |------------------|--------------------------------------------|
