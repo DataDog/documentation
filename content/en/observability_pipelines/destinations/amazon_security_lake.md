@@ -25,8 +25,6 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 ## AWS Authentication
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/intro %}}
-
 {{% observability_pipelines/aws_authentication/instructions %}}
 
 ### Permissions
