@@ -23,8 +23,8 @@ Datadog provides FIPS-compliant monitoring for AWS Lambda functions through the 
 Datadog's FIPS compliance for AWS Lambda is implemented through two main components:
 
 1. **FIPS-Compliant Lambda Extension**:
-   - The "compatibility" version of the extension is a Go binary built using the [BoringCrypto FIPS-certified module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4407).
-   - The "optimized" version of the extension is a Rust binary built with the [AWS-LC FIPS-certified cryptographic module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4816).
+   - The compatibility version of the extension is a Go binary built using the [BoringCrypto FIPS-certified module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4407).
+   - The Next Generation Lambda Extension is a Rust binary built with the [AWS-LC FIPS-certified cryptographic module](https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4816).
 
 2. **Runtime Libraries Support**:
    - The Python and JavaScript Datadog Lambda Layers, and the Go Datadog Lambda Library offer FIPS-compliant operation controlled by the `DD_LAMBDA_FIPS_MODE` environment variable.
