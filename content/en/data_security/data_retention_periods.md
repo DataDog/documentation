@@ -80,6 +80,7 @@ attributes:
   - product: Database Monitoring
     data_type: | 
        - **Query samples**: 15 days
+       - **Query metrics**: 15 months
   - product: Datadog App
     data_type: | 
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account

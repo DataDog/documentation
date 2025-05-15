@@ -120,5 +120,5 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility/go/#web-framework-compatibility
-[2]: /security/application_security/threats/setup/compatibility/go/
+[1]: /security/application_security/setup/compatibility/go/#web-framework-compatibility
+[2]: /security/application_security/setup/compatibility/go/
