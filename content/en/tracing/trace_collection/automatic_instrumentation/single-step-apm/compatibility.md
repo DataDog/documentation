@@ -32,7 +32,7 @@ The following container platforms are compatible:
 |-----------------|--------------------------------------------------------|---------|
 | Linux           | Not supported on hardened environments such as SELinux | GA      |
 | Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | Preview |
+| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
 
 ### Platform-specific requirements
 
@@ -79,6 +79,7 @@ This section provides language-specific compatibility requirements for Single St
 
 | Python Version | Support                         |
 |----------------|---------------------------------|
+| 3.13           | <i class="icon-check-bold"></i> |
 | 3.12           | <i class="icon-check-bold"></i> |
 | 3.11           | <i class="icon-check-bold"></i> |
 | 3.10           | <i class="icon-check-bold"></i> |

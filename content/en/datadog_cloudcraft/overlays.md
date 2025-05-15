@@ -70,7 +70,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/cloudcraft_ccm_overlay.png" alt="Cloud Cost Management(CCM) overlay in Cloudcraft, highlighting the collapsible savings legend at the bottom left hand side of the screen." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_ccm_overlay_2.png" alt="Cloud Cost Management(CCM) overlay in Cloudcraft, highlighting the collapsible savings legend at the bottom left hand side of the screen." style="width:100%;" >}}
 
 ## Further reading
 

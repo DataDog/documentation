@@ -1226,7 +1226,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
-    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric. By setting `exclude_tags_mode`\nto true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are\nnot queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`\npermission.",
     "summary": "Create a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
@@ -1373,7 +1373,7 @@
   },
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
-    "summary": "Get the schedule of an on-call user"
+    "summary": "Get the schedule on-call user"
   },
   "GetOnCallTeamRoutingRules": {
     "description": "Get a team's on-call routing rules",
