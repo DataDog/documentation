@@ -41,9 +41,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
-- link: "https://www.datadoghq.com/blog/software-catalog/"
+- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
-  text: "Improve developer experience and collaboration with Software Catalog"
+  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 ---
 
 ## Metadata structure and supported versions
@@ -517,7 +517,7 @@ integrations:
 
 <div class="alert alert-info">Custom extensions are in Limited Availability.</div>
 
-The `extensions` field is supported in all version. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+The `extensions` field is supported in all versions. You can incorporate this custom field into deployment processes to standardize and codify best practices.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2.2

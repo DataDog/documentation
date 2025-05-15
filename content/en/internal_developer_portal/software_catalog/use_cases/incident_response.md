@@ -14,6 +14,9 @@ further_reading:
   - link: "/integrations/pagerduty/"
     tag: "Documentation"
     text: "PagerDuty integration"
+  - link: "/tracing/software_catalog/guides/upstream-downstream-dependencies"
+    tag: "Guide"
+    text: "See Upstream and Downstream Dependencies During an Active Incident"
 ---
 
 

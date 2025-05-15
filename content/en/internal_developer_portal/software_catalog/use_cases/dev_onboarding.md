@@ -15,6 +15,9 @@ further_reading:
   - link: "/software_catalog/software_templates/"
     tag: "Documentation"
     text: "Datadog Software Templates"
+  - link: "https://www.datadoghq.com/blog/software-catalog/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Software Catalog"
 ---
 
 Datadog's Software Catalog automates key tasks and centralizes essential resources (such as docs, runbooks, [scorecards][1], and [templates][2]) to reduce time-to-first-commit and optimize the overall developer experience.

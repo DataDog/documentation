@@ -9,45 +9,9 @@ aliases:
   - /tracing/service_catalog/
   - /service_catalog/
 further_reading:
-- link: "/tracing/software_catalog/service_definition_api/"
+- link: "/internal_developer_portal/software_catalog/use_cases"
   tag: "Documentation"
-  text: "Registering Services with the Service Definition API"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "External Site"
-  text: "Create and manage service definitions with Terraform"
-- link: "/tracing/software_catalog/guides/upstream-downstream-dependencies"
-  tag: "Guide"
-  text: "See Upstream and Downstream Dependencies During an Active Incident"
-- link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
-  tag: "Blog"
-  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
-- link: "https://www.datadoghq.com/blog/apm-security-view/"
-  tag: "Blog"
-  text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
-- link: "https://www.datadoghq.com/blog/service-catalog-setup/"
-  tag: "Blog"
-  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
-- link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
-  tag: "Blog"
-  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
-- link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
-  tag: "Blog"
-  text: "Improve your shift-left observability with the Datadog Service Catalog"
-- link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
-  tag: "Blog"
-  text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
-- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
-  tag: "Blog"
-  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
-- link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
-  tag: "Blog"
-  text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
-- link: "https://www.datadoghq.com/blog/software-catalog/"
-  tag: "Blog"
-  text: "Improve developer experience and collaboration with Software Catalog"
-- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
-  tag: "Blog"
-  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog" 
+  text: "Learn about Software Catalog Use Cases"
 algolia:
   tags: ['software catalog']
 ---
@@ -63,37 +27,33 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for our Internal Developer Portal!" >}}
 {{< /callout >}}
 
-## Key terminology
+## What you can do in Software Catalog
+<br>
+{{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
+<br>
 
-Service
-: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be a group of endpoints, a group of DB queries, or a group of periodic jobs. Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12]. You can also import additional services through external sources like [Backstage][13] or [ServiceNow][14].
+- Track ownership: open a team's Slack channel, repo, or on-call rotation from the **Ownership** view
+- Spot reliability risks: surface services with recent deploys, rising error rates, open incidents, or failing monitors in **Reliability**
+- Prioritize performance work: filter by environment and compare latency, traffic, error rate, and Apdex in **Performance**
+- Harden security posture: find vulnerable libraries and live attacks from a single list in **Security**
+- Control cloud spend: link amortized AWS costs to code and infrastructure changes in **Costs**
+- Shorten delivery cycles: inspect CI pipeline health, static-analysis violations, and DORA metrics in **Software Delivery**
 
-System
-: In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
-: **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
+See the [Use Cases documentation][23] to learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
 
-Component
-: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, an API, or a queue. 
+## What appears in Software Catalog
 
-Endpoint
-: An endpoint refers to a specific route or path within a service that handles requests. For example, `/api/v2/messages/send`. Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][19] for an APM web service. APM provides performance metrics such as request count, latency, and error rate. Users can also add other unmonitored endpoints to Software Catalog through metadata [Definitions][17]. 
+Software Catalog includes any entity (such as a service or datastore) that:
+- Datadog [detects from telemetry][20],
+- you [declare through an Entity Definition][21], or
+- you [import from a third party][22] such as Backstage or ServiceNow.
 
-API
-: In the Software Catalog, an API refers to a collection of endpoints that belong together logically. APIs offer an alternative way to group endpoints beyond APM services (the mapping between endpoints and services are not modifiable). Users can define team and add additional endpoints (regardless of whether they are monitored by APM) by providing a `kind:API` metadata [Definition][18] in Software Catalog. 
-
-## Getting started
-
-{{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/software_catalog/customize/" >}}Customize Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/navigating/" >}}Navigate Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/use_cases/" >}}Learn about common use cases{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/manage/" >}}Manage a component in Software Catalog{{< /nextlink >}}
-{{< /whatsnext >}}
+**Note**: The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
 
 {{< site-region region="gov" >}}
-## Services types
+### Services types
 
-Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+Every monitored service is associated with a type. Datadog automatically determines type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
 
 For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
 
@@ -108,7 +68,7 @@ The type of the service can be one of:
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 {{< /site-region >}}
 {{< site-region region="ap1,us3,us5,eu,us" >}}
-## Filtering Software Catalog entries by component
+### Component types
 
 Every entry showing up in the Software Catalog is categorized as a component type:
 
@@ -128,8 +88,24 @@ Datadog populates Software Catalog entries and determines their associated compo
 [10]: /tracing/services/inferred_services#peer-tags
 {{< /site-region >}}
 
-## Data retention
-The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
+## Key terminology
+
+Service
+: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be a group of endpoints, a group of DB queries, or a group of periodic jobs. Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12]. You can also import additional services through external sources like [Backstage][13] or [ServiceNow][14].
+
+System
+: In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
+: **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
+
+Component
+: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, an API, or a queue. 
+
+Endpoint
+: An endpoint refers to a specific route or path within a service that handles requests. For example, `/api/v2/messages/send`. Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][19] for an APM web service. APM provides performance metrics such as request count, latency, and error rate. Users can also add other unmonitored endpoints to Software Catalog through metadata [Definitions][17]. 
+
+API
+: In the Software Catalog, an API refers to a collection of endpoints that belong together logically. APIs offer an alternative way to group endpoints beyond APM services (the mapping between endpoints and services are not modifiable). Users can define team and add additional endpoints (regardless of whether they are monitored by APM) by providing a `kind:API` metadata [Definition][18] in Software Catalog. 
+
 
 ## Further reading
 
@@ -154,3 +130,7 @@ The services and resources statistics, and span summaries on the **Service List*
 [17]: /software_catalog/service_definitions/v3-0/
 [18]: /software_catalog/service_definitions/#add-metadata-to-endpoints
 [19]: /tracing/glossary/#resources
+[20]: /internal_developer_portal/software_catalog/set_up/discover_entities
+[21]: /internal_developer_portal/software_catalog/set_up/create_entities
+[22]: /internal_developer_portal/software_catalog/set_up/import_entities
+[23]: /internal_developer_portal/software_catalog/use_cases

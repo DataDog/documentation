@@ -15,14 +15,23 @@ aliases:
   - /service_catalog/customize/create_entries/
   - /software_catalog/customize/create_entries
 further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
+  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+    tag: "External Site"
+    text: "Create and manage service definitions with Terraform"
+  - link: "/integrations/github"
+    tag: "Documentation"
+    text: "Learn about the GitHub Integration"
+  - link: "/api/latest/service-definition/"
+    tag: "API"
+    text: "Learn about the Service Definition API"
+  - link: "/api/latest/software_catalog/"
+    tag: "API"
+    text: "Learn about the Software Catalog API"
 ---
 
 ## Overview
 
-To add entity definitions to Software Catalog, you can:
+To add [entity definitions][13] to Software Catalog, you can:
 - manually add through the Datadog UI.
 - automate import through GitHub, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API.
 
@@ -127,5 +136,6 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 [8]: /api/latest/software-catalog/
 [9]: /integrations/github/
 [10]: https://app.datadoghq.com/integrations/github
-[11]: /software_catalog/apis/
+[11]: /software_catalog/entity_model
 [12]: https://app.datadoghq.com/event/explorer
+[13]: internal_developer_portal/software_catalog/entity_model

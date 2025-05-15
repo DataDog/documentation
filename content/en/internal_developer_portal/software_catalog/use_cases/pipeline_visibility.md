@@ -18,6 +18,12 @@ further_reading:
   - link: "/dora_metrics/"
     tag: "Documentation"
     text: "DORA Metrics"
+  - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
+    tag: "Blog"
+    text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
+  - link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
+    tag: "Blog"
+    text: "Improve your shift-left observability with the Datadog Service Catalog"
 ---
 
 

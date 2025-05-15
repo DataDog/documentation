@@ -37,27 +37,18 @@ aliases:
   - /api_catalog/owners_and_tags
   - /service_catalog/manage
 further_reading:
-  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-    tag: "External Site"
-    text: "Create and manage service definitions with Terraform"
-  - link: "/api/latest/service-definition/"
-    tag: "API"
-    text: "Learn about the Service Definition API"
-  - link: "/integrations/github"
-    tag: "Documentation"
-    text: "Learn about the GitHub Integration"
-  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
-    tag: "Blog"
-    text: "Import Backstage YAML files into Datadog"
-  - link: "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/#get-cmdb-metadata-in-the-datadog-service-catalog"
-    tag: "Blog"
-    text: "Manage your infrastructure with ServiceNow CMDB and Datadog"
-  - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
-    tag: "Source Code"
-    text: "Service Definition Schema"
   - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
     tag: "Blog"
     text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+  - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
+    tag: "Blog"
+    text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+  - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
+    tag: "Blog"
+    text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+  - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
+    tag: "Blog"
+    text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
 ---
 
 Software Catalog entities are defined through [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 

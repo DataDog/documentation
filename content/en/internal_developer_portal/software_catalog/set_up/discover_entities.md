@@ -1,5 +1,5 @@
 ---
-title: Doc Title
+title: Discover Entities
 disable_toc: false
 aliases:
   - /software_catalog/set_up/existing_datadog_user ## aliases for Existing Datadog User page

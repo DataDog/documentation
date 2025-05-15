@@ -14,9 +14,12 @@ aliases:
   - /service_catalog/customize/import_entries_servicenow/   ## alias for Import Entries from ServiceNow page
   - /software_catalog/customize/import_entries_servicenow
 further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
+  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+    tag: "Blog"
+    text: "Import Backstage YAML files into Datadog"
+  - link: "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/#get-cmdb-metadata-in-the-datadog-service-catalog"
+    tag: "Blog"
+    text: "Manage your infrastructure with ServiceNow CMDB and Datadog"
 ---
 
 

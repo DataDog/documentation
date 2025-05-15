@@ -13,6 +13,9 @@ further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"
     text: "Datadog App and API Protection"
+  - link: "https://www.datadoghq.com/blog/apm-security-view/"
+    tag: "Blog"
+    text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 ---
 
 The Software Catalog enables organizations to seamlessly incorporate security into every development stage, ensuring a strong security posture across teams, applications, and systems.
