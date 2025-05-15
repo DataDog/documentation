@@ -61,7 +61,7 @@ multifiltersearch:
     - category: Performance
       recommendation_type: Missing index
       scope: Databases
-      recommendation_description: The query’s execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query
+      recommendation_description: The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query
       recommendation_prerequisite: APM + DBM
     - category: User experience
       recommendation_type: User frustration action
@@ -70,7 +70,7 @@ multifiltersearch:
       recommendation_prerequisite: RUM
     - category: User experience
       recommendation_type: Unoptimized bundle size
-      scope: Browser applications and web views on mobile applications	
+      scope: Browser applications and web views on mobile applications
       recommendation_description: Large JS resources causing delays in the initial page render signaling misleading UI or broken elements
       recommendation_prerequisite: RUM
     - category: Error rate
