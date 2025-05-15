@@ -7,6 +7,7 @@ aliases:
   - /tracing/service_catalog/guides/upstream-downstream-dependencies
   - /service_catalog/guides/upstream-downstream-dependencies
   - /service_catalog/use_cases/upstream_downstream_dependencies
+  - /software_catalog/use_cases/incident_response
 further_reading:
   - link: "/service_management/incident_management/"
     tag: "Documentation"

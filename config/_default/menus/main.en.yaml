@@ -2070,49 +2070,49 @@ menu:
       identifier: idp_integrations
       weight: 4
     - name: Use Cases
-      url: internal_developer_portal/software_catalog/use_cases
-      parent: software_catalog
-      identifier: software_catalog_use_cases
+      url: internal_developer_portal/use_cases
+      parent: internal_developer_portal
+      identifier: idp_use_cases
       weight: 5
     - name: API Management
-      url: internal_developer_portal/software_catalog/use_cases/api_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_api_management
+      url: internal_developer_portal/use_cases/api_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_api_management
       weight: 501
     - name: Cloud Cost Management
-      url: internal_developer_portal/software_catalog/use_cases/cloud_cost_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_cloud_cost_management
+      url: internal_developer_portal/use_cases/cloud_cost_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_cloud_cost_management
       weight: 502
     - name: App and API Protection
-      url: internal_developer_portal/software_catalog/use_cases/appsec_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_appsec_management
+      url: internal_developer_portal/use_cases/appsec_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_appsec_management
       weight: 504
     - name: Developer Onboarding
-      url: internal_developer_portal/software_catalog/use_cases/dev_onboarding
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dev_onboarding
+      url: internal_developer_portal/use_cases/dev_onboarding
+      parent: idp_use_cases
+      identifier: idp_use_cases_dev_onboarding
       weight: 505
     - name: Dependency Management
-      url: internal_developer_portal/software_catalog/use_cases/dependency_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dependency_management
+      url: internal_developer_portal/use_cases/dependency_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_dependency_management
       weight: 506
     - name: Production Readiness
-      url: internal_developer_portal/software_catalog/use_cases/production_readiness
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_production_readiness
+      url: internal_developer_portal/use_cases/production_readiness
+      parent: idp_use_cases
+      identifier: idp_use_cases_production_readiness
       weight: 507
     - name: Incident Response
-      url: internal_developer_portal/software_catalog/use_cases/incident_response
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_incident_response
+      url: internal_developer_portal/use_cases/incident_response
+      parent: idp_use_cases
+      identifier: idp_use_cases_incident_response
       weight: 508
     - name: CI Pipeline Visibility
-      url: internal_developer_portal/software_catalog/use_cases/pipeline_visibility
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_pipeline_visibility
+      url: internal_developer_portal/use_cases/pipeline_visibility
+      parent: idp_use_cases
+      identifier: idp_use_cases_pipeline_visibility
       weight: 509
     - name: Error Tracking
       url: error_tracking/

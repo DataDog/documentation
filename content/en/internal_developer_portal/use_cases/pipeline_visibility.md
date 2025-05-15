@@ -11,6 +11,7 @@ aliases:
   - /software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /service_catalog/use_cases/ci_visibility
   - /software_catalog/use_cases/ci_visibility
+  - /software_catalog/use_cases/pipeline_visibility
 further_reading:
   - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
