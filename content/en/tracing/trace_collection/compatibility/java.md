@@ -111,6 +111,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Tomcat                  | 5.5+       | Fully Supported                                        | `tomcat`                                                 |
 | Undertow                | 2.0+       | Fully Supported                                        | `undertow`                                               |
 | Vert.x                  | 3.4+       | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
+| Websocket (JSR356)      | 1.0+       | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                              |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -134,6 +135,7 @@ The following instrumentations are disabled by default and can be enabled with t
 | Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                |
 | TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                    |
 | URL Connection               | `-Ddd.integration.urlconnection.enabled=true` </br> `-Ddd.integration.httpurlconnection.enabled=true`    |
+| Websocket                    | `-Ddd.trace.websocket.messages.enabled=true`                                                             |
 | ZIO                          | `-Ddd.integration.zio.experimental.enabled=true`                                                         |
 
 

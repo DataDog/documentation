@@ -1,7 +1,7 @@
 import { getConfig } from '../helpers/getConfig';
 import instantsearch from 'instantsearch.js';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
-import { configure, searchBox } from 'instantsearch.js/es/widgets';
+import { configure, searchBox, index } from 'instantsearch.js/es/widgets';
 import { searchbarHits } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
@@ -10,6 +10,8 @@ import { debounce } from '../utils/debounce';
 const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
 const typesenseConfig = getConfig(env).typesense;
+const docsIndex = typesenseConfig.docsIndex;
+const partnersIndex = typesenseConfig.partnersIndex;
 
 const adapterOptions = {
     server: {
@@ -38,14 +40,21 @@ const adapterOptions = {
         ],
         cacheSearchResultsForSeconds: 2 * 60
     },
-    additionalSearchParameters: {
-        preset: 'docs_alias_view'
+    collectionSpecificSearchParameters: {
+        [docsIndex]: {
+            preset: 'docs_alias_view',
+            collection: docsIndex
+        },
+        [partnersIndex]: {
+            preset: 'docs_partners_view',
+            collection: partnersIndex
+        }
     }
 };
+
 const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
 
 const searchClient = typesenseInstantSearchAdapter.searchClient;
-let indexName = typesenseConfig.index;
 
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
@@ -97,11 +106,13 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainer = document.querySelector('#searchbox');
     const hitsContainerContainer = document.querySelector('.hits-container');
     const hitsContainer = document.querySelector('#hits');
+    const partnersHitsContainer = document.querySelector('#hits-partners');
     const paginationContainer = document.querySelector('#pagination');
     const pageTitleScrollTo = document.querySelector('#pagetitle');
     const filtersDocs = `language: ${pageLanguage}`;
     const homepage = document.querySelector('.kind-home');
     const apiPage = document.querySelector('body.api');
+    const partnersPage = document.querySelector('body.partners');
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
@@ -124,8 +135,15 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         typesenseInstantSearchAdapter.updateConfiguration({
             ...adapterOptions,
             ...{
-                additionalSearchParameters: {
-                    preset: 'docs_alias_api_view'
+                collectionSpecificSearchParameters: {
+                    [docsIndex]: {
+                        preset: 'docs_alias_api_view',
+                        collection: docsIndex
+                    },
+                    [partnersIndex]: {
+                        preset: 'docs_partners_view',
+                        collection: partnersIndex
+                    }
                 }
             }
         });
@@ -139,20 +157,20 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     // No searchBoxContainer means no instantSearch
     if (searchBoxContainer) {
         const search = instantsearch({
-            indexName,
+            indexName: docsIndex,
             searchClient,
             // routing handles search state URL sync
             routing: {
                 stateMapping: {
                     stateToRoute(uiState) {
-                        const indexUiState = uiState[indexName];
+                        const indexUiState = uiState[docsIndex];
                         return {
                             s: indexUiState.query
                         };
                     },
                     routeToState(routeState) {
                         return {
-                            [indexName]: {
+                            [docsIndex]: {
                                 query: routeState.s
                             }
                         };
@@ -197,14 +215,14 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 showSubmit: true,
                 templates: {
                     submit({ cssClasses }, { html }) {
-                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span>
-
-                            <i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
+                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span
+                            ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
                     }
                 }
             }),
 
             hitComponent({
+                partnersPage: partnersPage,
                 container: hitsContainer,
                 basePathName: basePathName
             }),
@@ -214,7 +232,23 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 container: paginationContainer,
                 scrollTo: pageTitleScrollTo,
                 padding: 5
-            })
+            }),
+
+            // Add second index: Partners
+            index({
+                indexName: partnersIndex
+            }).addWidgets([
+                configure({
+                    hitsPerPage: numHits,
+                    distinct: 1
+                }),
+
+                hitComponent({
+                    partnersPage: partnersPage,
+                    container: partnersHitsContainer,
+                    basePathName: basePathName
+                })
+            ])
         ]);
 
         // Start up frontend search
@@ -244,10 +278,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     window.location.pathname = searchPathname;
                 }
             };
-
+            
             const handleOutsideSearchbarClick = (e) => {
                 // Intercept user clicks within instantSearch dropdown to send custom RUM event before redirect.
-                if (hitsContainer.contains(e.target)) {
+                const targetIsDescendant = [hitsContainer, partnersHitsContainer].some((c) => c.contains(e.target));
+                
+                if (targetIsDescendant) {
                     e.preventDefault();
                 }
 
@@ -256,7 +292,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 do {
                     if (target === searchBoxContainerContainer) return;
 
-                    if (target && target.href && hitsContainer.contains(e.target)) {
+                    if (target && target.href && targetIsDescendant) {
                         sendSearchRumAction(search.helper.state.query, target.href);
                         window.history.pushState({}, '', target.href);
                         window.location.reload();

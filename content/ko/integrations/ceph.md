@@ -22,8 +22,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 138
     source_type_name: Ceph
-  logs:
-    source: ceph
   saved_views:
     ceph_processes: assets/saved_views/ceph_processes.json
 author:
@@ -35,6 +33,7 @@ categories:
 - data stores
 - os & system
 - log collection
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: ceph
 integration_id: ceph
 integration_title: Ceph
-integration_version: 2.10.0
+integration_version: 4.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ceph
 public_title: Ceph
@@ -59,11 +57,15 @@ tile:
   - Supported OS::macOS
   - Category::Data Stores
   - Category::OS & 시스템
-  - Category::로그 수집
+  - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: 풀당 성과 메트릭을 수집하고 전반적인 클러스터 상태를 모니터링하세요.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-ceph-datadog
   support: README.md#Support
   title: Ceph
 ---
@@ -87,10 +89,10 @@ Datadog-Ceph 통합을 활성화해 다음 작업을 수행할 수 있습니다.
 
 Ceph 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있으므로 Ceph 서버에서 아무 것도 설치할 필요가 없습니다.
 
-### 설정
+### 구성
 
 [에이전트 설정 디렉터리][3] 루트에 있는 `conf.d/` 폴더에서 `ceph.d/conf.yaml` 파일을 편집합니다.
-사용 가능한 모든 옵션은 [sample ceph.d/conf.yaml][4]을 참조하세요.
+사용 가능한 모든 옵션은 [샘플 ceph.d/conf.yaml][4]을 참조하세요.
 
 ```yaml
 init_config:
@@ -108,9 +110,9 @@ dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 
 #### 로그 수집
 
-_에이전트 버전 > 6.0 이상 사용 가능_
+_Agent 버전 6.0 이상에서 사용 가능_
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml` 파일에서 로그 수집을 사용하도록 설정합니다.
+1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
 
    ```yaml
    logs_enabled: true
@@ -126,13 +128,13 @@ _에이전트 버전 > 6.0 이상 사용 가능_
        service: "<APPLICATION_NAME>"
    ```
 
-3. [에이전트를 재시작합니다][5].
+3. [Agent를 재시작합니다][5].
 
 ### 검증
 
 [에이전트 상태 하위 명령을 실행하고][6] 점검 섹션 아래에서 `ceph`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "ceph" >}}
@@ -144,7 +146,7 @@ _에이전트 버전 > 6.0 이상 사용 가능_
 
 Ceph 점검은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 {{< get-service-checks-from-git "ceph" >}}
 
 

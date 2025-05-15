@@ -139,20 +139,97 @@ datadog-ci sbom upload /tmp/sbom.json
 ```
 
 ## Select your source code management provider
-Datadog SCA supports all source code management providers, with native support for GitHub.
+Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
 
-### Set up the GitHub integration
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see inline code snippets and enable [pull request comments][9].
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
-- `Content: Read`, which allows you to see code snippets displayed in Datadog.
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][9].
+- `Content: Read`, which allows you to see code snippets displayed in Datadog
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][3].
+- `Checks: Read & Write`, which allows you to create checks on SAST violations to block pull requests
 
-### Other source code management providers
-If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
+[1]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[2]: /integrations/guide/source-code-integration
+[3]: /security/code_security/dev_tool_int/github_pull_requests
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+<div class="alert alert-warning">
+Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+</div>
+
+If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+<div class="alert alert-warning">
+Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+</div>
+
+If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow the instructions below to complete the setup process.
+
+**Note:** Azure DevOps Server is not supported.
+
+### Create and register a Microsoft Entra app
+If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
+
+1. Navigate to [Code Security setup][1].
+2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+3. Select **CI Pipelines**.
+4. Select the scan types you want to use.
+5. Select **Azure DevOps** as your source code management provider.
+6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
+7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
+   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
+   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
+8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
+9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
+10. Click **New client secret** and create a secret with your desired description and expiration values.
+11. Copy and paste the string in the **Value** column for your new secret, paste it into Datadog, and click **Create Configuration** to complete connecting your Entra tenant to Datadog.
+13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
+    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
+14. Click **Submit Organization**.
+
+### Configure project service hooks
+
+To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
+
+First, set your environment variables (note: the Datadog UI will fill these values out for you):
+```shell
+export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
+export DD_API_KEY="..."                         # Datadog API Key
+```
+
+Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
+```shell
+curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
+./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
+```
+
+Click [here][4] to see our CLI that automates this process.
+
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
+[2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://github.com/DataDog/azdevops-sci-hooks
+[5]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
+If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-sbom-to-datadog) to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Upload third-party SBOM to Datadog
 
@@ -205,6 +282,20 @@ datadog:
         - path/to/service/code/**
 {{< /code-block >}}
 
+
+If you want all the files in a repository to be associated with a service, you can use the glob `**/*` as follows:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - "**/*"
+{{< /code-block >}}
 
 #### Detecting file usage patterns
 
