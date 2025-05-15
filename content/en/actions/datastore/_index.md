@@ -66,7 +66,7 @@ To manually edit a row in your datastore:
 1. Hover over the row you want to change and click the pencil (**Edit**) icon.
 1. Use the **JSON** or **Raw text** tabs to edit keys in the row.
 
-**Note:** You cannot manually edit the primary key in a row. Instead, delete the row and re-enter the information.
+**Note:** You cannot manually edit the primary key in a row. If you need to edit a primary key, delete the row and re-add it.
 
 ### Update using a file
 
