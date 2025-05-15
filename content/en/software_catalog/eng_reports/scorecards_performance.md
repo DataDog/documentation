@@ -1,8 +1,5 @@
 ---
 title: Scorecards Performance
-further_reading:
-- link: "/tracing/software_catalog/"
-  tag: "Documentation"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -11,7 +8,7 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
-{{< img src="tracing/eng_reports/scorecards_performance.mp4" video=true alt="A video scrolling through the Scorecards Performance report, which includes sections for Performance by Scorecard, Historical Trends by Scorecard, Performance by Rule, and Historical Trends by Rule" style="width:100%;" >}}
+{{< img src="tracing/eng_reports/idp-scorecards-landing.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
 
 The Scorecards Performance report includes an organization-wide view of Scorecard performance by teams and rules, including historical trends. With this report, you can:
 - Identify highest and lowest performing teams by Scorecards and rules. 
@@ -25,6 +22,8 @@ Access the Scorecards Performance report by clicking on the "Overview" tab in ID
 ## Interact with your Scorecard Performance report
 
 ### Adjust your view
+
+{{< img src="tracing/eng_reports/idp-scorecards-filters.png" alt="Scorecard Performance report with an arrow highlighting the filtering options" style="width:100%;" >}} 
 
 By default, the Scorecards Performance report breaks down data by team, which allows you to identify the highest- and lowest-performing teams across all Scorecards, specific Scorecards, or individual rules.
 
@@ -49,10 +48,6 @@ To customize the dashboard, you can:
 - Update the Scorecard leaderboard view to aggregate by dimensions other than team or service (for example, you can create a leaderboard view by "system" or "tier")
 - Add widgets that are not included in the default view
 - Add filters to the existing widgets
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/dashboards/sharing/scheduled_reports/
 

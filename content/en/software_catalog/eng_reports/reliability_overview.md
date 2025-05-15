@@ -1,8 +1,5 @@
 ---
 title: Reliability Overview
-further_reading:
-- link: "/tracing/software_catalog/"
-  tag: "Documentation"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -11,14 +8,16 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
-{{< img src="tracing/eng_reports/reliability_overview.mp4" video=true alt="A video scrolling through the Reliability Overview report, which includes sections for SLO Performance and Incident Trends, grouped by team" style="width:100%;" >}}
+{{< img src="tracing/eng_reports/idp-full-landing-arrow.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
 
-The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this report, you can:
+The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. 
+
+With this report, you can:
 - Customize your SLO or Incident groupings to be based on service, team, or other tags or properties that have been added to your SLOs or Incidents.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 - Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
 
-Access the Reliability Overview report by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the lefthand menu. 
+Access the Reliability Overview report by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the left-hand menu. 
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
@@ -26,6 +25,8 @@ Access the Reliability Overview report by clicking on the "Overview" tab in IDP 
 ## Interact with your Reliability Overview report
 
 ### Adjust your view
+
+{{< img src="tracing/eng_reports/idp-reliability-overview-filtered.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
 
 You can update your Reliability Overview report view in the following ways:
  
@@ -53,7 +54,9 @@ To customize the dashboard, you can:
 
 ## Use the SLO summary score
 
-The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is designed as a summary metric for executive leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
+{{< img src="tracing/eng_reports/slo-summary-score.png" alt="The SLO Summary widget, including the SLO summary score" style="width:100%;" >}}
+
+The **SLO Summary** widget includes a "Score". It is designed as a summary metric for executive leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
 
 - The Score is "passing" (green/yellow) when most SLOs are **not** breached and have remaining error budget
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
@@ -70,10 +73,6 @@ Note that an average remaining error budget of 0% corresponds to a Score value o
 - **Red:** 0 ≤ Score < 66.667
 - **Yellow:** 66.667 ≤ Score < 80
 - **Green:** 80 ≤ Score ≤ 100
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
 
