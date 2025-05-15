@@ -4,22 +4,22 @@ description: Learn how to configure AWS for CloudPrem
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
-  text: "Learn more about CloudPrem"
+  text: "CloudPrem Overview"
 - link: "/cloudprem/installation/"
   tag: "Documentation"
-  text: "CloudPrem Installation"
+  text: "Install CloudPrem and Send Logs with the Agent"
 - link: "/cloudprem/ingress/"
   tag: "Documentation"
-  text: "Ingress Configuration"
+  text: "Configure CloudPrem Ingress"
 - link: "/cloudprem/cluster/"
   tag: "Documentation"
-  text: "Cluster Sizing and Operations"
+  text: "Learn more about Cluster Sizing and Operations"
 - link: "/cloudprem/processing/"
   tag: "Documentation"
-  text: "CloudPrem Log Processing"
+  text: "Configure CloudPrem Log Processing"
 - link: "/cloudprem/troubleshooting/"
   tag: "Documentation"
-  text: "Troubleshooting CloudPrem"
+  text: "Troubleshooting"
 ---
 
 ## Overview

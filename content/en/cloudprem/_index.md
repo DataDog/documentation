@@ -8,19 +8,18 @@ private: true
 
 ## Overview
 
-Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting - all while keeping your log data at rest within your infrastructure boundaries.
+{{< img src="/cloudprem/cloudprem_overview_1.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
 
-## Architecture
-
-CloudPrem uses a decoupled architecture that separates compute from storage, enabling independent scaling of indexing, search, and storage. Key components include indexers, searchers, a PostgreSQL-based metastore, and a control plane for task orchestration. For more information, see the [Architecture][4] documentation.
+Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting — all while keeping your log data at rest within your infrastructure boundaries.
 
 ## Get started
 
-{{< whatsnext desc="What's next:" >}}
+{{< whatsnext >}}
+   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}
    {{< nextlink href="/cloudprem/installation/" >}}Install CloudPrem and Send Logs with the Agent {{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingress/" >}}CloudPrem Ingress Configuration{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/ingress/" >}}Configure CloudPrem Ingress{{< /nextlink >}}
    {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/aws_config" >}}AWS Configuration{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/aws_config" >}}Configure AWS{{< /nextlink >}}
    {{< nextlink href="/cloudprem/processing/" >}}Configure CloudPrem Log Processing{{< /nextlink >}}
    {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}
