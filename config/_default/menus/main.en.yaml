@@ -2026,16 +2026,21 @@ menu:
       parent: software_catalog
       identifier: software_catalog_set_up
       weight: 101
-    - name: New to Datadog
-      url: internal_developer_portal/software_catalog/set_up/new_to_datadog
+    - name: Discover Entities
+      url: internal_developer_portal/software_catalog/set_up/discover_entities
       parent: software_catalog_set_up
-      identifier: software_catalog_set_up_new_to_dd
+      identifier: software_catalog_discover_entities
       weight: 1011
-    - name: Existing Datadog User
-      url: internal_developer_portal/software_catalog/set_up/existing_datadog_user
+    - name: Create Entities
+      url: internal_developer_portal/software_catalog/set_up/create_entities
       parent: software_catalog_set_up
-      identifier: software_catalog_set_up_existing_dd_user
+      identifier: software_catalog_create_entities
       weight: 1012
+    - name: Import Entities
+      url: internal_developer_portal/software_catalog/set_up/import_entities
+      parent: software_catalog_set_up
+      identifier: software_catalog_import_entities
+      weight: 1013
     - name: Entity Model
       url: internal_developer_portal/software_catalog/entity_model
       parent: software_catalog
