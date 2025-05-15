@@ -8,8 +8,6 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
-{{< img src="tracing/eng_reports/idp-full-landing-arrow.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
-
 The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. 
 
 With this report, you can:
@@ -19,6 +17,8 @@ With this report, you can:
 
 Access the Reliability Overview report by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the left-hand menu. 
 
+{{< img src="tracing/eng_reports/reliability-overview-landing.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
+
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
 
@@ -26,7 +26,7 @@ Access the Reliability Overview report by clicking on the "Overview" tab in IDP 
 
 ### Adjust your view
 
-{{< img src="tracing/eng_reports/idp-reliability-overview-filtered.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
+{{< img src="tracing/eng_reports/reliability-overview-filtered.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
 
 You can update your Reliability Overview report view in the following ways:
  

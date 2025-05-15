@@ -8,14 +8,14 @@ Engineering Reports are in Preview. TODO: link to sign-up form.
 
 ## Overview
 
-{{< img src="tracing/eng_reports/idp-scorecards-landing.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
-
 The Scorecards Performance report includes an organization-wide view of Scorecard performance by teams and rules, including historical trends. With this report, you can:
 - Identify highest and lowest performing teams by Scorecards and rules. 
 - Filter information based on team, scorecard, rule, application, tier, and lifecycle.
 - Explore historical info for the last 12 months to identify trends over time.
 
-Access the Scorecards Performance report by clicking on the "Overview" tab in IDP and selecting "Scorecards Performance" in the lefthand menu. 
+Access the Scorecards Performance report by clicking on the "Overview" tab in IDP and selecting "Scorecards Performance" in the left-hand menu. 
+
+{{< img src="tracing/eng_reports/idp-scorecards-landing.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Scorecards Performance report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
