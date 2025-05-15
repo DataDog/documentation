@@ -63,7 +63,7 @@ Instrumenting your consumers and producers with Data Streams Monitoring allows y
 
 |Model             |Integration                                 |
 |------------------|--------------------------------------------|
-|Self Hosted       |[Kafka Broker][8]                           |
+|Self Hosted       |[Kafka Broker][8] & [Kafka Consumer][13]                           |
 |Confluent Platform|[Confluent Platform][11]                    |
 |Confluent Cloud   |[Confluent Cloud][12]                       |
 |Amazon MSK        |[Amazon MSK][10] or [Amazon MSK (Agent)][9] |
@@ -86,3 +86,4 @@ See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.
 [10]: /integrations/amazon_msk_cloud/
 [11]: /integrations/confluent_platform/
 [12]: /integrations/confluent_cloud/
+[13]: /integrations/kafka/?tab=host#kafka-consumer-integration
