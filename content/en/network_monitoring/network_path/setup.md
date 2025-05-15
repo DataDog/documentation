@@ -191,8 +191,8 @@ instances:
 
 Agent `v7.59+` is required.
 
-To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
   ```yaml
   datadog:
@@ -224,7 +224,7 @@ To enable Network Path with Kubernetes using Helm, add the below to your `values
               - "tag_key2:tag_value2"
 ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L908
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
 {{< /tabs >}}
@@ -328,27 +328,32 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.
-Note: Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart][1] documentation.
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
+Note: Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
-agents:
-  # [...]
-  containers:
-    # [...]
-    systemProbe:
-      env:
-        - name: DD_TRACEROUTE_ENABLED
-          value: "true"
-    processAgent:
-      env:
-        - name: DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED
-          value: "true"
-        ## [optional]
-        # - name: DD_NETWORK_PATH_COLLECTOR_WORKERS
-        #   value: "10"
+datadog:
+  connections_monitoring:
+    enabled: true
+
+## Set to true to enable the Traceroute Module of the System Probe
+  traceroute:
+    enabled: true
+
+## @param collector - custom object - optional
+  ## Configuration related to Network Path Collector.
+  #
+  collector:
+    ## @param workers - integer - optional - default: 4
+    ## @env DD_WORKERS - integer - optional - default: 4
+    ## The `workers` refers to the number of concurrent workers available for network path execution.
+    #
+    # workers: 4
+
 ```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L908
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+
 
 {{% /tab %}}
 {{< /tabs >}}
