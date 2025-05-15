@@ -224,7 +224,7 @@ To enable Network Path with Kubernetes using Helm, add the below to your `values
               - "tag_key2:tag_value2"
 ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L908
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
 {{< /tabs >}}
@@ -324,6 +324,31 @@ Agent `v7.61+` is required.
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
 [3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.
+Note: Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart][1] documentation.
+
+```yaml
+agents:
+  # [...]
+  containers:
+    # [...]
+    systemProbe:
+      env:
+        - name: DD_TRACEROUTE_ENABLED
+          value: "true"
+    processAgent:
+      env:
+        - name: DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED
+          value: "true"
+        ## [optional]
+        # - name: DD_NETWORK_PATH_COLLECTOR_WORKERS
+        #   value: "10"
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L908
 
 {{% /tab %}}
 {{< /tabs >}}
