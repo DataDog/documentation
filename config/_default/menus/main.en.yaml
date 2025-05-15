@@ -3827,6 +3827,11 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
+    - name: APM Recommendations
+      url: tracing/recommendations/
+      parent: tracing
+      identifier: apm_recommendations
+      weight: 7
     - name: Code Origins for Spans
       url: tracing/code_origins
       parent: tracing

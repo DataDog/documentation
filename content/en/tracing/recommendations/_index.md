@@ -46,12 +46,12 @@ multifiltersearch:
     - category: Performance
       recommendation_type: N+1 queries on Database
       scope: Backend services
-      recommendation_description: A backend application calls sequentially the same Database instead of batching queries.
+      recommendation_description: A backend application calls sequentially the same Database instead of batching queries
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Sequential API calls
       scope: Backend services
-      recommendation_description: A backend application calls sequentially the same Database instead of batching queries.
+      recommendation_description: A backend application calls sequentially the same Database instead of batching queries
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Agressive retries
@@ -61,26 +61,31 @@ multifiltersearch:
     - category: Performance
       recommendation_type: Missing index
       scope: Databases
-      recommendation_description: The query’s execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
-      recommendation_prerequisite: DBM
+      recommendation_description: The query’s execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query
+      recommendation_prerequisite: APM + DBM
     - category: User experience
       recommendation_type: User frustration action
       scope: Browser applications
-      recommendation_description: Rage or dead actions are detected on elements on a page
+      recommendation_description: Common rage or dead actions are detected on elements on a page signaling misleading UI or broken elements
+      recommendation_prerequisite: RUM
+    - category: User experience
+      recommendation_type: Unoptimized bundle size
+      scope: Browser applications and web views on mobile applications	
+      recommendation_description: Large JS resources causing delays in the initial page render signaling misleading UI or broken elements
       recommendation_prerequisite: RUM
     - category: Error rate
       recommendation_type: New issue
       scope: Backend services
-      recommendation_description: A backend application started to generate a new Error signature.
+      recommendation_description: A backend application started to generate a new Error signature
       recommendation_prerequisite: Error Tracking
 
 ---
 
-<div class="alert alert-warning">APM Recommendations are in Preview. Features and recommendations may change before general availability.</div>
+{{< beta-callout url="#" btn_hidden="true" >}}
+APM Recommendations are in Preview. Features and recommendations may change before general availability.
+{{< /beta-callout >}}
 
-# APM Recommendations
-
-APM Recommendations help you optimize your applications' performance, reliability, and error rates by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to help you:
+APM Recommendations help you optimize your applications' performance, reliability, and error rates by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
 
 - Identify and resolve performance bottlenecks
 - Improve service reliability and uptime
@@ -99,7 +104,10 @@ By looking at these sources together, Datadog finds ways to help you improve per
 
 ## Supported Recommendations
 
-
-<!-- The table below is auto-generated. Replace the placeholder data with actual recommendations as they become available. -->
+<!-- The table below is auto-generated. Add new entries in multifiltersearch with new recommendations as they become available. -->
 
 {{< multifilter-search >}} 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
