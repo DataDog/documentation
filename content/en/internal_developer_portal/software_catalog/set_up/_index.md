@@ -94,7 +94,7 @@ By default, these services are not associated with Datadog telemetry, but you ca
 
 Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Software Catalog provides automatic checks for these recommended setups. 
 
-To view the configuration completeness for an entity, click the entity in the [Software Catalog][5], then find the **Setup Guidance** tab:
+To view the configuration completeness for an entity, click the entity in the [Software Catalog][2], then find the **Setup Guidance** tab:
 
 {{< img src="tracing/software_catalog/software-catalog-setup-guidance.png" alt="Software Catalog with the Setup Guidance tab highlighted." >}}
 
@@ -102,7 +102,8 @@ The Setup Guidance table does not necessarily reflect billing for individual pro
 
 ## Role based access and permissions
 
-For general information, see [Role Based Access Control][25] and [Role Permissions][26].
+For general information, see [Role Based Access Control][3] and [Role Permissions][4].
+
 ### Read permission
 
 The Software Catalog read permission allows a user to read Software Catalog data, which enables the following features:
@@ -123,31 +124,9 @@ The Software Catalog write permission allows a user to modify Software Catalog d
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
 [1]: /internal_developer_portal/software_catalog/entity_model
-[5]: https://app.datadoghq.com/software
-[24]: /tracing/services/service_page/
-[25]: /account_management/rbac
-[26]: /account_management/rbac/permissions
-
-
-
-[6]: /integrations/github/
-[7]: https://app.datadoghq.com/integrations/github
-[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/
-[10]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
-[11]: /tracing/software_catalog/service_definition_api/
-[12]: https://app.datadoghq.com/software/settings/get-started
-[13]: /getting_started/tagging/unified_service_tagging
-[14]: /tracing/software_catalog/service_definition_api/
-[15]: /integrations/github/
-[16]: /tracing/
-[17]: /universal_service_monitoring/
-[18]: /tracing/services/inferred_services
-[19]: /tracing/guide/service_overrides/#remove-service-overrides
-[20]: /tracing/guide/service_overrides/
-[21]: /software_catalog/endpoints/
-[22]: https://app.datadoghq.com/software/settings/get-started?currentTab=import
-[23]: /tracing/services/inferred_services
+[2]: https://app.datadoghq.com/software
+[3]: /account_management/rbac
+[4]: /account_management/rbac/permissions
 
 
 
