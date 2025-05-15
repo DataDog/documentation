@@ -22,10 +22,9 @@ further_reading:
 
 ## Overview
 
-The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
+The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. Datastores support CRUD (Create, Read, Update, and Delete) operations and integrate seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
 
 You can interact with a datastore using an app or a workflow, or you can use the UI in the Datadog App.
-
 
 ## Prerequisites
 
@@ -38,7 +37,6 @@ To use the [Actions Datastore UI][1], you also need the following permission, wh
 
 * `actions_datastore_manage` - Allows management of the Actions Datastore, including creating, updating, and deleting the datastore itself.
 
-
 ## Create a datastore
 
 To create a datastore:
@@ -46,29 +44,39 @@ To create a datastore:
 1. Navigate to the [Datastore page][1].
 1. Click **+ New Datastore**.
 1. Enter a **Name**, a **Primary Key**, and optionally a **Description** for your datastore. The Primary Key must be a column name in your data where every data row has a unique value.
-1. _Optionally_, to upload initial items to your datastore, use one of the following methods to copy a CSV file:
+1. _Optionally_, you can seed your datastore with initial data from a JSON or CSV file. Use one of the following methods to upload the contents of the file:
    * Drag and drop the file into the UI.
    * Click **browse files** to browse and select a file from your computer.
    * Copy a CSV file on your computer and use <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd> to paste it.
 
-   The CSV file must include a header row with a column that matches your Primary Key.
-1. Click **Create**.
-1. To see your datastore in the list, click **Refresh Results**.
+   The CSV or JSON file must include a header row with a column that matches your Primary Key.
+1. Click **Create**. A confirmation pop-up window appears with options to [create a workflow or app](#create-a-workflow-or-app-from-a-datastore) from your datastore, or view the datastore.
 
 After you populate your datastore with data, you can:
 
 * Search the datastore by using the **Search** box in the header.
 * Click the name of a column to sort the datastore by that column's data.
 
-
 ## Edit a datastore
 
-To edit a datastore, on the [Datastore page][1], locate your datastore in the list. You can perform the following operations:
+### Manually edit your data
 
-* To add a row, click the **+ (plus)** icon. Fill in values for each field in the row, then click **Create**.
-* To edit non-primary-key values in an existing row, hover over the row and click the **Pencil (Edit)** icon. Edit the desired values, then click **Save**.
-* To delete an existing row, hover over the row and click the **Trash (Delete)** icon. Click **Delete** to confirm.
+To manually edit a row in your datastore:
+1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. Hover over the row you want to change and click the pencil (**Edit**) icon.
+1. Use the **JSON** or **Raw text** tabs to edit keys in the row.
 
+**Note:** You cannot manually edit the primary key in a row. Instead, delete the row and re-enter the information.
+
+### Update using a file
+
+To update a datastore using a file:
+1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. Click **Add Data**.
+1. Select an option for how your data should be handled.
+   - **Overwrite** replaces existing rows in your table with the data for your file.
+   - **Append** adds the rows in your file to the existing dataset. If you select append, you cannot add duplicate data to your dataset.
+1. Click **Add**.
 
 ## Reference a datastore
 
@@ -78,10 +86,29 @@ To use values from a datastore in a workflow or app:
 1. In the header of your datastore, click the **Copy Datastore UUID** button.
 1. Use this UUID to reference your datastore in a workflow or app. Use the [Delete item][2], [Get item][3], [List items][4], or [Put item][5] actions and provide the UUID as your **Datastore ID**.
 
-
 ## Delete a datastore
 
 To delete a datastore, click the **Trash (Delete Datastore)** icon in the header of the datastore you want to delete, then click **Confirm** to verify.
+
+## Create a workflow or app from a datastore
+
+You can get started with a workflow or app directly from a datastore.
+
+### Workflows
+
+To create a workflow from a datastore:
+1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. Click **Create** > **Workflow from Datastore**.
+
+Datadog creates a Workflow with a **List items** workflow step prepopulated with your datastore ID. From here, follow the [Workflow Automation][8] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][10].
+
+### App Builder
+
+To create an app from a datastore:
+1. On the [Datastore page][1], locate your datastore in the list and click to open it.
+1. Click **Create** > **App from Datastore**.
+
+Datadog creates an app prepopulated with your datastore ID. From here, follow the [App Builder][9] documentation to build your app. For a list of available datastore actions, see the [Action Catalog][10].
 
 ## Limitations
 
@@ -104,3 +131,7 @@ Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case 
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.listDatastoreItems
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.putDatastoreItem
 [6]: /account_management/rbac/permissions/?tab=ui#app-builder--workflow-automation
+[7]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore
+[8]: /actions/workflows/build/
+[9]: /actions/app_builder/build/
+[10]: /actions/actions_catalog/#datadog-actions-datastore
