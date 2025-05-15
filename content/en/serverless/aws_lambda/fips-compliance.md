@@ -75,7 +75,7 @@ For Python, JavaScript, and Go Lambda functions, FIPS compliance is controlled u
 When FIPS mode is enabled:
 
 - AWS FIPS endpoints are used for Datadog API key lookups in AWS secure datastores.
-- Direct metric submission to the Datadog API is disabled, requiring the FIPS-compliant extension or forwarder for metric submission.
+- Direct metric submission to the Datadog API is disabled, requiring the FIPS-compliant extension for metric submission.
 
 ### Ruby, .NET, and Java
 
