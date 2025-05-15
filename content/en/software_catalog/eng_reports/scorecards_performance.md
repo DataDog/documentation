@@ -1,5 +1,12 @@
 ---
 title: Scorecards Performance
+further_reading:
+- link: "software_catalog/scorecards/"
+  tag: "Documentation"
+  text: "Datadog Scorecards"
+- link: "dashboards/"
+  tag: "Documentation"
+  text: "Datadog Dashboards"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -13,7 +20,7 @@ The Scorecards Performance report includes an organization-wide view of Scorecar
 - Filter information based on team, scorecard, rule, application, tier, and lifecycle.
 - Explore historical info for the last 12 months to identify trends over time.
 
-Access the Scorecards Performance report by clicking on the "Overview" tab in IDP and selecting "Scorecards Performance" in the left-hand menu. 
+Access the Scorecards Performance report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Scorecards Performance" in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/scorecards-landing.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
 
@@ -48,6 +55,10 @@ To customize the dashboard, you can:
 - Update the Scorecard leaderboard view to aggregate by dimensions other than team or service (for example, you can create a leaderboard view by "system" or "tier")
 - Add widgets that are not included in the default view
 - Add filters to the existing widgets
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/dashboards/sharing/scheduled_reports/
 

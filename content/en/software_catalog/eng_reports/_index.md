@@ -1,8 +1,15 @@
 ---
 title: Engineering Reports
 further_reading:
-- link: "/tracing/software_catalog/"
+- link: "/service_management/service_level_objectives/"
   tag: "Documentation"
+  text: "Service Level Objectives"
+- link: "service_management/incident_management/"
+  tag: "Documentation"
+  text: "Incident Management"
+- link: "software_catalog/scorecards/"
+  tag: "Documentation"
+  text: "Datadog Scorecards"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}

@@ -1,5 +1,15 @@
 ---
 title: Reliability Overview
+further_reading:
+- link: "/service_management/service_level_objectives/"
+  tag: "Documentation"
+  text: "Service Level Objectives"
+- link: "service_management/incident_management/"
+  tag: "Documentation"
+  text: "Incident Management"
+- link: "dashboards/"
+  tag: "Documentation"
+  text: "Datadog Dashboards"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -15,12 +25,11 @@ With this report, you can:
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 - Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
 
-Access the Reliability Overview report by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the left-hand menu. 
+Access the Reliability Overview report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Reliability Overview" in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/reliability-overview-landing.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
-
 
 ## Interact with your Reliability Overview report
 
@@ -73,6 +82,10 @@ Note that an average remaining error budget of 0% corresponds to a Score value o
 - **Red:** 0 ≤ Score < 66.667
 - **Yellow:** 66.667 ≤ Score < 80
 - **Green:** 80 ≤ Score ≤ 100
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
 
