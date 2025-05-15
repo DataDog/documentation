@@ -162,7 +162,6 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 3. Verify that your function was instrumented.
     1. In the Datadog UI, navigate to `Infrastructure > Serverless`
     2. Search for the name of your function.
