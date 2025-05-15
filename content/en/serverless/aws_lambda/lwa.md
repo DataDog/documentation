@@ -6,7 +6,7 @@ title: Lambda Web Adapter (Preview)
 
 # How to integrate Datadog
 
-From the web application perspective, running in Lambda Web Adapter is similar to running in a web server. But the Datadog instrumentation have to be configured specifically for this setup, depending on whether the application is being deployed using a container or a zip file.
+From the web application perspective, running in Lambda Web Adapter is similar to running in a web server. But the Datadog instrumentation has to be configured specifically for this setup, depending on whether the application is being deployed using a container or a zip file.
 In any case, the following steps are required:
 
 1. Adding the Lambda Web Adapter and Datadog extension
@@ -24,7 +24,7 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:77 /opt/. /opt/
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter
 ```
 
-2. Setting the required Datadog environment variables. Since there is no explicit shutdown system for Lambda, traces must be flushed as soon as possible so that their are not lost when the Lambda runtime environment is "frozen". Furthermore, the transparent tracing requires the Datadog extension to proxy requests before the Lambda Web Adapter, so the `AWS_LWA_LAMBDA_RUNTIME_API_PROXY` must be set to allow that. The port can be set with any available port
+2. Setting the required Datadog environment variables. Since there is no explicit shutdown system for Lambda, traces must be flushed as soon as possible so their are not lost when the Lambda runtime environment is "frozen". Furthermore, the transparent tracing requires the Datadog extension to proxy requests before the Lambda Web Adapter, so the `AWS_LWA_LAMBDA_RUNTIME_API_PROXY` must be set to allow that. The port can be set with any available port
 
 ```bash
 DD_TRACE_PARTIAL_FLUSH_MIN_SPANS=1
