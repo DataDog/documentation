@@ -2069,7 +2069,7 @@ menu:
       parent: internal_developer_portal
       identifier: idp_integrations
       weight: 4
-  - name: Use Cases
+    - name: Use Cases
       url: internal_developer_portal/software_catalog/use_cases
       parent: software_catalog
       identifier: software_catalog_use_cases
