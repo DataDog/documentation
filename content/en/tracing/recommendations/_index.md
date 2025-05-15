@@ -51,7 +51,7 @@ multifiltersearch:
     - category: Performance
       recommendation_type: Sequential API calls
       scope: Backend services
-      recommendation_description: A backend application calls sequentially the same Database instead of batching queries
+      recommendation_description: A backend application calls sequentially the same API instead of batching queries
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Agressive retries
