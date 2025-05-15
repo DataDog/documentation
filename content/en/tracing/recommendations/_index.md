@@ -5,6 +5,8 @@ algolia:
   tags:
     - apm recommendations
     - apm recommendation
+    - rum recommendation
+    - rum recommendations
     - application performance monitoring
     - performance recommendations
     - reliability recommendations
@@ -39,20 +41,36 @@ multifiltersearch:
       id: recommendation_description
     - name: Recommendation Prerequisite
       id: recommendation_prerequisite
+      filter_by: true
   data:
     - category: Performance
       recommendation_type: N+1 queries on Database
-      scope: Backend application
+      scope: Backend services
       recommendation_description: A backend application calls sequentially the same Database instead of batching queries.
       recommendation_prerequisite: APM
-    - category: Reliability
-      recommendation_type: <Recommendation Type>
-      scope: <Scope of Recommendation>
-      recommendation_description: <Description of the reliability recommendation.>
-      recommendation_prerequisite: <Prerequisites or integrations required.>
+    - category: Performance
+      recommendation_type: Sequential API calls
+      scope: Backend services
+      recommendation_description: A backend application calls sequentially the same Database instead of batching queries.
+      recommendation_prerequisite: APM
+    - category: Performance
+      recommendation_type: Agressive retries
+      scope: Backend services
+      recommendation_description: A backend application retries faulty calls to an API without backoff
+      recommendation_prerequisite: APM
+    - category: Performance
+      recommendation_type: Missing index
+      scope: Database
+      recommendation_description: The query’s execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
+      recommendation_prerequisite: DBM
+    - category: User experience
+      recommendation_type: User frustration action
+      scope: Browser applications
+      recommendation_description: 
+      recommendation_prerequisite: RUM
     - category: Error rate
-      recommendation_type: New errors
-      scope: Backend applications
+      recommendation_type: New issue
+      scope: Backend services
       recommendation_description: A backend application started to generate a new Error signature.
       recommendation_prerequisite: Error Tracking
 
