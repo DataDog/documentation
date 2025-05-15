@@ -96,7 +96,7 @@ An example task definition:
 
 ## Configure the ECS service
 
-[Create a ECS service][2]. The service configuration sets the number of Worker replicas to run and the scaling policy. In this example, the scaling policy is set to target an average CPU utilization of 70% with a minimum of two replicas and a maximum of five replicas.
+[Create an ECS service][2]. The service configuration sets the number of Worker replicas to run and the scaling policy. In this example, the scaling policy is set to target an average CPU utilization of 70% with a minimum of two replicas and a maximum of five replicas.
 
 ## Set up load balancing
 
