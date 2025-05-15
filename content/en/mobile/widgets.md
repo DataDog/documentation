@@ -129,7 +129,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_slo_may_2025.png" alt="Application Uptime SLO widgets displayed on Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/android_slo_widget_may_2025.png" alt="Application Uptime SLO widgets displayed on Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap the widget title to configure.
 2. Tap **Selected SLO** to choose an SLO to track.
