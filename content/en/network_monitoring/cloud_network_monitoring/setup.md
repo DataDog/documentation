@@ -206,10 +206,10 @@ To enable Cloud Network Monitoring for Windows hosts:
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
 To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+**Note:** Helm chart v2.4.39+ is required. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
@@ -392,7 +392,8 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1774-L1775
+
 {{% /tab %}}
 {{% tab "Operator" %}}
 
