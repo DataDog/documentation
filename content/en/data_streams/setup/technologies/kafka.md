@@ -57,9 +57,9 @@ title: Data Streams Monitoring for Kafka
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
 
-### Supported Deployment Models
+### Supported Kafka Deployments
 
-Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready to go metrics][7]. This can be done on any deployment model; the following deployment models have further integration support, providing additional insights into the health of your pipelines.
+Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready to go metrics][7] independently of how Kafka is deployed. However, the following Kafka deployments have further integration support, providing additional insights into the health of your Kafka cluster.
 
 |Model             |Integration                                 |
 |------------------|--------------------------------------------|
@@ -67,6 +67,7 @@ Instrumenting your consumers and producers with Data Streams Monitoring allows y
 |Confluent Platform|[Confluent Platform][11]                    |
 |Confluent Cloud   |[Confluent Cloud][12]                       |
 |Amazon MSK        |[Amazon MSK][10] or [Amazon MSK (Agent)][9] |
+|Red Panda         |Not yet integrated
 
 ### Setting up Data Streams Monitoring
 See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.NET][6].
