@@ -28,7 +28,13 @@ Datadog's FIPS compliance for AWS Lambda is implemented through two main compone
 
 2. **Runtime Libraries Support**:
    - The Python and JavaScript Datadog Lambda Layers, and the Go Datadog Lambda Library offer FIPS-compliant operation controlled by the `DD_LAMBDA_FIPS_MODE` environment variable.
-   - When FIPS mode is enabled, the runtime libraries use AWS FIPS endpoints for Datadog API key retrieval and disable direct metric submission to Datadog.
+     - `DD_LAMBDA_FIPS_MODE` defaults to `true` in GovCloud and `false` otherwise.
+   - When FIPS mode is enabled:
+     - The runtime libraries use AWS FIPS endpoints for Datadog API key retrieval
+     - The Lambda metric helper functions require the FIPS-compliant extension for metric submission:
+       - Python: `lambda_metric` from `datadog_lambda.metric`
+       - Node.js: `sendDistributionMetric` from `datadog-lambda-js`
+       - Go: `Metric()` from `ddlambda`
 
 ## FIPS Extension Layers
 

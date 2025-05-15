@@ -596,7 +596,7 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
  ```
 
 2. For Lambda functions using Python, JavaScript, or Go, set the environment variable `DD_LAMBDA_FIPS_MODE` to `true`. This environment variable:
-   - Disables direct metric submission
+   - In FIPS mode, the Lambda metric helper functions require the FIPS-compliant extension for metric submission
    - Uses AWS FIPS endpoints for API key lookups
    - Is enabled by default in GovCloud environments
 
