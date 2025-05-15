@@ -5500,6 +5500,42 @@ menu:
           - DownloadCloudWorkloadPolicyFile
         unstable: []
         order: 1
+    - name: Update a CSM Threats Agent policy
+      url: '#update-a-csm-threats-agent-policy'
+      identifier: csm-threats-update-a-csm-threats-agent-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCSMThreatsAgentPolicy
+        unstable: []
+        order: 5
+    - name: Get a CSM Threats Agent policy
+      url: '#get-a-csm-threats-agent-policy'
+      identifier: csm-threats-get-a-csm-threats-agent-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMThreatsAgentPolicy
+        unstable: []
+        order: 2
+    - name: Delete a CSM Threats Agent policy
+      url: '#delete-a-csm-threats-agent-policy'
+      identifier: csm-threats-delete-a-csm-threats-agent-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCSMThreatsAgentPolicy
+        unstable: []
+        order: 6
     - name: Get the latest CSM Threats policy
       url: '#get-the-latest-csm-threats-policy'
       identifier: csm-threats-get-the-latest-csm-threats-policy
@@ -5512,6 +5548,30 @@ menu:
           - DownloadCSMThreatsPolicy
         unstable: []
         order: 1
+    - name: Create a CSM Threats Agent policy
+      url: '#create-a-csm-threats-agent-policy'
+      identifier: csm-threats-create-a-csm-threats-agent-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCSMThreatsAgentPolicy
+        unstable: []
+        order: 4
+    - name: Get all CSM Threats Agent policies
+      url: '#get-all-csm-threats-agent-policies'
+      identifier: csm-threats-get-all-csm-threats-agent-policies
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMThreatsAgentPolicies
+        unstable: []
+        order: 3
     - name: Update a CSM Threats Agent rule
       url: '#update-a-csm-threats-agent-rule'
       identifier: csm-threats-update-a-csm-threats-agent-rule
@@ -7552,6 +7612,42 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
+    - name: Set on-call team routing rules
+      url: '#set-on-call-team-routing-rules'
+      identifier: on-call-set-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SetOnCallTeamRoutingRules
+        unstable: []
+        order: 10
+    - name: Get on-call team routing rules
+      url: '#get-on-call-team-routing-rules'
+      identifier: on-call-get-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallTeamRoutingRules
+        unstable: []
+        order: 9
+    - name: Get the schedule on-call user
+      url: '#get-the-schedule-on-call-user'
+      identifier: on-call-get-the-schedule-on-call-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallUser
+        unstable: []
+        order: 11
     - name: Update on-call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule
@@ -7648,6 +7744,58 @@ menu:
           - CreateOnCallEscalationPolicy
         unstable: []
         order: 5
+    - name: On-Call Paging
+      url: /api/latest/on-call-paging/
+      identifier: on-call-paging
+      generated: true
+    - name: Resolve On-Call Page
+      url: '#resolve-on-call-page'
+      identifier: on-call-paging-resolve-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResolveOnCallPage
+        unstable: []
+        order: 4
+    - name: Escalate On-Call Page
+      url: '#escalate-on-call-page'
+      identifier: on-call-paging-escalate-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EscalateOnCallPage
+        unstable: []
+        order: 3
+    - name: Acknowledge On-Call Page
+      url: '#acknowledge-on-call-page'
+      identifier: on-call-paging-acknowledge-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AcknowledgeOnCallPage
+        unstable: []
+        order: 2
+    - name: Create On-Call Page
+      url: '#create-on-call-page'
+      identifier: on-call-paging-create-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

@@ -35,7 +35,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
 <div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
 You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
@@ -623,7 +623,9 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events.
+
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. Version v5.48.0 of dd-trace-js introduces new methods under the `eventTrackingV2` namespace. Existing event tracking methods are retained for compatibility.
+
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -634,13 +636,16 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
+id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const user = 'user-id' // user could be just the ID
+const login = 'user@email.com'
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
 // Log a successful user authentication event
-tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
+// user and metadata are optional
+tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /tab %}}
 
@@ -649,12 +654,14 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
+const login = 'user-id' // the string used by the user to log in
 const userExists = true // if the user login exists in database for example
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
+// Log a failed user authentication event
+// userExists is optional and it is defaulted to false
 // metadata is optional
-tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
+tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /tab %}}
 
@@ -672,6 +679,60 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 {{< /tabs >}}
 
+#### Migrating to the new login success and failure methods 
+
+The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+
+**Note**: the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{< tabs >}}
+{{% tab "Login success" %}}
+```javascript
+const tracer = require('dd-trace')
+
+// in a controller:
+const user = {
+  id: 'user-id',
+  email: 'user@email.com'
+} // same as before, but now the object is optional. Providing a user ID will nonetheless help with post-compromised activity correlation
+
+const login = 'user@email.com' // new mandatory argument
+
+const metadata = { 
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the main argument
+  'key': 'value'
+}
+
+// tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // deprecated
+tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
+```
+{{% /tab %}}
+{{% tab "Login failure" %}}
+```javascript
+const tracer = require('dd-trace')
+
+// in a controller with the deprecated method:
+const userId = 'user-id' // No longer mandatory, but helpful when available
+const login = 'user@email.com' // new mandatory argument
+const userExists = true
+const metadata = { 
+//  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the first argument
+  'usr.id': userId, // Helps with correlating login failures with the rest of the user activity
+  'key': 'value'
+}
+
+// tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata) // deprecated
+tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 {{< /programming-lang >}}
 
