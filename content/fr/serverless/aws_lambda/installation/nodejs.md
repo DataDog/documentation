@@ -25,7 +25,7 @@ title: Instrumenter des applications Node.js sans serveur
 
 <div class="alert alert-warning">Si vous créez un bundle avec webpack ou esbuild, vous devrez peut-être <a href="/serverless/guide/serverless_tracing_and_bundlers/">marquer les bibliothèques Datadog comme externes</a>.</div>
 
-## Azure App Service
+## Installation
 
 Datadog propose de nombreuses méthodes différentes pour instrumenter vos applications sans serveur. Choisissez celle qui répond le mieux à vos besoins ci-dessous. Nous vous conseillons d'utiliser l'interface de ligne de commande Datadog. Vous *devez* suivre les instructions fournies pour "Image de conteneur" si votre application est déployée en tant qu'image de conteneur.
 
