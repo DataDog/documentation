@@ -180,7 +180,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
+{{< img src="profiler/view_profile_from_trace-2.png" alt="Opening a view of the profile in a flame graph" >}}
 
 From the timeline, click **Open in Profiling** to see the same data on a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
