@@ -128,50 +128,83 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 ### Configure the service ingestion rates by resource
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" btn_hidden="false" header="Adaptive sampling is in Preview!" >}}
-<b>Adaptive sampling rates</b> let Datadog control sampling rates on your behalf to match a configured monthly ingested volume budget. Follow the instructions in the <a href="/tracing/guide/adaptive_sampling">Adaptive sampling guide</a> to get started. To request access to the feature, complete the following form.
-{{< /callout >}}
+When configuring sampling rates for a service by resource name, there are two sampling strategies you can use:
 
-To configure sampling rates for the service by resource name: 
-1. Click **Manage Ingestion rate**.
-   {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
-2. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
+- **Adaptive sampling**: Automatically adjust sampling rates to match a configured monthly ingested volume budget.
+- **Custom sampling**: Manually set explicit sampling rates by resource.
 
-#### if the Remote configuration option is available
+#### Adaptive sampling (Recommended)
 
-3. Click **Apply** to save the configuration. 
+Specify a target monthly ingestion volume for one or multiple services while keeping visibility over all services and endpoints.
 
-The configuration should take effect in less than a minute. You **do not need** to redeploy the service for the change to take effect. You can observe the configuration changes from the [Live Search Explorer][9].
+To configure adaptive sampling:
 
-From the **Service Ingestion Summary**, resources for which the sampling rate are remotely applied should show as `Remote Configured` in the **Configuration** column.
+1. Navigate to the [Ingestion Control][2] page.
+2. Click a service to view the **Service Ingestion Summary**.
+3. Click **Manage Ingestion Rate**.
+4. Choose **Datadog adaptive sampling** rate as your service's sampling strategy.
+5. Click **Apply**.
 
-#### if the Remote configuration option is disabled
+<div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#remote-configuration-requirements">Remote Configuration requirements</a> are met.</div>
 
-If the remote configuration option is disabled, make sure that the listed [requirements](#remote-configuration-requirements) are all met to be able to use remote configuration.
+For more information, see [Adaptive Sampling][17].
 
-3. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. 
-**Note**: The service name value is case sensitive. It should match the case of your service name.
+#### Custom sampling
 
-4. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The resources for which the sampling rate was applied should show as `Local Configured`.
+To configure custom sampling rates for the service by resource name: 
+1. Navigate to the [Ingestion Control][2] page.
+2. Click a service to view the **Service Ingestion Summary**.
+3. Click **Manage Ingestion rate**.
+4. Click **Add new rule** to set sampling rates for some resources.  
+   **Note**: Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
+   {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_custom.png" alt="Configuration Modal" style="width:100%;">}}
+5. Apply the configuration **Remotely** or **Locally**:
+{{< tabs >}}
+{{% tab "Remotely" %}}
 
-#### Remote configuration requirements
+This option applies the configuration using Remote Configuration, so you **do not need** to redeploy the service for the change to take effect. You can observe the configuration changes from the [Live Search Explorer][100].
+
+1. Click **Apply** to save the configuration. 
+1. Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.  
+
+<br><div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#remote-configuration-requirements">Remote Configuration requirements</a> are met.</div>
+
+[100]: /tracing/trace_explorer/?tab=listview#live-search-for-15-minutes
+
+{{% /tab %}}
+
+{{% tab "Locally" %}}
+
+This option generates configuration for you to apply manually.
+1. Apply the generated configuration to the indicated service.  
+   **Note**: The service name value is case sensitive. It should match the case of your service name.
+1. Redeploy the service.
+1. Confirm that the new percentage has been applied by looking at the **Traffic Breakdown** column.
+1. Resources that have been configured locally display as `Configured Local` in the **Configuration** column.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% collapse-content title="Remote Configuration requirements" level="h4" expanded=false id="remote-configuration-requirements" %}}
 
 - Datadog Agent [7.41.1][2] or higher.
 - [Remote Configuration][3]  enabled for your Agent.
-- `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
+- `APM Remote Configuration Write` [permissions][4]. If you don't have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
 Find below the minimum tracing library version required for the feature:
 
-Language  | Minimum version required
-----------|--------------------------
-Java      | v1.34.0
-Go        | v1.64.0
-Python    | v.2.9.0
-Ruby      | v2.0.0
-Node.js   | v5.16.0
-PHP       | v1.4.0
-.NET      | v2.53.2
-C++       | v0.2.2
+| Language | Minimum version required |
+|----------|--------------------------|
+| Java     | v1.34.0                  |
+| Go       | v1.64.0                  |
+| Python   | v.2.9.0                  |
+| Ruby     | v2.0.0                   |
+| Node.js  | v5.16.0                  |
+| PHP      | v1.4.0                   |
+| .NET     | v2.53.2                  |
+| C++      | v0.2.2                   |
+
+{{% /collapse-content %}}
 
 ## Managing Datadog Agent ingestion configuration
 
