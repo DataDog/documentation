@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: docs10001/eventbridge-metrics
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
