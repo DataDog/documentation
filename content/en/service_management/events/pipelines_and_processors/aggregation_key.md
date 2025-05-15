@@ -17,6 +17,6 @@ The aggregation key processor performs the following actions:
 * Checks if any of the selected tag keys or attributes have values, if so, an aggregation key can be generated.
 * If not, an aggregation key is not set on the processed event.
 * If there are multiple values in the tag key, it selects only one value to generate the aggregation key.
-* Based on these values, it generates a hash and add the generated aggregation key to the event.
+* Based on these values, it generates a hash and adds the generated aggregation key to the event.
 
 [1]: /service_management/events/correlation/
