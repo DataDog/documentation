@@ -28,7 +28,7 @@ The developer overview page centralizes the following information about your tea
 
 #### Get started
 
-Before your team can use the developer overview page, a platform admin must connect the page widgets to data sources:
+Before your team starts using the developer overview page, connect its widgets to data sources with any account that has App Builder permissions:
 
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
 1. Select `+ Connect data` on each widget to connect to GitHub and Jira: 
@@ -49,17 +49,6 @@ Provide values for the page-level filters to tailor the developer overview page 
 - **Github_Username**: Your GitHub username
 
 **Note**: These filters persist when you return to **My Workspace**. 
-
-#### Clone for further customization
-
-If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard that lives outside of IDP.
-
-1. Select **Clone as dashboard** to create a customizable dashboard with content from the **My Workspace** page.
-1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
-   - Create a widget to capture PagerDuty on call information. 
-   - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
-   
-   See the [Embedded Apps][2] documentation to learn more about creating widgets.
 
 ### Page features
 
@@ -91,6 +80,17 @@ Surfaces issues and errors detected by [Datadog Incidents][3] and [Error Trackin
 #### Watchdog alerts
 
 Captures alerts from [Datadog Watchdog][5].
+
+### Clone for further customization
+
+If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard.
+
+1. Select **Clone as dashboard** to create a customizable dashboard prefilled with content from the **My Workspace** page.
+1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
+   - Create a widget to capture PagerDuty on call information. 
+   - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
+   
+   See the [Embedded Apps][2] documentation to learn more about creating widgets.
 
 ## Further reading
 
