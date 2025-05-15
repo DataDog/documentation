@@ -1,5 +1,5 @@
 ---
-title: Advanced Analysis Features
+title: Analysis Features
 further_reading:
 - link: "/notebooks"
   tag: "Documentation"

@@ -1571,7 +1571,7 @@ menu:
       pre: notebook
       parent: platform_heading
       weight: 20000
-    - name: Advanced Analysis
+    - name: Analysis Features
       url: notebooks/advanced_analysis/
       parent: notebooks
       identifier: notebooks_advanced_analysis
