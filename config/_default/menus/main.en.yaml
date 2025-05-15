@@ -1572,9 +1572,9 @@ menu:
       parent: platform_heading
       weight: 20000
     - name: Advanced Analysis
-      url: notebooks/computation/
+      url: notebooks/advanced_analysis/
       parent: notebooks
-      identifier: notebooks_computation
+      identifier: notebooks_advanced_analysis
       weight: 1
     - name: Guides
       url: notebooks/guide
