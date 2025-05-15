@@ -38,10 +38,7 @@ Datadog provides separate Lambda extension layers for FIPS compliance in both x8
 {{% tab "AWS GovCloud Regions" %}}
 
 ```
-# For x86-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
-
-# For arm64-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 
@@ -51,10 +48,7 @@ Replace `<AWS_REGION>` with a valid AWS GovCloud region such as `us-gov-west-1`.
 {{% tab "AWS Commercial Regions" %}}
 
 ```
-# For x86-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
-
-# For arm64-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 

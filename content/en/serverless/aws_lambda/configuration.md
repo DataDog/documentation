@@ -586,16 +586,12 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 1. Use a FIPS-compliant extension layer by referencing the appropriate ARN:
 
  ```sh
- # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+ # AWS GovCloud
  arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
-
- # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
  arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
 
- # Use this format for x86-based Lambda deployed in AWS commercial regions
+ # AWS Commercial
  arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
-
- # Use this format for arm64-based Lambda deployed in AWS commercial regions
  arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
  ```
 
@@ -604,7 +600,7 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
    - Uses AWS FIPS endpoints for API key lookups
    - Is enabled by default in GovCloud environments
 
-3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed, as these runtimes do not make direct API calls.
+3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
 
 4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
    - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
