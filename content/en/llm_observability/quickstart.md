@@ -150,7 +150,6 @@ The following steps generate an LLM Observability trace in an AWS Lambda environ
     ```
     4. Instrument your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer).
 
-
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
@@ -163,7 +162,6 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 
 3. Verify that your function was instrumented.
     1. In the Datadog UI, navigate to `Infrastructure > Serverless`
