@@ -290,7 +290,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
@@ -336,14 +336,14 @@
                 - /serverless/datadog_lambda_library/
                 - /serverless/serverless_integrations/cli/
         - action: pull-and-push-file
-          branch: master
+          branch: corentin.girard/align-upload-section
           globs:
           - 'src/commands/synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/corentin.girard/align-upload-section/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
