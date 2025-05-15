@@ -32,8 +32,8 @@ further_reading:
 ## Overview
 
 To add [entity definitions][13] to Software Catalog, you can:
-- manually add through the Datadog UI.
-- automate import through GitHub, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API.
+- manually create definitions through the Datadog UI.
+- manage definitions in code and automate import through GitHub, Terraform, or the Datadog API.
 
 ## Through the Datadog UI
 

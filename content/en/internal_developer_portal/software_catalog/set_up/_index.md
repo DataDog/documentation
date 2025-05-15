@@ -51,6 +51,8 @@ further_reading:
     text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
 ---
 
+## Overview
+
 Software Catalog entities are defined through [Entity Definitions][1], which are Kubernetes-style YAML configuration files. 
 
 To populate Software Catalog, you can:
@@ -77,8 +79,8 @@ By default, these services are not associated with Datadog telemetry, but you ca
 ## Import entities
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import-entities#import-from-backstage" >}}Import from Backstage{{< /nextlink >}}
-    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import-entities#import-from-servicenow" >}}Import from ServiceNow{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage" >}}Import from Backstage{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow" >}}Import from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Verify configuration completeness 
@@ -113,6 +115,10 @@ The Software Catalog write permission allows a user to modify Software Catalog d
 - Updating service metadata in the UI
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /internal_developer_portal/software_catalog/entity_model
 [2]: https://app.datadoghq.com/software

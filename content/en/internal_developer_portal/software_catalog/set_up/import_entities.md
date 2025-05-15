@@ -25,8 +25,7 @@ further_reading:
 
 ## Overview
 
-If you already have data or services registered in Backstage or Service Now, you can import these services into Datadog directly. 
-
+If you already have data or services registered in Backstage or ServiceNow, you can import these services into Datadog directly. 
 
 ## Import from Backstage
 

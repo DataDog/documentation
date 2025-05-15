@@ -1,5 +1,5 @@
 ---
-title: Definitions and Supported Versions
+title: Entity Model
 aliases:
   - /software_catalog/service_definitions/
   - /software_catalog/adding_metadata
@@ -46,7 +46,7 @@ further_reading:
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 ---
 
-## Metadata structure and supported versions
+## Overview
 
 Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 
 

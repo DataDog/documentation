@@ -48,7 +48,7 @@ Software Catalog includes any entity (such as a service or datastore) that:
 - you [declare through an Entity Definition][21], or
 - you [import from a third party][22] such as Backstage or ServiceNow.
 
-**Note**: The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
+**Note**: The services and resources statistics, and span summaries on the **Service List** and **Service Page**, are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
 
 {{< site-region region="gov" >}}
 ### Services types
@@ -66,11 +66,13 @@ The type of the service can be one of:
 *  Web
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+
 {{< /site-region >}}
+
 {{< site-region region="ap1,us3,us5,eu,us" >}}
 ### Component types
 
-Every entry showing up in the Software Catalog is categorized as a component type:
+Every entry in Software Catalog is categorized as a component type:
 
 *  Services
 *  Datastores
