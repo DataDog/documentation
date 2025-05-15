@@ -23,69 +23,94 @@ The goal of this feature is to allow you to scope down to specific users' behavi
 
 The User Profile page includes a list of attributes to help you better segment your users. You can conduct a FULL-TEXT SEARCH on `username` or `email`, SORT, and FILTER based on these attributes:
 
-<!-- #### Personal identifying attributes  -->
-User ID `**REQUIRED`
-: `type:string`  <br> Unique user identifier,  displayed by default in the User Profile page.<br> 
-_This is a required attribute needed for user tracking and populating on the User Profiles page_.<br>
+<!-- #### User attributes  -->
+User ID `REQUIRED`
+: `type:string` <br> A unique user identifier.<br> 
 
 User Email
-: <add context>
+: `type:string` <br> The user's email address.
 
 User Name
-: `type:string` <br> User friendly name, displayed by default in the User Profile page.
+: `type:string` <br> The user's full name.
+
+
 
 <!-- #### Time based attributes  -->
 First Seen
-: `type:string` <br> 
+: `type:timestamp` <br> The date of the user's first session.
 
+Last Seen
+: `type:timestamp`  <br> The date of the user's most recent session.
+
+
+
+<!-- #### application based attributes  -->
 First Seen Application
-: `type:string`  <br> 
+: `type:string`  <br> The ID of the first application the user accessed.
 
-<!-- #### Location based attributes  -->
+Last Seen Application
+: `type:string`  <br> The ID of the last application the user accessed.
 
+
+
+<!-- #### Geo based attributes  -->
 First City
-: `type:string` <br> 
+: `type:string` <br> The city of the user's first session.
 
 Last City
-: `type:string` <br> 
-
-First Region
-: `type:string` <br> 
-
-Last Region
-: `type:string` <br> 
+: `type:string` <br> The city of the user's last session.
 
 First Seen Country 
-: `type:string` <br> 
+: `type:string` <br> The ISO code of the country for the user's first session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
 
 Last Seen Country
-: `type:string` <br> 
+: `type:string` <br> The ISO code of the country for the user's last session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
 
-<!-- #### Device and Browser related attributes  -->
+First Region
+: `type:string` <br> The region of the user's first session.
+
+Last Region
+: `type:string` <br> The region of the user's last session.
+
+
+
+<!-- #### Device related attributes  -->
 First Device Type
-: <add context>
+: `type:string` <br> The device used in the user's first session (_for example: desktop, tablet_).
+
 Last Device Type
-: <add context>
-First OS Version
-: <add context>
-Last OS Version
-: <add context>
+: `type:string` <br> The device used in the user's last session (_for example: desktop, tablet_).
+
+
+
+<!-- #### OS related attributes  -->
 First OS Name
-: <add context>
+: `type:string` <br> The operating system of the user's first session (_for example: Windows, iOS_).
+
 Last OS Name
-: <add context>
+: `type:string` <br> The operating system of the user's last session (_for example: Windows, iOS_).
+
+First OS Version
+: `type:string` <br> The OS version of the user's first session.
+
+Last OS Version
+: `type:string` <br> The OS version of the user's last session.
+
+
+<!-- #### Browser related attributes  -->
 First Browser Name
-: <add context>
+: `type:string` <br> The browser used in the user's first session (_for example: Chrome, Safari_).
+
 Last Browser Name
-: <add context>
+: `type:string` <br> The browser used in the user's last session (_for example: Chrome, Safari_).
+
 First Browser Version
-: <add context>
+: `type:string` <br> The browser version from the user's first session.
+
 Last Browser Version
-: <add context>
+: `type:string` <br> The browser version from the user's last session.
 
-<!-- **(emphasize ``user.id` here?)**
-The attributes in this table are recommended for populating users in the User Profile page. -->
-
+<br>
 
 ## How profiles are sourced
 
@@ -114,174 +139,3 @@ From the session history, you can identify where frustrations are detected and s
 [3]: https://app.datadoghq.com/product-analytics/profiles
 
 
-
-<!-- var usersCoreDataModel = map[string]Field{
-    // Timestamps
-    "first_seen": {
-       FieldID:     "first_seen",
-       DisplayName: "First Seen",
-       Type:        Timestamp,
-       Description: "The date of the user's first session.",
-       Groups:      []string{},
-    },
-    "last_seen": {
-       FieldID:     "last_seen",
-       DisplayName: "Last Seen",
-       Type:        Timestamp,
-       Description: "The date of the user's most recent session.",
-       Groups:      []string{},
-    },
-    // User Attributes
-    "user_id": {
-       FieldID:     "user_id",
-       DisplayName: "User ID",
-       Type:        String,
-       Description: "A unique identifier for the user.",
-       Groups:      []string{"User"},
-    },
-    "user_email": {
-       FieldID:     "user_email",
-       DisplayName: "User Email",
-       Type:        String,
-       Description: "The user's email address.",
-       Groups:      []string{"User"},
-    },
-    "user_name": {
-       FieldID:     "user_name",
-       DisplayName: "User Name",
-       Type:        String,
-       Description: "The user's full name.",
-       Groups:      []string{"User"},
-    },
-    // Application Attributes
-    "first_application_id": {
-       FieldID:     "first_application_id",
-       DisplayName: "First Application ID",
-       Type:        String,
-       Description: "The ID of the first application the user accessed.",
-       Groups:      []string{"Application"},
-    },
-    "last_application_id": {
-       FieldID:     "last_application_id",
-       DisplayName: "Last Application ID",
-       Type:        String,
-       Description: "The ID of the last application the user accessed.",
-       Groups:      []string{"Application"},
-    },
-    // Geo Attributes
-    "first_country_code": {
-       FieldID:     "first_country_code",
-       DisplayName: "First Country Code",
-       Type:        String,
-       Description: "The ISO code of the country for the user's first session.",
-       Groups:      []string{"Geo"},
-    },
-    "last_country_code": {
-       FieldID:     "last_country_code",
-       DisplayName: "Last Country Code",
-       Type:        String,
-       Description: "The ISO code of the country for the user's last session.",
-       Groups:      []string{"Geo"},
-    },
-    "first_city": {
-       FieldID:     "first_city",
-       DisplayName: "First City",
-       Type:        String,
-       Description: "The city of the user's first session.",
-       Groups:      []string{"Geo"},
-    },
-    "last_city": {
-       FieldID:     "last_city",
-       DisplayName: "Last City",
-       Type:        String,
-       Description: "The city of the user's last session.",
-       Groups:      []string{"Geo"},
-    },
-    "first_region": {
-       FieldID:     "first_region",
-       DisplayName: "First Region",
-       Type:        String,
-       Description: "The region of the user's first session.",
-       Groups:      []string{"Geo"},
-    },
-    "last_region": {
-       FieldID:     "last_region",
-       DisplayName: "Last Region",
-       Type:        String,
-       Description: "The region of the user's last session.",
-       Groups:      []string{"Geo"},
-    },
-    // Device Attributes
-    "first_device_type": {
-       FieldID:     "first_device_type",
-       DisplayName: "First Device Type",
-       Type:        String,
-       Description: "The device used in the user's first session (e.g., desktop, tablet).",
-       Groups:      []string{"Device"},
-    },
-    "last_device_type": {
-       FieldID:     "last_device_type",
-       DisplayName: "Last Device Type",
-       Type:        String,
-       Description: "The device used in the user's last session (e.g., desktop, tablet).",
-       Groups:      []string{"Device"},
-    },
-    // OS Attributes
-    "first_os_name": {
-       FieldID:     "first_os_name",
-       DisplayName: "First OS Name",
-       Type:        String,
-       Description: "The operating system of the user's first session (e.g., Windows, iOS).",
-       Groups:      []string{"OS"},
-    },
-    "last_os_name": {
-       FieldID:     "last_os_name",
-       DisplayName: "Last OS Name",
-       Type:        String,
-       Description: "The operating system of the user's last session (e.g., Windows, iOS).",
-       Groups:      []string{"OS"},
-    },
-    "first_os_version": {
-       FieldID:     "first_os_version",
-       DisplayName: "First OS Version",
-       Type:        String,
-       Description: "The OS version of the user's first session.",
-       Groups:      []string{"OS"},
-    },
-    "last_os_version": {
-       FieldID:     "last_os_version",
-       DisplayName: "Last OS Version",
-       Type:        String,
-       Description: "The OS version of the user's last session.",
-       Groups:      []string{"OS"},
-    },
-    // Browser Attributes
-    "first_browser_name": {
-       FieldID:     "first_browser_name",
-       DisplayName: "First Browser Name",
-       Type:        String,
-       Description: "The browser used in the user's first session (e.g., Chrome, Safari).",
-       Groups:      []string{"Browser"},
-    },
-    "last_browser_name": {
-       FieldID:     "last_browser_name",
-       DisplayName: "Last Browser Name",
-       Type:        String,
-       Description: "The browser used in the user's last session (e.g., Chrome, Safari).",
-       Groups:      []string{"Browser"},
-    },
-    "first_browser_version": {
-       FieldID:     "first_browser_version",
-       DisplayName: "First Browser Version",
-       Type:        String,
-       Description: "The browser version from the user's first session.",
-       Groups:      []string{"Browser"},
-    },
-    "last_browser_version": {
-       FieldID:     "last_browser_version",
-       DisplayName: "Last Browser Version",
-       Type:        String,
-       Description: "The browser version from the user's last session.",
-       Groups:      []string{"Browser"},
-    },
-} -->
