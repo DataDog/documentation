@@ -7,7 +7,7 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-Application Security provides serverless capability for the following platforms and libraries:
+App and API Protection provides serverless capability for the following platforms and libraries:
 
 {{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
@@ -55,7 +55,7 @@ Go
 
 ## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in Preview</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
