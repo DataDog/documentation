@@ -1,5 +1,5 @@
 ---
-title: Manage Application Security Posture Across Development Teams
+title: Manage App and API Protection Posture Across Development Teams
 aliases:
   - /tracing/software_catalog/guides/appsec_management
   - /software_catalog/guides/appsec_management
