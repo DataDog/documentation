@@ -332,7 +332,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget** to bring up the configure screen.
-3. Select the **Organization**, **Teams** and **Order** in which you would like to see On-Call pages.
+3. Select the **Organization**, **Teams**, and **Order** in which you would like to see On-Call pages.
 4. Type in any additional filters and tap **Done**.
 5. Tap out of the widget to validate your selection and exit the configuration screen.
 
