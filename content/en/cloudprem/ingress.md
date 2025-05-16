@@ -122,4 +122,4 @@ rules:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[1]: /api/latest/ip-ranges/
