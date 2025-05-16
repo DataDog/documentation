@@ -3836,92 +3836,92 @@ menu:
       url: tracing/code_origins
       parent: tracing
       identifier: tracing_code_origins
-      weight: 7
+      weight: 8
     - name: Service Observability
       url: tracing/services/
       parent: tracing
       identifier: tracing_services
-      weight: 7
+      weight: 9
     - name: Software Catalog
       url: /software_catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
-      weight: 701
+      weight: 901
     - name: Service Page
       url: tracing/services/service_page/
       parent: tracing_services
       identifier: tracing_service_page
-      weight: 702
+      weight: 902
     - name: Resource Page
       url: tracing/services/resource_page/
       parent: tracing_services
       identifier: tracing_resource_page
-      weight: 703
+      weight: 903
     - name: Deployment Tracking
       url: tracing/services/deployment_tracking/
       parent: tracing_services
       identifier: tracing_deployment_tracking
-      weight: 704
+      weight: 904
     - name: Service Map
       url: tracing/services/services_map/
       parent: tracing_services
       identifier: tracing_service_map
-      weight: 705
+      weight: 905
     - name: Inferred Services
       url: tracing/services/inferred_services
       parent: tracing_services
       identifier: tracing_inferred_services
-      weight: 706
+      weight: 906
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 707
+      weight: 907
     - name: Endpoint Observability
       url: /software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
-      weight: 8
+      weight: 10
     - name: Explore Endpoints
       url: /software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
-      weight: 802
+      weight: 1002
     - name: Monitor Endpoints
       url: /software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
-      weight: 803
+      weight: 1003
     - name: Dynamic Instrumentation
       url: dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
-      weight: 9
+      weight: 11
     - name: Enabling
       url: dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
-      weight: 901
+      weight: 1101
     - name: Expression Language
       url: dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 902
+      weight: 1102
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
       parent: tracing
-      weight: 10
+      weight: 12
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
       identifier: tracing_error_tracking
-      weight: 11
+      weight: 13
     - name: Error Tracking Explorer
       url: tracing/error_tracking/explorer
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
-      weight: 1101
+      weight: 1301
     - name: Issue States
       url: tracing/error_tracking/issue_states
       parent: tracing_error_tracking
@@ -3931,57 +3931,57 @@ menu:
       url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
-      weight: 1103
+      weight: 1303
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_monitors
-      weight: 1105
+      weight: 1305
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1106
+      weight: 1306
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1107
+      weight: 1307
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1108
+      weight: 1308
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
       identifier: tracing_data_security
-      weight: 12
+      weight: 14
     - name: Guides
       url: tracing/guide/
       parent: tracing
       identifier: tracing_guides
-      weight: 13
+      weight: 15
     - name: Troubleshooting
       url: tracing/troubleshooting/
       parent: tracing
       identifier: tracing_troubleshooting
-      weight: 14
+      weight: 16
     - name: Tracer Startup Logs
       url: tracing/troubleshooting/tracer_startup_logs
       identifier: tracing_troubleshooting_startup_logs
       parent: tracing_troubleshooting
-      weight: 1401
+      weight: 1601
     - name: Tracer Debug Logs
       url: tracing/troubleshooting/tracer_debug_logs
       identifier: tracing_troubleshooting_debug_logs
       parent: tracing_troubleshooting
-      weight: 1402
+      weight: 1602
     - name: Connection Errors
       url: tracing/troubleshooting/connection_errors
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
-      weight: 1403
+      weight: 1603
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
