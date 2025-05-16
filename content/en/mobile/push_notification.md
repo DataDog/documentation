@@ -84,7 +84,7 @@ For more information, see the [guide on setting up your mobile device for On-Cal
 
 {{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
-3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High urgency On-Call.
+3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
 
 {{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
