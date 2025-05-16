@@ -49,11 +49,10 @@ With Cost Reports, you can:
 - Select from bar charts, summaries, or month over month views to best represent your data.
 
 ### Advanced options (optional)
-| Advanced option | Description |
-|-----------------|---------------|
-| Show usage charges only | Choose to include all spend (fees, taxes, refunds) or focus on usage charges only. |
-| Cost type | Switch between cost types (net, amortized, and so on). |
-| Enable container allocation |  Toggle container allocation for [containerized cost attribution][6] |
+
+- **Show usage charges only**: Choose to include all spend (fees, taxes, refunds) or focus on usage charges only.
+- **Cost type**: Switch between cost types (net, amortized, and so on).
+- **Enable container allocation**:  Toggle container allocation for [containerized cost attribution][6].
 
 **Note**: The availability of these options vary depending on the provider(s) selected.
 
