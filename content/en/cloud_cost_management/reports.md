@@ -12,83 +12,56 @@ further_reading:
 
 Datadog's Cost Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
 
-With Cost Reports, you get:
+With Cost Reports, you can:
 
-* **Centralized analysis**: Access and manage cloud spend data from [AWS][1], [Azure][2], [Google Cloud][3], and [SaaS][4] through a single interface.
-* **Flexible filtering**: Filter, group, and analyze costs to gain insights into spending patterns.
-* **Optimization insights**: Identify areas for cost optimization and better budget management.
-
-## Getting started with cost reports
-Access cost reports from [**Cloud Cost > Analyze > Reports**][5]. You can create a cost report from scratch or choose a pre-built template to accelerate your workflow.  
-
-### Available templates
-
-{{< img src="cloud_cost/cost_reports/templates.png" alt="Diagram illustrating available Cost Report templates" style="width:90%;" >}}
-
-Datadog provides several options in a template gallery to help you get started:
-
-| Template | Description |
-|----------|-------------|
-| AWS Spend by Service Name | Understand your EC2, S3, and Lambda costs. |
-| Azure Spend by Service Name | Break down costs by Azure services like Virtual Machines and Azure Monitor. |
-| GCP Spend by Service Name | Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine. |
-| Spend by Provider | Compare costs across AWS, Azure, Google Cloud, and more. |
-
-## Customizing cost reports
-
-{{< img src="cloud_cost/cost_reports/annotated_cost_report.png" alt="Diagram illustrating available Cost Report editor with annotations" style="width:90%;" >}}
-
-### Filters
-
-Refine your reports by selecting cloud providers or applying custom tags. For example:
-
-* Show only AWS and Snowflake expenditures
-* Filter by specific environments (such as env:prod)
-* Focus on costs associated with a specific region or team
-
-### Grouping and visualization
-
-Cost reports can be organized by various dimensions, including:
-
-* **Provider name**: Such as AWS, Azure, and GCP
-* **Service name**: Including services like EC2, S3, and Azure Monitor
-* **Custom resource tags**: You can apply your own tags for further granularity
-
-Visualization options include bar charts, summaries, or day-over-day views, which help in spotting trends and anomalies in cloud spending.
-
-### Additional options
-
-{{< img src="cloud_cost/cost_reports/advanced_options.png" alt="Diagram illustrating available Cost Report advanced options" style="width:90%;" >}}
-
-Advanced users can:
-
-* Switch between cost types like net amortized or amortized
-* Toggle container allocation to include [containerized cost attribution][6]
-* Toggle between all spend, which include things like fees, taxes, refunds or just focus on usage charges only
+- **Centralize cloud spend analysis**: View and manage costs from [AWS][1], [Azure][2], [Google Cloud][3], and [SaaS providers][4] in one place.
+- **Filter and group**: Filter by provider, tags, regions, and group by service, provider, or custom tags.
+- **Visualize graphs**: Use bar charts, summaries, and day-over-day views to spot trends and anomalies.
+- **Use advanced controls**: Switch between cost types, toggle container allocation, and focus on usage charges or all spend.
+- **Collaborate and share**: Save, star, export, and share reports with your team.
 
 ## Create a cost report
 
-To create a cost report:
+1. Go to [**Cloud Cost > Analyze > Reports**][5] in the Datadog app.
+1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
 
-1. Navigate to [**Cloud Cost > Analyze > Reports**][1].
-1. From this page, you can select a report template to start with, or click **New Report** to build a custom report.
-1. [Filter](#filters) by provider(s), tags, and tag values to show costs from.
-1. Use the dropdown to [group the data](#grouping-and-visualization) by specific attributes.
-1. Select a timeframe view.
-1. Change the visualization to surface the information you need.
-1. Optionally, configure any [advanced options](#additional-options), such as cost type, container allocation, or show usage charges only.
-1. Click **Save** at the top right of the page.
+   {{< img src="cloud_cost/cost_reports/create-new-report.png" alt="Create a new report or from a template." style="width:100%;" >}}
 
-## Share reports with your team
-After you've built a report, you save and share it across your organization. You can:
+   **Available Templates:**
+   - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
+   - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
+   - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
+   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, and more.
 
-- Save reports for personal or team use
-- Search for and star reports for quick access
-- Share URLs with teammates to collaborate in real-time
-- Export report views to CSV or PNGs
+## Customizing your report
 
-## Further Reading
-{{< partial name="whats-next/whats-next.html" >}}
+{{< img src="cloud_cost/cost_reports/customization-options-aws.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options." style="width:100%;" >}}
+
+### Apply filters
+- Select cloud providers (such as AWS, Azure, GCP, Snowflake).
+- Filter by tags (For example: `env:prod`, region, team).
+- View by cost or usage
+
+### Group data
+- Group by provider name, service name, or custom resource tags for deeper insights.
+
+### Choose visualization
+- Select from bar charts, summaries, or month over month views to best represent your data.
+
+### Advanced options (optional)
+| Advanced option | Description |
+|-----------------|---------------|
+| Show usage charges only | Choose to include all spend (fees, taxes, refunds) or focus on usage charges only. |
+| Cost type | Switch between cost types (net, amortized, and so on). |
+| Enable container allocation |  Toggle container allocation for [containerized cost attribution][6] |
+
+**Note**: The availability of these options vary depending on the provider(s) selected.
+
+## Save and share your report
+
+1. Click **Save** at the top right to save your report for personal or team use.
+1. Share the report by copying the URL or exporting the view to CSV or PNG.
+1. Star important reports for convenient access and search for saved reports as needed.
 
 [1]: /cloud_cost_management/aws/
 [2]: /cloud_cost_management/azure/?tab=billingaccounts
@@ -96,4 +69,3 @@ After you've built a report, you save and share it across your organization. You
 [4]: /cloud_cost_management/saas_costs/
 [5]: https://app.datadoghq.com/cost/analyze/reports
 [6]: /cloud_cost_management/container_cost_allocation/
-
