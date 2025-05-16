@@ -52,7 +52,7 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
     <li><code>lambda:GetFunction</code></li>
     <li><code>lambda:GetLayerVersion</code></li>
   </ul>
-  <p>Autoscaling permissions on the `DatadogAgentlessScanner` resource:</p>
+  <p>Autoscaling permissions on the <code>DatadogAgentlessScanner</code> resource:</p>
   <ul>
     <li><code>autoscaling:DescribeAutoScalingGroups</code></li>
     <li><code>autoscaling:SetDesiredCapacity</code></li>
