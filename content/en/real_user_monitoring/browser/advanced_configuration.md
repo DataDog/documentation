@@ -552,11 +552,11 @@ You can update the following event properties:
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
-**Note**: Unlike other events, view events are sent multiple times to Datadog to reflect the updates occurring during their lifecycle. An update on a previous view event can still be sent while a new view is active. So you should be mindful of this behavior when modifying the content of a view event.
+**Note**: Unlike other events, view events are sent multiple times to Datadog to reflect the updates occurring during their lifecycle. An update on a previous view event can still be sent while a new view is active. Datadog recommends being mindful of this behavior when modifying the content of a view event.
 
 ```javascript
 beforeSend: (event) => {
-    // discouraged, as the current view name could be applied the active view and on the previous views
+    // discouraged, as the current view name could be applied to both the active view and the previous views
     event.view.name = getCurrentViewName()
 
     // recommended
