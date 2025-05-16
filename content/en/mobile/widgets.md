@@ -98,7 +98,7 @@ You can display open incidents from multiple organizations on your mobile home s
 
 View your [SLOs][2] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
-Timeframe options are:
+The timeframe options are:
 - 7 days
 - 30 days
 - 90 days
