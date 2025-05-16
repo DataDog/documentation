@@ -87,6 +87,16 @@ The available setup methods depend on your platform:
 [10]: /tracing/trace_collection/library_config/
 
 {{% /tab %}}
+
+{{% tab "Windows" %}}
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[10]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Troubleshooting
