@@ -177,7 +177,7 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 
 ## Flaky test management tags are missing or have an unexpected order in test events
 
-When retrying a flaky test multiple times within a very short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky` or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out-of-order, causing the tags to not follow the logical order of events.
+When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky` or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out-of-order, causing the tags to not follow the logical order of events.
 
 ## Further reading
 
