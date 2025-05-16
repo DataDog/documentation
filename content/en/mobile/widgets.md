@@ -208,7 +208,7 @@ You can display Monitors from multiple organizations within the same widget.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you've logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+All organizations you are logged into are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 
 {{% /tab %}}
