@@ -62,7 +62,7 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ### Switch organizations
 
-To switch organizations, navigate to **Setting** page on the mobile app and click on **Organization**. 
+To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**. 
 
 **Note**: You may need to reauthenticate when you switch organizations.
 
