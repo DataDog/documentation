@@ -80,7 +80,7 @@ For more information, see the [guide on setting up your mobile device for On-Cal
 
 {{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
-2. If notification permissiongs are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
+2. If notification permissions are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
 
 {{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
