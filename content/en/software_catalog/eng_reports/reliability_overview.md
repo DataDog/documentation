@@ -1,0 +1,93 @@
+---
+title: Reliability Overview
+further_reading:
+- link: "/service_management/service_level_objectives/"
+  tag: "Documentation"
+  text: "Service Level Objectives"
+- link: "service_management/incident_management/"
+  tag: "Documentation"
+  text: "Incident Management"
+- link: "dashboards/"
+  tag: "Documentation"
+  text: "Datadog Dashboards"
+---
+
+{{< callout url="#" btn_hidden="true" header="false" >}}
+Engineering Reports are in Preview. TODO: link to sign-up form.
+{{< /callout >}}
+
+## Overview
+
+The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. 
+
+With this report, you can:
+- Customize your SLO or Incident groupings to be based on service, team, or other tags or properties that have been added to your SLOs or Incidents.
+- Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
+- Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
+
+Access the Reliability Overview report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Reliability Overview" in the left-hand menu. 
+
+{{< img src="tracing/eng_reports/reliability-overview-landing.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
+
+**Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
+
+## Interact with your Reliability Overview report
+
+### Adjust your view
+
+{{< img src="tracing/eng_reports/reliability-overview-filtered.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
+
+You can update your Reliability Overview report view in the following ways:
+ 
+- **Switch the aggregation between "Service" or "Team"**: View your organization's SLO and Incident performance by service/team groupings to identify top- and bottom-performing areas. 
+
+   **Note**: Service/team groupings are based on the **service** or **team** tag added to your SLOs, and the **services** or **teams** properties added to your Incidents.
+
+- **View "Daily", "Weekly", or "Monthly" historical information**: Update the historical SLO and Incident trends to your desired granularity.
+- **Add filters to scope the data**: Filter by teams, services, and incident severity and state.
+
+### Schedule reports
+
+Set up scheduled reports for your stakeholders that will be delivered as PDFs through Email or Slack on a recurring basis.
+
+To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
+
+### Customize your report 
+
+On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. The dashboard reflects the "team" aggregated view and includes weekly historical trends. 
+
+To customize the dashboard, you can:
+- Update the SLO Summary table to group by any tag you have added to your SLOs (for example, you can create a view grouped by "user journey")
+- Add widgets that are not included in the default view
+- Add filters to the existing widgets (for example, you can filter Incidents based on "Detection Method" not provided in the out-of-the-box report)
+
+## Use the SLO summary score
+
+{{< img src="tracing/eng_reports/slo-summary-score.png" alt="The SLO Summary widget, including the SLO summary score" style="width:100%;" >}}
+
+The **SLO Summary** widget includes a "Score". It is designed as a summary metric for executive leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
+
+- The Score is "passing" (green/yellow) when most SLOs are **not** breached and have remaining error budget
+- The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
+- SLOs in the "No Data" state are not considered in the Score
+
+### Score calculation details
+
+The Score is calculated as follows:
+- Average the remaining error budget of the SLOs (the minimum error budget is set to -200%, so any SLO with a lower error budget will be counted as -200% in the average)
+- The average error budget (between -200 and 100) is mapped to a Score between 0 and 100
+- The color and status of the Score is set based on the thresholds below
+
+Note that an average remaining error budget of 0% corresponds to a Score value of 66.667. The Score's status and color is based on the following thresholds:
+- **Red:** 0 ≤ Score < 66.667
+- **Yellow:** 66.667 ≤ Score < 80
+- **Green:** 80 ≤ Score ≤ 100
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /dashboards/sharing/scheduled_reports/
+
+
+
