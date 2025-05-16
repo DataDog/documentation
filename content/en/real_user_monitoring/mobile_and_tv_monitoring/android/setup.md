@@ -417,7 +417,30 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
+To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
+
 This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+
+To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a network interceptor:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val okHttpClient = OkHttpClient.Builder()
+    .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+    .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
 
 **Note**: If you also use multiple Interceptors, add `DatadogInterceptor` first.
 
