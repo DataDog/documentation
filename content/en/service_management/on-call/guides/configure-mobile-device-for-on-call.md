@@ -65,7 +65,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 3. Within the iOS system settings, make sure you enable the **Critical Alerts** toggle. Make sure you grant the mobile app the necessary permissions.
 
-4. Test the setup of your critical push notification by tapping **Test push notifications**
+4. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 {{% /tab %}}
 {{% tab "Android" %}}
