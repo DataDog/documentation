@@ -13,14 +13,16 @@ aliases:
 
 ## Overview
 
-Datadog App and API Protection provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
+Datadog App and API Protection (AAP) provides observability into application and API-level attacks that aim to exploit vulnerabilities and abuse app business logic, and observability into any bad actors targeting your systems. AAP performs actions such as the following:
 
-- **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
-- **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
-- **Security signals**: Automatically generates security signals when attacks or business logic abuses are detected, focusing on meaningful threats rather than individual attempts.
-- **Notification Options**: Offers notifications through Slack, email, or PagerDuty based on security signal settings.
-- **Embedded security**: Integrated within the application, providing better threat identification and classification by accessing trace data.
-- **Enhanced WAF functionality**: Functions like a Web Application Firewall (WAF) but with additional application context, improving accuracy and reducing false positives.
+- Detects and monitors application and API-level attacks
+- Flags traces containing attack attempts using APM data
+- Highlights exposed services in security views (Software Catalog, Service Page, Traces)
+- Identifies bad actors by collecting client IPs and user info
+- Provides automatic threat pattern updates and security signals
+- Supports built-in protection and attack qualification
+- Offers visibility into API threats and attack details
+- Helps identify and respond to vulnerabilities like Log4Shell
 
 ### Identify services exposed to application attacks
 

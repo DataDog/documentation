@@ -12,8 +12,6 @@ The following table lists the support for App and API Protection capabilities in
 | Threat Detection                       | 1.71.0                                       |
 | Threat Protection                      | 1.71.0                                       |
 | Customize response to blocked requests | 1.71.0                                       |
-| Software Composition Analysis (SCA)    | not applicable                               |
-| Code Security                          | not applicable                               |
 | Automatic user activity event tracking | not supported                                |
 | API Security                           | not supported                                |
 

@@ -14,9 +14,9 @@ further_reading:
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
+- **Attack Exposure**: If the endpoint is targeted by attacks.
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
+- **Vulnerabilities**: If the endpoint contains a vulnerability.
 - **Findings**: Security findings found on this API.
 - **Dependencies**: APIs and Databases the API depends on.
 
@@ -118,10 +118,6 @@ Datadog reports the type of authentication when available in a header through th
 | Bearer tokens (found in `Authorization` headers)  | `bearer_token`   |
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
-
-### Vulnerabilities count
-
-Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
 
 ## Further reading
 
