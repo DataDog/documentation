@@ -17,6 +17,8 @@ This last step is required only when using Datadog tracing
 
 ## Container deployment
 
+A full example is on [Github](https://github.com/awslabs/aws-lambda-web-adapter/tree/main/examples/datadog)
+
 1. Adding the Lambda Web Adapter and Datadog extension. Make sure to use 77 or later for Datadog and 0.9.1 or later for Lambda Web Adapter.
 
 ```Dockerfile
@@ -48,7 +50,6 @@ tracer.use('http', {
 });
 ```
 
-Full working example at [TODO Github example](https://github.com/awslabs/aws-lambda-web-adapter/pull/602)
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -81,11 +82,12 @@ tracer.configure(
 
 ```
 
-Full working example at [TODO Github example](https://github.com/awslabs/aws-lambda-web-adapter/pull/602)
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Zip deployment
+
+A full example is on [Github](https://github.com/awslabs/aws-lambda-web-adapter/tree/main/examples/datadog)
 
 1. Adding the Lambda Web Adapter and Datadog extension. Make sure to use 77 or later for Datadog and 25 or later for Lambda Web Adapter.
 
@@ -129,7 +131,6 @@ tracer.use('http', {
 });
 ```
 
-Full working example at [TODO Github example](https://github.com/awslabs/aws-lambda-web-adapter/pull/602)
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -162,6 +163,5 @@ tracer.configure(
 
 ```
 
-Full working example at [TODO Github example](https://github.com/awslabs/aws-lambda-web-adapter/pull/602)
 {{% /tab %}}
 {{< /tabs >}}
