@@ -35,9 +35,9 @@ To deploy CloudPrem on AWS, you need to configure:
 
 When starting a node, CloudPrem attempts to find AWS credentials using the credential provider chain implemented by [rusoto\_core::ChainProvider][2] and looks for credentials in this order:
 
-1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).  
-2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.  
-3. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.  
+1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
+2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
+3. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.
 4. Instance profile credentials, used on Amazon EC2 instances, and delivered through the Amazon EC2 metadata service.
 
 An error is returned if no credentials are found in the chain.
@@ -46,20 +46,20 @@ An error is returned if no credentials are found in the chain.
 
 CloudPrem attempts to find the AWS region from multiple sources, using the following order of precedence:
 
-1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.  
-2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).  
-3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.  
+1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
+2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
+3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
 4. **Default**: Falls back to `us-east-1` if no other source provides a region.
 
 ## IAM permissions for S3
 
 Required authorized actions:
 
-* `ListBucket` (on the bucket directly)  
-* `GetObject`  
-* `PutObject`  
-* `DeleteObject`  
-* `ListMultipartUploadParts`  
+* `ListBucket` (on the bucket directly)
+* `GetObject`
+* `PutObject`
+* `DeleteObject`
+* `ListMultipartUploadParts`
 * `AbortMultipartUpload`
 
 Here is an example of a bucket policy:
@@ -97,7 +97,7 @@ Here is an example of a bucket policy:
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloudprem/ingress/
 [2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html

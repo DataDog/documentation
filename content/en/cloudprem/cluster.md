@@ -71,4 +71,4 @@ The following components are typically lightweight:
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}

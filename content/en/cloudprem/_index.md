@@ -1,7 +1,7 @@
 ---
 title: CloudPrem
 description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
-private: true 
+private: true
 ---
 
 <div class="alert alert-warning">CloudPrem is in Preview.</div>
@@ -25,7 +25,7 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 {{< /whatsnext >}}
 
 
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/ 
+[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
 [2]: /cloudprem/installation/
 [3]: /cloudprem/processing/
 [4]: /cloudprem/architecture/

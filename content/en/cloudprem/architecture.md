@@ -40,13 +40,16 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 : Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called _splits_ to the object storage (for example, Amazon S3).
 
 **Searchers**
-: Handle search queries from the Datadog UI, reading metadata from Metastore and index data from the object storage.
+: Handle search queries from the Datadog UI, reading metadata from Metastore and fetching data from the object storage.
 
 **Metastore**
-: Stores metadata about the indexes, including splits locations on the object storage. CloudPrem uses PostgreSQL for this purpose.
+: Stores metadata about the indexes, including split locations on the object storage. CloudPrem uses PostgreSQL for this purpose.
 
-**Janitor/Control Plane**
-: Responsible for tasks like indexing tasks scheduling and delete tasks.
+**Control Plane**
+: Schedules indexing jobs called _indexing pipelines_ on indexers.
+
+**Janitor**
+: Performs maintenance tasks, applying retention policies, garbage collecting expired splits, and running delete query jobs.
 
 ## Further reading
 
