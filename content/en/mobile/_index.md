@@ -67,7 +67,7 @@ To switch organizations, navigate to the **Settings** page on the mobile app and
 **Note**: You may need to reauthenticate when you switch organizations.
 
 ### Log out
-To log out, navigate to **Setting** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure. 
+To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure. 
 
 ## On-Call
 
