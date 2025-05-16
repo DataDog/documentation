@@ -563,10 +563,6 @@ beforeSend: (event) => {
     event.view.name = getViewNameForUrl(event.view.url)
 }
 ```
-
-
-
-
 ### Discard a RUM event
 
 With the `beforeSend` API, discard a RUM event by returning `false`:
