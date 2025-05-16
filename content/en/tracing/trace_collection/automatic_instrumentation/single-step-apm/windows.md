@@ -17,7 +17,7 @@ With Single Step Instrumentation (SSI), you can automatically enable APM for you
 
 To enable APM with Single Step Instrumentation on Windows:
 
-1. In the Datadog app, go to the Install Datadog Windows Agent page.
+1. In the Datadog app, go to the Install Datadog [Windows Agent page][1] .
 1. Under Customize your observability coverage, toggle APM Instrumentation on.
 1. Copy and run the provided MSI install command on your Windows host.
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
@@ -38,3 +38,8 @@ Note: Only .NET applications running in IIS are supported for Single Step Instru
 
 ## Remove Single Step APM instrumentation from your Agent
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
