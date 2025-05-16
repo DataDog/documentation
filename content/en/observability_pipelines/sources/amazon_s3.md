@@ -17,8 +17,6 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 ## AWS Authentication
 
-{{% observability_pipelines/aws_authentication/amazon_s3_source/intro %}}
-
 {{% observability_pipelines/aws_authentication/instructions %}}
 
 ### Permissions
