@@ -297,7 +297,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 **Note**: You can add additional filters for the On-Call pages widget.
 
-#### Edit a On-Call shift widget
+#### Edit an On-Call shift widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
