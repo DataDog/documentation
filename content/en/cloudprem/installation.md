@@ -50,7 +50,7 @@ Before getting started with CloudPrem, ensure you have:
 3. [Configure the Datadog Agent to send Kubernetes logs](#send-kubernetes-logs-to-cloudprem-with-the-datadog-agent).
 4. [Configure your Datadog account](#configure-your-datadog-account).
 
-## Install the CloudPrem Helm chart 
+## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
 
@@ -70,7 +70,7 @@ Before getting started with CloudPrem, ensure you have:
    ```bash
    kubectl create secret generic <SECRET_NAME> \
    -n <NAMESPACE_NAME> \
-   --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE> 
+   --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>
    ```
 
 4. Customize the Helm chart
@@ -200,6 +200,14 @@ Before getting started with CloudPrem, ensure you have:
          memory: "16Gi"
    ```
 
+5. Install or upgrade the Helm chart
+
+   ```bash
+   helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
+   -n <NAMESPACE_NAME> \
+   -f datadog-values.yaml
+   ```
+
    To check if the deployment went well:
    - Look at the logs from the metastore or indexer pod.
    - Look at the status of deployment resources, such as the ingress status.
@@ -224,13 +232,13 @@ spec:
         keyName: api-key
     env:
       - name: DD_LOGS_CONFIG_LOGS_DD_URL
-        value: http://<RELEASE_NAME>-indexer.<NAMESPACE>.svc.cluster.local:7280
+        value: http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
 
   features:
     logCollection:
       enabled: true
       containerCollectAll: true
-      
+
     otlp:
       receiver:
         protocols:
@@ -244,7 +252,7 @@ spec:
 
 ```
 
-- Within the cluster, use the indexer service for the logs endpoint URL: `DD_LOGS_CONFIG_LOGS_DD_URL:http://<RELEASE_NAME>-indexer.<NAMESPACE>.svc.cluster.local:7280`.
+- Within the cluster, use the indexer service for the logs endpoint URL: `DD_LOGS_CONFIG_LOGS_DD_URL:http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`.
 - Outside the cluster, use the host of the internal ingress.
 - To send cluster metrics to Datadog, enable `prometheusScrape`.
 - To send cluster logs to Datadog, enable `OTLP/gRPC`.
@@ -266,7 +274,7 @@ After your Datadog account is configured, you are ready to search into the `clou
 To uninstall CloudPrem:
 
 ```bash
-helm uninstall <DEPLOYMENT_NAME>
+helm uninstall <RELEASE_NAME>
 ```
 
 ## Further reading

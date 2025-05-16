@@ -47,14 +47,14 @@ This setup ensures that only authenticated Datadog services can access the Cloud
 
 {{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
-### IP ranges API
-The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog IP Ranges API, specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
+### IP Allowlisting
+
+The Datadog control plane and query services connect to CloudPrem clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog [IP Ranges API][1], specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
 ```
 curl -X GET "https://ip-ranges.datadoghq.eu/" \
       -H "Accept: application/json" |
       jq '.webhooks'
 ```
-
 
 ## Internal ingress
 
@@ -89,7 +89,7 @@ rules:
           service:
             name: <RELEASE_NAME>-indexer
             port:
-              name: rest 
+              name: rest
       - path: /api/v2/logs
         pathType: Prefix
         backend:
@@ -120,4 +120,6 @@ rules:
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/api/latest/ip-ranges/

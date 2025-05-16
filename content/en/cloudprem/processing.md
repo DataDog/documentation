@@ -32,13 +32,13 @@ further_reading:
 
 ## Overview
 
-CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations. 
+CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
 
 <div class="alert alert-info">CloudPrem log pipelines and processors are designed to be match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
 
 For a list of supported and unsupported processors, see [Compatibility with cloud-based pipelines](#compatibility-with-cloud-based-pipelines).
 
-You configure log processing pipelines using a JSON file that adheres to the same format as Datadog pipeline configurations.
+You can configure log processing pipelines using a JSON file that adheres to the same format as Datadog pipeline configurations.
 
 ## Setting up processing
 
@@ -48,16 +48,16 @@ You configure log processing pipelines using a JSON file that adheres to the sam
    curl -X GET "https://api.datadoghq.com/api/v1/logs/config/pipelines" \
     -H "Accept: application/json" \
     -H "DD-API-KEY: ${DD_API_KEY}" \
-    -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > my-pipelines_config.json
+    -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > pipelines-config.json
    ```
 
-   This JSON file can be used directly with CloudPrem.
+This JSON file can be used directly with CloudPrem.
 
 2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the CloudPrem Helm chart:
 
    ```bash
    helm repo update
-   helm upgrade <RELEASE_NAME> -n <NAMESPACE> --set-file pipelinesConfig=./pipelines_config.json -f your_custom_values_file.yaml
+   helm upgrade <RELEASE_NAME> -n <NAMESPACE_NAME> --set-file pipelinesConfig=./pipelines-config.json -f datadog-values.yaml
    ```
 
    CloudPrem logs an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
@@ -65,7 +65,7 @@ You configure log processing pipelines using a JSON file that adheres to the sam
 
 ## Configuration file format
 
-The configuration is a JSON array, where each element represents a processor or a nested pipeline.  
+The configuration is a JSON array, where each element represents a processor or a nested pipeline.
 
 The order of elements in the array defines the sequential execution order of the processors.  The structure mirrors the output of the Datadog API endpoint `api/v1/logs/config/pipelines`.
 
@@ -150,7 +150,7 @@ Ignored processors appear as a warning in the indexer logs.
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/pipelines/?tab=source
 [2]: /api/latest/logs-pipelines/#get-all-pipelines
