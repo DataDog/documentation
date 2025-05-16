@@ -310,7 +310,7 @@ datadog:
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
-[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
+[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
