@@ -157,7 +157,7 @@ All organizations you've logged into are displayed in the configuration screen. 
 
 1. Tap the widget title to configure.
 2. From the configuration screen, tap **Organization**.
-3. Select a new organization (You might need to sign in).
+3. Select a new organization (you might need to sign in).
 4. Size the widget to fit your preference.
 5. Tap **Save** or **Apply**.
 
