@@ -366,7 +366,7 @@ Lock screen widgets for monitors, SLOs, Incidents, and Dashboards are supported 
 6. Configure the widget according to the fields specified for the selected widget.
 7. Drag, minimize, or expand the widget to customize the location and size of the widget on your lock screen.
 
-**Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widget by tapping **-** button on top left of the widget you would like to delete.
+**Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widget by tapping the **-** button on top left of the widget you would like to delete.
 
 ## Further Reading
 
