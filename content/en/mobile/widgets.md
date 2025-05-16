@@ -358,7 +358,7 @@ You can customize your On-Call pages widgets by filtering on:
 Lock screen widgets for monitors, SLOs, Incidents, and Dashboards are supported on iOS.
 
 1. Long press on your lock screen.
-2. Tap the **Customize** >> **Lock Screen**.
+2. Tap **Customize**, then **Lock Screen**.
 3. Tap on the lock screen widget space to pull up the **Add Widgets** card.
 4. Scroll to and tap on the **Datadog** app.
 4. Tap the lock screen widget you would like to add.
