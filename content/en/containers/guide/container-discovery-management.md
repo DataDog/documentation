@@ -42,7 +42,7 @@ Use the environment variables in the table below to configure container filterin
 
 The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 
-<div>
+</div>
 
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
