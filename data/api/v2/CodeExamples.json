@@ -212,6 +212,11 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1176049761",
+      "description": "Create a CSM Threats Agent rule with set action returns \"OK\" response"
     }
   ],
   "CreateCloudWorkloadSecurityAgentRule": [
