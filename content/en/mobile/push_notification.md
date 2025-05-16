@@ -19,7 +19,7 @@ Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-N
 When you log into the Datadog mobile app for the first time, an onboarding flow takes care of notification settings and permissions.
 </div>
 
-However, by default, the mobile app is not allowed to send you notifications. To receive push notifications: 
+By default, the mobile app is not allowed to send you notifications. To receive push notifications: 
 
 {{< tabs >}}
 {{% tab "iOS" %}}
