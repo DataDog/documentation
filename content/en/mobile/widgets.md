@@ -13,7 +13,7 @@ Add widgets on your home screen to quickly access real-time critical information
 {{< tabs >}}
 {{% tab "iOS" %}}
 1. Long press on your home screen.
-2. Tap the **Edit** >> **Add Widget** button on the top left corner of the screen.
+2. Tap **Edit**, then tap the **Add Widget** button on the top left corner of the screen.
 2. Search for "Datadog" widgets.
 3. Tap your desired widget and your preferred size (small, medium, or large).
 4. Tap **Add Widget** and configure the widget fields. When accessing the mobile app from the widget, these are the fields that will be queried in the app.
