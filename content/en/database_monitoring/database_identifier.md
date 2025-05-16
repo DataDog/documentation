@@ -37,6 +37,13 @@ database_identifier:
   template: $resolved_hostname:$instance_name
 ```
 
+<!-- In 7.67 there will be new template variables and this can be updated to $azure_name/$database -->
+Azure pool:
+```
+database_identifier:
+  template: my-pool-name/my-database
+```
+
 MySQL instance with the same hostname running in multiple environments:
 ```
 database_identifier:
