@@ -72,7 +72,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Display Open Incidents from multiple organizations
+#### Display open incidents from multiple organizations
 
 You can display open incidents from multiple organizations on your mobile home screen.
 
