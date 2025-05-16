@@ -99,7 +99,7 @@ arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:25
 for x86 and
 
 ```
-arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Extension-ARM:78
+arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Extension-ARM:77
 arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerArm64:25
 ```
 
