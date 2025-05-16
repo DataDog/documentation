@@ -21,7 +21,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is in Preview
+Exception Replay for APM Error Tracking is generally available for Python, and in Preview for Java, .NET, and PHP.
 </div>
 
 ## Overview
@@ -41,49 +41,67 @@ Supported languages
   - `dd-trace-dotnet` for .NET
   - `dd-trace-php` for PHP
 
-Exception Replay is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
+Exception Replay is only available in APM Error Tracking. Exception Replay on errors sourced from Logs and RUM is not supported.
 
 ## Setup
 
 1. Install or upgrade your Agent to version `7.44.0` or higher.
-2. Ensure that you are using:
+1. Ensure that you are using:
    * `ddtrace` version `1.16.0` or higher.
    * `dd-trace-java` version `1.47.0` or higher.
    * `dd-trace-dotnet` version `2.53.0` or higher.
-4. Set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
+   * `dd-trace-php` version `1.5.0` or higher.
+1. Set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true` to run your service with Exception Replay enabled.
+1. [Create a logs index][9] and configure it to the desired retention with no sampling.
+   * Set the filter to match on the `source:dd_debugger` tag.
+   * Ensure that the new index takes precedence over any others with filters that match that tag, because the first match wins.
+
+<div class="alert alert-info">
+**Why do I need a logs index?** When an error occurs and is captured in an APM span, the associated Exception Replay variable snapshots are captured as logs with reference links to the APM span. When you view the error in Error Tracking Explorer, the variable snapshots are fetched from the log data and displayed alongside the stack trace details.
+</div>
 
 ### Redacting sensitive data
 
-After you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. Enable Sensitive Data Scrubbing rules [in Datadog][7]. See the full [list of redacted identifiers][1].
+After you enable Exception Replay, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are [automatically redacted][5]. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
 - [Redacting based on specific classes or types][3].
-- Creating a [Sensitive Data Scanner][4] rule and applying it to logs that match the query `dd_source:debugger`.
+- Creating a [Sensitive Data Scanner][4] rule and applying it to logs that match the query `source:dd_debugger`.
 
-To learn more about scrubbing variable data, see [Dynamic Instrumentation Sensitive Data Scrubbing][5].
+To learn more about scrubbing variable data, see [Dynamic Instrumentation Sensitive Data Scrubbing][5]. 
+
+<div class="alert alert-info">
+Note: Enabling Dynamic Instrumentation is NOT a prerequisite for Sensitive Data Scrubbing. Sensitive Data Scrubbing is applied to Exception Replay variable snapshots by default whether or not Dynamic Instrumentation is enabled on that service.
+</div>
 
 ## Getting started
 
 1. Navigate to [**APM** > **Error Tracking**][6].
-2. Click into any Python Error Tracking issue and scroll down to the stack trace component.
-3. Expand stack frames to examine captured variable values.
+2. Click into an Error Tracking issue on a service with Exception Replay enabled.
+3. Scroll down to the stack trace component.
+4. Expand stack frames to examine captured variable values.
 
 ## Troubleshooting
 
-### A specific Python error trace does not have variable values
-To keep the performance overhead of the feature at a minimum, error capturing is rate limited: one error per second includes variable data. If you don't see variable values on a given trace:
+### A specific error trace does not have variable values
+To keep the performance overhead of the feature at a minimum, Exception Replay variable snapshots are rate limited. For a given exception or issue, a variable snapshot is captured at most 1x per hour (per instance or pod). If you don't see variable values on a given trace, try any of these options:
 
-1. Click **View Similar Errors**.
-2. Expand the time range selection to find another instance of the exception where variable values were captured.
+- Confirm Exception Replay is enabled on the source service and environment.
+- Click **View Similar Errors**.
+- Expand the time range selection to find another instance of the error where variable values were captured.
+- Use the search query `@error.debug_info_captured:true` in [Error Tracking Explorer][6].
+- Check your [Log Indexes][9] to confirm logs with the tag `source:dd_debugger` have the desired retention and aren't impacted by [Exclusion Filters][8] in other preceding indexes.
 
-[1]: https://github.com/DataDog/dd-trace-py/blob/2bd8e73b639af811cee2703198aa9e7e32b2f74e/ddtrace/debugging/_redaction.py
+[1]: https://github.com/DataDog/dd-trace-py/blob/main/ddtrace/debugging/_redaction.py
 [2]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-specific-classes-or-types
 [4]: /security/sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
 [7]: https://app.datadoghq.com/dynamic-instrumentation/setup
+[8]: /logs/log_configuration/indexes/#exclusion-filters
+[9]: https://app.datadoghq.com/logs/pipelines/indexes
 
 ## Further Reading
 
