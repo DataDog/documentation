@@ -359,7 +359,7 @@ Lock screen widgets for monitors, SLOs, Incidents, and Dashboards are supported 
 
 1. Long press on your lock screen.
 2. Tap the **Customize** >> **Lock Screen**.
-3. Tap on lock screen widget space to pull up **Add Widgets** card.
+3. Tap on the lock screen widget space to pull up the **Add Widgets** card.
 4. Scroll to and tap on the **Datadog** app.
 4. Tap the lock screen widget you would like to add.
 5. Tap the widget on the lock screen to pull up the configuration panel.
