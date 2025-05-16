@@ -1,17 +1,20 @@
 ---
-title: Error Tracking Exception Replay
+title: Exception Replay in Error Tracking
 is_beta: true
 description: Learn about Exception Replay in Error Tracking.
 further_reading:
+- link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
+  tag: 'Blog'
+  text: 'Simplify production debugging with Datadog Exception Replay'
+- link: '/tracking/live-debugger'
+  tag: 'Documentation'
+  text: 'Learn about Datadog Live Debugger'
 - link: '/error_tracking/monitors'
   tag: 'Documentation'
   text: 'Learn about Error Tracking Monitors'
 - link: '/tracing/error_tracking'
   tag: 'Documentation'
   text: 'Learn about Error Tracking for APM Backend Services'
-- link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
-  tag: 'Blog'
-  text: 'Simplify production debugging with Datadog Exception Replay'
 aliases:
   - /tracing/error_tracking/executional_context
   - /tracing/error_tracking/execution_replay/
