@@ -323,7 +323,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit a On-Call pages widget
+#### Edit an On-Call pages widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
