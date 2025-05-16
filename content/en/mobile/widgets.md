@@ -317,7 +317,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 1. Tap on the widget to configure.
 2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts.
-3. Tap **✓** when done configurations
+3. Tap **✓** to save the configuration.
 4. Long press and resize the widget to fit your preference.
 
 {{% /tab %}}
