@@ -4,9 +4,6 @@ aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
 further_reading:
-- link: "/security/application_security/how-appsec-works/#built-in-protection"
-  tag: "Documentation"
-  text: "How Application Security Monitoring Works"
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
@@ -296,13 +293,13 @@ datadog:
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/threats/setup/compatibility/
+[6]: /security/application_security/setup/compatibility/
 [7]: /account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security
 [10]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [11]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
-[12]: /security/application_security/how-appsec-works/#built-in-protection
+[12]: /security/application_security/how-it-works/#built-in-protection
 [13]: /account_management/audit_trail
 [14]: /monitors/
 [15]: /help/

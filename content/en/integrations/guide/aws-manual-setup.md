@@ -62,15 +62,15 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 ### Generate an external ID
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account(s)**, and then select **Manually**.
-2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
+2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][2] in the AWS documentation for more information.
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial or AWS GovCloud regions.
 {{< /site-region >}}
-4. Copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][2].
-  **Note**: The External ID remains available and is not regenerated for 48 hours, unless explicitly changed by a user or another AWS account is added to Datadog during this period. You can return to the **Add AWS Account(s)** page within that time period to complete the process of adding an account without the External ID changing.
+4. Copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][3].
+  **Note**: The External ID remains available and is not regenerated for 48 hours, unless explicitly changed by a user or another AWS account is added to Datadog during this period. You can return to the **Add AWS Account(s)** page within that time period without the External ID changing.
 
 ### Create a Datadog integration IAM role
 
@@ -88,7 +88,7 @@ Datadog assumes this role to collect data on your behalf.
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 4. Select **Require external ID** and enter the external ID copied in the previous section.
-Leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
+Leave `Require MFA` disabled. For more details, see the [Access to AWS accounts owned by third parties][3] page in the AWS documentation.
 5. Click **Next**.
 6. To enable [resource collection][5], attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role.
 7. Click **Next**.
@@ -103,9 +103,9 @@ This policy defines the permissions necessary for the Datadog integration role t
 2. Click **Add permissions**, and select **Create inline policy**.
 3. Select the **JSON** tab.
 4. Paste the [permission policies](#aws-integration-iam-policy) in the textbox.<br>
-  **Note**: Optionally, you can add [Condition][7] elements to the IAM policy. For example, conditions can be used to [restrict monitoring to certain regions][8].
+  **Note**: Optionally, you can add [Condition][6] elements to the IAM policy. For example, conditions can be used to [restrict monitoring to certain regions][7].
 5. Click **Next**.
-6. Give the policy a name such a `DatadogIntegrationPolicy`.
+6. Give the policy a name such as `DatadogIntegrationPolicy`.
 7. Click **Create policy**.
 
 ### Complete the setup in Datadog
@@ -120,16 +120,16 @@ This policy defines the permissions necessary for the Datadog integration role t
 
 <div class="alert alert-warning">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
-*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][10] section on our website.*
+*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][8] section on our website.*
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[2]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
+[3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [4]: https://console.aws.amazon.com/iam/home#/roles
 [5]: /integrations/amazon_web_services/#resource-collection
-[7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
-[8]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
-[9]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
-[10]: https://www.datadoghq.com/legal/restricted-service-locations/
+[6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+[7]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
+[8]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
