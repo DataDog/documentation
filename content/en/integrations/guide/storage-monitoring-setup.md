@@ -26,7 +26,7 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 
 2. Click [Add Buckets][1].
 
-{{< img src="integrations/guide/storage-monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
 
@@ -34,7 +34,7 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 
 4. Select the S3 buckets you want to monitor with Storage Monitoring. You can select buckets from multiple AWS accounts at once.
 
-{{< img src="integrations/guide/storage-monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+{{< img src="integrations/guide/storage_monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 5. Assign a destination bucket per region to store S3 inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
 
