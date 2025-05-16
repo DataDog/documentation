@@ -328,7 +328,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_pages_widget_may_2025.png" alt="Configured home screen on-call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/ios_pages_widget_may_2025.png" alt="Configured home screen On-Call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget** to bring up the configure screen.
