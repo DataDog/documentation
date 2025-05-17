@@ -40,7 +40,7 @@ categories:
 - marketplace
 - nube
 - colaboración
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -54,7 +54,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_zoom
 pricing:
-- billing_type: tag_count
+- billing_type: recuento_etiquetas
   includes_assets: true
   metric: datadog.marketplace.rapdev.zoom
   product_id: zoom
@@ -124,7 +124,7 @@ La integración de Zoom tiene la capacidad de monitorizar reuniones, salas, usua
 5. Descripción general de la geolocalización de RapDev Zoom
 6. Información general de teléfonos de RapDev Zoom
 
-## Agent
+## Ayuda
 Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Soporte: support@rapdev.io
@@ -143,4 +143,4 @@ Hecho con ❤️ en Boston
 
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el apoyo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">Haz clic aquí</a> para comprar esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">adquiere esta aplicación en el Marketplace</a>.

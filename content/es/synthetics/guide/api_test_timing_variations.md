@@ -12,13 +12,13 @@ title: Comprender los tiempos de los tests de API y solucionar las variaciones
 
 ## Información general
 
-Puedes identificar cuellos de botella en la comunicación entre tu servidor y el cliente con las [métricas de tiempo][1] que recopilan los tests de API Synthetic.
+Puedes identificar cuellos de botella en la comunicación entre tu servidor y el cliente con las [métricas de tiempo][1] que recopilan los tests de API de Synthetic.
 
 
 ## Métricas de tiempo
 
 
-Los tests Synthetic recopilan [métricas][1] que miden lo siguiente: 
+Los tests de Synthetic recopilan [métricas][1] que miden lo siguiente:
 
 
 ### Tiempo de redireccionamiento
@@ -34,7 +34,7 @@ La métrica `synthetics.http.redirect.time` solo se mide si las redirecciones se
 
 ### Tiempo de resolución DNS
 
-Las métricas `synthetics.dns.response.time` y `*.dns.time` miden el tiempo empleado en resolver el nombre de dominio. Los tests de API Synthetic utilizan servidores DNS comunes para la resolución de nombres de dominio, como Google, CloudFlare, AWS y Azure. Puedes anular estos servidores con [localizaciones privadas][3] o [tests DNS][4].
+Las métricas `synthetics.dns.response.time` y `*.dns.time` miden el tiempo empleado en resolver el nombre de dominio. Los tests de API de Synthetic utilizan servidores DNS comunes para la resolución de nombres de dominio, como Google, CloudFlare, AWS y Azure. Puedes anular estos servidores con [localizaciones privadas][3] o [tests DNS][4].
 
 Estas métricas solo se miden cuando el campo de URL de test de API contiene un nombre de dominio. Si utilizas una dirección IP, se omite la resolución DNS y no aparecen series temporales para estas métricas.
 
@@ -114,7 +114,7 @@ Pueden producirse variaciones del tiempo hasta el primer byte debido a la carga 
 ### Tiempo de descarga
 Pueden producirse variaciones en el tiempo de descarga debido a cambios en el tamaño de la respuesta. El tamaño del cuerpo descargado está disponible en los resultados de los tests y en la métrica `synthetics.http.response.size`.
 
-Siempre que puedan producirse variaciones debido a la carga de red, puedes utilizar [Network Performance Monitoring][6] y [Tests de ICMP de Synthetics][7] para identificar posibles cuellos de botella.
+Cuando puedan producirse variaciones debido a la carga de red, puedes utilizar [Cloud Network Monitoring][6] y los [tests ICMP Synthetics][7] para identificar posibles cuellos de botella.
 
 En los casos en los que puedan producirse variaciones debido a la carga del servidor, utiliza el [Datadog Agent][8] y sus [integraciones][9] para identificar posibles retrasos. 
 
@@ -128,7 +128,7 @@ En los casos en los que puedan producirse variaciones debido a la carga del serv
 [3]: /es/synthetics/private_locations/configuration#dns-configuration
 [4]: /es/synthetics/api_tests/dns_tests#define-request
 [5]: /es/synthetics/private_locations/?tab=docker#overview
-[6]: /es/network_monitoring/performance/#overview
+[6]: /es/network_monitoring/cloud_network_monitoring/#overview
 [7]: /es/synthetics/api_tests/icmp_tests/#overview
 [8]: /es/getting_started/agent/#overview
 [9]: /es/integrations/

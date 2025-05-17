@@ -192,6 +192,8 @@ Además de los [atributos RUM predeterminados][6] capturados por el SDK de RUM i
 
 Los atributos personalizados te permiten filtrar y agrupar información sobre el comportamiento observado del usuario (como el valor del carrito, el nivel de comerciante o la campaña publicitaria) con información a nivel de código (como los servicios de backend, la cronología de la sesión, los logs de error y el estado de la red).
 
+<div class="alert alert-info">Los atributos personalizados están pensados para pequeños fragmentos de información específicos (por ejemplo, ID, marcadores o etiquetas (labels) cortas). Evita adjuntar objetos grandes, como cargas útiles de respuesta HTTP completas. Esto puede aumentar significativamente el tamaño de los eventos y afectar al rendimiento.</div>
+
 ### Establecer un atributo global personalizado
 
 Para establecer un atributo global personalizado, utiliza `RUMMonitor.shared().addAttribute(forKey:value:)`.
@@ -214,13 +216,11 @@ Al añadir información de usuario a tus sesiones de RUM, simplificas lo siguien
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" >}}
 
-Los siguientes atributos son **opcionales**. Debes indicar **al menos uno**:
-
-| Atributo   | Tipo   | Descripción                                                                                              |
-|-------------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.email` | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
-| `usr.id`    | Cadena | Identificador de usuario único.                                                                                  |
-| `usr.name`  | Cadena | Nombre fácil de usar, mostrado por defecto en la interfaz de usuario de RUM.                       
+| Atributo   | Tipo   | Descripción                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | Cadena | (Obligatorio) Identificador único de usuario.                                              |
+| `usr.name`  | Cadena | (Opcional) Nombre de usuario sencillo, mostrado por defecto en la interfaz de usuario RUM.              |
+| `usr.email` | Cadena | (Opcional) Correo electrónico del usuario, mostrado en la interfaz de usuario RUM, si el nombre de usuario no está presente. |
 
 Para identificar las sesiones de usuario, utiliza la API `Datadog.setUserInfo(id:name:email:)`.
 
@@ -340,6 +340,9 @@ Puedes utilizar las siguientes propiedades en `RUM.Configuration` al activar RUM
 
 `telemetrySampleRate`
 : la frecuencia de muestreo para la telemetría interna del SDK utilizada por Datadog. Esta frecuencia controla el número de solicitudes reportadas al sistema de rastreo. Debe ser un valor comprendido entre `0` y `100`. Por defecto, se establece en `20`.
+
+`trackAnonymousUser`
+: Cuando se habilita, el SDK genera un ID de usuario anónimo, único y no personal que se conserva durante el lanzamiento de la aplicación. Este ID se adjuntará a cada sesión RUM, lo que te permitirá vincular sesiones originadas por el mismo usuario/dispositivo sin recopilar datos personales. Por defecto, se configura como `true`.
 
 `trackFrustrations`
 : determina si se activa el rastreo automático de las frustraciones de los usuarios. Por defecto, se establece en `true`.
@@ -548,7 +551,7 @@ let session = URLSession(
 Esto rastrea todas las solicitudes enviadas con la `session` instrumentada. Las solicitudes que coinciden con el dominio `example.com` se marcan como "primarias" (first party) y la información de rastreo se envía a tu backend para [conectar el recurso de RUM con su traza][1].
 
 
-[1]: https://docs.datadoghq.com/es/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[1]: https://docs.datadoghq.com/es/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
@@ -734,19 +737,19 @@ Si se devuelve `nil` desde el asignador de errores, recursos o acciones, se elim
 
 En función del tipo de evento, solo pueden modificarse algunas propiedades específicas:
 
-| Tipo de evento       | Clave de atributo                     | Descripción                             |
-|------------------|-----------------------------------|-----------------------------------------|
-| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Nombre de la acción.                      |
-|                  | `RUMActionEvent.view.url`            | URL de la vista vinculada a esta acción.   |
-| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Mensaje de error.                           |
-|                  | `RUMErrorEvent.error.stack`          | Stack trace del error.                 |
-|                  | `RUMErrorEvent.error.resource?.url`  | URL del recurso al que se refiere el error. |
-|                  | `RUMErrorEvent.view.url`             | URL de la vista vinculada a este error.    |
-| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL del recurso.                     |
-|                  | `RUMResourceEvent.view.url`          | URL de la vista vinculada a este recurso. |
-| RUMViewEvento     | `RUMViewEvent.view.name`             | Nombre de la vista.                        |
-|                  | `RUMViewEvent.view.url`              | URL de la vista.                         |
-|                  | `RUMViewEvent.view.referrer`         | URL vinculada con la vista inicial de la página.|
+| Tipo de evento       | Clave de atributo                        | Descripción                                      |
+| ---------------- | ------------------------------------ | ------------------------------------------------ |
+| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Nombre de la acción.                              |
+|                  | `RUMActionEvent.view.url`            | URL de la vista vinculada a esta acción.           |
+| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Mensaje de error.                                   |
+|                  | `RUMErrorEvent.error.stack`          | Stack trace del error.                         |
+|                  | `RUMErrorEvent.error.resource?.url`  | URL del recurso al que se refiere el error.         |
+|                  | `RUMErrorEvent.view.url`             | URL de la vista vinculada a este error.            |
+| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL del recurso.                             |
+|                  | `RUMResourceEvent.view.url`          | URL de la vista vinculada a este recurso.         |
+| RUMViewEvento     | `RUMViewEvent.view.name`             | Nombre de la vista.                                |
+|                  | `RUMViewEvent.view.url`              | URL de la vista.                                 |
+|                  | `RUMViewEvent.view.referrer`         | URL vinculada con la vista inicial de la página. |
 
 ## Recuperar el ID de sesión de RUM
 

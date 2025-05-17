@@ -34,7 +34,7 @@ categories:
 - nube
 - rum
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -118,4 +118,4 @@ Hecho con ❤️ en Boston
 *¿Esta no es la integración que estás buscando? ¿Falta una función esencial para tu organización? Envíanos una [nota](mailto:support@rapdev.io) y la crearemos.*
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-servicenow" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-servicenow" target="_blank">adquiere esta aplicación en el Marketplace</a>.
