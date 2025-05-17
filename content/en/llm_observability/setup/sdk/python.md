@@ -480,12 +480,12 @@ The SDK's `LLMObs.annotate_context()` method returns a context manager that can 
 
 The `LLMObs.annotation_context()` method accepts the following arguments:
 
-`name` 
+`name`
 : optional - _str_
 <br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
 
-`prompt` 
-: optional - _dictionary_ 
+`prompt`
+: optional - _dictionary_
 <br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
@@ -636,6 +636,36 @@ def llm_call():
     span_context = LLMObs.export_span(span=None)
     return completion
 {{< /code-block >}}
+
+## Span processing
+
+To modify input and output data on spans a processor function can be configured. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+
+def redact_processor(span: LLMObsSpan) -> LLMObsSpan:
+    if span.get_tag("no_output") == "true":
+        for message in span.output_messages:
+            message["content"] = ""
+    return span
+
+
+# If using LLMObs.enable()
+LLMObs.enable(
+  ...
+  span_processor=redact_processor,
+)
+# else when using `ddtrace-run`
+LLMObs.register_processor(redact_processor)
+
+with LLMObs.llm("invoke_llm_with_no_output"):
+    LLMObs.annotate(tags={"no_output": "true"})
+{{< /code-block >}}
+
 
 ## Advanced tracing
 
