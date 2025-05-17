@@ -229,6 +229,14 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 
 ## Advanced Configuration
 
+### Filter log collection on clusters
+
+#### Exclude all log collection from an individual cluster
+Configure the following environment variable in the Advanced Configuration section of your cluster in the Databricks UI or as a [Spark environment variable][18] in the Databricks API.
+```bash
+DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
+```
+
 ### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
@@ -291,3 +299,4 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [15]: https://www.datadoghq.com/support/
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
 [17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
+[18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
