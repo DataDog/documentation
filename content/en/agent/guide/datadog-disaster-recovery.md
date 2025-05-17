@@ -15,7 +15,7 @@ further_reading:
 {{< /callout >}}
 
 ## Overview 
-Datadog Disaster Recovery (DDR) provides you with observability continuity in rare outage events that may impact a cloud service provider region or Datadog services running within a cloud provider region. In such cases, DDR enables your organization to meet observability, availability, and business continuity goals. You can also recover live observability at an alternate, functional Datadog site in typically under an hour with DDR. <br><br>
+Datadog Disaster Recovery (DDR) provides you with observability continuity in rare outage events that may impact a cloud service provider region or Datadog services running within a cloud provider region. In such cases, DDR enables your organization to meet critical observability, availability, and business continuity goals. You can also recover live observability at an alternate, functional Datadog site in typically under an hour with DDR. <br><br>
 Additionally, Datadog Disaster Recover allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
 
 
@@ -83,7 +83,9 @@ curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
 
 
 {{% collapse-content title=" 4. Link the DDR org to the primary org" level="h5" %}}
-After the Datadog team has completed the configuration of the designated orgs and you have confirmed the public IDs for your orgs, you can now link them. For security reasons, Datadog is unable to link the orgs on your behalf. To link your primary and DDR orgs, run these commands:
+After the Datadog team has completed the configuration of the designated orgs and you have confirmed the public IDs for your orgs, you can now link them. For security reasons, Datadog is unable to link the orgs on your behalf. 
+
+To link your primary and DDR orgs, run these commands:
 
 ```shell
 export DDR_DD_API_KEY=<>
@@ -107,25 +109,25 @@ curl -v -H "Content-Type: application/json" -H
 <!------GROUP 3------------------------------------------------------------->
 #### when you have linked the DDR org to your primary org
 {{% collapse-content title=" 5. Create your Datadog API and App key for syncing" level="h5" %}}
-At the secondary Datadog site, create a set of API key and App key. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
+At the secondary Datadog site, create a set of `API key` **and** `App key`. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
 
 For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your Agent.
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 6. Configure Single Sign On for the Datadog App" level="h5" %}}
-Go to your [Organization Settings][1] to configure SAML or Google Login for your users. **Single Sign On (SSO) is highly recommended** to enable all your users to be able to seamlessly login to your Disater Recovery organization during an outage. 
+Go to your [Organization Settings][1] to configure SAML or Google Login for your users. 
 
-You must invite your users to your Disaster Recovery organization and give them appropriate roles and permissions. 
+**Single Sign On (SSO) is highly recommended** to enable all your users to be able to seamlessly login to your Disater Recovery organization during an outage. 
 
-Alternatively to streamline this operation you can use [Just-in-Time provisioning with SAML][2].
+You must invite your users to your Disaster Recovery organization and give them appropriate roles and permissions. Alternatively, to streamline this operation you can use [Just-in-Time provisioning with SAML][2].
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 7. Set up Resources syncing and scheduler" level="h5" %}}
 Datadog provides a tool called [Datadog sync-cli][3] to copy your dashboards, monitors and other configurations from your primary organization to your secondary organization. You can determine the frequency and timing of syncing based on your business requirements. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. We recommend performing this operation on a daily basis. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
-Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization. `Sync-cli can be configured for bidirectional syncing, but this is not yet fully tested and should be considered experimental at this moment`(**should we mention this? it doesn't sound like we recommned this at the moment**).
+Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization. `Sync-cli can be configured for bidirectional syncing, but this is not yet fully tested and should be considered experimental at this moment`(**should we mention this? it doesn't sound like we recommend this at the time**).
 
 Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here’s an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
 
@@ -164,7 +166,7 @@ Verify that your secondary org is accessible and that your Dashboards and Monito
 
 
 {{% collapse-content title=" 9. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
-Remote configuration (RC) is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control; alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
+[Remote configuration (RC)][7] is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control; alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
 
 Remote configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
 {{% /collapse-content %}}
@@ -172,7 +174,8 @@ Remote configuration will be turned on by default on your new organization and y
 
 {{% collapse-content title=" 10. Update your Datadog Agent configuration" level="h5" %}}
 Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery. 
-Configure your Datadog Agent's `datadog.yaml` configuration file as shown below for a `US5` site and restart the Agent.
+
+Configure your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
 ```shell 
 multi_region_failover:
@@ -180,10 +183,12 @@ multi_region_failover:
   failover_metrics: false
   failover_logs: false
   failover_traces: false
-  site: us5.datadoghq.com
-  api_key: us5_site_api_key
+  site:<DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  api_key:<DDR_SITE_API_KEY>
 ```
-During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. Your Datadog contact will work with you on scheduling dedicated windows for game day testing to measure performance and Recovery Time Objective(RTO).
+During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. 
+
+Your Datadog contact will work with you on scheduling dedicated windows for game day testing (`is this the failover testing day?`) to measure performance and Recovery Time Objective(RTO).
 {{% /collapse-content %}} <br>
 
 
