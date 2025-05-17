@@ -1256,6 +1256,13 @@
       "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
+  "UpdateResourceEvaluationFilters": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update resource filters returns \"OK\" response"
+    }
+  ],
   "ValidateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
