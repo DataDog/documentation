@@ -117,16 +117,6 @@ instances:
 
 Once all Agent configuration is complete, [restart the Datadog Agent][2].
 
-### Install or verify the Oracle integration
-
-#### First-time installations
-
-On the Integrations page in Datadog, install the [Oracle integration][7] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
-
-#### Existing installations
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Validate the setup
 
 [Run the Agent's status subcommand][3] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][5] and [Databases][4] page in Datadog to get started.
