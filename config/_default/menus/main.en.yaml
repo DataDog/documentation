@@ -3162,6 +3162,11 @@ menu:
       parent: serverless_aws_lambda
       identifier: libraries_integrations
       weight: 111
+    - name: Lambda Web Adapter
+      url: serverless/aws_lambda/lwa
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_lwa
+      weight: 112
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
