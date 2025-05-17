@@ -53,10 +53,7 @@ Capture observability data from in-house code or complex functions that aren't c
 
 To learn more, see [custom instrumentation][6].
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
-Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
-{{< /callout >}}
-
+<div class="alert alert-info"><a href="/tracing/service_discovery/">Service Discovery</a> provides visibility into the monitoring coverage of your services within Datadog. It automatically discovers services running across your infrastructure, helps you identify potential observability gaps, and provides relevant information to triage and take action.</div>
 
 ## APM setup tutorials
 
