@@ -141,8 +141,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-
-**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details. 
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -188,6 +187,14 @@ To notify your dev team if the value that breached the threshold of your monitor
   This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
 {{/is_exact_match}}
 ```
+
+The `is_exact_match` conditional variable also supports an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exist.
+```text
+{{#is_exact_match "host.datacenter" ""}}
+  This displays if the attribute or tag does not exist or if it's empty
+{{/is_match}}
+```
+
 
 {{% /tab %}}
 {{% tab "is_renotify" %}}
@@ -551,8 +558,9 @@ When building dynamic handles with attributes that might not always be present, 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
 ```text
-{{#is_match "kube_namespace.owner" ""}}
+{{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
+  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
 {{/is_match}}
 ```
 
