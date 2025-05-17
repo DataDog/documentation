@@ -24,9 +24,14 @@ Datadog Agents versions **7.54 or above** is required for Datadog Disaster Recov
 
 
 ## Setup 
-To enable Datadog Disaster Recovery, follow these steps:
+To enable Datadog Disaster Recovery, follow the relevant steps for when:
 
-<!---------------------------------------- GROUP 1------------------------------------------------------------->
+1. [you are ready to configure Datadog Disaster Recovery](#when-you-are-ready-to-configure-datadog-disaster-recovery)
+2. [Datadog confirms your new organization as your secondary failover organization](#when-datadog-confirms-your-new-organization-as-your-secondary-failover-organization)
+3. [you have linked the DDR org to your primary org](#when-you-have-linked-the-ddr-org-to-your-primary-org)
+4. [you are ready to test the failover process](#when-you-are-ready-to-test-the-failover-process)
+
+<!-------- GROUP 1------------------------------------------------------------->
 #### when you are ready to configure Datadog Disaster Recovery: 
 {{% collapse-content title=" 1. Create your secondary Datadog organization" level="h5" %}}
 Identify which site your primary organization is on by matching your Datadog website URL to the [`SITE URL`][4] in the table. Then, select a secondary site for your DDR organization.
@@ -54,8 +59,7 @@ Share your organization name with your Datadog contact(`IS THIS THE CSM`?) and t
 
 
 
-
-<!---------------------------------------- GROUP 2------------------------------------------------------------->
+<!------GROUP 2------------------------------------------------------------->
 #### when Datadog confirms your new organization as your secondary failover organization
 {{% collapse-content title=" 3. Confirm the public IDs of your orgs" level="h5" %}}
 Once the Datadog team has completed the configuration of the designated orgs, they will share with you the public IDs of the primary org and the DDR org. You can confirm these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
@@ -100,7 +104,7 @@ curl -v -H "Content-Type: application/json" -H
 
 
 
-<!---------------------------------------- GROUP 3------------------------------------------------------------->
+<!------GROUP 3------------------------------------------------------------->
 #### when you have linked the DDR org to your primary org
 {{% collapse-content title=" 5. Create your Datadog API and App key for syncing" level="h5" %}}
 At the secondary Datadog site, create a set of API key and App key. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
@@ -185,7 +189,7 @@ During the preview, we recommend having `failover_metrics`, `failover_logs` and 
 
 
 
-<!---------------------------------------- GROUP 4------------------------------------------------------------->
+<!-------GROUP 4------------------------------------------------------------->
 #### when you are ready to test the failover process
 {{% collapse-content title=" 11. Activate and test DDR failover" level="h5" %}}
 There are several methods that can be used for activating/testing the DDR failover. 
@@ -238,7 +242,7 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-<!---------------------------------------- LINKS ------------------------------------------------------------->
+<!------LINKS ------------------------------------------------------------->
 [1]: https://app.datadoghq.com/organization-settings/users
 [2]: https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning
 [3]: https://github.com/DataDog/datadog-sync-cli
