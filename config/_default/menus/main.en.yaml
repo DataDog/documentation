@@ -100,49 +100,49 @@ menu:
       url: getting_started/devsecops
       parent: getting_started
       weight: 10
+    - name: Event Management
+      identifier: getting_started_event_mgmt
+      url: getting_started/event_management/
+      parent: getting_started
+      weight: 11
     - name: Incident Management
       identifier: getting_started_incident_management
       url: getting_started/incident_management/
       parent: getting_started
-      weight: 11
+      weight: 12
     - name: Integrations
       identifier: getting_started_integrations
       url: getting_started/integrations/
       parent: getting_started
-      weight: 12
+      weight: 13
     - name: AWS
       identifier: getting_started_with_aws
       url: getting_started/integrations/aws/
-      weight: 1201
+      weight: 1301
       parent: getting_started_integrations
     - name: Azure
       identifier: getting_started_with_azure
       url: getting_started/integrations/azure/
-      weight: 1202
+      weight: 1302
       parent: getting_started_integrations
     - name: Google Cloud
       identifier: getting_started_with_google_cloud
       url: getting_started/integrations/google_cloud/
-      weight: 1203
+      weight: 1303
       parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1204
+      weight: 1304
       parent: getting_started_integrations
     - name: Logs
       identifier: getting_started_logs
       url: getting_started/logs/
       parent: getting_started
-      weight: 13
+      weight: 14
     - name: Monitors
       identifier: getting_started_monitors
       url: getting_started/monitors/
-      parent: getting_started
-      weight: 14
-    - name: OpenTelemetry
-      identifier: getting_started_opentelemetry
-      url: getting_started/opentelemetry/
       parent: getting_started
       weight: 15
     - name: Profiler
