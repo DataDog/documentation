@@ -113,10 +113,10 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/aws
-[2]: /cloud_cost_management/azure
-[3]: /cloud_cost_management/google_cloud
-[4]: /cloud_cost_management/saas_costs
+[1]: /cloud_cost_management/setup/aws
+[2]: /cloud_cost_management/setup/azure
+[3]: /cloud_cost_management/setup/google_cloud
+[4]: /cloud_cost_management/setup/saas_costs
 [5]: /cloud_cost_management/datadog_costs
 [6]: https://app.datadoghq.com/cost/explorer
 [7]: /dashboards

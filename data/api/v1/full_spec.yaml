@@ -1181,7 +1181,6 @@ components:
           readOnly: true
           type: string
         is_read_only:
-          default: false
           deprecated: true
           description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.

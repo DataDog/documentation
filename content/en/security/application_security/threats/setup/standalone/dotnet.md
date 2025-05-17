@@ -210,6 +210,6 @@ ENV DD_APM_TRACING_ENABLED=false
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/application_security/threats/setup/compatibility/dotnet/
+[2]: /security/application_security/setup/compatibility/dotnet/
 [3]: /agent/versions/upgrade_between_agent_minor_versions/
-[4]: /security/application_security/threats/setup/compatibility/
+[4]: /security/application_security/setup/compatibility/

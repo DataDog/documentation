@@ -7,10 +7,6 @@ further_reading:
   text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="Access the Preview!" >}}
-  Log Workspaces is in Preview.
-{{< /callout >}}
-
 ## Overview
 During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Log Workspaces to run queries to:
 
@@ -60,7 +56,7 @@ You can also create Calculated Fields directly within a Workspace to define a co
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
 - Include additional data sources such as reference tables
-- Use SQL to join data
+- Use [DDSQL][5] to join data
 - Transform, correlate, and visualize the data
 
 Cells that depend on other cells are automatically updated when one of the cells it depends on is changed.
@@ -261,3 +257,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
+[5]: /ddsql_reference/
