@@ -225,7 +225,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 ### Filter log collection on a clusters
 
 #### Exclude all log collection from an individual cluster
-Configure the following environment variable in the Advanced Configuration section of your cluster in the Databricks UI or as [Spark env vars][2] in the Databricks API.
+Configure the following environment variable in the Advanced Configuration section of your cluster in the Databricks UI or as a [Spark environment variable][2] in the Databricks API.
 ```bash
 DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
 ```
