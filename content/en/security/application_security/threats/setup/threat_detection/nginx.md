@@ -61,15 +61,6 @@ The Datadog nginx tracing module has experimental support for threat detection a
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Limitations
-
-As of version 1.3.0, the available functionality has the following important limitations:
-
-* The request body is not inspected, regardless of its content type.
-
-* It's not possible to block the request based on characteristics of the
-  response, such as its status code, headers, or body.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
