@@ -227,6 +227,26 @@ Enables RUM correlation with logs (default is true).
 **Default**: `true`<br/>
 Enables trace correlation with logs (default is true).
 
+`appHangThreshold`
+: Optional<br/>
+**Type**: number<br/>
+**Default**: `undefined`<br/>
+The app hang threshold in seconds for non-fatal app hangs on iOS (default is undefined).
+
+`trackNonFatalAnrs`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `undefined`<br/>
+Enables tracking of non-fatal ANRs on Android. By default, the reporting of non-fatal ANRs on Android 30+ is disabled because it would
+create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default,
+as fatal ANRs cannot be reported on those versions.
+
+`trackWatchdogTerminations`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Determines whether the SDK should track application termination by the watchdog on iOS (default is false).
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
