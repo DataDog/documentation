@@ -11,13 +11,13 @@ If you want to run multiple pipelines on one host so that you can send logs from
 
 [Set up the first pipeline](https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/?tab=pipelineui) and install the Worker on your host.
 
-## Create another pipeline
+## Create an additional pipeline
 
 [Set up another pipeline](https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/?tab=pipelineui) for the additional Worker that you want to run on the same host. When you get to the Install page, follow the below steps to run the additional Worker.
 
 ## Run an additional Worker
 
-When you installed the first Worker, by default you have:
+When you install the first Worker, by default you have:
 
 - The service binary: `/usr/bin/observability-pipelines-worker`
 - The service definition file: `/lib/systemd/system/observability-pipelines-worker.service`, which looks like:
@@ -56,7 +56,7 @@ When you installed the first Worker, by default you have:
 
 ### Configure an additional Worker
 
-In this example, another pipeline was created with the Fluent source. To configure a Worker for the pipeline:
+In this example, another pipeline is created with the Fluent source. To configure a Worker for this pipeline:
 
 1. Run the following command to create a new data directory, updating `op-fluent` to a directory name that fits your use case:
     ```
@@ -102,8 +102,8 @@ In this example, another pipeline was created with the Fluent source. To configu
     [Install]
     WantedBy=multi-user.target
     ```
-    - The service name is specific to your use case, `<your_use_case_name>.service`. In this example, the service name is `op-fluent` since the pipeline is using the Fluent source.
-    - The description is for your specific use case, where in this example it is `OPW for Fluent Pipeline`.
+    - The service name should match your use case, `<your_use_case_name>.service`. In this example, the service name is `op-fluent` since the pipeline is using the Fluent source.
+    - The description should also match your specific use case, in this example it is `OPW for Fluent Pipeline`.
     - `EnvironmentFile` is set to the new systemd service environment variables file you created, which in this example is: `-/etc/default/op-fluent`.
 1. Run this command to reload systemd:
     ```
@@ -122,5 +122,5 @@ You can run the command `sudo journalctl -u op-fluent.service` to help you debug
 
 ## Deploy the pipeline
 
-1.  Navigate to the second pipeline's Install page.
-1.  In the **Deploy your pipeline** section, you should see your second Worker detected. Click **Deploy**.
+1.  Navigate to the additional pipeline's Install page.
+1.  In the **Deploy your pipeline** section, you should see your additional Worker detected. Click **Deploy**.
