@@ -27,7 +27,7 @@ Se admiten los siguientes lenguajes:
 - Ruby
 - PHP
 
-También es posible [cargar un SBOM de terceros a Datadog][13]
+También es posible [cargar un SBOM de terceros a Datadog][13].
 
 SCA admite la detección de dependencias tanto estática como en tiempo de ejecución:
 - Para la detección estática, puedes analizar a través de tus pipelines CI/CD o directamente a través de Datadog con análisis alojado (sólo GitHub). Ve a la [página de configuración de Code Security][4] o consulta la [configuración estática][1] para empezar.

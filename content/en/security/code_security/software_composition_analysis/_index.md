@@ -27,7 +27,7 @@ The following languages are supported:
 - Ruby
 - PHP
 
-It is also possible to [upload a third-party SBOM to Datadog][13]
+You can also [upload a third-party SBOM to Datadog][13].
 
 SCA supports both static and runtime dependency detection:
 - For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [Code Security setup page][4] or see [static setup][1] to get started.
