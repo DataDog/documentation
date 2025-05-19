@@ -304,8 +304,9 @@ To override default RUM view names so that they are aligned with how you've defi
 
 2. Start views for each route change.
 
-    {{< tabs >}}
-    {{% tab "NPM" %}}
+    <!-- NPM -->
+
+    {% if equals($lib_src, "npm") %}
 
     ```javascript
        import { matchRoutes, useLocation } from 'react-router-dom';
@@ -351,8 +352,13 @@ To override default RUM view names so that they are aligned with how you've defi
        }
     ```
 
-    {{% /tab %}}
-    {{% tab "CDN async" %}}
+    {% /if %}
+
+    <!-- end NPM -->
+
+    <!-- CDN async -->
+
+    {% if equals($lib_src, "cdn_async") %}
 
     ```javascript
        import { matchRoutes, useLocation } from 'react-router-dom';
@@ -399,8 +405,13 @@ To override default RUM view names so that they are aligned with how you've defi
        }
     ```
 
-    {{% /tab %}}
-    {{% tab "CDN sync" %}}
+    {% /if %}
+
+    <!-- end CDN async -->
+
+    <!-- CDN sync -->
+
+    {% if equals($lib_src, "cdn_sync") %}
 
     ```javascript
        import { matchRoutes, useLocation } from 'react-router-dom';
@@ -446,8 +457,9 @@ To override default RUM view names so that they are aligned with how you've defi
        }
     ```
 
-    {{% /tab %}}
-    {{< /tabs >}}
+    {% /if %}
+
+    <!-- end CDN sync -->
 
 ### Set view name
 
