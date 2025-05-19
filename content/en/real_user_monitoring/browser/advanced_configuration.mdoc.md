@@ -632,23 +632,6 @@ For example, to redact email addresses from your web application URLs:
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -663,8 +646,11 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -679,8 +665,11 @@ window.DD_RUM.onReady(function() {
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM &&
@@ -694,8 +683,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 You can update the following event properties:
 
@@ -1265,23 +1253,6 @@ Enrich or modify the context of RUM view events and corresponding child events w
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1295,8 +1266,11 @@ datadogRum.setViewContextProperty('activity', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1312,8 +1286,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -1326,8 +1303,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Replace view context
 
@@ -1336,23 +1312,6 @@ Replace the context of your RUM view events and corresponding child events with 
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1364,8 +1323,11 @@ datadogRum.setViewContext({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1380,8 +1342,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -1393,8 +1358,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## Error context
 
@@ -1402,11 +1366,11 @@ window.DD_RUM &&
 
 When capturing errors, additional context may be provided at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event context.
 
-{{< code-block lang="javascript" >}}
-const error = new Error('Something went wrong')
-error.dd_context = { component: 'Menu', param: 123, }
-throw error
-{{< /code-block >}}
+```javascript
+const error = new Error('Something went wrong');
+error.dd_context = { component: 'Menu', param: 123 };
+throw error;
+```
 
 ## Global context
 
