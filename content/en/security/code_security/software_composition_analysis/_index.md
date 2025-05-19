@@ -22,7 +22,7 @@ The following languages are supported:
 - Python
 - JavaScript
 - Java
-- Csharp
+- C#
 - Go
 - Ruby
 - PHP

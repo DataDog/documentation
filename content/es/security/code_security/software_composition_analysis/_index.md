@@ -22,7 +22,7 @@ Se admiten los siguientes lenguajes:
 - Python
 - JavaScript
 - Java
-- Csharp
+- C#
 - Go
 - Ruby
 - PHP
