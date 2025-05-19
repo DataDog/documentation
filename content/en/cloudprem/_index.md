@@ -15,12 +15,12 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 ## Get started
 
 {{< whatsnext >}}
-   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}
    {{< nextlink href="/cloudprem/installation/" >}}Install CloudPrem and Send Logs with the Agent {{< /nextlink >}}
    {{< nextlink href="/cloudprem/ingress/" >}}Configure CloudPrem Ingress{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
    {{< nextlink href="/cloudprem/aws_config" >}}Configure AWS{{< /nextlink >}}
    {{< nextlink href="/cloudprem/processing/" >}}Configure CloudPrem Log Processing{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}   
    {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}
 
