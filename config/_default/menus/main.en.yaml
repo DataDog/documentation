@@ -3827,7 +3827,7 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
-    - name: APM Recommendations
+    - name: Recommendations
       url: tracing/recommendations/
       parent: tracing
       identifier: apm_recommendations
