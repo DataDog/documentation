@@ -1,8 +1,6 @@
 ---
 title: Automated Analysis
-description: Automatically surfacing critical issues with contextual insights and recommended next steps
-aliases:
-    - /profiler/automated_analysis/
+description: Automatically surface critical issues with contextual insights and recommended next steps
 further_reading:
     - link: 'profiler/enabling'
       tag: 'Documentation'
@@ -44,7 +42,7 @@ multifiltersearch:
       description: Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data.
     - name: VMOperation Peak Duration
       severity: Warn
-      description: Triggers if a blocking VM operation (or combination of ops close in time) taking more than 2 seconds. Reports details about the operation with the highest duration.
+      description: Triggers if a blocking VM operation (or combination of operations close in time) takes more than 2 seconds. Reports details about the operation with the highest duration.
     - name: GC Pauses
       severity: Warn
       description: Triggers if more than 10% of time was spent in GC pauses.
@@ -56,7 +54,7 @@ multifiltersearch:
       description: Triggers if max number of deadlocked threads over query context is bigger than 0.
     - name: Thrown Exceptions
       severity: Warn
-      description: Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defauls to 10K)
+      description: Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K)
     - name: Primitive Value Boxing
       severity: Info
       description: Triggers if more than 5% of CPU time was spent doing primitive<>object value conversions.
@@ -75,26 +73,24 @@ Automated Analysis automatically detects performance issues in your applications
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
 - Recommended next steps to help you resolve the issue
 
-By reducing the expertise required to take action, Automated Analysis enables faster resolution of performance issues, and helps teams avoid costly blind spots. It also lays the foundation for powering performance and cost insights across the Datadog platform.
-
+This reduces the profiling expertise needed to identify and resolve performance issues in your applications that might otherwise go unnoticed.
 
 {{< img src="profiler/profiling_automated_analysis.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
 
 ## Explore insights
-Automated Analysis will be surfaced within the [Profile explorer][1]
-- As a banner at the top of the page when you're scoped to a specific service
+Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
+
+- In the **Top Insights** banner at the top of the page when you're scoped to a specific service
 {{< img src="profiler/profiling_automated_analysis_banner.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
-- In a column within the service list
+
+- In the **Insights** column within the service list
 {{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
 
-- Within a Flame Graph View
+- Within a flame graph view
 {{< img src="profiler/profiling_automated_analysis_flamegraph_viz.png" alt="The Automated Analysis column displaying insights detected for a given service within a flamegraph" style="width:100%;">}}
 
-- Within a Timeline View
+- Within a timeline view
 {{< img src="profiler/profiling_automated_analysis.png" alt="The Automated Analysis column displaying insights detected for a given service within a timeline" style="width:100%;">}}
-
-
-
 
 Click an insight to see a high-level summary that explains the issue, contextual insights from profiling data, and recommended next steps.
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
