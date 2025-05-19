@@ -51,9 +51,6 @@ multifiltersearch:
     - name: GC Pause Peak Duration
       severity: Info
       description: Triggers if at least one GC pause took more than 1 second.
-    - name: Deadlocked Threads
-      severity: Warn
-      description: Triggers if we see a custom datadog event capturing deadlocked threads during the profile.
     - name: Deadlocked Threads Detected
       severity: Warn
       description: Triggers if max number of deadlocked threads over query context is bigger than 0.
@@ -78,7 +75,7 @@ Automated Analysis automatically detects performance issues in your applications
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
 - Recommended next steps to help you resolve the issue
 
-By reducing the expertise required to take action, Automated Analysis enables faster resolution of performance issues, increases product adoption, and helps teams avoid costly blind spots. It also lays the foundation for powering performance and cost insights across the Datadog platform.
+By reducing the expertise required to take action, Automated Analysis enables faster resolution of performance issues, and helps teams avoid costly blind spots. It also lays the foundation for powering performance and cost insights across the Datadog platform.
 
 
 {{< img src="profiler/profiling_automated_analysis.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
@@ -90,16 +87,17 @@ Automated Analysis will be surfaced within the [Profile explorer][1]
 - In a column within the service list
 {{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
 
+- Within a Flame Graph View
+{{< img src="profiler/profiling_automated_analysis_flamegraph_viz.png" alt="The Automated Analysis column displaying insights detected for a given service within a flamegraph" style="width:100%;">}}
+
+- Within a Timeline View
+{{< img src="profiler/profiling_automated_analysis.png" alt="The Automated Analysis column displaying insights detected for a given service within a timeline" style="width:100%;">}}
+
+
+
+
 Click an insight to see a high-level summary that explains the issue, contextual insights from profiling data, and recommended next steps.
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
-
-## Aggregated vs individual insights
-**Individual insights** appear within specific profiles in the flamegraph and timeline views. They highlight issues detected in a single recording, providing detailed context about problems at a specific moment in time.
-{{< img src="profiler/profiling_automated_analysis_individual.png" alt="Example of an individual profile insight within the trace explorer" style="width:100%;">}}
-
-Aggregated insights, on the other hand, are surfaced at the service level and represent patterns detected across many profiles. They help you identify recurring or systemic issues affecting a service over time, making them ideal for quickly spotting problematic trends without digging into individual profiles.
-{{< img src="profiler/profiling_automated_analysis_aggregated.png" alt="Example of an aggregated insight within the profiler explorer" style="width:100%;">}}
-
 
 ## Supported insights
 <!-- The table below is auto-generated. Add new entries in multifiltersearch with new insights as they become available. -->
