@@ -4,9 +4,13 @@ further_reading:
 - link: "/notebooks"
   tag: "Documentation"
   text: "Learn more about Notebooks"
+- link: "/notebooks/advanced_analysis/getting_started"
+  tag: "Documentation"
+  text: "Getting Started with Analysis Features"
 ---
-{{< callout url="#" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview
+
+{{< callout btn_hidden="true" header="Join the Preview!">}} 
+  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
 {{< /callout >}}
 
 ## Overview
@@ -57,7 +61,7 @@ You can add or modify columns in your data source cell. There are two ways to ad
 - In the preview section, click **columns** to search through available attributes for your data source.   
 - In the preview, click on a row to open the detail side panel. Click the attribute you want to add as a column and from the pop up option, select Add "@your_column" to your "@your_datasource" dataset.
 
-<!-- {{< img src="#" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}} -->
+{{< img src="/notebooks/analysis_features/add_column_to_dataset.png" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}}
 
 ## Transforming and analyzing data
 
@@ -93,21 +97,21 @@ You can also transform your data using SQL by adding an analysis cell to your no
 
 ## Viewing and exporting data
 
-For any computational cell that includes a dataset preview, you can view the full 100-row preview by clicking the **View dataset** button.
+For any analysis cell that includes a dataset preview, you can view the full 100-row preview by clicking the **View dataset** button.
 
-You can save the results of any computational cell to a Dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
+You can save the results of any analysis cell to a Dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
 
 If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
 
-**Note**: By default, the dataset is tied to the global timeframe of the **dashboard** not to the timeframe of the notebook. However, you have the ability to set a custom timeframe on the dashboard widget.
+**Note**: By default, the dataset is tied to the global time frame of the **dashboard** not to the time frame of the notebook. However, you have the ability to set a custom time frame on the dashboard widget.
 
 ### Download dataset as a CSV
 
-You can download the data produced by your queries in CSV format for use outside of Datadog. On any computational cell, click the download icon and choose the number of rows to export. 
+You can download the data produced by your queries in CSV format for use outside of Datadog. On any analysis cell, click the download icon and choose the number of rows to export. 
 
 ## Visualizing transformed data
 
-You can graph the data you've transformed using computational cells inside a notebook, customizing the visualization with filters, aggregations, and appearance settings.
+You can graph the data you've transformed using analysis cells inside a notebook, customizing the visualization with filters, aggregations, and appearance settings.
 
 To graph your data:
 
