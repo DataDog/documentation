@@ -4467,15 +4467,15 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Submit Evaluations
-      url: llm_observability/evaluations/submit_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
-      weight: 401
     - name: Out of the Box Evaluations
       url: llm_observability/evaluations/ootb_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
+      weight: 401
+    - name: Submit Evaluations
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_evaluations
       weight: 402
     - name: Cluster Map
       url: llm_observability/cluster_map/

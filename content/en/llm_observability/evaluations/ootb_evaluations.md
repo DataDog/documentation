@@ -4,7 +4,7 @@ description: Learn how to configure out of the box evaluations for your LLM appl
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about Evaluations"
+  text: "Learn about LLM Observability terms and concepts"
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
@@ -16,13 +16,8 @@ further_reading:
 
 ## Overview
 
-You can configure Out of the Box evaluations for your LLM applications on the Settings page to optimize your application's performance and security.
-
-Evaluations
-: Enables Datadog to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. For more information about evaluations, see [Terms and Concepts][1].
-
-Topics
-: Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose.
+Out of the Box Evaluations
+: Enables Datadog to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety.
 
 ## Connect your account
 
@@ -120,17 +115,101 @@ LLM Observability provides metrics to help you monitor and manage the token usag
 
 Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
-## Provide topics for topic relevancy
+### Quality evaluations
 
-Providing topics allows you to use the [topic relevancy][3] evaluation.
+#### Topic Relevancy
+
+This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
+
+You can provide topics for this evaluation.
 
 1. Go to [**LLM Observability > Applications**][4].
 1. Select the application you want to add topics for.
-1. At the bottom of the left sidebar, select **Configuration**.
-1. Add topics in the pop-up modal.
+1. CLick **Evaluations** on the left side panel.
+1. At the right corner of the top panel, select **Configuration**.
+1. Click the **Edit Evaluations** icon for Topic Relevancy.
+1. Add topics on the config page.
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
+#### Failure to Answer
+
+This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
+
+{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
+
+##### Failure to Answer Configuration
+The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+
+| Configuration Option | Description | Example(s) |
+|---|---|---|
+| Empty Code Response | An empty code object like an empty list or tuple, signifiying no data or results | (), [], {}, "", '' |
+| Empty Response | No meaningful response, returning only whitespace | whitespace |
+| No Content Response | An empty output accompanied by a message indicated no content is available | Not found, N/A |
+| Redirection Response | Redirects the user to another source of suggests an alternative approach | If you have additional details, I’d be happy to include them|
+| Refusal Response | Explicitly declines to provide an answer or the complete the request | Sorry, I can't answer this question |
+
+#### Language Mismatch
+
+This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
+
+Language mismatch is only supported for natural language prompts. Input and output pairs mainly consisting of structured data such as JSON, code snippets, or special characters are not flagged as a language mismatch.
+
+{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using Open Source Model | Language Mismatch flags whether each prompt-response pair demonstrates that the LLM application answered the user's question in the same language that the user used.  |
+
+#### Sentiment
+
+This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
+
+{{< img src="llm_observability/evaluations/sentiment_1.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
+
+### Security and Safety evaluations
+
+#### Toxicity
+
+This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
+
+{{< img src="llm_observability/evaluations/toxicity_1.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
+
+#### Prompt Injection
+
+This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
+
+{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input | Evaluated using LLM | Prompt Injection flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
+
+#### Sensitive Data Scanning
+
+This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
+
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+  
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][5], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
 
 ## Further Reading
 
