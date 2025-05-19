@@ -34,7 +34,6 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
     <li><code>ebs:GetSnapshotBlock</code></li>
     <li><code>ebs:ListChangedBlocks</code></li>
     <li><code>ebs:ListSnapshotBlocks</code></li>
-    <li><code>ec2:CopyImage</code></li>
     <li><code>ec2:CopySnapshot</code></li>
     <li><code>ec2:CreateSnapshot</code></li>
     <li><code>ec2:CreateTags</code></li>
