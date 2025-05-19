@@ -94,7 +94,7 @@ Clicking an an insight in either area will display a high-level summary explaini
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
 ## Aggregated vs individual insights
-Individual insights are tied to a specific profile and show up directly in the flamegraph and timeline views. They highlight problems detected within a single recording, giving detailed context about a specific performance issue observed in that exact moment.
+**Individual insights** appear within specific profiles in the flamegraph and timeline views. They highlight issues detected in a single recording, providing detailed context about problems at a specific moment in time.
 {{< img src="profiler/profiling_automated_analysis_individual.png" alt="Example of an individual profile insight within the trace explorer" style="width:100%;">}}
 
 Aggregated insights, on the other hand, are surfaced at the service level and represent patterns detected across many profiles. They help you identify recurring or systemic issues affecting a service over time, making them ideal for quickly spotting problematic trends without digging into individual profiles.
