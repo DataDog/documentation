@@ -35,7 +35,7 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 ## Setup
 
-To display data on the Containers view, ensure that container collection is enabled.
+To display data on the Containers view, enable container collection.
 
 {{< tabs >}}
 {{% tab "Docker" %}}

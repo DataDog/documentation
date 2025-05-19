@@ -207,7 +207,7 @@ For more information about installing the Datadog Agent with AWS ECS Fargate, se
 
 ### I/O stats
 
-I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To collect these stats, use the following configuration to enable the process module of the system-probe:
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To collect these stats, enable the process module of the system-probe:
 
 1. Copy the system-probe example configuration:
 
@@ -233,7 +233,7 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 
 
 ### Optimized process collection footprint
-Beginning with Agent version 7.65.0, container and process collection now runs in the core Datadog Agent by default in Linux environments, to reduce the Agent's overall footprint.
+As of Agent v7.65.0, container and process collection run in the core Datadog Agent by default on Linux, reducing the Agent's overall footprint.
 
 For verification, you can explicitly enable this feature.
 
@@ -494,7 +494,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-### Live Containers
+### Live containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
 
