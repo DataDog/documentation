@@ -36,7 +36,7 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 #### Rsyslog versión 8 o posterior
 <div class="alert alert-info"> A partir de la <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">versión 8.1.5</a> Rsyslog recomienda el modo <code>inotify</code>. Tradicionalmente, <code>imfile</code> utilizaba el modo polling, que consume muchos más recursos (y es más lento) que el modo <code>inotify</code>. </div>
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Ubuntu y Debian" %}}
 
