@@ -27,6 +27,8 @@ The following languages are supported:
 - Ruby
 - PHP
 
+It is also possible to [upload a third-party SBOM to Datadog][13]
+
 SCA supports both static and runtime dependency detection:
 - For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [Code Security setup page][4] or see [static setup][1] to get started.
 - For runtime detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][2] to get started.
@@ -90,3 +92,4 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [10]: https://app.datadoghq.com/services?lens=Security
 [11]: https://app.datadoghq.com/security/appsec/vm/library
 [12]: https://app.datadoghq.com/ci/code-analysis
+[13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
