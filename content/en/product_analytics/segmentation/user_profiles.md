@@ -15,7 +15,7 @@ While Product Analytics provides insight into users behavior overall, the user p
 
 The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 
 
-The goal of this feature is to allow you to scope down to specific users' behavioral data that would help inform your decisions on product optimization and feature adoption. For example, with the filtering capability, you can answer the question of _how many active users there are in a given country_, by using the `First City` and `Last City` attributes. 
+The goal of the User Profile page is to is to allow you to scope down to specific users' behavioral data that would help inform your decisions on product optimization and feature adoption. For example, with the filtering capability, you can answer the question of _how many active users there are in a given country_, by using the `First City` and `Last City` attributes. 
 
 {{< img src="product_analytics/segmentation/user_profiles/userProfilePage-2.png" alt="A view of the User profile page.">}}
 
@@ -124,7 +124,7 @@ The User Profile page allows you to see information on individual users and corr
 {{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
 
-From the session history, you can identify where frustrations are detected and see the analytics details of these frustrations. 
+From the session history, you can identify where frustrations are detected and follow the link to the analytics details of these frustrations. 
 
 {{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profile page and its session history." style="width:70%;">}}
 
