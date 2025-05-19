@@ -72,13 +72,13 @@ The following integrations are supported for High Availability:
 
 2. Search for your previously configured Agents using tags or hostname, for example, `config_id:<CONFIG-NAME>`.
 
-{{< img src="/integrations/guide/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
+   {{< img src="/integrations/guide/high_availability/fleet-view-agents_2.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
 3. Click on the Agent you want to designate as the preferred active Agent to open a side-panel.
 
 4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
 
-{{< img src="/integrations/guide/high_availability/agent-preferred.png" alt="Fleet Automation View Agents, highlighting HA Preferred Active Agent" style="width:100%;" >}}
+   {{< img src="/integrations/guide/high_availability/agent-preferred.png" alt="Fleet Automation View Agents, highlighting HA Preferred Active Agent" style="width:100%;" >}}
 
 ## Testing and validation
 

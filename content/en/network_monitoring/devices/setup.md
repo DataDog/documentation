@@ -43,7 +43,7 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 ## Setup
 
-#### High Availability
+### High Availability
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
