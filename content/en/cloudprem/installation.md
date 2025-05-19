@@ -1,6 +1,7 @@
 ---
 title: CloudPrem Installation
 description: Learn how to install and configure CloudPrem in your environment
+private: true
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"

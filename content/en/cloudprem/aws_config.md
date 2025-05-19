@@ -1,6 +1,7 @@
 ---
 title: AWS Configuration
 description: Learn how to configure AWS for CloudPrem
+private: true
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"

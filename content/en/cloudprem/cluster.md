@@ -1,6 +1,7 @@
 ---
 title: Cluster Sizing and Operations
 description: Learn about cluster sizing, scaling, monitoring, and maintenance for CloudPrem
+private: trues
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"

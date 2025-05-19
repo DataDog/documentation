@@ -1,5 +1,6 @@
 ---
 title: Architecture
+private: true
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
