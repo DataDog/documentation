@@ -4,6 +4,7 @@ categories:
 - cloud
 - log collection
 - network
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'AWS VPN.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: AWS VPN
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_vpn
 public_title: Intégration Datadog/AWS VPN
@@ -23,7 +23,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 AWS VPN vous permet d'établir un tunnel sécurisé et privé depuis votre réseau ou appareil vers le réseau global AWS.
 
@@ -78,7 +78,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-vpn
 [4]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpn/amazon_vpn_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help/

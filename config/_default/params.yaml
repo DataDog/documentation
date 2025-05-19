@@ -72,8 +72,6 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo
@@ -101,7 +99,6 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
@@ -122,14 +119,18 @@ code_language_ids:
     otel: "OpenTelemetry API"
     status_legacy: "Status Page (Legacy)"
     status_page: "Status Page"
-    notebooks_legacy: "Notebooks (Legacy)"
-    notebooks_new: "Notebooks (New)"
     envoy: "Envoy"
     httpd: "Apache HTTP Server"
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
+    windows_iis: "Windows IIS"
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
+    apigateway: "Amazon API Gateway"
+    ddsql_preview: "DDSQL (Preview)"
+    ddsql_default: "DDSQL"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -148,27 +149,38 @@ allowedRegions:
     value: us
     weight: 10
     domain: datadoghq.com
+    exact_domains:
+      - "navy.oncall.datadoghq.com"
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
+    exact_domains:
+      - "teal.oncall.datadoghq.com"
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
+    exact_domains:
+      - "coral.oncall.datadoghq.com"
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
+    exact_domains:
+       "beige.oncall.datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
+    exact_domains:
+      - "saffron.oncall.datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 30
     domain: ddog-gov.com
-
+    exact_domains:
+      - "navy.oncall.datadoghq.com"
 
 core_product:
   value_required: false
@@ -188,7 +200,10 @@ core_product:
         - 'core_product:synthetic monitoring'
         - 'core_product:digital experience monitoring'
         - 'specific_interest:testing'
-    - name: csm
+    - name: cloud security
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: workload protection
       requires_all_keyvals:
         - 'core_product:security'
     - name: cspm

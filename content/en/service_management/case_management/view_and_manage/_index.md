@@ -6,6 +6,12 @@ further_reading:
   text: "Case settings"
 ---
 
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
@@ -38,7 +44,7 @@ Within a project, you can search for cases by:
 
 To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority `P2` or `P3`. 
 
-Additionally, you can search for cases across all projects using the global search bar in the top left corner.
+Additionally, you can search for cases across all projects using the search bar in the top left corner.
 
 ## Create a view
 

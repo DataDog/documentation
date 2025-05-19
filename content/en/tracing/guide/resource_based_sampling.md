@@ -1,7 +1,6 @@
 ---
 title: Resource-based sampling
 disable_toc: false
-private: true
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"

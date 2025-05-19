@@ -75,7 +75,7 @@ Para configurar Datadog APM sin necesidad de modificar el código de tu aplicaci
 1. Ejecuta el comando de instalación:
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
 
     Sustituye `<YOUR_DD_API_KEY>` por tu [clave de API de Datadog][2], `<YOUR_DD_SITE>` por tu [sitio de Datadog][7] y `<AGENT_ENV>` por el entorno en el que está instalado tu Agent (por ejemplo, `development`).

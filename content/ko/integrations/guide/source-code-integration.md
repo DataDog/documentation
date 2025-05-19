@@ -391,7 +391,7 @@ Docker 컨테이너를 사용하는 경우 두 가지 옵션이 있습니다. Do
 | GitHub SaaS(github.com) | Yes | Yes |
 | GitHub Enterprise Server | Yes | Yes |
 | GitLab SaaS(gitlab.com) | Yes | Yes |
-| GitLab 자체 관리형 | Yes | No |
+| GitLab 자체 관리형 | Yes | 네(제한된 평가판) |
 | Bitbucket | Yes | No |
 | Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
@@ -415,10 +415,10 @@ GitHub 통합을 설정하면 [**오류 추적**][103], [**연속 프로파일�
 {{% tab "GitLab" %}}
 
 <div class="alert alert-warning">
-자체 관리 GitLab 인스턴스의 리포지토리는 소스 코드 통합에서 바로 지원되지 않습니다. 이 기능을 사용하려면 <a href="/도움/도움말">지원팀에 문의하세요</a>.
+GitLab 인스턴스의 리포지토리는 제한된 평가판 상태로 제공됩니다. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">평가판을 신청하세요</a>.
 </div>
 
-텔레메트리를 소스 코드와 연결하려면 [`datadog-ci git-metadata upload`][2] 명령으로 리포지토리 메타데이터를 업로드하세요. `datadog-ci v2.10.0` 이상이 필요합니다.
+소스 코드와 원격 측정을 연결하려면 GitLab 통합을 설치하거나(제한된 평가판 신청) [`datadog-ci git-metadata upload`][2] 명령을 사용하여 리포지토리 메타데이터를 업로드하세요. `datadog-ci v2.10.0` 이상이 필요합니다.
 
 Git 리포지토리 내에서 `datadog-ci git-metadata upload`를 실행하면 Datadog는 리포지토리 URL, 현재 브랜치의 커밋 SHA, 추적된 파일 경로의 목록을 받습니다.
 

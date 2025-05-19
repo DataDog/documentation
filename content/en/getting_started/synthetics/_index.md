@@ -10,6 +10,9 @@ further_reading:
 - link: '/synthetics/multistep'
   tag: 'Documentation'
   text: 'Learn more about multistep API tests'
+- link: '/synthetics/mobile_app_testing'
+  tag: 'Documentation'
+  text: 'Learn more about mobile tests'
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn more about browser tests'
@@ -34,9 +37,9 @@ Synthetic tests allow you to observe how your systems and applications are perfo
 
 ## Synthetic test types
 
-Datadog offers **API tests**, **Multistep API tests**, and **Browser tests**.
+Datadog offers **API tests**, **Multistep API tests**, **Browser tests**, and **Mobile tests**.
 
-To monitor internal-facing applications, run your tests from managed locations or private locations. Synthetic tests can be triggered manually, on a schedule, or directly from your CI/CD pipelines.
+To monitor internal-facing applications, run your tests from managed locations or private locations. Synthetic tests can be triggered manually, on a schedule, or [directly from your CI/CD pipelines][7].
 
 ## Prerequisites
 
@@ -49,6 +52,7 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 - [Create an API test][2] to start monitoring your API endpoints' uptime.
 - [Create a multistep API test][3] to link several HTTP requests and start monitoring key workflows at the API level.
 - [Create a browser test][4] to start testing critical business transactions on your applications.
+- [Create a mobile test][6] to start testing key business workflows on your Android and iOS applications.
 - [Create a private location][5] to start monitoring internal applications using all Synthetic test types.
 
 ## Further Reading
@@ -60,3 +64,5 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 [3]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
 [4]: /getting_started/synthetics/browser_test/
 [5]: /getting_started/synthetics/private_location/
+[6]: /getting_started/synthetics/mobile_app_testing/
+[7]: /getting_started/continuous_testing/

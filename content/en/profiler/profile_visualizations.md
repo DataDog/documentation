@@ -61,7 +61,7 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
 
 ### Single profile
 
