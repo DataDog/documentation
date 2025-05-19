@@ -144,6 +144,8 @@ window.DD_RUM &&
 
     {% /if %}
 
+    <!-- end SDK version >=5.28.0 & NPM -->
+
     <!-- SDK version >=5.28.0 & CDN async -->
 
     {% if equals($lib_src, "cdn_async") %}
@@ -163,6 +165,8 @@ window.DD_RUM &&
 
     {% /if %}
 
+    <!-- end SDK version >=5.28.0 & CDN async -->
+
     <!-- SDK version >=5.28.0 & CDN sync -->
 
     {% if equals($lib_src, "cdn_sync") %}
@@ -180,17 +184,20 @@ window.DD_RUM &&
     ```
 
     {% /if %}
+    <!-- end SDK version >=5.28.0 & CDN sync -->
 
 {% /if %}
 
 <!-- end SDK version >=5.28.0 -->
 
-<details>
-<summary>before <code>v5.28.0</code></summary>
-The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. It uses <code>checkout</code> for the view name and associates the <code>purchase</code> service with version <code>1.2.3</code>.
+<!-- SDK version >=4.13.0 -->
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+{% else equals($rum_browser_sdk_version, "gte_4_13_0") %}
+The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
+
+<!-- SDK version >=4.13.0 & NPM -->
+
+{% if equals($lib_src, "npm") %}
 
 ```javascript
 datadogRum.startView({
@@ -200,8 +207,13 @@ datadogRum.startView({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- end SDK version >=4.13.0 & NPM -->
+
+<!-- SDK version >=4.13.0 & CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -213,8 +225,13 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- end SDK version >=4.13.0 & CDN async -->
+
+<!-- SDK version >=4.13.0 & CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM &&
@@ -225,24 +242,33 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
-</details>
+<!-- end SDK version >=4.13.0 & CDN sync -->
 
-   <details>
-     <summary>before <code>v4.13.0</code></summary>
-   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+{% /if %}
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+<!-- end SDK version >=4.13.0 -->
+
+<!-- SDK version < 4.13.0 -->
+
+{% else %}
+
+The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
+
+<!-- SDK version < 4.13.0 & NPM -->
+
+{% if equals($lib_src, "npm") %}
 
 ```javascript
 datadogRum.startView('checkout');
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- SDK version < 4.13.0 & CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -250,17 +276,21 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- SDK version < 4.13.0 & CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.startView('checkout');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
-   </details>
+{% /if %}
+
+<!-- end SDK version <4.13.0 -->
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
