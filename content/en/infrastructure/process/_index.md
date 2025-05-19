@@ -494,7 +494,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-### Live containers
+### Live Containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
 
