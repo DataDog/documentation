@@ -1417,23 +1417,6 @@ After RUM is initialized, add extra context to all RUM events collected from you
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1447,8 +1430,11 @@ datadogRum.setGlobalContextProperty('activity', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1464,8 +1450,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -1478,8 +1467,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Remove global context property
 
@@ -1488,23 +1476,6 @@ You can remove a previously defined global context property.
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1514,8 +1485,11 @@ datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
 datadogRum.removeGlobalContextProperty('codeVersion');
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1528,8 +1502,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
@@ -1538,8 +1515,7 @@ window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Replace global context
 
@@ -1548,23 +1524,6 @@ Replace the default context for all your RUM events with the `setGlobalContext(c
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1576,8 +1535,11 @@ datadogRum.setGlobalContext({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1592,8 +1554,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -1605,8 +1570,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Clear global context
 
@@ -1615,23 +1579,6 @@ You can clear the global context by using `clearGlobalContext`.
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1639,8 +1586,11 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.clearGlobalContext();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1648,15 +1598,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.clearGlobalContext();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Read global context
 
