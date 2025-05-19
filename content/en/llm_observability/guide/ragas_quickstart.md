@@ -1,7 +1,7 @@
 ---
 title: Ragas Quickstart
 further_reading:
-    - link: '/llm_observability/ragas_evaluations'
+    - link: '/llm_observability/evaluations/ragas_evaluations'
       tag: 'Documentation'
       text: 'Ragas Evaluations'
 ---
