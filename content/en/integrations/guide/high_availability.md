@@ -89,12 +89,12 @@ The following integrations are supported for High Availability:
 
 ### How is the active Agent determined?
 
-** Without a preferred active Agent
+**Without a preferred active Agent**:
 - The active Agent is initially selected at random.
 - Failover occurs only when the current active Agent shuts down or crashes.
 - When the primary Agent recovers, it does not automatically reclaim the active role.
 
-**With a preferred active Agent
+**With a preferred active Agent**:
 - The preferred Agent always takes priority when available.
 - If it fails, the standby Agent becomes active.
 - When the preferred Agent recovers, it automatically resumes the active role, and the standby Agent returns to standby.
