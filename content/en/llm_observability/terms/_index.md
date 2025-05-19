@@ -9,7 +9,7 @@ further_reading:
     - link: '/llm_observability/setup'
       tag: 'Documentation'
       text: 'Learn how to set up LLM Observability'
-    - link: '/llm_observability/submit_evaluations'
+    - link: '/llm_observability/evaluations/submit_evaluations'
       tag: 'Guide'
       text: 'Submit Evaluations to LLM Observability'
 ---
@@ -257,7 +257,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [3]: /llm_observability/setup/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
 [5]: /security/sensitive_data_scanner/
-[6]: /llm_observability/submit_evaluations
+[6]: /llm_observability/evaluations/submit_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb
 [9]: https://github.com/DataDog/llm-observability/blob/main/3-agent-span.ipynb

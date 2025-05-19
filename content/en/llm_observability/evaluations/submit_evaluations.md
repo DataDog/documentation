@@ -9,7 +9,7 @@ further_reading:
     - link: '/llm_observability/setup/api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
-    - link: '/llm_observability/submit_nemo_evaluations'
+    - link: '/llm_observability/evaluations/submit_nemo_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting evaluations from NVIDIA NeMo'
 ---

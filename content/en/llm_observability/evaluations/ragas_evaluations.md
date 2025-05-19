@@ -1,7 +1,7 @@
 ---
 title: Ragas Evaluations
 further_reading:
-    - link: '/llm_observability/submit_evaluations'
+    - link: '/llm_observability/evaluations/submit_evaluations'
       tag: 'Documentation'
       text: 'Submit Evaluations'
 ---

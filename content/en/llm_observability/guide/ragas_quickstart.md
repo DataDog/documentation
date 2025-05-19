@@ -57,4 +57,4 @@ Learn how to use Datadog's integration with the [Ragas][1] framework to evaluate
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.ragas.io/en/stable/
-[2]: /llm_observability/ragas_evaluations
+[2]: /llm_observability/evaluations/ragas_evaluations
