@@ -101,7 +101,7 @@ Aggregated insights, on the other hand, are surfaced at the service level and re
 {{< img src="profiler/profiling_automated_analysis_aggregated.png" alt="Example of an aggregated insight within the profiler explorer" style="width:100%;">}}
 
 
-## Supported Insights
+## Supported insights
 <!-- The table below is auto-generated. Add new entries in multifiltersearch with new insights as they become available. -->
 {{< multifilter-search >}} 
 
