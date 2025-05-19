@@ -8,6 +8,8 @@ further_reading:
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
+If you are using [EMR on EKS][13], follow these [instructions for setting up DJM on Kubernetes][14].
+
 ## Requirements
 
 [Amazon EMR Release 6.0.1][10] or later is required.
@@ -123,8 +125,10 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 | DD_TAGS                  | Add tags to EMR cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
 | DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
 
 [15]: /getting_started/tagging/
+[16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
@@ -178,3 +182,5 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
 [11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/emr.go
+[13]: https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html
+[14]: /data_jobs/kubernetes/

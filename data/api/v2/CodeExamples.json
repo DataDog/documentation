@@ -200,32 +200,39 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
-  "UpdateCSMThreatsAgentRule": [
+  "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Workload Protection policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Workload Protection policy returns \"OK\" response"
     }
   ],
   "ArchiveCase": [
