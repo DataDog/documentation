@@ -235,7 +235,7 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 ### Optimized process collection footprint
 Beginning with Agent version 7.65.0, container and process collection now runs in the core Datadog Agent by default in Linux environments, to reduce the Agent's overall footprint.
 
-Datadog recommends using this default setting. However, you can choose to run container and process collection in a separate Process Agent, which was the default behavior in Agent versions prior to 7.65.0.
+For verification, you can explicitly enable this feature.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -243,7 +243,7 @@ Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
 ```
 datadog:
   processAgent:
-    runInCoreAgent: false
+    runInCoreAgent: true
 ```
 {{% /tab %}}
 
@@ -260,7 +260,7 @@ spec:
     nodeAgent:
       env:
         - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-          value: "false"
+          value: "true"
 ```
 {{% /tab %}}
 
@@ -270,12 +270,12 @@ If you are running the Agent outside of containers on Linux, add the `run_in_cor
 ```
 process_config:
   run_in_core_agent:
-    enabled: false
+    enabled: true
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-Note that container and process collection still run in the separate Process Agent in non-Linux environments.
+ Explicitly setting the config flag to false will cause container and process collection to run in the separate Process Agent. Note that container and process collection always run in the separate Process Agent in non-Linux environments.
 
 
 ### Process arguments scrubbing
