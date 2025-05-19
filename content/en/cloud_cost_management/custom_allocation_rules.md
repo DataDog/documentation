@@ -9,23 +9,40 @@ further_reading:
 
 ## Overview
 
-Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. After you have set up allocation rules, you can report on which costs were allocated by a rule. 
+Custom allocation rules helps teams take ownership of their cloud spend by attributing cloud costs to business units, teams, or environments. This page describes how to create a custom allocation rule, how each allocation method works, how to refine your cost destinations using filters and partitions, and how to manage and review your allocation rules.
 
-Custom cost allocation runs after [Tag Pipelines][1], enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
+These are the general steps to create a custom allocation rule:
 
-## Rule creation
+1. **[Define the source costs](#step-1---define-the-source)** you want to allocate. Specify which costs should be included in the allocation rule by setting crtieria such as provider, product, spend type, or tags.
+1. **Choose your [allocation method](#step-2---choose-an-allocation-method)**:
 
-Access the [Custom Allocation Rules section][2] under Cloud Cost settings to establish rules. Choose from the following allocation methods:
+   | Allocation Method | Description | Examples |
+   | ----------------  | ----------- | -------- |
+   | Even  | Split costs equally among destination tags. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
+   | Custom  | Assign specific percentages to each destination. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
+   | Proportional by spend | Allocate based on each destination's share of total spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
+   | Dynamic by metric  | Allocate based on a performance or usage metric. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
 
 
-| Allocation Method | Description | Examples |
-| ----------------  | ----------- | -------- |
-| Even  | Costs are allocated evenly to your destination tags. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
-| Custom Percentage  | Costs are allocated based on custom percentages for the destination tags. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
-| Proportional  | Costs are allocated based on the proportional spend of destination values. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
-| Dynamic by Metric  | Costs are allocated based on the proportional amount of a defined metric. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
+1. **[Define your destinations](#step-3---define-the-destination)** (the tags or groups that receive the allocated costs).
+1. (Optional) **[Apply a filter](#filtering)** to restrict which costs are included in the allocation rule.
+1. (Optional) **[Use partitioning](#partitioning)** to automatically create sub-allocations for each value of a tag (for example, environment or project)
 
-## Allocation methods
+Custom cost allocation runs after [Tag Pipelines][1] have finished processing any updated tags, enabling allocations based on the latest user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
+
+## Accessing Custom Allocation Rules
+
+Navigate to [**Cloud Cost > Custom Allocation Rules**][2], which is a section under Cloud Cost settings to establish rules and click **Add New Rule** to start.
+
+## Define the source
+
+Use the dropdown filters to specify the cloud provider, specific products or services, cost types, and any other attributes or tags that help you target the right costs.
+
+## Choose an allocation method
+
+Choosing the right allocation method ensures that costs are attributed fairly and transparently, supporting accurate showback, chargeback, or internal reporting.
+
+You can choose from the following allocation methods:
 
 {{< tabs >}}
 
@@ -60,7 +77,7 @@ Costs are allocated based on the proportional spend of destination values. Simil
 
 {{% tab "Dynamic by Metric Allocation" %}}
 
-Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][3]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
+Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
 For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
 
@@ -70,13 +87,18 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 
 {{< img src="cloud_cost/custom_allocation_rules/dynamic_ui.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:60%;" >}}
 
-[3]: /metrics/#querying-metrics
+[1]: /metrics/#querying-metrics
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Specify what costs are included in the allocation
+## Define the destination
+
+Filter for and partition the groups, teams, projects, or business units that are to receive the allocated costs.
+
+Use the table below to understand the type of information that is required or optional by cloud provider when adding a destination.
+
 | Step | Required | Examples |
 | ---- | ---- | ---- |
 | Select the cost provider | Yes | AWS, Google Cloud, Azure |
@@ -86,9 +108,15 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 | Partition costs by | Only applicable for Even, Proportional, and Dynamic by Metric strategies, optional | `environment` is all values |
 | Name | Yes | allocate\_untagged\_support\_costs |
 
+### Filtering
+
+A filter restricts which costs are included in an allocation rule, based on criteria you define. For example, you might only want to allocate costs where `aws_product` is `ec2` or where a specific tag is present. Filters help you target the allocation rule to just the relevant subset of your cloud spend.
+
 ### Partitioning
 
-For some of the allocation strategies, you can specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, with proportional allocation, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+Partitioning allows you to split a single allocation rule into multiple sub-allocations based on a tag value such as `env`. Instead of creating separate rules for each environment (like production and staging), you can create one rule that is automatically applied to each value of the tag. Each partitioned sub-allocation uses the same allocation structure, but applies only to costs matching that tag value.
+
+For example, if you partition by `env:prod` and `env:staging`, the rule creates separate allocations for each environment, but with the same structure.
 
 {{< tabs >}}
 
@@ -115,7 +143,7 @@ For some of the allocation strategies, you can specify how cost proportions shou
 ## Managing rules
 Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
 
-When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact [Datadog support][5] to request a backfill.
+When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact [Datadog support][3] to request a backfill.
 
 Rules are applied in the same order as shown in the list.
 
@@ -129,4 +157,4 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 
 [1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
-[5]: https://www.datadoghq.com/support/
+[3]: https://www.datadoghq.com/support/
