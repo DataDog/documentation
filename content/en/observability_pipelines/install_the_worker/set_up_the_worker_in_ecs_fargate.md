@@ -64,7 +64,7 @@ An example task definition:
         },
         {
           "name": "DD_OP_PIPELINE_ID",
-          "value": "e4454df2-f3a1-11ef-8654-test"
+          "value": "xxxxxxx-xxxx-xxxx-xxxx-xxxx"
         }
       ],
       "mountPoints": [],
@@ -100,8 +100,9 @@ An example task definition:
 
 ## Set up load balancing
 
-[Configure an application load balancer][3] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
+Depending on your use case, configure either an [Application Load Balancer][3] or a [Network Load Balancer][4] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-task-definition.html
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html
 [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
+[4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
