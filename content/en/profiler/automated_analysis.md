@@ -75,7 +75,7 @@ multifiltersearch:
 Automated Analysis helps teams detect and troubleshoot problems faster, without requiring deep expertise in code profiling. Powered by Continuous Profiler, Automated Analysis continuously monitors your applications and surfaces critical issues in real time, along with actionable insights to guide resolution. When a problem is detected, Automated Analysis provides:
 
 - A high-level summary explaining the issue and why it matters
-- Contextual insights from profiling data (e.g., affected methods, packages, or processes)
+- Contextual insights from profiling data (for example, affected methods, packages, or processes)
 - Recommended next steps to help you resolve the issue efficiently
 
 By reducing the expertise required to take action, Automated Analysis enables faster resolution of performance issues, increases product adoption, and helps teams avoid costly blind spots. It also lays the foundation for powering performance and cost insights across the Datadog platform.
