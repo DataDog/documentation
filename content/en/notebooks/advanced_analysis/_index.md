@@ -11,15 +11,14 @@ further_reading:
 
 ## Overview
 
-The computational functionality within Notebooks supports complex operations, such as combining attributes from multiple sources or transforming data, while still providing all the powerful features that Notebooks offer. 
+The analysis feature within Notebooks lets your perform advanced analysis on your Datadog data. You can join multiple datasets together, chain queries and transform your data using predefined transformations or SQL, while still providing all the powerful features Notesbooks offer.
 
 Notebooks are collaborative text editors that let you embed Datadog graphs directly into your documents. While this is great for exploration and storytelling, investigations may require more advanced control over data queries. Use analysis features to run queries that help you:
 
-* Correlate multiple data sources  
-* Aggregate multiple levels of data  
+* Chain queries such as aggregating already aggregated data or joining two set of aggregating data  
 * Join data across multiple log sources and other datasets  
-* Extract data or add a calculated field at query time  
-* Visualize transformed datasets with embedded graphs
+* Perform advanced parsing, extract data and add calculated fields at query time  
+* Visualize transformed datasets with graphs
 
 ## Adding data to your notebook
 
@@ -43,7 +42,7 @@ After adding a data source cell to a notebook, you can continue modifying it to 
 
 ### Change the time frame for the data
 
-By default, data source cells created from Notebooks use the global time frame. Data source cells created from the Log Explorer use a local time fixed to the time frame at the time of export.
+By default, data source cells created from Notebooks use the notebook's global time frame. Data source cells created from the Log Explorer use a local time fixed to the time frame at the time of export.
 
 You can switch any data source cell between a local or global time frame using the toggle button in the top right corner of the cell. 
 
@@ -58,9 +57,11 @@ You can add or modify columns in your data source cell. There are two ways to ad
 - In the preview section, click **columns** to search through available attributes for your data source.   
 - In the preview, click on a row to open the detail side panel. Click the attribute you want to add as a column and from the pop up option, select Add "@your_column" to your "@your_datasource" dataset.
 
+<!-- {{< img src="#" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}} -->
+
 ## Transforming and analyzing data
 
-You can add various cell types to enhance your analysis capabilities. These cells allow you to include additional data sources such as reference tables, use DDSQL to join data, and transform, correlate, and visualize your data effectively. One of the key benefits of this approach is that cells that depend on other cells are automatically updated whenever a dependency changes, ensuring your analysis always reflects the most current data.
+You can add various cell types to enhance your analysis capabilities. These cells allow you to include additional data sources such as reference tables, RUM, or spans. Use SQL to join data, and transform, correlate, and visualize your data effectively. One of the key benefits of this approach is that cells that depend on other cells are automatically updated whenever a dependency changes, ensuring your analysis always reflects the most current data.
 
 ### Transformation cell
 
@@ -79,13 +80,13 @@ After adding the transformation cell, you can add any number of transformation o
 | Calculate | Add a name for the field and the function formula, using the [calculated field expression language][3]. |
 | Limit | Enter the number of rows of the dataset you want to display. |
 | Sort | Select the sort order and column to sort on. |
-| Convert | Select the column and the column type to be converted. |
+| Convert | Lets you convert a column into a different type. Select the column and the column type to be converted. |
 
 ### Analysis cell
 
 You can also transform your data using SQL by adding an analysis cell to your notebook.
 
-1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd> or click the **Analyze Dataset** tile at the bottom of the page.   
+1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd> or click the **SQL Query** tile at the bottom of the page.   
 2. In the source dataset dropdown, select the data source you want to transform.  
 3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].  
 4. Click **Run** in the top-right corner of the analysis cell to execute your query.
@@ -97,6 +98,8 @@ For any computational cell that includes a dataset preview, you can view the ful
 You can save the results of any computational cell to a Dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
 
 If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
+
+**Note**: By default, the dataset is tied to the global timeframe of the **dashboard** not to the timeframe of the notebook. However, you have the ability to set a custom timeframe on the dashboard widget.
 
 ### Download dataset as a CSV
 
