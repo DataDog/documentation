@@ -173,6 +173,24 @@ This check identifies and flags user inputs that deviate from the configured acc
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
+#### Hallucination
+
+This check identifies instances where the LLM makes a claim that disagrees with the provided input context. TODO: LINK TO SDK DOCS FOR INSTRUMENTATION
+
+{{< img src="llm_observability/evaluations/hallucination_1.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
+
+##### Hallucination Configuration
+TODO
+
+| Configuration Option | Description | Example(s) |
+|---|---|---|
+| Contradiction | TODO | TODO |
+| Unsupported Claim | TODO | TODO |
+
 #### Failure to Answer
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
