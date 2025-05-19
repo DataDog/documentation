@@ -2235,6 +2235,11 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_exception_replay
       weight: 101
+    - name: Capturing Handled Errors
+      url: error_tracking/backend/capturing_handled_errors
+      parent: error_tracking_backend
+      identifier: error_tracking_capturing_handled_errors
+      weight: 102
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
@@ -6534,7 +6539,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security
