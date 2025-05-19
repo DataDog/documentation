@@ -6,6 +6,6 @@
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
 1. Optionally, select an AWS authentication option. If you select **Assume role**:
     1. Enter the ARN of the IAM role you want to assume.
-    1. Optionally enter the assumed role session name and external ID.
+    1. Optionally, enter the assumed role session name and external ID.
 
 [10051]: /observability_pipelines/destinations/#template-syntax
