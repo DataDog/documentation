@@ -90,7 +90,7 @@ Automated Analysis will be surfaced within the [Profile explorer][1]
 - In a column within the service list
 {{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
 
-Clicking an an insight in either area will display a high-level summary explaining the issue, contextual insights from profiling data, and  recommended next steps.
+Click an insight to see a high-level summary that explains the issue, contextual insights from profiling data, and recommended next steps.
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
 ## Aggregated vs individual insights
