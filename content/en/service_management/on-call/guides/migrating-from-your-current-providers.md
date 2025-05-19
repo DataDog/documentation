@@ -61,7 +61,7 @@ Assign clear owners to each phase and communicate timelines early. Use a shared 
 
 ## Configure Datadog On-Call
 
-Before you begin configuration, review the concept of [Teams][4] in Datadog On-Call. Teams serve as the foundation for your on-call structure and are used to define:
+Before you start configuring Datadog On-Call, review the concept of [Teams][4]. Teams serve as the foundation for your on-call structure and are used to define:
 
 - Schedules
 - Escalation policies
@@ -70,7 +70,7 @@ Before you begin configuration, review the concept of [Teams][4] in Datadog On-C
 
 After reviewing the team model and mapping your existing assets, you're ready to configure Datadog On-Call to reflect your desired structure.
 
-If you're migrating from PagerDuty, Datadog provides a [dedicated migration tool][5] that can help you selectively import schedules and escalation policies. Use it during setup to reduce manual effort and avoid migrating unused configurations.
+<div class="alert alert-info">If you're migrating from PagerDuty, Datadog provides a <a href="/service_management/on-call/guides/migrate-your-pagerduty-resources-to-on-call">dedicated migration tool</a> that can help you selectively import schedules and escalation policies. Use it during setup to reduce manual effort and avoid migrating unused configurations.</div>
 
 During setup, be sure to:
 
@@ -147,7 +147,6 @@ With your core migration to Datadog On-Call complete, shift focus to long-term o
 [2]: /integrations/
 [3]: /monitors/notify/#bulk-editing-monitor--handles
 [4]: /on_call/teams/
-[5]: https://www.google.com
 [6]: /service_management/incident_management
 [7]: /service_management/on-call/schedules/
 [8]: https://app.datadoghq.com/on-call/analytics
