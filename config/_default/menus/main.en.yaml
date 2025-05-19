@@ -5518,36 +5518,41 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
       weight: 807
+    - name: Lambda Forwarder
+      url: observability_pipelines/sources/http_server/#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
+      weight: 808
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 808
+      weight: 809
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 809
+      weight: 810
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 810
+      weight: 811
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 811
+      weight: 812
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 812
+      weight: 813
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 813
+      weight: 814
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
