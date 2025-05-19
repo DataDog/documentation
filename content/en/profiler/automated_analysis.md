@@ -76,7 +76,7 @@ Automated Analysis automatically detects performance issues in your applications
 
 - A high-level summary explaining the issue and why it matters
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
-- Recommended next steps to help you resolve the issue efficiently
+- Recommended next steps to help you resolve the issue
 
 By reducing the expertise required to take action, Automated Analysis enables faster resolution of performance issues, increases product adoption, and helps teams avoid costly blind spots. It also lays the foundation for powering performance and cost insights across the Datadog platform.
 
