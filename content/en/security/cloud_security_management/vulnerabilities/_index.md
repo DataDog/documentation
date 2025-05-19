@@ -85,7 +85,7 @@ Use these tables to decide which solution to start with:
 | Container image                           | OS packages and app packages, mapped to image | OS packages                    |
 | Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux                                         | Linux, Windows                 |
-| Serverless                                | AWS Lambda                                    | Not applicable                 |
+| Serverless                                | AWS Lambda, AWS ECS Fargate                   | Not applicable                 |
 | Container registries                      | Amazon ECR                                    | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
