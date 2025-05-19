@@ -6,6 +6,8 @@ aliases:
 content_filters:
     - trait_id: lib_src
       option_group_id: rum_browser_sdk_source_options
+    - trait_id: rum_browser_sdk_version
+      option_group_id: rum_browser_sdk_version_for_advanced_config
 further_reading:
     - link: '/real_user_monitoring/browser/tracking_user_actions'
       tag: Documentation
@@ -114,16 +116,20 @@ window.DD_RUM &&
     - View Name: Defaults to the page URL path.
     - Service: Defaults to the default service specified when creating your RUM application.
     - Version: Defaults to the default version specified when creating your RUM application.
-    - Context: Starting with [version 5.28.0][20], you can add context to views and the child events of views.
+      {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
+    - Context: You can add context to views and the child events of views.
+      {% /if %}
 
     For more information, see [Setup Browser Monitoring][4].
 
-    <details open>
-      <summary>Latest version</summary>
-    The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+    <!-- SDK version >=5.28.0 -->
 
-    {{< tabs >}}
-    {{% tab "NPM" %}}
+    {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
+    The following example manually tracks the pageviews on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
+
+    <!-- SDK version >=5.28.0 & NPM -->
+
+    {% if equals($lib_src, "npm") %}
 
     ```javascript
     datadogRum.startView({
@@ -136,8 +142,11 @@ window.DD_RUM &&
     });
     ```
 
-    {{% /tab %}}
-    {{% tab "CDN async" %}}
+    {% /if %}
+
+    <!-- SDK version >=5.28.0 & CDN async -->
+
+    {% if equals($lib_src, "cdn_async") %}
 
     ```javascript
     window.DD_RUM.onReady(function () {
@@ -152,8 +161,11 @@ window.DD_RUM &&
     });
     ```
 
-    {{% /tab %}}
-    {{% tab "CDN sync" %}}
+    {% /if %}
+
+    <!-- SDK version >=5.28.0 & CDN sync -->
+
+    {% if equals($lib_src, "cdn_sync") %}
 
     ```javascript
     window.DD_RUM &&
@@ -167,10 +179,12 @@ window.DD_RUM &&
         });
     ```
 
-    {{% /tab %}}
-    {{< /tabs >}}
+    {% /if %}
 
-</details>
+{% /if %}
+
+<!-- end SDK version >=5.28.0 -->
+
 <details>
 <summary>before <code>v5.28.0</code></summary>
 The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. It uses <code>checkout</code> for the view name and associates the <code>purchase</code> service with version <code>1.2.3</code>.
