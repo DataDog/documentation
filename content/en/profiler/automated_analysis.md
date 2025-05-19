@@ -72,7 +72,7 @@ multifiltersearch:
 ---
 
 ## Overview
-Automated Analysis helps teams detect and troubleshoot problems faster, without requiring deep expertise in code profiling. Powered by Continuous Profiler, Automated Analysis continuously monitors your applications and surfaces critical issues in real time, along with actionable insights to guide resolution. When a problem is detected, Automated Analysis provides:
+Automated Analysis automatically detects performance issues in your applications using Continuous Profiler data and provides actionable insights for resolution. When an issue is detected, Automated Analysis provides:
 
 - A high-level summary explaining the issue and why it matters
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
