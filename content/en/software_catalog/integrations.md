@@ -23,7 +23,7 @@ PagerDuty and OpsGenie integrations for Software Catalog are not supported in th
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Software Catalog][9]. You can leverage Datadog's [Action Catalog][24] to both query external data and take action directly.
+When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into [Software Catalog][9] entity definitions. From there, you can use the [Action Catalog][24] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
 
 {{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" d_target="#signupModal" btn_hidden="false" header="Request a new integration" >}}
 {{< /callout >}}
@@ -32,46 +32,43 @@ When you configure a service account for a [Datadog integration][10], you can in
 
 ### PagerDuty
 
-You can add PagerDuty metadata to a service so that the Software Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
+Attach PagerDuty metadata to a service to display information like current on-call user and active incidents in Software Catalog. If multiple users are on call, Datadog shows the first user in the escalation list and then sorts alphabetically by email.
 
 #### Setup
 
-You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service for each service in the Software Catalog.
+You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service to each service in Software Catalog.
 
 1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
+1. Obtain your [PagerDuty API Access Key][3].
+1. Paste the key on the [Pagerduty Integration Setup][4] page.
 
-2. Get your PagerDuty API access key as described in their [API Access Key][3] documentation.
+  {{< img src="tracing/software_catalog/pagerduty-token.png" alt="PagerDuty integration setup form with the API key field highlighted." style="width:100%;" >}}
 
-3. Enter the API Access Key on [Pagerduty Integration Setup][4] to finish configuring it.
-
-  {{< img src="tracing/software_catalog/pagerduty-token.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
-
-4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
-
+1. Add PagerDuty information to the [service definition][5]:
    ```
    ...
    integrations:
      pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
    ...
    ```
-   
-You can also create other visualizations, actions, or automations to integrate with Pagerduty by leveraging Datadog's [Action Catalog][15]. These actions can be used to query & act upon services, incidents, schedules, and more from PagerDuty.
+  
 
+To create visualizations, actions, or automations for additional workflows—such as querying incidents or schedules—use Datadog's [Action Catalog][15].
 
 ### OpsGenie
 
-You can add OpsGenie metadata to a service so that the Software Catalog displays and links to information such as who is on-call for the service.
+Add OpsGenie metadata to a service so that Software Catalog displays and links to information such as who is on call for the service.
 
 #### Setup
 
 1. If you have not already done so, set up the [Datadog OpsGenie integration][12].
-2. Get your OpsGenie API access key as described in their [API Key Management][13] documentation. This API key requires **configuration access** and **read** access rights.
-3. Add an account in the **Accounts** section at the bottom of the [integration tile][14], paste your OpsGenie API access key, and select the region for your OpsGenie account.
+1. Obtain your [OpsGenie API Access Key][3] and ensure it has **configuration access** and **read** permissions.
+3. At the bottom of the [integration tile][14], add an account, paste your OpsGenie API access key, and select the region for your OpsGenie account.
 
    {{< img src="tracing/software_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
    {{< img src="tracing/software_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
 
-4. Update the service definition with the OpsGenie information to link your OpsGenie service with your Datadog service. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
+4. Update the [service definition][5] with OpsGenie metadata. For example:
 
    ```yaml
    "integrations": {
@@ -82,21 +79,25 @@ You can add OpsGenie metadata to a service so that the Software Catalog displays
    }
    ```
 
-Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Software Catalog.
+Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab for services in Software Catalog.
 
 {{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
 
-You can also create other visualizations, actions, or automations to integrate with OpsGenie by leveraging Datadog's [Action Catalog][16].  These actions can be used to query & act upon services, schedules, incidents, and more from OpsGenie.
+To create visualizations, actions, or automations for additional workflows—such as querying incidents or schedules—use Datadog's [Action Catalog][16].
 
 ### Atlassian Statuspage
 
-Atlassian Statuspage integration to create and update status incidents and components. You can automatically post incidents to your Statuspage, retrieve incident details, and update component status to keep users informed. Learn more about configuring the [integration][18]. You can also leverage Datadog's [Action Catalog][19] to query & act upon pages and incidents.
+Use the Atlassian Statuspage integration to retrieve and update component status and incident details. See the [Atlassian Statuspage integration][18] page for configuration details, and explore Datadog's [Action Catalog][19] for workflow options.
 
 ### Freshservice
 
-Freshservice (Freshworks) service desk integration for IT incident tickets. Allows Datadog to create, update, and query Freshservice tickets—for example, opening a new incident in Freshservice when a monitor alerts. Learn more about configuring the integration. You can also explore Datadog’s Action Catalog for available Freshservice actions.
+Create, update, and query Freshservice tickets (for example, open an incident when a monitor alerts). See the integration documentation and Freshservice actions in the Action Catalog.
+
+Use the Freshservice (Freshworks) service desk integration create, update, and query Freshservice tickets. For example, you can create a workflow to open an incident when a monitor alerts. Learn more about configuring the integration. You can also explore Datadog’s Action Catalog for available Freshservice actions.
 
 ### Slack
+
+Send alerts to Slack channels or manage channels dynamically. See the Slack integration docs and Slack actions in the Action Catalog.
 
 Slack collaboration integration to send incident alerts or updates to Slack channels (and perform channel management). Datadog can post messages to Slack, create channels, invite users, and more—ideal for setting up incident war rooms. Learn more in the integration documentation, or explore Slack-specific workflows in the Action Catalog.
 
