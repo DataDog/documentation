@@ -22,7 +22,7 @@ For a list of supported services, see the [Library Compatibility Requirements][5
 | Critical | Command Injection                     | COMMAND_INJECTION           | TRUE | TRUE | TRUE | TRUE |
 | High | LDAP Injection                        | LDAP_INJECTION              | TRUE | TRUE | TRUE | FALSE |
 | High | Email HTML Injection | EMAIL_HTML_INJECTION                            | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | Hardcoded Secrets                     | HARDCODED_SECRET            | TRUE | TRUE | FALSE | FALSE |
+| High | Hardcoded Secrets                     | HARDCODED_SECRET            | TRUE | TRUE | TRUE | FALSE |
 | High | Hardcoded Passwords                   | HARDCODED_PASSWORD          | FALSE | FALSE | TRUE | FALSE |
 | High | Path Traversal                        | PATH_TRAVERSAL              | TRUE | TRUE | TRUE | TRUE |
 | High | Trust Boundary Violation              | TRUST_BOUNDARY_VIOLATION    | TRUE | TRUE | FALSE | FALSE |
@@ -50,6 +50,14 @@ For a list of supported services, see the [Library Compatibility Requirements][5
 | Low | Admin Console Active                  | ADMIN_CONSOLE_ACTIVE        | TRUE | FALSE | FALSE | FALSE |
 | Low | Session Timeout                       | SESSION_TIMEOUT             | TRUE | FALSE | FALSE | FALSE |
 | Low | Session Rewriting                     | SESSION_REWRITING           | TRUE | FALSE | FALSE | FALSE |
+
+## How IAST detects vulnerabilities
+Datadog Runtime Code Analysis (IAST) utilizes the same tracing libraries as Datadog APM, enabling it to monitor live application traffic and detect code-level vulnerabilities in real time. It follows this process:
+
+- **Tracking data sources:**: IAST observes data entering your application from external sources such as request URLs, bodies, or headers. These inputs are tagged and monitored throughout their lifecycle.
+- **Analyzing data flow**: The Datadog tracing library tracks how the input data moves through the application—even if it's transformed, split, or combined. This allows IAST to understand if and how the original input reaches sensitive parts of the code.
+- **Identifying vulnerable points**: IAST detects code locations where user-controlled inputs are used in potentially insecure ways—for example, in SQL queries, dynamic code execution, or HTML rendering.
+- **Confirming the vulnerability**: A vulnerability is only reported when IAST can confirm that tainted input reaches a vulnerable point in the code. This approach minimizes false positives and ensures that findings are actionable.
 
 ## Explore and manage code vulnerabilities
 

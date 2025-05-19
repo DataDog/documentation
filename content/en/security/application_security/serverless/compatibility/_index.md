@@ -7,22 +7,22 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-Application Security provides serverless capability for the following platforms and libraries:
+App and API Protection provides serverless capability for the following platforms and libraries:
 
 {{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
   
-|Type           	| Threat Detection	|  Software Composition Analysis (SCA)	| Code Security 	|
-| ---  		|   ---             		|           ----           			|           ----            				|
-| Java  		| {{< X >}}         	| 	                			|						|
-| .NET    	| {{< X >}}         	|  	                          		|						|
-| Node 		| {{< X >}}     		| {{< X >}}	              			|						|
-| Python   	| {{< X >}}         	| {{< X >}}                 			|						|
-| Ruby   	| {{< X >}}         	|  	                 			|						|
-| PHP   	| 		        	|	            			|						|
-| Go   		| {{< X >}}         	| 	               			|						|
+|Type           	| Threat Detection	| Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
+| --------------- | ----------------- | ------------------------------------------- | ----------------------------- |
+| Java  	      	| {{< X >}}         |                     	                			|	                    					|
+| .NET  	      	| {{< X >}}         |                     	                			|	                    					|
+| Node 		        | {{< X >}}     		| {{< X >}}	              		               	|                    						|
+| Python         	| {{< X >}}        	| {{< X >}}                              			|				                    		|
+| Ruby           	| {{< X >}}        	|  	                                     			|				                    		|
+| PHP            	| 		            	|	                                      			|				                    		|
+| Go   	        	| {{< X >}}        	| 	                                     			|				                    		|
 
 ### Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
@@ -55,19 +55,19 @@ Go
 
 ## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in Preview</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type           	| Threat Detection	|  Software Composition Analysis	| Code Security 	|
-| ---  		|   ---             		|           ----           			|           ----            				|
-| Java  		| Preview         	| Preview	                			|						|
-| .NET    	| Preview         	| Preview 	                          		|						|
-| Node 		| Preview     		| Preview	              			|						|
-| Python   	| Preview         	| Preview                 			|						|
-| Ruby   	| Preview         	|  Preview	                 			|						|
-| PHP   	| 		      |	            			|						|
-| Go   		| Preview         	| Preview	               			|						|
+|Type           	| Threat Detection	| Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
+| --------------- | ----------------- | ------------------------------------------- | ----------------------------- |
+| Java  		      | Preview         	| Preview	                			              |                    						|
+| .NET    	      | Preview         	| Preview	                			              |                    						|
+| Node 		        | Preview     		  | Preview	                			              |                    						|
+| Python   	      | Preview         	| Preview	                			              |                    						|
+| Ruby   	        | Preview         	| Preview	                			              |                    						|
+| PHP   	        | 		              |	        	                			            |                    		    		|
+| Go   		        | Preview         	| Preview	                			              |                    						|
 
 
 ## Azure App Service
@@ -76,14 +76,14 @@ Only *web applications* are supported. Azure Functions are not supported.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type       | OS			     |Threat Detection	|  Software Composition Analysis	 | Code Security 	|
-|-----------|--------------------|------------------|------------------------------------|------------------------------------------|
-| Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | {{< X >}}			                            |
-| .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |
-| Node 		| Linux			     | {{< X >}}        | {{< X >}}        	                 | {{< X >}}			                            |
-| Python   	| Linux			     | {{< X >}}        | {{< X >}}                          |			                                |
-| Ruby   	| Linux			     | {{< X >}}        | {{< X >}}      	                 |			                                |
-| PHP   	| Linux			     |		        	| {{< X >}} 	                     |			                                |
+|Type       | OS			         | Threat Detection	| Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST) 	|
+|-----------|------------------|------------------|----------------------------------------------|--------------------------------|
+| Java  	  | Windows, Linux	 | {{< X >}}    	  | {{< X >}}	                                   | Preview (1.15.0)               |
+| .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                             | Preview (2.42.0)               |
+| Node 		  | Linux			       | {{< X >}}        | {{< X >}}        	                           | Preview (4.18.0)               |
+| Python   	| Linux			       | {{< X >}}        | {{< X >}}                                    |			                          |
+| Ruby   	  | Linux			       | {{< X >}}        | {{< X >}}      	                             |			                          |
+| PHP   	  | Linux			       |		        	    | {{< X >}} 	                                 |			                          |
 
 
 [1]: /serverless/distributed_tracing/

@@ -10,6 +10,10 @@ further_reading:
   text: "Learn about LLM Observability Key Terms and Concepts"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Overview
 
 You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 
@@ -24,6 +28,8 @@ You can visualize the clusters by using a **Box Packing** or **Scatter Plot** la
 - Scatter Plot, on the other hand, allows you to view the high dimensional text embeddings in a 2D space, although the distance between each trace may be misleading due to projection distortion. 
 
 Cluster Maps provide an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
+
+<div class="alert alert-info"><strong>Built with Llama</strong>: The Cluster Map uses Llama to generate topic labels based on your instrumented LLM application's inputs and outputs. </div>
 
 ## Search and manage clusters
 

@@ -163,7 +163,7 @@ La mejor forma de solucionar este problema es asegurarse de que los parámetros 
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /es/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /es/continuous_integration/intelligent_test_runner/
 [13]: /es/tests/#parameterized-test-configurations
 [14]: /es/tests/#supported-features

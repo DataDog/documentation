@@ -1,5 +1,5 @@
 ---
-title: Manage Application Security Posture Across Development Teams
+title: Manage App and API Protection Posture Across Development Teams
 aliases:
   - /tracing/software_catalog/guides/appsec_management
   - /software_catalog/guides/appsec_management
@@ -12,7 +12,7 @@ aliases:
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"
-    text: "Datadog Application Security Management"
+    text: "Datadog App and API Protection"
 ---
 
 The Software Catalog enables organizations to seamlessly incorporate security into every development stage, ensuring a strong security posture across teams, applications, and systems.

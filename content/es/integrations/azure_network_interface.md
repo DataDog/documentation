@@ -4,7 +4,7 @@ aliases:
 categories:
 - azure
 - nube
-- la red
+- network
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Network Interface.
@@ -50,7 +50,7 @@ La integración Azure Network Interface no incluye eventos.
 
 La integración Azure Network Interface no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
