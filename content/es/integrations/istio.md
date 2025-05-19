@@ -19,7 +19,7 @@
       - "istio.mesh.request.count"
       - "istio.galley.endpoint_no_pod"
       "metadata_path": "metadata.csv"
-      "prefix": "istio".
+      "prefix": "istio."
     "process_signatures":
     - "pilot-agent proxy router"
     - "envoy envoy-rev0.json"
