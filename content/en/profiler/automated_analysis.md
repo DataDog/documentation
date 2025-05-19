@@ -14,56 +14,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-timeline-view/'
       tag: 'Blog'
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
-multifiltersearch:
-  # "id" must match the corresponding key in the "data" object
-  headers:
-    - name: Name
-      id: name
-      filter_by: true
-    - name: Severity
-      id: severity
-      filter_by: true
-    - name: Description
-      id: description
-      filter_by: false
-      
-  data:
-    - name: GC Setup
-      severity: Info
-      description: Triggers when one of the following is detected - serial GC used on a multi-core machine, parallel GC on a single-core machine, more GC threads were configured than available cores, or a parallel GC was configured to run in 1 thread
-    - name: Duplicated Flags
-      severity: Info
-      description: Triggers if duplicate flags were provided to the runtime (e.g. `-Xmx2g -Xmx5g`). This is a problem as it may lead to changes not having the expected effect.
-    - name: Options
-      severity: Warn
-      description: Triggers if undocumented, deprecated or non-recommended option flags were detected.
-    - name: Stackdepth Setting
-      severity: Warn
-      description: Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data.
-    - name: VMOperation Peak Duration
-      severity: Warn
-      description: Triggers if a blocking VM operation (or combination of operations close in time) takes more than 2 seconds. Reports details about the operation with the highest duration.
-    - name: GC Pauses
-      severity: Warn
-      description: Triggers if more than 10% of time was spent in GC pauses.
-    - name: GC Pause Peak Duration
-      severity: Info
-      description: Triggers if at least one GC pause took more than 1 second.
-    - name: Deadlocked Threads Detected
-      severity: Warn
-      description: Triggers if max number of deadlocked threads over query context is bigger than 0.
-    - name: Thrown Exceptions
-      severity: Warn
-      description: Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K)
-    - name: Primitive Value Boxing
-      severity: Info
-      description: Triggers if more than 5% of CPU time was spent doing primitive<>object value conversions.
-    - name: Explicit GC
-      severity: Info
-      description: Triggers if there are System.gc() calls.
-    - name: Head of line blocking
-      severity: Info
-      description: Triggers if a queue event gets stuck behind the given activity.
 ---
 
 ## Overview
@@ -96,9 +46,23 @@ Click an insight to see a high-level summary that explains the issue, contextual
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
 ## Supported insights
-<!-- The table below is auto-generated. Add new entries in multifiltersearch with new insights as they become available. -->
-{{< multifilter-search >}} 
 
+Automated Analysis supports finding the following insights:
+
+| Name                      | Severity | Description |
+|---------------------------|----------|-------------|
+| Duplicated Flags          | Info     | Triggers if duplicate flags were provided to the runtime (for example, `-Xmx2g -Xmx5g`). This is a problem as it may lead to changes not having the expected effect. |
+| Explicit GC               | Info     | Triggers if there are System.gc() calls. |
+| GC Pause Peak Duration    | Info     | Triggers if at least one GC pause took more than 1 second. |
+| GC Setup                  | Info     | Triggers when one of the following is detected - serial GC used on a multi-core machine, parallel GC on a single-core machine, more GC threads were configured than available cores, or a parallel GC was configured to run in 1 thread |
+| Head of line blocking     | Info     | Triggers if a queue event gets stuck behind the given activity. |
+| Primitive Value Boxing    | Info     | Triggers if more than 5% of CPU time was spent doing primitive<>object value conversions. |
+| Deadlocked Threads Detected | Warn   | Triggers if max number of deadlocked threads over query context is bigger than 0. |
+| GC Pauses                 | Warn     | Triggers if more than 10% of time was spent in GC pauses. |
+| Options                   | Warn     | Triggers if undocumented, deprecated or non-recommended option flags were detected. |
+| Stackdepth Setting        | Warn     | Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data. |
+| Thrown Exceptions         | Warn     | Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K) |
+| VMOperation Peak Duration | Warn     | Triggers if a blocking VM operation (or combination of operations close in time) takes more than 2 seconds. Reports details about the operation with the highest duration. |
 
 ## Further reading
 
