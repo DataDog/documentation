@@ -21544,38 +21544,8 @@ components:
       - space
       type: object
     MetricCustomAggregations:
-      description: 'A list of queryable aggregation combinations for a count, rate,
-        or gauge metric.
-
-        By default, count and rate metrics require the (time: sum, space: sum) aggregation
-        and
-
-        Gauge metrics require the (time: avg, space: avg) aggregation.
-
-        Additional time & space combinations are also available:
-
-
-        - time: avg, space: avg
-
-        - time: avg, space: max
-
-        - time: avg, space: min
-
-        - time: avg, space: sum
-
-        - time: count, space: sum
-
-        - time: max, space: max
-
-        - time: min, space: min
-
-        - time: sum, space: avg
-
-        - time: sum, space: sum
-
-
-        Can only be applied to non_distribution metrics that have a `metric_type`
-        of `count`, `rate`, or `gauge`.'
+      description: Deprecated. You no longer need to configure specific time and space
+        aggregations for Metrics Without Limits.
       example:
       - space: sum
         time: sum
@@ -24803,7 +24773,8 @@ components:
           description: Optional prefix for object keys within the GCS bucket.
           type: string
         metadata:
-          description: Custom metadata key-value pairs added to each object.
+          description: Custom metadata to attach to each object uploaded to the GCS
+            bucket.
           items:
             $ref: '#/components/schemas/ObservabilityPipelineMetadataEntry'
           type: array
@@ -24819,7 +24790,6 @@ components:
       - auth
       - storage_class
       - acl
-      - metadata
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -25098,8 +25068,7 @@ components:
       x-enum-varnames:
       - LOGSTASH
     ObservabilityPipelineMetadataEntry:
-      description: A custom metadata entry to attach to each object uploaded to the
-        GCS bucket.
+      description: A custom metadata entry.
       properties:
         name:
           description: The metadata key.
@@ -52459,8 +52428,7 @@ paths:
           maximum: 2147483647
           minimum: 49
           type: integer
-      - description: The number of aggregations that a `count`, `rate`, or `gauge`
-          metric is configured to use. Max number of aggregation combos is 9.
+      - description: Deprecated. Number of aggregations has no impact on volume.
         example: 1
         in: query
         name: filter[num_aggregations]
@@ -52680,17 +52648,16 @@ paths:
       description: 'Create and define a list of queryable tag keys for an existing
         count/gauge/rate/distribution metric.
 
-        Optionally, include percentile aggregations on any distribution metric or
-        configure custom aggregations
+        Optionally, include percentile aggregations on any distribution metric. By
+        setting `exclude_tags_mode`
 
-        on any count, rate, or gauge metric. By setting `exclude_tags_mode` to true
-        the behavior is changed
+        to true, the behavior is changed from an allow-list to a deny-list, and tags
+        in the defined list are
 
-        from an allow-list to a deny-list, and tags in the defined list will not be
-        queryable.
+        not queryable. Can only be used with application keys of users with the `Manage
+        Tags for Metrics`
 
-        Can only be used with application keys of users with the `Manage Tags for
-        Metrics` permission.'
+        permission.'
       operationId: CreateTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -54324,7 +54291,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get the schedule of an on-call user
+      summary: Get the schedule on-call user
       tags:
       - On-Call
       x-menu-order: 11

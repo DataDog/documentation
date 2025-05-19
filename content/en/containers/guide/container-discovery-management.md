@@ -33,7 +33,16 @@ You can set exceptions in two ways:
 
 ## Agent configuration
 
-Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their container name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
+Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+- container name (`name`)
+- container image name (`image`)
+- Kubernetes namespace (`kube_namespace`)
+
+<div class="alert alert-warning">
+
+The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
+
+</div>
 
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
