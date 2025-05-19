@@ -18,7 +18,7 @@ If you want to run multiple pipelines on the same host so that you can send logs
 
 [Set up the first pipeline][1] and install the Worker on your host.
 
-## Create another pipeline
+## Create an additional pipeline
 
 [Set up another pipeline][1] for the additional Worker that you want to run on the same host. When you reach the Install page, follow the below steps to run the Worker for this pipeline.
 
@@ -124,8 +124,8 @@ Additionally, you can use the command `sudo journalctl -u op-fluent.service` to 
 
 ## Deploy the pipeline
 
-1.  Navigate to the second pipeline's Install page.
-1.  In the **Deploy your pipeline** section, you should see your second Worker detected. Click **Deploy**.
+1.  Navigate to the additional pipeline's Install page.
+1.  In the **Deploy your pipeline** section, you should see your additional Worker detected. Click **Deploy**.
 
 [1]: https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/?tab=pipelineui
 [2]: https://docs.datadoghq.com/observability_pipelines/environment_variables/?tab=sources
