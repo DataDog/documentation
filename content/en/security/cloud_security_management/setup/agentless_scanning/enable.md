@@ -27,7 +27,7 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
-- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are limited to the strict necessary scope of the target scans.<br><br>
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are strictly limited to the minimum permissions required to perform the necessary scans, following the principle of least privilege.<br><br>
   {{< collapse-content title="AWS scanning permissions" level="h5" >}}
   <p>Scanning permissions:</p>
   <ul>
@@ -52,7 +52,7 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
     <li><code>lambda:GetFunction</code></li>
     <li><code>lambda:GetLayerVersion</code></li>
   </ul>
-  <p>Autoscaling permissions on the <code>DatadogAgentlessScanner</code> resource:</p>
+  <p>Scanners autoscaling and management permissions:</p>
   <ul>
     <li><code>autoscaling:DescribeAutoScalingGroups</code></li>
     <li><code>autoscaling:SetDesiredCapacity</code></li>
