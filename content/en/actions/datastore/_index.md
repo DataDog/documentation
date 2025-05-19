@@ -43,7 +43,9 @@ To create a datastore:
 
 1. Navigate to the [Datastore page][1].
 1. Click **+ New Datastore**.
-1. Enter a **Name**, a **Primary Key**, and optionally a **Description** for your datastore. The Primary Key must be a column name in your data where every data row has a unique value.
+1. Enter a **Name** for your datastore.
+1. Enter a **Primary Key** or toggle the option to **Autogenerate a Primary Key** if a primary key is not essential to your usecase. If you choose to enter a primary key, the key must be a column name in your data where each key has a unique value.
+1. Optionally, enter a **Description** for your datastore.
 1. _Optionally_, you can seed your datastore with initial data from a JSON or CSV file. Use one of the following methods to upload the contents of the file:
    * Drag and drop the file into the UI.
    * Click **browse files** to browse and select a file from your computer.
