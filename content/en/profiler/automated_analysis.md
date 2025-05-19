@@ -93,7 +93,7 @@ Automated Analysis will be surfaced within the [Profile explorer][1]
 Clicking an an insight in either area will display a high-level summary explaining the issue, contextual insights from profiling data, and  recommended next steps.
 {{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
-## Aggregated vs Individual Insights
+## Aggregated vs individual insights
 Individual insights are tied to a specific profile and show up directly in the flamegraph and timeline views. They highlight problems detected within a single recording, giving detailed context about a specific performance issue observed in that exact moment.
 {{< img src="profiler/profiling_automated_analysis_individual.png" alt="Example of an individual profile insight within the trace explorer" style="width:100%;">}}
 
