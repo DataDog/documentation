@@ -442,7 +442,7 @@ To access the scatter plot analytic [in the Processes page][5] click on the _Sho
 
 By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual processes and containers that contribute to the group.
 
-The options at the top of the graph allows you to control your scatter plot analytic:
+The options at the top of the graph allow you to control your scatter plot analytic:
 
 - Selection of metrics to display.
 - Selection of the aggregation method for both metrics.

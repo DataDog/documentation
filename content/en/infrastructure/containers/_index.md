@@ -197,7 +197,7 @@ You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsib
 
 By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
-The options at the top of the graph allows you to control your scatter plot analytic:
+The options at the top of the graph allow you to control your scatter plot analytic:
 
 * Selection of metrics to display.
 * Selection of the aggregation method for both metrics.
