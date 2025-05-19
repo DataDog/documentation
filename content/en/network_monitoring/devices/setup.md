@@ -56,7 +56,7 @@ High Availability (HA) support of the Datadog Agent in Network Device Monitoring
 
 You can configure active and standby Agents to function as an HA pair in NDM. If the active Agent goes down, the standby Agent takes over within 90 seconds, becoming the new active Agent. Additionally, you can designate a preferred active Agent, allowing NDM to automatically revert to it once it becomes available again. This feature allows for proactive Agent switching ahead of scheduled maintenance.
 
-Reference [High Availability support of the Datadog Agent][20] for more information.
+For more information, see [High Availability support of the Datadog Agent][20].
 
 ### Configuration
 

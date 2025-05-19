@@ -46,9 +46,9 @@ The following integrations are supported for High Availability:
 
 ### Installation
 
-1. Install two Agents on like hosts (one on each host). The following setup is for hosts with similar capabilities (CPU, RAM, and networking) and configurations (including `datadog.yaml` and integration settings).
+1. Install the Datadog Agent on two similar hosts (one on each host). The following setup is for hosts with similar capabilities (CPU, RAM, and networking) and configurations (including `datadog.yaml` and integration settings).
 
-2. For both Agents, on each host, configure your `datadog.yaml` with the following settings:
+2. Configure your `datadog.yaml` on each host, with the following settings:
 
    ```yaml
    ha_agent:
@@ -59,10 +59,10 @@ The following integrations are supported for High Availability:
 
 3. Configure one of the [supported integrations](#supported-integrations) for High Availability:
 
-   For example, to set up the SNMP integration, install it on both Agents using the [SNMP Metrics][1] setup guide.
+   For example, to set up the SNMP integration, install it on both Agents using the [SNMP Metrics][1] setup guide. <br>
    **Note**: Both [individual device monitoring][10] and [Autodiscovery][11] methods are supported for the SNMP integration.
 
-   After configured, the two Agents function as an HA pair:
+   After the Agents are configured, they function as an HA pair:
    - The installed integration runs only on the _active_ Agent.
    - If the active Agent or host fails (due to a crash or shutdown), the standby Agent automatically takes over, maintaining uninterrupted monitoring.
 
@@ -74,7 +74,7 @@ The following integrations are supported for High Availability:
 
 {{< img src="/integrations/guide/high_availability/fleet-view-agents.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-3. Click on the Agent you want to designate as the Preferred active Agent to open a side-panel.
+3. Click on the Agent you want to designate as the preferred active Agent to open a side-panel.
 
 4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
 
@@ -82,29 +82,26 @@ The following integrations are supported for High Availability:
 
 ## Testing and validation
 
-1. Test that failover works by shutting down the Agent or host that is Active.
+1. Test failover by shutting down the active Agent or its host.
 2. The standby Agent should start monitoring the configured integration(s) after 1-3 minutes.
 
 ## FAQ
 
 ### How is the active Agent determined?
 
-**If no Preferred active Agent is defined**:
+** Without a preferred active Agent
+- The active Agent is initially selected at random.
+- Failover occurs only when the current active Agent shuts down or crashes.
+- When the primary Agent recovers, it does not automatically reclaim the active role.
 
-- The active Agent is initially chosen randomly.
-- Active Agent switching is minimized to avoid unnecessary failover:
-  - If the primary Agent is active and it shuts down or crashes, the secondary Agent takes over as the new active Agent.
-  - When the primary Agent recovers, the secondary Agent remains active.
-
-**If a Preferred active Agent is defined**:
-
-- The preferred active Agent takes priority:
-  - If the primary Agent is the preferred active Agent and is active, a failover occurs if the primary Agent shuts down or crashes, making the secondary Agent active.
-  - When the primary Agent recovers, it automatically resumes the active role, and the secondary Agent returns to standby.
+**With a preferred active Agent
+- The preferred Agent always takes priority when available.
+- If it fails, the standby Agent becomes active.
+- When the preferred Agent recovers, it automatically resumes the active role, and the standby Agent returns to standby.
 
 ### Why does my Agent have an `unknown` HA Agent state?
 
-- Remote Configuration may not be setup correctly. Review the [prerequisites](#prerequisites) and [Remote Configuration setup][12] documentation for more information.
+- Remote Configuration may not be setup correctly. For more information, review the [prerequisites](#prerequisites) and [Remote Configuration setup][12] documentation.
 
 
 ## Further reading
