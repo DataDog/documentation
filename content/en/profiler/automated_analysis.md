@@ -87,7 +87,7 @@ By reducing the expertise required to take action, Automated Analysis enables fa
 Automated Analysis will be surfaced within the [Profile explorer][1]
 - As a banner at the top of the page when you're scoped to a specific service
 {{< img src="profiler/profiling_automated_analysis_banner.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
-- As a column within the service list
+- In a column within the service list
 {{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
 
 Clicking an an insight in either area will display a high-level summary explaining the issue, contextual insights from profiling data, and  recommended next steps.
