@@ -629,6 +629,24 @@ You can [enrich your RUM event data with feature flags][14] to get additional co
 
 For example, to redact email addresses from your web application URLs:
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -716,6 +734,24 @@ beforeSend: (event) => {
 
 With the `beforeSend` API, discard a RUM event by returning `false`:
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -802,6 +838,24 @@ When making changes to the user session object, all RUM events collected after t
 
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -850,6 +904,24 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 `datadogRum.getUser()`
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -879,6 +951,24 @@ window.DD_RUM && window.DD_RUM.getUser();
 ### Add/Override user session property
 
 `datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
+
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -910,6 +1000,24 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe');
 
 `datadogRum.removeUserProperty('<USER_KEY>')`
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -939,6 +1047,24 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name');
 ### Clear user session property
 
 `datadogRum.clearUser()`
+
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -972,7 +1098,26 @@ By default, no sampling is applied on the number of collected sessions. To apply
 
 The following example collects only 90% of all sessions on a given RUM application:
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
+
 {{% tab "NPM" %}}
 
 ```javascript
@@ -1035,6 +1180,24 @@ To change the tracking consent value after the RUM Browser SDK is initialized, u
 This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
 
 When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1099,6 +1262,24 @@ Optionally define the context while starting a view with [`startView` options](#
 
 Enrich or modify the context of RUM view events and corresponding child events with the `setViewContextProperty(key: string, value: any)` API.
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -1151,6 +1332,24 @@ window.DD_RUM &&
 ### Replace view context
 
 Replace the context of your RUM view events and corresponding child events with `setViewContext(context: Context)` API.
+
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1215,6 +1414,24 @@ throw error
 
 After RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -1268,6 +1485,24 @@ window.DD_RUM &&
 
 You can remove a previously defined global context property.
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -1309,6 +1544,24 @@ window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ### Replace global context
 
 Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API.
+
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1359,6 +1612,24 @@ window.DD_RUM &&
 
 You can clear the global context by using `clearGlobalContext`.
 
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
+NPM-specific content goes here.
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
+CDN async-specific content goes here.
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
+CDN sync-specific content goes here.
+{% /if %}
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -1391,8 +1662,9 @@ window.DD_RUM && window.DD_RUM.clearGlobalContext();
 
 Once RUM is initialized, read the global context with the `getGlobalContext()` API.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1400,8 +1672,11 @@ import { datadogRum } from '@datadog/browser-rum';
 const context = datadogRum.getGlobalContext();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1409,15 +1684,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## Contexts life cycle
 
@@ -1447,8 +1724,9 @@ Starting with version 5.22, the RUM Browser SDK supports micro frontend architec
 
 In the `beforeSend` property, you can override the service and version properties. To help you identify where the event originated, use the `context.handlingStack` property.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+<!-- NPM -->
+
+{% if equals($lib_src, "npm") %}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1471,8 +1749,11 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
@@ -1495,8 +1776,11 @@ window.DD_RUM.onReady(function() {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
@@ -1517,8 +1801,7 @@ window.DD_RUM && window.DD_RUM.init({
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 Any query done in the RUM Explorer can use the service attribute to filter events.
 
@@ -1530,10 +1813,6 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 -   Resource events other than XHR and Fetch.
 -   View events (but you can [override default RUM view names][21] instead)
 -   CORS and CSP violations
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
