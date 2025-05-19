@@ -17,7 +17,7 @@
     "metrics":
       "check": "snmp.devices_monitored"
       "metadata_path": "metadata.csv"
-      "prefix": "snmp".
+      "prefix": "snmp."
     "service_checks":
       "metadata_path": "assets/service_checks.json"
     "source_type_id": !!int "78"
