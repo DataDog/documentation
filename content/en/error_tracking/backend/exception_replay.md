@@ -6,7 +6,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
   tag: 'Blog'
   text: 'Simplify production debugging with Datadog Exception Replay'
-- link: '/tracking/live-debugger'
+- link: '/tracing/live_debugger'
   tag: 'Documentation'
   text: 'Learn about Datadog Live Debugger'
 - link: '/error_tracking/monitors'
@@ -57,7 +57,7 @@ Exception Replay is only available in APM Error Tracking. It is not available fo
    * Ensure that the new index takes precedence over any others with filters that match that tag, because the first match wins.
 
 <div class="alert alert-info">
-**Why create a logs index?** When an error occurs and is captured in an APM span, Exception Replay variable snapshots are captured as logs with reference links to the APM span. When viewing the error in Error Tracking Explorer, variable snapshots from the log data display alongside stack trace details.
+<b>Why create a logs index?</b> When an error occurs and is captured in an APM span, Exception Replay variable snapshots are captured as logs with reference links to the APM span. When viewing the error in Error Tracking Explorer, variable snapshots from the log data display alongside stack trace details.
 </div>
 
 ### Redacting sensitive data
@@ -72,7 +72,7 @@ Scrub Exception Replay variable snapshots for PII and other sensitive data by:
 For more information, see [Dynamic Instrumentation Sensitive Data Scrubbing][5].
 
 <div class="alert alert-info">
-**Note:** Dynamic Instrumentation is NOT a prerequisite for Sensitive Data Scrubbing. Sensitive Data Scrubbing applies to Exception Replay variable snapshots by default regardless of whether Dynamic Instrumentation is enabled on the service.
+<b>Note:</b> Dynamic Instrumentation is NOT a prerequisite for Sensitive Data Scrubbing. Sensitive Data Scrubbing applies to Exception Replay variable snapshots by default regardless of whether Dynamic Instrumentation is enabled on the service.
 </div>
 
 ## Getting started
