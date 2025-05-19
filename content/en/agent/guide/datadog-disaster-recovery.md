@@ -67,17 +67,18 @@ Once the Datadog team has completed the configuration of the designated orgs, th
 **Note:** If any of your sites is in a region other than the `US1` region, you would need to specify the <SITE> parameter.
 
 ``` shell
+# Run this command to get the Public ID for your primary site. 
+curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
+-H "Accept: application/json" \
+-H "DD-API-KEY: ${PRIMARY_DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${PRIMARY_DD_APP_KEY}"
+
 # Run this command to get the Public ID for your DDR site. 
 curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
 -H "Accept: application/json" \
 -H "DD-API-KEY: ${DDR_DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DDR_DD_APP_KEY}"
 
-# Run this command to get the Public ID for your primary site. 
-curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
--H "Accept: application/json" \
--H "DD-API-KEY: ${PRIMARY_DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${PRIMARY_DD_APP_KEY}"
 ```
 {{% /collapse-content %}}
 
@@ -88,18 +89,19 @@ After the Datadog team has completed the configuration of the designated orgs an
 To link your primary and DDR orgs, run these commands:
 
 ```shell
-export DDR_DD_API_KEY=<>
-export DDR_DD_APP_KEY= 
-export DDR_DD_API_URL=https://api.datadoghq.com\
+export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
+export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
+export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
 
 export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
 export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
 export USER_EMAIL=<USER_EMAIL>
-export CONNECTION='{"data":{"id":"'${DDR_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${PRIMARY_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'","IsPrimary":true}}}'
+export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'"}}}'
+
 
 curl -v -H "Content-Type: application/json" -H 
-"dd-api-key:${CRDR_DD_API_KEY}" -H 
-"dd-application-key:${CRDR_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${CRDR_DD_API_URL}/api/v2/hamr
+"dd-api-key:${PRIMARY_DD_API_KEY}" -H 
+"dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 {{% /collapse-content %}} <br>
 
@@ -127,7 +129,7 @@ You must invite your users to your Disaster Recovery organization and give them 
 {{% collapse-content title=" 7. Set up Resources syncing and scheduler" level="h5" %}}
 Datadog provides a tool called [Datadog sync-cli][3] to copy your dashboards, monitors and other configurations from your primary organization to your secondary organization. You can determine the frequency and timing of syncing based on your business requirements. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. We recommend performing this operation on a daily basis. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
-Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization. `Sync-cli can be configured for bidirectional syncing, but this is not yet fully tested and should be considered experimental at this moment`(**should we mention this? it doesn't sound like we recommend this at the time**).
+Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization.
 
 Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here’s an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
 
@@ -188,7 +190,7 @@ multi_region_failover:
 ```
 During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. 
 
-Your Datadog contact will work with you on scheduling dedicated windows for game day testing (`is this the failover testing day?`) to measure performance and Recovery Time Objective(RTO).
+Your Datadog contact will work with you on scheduling dedicated time windows for failover testing to measure performance and Recovery Time Objective(RTO).
 {{% /collapse-content %}} <br>
 
 
