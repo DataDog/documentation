@@ -50,7 +50,7 @@ In the Pathway page, you can filter the data in the visualization to reflect a s
 
 ### In analytics explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the number of sessions they had.
+You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
 {{< img src="product_analytics/segmentation/analytics-explorer.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
