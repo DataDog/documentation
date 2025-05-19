@@ -7128,8 +7128,13 @@ menu:
     - name: Optimizing Performance
       url: real_user_monitoring/browser/optimizing_performance/
       parent: rum_browser
-      identifier: optimizing_performance
+      identifier: rum_optimizing_performance
       weight: 105
+    - name: RUM Recommendations
+      url: real_user_monitoring/browser/optimizing_performance/rum_recommendations
+      parent: rum_optimizing_performance
+      identifier: rum_recommendations
+      weight: 101
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
