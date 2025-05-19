@@ -244,14 +244,14 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [6]: https://github.com/DataDog/orchestrion
-[7]: /security/application_security/threats/exploit-prevention
+[7]: /security/application_security/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
 [10]: https://pkg.go.dev/cmd/go#hdr-Modules__module_versions__and_more
 [11]: https://github.com/DataDog/orchestrion/releases
 [12]: /profiler
 [13]: /tracing/troubleshooting/go_compile_time/
 [14]: /getting_started/tagging/unified_service_tagging/
-[15]: /security/application_security/threats/exploit-prevention/
+[15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
 
 

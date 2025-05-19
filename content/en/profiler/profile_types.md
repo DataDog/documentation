@@ -204,7 +204,8 @@ Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
 Allocations (in beta, v2.18+)
-: The number and size of allocated objects by each method, as well as their type.<br />
+: The number and size of allocated objects by each method, as well as their type.
+For .NET Framework, the size is not available.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
