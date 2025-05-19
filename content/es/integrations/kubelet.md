@@ -34,7 +34,7 @@
 "manifest_version": "2.0.0"
 "name": "kubelet"
 "public_title": "Kubelet"
-"short_description": "Recopilación de estadísticas de contenedor de kubelet".
+"short_description": "Recopilación de estadísticas de contenedor de kubelet."
 "supported_os":
 - "linux"
 - "macos"
@@ -48,7 +48,7 @@
   - "Category::Contenedores"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Recopilación de estadísticas de contenedor de kubelet".
+  "description": "Recopilación de estadísticas de contenedor de kubelet."
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"
