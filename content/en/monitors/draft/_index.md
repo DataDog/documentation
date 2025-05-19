@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Draft Monitors let you safely create, refine, and test alerts without triggering notifications or impacting production. Whether you're experimenting with thresholds, iterating on complex queries, or collaborating with teammates, drafts give you a clean, isolated space to work—free from the noise of unfinished or test monitors. They help reduce alert fatigue during development and ensure only fully vetted monitors go live. Ideal for engineers and SREs managing alert workflows, Draft Monitors provide a clear, low-risk path from idea to reliable alert.
+Draft Monitors let you safely create, refine, and test alerts without triggering notifications or impacting production. Whether you're experimenting with thresholds, iterating on complex queries, or collaborating with teammates, drafts give you a clean, isolated space to work—free from the noise of unfinished or test monitors. They help reduce alert fatigue during development and ensure only fully vetted monitors go live. Ideal for engineers and SREs managing alert workflows, Draft Monitors provide clarity across multiple teams and a sure path from idea to reliable alert.
 
 ## Create a draft monitor
 
@@ -35,7 +35,7 @@ When your monitor is ready:
 3. Click **Publish Monitor.**  
 4. This publishes your monitor and begins alerting based on your conditions.
 
-## Manage Draft monitors
+## Manage draft monitors
 
 <!-- TODO Add image of Monitors List filtered to view drafts, and final QA of instructions with UI-->
 
@@ -45,7 +45,7 @@ Find draft monitors from the [**Monitors List**][3] by using the draft status fa
 
 Anyone with edit permissions can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
 
-## Best Practices
+## Best practices
 
 * **Use drafts for peer reviews:** Collaborate before pushing changes live.  
 * **Avoid noise in production:** Test alert conditions safely in a draft first.  
