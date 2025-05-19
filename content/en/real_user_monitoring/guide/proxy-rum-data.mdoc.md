@@ -36,7 +36,7 @@ To successfully forward a request to Datadog, your proxy must
 {% alert level="warning" %}
 - For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the `cookie` header.
 - The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.
-- Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).
+- Make sure your proxy implementation does not allow a malicious actor to send requests to a different server. For example: `https://browser-intake-datadoghq.com.malicious.com`.
 {% /alert %}
 
 ### Build the Datadog intake URL
