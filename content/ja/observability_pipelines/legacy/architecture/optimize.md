@@ -6,6 +6,7 @@ title: (レガシー) インスタンスの最適化
 
 {{< site-region region="gov" >}}
 Observability Pipelines は、US1-FED Datadog サイトでは利用できません。このガイドは、大規模な本番環境レベルのデプロイメント向けです。
+{{< /site-region >}}
 
 ## インスタンスサイジング
 
