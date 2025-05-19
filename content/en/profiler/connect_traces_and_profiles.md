@@ -127,7 +127,7 @@ With the span timeline view, you can:
 - Surface runtime activity that impacted the request
 - Leverage [Automated Analysis][1] to highlight performance issues directly in the view, such as oversized thread pools or GC contention
 
-[1]: https://www.datadoghq.com//profiler/automated_analysis/
+[1]: /profiler/automated_analysis/
 
 Depending on the runtime and language, the lanes vary:
 
