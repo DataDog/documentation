@@ -532,15 +532,46 @@ function beforeSend(event, context)
 
 The potential `context` values are:
 
-| RUM event type   | Context                                                                           |
-| ---------------- | --------------------------------------------------------------------------------- |
-| View             | [Location][6]                                                                     |
-| Action           | [Event][7] and handling stack                                                     |
-| Resource (XHR)   | [XMLHttpRequest][8], [PerformanceResourceTiming][9], and handling stack           |
-| Resource (Fetch) | [Request][10], [Response][11], [PerformanceResourceTiming][9], and handling stack |
-| Resource (Other) | [PerformanceResourceTiming][9]                                                    |
-| Error            | [Error][12]                                                                       |
-| Long Task        | [PerformanceLongTaskTiming][13]                                                   |
+{% table %}
+
+-   RUM event type
+-   Context
+
+---
+
+-   View
+-   [Location][6]
+
+---
+
+-   Action
+-   [Event][7] and handling stack
+
+---
+
+-   Resource (XHR)
+-   [XMLHttpRequest][8], [PerformanceResourceTiming][9], and handling stack
+
+---
+
+-   Resource (Fetch)
+-   [Request][10], [Response][11], [PerformanceResourceTiming][9], and handling stack
+
+---
+
+-   Resource (Other)
+-   [PerformanceResourceTiming][9]
+
+---
+
+-   Error
+-   [Error][12]
+
+---
+
+-   Long Task
+-   [PerformanceLongTaskTiming][13]
+    {% /table %} |
 
 For more information, see the [Enrich and control RUM data guide][14].
 
@@ -687,22 +718,97 @@ window.DD_RUM &&
 
 You can update the following event properties:
 
-| Attribute                           | Type   | Description                                                                                                                                                                               |
-| ----------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `view.url`                          | String | The URL of the active web page.                                                                                                                                                           |
-| `view.referrer`                     | String | The URL of the previous web page from which a link to the currently requested page was followed.                                                                                          |
-| `view.name`                         | String | The name of the current view.                                                                                                                                                             |
-| `view.performance.lcp.resource_url` | String | The resource URL for the Largest Contentful Paint.                                                                                                                                        |
-| `service`                           | String | The service name for your application.                                                                                                                                                    |
-| `version`                           | String | The application's version. For example: 1.2.3, 6c44da20, or 2020.02.13.                                                                                                                   |
-| `action.target.name`                | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
-| `error.message`                     | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
-| `error.stack `                      | String | The stack trace or complementary information about the error.                                                                                                                             |
-| `error.resource.url`                | String | The resource URL that triggered the error.                                                                                                                                                |
-| `resource.url`                      | String | The resource URL.                                                                                                                                                                         |
-| `long_task.scripts.source_url`      | String | The script resource url                                                                                                                                                                   |
-| `long_task.scripts.invoker`         | String | A meaningful name indicating how the script was called                                                                                                                                    |
-| `context`                           | Object | Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
+{% table %}
+
+-   Attribute
+-   Type
+-   Description
+
+---
+
+-   `view.url`
+-   String
+-   The URL of the active web page.
+
+---
+
+-   `view.referrer`
+-   String
+-   The URL of the previous web page from which a link to the currently requested page was followed.
+
+---
+
+-   `view.name`
+-   String
+-   The name of the current view.
+
+---
+
+-   `view.performance.lcp.resource_url`
+-   String
+-   The resource URL for the Largest Contentful Paint.
+
+---
+
+-   `service`
+-   String
+-   The service name for your application.
+
+---
+
+-   `version`
+-   String
+-   The application's version. For example: 1.2.3, 6c44da20, or 2020.02.13.
+
+---
+
+-   `action.target.name`
+-   String
+-   The element that the user interacted with. Only for automatically collected actions.
+
+---
+
+-   `error.message`
+-   String
+-   A concise, human-readable, one-line message explaining the error.
+
+---
+
+-   `error.stack`
+-   String
+-   The stack trace or complementary information about the error.
+
+---
+
+-   `error.resource.url`
+-   String
+-   The resource URL that triggered the error.
+
+---
+
+-   `resource.url`
+-   String
+-   The resource URL.
+
+---
+
+-   `long_task.scripts.source_url`
+-   String
+-   The script resource url.
+
+---
+
+-   `long_task.scripts.invoker`
+-   String
+-   A meaningful name indicating how the script was called.
+
+---
+
+-   `context`
+-   Object
+-   Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**).
+
+{% /table %}
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
@@ -725,23 +831,6 @@ With the `beforeSend` API, discard a RUM event by returning `false`:
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -758,8 +847,11 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -776,8 +868,11 @@ window.DD_RUM.onReady(function() {
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM &&
@@ -793,8 +888,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 **Note**: View events cannot be discarded.
 
@@ -806,15 +900,35 @@ Adding user information to your RUM sessions helps you:
 -   Know which users are the most impacted by errors
 -   Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" %}
 
 The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
-| Attribute   | Type   | Description                                                                                              |
-| ----------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+{% table %}
+
+-   Attribute
+-   Type
+-   Description
+
+---
+
+-   `usr.id`
+-   String
+-   Unique user identifier.
+
+---
+
+-   `usr.name`
+-   String
+-   User friendly name, displayed by default in the RUM UI.
+
+---
+
+-   `usr.email`
+-   String
+-   User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars.
+
+{% /table %}
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
@@ -829,23 +943,6 @@ When making changes to the user session object, all RUM events collected after t
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 datadogRum.setUser({
@@ -857,8 +954,11 @@ datadogRum.setUser({
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -872,8 +972,11 @@ window.DD_RUM.onReady(function() {
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
@@ -885,8 +988,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Access user session
 
@@ -895,30 +997,16 @@ window.DD_RUM && window.DD_RUM.setUser({
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 datadogRum.getUser();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -926,15 +1014,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.getUser();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Add/Override user session property
 
@@ -943,30 +1033,16 @@ window.DD_RUM && window.DD_RUM.getUser();
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 datadogRum.setUserProperty('name', 'John Doe');
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -974,15 +1050,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Remove user session property
 
@@ -991,30 +1069,16 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe');
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 datadogRum.removeUserProperty('name');
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1022,15 +1086,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ### Clear user session property
 
@@ -1039,30 +1105,16 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name');
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 datadogRum.clearUser();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1070,15 +1122,17 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## Sampling
 
@@ -1089,24 +1143,6 @@ The following example collects only 90% of all sessions on a given RUM applicati
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1119,8 +1155,11 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1133,8 +1172,11 @@ window.DD_RUM.onReady(function () {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM &&
@@ -1146,8 +1188,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 For a sampled out session, all pageviews and associated telemetry for that session are not collected.
 
@@ -1172,23 +1213,6 @@ When `setTrackingConsent()` is used before `init()`, the provided value takes pr
 <!-- NPM -->
 
 {% if equals($lib_src, "npm") %}
-NPM-specific content goes here.
-{% /if %}
-
-<!-- CDN async -->
-
-{% if equals($lib_src, "cdn_async") %}
-CDN async-specific content goes here.
-{% /if %}
-
-<!-- CDN sync -->
-
-{% if equals($lib_src, "cdn_sync") %}
-CDN sync-specific content goes here.
-{% /if %}
-
-{{< tabs >}}
-{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -1203,8 +1227,11 @@ acceptCookieBannerButton.addEventListener('click', function() {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{% /if %}
+
+<!-- CDN async -->
+
+{% if equals($lib_src, "cdn_async") %}
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1221,8 +1248,11 @@ acceptCookieBannerButton.addEventListener('click', () => {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{% /if %}
+
+<!-- CDN sync -->
+
+{% if equals($lib_src, "cdn_sync") %}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
@@ -1235,8 +1265,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## View context
 
