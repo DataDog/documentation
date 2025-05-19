@@ -4467,26 +4467,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_configuration
       weight: 4
-    - name: Submit Evaluations
-      url: llm_observability/submit_evaluations/
+    - name: Evaluations
+      url: llm_observability/evaluations/
       parent: llm_obs
-      identifier: llm_obs_submit_evaluations
+      identifier: llm_obs_evaluation
       weight: 5
-    - name: Ragas Evaluations
-      url: llm_observability/ragas_evaluations/
-      parent: llm_obs
-      identifier: llm_obs_ragas_evaluation
-      weight: 6
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 7
+      weight: 6
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 7
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
