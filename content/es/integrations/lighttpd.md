@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "lighttpd"
 "public_title": "Lighttpd"
-"short_description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más".
+"short_description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más."
 "supported_os":
 - "linux"
 - "windows"
@@ -56,7 +56,7 @@
   - "Supported OS::macOS"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más".
+  "description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más."
   "media": []
   "overview": "README.md#Información general"
   "resources":
