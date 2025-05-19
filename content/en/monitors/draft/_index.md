@@ -14,7 +14,11 @@ further_reading:
 
 ## Overview
 
-Draft Monitors let you safely create, refine, and test alerts without triggering notifications or impacting production. Whether you're experimenting with thresholds, iterating on complex queries, or collaborating with teammates, drafts give you a clean, isolated space to work—free from the noise of unfinished or test monitors. They help reduce alert fatigue during development and ensure only fully vetted monitors go live. Ideal for engineers and SREs managing alert workflows, Draft Monitors provide clarity across multiple teams and a sure path from idea to reliable alert.
+Draft Monitors let you safely create, refine, and test alerts without triggering notifications or impacting production. 
+
+Whether you're experimenting with thresholds, iterating on complex queries, or collaborating with teammates, drafts give you a clean, isolated space to work that is free from the noise of unfinished or test monitors. Also, Draft Monitors help reduce alert fatigue during development and ensure only fully vetted monitors go live. 
+
+Ideal for engineers and SREs managing alert workflows, Draft Monitors provide clarity across multiple teams and a sure path from idea to reliable alert.
 
 ## Create a draft monitor
 
@@ -43,7 +47,7 @@ Find draft monitors from the [**Monitors List**][3] by using the draft status fa
 
 ## Permissions
 
-Anyone with edit permissions can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
+Anyone with [edit permissions][4] can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
 
 ## Best practices
 
@@ -59,3 +63,4 @@ Anyone with edit permissions can update a draft monitor. You can use events to p
 [1]: https://app.datadoghq.com/monitors/create
 [2]: https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert
 [3]: https://app.datadoghq.com/monitors/manage
+[4]: /monitors/configuration/?tab=thresholdalert#permissions
