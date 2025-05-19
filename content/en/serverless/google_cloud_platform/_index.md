@@ -1,8 +1,7 @@
 ---
 title: Google Cloud Platform
-
+aliases:
+    - /serverless/gcp
 ---
 
-# Overview
-
-The new future home of our docs.
+## Overview
