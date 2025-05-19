@@ -415,7 +415,7 @@ Processes in Kubernetes containers are tagged by:
 - `kube_daemon_set`
 - `kube_job`
 - `kube_deployment`
-- `Kube_cluster_name`
+- `kube_cluster_name`
 
 If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` are picked up automatically.
 Having these tags available lets you tie together APM, logs, metrics, and process data.
