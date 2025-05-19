@@ -13,6 +13,10 @@ further_reading:
   text: "Learn how to set up LLM Observability"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Overview
 
 You can configure your LLM applications on the Settings page to optimize your application's performance and security.
@@ -28,6 +32,8 @@ Topics
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a BAA and configured for zero data retention.</div>
+
 Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for Evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
@@ -42,6 +48,8 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
+<div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the **GPT-4o mini** model for Evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
@@ -54,8 +62,9 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
-
 {{% tab "Anthropic" %}}
+
+<div class="alert alert-info">Anthropic is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for Evaluations.
 
@@ -69,6 +78,8 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
+
+<div class="alert alert-info">Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for Evaluations.
 
@@ -95,6 +106,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 1. Select the span names you would like your evaluation to run on. (Optional if traces is selected).
 1. Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
 1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
+1. (Optional) For Failure to Answer, if OpenAI or Azure OpenAI is selected, configure the evaluation by selecting what types of answers should be considered Failure to Answer. This configuration is detailed in [Failure to Answer Configuration][5].
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
@@ -131,3 +143,4 @@ Topics can contain multiple words and should be as specific and descriptive as p
 [2]: https://app.datadoghq.com/llm/settings/evaluations
 [3]: /llm_observability/terms/#topic-relevancy
 [4]: https://app.datadoghq.com/llm/applications
+[5]: /llm_observability/terms/#failure-to-answer-configuration

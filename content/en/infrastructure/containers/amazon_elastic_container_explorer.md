@@ -155,13 +155,13 @@ Some resources have specific tags. The following tags are available in addition 
 | **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
 |---------------------|------------------------|--------------------------|
 | **Cluster**         | ~15 minutes             | ~15 minutes               |
-| **Task**            | ~15 seconds             | ~24 hours                 |
-| **Task Definition** | ~15 seconds             | ~24 hours                 |
-| **Service**         | ~15 seconds             | ~24 hours                 |
-| **Container Instance**         | ~24 hours               | ~24 hours                 |
+| **Task**            | ~15 seconds             | ~15 minutes                 |
+| **Task Definition** | ~15 seconds             | ~15 minutes                 |
+| **Service**         | ~15 seconds             | ~15 minutes                 |
+| **Container Instance**         | ~15 minutes               | ~15 minutes                 |
 
 * A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
-* Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
+* Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to 30 minutes.
 * Installing the Datadog Agent in your cluster provides additional, relevant host-level tags, such as `availability_zone`.
 
 [1]: https://app.datadoghq.com/orchestration/explorer/ecsTask

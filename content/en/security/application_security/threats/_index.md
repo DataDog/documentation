@@ -1,7 +1,7 @@
 ---
-title: Application Threat Management
+title: App and API Protection
 further_reading:
-- link: "/security/application_security/threats/add-user-info/"
+- link: "/security/application_security/how-it-works/add-user-info/"
   tag: "Documentation"
   text: "Tracking User Activity"
 - link: "/security/application_security/threats/library_configuration/"
@@ -10,7 +10,7 @@ further_reading:
 - link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How AAP Works"
 ---
@@ -19,25 +19,25 @@ further_reading:
 <div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Datadog's App and API Protection (AAP) Threat Management protects web applications and APIs from a wide range of security threats, including: 
+Datadog's App and API Protection (AAP) App and API Protection protects web applications and APIs from a wide range of security threats, including: 
 
 - Exploit attempts
 - Application abuse and fraud
 - API abuse 
 
-Integrated into the Datadog platform, AAP Threat Management leverages Datadog’s extensive observability data (logs and traces) to provide full-stack visibility and security in a unified platform. 
+Integrated into the Datadog platform, App and API Protection leverages Datadog’s extensive observability data (logs and traces) to provide full-stack visibility and security in a unified platform. 
 
-AAP Threat Management enables teams to identify and remediate threats quickly. Its key differentiator is bridging the gap between security and DevOps, promoting collaboration between development, security, and operations teams.
+App and API Protection enables teams to identify and remediate threats quickly. Its key differentiator is bridging the gap between security and DevOps, promoting collaboration between development, security, and operations teams.
 
 ## Use cases
 
-Discover the ways Datadog AAP Threat Management helps common use cases:
+Discover the ways Datadog App and API Protection helps common use cases:
 
 | You want to...    | How Datadog AAP can help |
 | ----------- | ----------- |
-| **Web Application Protection:** Prevent vulnerability exploits such as SQL Injection, Server-side Request Forgery, and Local File Inclusion. | Enable [Exploit Prevention][9] on your services. AAP Threat Management blocks exploits in real-time and generates signals for further investigation.|
+| **Web Application Protection:** Prevent vulnerability exploits such as SQL Injection, Server-side Request Forgery, and Local File Inclusion. | Enable [Exploit Prevention][9] on your services. App and API Protection blocks exploits in real-time and generates signals for further investigation.|
 | **Application and API abuse:** Protect applications against application and API abuse such as credential stuffing and Account Takeover attacks.| Leverage [OOTB detection rules][10] for notifications such as unusual account creations or password resets from an IP, or distributed credential stuffing campaigns. Review the benefits of [OOTB Account TakeOver Protection][11].|
-| **API Security:** Learn about your organization’s APIs, understand the posture and actions needed to reduce risk using a prioritized list of API endpoints.| AAP Threat Management:</br> - Inventories all your API endpoints.</br> - Gives you visibility into your API traffic, including API abuse.</br> - Highlights risk across your API endpoints. For example, vulnerable or unauthenticated endpoints processing sensitive data.|
+| **API Security:** Learn about your organization’s APIs, understand the posture and actions needed to reduce risk using a prioritized list of API endpoints.| App and API Protection:</br> - Inventories all your API endpoints.</br> - Gives you visibility into your API traffic, including API abuse.</br> - Highlights risk across your API endpoints. For example, vulnerable or unauthenticated endpoints processing sensitive data.|
 
 ## Security signals
 
@@ -45,7 +45,7 @@ Security signals raised by Threat Monitoring are summarized and surfaced in view
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Software Catalog with services showing threat signals" style="width:100%;" >}}
 
-For additional information about how Threat Management works, read [How AAP Works][4].
+For additional information about how App and API Protection works, read [How AAP Works][4].
 
 
 ## Explore threat signals
@@ -75,12 +75,12 @@ For information on disabling threat management and protection, see [Disabling th
 
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
-[4]: /security/application_security/how-appsec-works/
+[4]: /security/application_security/how-it-works/
 [5]: /security/application_security/threats/inapp_waf_rules/
-[6]: /security/application_security/threats/custom_rules/
+[6]: /security/application_security/policies/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
-[8]: /security/application_security/threats/security_signals/
-[9]: /security/application_security/threats/exploit-prevention/
+[8]: /security/workload_protection/security_signals/
+[9]: /security/application_security/exploit-prevention/
 [10]: /security/default_rules/?category=cat-application-security
 [11]: /security/account_takeover_protection/
 [12]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

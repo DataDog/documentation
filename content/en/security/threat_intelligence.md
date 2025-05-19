@@ -4,7 +4,7 @@ aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"
 further_reading:
-  - link: "/security/application_security/threats/threat-intelligence/"
+  - link: "/security/application_security/how-it-works/threat-intelligence/"
     tag: "documentation"
     text: "AAP Threat Intelligence"
   - link: "/security/cloud_siem/threat_intelligence/"
@@ -16,7 +16,7 @@ products:
   url: /security/cloud_siem/
   icon: siem
 - name: Workload Protection
-  url: /security/threats/
+  url: /security/workload_protection/
   icon: cloud-security-management
 - name: App and API Protection
   url: /security/application_security/
@@ -91,8 +91,6 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | AAP and Cloud SIEM |
 | disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | AAP |
-| C2 | suspicious | domains  | Detect communication with known command and control domains | Cloud SIEM |
-| Phishing | suspicious | domains  | Identify phishing domains used in credential harvesting or brand impersonation | Cloud SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |
