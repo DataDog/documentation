@@ -55,7 +55,10 @@ If you're using Kubernetes, follow the instruction for [running in Kubernetes][8
 
 If you're directly using Docker, follow the instrcutins for [running in Docker][9].
 
-If you're not using a container runtime, follow the instructions for running [directly on the host][10]
+
+### Non-container environments
+
+For hosts without container runtimes, follow the instructions for [running directly on the host][10].
 
 ### Configuring the Profiler
 #### Local symbol upload (Experimental)
