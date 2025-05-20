@@ -16,6 +16,9 @@ further_reading:
   text: "How Datadog's Infrastructure team manages internal deployments using the Service Catalog and CI/CD Visibility"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Datadog's Internal Developer Portal!" >}}
+{{< /callout >}}
+
 TODO: insert image of IDP
 
 ## Overview
@@ -29,10 +32,10 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 ## Common use cases
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/internal_developer_portal/use_cases/dev_onboarding" >}}Accelerate Developer Onboarding{{< /nextlink >}}
-    {{< nextlink href="/internal_developer_portal/use_cases/incident_response" >}}Improve Incident Response{{< /nextlink >}}
-    {{< nextlink href="/internal_developer_portal/use_cases/dependency_management" >}}Manage and Map Dependencies{{< /nextlink >}}
-    {{< nextlink href="/internal_developer_portal/use_cases/production_readiness" >}}Evaluate Production Readiness{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/use_cases/dev_onboarding" >}}Accelerate developer onboarding{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/use_cases/incident_response" >}}Improve incident response{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/use_cases/dependency_management" >}}Manage and map dependencies{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/use_cases/production_readiness" >}}Evaluate production readiness{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Main features

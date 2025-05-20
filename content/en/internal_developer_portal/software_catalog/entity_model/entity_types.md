@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-As of schema v3.0+, Software Catalog supports multiple kinds of entities, such as service, queue, datastore, system, and API. Custom entities are also supported.
+In Software Catalog, an entity represents the smallest building block of modern microservice-based architecture. As of [schema definition v3.0][1]+, an entity can be an instrumented APM service, a datastore, a system, an API, a queue, or even a custom-defined entity. 
 
 See GitHub for [full schema definitions][1]. 
 
@@ -231,3 +231,4 @@ Example YAML:
 
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[2]: /tracing/services/inferred_services/?tab=agentv7551#naming-inferred-entities
