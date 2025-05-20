@@ -47,56 +47,56 @@ Starting with [version 2.17.0](https://github.com/DataDog/browser-sdk/blob/main/
 
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
-   <!-- NPM -->
+    <!-- NPM -->
 
-   {% if equals($lib_src, "npm") %}
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
-   
-   datadogRum.init({
-       ...,
-       trackViewsManually: true,
-       ...
-   });
-   ```
-   {% /if %}
+    {% if equals($lib_src, "npm") %}
+    ```javascript
+    import { datadogRum } from '@datadog/browser-rum';
+    
+    datadogRum.init({
+      ...,
+      trackViewsManually: true,
+      ...
+    });
+    ```
+    {% /if %}
 
-   <!-- CDN async -->
+    <!-- CDN async -->
 
-   {% if equals($lib_src, "cdn_async") %}
-   ```javascript
-   window.DD_RUM.onReady(function() {
-       window.DD_RUM.init({
-           ...,
-           trackViewsManually: true,
-           ...
-       })
-   })
-   ```
-   {% /if %}
+    {% if equals($lib_src, "cdn_async") %}
+    ```javascript
+    window.DD_RUM.onReady(function() {
+      window.DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+      })
+    })
+    ```
+    {% /if %}
 
-   <!-- CDN sync -->
+    <!-- CDN sync -->
 
-   {% if equals($lib_src, "cdn_sync") %}
-   ```javascript
-   window.DD_RUM &&
-       window.DD_RUM.init({
-           ...,
-           trackViewsManually: true,
-           ...
-       });
-   ```
-   {% /if %}
+    {% if equals($lib_src, "cdn_sync") %}
+    ```javascript
+    window.DD_RUM &&
+      window.DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+      });
+    ```
+    {% /if %}
 
 1. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0](https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130), you can also optionally define the associated service name and version.
 
-   - View Name: Defaults to the page URL path.
-   - Service: Defaults to the default service specified when creating your RUM application.
-   - Version: Defaults to the default version specified when creating your RUM application.
+    - View Name: Defaults to the page URL path.
+    - Service: Defaults to the default service specified when creating your RUM application.
+    - Version: Defaults to the default version specified when creating your RUM application.
 
-   {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
-   - Context: You can add context to views and the child events of views.
-   {% /if %}
+    {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
+    - Context: You can add context to views and the child events of views.
+    {% /if %}
 
 For more information, see [Setup Browser Monitoring](/real_user_monitoring/browser/setup/).
 
@@ -110,12 +110,12 @@ The following example manually tracks the pageviews on the `checkout` page in a 
 {% if equals($lib_src, "npm") %}
 ```javascript
 datadogRum.startView({
-    name: 'checkout',
-    service: 'purchase',
-    version: '1.2.3',
-    context: {
-        payment: 'Done'
-    }
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3',
+  context: {
+    payment: 'Done'
+  }
 });
 ```
 {% /if %}
@@ -127,14 +127,14 @@ datadogRum.startView({
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
-    window.DD_RUM.startView({
-        name: 'checkout',
-        service: 'purchase',
-        version: '1.2.3',
-        context: {
-            payment: 'Done'
-        }
-    });
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3',
+    context: {
+      payment: 'Done'
+    }
+  });
 });
 ```
 {% /if %}
@@ -146,14 +146,14 @@ window.DD_RUM.onReady(function () {
 {% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
-    window.DD_RUM.startView({
-        name: 'checkout',
-        service: 'purchase',
-        version: '1.2.3',
-        context: {
-            payment: 'Done'
-        }
-    });
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3',
+    context: {
+      payment: 'Done'
+    }
+  });
 ```
 {% /if %}
 
@@ -173,9 +173,9 @@ The following example manually tracks the pageviews on the `checkout` page in a 
 {% if equals($lib_src, "npm") %}
 ```javascript
 datadogRum.startView({
-    name: 'checkout',
-    service: 'purchase',
-    version: '1.2.3'
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
 });
 ```
 {% /if %}
@@ -187,11 +187,11 @@ datadogRum.startView({
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
-    window.DD_RUM.startView({
-        name: 'checkout',
-        service: 'purchase',
-        version: '1.2.3'
-    });
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  });
 });
 ```
 {% /if %}
@@ -203,11 +203,11 @@ window.DD_RUM.onReady(function () {
 {% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
-    window.DD_RUM.startView({
-        name: 'checkout',
-        service: 'purchase',
-        version: '1.2.3'
-    });
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  });
 ```
 {% /if %}
 
@@ -234,7 +234,7 @@ datadogRum.startView('checkout');
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
-    window.DD_RUM.startView('checkout');
+  window.DD_RUM.startView('checkout');
 });
 ```
 {% /if %}
@@ -261,156 +261,156 @@ To override default RUM view names so that they are aligned with how you've defi
 
 1. Start views for each route change.
 
-   <!-- NPM -->
+    <!-- NPM -->
 
-   {% if equals($lib_src, "npm") %}
-   ```javascript
-      import { matchRoutes, useLocation } from 'react-router-dom';
-      import { routes } from 'path/to/routes';
-      import { datadogRum } from "@datadog/browser-rum";
-   
-      export default function App() {
-        // Track every route change with useLocation API
-       let location = useLocation();
-   
-       useEffect(() => {
-         const routeMatches = matchRoutes(routes, location.pathname);
-         const viewName = routeMatches && computeViewName(routeMatches);
-         if (viewName) {
-           datadogRum.startView({name: viewName});
-         }
-       }, [location.pathname]);
-   
-       ...
-      }
-   
-      // Compute view name out of routeMatches
-      function computeViewName(routeMatches) {
-       let viewName = "";
-       for (let index = 0; index < routeMatches.length; index++) {
-         const routeMatch = routeMatches[index];
-         const path = routeMatch.route.path;
-         // Skip pathless routes
-         if (!path) {
-           continue;
-         }
-   
-         if (path.startsWith("/")) {
+    {% if equals($lib_src, "npm") %}
+    ```javascript
+    import { matchRoutes, useLocation } from 'react-router-dom';
+    import { routes } from 'path/to/routes';
+    import { datadogRum } from "@datadog/browser-rum";
+
+    export default function App() {
+      // Track every route change with useLocation API
+      let location = useLocation();
+    
+      useEffect(() => {
+        const routeMatches = matchRoutes(routes, location.pathname);
+        const viewName = routeMatches && computeViewName(routeMatches);
+        if (viewName) {
+          datadogRum.startView({name: viewName});
+        }
+      }, [location.pathname]);
+    
+    ...
+    }
+    
+    // Compute view name out of routeMatches
+    function computeViewName(routeMatches) {
+      let viewName = "";
+      for (let index = 0; index < routeMatches.length; index++) {
+        const routeMatch = routeMatches[index];
+        const path = routeMatch.route.path;
+        // Skip pathless routes
+        if (!path) {
+          continue;
+        }
+  
+        if (path.startsWith("/")) {
           // Handle absolute child route paths
-           viewName = path;
-         } else {
+          viewName = path;
+        } else {
           // Handle route paths ending with "/"
-           viewName += viewName.endsWith("/") ? path : `/${path}`;
-         }
-       }
-   
-       return viewName || '/';
+          viewName += viewName.endsWith("/") ? path : `/${path}`;
+        }
       }
-   ```
-   {% /if %}
+  
+      return viewName || '/';
+    }
+    ```
+    {% /if %}
 
-   <!-- end NPM -->
+    <!-- end NPM -->
 
-   <!-- CDN async -->
+    <!-- CDN async -->
 
-   {% if equals($lib_src, "cdn_async") %}
-   ```javascript
-      import { matchRoutes, useLocation } from 'react-router-dom';
-      import { routes } from 'path/to/routes';
-   
-      export default function App() {
-        // Track every route change with useLocation API
-       let location = useLocation();
-   
-       useEffect(() => {
-         const routeMatches = matchRoutes(routes, location.pathname);
-         const viewName = routeMatches && computeViewName(routeMatches);
-         if (viewName) {
-           DD_RUM.onReady(function() {
-             DD_RUM.startView({name: viewName});
-           });
-         }
-       }, [location.pathname]);
-   
-       ...
-      }
-   
-      // Compute view name out of routeMatches
-      function computeViewName(routeMatches) {
-       let viewName = "";
-       for (let index = 0; index < routeMatches.length; index++) {
-         const routeMatch = routeMatches[index];
-         const path = routeMatch.route.path;
-         // Skip pathless routes
-         if (!path) {
-           continue;
-         }
-   
-         if (path.startsWith("/")) {
+    {% if equals($lib_src, "cdn_async") %}
+    ```javascript
+    import { matchRoutes, useLocation } from 'react-router-dom';
+    import { routes } from 'path/to/routes';
+
+    export default function App() {
+      // Track every route change with useLocation API
+      let location = useLocation();
+
+      useEffect(() => {
+        const routeMatches = matchRoutes(routes, location.pathname);
+        const viewName = routeMatches && computeViewName(routeMatches);
+        if (viewName) {
+          DD_RUM.onReady(function() {
+            DD_RUM.startView({name: viewName});
+          });
+        }
+      }, [location.pathname]);
+
+    ...
+    }
+    
+    // Compute view name out of routeMatches
+    function computeViewName(routeMatches) {
+      let viewName = "";
+      for (let index = 0; index < routeMatches.length; index++) {
+        const routeMatch = routeMatches[index];
+        const path = routeMatch.route.path;
+        // Skip pathless routes
+        if (!path) {
+          continue;
+        }
+
+        if (path.startsWith("/")) {
           // Handle absolute child route paths
-           viewName = path;
-         } else {
+          viewName = path;
+        } else {
           // Handle route paths ending with "/"
-           viewName += viewName.endsWith("/") ? path : `/${path}`;
-         }
-       }
-   
-       return viewName || '/';
+          viewName += viewName.endsWith("/") ? path : `/${path}`;
+        }
       }
-   ```
-   {% /if %}
 
-   <!-- end CDN async -->
+      return viewName || '/';
+    }
+    ```
+    {% /if %}
 
-   <!-- CDN sync -->
+    <!-- end CDN async -->
 
-   {% if equals($lib_src, "cdn_sync") %}
-   ```javascript
-      import { matchRoutes, useLocation } from 'react-router-dom';
-      import { routes } from 'path/to/routes';
-   
-      export default function App() {
-        // Track every route change with useLocation API
-       let location = useLocation();
-   
-       useEffect(() => {
-         const routeMatches = matchRoutes(routes, location.pathname);
-         const viewName = routeMatches && computeViewName(routeMatches);
-         if (viewName) {
-           window.DD_RUM &&
-             window.DD_RUM.startView({name: viewName});
-         }
-       }, [location.pathname]);
-   
-       ...
+    <!-- CDN sync -->
+
+    {% if equals($lib_src, "cdn_sync") %}
+    ```javascript
+    import { matchRoutes, useLocation } from 'react-router-dom';
+    import { routes } from 'path/to/routes';
+
+    export default function App() {
+      // Track every route change with useLocation API
+      let location = useLocation();
+    
+      useEffect(() => {
+        const routeMatches = matchRoutes(routes, location.pathname);
+        const viewName = routeMatches && computeViewName(routeMatches);
+        if (viewName) {
+          window.DD_RUM &&
+            window.DD_RUM.startView({name: viewName});
+        }
+      }, [location.pathname]);
+    
+      ...
       }
-   
-      // Compute view name out of routeMatches
-      function computeViewName(routeMatches) {
-       let viewName = "";
-       for (let index = 0; index < routeMatches.length; index++) {
-         const routeMatch = routeMatches[index];
-         const path = routeMatch.route.path;
-         // Skip pathless routes
-         if (!path) {
-           continue;
-         }
-   
-         if (path.startsWith("/")) {
+    
+    // Compute view name out of routeMatches
+    function computeViewName(routeMatches) {
+      let viewName = "";
+      for (let index = 0; index < routeMatches.length; index++) {
+        const routeMatch = routeMatches[index];
+        const path = routeMatch.route.path;
+        // Skip pathless routes
+        if (!path) {
+          continue;
+        }
+
+        if (path.startsWith("/")) {
           // Handle absolute child route paths
-           viewName = path;
-         } else {
+          viewName = path;
+        } else {
           // Handle route paths ending with "/"
-           viewName += viewName.endsWith("/") ? path : `/${path}`;
-         }
-       }
-   
-       return viewName || '/';
+          viewName += viewName.endsWith("/") ? path : `/${path}`;
+        }
       }
-   ```
-   {% /if %}
 
-   <!-- end CDN sync -->
+      return viewName || '/';
+    }
+    ```
+    {% /if %}
+
+    <!-- end CDN sync -->
 
 ### Set view name
 
@@ -432,12 +432,12 @@ datadogRum.setViewName('Checkout');
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
-    window.DD_RUM.setViewName('<VIEW_NAME>');
+  window.DD_RUM.setViewName('<VIEW_NAME>');
 });
 
 // Code example
 window.DD_RUM.onReady(function () {
-    window.DD_RUM.setViewName('Checkout');
+  window.DD_RUM.setViewName('Checkout');
 });
 ```
 {% /if %}
@@ -501,184 +501,102 @@ The potential `context` values are:
 - Long Task
 - [PerformanceLongTaskTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming)
 
-  {% table /%}
-{% if /%}
-{% if equals($lib_src, "npm") %}
-```
-javascript
-                        import { datadogRum } from '@datadog/browser-rum';
-                          
-                          datadogRum.init({
-                              ...,
-                              beforeSend: (event, context) => {
-                                  // collect a RUM resource's response headers
-                                  if (event.type === 'resource' && event.resource.type === 'fetch') {
-                                      event.context.responseHeaders = Object.fromEntries(context.response.headers)
-                                  }
-                                  return true
-                              },
-                              ...
-                          });
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
-{% if equals($lib_src, "cdn_async") %}
-```
-javascript
-                        window.DD_RUM.onReady(function() {
-                              window.DD_RUM.init({
-                                  ...,
-                                  beforeSend: (event, context) => {
-                                      // collect a RUM resource's response headers
-                                      if (event.type === 'resource' && event.resource.type === 'fetch') {
-                                          event.context.responseHeaders = Object.fromEntries(context.response.headers)
-                                      }
-                                      return true
-                                  },
-                                  ...
-                              })
-                          })
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
-{% if equals($lib_src, "cdn_sync") %}
-```
-javascript
-                        window.DD_RUM &&
-                              window.DD_RUM.init({
-                                  ...,
-                                  beforeSend: (event, context) => {
-                                      // collect a RUM resource's response headers
-                                      if (event.type === 'resource' && event.resource.type === 'fetch') {
-                                          event.context.responseHeaders = Object.fromEntries(context.response.headers)
-                                      }
-                                      return true
-                                  },
-                                  ...
-                              });
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
-{% if equals($lib_src, "npm") %}
-```
-javascript
-                        import { datadogRum } from '@datadog/browser-rum';
-                          
-                          datadogRum.init({
-                              ...,
-                              beforeSend: (event) => {
-                                  // remove email from view url
-                                  event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
-                              },
-                              ...
-                          });
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
-{% if equals($lib_src, "cdn_async") %}
-```
-javascript
-                        window.DD_RUM.onReady(function() {
-                              window.DD_RUM.init({
-                                  ...,
-                                  beforeSend: (event) => {
-                                      // remove email from view url
-                                      event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
-                                  },
-                                  ...
-                              })
-                          })
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
-{% if equals($lib_src, "cdn_sync") %}
-```
-javascript
-                        window.DD_RUM &&
-                              window.DD_RUM.init({
-                                  ...,
-                                  beforeSend: (event) => {
-                                      // remove email from view url
-                                      event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
-                                  },
-                                  ...
-                              });
-                          
-                        
-                      
-                    
-                  
-                
-              
-            
-          
-        
-      
-    
-  
-```
-{% /if %}
 {% /table %}
 {% /if %}
 
-{% if /%}
+{% if equals($lib_src, "npm") %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+  
+datadogRum.init({
+  ...,
+  beforeSend: (event, context) => {
+    // collect a RUM resource's response headers
+    if (event.type === 'resource' && event.resource.type === 'fetch') {
+      event.context.responseHeaders = Object.fromEntries(context.response.headers)
+    }
+    return true
+  },
+  ...
+});
+```
+{% /if %}
+
+{% if equals($lib_src, "cdn_async") %}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+      // collect a RUM resource's response headers
+      if (event.type === 'resource' && event.resource.type === 'fetch') {
+        event.context.responseHeaders = Object.fromEntries(context.response.headers)
+      }
+      return true
+    },
+    ...
+  })
+})
+```
+{% /if %}
+
+{% if equals($lib_src, "cdn_sync") %}
+```javascript
+window.DD_RUM &&
+  window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+      // collect a RUM resource's response headers
+      if (event.type === 'resource' && event.resource.type === 'fetch') {
+          event.context.responseHeaders = Object.fromEntries(context.response.headers)
+      }
+      return true
+    },
+    ...
+  });
+```
+{% /if %}
+
+{% if equals($lib_src, "npm") %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+  
+datadogRum.init({
+  ...,
+  beforeSend: (event) => {
+    // remove email from view url
+    event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+  },
+  ...
+});
+```
+{% /if %}
+
+{% if equals($lib_src, "cdn_async") %}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.init({
+    ...,
+    beforeSend: (event) => {
+      // remove email from view url
+      event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    },
+    ...
+  });
+});
+```
+{% /if %}
+
+{% if equals($lib_src, "cdn_sync") %}
+```javascript
+window.DD_RUM &&
+  window.DD_RUM.init({
+    ...,
+    beforeSend: (event) => {
+      // remove email from view url
+      event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    },
+    ...
+  });
+```
+{% /if %}
