@@ -4,6 +4,7 @@
     },
     "[markdoc]": {
         "editor.defaultFormatter": "stripe.markdoc-language-support",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2
     }
 }
