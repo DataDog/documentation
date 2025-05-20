@@ -49,4 +49,4 @@ The endpoint details page shows you metadata, performance metrics, errors, depen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /tracing/software_catalog/service_definitions/v3-0/#system-and-api-pages-in-software-catalog
+[2]: /software_catalog/service_definitions/v3-0/#system-and-api-pages-in-software-catalog
