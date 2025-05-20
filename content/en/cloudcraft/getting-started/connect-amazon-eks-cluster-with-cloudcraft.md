@@ -10,6 +10,8 @@ Cloudcraft uses [access entries][1] to grant [Cloudcraft's existing read-only IA
 
 ## Prerequisites
 
+<div class="alert alert-info">Scanning EKS clusters requires public endpoints. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control.</a></div>
+
 Before connecting your Amazon EKS clusters with Cloudcraft, you must connect your AWS account and generate diagrams that include your clusters.
 
 To connect your AWS account and familiarize yourself with Cloudcraft, see the following articles:
