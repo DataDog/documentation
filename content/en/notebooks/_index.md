@@ -30,21 +30,16 @@ You can create a notebook in two places:
 - From the left-hand navigation bar, click **Dashboards > New Notebook**.
 - On the upper-right-hand corner of the [Notebooks List page][1], click **New Notebook**.
 
-{{< img src="/notebooks/notebooks_new/new_legacy_notebook_dropdown.png" alt="Create legacy notebook through the New Notebook dropdown" style="width:100%;" >}}
-
-To create a legacy notebook, click the **New Noteboook** dropdown and select **New Legacy Notebook**. 
-
 ### Notebook templates
 
 In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Editing a notebook
 
-With Notebooks, you can start typing using markdown shortcuts such as `#` for headers or <code>```</code> for code blocks. Notebooks comprise cells that can contain text or graphs. A new cell is created every time you press <kbd>Enter</kbd>. Notebooks automatically save your text content as you type. For graph cells, save all edits in the graph editor for the widget to be saved in the notebook.
+With Notebooks, you can start typing using markdown shortcuts, such as `#` for headers or <code>```</code> for code blocks. Notebooks automatically save your text content as you type. For graphs, save all edits in the graph editor for the widget to be saved in the notebook.
 
 ### Cell types
-
-Notebooks support the following cell types:
+Notebooks support various cell types, including but not limited to:
 - [Graphs](#graphs-in-notebooks)
 - Images
 - Headers (H1 - H3)
@@ -52,6 +47,8 @@ Notebooks support the following cell types:
 - Codeblocks
 - Quotes
 - [Markdown](#markdown-cells)
+
+For the full list, type <kbd>/</kbd> into a notebook.
 
 ### Graphs in notebooks
 
@@ -66,7 +63,13 @@ Additional graph configuration options are accessible under the three-dot ellips
 - **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for XS and S graphs.
 - **Split graph**: Display one graph per tag value to view small multiples of your visualization.
 
-### Rich text features
+### Markdown and rich text features
+
+Markdown content can be added directly to text. Use Markdown in Notebooks for the following features:
+- Text tables  
+- Syntax highlighting in code blocks  
+- Inline template variables  
+- @Mentions
 
 Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
 
@@ -86,20 +89,13 @@ Slash commands are an interface for creating graphs or cells. On a new line, typ
 
 When you select a graph type, it opens the [graph editor][3]. After you click **Save**, the graph appears in your notebook.
 
-### Markdown cells
+### Keyboard shortcuts
 
-Markdown cells allow you to use the legacy markdown experience in the new editor. They are most useful for the following features:
+{{< img src="/notebooks/notebook_keyboard_shortcuts.png" alt="Keyboard shortcuts menu for Datadog notebooks" style="width:70%;" >}}
 
-- Text Tables  
-- Syntax Highlighting in codeblocks  
-- Inline template variables  
-- @Mentions
+At the bottom-left corner of a notebook, click the keyboard icon to view a list of keyboard shortcuts for editing.
 
-To create a markdown cell, type `/markdown` and press <kbd>Enter</kbd>.
-
-### Moving cells
-
-You can move cells by either cutting and pasting them (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>) or by hovering over a cell and using the drag handle on the left to move it to the desired location.
+Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
 ### Table of contents 
 
@@ -119,7 +115,7 @@ Notebooks automatically generate a table of contents from any headers you insert
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using either the [image cell](#image-cell) or the [Markdown editor](#markdown-editor).
+You can add images to your notebook using the [image cell](#image-cell).
 
 #### Image cell
 
@@ -169,7 +165,7 @@ To comment on a graph or an image, select the cell and click on the comment icon
 
 ## Multiplayer experience in Notebooks
 
-Notebooks are collaborative, allowing multiple users to edit simultaneously. If a collaborator opens your notebook, their cursor appears. Hover over a cursor to see the collaborator's name.
+With rich text presence, Notebooks support full collaboration, allowing multiple users to edit simultaneously. When a collaborator opens your notebook, their cursor appears in real time. Hover over a cursor to see the collaborator's name.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -289,8 +285,6 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 ## API access
 
 Notebooks APIs are currently being updated to support the new Notebooks product. Creating notebooks through the API places them in "compatibility mode," supporting only markdown and widget cells. 
-
-You cannot read or edit new notebooks using the notebooks API; attempts to do so result in a 400 error.
 
 ## Further reading
 

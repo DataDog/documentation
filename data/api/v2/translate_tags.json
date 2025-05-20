@@ -57,7 +57,7 @@
   },
   "csm-threats": {
     "name": "CSM Threats",
-    "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
+    "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
     "name": "Case Management",
@@ -182,6 +182,10 @@
   "on-call": {
     "name": "On-Call",
     "description": "Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\ndirectly through the Datadog API."
+  },
+  "on-call-paging": {
+    "name": "On-Call Paging",
+    "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",

@@ -122,6 +122,10 @@ For more information, see the [Azure integration documentation][4].
 
 {{% tab "Google Cloud storage" %}}
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Reference Tables are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
+{{% /site-region %}}
+
 1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
 
 1. From the Google Cloud console, navigate to the **Cloud Storage** page.

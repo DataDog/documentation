@@ -178,6 +178,10 @@ nav_sections:
         link: developers/
         icon: dev-code
         desc: Develop on the Datadog platform
+      - title: Partners
+        link: partners/
+        icon: colab
+        desc: Learn about best practices and get started monitoring your clients' environments.
 
 popular_searches:
   - title: API documentation

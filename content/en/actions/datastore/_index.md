@@ -11,7 +11,14 @@ further_reading:
 - link: "service_management/workflows/build"
   tag: "Documentation"
   text: "Build Workflows"
+- link: "https://www.datadoghq.com/blog/datadog-datastore/"
+  tag: "Blog"
+  text: "Enhance your automated workflows and apps with Datastore"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datastores are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 

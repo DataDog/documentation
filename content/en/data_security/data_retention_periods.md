@@ -64,8 +64,8 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: | 
-       - **Profiles (not displayed in the UI)**: 8 days
-       - **Profiles (displayed in the UI)**: 1 year
+       - **Individual profiles (not opened in the UI)**: 8 days
+       - **Individual profiles (opened in the UI at least once)**: 1 year
        - **Profile metrics**: 90 days
   - product: Continuous Testing
     data_type: | 
@@ -80,12 +80,14 @@ attributes:
   - product: Database Monitoring
     data_type: | 
        - **Query samples**: 15 days
+       - **Query metrics**: 15 months
   - product: Datadog App
     data_type: | 
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Errors**: 1 year after last access
+       - **Error samples**: 15 days
+       - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
        - **Events**: 15 months
@@ -113,7 +115,7 @@ attributes:
     data_type: | 
        - **Netflow**: 30 days
        - **SNMP traps**: 15 days
-  - product: Network Performance Monitoring
+  - product: Cloud Network Monitoring
     data_type: | 
        - **Netflow**: 14 days
   - product: Product Analytics
