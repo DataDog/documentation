@@ -2863,6 +2863,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update resource filters
+      url: '#update-resource-filters'
+      identifier: security-monitoring-update-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateResourceEvaluationFilters
+        unstable: []
+        order: 27
+    - name: List resource filters
+      url: '#list-resource-filters'
+      identifier: security-monitoring-list-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetResourceEvaluationFilters
+        unstable: []
+        order: 26
     - name: Update a custom framework
       url: '#update-a-custom-framework'
       identifier: security-monitoring-update-a-custom-framework
