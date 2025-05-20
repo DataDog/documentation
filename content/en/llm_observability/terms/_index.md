@@ -155,11 +155,9 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 ## Evaluations
 
-LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations, including assessments of sentiment, topic relevancy, toxicity, failure to answer and model hallucination. With evaluations, you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
+LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
-LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation. While Datadog provides [out-of-the-box evaluations][12] for your traces, you can also [submit your own evaluations][6] to LLM Observability.
-
-You can learn more about the specific Evaluations we support [here][10].
+While Datadog provides [out-of-the-box evaluations][12] for your traces, you can also [submit your own evaluations][6] to LLM Observability, integrate with frameworks like [Ragas][13] and [NeMo][14], or Datadog's [Sensitive Data Scanner][5].
 
 ## Further Reading
 
@@ -177,3 +175,5 @@ You can learn more about the specific Evaluations we support [here][10].
 [10]: https://github.com/DataDog/llm-observability/blob/main/4-custom-evaluations.ipynb
 [11]: /llm_observability/evaluations/
 [12]: /llm_observability/evaluations/ootb_evaluations
+[13]: /llm_observability/evaluations/ragas_evaluations
+[14]: /llm_observability/evaluations/submit_nemo_evaluations
