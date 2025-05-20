@@ -6,7 +6,7 @@ aliases:
 
 ## Overview
 
-[Google Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) is a way to run container-based services and jobs in Google Cloud Platform.
+[Google Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) is a way to run container-based services and jobs in Google Cloud.
 
 Note about service monitors and logs through the Google Cloud Integration.
 

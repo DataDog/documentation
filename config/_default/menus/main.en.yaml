@@ -3245,25 +3245,25 @@ menu:
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
       weight: 702
-    - name: Google Cloud Platform
-      url: serverless/google_cloud_platform
+    - name: Google Cloud
+      url: serverless/google_cloud
       parent: serverless
       identifier: serverless_gcp
       weight: 8
     - name: Google Cloud Run
-      url: serverless/google_cloud_platform/google_cloud_run
+      url: serverless/google_cloud/google_cloud_run
       parent: serverless_gcp
       weight: 801
-    - name: Google Cloud Functions
-      url: serverless/google_cloud_platform/google_cloud_functions
+    - name: Google Cloud Run In-Process
+      url: serverless/google_cloud/google_cloud_run_in_process
       parent: serverless_gcp
       weight: 802
-    - name: Google Cloud Functions (1st generation)
-      url: serverless/google_cloud_platform/google_cloud_run_functions_1st_gen
+    - name: Google Cloud Run Functions
+      url: serverless/google_cloud/google_cloud_functions
       parent: serverless_gcp
       weight: 803
-    - name: Google Cloud Run serverless-init
-      url: serverless/google_cloud_platform/google_cloud_run_serverless_init
+    - name: Google Cloud Functions (1st generation)
+      url: serverless/google_cloud/google_cloud_run_functions_1st_gen
       parent: serverless_gcp
       weight: 804
     - name: Glossary
