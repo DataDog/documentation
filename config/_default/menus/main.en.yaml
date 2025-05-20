@@ -4487,6 +4487,16 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
       weight: 402
+    - name: Ragas Evaluations
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 403
+    - name: NeMo Evaluations
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 404
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
