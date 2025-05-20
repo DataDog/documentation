@@ -22,7 +22,7 @@ With Cost Reports, you can:
 
 ## Create a cost report
 
-1. Go to [**Cloud Cost > Analyze > Reports**][5] in the Datadog app.
+1. Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
 1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
 
    {{< img src="cloud_cost/cost_reports/create-new-report.png" alt="Create a new report or from a template." style="width:100%;" >}}
@@ -60,7 +60,7 @@ With Cost Reports, you can:
 
 1. Click **Save** at the top right to save your report for personal or team use.
 1. Share the report by copying the URL or exporting the view to CSV or PNG.
-1. Star important reports for convenient access and search for saved reports as needed.
+1. Search for saved reports as needed.
 
 [1]: /cloud_cost_management/aws/
 [2]: /cloud_cost_management/azure/?tab=billingaccounts
