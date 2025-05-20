@@ -3162,6 +3162,11 @@ menu:
       parent: serverless_aws_lambda
       identifier: libraries_integrations
       weight: 111
+    - name: Lambda Web Adapter
+      url: serverless/aws_lambda/lwa
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_lwa
+      weight: 112
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -4093,56 +4098,61 @@ menu:
       parent: profiler
       identifier: profiler_compare
       weight: 5
+    - name: Automated Analysis
+      url: profiler/automated_analysis
+      parent: profiler
+      identifier: profiler_automated_analysis
+      weight: 6
     - name: Profiler Troubleshooting
       url: profiler/profiler_troubleshooting/
       parent: profiler
       identifier: profiler_troubleshooting
-      weight: 6
+      weight: 7
     - name: Java
       url: profiler/profiler_troubleshooting/java/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_java
-      weight: 601
+      weight: 701
     - name: Python
       url: profiler/profiler_troubleshooting/python/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_python
-      weight: 602
+      weight: 702
     - name: Go
       url: profiler/profiler_troubleshooting/go/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_go
-      weight: 603
+      weight: 703
     - name: Ruby
       url: profiler/profiler_troubleshooting/ruby/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_ruby
-      weight: 604
+      weight: 704
     - name: Node.js
       url: profiler/profiler_troubleshooting/nodejs/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_nodejs
-      weight: 605
+      weight: 705
     - name: .NET
       url: profiler/profiler_troubleshooting/dotnet/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_dotnet
-      weight: 606
+      weight: 706
     - name: PHP
       url: profiler/profiler_troubleshooting/php/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_php
-      weight: 607
+      weight: 707
     - name: C/C++/Rust
       url: profiler/profiler_troubleshooting/ddprof/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
-      weight: 608
+      weight: 708
     - name: Guides
       url: profiler/guide/
       parent: profiler
       identifier: profiler_guides
-      weight: 7
+      weight: 8
     - name: Database Monitoring
       url: database_monitoring/
       pre: database-2
@@ -6060,6 +6070,12 @@ menu:
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
       weight: 1001
+    # - name: CloudPrem
+    #   pre: cloud
+    #   url: cloudprem/
+    #   parent: log_management_heading 
+    #   identifier: cloud_prem
+    #   weight: 30000
     - name: Security Overview
       url: security/
       pre: security-platform
