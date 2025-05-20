@@ -149,6 +149,40 @@ This check identifies instances where the LLM makes a claim that disagrees with 
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
+##### Instrumentation
+
+In order to take advantage of Hallucination detection, you will need to annotate LLM spans with the user query and context:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.utils import Prompt
+
+# if your llm call is auto-instrumented...
+with LLMObs.annotation_context(
+        prompt=Prompt(
+            variables={"user_question": user_question, "article": article},
+            rag_query_variables=["user_question"],
+            rag_context_variables=["article"]
+        ),
+        name="generate_answer"
+):
+    oai_client.chat.completions.create(...) # autoinstrumented llm call
+
+# if your llm call is manually instrumented ...
+@llm(name="generate_answer")
+def generate_answer():
+  ...
+  LLMObs.annotate(
+            prompt=Prompt(
+                variables={"user_question": user_question, "article": article},
+                rag_query_variables=["user_question"],
+                rag_context_variables=["article"]
+            ),
+  )
+{{< /code-block >}}
+
+The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (e. g., the messages for an OpenAI chat completion request). Set rag_query_variables and rag_context_variables to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+
 ##### Hallucination configuration
 
 Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled.
