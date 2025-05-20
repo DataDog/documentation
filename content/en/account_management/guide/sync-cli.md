@@ -24,4 +24,7 @@ The `datadog-sync-cli` tool can be installed from source, from Releases, or from
 
 ### Installing from releases
 
-### 
+### Installing using Docker
+
+
+## Usage 
