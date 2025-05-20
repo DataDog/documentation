@@ -585,15 +585,20 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 1. Use a FIPS-compliant extension layer by referencing the appropriate ARN:
 
+{{< tabs >}}
+{{% tab "AWS GovCLoud" %}}
  ```sh
- # AWS GovCloud
  arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
  arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
-
- # AWS Commercial
+ ```
+{{% /tab %}}
+{{% tab "AWS Commercial" %}}
+ ```sh
  arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
  arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
  ```
+{{% /tab %}}
+{{< /tabs >}}
 
 2. For Lambda functions using Python, JavaScript, or Go, set the environment variable `DD_LAMBDA_FIPS_MODE` to `true`. This environment variable:
    - In FIPS mode, the Lambda metric helper functions require the FIPS-compliant extension for metric submission
