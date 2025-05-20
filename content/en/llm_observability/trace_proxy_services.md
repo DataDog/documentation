@@ -169,7 +169,7 @@ This can also be done by filtering the span kind facet on the left hand side of 
 
 ### Filtering by a specific ML application and observing patterns and trends
 
-Both processes described in the filtering by [top-level calls to the proxy service](#all-llm-calls-made-within-the-proxy-or-gateway-service) and [LLM calls made within the proxy or gateway service](#all-llm-calls-made-within-the-proxy-or-gateway-service) can also be applied to a specific ML application to view its interaction with the proxy or gateway service.
+Both processes described in the filtering by [top-level calls to the proxy service](#all-requests-to-the-proxy-or-gateway-service) and [LLM calls made within the proxy or gateway service](#all-llm-calls-made-within-the-proxy-or-gateway-service) can also be applied to a specific ML application to view its interaction with the proxy or gateway service.
 
 1. In the top-left dropdown, select the ML application of interest.
 2. To see all traces for the ML application, switch from the `All Spans` view to the `Traces` view in the top-right dropdown.
