@@ -16,8 +16,8 @@ further_reading:
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
 
-{{< callout url="" btn_hidden="true" header="Try the Automated Analysis Preview!">}}
-	The Automated Analysis is in Preview.
+{{< callout url="" btn_hidden="true" >}}
+ Automated Analysis for the Continuous Profiler is in Preview.
 {{< /callout >}}
 
 ## Overview
