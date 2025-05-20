@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
   tag: "Blog"
   text: "Best practices for using DORA metrics to improve software delivery"
+- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
+  tag: "Blog"
+  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
@@ -29,7 +32,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -38,7 +40,7 @@ DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that ind
 Deployment frequency
 : How often an organization successfully releases to production.
 
-Lead time for changes
+Change lead time
 : The amount of time it takes a commit to get into production.
 
 Change failure rate

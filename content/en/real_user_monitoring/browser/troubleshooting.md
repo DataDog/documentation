@@ -48,9 +48,9 @@ The RUM SDK sends batches of event data to Datadog's intake every time one of th
 - When the payload is >16 kB
 - On `visibility:hidden` or `beforeUnload`
 
-If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+If data is being sent, you should see network requests targeting `api/v2/rum` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
+{{< img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake">}}
 
 ## RUM cookies
 
