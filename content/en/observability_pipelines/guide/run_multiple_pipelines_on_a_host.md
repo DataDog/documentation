@@ -1,5 +1,5 @@
 ---
-title: Run Multiple Pipelines on the Same Host
+title: Run Multiple Pipelines on a Host
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/set_up_pipelines/"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-If you want to run multiple pipelines on the same host so that you can send logs from different sources, you need to manually add the Worker files for any additional Workers. This document explains which files you need to add and modify to run those Workers.
+If you want to run multiple pipelines on a single host to send logs from different sources, you need to manually add the Worker files for any additional Workers. This document explains which files you need to add and modify to run those Workers.
 
 ## Prerequisites
 
