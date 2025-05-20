@@ -3259,7 +3259,7 @@ menu:
       parent: serverless_gcp
       weight: 802
     - name: Google Cloud Run Functions
-      url: serverless/google_cloud/google_cloud_functions
+      url: serverless/google_cloud/google_cloud_run_functions
       parent: serverless_gcp
       weight: 803
     - name: Google Cloud Functions (1st generation)
