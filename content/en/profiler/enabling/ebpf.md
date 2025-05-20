@@ -95,7 +95,7 @@ TBD
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+After installing the Full-Host Profiler, see the [Getting Started with Profiler][6] to learn how to use Continuous Profiler to identify and fix performance problems.
 
 ## Further Reading
 
