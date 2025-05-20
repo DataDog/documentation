@@ -7771,7 +7771,7 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: Charts
+    - name: Vizualizing with Charts
       url: product_analytics/charts
       parent: product_analytics
       identifier: pa_charts
@@ -7801,21 +7801,16 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
-    - name: Heatmaps
-      url: product_analytics/heatmaps
-      parent: product_analytics
-      identifier: pa_heatmaps
-      weight: 3
-    - name: Session Replay
+    - name: Replaying User Activity
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 4
+      weight: 3
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 401
+      weight: 301
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -7840,7 +7835,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 402
+      weight: 302
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -7856,21 +7851,26 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Segmentation
+    - name: Heatmaps
+      url: product_analytics/session_replay/heatmaps
+      parent: pa_session_replay
+      identifier: pa_heatmaps
+      weight: 303
+    - name: Analyzing User Groups
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 6
+      weight: 4
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 7
+      weight: 5
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 8
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2
