@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-RUM Recommendations highlight opportunities to improve your application's frontend performance and reliability. Each view in your application has its own set of recommendations, available from the [Optimization page][2].
+RUM Recommendations highlight opportunities to improve your application's frontend availability, performance, and reliability. Each view in your application has its own set of recommendations, available from the [Optimization page][2].
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/rum-recommendations-overview.mp4" alt="Reviewing a RUM recommendation by Bits AI to review a session replay and alleviate user frustration." video="true">}}
 
@@ -24,7 +24,7 @@ Recommendations enable you to:
 
 ## How it works
 
-Datadog analyzes RUM and APM data to generate recommendations for enhancing the performance and stability of your application's frontend. A severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. A recommendation's severity is determined by the number of impacted events and users.
+Datadog analyzes RUM and APM data to generate recommendations for enhancing the availability, performance, and stability of your application's frontend. A severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. A recommendation's severity is determined by the number of impacted events and users.
 
 After the recommendation has been addressed, you can mark it as resolved. Recommendations are automatically resolved if they are no longer detected upon a new application version deployment.
 
