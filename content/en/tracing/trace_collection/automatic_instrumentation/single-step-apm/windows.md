@@ -24,6 +24,8 @@ To enable APM with Single Step Instrumentation on Windows:
 
 Once installed, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
+**Note:** Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
+
 ## Set SDK Tracer Versions
 
 By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET Tracer.
@@ -33,8 +35,6 @@ If you need to pin a specific version:
 1. From the Windows Agent install page, after toggling APM Instrumentation, select Customize library versions.
 1. Under .NET, choose the version you want to use.
 1. Copy the updated MSI command and run it on your host.
-
-Note: Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
 
 ## Remove Single Step APM instrumentation from your Agent
 
