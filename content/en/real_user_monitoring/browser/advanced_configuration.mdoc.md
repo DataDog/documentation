@@ -87,13 +87,37 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
 1. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][4], you can also optionally define the associated service name and version.
 
-    - View Name: Defaults to the page URL path.
-    - Service: Defaults to the default service specified when creating your RUM application.
-    - Version: Defaults to the default version specified when creating your RUM application.
-
-    {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
-    - Context: You can add context to views and the child events of views.
-    {% /if %}
+    {% table %}
+    * View option
+    * Description
+    * Default value
+    * Supported in your version
+    ---
+    * `name`
+    * The name of the view.
+    * The page URL path.
+    * SUPPORT GOES HERE
+    ---
+    * `service`
+    * The service to associate with the view.
+    * The default service specified when creating your RUM application.
+    * SUPPORT GOES HERE
+    ---
+    * `version`
+    * The version to associate with the view.
+    * The default version specified when creating your RUM application.
+    * SUPPORT GOES HERE
+    ---
+    * `context`
+    * An object of arbitrary keys and values that can be added to views and the child events of views.
+    * `{}`
+    * 
+      {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
+      {% x/ %}
+      {% else /%}
+      No, supported in `>=5.28.0`.
+      {% /if %}
+    {% /table %}
 
 For more information, see [Setup Browser Monitoring][5].
 
@@ -1032,7 +1056,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ## View context
 
-{% if not($rum_browser_sdk_version, "gte_5_28_0") %}
+{% if not(equals($rum_browser_sdk_version, "gte_5_28_0")) %}
 {% alert level="warning" %}
 Upgrade to version 5.28.0 or later to use this feature.
 {% /alert %}
