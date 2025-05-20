@@ -155,7 +155,7 @@ All requests to the proxy service can now be viewed as top-level spans within th
 
 The workflow span name can also be filtered by a facet on the left hand side of the trace view:
 
-{{< img src="llm_observability/span-name-facet-for-proxy-service-monitoring.png" alt="Select the workflow span name from the facet on the left hand side of the trace view" style="width:100%;" >}}
+{{< img src="llm_observability/span-name-facet-for-proxy-service-monitoring.png" alt="Select the workflow span name from the facet on the left hand side of the trace view" style="width:50%;" >}}
 
 ### All LLM calls made within the proxy or gateway service
 
@@ -165,7 +165,7 @@ To instead monitor only the LLM calls made within a proxy or gateway service, fi
 
 This can also be done by filtering the span kind facet on the left hand side of the trace view:
 
-{{< img src="llm_observability/span-kind-facet-for-proxy-service-monitoring.png" alt="Select the LLM span kind facet from the left hand side of the trace view" style="width:100%;" >}}
+{{< img src="llm_observability/span-kind-facet-for-proxy-service-monitoring.png" alt="Select the LLM span kind facet from the left hand side of the trace view" style="width:50%;" >}}
 
 ### Filtering by a specific ML application and observing patterns and trends
 
