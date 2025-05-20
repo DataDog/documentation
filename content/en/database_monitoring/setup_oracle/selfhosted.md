@@ -118,7 +118,7 @@ For installation steps, see the [Agent installation instructions][1].
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
-**Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][10] for more details
+**Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][10] for more details.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}
