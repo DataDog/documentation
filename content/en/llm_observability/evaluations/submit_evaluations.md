@@ -20,11 +20,11 @@ further_reading:
 ## Overview
 
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
-While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [Python SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). See [Naming custom metrics][1] for guidelines on how to choose an appropriate label for your evaluations.
+While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). See [Naming custom metrics][1] for guidelines on how to choose an appropriate label for your evaluations.
 
 ## Submitting evaluations with the SDK
 
-The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See [submitting evaluations][3] in the SDK documentation for details.
+The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See the [Python][3] or [NodeJS][4] SDK documentation for more details.
 
 ### Example
 
@@ -56,7 +56,7 @@ def llm_call():
 
 ## Submitting evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][4] for more details on the API specifications.
+You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
 
 ### Example
 
@@ -94,6 +94,6 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/custom_metrics/#naming-custom-metrics
-[2]: /llm_observability/setup/sdk/#exporting-a-span
-[3]: /llm_observability/setup/sdk/#submit-evaluations
-[4]: /llm_observability/setup/api/?tab=model#evaluations-api
+[2]: /llm_observability/setup/api/?tab=model#evaluations-api
+[3]: /llm_observability/setup/sdk/python/#evaluations
+[4]: /llm_observability/setup/sdk/nodejs/#evaluations
