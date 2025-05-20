@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run Serverless Init
+title: Google Cloud Run serverless-init
 ---
 
 ## Overview

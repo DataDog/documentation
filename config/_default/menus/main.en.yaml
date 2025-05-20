@@ -3262,7 +3262,7 @@ menu:
       url: serverless/google_cloud_platform/google_cloud_run_functions_1st_gen
       parent: serverless_gcp
       weight: 803
-    - name: Google Cloud Run Serverless Init
+    - name: Google Cloud Run serverless-init
       url: serverless/google_cloud_platform/google_cloud_run_serverless_init
       parent: serverless_gcp
       weight: 804
