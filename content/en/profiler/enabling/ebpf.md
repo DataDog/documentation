@@ -42,7 +42,7 @@ OS Settings
 : TBD
 
 Debugging information
-: Symbols should be available locallly or can be  uploaded in CI via `datadog-ci` 
+: Symbols should be available locallly or can be  uploaded in CI with `datadog-ci` 
 
 ## Installation
 
