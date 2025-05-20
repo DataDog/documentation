@@ -51,13 +51,6 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
     <li><code>lambda:GetFunction</code></li>
     <li><code>lambda:GetLayerVersion</code></li>
   </ul>
-  <p>Scanners autoscaling and management permissions:</p>
-  <ul>
-    <li><code>autoscaling:DescribeAutoScalingGroups</code></li>
-    <li><code>autoscaling:SetDesiredCapacity</code></li>
-    <li><code>autoscaling:StartInstanceRefresh</code></li>
-    <li><code>ec2:GetConsoleOutput</code></li>
-  </ul>
   <p>Only when Sensitive Data Scanning (DSPM) is enabled:</p>
   <ul>
     <li><code>kms:GenerateDataKey</code></li>
