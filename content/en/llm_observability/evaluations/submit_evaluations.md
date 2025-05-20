@@ -32,27 +32,24 @@ The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` 
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
+def my_harmfulness_eval(input: Any) -> float:
+  score = ... # custom harmfulness evaluation logic
+
+  return score
+
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
 def llm_call():
     completion = ... # user application logic to invoke LLM
 
-    # tag your span with a `msg_id`
-    msg_id = get_msg_id()
-    LLMObs.annotate(
-        tags = {'msg_id': msg_id}
-    )
-
-    # submit an evaluation on a span tagged with a matching `msg_id`
-    LLMObs.submit_evaluation_for(
-        span_with_tag_value = {
-            "tag_key": "msg_id",
-            "tag_value": msg_id
-        },
+    # joining an evaluation to a span via span ID and trace ID
+    span_context = LLMObs.export_span(span=None)
+    LLMObs.submit_evaluation(
+        span = span_context,
         ml_app = "chatbot",
         label="harmfulness",
         metric_type="score",
-        value=10,
-        tags={"evaluation_provider": "ragas"},
+        value=my_harmfulness_eval(completion),
+        tags={"reasoning": "it makes sense", "type": "custom"},
     )
 {{< /code-block >}}
 
