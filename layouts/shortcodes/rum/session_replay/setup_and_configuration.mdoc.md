@@ -161,12 +161,12 @@ To set up Mobile Session Replay for React Native:
 
     // Add this function as onInitialization prop to DatadogProvider
     const onSDKInitialized = async () => {
-        await SessionReplay.enable({
-          replaySampleRate: 100,
-          textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS, 
-          imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE, 
-          touchPrivacyLevel: TouchPrivacyLevel.SHOW, 
-        });
+      await SessionReplay.enable({
+        replaySampleRate: 100,
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS, 
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE, 
+        touchPrivacyLevel: TouchPrivacyLevel.SHOW, 
+      });
     };
 
     const App = () => {
@@ -295,7 +295,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" %}
 var sessionReplayConfig = SessionReplay.Configuration(
-    replaySampleRate: <SAMPLE_RATE>
+  replaySampleRate: <SAMPLE_RATE>
 )
 ```
 {% /if %}
