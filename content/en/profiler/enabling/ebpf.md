@@ -48,7 +48,7 @@ Debugging information
 
 The Full-Host Profiler is distributed as a standalone executable.
 
-### Running the Profiler
+### Container environments
 If the host is running workloads inside containers, it is recommended to run the profiler inside a container as well. A container image is [available][5].
 
 If you're using Kubernetes, follow the instruction for [running in Kubernetes][8].
