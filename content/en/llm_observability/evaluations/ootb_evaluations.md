@@ -139,6 +139,25 @@ You can provide topics for this evaluation.
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
+#### Hallucination
+
+This check identifies instances where the LLM makes a claim that disagrees with the provided input context.
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
+
+##### Hallucination configuration
+
+Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled.
+
+| Configuration Option | Description |
+|---|---|
+| Contradiction | Claims made in the LLM-generated response that go directly against the provided context |
+| Unsupported Claim | Claims made in the LLM-generated response that are not grounded in the context |
+
+Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
+
 #### Failure to Answer
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
