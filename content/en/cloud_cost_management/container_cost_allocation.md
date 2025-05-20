@@ -111,7 +111,6 @@ Cost allocation divides host compute and other resource costs from your cloud pr
 
 Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
 
-
 {{< tabs >}}
 {{% tab "AWS" %}}
 

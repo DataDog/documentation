@@ -26,6 +26,8 @@ This guide walks you through the recommended aggregator architecture for new Obs
 
 Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][1] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data loss. It also ensures high availability should a Worker go down for any reason.
 
+For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][2]).
+
 | Cloud Provider| Recommendation (minimum) |
 | ------------- | ------------------------ |
 | AWS           | c7i.xlarge               |
@@ -141,3 +143,4 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 - A five minute stabilization period for scaling up and down.
 
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L70-L85
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html
