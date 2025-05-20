@@ -144,5 +144,5 @@ A table of the important environment variables, which container they are set on,
 1. step
 1. instructions
     - with some details.
-{{% /tab }}
+{{% /tab %}}
 {{< /tabs >}}
