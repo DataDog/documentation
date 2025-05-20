@@ -68,7 +68,7 @@ To enable local symbol upload:
 
 1. Set the `DD_HOST_PROFILING_EXPERIMENTAL_UPLOAD_SYMBOLS` environment variable to true.
 2. Provide a Datadog API key through the `DD_API_KEY` environment variable.
-3. Provide a Datadog APP key through the `DD_APP_KEY` environment variable.
+3. Provide a [Datadog application key][13] through the `DD_APP_KEY` environment variable.
 4. Set the `DD_SITE environment` variable to your Datadog site (e.g. datadoghq.com, datadoghq.eu, us5.datadoghq.com, ...).
 
 ### Build
