@@ -223,9 +223,8 @@ The Calendar application uses the OpenTelemetry logging exporter in its Logback 
 
 Additionally, environment variables configure the OpenTelemetry environment to export logs, metrics, and traces:
 
-1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
-2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
-3. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics and traces to be sent with OTLP.
+1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otelcol.yml`.
+2. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics, traces, and logs to be sent with OTLP.
 
 ## Correlating observability data
 
