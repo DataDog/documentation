@@ -143,6 +143,8 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 This check identifies instances where the LLM makes a claim that disagrees with the provided input context.
 
+{{< img src="llm_observability/evaluations/hallucination_1.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
