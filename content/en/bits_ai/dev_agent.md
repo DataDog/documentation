@@ -14,20 +14,31 @@ The Bits AI Dev Agent is a generative AI coding assistant that uses observabilit
 
 ## Requirements
 
-To use the Dev Agent, your environment must be integrated with GitHub. The Agent uses this connection to create pull requests, apply code updates, and track changes as it responds to developer feedback.
+To use the Dev Agent, you must enable the GitHub integration. The Agent uses this connection to create pull requests, apply code updates, and track changes as it responds to developer feedback.
 
 ## Key capabilities
+
+### Key capabilities
+
+| Capability                                 | Available for       |
+|--------------------------------------------|---------------------|
+| Proposes GitHub pull requests with fixes   | Error Tracking      |
+| Adds unit tests to validate proposed changes | Error Tracking      |
+| Responds to developer feedback in PRs      | Error Tracking      |
+| Identifies root-cause spans in traces      | APM (Tracing)       |
+| Recommends latency optimizations           | APM (Tracing)       |
+| Tracks Dev Agent activity in a central dashboard | All integrations    |
 
 - **Creates pull requests with proposed fixes**  
   When the Dev Agent detects an issue such as a crash, exception, or security vulnerability, it opens a GitHub pull request with a description of the problem and a proposed fix that follows your team’s PR template.
 - **Adds test coverage for proposed changes**  
-  Each PR includes unit tests to validate the fix and prevent regressions. If developers suggest changes, the agent updates the tests accordingly.
+  Each PR includes unit tests to validate the fix and prevent regressions. If developers suggest changes, the Agent updates the tests accordingly.
 - **Responds to PR feedback**  
-  Developers can leave comments requesting alternate logic, logging, or status codes. The agent updates the code in response and commits the changes automatically.
+  Developers can leave comments requesting alternate logic, logging, or status codes. The Aagent updates the code in response and commits the changes automatically.
 - **Surfaces root causes in distributed traces**  
   For performance issues, the Dev Agent analyzes traces to identify high-latency spans and recommends specific fixes, such as caching repeated GitHub auth calls.
 - **Tracks all activity in a central dashboard**  
-  A dedicated interface shows every agent-generated PR, including status, service, triggering signal, and whether it’s under review, updated, or merged.
+  A dedicated interface shows every Agent-generated PR, including status, service, triggering signal, and whether it’s under review, updated, or merged.
 
 ## How it works
 
