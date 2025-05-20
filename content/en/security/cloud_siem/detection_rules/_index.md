@@ -149,7 +149,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 #####  How an event is determined to be anomalous
 
-If the default parameters are used in the **Content anomaly detection options** section, events are normal if they have a similarity score of `70%` with more than `1` other event withing the last `7 days`. This means a signal is triggered when the field values are significantly different than the values seen in the last `7 days`. An event is significantly different if the event fields analyzed are less than or equal to the similarity score, which in this example is 70%.
+If the default parameters are used in the **Content anomaly detection options** section, events are normal if they have a similarity score of `70%` with more than `1` other event withing the last `7 days`. This means a signal is triggered when the event field values are significantly different than the values seen in the last `7 days`. An event is significantly different if the event fields analyzed are less than or equal to the similarity score, which in this example is 70%.
 
 An event field is considered normal if at least one historical log event has a similar value.
 
