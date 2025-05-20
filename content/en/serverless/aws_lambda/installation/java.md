@@ -17,6 +17,8 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the Java runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
 
 If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
