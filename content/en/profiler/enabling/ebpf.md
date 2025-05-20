@@ -1,5 +1,5 @@
 ---
-title: Enabling the eBPF Profiler
+title: Enabling the Full-Host Profiler
 private: true
 further_reading:
     - link: 'getting_started/profiler'
