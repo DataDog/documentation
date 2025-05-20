@@ -32,6 +32,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/"
   tag: "Blog"
   text: "How to secure HTTP headers with synthetic tests"
+- link: "https://www.datadoghq.com/blog/synthetic-monitoring-updates/"
+  tag: "Blog"
+  text: "Gain key insights into user experiences faster with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/smoke-testing-synthetic-monitoring/"
+  tag: "Blog"
+  text: "How to create efficient UX smoke tests with Synthetic Monitoring"
 algolia:
   tags: ['synthetics']
 cascade:

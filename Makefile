@@ -61,20 +61,34 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-# Download all dependencies and run the site
-start: setup-build-scripts ## Build and run docs including external content.
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-cdocs: 
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js;
+
+start:
+	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make setup-build-scripts
+	@make build-cdocs
 	@make server
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make update_websites_sources_module
+	@make server
+
+# Leave build scripts in place, but skip dependencies and sources_module
+# Useful for testing local changes to the CDOCS build script
+start-cdocs-preserve-build:
+	@make build-cdocs
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
@@ -96,11 +110,11 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json domains/cloud_platform/aws/libs/mappings/content/)
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples update_pre_build node_modules placeholders
+	make hugpython all-examples update_pre_build node_modules build-cdocs placeholders
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)

@@ -44,8 +44,8 @@ Use the following environment variables to configure formats for reading and wri
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
-**Default**: `datadog,tracecontext` <br>
-**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links.
+**Default**: `datadog,tracecontext,baggage` <br>
+**Note**: With multiple trace context formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links. When `baggage` is included, it is added as [baggage](#baggage) to the existing context.
 
 `OTEL_PROPAGATORS`
 : Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
@@ -122,6 +122,7 @@ The Datadog Python SDK supports the following trace context formats, including d
 |------------------------|---------------------------------|
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
+| [Baggage][6]          | `baggage`                       |
 | [B3 Single][3]         | `b3`                            |
 |                        | `b3 single header` (deprecated) |
 | [B3 Multi][4]          | `b3multi`                       |
@@ -132,6 +133,7 @@ The Datadog Python SDK supports the following trace context formats, including d
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -145,6 +147,7 @@ The Datadog Ruby SDK supports the following trace context formats, including dep
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][6]          | `baggage`           |
 | [B3 Single][3]         | `b3`                |
 | [B3 Multi][4]          | `b3multi`           |
 | [None][5]              | `none`              |
@@ -168,6 +171,7 @@ end
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -181,6 +185,7 @@ The Datadog Go SDK supports the following trace context formats, including depre
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][6]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
@@ -191,6 +196,7 @@ The Datadog Go SDK supports the following trace context formats, including depre
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -204,6 +210,7 @@ The Datadog Node.js SDK supports the following trace context formats, including 
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][6]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
@@ -214,6 +221,7 @@ The Datadog Node.js SDK supports the following trace context formats, including 
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -227,6 +235,7 @@ The Datadog PHP SDK supports the following trace context formats, including depr
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][6]          | `baggage`           |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
@@ -319,6 +328,7 @@ Creating this surrounding trace to your consuming-processing logic ensures obser
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -332,6 +342,7 @@ The Datadog C++ SDK supports the following trace context formats, including depr
 |------------------------|---------------------|
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
+| [Baggage][6]          | `baggage`           |
 | [B3 Multi][4]          | `b3`                |
 |                        | `b3multi`           |
 | [None][5]              | `none`              |
@@ -467,6 +478,7 @@ void handle_http_request(const Request& request, dd::Tracer& tracer) {
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
+[6]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -480,6 +492,7 @@ The Datadog .NET SDK supports the following trace context formats, including dep
 |------------------------|-------------------------------|
 | [Datadog][1]           | `datadog`                     |
 | [W3C Trace Context][2] | `tracecontext`                |
+| [Baggage][9]          | `baggage`                     |
 |                        | `W3C` (deprecated)            |
 | [B3 Single][3]         | `B3 single header`            |
 |                        | `B3SingleHeader` (deprecated) |
@@ -595,7 +608,7 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 [6]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0
 [7]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0
 [8]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0
-
+[9]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -628,7 +641,7 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 ### Baggage
 
-_Currently available in Python, Node.js, and .NET. For other languages, please reach out to [Support][11]_ 
+_Currently available in Python, Ruby, PHP, Java, Node.js, C++, Go and .NET. For other languages, please reach out to [Support][11]_ 
 
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
 

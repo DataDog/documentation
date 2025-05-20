@@ -24,6 +24,15 @@
 		"description": "Site region shortcode"
 	},
 
+	"Gov region selector":{
+		"prefix": ";;gov-region",
+		"body": [
+			"{{< site-region region=\"gov\" >}}<div class=\"alert alert-warning\"> Enter summary here <a href=\"/getting_started/site\">Datadog site</a> ({{< region-param key=\"dd_site_name\" >}}).</div>",
+"{{< /site-region >}}"
+		],
+		"description": "Gov Site region shortcode"
+	},
+
 	"Region site address":{
 		"prefix": ";;site",
 		"body": [
@@ -297,8 +306,8 @@
 	"Collapse": {
 			"prefix": ";;collapse",
 			"body": [
-				"{{% collapse-content title=\"${1:title}\" level=\"${2|h4,h1,h2,h3,h5,p|}\" expanded=${3|false,true|} %}}",
-				"${4:...}",
+				"{{% collapse-content title=\"${1:title}\" level=\"${2|h4,h1,h2,h3,h5,p|}\" expanded=${3|false,true|} id=\"${4:id-for-anchoring}\" %}}",
+				"${5:...}",
 				"{{% /collapse-content %}}"
 			],
 			"description": "Collapse and expand content"

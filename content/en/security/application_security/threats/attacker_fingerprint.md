@@ -2,7 +2,7 @@
 title: Attacker Fingerprint
 disable_toc: false
 further_reading:
-- link: "/security/application_security/threats/attacker_clustering"
+- link: "/security/application_security/security_signals/attacker_clustering"
   tag: "Documentation"
   text: "Attacker Clustering"
 ---
@@ -11,7 +11,7 @@ This topic describes a feature called **Datadog Attacker Fingerprint** to identi
 
 ## Overview
 
-Datadog Attacker Fingerprint identifies attackers beyond IP addresses. Datadog Attacker fingerprints are automatically computed and added to your traces on attack or login attempts when Application Security Management (ASM) is enabled on your service.
+Datadog Attacker Fingerprint identifies attackers beyond IP addresses. Datadog Attacker fingerprints are automatically computed and added to your traces on attack or login attempts when App and API Protection (AAP) is enabled on your service.
 
 Datadog Attacker fingerprints are composed of several fragments:
 * Endpoint Identifier
@@ -59,9 +59,9 @@ The network identifier fragment provides information about the network part of t
 
 ## How to use Attacker Fingerprints
 
-Fragments can be used as filters in the ASM Traces explorer by filtering on the desired fingerprint field. For example: `@appsec.fingerprint.header.ua_hash:e462fa45` will filter on all requests that have the same user agent hash.
+Fragments can be used as filters in the AAP Traces explorer by filtering on the desired fingerprint field. For example: `@appsec.fingerprint.header.ua_hash:e462fa45` will filter on all requests that have the same user agent hash.
 
-{{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Screenshot of an ASM trace with attacker fingerprint in the trace side panel"  >}}
+{{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Screenshot of an AAP trace with attacker fingerprint in the trace side panel"  >}}
 
 Attacker fingerprints are used in the [Attacker Clustering][1] feature. If a significant portion of your traffic presents the same fingerprint attributes, attacker clustering will show it has a common attack attribute.
 
@@ -70,4 +70,4 @@ Attacker fingerprints are used in the [Attacker Clustering][1] feature. If a sig
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/attacker_clustering
+[1]: /security/application_security/security_signals/attacker_clustering

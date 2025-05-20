@@ -10,6 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/cloud-siem-flex-logs/"
+  tag: "Blog"
+  text: "Cloud SIEM and Flex Logs: Enhanced security insights for the cloud"
+- link: "/logs/guide/flex_compute"
+  tag: "Documentation"
+  text: "Monitor Flex Compute Usage"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -19,6 +25,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 ## Overview
