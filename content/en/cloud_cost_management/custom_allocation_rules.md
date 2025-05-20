@@ -9,24 +9,38 @@ further_reading:
 
 ## Overview
 
-Custom allocation rules helps teams take ownership of their cloud spend by attributing cloud costs to business units, teams, or environments. This page describes how to create a custom allocation rule, how each allocation method works, how to refine your cost destinations using filters and partitions, and how to manage and review your allocation rules.
+Custom allocation rules let you split and assign shared costs to the teams, projects, or environments that use them, supporting accurate showback and chargeback.
+
+With custom allocation rules, platform engineers and cloud cost management professionals can:
+
+- Allocate shared costs using even, proportional, custom percentage, or usage-based methods
+- Refine which costs are included using filters
+- Split allocations by environment, team, or other tags with partitioning
+- Review and manage all allocation rules in one place
+
+By accurately attributing costs, you can drive accountability and optimize cloud usage across your organization.
 
 These are the general steps to create a custom allocation rule:
 
-1. **[Define the source costs](#step-1---define-the-source)** you want to allocate. Specify which costs should be included in the allocation rule by setting crtieria such as provider, product, spend type, or tags.
-1. **Choose your [allocation method](#step-2---choose-an-allocation-method)**:
+1. **[Define the source costs](#define-the-source)**. Specify which costs you want to allocate by setting crtieria such as provider, product, spend type, or tags.
+   
+   _Example: Untagged support costs, shared database costs._
+1. **Choose your [allocation method](#choose-an-allocation-method)**. Options include:
 
-   | Allocation Method | Description | Examples |
+   | Allocation Method | Description | Example |
    | ----------------  | ----------- | -------- |
-   | Even  | Split costs equally among destination tags. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
-   | Custom  | Assign specific percentages to each destination. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
-   | Proportional by spend | Allocate based on each destination's share of total spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
-   | Dynamic by metric  | Allocate based on a performance or usage metric. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
+   | Even  | Split costs evenly among all destinations, regardless of usage or size. Ideal for scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
+   | Custom  | Split costs based on percentages you define to each destination. Ideal for scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
+   | Proportional by spend | Split costs based on each destination's share of total spend. Ideal for scenarios where teams should pay in proportion for their actual usage or spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
+   | Dynamic by metric  | Split costs based on a performance or usage metric. Ideal for scenarios where costs should reflect actual resource consumption or performance metrics. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
 
+1. **[Select your destinations](#define-the-destination)**. Decide which teams, projects, or environments receive the allocated costs.
+1. (Optional) **[Apply filters](#filtering)**. Refine which costs are included in the allocation rule by adding filters.
 
-1. **[Define your destinations](#step-3---define-the-destination)** (the tags or groups that receive the allocated costs).
-1. (Optional) **[Apply a filter](#filtering)** to restrict which costs are included in the allocation rule.
-1. (Optional) **[Use partitioning](#partitioning)** to automatically create sub-allocations for each value of a tag (for example, environment or project)
+   _Example: Only include costs where `aws_proudct` is `ec2`._
+1. (Optional) **[Use partitioning](#partitioning)**. Automatically create sub-allocations for each value of a tag, such as environment or team.
+
+   _Example: Split costs separately for each environment (`prod`, `staging`)._
 
 Custom cost allocation runs after [Tag Pipelines][1] have finished processing any updated tags, enabling allocations based on the latest user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
 
@@ -42,50 +56,67 @@ Use the dropdown filters to specify the cloud provider, specific products or ser
 
 Choosing the right allocation method ensures that costs are attributed fairly and transparently, supporting accurate showback, chargeback, or internal reporting.
 
-You can choose from the following allocation methods:
+Below is a description of how each allocation method works with examples.
 
 {{< tabs >}}
 
-{{% tab "Even Allocation" %}}
+{{% tab "Even" %}}
+
+{{< img src="cloud_cost/custom_allocation_rules/even_diagram.png" alt="Diagram illustrating the even split strategy" style="width:70%;" >}}
 
 With the even strategy, costs are allocated evenly towards your destination tags, regardless of any other spend. Apply a filter to refine which part of the bill determines the proportions.
 
-{{< img src="cloud_cost/custom_allocation_rules/even_diagram.png" alt="Diagram illustrating the even split strategy" style="width:60%;" >}}
-
-{{< img src="cloud_cost/custom_allocation_rules/even_ui.png" alt="The even split strategy as seen in Datadog" style="width:60%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/ui-even.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
 
 {{% /tab %}}
 
-{{% tab "Custom Percentage Allocation" %}}
+{{% tab "Custom percentage" %}}
+
+{{< img src="cloud_cost/custom_allocation_rules/custom_percentage_diagram.png" alt="Diagram illustrating the even split strategy" style="width:70%;" >}}
+
 With the custom percentage strategy, you can define static custom percentages for the destination tags you select. For example, if you have 3 destinations (`teamA`, `teamB`, `teamC`) you can allocate 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`.
 
-{{< img src="cloud_cost/custom_allocation_rules/custom_percentage_diagram.png" alt="Diagram illustrating the even split strategy" style="width:60%;" >}}
-
-{{< img src="cloud_cost/custom_allocation_rules/custom_percentage_ui.png" alt="The even split strategy as seen in Datadog" style="width:60%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/ui-custom.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
 
 {{% /tab %}}
 
-{{% tab "Proportional Allocation" %}}
+{{% tab "Proportional" %}}
+
+{{< img src="cloud_cost/custom_allocation_rules/proportional_diagram.png" alt="Diagram illustrating the proportional split strategy" style="width:70%;" >}}
 
 Costs are allocated based on the proportional spend of destination values. Similarly to even allocation, you can further customize your allocation by setting filters and partitions.
 
-{{< img src="cloud_cost/custom_allocation_rules/proportional_diagram.png" alt="Diagram illustrating the proportional split strategy" style="width:60%;" >}}
+In the example above, EC2 support fees across teams are allocated based on their share of overall EC2 spend. Proportions are calculated based on how much each team spent.
 
-{{< img src="cloud_cost/custom_allocation_rules/proportional_ui.png" alt="The proportional split strategy as seen in Datadog" style="width:60%;" >}}
+To create a rule for this allocation, you could:
+
+- Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`).
+- Choose the allocation method: **Proportional by spend**.
+- Define the allocation destination: **Team** (`teamA`, `teamB`, `teamC`).
+- Define the proportions to split the source costs : **EC2** (`aws_product:ec2`).
+
+You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by environment using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+
+{{< img src="cloud_cost/custom_allocation_rules/ui-proportional-by-spend.png" alt="The proportional split strategy as seen in Datadog" style="width:90%;" >}}
 
 {{% /tab %}}
 
-{{% tab "Dynamic by Metric Allocation" %}}
+{{% tab "Dynamic by metric" %}}
+
+{{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:70%;" >}}
 
 Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
-For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
+For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user, as follows:
 
-For determining the proportion of costs to be allocate, metrics can be aggregated on a daily or monthly basis. However, the costs themselves are still allocated on a daily basis.
+To create a rule for the above allocation, you could:
 
-{{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:60%;" >}}
+- Define the costs to allocate (source): **PostGreSQL costs** (`azure_product_family:dbforpostgresql`).
+- Choose the allocation method: **Dynamic by metric**
+- Define the allocation destination: **User** (`User A`, `User B`, `User C`).
+- Define the metric query to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
 
-{{< img src="cloud_cost/custom_allocation_rules/dynamic_ui.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:60%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
 
@@ -97,7 +128,7 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 
 Filter for and partition the groups, teams, projects, or business units that are to receive the allocated costs.
 
-Use the table below to understand the type of information that is required or optional by cloud provider when adding a destination.
+The table below describes type of information that is required or optional when adding a destination.
 
 | Step | Required | Examples |
 | ---- | ---- | ---- |
@@ -120,21 +151,27 @@ For example, if you partition by `env:prod` and `env:staging`, the rule creates 
 
 {{< tabs >}}
 
-{{% tab "Even Allocation" %}}
+{{% tab "Even allocation" %}}
 
-{{< img src="cloud_cost/custom_allocation_rules/even_partition_diagram.png" alt="Diagram illustrating the even split strategy with partitioning" style="width:90%;" >}}
+With this partition, the same even allocation rule is applied to each environment.
 
-{{% /tab %}}
-
-{{% tab "Proportional Allocation" %}}
-
-{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/even_partition_diagram.png" alt="Diagram illustrating the even split strategy with partitioning" style="width:100%;" >}}
 
 {{% /tab %}}
 
-{{% tab "Dynamic by Metric Allocation" %}}
+{{% tab "Proportional allocation" %}}
 
-{{< img src="cloud_cost/custom_allocation_rules/dynamic_partition_diagram.png" alt="Diagram illustrating the dynamic split strategy with partitioning" style="width:90%;" >}}
+In this example, EC2 support fees are proportionally allocated to teams in two different environments - staging and prod - based on each team's share of EC2 spend.
+
+{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:100%;" >}}
+
+{{% /tab %}}
+
+{{% tab "Dynamic by metric allocation" %}}
+
+In this example, PostgreSQL costs are allocated to users in staging and prod based on each user's share of total query execution time.
+
+{{< img src="cloud_cost/custom_allocation_rules/dynamic_partition_diagram.png" alt="Diagram illustrating the dynamic split strategy with partitioning" style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -144,6 +181,8 @@ For example, if you partition by `env:prod` and `env:staging`, the rule creates 
 Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
 
 When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact [Datadog support][3] to request a backfill.
+
+You can also disable a custom allocation rule without deleting it.
 
 Rules are applied in the same order as shown in the list.
 
