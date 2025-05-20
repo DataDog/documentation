@@ -145,7 +145,17 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 1. In the **Group by** field, specify the fields you want to group by.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule learns the values of the log fields and does not generate any signals.
   **Note**: If the detection rule is modified, the learning period restarts at day `0`.
-1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not.
+1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+#####  How an event is determined to be anomalous
+
+If the default parameters are used in the **Content anomaly detection options** section, events are normal if they have a similarity score of `70%` with more than `1` other event withing the last `7 days`. This means a signal is triggered when the field values are significantly different than the values seen in the last `7 days`. An event is significantly different if the event fields analyzed are less than or equal to the similarity score, which in this example is 70%.
+
+An event field is considered normal if at least one historical log event has a similar value.
+
+For an event to be anomalous, the event fields analyzed:
+- Must not have been seen in the past X days. In this example, it is 7 days.
+- Must be significantly different from all previously observed values
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
