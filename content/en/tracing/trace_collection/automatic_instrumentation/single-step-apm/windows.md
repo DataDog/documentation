@@ -38,6 +38,13 @@ Note: Only .NET applications running in IIS are supported for Single Step Instru
 
 ## Remove Single Step APM instrumentation from your Agent
 
+
+To disable SSI for .NET on your host run:
+
+```shell
+&"C:\Program Files\Datadog\Datadog Agent\bin\datadog-installer.exe" remove datadog-apm-library-dotnet
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
