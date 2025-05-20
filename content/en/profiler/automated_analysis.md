@@ -16,6 +16,10 @@ further_reading:
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
 
+{{< callout url="" btn_hidden="true" header="Try the Automated Analysis Preview!">}}
+	The Automated Analysis is in Preview.
+{{< /callout >}}
+
 ## Overview
 Automated Analysis automatically detects performance issues in your applications using Continuous Profiler data and provides actionable insights for resolution. When an issue is detected, Automated Analysis provides:
 
