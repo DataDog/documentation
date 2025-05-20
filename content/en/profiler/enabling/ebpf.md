@@ -75,23 +75,6 @@ You must first ensure you have the correct version of go installed. In order to 
    make
    ```
 
-### Library
-TBD
-
-### Deploying the shared library
-
-TBD
-
-#### Installing the library
-
-TBD
-#### Appending a search directory
-
-TBD
-
-## Configuration
-
-TBD
 
 ## What's next?
 
