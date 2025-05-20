@@ -42,21 +42,21 @@ The developer overview page centralizes the following information about your tea
 
 #### Get started
 
-Before your team starts using the developer overview page, connect its widgets to data sources with any account that has App Builder permissions:
+The widgets displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
 
+To use the developer overview page with your data, [connect your data sources][10]:
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
-1. Select `+ Connect data` on each widget to connect to GitHub and Jira: 
-   - "My Jira Tickets"
-   - "My Open PRs"
-   - "My Assigned PRs"
-   - "My Team's PRs"
-   - "My Services"
+1. For each widget:
+   1. Click **+ Connect Data**.
+   1. Create a new connection or select an existing one. 
 
-The widgets are powered by [Datadog App Builder][9] and show demo data until you complete this step.
+   After you save your selection, the app displays data from your connection. You can change the selected connection by clicking Change Connection in the app.
+
+**Note**: Connecting data is a one-time setup task; the selected connections apply for your entire team.
    
 #### Personalize your view
 
-Provide values for the page-level filters to tailor the developer overview page to your username and team: 
+Provide values for the filters at the top of the page to personalize your view:
 - **Team**: Name of your [Datadog Team][8] 
 - **Github_Org**: Name of your GitHub Organization
 - **Github_Team**: Name of your GitHub Team
@@ -78,14 +78,14 @@ Lists open Jira issues assigned to your email. Tickets with the status **Done** 
 
 #### GitHub PRs
 
-- **My open PRs** — Pull requests you have created.  
-- **My assigned PRs** — Pull requests you are assigned to review.
-- **My team's PRs** — Pull requests opened by teammates in the selected GitHub team.
+- **My open PRs**: Pull requests you have created.  
+- **My assigned PRs**: Pull requests you are assigned to review.
+- **My team's PRs**: Pull requests opened by teammates in the selected GitHub team.
 
 #### Team services and scorecard performance
 
-- **My team's services** — Lists services owned by the selected **Team** filter.  
-- **Scorecard performance by service** — Displays the average score across all scorecards for each service.
+- **My team's services**: Lists services owned by the selected **Team** filter.  
+- **Scorecard performance by service**: Displays the average score across all scorecards for each service owned by the selected **Team** filter.
 
 #### Issues and Errors
 
@@ -97,14 +97,12 @@ Captures alerts from [Datadog Watchdog][5].
 
 ### Clone for further customization
 
-If the developer overview page doesn't meet your workflow needs, you can clone the page to create a customizable dashboard.
+If you need to customize your view, click **Clone as dashboard** at the top right hand side. This will create a dashboard prefilled with content from the **My Workspace** page. 
 
-1. Select **Clone as dashboard** to create a customizable dashboard prefilled with content from the **My Workspace** page.
-1. Edit the dashboard: add or remove widgets, embed third-party data, or edit the layout. For example:
-   - Create a widget to capture PagerDuty on call information. 
-   - Add a Note widget to create an "announcements" section at the top of the page to capture important updates for your organization.
-   
-   See the [Embedded Apps][2] documentation to learn more about creating widgets.
+Here are some example customizations you can make with the cloned dashboard:
+- Create [Embedded Apps][2] using Datadog's [Action Catalog][11] to display additional 3rd party data (for example, display PagerDuty on call information).
+- Update the overall layout and design of your view by re-sizing, re-arranging, and adding/removing [widgets][12].
+- Use a [Note][13] widget to add an announcement and updates section with relevant information for your organization.
 
 ## Further reading
 
@@ -119,4 +117,8 @@ If the developer overview page doesn't meet your workflow needs, you can clone t
 [7]: /service_management/service_level_objectives/
 [8]: /account_management/teams/
 [9]: /actions/app_builder/#apps-created-by-datadog
+[10]: /actions/connections
+[11]: /actions/actions_catalog/
+[12]: /dashboards/widgets/
+[13]: /dashboards/widgets/note/
 
