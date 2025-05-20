@@ -21,7 +21,7 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Select [**+ New Escalation Policy**][3].
 1. Enter a **Name** for your escalation policy. For example, _Payment's Escalation Policy_.
 1. Select the **Teams** that own this escalation policy.
-1. Now start building the policy out. Decide who or what should receive a Page when this escalation policy is invoked. For each escalation step after, select who to notify. Each step can notify individual users, entire teams, and/or whoever is on-call in a schedule. Please note that each step offers a choice between two notification methods: notify_all and round_robin. You'll find detailed explanations of these methods in the dedicated section.
+1. Now start building the policy out. Decide who or what should receive a Page when this escalation policy is invoked. For each escalation step after, select who to notify. Each step can notify individual users, entire teams, and/or whoever is on-call in a schedule. Please note that each step offers a choice between two notification methods: `notify_all` and `round_robin`. You'll find detailed explanations of these methods in the dedicated section.
    _For example: After this Page is triggered, it is sent to whoever is currently on-call for the Primary schedule, in this case John Doe._
    {{< img src="service_management/oncall/escalation_policy_2_steps_v2.png" alt="An escalation policy, showing two steps after 'Page is triggered'. Each step has a 'Notify' input box and 'If the page is not acknowledged after N minutes, escalate.' The first step is configured to notify a schedule named Primary, and escalates if the page is not acknowledged after 5 minutes. The second step is configured to notify a user named Jane Doe." style="width:100%;" >}}
 1. Configure how many minutes to wait for one of the recipients to acknowledge the Page. If no one acknowledges the Page within the time frame, the Page is escalated. In the example, if the Primary on-call person, John Doe, does not acknowledges the Page within five minutes, the Page is then sent to Jane Doe.
@@ -42,10 +42,10 @@ For example, if a step includes:
 
 then 5 people will be notified simultaneously (individual, 3 people on the team and the person On-Call for the schedule).
 
-### Notify all
+### Round Robin
 Round Robin automatically distributes pages across multiple targets (users, schedules, teams) in a rotating order, ensuring fair load balancing.
 
-EImagine you are building a rotation for a premier support team which counts 50 people, you don't want have all of them On-Call at the same time but given the load of support tickets you want to spread to multiple persons on the team still. You can build 5 schedules of 10 people each and have 5 person On-Call at the same time on which tickets will be sent evenly.
+Imagine you are building a rotation for a premier support team which counts 50 people, you don't want have all of them On-Call at the same time but given the load of support tickets you want to spread to multiple persons on the team still. You can build 5 schedules of 10 people each and have 5 person On-Call at the same time on which tickets will be sent evenly.
 - Page A → Support Schedule Group 1
 - Page B → Support Schedule Group 2
 - Page C → Support Schedule Group 3
