@@ -20,7 +20,7 @@ Adaptive sampling is in Preview. To request access, complete the form.
 
 Datadog **adaptive sampling** helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes).
 
-When you choose adaptive sampling as your sampling strategy, you select a target monthly volume for trace ingestion for one or more services. This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over its endpoints.
+When you choose adaptive sampling as your sampling strategy, you select a target monthly volume for trace ingestion for one or more services. This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over their endpoints.
 
 Adaptive sampling uses [remote configuration][3] plus the existing [sampling rules][7] mechanisms to dynamically adjust sampling rates for each environment, service, and resource combination. This helps you to:
 - Match your specified monthly budget.
@@ -52,48 +52,49 @@ The following table lists minimum tracing library versions required for adaptive
 
 ## Configure the adaptive sampling target
 
-To get started with adaptive sampling, you first need to pick a target setting strategy between:
-1. Configuring a fixed target in gigabytes per month
-2. Configuring a budget which is proportional to your allotment and the number of services onboarded (e.g. based on the number of APM hosts)
+To get started with adaptive sampling, you first need to pick a target strategy setting:
 
-| Fixed target | % based target | 
-|--------------|----------------|
-| **Pros**: Ensures you never go over budget | **Pros**: Scales with the number of APM hosts and the number of services onboarded: only set it once |
-| **Cons**: You have to edit the budget every time you onboard a new service to adaptive sampling | **Cons**: Not a goot fit if you want to stay below a specified volume (as it may vary depending on the number of hosts reporting APM data to Datadog) |
+- **Set Budget by Number of APM Hosts**: Configure a budget that is proportional to your allotment and the number of services onboarded (for example, based on the number of APM hosts)
+- **Set Budget by Data Volume**: Configure a fixed target in gigabytes per month
 
-To set the adaptive sampling monthly target in-app:
+
+|          | Budget by Number of APM Hosts                                                                                                              | Budget by Data Volume                                                                 |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **Pros** | Scales with the number of APM hosts and the number of services onboarded; only set it once                                                 | Ensures you never go over budget                                                      |
+| **Cons** | Not a good fit if you want to stay below a specific volume, as it may vary depending on the number of hosts reporting APM data to Datadog | You have to edit the budget every time you onboard a new service to adaptive sampling |
+
+To set the adaptive sampling monthly target:
 1. Navigate to the [Ingestion Control][18] page.
 2. Click **Manage Adaptive Sampling Target**
   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_target_cta.png" alt="Call to action to set adaptive sampling target" style="width:100%;">}}
-3. Pick a sampling strategy between the fixed (volume-based) target and the % based target.
+3. Choose a target strategy for sampling:
 
-### Volume-based target
-
-{{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Volume based target setting" style="width:100%;">}}
-
-If you are configuring the first service to adaptive sampling, ensure that the ingestion volume target is `>0`. For subsequent services, you should increase the allocated budget after the new service is onboarded to account for the new volume.  
-  <div class="alert alert-info">The configured budget is only allocated to services enrolled to adaptive sampling. It does not account for the additional volume from services that are not onboarded and which local sampling rules or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or the tracing library.</div>
-
-### % based target
+### Set budget by number of APM hosts (Recommended)
 
 {{< img src="/tracing/guide/adaptive_sampling/percentage_based_target_setting.png" alt="Percentage based target setting" style="width:100%;">}}
 
 Set your monthly target to a percentage of your allotment. At the bottom of the page, you are provided with a more complete explanation of how that percentage is converted in a monthly target volume. It is the product of: 
-- the **global allotment**: `150GB * number_of_APM_hosts + 50GB * number_of_traced_serverless_invocations (if applicable)+ 10GB * number_of_fargate_tasks(if applicable)`
-- the **percentage of allotment** configured above
-- the **contribution of onboarded services** to the allotment. For instance, if the services onboarded to adaptive sampling contribute to 10% of the total ingested volume, we will target 10% of the global allotment. This number increases with the number of services onboarded.
+
+- The **global allotment**: `150GB * number_of_APM_hosts + 50GB * number_of_traced_serverless_invocations (if applicable) + 10GB * number_of_fargate_tasks (if applicable)`
+- The **percentage of allotment** configured above
+- The **contribution of onboarded services** to the allotment. For example, if the services onboarded to adaptive sampling contribute to 10% of the total ingested volume, Datadog targets 10% of the global allotment. This number increases with the number of services onboarded.
 
 {{< img src="/tracing/guide/adaptive_sampling/percentage_based_target_computation.png" alt="Percentage based target computation" style="width:100%;">}}
 
-
 That monthly target volume is recomputed every 30 minutes.
 
+### Set budget by data volume
+
+{{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Volume based target setting" style="width:100%;">}}
+
+If you are configuring the first service to adaptive sampling, ensure that the ingestion volume target is `>0`. For subsequent services, you should increase the allocated budget after the new service is onboarded to account for the new volume.  
+  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or tracing libraries.</div>
 
 ## Configure adaptive sampling for a service
 
-To configure adaptive sampling for a service, you might first want to view what is the current ingestion configuration of the service
-
 ### View sampling rates by resource for a service
+
+Before you configure adaptive sampling for a service, you can view the current ingestion configuration for the service.
 
 To see configured sampling rates:
 
@@ -114,12 +115,12 @@ The table includes:
 
 ### Onboard a service to adaptive sampling
 
-To onboard the service to adaptive sampling
+To onboard a service to adaptive sampling
 
 1. Navigate to the [Ingestion Control][18] page.
 2. Click a service to view the **Service Ingestion Summary**.
 3. Click **Manage Ingestion Rate**.
-4. Choose **Datadog adaptive sampling** rate as your service's sampling strategy.
+4. Choose **Datadog adaptive sampling** as your service's sampling strategy.
 5. Click **Apply**.
 6. (Optional) Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (for example, 100% of `GET /checkout` endpoints) or less (for example, 0.1% of `/health` requests) data.
 

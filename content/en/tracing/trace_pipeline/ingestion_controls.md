@@ -257,5 +257,5 @@ To phrase it another way, Datadog uses the following precedence rules:
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [14]: /agent/remote_config/#enabling-remote-configuration
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
-[17]: /tracing/guide/adaptive_sampling/
+[17]: /tracing/trace_pipeline/adaptive_sampling/
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
