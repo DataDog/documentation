@@ -14,7 +14,16 @@ further_reading:
 The Full-Host Profiler is in Preview.
 {{< /callout >}}
 
-The eBPF profiler is our eBPF-based host profiler built on OpenTelemetry and designed to send profiling data to the Datadog backend via the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments like Docker and Kubernetes.
+The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetry that sends profiling data to Datadog using the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments such as Docker and Kubernetes.
+
+### Use cases
+
+The Full-Host Profiler is particularly valuable for:
+
+- Profiling open-source software components that aren't instrumented with Datadog's tracing libraries.
+- Analyzing performance across multi-language processes and runtimes.
+- Identifying resource bottlenecks at the host level, including detection of noisy neighbor processes.
+
 
 ## Requirements
 
