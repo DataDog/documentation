@@ -1,10 +1,6 @@
 ---
 title: Enabling the eBPF Profiler
-code_lang: ebpf
-type: multi-code-lang
-code_lang_weight: 90
-aliases:
-  - /tracing/profiler/enabling/ebpf/
+private: true
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
