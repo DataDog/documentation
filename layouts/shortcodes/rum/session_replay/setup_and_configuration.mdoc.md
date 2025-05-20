@@ -344,9 +344,9 @@ SessionReplay.stopRecording()
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" %}
 let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: <SAMPLE_RATE>,
-        startRecordingImmediately: false
-    )
+  replaySampleRate: <SAMPLE_RATE>,
+  startRecordingImmediately: false
+)
     
 // Do something
 SessionReplay.startRecording()
@@ -359,8 +359,8 @@ SessionReplay.stopRecording()
 {% if equals($platform, "kotlin_multiplatform") %}
 ```kotlin {% filename="Application.kt" %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
-      .startRecordingImmediately(false)
-      .build()
+  .startRecordingImmediately(false)
+  .build()
 
 // Do something
 SessionReplay.startRecording()
