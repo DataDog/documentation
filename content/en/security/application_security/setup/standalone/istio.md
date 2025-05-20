@@ -19,16 +19,16 @@ further_reading:
 To try the preview of App and API Protection for Istio, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration leverages Envoy's external processing filter, allowing Datadog to inspect and protect your traffic for threat detection and blocking. This can be applied at the Istio Ingress Gateway or at the sidecar level.
+You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-1. A running Kubernetes cluster with Istio installed.
-2. The [Datadog Agent is installed and configured][1] in your Kubernetes cluster.
-    - Ensure [Remote Configuration][2] is enabled and configured to enable blocking attackers through the Datadog UI.
-    - Ensure APM is enabled in the Agent. *This allows the external processor service to send its own traces to the Agent and is typically enabled by default.*
+1. A running Kubernetes cluster with [Istio][1] installed.
+2. The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
+    - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
+    - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
 
 ## Enabling threat detection
 
@@ -38,9 +38,11 @@ Enabling the threat detection for Istio involves two main steps:
 
 ### 1. Deploy the Datadog External Processor Service
 
-This service is a gRPC service that Envoy communicates with to have requests and responses analysed by App and API Protection.
+This service is a gRPC server that Envoy communicates with to have requests and responses analysed by App and API Protection.
 
-Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system` or a dedicated `datadog` namespace.
+Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system` or a dedicated namespace.
+
+The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][5].
 
 Here is an example manifest (`datadog-aap-extproc-service.yaml`):
 
@@ -109,7 +111,7 @@ spec:
   type: ClusterIP
 ```
 
-### Environment Variables for the External Processor
+#### Environment Variables for the External Processor
 
 The Datadog App and API Protection External Processor supports the following environment variables to be configured:
 
@@ -119,7 +121,7 @@ The Datadog App and API Protection External Processor supports the following env
 | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                           |
 | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.      |
 
-Configure the connection from the processor service to the Datadog Agent using these environment variables. These are primarily for the processor service to send its own telemetry (traces, metrics) to the Agent:
+Configure the connection from the external processor to the Datadog Agent using these environment variables:
 
 | Environment variable                   | Default value | Description                                                                      |
 |----------------------------------------|---------------|----------------------------------------------------------------------------------|
@@ -127,10 +129,10 @@ Configure the connection from the processor service to the Datadog Agent using t
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The External Processor is built on top of the [Datadog Go Tracer][6]. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  <strong>Note:</strong> The External Processor is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+You can find more configuration options in [Configuring the Go Tracing Library][6] and [App and API Protection Library Configuration][7].
 
 ### 2. Configure an EnvoyFilter
 
@@ -143,7 +145,7 @@ Choose the appropriate configuration based on whether you want to apply App and 
 
 This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all north-south traffic entering your service mesh.
 
-The example `EnvoyFilter` below targets the default Istio Ingress Gateway, which typically runs in the `istio-system` namespace with the label `istio: ingressgateway`.
+Here is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway, which typically runs in the `istio-system` namespace with the label `istio: ingressgateway`. You must update these to match your specific application.
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -212,7 +214,7 @@ spec:
 
 This configuration applies App and API Protection to specific pods within your service mesh by targeting their Istio sidecar proxies. This allows for more granular control over which services are protected.
 
-The example `EnvoyFilter` below targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these to match your specific application.
+Here is an example manifest (`datadog-aap-sidecar-filter.yaml`) that targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these to match your specific application.
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -296,8 +298,10 @@ The Istio integration has the following limitations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
-[2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[6]: https://github.com/DataDog/dd-trace-go
-[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[1]: https://istio.io/
+[2]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
+[3]: https://docs.datadoghq.com/agent/remote_config/?tab=helm#enabling-remote-configuration
+[4]: https://docs.datadoghq.com/error_tracking/guides/enable_apm/?tab=kubernetes
+[5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
+[6]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[7]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
