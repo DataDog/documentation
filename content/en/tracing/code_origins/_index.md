@@ -119,7 +119,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 - Ensure that all [Source Code Integration][7] setup requirements are met, and that your `DD_GIT_*` tags are configured with the correct values.
 - For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
-- Code Origins is designed to reference user code only, but in some cases, third-party code references may slip through. You can help us improve by reporting these cases support@datadoghq.com!
+- Code Origins is designed to reference user code only, but in some cases, third-party code references may slip through. Please help us improve by reporting these cases to [Datadog support][13].
 
 ## Further Reading
 
@@ -137,3 +137,4 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [10]: https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps
 [11]: /tracing/live_debugger/
 [12]: /glossary/#service-entry-span
+[13]: https://www.datadoghq.com/support/
