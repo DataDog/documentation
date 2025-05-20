@@ -27,12 +27,12 @@ These are the general steps to create a custom allocation rule:
    _Example: Untagged support costs, shared database costs._
 1. **Choose your [allocation method](#choose-an-allocation-method)**. Options include:
 
-   | Allocation Method | Description | Example |
-   | ----------------  | ----------- | -------- |
-   | Even  | Split costs evenly among all destinations, regardless of usage or size. Ideal for scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
-   | Custom  | Split costs based on percentages you define to each destination. Ideal for scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
-   | Proportional by spend | Split costs based on each destination's share of total spend. Ideal for scenarios where teams should pay in proportion for their actual usage or spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
-   | Dynamic by metric  | Split costs based on a performance or usage metric. Ideal for scenarios where costs should reflect actual resource consumption or performance metrics. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
+   | Allocation Method | Description | Use Case | Example |
+   | ----------------  | ----------- | -------- | --------|
+   | Even  | Split costs evenly among all destinations, regardless of usage or size. | Scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
+   | Custom  | Split costs based on percentages you define to each destination. | Scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
+   | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion for their actual usage or spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
+   | Dynamic by metric  | Split costs based on a performance or usage metric. | Scenarios where costs should reflect actual resource consumption or performance metrics. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
 
 1. **[Select your destinations](#define-the-destination)**. Decide which teams, projects, or environments receive the allocated costs.
 1. (Optional) **[Apply filters](#filtering)**. Refine which costs are included in the allocation rule by adding filters.
