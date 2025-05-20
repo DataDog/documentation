@@ -7776,10 +7776,10 @@ menu:
       parent: product_analytics
       identifier: pa_user_retention
       weight: 1
-    - name: Journeys
-      url: product_analytics/journeys
+    - name: Charts
+      url: product_analytics/charts
       parent: product_analytics
-      identifier: pa_journeys
+      identifier: pa_charts
       weight: 2
     - name: Pathway Diagrams
       url: product_analytics/journeys/pathways

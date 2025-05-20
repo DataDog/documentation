@@ -1,15 +1,15 @@
 ---
-title: Journeys
-description: Journeys help you understand the path your users follow as they discover your product, service, or brand.
+title: Chart Types
+description: The various Charts help you understand the path your users follow as they discover your product, service, or brand.
 further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+<!-- {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
 All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
+{{< /callout >}} -->
 
 ## Overview
 
