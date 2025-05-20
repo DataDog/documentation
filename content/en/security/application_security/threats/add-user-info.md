@@ -143,7 +143,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
 
-{{% collapse-content title="set_user" level="h4" expanded="false" id="ruby-set-user" %}}
+{{% collapse-content title="set_user" level="h4" expanded="true" %}}
 
 Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
 
@@ -309,7 +309,7 @@ Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="java-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -402,7 +402,7 @@ Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="dotnet-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -463,7 +463,7 @@ Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user e
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="go-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
@@ -528,7 +528,7 @@ The following examples show how to track login events or custom events (using si
 
 Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="ruby-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -572,7 +572,7 @@ Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="php-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```php
 <?php
 \datadog\appsec\track_user_login_success_event($id, ['usr.login' => $email])
@@ -607,7 +607,7 @@ Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="nodejs-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -666,7 +666,7 @@ The new methods in `eventTrackingV2` introduce a more intuitive parameter order 
 
 In the following example, the commented code is no longer necessary.
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="nodejs-migration-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -715,7 +715,7 @@ Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h4" expanded="false" id="python-login-success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
