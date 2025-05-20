@@ -32,7 +32,7 @@ further_reading:
 
 ## Overview
 
-There are various ways you can modify the [data and context collected](/real_user_monitoring/browser/data_collected/) by RUM, to support your needs for:
+There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
 
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with support.
@@ -41,9 +41,9 @@ There are various ways you can modify the [data and context collected](/real_use
 
 ## Override default RUM view names
 
-The RUM Browser SDK automatically generates a [view event](/real_user_monitoring/browser/monitoring_page_performance/) for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
+The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
 
-Starting with [version 2.17.0](https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170), you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
+Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
 
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
@@ -88,7 +88,7 @@ Starting with [version 2.17.0](https://github.com/DataDog/browser-sdk/blob/main/
     ```
     {% /if %}
 
-1. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0](https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130), you can also optionally define the associated service name and version.
+1. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][4], you can also optionally define the associated service name and version.
 
     - View Name: Defaults to the page URL path.
     - Service: Defaults to the default service specified when creating your RUM application.
@@ -98,15 +98,13 @@ Starting with [version 2.17.0](https://github.com/DataDog/browser-sdk/blob/main/
     - Context: You can add context to views and the child events of views.
     {% /if %}
 
-For more information, see [Setup Browser Monitoring](/real_user_monitoring/browser/setup/).
+For more information, see [Setup Browser Monitoring][5].
 
 <!-- SDK version >=5.28.0 -->
-
 {% if equals($rum_browser_sdk_version, "gte_5_28_0") %}
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
 
 <!-- SDK version >=5.28.0 & NPM -->
-
 {% if equals($lib_src, "npm") %}
 ```javascript
 datadogRum.startView({
@@ -120,10 +118,7 @@ datadogRum.startView({
 ```
 {% /if %}
 
-<!-- end SDK version >=5.28.0 & NPM -->
-
 <!-- SDK version >=5.28.0 & CDN async -->
-
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -139,10 +134,7 @@ window.DD_RUM.onReady(function () {
 ```
 {% /if %}
 
-<!-- end SDK version >=5.28.0 & CDN async -->
-
 <!-- SDK version >=5.28.0 & CDN sync -->
-
 {% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
@@ -157,19 +149,13 @@ window.DD_RUM &&
 ```
 {% /if %}
 
-<!-- end SDK version >=5.28.0 & CDN sync -->
-{% /if %}
-
 <!-- end SDK version >=5.28.0 -->
 
 <!-- SDK version >=4.13.0 -->
-
 {% else equals($rum_browser_sdk_version, "gte_4_13_0") /%}
-
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
 
 <!-- SDK version >=4.13.0 & NPM -->
-
 {% if equals($lib_src, "npm") %}
 ```javascript
 datadogRum.startView({
@@ -180,10 +166,7 @@ datadogRum.startView({
 ```
 {% /if %}
 
-<!-- end SDK version >=4.13.0 & NPM -->
-
 <!-- SDK version >=4.13.0 & CDN async -->
-
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -196,10 +179,7 @@ window.DD_RUM.onReady(function () {
 ```
 {% /if %}
 
-<!-- end SDK version >=4.13.0 & CDN async -->
-
 <!-- SDK version >=4.13.0 & CDN sync -->
-
 {% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM &&
@@ -211,18 +191,13 @@ window.DD_RUM &&
 ```
 {% /if %}
 
-<!-- end SDK version >=4.13.0 & CDN sync -->
-
 <!-- end SDK version >=4.13.0 -->
 
 <!-- SDK version < 4.13.0 -->
-
 {% else /%}
-
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
 
 <!-- SDK version < 4.13.0 & NPM -->
-
 {% if equals($lib_src, "npm") %}
 ```javascript
 datadogRum.startView('checkout');
@@ -230,7 +205,6 @@ datadogRum.startView('checkout');
 {% /if %}
 
 <!-- SDK version < 4.13.0 & CDN async -->
-
 {% if equals($lib_src, "cdn_async") %}
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -240,13 +214,13 @@ window.DD_RUM.onReady(function () {
 {% /if %}
 
 <!-- SDK version < 4.13.0 & CDN sync -->
-
 {% if equals($lib_src, "cdn_sync") %}
 ```javascript
 window.DD_RUM && window.DD_RUM.startView('checkout');
 ```
 {% /if %}
 
+{% /if %}
 <!-- end SDK version <4.13.0 -->
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
@@ -262,7 +236,6 @@ To override default RUM view names so that they are aligned with how you've defi
 1. Start views for each route change.
 
     <!-- NPM -->
-
     {% if equals($lib_src, "npm") %}
     ```javascript
     import { matchRoutes, useLocation } from 'react-router-dom';
@@ -308,11 +281,9 @@ To override default RUM view names so that they are aligned with how you've defi
     }
     ```
     {% /if %}
-
     <!-- end NPM -->
 
     <!-- CDN async -->
-
     {% if equals($lib_src, "cdn_async") %}
     ```javascript
     import { matchRoutes, useLocation } from 'react-router-dom';
@@ -363,7 +334,6 @@ To override default RUM view names so that they are aligned with how you've defi
     <!-- end CDN async -->
 
     <!-- CDN sync -->
-
     {% if equals($lib_src, "cdn_sync") %}
     ```javascript
     import { matchRoutes, useLocation } from 'react-router-dom';
@@ -409,7 +379,6 @@ To override default RUM view names so that they are aligned with how you've defi
     }
     ```
     {% /if %}
-
     <!-- end CDN sync -->
 
 ### Set view name
@@ -481,25 +450,25 @@ The potential `context` values are:
 - Context
 ---
 - View
-- [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location)
+- [Location][6]
 ---
 - Action
-- [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) and handling stack
+- [Event][7] and handling stack
 ---
 - Resource (XHR)
-- [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming), and handling stack
+- [XMLHttpRequest][8], [PerformanceResourceTiming][9], and handling stack
 ---
 - Resource (Fetch)
-- [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request), [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response), [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming), and handling stack
+- [Request][10], [Response][11], [PerformanceResourceTiming][12], and handling stack
 ---
 - Resource (Other)
-- [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming)
+- [PerformanceResourceTiming][12]
 ---
 - Error
-- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+- [Error][13]
 ---
 - Long Task
-- [PerformanceLongTaskTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming)
+- [PerformanceLongTaskTiming][12]
 
 {% /table %}
 {% /if %}
@@ -600,3 +569,17 @@ window.DD_RUM &&
   });
 ```
 {% /if %}
+
+[1]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/browser/monitoring_page_performance/
+[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
+[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[5]: /real_user_monitoring/browser/setup/
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
