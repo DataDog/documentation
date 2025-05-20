@@ -78,6 +78,11 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application started to generate a new Error signature.
       recommendation_prerequisite: Error Tracking
+    - category: Performance
+      recommendation_type: High volume of thrown exceptions
+      scope: Backend services
+      recommendation_description: A Backend application is throwing a high number of exceptions as control-flow
+      recommendation_prerequisite: APM + Continuous Profiler
 
 ---
 
