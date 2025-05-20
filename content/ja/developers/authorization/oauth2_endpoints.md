@@ -29,7 +29,7 @@ title: OAuth2 認可エンドポイントリファレンス
 |---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | `redirect_uri`                                | ユーザーがアクセスを許可または拒否した後の、アプリケーションのリダイレクトエンドポイント。                              |
 | `client_id`                                   | OAuth2 クライアントの Client ID。                                                                       |
-| `response_type`                               | レスポンスタイプは、この付与フロー用のコードでなければなりません。                                                        |
+| `response_type`                               | この認可フローでは、レスポンスタイプを `code` にする必要があります。                                                        |
 | `code_challenge`  (PKCE が有効な場合)        | `code_verifier` の変換。Datadog は `SHA-256` を使用してコードチャレンジを計算することを推奨します。     |
 | `code_challenge_method`  (PKCE が有効な場合) | コードチャレンジの計算に使用する方式。`SHA-256`、または `S256` がサポートされています。  |
 
@@ -42,7 +42,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### 成功レスポンス
 
-If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `domain` parameter, in the query component. 
+ユーザーがアクセス要求を承認すると、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、認可 `code` と `domain` パラメーターをクエリコンポーネントに含めてユーザーをリダイレクト URI へリダイレクトします。
 
 #### エラーレスポンス
 

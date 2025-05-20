@@ -2,7 +2,7 @@
 description: Aprende a extraer un OTP del cuerpo de un correo electrónico utilizando
   tests de navegador de Synthetic.
 further_reading:
-- link: //synthetics/browser_tests/?tab=requestoptions#overview
+- link: /synthetics/browser_tests/?tab=requestoptions#overview
   tag: Documentación
   text: Más información sobre tests de navegador de Synthetic
 - link: /synthetics/api_tests/http_tests#variables
@@ -138,7 +138,7 @@ Desde aquí, puedes continuar [registrando el resto de tu test de navegador][9] 
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /es/synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /es/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[6]: /es/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
 [7]: /es/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#email
 [8]: /es/synthetics/guide/email-validation/#create-an-email-variable
 [9]: /es/synthetics/browser_tests/actions?tab=testanelementontheactivepage
