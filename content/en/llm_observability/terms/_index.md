@@ -177,6 +177,7 @@ This check identifies and flags user inputs that deviate from the configured acc
 
 This check identifies instances where the LLM makes a claim that disagrees with the provided input context. TODO: LINK TO SDK DOCS FOR INSTRUMENTATION
 
+TODO: screenshot
 {{< img src="llm_observability/evaluations/hallucination_1.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
@@ -184,12 +185,14 @@ This check identifies instances where the LLM makes a claim that disagrees with 
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
 ##### Hallucination Configuration
-TODO
+Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled.
 
-| Configuration Option | Description | Example(s) |
-|---|---|---|
-| Contradiction | TODO | TODO |
-| Unsupported Claim | TODO | TODO |
+| Configuration Option | Description |
+|---|---|
+| Contradiction | Claims made in the LLM-generated response that go directly against the provided context |
+| Unsupported Claim | Claims made in the LLM-generated response that are not grounded in the context |
+
+Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
 
 #### Failure to Answer
 
