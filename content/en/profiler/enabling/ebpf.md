@@ -101,7 +101,7 @@ After installing the Full-Host Profiler, see the [Getting Started with Profiler]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: shttps://github.com/DataDog/dd-otel-host-profiler/releases/
+[2]: https://github.com/DataDog/dd-otel-host-profiler/releases/
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://github.com/DataDog/dd-otel-host-profiler/pkgs/container/dd-otel-host-profiler/.
