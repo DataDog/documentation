@@ -35,6 +35,8 @@ Follow the relevant documentation to learn more about Single Step Instrumentatio
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
+<div class="alert alert-info"> Single Step APM Instrumentation on Windows is currently in preview.</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.
