@@ -47,10 +47,12 @@ The widgets displayed on the developer overview page are powered by [Datadog App
 To use the developer overview page with your data, [connect your data sources][10]:
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
 1. For each widget:
+
    1. Click **+ Connect Data**.
    1. Create a new connection or select an existing one. 
-
-   After you save your selection, the app displays data from your connection. You can change the selected connection by clicking Change Connection in the app.
+   
+   <br>
+   After you save your selection, the widget displays data from your connection. You can change the selected connection by clicking Change Connection in the widget.
 
 **Note**: Connecting data is a one-time setup task; the selected connections apply for your entire team.
    
