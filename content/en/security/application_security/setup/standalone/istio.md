@@ -169,6 +169,7 @@ spec:
           type: STRICT_DNS
           connect_timeout: 0.2s
           lb_policy: ROUND_ROBIN
+          http2_protocol_options: {}
           transport_socket:
             name: envoy.transport_sockets.tls
             typed_config:
@@ -237,11 +238,12 @@ spec:
           type: STRICT_DNS
           connect_timeout: 0.2s
           lb_policy: ROUND_ROBIN
+          http2_protocol_options: {}
           transport_socket:
             name: envoy.transport_sockets.tls
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
-              sni: "lcoalhost"
+              sni: "localhost"
           load_assignment:
             cluster_name: "datadog_aap_ext_proc_cluster"
             endpoints:
