@@ -12,8 +12,7 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Engineering Reports are in Preview. TODO: link to sign-up form.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSf_617JW9d8wGVnCspDjrrQvWyeTz3hmQsg5mLvF5pNbP_Y1Q/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -54,7 +53,7 @@ To schedule reports, click on **Schedule Report** in the top right corner (or **
 
 ### Customize your report 
 
-On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. The dashboard reflects the "team" aggregated view and includes weekly historical trends. 
+On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. 
 
 To customize the dashboard, you can:
 - Update the SLO Summary table to group by any tag you have added to your SLOs (for example, you can create a view grouped by "user journey")

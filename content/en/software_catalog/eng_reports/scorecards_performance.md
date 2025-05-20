@@ -9,8 +9,7 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Engineering Reports are in Preview. TODO: link to sign-up form.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSf_617JW9d8wGVnCspDjrrQvWyeTz3hmQsg5mLvF5pNbP_Y1Q/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
 {{< /callout >}}
 
 ## Overview
