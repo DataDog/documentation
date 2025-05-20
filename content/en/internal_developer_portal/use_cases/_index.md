@@ -7,7 +7,7 @@ aliases:
   - /software_catalog/guides
 ---
 
-Learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, and improve operational efficiency:
+Learn how teams use Datadog Internal Developer Portal to centralize knowledge, streamline processes, and improve operational efficiency:
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/use_cases/api_management/" >}}API Management{{< /nextlink >}}
