@@ -10,9 +10,9 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
-<code>ebpf</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
+{{< callout url="" btn_hidden="true" header="Try the Full-Host Profiler Preview!">}}
+The Full-Host Profiler is in Preview.
+{{< /callout >}}
 
 The eBPF profiler is our eBPF-based host profiler built on OpenTelemetry and designed to send profiling data to the Datadog backend via the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments like Docker and Kubernetes.
 
