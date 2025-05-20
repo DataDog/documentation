@@ -7791,6 +7791,11 @@ menu:
       parent: pa_charts
       identifier: pa_user_retention
       weight: 103
+    - name: Analytics Explorer
+      url: product_analytics/charts/analytics_explorer
+      parent: pa_charts
+      identifier: pa_analytics_explorer
+      weight: 104
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
@@ -7851,36 +7856,6 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Analytics Explorer
-      url: product_analytics/analytics_explorer/
-      parent: product_analytics
-      identifier: pa_analytics_explorer
-      weight: 5
-    - name: Search Syntax
-      url: product_analytics/analytics_explorer/search_syntax
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_search_syntax
-      weight: 501
-    - name: Group
-      url: product_analytics/analytics_explorer/group
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_group
-      weight: 502
-    - name: Visualize
-      url: product_analytics/analytics_explorer/visualize
-      parent: pa_analytics_explorer
-      identifier: visualize
-      weight: 503
-    - name: Events
-      url: product_analytics/analytics_explorer/events
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_events
-      weight: 504
-    - name: Export
-      url: product_analytics/analytics_explorer/export
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_export
-      weight: 505
     - name: Segmentation
       url: product_analytics/segmentation/
       parent: product_analytics

@@ -34,6 +34,15 @@ With Analytics visualizations, you can:
 * Create a widget in a dashboard out of that visualization.
 * Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
 
+## Using the analytics chart
+{{< whatsnext desc="Follow these links here to learn how to use the analytics search syntax, view events, and vizualise, group, and export views. " >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Search syntax{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Groups{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}export{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Build a query
 
 In [Analytics][1], customize your display by adding facets and measures to your search query. 
@@ -58,6 +67,6 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/analytics
+[1]: https://app.datadoghq.com/product-analytics/explorer
 [2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
 [3]: /product_analytics/analytics_explorer/group/
