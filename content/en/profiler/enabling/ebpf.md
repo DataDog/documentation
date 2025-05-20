@@ -93,7 +93,7 @@ TBD
 
 TBD
 
-## Not sure what to do next?
+## What's next?
 
 After installing the Full-Host Profiler, see the [Getting Started with Profiler][6] to learn how to use Continuous Profiler to identify and fix performance problems.
 
