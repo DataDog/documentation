@@ -28,7 +28,7 @@ LLM Observability offers several ways to support evaluations.
 
 ### Out of the Box Evaluations
 
-[Out of the Box Evaluations][1] are built and supported by Datadog to support common use cases. You can enable and configure them within the LLM Observability application. Most of them require for you to bring your own key, though a few are hosted within Datadog.
+[Out of the Box Evaluations][1] are built and supported by Datadog to support common use cases. You can enable and configure them within the LLM Observability application.
 
 ### Submit Custom Evaluations
 
