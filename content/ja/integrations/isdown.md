@@ -21,7 +21,7 @@ author:
   support_email: support@isdown.app
 categories:
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/isdown/README.md
 display_on_public_website: true
@@ -116,10 +116,10 @@ IsDown は、監視するサービスで障害が発生するたびに、イベ�
 
 お役に立つドキュメント、リンクや記事:
 
-[Track service provider outages with IsDown and Datadog][5]
+[IsDown と Datadog でサービスプロバイダーの障害を追跡する][5]
 
 [1]: https://isdown.app
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: assets/service_checks.json
+[3]: https://app.datadoghq.com/assets/service_checks.json
 [4]: mailto:support@isdown.app
 [5]: https://www.datadoghq.com/blog/track-provider-outages-isdown-datadog/
