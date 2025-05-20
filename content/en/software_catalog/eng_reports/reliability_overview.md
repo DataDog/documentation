@@ -73,6 +73,20 @@ The **SLO Summary** widget includes a "Score". It is designed as a summary metri
 ### Score calculation details
 
 The Score is calculated as follows:
+
+{{< jqmath-vanilla >}}
+
+$$
+\text"Average Remaining Error Budget"
+      = {∑_{i=0}^{n}\\text"[Remaining Error Budget]"_i} / n
+$$
+
+$$
+\text"Score"
+      = {max(\text"[Average Remaining Error Budget]"\,-200) + 200} / 300 * 100
+$$
+
+
 - Average the remaining error budget of the SLOs (the minimum error budget is set to -200%, so any SLO with a lower error budget will be counted as -200% in the average)
 - The average error budget (between -200 and 100) is mapped to a Score between 0 and 100
 - The color and status of the Score is set based on the thresholds below
@@ -81,6 +95,7 @@ Note that an average remaining error budget of 0% corresponds to a Score value o
 - **Red:** 0 ≤ Score < 66.667
 - **Yellow:** 66.667 ≤ Score < 80
 - **Green:** 80 ≤ Score ≤ 100
+
 
 ## Further reading
 
