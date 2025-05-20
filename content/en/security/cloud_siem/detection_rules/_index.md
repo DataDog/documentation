@@ -57,6 +57,10 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
+### Content Anomaly
+
+Content Anomaly detects when an event's content is an anomaly compared to the historical baseline.
+
 ### Impossible Travel
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
@@ -128,6 +132,20 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
 **Note**: The query applies to all ingested logs.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "Content Anomaly" %}}
+
+### Search query
+
+1. Cloud SIEM can analyze logs and Audit Trail events. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
+1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
+1. In the **Group by** field, specify the fields you want to group by.
+1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule learns the values of the log fields, and does not generate any signals.
+  **Note**: If the detection rule is modified, the learning is restarted.
+1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -266,6 +284,26 @@ Set a maximum duration to keep updating a signal if new values are detected with
 ### Severity and notification
 
 {{% security-rule-severity-notification %}}
+
+### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+Once a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+{{% /tab %}}
+
+{{% tab "Content Anomaly" %}}
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
 ### Time windows
 
