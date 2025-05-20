@@ -81,7 +81,7 @@ multifiltersearch:
     - category: Performance
       recommendation_type: High volume of thrown exceptions
       scope: Backend services
-      recommendation_description: A Backend application is throwing a high number of exceptions as control-flow
+      recommendation_description: A backend application is throwing a high number of exceptions as control-flow
       recommendation_prerequisite: APM + Continuous Profiler
 
 ---
@@ -119,7 +119,7 @@ To review recommendations that need your attention:
 
 1. Go to [**APM** > **Recommendations**][1].
 2. Review the recommendations in **For Review**.
-3. Select a recommendation from the list to see more details. about the problem, impact, and how to resolve it.
+3. Select a recommendation from the list to see the problem, impact, and how to resolve it.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 
 After you've addressed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Case** to assign the recommendation to an owner and track related work.
