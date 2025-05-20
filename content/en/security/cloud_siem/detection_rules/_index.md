@@ -143,8 +143,8 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 1. Cloud SIEM can analyze logs and Audit Trail events. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **Group by** field, specify the fields you want to group by.
-1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule learns the values of the log fields, and does not generate any signals.
-  **Note**: If the detection rule is modified, the learning is restarted.
+1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule learns the values of the log fields and does not generate any signals.
+  **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not.
 
 [1]: /logs/search_syntax/
