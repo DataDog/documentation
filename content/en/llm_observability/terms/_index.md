@@ -155,9 +155,9 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 ## Evaluations
 
-LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
+LLM Observability offers out-of-the-box Evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
-While Datadog provides [out-of-the-box evaluations][12] for your traces, you can also [submit your own evaluations][6] to LLM Observability, integrate with frameworks like [Ragas][13] and [NeMo][14], or Datadog's [Sensitive Data Scanner][5].
+While Datadog provides [out-of-the-box evaluations][12] for your traces, you can also [submit your own evaluations][6] to LLM Observability or integrate with frameworks like [Ragas][13] and [NeMo][14]. In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with LLM Observability, such that any sensitive data in your input and output is scanned and redacted.
 
 ## Further Reading
 

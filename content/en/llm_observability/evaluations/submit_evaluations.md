@@ -47,7 +47,7 @@ def llm_call():
         span = span_context,
         ml_app = "chatbot",
         label="harmfulness",
-        metric_type="score",
+        metric_type="score", # can be score or categorical
         value=my_harmfulness_eval(completion),
         tags={"reasoning": "it makes sense", "type": "custom"},
     )

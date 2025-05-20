@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Out of the Box Evaluations are built in tools to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Out-of-the-Box Evaluations are built-in tools to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
-Most of our out of the box evaluations require for you to bring your own key, though a few are self hosted within Datadog.
+LLM Observability out-of-the-box evaluations which leverage LLMs require for you to bring your own key, meaning that you need to connect your LLM provider to Datadog to use them.
 
 ## Connect your account
 

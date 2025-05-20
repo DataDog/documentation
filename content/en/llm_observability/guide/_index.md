@@ -17,5 +17,6 @@ cascade:
     {{< nextlink href="/llm_observability/quickstart" >}}Trace an LLM Application{{< /nextlink >}}
     {{< nextlink href="/llm_observability/evaluations/" >}}Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/ragas_quickstart" >}}Ragas Quickstart{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/evaluations/submit_nemo_evaluations" >}}NeMo Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/llm_observability_and_apm" >}}Using LLM Observability and APM{{< /nextlink >}}
 {{< /whatsnext >}}
