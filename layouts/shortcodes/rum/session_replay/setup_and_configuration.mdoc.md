@@ -123,19 +123,30 @@ To set up Mobile Session Replay for React Native:
 
 1. Make sure you've [set up and initialized the Datadog React Native SDK][14] with views instrumentation enabled.
 
-2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][15] or [npm][16].
+2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [npm][16] or [yarn][15].
 
-    ```shell
-    yarn add @datadog/mobile-react-native-session-replay
-    ```
+    {% tabs %}
 
+    {% tab label="npm" %}
     ```shell
     npm install @datadog/mobile-react-native-session-replay
     ```
+    {% /tab %}
+    
+    {% tab label="yarn" %}
+    ```shell
+    yarn add @datadog/mobile-react-native-session-replay
+    ```
+    {% /tab %}
 
-2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+    {% /tabs %}
 
-   - If you use the `DatadogProvider` component:
+2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK.
+
+    {% tabs %}
+    
+    {% tab label="DatadogProvider" %}
+    If you use the `DatadogProvider` component:
 
     ```typescript {% filename="App.tsx" %}
     import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
@@ -169,8 +180,10 @@ To set up Mobile Session Replay for React Native:
 
     export default App;
     ```
-
-   - If you use the `DdSdkReactNative.initialize` method:
+    {% /tab %}
+    
+    {% tab label="DdSdkReactNative.initialize" %}
+    If you use the `DdSdkReactNative.initialize` method:
 
     ```typescript {% filename="App.tsx" %}
     import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
@@ -182,6 +195,9 @@ To set up Mobile Session Replay for React Native:
       .then(() => SessionReplay.enable())
       .catch((error) => { /* handle error */ });
     ```
+    {% /tab %}
+
+    {% /tabs %}
 
 3. Enable Session Replay in your app, after initializing the Datadog SDK:
     ```typescript {% filename="App.tsx" %}
@@ -371,7 +387,7 @@ SessionReplay.stopRecording();
 
 ### Validate whether Session Replay data is being sent
 
-To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK:
+To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.
 
 <!-- Android -->
 {% if equals($platform, "android") %}
