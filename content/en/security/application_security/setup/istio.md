@@ -21,26 +21,24 @@ To try the preview of App and API Protection for Istio, follow the setup instruc
 
 You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration leverages Envoy's external processing filter, allowing Datadog to inspect and protect your traffic for threat detection and blocking. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
-This guide focuses on applying App and API Protection at the Istio Ingress Gateway. For sidecar injection, the `EnvoyFilter` configuration needs to be adapted to target specific workloads and potentially different listener contexts.
-
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-1.  A running Kubernetes cluster with Istio installed.
-2.  The [Datadog Agent is installed and configured][1] in your Kubernetes cluster.
+1. A running Kubernetes cluster with Istio installed.
+2. The [Datadog Agent is installed and configured][1] in your Kubernetes cluster.
     - Ensure [Remote Configuration][2] is enabled and configured to enable blocking attackers through the Datadog UI.
     - Ensure APM is enabled in the Agent. *This allows the external processor service to send its own traces to the Agent and is typically enabled by default.*
 
 ## Enabling threat detection
 
 Enabling the threat detection for Istio involves two main steps:
-1.  Deploying the Datadog External Processor service.
-2.  Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
+1. Deploying the Datadog External Processor service.
+2. Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
 
 ### 1. Deploy the Datadog External Processor Service
 
-This service is a gRPC server that Envoy communicates with to have requests and responses analysed by App and API Protection.
+This service is a gRPC service that Envoy communicates with to have requests and responses analysed by App and API Protection.
 
 Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system` or a dedicated `datadog` namespace.
 
@@ -66,7 +64,7 @@ spec:
     spec:
       containers:
       - name: datadog-aap-extproc-container
-        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.73.1 # Check for the latest available version
+        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.73.1 # Replace with the latest version version
         ports:
         - name: grpc
           containerPort: 443 # Default gRPC port for the external processor
@@ -128,19 +126,24 @@ Configure the connection from the processor service to the Datadog Agent using t
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent. |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-For other configurations, the service inherits settings from the [Datadog Go Tracing Library][7] and [Application and API Protection Library Configuration][8].
-
 <div class="alert alert-warning">
   <strong>Note:</strong> The External Processor is built on top of the [Datadog Go Tracer][6]. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
 You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
-### 2. Configure an EnvoyFilter for the Istio Ingress Gateway
+### 2. Configure an EnvoyFilter
 
-Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway to send traffic to the `datadog-aap-extproc-service` you deployed.
+Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway or specific sidecar proxies to send traffic to the `datadog-aap-extproc-service` you deployed. This filter tells Envoy how to connect to the external processor and which traffic to send.
 
-This example applies the filter to the default Istio Ingress Gateway, typically running in the `istio-system` namespace:
+Choose the appropriate configuration based on whether you want to apply App and API Protection at the Ingress Gateway or directly on your application's sidecar proxies.
+
+{{< tabs >}}
+{{% tab "Istio Ingress Gateway" %}}
+
+This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all north-south traffic entering your service mesh.
+
+The example `EnvoyFilter` below targets the default Istio Ingress Gateway, which typically runs in the `istio-system` namespace with the label `istio: ingressgateway`.
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -151,7 +154,7 @@ metadata:
 spec:
   workloadSelector:
     labels:
-      istio: ingressgateway
+      istio: ingressgateway # Standard label for Istio Ingress Gateway pods
   configPatches:
     # Patch 1: Add the Cluster definition for the Datadog External Processing service
     - applyTo: CLUSTER
@@ -201,10 +204,81 @@ spec:
             grpc_service:
               envoy_grpc:
                 cluster_name: "datadog_aap_ext_proc_cluster"
+```
+
+{{% /tab %}}
+{{% tab "Sidecar" %}}
+
+This configuration applies App and API Protection to specific pods within your service mesh by targeting their Istio sidecar proxies. This allows for more granular control over which services are protected.
+
+The example `EnvoyFilter` below targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these to match your specific application.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: datadog-aap-sidecar-filter
+  namespace: <your-application-namespace> # Namespace of your application
+spec:
+  workloadSelector:
+    labels:
+      app: <your-app-label> # Label of your application pods
+  configPatches:
+    # Patch 1: Add the Cluster definition for the Datadog External Processing service
+    - applyTo: CLUSTER
+      match:
+        context: SIDECAR_INBOUND
+        cluster:
+          service: "*"
+      patch:
+        operation: ADD
+        value:
+          name: "datadog_aap_ext_proc_cluster" # A unique name for this cluster configuration
+          type: STRICT_DNS
+          connect_timeout: 0.2s
+          lb_policy: ROUND_ROBIN
+          transport_socket:
+            name: envoy.transport_sockets.tls
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+              sni: "lcoalhost"
+          load_assignment:
+            cluster_name: "datadog_aap_ext_proc_cluster"
+            endpoints:
+            - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      # Address of the Datadog External Processor service
+                      address: "datadog-aap-extproc-service.<extproc-service-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
+                      port_value: 443
+
+    # Patch 2: Add the External Processing HTTP Filter to the Sidecar's connection manager
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_INBOUND
+        listener:
+          filterChain:
+            filter:
+              name: "envoy.filters.network.http_connection_manager"
+              subFilter:
+                name: "envoy.filters.http.router"
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.filters.http.ext_proc
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
+            grpc_service:
+              envoy_grpc:
+                cluster_name: "datadog_aap_ext_proc_cluster"
               timeout: 0.2s
 ```
 
-After applying the `EnvoyFilter`, traffic passing through your Istio Ingress Gateway will be processed by the Datadog External Processor service, enabling App and API Protection features.
+{{% /tab %}}
+{{< /tabs >}}
+
+After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingress Gateway or selected sidecars will be processed by the Datadog External Processor service, enabling App and API Protection features.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
