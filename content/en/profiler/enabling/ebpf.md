@@ -46,7 +46,7 @@ Debugging information
 
 ## Installation
 
-The profiler can be used as a standalone executable.
+The Full-Host Profiler is distributed as a standalone executable.
 
 ### Running the Profiler
 If the host is running workloads inside containers, it is recommended to run the profiler inside a container as well. A container image is [available][5].
