@@ -181,7 +181,7 @@ def generate_answer():
   )
 {{< /code-block >}}
 
-The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (e. g., the messages for an OpenAI chat completion request). Set rag_query_variables and rag_context_variables to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (e. g., the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 ##### Hallucination configuration
 
@@ -193,6 +193,8 @@ Hallucination detection makes a distinction between two types of hallucinations,
 | Unsupported Claim | Claims made in the LLM-generated response that are not grounded in the context |
 
 Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
+
+Hallucination detection is only available for OpenAI.
 
 #### Failure to Answer
 
