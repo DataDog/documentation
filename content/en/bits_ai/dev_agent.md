@@ -17,11 +17,16 @@ The Bits AI Dev Agent is a generative AI coding assistant that uses observabilit
 
 To use the Dev Agent, you must enable the GitHub integration. The Agent uses this connection to create pull requests, apply code updates, and track changes as it responds to developer feedback.
 
-### Key capabilities
+## Key capabilities
 
-| Capability                                       | Description                                                                                                                                                    |
-|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Proposes GitHub pull requests with fixes         | Opens a PR with a fix when a high-impact issue is detected. The PR includes a description of the problem, a proposed change, and links to the original signal. |
-| Adds unit tests to validate proposed changes     | Automatically generates tests to verify the correctness of the fix and prevent regressions.                                                                    |
-| Responds to developer feedback in PRs            | Updates the code based on comments, such as changing logic, adding logging, or returning a different status code.                                              |
-| Tracks Dev Agent activity in a central dashboard | Shows the status of each PR, including the affected service, source, and whether it's under review, updated, or merged.                                        |
+### Proposes GitHub pull requests with fixes
+Opens a pull request with a fix when a high-impact issue is detected. The PR includes a description of the problem, a proposed code change, and links to the original signal.
+
+### Adds unit tests to validate proposed changes
+Automatically generates tests to verify the correctness of the fix and prevent regressions. If developers request changes, the tests are updated accordingly.
+
+### Responds to developer feedback in PRs
+Updates the code in response to review comments, such as changing logic, adding logging, or returning a different status code. Updated commits are pushed automatically.
+
+### Tracks Dev Agent activity in a central dashboard
+Provides a dedicated interface to view and filter all Agent-generated PRs, including their status, triggering product, and affected service.
