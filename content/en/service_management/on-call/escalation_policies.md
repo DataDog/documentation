@@ -21,12 +21,12 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Select [**+ New Escalation Policy**][3].
 1. Enter a **Name** for your escalation policy. For example, _Payment's Escalation Policy_.
 1. Select the **Teams** that own this escalation policy.
-1. Now start building the policy out. Decide who or what should receive a Page when this escalation policy is invoked. For each escalation step after, select who to notify. Each step can notify individual users, entire teams, and/or whoever is on-call in a schedule. Please note that each step offers a choice between two notification methods: `notify_all` and `round_robin`. You'll find detailed explanations of these methods in the dedicated section.
+1. Now start building the policy out. Decide who or what should receive a Page when this escalation policy is invoked. For each escalation step after, select who to notify. Each step can notify individual users, entire teams, and/or whoever is on-call in a schedule. Please note that each step offers a choice between two notification methods: `notify_all` and `round_robin`. Detailed explanations of these methods can be found in the dedicated section.
    _For example: After this Page is triggered, it is sent to whoever is currently on-call for the Primary schedule, in this case John Doe._
    {{< img src="service_management/oncall/escalation_policy_2_steps_v2.png" alt="An escalation policy, showing two steps after 'Page is triggered'. Each step has a 'Notify' input box and 'If the page is not acknowledged after N minutes, escalate.' The first step is configured to notify a schedule named Primary, and escalates if the page is not acknowledged after 5 minutes. The second step is configured to notify a user named Jane Doe." style="width:100%;" >}}
-1. Configure how many minutes to wait for one of the recipients to acknowledge the Page. If no one acknowledges the Page within the time frame, the Page is escalated. In the example, if the Primary on-call person, John Doe, does not acknowledges the Page within five minutes, the Page is then sent to Jane Doe.
-1. Configure how many times these steps should be repeated if no one acknowledges the Page.
-1. Select whether Datadog should automatically update the Page status to **Resolved** after executing all rules and repeats.
+2. Configure how many minutes to wait for one of the recipients to acknowledge the Page. If no one acknowledges the Page within the time frame, the Page is escalated. In the example, if the Primary on-call person, John Doe, does not acknowledges the Page within five minutes, the Page is then sent to Jane Doe.
+3. Configure how many times these steps should be repeated if no one acknowledges the Page.
+4. Select whether Datadog should automatically update the Page status to **Resolved** after executing all rules and repeats.
 
 ## Escalation policy step types
 In each step of an escalation policy, you can keep the standard `Notify All` behavior or opt-in for `Round Robin`.
@@ -42,10 +42,10 @@ For example, if a step includes:
 
 then 5 people will be notified simultaneously (individual, 3 people on the team and the person On-Call for the schedule).
 
-### Round Robin
-Round Robin automatically distributes pages across multiple targets (users, schedules, teams) in a rotating order, ensuring fair load balancing.
+### Round robin
+Round robin automatically distributes pages across multiple targets (users, schedules, teams) in a rotating order, ensuring fair load balancing.
 
-Imagine you are building a rotation for a premier support team which counts 50 people, you don't want have all of them On-Call at the same time but given the load of support tickets you want to spread to multiple persons on the team still. You can build 5 schedules of 10 people each and have 5 person On-Call at the same time on which tickets will be sent evenly.
+Imagine you're building a rotation for a Premier Support team of 50 people. You don't want everyone On-Call at once, but due to the support ticket volume, you still need to distribute the load. One approach is to create 5 schedules with 10 people each and have 5 people On-Call at the same time, one from each schedule. Tickets can then be evenly distributed among them.
 - Page A → Support Schedule Group 1
 - Page B → Support Schedule Group 2
 - Page C → Support Schedule Group 3
@@ -54,10 +54,10 @@ Imagine you are building a rotation for a premier support team which counts 50 p
 - Page F → Support Schedule Group 1
 - Page G → Support Schedule Group 2
 
-#### Escalation Behavior:
-In round robin mode, when a page isn't acknowledged in time, it does not move to the next target in the round robin rotation but it escalate to the next step in the policy; like a "Notify All" page would.
+#### Escalation behavior:
+In round robin mode, if a page isn't acknowledged in time, it doesn't move to the next person in the round robin rotation. Instead, it escalates to the next step in the policy—just like a "Notify All" page would.
 
-If you still want it to be sent to the next target in the round robin, then keep only one step in round robin in your escalation policy and have it repeat at least as many times as the number of targets.
+If you want the page to go to the next target in the round robin, use only one round robin step in your escalation policy and configure it to repeat at least as many times as there are targets.
 
 ## Escalation policy step targets
 In each step of an escalation policy, you can notify individual users, entire teams, or whoever is on-call in a schedule.
