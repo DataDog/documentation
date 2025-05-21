@@ -23,7 +23,6 @@ cascade:
     {{< nextlink href="/integrations/servicenow/#configure-incident-management" >}}ServiceNow{{< /nextlink >}}
     {{< nextlink href="/integrations/zoom_incident_management" >}}Zoom{{< /nextlink >}}
     {{< nextlink href="/coscreen/?tab=desktop#coscreen--datadog-incident-management" >}}CoScreen{{< /nextlink >}}
-    {{< nextlink href="/integrations/statuspage" >}}Statuspage Integration{{< /nextlink >}}
     {{< nextlink href="/integrations/pagerduty" >}}PagerDuty{{< /nextlink >}}
 {{< /whatsnext >}}
 
