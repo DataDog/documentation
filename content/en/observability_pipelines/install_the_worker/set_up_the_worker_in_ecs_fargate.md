@@ -17,7 +17,7 @@ The setup configuration for this example consists of a Fargate task, Fargate ser
 
 [Create a task definition][1]. The task definition describes which containers to run, the configuration (such as the environment variables and ports), and the CPU and memory resources allocated for the task.
 
-Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` are used to allow the load balancer to do health checks on the routing targets. The CPU and memory resources should be increased for the production usage.
+Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` are used to allow the load balancer to do health checks on the Observability Pipelines Worker.
 
 An example task definition:
 
@@ -89,8 +89,8 @@ An example task definition:
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "cpu": "256",
-  "memory": "512"
+  "cpu": "xxx",
+  "memory": "xxx"
 }
 ```
 
