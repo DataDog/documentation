@@ -25,6 +25,49 @@ To set up Cloud Cost Management in Datadog, you should:
 
 ## Setup
 
+### Configure the AWS integration
+
+Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
+
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
+
+* **Linked Account Access**
+* **Linked Account Refunds and Credits**
+* **Linked Account Discounts**
+
+This ensures complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
+
+{{< tabs >}}
+
+{{% tab "CloudFormation" %}}
+
+{{< img src="cloud_cost/setup/aws_cloudformation_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+
+### Select which resources need to be created
+
+The CloudFormation stack can be configured in three ways depending on your existing AWS resources:
+
+* **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
+* **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
+* **Existing report**: Unselect **Create Cost and Usage Report** to import an existing Cost and Usage Report
+
+### Configure the Cost and Usage Report settings
+
+Enter the following details for your Cost and Usage Report:
+
+* **Bucket Name**: The S3 bucket name where the report files are stored
+* **Bucket Region**: The AWS region of your S3 bucket (e.g. `us-east-1`)
+* **Export Path Prefix**: The S3 path prefix where report files are stored
+* **Export Name**: The name of your Cost and Usage Report
+
+**Note**: If you selected to create new resources in the previous step, these values will be used for the newly created resources.
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/aws_manual_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+
 ### Prerequisite: generate a Cost and Usage Report
 
 [Create a Legacy Cost and Usage Report][1] in AWS under the **Data Exports** section.
@@ -43,18 +86,6 @@ Select the following delivery options:
 * Time granularity: **Hourly**
 * Report versioning: **Create new report version**
 * Compression type: **GZIP** or **Parquet**
-
-### Configure the AWS integration
-
-Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
-
-**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
-
-* **Linked Account Access**
-* **Linked Account Refunds and Credits**
-* **Linked Account Discounts**
-
-This ensures complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
 
 ### Locate the Cost and Usage Report
 
@@ -139,6 +170,10 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Account filtering
 
