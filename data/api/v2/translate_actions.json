@@ -843,6 +843,30 @@
     "request_description": "Workflows Webhook handle payload.",
     "request_schema_description": "Update Workflows webhook handle request."
   },
+  "GetTenancyConfigs": {
+    "description": "List all tenancy integrations.",
+    "summary": "Get tenancy configs"
+  },
+  "CreateTenancyConfig": {
+    "description": "Create a new tenancy config.",
+    "summary": "Create tenancy config",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateTenancyConfig` object."
+  },
+  "DeleteTenancyConfig": {
+    "description": "Delete an existing tenancy config.",
+    "summary": "Delete tenancy config"
+  },
+  "GetTenancyConfig": {
+    "description": "Get a single tenancy config object.",
+    "summary": "Get tenancy config"
+  },
+  "UpdateTenancyConfig": {
+    "description": "Update an existing tenancy config.",
+    "summary": "Update tenancy config",
+    "request_description": "",
+    "request_schema_description": "The definition of `UpdateTenancyConfig` object."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
