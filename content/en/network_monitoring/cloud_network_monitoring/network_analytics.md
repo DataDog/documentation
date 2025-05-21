@@ -55,7 +55,7 @@ The next example shows all aggregate connections from IP addresses representing 
 
 You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
-### Understanding client/server roles and traffic direction
+### Understanding client and server roles in relation to traffic direction
 
 The Network Analytics page shows directional traffic flows from clients in one zone to servers in another. These flows are not symmetrical and may not show equal "bytes sent" and "bytes received" when reversed.
 
@@ -64,7 +64,7 @@ In this context:
 - Client refers to the side that initiates the connection.
 - Server is the side that responds to that connection.
 
-Datadog monitors traffic based on who opened the connection, the reverse direction (server to client) is shown as a separate flow and may have different volume metrics, or no data at all if no connections are initiated in that direction.
+Datadog monitors traffic based on who opened the connection. The reverse direction (server to client) is shown as a separate flow and may have different volume metrics, or no data at all if no connections are initiated in that direction.
 
 For example, if a client in `us-east-1d` talks to a server in `us-east-1c`, you may see significant traffic. However, if there is no server in `us-east-1d`, the reverse row (`us-east-1c → us-east-1d`) may show little or no data.
 
