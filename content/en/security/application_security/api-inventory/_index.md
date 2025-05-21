@@ -14,7 +14,7 @@ further_reading:
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: If the endpoint is targeted by attacks.
+- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability.
 - **Findings**: Security findings found on this API.
