@@ -94,7 +94,7 @@ Clicking on any resource opens a side panel with details including:
 - **Service and team ownership** of the resource
 - **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
 
-## Resource Changes
+## Resource Changes (in Preview)
 
 Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps you monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
 
