@@ -13,6 +13,10 @@ further_reading:
   text: "Enhance your automated workflows and apps with Datastore"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can create a Datastore from the [Datastore page][1], or create one from a workflow or app.
 
 ## Create a datastore
@@ -72,6 +76,17 @@ The **Table Options** button allows you to:
 - Copy the datastore UUID, which is useful for [apps with multiple datastore references][4].
 - Clone the datastore
 - Delete the datastore
+
+## Limitations
+
+Datastore has the following limitations:
+
+- A datastore can contain up to 5,000 rows.
+- A primary key column of type `string` is required and must uniquely identify each row.
+- Each row can be up to 100 KB in size.
+- The primary key value is immutable, it cannot be changed after the row is created.
+
+Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
 
 ## Further reading
 
