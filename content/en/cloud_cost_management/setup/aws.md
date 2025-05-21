@@ -43,7 +43,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 {{< img src="cloud_cost/setup/aws_cloudformation_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
 
-### Select which resources need to be created
+### Select the resources to create
 
 The CloudFormation stack can be configured in three ways depending on your existing AWS resources:
 
@@ -56,21 +56,23 @@ The CloudFormation stack can be configured in three ways depending on your exist
 Enter the following details for your Cost and Usage Report:
 
 * **Bucket Name**: The S3 bucket name where the report files are stored.
-* **Bucket Region**: The AWS region of your S3 bucket. For example, `us-east-1`.
+* **Bucket Region**: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * **Export Path Prefix**: The S3 path prefix where report files are stored.
 * **Export Name**: The name of your Cost and Usage Report.
 
-**Note**: These values either locate your existing Cost and Usage Report or define the settings for newly created resources.
+**Note**: These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
+
+[100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
 
 {{% /tab %}}
 
 {{% tab "Manual" %}}
 
-{{< img src="cloud_cost/setup/aws_manual_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_manual_setup.jpg" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 ### Prerequisite: generate a Cost and Usage Report
 
-[Create a Legacy Cost and Usage Report][1] in AWS under the **Data Exports** section.
+[Create a Legacy Cost and Usage Report][201] in AWS under the **Data Exports** section.
 
 Select the Export type **Legacy CUR export**.
 
@@ -78,7 +80,7 @@ Select the following content options:
 
 * Export type: **Legacy CUR export**
 * **Include resource IDs**
-* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
+* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
 * **"Refresh automatically"**
 
 Select the following delivery options:
@@ -89,7 +91,7 @@ Select the following delivery options:
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][4]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -106,7 +108,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 ### Configure access to the Cost and Usage Report
 
-[Create a policy][5] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
+[Create a policy][205] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -170,6 +172,11 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
+[201]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
+[204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
+[205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 
 {{% /tab %}}
 
