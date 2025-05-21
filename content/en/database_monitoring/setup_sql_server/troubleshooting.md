@@ -126,7 +126,6 @@ This is described in more detail [in the Microsoft documentation][7]
 2. If your SQL Server instance does not require encryption to connect (`rds.force_ssl=0` on AWS), then update the connection string to include `Use Encryption for Data=False;`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
