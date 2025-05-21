@@ -63,6 +63,18 @@ You can add or modify columns in your data source cell. There are two ways to ad
 
 {{< img src="/notebooks/analysis_features/add_column_to_dataset.png" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}}
 
+### Calculated fields queries
+
+You can take existing Log Explorer queries with [Calculated Fields][4] and open them in Notebooks. To transfer these queries from the Log Explorer, click **More** and select **Analyze in Notebooks**. The Calculated Fields automatically convert into a Transformation cell.
+
+You can also create Calculated Fields directly within a notebook to define a computed field from existing data sources. These fields can be reused in subsequent analysis:
+1. Open a Workspace with a data source.
+1. Add a [Transformation cell](#transformation-cell).
+1. Click **More operations**.
+1. Select **Calculate**.
+
+{{< img src="/logs/workspace/calculated_fields_transformation_cell.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
+
 ## Transforming and analyzing data
 
 You can add various cell types to enhance your analysis capabilities. These cells allow you to include additional data sources such as reference tables, RUM, or spans. Use SQL to join data, and transform, correlate, and visualize your data effectively. One of the key benefits of this approach is that cells that depend on other cells are automatically updated whenever a dependency changes, ensuring your analysis always reflects the most current data.
@@ -95,20 +107,6 @@ You can also transform your data using SQL by adding an analysis cell to your no
 3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].  
 4. Click **Run** in the top-right corner of the analysis cell to execute your query.
 
-## Viewing and exporting data
-
-For any analysis cell that includes a dataset preview, you can view the full 100-row preview by clicking the **View dataset** button.
-
-You can save the results of any analysis cell to a Dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
-
-If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
-
-**Note**: By default, the dataset is tied to the global time frame of the **dashboard** not to the time frame of the notebook. However, you have the ability to set a custom time frame on the dashboard widget.
-
-### Download dataset as a CSV
-
-You can download the data produced by your queries in CSV format for use outside of Datadog. On any analysis cell, click the download icon and choose the number of rows to export. 
-
 ## Visualizing transformed data
 
 You can graph the data you've transformed using analysis cells inside a notebook, customizing the visualization with filters, aggregations, and appearance settings.
@@ -118,6 +116,29 @@ To graph your data:
 1. Type `/graph` and press <kbd>Enter</kbd> or click the **graph dataset** tile at the bottom of the page.  
 2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.  
 3. Select your visualization type from the graph menu and press <kbd>Enter</kbd>.
+
+## Viewing and exporting data
+
+For any analysis cell that includes a dataset preview, you can view the full 100-row preview by clicking the **View dataset** button.
+
+### Export your query to a dashboard
+
+You can save the results of any analysis cell to a dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
+
+If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
+
+**Note**: By default, the dataset is tied to the global time frame of the **dashboard** not to the time frame of the notebook. However, you have the ability to set a custom time frame on the dashboard widget.
+
+### Download dataset as a CSV
+
+You can download data from cells for use in external tools or further processing outside of Datadog.
+
+To download your dataset as a CSV file:
+
+1. Navigate to any analysis cell that contains a dataset.
+2. Click the download icon in the top-right corner of the cell.
+3. Select the number of rows you want to export (up to the maximum available).
+4. The CSV file automatically downloads to your computer.
 
 ## Further reading
 

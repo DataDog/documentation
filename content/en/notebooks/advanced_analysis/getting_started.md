@@ -14,30 +14,23 @@ further_reading:
 
 {{< img src="logs/workspace/datasets_example.png" alt="The workspace datasets" style="width:100%;" >}}
 
-This example analysis notebook has:
--  Three data sources:
-	- `trade_start_logs`
-	- `trade_execution_logs`
-	- `trading_platform_users`
-- Three derived datasets, which are the results of data that has been transformed from filtering, grouping, or querying using SQL:
-    - `parsed_execution_logs`
-    - `transaction_record`
-    - `transaction_record_with_names`
+This example notebook walks through a multi-step analysis that transforms and visualizes log and reference data. It begins by importing several data sources, then processes and enriches them through parsing, joins, and transformations to build derived datasets. The walkthrough concludes with a visualization that highlights the final results, helping illustrate the full data journey from raw logs to structured insights.
 
-- One treemap visualization.
-
-This diagram shows the different transformation and analysis cells the data sources go through.
+This diagram shows how the data flows through each transformation and analysis step.
 
 {{< img src="logs/workspace/workspace_flowchart.png" alt="A flowchart showing the steps that the data sources go through" style="width:80%;"  >}}
 
-### Example walkthrough
+## Step-by-Step walkthrough on building the analysis
 
-The example starts off with two logs data sources:
-- `trade_start_logs`
-- `trade_execution_logs`
+### 1. Importing data sources
 
-The next cell in the analysis notebook is the transform cell `parsed_execution_logs`. It uses the following [grok parsing syntax][3] to extract the transaction ID from the `message` column of the `trade_execution_logs` dataset and adds the transaction ID to a new column called `transaction_id`.
+The analysis begins with two primary log data sources:
+- `trade_start_logs`: Contains information about trade initiation
+- `trade_execution_logs`: Contains details about trade execution
 
+### 2. Extracting transaction IDs
+
+The first transformation uses a transform cell to create `parsed_execution_logs`. This cell applies [grok parsing syntax][1] to extract transaction IDs from the `message` column of `trade_execution_logs`, creating a new `transaction_id` column:
 ```
 transaction %{notSpace:transaction_id}
 ```
@@ -51,7 +44,9 @@ An example of the resulting `parsed_execution_logs` dataset:
 | May 29 10:58:54.000 | shopist.internal | Executing trade for transaction 96870 | 96870       |
 | May 31 12:20:01.152 | shopist.internal | Executing trade for transaction 80207 | 80207       |
 
-The analysis cell `transaction_record` uses the following SQL command to select specific columns from the `trade_start_logs` dataset and the `trade_execution_logs`, renames the status `INFO` to `OK`, and then joins the two datasets.
+### 3. Joining trade start and execution logs
+
+The next step uses an analysis cell to create `transaction_record`. This SQL query selects specific columns from both datasets, transforms the status field (converting 'INFO' to 'OK'), and joins the datasets on transaction_id:
 
 ```sql
 SELECT
@@ -89,7 +84,9 @@ Then the reference table `trading_platform_users` is added as a data source:
 | Tanya Mejia    | 47694       | verified       |
 | Michael Kaiser | 80207       | fraudulent     |
 
-The analysis cell `transaction_record_with_names` runs the following SQL command to take the customer name and account status from `trading_platform_users`, appending it as columns, and then joins it with the `transaction_records` dataset:
+### 4. Enriching transaction data with customer information
+
+The analysis cell `transaction_record_with_names` uses SQL to join the transaction data with customer information. This query selects columns from both datasets, enriching the transaction records with customer names and account status:
 
 ```sql
 SELECT tr.timestamp, tr.customer_id, tpu.customer_name, tpu.account_status, tr.transaction_id, tr.dollar_value, tr.status
@@ -106,10 +103,14 @@ An example of the resulting `transaction_record_with_names` dataset:
 | May 29 10:58:54.000 | 47694       | Tanya Mejia    | verified       | cb23d1a7-c0cb  | 703.71       | OK     |
 | May 31 12:20:01.152 | 80207       | Michael Kaiser | fraudulent     | 2c75b835-4194  | 386.21       | ERROR  |
 
-Finally, a treemap visualization cell is created with the `transaction_record_with_names` dataset filtered for `status:error` logs and grouped by `dollar_value`, `account_status`, and `customer_name`.
+### 5. Visualizing error transactions
+
+Finally, a treemap visualization cell is created to identify problematic transactions. The visualization uses the `transaction_record_with_names` dataset with a filter for `status:ERROR` logs and groups the data by `dollar_value`, `account_status`, and `customer_name`, making it easy to spot patterns in failed transactions.
 
 {{< img src="logs/workspace/treemap.png" alt="The workspace datasets" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/log_configuration/parsing/
