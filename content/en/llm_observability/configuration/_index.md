@@ -13,6 +13,10 @@ further_reading:
   text: "Learn how to set up LLM Observability"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 ## Overview
 
 You can configure your LLM applications on the Settings page to optimize your application's performance and security.
