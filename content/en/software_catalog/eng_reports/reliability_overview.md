@@ -12,7 +12,7 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSf_617JW9d8wGVnCspDjrrQvWyeTz3hmQsg5mLvF5pNbP_Y1Q/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -26,7 +26,7 @@ With this report, you can:
 
 Access the Reliability Overview report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Reliability Overview" in the left-hand menu. 
 
-{{< img src="tracing/eng_reports/reliability-overview-landing.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
+{{< img src="tracing/eng_reports/reliability-overview-landing2.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
@@ -34,7 +34,7 @@ Access the Reliability Overview report by clicking on the "Overview" tab in Inte
 
 ### Adjust your view
 
-{{< img src="tracing/eng_reports/reliability-overview-filtered.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
+{{< img src="tracing/eng_reports/reliability-overview-filtered2.png" alt="Reliability Overview page with an arrow highlighting the filtering options" style="width:100%;" >}} 
 
 You can update your Reliability Overview report view in the following ways:
  
@@ -62,7 +62,7 @@ To customize the dashboard, you can:
 
 ## Use the SLO summary score
 
-{{< img src="tracing/eng_reports/slo-summary-score.png" alt="The SLO Summary widget, including the SLO summary score" style="width:100%;" >}}
+{{< img src="tracing/eng_reports/slo-summary-score2.png" alt="The SLO Summary widget, including the SLO summary score" style="width:100%;" >}}
 
 The **SLO Summary** widget includes a "Score". It is designed as a summary metric for executive leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
 

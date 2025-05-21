@@ -9,7 +9,7 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSf_617JW9d8wGVnCspDjrrQvWyeTz3hmQsg5mLvF5pNbP_Y1Q/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -21,7 +21,7 @@ The Scorecards Performance report includes an organization-wide view of Scorecar
 
 Access the Scorecards Performance report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Scorecards Performance" in the left-hand menu. 
 
-{{< img src="tracing/eng_reports/scorecards-landing.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
+{{< img src="tracing/eng_reports/scorecards-landing2.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
 
 **Note:** If you have not opted into the Datadog IDP Preview, you can access the Scorecards Performance report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
@@ -29,7 +29,7 @@ Access the Scorecards Performance report by clicking on the "Overview" tab in In
 
 ### Adjust your view
 
-{{< img src="tracing/eng_reports/scorecards-filtered.png" alt="Scorecard Performance report with an arrow highlighting the filtering options" style="width:100%;" >}} 
+{{< img src="tracing/eng_reports/scorecards-filtered2.png" alt="Scorecard Performance report with an arrow highlighting the filtering options" style="width:100%;" >}} 
 
 By default, the Scorecards Performance report breaks down data by team, which allows you to identify the highest- and lowest-performing teams across all Scorecards, specific Scorecards, or individual rules.
 

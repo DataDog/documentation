@@ -21,7 +21,7 @@ further_reading:
   text: "Watchdog"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeSTnYKr5ysWbfsvfbslDaRG_9WWQFqpIBa_FcFcpGTkh8GiQ/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for the Developer Overview Page!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -31,6 +31,8 @@ Datadog's Internal Developer Platform (IDP) ships with **overview pages** that s
 - SREs and engineering managers get a big-picture view of product reliability, service health, scorecard performance, and other key metrics across their teams. 
 
 ## Developer overview page
+
+{{< img src="tracing/eng_reports/developer-overview-page.png" alt="The developer overview page in the My Workspace section of Internal Developer Portal, with an Overview showing high-level alert, incident, and SLO metrics, and a My Tasks section showing JIRA tickets" style="width:100%;" >}}
 
 The developer overview page centralizes the following information about your team and services:
 - Your team's Monitors, Incidents, and SLOs
