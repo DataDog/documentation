@@ -15,6 +15,10 @@ further_reading:
 
 ---
 
+{{< callout url="" btn_hidden="false" >}}
+Role-Based Sensitive Data Unmasking in Logs is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 ## Overview
 
 In many organizations, logs may contain sensitive information that requires [scrubbing][1] or restricted access to ensure compliance and privacy. Role-Based Access Control (RBAC) enables you to manage user access permissions efficiently, allowing only authorized personnel access to specific logs and features. This guide details how to set up RBAC for logs in Datadog, focusing on creating custom roles and assigning appropriate permissions.
