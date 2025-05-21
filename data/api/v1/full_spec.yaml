@@ -1181,7 +1181,6 @@ components:
           readOnly: true
           type: string
         is_read_only:
-          default: false
           deprecated: true
           description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
@@ -3201,11 +3200,13 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - monitor
       - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - MONITOR
       - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
@@ -13708,6 +13709,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13726,12 +13731,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true
@@ -16892,6 +16899,7 @@ components:
       - assertFromJavascript
       - assertPageContains
       - assertPageLacks
+      - assertRequests
       - click
       - extractFromJavascript
       - extractVariable
@@ -16920,6 +16928,7 @@ components:
       - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
+      - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
@@ -20552,6 +20561,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -20871,6 +20885,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for all organizations (To be introduced
@@ -20883,6 +20902,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -20891,6 +20915,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -21422,6 +21451,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -21745,6 +21779,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for the given org (To be introduced
@@ -21757,6 +21796,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -21765,6 +21809,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -22297,6 +22346,11 @@ components:
             Plus over all hours in the current month for all organizations.
           format: int64
           type: integer
+        error_tracking_apm_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_error_events_agg_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current month for all organizations.
@@ -22651,6 +22705,11 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current month for all organizations (To be introduced
@@ -22663,6 +22722,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current month for all organizations.
@@ -22671,6 +22735,11 @@ components:
         rum_mobile_replay_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_agg_sum:
@@ -24221,10 +24290,11 @@ components:
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
@@ -24253,7 +24323,7 @@ components:
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit and delete individual monitors.
+            monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
@@ -30443,7 +30513,7 @@ paths:
       - description: 'When specified, shows additional information about the group
           states.
 
-          Choose one or more from `all`, `alert`, `warn`, and `no data` (`no%20data`).'
+          Choose one or more from `all`, `alert`, `warn`, and `no data`.'
         in: query
         name: group_states
         required: false
@@ -38959,7 +39029,10 @@ tags:
 
     scopes from alerting. Downtime settings, which can be scheduled with start and
 
-    end times, prevent all alerting related to specified Datadog tags.'
+    end times, prevent all alerting related to specified Datadog tags.
+
+
+    **Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).'
   name: Downtimes
 - description: Manage embeddable graphs through the API. See [Embeddable Graphs with
     Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/)
@@ -39040,7 +39113,10 @@ tags:
     notifies your team when a defined threshold has exceeded.
 
 
-    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).
+
+
+    **Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
@@ -39068,7 +39144,7 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/pagerduty/
   name: PagerDuty Integration
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the
@@ -39178,7 +39254,7 @@ tags:
 
     Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
   name: Tags
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the

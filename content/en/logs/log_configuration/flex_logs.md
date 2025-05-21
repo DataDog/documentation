@@ -10,6 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/cloud-siem-flex-logs/"
+  tag: "Blog"
+  text: "Cloud SIEM and Flex Logs: Enhanced security insights for the cloud"
+- link: "/logs/guide/flex_compute"
+  tag: "Documentation"
+  text: "Monitor Flex Compute Usage"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -19,6 +25,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 ## Overview
@@ -63,7 +72,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 
@@ -121,7 +130,7 @@ To disable Flex Logs:
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. 
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click **Save**.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 

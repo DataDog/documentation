@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-composer
+app_uuid: 59f5f810-7282-4b41-bb10-80d6e8839a73
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.composer.environment.api.request_count
+      metadata_path: metadata.csv
+      prefix: gcp.composer.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 264
+    source_type_name: Google Cloud Composer
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - 설정 및 배포
@@ -7,6 +27,7 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: 주요 Google Cloud Composer 메트릭을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_composer/
 draft: false
 git_integration_title: google_cloud_composer
@@ -15,14 +36,29 @@ integration_id: google-cloud-composer
 integration_title: Google Cloud Composer
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_composer
-public_title: Datadog-Google Cloud Composer 통합
-short_description: 주요 Google Cloud Composer 메트릭을 추적합니다.
+public_title: Google Cloud Composer
+short_description: 클라우드와 온프레미스 데이터 센터 전체의 파이프라인을 모니터링하고 일정을 예약해 주는 서비스
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - 카테고리::설정 및 배포
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 클라우드와 온프레미스 데이터 센터 전체의 파이프라인을 모니터링하고 일정을 예약해 주는 서비스
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Composer
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud Composer는 클라우드 및 온프레미스 데이터센터 전반에 걸쳐 파이프라인을 작성, 예약 및 모니터링할 수 있도록 도와드리는 완전관리형 워크플로우 오케스트레이션 서비스입니다.

@@ -260,6 +260,7 @@ spec:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
               - <CONTAINER_IMAGE>
+            cluster_check: true
             init_config:
               <INIT_CONFIG>
             instances:
@@ -303,6 +304,7 @@ clusterAgent:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
         - <CONTAINER_IMAGE>
+      cluster_check: true
       init_config:
         <INIT_CONFIG>
       instances:

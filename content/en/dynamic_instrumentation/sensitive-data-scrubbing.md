@@ -4,18 +4,18 @@ further_reading:
 - link: "/dynamic_instrumentation/enabling/"
   tag: "Documentation"
   text: "Setting Up Dynamic Instrumentation"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 ---
 
 ## Overview
 
-Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs into log messages or add them as span tags. 
+Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs into log messages or add them as span tags.
 
-While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information. 
+While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information.
 
-By understanding and properly configuring these redaction mechanisms, you can use Dynamic Instrumentation with confidence and security. 
+By understanding and properly configuring these redaction mechanisms, you can use Dynamic Instrumentation with confidence and security.
 
 ## Redact based on identifiers
 
@@ -26,6 +26,8 @@ Dynamic Instrumentation automatically redacts values linked to specific identifi
 ### Custom identifier redaction
 
 You can further tailor redaction by specifying additional identifiers. In your application's environment (not on `datadog-agent`), set the  `DD_DYNAMIC_INSTRUMENTATION_REDACTED_IDENTIFIERS` environment variable to a comma-separated list of identifiers such as `firstName,lastName,phoneNumber`.
+
+To exclude specific identifiers from the default redaction list, set the `DD_DYNAMIC_INSTRUMENTATION_REDACTION_EXCLUDED_IDENTIFIERS` environment variable to a comma-separated list of identifiers that should not be redacted, such as `cookie,sessionid`.
 
 Redaction applies universally, regardless of how the identifier is used in the code (as method arguments, local variables, class attributes, dictionary keys, and so on). The associated values are redacted in your infrastructure and not uploaded to Datadog.
 
@@ -58,5 +60,5 @@ You can disable the default rules or create other rules through the [Sensitive D
 
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-debugger/debugger-bootstrap/src/main/java/datadog/trace/bootstrap/debugger/util/Redaction.java
 [2]: https://app.datadoghq.com/dynamic-instrumentation/setup
-[3]: /sensitive_data_scanner/
+[3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner

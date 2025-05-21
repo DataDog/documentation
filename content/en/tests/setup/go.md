@@ -38,6 +38,10 @@ To report test results to Datadog, you need to configure the Datadog Go library:
 
 {{< tabs >}}
 
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
+{{% /tab %}}
+
 {{% tab "Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}

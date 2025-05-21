@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< callout url="/help/" header="Get Started with Domain Allowlist" >}}
-  Domain Allowlist is available for customers with Enterprise plans. If you're interested in this feature, contact Datadog support to request access.
+  Domain Allowlist is generally available for customers with Enterprise plans. If you're interested in this feature but are not an Enterprise customer, contact Datadog support.
 {{< /callout >}} 
 
 With [Domain Allowlist][1], you can restrict the email domains that can receive notifications. The notifications in scope include all notifications from:
