@@ -151,6 +151,10 @@ Restart the Agent. Go to the [APM Settings][6] page and select the additional pr
 
 Now you can filter your services in the [Software Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
+**Note**:
+
+We currently only support all-lowercase values for additional primary tags. If you're setting a container tag as a primary tag, make sure it's in lowercase.
+
 ### Custom labels as tags
 
 If you haven't already, you may also configure the Agent to send container or Pod labels as custom tags for your traces with [Assigning Tags][8].
