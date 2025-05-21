@@ -67,11 +67,26 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
+
+   The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
+   ```yaml
+   ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
+   ```
+
+   Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
+
+   For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
+   
+
 [1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [5]: https://openlineage.io/docs/integrations/airflow/
+[6]: https://airflow.apache.org/docs/apache-airflow/2.9.3/configurations-ref.html#log-filename-template
+[7]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+[8]: https://docs.datadoghq.com/integrations/airflow/?tab=containerized
 
 
 ## Validation

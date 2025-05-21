@@ -14,7 +14,7 @@ further_reading:
 
 Monitor the usage of Flex compute through various graphs on the Flex Controls page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Dashboard showing both the query performance and compute size" style="width:100%;" >}} -->
+{{< img src="/logs/guide/flex_compute/flex_compute_graphs.png" alt="Dashboard showing the query performance and compute size metrics, including query slowdowns, top sources of slowdowns, and compute usage over time" style="width:100%;" >}}
 
 ## Monitoring query performance
 
