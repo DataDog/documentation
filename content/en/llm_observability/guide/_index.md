@@ -9,6 +9,10 @@ cascade:
         subcategory: LLM Observability Guides
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 {{< whatsnext desc="LLM Observability Guides:" >}}
     {{< nextlink href="/llm_observability/quickstart" >}}Trace an LLM Application{{< /nextlink >}}
     {{< nextlink href="/llm_observability/submit_evaluations" >}}Submit Evaluations{{< /nextlink >}}

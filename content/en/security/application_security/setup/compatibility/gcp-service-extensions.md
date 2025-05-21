@@ -1,13 +1,13 @@
 ---
-title: AAP GCP Service Extensions Compatibility Requirements
+title: App and API Protection GCP Service Extensions Compatibility Requirements
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 40
 ---
 
-The following table lists the support for App and API Protection capabilities in the AAP GCP Service Extensions according to the specified version:
+The following table lists the support for App and API Protection capabilities in the App and API Protection GCP Service Extensions according to the specified version:
 
-| App and API Protection capability        | Minimum AAP Service Extensions image version  |
+| App and API Protection capability        | Minimum App and API Protection Service Extensions image version  |
 |----------------------------------------|----------------------------------------------|
 | Threat Detection                       | 1.71.0                                       |
 | Threat Protection                      | 1.71.0                                       |
@@ -15,11 +15,11 @@ The following table lists the support for App and API Protection capabilities in
 | Automatic user activity event tracking | not supported                                |
 | API Security                           | not supported                                |
 
-Please review AAP GCP Service Extensions integration version 1.71.0 [limitations][1].
+Please review App and API Protection GCP Service Extensions integration version 1.71.0 [limitations][1].
 
-## AAP GCP Service Extensions support
+## App and API Protection GCP Service Extensions support
 
-AAP GCP Service Extensions is in Preview.
+App and API Protection GCP Service Extensions is in Preview.
 
 <div class="alert alert-info">If you would like to see support added for any of
 the unsupported capabilities, let us know! Fill out <a
