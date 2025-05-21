@@ -103,7 +103,7 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 On the Notebooks page, you can view and search all of the notebooks that you have access to in your Datadog org, and filter them by tags. Notebook tags allow you to filter by favorites, team, and type. See [notebook tags][19] for more information.
 
-**Note:** To set up or edit a notebook, you need to [login to the Datadog browser app][10]. For more information, see [Notebooks][18].
+**Note:** To set up or edit a notebook, you need to [log in to the Datadog browser app][10]. For more information, see [Notebooks][18].
 
 ## Traces
 
