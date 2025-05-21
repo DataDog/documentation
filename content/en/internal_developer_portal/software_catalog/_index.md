@@ -8,6 +8,7 @@ aliases:
   - /tracing/faq/service_catalog/
   - /tracing/service_catalog/
   - /service_catalog/
+  - /software_catalog/
 further_reading:
 - link: "/internal_developer_portal/software_catalog/use_cases"
   tag: "Documentation"

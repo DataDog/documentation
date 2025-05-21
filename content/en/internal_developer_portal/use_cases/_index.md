@@ -5,6 +5,7 @@ aliases:
   - /service_catalog/guides
   - /tracing/software_catalog/guides
   - /software_catalog/guides
+  - /software_catalog/use_cases
 ---
 
 Learn how teams use Datadog Internal Developer Portal to centralize knowledge, streamline processes, and improve operational efficiency:

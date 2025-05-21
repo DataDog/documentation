@@ -1,6 +1,7 @@
 ---
 title: Set Up Software Catalog
 aliases:
+  - /software_catalog/set_up
   - /tracing/software_catalog/guides/validating-service-definition  ## aliases for Validating Service Definition page
   - /software_catalog/guides/validating-service-definition
   - /tracing/service_catalog/guides/validating-service-definition
