@@ -36,19 +36,23 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 - Control cloud spend: link amortized AWS costs to code and infrastructure changes in **Costs**
 - Shorten delivery cycles: inspect CI pipeline health, static-analysis violations, and DORA metrics in **Software Delivery**
 
-See the [Use Cases documentation][23] to learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
+See the [Use Cases documentation][4] to learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
 
 ## What appears in Software Catalog
 
 Software Catalog includes any entity (such as a service or datastore) that:
-- Datadog [detects from telemetry][20],
-- you [declare through an Entity Definition][21], or
-- you [import from a third party][22] such as Backstage or ServiceNow.
+- Datadog [detects from telemetry][5],
+- you [declare through an Entity Definition][6], or
+- you [import from a third party][7] such as Backstage or ServiceNow.
 
-**Note**: The services and resources statistics, and span summaries on the **Service List** and **Service Page**, are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
+[Learn more][3] about entity types and their configurations.
+
+**Note**: 
+- The entity supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
+- The services and resources statistics, and span summaries on the **Service List** and **Service Page**, are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
 
 {{< site-region region="gov" >}}
-### Services types
+### Service types
 
 Every monitored service is associated with a type. Datadog automatically determines type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
 
@@ -66,52 +70,16 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 {{< /site-region >}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
-### Component types
-
-Every entry in Software Catalog is categorized as a component type:
-
-*  Services
-*  Datastores
-*  Queues
-*  RUM Apps
-*  External providers
-*  Endpoints
-
-{{< img src="tracing/software_catalog/select-component.png" alt="Software Catalog component selector" style="width:30%;" >}}
-
-Datadog populates Software Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (for example: USM, DSM, RUM).
-
-**Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
-
-[10]: /tracing/services/inferred_services#peer-tags
-{{< /site-region >}}
-
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /account_management/rbac/
-[3]: /account_management/rbac/permissions/
-[4]: /data_security/data_retention_periods/
-[5]: /tracing/software_catalog/adding_metadata#service-definition-schema-v22
-[6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
-[7]: /tracing/other_telemetry/
-[8]: /software_catalog/add_metadata#metadata-schema-v30-beta
-[9]: /software_catalog/scorecards/
-[10]: /glossary/#service
-[11]: /opentelemetry/integrations/trace_metrics/
-[12]: /software_catalog/customize/create_entries
-[13]: /software_catalog/customize/import_entries_backstage
-[14]: /software_catalog/customize/import_entries_servicenow
-[15]: https://backstage.io/docs/features/software-catalog/system-model/
+[2]: /data_security/data_retention_periods/
+[3]: /internal_developer_portal/software_catalog/entity_types
+[4]: /internal_developer_portal/software_catalog/use_cases
+[5]: /internal_developer_portal/software_catalog/set_up/discover_entities
+[6]: /internal_developer_portal/software_catalog/set_up/create_entities
+[7]: /internal_developer_portal/software_catalog/set_up/import_entities
 
-[17]: /software_catalog/service_definitions/v3-0/
-[18]: /software_catalog/service_definitions/#add-metadata-to-endpoints
-[19]: /tracing/glossary/#resources
-[20]: /internal_developer_portal/software_catalog/set_up/discover_entities
-[21]: /internal_developer_portal/software_catalog/set_up/create_entities
-[22]: /internal_developer_portal/software_catalog/set_up/import_entities
-[23]: /internal_developer_portal/software_catalog/use_cases
