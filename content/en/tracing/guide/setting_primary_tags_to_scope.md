@@ -153,7 +153,7 @@ Now you can filter your services in the [Software Catalog][7] by the tag being s
 
 **Note**:
 
-We currently only support all-lowercase values for additional primary tags. If you're setting a container tag as a primary tag, make sure it's in lowercase.
+Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 
 ### Custom labels as tags
 
