@@ -57,11 +57,11 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-### Content Anomaly
+### Content anomaly
 
-While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs to detect anomalies. The rule determines a similarity score for incoming values by comparing how different they are to previous values. The similarity score helps to determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
-### Impossible Travel
+### Impossible travel
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
@@ -136,7 +136,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "Content Anomaly" %}}
+{{% tab "Content anomaly" %}}
 
 ### Search query
 
@@ -149,18 +149,18 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 #####  How an event is determined to be anomalous
 
-Content Anomaly detection balances precision and sensitivity using several rule parameters that you can set:
+Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
 
 1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
 1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
 1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
 
-These parameters help to identify field content that are both unusual and rare, filtering out minor or common variations.
+These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Impossible travel" %}}
 
 ### Search query
 
@@ -305,7 +305,7 @@ A signal "closes" once the time exceeds the maximum signal duration, regardless 
 
 {{% /tab %}}
 
-{{% tab "Content Anomaly" %}}
+{{% tab "Content anomaly" %}}
 
 ### Severity and notification
 
@@ -325,7 +325,7 @@ A signal "closes" once the time exceeds the maximum signal duration, regardless 
 
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Impossible travel" %}}
 
 The impossible travel detection method does not require setting a rule case.
 
