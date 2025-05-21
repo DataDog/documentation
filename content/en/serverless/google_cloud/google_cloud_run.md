@@ -2,35 +2,73 @@
 title: Google Cloud Run
 aliases:
     - /serverless/gcp/gcr
+further_reading:
+- link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
+  tag: 'Blog'
+  text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
 ---
 
 ## Overview
 
-[Google Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) is a way to run container-based services and jobs in Google Cloud.
-
-Note about service monitors and logs through the Google Cloud Integration.
+[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through our [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run.
 
 ## Setup
 
-Traces and custom metrics are provided by our tracer libraries, along with profiling where it is available. Application logs are collected through a volume shared between the application container and the Datadog sidecar container.
+<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process.">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
+
+The overall process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
 
 ### Applications
+
+Set up a Datadog tracing library, configure the application to send `dogstatsd` metrics to port `8125`, and send correctly-formatted logs to the shared volume.
+
+For custom metrics, use the [Distribution Metrics][4] to correctly aggregate data from multiple Google Cloud Run instances.
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
 #### Example Code
+
 ```js
-// add the example code here, with traces, custom metrics, profiling, and logs
+// the tracer also includes a dogstatsd client
+const tracer = require('dd-trace').init({
+ logInjection: true,
+});
+
+const express = require("express");
+const app = express();
+
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+ level: 'info',
+ exitOnError: false,
+ format: format.json(),
+ transports: [new transports.File({ filename: `/shared-volume/logs/app.log`})],
+});
+
+app.get("/", (_, res) => {
+ logger.info("Hello!");
+ tracer.dogstatsd.distribution("our-sample-app.sample-metric", 1);
+
+ res.status(200).json({ msg: "A traced endpoint with custom metrics" });
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port);
 ```
 
 #### Details
-##### Tracing
+The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [Profiling][3].
 
-##### Profiling
+Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-##### Metrics
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The log files are identified by a `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` to pick up all of the files ending in `.log` in the `/shared-volume/logs` directory.
 
-##### Logs
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: https://docs.datadoghq.com/profiler/enabling/nodejs?tab=environmentvariables
+[4]: /logs/log_collection/nodejs/?tab=winston30
+[5]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -117,19 +155,47 @@ Traces and custom metrics are provided by our tracer libraries, along with profi
 
 ### Containers
 
-A high level overview of the things we need to do, including a shared volume for logs, the environment variables we need to set up on the application container and the sidecar container.
+A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect telemetry from your application container and send it to datadog. The sidecar container is configured with a healthcheck for correct starup and a shared volume for log forwarding.
 
 #### Environment Variables
 
-A table of the important environment variables, which container they are set on, and some notes about them.
+| Variable | Container | Description |
+| -------- | --------- | ----------- |
+| `DD_SERVERLESS_LOG_PATH` | Both | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. |
+|`DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
+| `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
+| `DD_LOGS_INJECTION` | Sidecar | When true, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
+| `DD_SERVICE`      | Both | See [Unified Service Tagging][14].                                  |
+| `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
+| `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
+| `DD_SOURCE`       | Sidecar | See [Unified Service Tagging][14].                                  |
+| `DD_TAGS`         | Sidecar | See [Unified Service Tagging][14]. |
+| `DD_HEALTH_PORT` | Sidecar | The port for sidecar health checks. For example `9999` |
+
+The `DD_LOGS_ENABLED` environment variable is not required.
 
 {{< tabs >}}
 {{% tab "GCR UI" %}}
-1. Step
-1. by
-1. step
-1. instructions
-    - with some details.
+1. In the Cloud Run service page, select **Edit & Deploy New Revision**.
+1. Open the **Volumes** main tab and create a new volume for log forwarding.
+    1. Make an `In-Memory` volume called `shared-logs`.
+    1. You may set a size limit if necessary.
+1. Open the **Containers** main tab and click **Add Container** to add a new `gcr.io/datadoghq/serverless-init:latest` sidecar container.
+1. Click **Add health check** to add a `Startup check` for the container.
+    1. Select the `TCP` **probe type**.
+    2. Choose any free port (`9999`, for example). We will need this port number shortly for the `DD_HEALTH_PORT` variable.
+1. Click the **Variables & Secrets** tab and add the required environment variables.
+    - The `DD_HEALTH_PORT` variable should be the port for the TCP health check you configured.
+    - The `DD_SERVERLESS_LOG_PATH` variable should be set to `<volume-mount-name>/logs/*.log`. You will set the `<volume-mount-name>` shortly, most likely to `/shared-logs`, so `/shared-logs/logs/*.log`.
+    - See the table above for the other required [Environment Variables](#environment-variables).
+1. Click the **Volume Mounts** tab and add the logs volume mount.
+    - Mount it at the location that matches the `DD_SERVERLESS_LOG_PATH`, for example `/shared-logs`.
+1. Edit the application container.
+1. Click the **Volume Mounts** tab and add the logs volume mount.
+    - Mount it to the same location that you did for the sidecar container, one that matches the `DD_SERVERLESS_LOG_PATH` environment variable, for example `/shared-logs`.
+1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` and `DD_SERVERLESS_LOG_PATH a environment varialbes as you did for the sidecar.
+1. Click the **Settings** tab and set the **Container start up order** to **Depends on** the sidecar container.
+1. **Deploy** the application.
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
 1. Step
@@ -146,3 +212,23 @@ A table of the important environment variables, which container they are set on,
     - with some details.
 {{% /tab %}}
 {{< /tabs >}}
+
+
+## Futher Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://cloud.google.com/run/docs/overview/what-is-cloud-run
+[2]: /integrations/google_cloud_platform
+[3]: https://cloud.google.com/run/docs/deploying#sidecars
+[4]: /metrics/distributions
+[5]: /account_management/api-app-keys/#api-keys
+[6]: /getting_started/site/
+[7]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[8]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[10]: /tracing/other_telemetry/connect_logs_and_traces/php
+[11]: /tracing/other_telemetry/connect_logs_and_traces/python
+[12]: /tracing/other_telemetry/connect_logs_and_traces/go
+[13]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[14]: /getting_started/tagging/unified_service_tagging/
