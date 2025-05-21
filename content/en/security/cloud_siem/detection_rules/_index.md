@@ -59,7 +59,7 @@ When configuring a specific threshold isn't an option, you can define an anomaly
 
 ### Content Anomaly
 
-Content Anomaly detects when an event's content is an anomaly compared to the historical baseline.
+While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs to detect anomalies. The rule determines a similarity score for incoming values by comparing how different they are to previous values. The similarity score helps to determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
 ### Impossible Travel
 
@@ -143,7 +143,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 1. Cloud SIEM can analyze logs and Audit Trail events. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **Group by** field, specify the fields you want to group by.
-1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule learns the values of the log fields and does not generate any signals.
+1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
   **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
@@ -155,7 +155,7 @@ Content Anomaly detection balances precision and sensitivity using several rule 
 1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
 1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
 
-For example, if you set a similarity threshold of 70% and require two or more similar past values, only field content that are both unusual and rare are identified, filtering out minor or common variations.
+These parameters help to identify field content that are both unusual and rare, filtering out minor or common variations.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
