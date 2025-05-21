@@ -52,7 +52,7 @@ Use the search bar's autocomplete feature to complete your query using:
 
 ### Autocomplete facets and values
 
-The search bar autosuggests facets based on your input in the search bar. These facets are displayed in the same order in which they are positioned in the [facet panel][5]. If a facet has a defined display name, it is displayed on the right-hand side of the dropdown menu. Facets that are not configured to be displayed in the facet panel are not autosuggested for a search.
+The search bar autosuggests facets based on your input in the search bar. These facets are displayed in the same order in which they are positioned in the [facet panel][5]. If a facet has a defined display name, it is displayed on the right-hand side of the dropdown menu.
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
