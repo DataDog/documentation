@@ -66,18 +66,9 @@ Use filters to include only the specific costs you want to allocate, such as by 
 ### Advanced options (optional)
 
 - **Show usage charges only**: Choose to include all spend (fees, taxes, refunds) or focus on usage charges only.
-- **Cost type**: Choose a cost type that best matches your reporting, analysis, or financial management needs.
+- **Cost type**: Choose a cost type that best matches your reporting, analysis, or financial management needs. Review the definitions for each cost type based on your provider: [AWS][7], [Azure][8], [Google Cloud][9], [Custom][10].
 
-  | Cost Type | Benefits | Use Cases |
-  |------------------|------------------------------------------------------|----------------------------------------------------------------|
-  | Amortized | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis) | Long-term cost analysis, internal allocation |
-  | Blended | Averages rates across all usage | High-level reporting, mixed pricing models |
-  | Unblended | (Recommended default) Cost shown as the amount charged at the time of usage (cash basis) | Detailed analysis, invoice reconciliation |
-  | On-Demand | Cost based on the list rate by the provider. | Estimating, benchmarking, forecasting |
-  | Net Amortized | Spreads both resource costs and discount program fees evenly over the billing period, including savings plans and reservation charges | Accurate reporting, budgeting, chargeback |
-  | Net Unblended | Show the total resource costs for a given period, with discounts for large-scale usage already applied | Auditing, compliance, granular internal reporting |
-
-**Note**: The availability of these options vary depending on the provider(s) selected.
+  **Note**: The availability of these options vary depending on the provider(s) selected. 
 
 ## Save and share your report
 
@@ -91,3 +82,7 @@ Use filters to include only the specific costs you want to allocate, such as by 
 [4]: /cloud_cost_management/saas_costs/
 [5]: https://app.datadoghq.com/cost/analyze/reports
 [6]: /cloud_cost_management/container_cost_allocation/
+[7]: /cloud_cost_management/setup/aws/#cost-types
+[8]: /cloud_cost_management/setup/azure/#cost-types
+[9]: /cloud_cost_management/setup/google_cloud/#cost-types
+[10]: /cloud_cost_management/setup/custom/#cost-metric-types
