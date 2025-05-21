@@ -46,3 +46,5 @@ Select your application language for details on how to enable AAP Threat Detecti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/setup/compatibility
+[2]: /agent/
+[3]: /security/application_security/guide/standalone_application_security/
