@@ -115,4 +115,4 @@ The available functionality for Envoy version `1.71.0` has the following importa
 [5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/

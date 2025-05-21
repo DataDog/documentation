@@ -103,7 +103,7 @@ As important as it is for you to be able to apply protection granularly and redu
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: https://app.datadoghq.com/security/appsec/passlist
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
-[10]: /security/application_security/threats/inapp_waf_rules/
+[10]: /security/application_security/policies/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
 [12]: /security/application_security/setup/compatibility/
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
@@ -111,4 +111,4 @@ As important as it is for you to be able to apply protection granularly and redu
 [16]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-responses
 [17]: https://docs.datadoghq.com/service_management/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
-[20]: /security/application_security/threats/security_signals/
+[20]: /security/application_security/security_signals/

@@ -127,6 +127,6 @@ Datadog reports the type of authentication when available in a header through th
 [2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[6]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
 [8]: /security/code_security/iast/
