@@ -55,12 +55,12 @@ The CloudFormation stack can be configured in three ways depending on your exist
 
 Enter the following details for your Cost and Usage Report:
 
-* **Bucket Name**: The S3 bucket name where the report files are stored
-* **Bucket Region**: The AWS region of your S3 bucket (e.g. `us-east-1`)
-* **Export Path Prefix**: The S3 path prefix where report files are stored
-* **Export Name**: The name of your Cost and Usage Report
+* **Bucket Name**: The S3 bucket name where the report files are stored.
+* **Bucket Region**: The AWS region of your S3 bucket. For example, `us-east-1`.
+* **Export Path Prefix**: The S3 path prefix where report files are stored.
+* **Export Name**: The name of your Cost and Usage Report.
 
-**Note**: If you selected to create new resources in the previous step, these values will be used for the newly created resources.
+**Note**: These values either locate your existing Cost and Usage Report or define the settings for newly created resources.
 
 {{% /tab %}}
 
@@ -185,7 +185,7 @@ Using Account Filtering requires an AWS management account. You can configure ac
 
 #### Configure account filters for an existing account
 
-Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][18], and then click **Manage Account** for the management account you want to filter.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][17], and then click **Manage Account** for the management account you want to filter.
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="Manage Account button on account card" style="width:100%;" >}}
 
@@ -429,4 +429,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
 [15]: /cloud_cost_management/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
-[18]: https://app.datadoghq.com/cost/settings/accounts
+[17]: https://app.datadoghq.com/cost/settings/accounts
