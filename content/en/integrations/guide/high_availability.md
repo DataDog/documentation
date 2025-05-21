@@ -80,6 +80,10 @@ The following integrations are supported for High Availability:
 
    {{< img src="/integrations/guide/high_availability/agent-preferred.png" alt="Fleet Automation View Agents, highlighting HA Preferred Active Agent" style="width:100%;" >}}
 
+5. On the same screen, click on the High Availability tab to verify the status of the preferred active Agent and standby Agent:
+
+   {{< img src="/integrations/guide/high_availability/high_availability_tab_fleet.png" alt="Fleet Automation High Availability tab, highlighting HA Preferred Active Agent" style="width:100%;" >}}
+
 ## Testing and validation
 
 1. Test failover by shutting down the active Agent or its host.
