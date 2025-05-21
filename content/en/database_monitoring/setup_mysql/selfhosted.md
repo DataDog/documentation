@@ -223,24 +223,17 @@ export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.checks='{"postgres": {
+  -l com.datadoghq.ad.checks='{"mysql": {
     "init_config": {},
     "instances": [{
       "dbm": true,
       "host": "<HOST>",
-      "port": 5432,
+      "port": <PORT>,
       "username": "datadog",
       "password": "ENC[datadog_user_database_password]"
     }]
   }}' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
-```
-
-**Note**: For Postgres 9.6, add the following lines to the instance config:
-
-```json
-"pg_stat_statements_view": "datadog.pg_stat_statements()",
-"pg_stat_activity_view": "datadog.pg_stat_activity()",
 ```
 
 ### Dockerfile
@@ -250,13 +243,7 @@ You can also specify labels in a `Dockerfile`, allowing you to build and deploy 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
-LABEL "com.datadoghq.ad.checks"='{"postgres": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
-```
-
-**Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
-
-```json
-"pg_stat_statements_view": "datadog.pg_stat_statements()", "pg_stat_activity_view": "datadog.pg_stat_activity()",
+LABEL "com.datadoghq.ad.checks"='{"mysql": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
 ```
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
