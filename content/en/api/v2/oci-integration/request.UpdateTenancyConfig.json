@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "home_region": "us-sanjose-1",
+      "metrics_config": {
+        "compartment_tag_filters": [
+          "datadog:true",
+          "env:prod"
+        ],
+        "enabled": false,
+        "excluded_services": []
+      },
+      "resource_collection_enabled": false,
+      "user_ocid": "ocid1.user.test_updated"
+    },
+    "id": "string",
+    "type": "oci_tenancy"
+  }
+}
