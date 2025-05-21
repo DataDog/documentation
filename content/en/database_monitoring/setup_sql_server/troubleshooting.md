@@ -136,7 +136,6 @@ This is described in more detail [in the Microsoft documentation][7]
 3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. After installing the driver, update the `adoprovider` to `MSOLEDBSQL`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"
