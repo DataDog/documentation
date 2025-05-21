@@ -1,8 +1,6 @@
 ---
-title: Use datastores with App Builder and Workflows
+title: Use Datastores with Apps and Workflows
 disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
 - link: "service_management/app_builder/build"
   tag: "Documentation"
@@ -14,6 +12,12 @@ further_reading:
   tag: "Blog"
   text: "Enhance your automated workflows and apps with Datastore"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+You can reference and perform CRUD (Create, Read, Update, and Delete) operations on a datastore inside a workflow or an app. Additionally, you can create a workflow or app directly from an existing datastore.
 
 ## Create a workflow or app from a datastore {#create-workflow-app}
 
@@ -57,13 +61,32 @@ To use a datastore in an existing workflow, add a datastore action:
 
 ## Use multiple datastores with a single action {#multiple-datastores}
 
-In App Builder, you can use a single datastore action to reference multiple datastores. In the example below, a selector controls which datastore is displayed in the table. The app uses a single _List Items_ datastore action.
+In App Builder, you can use a single datastore action to reference multiple datastores. In the example below, a selector controls which datastore is displayed in the table. The app uses a single List Items datastore action.
 
 **Note**: The datastore in this example uses pseudodata for demonstration purposes.
 
 {{< img src="/actions/datastore/datastore-multiple.png" alt="You can reference multiple datastores with a single datastore action" style="width:100%;" >}}
 
-This app uses multiple datasets by referencing each datastore's UUID as the `value` in the selector component, and using the expression `${select0?.value}` in the List Items action to list the entries from the selected datastore. The table uses the output from the List Items action to display the data from the datastore.
+This app uses multiple datasets by:
+- Referencing each datastore's UUID as the `value` in the selector component:
+  ```json
+  ${[
+    {
+        "label": "Datastore 1",
+        "value": "ae729fad-425f-4e54-b70b-f228768e66b6"
+    },
+    {
+        "label": "Datastore 2",
+        "value": "c190f470-8850-4651-9a36-781030827468"
+    }
+   ]}
+  ```
+- Using the expression `${select0?.value}` in the List Items action to list the entries from the selected datastore.
+
+The table uses the output from the List Items action to display the data from the datastore.
+
+
+### Retrieve a UUID
 
 To retrieve the UUID for a datastore:
 1. On the [Datastore page][1], locate your datastore in the list and click to open it.
