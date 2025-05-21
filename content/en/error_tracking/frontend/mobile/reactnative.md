@@ -1,5 +1,5 @@
 ---
-title: React Native Crash Reporting and Error Tracking
+title: React Native Crash Reporting
 type: multi-code-lang
 code_lang: reactnative
 code_lang_weight: 60

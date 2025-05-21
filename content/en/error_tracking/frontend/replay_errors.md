@@ -80,4 +80,4 @@ After reviewing key information about the error, such as the error message and s
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [2]: /error_tracking/frontend/browser#setup
-[3]: /error_tracking/frontend/mobile
+[3]: /error_tracking/frontend/mobile_error_tracking
