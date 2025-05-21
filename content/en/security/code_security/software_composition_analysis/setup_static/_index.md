@@ -46,7 +46,7 @@ First, configure your Datadog API and application keys by adding `DD_APP_KEY` an
 Next, run SCA by following instructions for your chosen CI provider below.
 
 ## GitHub Actions
-SCA can run as a job in your GitHub Actions workflows. The action provided below invokes [Datadog osv-scanner][10], our recommended SBOM generator, on your codebase and uploads the results into Datadog.
+SCA can run as a job in your GitHub Actions workflows. The action provided below invokes our recommended SBOM tool, [Datadog SBOM Generator][10], on your codebase and uploads the results into Datadog.
 
 Add the following code snippet in `.github/workflows/datadog-sca.yml`. Make sure to replace
 the `dd_site` attribute with the [Datadog site][12] you are using.
@@ -120,18 +120,18 @@ export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
-# Download the latest Datadog OSV Scanner:
-# https://github.com/DataDog/osv-scanner/releases
-DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/download/osv-scanner_linux_amd64.zip
+# Download the latest Datadog SBOM Generator:
+# https://github.com/DataDog/datadog-sbom-generator/releases
+DATADOG_SBOM_GENERATOR_URL=https://github.com/DataDog/datadog-sbom-generator/releases/latest/download/datadog-sbom-generator_linux_amd64.zip
 
-# Install OSV Scanner
-mkdir /osv-scanner
-curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-unzip /osv-scanner/osv-scanner.zip -d /osv-scanner
-chmod 755 /osv-scanner/osv-scanner
+# Install Datadog SBOM Generator
+mkdir /datadog-sbom-generator
+curl -L -o /datadog-sbom-generator/datadog-sbom-generator.zip $DATADOG_SBOM_GENERATOR_URL
+unzip /datadog-sbom-generator/datadog-sbom-generator.zip -d /datadog-sbom-generator
+chmod 755 /datadog-sbom-generator/datadog-sbom-generator
 
-# Run OSV Scanner and scan your dependencies
-/osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
+# Run Datadog SBOM Generator to scan your dependencies
+/datadog-sbom-generator/datadog-sbom-generator scan --output=/tmp/sbom.json /path/to/repository
 
 # Upload results to Datadog
 datadog-ci sbom upload /tmp/sbom.json
@@ -232,7 +232,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Upload third-party SBOM to Datadog
 
-While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest a
+While Datadog suggests using [our own SBOM generator][10], it is possible to ingest a
 third-party SBOM.
 
 Our tooling supports the following SBOM standards:
@@ -334,7 +334,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [7]: /integrations/github
 [8]: /integrations/guide/source-code-integration
 [9]: /security/code_security/dev_tool_int/github_pull_requests/
-[10]: https://github.com/DataDog/osv-scanner
+[10]: https://github.com/DataDog/datadog-sbom-generator
 [11]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
