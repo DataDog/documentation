@@ -242,3 +242,10 @@ core_product:
     - name: software catalog
     - name: slos
     - name: watchdog
+
+# Unsupported sites for each product
+unsupported_sites:
+  datadog_cloudcraft:
+  - gov
+  workflows:
+  - gov

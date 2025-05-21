@@ -1,0 +1,23 @@
+{{/*  Inserts a banner at the top of the page if a site is not supported  */}}
+{{ $dot := . }}
+
+{{ $product_id := .Page.Params.product_id }}
+{{ $unsupported_sites := .Site.Params.unsupported_sites }}
+
+{{ $unsupported_product := index $unsupported_sites $product_id }}
+
+{{ if $unsupported_product }}
+    {{/*  concatenate the unsupported regions into a comma separated list  */}}
+    {{ $unsupported_regions := "" }}
+    {{ range $unsupported_product }}
+        {{ $unsupported_regions = printf "%s%s," $unsupported_regions . }}
+    {{ end }}
+
+    {{/*  remove the trailing comma  */}}
+    {{ $unsupported_regions = substr $unsupported_regions 0 -1 }}
+    
+    <div class="d-none site-region-container" data-region="{{ $unsupported_regions }}">
+        <div class="alert alert-warning">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
+    </div>
+{{ end }}
+
