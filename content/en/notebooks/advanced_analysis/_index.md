@@ -107,6 +107,8 @@ You can also transform your data using SQL by adding an analysis cell to your no
 3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].  
 4. Click **Run** in the top-right corner of the analysis cell to execute your query.
 
+{{< img src="/notebooks/analysis_features/analysis_cell_example.png" alt="Example of an analysis cell with SQL query transforming data in a notebook" style="width:100%;" >}}
+
 ## Visualizing transformed data
 
 You can graph the data you've transformed using analysis cells inside a notebook, customizing the visualization with filters, aggregations, and appearance settings.
@@ -124,6 +126,8 @@ For any analysis cell that includes a dataset preview, you can view the full 100
 ### Export your query to a dashboard
 
 You can save the results of any analysis cell to a dashboard by clicking **Save to Dashboard** and selecting an existing dashboard or creating a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
+
+{{< img src="/notebooks/analysis_features/analysis_cell_save_to_dashboard.png" alt="Example of saving an analysis cell to a dashboard from a notebook" style="width:100%;" >}}
 
 If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
 
