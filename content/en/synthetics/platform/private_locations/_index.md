@@ -675,9 +675,9 @@ When spinning up your private location containers, mount the relevant certificat
 
 {{% /tab %}}
 
-{{% tab "Windows" %}}
+{{% tab "Windows service" %}}
 
-To install root certificates for private locations on Windows environments, use the following steps:
+To install root certificates for private locations on a Windows service, use the following steps:
 
 1. Open the Registry Editor App.
 2. Navigate to the `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location` entry.
@@ -691,6 +691,24 @@ default: <code>C:\Program Files\Datadog-Synthetics\Synthetics.</code></div>
    {{< img src="synthetics/private_locations/windows_pl_set_service.png" alt="Your image description" style="width:100%;" >}}
 
 5. Open the Services App and reload the Datadog Synthetics Private Location service.
+
+{{% /tab %}}
+
+{{% tab "Windows standalone" %}}
+
+To install root certificates for private locations on a standalone Windows process with `synthetics-private-location.exe`, use the following steps:
+
+1. Open your Windows terminal.
+
+2. Set the environment variable `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
+
+3. Call the executable `.\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"`
+
+Example:
+
+```shell
+set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
 
 {{% /tab %}}
 {{< /tabs >}}
