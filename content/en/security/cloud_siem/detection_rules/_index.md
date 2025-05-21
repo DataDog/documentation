@@ -319,7 +319,7 @@ In the **Anomaly count** field, enter the condition for how many anomalous logs 
 
 Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
-Once a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
 
 A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
