@@ -26,7 +26,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -302,6 +301,8 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 - When using "Squash" to merge pull requests:
   - For GitHub and GitLab: Metrics are emitted for the original commits.
   - For other Git providers: Metrics are emitted for the new commit added to the target branch.
+- When using "Rebase", either manually or to merge pull requests:
+  - For all Git providers: Metrics are emitted based on the original commit timestamps, while the displayed SHA corresponds to the newly created rebased commit.
 
 ## Calculating change failure rate
 

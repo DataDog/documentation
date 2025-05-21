@@ -38,7 +38,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 <strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][3], or use the instrumentation functions described below.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -130,7 +130,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // The user must be blocked by aborting the request handler asap.
     // The blocking response is automatically handled and sent by the appsec middleware.
-    return 
+    return
   }
 }
 ```
@@ -143,9 +143,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
 
-{{< tabs >}}
-
-{{% tab "set_user" %}}
+{{% collapse-content title="set_user" level="h4" expanded="true" %}}
 
 Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
 
@@ -174,10 +172,9 @@ Datadog::Kit::Identity.set_user(
   another_tag: 'another_value',
 )
 ```
+{{% /collapse-content %}}
 
-{{% /tab %}}
-
-{{% tab "set_tag" %}}
+{{% collapse-content title="set_tag" level="h4" expanded="false" id="ruby-set-tag" %}}
 
 If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
 
@@ -206,10 +203,7 @@ trace.set_tag('usr.scope', 'read:message, write:files')
 # Set free-form tags:
 trace.set_tag('usr.another_tag', 'another_value')
 ```
-
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
@@ -311,12 +305,11 @@ If no usr.login is provided, usr.id will be used instead.</a>
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events. 
+Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -343,9 +336,9 @@ public class LoginController {
 }
 
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Login failure" %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="java-login-failure" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -375,9 +368,9 @@ public class LoginController {
     }
 }
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="java-custom-business" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -399,20 +392,17 @@ public class LoginController {
 }
 
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
 
-Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events. 
+Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -429,8 +419,8 @@ void OnLogonSuccess(string userId, string login...)
 }
 
 ```
-{{% /tab %}}
-{{% tab "Login failure" %}}
+{{% /collapse-content %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="dotnet-login-failure" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -447,10 +437,9 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
     // ...
 }
 ```
+{{% /collapse-content %}}
 
-{{% /tab %}}
-
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="dotnet-custom-business" %}}
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
@@ -465,20 +454,16 @@ void OnUserSignupComplete(string userId, ...)
     // ...
 }
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
-
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
+Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
@@ -499,8 +484,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
   }
 }
 ```
-{{% /tab %}}
-{{% tab "Login failure" %}}
+{{% /collapse-content %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="go-login-failure" %}}
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
@@ -511,14 +496,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := make(map[string]string) /* optional extra event metadata */
   metadata["usr.login"] = "user-email"
-  
+
   // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="go-custom-business" %}}
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
@@ -532,9 +517,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   appsec.TrackCustomEvent(r.Context(), "users.signup", metadata)
 }
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -545,8 +528,7 @@ The following examples show how to track login events or custom events (using si
 
 Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -554,9 +536,9 @@ trace = Datadog::Tracing.active_trace
 # Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' }, { 'usr.login': 'my_user_email' })
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Login failure" %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-login-failure" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -569,20 +551,19 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 # if the user doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false, { 'usr.login': 'my_user_email' })
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="ruby-custom-business" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...) 
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 
 # Leveraging custom business logic tracking to track user signups
 Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
@@ -591,16 +572,15 @@ Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```php
 <?php
 \datadog\appsec\track_user_login_success_event($id, ['usr.login' => $email])
 ?>
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Login failure" %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="php-login-failure" %}}
 ```php
 <?php
 // If no numeric userId is available, you may use any unique string as userId instead (username, email...)
@@ -608,20 +588,18 @@ The following examples show how to track login events or custom events (using si
 \datadog\appsec\track_user_login_failure_event($id, $exists, ['usr.login' => $email])
 ?>
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="php-custom-business" %}}
 ```php
 <?php
 \datadog\appsec\track_custom_event('users.signup', ['usr.id' => $id]);
 ?>
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
-
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
+
 {{< programming-lang lang="nodejs" >}}
 
 Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. Version v5.48.0 of dd-trace-js introduces new methods under the `eventTrackingV2` namespace. Existing event tracking methods are retained for compatibility.
@@ -629,8 +607,7 @@ Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -647,9 +624,9 @@ const metadata = { 'key': 'value' } // you can add arbitrary fields
 // user and metadata are optional
 tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Login failure" %}}
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="nodejs-login-failure" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -663,9 +640,9 @@ const metadata = { 'key': 'value' } // you can add arbitrary fields
 // metadata is optional
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="nodejs-custom-business" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -675,11 +652,9 @@ const metadata = { 'usr.id': 'user-id' }
 
 tracer.appsec.trackCustomEvent(eventName, metadata)
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{< /tabs >}}
-
-#### Migrating to the new login success and failure methods 
+#### Migrating to the new login success and failure methods
 
 The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
 
@@ -691,8 +666,7 @@ The new methods in `eventTrackingV2` introduce a more intuitive parameter order 
 
 In the following example, the commented code is no longer necessary.
 
-{{< tabs >}}
-{{% tab "Login success" %}}
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -704,7 +678,7 @@ const user = {
 
 const login = 'user@email.com' // new mandatory argument
 
-const metadata = { 
+const metadata = {
 //  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the main argument
   'key': 'value'
 }
@@ -712,8 +686,9 @@ const metadata = {
 // tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // deprecated
 tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
-{{% /tab %}}
-{{% tab "Login failure" %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -721,7 +696,7 @@ const tracer = require('dd-trace')
 const userId = 'user-id' // No longer mandatory, but helpful when available
 const login = 'user@email.com' // new mandatory argument
 const userExists = true
-const metadata = { 
+const metadata = {
 //  'usr.login': 'user@email.com', this is no longer necessary in metadata. Must be the first argument
   'usr.id': userId, // Helps with correlating login failures with the rest of the user activity
   'key': 'value'
@@ -730,9 +705,7 @@ const metadata = {
 // tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata) // deprecated
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
@@ -742,21 +715,19 @@ Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{< tabs >}}
-
-{{% tab "Login success" %}}
-
+{{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
 metadata = {"usr.login": "user@email.com"}
-# name, email, scope, role, session_id and propagate are optional arguments which 
-# default to None except propagate that defaults to True. They'll be 
+# name, email, scope, role, session_id and propagate are optional arguments which
+# default to None except propagate that defaults to True. They'll be
 # passed to the set_user() function
 track_user_login_success_event(tracer, "userid", metadata)
 ```
-{{% /tab %}}
-{{% tab "Login failure" %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="python-login-failure" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
@@ -766,10 +737,9 @@ exists = False
 # if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Custom business logic" %}}
-
+{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="python-custom-business" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
@@ -777,9 +747,7 @@ metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
@@ -817,10 +785,10 @@ The events that can be automatically detected are:
 
 Automatic user activity tracking offers the following modes:
 
-- `identification` mode (short name: `ident`): 
+- `identification` mode (short name: `ident`):
   - This mode is the default and always collects the user ID or best effort.
   - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
-  - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
+  - When the instrumented framework doesn't clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
     - `id`
     - `email`
     - `username`
@@ -830,7 +798,7 @@ Automatic user activity tracking offers the following modes:
 - `anonymization` mode (short name: `anon`):
   - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
 - `disabled` mode:
-  - AAP libraries do *not* collect any user ID from their automated instrumentations. 
+  - AAP libraries do *not* collect any user ID from their automated instrumentations.
   - User login events are not emitted.
 
 <div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
@@ -854,9 +822,9 @@ The following modes are deprecated:
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
-## Disabling user activity event tracking 
+## Disabling user activity event tracking
 
-To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
