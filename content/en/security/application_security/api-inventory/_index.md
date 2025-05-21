@@ -16,7 +16,7 @@ further_reading:
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
-- **Vulnerabilities**: If the endpoint contains a vulnerability.
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
 - **Findings**: Security findings found on this API.
 - **Dependencies**: APIs and Databases the API depends on.
 
