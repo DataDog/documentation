@@ -68,7 +68,7 @@ Datadog monitors traffic based on who opened the connection, the reverse directi
 
 For example, if a client in `us-east-1d` talks to a server in `us-east-1c`, you may see significant traffic. However, if there is no server in `us-east-1d`, the reverse row (`us-east-1c → us-east-1d`) may show little or no data.
 
-**Note**: Asymmetries in traffic can also result from application behavior (for example, video streaming), infrastructure elements (for example, proxies or NATs), or lack of connection initiation in one direction.
+**Note**: Asymmetries in traffic can also result from application behavior or infrastructure elements (for example, proxies or NATs), or lack of connection initiation in one direction.
 
 ### Recommended queries
 
