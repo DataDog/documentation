@@ -7,13 +7,11 @@ aliases:
   - /security/application_security/enabling/compatibility
   - /security/application_security/enabling
   - /security/application_security/getting_started
+  - /security/application_security/threats
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works"
-- link: "/security/application_security/threats/"
-  tag: "Documentation"
-  text: "App and API Protection"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog App and API Protection"

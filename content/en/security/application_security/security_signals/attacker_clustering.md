@@ -8,7 +8,7 @@ further_reading:
 - link: "/security/application_security/how-it-works/threat-intelligence/"
   tag: "Documentation"
   text: "Threat Intelligence"
-- link: "/security/application_security/threats/event_rules"
+- link: "/security/application_security/policies/inapp_waf_rules/"
   tag: "Documentation"
   text: "In-App WAF Rules"
 - link: "/security/application_security/threats/security_signals/"
@@ -73,6 +73,6 @@ The attacker clustering attributes selected are then shown as regular expression
 
 [1]: /security/application_security/how-it-works/threat-intelligence/
 [2]: /security/application_security/security_signals/attacker_fingerprint
-[3]: /security/application_security/threats/event_rules
+[3]: /security/application_security/threats/security_signals/
 [4]: /security/workload_protection/security_signals/
 [5]: /tracing/trace_collection/library_config/
