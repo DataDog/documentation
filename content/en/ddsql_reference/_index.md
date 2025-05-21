@@ -4,7 +4,15 @@ type: multi-code-lang
 further_reading:
 - link: "/ddsql_editor"
   tag: "Documentation"
+  text: "DDSQL Editor Overview"
+- link: "/ddsql_editor"
+  tag: "Documentation"
   text: "Learn more about the DDSQL Editor"
+- link: "/logs/workspaces/"
+  tag: "Documentation"
+  text: "Log Workspaces Overview"
+algolia:
+  tags: ["ddsql"]
 ---
 
 ## Supported DDSQL Syntax
