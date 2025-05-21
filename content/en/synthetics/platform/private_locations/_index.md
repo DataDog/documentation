@@ -684,7 +684,7 @@ To install root certificates for private locations on Windows environments, use 
 3. Create a new Registry key named `Environment` with the `Multi-string` value type.
 
 <div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetics Service:
-default: <code>C:\Program Files\Datadog-Synthetics\Synthetics.</code></a></div>
+default: <code>C:\Program Files\Datadog-Synthetics\Synthetics.</code></div>
 
 4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
 
