@@ -119,7 +119,7 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 
 On the Logs page, you can view and search all of the logs or flex logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][23].
 
-You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][22].
+You can also group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][22].
 
 **Note**: To toggle on flex logs, navigate to the logs list and tap on the top right to select enable flex logs.
 
