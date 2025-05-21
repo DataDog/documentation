@@ -130,7 +130,7 @@ To disable Flex Logs:
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option, doesn't apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option the and click **Save**.
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option, doesn't apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option and click **Save**.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 
