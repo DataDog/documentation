@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Draft Monitors let you safely create, refine, and test alerts without triggering notifications or impacting production. 
+Draft Monitors let you safely create, refine, and test alerts without triggering notifications. 
 
 Whether you're experimenting with thresholds, iterating on complex queries, or collaborating with teammates, drafts give you a clean, isolated space to work that is free from the noise of unfinished or test monitors. Also, Draft Monitors help reduce alert fatigue during development and ensure only fully vetted monitors go live. 
 
@@ -25,7 +25,7 @@ Ideal for engineers and SREs managing alert workflows, Draft Monitors provide cl
 To create and store monitors in a draft state:
 
 1. Navigate to [**Monitors > New Monitor**][1].  
-2. [Configure the monitor][2] (add your query, specify conditions, set notifications). Notifications set in a draft are only used after the monitor is published.  
+2. [Configure the monitor][2] (add your query, specify conditions, and optionally set notifications). Notification handles set in a draft are only used after the monitor is published. 
 3. Click **Save as Draft**. No alerts are sent from this draft monitor.
 
 {{< img src="/monitors/draft/save_as_draft.png" alt="Save as Draft button in the monitor creation interface" style="width:100%;" >}}
@@ -43,7 +43,7 @@ When your monitor is ready:
 
 <!-- TODO Add image of Monitors List filtered to view drafts, and final QA of instructions with UI-->
 
-Find draft monitors from the [**Monitors List**][3] by using the draft status facet or filter by `draft_status:draft`. Drafts appear with a **Draft** label on the monitor status page and in the monitor list. Drafts expire after 6 months, but you can delete draft monitors at any time.
+Find draft monitors from the [**Monitors List**][3] by using the draft status facet or filter by `draft_status:draft`. Drafts appear with a **Draft** label on the monitor status page and in the monitor list. Drafts expire after 6 months without updates, but you can delete draft monitors at any time.
 
 ## Permissions
 
