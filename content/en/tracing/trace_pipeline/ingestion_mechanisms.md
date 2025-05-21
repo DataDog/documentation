@@ -52,12 +52,12 @@ Sampling rate configuration in the Agent is configurable remotely if you are usi
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
 @param target_traces_per_second - integer - optional - default: 10
-@env DD_APM_MAX_TPS - integer - optional - default: 10
+@env DD_APM_TARGET_TPS - integer - optional - default: 10
 ```
 
 **Notes**:
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
-- The maximum traces per second is a target, not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
+- The target is not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
 
 All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
