@@ -46,7 +46,7 @@ First, configure your Datadog API and application keys by adding `DD_APP_KEY` an
 Next, run SCA by following instructions for your chosen CI provider below.
 
 ## GitHub Actions
-SCA can run as a job in your GitHub Actions workflows. The action provided below invokes our recommended SBOM tool, [Datadog SBOM Generator][10], on your codebase and uploads the results into Datadog.
+SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][10], on your codebase and uploads the results into Datadog.
 
 Add the following code snippet in `.github/workflows/datadog-sca.yml`. Make sure to replace
 the `dd_site` attribute with the [Datadog site][12] you are using.
@@ -232,7 +232,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Upload third-party SBOM to Datadog
 
-While Datadog suggests using [our own SBOM generator][10], it is possible to ingest a
+Datadog recommends using the [Datadog SBOM generator][10], but it is also possible to ingest a
 third-party SBOM.
 
 Our tooling supports the following SBOM standards:

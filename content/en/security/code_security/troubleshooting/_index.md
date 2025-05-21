@@ -156,7 +156,7 @@ You can always configure your default branch in-app under [Repository Settings][
 
 ### No package detected for C# projects
 
-Our SBOM generator, ([`datadog-sbom-generator`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
+The Datadog SBOM generator, ([`datadog-sbom-generator`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
 this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
 The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
