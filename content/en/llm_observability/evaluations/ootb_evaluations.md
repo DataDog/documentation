@@ -135,7 +135,7 @@ You can provide topics for this evaluation.
 1. CLick **Evaluations** on the left side panel.
 1. At the right corner of the top panel, select **Configuration**.
 1. Click the **Edit Evaluations** icon for Topic Relevancy.
-1. Add topics on the config page.
+1. Add topics on the configuration page.
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
@@ -181,7 +181,7 @@ def generate_answer():
   )
 {{< /code-block >}}
 
-The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (e. g., the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 ##### Hallucination configuration
 
@@ -221,7 +221,7 @@ The types of Failure to Answer are defined below and can be configured when the 
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
 
-Language mismatch is only supported for natural language prompts. Input and output pairs mainly consisting of structured data such as JSON, code snippets, or special characters are not flagged as a language mismatch.
+Language mismatch is only supported for natural language prompts. Input and output pairs that mainly consist of structured data such as JSON, code snippets, or special characters are not flagged as a language mismatch.
 
 {{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 

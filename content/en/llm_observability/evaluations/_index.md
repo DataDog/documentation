@@ -3,19 +3,7 @@ title: Evaluations
 description: Learn how to configure Evaluations for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
-further_reading:
-- link: "/llm_observability/evaluations/ootb_evaluations"
-  tag: "Documentation"
-  text: "Learn about Out of the Box Evaluations"
-- link: "/llm_observability/evaluations/submit_evaluations"
-  tag: "Documentation"
-  text: "Learn about submitting Custom Evaluations"
-- link: "/llm_observability/evaluations/ragas_evaluations"
-  tag: "Documentation"
-  text: "Learn about integrating with Ragas"
-- link: "/llm_observability/evaluations/submit_nemo_evaluations"
-  tag: "Documentation"
-  text: "Learn about integrating with NeMo"
+    - /llm_observability/configuration/
 ---
 
 {{< site-region region="gov" >}}
@@ -24,15 +12,15 @@ further_reading:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations.
+LLM Observability offers several ways to support evaluations:
 
 ### Out of the Box Evaluations
 
-[Out of the Box Evaluations][1] are built and supported by Datadog to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [Out of the Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Submit Custom Evaluations
+### Submit Evaluations
 
-You can also [Submit Custom Evaluations][2] using our API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also [Submit Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
 ### Evaluation Integrations
 
