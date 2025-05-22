@@ -687,6 +687,21 @@ components:
       required: true
       schema:
         type: string
+    ResourceFilterAccountID:
+      description: Filter resource filters by cloud provider account ID. This parameter
+        is only valid when provider is specified.
+      in: query
+      name: account_id
+      required: false
+      schema:
+        type: string
+    ResourceFilterProvider:
+      description: Filter resource filters by cloud provider (e.g. aws, gcp, azure).
+      in: query
+      name: cloud_provider
+      required: false
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
@@ -826,6 +841,13 @@ components:
       required: true
       schema:
         type: string
+    SkipCache:
+      description: Skip cache for resource filters.
+      in: query
+      name: skip_cache
+      required: false
+      schema:
+        type: boolean
     SpansMetricIDParameter:
       description: The name of the span-based metric.
       in: path
@@ -15833,6 +15855,26 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetResourceEvaluationFiltersResponse:
+      description: The definition of `GetResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    GetResourceEvaluationFiltersResponseData:
+      description: The definition of `GetResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
     GetRuleVersionHistoryData:
       description: Data for the rule version history.
       properties:
@@ -29747,6 +29789,46 @@ components:
       required:
       - data
       type: object
+    ResourceFilterAttributes:
+      description: Attributes of a resource filter.
+      example:
+        aws:
+          '123456789':
+          - environment:production
+          - team:devops
+        azure:
+          sub-001:
+          - app:frontend
+        gcp:
+          project-abc:
+          - region:us-central1
+      properties:
+        cloud_provider:
+          additionalProperties:
+            additionalProperties:
+              items:
+                description: Tag filter in format "key:value"
+                example: environment:production
+                type: string
+              type: array
+            type: object
+          description: A map of cloud provider names (e.g., "aws", "gcp", "azure")
+            to a map of account/resource IDs and their associated tag filters.
+          type: object
+        uuid:
+          description: The UUID of the resource filter.
+          type: string
+      required:
+      - cloud_provider
+      type: object
+    ResourceFilterRequestType:
+      description: Constant string to identify the request type.
+      enum:
+      - csm_resource_filter
+      example: csm_resource_filter
+      type: string
+      x-enum-varnames:
+      - CSM_RESOURCE_FILTER
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -32909,9 +32991,11 @@ components:
       example: true
       type: boolean
     SecurityMonitoringRuleKeepAlive:
-      description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window. For third
-        party detection method, this field is not used."
+      description: 'Once a signal is generated, the signal will remain "open" if a
+        case is matched at least once within
+
+        this keep alive window. For third party detection method, this field is not
+        used.'
       enum:
       - 0
       - 60
@@ -32941,9 +33025,10 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleMaxSignalDuration:
-      description: "A signal will \u201Cclose\u201D regardless of the query being
-        matched once the time exceeds the maximum duration.\nThis time is calculated
-        from the first seen timestamp."
+      description: 'A signal will "close" regardless of the query being matched once
+        the time exceeds the maximum duration.
+
+        This time is calculated from the first seen timestamp.'
       enum:
       - 0
       - 60
@@ -39352,6 +39437,52 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateResourceEvaluationFiltersRequest:
+      description: Request object to update a resource filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequestData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersRequestData:
+      description: The definition of `UpdateResourceFilterRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `UpdateResourceEvaluationFiltersRequestData` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
+    UpdateResourceEvaluationFiltersResponse:
+      description: The definition of `UpdateResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersResponseData:
+      description: The definition of `UpdateResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
     UpdateRuleRequest:
       description: Request to update a scorecard rule.
       properties:
@@ -44744,6 +44875,80 @@ paths:
         permissions:
         - security_monitoring_rules_read
         - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+  /api/v2/cloud_security_management/resource_filters:
+    get:
+      description: List resource filters.
+      operationId: GetResourceEvaluationFilters
+      parameters:
+      - $ref: '#/components/parameters/ResourceFilterProvider'
+      - $ref: '#/components/parameters/ResourceFilterAccountID'
+      - $ref: '#/components/parameters/SkipCache'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: List resource filters
+      tags:
+      - Security Monitoring
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
+      x-undo:
+        type: safe
+    put:
+      description: Update resource filters.
+      operationId: UpdateResourceEvaluationFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Update resource filters
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/container_images:
@@ -55563,7 +55768,11 @@ paths:
         type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
-      description: Get the list of Cloud Security Management Threats Agent rules
+      description: 'Get the list of Workload Protection agent rules.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: ListCSMThreatsAgentRules
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID'
@@ -55578,22 +55787,25 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all CSM Threats Agent rules
+      summary: Get all Workload Protection agent rules
       tags:
       - CSM Threats
-      x-menu-order: 3
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Create a new Cloud Security Management Threats Agent rule with
-        the given parameters
+      description: 'Create a new Workload Protection agent rule with the given parameters.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: CreateCSMThreatsAgentRule
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
-        description: The definition of the new Agent rule
+        description: The definition of the new agent rule
         required: true
       responses:
         '200':
@@ -55610,7 +55822,7 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a CSM Threats Agent rule
+      summary: Create a Workload Protection agent rule
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
@@ -55625,7 +55837,7 @@ paths:
               \"technique:T1059\"],\n      \"policy_id\": \"{{ policy.data.id }}\"\n
               \    }\n  }\n}"
           step: there is a valid "agent_rule_rc" in the system
-      x-menu-order: 4
+      x-menu-order: 3
       x-undo:
         operationId: DeleteCSMThreatsAgentRule
         parameters:
@@ -55634,7 +55846,11 @@ paths:
         type: unsafe
   /api/v2/remote_config/products/cws/agent_rules/{agent_rule_id}:
     delete:
-      description: Delete a specific Cloud Security Management Threats Agent rule
+      description: 'Delete a specific Workload Protection agent rule.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: DeleteCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -55648,15 +55864,18 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a CSM Threats Agent rule
+      summary: Delete a Workload Protection agent rule
       tags:
       - CSM Threats
-      x-menu-order: 6
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
-      description: Get the details of a specific Cloud Security Management Threats
-        Agent rule
+      description: 'Get the details of a specific Workload Protection agent rule.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: GetCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -55674,16 +55893,20 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a CSM Threats Agent rule
+      summary: Get a Workload Protection agent rule
       tags:
       - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
     patch:
-      description: 'Update a specific Cloud Security Management Threats Agent rule.
+      description: 'Update a specific Workload Protection Agent rule.
 
-        Returns the Agent rule object when the request is successful.'
+        Returns the agent rule object when the request is successful.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: UpdateCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -55693,7 +55916,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
-        description: New definition of the Agent rule
+        description: New definition of the agent rule
         required: true
       responses:
         '200':
@@ -55712,16 +55935,20 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a CSM Threats Agent rule
+      summary: Update a Workload Protection agent rule
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/remote_config/products/cws/policy:
     get:
-      description: Get the list of Cloud Security Management Threats Agent policies
+      description: 'Get the list of Workload Protection policies.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: ListCSMThreatsAgentPolicies
       responses:
         '200':
@@ -55734,15 +55961,18 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all CSM Threats Agent policies
+      summary: Get all Workload Protection policies
       tags:
       - CSM Threats
-      x-menu-order: 3
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
-      description: Create a new Cloud Security Management Threats Agent policy with
-        the given parameters
+      description: 'Create a new Workload Protection policy with the given parameters.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: CreateCSMThreatsAgentPolicy
       requestBody:
         content:
@@ -55766,7 +55996,7 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a CSM Threats Agent policy
+      summary: Create a Workload Protection policy
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
@@ -55779,7 +56009,7 @@ paths:
               \"My agent policy\",\n      \"hostTags\": [\"env:staging\"],\n      \"enabled\":
               true\n     }\n  }\n}"
           step: there is a valid "policy_rc" in the system
-      x-menu-order: 4
+      x-menu-order: 8
       x-undo:
         operationId: DeleteCSMThreatsAgentPolicy
         parameters:
@@ -55788,13 +56018,17 @@ paths:
         type: unsafe
   /api/v2/remote_config/products/cws/policy/download:
     get:
-      description: 'The download endpoint generates a CSM Threats policy file from
-        your currently active
+      description: 'The download endpoint generates a Workload Protection policy file
+        from your currently active
 
-        CSM Threats rules, and downloads them as a `.policy` file. This file can then
-        be deployed to
+        Workload Protection agent rules, and downloads them as a `.policy` file. This
+        file can then be deployed to
 
-        your Agents to update the policy running in your environment.'
+        your agents to update the policy running in your environment.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: DownloadCSMThreatsPolicy
       responses:
         '200':
@@ -55808,15 +56042,19 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get the latest CSM Threats policy
+      summary: Download the Workload Protection policy
       tags:
       - CSM Threats
-      x-menu-order: 1
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v2/remote_config/products/cws/policy/{policy_id}:
     delete:
-      description: Delete a specific Cloud Security Management Threats Agent policy
+      description: 'Delete a specific Workload Protection policy.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: DeleteCSMThreatsAgentPolicy
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
@@ -55831,15 +56069,18 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a CSM Threats Agent policy
+      summary: Delete a Workload Protection policy
       tags:
       - CSM Threats
-      x-menu-order: 6
+      x-menu-order: 10
       x-undo:
         type: idempotent
     get:
-      description: Get the details of a specific Cloud Security Management Threats
-        Agent policy
+      description: 'Get the details of a specific Workload Protection policy.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: GetCSMThreatsAgentPolicy
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
@@ -55856,16 +56097,20 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a CSM Threats Agent policy
+      summary: Get a Workload Protection policy
       tags:
       - CSM Threats
-      x-menu-order: 2
+      x-menu-order: 7
       x-undo:
         type: safe
     patch:
-      description: 'Update a specific Cloud Security Management Threats Agent policy.
+      description: 'Update a specific Workload Protection policy.
 
-        Returns the Agent policy object when the request is successful.'
+        Returns the policy object when the request is successful.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: UpdateCSMThreatsAgentPolicy
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
@@ -55893,11 +56138,11 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a CSM Threats Agent policy
+      summary: Update a Workload Protection policy
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/remote_config/products/obs_pipelines/pipelines:
@@ -58872,13 +59117,16 @@ paths:
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
-      description: 'The download endpoint generates a Cloud Workload Security policy
-        file from your currently active
+      description: 'The download endpoint generates a Workload Protection policy file
+        from your currently active
 
-        Cloud Workload Security rules, and downloads them as a .policy file. This
+        Workload Protection agent rules, and downloads them as a `.policy` file. This
         file can then be deployed to
 
-        your Agents to update the policy running in your environment.'
+        your agents to update the policy running in your environment.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: DownloadCloudWorkloadPolicyFile
       responses:
         '200':
@@ -58892,10 +59140,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get the latest Cloud Workload Security policy
+      summary: Download the Workload Protection policy (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 1
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -59783,7 +60031,10 @@ paths:
         type: idempotent
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
-      description: Get the list of Agent rules
+      description: 'Get the list of agent rules.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: ListCloudWorkloadSecurityAgentRules
       responses:
         '200':
@@ -59796,10 +60047,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all Cloud Workload Security Agent rules
+      summary: Get all Workload Protection agent rules (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 3
+      x-menu-order: 12
       x-permission:
         operator: OR
         permissions:
@@ -59807,14 +60058,17 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a new Agent rule with the given parameters.
+      description: 'Create a new agent rule with the given parameters.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: CreateCloudWorkloadSecurityAgentRule
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
-        description: The definition of the new Agent rule
+        description: The definition of the new agent rule
         required: true
       responses:
         '200':
@@ -59831,7 +60085,7 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a Cloud Workload Security Agent rule
+      summary: Create a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
@@ -59844,7 +60098,7 @@ paths:
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
-      x-menu-order: 4
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -59857,7 +60111,10 @@ paths:
         type: unsafe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
     delete:
-      description: Delete a specific Agent rule
+      description: 'Delete a specific agent rule.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: DeleteCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59870,10 +60127,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a Cloud Workload Security Agent rule
+      summary: Delete a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -59881,7 +60138,10 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get the details of a specific Agent rule
+      description: 'Get the details of a specific agent rule.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: GetCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59898,10 +60158,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a Cloud Workload Security Agent rule
+      summary: Get a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 2
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -59909,9 +60169,12 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: 'Update a specific Agent rule.
+      description: 'Update a specific agent rule.
 
-        Returns the Agent rule object when the request is successful.'
+        Returns the agent rule object when the request is successful.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: UpdateCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59920,7 +60183,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
-        description: New definition of the Agent rule
+        description: New definition of the agent rule
         required: true
       responses:
         '200':
@@ -59939,11 +60202,11 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a Cloud Workload Security Agent rule
+      summary: Update a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -65878,10 +66141,14 @@ tags:
 
     Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.'
   name: CSM Coverage Analysis
-- description: Cloud Security Management Threats (CSM Threats) monitors file, network,
-    and process activity across your environment to detect real-time threats to your
-    infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
-    for more information on setting up CSM Threats.
+- description: 'Workload Protection monitors file, network, and process activity across
+    your environment to detect real-time threats to your infrastructure. See [Workload
+    Protection](https://docs.datadoghq.com/security/workload_protection/) for more
+    information on setting up Workload Protection.
+
+
+    **Note**: These endpoints are split based on whether you are using the US1-FED
+    site or not. Please reference the specific resource for the site you are using.'
   name: CSM Threats
 - description: View and manage cases and projects within Case Management. See the
     [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
