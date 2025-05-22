@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process.">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
 
 The overall process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
 
@@ -29,7 +29,8 @@ For custom metrics, use the [Distribution Metrics][4] to correctly aggregate dat
 #### Example Code
 
 ```js
-// the tracer also includes a dogstatsd client
+// The tracer includes a dogstatsd client.
+// It will send profiling information if configured with DD_PROFILING_ENABLED.
 const tracer = require('dd-trace').init({
  logInjection: true,
 });
@@ -62,7 +63,9 @@ The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [
 
 Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The log files are identified by a `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` to pick up all of the files ending in `.log` in the `/shared-volume/logs` directory.
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` which will forward all of files ending in `.log` in the `/shared-volume/logs` directory.
+
+Set `DD_PROFILING_ENABLED` to enable [Profiling][3].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
@@ -155,17 +158,17 @@ Application [Logs][4] need to be sent to a file that the sidecar container can a
 
 ### Containers
 
-A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect telemetry from your application container and send it to datadog. The sidecar container is configured with a healthcheck for correct starup and a shared volume for log forwarding.
+A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect telemetry from your application container and send it to datadog. The sidecar container is configured with a healthcheck for correct starup, and a shared volume for log forwarding, and the environment variables documented [below](#environment-variables).
 
 #### Environment Variables
 
 | Variable | Container | Description |
 | -------- | --------- | ----------- |
-| `DD_SERVERLESS_LOG_PATH` | Both | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. |
-|`DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
+| `DD_SERVERLESS_LOG_PATH` | Sidecar | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
+| `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar | When true, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
-| `DD_SERVICE`      | Both | See [Unified Service Tagging][14].                                  |
+| `DD_SERVICE`      | **Both** | See [Unified Service Tagging][14].                                  |
 | `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_SOURCE`       | Sidecar | See [Unified Service Tagging][14].                                  |
@@ -176,7 +179,7 @@ The `DD_LOGS_ENABLED` environment variable is not required.
 
 {{< tabs >}}
 {{% tab "GCR UI" %}}
-1. In the Cloud Run service page, select **Edit & Deploy New Revision**.
+1. On the Cloud Run service page, select **Edit & Deploy New Revision**.
 1. Open the **Volumes** main tab and create a new volume for log forwarding.
     1. Make an `In-Memory` volume called `shared-logs`.
     1. You may set a size limit if necessary.
@@ -186,14 +189,14 @@ The `DD_LOGS_ENABLED` environment variable is not required.
     2. Choose any free port (`9999`, for example). We will need this port number shortly for the `DD_HEALTH_PORT` variable.
 1. Click the **Variables & Secrets** tab and add the required environment variables.
     - The `DD_HEALTH_PORT` variable should be the port for the TCP health check you configured.
-    - The `DD_SERVERLESS_LOG_PATH` variable should be set to `<volume-mount-name>/logs/*.log`. You will set the `<volume-mount-name>` shortly, most likely to `/shared-logs`, so `/shared-logs/logs/*.log`.
-    - See the table above for the other required [Environment Variables](#environment-variables).
+    - The `DD_SERVERLESS_LOG_PATH` variable should be set to `/shared-logs/logs/*.log` where `/shared-logs` is the volume mount point we will use in the next step.
+    - See the table above for the other required and suggested [Environment Variables](#environment-variables).
 1. Click the **Volume Mounts** tab and add the logs volume mount.
-    - Mount it at the location that matches the `DD_SERVERLESS_LOG_PATH`, for example `/shared-logs`.
+    - Mount it at the location that matches the prefix of `DD_SERVERLESS_LOG_PATH`, for example `/shared-logs` for a `/shared-logs/logs/*.log` log path.
 1. Edit the application container.
 1. Click the **Volume Mounts** tab and add the logs volume mount.
-    - Mount it to the same location that you did for the sidecar container, one that matches the `DD_SERVERLESS_LOG_PATH` environment variable, for example `/shared-logs`.
-1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` and `DD_SERVERLESS_LOG_PATH a environment varialbes as you did for the sidecar.
+    - Mount it to the same location that you did for the sidecar container, for example `/shared-logs`.
+1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` environment variable as you did for the sidecar.
 1. Click the **Settings** tab and set the **Container start up order** to **Depends on** the sidecar container.
 1. **Deploy** the application.
 {{% /tab %}}
