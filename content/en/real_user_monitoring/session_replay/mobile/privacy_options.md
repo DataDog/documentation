@@ -574,7 +574,7 @@ Privacy overrides are fully supported in React Native starting from version `2.8
 
 React Native's implementation is built on the same foundation as the native Android and iOS SDKs. As a result, you can rely on the privacy features behaving the same way across all three platforms.
 
-#### Usage via `SessionReplayView`
+#### Usage with `SessionReplayView`
 
 The SDK provides a set of React components under the `SessionReplayView` namespace, which are used to configure privacy settings within your React Native application.
 
@@ -597,8 +597,14 @@ Each of these components behaves like a regular React Native View, meaning they 
 
 #### Integration approaches
 
-1. **As Wrappers**
+There are two ways to apply privacy overrides in React Native:
+- Wrap specific components with a privacy-focused `SessionReplayView` to target only certain elements, or
+- Replace an entire `<View>` with a `SessionReplayView` to apply privacy settings to a whole section of your UI.
 
+This flexibility lets you control which parts of your app are masked or visible in session replays.
+
+
+{{% collapse-content title="As wrappers" level="h4" expanded=true id="as-wrappers" %}}
 Use `SessionReplayView` components to wrap specific parts of your UI where you want to override privacy settings.
 
 For example, going from:
@@ -632,9 +638,9 @@ const App = () => {
     );
 }
 {{< /code-block >}}
+{{% /collapse-content %}} 
 
-2. **As Replacements**
-
+{{% collapse-content title="As replacements" level="h4" expanded=true id="as-replacements" %}}
 Replace an existing `<View>` with a `SessionReplayView` component directly. This is ideal when a view already encapsulates the section of the UI that needs modified privacy behavior.
 
 For example, instead of:
@@ -660,6 +666,7 @@ const App = () => {
     );
 }
 {{< /code-block >}}
+{{% /collapse-content %}} 
 
 #### Combining privacy components
 
@@ -694,9 +701,9 @@ const App = () => {
 
 ### Notes on WebViews
 
-• Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
+- Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
 
-• When a WebView is marked as `hidden`, it is replaced by a placeholder in the replay. However, the WebView itself continues to collect and send data. To avoid this, it is recommended to use [browser SDK privacy settings][1] for managing WebView privacy, as they provide more targeted control.
+- When a WebView is marked as `hidden`, it is replaced by a placeholder in the replay. However, the WebView itself continues to collect and send data. To avoid this, it is recommended to use [browser SDK privacy settings][1] for managing WebView privacy, as they provide more targeted control.
 
 
 ## How and what data is masked
