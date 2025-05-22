@@ -12,7 +12,7 @@ further_reading:
   text: "Datadog Scorecards"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSf_617JW9d8wGVnCspDjrrQvWyeTz3hmQsg5mLvF5pNbP_Y1Q/viewform" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Engineering Reports!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for Engineering Reports!" >}}
 {{< /callout >}}
 
 ## Overview

@@ -21,7 +21,7 @@ further_reading:
   text: "Watchdog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for the Developer Overview Page!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the Developer Overview Page!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -91,7 +91,7 @@ Lists open Jira issues assigned to your email. Tickets with the status **Done** 
 - **My team's services**: Lists services owned by the selected **Team** filter.  
 - **Scorecard performance by service**: Displays the average score across all scorecards for each service owned by the selected **Team** filter.
 
-#### Issues and Errors
+#### Issues and errors
 
 Surfaces issues and errors detected by [Datadog Incidents][3] and [Error Tracking][4]. Widgets remain empty until these products are enabled.
 
@@ -101,11 +101,11 @@ Captures alerts from [Datadog Watchdog][5].
 
 ### Clone for further customization
 
-If you need to customize your view, click **Clone as dashboard** at the top right hand side. This will create a dashboard prefilled with content from the **My Workspace** page. 
+If you need to customize your view, click **Clone as dashboard** at the top right hand side. This creates a dashboard prefilled with content from the **My Workspace** page. 
 
 Here are some example customizations you can make with the cloned dashboard:
-- Create [Embedded Apps][2] using Datadog's [Action Catalog][11] to display additional 3rd party data (for example, display PagerDuty on call information).
-- Update the overall layout and design of your view by re-sizing, re-arranging, and adding/removing [widgets][12].
+- Create [Embedded Apps][2] using Datadog's [Action Catalog][11] to display additional third-party data (for example, display PagerDuty on call information).
+- Update the overall layout and design of your view by resizing, rearranging, and adding/removing [widgets][12].
 - Use a [Note][13] widget to add an announcement and updates section with relevant information for your organization.
 
 ## Further reading
