@@ -698,11 +698,9 @@ default: <code>C:\Program Files\Datadog-Synthetics\Synthetics.</code></div>
 
 To install root certificates for private locations on a standalone Windows process with `synthetics-private-location.exe`, use the following steps:
 
-1. Open your Windows terminal.
+1. Open your Windows command prompt or PowerShell.
 
-2. Set the environment variable `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
-
-3. Call the executable `.\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"`
+2. Set the environment variable and call the executable.
 
 Example:
 
