@@ -6265,7 +6265,55 @@ menu:
           - CreateDORAIncident
         unstable:
           - v2
+        order: 2
+    - name: Get a failure event
+      url: '#get-a-failure-event'
+      identifier: dora-metrics-get-a-failure-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORAFailure
+        unstable: []
+        order: 6
+    - name: Get a list of failure events
+      url: '#get-a-list-of-failure-events'
+      identifier: dora-metrics-get-a-list-of-failure-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORAFailures
+        unstable: []
         order: 4
+    - name: Get a deployment event
+      url: '#get-a-deployment-event'
+      identifier: dora-metrics-get-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORADeployment
+        unstable: []
+        order: 5
+    - name: Get a list of deployment events
+      url: '#get-a-list-of-deployment-events'
+      identifier: dora-metrics-get-a-list-of-deployment-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORADeployments
+        unstable: []
+        order: 3
     - name: Send a deployment event for DORA Metrics
       url: '#send-a-deployment-event-for-dora-metrics'
       identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
@@ -6278,7 +6326,7 @@ menu:
           - CreateDORADeployment
         unstable:
           - v2
-        order: 4
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
