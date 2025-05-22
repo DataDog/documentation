@@ -420,7 +420,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
