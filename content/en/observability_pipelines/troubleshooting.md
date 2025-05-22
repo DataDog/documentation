@@ -114,7 +114,7 @@ The curl command you use is based on the port you are using, as well as the path
 
 ## Worker is not starting
 
-If the Worker is not starting, then Worker logs for troubleshooting are not getting to Datadog, which means they are not available in Log Explorer. To view logs locally, run this command:
+If the Worker is not starting, then Worker logs are not getting to Datadog, which means the logs are not available in Log Explorer for troubleshooting. To view logs locally, run this command:
 
 - For a VM-based environment:
     ```
