@@ -4103,11 +4103,6 @@ menu:
       parent: profiler_enabling
       identifier: profiler_enabling_linux
       weight: 109
-    - name: Full Host
-      url: profiler/enabling/full_host/
-      parent: profiler_enabling
-      identifier: profiler_enabling_full_host
-      weight: 110
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler
@@ -4177,12 +4172,12 @@ menu:
       url: profiler/profiler_troubleshooting/ddprof/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
-      weight: 608
+      weight: 708
     - name: Full Host
       url: profiler/profiler_troubleshooting/full_host/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_full_host
-      weight: 609
+      weight: 709
     - name: Guides
       url: profiler/guide/
       parent: profiler

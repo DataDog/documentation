@@ -20,7 +20,7 @@ The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetr
 
 The Full-Host Profiler is particularly valuable for:
 
-- Profiling open-source software components that aren't instrumented with Datadog's tracing libraries.
+- Profiling open source software components that aren't instrumented with Datadog's tracing libraries.
 - Analyzing performance across multi-language processes and runtimes.
 - Identifying resource bottlenecks at the host level, including detection of noisy neighbor processes.
 
@@ -42,7 +42,7 @@ OS Settings
 : TBD
 
 Debugging information
-: Symbols should be available locallly or can be  uploaded in CI with `datadog-ci` 
+: Symbols should be available locally or can be uploaded in CI with `datadog-ci` 
 
 ## Installation
 
@@ -69,7 +69,7 @@ To enable local symbol upload:
 1. Set the `DD_HOST_PROFILING_EXPERIMENTAL_UPLOAD_SYMBOLS=true`.
 2. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
 3. Provide a [Datadog application key][13] through the `DD_APP_KEY` environment variable.
-4. Set the `DD_SITE environment` variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
+4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
 ### Build
 To build the Full-Host Profiler directly on your machine:
