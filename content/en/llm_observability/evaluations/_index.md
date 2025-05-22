@@ -24,7 +24,7 @@ You can also [Submit Evaluations][2] using Datadog's API. This mechanism is grea
 
 ### Evaluation Integrations
 
-We also support integration with some 3rd party evaluation frameworks, such as [Ragas][3] and [NeMo][4].
+Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][3] and [NeMo][4].
 
 ### Sensitive Data Scanner integration
 

@@ -1,6 +1,6 @@
 ---
-title: Out-of-the-Box Evaluations
-description: Learn how to configure out of the box evaluations for your LLM applications.
+title: Out-of-the-box evaluations
+description: Learn how to configure out-of-the-box evaluations for your LLM applications.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -16,20 +16,20 @@ further_reading:
 
 ## Overview
 
-Out-of-the-Box Evaluations are built-in tools to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Out-of-the-box evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
-LLM Observability out-of-the-box evaluations which leverage LLMs require for you to bring your own key, meaning that you need to connect your LLM provider to Datadog to use them.
+LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
-## Connect your account
+## Connect your LLM provider account
 
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a BAA and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
-Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for Evaluations.
+Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the OpenAI tile.
@@ -45,7 +45,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 <div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the **GPT-4o mini** model for Evaluations.
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the `GPT-4o mini` model for evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
@@ -61,7 +61,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 <div class="alert alert-info">Anthropic is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for Evaluations.
+Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Anthropic tile.
@@ -76,7 +76,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 
 <div class="alert alert-info">Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for Evaluations.
+Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Amazon Bedrock tile.
@@ -100,14 +100,14 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
    - If you select to run the evaluation on spans, you must select at least one span name to save your configured evaluation.
 1. Select the span names you would like your evaluation to run on. (Optional if traces is selected).
 1. Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
-1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
+1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A sampling percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
 1. (Optional) For Failure to Answer, if OpenAI or Azure OpenAI is selected, configure the evaluation by selecting what types of answers should be considered Failure to Answer. This configuration is detailed in [Failure to Answer Configuration][5].
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
 For more information about evaluations, see [Terms and Concepts][1].
 
-### Estimated Token Usage
+### Estimated token usage
 
 LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
 
@@ -120,7 +120,7 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 ### Quality evaluations
 
-#### Topic Relevancy
+#### Topic relevancy
 
 This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
   
@@ -132,8 +132,8 @@ You can provide topics for this evaluation.
 
 1. Go to [**LLM Observability > Applications**][4].
 1. Select the application you want to add topics for.
-1. CLick **Evaluations** on the left side panel.
-1. At the right corner of the top panel, select **Configuration**.
+1. At the right corner of the top panel, select **Settings**.
+1. Beside **Topic Relevancy**, click **Configure Evaluation**.
 1. Click the **Edit Evaluations** icon for Topic Relevancy.
 1. Add topics on the configuration page.
 
