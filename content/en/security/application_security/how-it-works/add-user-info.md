@@ -281,7 +281,7 @@ Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track u
 
 In previous versions, you can monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
 
-{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" %}}
+{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" id="python-user-info-sdk" %}}
 
 Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags and enable user blocking capability:
 
@@ -306,7 +306,7 @@ track_user(
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Legacy API" level="h4" expanded="false" %}}
+{{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-user-info-legacy" %}}
 
 This example shows how to set user monitoring tags and enable user blocking capability, using the legacy API.
 But using instead the new User Tracking SDK is encouraged.
@@ -750,7 +750,7 @@ Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track u
 
 The following examples show how to track login events, signup events or custom events.
 
-{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" %}}
+{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" id="python-business-logic-sdk" %}}
 
 Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 
@@ -813,7 +813,9 @@ track_user_sdk.track_signup(
 )
 
 
-## This function should be called when a custom user event occurs in the application.
+## This function should be called when a custom user event occurs in the
+# application.
+
 # metadata is required
 metadata = {
     "usr.address": {"line1": "221b Baker Street", "city": "London"},
@@ -824,7 +826,7 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="FastAPI Toy App with SDK" level="h4" expanded="false" %}}
+{{% collapse-content title="FastAPI Toy App with SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
 
 The following example is a fully functionning Toy application using the User Tracking SDK with a memory based user database. It's only provided as an example to illustrate the possible usage of the SDK and does not provide the necessary requirements of a real application, like a persistent data model or a secure authentification system.
 
@@ -872,7 +874,10 @@ app.add_middleware(SessionMiddleware, secret_key=session_secret)
 @app.post("/signup")
 async def signup(username: str, password: str):
     if username in users:
-        return JSONResponse({"error": "User already exists"}, status_code=400)
+        return JSONResponse(
+            {"error": "User already exists"},
+            status_code=400,
+        )
 
     user_id = str(uuid4())
     users[username] = User(
@@ -890,13 +895,15 @@ async def login(username: str, password: str, request: Request):
     if username not in users:
         track_login_failure(username, False)
         return JSONResponse(
-            {"error": "Invalid user password combination"}, status_code=403
+            {"error": "Invalid user password combination"},
+            status_code=403,
         )
 
     if users[username].password != password:
         track_login_failure(username, True, users[username].user_id)
         return JSONResponse(
-            {"error": "Invalid user password combination"}, status_code=403
+            {"error": "Invalid user password combination"},
+            status_code=403,
         )
 
     track_login_success(username, users[username].user_id)
@@ -908,7 +915,10 @@ async def login(username: str, password: str, request: Request):
 
 @app.get("/whoami")
 async def whoami(request: Request) -> User:
-    if "username" not in request.session or request.session["username"] not in users:
+    if (
+        "username" not in request.session
+        or request.session["username"] not in users
+    ):
         raise HTTPException(status_code=403, detail="User not logged in")
 
     track_custom_event(
@@ -924,7 +934,7 @@ async def whoami(request: Request) -> User:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Legacy API" level="h4" expanded="false" %}}
+{{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-business-logic-legacy" %}}
 
 Available since dd-trace-py v1.9, using the new User Tracking SDK instead is now encouraged.
 
