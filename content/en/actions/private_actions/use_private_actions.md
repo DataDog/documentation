@@ -19,6 +19,10 @@ further_reading:
   text: "Handling Private Action Credentials"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Private actions are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
