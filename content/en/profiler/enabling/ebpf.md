@@ -51,9 +51,9 @@ The Full-Host Profiler is distributed as a standalone executable.
 ### Container environments
 For hosts running containerized workloads, Datadog recommends running the profiler inside a container:
 
-If you're using Kubernetes, follow the instruction for [running in Kubernetes][8].
-
-If you're directly using Docker, follow the instrcutins for [running in Docker][9].
+- **Kubernetes**: Follow the [running in Kubernetes][8] instructions.
+- **Docker**: Follow the [running in Docker][9] instructions.
+- **Container image**: Available from the [container registry][5].
 
 
 ### Non-container environments
