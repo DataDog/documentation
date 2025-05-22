@@ -55,7 +55,7 @@ Imagine you're building a rotation for a Premier Support team of 50 people. You 
 - Page G → Support Schedule Group 2
 
 #### Escalation behavior:
-In round robin mode, if a page isn't acknowledged in time, it doesn't move to the next person in the round robin rotation. Instead, it escalates to the next step in the policy—just like a "Notify All" page would.
+In round robin mode, if a page isn't acknowledged in time, it doesn't move to the next person in the round robin rotation. Instead, it escalates to the next step in the policy — like a "Notify All" page would.
 
 If you want the page to go to the next target in the round robin, use only one round robin step in your escalation policy and configure it to repeat at least as many times as there are targets.
 
