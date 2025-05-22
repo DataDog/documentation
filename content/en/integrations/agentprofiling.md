@@ -17,7 +17,7 @@ integration_id: "agentprofiling"
 
 ## Overview
 
-This check should be used when troubleshooting a memory or CPU issue in the Agent. After a user-configured memory or CPU threshold is exceeded, a flare with profiles will be generated. It can be generated locally or sent directly to a Datadog Support case.  
+This check should be used when troubleshooting a memory or CPU issue in the Agent. After a user-configured memory or CPU threshold is exceeded, a flare with profiles is automatically generated. This flare can be generated locally or sent directly to a Datadog Support case. A valid `ticket_id` and `user_email` must be provided in the `conf.yaml` for the flare to be sent directly to a Support case. It is otherwise generated locally.   
 
 ## Setup
 
@@ -44,19 +44,19 @@ The System check is included in the [Datadog Agent][1] package. No additional in
 
 [Run the Agent's status subcommand][1] and look for `agentprofiling` under the Checks section.
 
-## Data collected
+## Data Collected
 
 ### Metrics
 
-The Agentprofiling check does not include any metrics.
+The Agent Profiling check does not include any metrics.
 
 ### Events
 
-The System check does not include any events.
+The Agent Profiling check does not include any events.
 
-### Service checks
+### Service Checks
 
-The System check does not include any service checks.
+The Agent Profiling check does not include any service checks.
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
