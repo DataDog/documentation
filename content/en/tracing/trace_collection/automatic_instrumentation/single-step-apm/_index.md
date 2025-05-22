@@ -27,7 +27,7 @@ After instrumentation, you can optionally:
 - [configure Unified Service Tags (USTs)](#configure-universal-service-tags)
 - [enable additional SDK-dependent products and features](#enable-sdk-dependent-products-and-features), such as Continuous Profiler or Application Security Monitoring
 
-Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
+Click on one of the following tiles to learn how to set up SSI for your deployment type:
 
 {{< partial name="apm/apm-single-step.html" >}} 
 
