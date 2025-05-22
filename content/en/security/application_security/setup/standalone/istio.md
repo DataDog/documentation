@@ -29,6 +29,7 @@ Before you begin, ensure you have the following:
 2. The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
     - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
     - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
+      - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
 ## Enabling threat detection
 
@@ -42,7 +43,7 @@ This service is a gRPC server that Envoy communicates with to have requests and 
 
 Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system` or a dedicated namespace.
 
-The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][5].
+The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
 
 Here is an example manifest (`datadog-aap-extproc-service.yaml`):
 
@@ -51,7 +52,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datadog-aap-extproc-deployment
-  namespace: istio-system # Or your preferred namespace, ensure it's resolvable by the Envoy proxy
+  namespace: <your-preferred-namespace> # Change to your preferred namespace, ensure it's resolvable by the Envoy proxy
   labels:
     app: datadog-aap-extproc
 spec:
@@ -73,8 +74,9 @@ spec:
         - name: health
           containerPort: 80  # Default health check port
         env:
-        # ---- Required Agent Configuration ----
-        # Configure the address of your Datadog Agent for the processor
+        # ---- Optional: Agent Configuration ----
+        # If you enabled the Cluster Agent Admission Controller, you can skip this section as the Agent host information is automatically injected.
+        # Otherwise, configure the address of your Datadog Agent for the external processor
         - name: DD_AGENT_HOST
           value: "<your-datadog-agent-service>.<your-datadog-agent-namespace>.svc.cluster.local"
         - name: DD_TRACE_AGENT_PORT # Optional if your Agent's trace port is the default 8126
@@ -97,7 +99,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: datadog-aap-extproc-service # This name will be used in the EnvoyFilter configuration
-  namespace: istio-system # Must be the same namespace as the Deployment
+  namespace: <your-preferred-namespace> # Change to your preferred namespace, ensure it's resolvable by the Envoy proxy
   labels:
     app: datadog-aap-extproc
 spec:
@@ -132,7 +134,7 @@ Configure the connection from the external processor to the Datadog Agent using 
   <strong>Note:</strong> The External Processor is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-You can find more configuration options in [Configuring the Go Tracing Library][6] and [App and API Protection Library Configuration][7].
+You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ### 2. Configure an EnvoyFilter
 
@@ -152,11 +154,13 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: datadog-aap-gateway-filter
-  namespace: istio-system # Namespace of your Istio Ingress Gateway
+  namespace: <your-preferred-namespace> # Change to your preferred namespace, ensure it's resolvable by the Envoy proxy
 spec:
-  workloadSelector:
-    labels:
-      istio: ingressgateway # Standard label for Istio Ingress Gateway pods
+  ## If workloadSelector is omitted, the following patches apply to Gateway pods in this EnvoyFilter's namespace
+  ## Use workloadSelector to target a specific Gateway instance.
+  # workloadSelector:
+  #   labels:
+  #     istio: ingressgateway # Label for the default Istio Gateway implementation
   configPatches:
     # Patch 1: Add the Cluster definition for the Datadog External Processing service
     - applyTo: CLUSTER
@@ -185,7 +189,7 @@ spec:
                   address:
                     socket_address:
                       # Address of the Datadog External Processor service
-                      address: "datadog-aap-extproc-service.istio-system.svc.cluster.local" # Adjust if your service name or namespace is different
+                      address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 
     # Patch 2: Add the External Processing HTTP Filter to the Gateway's HTTP connection manager
@@ -301,7 +305,8 @@ The Istio integration has the following limitations:
 [1]: https://istio.io/
 [2]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
 [3]: https://docs.datadoghq.com/agent/remote_config/?tab=helm#enabling-remote-configuration
-[4]: https://docs.datadoghq.com/error_tracking/guides/enable_apm/?tab=kubernetes
-[5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
-[6]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[7]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[4]: https://docs.datadoghq.com/tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator
+[5]: https://docs.datadoghq.com/tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator#cluster-agent-admission-controller
+[6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
+[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
