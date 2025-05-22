@@ -94,8 +94,7 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -141,12 +140,16 @@ npm install -g @datadog/datadog-ci
 datadog-ci sbom upload /path/to/sbom-file.json
 ```
 
+### Services or teams in SCA libraries are not updating
+
+Results for services and teams in SCA are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability or library data for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
-
-You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
@@ -159,6 +162,11 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
 
+### Datadog-hosted scan did not run for a repository with a backslash (`\`) in the file path
+
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\`). If your repository includes such paths,
+you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
+
 ## No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
@@ -168,8 +176,8 @@ There are a series of steps that must run successfully for vulnerability informa
 If you have enabled runtime vulnerability detection on your services, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
@@ -227,7 +235,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [1]: /help/
 [2]: /security/code_security/static_analysis/github_actions
 [3]: /security/code_security/static_analysis/github_actions#inputs
-[4]: https://app.datadoghq.com/ci/settings/repository
+[4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
 [7]: https://github.com/DataDog/osv-scanner

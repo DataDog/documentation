@@ -1815,6 +1815,71 @@ menu:
           - ListMonitorConfigPolicies
         unstable: []
         order: 10
+    - name: Update a monitor notification rule
+      url: '#update-a-monitor-notification-rule'
+      identifier: monitors-update-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 17
+    - name: Get a monitor notification rule
+      url: '#get-a-monitor-notification-rule'
+      identifier: monitors-get-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRule
+        unstable:
+          - v2
+        order: 14
+    - name: Delete a monitor notification rule
+      url: '#delete-a-monitor-notification-rule'
+      identifier: monitors-delete-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorNotificationRule
+        unstable:
+          - v2
+        order: 18
+    - name: Create a monitor notification rule
+      url: '#create-a-monitor-notification-rule'
+      identifier: monitors-create-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 16
+    - name: Get all monitor notification rules
+      url: '#get-all-monitor-notification-rules'
+      identifier: monitors-get-all-monitor-notification-rules
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRules
+        unstable:
+          - v2
+        order: 15
     - name: Unmute all monitors
       url: '#unmute-all-monitors'
       identifier: monitors-unmute-all-monitors
@@ -2798,6 +2863,78 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update resource filters
+      url: '#update-resource-filters'
+      identifier: security-monitoring-update-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateResourceEvaluationFilters
+        unstable: []
+        order: 27
+    - name: List resource filters
+      url: '#list-resource-filters'
+      identifier: security-monitoring-list-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetResourceEvaluationFilters
+        unstable: []
+        order: 26
+    - name: Update a custom framework
+      url: '#update-a-custom-framework'
+      identifier: security-monitoring-update-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomFramework
+        unstable: []
+        order: 4
+    - name: Get a custom framework
+      url: '#get-a-custom-framework'
+      identifier: security-monitoring-get-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomFramework
+        unstable: []
+        order: 4
+    - name: Delete a custom framework
+      url: '#delete-a-custom-framework'
+      identifier: security-monitoring-delete-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomFramework
+        unstable: []
+        order: 4
+    - name: Create a custom framework
+      url: '#create-a-custom-framework'
+      identifier: security-monitoring-create-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomFramework
+        unstable: []
+        order: 4
     - name: Change the triage state of a security signal
       url: '#change-the-triage-state-of-a-security-signal'
       identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -5315,9 +5452,9 @@ menu:
       url: /api/latest/csm-threats/
       identifier: csm-threats
       generated: true
-    - name: Update a Cloud Workload Security Agent rule
-      url: '#update-a-cloud-workload-security-agent-rule'
-      identifier: csm-threats-update-a-cloud-workload-security-agent-rule
+    - name: Update a Workload Protection agent rule (US1-FED)
+      url: '#update-a-workload-protection-agent-rule-us1-fed'
+      identifier: csm-threats-update-a-workload-protection-agent-rule-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5326,10 +5463,10 @@ menu:
         operationids:
           - UpdateCloudWorkloadSecurityAgentRule
         unstable: []
-        order: 5
-    - name: Get a Cloud Workload Security Agent rule
-      url: '#get-a-cloud-workload-security-agent-rule'
-      identifier: csm-threats-get-a-cloud-workload-security-agent-rule
+        order: 15
+    - name: Get a Workload Protection agent rule (US1-FED)
+      url: '#get-a-workload-protection-agent-rule-us1-fed'
+      identifier: csm-threats-get-a-workload-protection-agent-rule-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5338,10 +5475,10 @@ menu:
         operationids:
           - GetCloudWorkloadSecurityAgentRule
         unstable: []
-        order: 2
-    - name: Delete a Cloud Workload Security Agent rule
-      url: '#delete-a-cloud-workload-security-agent-rule'
-      identifier: csm-threats-delete-a-cloud-workload-security-agent-rule
+        order: 13
+    - name: Delete a Workload Protection agent rule (US1-FED)
+      url: '#delete-a-workload-protection-agent-rule-us1-fed'
+      identifier: csm-threats-delete-a-workload-protection-agent-rule-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5350,10 +5487,10 @@ menu:
         operationids:
           - DeleteCloudWorkloadSecurityAgentRule
         unstable: []
-        order: 6
-    - name: Create a Cloud Workload Security Agent rule
-      url: '#create-a-cloud-workload-security-agent-rule'
-      identifier: csm-threats-create-a-cloud-workload-security-agent-rule
+        order: 16
+    - name: Create a Workload Protection agent rule (US1-FED)
+      url: '#create-a-workload-protection-agent-rule-us1-fed'
+      identifier: csm-threats-create-a-workload-protection-agent-rule-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5362,10 +5499,10 @@ menu:
         operationids:
           - CreateCloudWorkloadSecurityAgentRule
         unstable: []
-        order: 4
-    - name: Get all Cloud Workload Security Agent rules
-      url: '#get-all-cloud-workload-security-agent-rules'
-      identifier: csm-threats-get-all-cloud-workload-security-agent-rules
+        order: 14
+    - name: Get all Workload Protection agent rules (US1-FED)
+      url: '#get-all-workload-protection-agent-rules-us1-fed'
+      identifier: csm-threats-get-all-workload-protection-agent-rules-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5374,10 +5511,10 @@ menu:
         operationids:
           - ListCloudWorkloadSecurityAgentRules
         unstable: []
-        order: 3
-    - name: Get the latest Cloud Workload Security policy
-      url: '#get-the-latest-cloud-workload-security-policy'
-      identifier: csm-threats-get-the-latest-cloud-workload-security-policy
+        order: 12
+    - name: Download the Workload Protection policy (US1-FED)
+      url: '#download-the-workload-protection-policy-us1-fed'
+      identifier: csm-threats-download-the-workload-protection-policy-us1-fed
       parent: csm-threats
       generated: true
       params:
@@ -5386,10 +5523,46 @@ menu:
         operationids:
           - DownloadCloudWorkloadPolicyFile
         unstable: []
-        order: 1
-    - name: Get the latest CSM Threats policy
-      url: '#get-the-latest-csm-threats-policy'
-      identifier: csm-threats-get-the-latest-csm-threats-policy
+        order: 17
+    - name: Update a Workload Protection policy
+      url: '#update-a-workload-protection-policy'
+      identifier: csm-threats-update-a-workload-protection-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCSMThreatsAgentPolicy
+        unstable: []
+        order: 9
+    - name: Get a Workload Protection policy
+      url: '#get-a-workload-protection-policy'
+      identifier: csm-threats-get-a-workload-protection-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMThreatsAgentPolicy
+        unstable: []
+        order: 7
+    - name: Delete a Workload Protection policy
+      url: '#delete-a-workload-protection-policy'
+      identifier: csm-threats-delete-a-workload-protection-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCSMThreatsAgentPolicy
+        unstable: []
+        order: 10
+    - name: Download the Workload Protection policy
+      url: '#download-the-workload-protection-policy'
+      identifier: csm-threats-download-the-workload-protection-policy
       parent: csm-threats
       generated: true
       params:
@@ -5398,10 +5571,34 @@ menu:
         operationids:
           - DownloadCSMThreatsPolicy
         unstable: []
-        order: 1
-    - name: Update a CSM Threats Agent rule
-      url: '#update-a-csm-threats-agent-rule'
-      identifier: csm-threats-update-a-csm-threats-agent-rule
+        order: 11
+    - name: Create a Workload Protection policy
+      url: '#create-a-workload-protection-policy'
+      identifier: csm-threats-create-a-workload-protection-policy
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCSMThreatsAgentPolicy
+        unstable: []
+        order: 8
+    - name: Get all Workload Protection policies
+      url: '#get-all-workload-protection-policies'
+      identifier: csm-threats-get-all-workload-protection-policies
+      parent: csm-threats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMThreatsAgentPolicies
+        unstable: []
+        order: 6
+    - name: Update a Workload Protection agent rule
+      url: '#update-a-workload-protection-agent-rule'
+      identifier: csm-threats-update-a-workload-protection-agent-rule
       parent: csm-threats
       generated: true
       params:
@@ -5410,10 +5607,10 @@ menu:
         operationids:
           - UpdateCSMThreatsAgentRule
         unstable: []
-        order: 5
-    - name: Get a CSM Threats Agent rule
-      url: '#get-a-csm-threats-agent-rule'
-      identifier: csm-threats-get-a-csm-threats-agent-rule
+        order: 4
+    - name: Get a Workload Protection agent rule
+      url: '#get-a-workload-protection-agent-rule'
+      identifier: csm-threats-get-a-workload-protection-agent-rule
       parent: csm-threats
       generated: true
       params:
@@ -5423,9 +5620,9 @@ menu:
           - GetCSMThreatsAgentRule
         unstable: []
         order: 2
-    - name: Delete a CSM Threats Agent rule
-      url: '#delete-a-csm-threats-agent-rule'
-      identifier: csm-threats-delete-a-csm-threats-agent-rule
+    - name: Delete a Workload Protection agent rule
+      url: '#delete-a-workload-protection-agent-rule'
+      identifier: csm-threats-delete-a-workload-protection-agent-rule
       parent: csm-threats
       generated: true
       params:
@@ -5434,10 +5631,10 @@ menu:
         operationids:
           - DeleteCSMThreatsAgentRule
         unstable: []
-        order: 6
-    - name: Create a CSM Threats Agent rule
-      url: '#create-a-csm-threats-agent-rule'
-      identifier: csm-threats-create-a-csm-threats-agent-rule
+        order: 5
+    - name: Create a Workload Protection agent rule
+      url: '#create-a-workload-protection-agent-rule'
+      identifier: csm-threats-create-a-workload-protection-agent-rule
       parent: csm-threats
       generated: true
       params:
@@ -5446,10 +5643,10 @@ menu:
         operationids:
           - CreateCSMThreatsAgentRule
         unstable: []
-        order: 4
-    - name: Get all CSM Threats Agent rules
-      url: '#get-all-csm-threats-agent-rules'
-      identifier: csm-threats-get-all-csm-threats-agent-rules
+        order: 3
+    - name: Get all Workload Protection agent rules
+      url: '#get-all-workload-protection-agent-rules'
+      identifier: csm-threats-get-all-workload-protection-agent-rules
       parent: csm-threats
       generated: true
       params:
@@ -5458,7 +5655,7 @@ menu:
         operationids:
           - ListCSMThreatsAgentRules
         unstable: []
-        order: 3
+        order: 1
     - name: Case Management
       url: /api/latest/case-management/
       identifier: case-management
@@ -5671,6 +5868,54 @@ menu:
           - ListCustomCostsFiles
         unstable: []
         order: 10
+    - name: List budgets
+      url: '#list-budgets'
+      identifier: cloud-cost-management-list-budgets
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBudgets
+        unstable: []
+        order: 17
+    - name: Get a budget
+      url: '#get-a-budget'
+      identifier: cloud-cost-management-get-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBudget
+        unstable: []
+        order: 16
+    - name: Delete a budget
+      url: '#delete-a-budget'
+      identifier: cloud-cost-management-delete-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteBudget
+        unstable: []
+        order: 15
+    - name: Create or update a budget
+      url: '#create-or-update-a-budget'
+      identifier: cloud-cost-management-create-or-update-a-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertBudget
+        unstable: []
+        order: 14
     - name: Update Cloud Cost Management Azure config
       url: '#update-cloud-cost-management-azure-config'
       identifier: cloud-cost-management-update-cloud-cost-management-azure-config
@@ -7284,6 +7529,19 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Validate an observability pipeline
+      url: '#validate-an-observability-pipeline'
+      identifier: observability-pipelines-validate-an-observability-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidatePipeline
+        unstable:
+          - v2
+        order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
       identifier: observability-pipelines-create-a-new-pipeline
@@ -7297,6 +7555,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List pipelines
+      url: '#list-pipelines'
+      identifier: observability-pipelines-list-pipelines
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPipelines
+        unstable:
+          - v2
+        order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -7359,6 +7630,194 @@ menu:
           - v2
         operationids:
           - ListOktaAccounts
+        unstable: []
+        order: 1
+    - name: On-Call
+      url: /api/latest/on-call/
+      identifier: on-call
+      generated: true
+    - name: Set on-call team routing rules
+      url: '#set-on-call-team-routing-rules'
+      identifier: on-call-set-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SetOnCallTeamRoutingRules
+        unstable: []
+        order: 10
+    - name: Get on-call team routing rules
+      url: '#get-on-call-team-routing-rules'
+      identifier: on-call-get-on-call-team-routing-rules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallTeamRoutingRules
+        unstable: []
+        order: 9
+    - name: Get the schedule on-call user
+      url: '#get-the-schedule-on-call-user'
+      identifier: on-call-get-the-schedule-on-call-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallUser
+        unstable: []
+        order: 11
+    - name: Update on-call schedule
+      url: '#update-on-call-schedule'
+      identifier: on-call-update-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallSchedule
+        unstable: []
+        order: 4
+    - name: Get on-call schedule
+      url: '#get-on-call-schedule'
+      identifier: on-call-get-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallSchedule
+        unstable: []
+        order: 2
+    - name: Delete on-call schedule
+      url: '#delete-on-call-schedule'
+      identifier: on-call-delete-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallSchedule
+        unstable: []
+        order: 3
+    - name: Create on-call schedule
+      url: '#create-on-call-schedule'
+      identifier: on-call-create-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallSchedule
+        unstable: []
+        order: 1
+    - name: Update on-call escalation policy
+      url: '#update-on-call-escalation-policy'
+      identifier: on-call-update-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallEscalationPolicy
+        unstable: []
+        order: 6
+    - name: Get on-call escalation policy
+      url: '#get-on-call-escalation-policy'
+      identifier: on-call-get-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallEscalationPolicy
+        unstable: []
+        order: 7
+    - name: Delete on-call escalation policy
+      url: '#delete-on-call-escalation-policy'
+      identifier: on-call-delete-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallEscalationPolicy
+        unstable: []
+        order: 8
+    - name: Create on-call escalation policy
+      url: '#create-on-call-escalation-policy'
+      identifier: on-call-create-on-call-escalation-policy
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallEscalationPolicy
+        unstable: []
+        order: 5
+    - name: On-Call Paging
+      url: /api/latest/on-call-paging/
+      identifier: on-call-paging
+      generated: true
+    - name: Resolve On-Call Page
+      url: '#resolve-on-call-page'
+      identifier: on-call-paging-resolve-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResolveOnCallPage
+        unstable: []
+        order: 4
+    - name: Escalate On-Call Page
+      url: '#escalate-on-call-page'
+      identifier: on-call-paging-escalate-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EscalateOnCallPage
+        unstable: []
+        order: 3
+    - name: Acknowledge On-Call Page
+      url: '#acknowledge-on-call-page'
+      identifier: on-call-paging-acknowledge-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AcknowledgeOnCallPage
+        unstable: []
+        order: 2
+    - name: Create On-Call Page
+      url: '#create-on-call-page'
+      identifier: on-call-paging-create-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
         unstable: []
         order: 1
     - name: Opsgenie Integration

@@ -7,19 +7,19 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/aws"
+- link: "/cloud_cost_management/setup/aws"
   tag: "Documentation"
   text: "Gain insights into your AWS bill"
-- link: "/cloud_cost_management/azure"
+- link: "/cloud_cost_management/setup/azure"
   tag: "Documentation"
   text: "Gain insights into your Azure bill"
-- link: "/cloud_cost_management/google_cloud"
+- link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
-- link: "/cloud_cost_management/saas_costs"
+- link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/custom"
+- link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
@@ -65,7 +65,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 | dimension_name / dimension | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
 | product_name / datadog_product | `product_name` is the high-level grouping name for Datadog products (for example, `Logs`). </br></br> `datadog_product` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `logs`). |
 | `<Usage Attribution tags>` | You can add up to three tag keys, configured in [Usage Attribution][8], with their associated values (for example, `team` or `service`). |
-| cost_type | The type of charge covered by this item (for example, `usage` or `adjustment`). Adjustments are attributed to the parent organization. |
+| cost_type | The type of charge covered by this item (for example, `usage` or `adjustment`). |
 | pricing_category | The specific type of charge covered by this item (for example, `committed` or `on-demand`). |
 
 ## Further reading
@@ -74,7 +74,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 
 [1]: /cloud_cost_management/
 [2]: /cloud_cost_management/monitors
-[3]: /cloud_cost_management/saas_costs
+[3]: /cloud_cost_management/setup/saas_costs
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [6]: /account_management/rbac/

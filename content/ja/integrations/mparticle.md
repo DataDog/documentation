@@ -1,9 +1,9 @@
 ---
 categories:
-- mobile
-custom_kind: integration
+- apm
+custom_kind: インテグレーション
 dependencies: []
-description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
+description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集
 doc_link: https://docs.datadoghq.com/integrations/mparticle/
 draft: false
 git_integration_title: mparticle
@@ -15,7 +15,7 @@ is_public: true
 manifest_version: '1.0'
 name: mparticle
 public_title: Datadog-mParticle インテグレーション
-short_description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
+short_description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集
 version: '1.0'
 ---
 

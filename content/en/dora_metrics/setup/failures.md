@@ -30,21 +30,49 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
-Failed deployment events, currently interpreted through failure events, are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
+Failure events are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
 
 ## Selecting and configuring a failure data source
 
 {{< tabs >}}
+{{% tab "Datadog Incidents" %}}
+DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. After incidents are declared, DORA uses them to measure change failure rate and time to restore.
+
+**Note**: The time to restore is measured as the total duration an incident spends in the `active` state. For cases like `active` → `stable` → `active` → `stable`, it includes all `active` periods. The time to restore is shown only when an incident is in a `stable` or `resolved` state. If a `resolved` incident is reactivated, the metric is hidden until it's `resolved` again.
+
+
+### Requirements
+
+- **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
+
+To avoid having unlabeled failures, Datadog strongly recommends adding the following attributes to incidents:
+  - `Teams`
+  - `Services`
+  - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
+
+If provided with incidents, the `Severity` tag is added to failure events.
+
+**Recommended**: In the [Incident Settings][203], set attributes field `Prompted` to `At Resolution` to ensure you never forget to add these attributes to your incidents.
+
+### Include historical incidents
+
+You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][202], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
+
+[201]: /service_management/incident_management/
+[202]: https://app.datadoghq.com/ci/settings/dora
+[203]: https://app.datadoghq.com/incidents/settings?section=property-fields
+
+
+{{% /tab %}}
 {{% tab "PagerDuty" %}}
 [PagerDuty][104] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
 
 To integrate your PagerDuty account with DORA Metrics: 
 
-1. Enable PagerDuty as a failure data source in [DORA settings][111]. 
+1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][111]. 
 
 1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
@@ -132,7 +160,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a failure events data source in [DORA settings][15].
+- **datadog-ci CLI / API** is enabled as a **Failures** event data source in [DORA settings][15].
 - The following attributes are required:
   - `services` or `team` (at least one must be present)
   - `started_at`
