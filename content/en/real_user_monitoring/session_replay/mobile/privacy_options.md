@@ -29,7 +29,7 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Fine-grained masking
-Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
+Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs.
 
 ### Text and input masking
 
@@ -38,7 +38,7 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;">}}
 
 #### Mask sensitive inputs
-With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields. 
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -55,7 +55,7 @@ With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown 
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: .maskSensitiveInputs,
         imagePrivacyLevel: imagePrivacyLevel,
         touchPrivacyLevel: touchPrivacyLevel
@@ -73,7 +73,7 @@ With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown 
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
     }
 
@@ -101,7 +101,7 @@ With the `mask_all_inputs` setting enabled, all inputs fields are masked in the 
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: .maskAllInputs,
         imagePrivacyLevel: imagePrivacyLevel,
         touchPrivacyLevel: touchPrivacyLevel
@@ -119,7 +119,7 @@ With the `mask_all_inputs` setting enabled, all inputs fields are masked in the 
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL_INPUTS,
     }
 
@@ -147,7 +147,7 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: .maskAll,
         imagePrivacyLevel: imagePrivacyLevel,
         touchPrivacyLevel: touchPrivacyLevel
@@ -165,7 +165,7 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL,
     }
 
@@ -199,7 +199,7 @@ With the `mask_all` setting enabled, all images are replaced by placeholders lab
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: textAndInputPrivacyLevel,
         imagePrivacyLevel: .maskAll,
         touchPrivacyLevel: touchPrivacyLevel
@@ -217,7 +217,7 @@ With the `mask_all` setting enabled, all images are replaced by placeholders lab
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         imagePrivacyLevel: ImagePrivacyLevel.MASK_ALL,
     }
 
@@ -232,7 +232,7 @@ To manage content masking while still showing system images, users can choose th
 
 On iOS, users can select the `mask_non_bundled_only` setting, which replaces any image that is not part of the system with a "Content Image" placeholder.
 
-On Android, users can select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder. 
+On Android, users can select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder.
 
 **Note**: These dimensions refer to the drawable resource, not the view's size.
 
@@ -261,7 +261,7 @@ On Android, users can select the `mask_large_only` setting, which replaces image
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: textAndInputPrivacyLevel,
         imagePrivacyLevel: .maskNonBundledOnly,
         touchPrivacyLevel: touchPrivacyLevel
@@ -279,7 +279,7 @@ On Android, users can select the `mask_large_only` setting, which replaces image
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         imagePrivacyLevel: ImagePrivacyLevel.MASK_NON_BUNDLED_ONLY,
     }
 
@@ -307,7 +307,7 @@ With the `mask_none` setting enabled, all images are shown in the replay.
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: textAndInputPrivacyLevel,
         imagePrivacyLevel: .maskNone,
         touchPrivacyLevel: touchPrivacyLevel
@@ -325,7 +325,7 @@ With the `mask_none` setting enabled, all images are shown in the replay.
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
     }
 
@@ -339,7 +339,7 @@ With the `mask_none` setting enabled, all images are shown in the replay.
 By default, the `hide` setting is enabled for all touches. With this setting enabled, all touches on screen are hidden.
 
 #### Hide all touches
-With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting. 
+With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -356,7 +356,7 @@ With the `hide` setting enabled, all touches that occur during the replay are hi
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: textAndInputPrivacyLevel,
         imagePrivacyLevel: imagePrivacyLevel,
         touchPrivacyLevel: .hide
@@ -374,7 +374,7 @@ With the `hide` setting enabled, all touches that occur during the replay are hi
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         touchPrivacyLevel: TouchPrivacyLevel.HIDE,
     }
 
@@ -385,7 +385,7 @@ With the `hide` setting enabled, all touches that occur during the replay are hi
 {{< /tabs >}}
 
 #### Show all touches
-With the `show` setting enabled, all touches that occur during the replay are shown. 
+With the `show` setting enabled, all touches that occur during the replay are shown.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -402,7 +402,7 @@ With the `show` setting enabled, all touches that occur during the replay are sh
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
     let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         textAndInputPrivacyLevel: textAndInputPrivacyLevel,
         imagePrivacyLevel: imagePrivacyLevel,
         touchPrivacyLevel: .show
@@ -420,7 +420,7 @@ With the `show` setting enabled, all touches that occur during the replay are sh
     } from "@datadog/mobile-react-native-session-replay";
 
     const config: SessionReplayConfiguration = {
-        replaySampleRate: sampleRate, 
+        replaySampleRate: sampleRate,
         touchPrivacyLevel: TouchPrivacyLevel.SHOW,
     }
 
@@ -436,9 +436,11 @@ The sections above describe the global masking levels that apply to the entire a
 
 To ensure overrides are recognized properly, they should be applied as early as possible in the view lifecycle. This prevents scenarios where Session Replay might process a view before applying the overrides.
 
-Privacy overrides affect views and their descendants. This means that even if an override is applied to a view where it might have no immediate effect (for example, applying an image override to a text input), the override still applies to all child views. 
+Privacy overrides affect views and their descendants. This means that even if an override is applied to a view where it might have no immediate effect (for example, applying an image override to a text input), the override still applies to all child views.
 
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
+
+The sections below describe how to override privacy settings for Android and iOS. For settings specific to React Native, see [Privacy overrides support in React Native](#privacy-overrides-support-in-react-native).
 
 <div class="alert alert-info">Privacy overrides are not supported in SwiftUI.</div>
 
@@ -563,6 +565,133 @@ Use `setSessionReplayHidden(hide = true)` to hide the element. Setting `hide` to
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Privacy overrides Support in React Native
+
+Privacy overrides are fully supported in React Native starting from version `2.8.0` of the Datadog [React Native SDK][2]. Although the underlying functionality is shared with native Android and iOS platforms, the integration in React Native is designed to align with common React patterns.
+
+#### Behavior consistency
+
+React Native's implementation is built on the same foundation as the native Android and iOS SDKs. As a result, you can rely on the privacy features behaving the same way across all three platforms.
+
+#### Usage via `SessionReplayView`
+
+The SDK provides a set of React components under the `SessionReplayView` namespace, which are used to configure privacy settings within your React Native application.
+
+To use them, import `SessionReplayView` as follows:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+import { SessionReplayView } from "@datadog/mobile-react-native-session-replay";
+{{< /code-block >}}
+
+This import provides access to four privacy-focused components.
+
+Each of these components behaves like a regular React Native View, meaning they can be used anywhere you would typically use a View, with the addition of privacy-related behavior.
+
+| Component                    | Description                                                                                                   | Properties                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SessionReplayView.Privacy`  | Adds support for customizing text, image, and touch privacy settings for its children.                        | - `textAndInputPrivacy?`: [TextAndInputPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L43) <br><br> - `imagePrivacy?`: [ImagePrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L15) <br><br> - `touchPrivacy?`: [TouchPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L32) <br><br> - `hide?`: `boolean` |
+| `SessionReplayView.MaskAll`  | Applies the most restrictive privacy settings (`MaskAll` or platform equivalent) to all children.             | - `showTouch?`: `boolean`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `SessionReplayView.MaskNone` | Applies the least restrictive settings (`MaskNone` or platform equivalent). All child components are visible. | _(No additional properties)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `SessionReplayView.Hide`     | Completely hides all child components from session replay.                                                    | _(No additional properties)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+#### Integration Approaches
+
+1. **As Wrappers**
+
+Use `SessionReplayView` components to wrap specific parts of your UI where you want to override privacy settings.
+
+For example, going from:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+const App = () => {
+    return (
+        <View>
+            {/_ content _/}
+            <TextInput placeholder="First Name" value="Data" />
+            <TextInput placeholder="Last Name" value="Dog" />
+            {/* content */}
+        </View>
+    );
+}
+{{< /code-block >}}
+
+To:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+const App = () => {
+    return (
+        <View>
+            {/_ content _/}
+            <SessionReplayView.MaskAll showTouch={true}>
+                <TextInput placeholder="First Name" value="Data" />
+                <TextInput placeholder="Last Name" value="Dog" />
+            </SessionReplayView.MaskAll>
+            {/* content */}
+        </View>
+    );
+}
+{{< /code-block >}}
+
+2. **As Replacements**
+
+Replace an existing `<View>` with a `SessionReplayView` component directly. This is ideal when a view already encapsulates the section of the UI that needs modified privacy behavior.
+
+For example, instead of:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+const App = () => {
+    return (
+        <View>
+        {/_ content _/}
+        </View>
+    );
+}
+{{< /code-block >}}
+
+You can use:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+const App = () => {
+    return (
+        <SessionReplayView.MaskNone>
+        {/_ content _/}
+        </SessionReplayView.MaskNone>
+    );
+}
+{{< /code-block >}}
+
+#### Combining privacy components
+
+You can freely combine the `SessionReplayView` components to apply different privacy settings to distinct sections of your UI. This is especially useful when you need a mix of hidden elements, masked input fields, and visible content within the same screen.
+
+For example:
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+import { ImagePrivacyLevel, SessionReplayView, TextAndInputPrivacyLevel, TouchPrivacyLevel } from "@datadog/mobile-react-native-session-replay";
+
+const App = () => {
+    return (
+        <SessionReplayView.Privacy
+            textAndInputPrivacy={TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS}
+            imagePrivacy={ImagePrivacyLevel.MASK_NONE}
+            touchPrivacy={TouchPrivacyLevel.SHOW}>
+            {/_ content _/}
+            <SessionReplayView.MaskAll showTouch={true}>
+                {/* content */}
+                <SessionReplayView.MaskNone>
+                    {/* content */}
+                </SessionReplayView.MaskNone>
+                {/* content */}
+            </SessionReplayView.MaskAll>
+            {/* content */}
+            <SessionReplayView.Hide>
+                {/* content */}
+            </SessionReplayView.Hide>
+        </SessionReplayView.Privacy>
+    );
+}
+{{< /code-block >}}
+
 ### Notes on WebViews
 
 • Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
@@ -686,7 +815,7 @@ The following chart shows how we apply different touch interaction strategies, u
 
 The following chart shows how we apply different image masking strategies:
 
-| Type           | Mask None | Mark Large Only (Android) <br/> / Mask Non Bundled Only (iOS) | Mask All 
+| Type           | Mask None | Mark Large Only (Android) <br/> / Mask Non Bundled Only (iOS) | Mask All
 |----------------|-----------|---------------------------------------------------------------|---------|
 | Content Image  | Shown     | Masked                                                        | Masked |
 | System Image   | Shown     | Shown                                                         | Masked |
@@ -697,3 +826,4 @@ The following chart shows how we apply different image masking strategies:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/session_replay/privacy_options
+[2]: https://github.com/DataDog/dd-sdk-reactnative
