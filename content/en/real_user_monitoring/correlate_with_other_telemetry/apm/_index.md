@@ -408,7 +408,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
