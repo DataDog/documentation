@@ -44150,6 +44150,93 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  apiVersion: v3
+                  datadog:
+                    codeLocations:
+                    - paths:
+                      - baz/*.c
+                      - bat/**/*
+                      - ../plop/*.java
+                      repositoryURL: http://github/shopping-cart.git
+                    - paths:
+                      - baz/*.c
+                      - bat/**/*
+                      - ../plop/*.java
+                      repositoryURL: http://github/shopping-cart-2.git
+                    events:
+                    - name: deployment events
+                      query: app:myapp AND type:github
+                    - name: event type B
+                      query: app:myapp AND type:github
+                    logs:
+                    - name: critical logs
+                      query: app:myapp AND type:github
+                    - name: ops logs
+                      query: app:myapp AND type:github
+                    performanceData:
+                      tags:
+                      - service:shopping-cart
+                      - hostname:shopping-cart
+                    pipelines:
+                      fingerprints:
+                      - fp1
+                      - fp2
+                  extensions:
+                    datadoghq.com/shopping-cart:
+                      customField: customValue
+                  integrations:
+                    opsgenie:
+                      region: US
+                      serviceURL: https://www.opsgenie.com/service/shopping-cart
+                    pagerduty:
+                      serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+                  kind: service
+                  metadata:
+                    additionalOwners:
+                    - name: opsTeam
+                      type: operator
+                    contacts:
+                    - contact: team@shopping.com
+                      name: Support Email
+                      type: email
+                    - contact: https://www.slack.com/archives/shopping-cart
+                      name: Support Slack
+                      type: slack
+                    displayName: Shopping Cart
+                    inheritFrom: service:otherService
+                    links:
+                    - name: shopping-cart runbook
+                      type: runbook
+                      url: https://runbook/shopping-cart
+                    - name: shopping-cart architecture
+                      provider: gdoc
+                      type: doc
+                      url: https://google.drive/shopping-cart-architecture
+                    - name: shopping-cart Wiki
+                      provider: wiki
+                      type: doc
+                      url: https://wiki/shopping-cart
+                    - name: shopping-cart source code
+                      provider: github
+                      type: repo
+                      url: http://github/shopping-cart
+                    name: service-{{ unique_lower_alnum }}
+                    owner: myteam
+                    tags:
+                    - tag:value
+                  spec:
+                    dependsOn:
+                    - service:serviceA
+                    - service:serviceB
+                    languages:
+                    - go
+                    - python
+                    lifecycle: production
+                    tier: '1'
+                    type: web
             schema:
               $ref: '#/components/schemas/UpsertCatalogEntityRequest'
         description: Entity YAML or JSON.
