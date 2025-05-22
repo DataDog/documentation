@@ -1,5 +1,5 @@
 ---
-title: Out-of-the-box evaluations
+title: Out-of-the-Box Evaluations
 description: Learn how to configure out-of-the-box evaluations for your LLM applications.
 further_reading:
 - link: "/llm_observability/terms/"
