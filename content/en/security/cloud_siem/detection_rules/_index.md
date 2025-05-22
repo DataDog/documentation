@@ -57,7 +57,11 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-### Impossible Travel
+### Content anomaly
+
+While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+### Impossible travel
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
@@ -132,7 +136,31 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Content anomaly" %}}
+
+### Search query
+
+1. Cloud SIEM can analyze logs and Audit Trail events. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
+1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
+1. In the **Group by** field, specify the fields you want to group by.
+1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
+  **Note**: If the detection rule is modified, the learning period restarts at day `0`.
+1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+#####  How an event is determined to be anomalous
+
+Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
+
+1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
+1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
+1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
+
+These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "Impossible travel" %}}
 
 ### Search query
 
@@ -277,7 +305,27 @@ A signal "closes" once the time exceeds the maximum signal duration, regardless 
 
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Content anomaly" %}}
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+{{% /tab %}}
+
+{{% tab "Impossible travel" %}}
 
 The impossible travel detection method does not require setting a rule case.
 

@@ -111,4 +111,4 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [2]: /account_management/api-app-keys/#application-keys
 [3]: /getting_started/site/
 [4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sarif
-[5]: https://app.datadoghq.com/ci/settings/repository
+[5]: https://app.datadoghq.com/source-code/repositories

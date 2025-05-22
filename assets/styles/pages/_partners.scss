@@ -1,0 +1,28 @@
+.partners {
+    .partners-banner {
+        background-image: url('#{$baseImgURL}images/partners/partners_banner_bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 60px;
+        [class*='col-'] {
+            // override global column style
+            position: unset;
+        } 
+        p {
+            margin: 0;
+        }
+        .external-link {
+            span {
+                margin-right: 4px;
+            }
+            i {
+                position: relative;
+                top: 3px
+            }
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+}

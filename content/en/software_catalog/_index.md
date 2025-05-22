@@ -45,6 +45,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/software-catalog/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
+- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
+  tag: "Blog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog" 
 algolia:
   tags: ['software catalog']
 ---
@@ -135,7 +138,7 @@ The services and resources statistics, and span summaries on the **Service List*
 [1]: https://app.datadoghq.com/services
 [2]: /account_management/rbac/
 [3]: /account_management/rbac/permissions/
-[4]: /developers/guide/data-collection-resolution-retention/
+[4]: /data_security/data_retention_periods/
 [5]: /tracing/software_catalog/adding_metadata#service-definition-schema-v22
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
 [7]: /tracing/other_telemetry/

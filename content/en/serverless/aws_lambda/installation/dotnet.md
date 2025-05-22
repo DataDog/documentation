@@ -18,6 +18,8 @@ further_reading:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the .NET runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/order-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
@@ -305,7 +307,7 @@ module "lambda-datadog" {
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
 
-To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
 
 - `DD_TRACE_OTEL_ENABLED`
 - `DD_PROFILING_ENABLED`

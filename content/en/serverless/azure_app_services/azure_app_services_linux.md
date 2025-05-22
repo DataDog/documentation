@@ -28,7 +28,7 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_PROFILING_ENABLED` (optional) Enables the [Continuous Profiler][15], specific to .NET.
+- `DD_PROFILING_ENABLED` (optional) Enables the [Continuous Profiler][15], specific to .NET and Node.js.
 
 ### Identifying your startup command
 
@@ -59,7 +59,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 Go to **General settings** and add the following to the **Startup Command** field:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.15/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.12.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}

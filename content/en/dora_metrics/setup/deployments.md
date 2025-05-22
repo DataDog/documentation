@@ -26,7 +26,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -161,7 +160,7 @@ For deployments identified through APM Deployment Tracking, the change lead time
 
 For service deployments tracked by APM to contribute to change lead time, ensure the following:
 
-### Requirements for calculating change lead time 
+### Requirements for calculating change lead time
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
 - Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
 
@@ -297,11 +296,13 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 - Change lead time stage breakdown metrics are only available for GitHub and GitLab.
 - Change lead time is not available for the first deployment of a service that includes Git information.
+- Change lead time is not available if the most recent deployment of a service was more than 60 days ago.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
-- For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
   - For GitHub and GitLab: Metrics are emitted for the original commits.
   - For other Git providers: Metrics are emitted for the new commit added to the target branch.
+- When using "Rebase", either manually or to merge pull requests:
+  - For all Git providers: Metrics are emitted based on the original commit timestamps, while the displayed SHA corresponds to the newly created rebased commit.
 
 ## Calculating change failure rate
 

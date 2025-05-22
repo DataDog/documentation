@@ -9,6 +9,10 @@ further_reading:
   text: "Workflow Automation"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:
@@ -30,6 +34,9 @@ Handover Automations are maintained on a Team level. To get started, navigate to
 
 ### Send a Slack message
 Post a message to Slack at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Slack app—make sure it's [added to your workspace][2].
+
+#### Troubleshooting
+If you're not receiving @ mentions in Slack, your Slack and Datadog profiles may not be linked. To connect them, run any Datadog Slack command, such as `/dd page`.
 
 ### Send a Microsoft Teams message
 Post a message to Microsoft Teams at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Teams app—make sure it's [added to your workspace][3].

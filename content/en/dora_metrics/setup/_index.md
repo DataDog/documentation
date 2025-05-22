@@ -12,7 +12,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -36,8 +35,9 @@ The four DORA Metrics are calculated based on two types of events that support d
 ### Select a failure data source
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for failure events. See the respective documentation to set up one or more data sources for your failure events:" >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=datadog_incidents" >}}Datadog Incidents{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/setup/failures?tab=pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/setup/failures?tab=api" >}}Incident Event API{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=api" >}}Failure Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Limitations
