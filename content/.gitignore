@@ -2,8 +2,6 @@
 # Ignore .md files compiled from Markdoc
 /en/real_user_monitoring/guide/proxy-mobile-rum-data.md
 
-<<<<<<< HEAD
-/en/real_user_monitoring/session_replay/mobile/privacy_options.md
-=======
 /en/real_user_monitoring/guide/proxy-rum-data.md
->>>>>>> master
+
+/en/real_user_monitoring/session_replay/mobile/privacy_options.md
