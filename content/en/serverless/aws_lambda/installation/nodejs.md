@@ -27,6 +27,8 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>sendDistributionMetric</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/loyalty-point-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
@@ -386,6 +388,41 @@ module "lambda-datadog" {
 
 <div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
+## Span Auto-linking
+
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
+### Configure Auto-linking for DynamoDB PutItem
+
+To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
+
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `object` keyed by the table names as `strings`. Each value is an `array` of primary key fields (as `string`) for the associated table. The array can have exactly one or two elements, depending on the table's primary key schema.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+```js
+// Initialize the tracer with the configuration
+const tracer = require('dd-trace').init({
+  dynamoDb: {
+    tablePrimaryKeys: {
+      'table_name': ['key1', 'key2'],
+      'other_table': ['other_key']
+    }
+  }
+})
+```
+{{% /tab %}}
+
+{{% tab "Environment variable" %}}
+```sh
+export DD_TRACE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
 
@@ -464,3 +501,5 @@ exports.handler = async (event) => {
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html

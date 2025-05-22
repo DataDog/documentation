@@ -12,7 +12,7 @@ further_reading:
 
 This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
+{{< img src="security/datadog_security_coverage_aws_fargate2.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -355,7 +355,7 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security
+## App and API Protection
 
 ### Prerequisites
 
@@ -419,12 +419,12 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events
-[10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
-[11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
-[12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/threats/setup/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/threats/setup/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
+[10]: /security/application_security/setup/threat_detection/java/?tab=awsfargate
+[11]: /security/application_security/setup/threat_detection/java/?tab=amazonecs
+[12]: /security/application_security/setup/threat_detection/dotnet?tab=awsfargate
+[13]: /security/application_security/setup/threat_detection/ruby?tab=awsfargate
+[14]: /security/application_security/setup/threat_detection/nodejs?tab=awsfargate
+[15]: /security/application_security/setup/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [18]: /security/code_security/iast/setup/java/
