@@ -45,7 +45,7 @@ When Cloud SIEM is enabled, OOTB detection rules automatically start analyzing y
 - Change the name of the rule.
 - Extend the query. The original query cannot be edited, but you can add a custom query to it.
 - Change the severity setting in the **Set conditions** section.
-- Modify the playbook,
+- Modify the playbook.
 
 ### Custom detection rules
 
