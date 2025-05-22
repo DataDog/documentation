@@ -48,10 +48,10 @@ See the [Use Cases documentation][4] to learn how teams use Datadog Software Cat
 
 ## What appears in Software Catalog
 
-Software Catalog includes entities (such as a service or datastore) that:
-- Datadog [detects from telemetry][5],
-- you [declare through an Entity Definition][6], or
-- you [import from a third party][7] such as Backstage or ServiceNow.
+Software Catalog includes an entity when:
+- Datadog [detects it from telemetry][5],
+- You [declare it in an Entity Definition][6], or
+- You [import it from a third-party source][7] such as Backstage or ServiceNow.
 
 [Learn more][3] about entity types and how to configure them for your needs.
 
