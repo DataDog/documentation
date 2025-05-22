@@ -633,7 +633,7 @@ def llm_call():
 
 ## Span processing
 
-To modify input and output data on spans a processor function can be configured. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
 
 ### Example
 
@@ -663,7 +663,7 @@ with LLMObs.llm("invoke_llm_with_no_output"):
 
 ### Example: conditional modification with auto-instrumentation
 
-When using auto instrumentation the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `annotation_context()` can be used in addition to a span processor.
+When using auto instrumentation, the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `annotation_context()` can be used in addition to a span processor.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
