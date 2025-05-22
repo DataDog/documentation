@@ -37,7 +37,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM detection rules analyze logs and audit events and generate security signals when a threat is detected. You can use out-of-the-box detections rules or create custom detection rules.
+Cloud SIEM detection rules analyze logs and audit events and generate security signals when a threat is detected. You can use [out-of-the-box detections rules][6] or create custom detection rules.
 
 ### Out-of-the-box detection rules
 
@@ -437,3 +437,4 @@ The rule deprecation process is as follows:
 [3]: https://app.datadoghq.com/logs/
 [4]: https://app.datadoghq.com/security/rules
 [5]: /security/cloud_siem/historical_jobs/
+[6]: /security/default_rules/?category=cat-cloud-siem-log-detection#all
