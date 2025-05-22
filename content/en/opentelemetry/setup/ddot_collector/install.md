@@ -1036,4 +1036,3 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
-[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
