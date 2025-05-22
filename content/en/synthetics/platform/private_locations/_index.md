@@ -671,7 +671,7 @@ You can upload custom root certificates to your private locations to have your A
 
 When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. 
 
-**Note**: If you combine all your `.pem` files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
+<div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 
 {{% /tab %}}
 
@@ -704,7 +704,7 @@ To install root certificates for private locations on a standalone Windows proce
 
 Example:
 
-```shell
+```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
 ```
 
