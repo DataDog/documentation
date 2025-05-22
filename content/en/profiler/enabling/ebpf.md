@@ -72,8 +72,13 @@ To enable local symbol upload:
 4. Set the `DD_SITE environment` variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
 ### Build
-You must first ensure you have the correct version of go installed. In order to build the profiler directly on your machine, you can simply run:
+To build the Full-Host Profiler directly on your machine:
 
+1. Ensure you have the required version of Go installed:
+   ```shell
+   go version
+   ```
+2. Run:
    ```shell
    make
    ```
