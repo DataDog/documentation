@@ -26,7 +26,7 @@ Datadog App and API Protection (AAP) provides observability into application and
 
 ### Identify services exposed to application attacks
 
-Datadog App and API Protection [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
+Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Software Catalog][2], [Service Page][3], [Traces][4]).
 
@@ -139,8 +139,7 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /security/cloud_siem/
 [17]: /security/application_security/policies/library_configuration/#data-security-considerations
-[25]: /security/application_security/how-it-works/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
-[29]: https://docs.datadoghq.com/security/code_security/
+[29]: /security/code_security/
