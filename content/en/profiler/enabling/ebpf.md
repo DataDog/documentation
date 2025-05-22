@@ -96,3 +96,6 @@ After installing the Full-Host Profiler, see the [Getting Started with Profiler]
 [8]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-kubernetes.md
 [9]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-in-docker.md
 [10]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-on-host.md
+[11]: https://app.datadoghq.com/organization-settings/api-keys
+[12]: /getting_started/site/
+[13]: https://app.datadoghq.com/access/application-keys
