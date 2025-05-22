@@ -3,6 +3,8 @@ title: Nginx Compatibility Requirements
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /security/application_security/threats/setup/compatibility/nginx
 ---
 
 ## App and API Protection capabilities support

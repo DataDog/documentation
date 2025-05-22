@@ -3,7 +3,6 @@ title: In-App WAF Rules
 aliases:
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
-  - /security/application_security/threats/event_rules
 ---
 
 ## Overview

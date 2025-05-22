@@ -1,5 +1,8 @@
 ---
 title: App and API Protection Setup
+aliases:
+  - /security/application_security/threats/setup/
+  - /security/application_security/threats/threat_management_setup/
 disable_toc: false
 ---
 

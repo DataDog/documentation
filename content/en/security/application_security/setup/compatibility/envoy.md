@@ -3,6 +3,8 @@ title: Envoy Compatibility Requirements
 code_lang: envoy
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /security/application_security/threats/setup/compatibility/envoy
 ---
 
 The following table lists the support for App and API Protection capabilities in the Envoy integration according to the specified tracer version:

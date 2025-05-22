@@ -3,6 +3,8 @@ title: Python Compatibility Requirements
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/compatibility/python
 ---
 ## App and API Protection capabilities support
 

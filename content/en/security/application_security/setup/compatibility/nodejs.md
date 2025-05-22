@@ -3,6 +3,8 @@ title: Node.js Compatibility Requirements
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/compatibility/nodejs
 ---
 
 ## App and API Protection capabilities

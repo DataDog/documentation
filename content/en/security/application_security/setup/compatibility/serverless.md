@@ -3,6 +3,8 @@ title: Serverless Compatibility Requirements
 code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90
+aliases:
+  - /security/application_security/threats/setup/compatibility/serverless
 ---
 
 App and API Protection provides serverless capability for the following platforms and libraries:

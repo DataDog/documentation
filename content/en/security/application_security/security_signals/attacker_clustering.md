@@ -1,6 +1,8 @@
 ---
 title: Attacker Clustering
 disable_toc: false
+aliases:
+  - /security/application_security/threats/attacker_clustering
 further_reading:
 - link: "/security/application_security/security_signals/attacker_fingerprint"
   tag: "Documentation"

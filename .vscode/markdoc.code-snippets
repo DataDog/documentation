@@ -125,5 +125,14 @@
         "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"
+    },
+
+    "Aliases frontmatter": {
+        "prefix": ";;aliases",
+        "body": [
+            "aliases:",
+            "  - ${1:/your/url/here}"
+        ],
+        "description": "YAML frontmatter for aliases with a single URL entry"
     }
 }

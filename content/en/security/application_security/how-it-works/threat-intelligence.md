@@ -1,5 +1,7 @@
 ---
 title: Threat Intelligence
+aliases:
+  - /security/application_security/threats/threat-intelligence
 ---
 
 ## Overview

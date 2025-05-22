@@ -3,6 +3,8 @@ title: Enabling Application & API Protection for Envoy
 code_lang: envoy
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/standalone/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"

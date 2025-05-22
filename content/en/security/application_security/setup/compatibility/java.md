@@ -3,6 +3,8 @@ title: Java Compatibility Requirements
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
+aliases:
+  - /security/application_security/threats/setup/compatibility/java
 ---
 
 ## App and API Protection capabilities

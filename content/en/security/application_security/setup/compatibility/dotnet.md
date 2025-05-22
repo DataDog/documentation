@@ -3,6 +3,8 @@ title: .NET Compatibility Requirements
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
+aliases:
+  - /security/application_security/threats/setup/compatibility/dotnet
 ---
 
 ## App and API Protection capabilities support

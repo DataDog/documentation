@@ -3,6 +3,8 @@ title: Go Compatibility Requirements
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+  - /security/application_security/threats/setup/compatibility/go
 ---
 
 ## App and API Protection capabilities

@@ -3,6 +3,8 @@ title: Ruby Compatibility Requirements
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+  - /security/application_security/threats/setup/compatibility/ruby
 ---
 
 ## App and API Protection capabilities support

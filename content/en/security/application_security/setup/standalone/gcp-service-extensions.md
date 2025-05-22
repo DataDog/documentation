@@ -3,6 +3,8 @@ title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/standalone/gcp-service-extensions
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"

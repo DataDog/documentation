@@ -2,6 +2,7 @@
 title: Overview
 aliases:
   - /security/application_security/threats/threat-overview
+  - /security/application_security/threats/attack-summary
 ---
 
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->

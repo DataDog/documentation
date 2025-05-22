@@ -1,6 +1,8 @@
 ---
 title: Enabling AAP threat detection and protection using single step instrumentation
 external_redirect: /security/application_security/threats/threat_detection/
+aliases:
+  - /security/application_security/threats/setup/single_step
 ---
 
 <div class="alert alert-info">Enabling AAP threat detection and protection using single step instrumentation is in Preview.</div>
