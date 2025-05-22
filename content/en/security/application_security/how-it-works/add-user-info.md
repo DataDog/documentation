@@ -279,7 +279,7 @@ For information and options, read [the Node.js tracer documentation][1].
 
 Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track users and user events.
 
-In previous versions, you can onitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+In previous versions, you can monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
 
 {{% collapse-content title="User Tracking SDK" level="h4" expanded="true" %}}
 
@@ -287,16 +287,29 @@ Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags
 
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
+
 user_login = "some_login"
-# to enable all features (user_id and/or session_id monitoring and blocking), make sure you provide the corresponding optional arguments
-track_user(user_login, user_id="some_user_id", session_id="session_id", metadata={name="John", email="test@test.com", scope="some_scope", role="manager"})
+# to enable all features (user_id and/or session_id monitoring and blocking), 
+# make sure you provide the corresponding optional arguments
+track_user(
+    user_login,
+    user_id="some_user_id",
+    session_id="session_id",
+    metadata={
+        "name": "John",
+        "email": "test@test.com",
+        "scope": "some_scope",
+        "role": "manager",
+    },
+)
 ```
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Legacy API" level="h4" expanded="true" %}}
+{{% collapse-content title="Legacy API" level="h4" expanded="false" %}}
 
-This example shows how to set user monitoring tags and enable user blocking capability:
+This example shows how to set user monitoring tags and enable user blocking capability, using the legacy API.
+But using instead the new User Tracking SDK is encouraged.
 
 ```python
 from ddtrace.contrib.trace_utils import set_user
@@ -750,32 +763,62 @@ Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 ```python
 from ddtrace.appsec import track_user_sdk
 
-# This function should be called when a user successfully logs in to the application.
+## This function should be called when a user successfully logs in to the
+# application.
+
 # user_id and metadata are optional
 metadata = {"usr.email": "user@email.com"}
-track_user_sdk.track_login_success("some_user_login", user_id="some_user_id", metadata=metadata)
+track_user_sdk.track_login_success(
+    "some_user_login",
+    user_id="some_user_id",
+    metadata=metadata,
+)
 
 
-# This function should be called when a user fails to log in to the application.
+## This function should be called when a user fails to log in to the
+# application.
+
 # user_id and metadata are optional
 metadata = {"usr.error": "login failure"}
+
 # If you want to track the login failure as a "login do not exists"
 exists = False
-track_user_sdk.track_login_failure("some_user_login", exists, metadata=metadata)
-# If you want to track the login failure as a "login exists but authentification failed"
+track_user_sdk.track_login_failure(
+    "some_user_login",
+    exists,
+    metadata=metadata,
+)
+
+# If you want to track the login failure as a "login exists but
+# authentification failed
 exists = True
-track_user_sdk.track_login_failure("some_user_login", exists, user_id="some_user_id", metadata=metadata)
+track_user_sdk.track_login_failure(
+    "some_user_login",
+    exists,
+    user_id="some_user_id",
+    metadata=metadata,
+)
 
 
-# This function should be called when a user successfully signs up for the application.
+## This function should be called when a user successfully signs up for
+# the application.
+
 # user_id, success and metadata are optional, success is True by default.
 metadata = {"usr.email": "user@email.com"}
-track_user_sdk.track_signup("some_user_login", user_id="some_user_id", success=True, metadata=metadata)
+track_user_sdk.track_signup(
+    "some_user_login",
+    user_id="some_user_id",
+    success=True,
+    metadata=metadata,
+)
 
 
-# This function should be called when a custom user event occurs in the application.
+## This function should be called when a custom user event occurs in the application.
 # metadata is required
-metadata = {"usr.address": {"line1":"221b Baker Street", "city":"London"}, "phone":"0123456789"}
+metadata = {
+    "usr.address": {"line1": "221b Baker Street", "city": "London"},
+    "phone": "0123456789",
+}
 track_user_sdk.track_custom_event("my_event_name", metadata)
 
 ```
@@ -882,6 +925,9 @@ async def whoami(request: Request) -> User:
 
 
 {{% collapse-content title="Legacy API" level="h4" expanded="false" %}}
+
+Available since dd-trace-py v1.9, using the new User Tracking SDK instead is now encouraged.
+
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
