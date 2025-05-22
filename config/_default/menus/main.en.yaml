@@ -3167,6 +3167,11 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
       weight: 112
+    - name: FIPS Compliance
+      url: serverless/aws_lambda/fips-compliance
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_fips_compliance
+      weight: 113
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -3832,96 +3837,101 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
+    - name: Recommendations
+      url: tracing/recommendations/
+      parent: tracing
+      identifier: apm_recommendations
+      weight: 7
     - name: Code Origins for Spans
       url: tracing/code_origins
       parent: tracing
       identifier: tracing_code_origins
-      weight: 7
+      weight: 8
     - name: Service Observability
       url: tracing/services/
       parent: tracing
       identifier: tracing_services
-      weight: 7
+      weight: 9
     - name: Software Catalog
       url: /software_catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
-      weight: 701
+      weight: 901
     - name: Service Page
       url: tracing/services/service_page/
       parent: tracing_services
       identifier: tracing_service_page
-      weight: 702
+      weight: 902
     - name: Resource Page
       url: tracing/services/resource_page/
       parent: tracing_services
       identifier: tracing_resource_page
-      weight: 703
+      weight: 903
     - name: Deployment Tracking
       url: tracing/services/deployment_tracking/
       parent: tracing_services
       identifier: tracing_deployment_tracking
-      weight: 704
+      weight: 904
     - name: Service Map
       url: tracing/services/services_map/
       parent: tracing_services
       identifier: tracing_service_map
-      weight: 705
+      weight: 905
     - name: Inferred Services
       url: tracing/services/inferred_services
       parent: tracing_services
       identifier: tracing_inferred_services
-      weight: 706
+      weight: 906
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 707
+      weight: 907
     - name: Endpoint Observability
       url: /software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
-      weight: 8
+      weight: 10
     - name: Explore Endpoints
       url: /software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
-      weight: 802
+      weight: 1002
     - name: Monitor Endpoints
       url: /software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
-      weight: 803
+      weight: 1003
     - name: Dynamic Instrumentation
       url: dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
-      weight: 9
+      weight: 11
     - name: Enabling
       url: dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
-      weight: 901
+      weight: 1101
     - name: Expression Language
       url: dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 902
+      weight: 1102
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
       parent: tracing
-      weight: 10
+      weight: 12
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
       identifier: tracing_error_tracking
-      weight: 11
+      weight: 13
     - name: Error Tracking Explorer
       url: tracing/error_tracking/explorer
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
-      weight: 1101
+      weight: 1301
     - name: Issue States
       url: tracing/error_tracking/issue_states
       parent: tracing_error_tracking
@@ -3931,57 +3941,57 @@ menu:
       url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
-      weight: 1103
+      weight: 1303
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_monitors
-      weight: 1105
+      weight: 1305
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1106
+      weight: 1306
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1107
+      weight: 1307
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1108
+      weight: 1308
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
       identifier: tracing_data_security
-      weight: 12
+      weight: 14
     - name: Guides
       url: tracing/guide/
       parent: tracing
       identifier: tracing_guides
-      weight: 13
+      weight: 15
     - name: Troubleshooting
       url: tracing/troubleshooting/
       parent: tracing
       identifier: tracing_troubleshooting
-      weight: 14
+      weight: 16
     - name: Tracer Startup Logs
       url: tracing/troubleshooting/tracer_startup_logs
       identifier: tracing_troubleshooting_startup_logs
       parent: tracing_troubleshooting
-      weight: 1401
+      weight: 1601
     - name: Tracer Debug Logs
       url: tracing/troubleshooting/tracer_debug_logs
       identifier: tracing_troubleshooting_debug_logs
       parent: tracing_troubleshooting
-      weight: 1402
+      weight: 1602
     - name: Connection Errors
       url: tracing/troubleshooting/connection_errors
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
-      weight: 1403
+      weight: 1603
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
@@ -4780,111 +4790,116 @@ menu:
       parent: tests
       identifier: tests_monitors
       weight: 6
+    - name: Test Health
+      url: tests/test_health
+      parent: tests
+      identifier: tests_test_health
+      weight: 7
     - name: Flaky Test Management
       url: tests/flaky_test_management
       parent: tests
       identifier: tests_flaky_test_management
-      weight: 7
+      weight: 8
     - name: Early Flake Detection
       url: tests/flaky_test_management/early_flake_detection
       parent: tests_flaky_test_management
       identifier: tests_early_flake_detection
-      weight: 701
+      weight: 801
     - name: Auto Test Retries
       url: tests/flaky_test_management/auto_test_retries
       parent: tests_flaky_test_management
       identifier: tests_auto_test_retries
-      weight: 702
+      weight: 802
     - name: Test Impact Analysis
       url: tests/test_impact_analysis
       parent: tests
       identifier: test_impact_analysis
-      weight: 8
+      weight: 9
     - name: Setup
       url: tests/test_impact_analysis/setup/
       parent: test_impact_analysis
       identifier: test_impact_analysis_setup
-      weight: 801
+      weight: 901
     - name: .NET
       url: tests/test_impact_analysis/setup/dotnet/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_dotnet
-      weight: 8101
+      weight: 9101
     - name: JavaScript and TypeScript
       url: tests/test_impact_analysis/setup/javascript/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_javascript
-      weight: 8102
+      weight: 9102
     - name: Python
       url: tests/test_impact_analysis/setup/python/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_python
-      weight: 8103
+      weight: 9103
     - name: Swift
       url: tests/test_impact_analysis/setup/swift/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_swift
-      weight: 8104
+      weight: 9104
     - name: Java
       url: tests/test_impact_analysis/setup/java/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_java
-      weight: 8105
+      weight: 9105
     - name: Ruby
       url: tests/test_impact_analysis/setup/ruby/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
-      weight: 8106
+      weight: 9106
     - name: Go
       url: tests/test_impact_analysis/setup/go/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_go
-      weight: 8107
+      weight: 9107
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis
       identifier: test_impact_analysis_how_it_works
-      weight: 802
+      weight: 902
     - name: Troubleshooting
       url: tests/test_impact_analysis/troubleshooting/
       parent: test_impact_analysis
       identifier: test_impact_analysis_troubleshooting
-      weight: 803
+      weight: 903
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 9
+      weight: 10
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 10
+      weight: 11
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 11
+      weight: 12
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 12
+      weight: 13
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
       parent: tests
       identifier: tests_correlate_logs_and_tests
-      weight: 13
+      weight: 14
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 14
+      weight: 15
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 15
+      weight: 16
     - name: Quality Gates
       url: quality_gates/
       pre: ci

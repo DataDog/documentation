@@ -3,10 +3,10 @@ categories:
 - aws
 - nube
 - recopilación de logs
-- la red
+- network
 - rastreo
 creates_events: false
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: AWS App Mesh es un proxy de servicio y periferia de código abierto.
 display_name: AWS App Mesh
@@ -28,11 +28,11 @@ metric_to_check: envoy.stats.overflow
 name: amazon_app_mesh
 public_title: Integración de Datadog y AWS App Mesh
 short_description: AWS App Mesh es un proxy de servicio y periferia de código abierto.
-support: core
+support: núcleo
 supported_os:
-- linux
+- Linux
 - mac_os
-- windows
+- Windows
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
@@ -92,7 +92,7 @@ Sigue estas instrucciones para activar la recopilación de métricas para el pro
                 path: envoy.yaml
     ```
 
-#### APM
+#### Recopilación de logs
 
 {{< site-region region="us3" >}}
 
@@ -112,15 +112,15 @@ Para habilitar la recopilación de logs, actualiza el DaemonSet del Agent con la
 
 Selecciona el espacio de nombres para desplegar el `datadog-agent` y servicio, por ejemplo: `monitoring`. Utiliza esto en la opción para desplegar el appmesh-inyector con:
 
-    ```shell
-      helm upgrade -i appmesh-controller eks/appmesh-controller \
-      --namespace appmesh-system \
-      --set sidecar.logLevel=debug \
-      --set tracing.enabled=true \
-      --set tracing.provider=datadog \
-      --set tracing.address=ref:status.hostIP \
-      --set tracing.port=8126
-    ```
+```shell
+  helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set sidecar.logLevel=debug \
+  --set tracing.enabled=true \
+  --set tracing.provider=datadog \
+  --set tracing.address=ref:status.hostIP \
+  --set tracing.port=8126
+```
 
 
 Alternativamente, el inyector appmesh puede desplegarse siguiendo la documentación de [App Mesh con EKS][2] con la opción `enable-datadog-tracing=true` o la variable de entorno`ENABLE_Datadog_TRACING=true`.
@@ -147,7 +147,7 @@ Alternativamente, el inyector appmesh puede desplegarse siguiendo la documentaci
             },
     ```
 
-#### APM
+#### Recopilación de logs
 
 {{< site-region region="us3" >}}
 
@@ -193,7 +193,7 @@ Establece los parámetros de AWS App Mesh `ENABLE_ENVOY_Datadog_TRACING` y `Data
             },
     ```
 
-#### APM
+#### Recopilación de logs
 
 {{< site-region region="us3" >}}
 
@@ -233,15 +233,15 @@ Consulta la [integración de Envoy][2] para obtener una lista de métricas.
 
 La integración de AWS App Mesh no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de AWS App Mesh no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
