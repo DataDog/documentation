@@ -6536,9 +6536,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.7.tgz":
-  version: 1.1.7
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.7.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz":
+  version: 1.1.9
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz"
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
@@ -6562,7 +6562,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: 41500ff7dfed1a381a574dc63779dc0ef310bcdb0948659d09822c5638ebdd8a46ed4f468887dc2a4d0914cb0b20e7ae0f8a16de039636aaeac76a2449f1dc71
+  checksum: 98ec8f23adf4058c97ed8ea94b1611276c016889c0d89f8621e6a6e4cec8773e82e4f8645d5f2b66799017e24776f88d8cfa1e212d8265c8cbf468d693db995a
   languageName: node
   linkType: hard
 
@@ -7595,7 +7595,7 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.7.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz"
     cross-env: ^5.2.1
     del: 4.1.1
     eslint: ^6.8.0
