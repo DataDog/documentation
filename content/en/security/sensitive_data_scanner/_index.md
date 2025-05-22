@@ -67,7 +67,7 @@ The data that can be scanned and redacted are:
 - Events: Event attribute values only
 
 {{< callout url="" btn_hidden="false" >}}
-Role-Based Sensitive Data Unmasking in Logs is in Preview. To enroll, click <b>Request Access</b>.
+Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
