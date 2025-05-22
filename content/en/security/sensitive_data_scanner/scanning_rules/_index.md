@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
-Human Name PII Detection in Logs using Machine Learning is in Preview. To enroll, click <b>Request Access</b>.
+Human name PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
 ## Telemetry Data
