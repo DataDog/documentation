@@ -24,6 +24,8 @@ algolia:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>lambda_metric</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
