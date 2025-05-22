@@ -1,12 +1,5 @@
 ---
 title: Threat Intelligence
-further_reading:
-- link: "https://docs.datadoghq.com/security/threat_intelligence/"
-  tag: "Documentation"
-  text: "Threat Intelligence at Datadog"
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "Protect against threats with Datadog App and API Protection"
 ---
 
 ## Overview
@@ -156,10 +149,6 @@ When viewing the traces in the AAP Traces Explorer, you can see threat intellige
 Under `@threat_intel.results` you can always see the full details of what was matched from which source.
 
  <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}} -->
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threat_intelligence/#threat-intelligence-sources
 [2]: /integrations/guide/reference-tables
