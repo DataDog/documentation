@@ -62,7 +62,7 @@ For hosts without container runtimes, follow the instructions for [running direc
 
 ### Configuration
 #### Local symbol upload (Experimental)
-For compiled languages (C/C++/Rust/Go/...), the profiler can upload local symbols (when available) to Datadog for symbolication. Symbols need to be available locally (unstripped binaries).
+For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available.
 
 To enable local symbol upload:
 
