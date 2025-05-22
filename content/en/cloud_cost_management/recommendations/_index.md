@@ -507,7 +507,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/recommendations
-[2]: /cloud_cost_management/aws/#setup
+[2]: /cloud_cost_management/setup/aws/#setup
 [3]: /integrations/amazon_web_services/#resource-collection
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/

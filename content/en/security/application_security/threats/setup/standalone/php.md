@@ -106,4 +106,4 @@ Update your ECS task definition JSON file, by adding these in the environment se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility/php/
+[1]: /security/application_security/setup/compatibility/php/
