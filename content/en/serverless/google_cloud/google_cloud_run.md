@@ -26,8 +26,9 @@ For custom metrics, use the [Distribution Metrics][4] to correctly aggregate dat
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
-#### Example Code
+Add the `dd-trace-js` [library][1] to your application.
 
+#### app.js
 ```js
 // The tracer includes a dogstatsd client.
 // It will send profiling information if configured with DD_PROFILING_ENABLED.
@@ -56,6 +57,26 @@ app.get("/", (_, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port);
+```
+
+You can use `npm install dd-trace` to add the tracer to your package.
+
+#### Dockerfile
+
+Your `Dockerfile` can look something like this. This will create a minmimal application container with metrics, traces, logs, (ADD PROFILING!). Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
+
+```dockerfile
+FROM node:22-slim
+
+COPY app.js package.json package-lock.json .
+RUN npm ci --only=production
+
+# Initialize the tracer
+ENV NODE_OPTIONS="--require dd-trace/init"
+
+EXPOSE 8080
+
+CMD ["node", "app.js"]
 ```
 
 #### Details
@@ -171,11 +192,12 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 | `DD_SERVICE`      | Sidecar *and* Application | See [Unified Service Tagging][14].                                  |
 | `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
-| `DD_SOURCE`       | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_TAGS`         | Sidecar | See [Unified Service Tagging][14]. |
 | `DD_HEALTH_PORT` | Sidecar | The port for sidecar health checks. For example `9999` |
 
 The `DD_LOGS_ENABLED` environment variable is not required.
+
+TODO: write something about `DD_SOURCE`.
 
 {{< tabs >}}
 {{% tab "GCR UI" %}}
@@ -215,6 +237,10 @@ The `DD_LOGS_ENABLED` environment variable is not required.
     - with some details.
 {{% /tab %}}
 {{< /tabs >}}
+
+
+### Add a `service` label
+Add a `service` label which matches the `DD_SERVICE` value on the containers to the Google Cloud service. Access this through the service list, through the **Labels** button after selecting the service.
 
 
 ## Futher Reading
