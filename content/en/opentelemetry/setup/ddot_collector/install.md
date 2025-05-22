@@ -872,7 +872,7 @@ public String getDate() {
 
 Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
 
-If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application’s Deployment manifest file:
+If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application's Deployment manifest file:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 env:
   ...
@@ -975,73 +975,6 @@ View metrics from the DDOT Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 
-<<<<<<< HEAD:content/en/opentelemetry/agent/install_agent_with_collector.md
-## Included components
-
-By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
-
-{{% collapse-content title="Receivers" level="p" %}}
-
-- [filelogreceiver][16]
-- [fluentforwardreceiver][17]
-- [hostmetricsreceiver][18]
-- [jaegerreceiver][19]
-- [otlpreceiver][20]
-- [prometheusreceiver][21]
-- [receivercreator][22]
-- [zipkinreceiver][23]
-- [nopreceiver][24]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Processors" level="p" %}}
-
-- [attributesprocessor][25]
-- [batchprocessor][26]
-- [cumulativetodeltaprocessor][27]
-- [filterprocessor][28]
-- [groupbyattributeprocessor][29]
-- [k8sattributesprocessor][30]
-- [memorylimiterprocessor][31]
-- [probabilisticsamplerprocessor][32]
-- [resourcedetectionprocessor][33]
-- [resourceprocessor][34]
-- [routingprocessor][35]
-- [tailsamplingprocessor][36]
-- [transformprocessor][37]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Exporters" level="p" %}}
-
-- [datadogexporter][38]
-- [debugexporter][39]
-- [loadbalancingexporter][58]
-- [otlpexporter][40]
-- [otlphttpexporter][41]
-- [sapmexporter][42]
-- [nopexporter][43]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Connectors" level="p" %}}
-
-- [datadogconnector][44]
-- [spanmetricsconnector][45]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Extensions" level="p" %}}
-
-- [healthcheckextension][46]
-- [observer][47]
-- [pprofextension][48]
-- [zpagesextension][49]
-
-{{% /collapse-content %}}
-
-=======
->>>>>>> bb925abde6cfb69e4a2756857915aca88b96dfb6:content/en/opentelemetry/setup/ddot_collector/install.md
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
