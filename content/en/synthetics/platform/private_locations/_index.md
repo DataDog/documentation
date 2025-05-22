@@ -681,16 +681,16 @@ To install root certificates for private locations on a Windows service, use the
 
 1. Open the Registry Editor App.
 2. Navigate to the `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location` entry.
-3. Create a new Registry key named `Environment` with the `Multi-string` value type.
+3. Create a Registry key named `Environment` with the `Multi-string` value type.
 
-<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetics Service:
+<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
 default: <code>C:\Program Files\Datadog-Synthetics\Synthetics.</code></div>
 
 4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
 
    {{< img src="synthetics/private_locations/windows_pl_set_service.png" alt="Your image description" style="width:100%;" >}}
 
-5. Open the Services App and reload the Datadog Synthetics Private Location service.
+5. Open the Services App and reload the Datadog Synthetic Monitoring Private Location service.
 
 {{% /tab %}}
 
