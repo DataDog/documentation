@@ -105,7 +105,7 @@ The following instructions turn on [Software Bill of Materials][5] (SBOM) collec
 
 **Notes**:
 - SBOM collection is not compatible with the image streaming feature in Google Kubernetes Engine (GKE). To disable it, see the [Disable Image streaming][11] section of the GKE docs.
-- The Cloud Security Vulnerabilities feature is available for Amazon ECS Fargate via [Amazon ECR agentless scanning][13]
+- The Cloud Security Vulnerabilities feature is available for Amazon ECS Fargate with [Amazon ECR agentless scanning][13].
 - The Cloud Security Vulnerabilities feature is not available for containers running on Windows environments.
 
 {{< tabs >}}
