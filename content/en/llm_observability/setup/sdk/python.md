@@ -649,7 +649,7 @@ from ddtrace.llmobs import LLMObsSpan
 
 def redact_processor(span: LLMObsSpan) -> LLMObsSpan:
     if span.get_tag("no_output") == "true":
-        for message in span.output_messages:
+        for message in span.output:
             message["content"] = ""
     return span
 
@@ -664,6 +664,30 @@ LLMObs.register_processor(redact_processor)
 
 with LLMObs.llm("invoke_llm_with_no_output"):
     LLMObs.annotate(tags={"no_output": "true"})
+{{< /code-block >}}
+
+
+### Example: conditional modification with auto-instrumentation
+
+When using auto instrumentation the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `annotation_context()` can be used in addition to a span processor.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+
+def redact_processor(span: LLMObsSpan) -> LLMObsSpan:
+    if span.get_tag("no_input") == "true":
+        for message in span.input:
+            message["content"] = ""
+    return span
+
+LLMObs.register_processor(redact_processor)
+
+
+def call_openai():
+    with LLMObs.annotation_context(tags={"no_input": "true"}):
+        # make call to openai
+        ...
 {{< /code-block >}}
 
 
