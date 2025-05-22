@@ -566,7 +566,7 @@ Use `setSessionReplayHidden(hide = true)` to hide the element. Setting `hide` to
 {{< /tabs >}}
 
 
-### Privacy overrides Support in React Native
+### Privacy overrides support in React Native
 
 Privacy overrides are fully supported in React Native starting from version `2.8.0` of the Datadog [React Native SDK][2]. Although the underlying functionality is shared with native Android and iOS platforms, the integration in React Native is designed to align with common React patterns.
 
@@ -595,7 +595,7 @@ Each of these components behaves like a regular React Native View, meaning they 
 | `SessionReplayView.MaskNone` | Applies the least restrictive settings (`MaskNone` or platform equivalent). All child components are visible. | _(No additional properties)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `SessionReplayView.Hide`     | Completely hides all child components from session replay.                                                    | _(No additional properties)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
-#### Integration Approaches
+#### Integration approaches
 
 1. **As Wrappers**
 
