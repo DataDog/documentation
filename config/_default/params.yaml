@@ -105,7 +105,7 @@ code_language_ids:
     windows: Windows
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
-    ebpf: "eBPF"
+    full_host: "Full Host"
     serverless: "Serverless"
     javascript: "JavaScript"
     swift: "Swift"

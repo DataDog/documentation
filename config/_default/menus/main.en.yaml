@@ -4061,10 +4061,10 @@ menu:
       parent: profiler_enabling
       identifier: profiler_enabling_linux
       weight: 109
-    - name: eBPF
-      url: profiler/enabling/ebpf/
+    - name: Full Host
+      url: profiler/enabling/full_host/
       parent: profiler_enabling
-      identifier: profiler_enabling_ebpf
+      identifier: profiler_enabling_full_host
       weight: 110
     - name: Profile Types
       url: profiler/profile_types/
@@ -4131,10 +4131,10 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
       weight: 608
-    - name: eBPF
-      url: profiler/profiler_troubleshooting/ebpf/
+    - name: Full Host
+      url: profiler/profiler_troubleshooting/full_host/
       parent: profiler_troubleshooting
-      identifier: profiler_troubleshooting_ebpf
+      identifier: profiler_troubleshooting_full_host
       weight: 609
     - name: Guides
       url: profiler/guide/

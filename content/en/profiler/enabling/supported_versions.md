@@ -17,8 +17,8 @@ The following tables summarize the features available for each language runtime.
 
 To use the Datadog Profiler, use at least the minimum versions summarized in the following table. For specific profile type availability by version, see [Profile types](#profile-types).
 
-|                                   |  [Java][1]   |   [Python][2]    |    [Go][3]    |   [Ruby][4]    | [Node.js][5]  |  [.NET][6]  |   [PHP][7]    | [Rust/C/C++][8] | [eBPF][9] |
-|-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|:---------------:|
+|                                   |  [Java][1]   |   [Python][2]    |    [Go][3]    |   [Ruby][4]    | [Node.js][5]  |  [.NET][6]  |   [PHP][7]    | [Rust/C/C++][8] |
+|-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
 | <strong>Minimum&nbsp;runtime&nbsp;version</strong> | [JDK&nbsp;8+][17]  | Python&nbsp;2.7+ | [previous major Go release][21] | Ruby&nbsp;2.5+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |                 |
 | <strong>Feature-complete runtime version</strong>       | [JDK&nbsp;11+][17] | Python&nbsp;3.6+ | [latest major Go release][21] | Ruby&nbsp;3.2+ | Node&nbsp;18+ |                              .NET&nbsp;7+                               | PHP&nbsp;8.0+ |                 |
 | <strong>Feature-complete tracing library version</strong>        | [latest][9]  |   [latest][10]   | [latest][11]  |  [latest][12]  | [latest][13]  |                              [latest][14]                               | [latest][15]  |  [latest][16]   |
@@ -28,9 +28,9 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 The following table shows profile type availability by language. For optimal performance and access to all features, Datadog recommends using the latest version of the tracing library for your language. If a specific runtime version isn't indicated, the profile type is available with the minimum runtime version listed in the [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
 
 
-| <div style="width:150px"><div>    |                     [Java][1]                     | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |[eBPF][9] |
-|-----------------------------------|:-------------------------------------------------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|:----------:|
-| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  | {{< tooltip glossary="preview" case="title" >}} | {{< tooltip glossary="preview" case="title" >}} |
+| <div style="width:150px"><div>    |                     [Java][1]                     | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
+|-----------------------------------|:-------------------------------------------------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
+| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  | {{< tooltip glossary="preview" case="title" >}} | 
 | {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   |                 {{< X >}}                 | Python 3.7+ | | | | .NET 5+ | {{< X >}}  | |
 | {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   |                [JDK 11+][17]                 | Python 3.6+ | {{< X >}} | {{< X >}} | | {{< tooltip glossary="preview" case="title" >}}<br>.NET 6+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}} |
 | {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK 11+][17] | Python 3.6+ | {{< X >}} | alpha<br>Ruby 3.1+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}}<br>.NET 7+ | | {{< tooltip glossary="preview" case="title" >}} |
@@ -42,9 +42,9 @@ The following table shows profile type availability by language. For optimal per
 
 The following table outlines additional profiling features by language. For full functionality and best performance, Datadog recommends using the latest version of your language's tracing library. If a specific runtime version isn't indicated, the feature is available with the minimum runtime version listed in the [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
 
-|                                   | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] | [eBPF][9] |
-|-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|:----------:|
-| {{< ci-details title="Trace to Profiling integration" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | {{< X >}} |
+|                                   | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
+|-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
+| {{< ci-details title="Trace to Profiling integration" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | {{< ci-details title="Endpoint Profiling" >}}Identify endpoints that are bottlenecks or responsible for heavy resource consumption. <a href="/profiler/connect_traces_and_profiles/#endpoint-profiling">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | {{< ci-details title="Memory Leaks" >}}A guided workflow to assist in investigating memory leaks. <a href="/profiler/guide/solve-memory-leaks/">Learn more</a>{{< /ci-details >}}   | {{< X >}} | | {{< X >}} | | | | | |

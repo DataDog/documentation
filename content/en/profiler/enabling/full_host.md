@@ -5,7 +5,7 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/profiler_troubleshooting/ebpf'
+    - link: 'profiler/profiler_troubleshooting/full_host'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 ---
@@ -36,7 +36,7 @@ Supported architecture
 : `amd64` or `arm64` processors
 
 Serverless
-: `ebpf` is not supported on serverless platforms, such as AWS Lambda.
+: `full host` is not supported on serverless platforms, such as AWS Lambda.
 
 OS Settings
 : TBD

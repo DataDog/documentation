@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting the eBPF Profiler
-code_lang: ebpf
+title: Troubleshooting the Full Host Profiler
+code_lang: full_host
 type: multi-code-lang
 code_lang_weight: 90
 further_reading:
@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<code>eBPF</code> is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>Full Host</code> is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 
