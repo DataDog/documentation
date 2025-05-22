@@ -18,7 +18,7 @@ further_reading:
 ---
 
 {{< callout url="" btn_hidden="false" >}}
-Role-Based Sensitive Data Unmasking in Logs is in Preview. To enroll, click <b>Request Access</b>.
+Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
 ## Overview
