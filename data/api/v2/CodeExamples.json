@@ -347,6 +347,20 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "ListDORADeployments": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Get a list of deployment events returns \"OK\" response"
+    }
+  ],
+  "ListDORAFailures": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Get a list of failure events returns \"OK\" response"
+    }
+  ],
   "CreateDORADeployment": [
     {
       "group": "dora_metrics",
