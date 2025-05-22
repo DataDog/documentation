@@ -60,7 +60,7 @@ For hosts running containerized workloads, Datadog recommends running the profil
 
 For hosts without container runtimes, follow the instructions for [running directly on the host][10].
 
-### Configuring the Profiler
+### Configuration
 #### Local symbol upload (Experimental)
 For compiled languages (C/C++/Rust/Go/...), the profiler can upload local symbols (when available) to Datadog for symbolication. Symbols need to be available locally (unstripped binaries).
 
