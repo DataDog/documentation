@@ -168,7 +168,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar | When true, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
-| `DD_SERVICE`      | **Both** | See [Unified Service Tagging][14].                                  |
+| `DD_SERVICE`      | Sidecar *and* Application | See [Unified Service Tagging][14].                                  |
 | `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_SOURCE`       | Sidecar | See [Unified Service Tagging][14].                                  |
