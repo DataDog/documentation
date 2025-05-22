@@ -510,7 +510,7 @@ Processes are normally collected at 10s resolution. While actively working with 
 ## Additional information
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. If the Agent is running unprivileged, the mount does not occur. Without it, all features except the `user` metadata field still function. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. If the Agent is running unprivileged, the mount does not occur. Even without access to the `/etc/passwd` file, all features except the `user` metadata field still function. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 
