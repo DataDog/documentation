@@ -3547,6 +3547,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 8
+    - name: Custom Recommendations
+      url: cloud_cost_management/recommendations/custom_recommendations
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_custom_recommendations
+      weight: 801
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
