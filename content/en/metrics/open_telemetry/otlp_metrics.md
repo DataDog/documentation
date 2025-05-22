@@ -11,4 +11,4 @@ aliases:
 - /metrics/open_telemetry/
 ---
 
-{{< include-markdown "/opentelemetry/otel_metrics" >}}
+{{< include-markdown "/opentelemetry/reference/otel_metrics" >}}

@@ -197,7 +197,7 @@ See associated tags, as well as critical host/container metrics graphs including
 
 See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [Log Explorer search][1].
 
-{{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Logs in Traces" style="width:100%;">}}
 
 
 [1]: /logs/explorer/search/
@@ -228,11 +228,11 @@ Click on a service's span to see network dependencies of the service making the 
 
 See attack attempts that target the services of the distributed trace. You can see the pattern used by the attacker, the rule that detects the attack, and whether the attacker found a vulnerability in your service.
 
-Click **View in ASM** to investigate further using [Datadog Application Security Management][1].
+Click **View in AAP** to investigate further using [Datadog App and API Protection][1].
 
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
-[1]: /security/application_security/how-appsec-works/
+[1]: /security/application_security/how-it-works/
 {{% /tab %}}
 {{% tab "Profiles" %}}
 

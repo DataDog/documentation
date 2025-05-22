@@ -50,6 +50,7 @@ To get started, follow the instructions below.
    ```shell
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
+   # AIRFLOW__OPENLINEAGE__NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
    export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
@@ -66,11 +67,26 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
+
+   The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
+   ```yaml
+   ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
+   ```
+
+   Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
+
+   For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
+   
+
 [1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [5]: https://openlineage.io/docs/integrations/airflow/
+[6]: https://airflow.apache.org/docs/apache-airflow/2.9.3/configurations-ref.html#log-filename-template
+[7]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+[8]: https://docs.datadoghq.com/integrations/airflow/?tab=containerized
 
 
 ## Validation
@@ -113,6 +129,7 @@ To get started, follow the instructions below.
    #!/bin/sh
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
+   # AIRFLOW__OPENLINEAGE__NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
    export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
 
@@ -172,14 +189,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 ## Setup
 
-1. Install the OpenLineage provider (`apache-airflow-providers-openlineage`) 1.11.0+ and [`openlineage-python`][8] 1.23.0+. Add the following to your `requirements.txt` file inside your [Astro project][4]:
-
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   openlineage-python>=1.23.0
-   ```
-
-2. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
+1. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
 
     - [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
     - [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
@@ -197,7 +207,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
     * replace `<DD_API_KEY>` with your valid [Datadog API key][7].
 
     **Optional:**
-    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
+    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for the `env` tag on all DAGs in the Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
     * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider.
 
     See the [Astronomer official guide][10] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.

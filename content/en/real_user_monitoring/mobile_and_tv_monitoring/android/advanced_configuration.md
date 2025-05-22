@@ -235,13 +235,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The following attributes are **optional**, you should provide **at least one** of them:
-
-| Attribute  | Type | Description                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | String | Unique user identifier.                                                                                  |
-| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `setUserInfo` API, for example:
 
@@ -362,6 +360,9 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 `useCustomEndpoint`
 : Use RUM to target a custom server.
+
+`trackAnonymousUser`
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
  
 ### Automatically track views
 
@@ -556,32 +557,32 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
      
-   | Event type    | Attribute key      | Description                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Event type    | Attribute key        | Description                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | ActionEvent   |                    |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ActionEvent   |                      |                                                  |
    |               | `action.target.name` | Target name.                                     |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                               |
-   | ErrorEvent    |                      |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ErrorEvent    |                      |                                                  |
    |               | `error.message`      | Error message.                                   |
    |               | `error.stack`        | Stacktrace of the error.                         |
    |               | `error.resource.url` | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | ResourceEvent |                    |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ResourceEvent |                      |                                                  |
    |               | `resource.url`       | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | URL that linked to the initial view of the page. |
-   |               | `view.url`            | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
+   | LongTaskEvent |                      |                                                  |
+   |               | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`          | Name of the view.                                |
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 

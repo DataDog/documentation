@@ -8,10 +8,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  This feature is in Preview. To enable this feature, reach out to Customer Success. 
-{{< /callout >}}  
-
 By default, every metric query in Datadog consists of two layers of aggregation. Nested queries allows you to reuse the results of a previous query in a subsequent one.
 
 {{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
@@ -189,7 +185,7 @@ Datadog provides a `moving_rollup` function that enables aggregation of datapoin
 
 {{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
-The existing version of the `moving-rollup` function only supports the following aggregators:
+The existing version of the `moving_rollup` function only supports the following aggregators:
 - `avg`
 - `sum`
 - `min`
@@ -288,7 +284,7 @@ You can use nested queries functionality in our [public API for querying timeser
 [4]: /metrics/distributions/
 [5]: /metrics/#anatomy-of-a-metric-query
 [6]: /metrics/nested_queries/#multilayer-aggregation
-[7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
-[8]: /metrics/nested_queries/#higher-resolution-queries-over-historical-timeframes
+[7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-counts-rates-and-gauges
+[8]: /metrics/nested_queries/#higher-resolution-queries-over-historical-time-frames
 [9]: /metrics/distributions/
 [10]: /dashboards/functions/rollup/#moving-rollup

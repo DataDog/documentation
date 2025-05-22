@@ -183,9 +183,22 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
+##### Failure to Answer Configuration
+The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+
+| Configuration Option | Description | Example(s) |
+|---|---|---|
+| Empty Code Response | An empty code object, like an empty list or tuple, signifiying no data or results | (), [], {}, "", '' |
+| Empty Response | No meaningful response, returning only whitespace | whitespace |
+| No Content Response | An empty output accompanied by a message indicating no content is available | Not found, N/A |
+| Redirection Response | Redirects the user to another source or suggests an alternative approach | If you have additional details, I'd be happy to include them|
+| Refusal Response | Explicitly declines to provide an answer or to complete the request | Sorry, I can't answer this question |
+
 #### Language Mismatch
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
+
+Language mismatch is only supported for natural language prompts. Input and output pairs mainly consisting of structured data such as JSON, code snippets, or special characters are not flagged as a language mismatch.
 
 {{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
@@ -243,7 +256,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
 [3]: /llm_observability/setup/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
-[5]: /sensitive_data_scanner/
+[5]: /security/sensitive_data_scanner/
 [6]: /llm_observability/submit_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb

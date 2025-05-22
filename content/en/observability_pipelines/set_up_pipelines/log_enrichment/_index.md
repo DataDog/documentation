@@ -18,7 +18,7 @@ aliases:
 
 Select a source to get started:
 
-<!-- - [Amazon Data Firehose][12] -->
+- [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]

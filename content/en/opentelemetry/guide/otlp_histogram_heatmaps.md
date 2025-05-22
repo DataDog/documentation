@@ -1,5 +1,5 @@
 ---
-title: Visualizing OTLP Histograms as heatmaps
+title: Visualize OTLP Histograms as Heatmaps
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"

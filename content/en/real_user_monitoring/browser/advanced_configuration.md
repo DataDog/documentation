@@ -477,7 +477,7 @@ window.DD_RUM &&
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
 
-The RUM Browser SDK ignores attributes added outside of `event.context`
+The RUM Browser SDK ignores attributes added outside of `event.context`.
 
 ### Enrich RUM events with feature flags
 
@@ -540,7 +540,7 @@ You can update the following event properties:
 | `view.name`                    | String | The name of the current view.                                                                                                                                                             |
 | `view.performance.lcp.resource_url` | String |   The resource URL for the Largest Contentful Paint.                                                                                                                                 |
 | `service`                      | String | The service name for your application.                                                                                                                                                    |
-| `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
+| `version`                      | String | The application's version. For example: 1.2.3, 6c44da20, or 2020.02.13.                                                                                                                  |
 | `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
 | `error.message`                | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
 | `error.stack `                 | String | The stack trace or complementary information about the error.                                                                                                                             |
@@ -552,6 +552,17 @@ You can update the following event properties:
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
+**Note**: Unlike other events, view events are sent multiple times to Datadog to reflect the updates occurring during their lifecycle. An update on a previous view event can still be sent while a new view is active. Datadog recommends being mindful of this behavior when modifying the content of a view event.
+
+```javascript
+beforeSend: (event) => {
+    // discouraged, as the current view name could be applied to both the active view and the previous views
+    event.view.name = getCurrentViewName()
+
+    // recommended
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 ### Discard a RUM event
 
 With the `beforeSend` API, discard a RUM event by returning `false`:
@@ -985,6 +996,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Error context
+
+### Attaching local error context with dd_context
+
+When capturing errors, additional context may be provided at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event context.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Global context
 
 ### Add global context property
@@ -1304,7 +1328,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
