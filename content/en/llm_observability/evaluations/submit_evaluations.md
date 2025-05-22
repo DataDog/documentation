@@ -2,6 +2,7 @@
 title: Submit Evaluations
 aliases:
     - /tracing/llm_observability/submit_evaluations
+    - /llm_observability/submit_evaluations
 further_reading:
     - link: '/llm_observability/setup/sdk'
       tag: 'Documentation'

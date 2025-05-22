@@ -1,5 +1,7 @@
 ---
 title: NeMo Evaluations
+aliases:
+ - /llm_observability/submit_nemo_evaluations/
 further_reading:
 - link: "/llm_observability/evaluations/submit_evaluations"
   tag: "Documentation"
