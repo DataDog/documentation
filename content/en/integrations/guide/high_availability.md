@@ -35,6 +35,7 @@ The following integrations are supported for High Availability:
 
 - Agent 7.64+
 - [Remote Configuration][9] enabled for your organization.
+- [fleet_policies_write][14] permission to configure the [preferred active Agent](#define-a-preferred-active-agent).
 
 **Supported Operating Systems**:
 
@@ -74,13 +75,13 @@ The following integrations are supported for High Availability:
 
    {{< img src="/integrations/guide/high_availability/fleet-view-agents_2.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-3. Click on the Agent you want to designate as the preferred active Agent to open a side-panel.
+3. Select the Agent you want to assign as the preferred active Agent and click **View Agent details** to open a side panel.
 
-4. In the **HA Preferred Active Agent** dropdown, select the Agent you would like to define as preferred.
+4. Navigate to the **High Availability** tab and click the three dots next to the Agent you wish to designate as the preferred active Agent.
 
-   {{< img src="/integrations/guide/high_availability/agent-preferred.png" alt="Fleet Automation View Agents, highlighting HA Preferred Active Agent" style="width:100%;" >}}
+   {{< img src="/integrations/guide/high_availability/set_preferred.png" alt="Fleet Automation High Availability tab, highlighting the drop-down to select the preferred Active Agent" style="width:100%;" >}}
 
-5. On the same screen, click on the High Availability tab to verify the status of the preferred active Agent and standby Agent:
+5. On the same screen, review the health status of the preferred active Agent, standby Agent, and configured integrations:
 
    {{< img src="/integrations/guide/high_availability/high_availability_tab_fleet.png" alt="Fleet Automation High Availability tab, highlighting HA Preferred Active Agent" style="width:100%;" >}}
 
@@ -125,4 +126,5 @@ The following integrations are supported for High Availability:
 [11]: /network_monitoring/devices/snmp_metrics?tab=snmpv2#autodiscovery
 [12]: /agent/remote_config/?tab=configurationyamlfile#setup
 [13]: https://app.datadoghq.com/fleet
+[14]: /account_management/rbac/permissions/#fleet-automation
 
