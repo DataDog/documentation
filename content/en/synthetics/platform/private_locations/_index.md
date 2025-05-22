@@ -680,7 +680,7 @@ When spinning up your private location containers, mount the relevant certificat
 To install root certificates for private locations on a Windows service, use the following steps:
 
 1. Open the Registry Editor App.
-2. Navigate to the `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location` entry.
+2. Navigate to the entry `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
 3. Create a Registry key named `Environment` with the `Multi-string` value type.
 
 <div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
