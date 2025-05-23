@@ -5,11 +5,11 @@ type: multi-code-lang
 code_lang_weight: 30
 ---
 
-## Application Security capabilities support
+## App and API Protection capabilities support
 
 The following application security capabilities are supported in the Ruby library, for the specified tracer version:
 
-| Application Security capability  | Minimum Ruby tracer version |
+| App and API Protection capability  | Minimum Ruby tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
@@ -51,7 +51,7 @@ These are supported on the following architectures:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Code Security** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
@@ -78,7 +78,7 @@ These are supported on the following architectures:
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Code Security** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
@@ -96,7 +96,7 @@ These are supported on the following architectures:
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
+##### App and API Protection Capability Notes
 - **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
