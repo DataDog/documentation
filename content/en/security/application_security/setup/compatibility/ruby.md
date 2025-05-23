@@ -3,6 +3,8 @@ title: Ruby Compatibility Requirements
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+  - /security/application_security/threats/setup/compatibility/ruby
 ---
 
 ## App and API Protection capabilities support
@@ -14,8 +16,6 @@ The following App and API Protection capabilities are supported in the Ruby libr
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
 | Customize response to blocked requests | 1.15.0 |
-| Software Composition Analysis (SCA) | 1.11.0 |
-| Code Security        | not supported |
 | Automatic user activity event tracking | 1.14.0 |
 | API Security | 2.4.0 |
 
@@ -24,13 +24,13 @@ The minimum tracer version to get all supported App and API Protection capabilit
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                |                               |
-| Kubernetes  | {{< X >}}                |                               |
-| Amazon ECS  | {{< X >}}                |                               |
-| AWS Fargate | {{< X >}}                |                               |
-| AWS Lambda  |                          |                               |
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate | {{< X >}}                |
+| AWS Lambda  |                          |
 
 ## Language and framework compatibility
 
@@ -52,7 +52,6 @@ These are supported on the following architectures:
 - Distributed Tracing to see attack flows through your applications
 
 ##### App and API Protection Capability Notes
-- **Code Security** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- |
@@ -79,7 +78,6 @@ These are supported on the following architectures:
 - Request-based blocking
 
 ##### App and API Protection Capability Notes
-- **Code Security** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -97,7 +95,6 @@ These are supported on the following architectures:
 - error and stacktrace capturing
 
 ##### App and API Protection Capability Notes
-- **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |

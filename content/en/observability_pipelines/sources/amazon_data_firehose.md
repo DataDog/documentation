@@ -19,4 +19,12 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/log_source_configuration/amazon_data_firehose %}}
 
+## AWS Authentication
+
+{{% observability_pipelines/aws_authentication/instructions %}}
+
+### Permissions
+
+{{% observability_pipelines/aws_authentication/amazon_s3_source/permissions %}}
+
 [1]: /observability_pipelines/set_up_pipelines/

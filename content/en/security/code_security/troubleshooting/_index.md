@@ -94,8 +94,7 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -150,10 +149,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
-
-You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 

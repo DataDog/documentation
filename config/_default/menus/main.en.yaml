@@ -1571,11 +1571,21 @@ menu:
       pre: notebook
       parent: platform_heading
       weight: 20000
+    - name: Analysis Features
+      url: notebooks/advanced_analysis/
+      parent: notebooks
+      identifier: notebooks_advanced_analysis
+      weight: 1
+    - name: Getting Started
+      url: notebooks/advanced_analysis/getting_started/
+      parent: notebooks_advanced_analysis
+      identifier: notebooks_advanced_analysis_getting_started
+      weight: 101
     - name: Guides
       url: notebooks/guide
       parent: notebooks
       identifier: notebooks_guide
-      weight: 1
+      weight: 2
     - name: DDSQL Editor
       url: ddsql_editor/
       pre: ddsql
@@ -1983,157 +1993,157 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Software Catalog
-      url: software_catalog/
-      pre: service-catalog
+    - name: Natural Language Querying
+      url: bits_ai/query_examples
+      identifier: bits_ai_natural_language_querying
+      parent: bits_ai
+      weight: 3
+    - name: Internal Developer Portal
+      url: internal_developer_portal/
+      pre: internal-developer-portal-wui
       parent: platform_heading
-      identifier: software_catalog
+      identifier: internal_developer_portal
       weight: 110000
+    - name: Software Catalog
+      url: internal_developer_portal/software_catalog/
+      parent: internal_developer_portal
+      identifier: software_catalog
+      weight: 1
     - name: Set Up
-      url: software_catalog/set_up
+      url: internal_developer_portal/software_catalog/set_up
       parent: software_catalog
       identifier: software_catalog_set_up
-      weight: 1
-    - name: New to Datadog
-      url: software_catalog/set_up/new_to_datadog
-      parent: software_catalog_set_up
-      identifier: software_catalog_set_up_new_to_dd
       weight: 101
-    - name: Existing Datadog User
-      url: software_catalog/set_up/existing_datadog_user
+    - name: Discover Entities
+      url: internal_developer_portal/software_catalog/set_up/discover_entities
       parent: software_catalog_set_up
-      identifier: software_catalog_set_up_existing_dd_user
+      identifier: software_catalog_discover_entities
+      weight: 1011
+    - name: Create Entities
+      url: internal_developer_portal/software_catalog/set_up/create_entities
+      parent: software_catalog_set_up
+      identifier: software_catalog_create_entities
+      weight: 1012
+    - name: Import Entities
+      url: internal_developer_portal/software_catalog/set_up/import_entities
+      parent: software_catalog_set_up
+      identifier: software_catalog_import_entities
+      weight: 1013
+    - name: Entity Model
+      url: internal_developer_portal/software_catalog/entity_model
+      parent: software_catalog
+      identifier: software_catalog_entity_model
       weight: 102
-    - name: Customize
-      url: software_catalog/customize
-      parent: software_catalog
-      identifier: software_catalog_customize
-      weight: 2
-    - name: Navigate
-      url: software_catalog/navigating
-      parent: software_catalog
-      identifier: software_catalog_browse
-      weight: 3
-    - name: Use Cases
-      url: software_catalog/use_cases
-      parent: software_catalog
-      identifier: software_catalog_use_cases
-      weight: 4
-    - name: API Management
-      url: software_catalog/use_cases/api_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_api_management
-      weight: 401
-    - name: Cloud Cost Management
-      url: software_catalog/use_cases/cloud_cost_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_cloud_cost_management
-      weight: 402
-    - name: App and API Protection
-      url: software_catalog/use_cases/appsec_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_appsec_management
-      weight: 403
-    - name: Developer Onboarding
-      url: software_catalog/use_cases/dev_onboarding
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dev_onboarding
-      weight: 404
-    - name: Dependency Management
-      url: software_catalog/use_cases/dependency_management
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_dependency_management
-      weight: 405
-    - name: Production Readiness
-      url: software_catalog/use_cases/production_readiness
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_production_readiness
-      weight: 406
-    - name: Incident Response
-      url: software_catalog/use_cases/incident_response
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_incident_response
-      weight: 407
-    - name: CI Pipeline Visibility
-      url: software_catalog/use_cases/pipeline_visibility
-      parent: software_catalog_use_cases
-      identifier: software_catalog_use_cases_pipeline_visibility
-      weight: 408
-    - name: Manage a Component
-      url: software_catalog/manage
-      parent: software_catalog
-      identifier: software_catalog_investigate
-      weight: 5
-    - name: Definitions
-      url: software_catalog/service_definitions/
-      parent: software_catalog
-      identifier: software_catalog_definitions_versions
-      weight: 6
-    - name: v3.0
-      url: /software_catalog/service_definitions/v3-0/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_3-0
-      weight: 601
-    - name: v2.2
-      url: /software_catalog/service_definitions/v2-2/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-2
-      weight: 602
-    - name: v2.1
-      url: /software_catalog/service_definitions/v2-1/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-1
-      weight: 603
-    - name: v2.0
-      url: /software_catalog/service_definitions/v2-0/
-      parent: software_catalog_definitions_versions
-      identifier: software_catalog_definitions_2-0
-      weight: 604
-    - name: Scorecards
-      url: software_catalog/scorecards
-      parent: software_catalog
-      identifier: software_catalog_scorecards
-      weight: 7
-    - name: Scorecard Configuration
-      url: software_catalog/scorecards/scorecard_configuration
-      parent: software_catalog_scorecards
-      identifier: scorecard_configuration
-      weight: 701
-    - name: Custom Rules
-      url: software_catalog/scorecards/custom_rules
-      parent: software_catalog_scorecards
-      identifier: scorecard_custom_rules
-      weight: 702
-    - name: Using Scorecards
-      url: software_catalog/scorecards/using_scorecards
-      parent: software_catalog_scorecards
-      identifier: using_scorecards
-      weight: 703
-    - name: Self-Service Actions
-      url: software_catalog/self_service_actions
-      parent: software_catalog
-      identifier: self_service_actions
-      weight: 8
-    - name: Software Templates
-      url: software_catalog/self_service_actions/software_templates
-      parent: self_service_actions
-      identifier: software_templates
-      weight: 801
-    - name: Definition APIs
-      url: software_catalog/apis
-      parent: software_catalog
-      identifier: software_catalog_apis
-      weight: 9
-    - name: Integrations
-      url: software_catalog/integrations
-      parent: software_catalog
-      identifier: software_catalog_integrations
-      weight: 10
+    - name: Entity Types
+      url: internal_developer_portal/software_catalog/entity_model/entity_types
+      parent: software_catalog_entity_model
+      identifier: software_catalog_entity_types
+      weight: 1021
     - name: Troubleshooting
-      url: software_catalog/troubleshooting
+      url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 11
+      weight: 103
+    - name: Scorecards
+      url: internal_developer_portal/scorecards
+      parent: internal_developer_portal
+      identifier: idp_scorecards
+      weight: 2
+    - name: Scorecard Configuration
+      url: internal_developer_portal/scorecards/scorecard_configuration
+      parent: idp_scorecards
+      identifier: scorecard_configuration
+      weight: 201
+    - name: Custom Rules
+      url: internal_developer_portal/scorecards/custom_rules
+      parent: idp_scorecards
+      identifier: scorecard_custom_rules
+      weight: 202
+    - name: Using Scorecards
+      url: internal_developer_portal/scorecards/using_scorecards
+      parent: idp_scorecards
+      identifier: using_scorecards
+      weight: 203
+    - name: Self-Service Actions
+      url: internal_developer_portal/self_service_actions
+      parent: internal_developer_portal
+      identifier: self_service_actions
+      weight: 3
+    - name: Software Templates
+      url: internal_developer_portal/self_service_actions/software_templates
+      parent: self_service_actions
+      identifier: software_templates
+      weight: 301
+    - name: Engineering Reports
+      url: internal_developer_portal/eng_reports
+      parent: internal_developer_portal
+      identifier: idp_eng_reports
+      weight: 4
+    - name: Reliability Overview
+      url: internal_developer_portal/eng_reports/reliability_overview
+      parent: idp_eng_reports
+      identifier: eng_reports_reliability_overview
+      weight: 401
+    - name: Scorecards Performance
+      url: internal_developer_portal/eng_reports/scorecards_performance
+      parent: idp_eng_reports
+      identifier: eng_reports_scorecards_perf
+      weight: 402
+    - name: Overview Pages
+      url: internal_developer_portal/overview_pages
+      parent: internal_developer_portal
+      identifier: idp_overview_pages
+      weight: 5
+    - name: Integrations
+      url: internal_developer_portal/integrations
+      parent: internal_developer_portal
+      identifier: idp_integrations
+      weight: 6
+    - name: Use Cases
+      url: internal_developer_portal/use_cases
+      parent: internal_developer_portal
+      identifier: idp_use_cases
+      weight: 7
+    - name: API Management
+      url: internal_developer_portal/use_cases/api_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_api_management
+      weight: 701
+    - name: Cloud Cost Management
+      url: internal_developer_portal/use_cases/cloud_cost_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_cloud_cost_management
+      weight: 702
+    - name: App and API Protection
+      url: internal_developer_portal/use_cases/appsec_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_appsec_management
+      weight: 703
+    - name: Developer Onboarding
+      url: internal_developer_portal/use_cases/dev_onboarding
+      parent: idp_use_cases
+      identifier: idp_use_cases_dev_onboarding
+      weight: 704
+    - name: Dependency Management
+      url: internal_developer_portal/use_cases/dependency_management
+      parent: idp_use_cases
+      identifier: idp_use_cases_dependency_management
+      weight: 705
+    - name: Production Readiness
+      url: internal_developer_portal/use_cases/production_readiness
+      parent: idp_use_cases
+      identifier: idp_use_cases_production_readiness
+      weight: 706
+    - name: Incident Response
+      url: internal_developer_portal/use_cases/incident_response
+      parent: idp_use_cases
+      identifier: idp_use_cases_incident_response
+      weight: 707
+    - name: CI Pipeline Visibility
+      url: internal_developer_portal/use_cases/pipeline_visibility
+      parent: idp_use_cases
+      identifier: idp_use_cases_pipeline_visibility
+      weight: 708
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -2297,16 +2307,11 @@ menu:
       parent: slos
       identifier: burn_rate
       weight: 5
-    - name: OOTB Dashboard
-      url: service_management/service_level_objectives/ootb_dashboard/
-      parent: slos
-      identifier: slos_ootb_dashboard
-      weight: 6
     - name: Guides
       url: service_management/service_level_objectives/guide/
       parent: slos
       identifier: slos_guides
-      weight: 7
+      weight: 6
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
@@ -3527,26 +3532,31 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
+    - name: Reports
+      url: /cloud_cost_management/reports
+      parent: cloud_cost
+      identifier: cloud_cost_reports
+      weight: 8
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 10
+      weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 11
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -3853,7 +3863,7 @@ menu:
       identifier: tracing_services
       weight: 9
     - name: Software Catalog
-      url: /software_catalog/
+      url: /internal_developer_portal/software_catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
       weight: 901
@@ -3888,17 +3898,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 907
     - name: Endpoint Observability
-      url: /software_catalog/endpoints/
+      url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 10
     - name: Explore Endpoints
-      url: /software_catalog/endpoints/explore_endpoints
+      url: internal_developer_portal/software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 1002
     - name: Monitor Endpoints
-      url: /software_catalog/endpoints/monitor_endpoints
+      url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
@@ -4482,31 +4492,41 @@ menu:
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
       weight: 303
-    - name: Configuration
-      url: llm_observability/configuration/
+    - name: Evaluations
+      url: llm_observability/evaluations/
       parent: llm_obs
-      identifier: llm_obs_configuration
+      identifier: llm_obs_evaluations
       weight: 4
+    - name: Out-of-the-Box Evaluations
+      url: llm_observability/evaluations/ootb_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ootb_evaluations
+      weight: 401
     - name: Submit Evaluations
-      url: llm_observability/submit_evaluations/
-      parent: llm_obs
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
-      weight: 5
+      weight: 402
     - name: Ragas Evaluations
-      url: llm_observability/ragas_evaluations/
-      parent: llm_obs
-      identifier: llm_obs_ragas_evaluation
-      weight: 6
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 403
+    - name: NeMo Evaluations
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 404
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 7
+      weight: 5
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 6
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5468,6 +5488,11 @@ menu:
       identifier: install_the_worker_commands
       parent: observability_pipelines_install_the_worker
       weight: 201
+    - name: ECS Fargate
+      url: observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
+      identifier: install_the_worker_ecs_fargate
+      parent: observability_pipelines_install_the_worker
+      weight: 202
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -6565,7 +6590,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security
@@ -6606,6 +6631,16 @@ menu:
       parent: application_security_policies
       identifier: application_security_policies_ootb_rules
       weight: 2
+    - name: In-App WAF Rules
+      url: security/application_security/policies/inapp_waf_rules/
+      parent: application_security_policies
+      identifier: application_security_policies_inappwaf_rules
+      weight: 3
+    - name: Tracing Library Configuration
+      url: security/application_security/policies/library_configuration/
+      parent: application_security_policies
+      identifier: application_security_policies_tracing_lib
+      weight: 4
     - name: Exploit Prevention
       url: security/application_security/exploit-prevention/
       parent: application_security
