@@ -327,6 +327,10 @@
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
   },
+  "ListCatalogRelation": {
+    "description": "Get a list of entity relations from Software Catalog.",
+    "summary": "Get a list of entity relations"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -2292,6 +2296,20 @@
     "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
+  },
+  "ListMemberTeams": {
+    "description": "Get all member teams.",
+    "summary": "Get all member teams"
+  },
+  "AddMemberTeam": {
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "summary": "Add a member team",
+    "request_description": "",
+    "request_schema_description": "Request to add a member team to super team's hierarchy"
+  },
+  "RemoveMemberTeam": {
+    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "summary": "Remove a member team"
   },
   "DeleteTeam": {
     "description": "Remove a team using the team's `id`.",
