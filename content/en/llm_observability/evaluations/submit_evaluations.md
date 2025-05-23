@@ -1,5 +1,5 @@
 ---
-title: Submit Evaluations
+title: Submit Custom Evaluations
 aliases:
     - /tracing/llm_observability/submit_evaluations
     - /llm_observability/submit_evaluations
@@ -25,7 +25,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 ## Submitting evaluations with the SDK
 
-The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See the [Python][3] or [NodeJS][4] SDK documentation for more details.
+The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit custom evaluations to LLM Observability. See the [Python][3] or [NodeJS][4] SDK documentation for more details.
 
 ### Example
 

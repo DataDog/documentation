@@ -7,9 +7,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
       text: 'Get granular LLM observability by instrumenting your LLM chains'
-    - link: '/llm_observability/evaluations/submit_evaluations'
+    - link: '/llm_observability/evaluations'
       tag: 'Guide'
-      text: 'Submit Evaluations to LLM Observability'
+      text: 'Evaluation options for LLM Observability'
 ---
 
 {{< site-region region="gov" >}}

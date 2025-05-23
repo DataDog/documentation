@@ -4517,7 +4517,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
       weight: 401
-    - name: Submit Evaluations
+    - name: Submit Custom Evaluations
       url: llm_observability/evaluations/submit_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
