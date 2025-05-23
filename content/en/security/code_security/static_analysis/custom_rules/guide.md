@@ -290,7 +290,7 @@ If you need to check if an argument is equal to one of several values, there is 
 
 Your rule's JavaScript code will typically look like this:
 
-```
+```javascript
 function visit(query, filename, code) {
   const { cap1, cap2, cap3 } = query.captures;
   const { cap4, cap5, cap6 } = query.capturesList;
@@ -324,7 +324,7 @@ For example, with a query like this:
 
 the `query` argument would contain something similar to this:
 
-```
+```javascript
 query = {
   captures: {
     ids: /* the first `identifier` node in field `left` */,
@@ -347,7 +347,7 @@ query = {
 
 The names of the captures are used as the keys in the `query.captures` and `query.capturesList` objects. If you assign those captures names that are compatible with JavaScript variable names, you can retrieve them easily:
 
-```
+```javascript
 const { id, expr, node } = query.captures;
 ```
 
@@ -355,7 +355,7 @@ The above code extracts the fields `id`, `expr`, and `node` from `query.captures
 
 If the capture names are not compatible with JavaScript variable names, you can still extract them but a little less conveniently.
 
-```
+```javascript
 const id = query.captures["id-node"];
 const expr = query.captures["20394];
 ```
@@ -378,7 +378,7 @@ You can use the `start` and `end` field to check the length of a node or the rel
 
 You can use the `ddsa.getParent(node)` and `ddsa.getChildren(node)` functions to get a node's parent and children, respectively.
 
-```
+```javascript
 function visit(query, filename, code) {
   const { funcDecl } = query.captures;
   const parent = ddsa.getParent(funcDecl);
@@ -392,7 +392,7 @@ function visit(query, filename, code) {
 
 You can also keep calling `ddsa.getParent(node)` and `ddsa.getChildren(node)` on the nodes returned by these functions to keep navigating the parse tree. Calling `ddsa.getParent()` on the root node returns `undefined`, while calling `ddsa.getChildren()` on a leaf tree returns an empty list.
 
-```
+```javascript
 function visit(query, filename, code) {
   const { funcDecl } = query.captures;
   let root = getRoot(funcDecl);
@@ -420,7 +420,7 @@ function displayLeaves(node) {
 
 You can compare two node objects with `==` to know if they point to the same node.
 
-```
+```javascript
 function visit(query, filename, code) {
   const { funcDecl } = query.captures;
   displaySiblings(funcDecl);
@@ -441,7 +441,7 @@ function displaySiblings(node) {
 
 Use the `addError()` function to report a finding to the user. This function takes a `Violation` object that you can build with the `buildError()` function. This function takes five arguments: `startLine`, `startCol`, `endLine`, `endCol`, and `message`. Generally, you would use a node's `start` and `end` fields to get the values for the first four arguments.
 
-```
+```javascript
 function visit(query, filename, code) {
   const { funcCall } = query.captures;
   addError(
@@ -466,7 +466,7 @@ You can build the proposed edits with the `buildEditAdd()`, `buildEditRemove()`,
 * `buildEditRemove()` generates a suggestion to delete text. It takes four arguments: `startLine`, `startCol`, `endLine`, and `endCol`.
 * `buildEditUpdate()` generates a suggestion to modify text. It takes five arguments: `startLine`, `startCol`, `endLine`, `endCol`, and `newContent`.
 
-```
+```javascript
 function visit(query, filename, code) {
   const { fname } = query.captures;
   if (fname.text != "oldFunction") return;
@@ -510,8 +510,9 @@ To do that, use the question mark (`?`) modifier and a capture on the child node
       (return_statement)? @ret ; This is the node we want to exclude
     )
 )
+```
 
-
+```javascript
 // Code:
 function visit(query, filename, code) {
   const { id, ret } = query.captures;
@@ -540,8 +541,9 @@ For example, if you want to find a function definition that contains a function 
        (@eq? @methodName "DoSomething")
     )
 ) @fn
+```
 
-
+```javascript
 // Code:
 function visit(query, filename, code) {
   const { fn } = query.captures;
@@ -554,7 +556,7 @@ function visit(query, filename, code) {
 
 You can do many things with `ddsa.getParent()` and `ddsa.getChildren()`. For example, you can examine a node's siblings:
 
-```
+```javascript
 function getSiblings(node) {
   return ddsa.getChildren(ddsa.getParent(node)).filter(n => n != node);
 }
@@ -694,7 +696,9 @@ Some rule writers tried to solve this by specifying several alternatives, each o
 
   (#eq? @methodName "DoSomething")
 ) @decl
+```
 
+```javascript
 // Code:
 function visit(query, filename, code) {
   const { decl, fn } = query.captures;
@@ -711,7 +715,9 @@ A solution for this problem is to write a query for the child node and then use 
 (call_expression
   function: (_field: _ @methodName (#eq? @methodName "doSomething))
 )
+```
 
+```javascript
 // Code:
 function visit(query, filename, code) {
   const { fn } = query.captures;
