@@ -11,13 +11,18 @@ further_reading:
 ---
 
 ## Overview 
-While Product Analytics provides insight into users behavior overall, the user profiles feature allows you to track and analyse the behavioral patterns of key users.
+The User Profiles page allows you to track and analyse the behavioral patterns of key users. 
 
-The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 
-
-The goal of the User Profile page is to is to allow you to scope down to specific users' behavioral data that would help inform your decisions on product optimization and feature adoption. For example, with the filtering capability, you can answer the question of _how many active users there are in a given country_, by using the `First City` and `Last City` attributes. 
+You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
 {{< img src="product_analytics/segmentation/user_profiles/userProfilePage-2.png" alt="A view of the User profile page.">}}
+
+
+The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 
+<br>
+
+<div class="alert alert-note" style="background-color: #EED9FF"><h3>How to use:</h3> With the filtering capability, you can answer the question of how many active users there are in a given country, by using the <code>First City</code> and <code>Last City</code> attributes </div>
+<br>
 
 ## Available attributes
 
