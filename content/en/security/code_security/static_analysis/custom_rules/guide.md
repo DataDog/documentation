@@ -23,13 +23,13 @@ The basic pattern consists of a node type between parentheses. This pattern matc
 
 The following example shows a query that matches nodes of type `func-decl`:
 
-```
+```scheme
 (func-decl)
 ```
 
 You can add patterns after the node type and before the closing parenthesis. The resulting pattern will match nodes with children that match those patterns.
 
-```
+```scheme
 (func-decl (arg-list) (body))
 ```
 
@@ -39,7 +39,7 @@ This example matches nodes of type `func-decl` that contain a node of type `arg-
 
 You can nest child patterns as deep as you need.
 
-```
+```scheme
 (func-decl
   (arg-list
     (argument)
@@ -54,7 +54,7 @@ You can nest child patterns as deep as you need.
 
 As you see, you can add white space and line breaks to your Tree Sitter query. You can adjust them to make your query more readable. You can also add comments, which start with a semicolon and run to the end of the line.
 
-```
+```scheme
 ; Another way to format the previous example
 (func-decl
   (arg-list (argument)) ; The arg-list contains at least one argument
@@ -66,7 +66,7 @@ As you see, you can add white space and line breaks to your Tree Sitter query. Y
 
 You can use periods (`.`) to specify that two sibling nodes must appear together; otherwise, they will match even if there are other nodes between them. You can also use periods to specify that a node must be the first or last child.
 
-```
+```scheme
 (func-decl (arg-list) . (body))
 ; The `func-decl` contains an `arg-list` followed immediately by a `body`.
 
@@ -79,7 +79,7 @@ You can use periods (`.`) to specify that two sibling nodes must appear together
 
 Some nodes have fields, which you can match by specifying the field's name, a colon, and then a pattern for the content of the field.
 
-```
+```scheme
 (unary-operator
   operand: (identifier))
 ; Matches `unary-operator` nodes with a field `operand`
@@ -88,7 +88,7 @@ Some nodes have fields, which you can match by specifying the field's name, a co
 
 You can also match nodes that lack a field by specifying an exclamation point (`!`) followed by the field's name.
 
-```
+```scheme
 (if-statement
   !else)
 ; Matches an `if-statement` that doesn't have an `else` field.
@@ -98,7 +98,7 @@ So far we've seen "named nodes", which are nodes that have a type. Tree Sitter a
 
 You can match anonymous nodes by specifying their text between double quotes.
 
-```
+```scheme
 (binary-operation
   (identifier)
   "+"
@@ -112,7 +112,7 @@ You can match anonymous nodes by specifying their text between double quotes.
 
 You can use an underscore (`_`) as a wildcard. An underscore by itself matches any node whether it's named or anonymous; an underscore as the name of a node matches any named node but not anonymous nodes.
 
-```
+```scheme
 (binary-operation . (_) "+" (identifier) . )
 ; Matches a `binary-operation` node where the first child node
 ; is a named node of any type.
@@ -130,7 +130,7 @@ You can use an underscore (`_`) as a wildcard. An underscore by itself matches a
 
 If you specify more than one pattern in the top level of your Tree Sitter query, the query will find nodes that match any of the patterns.
 
-```
+```scheme
 (program)
 (module)
 ; Matches nodes of type `program` or `module`
@@ -138,7 +138,7 @@ If you specify more than one pattern in the top level of your Tree Sitter query,
 
 If you want to specify alternative matches for child nodes, write your alternatives between square brackets (`[]`). Note that the alternatives are listed one after another, without commas in between.
 
-```
+```scheme
 (func-decl
   [
     (func-prototype)
@@ -155,7 +155,7 @@ If a node contains children that could fulfill several alternatives, the query e
 
 You can "capture" matched nodes to make them available in the rule's JavaScript code or to use them in predicates (described below.) To capture a node, add an at-sign (`@`) followed by a capture name after the pattern you want to capture.
 
-```
+```scheme
 (binary-operation
   (identifier) @id
   "+" @op
@@ -171,7 +171,7 @@ You can "capture" matched nodes to make them available in the rule's JavaScript 
 
 You can indicate that a node may appear optionally by specifying the question mark (`?`) modifier after its pattern.
 
-```
+```scheme
 (exit-statement
   (integer)?
 )
@@ -180,7 +180,7 @@ You can indicate that a node may appear optionally by specifying the question ma
 
 You can capture an optional node; the capture will be empty if the node is not present.
 
-```
+```scheme
 (exit-statement
   (integer)? @retCode
 )
@@ -190,7 +190,7 @@ You can capture an optional node; the capture will be empty if the node is not p
 
 You can indicate that a node may appear zero or more times by specifying the asterisk (`*`) modifier after its pattern.
 
-```
+```scheme
 (list
   _* @items
 )
@@ -201,7 +201,7 @@ As you can see, these modifiers are most useful with captures. If you were not i
 
 You can indicate that a node must appear one or more times by specifying the plus sign (`+`) modifier after its pattern.
 
-```
+```scheme
 (array-index
   (integer)+ @indices
 )
@@ -211,7 +211,7 @@ You can indicate that a node must appear one or more times by specifying the plu
 
 You can also apply these modifiers to groups of patterns. To do it, surround the group in parentheses and then apply the modifier after the closing parenthesis.
 
-```
+```scheme
 (array-dimensions
   (integer)
   ("," integer)*
@@ -234,7 +234,7 @@ For example, if the parse tree had a `list` node with no children, a "`(list _*)
 
 You can specify extra conditions that the nodes must fulfill to be matched. These conditions are expressed in the form of predicates added inside the parentheses of a pattern.
 
-```
+```scheme
 (binary-operator
   (identifier) @id
   (#match? @id "[a-z]+([A-Z][a-z]*)*")
@@ -245,7 +245,7 @@ You can specify extra conditions that the nodes must fulfill to be matched. Thes
 
 Predicates have the form `(#pred? arg1 arg2)`, where `#pred?` is the name of a predicate, `arg1` is a capture, and `arg2` may be another capture or a string.
 
-```
+```scheme
 (assign-statement
   left: _ @target
   right: _ @source
@@ -264,7 +264,7 @@ If your capture contains multiple nodes (for example, if you used the `*` or `?`
 * `#any-eq?`, `#any-not-eq?` --- any of the captured nodes is equal to / is not equal to the second argument.
 * `#any-match?`, `#any-not-match?` --- any of the captured nodes matches / does not match the regular expression provided as the second argument.
 
-```
+```scheme
 (array-index
   (identifier)* @ids
   (#any-eq? @ids "exit")
@@ -277,7 +277,7 @@ If you need to check if an argument is equal to one of several values, there is 
 
 * `#any-of?`, `#not-any-of?` --- the capture is equal / is not equal to any of the second, third, fourth, etc., argument.
 
-```
+```scheme
 (function-call
   name: _ @fn
   (#any-of? @fn "system" "exit" "quit")
@@ -315,7 +315,7 @@ The `filename` and `code` arguments are strings; the `query` argument, however, 
 
 For example, with a query like this:
 
-```
+```scheme
 (var-assignment
   left: (identifier)+ @ids
   right: _ @expr
@@ -500,7 +500,7 @@ However, you can combine a query and JavaScript code to achieve that result.
 
 To do that, use the question mark (`?`) modifier and a capture on the child node that you want to exclude, and then your JavaScript code can check whether the node was captured. If it was not captured, that means that the node is not present.
 
-```
+```scheme
 ; Query:
 (function_declaration
   name: (identifier) @id
@@ -533,7 +533,7 @@ It is tempting to try to write a query that selects and captures all the nodes y
 
 For example, if you want to find a function definition that contains a function call, you can't do that in a Tree Sitter query without specifying patterns for the function call at different nesting levels. However, you can do it very easily if you search for the function call in the Tree Sitter query and then, in your JavaScript code, you climb up the parse tree using `ddsa.getParent()` to find the function definition.
 
-```
+```scheme
 ; Query:
 (call_expression
   function:
@@ -598,7 +598,7 @@ Some rule authors try to match two nodes at once using the same, or very similar
 
 For example, you might write a query like this one to capture pairs of methods in a class declaration:
 
-```
+```scheme
 (class_declaration
   (method_declaration) @method1
   (method_declaration) @method2
@@ -609,7 +609,7 @@ For a class with only two methods, this query will only return one node; however
 
 To avoid this, you should use modifiers like `+` or `*` to capture the whole list of methods in one single query result, or use `.` to indicate that the child nodes must appear next to each other.
 
-```
+```scheme
 (class_declaration
   (method_declaration)+ @methods
 )
@@ -627,7 +627,7 @@ To avoid this, you should use modifiers like `+` or `*` to capture the whole lis
 
 A common type of rule tries to find variables of a particular type that are used in a particular way. People tend to write the query as "find all variable definitions and capture the name, find all variable usages, capture the name, and check that the names match".
 
-```
+```scheme
 (_
   (var_declaration
     (var_spec
@@ -664,7 +664,7 @@ You can easily write a pattern that finds a node that contains a child node that
 
 Some rule writers tried to solve this by specifying several alternatives, each one with the pattern of interest at a different nesting level.
 
-```
+```scheme
 ; Query:
 (function_declaration
   [
@@ -710,7 +710,7 @@ We've already mentioned the problems with this approach. First, the query engine
 
 A solution for this problem is to write a query for the child node and then use `ddsa.getParent()` to locate the ancestor node. This also has the advantage that it gives us unlimited nesting levels.
 
-```
+```scheme
 ; Query:
 (call_expression
   function: (_field: _ @methodName (#eq? @methodName "doSomething))
