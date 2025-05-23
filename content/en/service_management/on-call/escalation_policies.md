@@ -23,9 +23,11 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Select the **Teams** that own this escalation policy.
 1. For each escalation step:
    1. Decide who should be notified. You can specify individual users, teams, or whoever is on-call in a schedule.
-   1. Select one of the following notification methods: `Notify All`, `Round Robin`. See [Escalation policy notification types](#escalation-policy-step-notification-types) for details.
+   1. Select one of the following notification methods: `Notify All`, `Round Robin`. See [Escalation policy step notification types](#escalation-policy-step-notification-types) for details.
    1. Specify how many minutes the recipient has to acknowledge the page before it is escalated to the next tier.
-   <br>For example, the following will notify the current on-call user when a page is triggered. It will escalate to Jane Doe if John does not acknowledge the page within 5 minutes.
+   <br>
+   
+   For example, the following policy notifies the current on-call user when a page is triggered. It escalates to Jane Doe if John does not acknowledge the page within 5 minutes.
    {{< img src="service_management/oncall/escalation_policy_2_steps_v2.png" alt="An escalation policy configured to notify the scheduled on-call user and escalate to Jane Doe if the page is not acknowledged after 5 minutes." style="width:100%;" >}}
 1. Set how many times to repeat the steps if no one acknowledges the page.
 1. Select whether Datadog should automatically update the page status to **Resolved** after executing all rules and repeats.
@@ -37,7 +39,7 @@ In each step of an escalation policy, you can keep the default `Notify All` beha
 ### Notify all (default)
 Notify all targets of the step at the same time.
 
-For example, if a step includes an individual user, a team with three members, and a schedule, then five people will be notified: the individual user, each of the three team members, and the on-call user from the schedule.
+For example, if a step includes an individual user, a team with three members, and a schedule, then five people are notified: the individual user, each of the three team members, and the on-call user from the schedule.
 
 ### Round robin
 Automatically distribute pages across multiple targets (users, schedules, teams) in a rotating order to ensure fair load balancing.
