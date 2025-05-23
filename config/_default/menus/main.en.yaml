@@ -5519,7 +5519,7 @@ menu:
       identifier: observability_pipelines_sources_http_server
       weight: 807
     - name: Lambda Forwarder
-      url: observability_pipelines/sources/http_server/#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines
+      url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
       weight: 808

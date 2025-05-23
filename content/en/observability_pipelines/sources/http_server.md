@@ -35,8 +35,3 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/
-[3]: /observability_pipelines/processors/
-[4]: /logs/guide/forwarder/?tab=cloudformation#installation
-[5]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
-[6]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
