@@ -1,5 +1,5 @@
 ---
-title: Cost Reports
+title: Reports
 private: true
 description: Track your organization spending with Cloud Cost Management Reports.
 further_reading:
@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-Datadog's Cost Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
+Datadog's Cloud Cost Monitoring (CCM) Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
 
-With Cost Reports, you can:
+With Reports, you can:
 
 - **Centralize cloud spend analysis**: View and manage costs from [AWS][1], [Azure][2], [Google Cloud][3], and [SaaS providers][4] in one place.
 - **Filter and group**: Filter by provider, tags, regions, and group by service, provider, or custom tags.
