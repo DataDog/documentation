@@ -23,7 +23,7 @@ Data Quality Monitoring automatically tracks when data was last updated and how 
 
 ### Surfaces column-level quality metrics
 
-Column-level metrics such as null counts and uniqueness can help identify unexpected changes in column properties or structure. These changes may point to issues such as pipeline regressions or data entry problems that don’t affect freshness or volume but still degrade quality.
+Column-level metrics such as null counts and uniqueness can help identify unexpected changes in column properties or structure. These changes may point to issues such as pipeline regressions or data entry problems that don't affect freshness or volume but still degrade quality.
 
 ### Supports alerting through monitors
 
