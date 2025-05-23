@@ -22,7 +22,7 @@ further_reading:
 
 ## Language Integrations
 
-{{< integrations >}}
+{{< appsec_languages >}}
 
 ## Proxy Integrations
 
