@@ -3,9 +3,6 @@ title: Cloud Security
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: "Release Notes"
-    text: "See What's New in Datadog Security Compliance"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
@@ -42,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
     tag: "Blog"
     text: "How we use Datadog for detection as code"
+  - link: "https://www.datadoghq.com/blog/shared-responsibility-model/"
+    tag: "Blog"
+    text: "Simplifying the shared responsibility model: How to meet your cloud security obligations"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
