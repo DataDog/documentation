@@ -16,7 +16,7 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 To enable automatic reporting of handled errors, you can set one of these two environment variables:
 
-- ``DD_ERROR_TRACKING_HANDLED_ERRORS`` = ``user|third_party|all``.
+- ``DD_ERROR_TRACKING_HANDLED_ERRORS``. Accepted values are: `user`, `third_party` or ,`all`.
 This environment variable enables reporting of handled errors respectively from user code, third party packages or both.
 - ``DD_ERROR_TRACKING_HANDLED_ERRORS_INCLUDE`` = ``module1, module2...``.
 List the modules from which handled errors should be reported. You need to specify the full name of the module. For instance, to instrument the module `security` in your `mysite` app, you need to specify

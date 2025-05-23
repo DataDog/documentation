@@ -19,9 +19,9 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 You can enable automatic reporting of handled errors using the following environment variables:
 
-- `DD_ERROR_TRACKING_HANDLED_ERRORS` to report handled errors from user code, third-party gems, or both. Accepted values are: `user,third_party,all`.
+- `DD_ERROR_TRACKING_HANDLED_ERRORS` to report handled errors from user code, third-party gems, or both. Accepted values are: `user`, `third_party`, `all`.
 - `DD_ERROR_TRACKING_HANDLED_ERRORS_INCLUDE` to provide a list of comma-separated paths, file names, and gem names for which handled errors will be reported. Possible values are specified below.
-For Ruby 3.3 or newer, the location where the error was raised and where it was rescued will be matched. For earlier versions of Ruby, only the location where the error was raised can be matched.
+For Ruby `v3.3+`, the location where the error was raised and where it was rescued will be matched. For earlier versions of Ruby, only the location where the error was raised can be matched.
 
 Alternatively, you can set error tracking parameters in code with these functions, inside a `Datadog.configure` block:
 
