@@ -93,7 +93,7 @@ Historical views stay in Datadog until they have exceeded the selected retention
 
 One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete_settings.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 
 ### Viewing deleted historical views
 
