@@ -148,7 +148,7 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 2. Run this command to install the Agent. Replace `<DATADOG_API_KEY>`, `<DATADOG_SITE>` with their values.
  
 ```shell
-choco install -ia='APIKEY=`<DATADOG_API_KEY>` SITE=`<DATADOG_SITE>`' datadog-agent
+choco install -ia='APIKEY=<DATADOG_API_KEY> SITE=<DATADOG_SITE>' datadog-agent
 ```
 
 {{% /tab %}}
