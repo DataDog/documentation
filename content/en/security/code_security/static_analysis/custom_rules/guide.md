@@ -35,7 +35,7 @@ You can add patterns after the node type and before the closing parenthesis. The
 
 This example matches nodes of type `func-decl` that contain a node of type `arg-list` followed by a node of type `body`, possibly with other nodes in between. In the following parse tree, this query would match the subtrees outlined in blue, but not the subtree outlined in orange.
 
-{{< img src="/security/code_security/custom_rule_tutorial_rule_created.png" alt="Rule created" style="height:20em;" >}}
+{{< img src="/security/code_security/custom_rule_guide_parse_trees.png" alt="An example parse tree with two examples highlighted." style="height:20em;" >}}
 
 You can nest child patterns as deep as you need.
 
