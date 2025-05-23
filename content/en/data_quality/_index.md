@@ -4,6 +4,8 @@ title: Data Quality Monitoring
 
 Data Quality Monitoring helps you detect and troubleshoot issues in your data workflows before they cause problems in dashboards, machine learning models, or other downstream systems. It alerts you to common issues such as missing updates, unexpected changes in row counts, or unusual column values, and helps trace those issues back to the upstream jobs or data sources that may have caused them.
 
+{{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; one table is flagged with a triggered alert" style="width:100%;" >}}
+
 ## Supported data sources and integrations
 
 To use Data Quality Monitoring, you must enable the appropriate data source integrations in Datadog. The table below outlines the required setup steps.
@@ -15,25 +17,25 @@ To use Data Quality Monitoring, you must enable the appropriate data source inte
 
 ## Key capabilities
 
-### Detect freshness and volume anomalies
+### Detects freshness and volume anomalies
 
-Data Quality Monitoring automatically tracks when data was last updated and how much data is being written to each table. It uses built-in anomaly detection to identify issues such as delayed updates or unexpected changes in row counts. These signals help you catch problems early, before they affect downstream dashboards, machine learning models, or data products.
+Data Quality Monitoring automatically tracks when data was last updated and how much data is being written to each table. It uses built-in anomaly detection to identify issues such as delayed updates or unexpected changes in row counts. These signals help detect problems early, before they affect downstream dashboards, machine learning models, or data products.
 
-### Perform column-level quality checks
+### Surfaces column-level quality metrics
 
-You can monitor column-level signals like null counts and uniqueness to detect unexpected changes in data shape. These checks help surface schema drift, pipeline regressions, or data entry issues that might not affect freshness or volume but still degrade quality.
+Column-level metrics such as null counts and uniqueness can help identify unexpected changes in column properties or structure. These changes may point to issues such as pipeline regressions or data entry problems that don’t affect freshness or volume but still degrade quality.
 
-### Set up alerts using monitors
+### Supports alerting through monitors
 
-From each dataset page, you can create monitors for metrics like freshness and volume using prebuilt templates. These monitors rely on statistical thresholds and automatically flag abnormal behavior. After creating a monitor, you can manage it through the [Monitors][3] page, where you can adjust conditions, notification settings, or tags to scope alerts by team, priority, or dataset.
+Data Quality Monitoring includes monitor templates for metrics such as freshness, volume, and row count changes. Metric monitors use predefined thresholds, such as a maximum update interval, while anomaly monitors detect deviations from historical patterns. After creating a monitor, you can manage its conditions, notification settings, and tags from the [Monitors][3] page to scope alerts by team, priority, or dataset.
 
-### Understand how data is used
+### Provides usage insights
 
-Usage metrics help you identify which tables are frequently queried and which are not. This context supports cost optimization and helps prioritize where to focus monitoring. Usage data is available when access history logging is enabled in your data platform (such as Snowflake).
+Usage metrics highlight which tables are frequently queried and which are not. This context supports cost optimization and helps prioritize where to focus monitoring. Usage data is available when access history logging is enabled in your data platform (such as Snowflake).
 
-### Investigate upstream and downstream dependencies
+### Maps upstream and downstream dependencies
 
-Lineage views allow you to trace which jobs or systems wrote to a dataset and which downstream assets depend on it. This makes it easier to troubleshoot the root cause of data quality issues and assess their impact across your environment.
+Lineage views show which jobs or systems wrote to a dataset and which downstream assets depend on it. This context makes it easier to troubleshoot the root cause of data quality issues and assess their impact across your environment.
 
 [1]: /integrations/snowflake_web/
 [2]: /integrations/google_cloud_bigquery/
