@@ -279,4 +279,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: https://app.datadoghq.com/llm/settings/evaluations
 [3]: /llm_observability/terms/#topic-relevancy
 [4]: https://app.datadoghq.com/llm/applications
-[5]: /llm_observability/terms/#failure-to-answer-configuration
+[5]: /llm_observability/evaluations/ootb_evaluations/#failure-to-answer-configuration
