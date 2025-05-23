@@ -1,4 +1,4 @@
-Follow the [Datadog Forwarder CloudFormation installation instructions][10015] to deploy the Datadog Forwarder. After you have filled in `DdApiKey` and selected the appropriate `DdSite`, go to the **Log Forwarding (Optional)** section. Enter the following information in that section to set up the Forwarder to send logs to Observability Pipelines:
+Follow the [Datadog Forwarder CloudFormation installation instructions][10015] to deploy the Datadog Forwarder. After you have filled in `DdApiKey` and selected the appropriate `DdSite`, go to the **Log Forwarding (Optional)** section. Enter the following information in that section to configure the Forwarder for sending logs to Observability Pipelines:
 
 1. In the **DdUrl** field, enter your load balancer address, which for this example is `9997`. **Note**: Datadog recommends fronting your Worker with a load balancer.
 1. In the **DdPort** field, enter `80`.
