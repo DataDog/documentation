@@ -1,5 +1,5 @@
 ---
-title: Mobile Device Widget
+title: Mobile Device Widgets
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"

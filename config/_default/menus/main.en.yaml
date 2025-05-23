@@ -1159,6 +1159,21 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
+    - name: Accessibility
+      url: mobile/accessibility
+      identifier: mobile_accessibility
+      parent: mobile
+      weight: 3
+    - name: Push Notifications
+      url: mobile/push_notification
+      identifier: mobile_push_notification
+      parent: mobile
+      weight: 4
+    - name: Widgets
+      url: mobile/widgets
+      identifier: mobile_widgets
+      parent: mobile
+      weight: 5
     - name: DDSQL Reference
       url: ddsql_reference/
       pre: ddsql
