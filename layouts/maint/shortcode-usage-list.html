@@ -1,9 +1,0 @@
-{{ range .Pages }}
-  {{ if .IsPage }}
-    {{ if (where .Content "HasShortcode" .Params.shortcode )}}
-        <li class="shortcode-usage"> 
-            <a href="{{ .Permalink }}">{{ .Title }}</a>: Uses shortcode: {{ .Params.shortcode }}
-        </li>
-    {{ end }}
-  {{ end }}
-{{ end }}
