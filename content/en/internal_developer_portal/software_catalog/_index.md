@@ -23,12 +23,13 @@ algolia:
 
 [Software Catalog][1] provides a centralized, dynamic view of your software ecosystem, enabling teams to track ownership, monitor performance, manage dependencies, and enforce security and compliance standards.
 
-Built on real-time telemetry and automated metadata collection, Software Catalog also offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
+Built on real-time telemetry and automated metadata collection, Software Catalog offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
 
 ## What you can do in Software Catalog
 <br>
 {{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
 <br>
+
 Software Catalog offers multiple views to help you explore and manage your services.
 
 - **Ownership**: Access your team's Slack, repo, or on-call information.
@@ -37,12 +38,6 @@ Software Catalog offers multiple views to help you explore and manage your servi
 - **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
 - **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.
 - **Software Delivery**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
-- Track ownership: open a team's Slack channel, repo, or on-call rotation from the **Ownership** view
-- Spot reliability risks: surface services with recent deploys, rising error rates, open incidents, or failing monitors in **Reliability**
-- Prioritize performance work: filter by environment and compare latency, traffic, error rate, and Apdex in **Performance**
-- Harden security posture: find vulnerable libraries and live attacks from a single list in **Security**
-- Control cloud spend: link amortized AWS costs to code and infrastructure changes in **Costs**
-- Shorten delivery cycles: inspect CI pipeline health, static-analysis violations, and DORA metrics in **Software Delivery**
 
 See the [Use Cases documentation][4] to learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
 

@@ -2065,24 +2065,24 @@ menu:
       identifier: software_templates
       weight: 301
     - name: Engineering Reports
-      url: software_catalog/eng_reports
-      parent: software_catalog
-      identifier: software_catalog_eng_reports
+      url: internal_developer_portal/eng_reports
+      parent: internal_developer_portal
+      identifier: idp_eng_reports
       weight: 4
     - name: Reliability Overview
-      url: software_catalog/eng_reports/reliability_overview
-      parent: software_catalog_eng_reports
+      url: internal_developer_portal/eng_reports/reliability_overview
+      parent: idp_eng_reports
       identifier: eng_reports_reliability_overview
       weight: 401
     - name: Scorecards Performance
-      url: software_catalog/eng_reports/scorecards_performance
-      parent: software_catalog_eng_reports
+      url: internal_developer_portal/eng_reports/scorecards_performance
+      parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
       weight: 402
     - name: Overview Pages
-      url: software_catalog/overview_pages
-      parent: software_catalog
-      identifier: software_catalog_overview_pages
+      url: internal_developer_portal/overview_pages
+      parent: internal_developer_portal
+      identifier: idp_overview_pages
       weight: 5
     - name: Integrations
       url: internal_developer_portal/integrations
