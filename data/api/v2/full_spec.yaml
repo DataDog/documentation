@@ -363,6 +363,7 @@ components:
         type: string
     FilterByRef:
       description: Filter entities by reference
+      example: service:shopping-cart
       explode: true
       in: query
       name: filter[ref]
@@ -374,6 +375,32 @@ components:
       explode: true
       in: query
       name: filter[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
+    FilterRelationByFromRef:
+      description: Filter relations by the reference of the first entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[from_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByToRef:
+      description: Filter relations by the reference of the second entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[to_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByType:
+      description: Filter relations by type.
+      explode: true
+      in: query
+      name: filter[type]
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
@@ -680,11 +707,34 @@ components:
       required: true
       schema:
         type: string
+    RelationInclude:
+      description: Include relationship data.
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationIncludeType'
     ReportID:
       description: The ID of the report job.
       in: path
       name: report_id
       required: true
+      schema:
+        type: string
+    ResourceFilterAccountID:
+      description: Filter resource filters by cloud provider account ID. This parameter
+        is only valid when provider is specified.
+      in: query
+      name: account_id
+      required: false
+      schema:
+        type: string
+    ResourceFilterProvider:
+      description: Filter resource filters by cloud provider (e.g. aws, gcp, azure).
+      in: query
+      name: cloud_provider
+      required: false
       schema:
         type: string
     ResourceID:
@@ -826,6 +876,13 @@ components:
       required: true
       schema:
         type: string
+    SkipCache:
+      description: Skip cache for resource filters.
+      in: query
+      name: skip_cache
+      required: false
+      schema:
+        type: boolean
     SpansMetricIDParameter:
       description: The name of the span-based metric.
       in: path
@@ -15833,6 +15890,26 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetResourceEvaluationFiltersResponse:
+      description: The definition of `GetResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    GetResourceEvaluationFiltersResponseData:
+      description: The definition of `GetResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
     GetRuleVersionHistoryData:
       description: Data for the rule version history.
       properties:
@@ -19812,6 +19889,38 @@ components:
           $ref: '#/components/schemas/PowerpackResponseLinks'
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
+    ListRelationCatalogResponse:
+      description: List entity relation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationResponseData'
+        included:
+          $ref: '#/components/schemas/ListRelationCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListRelationCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RelationResponseMeta'
+      type: object
+    ListRelationCatalogResponseIncluded:
+      description: List relation response included entities.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    ListRelationCatalogResponseLinks:
+      description: List relation response links.
+      properties:
+        next:
+          description: Next link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=2
+          type: string
+        previous:
+          description: Previous link.
+          type: string
+        self:
+          description: Current link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=0
+          type: string
       type: object
     ListRulesResponse:
       description: Scorecard rules response.
@@ -29168,6 +29277,114 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RelationAttributes:
+      description: Relation attributes.
+      properties:
+        from:
+          $ref: '#/components/schemas/RelationEntity'
+        to:
+          $ref: '#/components/schemas/RelationEntity'
+        type:
+          $ref: '#/components/schemas/RelationType'
+      type: object
+    RelationEntity:
+      description: Relation entity reference.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+      type: object
+    RelationIncludeType:
+      description: Supported include types for relations.
+      enum:
+      - entity
+      - schema
+      type: string
+      x-enum-varnames:
+      - ENTITY
+      - SCHEMA
+    RelationMeta:
+      description: Relation metadata.
+      properties:
+        createdAt:
+          description: Relation creation time.
+          format: date-time
+          type: string
+        definedBy:
+          description: Relation defined by.
+          type: string
+        modifiedAt:
+          description: Relation modification time.
+          format: date-time
+          type: string
+        source:
+          description: Relation source.
+          type: string
+      type: object
+    RelationRelationships:
+      description: Relation relationships.
+      properties:
+        fromEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+        toEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+      type: object
+    RelationResponse:
+      description: Relation response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RelationAttributes'
+        id:
+          description: Relation ID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/RelationMeta'
+        relationships:
+          $ref: '#/components/schemas/RelationRelationships'
+        subtype:
+          description: Relation subtype.
+          type: string
+        type:
+          $ref: '#/components/schemas/RelationResponseType'
+      type: object
+    RelationResponseData:
+      description: Array of relation responses
+      items:
+        $ref: '#/components/schemas/RelationResponse'
+      type: array
+    RelationResponseMeta:
+      description: Relation response metadata.
+      properties:
+        count:
+          description: Total relations count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    RelationResponseType:
+      description: Relation type.
+      enum:
+      - relation
+      type: string
+      x-enum-varnames:
+      - RELATION
+    RelationToEntity:
+      description: Relation to entity.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+      type: object
     RelationType:
       description: Supported relation types.
       enum:
@@ -29747,6 +29964,46 @@ components:
       required:
       - data
       type: object
+    ResourceFilterAttributes:
+      description: Attributes of a resource filter.
+      example:
+        aws:
+          '123456789':
+          - environment:production
+          - team:devops
+        azure:
+          sub-001:
+          - app:frontend
+        gcp:
+          project-abc:
+          - region:us-central1
+      properties:
+        cloud_provider:
+          additionalProperties:
+            additionalProperties:
+              items:
+                description: Tag filter in format "key:value"
+                example: environment:production
+                type: string
+              type: array
+            type: object
+          description: A map of cloud provider names (e.g., "aws", "gcp", "azure")
+            to a map of account/resource IDs and their associated tag filters.
+          type: object
+        uuid:
+          description: The UUID of the resource filter.
+          type: string
+      required:
+      - cloud_provider
+      type: object
+    ResourceFilterRequestType:
+      description: Constant string to identify the request type.
+      enum:
+      - csm_resource_filter
+      example: csm_resource_filter
+      type: string
+      x-enum-varnames:
+      - CSM_RESOURCE_FILTER
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -32909,9 +33166,11 @@ components:
       example: true
       type: boolean
     SecurityMonitoringRuleKeepAlive:
-      description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window. For third
-        party detection method, this field is not used."
+      description: 'Once a signal is generated, the signal will remain "open" if a
+        case is matched at least once within
+
+        this keep alive window. For third party detection method, this field is not
+        used.'
       enum:
       - 0
       - 60
@@ -32941,9 +33200,10 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleMaxSignalDuration:
-      description: "A signal will \u201Cclose\u201D regardless of the query being
-        matched once the time exceeds the maximum duration.\nThis time is calculated
-        from the first seen timestamp."
+      description: 'A signal will "close" regardless of the query being matched once
+        the time exceeds the maximum duration.
+
+        This time is calculated from the first seen timestamp.'
       enum:
       - 0
       - 60
@@ -39352,6 +39612,52 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateResourceEvaluationFiltersRequest:
+      description: Request object to update a resource filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequestData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersRequestData:
+      description: The definition of `UpdateResourceFilterRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `UpdateResourceEvaluationFiltersRequestData` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
+    UpdateResourceEvaluationFiltersResponse:
+      description: The definition of `UpdateResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersResponseData:
+      description: The definition of `UpdateResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
     UpdateRuleRequest:
       description: Request to update a scorecard rule.
       properties:
@@ -44128,6 +44434,51 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/catalog/relation:
+    get:
+      description: Get a list of entity relations from Software Catalog.
+      operationId: ListCatalogRelation
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of relations in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterRelationByType'
+      - $ref: '#/components/parameters/FilterRelationByFromRef'
+      - $ref: '#/components/parameters/FilterRelationByToRef'
+      - $ref: '#/components/parameters/RelationInclude'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRelationCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity relations
+      tags:
+      - Software Catalog
+      x-menu-order: 3
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
@@ -44744,6 +45095,80 @@ paths:
         permissions:
         - security_monitoring_rules_read
         - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+  /api/v2/cloud_security_management/resource_filters:
+    get:
+      description: List resource filters.
+      operationId: GetResourceEvaluationFilters
+      parameters:
+      - $ref: '#/components/parameters/ResourceFilterProvider'
+      - $ref: '#/components/parameters/ResourceFilterAccountID'
+      - $ref: '#/components/parameters/SkipCache'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: List resource filters
+      tags:
+      - Security Monitoring
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
+      x-undo:
+        type: safe
+    put:
+      description: Update resource filters.
+      operationId: UpdateResourceEvaluationFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Update resource filters
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/container_images:

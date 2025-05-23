@@ -2863,6 +2863,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update resource filters
+      url: '#update-resource-filters'
+      identifier: security-monitoring-update-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateResourceEvaluationFilters
+        unstable: []
+        order: 27
+    - name: List resource filters
+      url: '#list-resource-filters'
+      identifier: security-monitoring-list-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetResourceEvaluationFilters
+        unstable: []
+        order: 26
     - name: Update a custom framework
       url: '#update-a-custom-framework'
       identifier: security-monitoring-update-a-custom-framework
@@ -8854,6 +8878,18 @@ menu:
       url: /api/latest/software-catalog/
       identifier: software-catalog
       generated: true
+    - name: Get a list of entity relations
+      url: '#get-a-list-of-entity-relations'
+      identifier: software-catalog-get-a-list-of-entity-relations
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogRelation
+        unstable: []
+        order: 3
     - name: Delete a single entity
       url: '#delete-a-single-entity'
       identifier: software-catalog-delete-a-single-entity

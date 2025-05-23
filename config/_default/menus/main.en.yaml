@@ -2109,31 +2109,51 @@ menu:
       parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 703
+    - name: Engineering Reports
+      url: software_catalog/eng_reports
+      parent: software_catalog
+      identifier: software_catalog_eng_reports
+      weight: 8
+    - name: Reliability Overview
+      url: software_catalog/eng_reports/reliability_overview
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_reliability_overview
+      weight: 801
+    - name: Scorecards Performance
+      url: software_catalog/eng_reports/scorecards_performance
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_scorecards_perf
+      weight: 802
+    - name: Overview Pages
+      url: software_catalog/overview_pages
+      parent: software_catalog
+      identifier: software_catalog_overview_pages
+      weight: 9
     - name: Self-Service Actions
       url: software_catalog/self_service_actions
       parent: software_catalog
       identifier: self_service_actions
-      weight: 8
+      weight: 10
     - name: Software Templates
       url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
-      weight: 801
+      weight: 1001
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 9
+      weight: 11
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 10
+      weight: 12
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 11
+      weight: 13
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -2297,16 +2317,11 @@ menu:
       parent: slos
       identifier: burn_rate
       weight: 5
-    - name: OOTB Dashboard
-      url: service_management/service_level_objectives/ootb_dashboard/
-      parent: slos
-      identifier: slos_ootb_dashboard
-      weight: 6
     - name: Guides
       url: service_management/service_level_objectives/guide/
       parent: slos
       identifier: slos_guides
-      weight: 7
+      weight: 6
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
@@ -3167,6 +3182,11 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
       weight: 112
+    - name: FIPS Compliance
+      url: serverless/aws_lambda/fips-compliance
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_fips_compliance
+      weight: 113
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -3522,26 +3542,31 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
+    - name: Reports
+      url: /cloud_cost_management/reports
+      parent: cloud_cost
+      identifier: cloud_cost_reports
+      weight: 8
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 10
+      weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 11
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -3832,96 +3857,101 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
+    - name: Recommendations
+      url: tracing/recommendations/
+      parent: tracing
+      identifier: apm_recommendations
+      weight: 7
     - name: Code Origins for Spans
       url: tracing/code_origins
       parent: tracing
       identifier: tracing_code_origins
-      weight: 7
+      weight: 8
     - name: Service Observability
       url: tracing/services/
       parent: tracing
       identifier: tracing_services
-      weight: 7
+      weight: 9
     - name: Software Catalog
       url: /software_catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
-      weight: 701
+      weight: 901
     - name: Service Page
       url: tracing/services/service_page/
       parent: tracing_services
       identifier: tracing_service_page
-      weight: 702
+      weight: 902
     - name: Resource Page
       url: tracing/services/resource_page/
       parent: tracing_services
       identifier: tracing_resource_page
-      weight: 703
+      weight: 903
     - name: Deployment Tracking
       url: tracing/services/deployment_tracking/
       parent: tracing_services
       identifier: tracing_deployment_tracking
-      weight: 704
+      weight: 904
     - name: Service Map
       url: tracing/services/services_map/
       parent: tracing_services
       identifier: tracing_service_map
-      weight: 705
+      weight: 905
     - name: Inferred Services
       url: tracing/services/inferred_services
       parent: tracing_services
       identifier: tracing_inferred_services
-      weight: 706
+      weight: 906
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 707
+      weight: 907
     - name: Endpoint Observability
       url: /software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
-      weight: 8
+      weight: 10
     - name: Explore Endpoints
       url: /software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
-      weight: 802
+      weight: 1002
     - name: Monitor Endpoints
       url: /software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
-      weight: 803
+      weight: 1003
     - name: Dynamic Instrumentation
       url: dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
-      weight: 9
+      weight: 11
     - name: Enabling
       url: dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
-      weight: 901
+      weight: 1101
     - name: Expression Language
       url: dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 902
+      weight: 1102
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
       parent: tracing
-      weight: 10
+      weight: 12
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
       identifier: tracing_error_tracking
-      weight: 11
+      weight: 13
     - name: Error Tracking Explorer
       url: tracing/error_tracking/explorer
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
-      weight: 1101
+      weight: 1301
     - name: Issue States
       url: tracing/error_tracking/issue_states
       parent: tracing_error_tracking
@@ -3931,57 +3961,57 @@ menu:
       url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
-      weight: 1103
+      weight: 1303
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_monitors
-      weight: 1105
+      weight: 1305
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1106
+      weight: 1306
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1107
+      weight: 1307
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1108
+      weight: 1308
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
       identifier: tracing_data_security
-      weight: 12
+      weight: 14
     - name: Guides
       url: tracing/guide/
       parent: tracing
       identifier: tracing_guides
-      weight: 13
+      weight: 15
     - name: Troubleshooting
       url: tracing/troubleshooting/
       parent: tracing
       identifier: tracing_troubleshooting
-      weight: 14
+      weight: 16
     - name: Tracer Startup Logs
       url: tracing/troubleshooting/tracer_startup_logs
       identifier: tracing_troubleshooting_startup_logs
       parent: tracing_troubleshooting
-      weight: 1401
+      weight: 1601
     - name: Tracer Debug Logs
       url: tracing/troubleshooting/tracer_debug_logs
       identifier: tracing_troubleshooting_debug_logs
       parent: tracing_troubleshooting
-      weight: 1402
+      weight: 1602
     - name: Connection Errors
       url: tracing/troubleshooting/connection_errors
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
-      weight: 1403
+      weight: 1603
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
@@ -4472,31 +4502,41 @@ menu:
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
       weight: 303
-    - name: Configuration
-      url: llm_observability/configuration/
+    - name: Evaluations
+      url: llm_observability/evaluations/
       parent: llm_obs
-      identifier: llm_obs_configuration
+      identifier: llm_obs_evaluations
       weight: 4
+    - name: Out-of-the-Box Evaluations
+      url: llm_observability/evaluations/ootb_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ootb_evaluations
+      weight: 401
     - name: Submit Evaluations
-      url: llm_observability/submit_evaluations/
-      parent: llm_obs
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
-      weight: 5
+      weight: 402
     - name: Ragas Evaluations
-      url: llm_observability/ragas_evaluations/
-      parent: llm_obs
-      identifier: llm_obs_ragas_evaluation
-      weight: 6
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 403
+    - name: NeMo Evaluations
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 404
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 7
+      weight: 5
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 6
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5458,6 +5498,11 @@ menu:
       identifier: install_the_worker_commands
       parent: observability_pipelines_install_the_worker
       weight: 201
+    - name: ECS Fargate
+      url: observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
+      identifier: install_the_worker_ecs_fargate
+      parent: observability_pipelines_install_the_worker
+      weight: 202
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -6555,7 +6600,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security
@@ -6596,6 +6641,16 @@ menu:
       parent: application_security_policies
       identifier: application_security_policies_ootb_rules
       weight: 2
+    - name: In-App WAF Rules
+      url: security/application_security/policies/inapp_waf_rules/
+      parent: application_security_policies
+      identifier: application_security_policies_inappwaf_rules
+      weight: 3
+    - name: Tracing Library Configuration
+      url: security/application_security/policies/library_configuration/
+      parent: application_security_policies
+      identifier: application_security_policies_tracing_lib
+      weight: 4
     - name: Exploit Prevention
       url: security/application_security/exploit-prevention/
       parent: application_security
