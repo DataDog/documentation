@@ -3542,26 +3542,31 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
+    - name: Reports
+      url: /cloud_cost_management/reports
+      parent: cloud_cost
+      identifier: cloud_cost_reports
+      weight: 8
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 10
+      weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 11
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -6595,7 +6600,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security
