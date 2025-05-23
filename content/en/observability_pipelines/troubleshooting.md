@@ -112,6 +112,21 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
+## Worker is not starting
+
+If the Worker is not starting, Worker logs are not sent to Datadog and are not visible in Log Explorer for troubleshooting. To view the logs locally, use the following command:
+
+- For a VM-based environment:
+    ```
+    sudo journalctl -u observability-pipelines-worker.service -b
+    ```
+
+- For Kubernetes:
+    ```
+    kubectl logs <pod-name>
+    ```
+    An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
