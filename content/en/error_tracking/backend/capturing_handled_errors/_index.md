@@ -36,7 +36,7 @@ Capturing handled errors is only available in APM Error Tracking or Standalone B
 Set up your application to capture handled errors using one of the following official Datadog tracing libraries:
 
 {{< partial name="error_tracking/error-tracking-handled-errors.html" >}}
-
+<br />
 
 ## Further Reading
 
