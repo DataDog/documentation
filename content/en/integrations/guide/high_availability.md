@@ -75,7 +75,9 @@ The following integrations are supported for High Availability:
 
    {{< img src="/integrations/guide/high_availability/fleet-view-agents_2.png" alt="Fleet Automation View Agents" style="width:100%;" >}}
 
-3. Select the Agent you want to assign as the preferred active Agent and click **View Agent details** to open a side panel.
+3. Select the Agent you want to assign as the preferred active Agent and click **View Agent details** to open the side panel.
+
+   {{< img src="/integrations/guide/high_availability/view_agent_details.png" alt="Selecting a host from the Fleet Automation tab and highlighting View Agent details" style="width:50%;" >}}
 
 4. Navigate to the **High Availability** tab and click the three dots next to the Agent you wish to designate as the preferred active Agent.
 
@@ -103,6 +105,10 @@ The following integrations are supported for High Availability:
 - The preferred Agent always takes priority when available.
 - If it fails, the standby Agent becomes active.
 - When the preferred Agent recovers, it automatically resumes the active role, and the standby Agent returns to standby.
+
+### Why am I not able to configure the preferred active Agent?
+
+- You may not have the necessary permissions. Review the [prerequisites](#prerequisites) and refer to the [fleet_policies_write][14] documentation.
 
 ### Why does my Agent have an `unknown` HA Agent state?
 
