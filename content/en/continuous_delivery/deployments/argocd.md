@@ -44,7 +44,7 @@ metadata:
   name: argocd-notifications-cm
 data:
   service.webhook.cd-visibility-webhook: |
-    url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+    url: https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook
     headers:
     - name: "DD-CD-PROVIDER-ARGOCD"
       value: "true"
@@ -78,7 +78,7 @@ If you used Helm to install Argo CD, add the following configuration to your `va
 notifications:
   notifiers:
     service.webhook.cd-visibility-webhook: |
-      url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+      url: https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook
       headers:
         - name: "DD-CD-PROVIDER-ARGOCD"
           value: "true"
