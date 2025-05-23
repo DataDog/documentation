@@ -26,7 +26,7 @@ The [Endpoints list][1] provides visibility into all HTTP endpoints across your 
 The Endpoints list shows performance data scoped to your selected environment and time frame:
 
 - **Column sorting**: Click column headers to sort by metrics. For example, click **P95** to see endpoints with the top 95th percentile for latency.
-- **Ownership tracking**: View team ownership in the **TEAM** column. This information is inherited from the associated service definition in the [Software Catalog][2]. The service owner owns all of the endpoints connected to the service.
+- **Ownership tracking**: View team ownership in the **TEAM** column. This information is inherited from the associated API definition in the [Software Catalog][2]. The API owner owns all of the endpoints connected to the API.
 - **Filtering and searching**: Search by service, path, or any primary tag, or filter using facets like **Service** and **Team**.
 - **Scoping**: Specify the environment, additional primary tags (for example, `cluster_name`), and time frame.
 
@@ -50,4 +50,4 @@ The endpoint details page shows you metadata, performance metrics, errors, depen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /tracing/software_catalog/
+[2]: /software_catalog/service_definitions/v3-0/#system-and-api-pages-in-software-catalog
