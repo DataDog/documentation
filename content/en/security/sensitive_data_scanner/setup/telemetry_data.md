@@ -24,7 +24,7 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - RUM: Event attribute values only
 - Events: Event attribute values only
 
-{{< callout url="" btn_hidden="false" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
 Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
