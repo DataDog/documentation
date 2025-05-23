@@ -6641,6 +6641,16 @@ menu:
       parent: application_security_policies
       identifier: application_security_policies_ootb_rules
       weight: 2
+    - name: In-App WAF Rules
+      url: security/application_security/policies/inapp_waf_rules/
+      parent: application_security_policies
+      identifier: application_security_policies_inappwaf_rules
+      weight: 3
+    - name: Tracing Library Configuration
+      url: security/application_security/policies/library_configuration/
+      parent: application_security_policies
+      identifier: application_security_policies_tracing_lib
+      weight: 4
     - name: Exploit Prevention
       url: security/application_security/exploit-prevention/
       parent: application_security

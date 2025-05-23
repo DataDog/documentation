@@ -3,17 +3,6 @@ title: In-App WAF Rules
 aliases:
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
-  - /security/application_security/threats/event_rules
-further_reading:
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "Protect against threats with Datadog App and API Protection"
-- link: "/security/application_security/custom_rules/"
-  tag: "Documentation"
-  text: "Writing custom detection rules"
-- link: "/security/application_security/troubleshooting"
-  tag: "Documentation"
-  text: "Troubleshoot common Datadog App and API Protection issues"
 ---
 
 ## Overview
@@ -55,7 +44,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## Custom In-App WAF rules
 
-Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **App and API Protection** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4].
+Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **App and API Protection** -> **Policies** -> **In-App WAF** -> [**Custom Rules**][4].
 
 **Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
 
@@ -65,7 +54,7 @@ Blocking on a service is defined through the policy rules. Three Datadog default
 
 Services using a policy are visible directly in the policy management page.
 
-1. In Datadog, navigate to [Security > App and API Protection > Protection > In-App WAF][2].
+1. In Datadog, navigate to [Security > App and API Protection > Policies > In-App WAF][2].
 
    {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
 
@@ -119,11 +108,7 @@ Services using a policy are visible directly in the policy management page.
 
 Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box AAP detection rules or create new ones. 
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /security/application_security/custom_rules/
+[1]: /security/application_security/policies/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
