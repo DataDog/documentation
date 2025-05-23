@@ -193,6 +193,9 @@ This extension feature is not yet supported in VS Code.
 
 {{% tab "Cursor" %}}
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
+
+{{< img src="/developers/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Using Fix in Chat to fix an inline code error" style="width:100%" video=true >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
