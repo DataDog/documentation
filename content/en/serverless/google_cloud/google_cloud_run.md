@@ -33,7 +33,7 @@ Add the `dd-trace-js` [library][1] to your application.
 // The tracer includes a dogstatsd client.
 // It will send profiling information if configured with DD_PROFILING_ENABLED.
 const tracer = require('dd-trace').init({
- logInjection: true,
+	logInjection: true,
 });
 
 const express = require("express");
@@ -41,18 +41,24 @@ const app = express();
 
 const { createLogger, format, transports } = require('winston');
 
+// We can use the DD_SERVERLESS_LOG_PATH environment variable if it is available.
+// While this is not necessary, it the log forwarding configuration centralized
+// in the cloud run configuration.
+const log_filename = process.env.DD_SERVERLESS_LOG_PATH?.replace("*.log", "app.log") || "/shared-logs/logs/app.log";
+console.log(`writing logs to ${log_filename}`);
+
 const logger = createLogger({
- level: 'info',
- exitOnError: false,
- format: format.json(),
- transports: [new transports.File({ filename: `/shared-volume/logs/app.log`})],
+	level: 'info',
+	exitOnError: false,
+	format: format.json(),
+	transports: [new transports.File({ filename: log_filename })],
 });
 
 app.get("/", (_, res) => {
- logger.info("Hello!");
- tracer.dogstatsd.distribution("our-sample-app.sample-metric", 1);
+	logger.info("Hello!");
+	tracer.dogstatsd.distribution("our-sample-app.sample-metric", 1);
 
- res.status(200).json({ msg: "A traced endpoint with custom metrics" });
+	res.status(200).json({ msg: "A traced endpoint with custom metrics" });
 });
 
 const port = process.env.PORT || 8080;
@@ -185,7 +191,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 
 | Variable | Container | Description |
 | -------- | --------- | ----------- |
-| `DD_SERVERLESS_LOG_PATH` | Sidecar | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
+| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar | When true, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
@@ -194,6 +200,8 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_TAGS`         | Sidecar | See [Unified Service Tagging][14]. |
 | `DD_HEALTH_PORT` | Sidecar | The port for sidecar health checks. For example `9999` |
+
+The `DD_SERVERLESS_LOG_PATH` environment variable is not required on the application. But it can be set there and then used to configure the application's log filename. This avoids manually synchronizing the Cloud Run service's log path with the application code that writes to it.
 
 The `DD_LOGS_ENABLED` environment variable is not required.
 
