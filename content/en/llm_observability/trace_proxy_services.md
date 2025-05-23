@@ -7,11 +7,11 @@ title: Trace Proxy Services
 
 ## Overview
 
-Like any traditional application, LLM applications can be implemented across multiple different microservices. With LLM Observability, if one of these services is an LLM proxy (or an LLM gateway service), you can trace the LLM calls made by individual LLM applications in a complete end-to-end trace that captures the full request path that jumps across multiple services.
+Like traditional applications, an LLM application can span multiple microservices. With LLM Observability, if one of these services is an LLM proxy or gateway, you can trace LLM calls within a complete end-to-end trace, capturing the full request path across services.
 
 ## Enabling LLM Observability for a proxy or gateway service
 
-To enable LLM Observability for a proxy or gateway service that might be called from several different ML applications, you can enable LLM Observability without specifying an ML application name. In its place, specify the service name. This can be used to [filter out spans in LLM observability specific to the proxy or gateway service](#observing-llm-gateway-and-proxy-services).
+To enable LLM Observability for a proxy or gateway service used by multiple ML applications, you can configure it without specifying an ML application name. Instead, set the service name. This allows you to [filter spans specific to that proxy or gateway service within LLM observability](#observing-llm-gateway-and-proxy-services).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -43,7 +43,7 @@ const llmobs = tracer.llmobs;
 {{< /tabs >}}
 
 
-In your specific applications that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name:
+In your specific services that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -57,7 +57,7 @@ import requests
 
 if __name__ == "__main__":
     with LLMObs.workflow(name="run-chat"):
-      # other application-specific logic - RAG steps, parsing, etc.
+      # other application-specific logic - (such as RAG steps and parsing)
 
       response = requests.post("http://localhost:8080/chat", json={
         # data to pass to the proxy service
@@ -83,7 +83,7 @@ const axios = require('axios');
 
 async function main () {
   llmobs.trace({ name: 'run-chat', kind: 'workflow' }, async () => {
-    // other application-specific logic - RAG steps, parsing, etc.
+    // other application-specific logic - (such as RAG steps and parsing)
 
     // wrap the proxy call in a task span
     const response = await axios.post('http://localhost:8080/chat', {
@@ -100,7 +100,7 @@ main();
 {{% /tab %}}
 {{< /tabs >}}
 
-When making requests to the proxy or gateway service, the LLM Observability SDK automatically propagates the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
+When the LLM application makes a request to the proxy or gateway service, the LLM Observability SDK automatically propagates the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
 
 ## Observing LLM gateway and proxy services
 
@@ -147,33 +147,33 @@ app.post('/chat', async (req, res) => {
 
 All requests to the proxy service can now be viewed as top-level spans within the LLM trace view:
 
-1. In the LLM trace view, view `All Applications` from the top-left dropdown.
-2. Switch to the `All Spans` view in the top-right dropdown.
+1. In the [LLM trace][1] page, select **All Applications** from the top-left dropdown.
+2. Switch to the **All Spans** view in the top-right dropdown.
 3. Filter the list by the `service` tag and the workflow name.
 
 {{< img src="llm_observability/all-spans-with-service-and-span-name.png" alt="View all spans from all ML applications with the service and workflow name tags" style="width:100%;" >}}
 
-The workflow span name can also be filtered by a facet on the left hand side of the trace view:
+You can also filter the workflow **Span Name** using the facet on the left hand side of the trace view:
 
 {{< img src="llm_observability/span-name-facet-for-proxy-service-monitoring.png" alt="Select the workflow span name from the facet on the left hand side of the trace view" style="width:50%;" >}}
 
 ### All LLM calls made within the proxy or gateway service
 
-To instead monitor only the LLM calls made within a proxy or gateway service, filter by `llm` spans in the trace view:
+To only monitor the LLM calls made within a proxy or gateway service, filter by `llm` spans in the trace view:
 
 {{< img src="llm_observability/all-spans-with-service-and-span-kind.png" alt="View all spans from all ML applications with the service tags and the LLM span kind" style="width:100%;" >}}
 
-This can also be done by filtering the span kind facet on the left hand side of the trace view:
+You can also filter the **Span Kind** facet on the left hand side of the trace view:
 
 {{< img src="llm_observability/span-kind-facet-for-proxy-service-monitoring.png" alt="Select the LLM span kind facet from the left hand side of the trace view" style="width:50%;" >}}
 
 ### Filtering by a specific ML application and observing patterns and trends
 
-Both processes described in the filtering by [top-level calls to the proxy service](#all-requests-to-the-proxy-or-gateway-service) and [LLM calls made within the proxy or gateway service](#all-llm-calls-made-within-the-proxy-or-gateway-service) can also be applied to a specific ML application to view its interaction with the proxy or gateway service.
+You can apply both filtering processes ([top-level calls to the proxy service](#all-requests-to-the-proxy-or-gateway-service) and [LLM calls made within the proxy or gateway service](#all-llm-calls-made-within-the-proxy-or-gateway-service)) to a specific ML application to view its interaction with the proxy or gateway service.
 
 1. In the top-left dropdown, select the ML application of interest.
-2. To see all traces for the ML application, switch from the `All Spans` view to the `Traces` view in the top-right dropdown.
-3. To see a timeseries of traces for the ML application, switch from a `List` view to a `Timeseries` view in the Traces view while maintaining the `All Span` filter in the top-right dropdown.
+2. To see all traces for the ML application, switch from the **All Spans** view to the **Traces** view in the top-right dropdown.
+3. To see a timeseries of traces for the ML application, switch back to the **All Spans** filter in the top-right dropdown and next to "Visualize as", select **Timeseries**.
 
 {{< img src="llm_observability/timeseries-view-for-proxy-services.png" alt="Switch from a List view to a Timeseries view in the Traces view while maintaining the All Span filter" style="width:100%;" >}}
 
@@ -183,3 +183,6 @@ To observe the complete end-to-end usage of an LLM application that makes calls 
 
 1. In the LLM trace view, select the ML application name of interest from the top-left dropdown.
 2. Switch to the `Traces` view in the top-right dropdown.
+
+
+[1]: https://app.datadoghq.com/llm/traces
