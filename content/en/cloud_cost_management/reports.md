@@ -55,13 +55,13 @@ Use filters to include only the specific costs you want to allocate, such as by 
 
 ### Change how you see your data
 - Select a **visualization option**:
-  - **Bar chart**: Compare costs across multiple categories side by side, so you can quickly identify top cost drivers.
+  - **Bar chart**: Compare costs across multiple categories side by side, so you can identify top cost drivers.
   - **Pie chart**: Shows the percentage share of each segment, ideal for understanding the relative proportion of costs among a small number of categories.
-  - **Treemap**: Displays hierarchical data and the relative size of many categories at once, making it easy to see both the overall structure and the alrgest contributors in a single view.
+  - **Treemap**: Displays hierarchical data and the relative size of many categories at once, so you can see both the overall structure and the largest contributors in a single view.
 - Change the **table view**:
   - **Summary**: A consolidated, overall picture of your costs.
   - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
-- Update the **timeframe** to monitor trends about your cloud spend.
+- Update the **time frame** to monitor trends about your cloud spend.
 
 ### Advanced options (optional)
 
