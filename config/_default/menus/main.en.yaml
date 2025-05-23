@@ -2109,31 +2109,51 @@ menu:
       parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 703
+    - name: Engineering Reports
+      url: software_catalog/eng_reports
+      parent: software_catalog
+      identifier: software_catalog_eng_reports
+      weight: 8
+    - name: Reliability Overview
+      url: software_catalog/eng_reports/reliability_overview
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_reliability_overview
+      weight: 801
+    - name: Scorecards Performance
+      url: software_catalog/eng_reports/scorecards_performance
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_scorecards_perf
+      weight: 802
+    - name: Overview Pages
+      url: software_catalog/overview_pages
+      parent: software_catalog
+      identifier: software_catalog_overview_pages
+      weight: 9
     - name: Self-Service Actions
       url: software_catalog/self_service_actions
       parent: software_catalog
       identifier: self_service_actions
-      weight: 8
+      weight: 10
     - name: Software Templates
       url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
-      weight: 801
+      weight: 1001
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 9
+      weight: 11
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 10
+      weight: 12
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 11
+      weight: 13
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -2297,16 +2317,11 @@ menu:
       parent: slos
       identifier: burn_rate
       weight: 5
-    - name: OOTB Dashboard
-      url: service_management/service_level_objectives/ootb_dashboard/
-      parent: slos
-      identifier: slos_ootb_dashboard
-      weight: 6
     - name: Guides
       url: service_management/service_level_objectives/guide/
       parent: slos
       identifier: slos_guides
-      weight: 7
+      weight: 6
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
@@ -3527,26 +3542,31 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
       weight: 7
+    - name: Reports
+      url: /cloud_cost_management/reports
+      parent: cloud_cost
+      identifier: cloud_cost_reports
+      weight: 8
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: Budgets
       url: /cloud_cost_management/budgets
       parent: cloud_cost
       identifier: cloud_cost_budgets
-      weight: 10
+      weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 11
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -4482,31 +4502,41 @@ menu:
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
       weight: 303
-    - name: Configuration
-      url: llm_observability/configuration/
+    - name: Evaluations
+      url: llm_observability/evaluations/
       parent: llm_obs
-      identifier: llm_obs_configuration
+      identifier: llm_obs_evaluations
       weight: 4
+    - name: Out-of-the-Box Evaluations
+      url: llm_observability/evaluations/ootb_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ootb_evaluations
+      weight: 401
     - name: Submit Evaluations
-      url: llm_observability/submit_evaluations/
-      parent: llm_obs
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
-      weight: 5
+      weight: 402
     - name: Ragas Evaluations
-      url: llm_observability/ragas_evaluations/
-      parent: llm_obs
-      identifier: llm_obs_ragas_evaluation
-      weight: 6
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 403
+    - name: NeMo Evaluations
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 404
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 7
+      weight: 5
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 6
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5468,6 +5498,11 @@ menu:
       identifier: install_the_worker_commands
       parent: observability_pipelines_install_the_worker
       weight: 201
+    - name: ECS Fargate
+      url: observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
+      identifier: install_the_worker_ecs_fargate
+      parent: observability_pipelines_install_the_worker
+      weight: 202
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
@@ -6565,7 +6600,7 @@ menu:
       url: security/application_security/serverless/compatibility/
       parent: asm_serverless
       identifier: asm_serverless_compat
-      weight: 1      
+      weight: 1
     - name: Overview
       url: security/application_security/overview
       parent: application_security

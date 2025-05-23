@@ -363,6 +363,7 @@ components:
         type: string
     FilterByRef:
       description: Filter entities by reference
+      example: service:shopping-cart
       explode: true
       in: query
       name: filter[ref]
@@ -374,6 +375,32 @@ components:
       explode: true
       in: query
       name: filter[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
+    FilterRelationByFromRef:
+      description: Filter relations by the reference of the first entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[from_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByToRef:
+      description: Filter relations by the reference of the second entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[to_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByType:
+      description: Filter relations by type.
+      explode: true
+      in: query
+      name: filter[type]
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
@@ -680,6 +707,14 @@ components:
       required: true
       schema:
         type: string
+    RelationInclude:
+      description: Include relationship data.
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationIncludeType'
     ReportID:
       description: The ID of the report job.
       in: path
@@ -19855,6 +19890,38 @@ components:
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
       type: object
+    ListRelationCatalogResponse:
+      description: List entity relation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationResponseData'
+        included:
+          $ref: '#/components/schemas/ListRelationCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListRelationCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RelationResponseMeta'
+      type: object
+    ListRelationCatalogResponseIncluded:
+      description: List relation response included entities.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    ListRelationCatalogResponseLinks:
+      description: List relation response links.
+      properties:
+        next:
+          description: Next link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=2
+          type: string
+        previous:
+          description: Previous link.
+          type: string
+        self:
+          description: Current link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=0
+          type: string
+      type: object
     ListRulesResponse:
       description: Scorecard rules response.
       properties:
@@ -29210,6 +29277,114 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RelationAttributes:
+      description: Relation attributes.
+      properties:
+        from:
+          $ref: '#/components/schemas/RelationEntity'
+        to:
+          $ref: '#/components/schemas/RelationEntity'
+        type:
+          $ref: '#/components/schemas/RelationType'
+      type: object
+    RelationEntity:
+      description: Relation entity reference.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+      type: object
+    RelationIncludeType:
+      description: Supported include types for relations.
+      enum:
+      - entity
+      - schema
+      type: string
+      x-enum-varnames:
+      - ENTITY
+      - SCHEMA
+    RelationMeta:
+      description: Relation metadata.
+      properties:
+        createdAt:
+          description: Relation creation time.
+          format: date-time
+          type: string
+        definedBy:
+          description: Relation defined by.
+          type: string
+        modifiedAt:
+          description: Relation modification time.
+          format: date-time
+          type: string
+        source:
+          description: Relation source.
+          type: string
+      type: object
+    RelationRelationships:
+      description: Relation relationships.
+      properties:
+        fromEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+        toEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+      type: object
+    RelationResponse:
+      description: Relation response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RelationAttributes'
+        id:
+          description: Relation ID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/RelationMeta'
+        relationships:
+          $ref: '#/components/schemas/RelationRelationships'
+        subtype:
+          description: Relation subtype.
+          type: string
+        type:
+          $ref: '#/components/schemas/RelationResponseType'
+      type: object
+    RelationResponseData:
+      description: Array of relation responses
+      items:
+        $ref: '#/components/schemas/RelationResponse'
+      type: array
+    RelationResponseMeta:
+      description: Relation response metadata.
+      properties:
+        count:
+          description: Total relations count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    RelationResponseType:
+      description: Relation type.
+      enum:
+      - relation
+      type: string
+      x-enum-varnames:
+      - RELATION
+    RelationToEntity:
+      description: Relation to entity.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+      type: object
     RelationType:
       description: Supported relation types.
       enum:
@@ -44259,6 +44434,51 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/catalog/relation:
+    get:
+      description: Get a list of entity relations from Software Catalog.
+      operationId: ListCatalogRelation
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of relations in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterRelationByType'
+      - $ref: '#/components/parameters/FilterRelationByFromRef'
+      - $ref: '#/components/parameters/FilterRelationByToRef'
+      - $ref: '#/components/parameters/RelationInclude'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRelationCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity relations
+      tags:
+      - Software Catalog
+      x-menu-order: 3
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
