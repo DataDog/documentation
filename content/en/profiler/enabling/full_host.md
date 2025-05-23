@@ -5,9 +5,6 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/profiler_troubleshooting/full_host'
-      tag: 'Documentation'
-      text: 'Fix problems you encounter while using the profiler'
 ---
 
 {{< callout url="" btn_hidden="true" header="Try the Full-Host Profiler Preview!">}}
