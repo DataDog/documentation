@@ -1,6 +1,7 @@
 ---
 title: Trace Qualification
-aliases:  
+aliases:
+  - /security/application_security/threats/trace_qualification
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

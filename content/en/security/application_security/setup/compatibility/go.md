@@ -3,6 +3,8 @@ title: Go Compatibility Requirements
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+  - /security/application_security/threats/setup/compatibility/go
 ---
 
 ## App and API Protection capabilities
@@ -15,8 +17,6 @@ The following App and API Protection capabilities are supported in the Go librar
 | API Security | 1.59.0 |
 | Threat Protection |  1.50.0   |
 | Customize response to blocked requests | 1.53.0 |
-| Software Composition Analysis (SCA) | 1.49.0 |
-| Code Security  | not supported |
 | Automatic user activity event tracking | not supported |
 
 The minimum tracer version to get all supported App and API Protection capabilities for Go is 1.59.0.
@@ -24,13 +24,13 @@ The minimum tracer version to get all supported App and API Protection capabilit
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                     |
-| Kubernetes  | {{< X >}}                | {{< X >}}                     |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
-| AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                |                               |
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate | {{< X >}}                |
+| AWS Lambda  | {{< X >}}                |
 
 ## Language and framework compatibility
 

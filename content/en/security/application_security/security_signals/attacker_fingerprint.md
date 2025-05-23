@@ -1,6 +1,8 @@
 ---
 title: Attacker Fingerprint
 disable_toc: false
+aliases:
+  - /security/application_security/threats/attacker_fingerprint
 further_reading:
 - link: "/security/application_security/security_signals/attacker_clustering"
   tag: "Documentation"

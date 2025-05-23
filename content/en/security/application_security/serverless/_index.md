@@ -13,7 +13,7 @@ further_reading:
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
-    - link: "/security/application_security/threats/"
+    - link: "/security/application_security/"
       tag: "Documentation"
       text: "App and API Protection"
     - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"

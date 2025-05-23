@@ -119,10 +119,6 @@ Datadog reports the type of authentication when available in a header through th
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Vulnerabilities count
-
-Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -131,6 +127,6 @@ Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to t
 [2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[6]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
 [8]: /security/code_security/iast/

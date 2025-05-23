@@ -1,6 +1,8 @@
 ---
 title: Compatibility Requirements
 type: multi-code-lang
+aliases:
+  - /security/application_security/threats/setup/compatibility/
 further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"

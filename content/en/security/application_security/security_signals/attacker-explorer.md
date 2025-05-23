@@ -1,6 +1,8 @@
 ---
 title: Attacker Explorer
 disable_toc: false
+aliases:
+  - /security/application_security/threats/attacker-explorer
 further_reading:
 - link: "/security/application_security/policies"
   tag: "Documentation"

@@ -3,6 +3,8 @@ title: App and API Protection GCP Service Extensions Compatibility Requirements
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /security/application_security/threats/setup/compatibility/gcp-service-extensions
 ---
 
 The following table lists the support for App and API Protection capabilities in the App and API Protection GCP Service Extensions according to the specified version:
@@ -12,8 +14,6 @@ The following table lists the support for App and API Protection capabilities in
 | Threat Detection                       | 1.71.0                                       |
 | Threat Protection                      | 1.71.0                                       |
 | Customize response to blocked requests | 1.71.0                                       |
-| Software Composition Analysis (SCA)    | not applicable                               |
-| Code Security                          | not applicable                               |
 | Automatic user activity event tracking | not supported                                |
 | API Security                           | not supported                                |
 
