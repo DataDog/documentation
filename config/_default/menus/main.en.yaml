@@ -4497,31 +4497,41 @@ menu:
       parent: llm_obs_setup
       identifier: llm_obs_setup_api
       weight: 303
-    - name: Configuration
-      url: llm_observability/configuration/
+    - name: Evaluations
+      url: llm_observability/evaluations/
       parent: llm_obs
-      identifier: llm_obs_configuration
+      identifier: llm_obs_evaluations
       weight: 4
+    - name: Out-of-the-Box Evaluations
+      url: llm_observability/evaluations/ootb_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ootb_evaluations
+      weight: 401
     - name: Submit Evaluations
-      url: llm_observability/submit_evaluations/
-      parent: llm_obs
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
-      weight: 5
+      weight: 402
     - name: Ragas Evaluations
-      url: llm_observability/ragas_evaluations/
-      parent: llm_obs
-      identifier: llm_obs_ragas_evaluation
-      weight: 6
+      url: llm_observability/evaluations/ragas_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_ragas_evaluations
+      weight: 403
+    - name: NeMo Evaluations
+      url: llm_observability/evaluations/submit_nemo_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 404
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 7
+      weight: 5
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 6
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
