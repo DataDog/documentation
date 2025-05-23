@@ -43,14 +43,14 @@ const { createLogger, format, transports } = require('winston');
 // We can use the DD_SERVERLESS_LOG_PATH environment variable if it is available.
 // While this is not necessary, it the log forwarding configuration centralized
 // in the cloud run configuration.
-const log_filename = process.env.DD_SERVERLESS_LOG_PATH?.replace("*.log", "app.log") || "/shared-logs/logs/app.log";
-console.log(`writing logs to ${log_filename}`);
+const logFilename = process.env.DD_SERVERLESS_LOG_PATH?.replace("*.log", "app.log") || "/shared-logs/logs/app.log";
+console.log(`writing logs to ${logFilename}`);
 
 const logger = createLogger({
 	level: 'info',
 	exitOnError: false,
 	format: format.json(),
-	transports: [new transports.File({ filename: log_filename })],
+	transports: [new transports.File({ filename: logFilename })],
 });
 
 app.get("/", (_, res) => {
