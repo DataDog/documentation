@@ -19,7 +19,7 @@ further_reading:
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Join the preview for Datadog's Internal Developer Portal!" >}}
 {{< /callout >}}
 
-{{< img src="internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
+{{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
 
 ## Overview
 
