@@ -7,7 +7,7 @@ title: Trace Proxy Services
 
 ## Overview
 
-Like any traditionally application, LLM applications can be implemented across multiple different microservices. With LLM Observability, if one of these services is a LLM proxy or gateway service, you can trace the LLM calls made by individual LLM applications in a complete end-to-end trace.
+Like any traditional application, LLM applications can be implemented across multiple different microservices. With LLM Observability, if one of these services is an LLM proxy (or an LLM gateway service), you can trace the LLM calls made by individual LLM applications in a complete end-to-end trace that captures the full request path that jumps across multiple services.
 
 ## Enabling LLM Observability for a proxy or gateway service
 
