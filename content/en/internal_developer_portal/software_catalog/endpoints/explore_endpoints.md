@@ -10,6 +10,7 @@ aliases:
     - /tracing/api_catalog/explore_apis/
     - /api_catalog/explore_apis/
     - /service_catalog/endpoints/explore_endpoints/
+    - /software_catalog/endpoints/explore_endpoints/
 ---
 
 {{< img src="tracing/software_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}

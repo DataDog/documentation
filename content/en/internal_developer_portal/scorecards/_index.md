@@ -4,6 +4,7 @@ aliases:
   - /tracing/software_catalog/scorecards
   - /tracing/service_catalog/scorecards
   - /service_catalog/scorecards
+  - /software_catalog/scorecards
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
@@ -40,9 +41,9 @@ You can select the rules used to populate the Scorecards, and you can generate r
 ## Get started
 
 {{< whatsnext desc="Set up Scorecards and explore how they can help your team:" >}}
-    {{< nextlink href="/software_catalog/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

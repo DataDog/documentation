@@ -10,7 +10,7 @@ aliases:
   - /service_catalog/
   - /software_catalog/
 further_reading:
-- link: "/internal_developer_portal/software_catalog/use_cases"
+- link: "/internal_developer_portal/use_cases"
   tag: "Documentation"
   text: "Learn about Software Catalog Use Cases"
 algolia:

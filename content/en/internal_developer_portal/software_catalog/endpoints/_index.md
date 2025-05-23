@@ -24,6 +24,7 @@ aliases:
     - /software_catalog/endpoints/discover_endpoints
     - /service_catalog/endpoints/discover_endpoints
     - /service_catalog/endpoints/
+    - /software_catalog/endpoints
 ---
 
 {{% site-region region="gov" %}}
@@ -107,9 +108,9 @@ Read [Adding Metadata to APIs][10] for more information.
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
 [6]: /software_catalog/manage
-[7]: /software_catalog/endpoints/monitor_endpoints/
+[7]: /internal_developer_portal/software_catalog/endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
 [9]: /software_catalog/customize/create_entries
 [10]: /software_catalog/service_definitions/#add-metadata-to-endpoints
-[11]: /software_catalog/endpoints/explore_endpoints/
+[11]: /internal_developer_portal/software_catalog/endpoints/explore_endpoints/
 [12]: https://app.datadoghq.com/services?selectedComponent=endpoint
