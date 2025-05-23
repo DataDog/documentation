@@ -112,7 +112,7 @@ The following integrations are supported for High Availability:
 
 ### Why does my Agent have an `unknown` HA Agent state?
 
-- Remote Configuration may not be setup correctly. For more information, review the [prerequisites](#prerequisites) and [Remote Configuration setup][12] documentation.
+- Remote Configuration may not be setup correctly. For more information, review the [prerequisites](#prerequisites) and the [Remote Configuration setup][12] documentation.
 
 
 ## Further reading
