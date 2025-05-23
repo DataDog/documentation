@@ -38,9 +38,6 @@ Supported architecture
 Serverless
 : `full host` is not supported on serverless platforms, such as AWS Lambda.
 
-OS Settings
-: TBD
-
 Debugging information
 : Symbols should be available locally or can be uploaded in CI with `datadog-ci` 
 
@@ -72,13 +69,8 @@ To enable local symbol upload:
 4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
 ### Build
-To build the Full-Host Profiler directly on your machine:
+To build the Full-Host Profiler directly on your machine, run:
 
-1. Ensure you have the required version of Go installed:
-   ```shell
-   go version
-   ```
-2. Run:
    ```shell
    make
    ```
