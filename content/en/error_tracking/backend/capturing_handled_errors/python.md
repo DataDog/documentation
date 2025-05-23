@@ -30,7 +30,7 @@ If you are running `Python3.10` or `Python3.11` and you want to instrument the `
 from ddtrace.errortracking._handled_exceptions.bytecode_reporting import instrument_main
 
 if __name__ == "__main__":
-instrument_main()
+  instrument_main()
 ```
 
 This code should be added after the functions definitions that contain handled errors.
