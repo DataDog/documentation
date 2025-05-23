@@ -18,3 +18,7 @@ We offer two mechanisms for instrumenting serverless Google Cloud code: sidecar 
 The sidecar containers are the suggested way to instrument these applications, deploying the datadog agent in a separate container that runs alongside your code. (add a few details about why we suggest this over in-process.) Detailed information for setting these up can be found at [Google Cloud Run](./google_cloud_run), [Google Cloud Run Functions](./google_cloud_run_functions), and [Google Cloud Run Functions (1st generation)](./google_cloud_run_functions_1st_gen).
 
 We continue to support the in-process. (add a few details and caveats.) Detailed information for setting up [Google Cloud Run In-Process](./google_cloud_run_in_process).
+
+### Sidecar vs. In-Process Instrumentation for Google Cloud Run
+
+A discussion of the tradeoffs between instrumenting Google Cloud Run services with a sidecar vs. in-process. Touch on cost things, performance, and decoupling your application from the Datadog tooling.
