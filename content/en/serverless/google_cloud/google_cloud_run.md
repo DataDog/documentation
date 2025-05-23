@@ -31,10 +31,9 @@ Add the `dd-trace-js` [library][1] to your application.
 #### app.js
 ```js
 // The tracer includes a dogstatsd client.
-// It will send profiling information if configured with DD_PROFILING_ENABLED.
-const tracer = require('dd-trace').init({
-	logInjection: true,
-});
+// The tracer will inject the current trace ID into logs with `DD_LOGS_INJECTION`.
+// The tracer will send profiling information with `DD_PROFILING_ENABLED`.
+const tracer = require('dd-trace').init();
 
 const express = require("express");
 const app = express();
@@ -69,7 +68,7 @@ You can use `npm install dd-trace` to add the tracer to your package.
 
 #### Dockerfile
 
-Your `Dockerfile` can look something like this. This will create a minmimal application container with metrics, traces, logs, (ADD PROFILING!). Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
+Your `Dockerfile` can look something like this. This will create a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
 
 ```dockerfile
 FROM node:22-slim
@@ -194,7 +193,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 | `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
-| `DD_LOGS_INJECTION` | Sidecar | When true, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
+| `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
 | `DD_SERVICE`      | Sidecar *and* Application | See [Unified Service Tagging][14].                                  |
 | `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
@@ -226,7 +225,7 @@ TODO: write something about `DD_SOURCE`.
 1. Edit the application container.
 1. Click the **Volume Mounts** tab and add the logs volume mount.
     - Mount it to the same location that you did for the sidecar container, for example `/shared-logs`.
-1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` environment variable as you did for the sidecar.
+1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` and `DD_LOGS_INJECTION` environment variables as you did for the sidecar.
 1. Click the **Settings** tab and set the **Container start up order** to **Depends on** the sidecar container.
 1. **Deploy** the application.
 {{% /tab %}}
