@@ -106,9 +106,9 @@ The following integrations are supported for High Availability:
 - If it fails, the standby Agent becomes active.
 - When the preferred Agent recovers, it automatically resumes the active role, and the standby Agent returns to standby.
 
-### Why am I not able to configure the preferred active Agent?
+### Why is it not possible to configure the preferred active Agent?
 
-- You may not have the necessary permissions. Review the [prerequisites](#prerequisites) and refer to the [fleet_policies_write][14] documentation.
+- You may not have the necessary permissions. Review the [prerequisites](#prerequisites) and the [fleet_policies_write][14] documentation.
 
 ### Why does my Agent have an `unknown` HA Agent state?
 
