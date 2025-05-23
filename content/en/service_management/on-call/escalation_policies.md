@@ -23,15 +23,15 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Select the **Teams** that own this escalation policy.
 1. For each escalation step:
    1. Decide who should be notified. You can specify individual users, teams, or whoever is on-call in a schedule.
-	 1. Select one of the following notification methods: `Notify All`, `Round Robin`. See [Escalation policy notification types](#escalation-policy-step-notification-types) for details.
-	 1. Specify how many minutes the recipient has to acknowledge the page before it is escalated to the next tier.
-   For example, the following will notify the current on-call user when a page is triggered. It will escalate to Jane Doe if John does not acknowledge the page within 5 minutes.
+   1. Select one of the following notification methods: `Notify All`, `Round Robin`. See [Escalation policy notification types](#escalation-policy-step-notification-types) for details.
+   1. Specify how many minutes the recipient has to acknowledge the page before it is escalated to the next tier.
+   <br>For example, the following will notify the current on-call user when a page is triggered. It will escalate to Jane Doe if John does not acknowledge the page within 5 minutes.
    {{< img src="service_management/oncall/escalation_policy_2_steps_v2.png" alt="An escalation policy configured to notify the scheduled on-call user and escalate to Jane Doe if the page is not acknowledged after 5 minutes." style="width:100%;" >}}
 1. Set how many times to repeat the steps if no one acknowledges the page.
 1. Select whether Datadog should automatically update the page status to **Resolved** after executing all rules and repeats.
 
 ## Escalation policy step notification types
-In each step of an escalation policy, you can keep the standard `Notify All` behavior or opt-in for `Round Robin`.
+In each step of an escalation policy, you can keep the default `Notify All` behavior or choose `Round Robin`.
 {{< img src="service_management/oncall/escalation_policy_notification_type.png" alt="Notification type selector in Escalation Policy creation" style="width:100%;" >}}
 
 ### Notify all (default)
