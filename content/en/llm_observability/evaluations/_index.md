@@ -18,9 +18,9 @@ LLM Observability offers several ways to support evaluations:
 
 Datadog builds and supports [Out of the Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Submit Evaluations
+### Submit Custom Evaluations
 
-You can also [Submit Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also [Submit Custom Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
 ### Evaluation Integrations
 
