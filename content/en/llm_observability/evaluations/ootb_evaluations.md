@@ -24,6 +24,8 @@ LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM 
 
 ## Connect your LLM provider account
 
+Configure the LLM provider you would like to use for bring-your-own-key evaluations. You only have to complete this step once.
+
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
@@ -93,14 +95,14 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 1. Click on the evaluation you want to enable.
    - Configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you select the edit icon to configure the evaluation for an individual LLM application.
    - Evaluations can be disabled by selecting the disable icon for an individual LLM application.
-1. If you select **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
-1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and an account.
+1. If you chose **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
+1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and choose an account.
 1. Configure the data to run the evaluation on:
-   - Select traces (the root span of each trace) or spans (which include LLM, Workflow, and Agent spans). If you select spans, you must select at least one span name too.
-   - Select the span names you would like your evaluation to run on. (Optional if traces is selected).
-   - Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
+   - Select **traces** (the root span of each trace) or **spans** (LLM, Workflow, and Agent).
+   - If you select spans, you must select at least one **span name**, otherwise they are optional.
+   - Optionally, specify any or all **tags** you want this evaluation to run on.
    - Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A sampling percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
-1. (Optional) Configure evaluation options by selecting what subcategories should be flagged, when available.
+1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
