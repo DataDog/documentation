@@ -1571,11 +1571,21 @@ menu:
       pre: notebook
       parent: platform_heading
       weight: 20000
+    - name: Analysis Features
+      url: notebooks/advanced_analysis/
+      parent: notebooks
+      identifier: notebooks_advanced_analysis
+      weight: 1
+    - name: Getting Started
+      url: notebooks/advanced_analysis/getting_started/
+      parent: notebooks_advanced_analysis
+      identifier: notebooks_advanced_analysis_getting_started
+      weight: 101
     - name: Guides
       url: notebooks/guide
       parent: notebooks
       identifier: notebooks_guide
-      weight: 1
+      weight: 2
     - name: DDSQL Editor
       url: ddsql_editor/
       pre: ddsql
