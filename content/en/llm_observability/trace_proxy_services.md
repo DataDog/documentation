@@ -100,7 +100,7 @@ main();
 {{% /tab %}}
 {{< /tabs >}}
 
-When making requests to the proxy or gateway service, the LLM Observability SDKs automatically propagate the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
+When making requests to the proxy or gateway service, the LLM Observability SDK automatically propagates the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
 
 ## Observing LLM gateway and proxy services
 
