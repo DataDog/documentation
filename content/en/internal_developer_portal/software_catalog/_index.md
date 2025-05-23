@@ -17,19 +17,26 @@ algolia:
   tags: ['software catalog']
 ---
 
-{{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 
-[Software Catalog][1] provides a centralized, dynamic view of your software ecosystem, enabling teams to track ownership, monitor performance, manage dependencies, and enforce security and compliance standards—all in one place.
+[Software Catalog][1] provides a centralized, dynamic view of your software ecosystem, enabling teams to track ownership, monitor performance, manage dependencies, and enforce security and compliance standards.
 
-Built on real-time telemetry and automated metadata collection, Software Catalog extends beyond traditional software catalogs by offering integrations with observability, security, and cost management tools. It empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
+Built on real-time telemetry and automated metadata collection, Software Catalog also offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
 
 ## What you can do in Software Catalog
 <br>
 {{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
 <br>
+Software Catalog offers multiple views to help you explore and manage your services.
 
+- **Ownership**: Access your team's Slack, repo, or on-call information.
+- **Reliability**: Address risks by surfacing services with recent deploys, rising error rates, open incidents, or failing monitors.
+- **Performance**: Compare latency, traffic, error rate, and Apdex by environment.
+- **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
+- **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.
+- **Software Delivery**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
 - Track ownership: open a team's Slack channel, repo, or on-call rotation from the **Ownership** view
 - Spot reliability risks: surface services with recent deploys, rising error rates, open incidents, or failing monitors in **Reliability**
 - Prioritize performance work: filter by environment and compare latency, traffic, error rate, and Apdex in **Performance**
@@ -41,16 +48,16 @@ See the [Use Cases documentation][4] to learn how teams use Datadog Software Cat
 
 ## What appears in Software Catalog
 
-Software Catalog includes any entity (such as a service or datastore) that:
-- Datadog [detects from telemetry][5],
-- you [declare through an Entity Definition][6], or
-- you [import from a third party][7] such as Backstage or ServiceNow.
+Software Catalog includes an entity when:
+- Datadog [detects it from telemetry][5],
+- You [declare it in an Entity Definition][6], or
+- You [import it from a third-party source][7] such as Backstage or ServiceNow.
 
-[Learn more][3] about entity types and their configurations.
+[Learn more][3] about entity types and how to configure them for your needs.
 
 **Note**: 
-- The entity supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
-- The services and resources statistics, and span summaries on the **Service List** and **Service Page**, are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
+- Use the entity type for more precise filtering than the legacy `type` filter (from the `span.type` attribute). For example, use the `datastore type` facet to filter by specific datastore technology.
+- Span summaries and service and resource statistics are retained for up to 30 days. For deeper analysis on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
 
 {{< site-region region="gov" >}}
 ### Service types
@@ -59,7 +66,7 @@ Every monitored service is associated with a type. Datadog automatically determi
 
 For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
 
-The type of the service can be one of:
+The service type can be one of:
 
 *  Cache
 *  Custom
@@ -67,7 +74,7 @@ The type of the service can be one of:
 *  Serverless function
 *  Web
 
-Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+Some integrations alias to certain types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
 {{< /site-region >}}
 
@@ -78,8 +85,8 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 [1]: https://app.datadoghq.com/services
 [2]: /data_security/data_retention_periods/
-[3]: /internal_developer_portal/software_catalog/entity_types
-[4]: /internal_developer_portal/software_catalog/use_cases
+[3]: /internal_developer_portal/software_catalog/entity_model/entity_types
+[4]: /internal_developer_portal/use_cases
 [5]: /internal_developer_portal/software_catalog/set_up/discover_entities
 [6]: /internal_developer_portal/software_catalog/set_up/create_entities
 [7]: /internal_developer_portal/software_catalog/set_up/import_entities

@@ -16,7 +16,7 @@ further_reading:
   text: "How Datadog's Infrastructure team manages internal deployments using the Service Catalog and CI/CD Visibility"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for Datadog's Internal Developer Portal!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Join the preview for Datadog's Internal Developer Portal!" >}}
 {{< /callout >}}
 
 {{< img src="internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
@@ -25,7 +25,7 @@ further_reading:
 
 Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and self-service workflows to standardize and accelerate software delivery. 
 
-- Powered by live telemetry, its [Software Catalog][1] inventories every service and environment in real time and enriches each entry with declarative metadata for ownership and operational context.
+- Powered by live telemetry, [Software Catalog][1] inventories every service and environment in real time and enriches each entry with descriptive metadata for ownership and operational context.
 - [Self-Service Actions][2] and [Scorecards][3] translate platform policies into one-click tasks, ensuring every change meets observability, security, and production criteria. 
 - Built-in [Engineering Reports][4] give platform engineers and leaders real-time visibility into software quality, standards adoption, and developer experience, making it easy to identify gaps and drive data-backed decisions.
 

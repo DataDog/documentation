@@ -185,7 +185,7 @@ This page holds relationship data of how the API interacts with dependencies, th
 
 {{% tab "Custom entities" %}}
 
-You can define custom entity types beyond service, system, datastore, queue, and API.
+You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
 
 Example YAML:
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
