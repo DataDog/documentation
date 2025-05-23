@@ -106,8 +106,6 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
-For more information about evaluations, see [Terms and Concepts][1].
-
 ### Estimated token usage
 
 LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
@@ -131,7 +129,7 @@ This check identifies and flags user inputs that deviate from the configured acc
 
 You can provide topics for this evaluation.
 
-1. Go to [**LLM Observability > Applications**][4].
+1. Go to [**LLM Observability > Applications**][3].
 1. Select the application you want to add topics for.
 1. At the right corner of the top panel, select **Settings**.
 1. Beside **Topic Relevancy**, click **Configure Evaluation**.
@@ -270,14 +268,12 @@ This check ensures that sensitive information is handled appropriately and secur
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][5], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
+| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][4], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/terms/
 [2]: https://app.datadoghq.com/llm/settings/evaluations
-[3]: /llm_observability/terms/#topic-relevancy
-[4]: https://app.datadoghq.com/llm/applications
-[5]: /security/sensitive_data_scanner/
+[3]: https://app.datadoghq.com/llm/applications
+[4]: /security/sensitive_data_scanner/
