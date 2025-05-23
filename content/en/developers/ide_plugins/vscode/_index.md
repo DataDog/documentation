@@ -10,7 +10,10 @@ further_reading:
   text: "Learn about Continuous Testing"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
-  text: "Learn about Source Code Integration."
+  text: "Learn about Source Code Integration"
+- link: "/bits_ai/"
+  tag: "Documentation"
+  text: "Learn about the Datadog Model Context Protocol (MCP) server"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -29,10 +32,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development. It is also available for Cursor and other forks of VS Code. To install in your preferred integrated development environment (IDE):
-
-- [Visual Studio Marketplace][1]: Install the extension for VS Code.
-- [Open VSX Registry][2]: Download the VSIX file to install for Cursor and other forks of VS Code.
+The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development. It can also be used in Cursor and other forks of VS Code.
 
 {{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
@@ -48,6 +48,10 @@ The extension includes these features:
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
 
+- [**Fix in Chat**](?tab=cursor#fix-in-chat): (Cursor only) Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
+
+- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): (Cursor only) Connect Cursor's AI agent to production telemetry, tools, and contexts from Datadog.
+
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
 ## Requirements
@@ -57,6 +61,39 @@ The extension includes these features:
   - If your organization uses a custom sub-domain such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting.
 
 - **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
+
+## Installation
+
+Installation procedures may vary among other integrated development environments (IDEs).
+
+{{< tabs >}}
+{{% tab "VS Code" %}}
+Install the extension either directly in the IDE, or from the web:
+
+- **In VS Code**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog. 
+
+- **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
+
+[1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+Install the extension either directly in the IDE, or from the web:
+
+- **In Cursor**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog. 
+
+- **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
+
+### MCP server setup (Cursor only)
+
+In Cursor, the extension includes access to the Datadog Model Context Protocol (MCP) server. Enable the MCP server to enhance Cursor's AI capabilities with your specific Datadog environment.
+
+1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
+2. Find the **Datadog** server and turn on the toggle to enable it. A list of available tools is displayed (click the refresh button if necessary).
+
+[2]: https://open-vsx.org/extension/datadog/datadog-vscode
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Log annotations
 
@@ -120,11 +157,9 @@ When you start editing a source file, the extension checks for [`static-analysis
 
 {{< img src="/developers/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
 
-After you create the configuration file, the analyzer runs automatically in the background whenever you open a file. If you need to enable Static Code Analysis for a particular language, search for the command `Datadog: Configure Static Analysis Languages` in the command palette (`Shift` + `Cmd` + `P` in macOS; `Ctrl` + `Shift` + `P` in Windows).
+After you create the configuration file, the analyzer runs automatically in the background whenever you open a file. If you need to enable Static Code Analysis for a particular language, search for the command `Datadog: Configure Static Analysis Languages` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
 You can also run a batch analysis for individual folders and even the entire workspace. In the IDE's file explorer view, right-click a folder and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
-
-<!-- <div style="width:600px; height:400px; background-color:#CCCCCC; display:flex; justify-content:center; align-items:center;">image placeholder: video of batch analysis</div><br /> -->
 
 <div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
 
@@ -148,6 +183,18 @@ Select an Error Tracking code insight from the Code Insights view. Go to the sta
 Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
 
 {{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
+
+## Fix in Chat
+
+{{< tabs >}}
+{{% tab "VS Code" %}}
+This extension feature is not yet supported in VS Code.
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## License
 
