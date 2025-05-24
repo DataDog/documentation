@@ -77,13 +77,13 @@ The following widgets are included by default on the developer overview page.
 
 Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
 
-#### Jira Tickets
+#### Jira tickets
 
 Lists open Jira issues assigned to your email. Tickets with the status **Done** are excluded.
 
-#### GitHub Pull Requests
+#### GitHub pull requests
 
-Lists open PRs that you have created and PRs you are assigned to review, based on the GitHub organization and username you've provided.
+Lists open pull requests that you have created and those you are assigned to review, based on the GitHub organization and username you've provided.
 
 #### Team services and scorecard performance
 
