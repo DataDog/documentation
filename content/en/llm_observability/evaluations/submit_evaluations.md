@@ -23,7 +23,7 @@ further_reading:
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
 While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). See [Naming custom metrics][1] for guidelines on how to choose an appropriate label for your evaluations.
 
-## Submitting evaluations with the SDK
+## Submitting custom evaluations with the SDK
 
 The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit custom evaluations to LLM Observability. See the [Python][3] or [NodeJS][4] SDK documentation for more details.
 
@@ -55,7 +55,7 @@ def llm_call():
 {{< /code-block >}}
 
 
-## Submitting evaluations with the API
+## Submitting custom evaluations with the API
 
 You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
 
