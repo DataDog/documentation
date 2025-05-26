@@ -573,8 +573,28 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "ListDORADeployments": {
+    "description": "Use this API endpoint to get a list of deployment events.",
+    "summary": "Get a list of deployment events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of deployments."
+  },
+  "GetDORADeployment": {
+    "description": "Use this API endpoint to get a deployment event.",
+    "summary": "Get a deployment event"
+  },
+  "ListDORAFailures": {
+    "description": "Use this API endpoint to get a list of failure events.",
+    "summary": "Get a list of failure events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of failures."
+  },
+  "GetDORAFailure": {
+    "description": "Use this API endpoint to get a failure event.",
+    "summary": "Get a failure event"
+  },
   "CreateDORAIncident": {
-    "description": "Use this API endpoint to provide data about incidents for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send an incident event for DORA Metrics",
     "request_description": "",
     "request_schema_description": "Request to create a DORA incident event."
