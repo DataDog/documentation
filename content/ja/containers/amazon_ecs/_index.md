@@ -43,6 +43,12 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
 
 **注:** ECS および Docker を併用して Datadog の[オートディスカバリー][5]を実行すると、環境内で実行中のタスクを自動的に検出して監視できます。
 
+{{% site-region region="gov" %}}
+#### FIPS 準拠
+
+FIPS 準拠の設定には、特定の設定手順が必要です。詳細については、[FIPS 準拠のドキュメント][32]を参照してください。
+{{% /site-region %}}
+
 ### ECS タスク定義の作成
 
 この [ECS タスク定義][30]は、必要な構成で Datadog Agent コンテナを起動します。Agent の構成を変更する必要がある場合、このタスク定義を更新し、デーモンサービスを再デプロイします。このタスク定義は、AWS Management Console または [AWS CLI][9] を使用して構成することができます。
@@ -315,6 +321,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 #### 行政機関の環境向けの Datadog 用 FIPSプロキシ
 
 <div class="alert alert-warning">
+この機能は、<a href="/agent/configuration/fips-compliance/">Datadog FIPS Agent</a> に置き換えられています。
 この機能は Linux でのみ利用可能です。
 </div>
 
@@ -478,3 +485,4 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /ja/network_monitoring/network_path
+[32]: /agent/configuration/fips-compliance/

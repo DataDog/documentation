@@ -45,6 +45,12 @@ The following instructions assume that you have configured an EC2 cluster. See t
 
 **Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
+{{% site-region region="gov" %}}
+## FIPS Compliance
+
+Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.
+{{% /site-region %}}
+
 ### Create an ECS task definition
 
 This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9].
@@ -317,7 +323,8 @@ You can run the Agent in `awsvpc` mode, but Datadog does not recommend this beca
 #### FIPS proxy for Datadog for Government environments
 
 <div class="alert alert-warning">
-This feature is only available for Linux.
+The FIPS proxy is progressively being deprecated. We recommend using the <a href="/agent/configuration/fips-compliance/">Datadog FIPS Agent</a> instead.
+The FIPS Proxy is only available for Linux.
 </div>
 
 To send data to the Datadog for Government site, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features][1].
@@ -480,3 +487,4 @@ Need help? Contact [Datadog support][11].
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
+[32]: /agent/configuration/fips-compliance/
