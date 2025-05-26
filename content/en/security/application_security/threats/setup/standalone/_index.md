@@ -23,11 +23,15 @@ further_reading:
 
 ## Language Integrations
 
-{{ <appsec-integrations >}}
-  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
-  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
-  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
-{{ </appsec-integrations >}}
+{{<appsec-integrations >}}
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" />}}
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" />}}
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" />}}
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/node_avatar.svg" />}}  
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/php_avatar.svg" />}}  
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/go_avatar.svg" />}}
+  {{<appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/ruby_avatar.svg" />}}
+{{</appsec-integrations >}}
 
 ## Proxy Integrations
 
