@@ -86,7 +86,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 
 ## Investigate resources
 
-Use the [Security Graph][17] to investigate the relationships between your resources.
+Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
