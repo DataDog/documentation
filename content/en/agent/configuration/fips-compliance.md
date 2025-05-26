@@ -21,13 +21,12 @@ algolia:
 <div class="alert alert-warning">The Datadog FIPS Agent is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
 
-The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent includes limited support for integrations that need to collect observability data that is external to the host.
+The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions. The FIPS Agent also includes limited support for integrations that need to collect observability data that is external to the host.
+
+**It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
 
 ## Supported platforms and limitations
 
-The FIPS Agent's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions.
-
-**It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
 
 Supported platforms:
 
@@ -46,10 +45,8 @@ Supported products (Agent 7.65.0 and above):
 - Runtime Security
 
 The Datadog FIPS Agent does **not** support the following:
-
 - Serverless Monitoring
 - Communication between Cluster Agent and Node Agents
-- Agent integrations
 - Outbound communication to anything other than GovCloud
 
 ## Prerequisites
@@ -79,18 +76,6 @@ In addition to the Operating System (OS) requirements above:
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Remove any `fips-proxy` installations on the host by uninstalling the `datadog-fips-proxy` package with your OS package manager. For example:
-
-   **Red Hat**
-   ```sh
-   sudo yum remove datadog-fips-proxy
-   ```
-   **Ubuntu/Debian**
-   ```sh
-   sudo apt-get remove datadog-fips-proxy
-   ```
-1. Ensure that the Agent's configuration file does not contain any [FIPS proxy][2] settings. FIPS proxy settings use the `fips.*` prefix.
-1. Use the [instructions for your OS][3] to uninstall the Datadog Agent.
 1. Install the Agent with FIPS support.
 
    **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
@@ -107,7 +92,7 @@ In addition to the Operating System (OS) requirements above:
       systemctl daemon-reload
       systemctl restart 'datadog-agent*'
       ```
-   1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
+1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
       {{< img src="/agent/fips-linux.png" alt="Your image description" style="width:100%;" >}}
 
@@ -118,13 +103,13 @@ In addition to the Operating System (OS) requirements above:
 
 {{% tab "Windows" %}}
 
-1. Follow the [Windows instructions][1] to uninstall the Datadog Agent.
+1. Follow the [Windows instructions][1] to uninstall any existing Datadog Agent on the machine.
 1. Run the command below to install the FIPS Agent, replacing `DATADOG_API_KEY` with your API key:
 
    **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
 
    {{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7.65.0.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
 if ($p.ExitCode -ne 0) {
    Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
