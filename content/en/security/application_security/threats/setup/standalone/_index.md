@@ -1,7 +1,8 @@
 ---
-title: Setup Application & API Protection
+title: Setup App and API Protection
 disable_sidebar: true
 type: multi-code-lang
+customClass: integrations # add the CSS class ".integrations" to the HTML body so the js loads accordingly
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
