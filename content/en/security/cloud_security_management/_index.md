@@ -86,6 +86,8 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 
 ## Investigate resources
 
+Use the [Security Graph][17] to investigate the relationships between your resources.
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
@@ -126,3 +128,4 @@ To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3
 [14]: /security/security_inbox
 [15]: https://app.datadoghq.com/security/feed
 [16]: /security/research_feed
+[17]: /security/cloud_security_management/security_graph

@@ -6440,6 +6440,11 @@ menu:
       parent: workload_protection
       identifier: workload_protection_troubleshooting
       weight: 206
+    - name: Security Graph
+      url: security/cloud_security_management/security_graph/
+      parent: csm
+      identifier: security_graph
+      weight: 3
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
