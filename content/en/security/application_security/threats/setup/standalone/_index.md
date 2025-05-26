@@ -21,6 +21,22 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const integrations = document.querySelectorAll('.integration');
+
+  integrations.forEach(integration => {
+    integration.addEventListener('mouseenter', function() {
+      this.classList.add('hover');
+    });
+
+    integration.addEventListener('mouseleave', function() {
+      this.classList.remove('hover');
+    });
+  });
+});
+</script>
+
 ## Language Integrations
 
 {{< appsec-integrations >}}
