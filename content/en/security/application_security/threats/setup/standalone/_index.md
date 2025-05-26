@@ -24,14 +24,14 @@ further_reading:
 ## Language Integrations
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" description="Setup Application Security for Python applications" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/python" />}}
-  {{< appsec-integration name=".NET" description="Setup Application Security for .NET applications" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/dotnet" />}}
-  {{< appsec-integration name="Java" description="Setup Application Security for Java applications" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/java" />}}
-  {{< appsec-integration name="Node.js" description="Setup Application Security for Node.js applications" logo="https://static.datadoghq.com/static/images/logos/node_avatar.svg" link="/security/application_security/setup/standalone/nodejs" />}}
-  {{< appsec-integration name="PHP" description="Setup Application Security for PHP applications" logo="https://static.datadoghq.com/static/images/logos/php_avatar.svg" link="/security/application_security/setup/standalone/php" />}}
-  {{< appsec-integration name="Go" description="Setup Application Security for Go applications" logo="https://static.datadoghq.com/static/images/logos/go_avatar.svg" link="/security/application_security/setup/standalone/go" />}}
-  {{< appsec-integration name="Ruby" description="Setup Application Security for Ruby applications" logo="https://static.datadoghq.com/static/images/logos/ruby_avatar.svg" link="/security/application_security/setup/standalone/ruby" />}}
-{{</ appsec-integrations >}}
+  {{< appsec-integration name="Python" description="Setup Application Security for Python applications" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/python" >}}
+  {{< appsec-integration name=".NET" description="Setup Application Security for .NET applications" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/dotnet" >}}
+  {{< appsec-integration name="Java" description="Setup Application Security for Java applications" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/java" >}}
+  {{< appsec-integration name="Node.js" description="Setup Application Security for Node.js applications" logo="https://static.datadoghq.com/static/images/logos/node_avatar.svg" link="/security/application_security/setup/standalone/nodejs" >}}
+  {{< appsec-integration name="PHP" description="Setup Application Security for PHP applications" logo="https://static.datadoghq.com/static/images/logos/php_avatar.svg" link="/security/application_security/setup/standalone/php" >}}
+  {{< appsec-integration name="Go" description="Setup Application Security for Go applications" logo="https://static.datadoghq.com/static/images/logos/go_avatar.svg" link="/security/application_security/setup/standalone/go" >}}
+  {{< appsec-integration name="Ruby" description="Setup Application Security for Ruby applications" logo="https://static.datadoghq.com/static/images/logos/ruby_avatar.svg" link="/security/application_security/setup/standalone/ruby" >}}
+{{< /appsec-integrations >}}
 
 ## Proxy Integrations
 
