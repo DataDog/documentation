@@ -327,6 +327,10 @@
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
   },
+  "ListCatalogRelation": {
+    "description": "Get a list of entity relations from Software Catalog.",
+    "summary": "Get a list of entity relations"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -1324,22 +1328,22 @@
     "summary": "Get all aggregated connections"
   },
   "CreateOnCallEscalationPolicy": {
-    "description": "Create a new on-call escalation policy",
-    "summary": "Create on-call escalation policy",
+    "description": "Create a new On-Call escalation policy",
+    "summary": "Create On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to create a new escalation policy, including the policy data."
   },
   "DeleteOnCallEscalationPolicy": {
-    "description": "Delete an on-call escalation policy",
-    "summary": "Delete on-call escalation policy"
+    "description": "Delete an On-Call escalation policy",
+    "summary": "Delete On-Call escalation policy"
   },
   "GetOnCallEscalationPolicy": {
-    "description": "Get an on-call escalation policy",
-    "summary": "Get on-call escalation policy"
+    "description": "Get an On-Call escalation policy",
+    "summary": "Get On-Call escalation policy"
   },
   "UpdateOnCallEscalationPolicy": {
-    "description": "Update an on-call escalation policy",
-    "summary": "Update on-call escalation policy",
+    "description": "Update an On-Call escalation policy",
+    "summary": "Update On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
@@ -1362,22 +1366,22 @@
     "summary": "Resolve On-Call Page"
   },
   "CreateOnCallSchedule": {
-    "description": "Create a new on-call schedule",
-    "summary": "Create on-call schedule",
+    "description": "Create a new On-Call schedule",
+    "summary": "Create On-Call schedule",
     "request_description": "",
     "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
   },
   "DeleteOnCallSchedule": {
-    "description": "Delete an on-call schedule",
-    "summary": "Delete on-call schedule"
+    "description": "Delete an On-Call schedule",
+    "summary": "Delete On-Call schedule"
   },
   "GetOnCallSchedule": {
-    "description": "Get an on-call schedule",
-    "summary": "Get on-call schedule"
+    "description": "Get an On-Call schedule",
+    "summary": "Get On-Call schedule"
   },
   "UpdateOnCallSchedule": {
-    "description": "Update a new on-call schedule",
-    "summary": "Update on-call schedule",
+    "description": "Update a new On-Call schedule",
+    "summary": "Update On-Call schedule",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
@@ -1386,12 +1390,12 @@
     "summary": "Get the schedule on-call user"
   },
   "GetOnCallTeamRoutingRules": {
-    "description": "Get a team's on-call routing rules",
-    "summary": "Get on-call team routing rules"
+    "description": "Get a team's On-Call routing rules",
+    "summary": "Get On-Call team routing rules"
   },
   "SetOnCallTeamRoutingRules": {
-    "description": "Set a team's on-call routing rules",
-    "summary": "Set on-call team routing rules",
+    "description": "Set a team's On-Call routing rules",
+    "summary": "Set On-Call team routing rules",
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },

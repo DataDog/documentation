@@ -363,6 +363,7 @@ components:
         type: string
     FilterByRef:
       description: Filter entities by reference
+      example: service:shopping-cart
       explode: true
       in: query
       name: filter[ref]
@@ -374,6 +375,32 @@ components:
       explode: true
       in: query
       name: filter[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
+    FilterRelationByFromRef:
+      description: Filter relations by the reference of the first entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[from_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByToRef:
+      description: Filter relations by the reference of the second entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[to_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByType:
+      description: Filter relations by type.
+      explode: true
+      in: query
+      name: filter[type]
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
@@ -680,6 +707,14 @@ components:
       required: true
       schema:
         type: string
+    RelationInclude:
+      description: Include relationship data.
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationIncludeType'
     ReportID:
       description: The ID of the report job.
       in: path
@@ -9549,12 +9584,11 @@ components:
       description: Information about the target to notify (such as a team or user).
       properties:
         identifier:
-          description: A unique ID for the target (for example, team handle or user
-            UUID).
+          description: Identifier for the target (for example, team handle or user
+            ID).
           type: string
         type:
-          description: The kind of target, `team_uuid` | `team_handle` | `user_uuid`.
-          type: string
+          $ref: '#/components/schemas/OnCallPageTargetType'
       type: object
     CreatePageRequestDataType:
       default: pages
@@ -13476,7 +13510,6 @@ components:
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: true
             retries: 2
@@ -13535,7 +13568,6 @@ components:
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: true
             retries: 2
@@ -13586,13 +13618,9 @@ components:
       description: Defines the attributes for creating an escalation policy, including
         its description, name, resolution behavior, retries, and steps.
       properties:
-        description:
-          description: Provides a detailed text description of the new escalation
-            policy.
-          type: string
         name:
           description: Specifies the name for the new escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13670,14 +13698,11 @@ components:
       type: object
     EscalationPolicyDataAttributes:
       description: Defines the main attributes of an escalation policy, such as its
-        description, name, and behavior on policy end.
+        name and behavior on policy end.
       properties:
-        description:
-          description: Provides a detailed text description of the escalation policy.
-          type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13796,7 +13821,7 @@ components:
         targets.
       properties:
         targets:
-          $ref: '#/components/schemas/EscalationTarget'
+          $ref: '#/components/schemas/EscalationTargets'
       type: object
     EscalationPolicyStepTarget:
       description: Defines a single escalation target within a step for an escalation
@@ -13837,7 +13862,6 @@ components:
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: false
             retries: 2
@@ -13887,12 +13911,9 @@ components:
       description: Defines the attributes that can be updated for an escalation policy,
         such as description, name, resolution behavior, retries, and steps.
       properties:
-        description:
-          description: Provides a detailed text description of the escalation policy.
-          type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13999,6 +14020,15 @@ components:
       - $ref: '#/components/schemas/TeamTarget'
       - $ref: '#/components/schemas/UserTarget'
       - $ref: '#/components/schemas/ScheduleTarget'
+    EscalationTargets:
+      description: A list of escalation targets for a step
+      properties:
+        data:
+          description: The `EscalationTargets` `data`.
+          items:
+            $ref: '#/components/schemas/EscalationTarget'
+          type: array
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -19854,6 +19884,38 @@ components:
           $ref: '#/components/schemas/PowerpackResponseLinks'
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
+    ListRelationCatalogResponse:
+      description: List entity relation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationResponseData'
+        included:
+          $ref: '#/components/schemas/ListRelationCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListRelationCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RelationResponseMeta'
+      type: object
+    ListRelationCatalogResponseIncluded:
+      description: List relation response included entities.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    ListRelationCatalogResponseLinks:
+      description: List relation response links.
+      properties:
+        next:
+          description: Next link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=2
+          type: string
+        previous:
+          description: Previous link.
+          type: string
+        self:
+          description: Current link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=0
+          type: string
       type: object
     ListRulesResponse:
       description: Scorecard rules response.
@@ -26910,6 +26972,18 @@ components:
             $ref: '#/components/schemas/OktaAccountResponseData'
           type: array
       type: object
+    OnCallPageTargetType:
+      description: The kind of target, `team_id` | `team_handle` | `user_id`.
+      enum:
+      - team_id
+      - team_handle
+      - user_id
+      example: team_id
+      type: string
+      x-enum-varnames:
+      - TEAM_ID
+      - TEAM_HANDLE
+      - USER_ID
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -29210,6 +29284,114 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RelationAttributes:
+      description: Relation attributes.
+      properties:
+        from:
+          $ref: '#/components/schemas/RelationEntity'
+        to:
+          $ref: '#/components/schemas/RelationEntity'
+        type:
+          $ref: '#/components/schemas/RelationType'
+      type: object
+    RelationEntity:
+      description: Relation entity reference.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+      type: object
+    RelationIncludeType:
+      description: Supported include types for relations.
+      enum:
+      - entity
+      - schema
+      type: string
+      x-enum-varnames:
+      - ENTITY
+      - SCHEMA
+    RelationMeta:
+      description: Relation metadata.
+      properties:
+        createdAt:
+          description: Relation creation time.
+          format: date-time
+          type: string
+        definedBy:
+          description: Relation defined by.
+          type: string
+        modifiedAt:
+          description: Relation modification time.
+          format: date-time
+          type: string
+        source:
+          description: Relation source.
+          type: string
+      type: object
+    RelationRelationships:
+      description: Relation relationships.
+      properties:
+        fromEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+        toEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+      type: object
+    RelationResponse:
+      description: Relation response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RelationAttributes'
+        id:
+          description: Relation ID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/RelationMeta'
+        relationships:
+          $ref: '#/components/schemas/RelationRelationships'
+        subtype:
+          description: Relation subtype.
+          type: string
+        type:
+          $ref: '#/components/schemas/RelationResponseType'
+      type: object
+    RelationResponseData:
+      description: Array of relation responses
+      items:
+        $ref: '#/components/schemas/RelationResponse'
+      type: array
+    RelationResponseMeta:
+      description: Relation response metadata.
+      properties:
+        count:
+          description: Total relations count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    RelationResponseType:
+      description: Relation type.
+      enum:
+      - relation
+      type: string
+      x-enum-varnames:
+      - RELATION
+    RelationToEntity:
+      description: Relation to entity.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+      type: object
     RelationType:
       description: Supported relation types.
       enum:
@@ -31905,9 +32087,6 @@ components:
         data:
           attributes:
             name: On-Call Schedule
-            tags:
-            - tag1
-            - tag2
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           relationships:
@@ -31991,9 +32170,6 @@ components:
                 start_time: 09:00:00
               rotation_start: '2025-02-01T00:00:00Z'
             name: On-Call Schedule
-            tags:
-            - tag1
-            - tag2
             time_zone: America/New_York
           relationships:
             teams:
@@ -32023,10 +32199,10 @@ components:
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
-        name, layers, time zone, and tags.
+        name, layers, and time zone.
       properties:
         layers:
-          description: The layers of on-call coverage that define rotation intervals
+          description: The layers of On-Call coverage that define rotation intervals
             and restrictions.
           items:
             $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems'
@@ -32035,11 +32211,6 @@ components:
           description: A human-readable name for the new schedule.
           example: Team A On-Call
           type: string
-        tags:
-          description: A list of tags for categorizing or filtering the schedule.
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone in which the schedule is defined.
           example: America/New_York
@@ -32127,18 +32298,13 @@ components:
       - type
       type: object
     ScheduleDataAttributes:
-      description: Provides core properties of a schedule object, such as its name,
-        time zone, and tags.
+      description: Provides core properties of a schedule object such as its name
+        and time zone.
       properties:
         name:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
-        tags:
-          description: A list of tags associated with this schedule.
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone in which this schedule operates.
           example: America/New_York
@@ -32344,10 +32510,6 @@ components:
                 start_time: 09:00:00
               rotation_start: '2025-02-01T00:00:00Z'
             name: On-Call Schedule Updated
-            tags:
-            - tag1
-            - tag2
-            - tag3
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           relationships:
@@ -32364,7 +32526,7 @@ components:
       type: object
     ScheduleUpdateRequestData:
       description: Contains all data needed to update an existing schedule, including
-        its attributes (such as name, layers, or tags) and any relationships to teams.
+        its attributes (such as name and time zone) and any relationships to teams.
       properties:
         attributes:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributes'
@@ -32383,7 +32545,7 @@ components:
       type: object
     ScheduleUpdateRequestDataAttributes:
       description: Defines the updatable attributes for a schedule, such as name,
-        time zone, tags, and layers.
+        time zone, and layers.
       properties:
         layers:
           description: The updated list of layers (rotations) for this schedule.
@@ -32394,14 +32556,6 @@ components:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
-        tags:
-          description: A list of tags that you can associate with this schedule.
-          example:
-          - front-end
-          - team-a
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone used when interpreting rotation times.
           example: America/New_York
@@ -38350,8 +38504,6 @@ components:
         id:
           description: The team's unique identifier.
           type: string
-        relationships:
-          $ref: '#/components/schemas/TeamReferenceRelationships'
         type:
           $ref: '#/components/schemas/TeamReferenceType'
       required:
@@ -38374,46 +38526,6 @@ components:
           description: The full, human-readable name of the team.
           type: string
       type: object
-    TeamReferenceRelationships:
-      description: Collects the key relationship fields for a team reference, specifically
-        on-call users.
-      properties:
-        oncall_users:
-          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsers'
-      type: object
-    TeamReferenceRelationshipsOncallUsers:
-      description: Defines which users are on-call within a team, stored as an array
-        of references.
-      properties:
-        data:
-          description: The list of user references who are on-call for this team.
-          items:
-            $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItems'
-          type: array
-      type: object
-    TeamReferenceRelationshipsOncallUsersDataItems:
-      description: References a user who is on-call within this team, identified by
-        `id` and `type`.
-      properties:
-        id:
-          description: The unique identifier of the user.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    TeamReferenceRelationshipsOncallUsersDataItemsType:
-      default: users
-      description: Users resource type.
-      enum:
-      - users
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
     TeamReferenceType:
       default: teams
       description: Teams resource type.
@@ -44259,6 +44371,51 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/catalog/relation:
+    get:
+      description: Get a list of entity relations from Software Catalog.
+      operationId: ListCatalogRelation
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of relations in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterRelationByType'
+      - $ref: '#/components/parameters/FilterRelationByFromRef'
+      - $ref: '#/components/parameters/FilterRelationByToRef'
+      - $ref: '#/components/parameters/RelationInclude'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRelationCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity relations
+      tags:
+      - Software Catalog
+      x-menu-order: 3
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
@@ -53795,7 +53952,7 @@ paths:
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/on-call/escalation-policies:
     post:
-      description: Create a new on-call escalation policy
+      description: Create a new On-Call escalation policy
       operationId: CreateOnCallEscalationPolicy
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -53829,7 +53986,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on-call escalation policy
+      summary: Create On-Call escalation policy
       tags:
       - On-Call
       x-given:
@@ -53837,9 +53994,9 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
-              unique }}\",\n      \"description\": \"{{ unique }}\",\n      \"resolve_page_on_policy_end\":
-              true,\n      \"retries\": 2,\n      \"steps\": [\n        {\n          \"assignment\":
-              \"default\",\n          \"escalate_after_seconds\": 3600,\n          \"targets\":
+              unique }}\",\n      \"resolve_page_on_policy_end\": true,\n      \"retries\":
+              2,\n      \"steps\": [\n        {\n          \"assignment\": \"default\",\n
+              \         \"escalate_after_seconds\": 3600,\n          \"targets\":
               [\n            {\n              \"id\": \"{{ dd_team.data.id }}\",\n
               \             \"type\": \"teams\"\n            },\n            {\n              \"id\":
               \"{{ schedule.data.id }}\",\n              \"type\": \"schedules\"\n
@@ -53867,7 +54024,7 @@ paths:
         type: unsafe
   /api/v2/on-call/escalation-policies/{policy_id}:
     delete:
-      description: Delete an on-call escalation policy
+      description: Delete an On-Call escalation policy
       operationId: DeleteOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53892,7 +54049,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on-call escalation policy
+      summary: Delete On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
@@ -53903,7 +54060,7 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get an on-call escalation policy
+      description: Get an On-Call escalation policy
       operationId: GetOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53940,7 +54097,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call escalation policy
+      summary: Get On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
@@ -53951,7 +54108,7 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update an on-call escalation policy
+      description: Update an On-Call escalation policy
       operationId: UpdateOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53994,7 +54151,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on-call escalation policy
+      summary: Update On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
@@ -54243,7 +54400,7 @@ paths:
         type: unsafe
   /api/v2/on-call/schedules:
     post:
-      description: Create a new on-call schedule
+      description: Create a new On-Call schedule
       operationId: CreateOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -54277,7 +54434,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on-call schedule
+      summary: Create On-Call schedule
       tags:
       - On-Call
       x-given:
@@ -54294,8 +54451,7 @@ paths:
               \"friday\",\n              \"end_time\": \"17:00:00\",\n              \"start_day\":
               \"monday\",\n              \"start_time\": \"09:00:00\"\n            }\n
               \         ],\n          \"rotation_start\": \"{{ timeISO('now - 5d')
-              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"tags\":
-              [\n        \"tag1\",\n        \"tag2\"\n      ],\n      \"time_zone\":
+              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"time_zone\":
               \"America/New_York\"\n    },\n    \"relationships\": {\n      \"teams\":
               {\n        \"data\": [\n          {\n            \"id\": \"65aea9d0-941c-4607-bf8a-14fc0dac2820\",\n
               \           \"type\": \"teams\"\n          }\n        ]\n      }\n    },\n
@@ -54314,7 +54470,7 @@ paths:
         type: unsafe
   /api/v2/on-call/schedules/{schedule_id}:
     delete:
-      description: Delete an on-call schedule
+      description: Delete an On-Call schedule
       operationId: DeleteOnCallSchedule
       parameters:
       - description: The ID of the schedule
@@ -54339,7 +54495,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on-call schedule
+      summary: Delete On-Call schedule
       tags:
       - On-Call
       x-menu-order: 3
@@ -54350,7 +54506,7 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get an on-call schedule
+      description: Get an On-Call schedule
       operationId: GetOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -54385,7 +54541,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call schedule
+      summary: Get On-Call schedule
       tags:
       - On-Call
       x-menu-order: 2
@@ -54396,7 +54552,7 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a new on-call schedule
+      description: Update a new On-Call schedule
       operationId: UpdateOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -54439,7 +54595,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on-call schedule
+      summary: Update On-Call schedule
       tags:
       - On-Call
       x-menu-order: 4
@@ -54504,7 +54660,7 @@ paths:
         type: safe
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
-      description: Get a team's on-call routing rules
+      description: Get a team's On-Call routing rules
       operationId: GetOnCallTeamRoutingRules
       parameters:
       - description: The team ID
@@ -54533,7 +54689,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call team routing rules
+      summary: Get On-Call team routing rules
       tags:
       - On-Call
       x-menu-order: 9
@@ -54544,7 +54700,7 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Set a team's on-call routing rules
+      description: Set a team's On-Call routing rules
       operationId: SetOnCallTeamRoutingRules
       parameters:
       - description: The team ID
@@ -54579,7 +54735,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Set on-call team routing rules
+      summary: Set On-Call team routing rules
       tags:
       - On-Call
       x-given:
