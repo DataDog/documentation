@@ -35,75 +35,44 @@ further_reading:
 
 ## Proxy Integrations
 
-<div id="integration-tiles" data-ref="container">
-  <div id="integrations" class="row integration-row mx-0">
-    <div id="mixid_1" data-id="1" class="item" data-ref="item">
-      <div class="integration">
-        <div id="1password" class="card-content">
-          <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
-            <picture class="mx-auto my-auto">
-              <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
-            </picture>
-            <div class="text-center picture-title">1Password</div>
-            <div class="text-center title">1Password</div>
-            <div class="blurb text-center">Get events for your 1Password account.</div>
-            <button type="button">Learn More</button>
-          </a>
-          <div class="dimmer-cloak"></div>
-        </div>
-      </div>
-    </div>
-    <div id="mixid_2" data-id="2" class="item" data-ref="item">
-      <div class="integration">
-        <div id="1password" class="card-content">
-          <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
-            <picture class="mx-auto my-auto">
-              <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
-            </picture>
-            <div class="text-center picture-title">1Password</div>
-            <div class="text-center title">1Password</div>
-            <div class="blurb text-center">Get events for your 1Password account.</div>
-            <button type="button">Learn More</button>
-          </a>
-          <div class="dimmer-cloak"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-Envoy
-NGINX
-Istio
+{{< appsec-integrations >}}
+  {{< appsec-integration name="NGINX" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx_avatar.svg" link="/security/application_security/setup/standalone/nginx" >}}
+  {{< appsec-integration name="Envoy" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/envoy_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
+  {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/istio" >}}
+{{< /appsec-integrations >}}
 
 ## Cloud and Containers Integrations
 
-## Google Cloud Platform
+### Google Cloud Platform (GCP) Integrations
 
-Applicaton Load Balancer
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Application Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Application Cloud Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Service Extension" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Cloud Run" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
+{{< /appsec-integrations >}}
 
-## Azure
+### Microsoft Azure Integrations
 
-Azure App Function
+{{< appsec-integrations >}}
+  {{< appsec-integration name="App Service" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
+{{< /appsec-integrations >}}
 
-## AWS
+### Amazon Web Services (AWS) Integrations
 
-AWS Lambda
+{{< appsec-integrations >}}
+  {{< appsec-integration name="AWS WAF" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-waf_avatar.svg" link="/security/application_security/setup/standalone/aws/waf" >}}
+  {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-lambda_avatar.svg" link="/security/application_security/setup/standalone/aws/lambda" >}}
+  {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
+{{< /appsec-integrations >}}
 
-## Kubernetes
+### Kubernetes Integrations
 
-Gateway API
-NGINX Ingress
-Istio
-
-Select your application language for details on how to enable Application & API Protection for your language and infrastructure types.
-
-{{< partial name="security-platform/appsec-languages.html" >}}</br>
+{{< appsec-integrations >}}
+  {{< appsec-integration name="NGINX Ingress Controller" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx-ingress-controller_avatar.svg" link="/security/application_security/setup/standalone/nginx-ingress-controller" >}}
+  {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
+{{< /appsec-integrations >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /security/application_security/setup/compatibility
-[2]: /agent/
-[3]: /security/application_security/guide/standalone_application_security/
