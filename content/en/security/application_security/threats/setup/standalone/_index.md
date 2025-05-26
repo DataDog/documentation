@@ -23,42 +23,47 @@ further_reading:
 
 ## Language Integrations
 
-Go
-Java
+{{ <appsec-integrations >}}
+  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+{{ </appsec-integrations >}}
 
 ## Proxy Integrations
 
-<div id="integrations" class="row integration-row mx-0">
-  <div id="mixid_1" data-id="1" class="item" data-ref="item">
-    <div class="integration">
-      <div id="1password" class="card-content">
-        <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
-          <picture class="mx-auto my-auto">
-            <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
-          </picture>
-          <div class="text-center picture-title">1Password</div>
-          <div class="text-center title">1Password</div>
-          <div class="blurb text-center">Get events for your 1Password account.</div>
-          <button type="button">Learn More</button>
-        </a>
-        <div class="dimmer-cloak"></div>
+<div id="integration-tiles" ata-ref="container">
+  <div id="integrations" class="row integration-row mx-0">
+    <div id="mixid_1" data-id="1" class="item" data-ref="item">
+      <div class="integration">
+        <div id="1password" class="card-content">
+          <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
+            <picture class="mx-auto my-auto">
+              <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
+            </picture>
+            <div class="text-center picture-title">1Password</div>
+            <div class="text-center title">1Password</div>
+            <div class="blurb text-center">Get events for your 1Password account.</div>
+            <button type="button">Learn More</button>
+          </a>
+          <div class="dimmer-cloak"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="mixid_2" data-id="2" class="item" data-ref="item">
-    <div class="integration">
-      <div id="1password" class="card-content">
-        <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
-          <picture class="mx-auto my-auto">
-            <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
-          </picture>
-          <div class="text-center picture-title">1Password</div>
-          <div class="text-center title">1Password</div>
-          <div class="blurb text-center">Get events for your 1Password account.</div>
-          <button type="button">Learn More</button>
-        </a>
-        <div class="dimmer-cloak"></div>
+    <div id="mixid_2" data-id="2" class="item" data-ref="item">
+      <div class="integration">
+        <div id="1password" class="card-content">
+          <a href="https://docs.datadoghq.com/integrations/1password/" aria-label="1Password datadog integration docs link">
+            <picture class="mx-auto my-auto">
+              <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" alt="1Password logo" loading="lazy">
+            </picture>
+            <div class="text-center picture-title">1Password</div>
+            <div class="text-center title">1Password</div>
+            <div class="blurb text-center">Get events for your 1Password account.</div>
+            <button type="button">Learn More</button>
+          </a>
+          <div class="dimmer-cloak"></div>
+        </div>
       </div>
     </div>
   </div>
