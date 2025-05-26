@@ -9,7 +9,7 @@ further_reading:
     text: Enable Runtime Metrics
 ---
 
-<div class="alert alert-info"> Single Step APM Instrumentation on Windows is currently in preview.</div>
+<div class="alert alert-info"> Single Step APM Instrumentation on Windows is in Preview.</div>
 
 ## Overview
 
@@ -19,12 +19,12 @@ With Single Step Instrumentation (SSI), you can automatically enable APM for you
 
 To enable APM with Single Step Instrumentation on Windows:
 
-1. In the Datadog app, go to the Install Datadog [Windows Agent page][1] .
-1. Under Customize your observability coverage, toggle APM Instrumentation on.
+1. In Datadog, go to the Install Datadog [Windows Agent page][1] .
+1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
 1. Copy and run the provided MSI install command on your Windows host.
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
 
-Once installed, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
+After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
 **Note:** Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
 
@@ -34,14 +34,14 @@ By default, Single Step Instrumentation installs the latest supported version of
 
 If you need to pin a specific version:
 
-1. From the Windows Agent install page, after toggling APM Instrumentation, select Customize library versions.
+1. From the Windows Agent install page, after toggling **Application Performance Monitoring (APM)** instrumentation, select Customize library versions.
 1. Under .NET, choose the version you want to use.
 1. Copy the updated MSI command and run it on your host.
 
 ## Remove Single Step APM instrumentation from your Agent
 
 
-To disable SSI for .NET on your host run:
+To disable SSI for .NET on your host, run:
 
 ```shell
 &"C:\Program Files\Datadog\Datadog Agent\bin\datadog-installer.exe" remove datadog-apm-library-dotnet
