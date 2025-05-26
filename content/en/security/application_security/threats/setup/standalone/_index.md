@@ -24,9 +24,9 @@ further_reading:
 ## Language Integrations
 
 {{ <appsec-integrations >}}
-  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
-  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
-  {{ <appsec-integrations name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
+  {{ <appsec-integration name="1Password" description="Get events for your 1Password account" logo="https://static.datadoghq.com/static/images/logos/onepassword_avatar.svg" />}}
 {{ </appsec-integrations >}}
 
 ## Proxy Integrations
