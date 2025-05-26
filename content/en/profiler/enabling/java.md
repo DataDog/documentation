@@ -226,6 +226,8 @@ or:
 ```
 -Ddd.profiling.ddprof.wall.enabled=false
 ```
+Note: If you are relying solely on JFR-based profiling, you will not receive walltime data, even on Java 11+.
+
 
 For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples.
 
