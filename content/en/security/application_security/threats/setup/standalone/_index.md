@@ -23,7 +23,8 @@ further_reading:
 
 ## Language Integrations
 
-{{< appsec_languages >}}
+Go
+Java
 
 ## Proxy Integrations
 
