@@ -234,7 +234,7 @@ Si es necesario, configura la biblioteca de rastreo para que envíe datos de tel
 
 La instrumentación personalizada depende de tu instrumentación automática e incluye pasos adicionales según el método:
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Windows" %}}
 
@@ -289,7 +289,7 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 
 #### Servicios de Windows
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Registry Editor" (Editor de registro) %}}
 
