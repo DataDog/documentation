@@ -21,7 +21,7 @@ algolia:
 <div class="alert alert-warning">The Datadog FIPS Agent is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
 
-The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent includes limited support for integrations that need to collect observability data that is external to the host.
+The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent includes [limited support for integrations][3] that need to collect observability data that is external to the host.
 
 ## Supported platforms and limitations
 
@@ -44,12 +44,11 @@ Supported products (Agent 7.65.0 and above):
 - Processes
 - Orchestrator Explorer
 - Runtime Security
+- Serverless Monitoring
 
 The Datadog FIPS Agent does **not** support the following:
 
-- Serverless Monitoring
 - Communication between Cluster Agent and Node Agents
-- Agent integrations
 - Outbound communication to anything other than GovCloud
 
 ## Prerequisites
@@ -145,6 +144,30 @@ if ($p.ExitCode -ne 0) {
 [2]: https://windows-agent.datadoghq.com/installers_v2.json
 
 {{% /tab %}}
+
+{{% tab "Serverless" %}}
+
+To use the AWS Lambda extension in FIPS mode, follow the instructions in the <a href="/serverless/aws_lambda/fips-compliance/">AWS Lambda FIPS Compliance</a> page.
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+In order to use the ECS integration in FIPS mode, some pre requisite steps are required to setup AWS compute instances in FIPS Mode depending of the instance type. Please refer to the following pages for more information:
+
+- [AWS EC2 FIPS Compliance][1]
+- [AWS Fargate FIPS Compliance][2]
+
+Then follow the step-by-step instructions in the <a href="/containers/ecs/fips-compliance">ECS instructions</a> page with the following parameters:
+
+Task Definition override:
+   - `DD_SITE` must be set to `ddog-gov.com`
+   - `image` (in `containerDefinitions`) must be set to `public.ecr.aws/datadog/agent:7-fips`
+
+[1]: https://docs.aws.amazon.com/linux/al2/ug/fips-mode.html
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Security and hardening
@@ -164,3 +187,4 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [2]: /agent/configuration/fips-compliance/
 [3]: /integrations/guide/fips-integrations
+[4]: /integrations/guide/jmxfetch-fips
