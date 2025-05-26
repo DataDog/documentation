@@ -17,6 +17,8 @@ With Single Step Instrumentation (SSI), you can automatically enable APM for you
 
 ## Enable APM on Windows
 
+**Note:** Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
+
 To enable APM with Single Step Instrumentation on Windows:
 
 1. In Datadog, go to the Install Datadog [Windows Agent page][1] .
@@ -25,8 +27,6 @@ To enable APM with Single Step Instrumentation on Windows:
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
 
 After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
-
-**Note:** Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
 
 ## Set SDK Tracer Versions
 
