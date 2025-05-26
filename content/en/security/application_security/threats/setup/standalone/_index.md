@@ -31,7 +31,7 @@ further_reading:
 
 ## Proxy Integrations
 
-<div id="integration-tiles" ata-ref="container">
+<div id="integration-tiles" data-ref="container">
   <div id="integrations" class="row integration-row mx-0">
     <div id="mixid_1" data-id="1" class="item" data-ref="item">
       <div class="integration">
@@ -49,7 +49,6 @@ further_reading:
         </div>
       </div>
     </div>
-
     <div id="mixid_2" data-id="2" class="item" data-ref="item">
       <div class="integration">
         <div id="1password" class="card-content">
