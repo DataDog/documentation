@@ -14457,8 +14457,8 @@ components:
         operator:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         type:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
       required:
@@ -14514,6 +14514,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
       type: object
     SyntheticsAssertionJSONSchemaMetaSchema:
@@ -14621,8 +14622,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         timingsScope:
           $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
@@ -14632,6 +14633,20 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTargetValue:
+      description: Value used by the operator in assertions. Can be either a number
+        or string.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
+    SyntheticsAssertionTargetValueNumber:
+      description: Numeric value used by the operator in assertions.
+      format: double
+      type: number
+    SyntheticsAssertionTargetValueString:
+      description: String value used by the operator in assertions. Supports templated
+        variables.
+      type: string
     SyntheticsAssertionTimingsScope:
       description: Timings scope for response time assertions.
       enum:
@@ -14716,6 +14731,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
         xPath:
           description: The X path to assert.

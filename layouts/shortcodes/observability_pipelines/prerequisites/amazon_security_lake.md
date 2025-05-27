@@ -13,9 +13,7 @@
             - AWS account ID
             - External ID
      - Select **Create and use a new service** for service access.
-1. Set up AWS authentication using `AWS_PROFILE` and `AWS_CONFIG FILE` environment variables. Observability Pipelines uses credentials associated with those environment variables to send logs to Amazon Security Lake. See [AWS Authentication][10074] for more information.
 
 [10071]: https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html
 [10072]: https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html
 [10073]: https://docs.aws.amazon.com/security-lake/latest/userguide/get-started-console.html
-[10074]: /observability_pipelines/destinations/amazon_security_lake/#aws-authentication
