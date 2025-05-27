@@ -12,8 +12,6 @@ Scheduled CSV Reports let you automatically receive recurring, structured data e
 
 ## Define a query
 
-<!-- TODO: Add an image of an example query -->
-
 To schedule a CSV Report, the query must meet the following conditions:
 
 * The query must be created from the [Log Explorer][1]  
@@ -40,8 +38,6 @@ To view CSV reports navigate to [Log Explorer][1] and click the **Reports** tab.
 
 * You must have the **Log Reports Write** permission to create your own report schedules  
 * You must have the **Log Reports Manage** permission to modify other users' report schedules  
-
-<!-- {{< img src="logs/reports/reports_view.png" alt="Reports view showing all Scheduled CSV reports in Log Explorer" style="width:100%;" >}} -->
 
 After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have **Log Reports Write** or **Log Reports Manage** permissions, you can unsubscribe from the report directly from an email
 
