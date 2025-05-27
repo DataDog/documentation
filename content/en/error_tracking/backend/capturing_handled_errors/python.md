@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 This code should be added after the functions definitions that contain handled errors.
 
-### Manual Instrumentation
+### Manual instrumentation
 
 You can report handled errors manually using ``span.record_exception(e)``:
 
