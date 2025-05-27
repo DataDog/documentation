@@ -64,16 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
 ### Google Cloud Platform (GCP) Integrations
 
 {{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="Application Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Application Cloud Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Service Extension" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Cloud Run" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
+  {{< appsec-integration name="Google Application Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Cloud Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Service Extension" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Cloud Run" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
 {{< /appsec-integrations >}}
 
 ### Microsoft Azure Integrations
 
 {{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="App Service" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
+  {{< appsec-integration name="Azure App Service" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
 {{< /appsec-integrations >}}
 
 ### Amazon Web Services (AWS) Integrations
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
 {{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="AWS WAF" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-waf_avatar.svg" link="/security/application_security/setup/standalone/aws/waf" >}}
   {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-lambda_avatar.svg" link="/security/application_security/setup/standalone/aws/lambda" >}}
-  {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
-{{< /appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
+  {{< appsec-integration name="AWS Fargate" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
+{{< /appsec-integrations >}}
 
 ### Kubernetes Integrations
 
