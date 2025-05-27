@@ -6,9 +6,9 @@ Data Quality Monitoring helps you detect and troubleshoot issues in your data wo
 
 {{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; one table is flagged with a triggered alert" style="width:100%;" >}}
 
-## Supported data sources and integrations
+## Connect your data sources
 
-To use Data Quality Monitoring, you must enable the relevant integrations for your data sources in Datadog. The table below outlines the required setup steps.
+Data Quality Monitoring supports Snowflake and BigQuery. To get started, enable the relevant integration and ensure the required features are turned on.
 
 | Data source | Required configuration                                                                                                |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
