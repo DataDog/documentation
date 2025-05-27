@@ -30,7 +30,8 @@ Add the `dd-trace-js` [library][1] to your application.
 
 #### app.js
 ```js
-// The tracer includes a dogstatsd client.
+// The tracer includes a dogstatsd client. The tracer is actually started with `NODE_OPTIONS`
+// so that we can take advantage of startup tracing.
 // The tracer will inject the current trace ID into logs with `DD_LOGS_INJECTION`.
 // The tracer will send profiling information with `DD_PROFILING_ENABLED`.
 const tracer = require('dd-trace').init();
@@ -89,7 +90,13 @@ The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [
 
 Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` which will forward all of files ending in `.log` in the `/shared-volume/logs` directory.
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` which will forward all of files ending in `.log` in the `/shared-volume/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since we are using `NODE_OPTIONS` to actually start our tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
+
+```js
+const tracer = require('dd-trace').init({
+	logInjection: true,
+});
+```
 
 Set `DD_PROFILING_ENABLED` to enable [Profiling][3].
 
@@ -193,7 +200,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 | `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
-| `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. |
+| `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. See also the details for your runtime above. |
 | `DD_SERVICE`      | Sidecar *and* Application | See [Unified Service Tagging][14].                                  |
 | `DD_VERSION`      | Sidecar | See [Unified Service Tagging][14].                                  |
 | `DD_ENV`          | Sidecar | See [Unified Service Tagging][14].                                  |
