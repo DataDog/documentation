@@ -56,7 +56,7 @@ The mapping descriptor has four main sections:
 | `version`    | Yes       | Must be set to `1` to indicate the mapping descriptor format version.                                                 |
 | `metadata`   | Yes       | Contains a set of hard-coded description fields about the event class. See [Metadata section](#metadata-section) for details.                         |
 | `preprocess` | No        | An ordered list of preprocessing steps. The preprocessors reformat raw data from the sources so that the data can be converted to OCSF format based on `mapping`. Each preprocessor entry consists of a `function` and parameters associated with that function. See [Preprocessors](#preprocess-section) for more information. |
-| `mapping`    | Yes       | An ordered list of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. Each [mapping](#mapping-section) may have a `conversion` specified by a [lookup table](#mapping-lookup-tables) or post-processing [mapping function](#mapping-functions). |
+| `mapping`    | Yes       | An ordered list of field-to-field assignments, where a `source` field is assigned to a `dest` field in the output OCSF event. Each [mapping](#mapping-section) may have a [lookup table](#mapping-lookup-tables) or post-processing [mapping function](#mapping-functions) to reformat the data. |
 
 ### Metadata section
 
@@ -167,7 +167,7 @@ The `mapping` section is an ordered list of field-to-field assignments. Each map
 
 A `source` path starting with `OCSF.` refers to a field in the output OCSF event that has been previously assigned.
 
-Use the `default` value if the source path may not exist before processing is done. The mapping may also optionally specify a `function` to and/or a [lookup table](#mapping-lookup-tables).
+Use the `default` value if the source path may not exist before processing is done. The mapping may also optionally specify a [function](#mapping-functions) and/or a [lookup table](#mapping-lookup-tables).
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
