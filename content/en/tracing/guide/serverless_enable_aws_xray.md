@@ -13,7 +13,7 @@ X-Ray is natively integrated and can be enabled in just a few steps, making it c
 
 Datadog APM offers deeper visibility than X-Ray. You can enrich traces with business or user context, follow async workflows across services, and capture payloads at every step. It supports custom sampling and retention, letting you dial down ingestion on noisy paths while retaining critical traces longer. This level of control is especially useful for scaling systems and debugging edge cases that are hard to reproduce.
 
-## Lambda Functions
+### AWS Lambda Functions
 
 | Capability | AWS X-Ray | Datadog APM |
 |------------|-----------|-------------|
@@ -24,7 +24,7 @@ Datadog APM offers deeper visibility than X-Ray. You can enrich traces with busi
 | Integrations | Limited to core AWS services | [Comprehensive support][5] for AWS & 3rd party services |
 | Distributed Tracing | Primitive subsegments | [Support through hybrid environments][6] |
 
-## Step Functions
+### AWS Step Functions
 
 | Capability | AWS X-Ray | Datadog APM |
 |------------|-----------|-------------|
@@ -34,9 +34,17 @@ Datadog APM offers deeper visibility than X-Ray. You can enrich traces with busi
 | Input/Output Visibility | None | Capture and visualize input and output data at each step |
 | Distributed Maps | None | [Full support for distributed maps][10] |
 
-## Enable AWS X-Ray
+## Get Started
 
-If AWS X-Ray meets your current requirements, see the [AWS X-Ray integration documentation][8] for detailed setup instructions.
+### Enable Datadog Monitoring
+
+If you need the enhanced capabilities that Datadog APM provides, follow these setup guides:
+- [Serverless monitoring for AWS Lambda][11] 
+- [Serverless monitoring for AWS Step Functions][12]
+
+### Enable AWS X-Ray Integration
+
+If AWS X-Ray meets your current requirements, see the [AWS X-Ray Integration documentation][8] for detailed setup instructions.
 
 [1]: https://docs.datadoghq.com/serverless/aws_lambda/configuration?tab=others#collect-the-request-and-response-payloads
 [2]: https://docs.datadoghq.com/serverless/aws_lambda/metrics?tab=python#enhanced-lambda-metrics
@@ -48,3 +56,5 @@ If AWS X-Ray meets your current requirements, see the [AWS X-Ray integration doc
 [8]: https://docs.datadoghq.com/integrations/amazon_xray/
 [9]: https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics
 [10]: https://docs.datadoghq.com/serverless/step_functions/distributed-maps
+[11]: https://docs.datadoghq.com/serverless/aws_lambda/
+[12]: https://docs.datadoghq.com/serverless/step_functions
