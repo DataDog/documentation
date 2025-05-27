@@ -2,16 +2,18 @@
 title: Visualize relationships with Security Graph
 ---
 
-One of the most persistent challenges in cloud security is making sense of how compute, storage, identity, and networking components interact with each other. With Security Graph, you can model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources, such as EC2 instances, IAM roles, S6 buckets, and security groups, combining data from your Agentless and Agent-based cloud scans. You can then investigate these relationships so you can surface indirect access paths, assess identity risks, and respond more effectively to emerging threats.
+One of the most persistent challenges in cloud security is making sense of how compute, storage, identity, and networking components interact with each other. With Security Graph, you can model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources, such as EC2 instances, IAM roles, S3 buckets, and security groups, combining data from your Agentless and Agent-based cloud scans. You can then investigate these relationships so you can surface indirect access paths, assess identity risks, and respond more effectively to emerging threats.
 
 ## Select or create a query
 
-There are three ways to specify the kinds of resources and relationships you want to see in Security Graph:
-- Write a query in natural language (for example, "Non-admin IAM roles that can assume admin IAM roles")
+There are two ways to specify the kinds of resources and relationships you want to see in Security Graph:
+<!-- - Write a query in natural language (for example, "Non-admin IAM roles that can assume admin IAM roles") -->
 - Select a pre-made query from the homepage
 - Build your query yourself, by specifying resource types and the relationships between them
 
-If you use a natural language or pre-made query, the technical details automatically populate in the query. You can modify those queries to fine-tune your results.
+<!-- If you use a natural language or pre-made query, the technical details automatically populate in the query. You can modify the query to fine-tune your results. -->
+
+If you use a pre-made query, the technical details automatically populate in the query. You can modify the query to fine-tune your results.
 
 ### Create and modify queries
 
