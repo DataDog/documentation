@@ -11,7 +11,7 @@ The Custom Processor is in Preview.
 
 ## VRL functions
 
-{{< whatsnext desc="The full list of functions are organized into the following categories:" >}}
+{{< whatsnext desc="The functions are organized into the following categories:" >}}
     {{< nextlink href="observability_pipelines/processors/custom_processing/#array" >}}Array{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processing/#codec" >}}Codec{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processing/#convert" >}}Convert{{< /nextlink >}}
