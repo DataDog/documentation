@@ -1,6 +1,8 @@
-name: Code Owners Approval Check
+name: Documentation Team Approval Check
 
 on:
+  pull_request:
+    types: [opened]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -11,17 +13,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check-code-owners-approval:
+  check-documentation-team-approval:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
     steps:
-      - name: Check Code Owners Approval
+      - name: Check Documentation Team Approval
         id: check_approvals
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.CODEOWNER_WORKFLOW_TOKEN }}
         with:
-          github-token: ${{secrets.CODEOWNER_WORKFLOW_TOKEN}}
+          github-token: ${{ env.GITHUB_TOKEN }}
           script: |
             const { owner, repo, number } = context.issue;
             
@@ -34,13 +38,9 @@ jobs:
               return;
             }
 
-            // Get required reviewers (this includes CODEOWNERS)
-            const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
-              owner,
-              repo,
-              pull_number: number,
-            });
-
+            // Define the documentation team slug
+            const DOCUMENTATION_TEAM = 'documentation';
+            
             // Get all reviews
             const { data: reviews } = await github.rest.pulls.listReviews({
               owner,
@@ -64,54 +64,63 @@ jobs:
                 .map(review => review.user.login)
             );
 
-            // Track team memberships and approvals
-            const requiredTeams = new Set(
-              reviewers.teams.map(team => `@${owner}/${team.slug}`)
-            );
-
-            // Check all approvals and gather missing ones
-            const missingApprovals = [];
-            const teamApprovals = new Map();
-
-            // Check team approvals
-            for (const teamSlug of requiredTeams) {
-              const strippedTeamSlug = teamSlug.replace(`@${owner}/`, '');
-              try {
-                const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
-                  org: owner,
-                  team_slug: strippedTeamSlug,
-                });
-                
-                const hasTeamApproval = teamMembers.some(member => 
-                  approvals.has(member.login)
-                );
-                
-                teamApprovals.set(teamSlug, hasTeamApproval);
-                
-                if (!hasTeamApproval) {
-                  missingApprovals.push(teamSlug);
-                }
-              } catch (error) {
-                console.error(`Error checking team ${teamSlug}: ${error}`);
-                teamApprovals.set(teamSlug, null); // null indicates error
-                missingApprovals.push(teamSlug);
-              }
+            // Check if documentation team has approved
+            let hasDocumentationApproval = false;
+            try {
+              const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: DOCUMENTATION_TEAM,
+              });
+              
+              hasDocumentationApproval = teamMembers.some(member => 
+                approvals.has(member.login)
+              );
+              
+              console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
+              
+            } catch (error) {
+              console.error(`Error checking documentation team: ${error}`);
+              core.setFailed(`Error checking documentation team approval: ${error.message}`);
+              return;
             }
 
-            // Check individual approvals
-            const individualApprovals = new Map();
-            reviewers.users.forEach(user => {
-              const userApproved = approvals.has(user.login);
-              individualApprovals.set(`@${user.login}`, userApproved);
-              
-              if (!userApproved) {
-                missingApprovals.push(`@${user.login}`);
-              }
+            // Get existing comments from this workflow
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: number,
             });
 
-            // Set final status
-            if (missingApprovals.length > 0) {
-              core.setFailed(`Missing approvals from: ${missingApprovals.join(', ')}`);
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('Documentation Team Review')
+            );
+
+            // Prepare comment content
+            const commentBody = hasDocumentationApproval 
+              ? `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`
+              : `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@${owner}/${DOCUMENTATION_TEAM}** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.`;
+
+            // Update or create comment
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
             } else {
-              console.log('All required reviewers have approved.');
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body: commentBody
+              });
+            }
+
+            // Set final status
+            if (!hasDocumentationApproval) {
+              core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM}`);
+            } else {
+              console.log('Documentation team has approved this PR.');
             }
