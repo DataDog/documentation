@@ -19,7 +19,7 @@ Cloudcraft supports overlays that integrate data from multiple sources, enrichin
 Cloudcraft provides the following built-in overlays: 
 
 - [Infrastructure](#infrastructure) (default) 
-- [Agent](#agent)
+- [Observability](#observability)
 - [Security](#security)
 - [Cloud Cost Management (CCM)](#cloud-cost-management)
 
@@ -29,13 +29,36 @@ The infrastructure view provides a broad overview, grouping resources by Account
 
 The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway to reduce visual clutter and highlight the most important parts of your architecture.
 
-{{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_with_ccm.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_with_ccm_2.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
 
-### Agent 
+### Observability 
 
-The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend at the bottom of the screen. A green dot signifies the Agent is installed, while a grey dot indicates it is not installed on that resource.
+The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Logs, and more. This helps you to assess visibility gaps across your environment.
 
-{{< img src="datadog_cloudcraft/agent_overlay_with_ccm.png" alt="Agent overlay in Cloudcraft, highlighting the collapsible legend at the bottom left hand side of the screen." width="100%" >}}
+In the bottom-left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific featues. Each row shows:
+
+- Feature name (for example, APM, Logs, CNM)
+- Numerical coverage: X / Y (for example, 16/35), where:
+  - X is the number of resources with that feature enabled
+  - Y is the total number of relevant resources in the current view or filter
+
+- Visual cue: Green pins for resources with Agent + feature, and gray for without
+
+{{< img src="datadog_cloudcraft/observability_overlay_with_ccm.png" alt="Agent overlay in Cloudcraft, highlighting the collapsible legend at the bottom left hand side of the screen." width="100%" >}}
+
+The observability overlay tracks coverage for the following:
+
+| Feature           | Description                                                        |
+|-------------------|--------------------------------------------------------------------|
+| Agent version     | Verifies if the Datadog Agent is installed and its version         |
+| APM               | Application Performance Monitoring (traces collected)        |
+| CNM               | Cloud Network Monitoring coverage                                 |
+| Logs              | Log collection status                                              |
+| CWS               | Cloud Workload Security coverage                                   |
+| CSPM              | Cloud Security Posture Management coverage                         |
+| Process           | Process monitoring enabled                                         |
+| CSM VM Hosts      | Coverage of CSM Vulnerability Management on hosts          |
+| CSM VM Containers | Coverage of CSM Vulnerability Management on containers                |
 
 ### Security
 
@@ -51,7 +74,7 @@ This view is ideal for mapping attack surfaces during penetration tests or secur
 
 By default, the security overlay shows Critical, High, and Medium misconfigurations, which you can filter at the bottom of the screen.
 
-{{< img src="datadog_cloudcraft/cloudcraft_security_overlay_with_ccm.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_security_overlay_with_ccm_2.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 ### Cloud Cost Management 
 
@@ -70,7 +93,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/cloudcraft_ccm_overlay_2.png" alt="Cloud Cost Management(CCM) overlay in Cloudcraft, highlighting the collapsible savings legend at the bottom left hand side of the screen." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_ccm_overlay_3.png" alt="Cloud Cost Management(CCM) overlay in Cloudcraft, highlighting the collapsible savings legend at the bottom left hand side of the screen." style="width:100%;" >}}
 
 ## Further reading
 

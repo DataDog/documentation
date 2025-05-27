@@ -90,7 +90,7 @@ Use the search bar to locate resources on the diagram by name, ID, or tag. This 
 Learn how to navigate between [built-in overlays][4] to view your architecture from different perspectives. Each overlay is designed to support specific operational goals, such as:
 
 - [Infrastructure][8]: High-level view of services and resources.
-- [Agent][9]: Visualize where the Datadog Agent is installed and reporting from.
+- [Observability][9]: Indicates which hosts have the Agent installed and what observability features are enabled.
 - [Security][10]: IAM, firewall, and security group visibility.
 - [Cloud Cost Management][11]: Track and optimize resource spend.
 
