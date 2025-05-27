@@ -7,7 +7,7 @@ aliases:
 ## Overview
 
 A brief introduction to the Google Cloud serverless offerings.
-- [Google Cloud Run](./google_cloud_run) for deploying container-based services and jobs ([official docs](https://cloud.google.com/run/docs/overview/what-is-cloud-run)).
+- [Google Cloud Run](./google_cloud_run) for deploying container-based services ([official docs](https://cloud.google.com/run/docs/overview/what-is-cloud-run)). Our instrumentation does not yet support Google Cloud Run Jobs, only Services.
 - [Google Cloud Run Funcitons](./google_cloud_run_functions) for deploying code that gets packaged into container-based services and jobs running on Google Cloud Run infrastructure ([official docs](...)).
 - [Google Cloud Run Functions (1st generation)](./google_cloud_run_functions_1st_gen) for deploying code that gets run on the legacy Cloud Functions infrastructure ([official docs](...)).
 

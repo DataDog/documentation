@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run
+title: Google Cloud Run Services
 aliases:
     - /serverless/gcp/gcr
 further_reading:
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through our [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run.
+[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through our [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run. We only support Google Cloud Run Services, not Google Cloud Run Jobs.
 
 ## Setup
 
