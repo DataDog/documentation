@@ -8,7 +8,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/docker
 ---
 
-Use the following instructions to enable Misconfigurations, Vulnerability Management, and Identity Risks.
+Use the following instructions to enable Misconfigurations and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 

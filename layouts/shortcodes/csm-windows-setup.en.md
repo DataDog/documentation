@@ -1,23 +1,10 @@
 
 Use the following instructions to enable Misconfigurations, Vulnerability Management, and Identity Risks on Windows.
 
-The out-of-the-box Windows ruleset includes the following default rules:
-
-- Certutil used to transmit or decode a file
-- Process memory was dumped using the minidump functions of comsvcs.dll
-- NTDS file referenced in command line
-- Suspicious ntdsutil usage
-- Procdump used to dump process memory
-- Scheduled task created
-- Bitsadmin used to download or execute a file
-- WMI used to remotely execute content
-- Known pentesting tool crackmapexec executed
-
 ## Prerequisites
 
 - Agent versions 7.52 and later.
 - Access to hosts running Windows Server 2016 or newer.
-- (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
 ## Limitations
 
