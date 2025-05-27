@@ -1,13 +1,13 @@
 ---
-title: Custom Processing
+title: Custom Processor
 disable_toc: false
 ---
 
 {{< callout src="#" header="false" btn_hidden="true" >}}
-The Custom Processing processor is in Preview.
+The Custom Processor is in Preview.
 {{< /callout >}}
 
-{{% observability_pipelines/processors/custom_processing %}}
+{{% observability_pipelines/processors/custom_processor %}}
 
 ## VRL functions
 

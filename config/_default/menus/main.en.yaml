@@ -5628,10 +5628,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 902
-    - name: Custom Processing
-      url: observability_pipelines/processors/custom_processing
+    - name: Custom Processor
+      url: observability_pipelines/processors/custom_processor
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_custom_processing
+      identifier: observability_pipelines_processors_custom_processor
       weight: 903
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
