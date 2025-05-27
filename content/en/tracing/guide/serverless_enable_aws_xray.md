@@ -5,43 +5,37 @@ aliases:
     - /tracing/serverless_functions/enable_aws_xray/
 ---
 
-## Overview
+## Which One Should You Use?
 
-When implementing distributed tracing for serverless applications, you have two primary options: Datadog APM and AWS X-Ray. While both provide tracing capabilities, they serve different use cases and have distinct trade-offs. This guide helps you understand which solution best fits your requirements.
+### Use AWS X-Ray if:
 
-## Understanding AWS X-Ray
+- You need a fast, lightweight way to get visibility into simple Serverless services.
+- You primarily use Lambda and API Gateway.
+- You're okay with AWS-managed sampling and limited trace retention.
+- You don’t need access to payload data, custom tags, or trace/log correlation.
 
-AWS X-Ray provides a straightforward way to trace requests in serverless environments. Its biggest strength lies in simplicity—you can enable tracing with just a few clicks in the AWS console, and it works seamlessly with managed services like API Gateway and Lambda.
+X-Ray is built into AWS and can be enabled with just a few clicks. It’s well-suited for teams that need to debug basic issues or visualize service calls in low-complexity systems. However, you won’t get function inputs and outputs, and the trace data is limited to what AWS provides. There’s also no way to add custom metadata or correlate traces with logs. If you're debugging lightweight workflows and real-time gaps in trace visibility are acceptable, X-Ray is often “good enough.”
 
-However, X-Ray comes with some notable constraints. The span attributes are quite limited, making it challenging to perform detailed queries or filter traces effectively. You won't see payload data (inputs and outputs), which can make debugging complex issues more difficult. Custom tags aren't supported, so adding business context to your traces isn't possible.
+### Use Datadog APM if:
 
-X-Ray also doesn't provide distributed tracing across Step Functions and Lambda functions, and there's no built-in correlation with logs. This can make root cause analysis more time-consuming when issues span multiple services.
+- You need full visibility into function inputs, outputs, and downstream calls.
+- Your system involves complex orchestration with services like Step Functions, SQS, DynamoDB, or third-party APIs.
+- You want to correlate traces with logs and metrics for faster debugging.
+- You need control over what data is retained and for how long, including full-fidelity traces.
 
-From a cost perspective, X-Ray can be expensive both when used directly through AWS and when ingesting data into Datadog. The service automatically samples traces with limited retention, giving you less control over what data you keep and for how long.
+Datadog APM goes far beyond what X-Ray offers. You can tag traces with business or customer context, trace asynchronous workflows end-to-end, and inspect payloads at each step. Sampling rules and retention policies are configurable, so you can reduce ingestion for high-throughput paths while preserving key traces for longer. This flexibility makes it ideal for growing systems and debugging hard-to-reproduce issues.
 
-Despite these limitations, X-Ray shines in environments where simplicity trumps advanced features. If your serverless services are lightweight and most issues can be resolved with basic tracing data, X-Ray's ease of use may be exactly what you need.
+## Feature Comparison
 
-## Understanding Datadog APM
-
-Datadog APM takes a more comprehensive approach to observability. You get full payload visibility, extensive custom tagging capabilities, and complete distributed tracing across all AWS services including Step Functions. The platform excels at correlating traces with logs, metrics, and infrastructure data.
-
-With Datadog APM, you have control over retention policies and sampling rules. This means you can retain full fidelity traces for as long as needed and perform long-term historical analysis. The real-time visibility comes without sampling gaps, ensuring you don't miss critical traces when you need them most.
-
-The trade-off is complexity. Datadog APM requires more initial setup and configuration compared to X-Ray's one-click approach. However, this investment pays off with advanced analytics, service dependency mapping, and deep integration with the broader Datadog observability platform.
-
-## When to Choose Each Solution
-
-The choice often comes down to your current needs and future growth plans. X-Ray works well when cost isn't a major concern, real-time visibility isn't critical, and your team is already comfortable with its capabilities. It's particularly suitable for lightweight serverless services where engineers can resolve most issues with basic tracing information.
-
-Many teams find X-Ray sufficient if they've already established service monitoring workflows and the operational cost of changing tools outweighs the potential benefits. There's real value in not disrupting working processes, especially when current tools meet most requirements.
-
-Datadog APM becomes the better choice when you need comprehensive observability features. If payload visibility, custom tagging, and business context are important for your debugging process, Datadog APM provides these capabilities out of the box. Teams building complex serverless architectures often find the enhanced tracing across Step Functions and Lambda functions invaluable.
-
-The platform really shines when log correlation is essential for debugging, or when you want granular control over sampling rules and retention policies. Real-time visibility and advanced analytics become critical as your serverless environment grows in complexity.
-
-## Trace Retention and Storage Differences
-
-Datadog offers custom retention policies with full trace ingestion and control over sampling rules, while X-Ray samples traces automatically with limited retention by default. This difference matters most when you need to retain full fidelity traces or run long-term historical analysis.
+| Capability | AWS X-Ray | Datadog APM |
+|------------|-----------|-------------|
+| Setup | One-click in AWS Console | Requires config, but integrates with IaC and CI/CD |
+| Payload Visibility | ❌ | ✅ |
+| Custom Tags | ❌ | ✅ |
+| Step Functions Support | ❌ | ✅ |
+| Trace → Log Correlation | ❌ | ✅ |
+| Retention Control | ❌ (AWS-managed sampling & TTL) | ✅ (User-defined sampling & retention) |
+| Breadth of Integration | Limited to core AWS services | Full AWS + infrastructure + 3rd party services |
 
 ## Enable AWS X-Ray
 
