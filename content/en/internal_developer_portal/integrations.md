@@ -23,7 +23,7 @@ PagerDuty and OpsGenie integrations for Internal Developer Portal are not suppor
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into [Software Catalog][9] entity definitions. From there, you can use the [Action Catalog][24] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
+When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into [Software Catalog][9] entity definitions. From there, you can use the [Action Catalog][31] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
 
 {{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" d_target="#signupModal" btn_hidden="false" header="Request a new integration" >}}
 {{< /callout >}}
