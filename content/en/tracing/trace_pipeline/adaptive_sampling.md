@@ -1,5 +1,5 @@
 ---
-title: Adaptive sampling
+title: Adaptive Sampling
 disable_toc: false
 aliases: 
     - /tracing/guide/adaptive_sampling
