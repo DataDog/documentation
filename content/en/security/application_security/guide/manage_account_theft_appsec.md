@@ -166,7 +166,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select **Signal** and remove all entries except **Application Security**.
+3. Select **Signal** and remove all entries except **App and API Protection**.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
@@ -705,17 +705,17 @@ This is general guidance. Depending on your applications and environments, there
 
 [1]: /security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
-[3]: /security/application_security/threats/setup/compatibility/
+[3]: /security/application_security/setup/compatibility/
 [4]: /agent/remote_config/?tab=configurationyamlfile
 [5]: https://app.datadoghq.com/security/appsec/onboarding
 [6]: https://app.datadoghq.com/security/appsec/traces?query=&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036043639&end=1735640843639&paused=false
-[7]: /security/application_security/threats/setup/threat_detection/
+[7]: /security/application_security/setup/threat_detection/
 [8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
-[9]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
-[10]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[9]: /security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
+[10]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [11]: /agent/remote_config/?tab=configurationyamlfile
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
-[13]: /security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
+[13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
 [15]: /security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
@@ -734,6 +734,6 @@ This is general guidance. Depending on your applications and environments, there
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
 [28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/threats/inapp_waf_rules/
+[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
