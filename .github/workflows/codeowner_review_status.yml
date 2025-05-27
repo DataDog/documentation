@@ -144,6 +144,14 @@ jobs:
             const approvalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}' === 'true';
             const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
             
+            // Debug logging
+            console.log('Raw outputs from first job:');
+            console.log('approval_status:', '${{ needs.check-documentation-team-approval.outputs.approval_status }}');
+            console.log('team_requested:', '${{ needs.check-documentation-team-approval.outputs.team_requested }}');
+            console.log('Parsed values:');
+            console.log('approvalStatus:', approvalStatus);
+            console.log('teamRequested:', teamRequested);
+            
             // Get pull request details for commit SHA
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
             
