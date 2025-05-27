@@ -16,7 +16,7 @@ further_reading:
 
 <div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
 
-The overall process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
+The recommended process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
 
 ### Applications
 
