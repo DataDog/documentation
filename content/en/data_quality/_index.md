@@ -2,13 +2,13 @@
 title: Data Quality Monitoring
 ---
 
-Data Quality Monitoring helps you detect and troubleshoot issues in your data workflows before they cause problems in dashboards, machine learning models, or other downstream systems. It alerts you to common issues such as missing updates, unexpected changes in row counts, or unusual column values, and helps trace those issues back to the upstream jobs or data sources that may have caused them.
+Data Quality Monitoring helps you detect and troubleshoot issues in your data workflows before they cause problems in reporting dashboards, machine learning models, or other downstream systems. It alerts you to common issues such as data freshness problems, volume anomalies, and column-level quality issues, and provides the context needed to trace them back to upstream jobs or data sources.
 
 {{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; one table is flagged with a triggered alert" style="width:100%;" >}}
 
 ## Connect your data sources
 
-Data Quality Monitoring supports Snowflake and BigQuery. To get started, enable the relevant integration and ensure the required features are turned on.
+Data Quality Monitoring supports Snowflake and BigQuery. To get started, enable the relevant integration and ensure the required features are enabled.
 
 | Data source | Required configuration                                                                                                |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
