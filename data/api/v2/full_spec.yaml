@@ -1343,8 +1343,6 @@ components:
           $ref: '#/components/schemas/AWSResourcesConfig'
         traces_config:
           $ref: '#/components/schemas/AWSTracesConfig'
-      required:
-      - aws_account_id
       type: object
     AWSAccountResponseData:
       description: AWS Account response data.
