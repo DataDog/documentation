@@ -100,7 +100,7 @@ preprocess:
   - type
   - subtype
   - null
-  - 'wildcard*'
+  - wildcard*
   - time_generated
 ```
 
@@ -167,7 +167,7 @@ The `mapping` section is an ordered list of field-to-field assignments. Each map
 
 A `source` path starting with `OCSF.` refers to a field in the output OCSF event that has been previously assigned.
 
-Use the `default` value if the source path does not exist before processing is done. The mapping may also optionally specify a `function` to and/or a [lookup table](#mapping-lookup-tables).
+Use the `default` value if the source path may not exist before processing is done. The mapping may also optionally specify a `function` to and/or a [lookup table](#mapping-lookup-tables).
 
 {{< tabs >}}
 {{% tab "YAML example" %}}
@@ -327,7 +327,7 @@ mapping:
 
 A function applies an operation to the value extracted from the source, before assigning the extracted value to the destination.
 
-### `concat_arrays`
+#### `concat_arrays`
 
 The `concat_arrays` function looks up a second `source` and, if it exists, concatenates it to the original source data. If a source is not an array, the source is converted into an array with a single element. The result is always an array.
 
@@ -415,4 +415,4 @@ mapping:
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://schema.ocsf.io/1.4.0/classes/authentication?extensions=
+[1]: https://schema.ocsf.io/1.3.0/classes/authentication?extensions=
