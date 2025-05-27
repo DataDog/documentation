@@ -6,7 +6,9 @@
 <head>
   {{ partialCached "header-scripts.html" . }}
 
-
+  {{ if ne (lower .Type) "integrations" }}
+    {{ partialCached "markdoc-assets.html" . }}
+  {{ end }}
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
