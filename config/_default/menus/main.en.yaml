@@ -5628,81 +5628,86 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 902
+    - name: Custom Processing
+      url: observability_pipelines/processors/custom_processing
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_custom_processing
+      weight: 903
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 903
+      weight: 904
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 904
+      weight: 905
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 905
+      weight: 906
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 906
+      weight: 907
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 907
+      weight: 908
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 908
+      weight: 909
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 909
+      weight: 910
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 910
+      weight: 911
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 911
+      weight: 912
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 912
+      weight: 913
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 913
+      weight: 914
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 914
+      weight: 915
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 915
+      weight: 916
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 916
+      weight: 917
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 917
+      weight: 918
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
