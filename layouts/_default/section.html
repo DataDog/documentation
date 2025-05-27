@@ -1,14 +1,22 @@
 {{ define "main" }}
-    <div class="row">
-        <div class="col-12 order-1">
-            <h1 id="pagetitle">{{ .Title }}</h1>
+    {{ if not .Content }}
+        <meta http-equiv="refresh" content="0; url='{{ "" | relURL }}'">
+        <script>
+            window.location.href = '{{ "" | relURL }}';
+        </script>
+        <p>If you are not redirected, <a href='{{ "" | relURL}}'>click here</a>.</p>
+    {{ else }}
+        <div class="row">
+            <div class="col-12 order-1">
+                <h1 id="pagetitle">{{ .Title }}</h1>
+            </div>
+            <div class="col-12">
+                {{ partial "breadcrumbs.html" . }}
+            </div>
         </div>
-        <div class="col-12">
-            {{ partial "breadcrumbs.html" . }}
-        </div>
-    </div>
-    {{ partial "translate_status_banner/translate_status_banner.html" . }}
-    
-    {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
-    {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+        {{ partial "translate_status_banner/translate_status_banner.html" . }}
+        
+        {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
+        {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+    {{ end }}
 {{ end }}
