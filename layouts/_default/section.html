@@ -1,10 +1,6 @@
 {{ define "main" }}
     {{ if not .Content }}
-        <meta http-equiv="refresh" content="0; url='{{ "" | relURL }}'">
-        <script>
-            window.location.href = '{{ "" | relURL }}';
-        </script>
-        <p>If you are not redirected, <a href='{{ "" | relURL}}'>click here</a>.</p>
+        {{ partial "meta-http-equiv.html" . }}
     {{ else }}
         <div class="row">
             <div class="col-12 order-1">
