@@ -6265,7 +6265,55 @@ menu:
           - CreateDORAIncident
         unstable:
           - v2
+        order: 2
+    - name: Get a failure event
+      url: '#get-a-failure-event'
+      identifier: dora-metrics-get-a-failure-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORAFailure
+        unstable: []
+        order: 6
+    - name: Get a list of failure events
+      url: '#get-a-list-of-failure-events'
+      identifier: dora-metrics-get-a-list-of-failure-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORAFailures
+        unstable: []
         order: 4
+    - name: Get a deployment event
+      url: '#get-a-deployment-event'
+      identifier: dora-metrics-get-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORADeployment
+        unstable: []
+        order: 5
+    - name: Get a list of deployment events
+      url: '#get-a-list-of-deployment-events'
+      identifier: dora-metrics-get-a-list-of-deployment-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORADeployments
+        unstable: []
+        order: 3
     - name: Send a deployment event for DORA Metrics
       url: '#send-a-deployment-event-for-dora-metrics'
       identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
@@ -6278,7 +6326,7 @@ menu:
           - CreateDORADeployment
         unstable:
           - v2
-        order: 4
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -7636,7 +7684,7 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
-    - name: Set on-call team routing rules
+    - name: Set On-Call team routing rules
       url: '#set-on-call-team-routing-rules'
       identifier: on-call-set-on-call-team-routing-rules
       parent: on-call
@@ -7648,7 +7696,7 @@ menu:
           - SetOnCallTeamRoutingRules
         unstable: []
         order: 10
-    - name: Get on-call team routing rules
+    - name: Get On-Call team routing rules
       url: '#get-on-call-team-routing-rules'
       identifier: on-call-get-on-call-team-routing-rules
       parent: on-call
@@ -7672,7 +7720,7 @@ menu:
           - GetScheduleOnCallUser
         unstable: []
         order: 11
-    - name: Update on-call schedule
+    - name: Update On-Call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule
       parent: on-call
@@ -7684,7 +7732,7 @@ menu:
           - UpdateOnCallSchedule
         unstable: []
         order: 4
-    - name: Get on-call schedule
+    - name: Get On-Call schedule
       url: '#get-on-call-schedule'
       identifier: on-call-get-on-call-schedule
       parent: on-call
@@ -7696,7 +7744,7 @@ menu:
           - GetOnCallSchedule
         unstable: []
         order: 2
-    - name: Delete on-call schedule
+    - name: Delete On-Call schedule
       url: '#delete-on-call-schedule'
       identifier: on-call-delete-on-call-schedule
       parent: on-call
@@ -7708,7 +7756,7 @@ menu:
           - DeleteOnCallSchedule
         unstable: []
         order: 3
-    - name: Create on-call schedule
+    - name: Create On-Call schedule
       url: '#create-on-call-schedule'
       identifier: on-call-create-on-call-schedule
       parent: on-call
@@ -7720,7 +7768,7 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
-    - name: Update on-call escalation policy
+    - name: Update On-Call escalation policy
       url: '#update-on-call-escalation-policy'
       identifier: on-call-update-on-call-escalation-policy
       parent: on-call
@@ -7732,7 +7780,7 @@ menu:
           - UpdateOnCallEscalationPolicy
         unstable: []
         order: 6
-    - name: Get on-call escalation policy
+    - name: Get On-Call escalation policy
       url: '#get-on-call-escalation-policy'
       identifier: on-call-get-on-call-escalation-policy
       parent: on-call
@@ -7744,7 +7792,7 @@ menu:
           - GetOnCallEscalationPolicy
         unstable: []
         order: 7
-    - name: Delete on-call escalation policy
+    - name: Delete On-Call escalation policy
       url: '#delete-on-call-escalation-policy'
       identifier: on-call-delete-on-call-escalation-policy
       parent: on-call
@@ -7756,7 +7804,7 @@ menu:
           - DeleteOnCallEscalationPolicy
         unstable: []
         order: 8
-    - name: Create on-call escalation policy
+    - name: Create On-Call escalation policy
       url: '#create-on-call-escalation-policy'
       identifier: on-call-create-on-call-escalation-policy
       parent: on-call

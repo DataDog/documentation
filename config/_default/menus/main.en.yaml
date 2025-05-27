@@ -1159,6 +1159,21 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
+    - name: Accessibility
+      url: mobile/accessibility
+      identifier: mobile_accessibility
+      parent: mobile
+      weight: 3
+    - name: Push Notifications
+      url: mobile/push_notification
+      identifier: mobile_push_notification
+      parent: mobile
+      weight: 4
+    - name: Widgets
+      url: mobile/widgets
+      identifier: mobile_widgets
+      parent: mobile
+      weight: 5
     - name: DDSQL Reference
       url: ddsql_reference/
       pre: ddsql
@@ -1571,11 +1586,21 @@ menu:
       pre: notebook
       parent: platform_heading
       weight: 20000
+    - name: Analysis Features
+      url: notebooks/advanced_analysis/
+      parent: notebooks
+      identifier: notebooks_advanced_analysis
+      weight: 1
+    - name: Getting Started
+      url: notebooks/advanced_analysis/getting_started/
+      parent: notebooks_advanced_analysis
+      identifier: notebooks_advanced_analysis_getting_started
+      weight: 101
     - name: Guides
       url: notebooks/guide
       parent: notebooks
       identifier: notebooks_guide
-      weight: 1
+      weight: 2
     - name: DDSQL Editor
       url: ddsql_editor/
       pre: ddsql
@@ -4492,7 +4517,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
       weight: 401
-    - name: Submit Evaluations
+    - name: Submit Custom Evaluations
       url: llm_observability/evaluations/submit_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
@@ -5468,6 +5493,11 @@ menu:
       parent: observability_pipelines_generate_metrics
       identifier: observability_pipelines_generate_metrics_syslog
       weight: 7023
+    - name: Run Multiple Pipelines on a Host
+      identifier: observability_run_multiple_pipelines_on_a_host
+      url: /observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/
+      parent: observability_pipelines_set_up_pipelines
+      weight: 108
     - name: Install the Worker
       url: observability_pipelines/install_the_worker/
       identifier: observability_pipelines_install_the_worker
@@ -5553,36 +5583,41 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
       weight: 807
+    - name: Lambda Forwarder
+      url: observability_pipelines/sources/lambda_forwarder/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
+      weight: 808
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 808
+      weight: 809
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 809
+      weight: 810
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 810
+      weight: 811
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 811
+      weight: 812
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 812
+      weight: 813
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 813
+      weight: 814
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
