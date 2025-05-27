@@ -79,13 +79,19 @@ You can initiate a page to an individual or team, and also override existing shi
 
 To configure On-Call notifications on your mobile device, follow the steps outlined in [this guide][21].
 
+Tapping **escalate** driects you to confirm esclation to the next policy level. Tapping **declare incident**, prompts you to enter a title and fill in relevant incident attributes.
+{{< img src="service_management/mobile/page_confirmation.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+
+
 ## Dashboards
 
 {{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
 **Note:** To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
+
+**Note:** Dashboard links configured in UTC open in UTC on the mobile app. For more information about dashboard configurations, see [Dashboard Configurations][24].
 
 ## Monitors
 
@@ -184,3 +190,4 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[24]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
