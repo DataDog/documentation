@@ -1,5 +1,5 @@
 ---
-title: Segmentation
+title: Analyzing users and segments
 description: Analyze and understand specific groups or segments of your user base.
 further_reading:
 - link: "/product_analytics/"
@@ -9,7 +9,147 @@ further_reading:
 
 ## Overview
 
-Segmentation is a feature in Product Analytics that allows you to analyze and understand specific groups or segments of your user base. By segmenting your users based on various characteristics and behaviors, you can uncover valuable insights, identify trends, and make data-driven decisions to optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization.
+Analyze and understand specific groups or segments of your user base using the [User Profile][3] and the [Segments][1] features. 
+
+The User Profiles page lists your available product users. You can **list**, **search**, **sort**, and **filter** on these users to create a list of these key users. You can use the [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment), to better analyze and understand their usage of your product. 
+
+The segments page includes a list of all of the segments you have created --- you can also create a segment from this page. Segmenting helps you to focus on some of your users based on various characteristics and behaviors in order to uncover valuable insights, identify trends, and make data-driven decisions that will optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization. 
+
+Follow the content list here to navigate to: 
+
+- **[User Profiles and their usage:](#user-profiles)**
+  - [User profile attributes](#user-profile-attributes)
+  - [How profiles are sourced](#how-profiles-are-sourced)
+  - [Navigating the user profile page](#navigating-the-user-profile-page)
+
+- **Segments - how to build and use them:**
+  - [Building a segment using your profiles](#build-a-segment)
+  - [Using the segments you created](#leverage-segments-across-product-analytics)
+
+
+
+
+## User profiles 
+
+The [User Profiles][3] page allows you to track and analyse the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
+
+{{< img src="product_analytics/segmentation/userprofiles_PANA.png" alt="A view of the User profile page.">}}
+
+<div class="alert" style="background: #7757D3">
+<h3 class="text-white">Example!</h3> <h3 class="text-black">FILTERING</h3>
+<p class="text-white">With the filtering capability on the User Profiles page, you can determine which users almost bought an item but dropped before checking out. <br><br> You can use the <code>Last Seen</code> <code>Last Seen Application</code> attributes and specify the sessions that reached <code>Cart</code> but dropped before reaching the <code>click on CHECKOUT</code> step. You have the option to also select the <code>Device Type</code> to further narrow this down.</p>
+
+{{< img src="product_analytics/segmentation/almost-bought_PANA.png" alt="A view of the User profile page.">}}
+
+</div>
+<br>
+
+### User profile attributes
+
+The User Profile page includes a list of attributes to help you better segment your users. You can conduct a full-text search on `username` or `email`, sort, and filter based on these attributes:
+
+{{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="id-for-anchoring" %}}
+
+<!-- #### User attributes  -->
+User ID `REQUIRED`
+: `type:string` <br> A unique user identifier.<br> 
+
+User Email
+: `type:string` <br> The user's email address.
+
+User Name
+: `type:string` <br> The user's full name.
+
+<!-- #### Time based attributes  -->
+First Seen
+: `type:timestamp` <br> The date of the user's first session.
+
+Last Seen
+: `type:timestamp`  <br> The date of the user's most recent session.
+
+
+<!-- #### application based attributes  -->
+First Seen Application
+: `type:string`  <br> The ID of the first application the user accessed.
+
+Last Seen Application
+: `type:string`  <br> The ID of the last application the user accessed.
+
+
+<!-- #### Geo based attributes  -->
+First City
+: `type:string` <br> The city of the user's first session.
+
+Last City
+: `type:string` <br> The city of the user's last session.
+
+First Seen Country 
+: `type:string` <br> The ISO code of the country for the user's first session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
+
+Last Seen Country
+: `type:string` <br> The ISO code of the country for the user's last session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
+
+First Region
+: `type:string` <br> The region of the user's first session.
+
+Last Region
+: `type:string` <br> The region of the user's last session.
+
+
+<!-- #### Device related attributes  -->
+First Device Type
+: `type:string` <br> The device used in the user's first session (_for example: desktop, tablet_).
+
+Last Device Type
+: `type:string` <br> The device used in the user's last session (_for example: desktop, tablet_).
+
+
+<!-- #### OS related attributes  -->
+First OS Name
+: `type:string` <br> The operating system of the user's first session (_for example: Windows, iOS_).
+
+Last OS Name
+: `type:string` <br> The operating system of the user's last session (_for example: Windows, iOS_).
+
+First OS Version
+: `type:string` <br> The OS version of the user's first session.
+
+Last OS Version
+: `type:string` <br> The OS version of the user's last session.
+
+
+<!-- #### Browser related attributes  -->
+First Browser Name
+: `type:string` <br> The browser used in the user's first session (_for example: Chrome, Safari_).
+
+Last Browser Name
+: `type:string` <br> The browser used in the user's last session (_for example: Chrome, Safari_).
+
+First Browser Version
+: `type:string` <br> The browser version from the user's first session.
+
+Last Browser Version
+: `type:string` <br> The browser version from the user's last session.
+
+{{% /collapse-content %}} 
+<br>
+
+### How profiles are sourced
+
+User profiles are sourced from RUM events using `usr.id` as the aggregating attribute. 
+
+The RUM SDK allows you to identify users by setting attributes such as User ID, Name, and Email (`usr.id`, `usr.name`, and `usr.email`). These attributes are then used to populate users onto the User Profiles page. 
+
+### Navigating the user profile page 
+The User Profile page allows you to see information on individual users and correlate this to the group. You can use full-text search, filter, and sort through your user profiles. You can select an individual user's profile to see more detail on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+
+{{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
+
+
+From the session history, you can identify where frustrations are detected and follow the link to the analytics details of these frustrations. 
+
+{{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profile page and its session history." style="width:70%;">}}
+<br>
 
 ## Build a segment
 
@@ -60,3 +200,4 @@ You can filter the data in the Analytics Explorer to reflect a selected set of u
 
 [1]: https://app.datadoghq.com/product-analytics/segments
 [2]: /integrations/guide/reference-tables/?tab=manualupload#validation-rules
+[3]: https://app.datadoghq.com/product-analytics/profiles

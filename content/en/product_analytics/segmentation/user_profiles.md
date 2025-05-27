@@ -21,10 +21,10 @@ You can scope down to specific users' behavioral data to help inform your decisi
 The User Profiles page allows you to LIST, SEARCH, SORT, and FILTER on your available product users to create a list of these key users. You can use the list of [available attributes](#available-attributes) to focus on this subset of your users, or [create a segment][2], so that you can better analyze and understand their usage of your product. 
 <br>
 
-<div class="alert alert-note" style="background-color: #EED9FF"><h3>How to use:</h3> With the filtering capability, you can answer the question of how many active users there are in a given country, by using the <code>First City</code> and <code>Last City</code> attributes </div>
+<div class="alert alert-note" style="background-color: #EED9FF"><h3>Example:</h3> With the filtering capability, you can answer the question of how many active users there are in a given country, by using the <code>First City</code> and <code>Last City</code> attributes </div>
 <br>
 
-## Available attributes
+## User profile attributes
 
 The User Profile page includes a list of attributes to help you better segment your users. You can conduct a FULL-TEXT SEARCH on `username` or `email`, SORT, and FILTER based on these attributes:
 
