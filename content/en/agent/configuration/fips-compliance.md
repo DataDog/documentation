@@ -50,6 +50,9 @@ The Datadog FIPS Agent does **not** support the following:
 
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
+- Datadog DDOT Collector[1]
+
+[1]: /opentelemetry/setup/ddot_collector
 
 ## Prerequisites
 
@@ -67,6 +70,21 @@ The Datadog FIPS Agent does **not** support the following:
 
 [1]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 {{% /tab %}}
+
+{{% tab "AWS ECS" %}}
+Please ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
+- Use a FIPS-compliant region (e.g., AWS GovCloud)
+- AWS compute launcher (EC2 or Fargate) must be in FIPS mode.
+- FIPS-compliant storage backing the ECS task.
+{{% /tab %}}
+
+{{% tab "AWS EKS" %}}
+Please ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
+- Use a FIPS-compliant region (e.g., AWS GovCloud)
+- EKS Worker nodes must be in FIPS mode.
+- FIPS-compliant storage backing the EKS Worker nodes.
+{{% /tab %}}
+
 {{< /tabs >}}
 
 In addition to the Operating System (OS) requirements above:
@@ -151,20 +169,31 @@ To use the AWS Lambda extension in FIPS mode, follow the instructions in the <a 
 
 {{% /tab %}}
 
-{{% tab "ECS" %}}
-In order to use the ECS integration in FIPS mode, some pre requisite steps are required to setup AWS compute instances in FIPS Mode depending of the instance type. Please refer to the following pages for more information:
-
-- [AWS EC2 FIPS Compliance][1]
-- [AWS Fargate FIPS Compliance][2]
-
-Then follow the step-by-step instructions in the <a href="/containers/ecs/fips-compliance">ECS instructions</a> page with the following parameters:
-
-Task Definition override:
+{{% tab "AWS ECS" %}}
+Follow the step-by-step instructions in the <a href="/containers/amazon_ecs/">ECS instructions</a> page by replacing the following Task Definition values:
+   - `image` (in `containerDefinitions` object) must be set to `public.ecr.aws/datadog/agent:7-fips`
    - `DD_SITE` must be set to `ddog-gov.com`
-   - `image` (in `containerDefinitions`) must be set to `public.ecr.aws/datadog/agent:7-fips`
 
-[1]: https://docs.aws.amazon.com/linux/al2/ug/fips-mode.html
-[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+{{% /tab %}}
+
+{{% tab "AWS EKS" %}}
+Follow the step-by-step instructions in the <a href="/containers/kubernetes/installation/">Datadog Agent installation on Kubernetes</a> page:
+
+Depending on your chosen installation method, please add the following values to your configuration before applying to your Kubernetes cluster:
+For the Datadog Operator:
+```datadog-agent.yaml
+datadog:
+   site: "ddog-gov.com"
+useFIPSAgent: true
+```
+
+For the Datadog Helm Chart:
+```datadog-agent.yaml
+spec:
+   global:
+      site: "ddog-gov.com"
+      useFIPSAgent: true
+```
 
 {{% /tab %}}
 
