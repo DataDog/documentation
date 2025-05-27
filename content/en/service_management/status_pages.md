@@ -89,9 +89,9 @@ When an issue arises, you can communicate it clearly through your status page.
 1. From a status page, click **Publish Incident** to open a "Publish Status Page Incident" modal and provide:
    | Field | Description |
    | ---- | ---- |
-   | **Title** | Short, clear description of the incident  Example: Increased error rates on US region |
+   | **Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
    | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
-   | **Message** *(optional)* | Additional details for your users  Examples: known cause, expected resolution time |
+   | **Message** *(optional)* | Additional details for your users <br>*Examples: known cause, expected resolution time* |
    | **Affected Components** | One or more components impacted by the incident |
    | **Impact** | Level of impact per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 1. Click **Publish Incident**.
