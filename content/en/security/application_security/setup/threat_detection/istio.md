@@ -21,6 +21,11 @@ To try the preview of App and API Protection for Istio, follow the setup instruc
 
 You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
+## Limitations
+
+The Istio integration has the following limitations:
+
+* The request body is not inspected, regardless of its content type.
 ## Prerequisites
 
 Before you begin, ensure you have the following:
@@ -39,9 +44,9 @@ Enabling the threat detection for Istio involves two main steps:
 
 ### 1. Deploy the Datadog External Processor Service
 
-This service is a gRPC server that Envoy communicates with to have requests and responses analysed by App and API Protection.
+This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
 
-Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system` or a dedicated namespace.
+Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system`, or a dedicated namespace.
 
 The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
 
@@ -115,7 +120,7 @@ spec:
 
 #### Environment Variables for the External Processor
 
-The Datadog App and API Protection External Processor supports the following environment variables to be configured:
+You can configure the Datadog App and API Protection External Processor using the following environment variables:
 
 | Environment variable                   | Default value   | Description                                                                  |
 |----------------------------------------|-----------------|------------------------------------------------------------------------------|
@@ -138,16 +143,16 @@ You can find more configuration options in [Configuring the Go Tracing Library][
 
 ### 2. Configure an EnvoyFilter
 
-Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway or specific sidecar proxies to send traffic to the `datadog-aap-extproc-service` you deployed. This filter tells Envoy how to connect to the external processor and which traffic to send.
+Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway or specific sidecar proxies to send traffic to the `datadog-aap-extproc-service` you deployed. This filter tells Envoy how to connect to the external processor and what traffic to send.
 
 Choose the appropriate configuration based on whether you want to apply App and API Protection at the Ingress Gateway or directly on your application's sidecar proxies.
 
 {{< tabs >}}
 {{% tab "Istio Ingress Gateway" %}}
 
-This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all north-south traffic entering your service mesh.
+This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all North-South traffic entering your service mesh.
 
-Here is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway, which typically runs in the `istio-system` namespace with the label `istio: ingressgateway`. You must update these to match your specific application.
+Below is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway that typically runs in the `istio-system` namespace with the label `istio: ingressgateway`. You must update these settings to match your specific application.
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -218,7 +223,7 @@ spec:
 
 This configuration applies App and API Protection to specific pods within your service mesh by targeting their Istio sidecar proxies. This allows for more granular control over which services are protected.
 
-Here is an example manifest (`datadog-aap-sidecar-filter.yaml`) that targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these to match your specific application.
+Here is an example manifest (`datadog-aap-sidecar-filter.yaml`) that targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these settings to match your specific application.
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -292,11 +297,6 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Limitations
-
-The Istio integration has the following limitations:
-
-* The request body is not inspected, regardless of its content type.
 
 ## Further Reading
 
