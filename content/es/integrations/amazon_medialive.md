@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.medialive.active_alerts
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.medialive.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -95,5 +95,5 @@ La integración de MediaLive no incluye ningún check de servicio.
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-medialive
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_medialive/amazon_medialive_metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_medialive/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/es/help/

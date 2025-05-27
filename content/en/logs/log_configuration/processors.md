@@ -19,6 +19,8 @@ algolia:
 
 ## Overview
 
+<div class="alert alert-info">The processors outlined in this documentation are specific to cloud-based logging environments. To parse, structure, and enrich on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/processors/">Observability Pipelines</a>.</div>
+
 A processor executes within a [Pipeline][1] to complete a data-structuring action and generate attributes to enrich your logs.
 
 {{< img src="logs/log_configuration/processor/processor_overview.png" alt="Processors" style="width:100%" >}}
@@ -69,7 +71,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 |----------------------|------------------|----------|---------------------------------------------------------|
 | `type`               | String           | Yes      | Type of the processor.                                  |
 | `name`               | String           | No       | Name of the processor.                                  |
-| `is_enabled`         | Boolean          | No       | If the processors is enabled or not. Default: `false`.  |
+| `is_enabled`         | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `source`             | String           | Yes      | Name of the log attribute to parse. Default: `message`. |
 | `samples`            | Array of strings | No       | List of (up to 5) sample logs for this grok parser.     |
 | `grok.support_rules` | String           | Yes      | List of Support rules for your grok parser.             |
@@ -800,6 +802,142 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following span remapper 
 {{< /tabs >}}
 
 **Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+
+## Array processor
+
+Use the array processor to extract, aggregate, or transform values from JSON arrays within your logs.
+
+Supported operations include:
+
+- **Select value from a matching element**
+- **Compute the length of an array**
+- **Append a value to an array**
+
+Each operation is configured through a dedicated processor.
+
+Define the array processor on the [**Pipelines** page][1].
+
+
+### Select value from matching element
+
+Extract a specific value from an object inside an array when it matches a condition.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_select_value.png" alt="Array processor - Select value from element" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "httpRequest": {
+    "headers": [
+      {"name": "Referrer", "value": "https://example.com"},
+      {"name": "Accept", "value": "application/json"}
+    ]
+  }
+}
+```
+
+**Configuration steps:**
+
+- **Array path**: `httpRequest.headers`
+- **Condition**: `name:Referrer`
+- **Extract value of**: `value`
+- **Target attribute**: `referrer`
+
+**Result:**
+
+```json
+{
+  "httpRequest": {
+    "headers": [...]
+  },
+  "referrer": "https://example.com"
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Array length
+
+Compute the number of elements in an array.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_length.png" alt="Array processor - Length" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "tags": ["prod", "internal", "critical"]
+}
+```
+
+**Configuration steps:**
+
+- **Array attribute**: `tags`
+- **Target attribute**: `tagCount`
+
+**Result:**
+
+```json
+{
+  "tags": ["prod", "internal", "critical"],
+  "tagCount": 3
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Append to array
+
+Add an attribute value to the end of a target array attribute in the log.
+
+**Note**: If the target array attribute does not exist in the log, it is automatically created.
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_append.png" alt="Array processor - Append" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "network": {
+    "client": {
+      "ip": "198.51.100.23"
+    }
+  },
+  "sourceIps": ["203.0.113.1"]
+}
+
+```
+**Configuration steps:**
+
+- **Attribute to append**: `"network.client.ip"`
+- **Array attribute to append to**: `sourceIps`
+
+**Result:**
+
+```json
+{
+  "network": {
+    "client": {
+      "ip": "198.51.100.23"
+    }
+  },
+  "sourceIps": ["203.0.113.1", "198.51.100.23"]
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

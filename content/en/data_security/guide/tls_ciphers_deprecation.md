@@ -57,6 +57,6 @@ This change does not impact Datadog for Government site for which the accepted c
 Datadog's systems already require the use of **TLS 1.2** and compatible clients will be able to negotiate other cipher suites. However, specific client-side configurations may alter this behavior. Use the client of your choice to connect to [tls-config-test.datadoghq.com][3] which is configured with the target ciphers, or use [How's my SSL? API][1] to check the cipher suites it supports. For any additional questions, reach out to [Datadog support][2].
 
 
-[1]: https://www.howsmyssl.com/api/
+[1]: https://www.howsmyssl.com/s/api.html
 [2]: /help
 [3]: https://tls-config-test.datadoghq.com

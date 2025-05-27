@@ -36,6 +36,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
   tag: 블로그
   text: Datadog API 카탈로그를 사용하여 API 성능, 보안 및 소유권을 관리하세요
+- link: https://www.datadoghq.com/blog/software-catalog/
+  tag: 블로그
+  text: 개발자 경험을 개선하고 Software Catalog와 협업
 - link: https://dtdg.co/fe
   tag: 기초 구축
   text: 대화형 세션에 참여하여 애플리케이션 성능 모니터링(APM)에 대한 이해도를 높이세요

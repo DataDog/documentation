@@ -35,7 +35,7 @@ RUM에서 수집한 [데이터 및 컨텍스트][1]를 다양한 방법으로 �
 
 ## 기본 RUM 보기 이름 재정의
 
-RUM Browser SDK는 사용자가 새 페이지에 액세스할 때마다 또는 페이지의 URL이 변경될 때(단일 페이지 애플리케이션의 경우) [보기 이벤트][2]를 자동으로 생성합니다. 보기 이름은 현재 페이지의 URL에서 생성되며, 가변 영숫자 ID는 자동으로 삭제됩니다. 예를 들어, `/dashboard/1234`는 `/dashboard/?`가 됩니다.
+RUM Browser SDK는 사용자가 방문한 새 페이지마다 또는 페이지 URL이 변경될 때마다(단일 페이지 애플리케이션의 경우) [view 이벤트][2]를 자동으로 생성합니다. view 이름은 현재 페이지 URL에서 생성되며, 이때 변수 ID는 자동으로 제거됩니다. 숫자가 하나 이상 포함된 경로 세그먼트는 변수 ID로 간주됩니다. 예를 들어 `/dashboard/1234` 및 `/dashboard/9a`는 `/dashboard/?`가 됩니다.
 
 [버전 2.17.0][3]부터 `trackViewsManually` 옵션을 사용하여 보기 이벤트를 수동으로 추적함으로써 보기 이름을 추가하고 팀이 소유한 전용 서비스에 할당할 수 있습니다:
 
@@ -477,10 +477,7 @@ window.DD_RUM &&
 
 사용자가 여러 팀에 속한 경우, 호출에 포함된 키-값 쌍을 Global Context API에 추가합니다.
 
-RUM Browser SDK는 다음을 무시합니다:
-
-- `event.context` 외부에서 추가된 속성
-- RUM 보기 이벤트 컨텍스트에 대한 수정사항
+RUM Browser SDK는 `event.context` 외부에서 추가된 속성을 무시합니다.
 
 ### 기능 플래그를 사용하여 RUM 이벤트 강화
 
@@ -536,19 +533,22 @@ window.DD_RUM &&
 
 다음 이벤트 속성을 업데이트할 수 있습니다:
 
-|   속성           |   유형    |   설명                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   문자열  |   활성화된 웹 페이지의 URL.                            |
-|   `view.referrer`       |   문자열  |   현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.  |
-|   `view.name`           |   문자열  |   현재 보기의 이름.                            |
-|   `service`             |   문자열  |   애플리케이션의 서비스 이름입니다.                                                            |
-|   `version`             |   문자열  |   애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)입니다.                          |
-|   `action.target.name`  |   문자열  |   사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.              |
-|   `error.message`       |   문자열  |   오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                 |
-|   `error.stack `        |   문자열  |   스택 트레이스 또는 오류에 대한 보완 정보.                                     |
-|   `error.resource.url`  |   문자열  |   오류를 트리거한 리소스 URL.                                                        |
-|   `resource.url`        |   문자열  |   리소스 URL.                                                                                 |
-|   `context`        |   개체  |   [글로벌 컨텍스트 API](#global-context), [뷰 컨텍스트 API](#view-context) 또는 수동으로 이벤트 생성 시 추가된 속성(예: `addError` 및 **`addAction`**)입니다.                                                                                 |
+| 속성                      | 유형   | 설명                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | 문자열 | 활성화된 웹 페이지의 URL.                                                                                                                                                           |
+| `view.referrer`                | 문자열 | 현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.                                                                                          |
+| `view.name`                    | 문자열 | 현재 보기의 이름.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | 문자열 |   Largest Contentful Paint에 대한 리소스 URL.                                                                                                                                 |
+| `service`                      | 문자열 | 애플리케이션의 서비스 이름입니다.                                                                                                                                                    |
+| `version`                      | 문자열 | 애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)입니다.                                                                                                                  |
+| `action.target.name`           | 문자열 | 사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.                                                                                                      |
+| `error.message`                | 문자열 | 오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                                                                                                         |
+| `error.stack `                 | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.                                                                                                                             |
+| `error.resource.url`           | 문자열 | 오류를 트리거한 리소스 URL.                                                                                                                                                |
+| `resource.url`                 | 문자열 | 리소스 URL.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | 문자열 | 스크립트 리소스 URL                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | 문자열 | 스크립트가 어떻게 호출되었는지 나타내는 의미 있는 이름                                                                                                                                    |
+| `context`                      | 개체 | [글로벌 컨텍스트 API](#global-context), [뷰 컨텍스트 API](#view-context) 또는 수동으로 이벤트 생성 시 추가된 속성(예: `addError` 및 **`addAction`**)입니다. |
 
 RUM Browser SDK는 위에 나열되지 않은 이벤트 속성에 대한 수정 사항은 무시합니다. 이벤트 속성에 대한 자세한 내용은 [RUM Browser SDK GitHub 리포지토리][15]를 참조하세요.
 
@@ -985,6 +985,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## 오류 컨텍스트
+
+### dd_context를 사용하여 로컬 오류 컨텍스트 연결
+
+오류 캡처 시 오류가 생성될 때 추가 컨텍스트가 제공될 수 있습니다. `addError()` API를 통해 추가 정보를 전달하는 대신 `dd_context` 속성을 오류 인스턴스에 직접 연결할 수 있습니다. RUM Browser SDK는 이 속성을 자동으로 감지하여 최종 오류 이벤트 컨텍스트에 병합합니다.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## 글로벌 컨텍스트
 
 ### 글로벌 컨텍스트 속성 추가
@@ -1306,7 +1319,7 @@ RUM 탐색기에서 수행한 모든 쿼리에 대해 서비스 속성을 사용
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
 [12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[14]: /ko/real_user_monitoring/guide/enrich-and-control-rum-data
+[14]: /ko/real_user_monitoring/feature_flag_tracking/using_feature_flags/#feature-flag-naming
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /ko/logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130

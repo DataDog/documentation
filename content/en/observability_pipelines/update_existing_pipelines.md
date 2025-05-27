@@ -7,6 +7,8 @@ disable_toc: false
 
 For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
+This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
+
 ## Update an existing pipeline
 
 1. Navigate to [Observability Pipelines][1].
@@ -105,6 +107,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
@@ -191,3 +198,5 @@ On the Worker installation page:
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /api/latest/observability-pipelines/#update-a-pipeline
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline

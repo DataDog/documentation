@@ -54,6 +54,11 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -184,6 +189,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -197,6 +207,20 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% tab "Remap to OCSF" %}}
 
 {{% observability_pipelines/processors/remap_ocsf %}}
+
+{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
 {{% tab "Sample" %}}
@@ -218,6 +242,16 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
 {{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
+
+{{% /tab %}}
+{{% tab "Throttle" %}}
+
+{{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -244,6 +278,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
