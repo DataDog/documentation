@@ -374,7 +374,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             img {
                 padding-top: 2px;
             }
-            &:hover,
             &.hover,
             &:active,
             &:focus {
@@ -512,7 +511,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         display: none;
         text-transform: uppercase;
     }
-    &:hover,
     &.hover {
         background: white;
         color: #333;
@@ -656,7 +654,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             width: 100%;
             height: 100%;
         }
-        &:hover,
         &.hover {
             .dimmer-cloak {
                 opacity: 0;
