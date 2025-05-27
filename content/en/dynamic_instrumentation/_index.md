@@ -39,7 +39,7 @@ further_reading:
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
+For an improved user experience with features like code completion and symbol search, enable [autocomplete and search][17].
 
 ## Getting started
 
@@ -56,7 +56,7 @@ Dynamic Instrumentation requires the following:
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended, [autocomplete and search (in Preview)][17] is enabled.
+- Recommended, [autocomplete and search][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
@@ -108,7 +108,7 @@ All probe types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. With [autocomplete and search][17] enabled, autocomplete shows suggestions for selecting a class or method.
 
 See the individual probe types below for specific creation steps for each probe type.
 
