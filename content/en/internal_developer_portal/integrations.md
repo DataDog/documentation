@@ -1,5 +1,5 @@
 ---
-title: Use Integrations with Software Catalog
+title: Integrations
 aliases:
   - /tracing/software_catalog/integrations
   - /tracing/service_catalog/integrations
@@ -17,7 +17,7 @@ further_reading:
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-PagerDuty and OpsGenie integrations for Software Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+PagerDuty and OpsGenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
   
@@ -54,7 +54,7 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 
    {{< img src="tracing/software_catalog/pagerduty-token.png" alt="PagerDuty integration setup form with the API key field highlighted." style="width:100%;" >}}
 
-1. Add PagerDuty information to the [service definition][81]:
+1. Add PagerDuty information to the [entity definition][82]:
    ```
    ...
    integrations:
@@ -75,7 +75,7 @@ To add OpsGenie metadata to an entity definition:
    {{< img src="tracing/software_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
    {{< img src="tracing/software_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
 
-4. Update the [service definition][81] with OpsGenie metadata. For example:
+4. Update the [entity definition][82] with OpsGenie metadata. For example:
 
    ```yaml
    "integrations": {
@@ -101,7 +101,7 @@ Once you've completed these steps, an **On Call** information box appears in the
 | [GitLab][12] | Manage issues, merge requests, branches, and commits. | `Approve merge request`, `Cherry pick commit` <br> [See all available actions.][42] |
 | Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Software Catalog or Actions Catalog. | - N/A; use HTTP actions and reqeusts to call platform APIs |
 
-You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Software Catalog. Learn more about [creating entity definitions and importing them from GitHub][81].
+You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Software Catalog. Learn more about [creating entity definitions and importing them from GitHub][83].
 
 ## CI/CD
 
@@ -118,8 +118,8 @@ You can also use GitHub to manage entity definitions and configure the GitHub in
 
 You can import entities from ServiceNow and Backstage into Datadog's Software Catalog. Refer to the following documentation for details:
 
-- [Import entries from ServiceNow][81]
-- [Import entries from Backstage][81]
+- [Import entries from ServiceNow][84]
+- [Import entries from Backstage][85]
 
 
 ## Cloud Resources
@@ -170,6 +170,9 @@ Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comp
 [61]: https://support.pagerduty.com/docs/api-access-keys
 [62]: https://support.atlassian.com/opsgenie/docs/api-key-management/
 [63]: https://support.pagerduty.com/docs/service-directory
-[81]: /software_catalog/set_up/new_to_datadog
+[82]: /internal_developer_portal/software_catalog/entity_model
+[83]: /internal_developer_portal/software_catalog/set_up/create_entities#github-integration
+[84]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow
+[85]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage
 
 
