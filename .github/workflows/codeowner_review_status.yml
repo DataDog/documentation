@@ -18,6 +18,9 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
+    outputs:
+      approval_status: ${{ steps.check_approvals.outputs.approval_status }}
+      team_requested: ${{ steps.check_approvals.outputs.team_requested }}
     steps:
       - name: Check Documentation Team Approval
         id: check_approvals
@@ -64,12 +67,12 @@ jobs:
                 .map(review => review.user.login)
             );
 
-            // Check if documentation team has approved by looking at requested reviewers and comments
+            // Check if documentation team is required via CODEOWNERS (requested reviewers)
             let hasDocumentationApproval = false;
             let isDocumentationTeamRequested = false;
             
             try {
-              // Get requested reviewers to see if documentation team is requested
+              // Get requested reviewers to see if documentation team is requested via CODEOWNERS
               const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
                 owner,
                 repo,
@@ -81,79 +84,25 @@ jobs:
                 team.slug === DOCUMENTATION_TEAM
               );
               
-              if (isDocumentationTeamRequested) {
-                console.log('Documentation team review is requested. Checking for approval indicators...');
-                
-                // Get all comments (including review comments)
-                const { data: comments } = await github.rest.issues.listComments({
-                  owner,
-                  repo,
-                  issue_number: number,
-                });
-                
-                const { data: reviewComments } = await github.rest.pulls.listReviewComments({
-                  owner,
-                  repo,
-                  pull_number: number,
-                });
-
-                console.log('comments', comments);
-                console.log('reviewComments', reviewComments);
-                
-                // Combine all comments
-                const allComments = [...comments, ...reviewComments];
-                
-                // Look for documentation team approval indicators in comments
-                const approvalPatterns = [
-                  /docs?\s*team\s*approved?/i,
-                  /documentation\s*team\s*approved?/i,
-                  /docs?\s*approved?/i,
-                  /documentation\s*approved?/i,
-                  /@DataDog\/documentation\s*approved?/i,
-                  /lgtm.*docs?/i,
-                  /docs?.*lgtm/i
-                ];
-                
-                // Check if any comment from an approver contains approval patterns
-                const docApprovalFromComment = allComments.some(comment => {
-                  const hasApprovalPattern = approvalPatterns.some(pattern => 
-                    pattern.test(comment.body)
-                  );
-                  const isFromApprover = approvals.has(comment.user.login);
-                  
-                  if (hasApprovalPattern && isFromApprover) {
-                    console.log(`Found documentation approval indicator from ${comment.user.login}: "${comment.body.substring(0, 100)}..."`);
-                    return true;
-                  }
-                  return false;
-                });
-                
-                // Also check if any reviewer has approved AND mentioned docs in their review
-                const docApprovalFromReview = reviews.some(review => {
-                  const isApproval = review.state === 'APPROVED';
-                  const mentionsDocs = review.body && approvalPatterns.some(pattern => 
-                    pattern.test(review.body)
-                  );
-                  
-                  if (isApproval && mentionsDocs) {
-                    console.log(`Found documentation approval in review from ${review.user.login}`);
-                    return true;
-                  }
-                  return false;
-                });
-                
-                hasDocumentationApproval = docApprovalFromComment || docApprovalFromReview;
-                
-                if (!hasDocumentationApproval && approvals.size > 0) {
-                  console.log(`Found ${approvals.size} approval(s), but no documentation team approval indicators found in comments.`);
-                }
-              } else {
-                // If documentation team is not requested, we don't need their approval
-                console.log('Documentation team review not requested for this PR.');
-                hasDocumentationApproval = true;
-              }
+              console.log(`Documentation team requested via CODEOWNERS: ${isDocumentationTeamRequested}`);
               
-              console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
+              if (isDocumentationTeamRequested) {
+                // Only check for approval if documentation team is actually required
+                const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+                  org: owner,
+                  team_slug: DOCUMENTATION_TEAM,
+                });
+                
+                hasDocumentationApproval = teamMembers.some(member => 
+                  approvals.has(member.login)
+                );
+                
+                console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
+              } else {
+                // If documentation team is not requested, no approval needed
+                hasDocumentationApproval = true;
+                console.log('Documentation team not required for this PR - no approval needed.');
+              }
               
             } catch (error) {
               console.error(`Error checking documentation team: ${error}`);
@@ -161,7 +110,9 @@ jobs:
               return;
             }
 
-
+            // Set output for the comment job
+            core.setOutput('approval_status', hasDocumentationApproval);
+            core.setOutput('team_requested', isDocumentationTeamRequested);
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
@@ -170,4 +121,64 @@ jobs:
               console.log('Documentation team review not required for this PR.');
             } else {
               console.log('Documentation team has approved this PR.');
+            }
+
+  update-pr-comment:
+    runs-on: ubuntu-latest
+    needs: check-documentation-team-approval
+    if: always()
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Update PR Comment
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github-token: ${{ env.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo, number } = context.issue;
+            const approvalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}' === 'true';
+            const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
+            
+            // Get existing comments from this workflow
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: number,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('Documentation Team Review')
+            );
+
+            // Prepare comment content
+            let commentBody;
+            if (!teamRequested) {
+              commentBody = `## ℹ️ Documentation Team Review\n\nNo documentation team review is required for this pull request.`;
+            } else if (approvalStatus) {
+              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`;
+            } else {
+              commentBody = `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@DataDog/documentation** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.`;
+            }
+
+            // Update or create comment
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+              console.log('Updated existing PR comment with documentation review status.');
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body: commentBody
+              });
+              console.log('Created new PR comment with documentation review status.');
             }
