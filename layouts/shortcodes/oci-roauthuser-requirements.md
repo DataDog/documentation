@@ -1,0 +1,2 @@
+- OCID of the `DatadogROAuthUser`
+- OCI API key and fingerprint value

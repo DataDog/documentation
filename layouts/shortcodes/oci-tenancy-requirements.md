@@ -1,0 +1,3 @@
+- Your OCI user account needs the **Cloud Administrator** role to complete these steps
+- Tenancy OCID
+- Home Region
