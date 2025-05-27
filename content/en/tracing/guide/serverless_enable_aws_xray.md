@@ -9,7 +9,7 @@ aliases:
 
 ### Overview
 
-X-Ray is natively integrated and can be enabled in just a few steps, making it convenient for basic observability needs. It’s a good fit for teams troubleshooting simple workflows or visualizing service-to-service calls in low-complexity environments. However, it doesn’t capture Lambda payloads and trace data is restricted to what AWS surfaces.
+X-Ray is natively integrated and can be enabled in just a few steps, making it convenient for basic observability needs. It's a good fit for teams troubleshooting simple workflows or visualizing service dependencies in low-complexity environments. However, it doesn't capture Lambda payloads and trace data is restricted to what AWS surfaces.
 
 Datadog APM offers deeper visibility than X-Ray. You can enrich traces with business or user context, follow async workflows across services, and capture payloads at every step. It supports custom sampling and retention, letting you dial down ingestion on noisy paths while keeping critical traces longer. This level of control is especially useful for scaling systems and debugging edge cases that are hard to reproduce.
 
