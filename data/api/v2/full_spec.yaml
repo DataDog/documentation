@@ -11083,6 +11083,25 @@ components:
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENT
+    DORAEvent:
+      description: A DORA event.
+      properties:
+        attributes:
+          description: The attributes of the event.
+          type: object
+        id:
+          description: The ID of the event.
+          type: string
+        type:
+          description: The type of the event.
+          type: string
+      type: object
+    DORAFetchResponse:
+      description: Response for the DORA fetch endpoints.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAEvent'
+      type: object
     DORAGitInfo:
       description: Git info for DORA Metrics events.
       properties:
@@ -11118,7 +11137,8 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID. Required to update a previously sent incident.
+          description: Incident ID. Must have at least 16 characters. Required to
+            update a previously sent incident.
           type: string
         name:
           description: Incident name.
@@ -11193,6 +11213,113 @@ components:
       type: string
       x-enum-varnames:
       - DORA_INCIDENT
+    DORAListDeploymentsRequest:
+      description: Request to get a list of deployments.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestData'
+      required:
+      - data
+      type: object
+    DORAListDeploymentsRequestAttributes:
+      description: Attributes to get a list of deployments.
+      properties:
+        from:
+          description: Minimum timestamp for requested events.
+          format: date-time
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: Search query with event platform syntax.
+          type: string
+        sort:
+          description: Sort order (prefixed with `-` for descending).
+          type: string
+        to:
+          description: Maximum timestamp for requested events.
+          format: date-time
+          type: string
+      type: object
+    DORAListDeploymentsRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestDataType'
+      required:
+      - attributes
+      type: object
+    DORAListDeploymentsRequestDataType:
+      description: The definition of `DORAListDeploymentsRequestDataType` object.
+      enum:
+      - dora_deployments_list_request
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENTS_LIST_REQUEST
+    DORAListFailuresRequest:
+      description: Request to get a list of failures.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAListFailuresRequestData'
+      required:
+      - data
+      type: object
+    DORAListFailuresRequestAttributes:
+      description: Attributes to get a list of failures.
+      properties:
+        from:
+          description: Minimum timestamp for requested events.
+          format: date-time
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: Search query with event platform syntax.
+          type: string
+        sort:
+          description: Sort order (prefixed with `-` for descending).
+          type: string
+        to:
+          description: Maximum timestamp for requested events.
+          format: date-time
+          type: string
+      type: object
+    DORAListFailuresRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAListFailuresRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DORAListFailuresRequestDataType'
+      required:
+      - attributes
+      type: object
+    DORAListFailuresRequestDataType:
+      description: The definition of `DORAListFailuresRequestDataType` object.
+      enum:
+      - dora_failures_list_request
+      type: string
+      x-enum-varnames:
+      - DORA_FAILURES_LIST_REQUEST
+    DORAListResponse:
+      description: Response for the DORA list endpoints.
+      properties:
+        data:
+          description: The list of DORA events.
+          items:
+            $ref: '#/components/schemas/DORAEvent'
+          type: array
+      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -30911,8 +31038,8 @@ components:
       description: Defines an action that is executed when a routing rule matches
         certain criteria.
       oneOf:
-      - $ref: '#/components/schemas/SlackAction'
-      - $ref: '#/components/schemas/TeamsAction'
+      - $ref: '#/components/schemas/SendSlackMessageAction'
+      - $ref: '#/components/schemas/SendTeamsMessageAction'
     RoutingRuleAttributes:
       description: Defines the configurable attributes of a routing rule, such as
         actions, query, time restriction, and urgency.
@@ -30928,6 +31055,7 @@ components:
           type: string
         time_restriction:
           $ref: '#/components/schemas/TimeRestrictions'
+          nullable: true
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
@@ -30943,8 +31071,7 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RoutingRuleRelationshipsPolicyData'
-      required:
-      - data
+          nullable: true
       type: object
     RoutingRuleRelationshipsPolicyData:
       description: Represents the policy data reference, containing the policy's ID
@@ -34198,7 +34325,7 @@ components:
       - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs or audit trail.
+      description: Source of events, either logs, audit trail, or Datadog events.
       enum:
       - logs
       - audit
@@ -34206,6 +34333,7 @@ components:
       - spans
       - security_runtime
       - network
+      - events
       example: logs
       type: string
       x-enum-varnames:
@@ -34215,6 +34343,7 @@ components:
       - SPANS
       - SECURITY_RUNTIME
       - NETWORK
+      - EVENTS
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -35016,6 +35145,65 @@ components:
       required:
       - selfServiceTrigger
       type: object
+    SendSlackMessageAction:
+      description: Sends a message to a Slack channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        type:
+          $ref: '#/components/schemas/SendSlackMessageActionType'
+        workspace:
+          description: The workspace ID.
+          example: WORKSPACE
+          type: string
+      required:
+      - type
+      - channel
+      - workspace
+      type: object
+    SendSlackMessageActionType:
+      default: send_slack_message
+      description: Indicates that the action is a send Slack message action.
+      enum:
+      - send_slack_message
+      example: send_slack_message
+      type: string
+      x-enum-varnames:
+      - SEND_SLACK_MESSAGE
+    SendTeamsMessageAction:
+      description: Sends a message to a Microsoft Teams channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        team:
+          description: The team ID.
+          example: TEAM
+          type: string
+        tenant:
+          description: The tenant ID.
+          example: TENANT
+          type: string
+        type:
+          $ref: '#/components/schemas/SendTeamsMessageActionType'
+      required:
+      - type
+      - channel
+      - tenant
+      - team
+      type: object
+    SendTeamsMessageActionType:
+      default: send_teams_message
+      description: Indicates that the action is a send Microsoft Teams message action.
+      enum:
+      - send_teams_message
+      example: send_teams_message
+      type: string
+      x-enum-varnames:
+      - SEND_TEAMS_MESSAGE
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
       properties:
@@ -36925,26 +37113,6 @@ components:
       type: string
       x-enum-varnames:
       - AGGREGATED_CONNECTION
-    SlackAction:
-      description: Sends a message to a Slack channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        type:
-          description: Must be set to "send_slack_message".
-          example: send_slack_message
-          type: string
-        workspace:
-          description: The workspace ID.
-          example: WORKSPACE
-          type: string
-      required:
-      - type
-      - channel
-      - workspace
-      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -38864,31 +39032,6 @@ components:
           $ref: '#/components/schemas/TeamUpdate'
       required:
       - data
-      type: object
-    TeamsAction:
-      description: Sends a message to a Microsoft Teams channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        team:
-          description: The team ID.
-          example: TEAM
-          type: string
-        tenant:
-          description: The tenant ID.
-          example: TENANT
-          type: string
-        type:
-          description: Must be set to "send_teams_message".
-          example: send_teams_message
-          type: string
-      required:
-      - type
-      - channel
-      - tenant
-      - team
       type: object
     TeamsField:
       description: Supported teams field.
@@ -46752,16 +46895,181 @@ paths:
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 1
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/dora/deployments:
+    post:
+      description: Use this API endpoint to get a list of deployment events.
+      operationId: ListDORADeployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAListDeploymentsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a list of deployment events
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/deployments/{deployment_id}:
+    get:
+      description: Use this API endpoint to get a deployment event.
+      operationId: GetDORADeployment
+      parameters:
+      - description: The ID of the deployment event.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFetchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      - appKeyAuth: []
+      summary: Get a deployment event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/failures:
+    post:
+      description: Use this API endpoint to get a list of failure events.
+      operationId: ListDORAFailures
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAListFailuresRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a list of failure events
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/failures/{failure_id}:
+    get:
+      description: Use this API endpoint to get a failure event.
+      operationId: GetDORAFailure
+      parameters:
+      - description: The ID of the failure event.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFetchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      - appKeyAuth: []
+      summary: Get a failure event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
   /api/v2/dora/incident:
     post:
-      description: 'Use this API endpoint to provide data about incidents for DORA
-        metrics.
+      description: 'Use this API endpoint to provide failure data for DORA metrics.
 
 
         This is necessary for:
@@ -46805,7 +47113,7 @@ paths:
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 2
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -66336,9 +66644,12 @@ tags:
     See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
     more information.
   name: Containers
-- description: Send events for DORA Metrics to measure and improve software delivery.
-    See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
-    information.
+- description: 'Search or send events for DORA Metrics to measure and improve your
+    software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
+    for more information.
+
+
+    **Note**: DORA Metrics are not available in the US1-FED site.'
   name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
