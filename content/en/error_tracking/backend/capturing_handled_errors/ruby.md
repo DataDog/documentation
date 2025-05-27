@@ -15,7 +15,7 @@ You must be running:
 
 Before you begin, make sure you've already [installed and configured the Agent][1]. You also need to [add the tracing library][2] directly in the application to instrument it.
 
-### Automatic Instrumentation
+### Automatic instrumentation
 
 To enable automatic reporting of handled errors, you can set one of these two environment variables:
 
