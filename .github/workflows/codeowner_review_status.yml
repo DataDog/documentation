@@ -160,7 +160,7 @@ jobs:
             if (!teamRequested) {
               commentBody = `## ℹ️ Documentation Team Review\n\nNo documentation team review is required for this pull request.`;
             } else if (approvalStatus) {
-              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`;
+              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n`;
             } else {
               commentBody = `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@DataDog/documentation** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.`;
             }
