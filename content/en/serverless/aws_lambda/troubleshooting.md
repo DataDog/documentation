@@ -31,7 +31,7 @@ See this [comparison guide][6] to understand the benefits of using the Extension
 
 To continue using the Forwarder, see this [Forwarder troubleshooting guide][8] for more help.
 
-<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the Extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
 
 ## Ensure the configurations are up-to-date and expected
 
