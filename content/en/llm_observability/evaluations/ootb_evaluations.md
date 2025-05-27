@@ -101,7 +101,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
    - Select **traces** (the root span of each trace) or **spans** (LLM, Workflow, and Agent).
    - If you selected spans, you must select at least one **span name**, otherwise they are optional.
    - (Optional) Specify any or all **tags** you want this evaluation to run on.
-   - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100 (evaluating all spans).
+   - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
@@ -206,7 +206,7 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 ##### Failure to Answer Configuration
-The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+You can configure the evaluation by selecting what types of answers should be considered Failure to Answer. This feature is only available if OpenAI or Azure OpenAI is selected for the LLM provider.
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
