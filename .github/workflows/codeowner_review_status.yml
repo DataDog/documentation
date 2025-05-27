@@ -2,7 +2,7 @@ name: Documentation Team Approval Check
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -96,6 +96,9 @@ jobs:
                   repo,
                   pull_number: number,
                 });
+
+                console.log('comments', comments);
+                console.log('reviewComments', reviewComments);
                 
                 // Combine all comments
                 const allComments = [...comments, ...reviewComments];
@@ -158,44 +161,7 @@ jobs:
               return;
             }
 
-            // Get existing comments from this workflow
-            const { data: comments } = await github.rest.issues.listComments({
-              owner,
-              repo,
-              issue_number: number,
-            });
 
-            const botComment = comments.find(comment => 
-              comment.user.type === 'Bot' && 
-              comment.body.includes('Documentation Team Review')
-            );
-
-            // Prepare comment content
-            let commentBody;
-            if (!isDocumentationTeamRequested) {
-              commentBody = `## ℹ️ Documentation Team Review\n\nNo documentation team review is required for this pull request.`;
-            } else if (hasDocumentationApproval) {
-              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`;
-            } else {
-              commentBody = `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@${owner}/${DOCUMENTATION_TEAM}** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.\n\n**For documentation team members**: When approving, please include one of these phrases in your review or comment:\n- "docs team approved"\n- "documentation approved"\n- "docs approved"\n- "@DataDog/documentation approved"\n\n${approvals.size > 0 ? `**Note**: Found ${approvals.size} approval(s), but no documentation team approval indicators found in comments.` : ''}`;
-            }
-
-            // Update or create comment
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner,
-                repo,
-                comment_id: botComment.id,
-                body: commentBody
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: number,
-                body: commentBody
-              });
-            }
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
