@@ -73,27 +73,40 @@ jobs:
             let isDocumentationTeamRequested = false;
             
             try {
-              // Get requested reviewers to see if documentation team is requested via CODEOWNERS
+              // Get requested reviewers to see if documentation team is currently requested
               const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
                 owner,
                 repo,
                 pull_number: number,
               });
               
-              // Check if documentation team is in requested reviewers
-              isDocumentationTeamRequested = reviewers.teams.some(team => 
+              // Check if documentation team is currently in requested reviewers
+              const currentlyRequested = reviewers.teams.some(team => 
                 team.slug === DOCUMENTATION_TEAM
               );
               
-              console.log(`Documentation team requested via CODEOWNERS: ${isDocumentationTeamRequested}`);
+              // Also check if any documentation team member has reviewed (indicating they were requested)
+              const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: DOCUMENTATION_TEAM,
+              });
+              
+              const teamMemberLogins = new Set(teamMembers.map(member => member.login));
+              const hasTeamMemberReview = reviews.some(review => 
+                teamMemberLogins.has(review.user.login)
+              );
+              
+              // Documentation team is considered "requested" if:
+              // 1. They are currently in requested reviewers, OR
+              // 2. Any team member has already reviewed (meaning they were requested but fulfilled the request)
+              isDocumentationTeamRequested = currentlyRequested || hasTeamMemberReview;
+              
+              console.log(`Documentation team currently requested: ${currentlyRequested}`);
+              console.log(`Documentation team member has reviewed: ${hasTeamMemberReview}`);
+              console.log(`Documentation team considered requested: ${isDocumentationTeamRequested}`);
               
               if (isDocumentationTeamRequested) {
-                // Only check for approval if documentation team is actually required
-                const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
-                  org: owner,
-                  team_slug: DOCUMENTATION_TEAM,
-                });
-                
+                // Check for approval from documentation team members
                 hasDocumentationApproval = teamMembers.some(member => 
                   approvals.has(member.login)
                 );
