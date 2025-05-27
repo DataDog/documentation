@@ -37,9 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+{{ .TableOfContents }}
+
 ## Language Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="Python" description="Setup Application Security for Python applications" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/python" >}}
   {{< appsec-integration name=".NET" description="Setup Application Security for .NET applications" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/dotnet" >}}
   {{< appsec-integration name="Java" description="Setup Application Security for Java applications" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/java" >}}
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ## Proxy Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="NGINX" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx_avatar.svg" link="/security/application_security/setup/standalone/nginx" >}}
   {{< appsec-integration name="Envoy" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/envoy_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
   {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/istio" >}}
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ### Google Cloud Platform (GCP) Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="Application Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
   {{< appsec-integration name="Application Cloud Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
   {{< appsec-integration name="Service Extension" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
@@ -70,21 +72,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ### Microsoft Azure Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="App Service" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
 {{< /appsec-integrations >}}
 
 ### Amazon Web Services (AWS) Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="AWS WAF" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-waf_avatar.svg" link="/security/application_security/setup/standalone/aws/waf" >}}
   {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-lambda_avatar.svg" link="/security/application_security/setup/standalone/aws/lambda" >}}
   {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
-{{< /appsec-integrations >}}
+{{< /appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
 
 ### Kubernetes Integrations
 
-{{< appsec-integrations >}}
+{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
   {{< appsec-integration name="NGINX Ingress Controller" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx-ingress-controller_avatar.svg" link="/security/application_security/setup/standalone/nginx-ingress-controller" >}}
   {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
 {{< /appsec-integrations >}}

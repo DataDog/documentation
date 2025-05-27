@@ -1,3 +1,15 @@
 <div id="integrations" class="row integration-row mx-0" data-ref="container">
   {{ .Inner }}
+  <div class="item" data-ref="item">
+    <div class="integration hover">
+      <div class="card-content">
+        <a href="{{ .Get "integration-request-link" }}" aria-label="request a missing integration form link" target="_blank">
+          <div class="text-center title">Missing Integration?</div>
+          <div class="blurb text-center">Request your missing integration</div>
+          <button type="button">Request Form</button>
+        </a>
+        <div class="dimmer-cloak"></div>
+      </div>
+    </div>
+  </div>
 </div>
