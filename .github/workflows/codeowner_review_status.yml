@@ -124,6 +124,22 @@ jobs:
               console.log('Documentation team has approved this PR.');
             }
 
+            // Create/update a consistent status check that both trigger types will update
+            const statusState = (isDocumentationTeamRequested && !hasDocumentationApproval) ? 'failure' : 'success';
+            const statusDescription = isDocumentationTeamRequested 
+              ? (hasDocumentationApproval ? 'Documentation team has approved' : 'Documentation team approval required')
+              : 'Documentation team review not required';
+
+            await github.rest.repos.createCommitStatus({
+              owner,
+              repo,
+              sha: pr.head.sha,
+              state: statusState,
+              target_url: `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`,
+              description: statusDescription,
+              context: 'Documentation Team Approval'
+            });
+
   update-pr-comment:
     runs-on: ubuntu-latest
     needs: check-documentation-team-approval
