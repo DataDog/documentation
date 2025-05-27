@@ -4473,7 +4473,7 @@ menu:
       weight: 60000
     - name: Data Quality Monitoring
       url: data_quality/
-      pre: book-1
+      pre: books
       identifier: data_quality
       parent: apm_heading
       weight: 70000

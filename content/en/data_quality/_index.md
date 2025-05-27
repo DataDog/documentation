@@ -8,11 +8,11 @@ Data Quality Monitoring helps you detect and troubleshoot issues in your data wo
 
 ## Supported data sources and integrations
 
-To use Data Quality Monitoring, you must enable the appropriate data source integrations in Datadog. The table below outlines the required setup steps.
+To use Data Quality Monitoring, you must enable the relevant integrations for your data sources in Datadog. The table below outlines the required setup steps.
 
 | Data source | Required configuration                                                                                                |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
-| Snowflake   | 1. Enable the [Snowflake integration][1] in Datadog.<br>2. Enable Query History Logs.<br>3. (Optional) Enable Access History for lineage and usage metrics. |
+| Snowflake   | 1. Enable the [Snowflake integration][1] in Datadog.<br>2. On the **Configure** tab, under **Resource Collection**, turn on the **Enable Data Monitoring for Snowflake tables** toggle.<br>3. Turn on the **Query History Logs** toggle.<br>4. (Optional) Turn on the **Enable Query Logs with Access History** toggle to gain additional insight into data usage and lineage. |
 | BigQuery    | 1. Enable the [BigQuery integration][2] in Datadog.<br>2. (Optional) Additional setup may be required for usage monitoring.         |
 
 ## Key capabilities
@@ -37,6 +37,6 @@ Usage metrics highlight which tables are frequently queried and which are not. T
 
 Lineage views show which jobs or systems wrote to a dataset and which downstream assets depend on it. This context makes it easier to troubleshoot the root cause of data quality issues and assess their impact across your environment.
 
-[1]: /integrations/snowflake_web/
-[2]: /integrations/google_cloud_bigquery/
+[1]: https://app.datadoghq.com/integrations?search=snowflake&integrationId=snowflake-web
+[2]: https://app.datadoghq.com/integrations?search=bigquery&integrationId=google-cloud-bigquery
 [3]: /monitors
