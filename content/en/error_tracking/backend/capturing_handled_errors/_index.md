@@ -38,7 +38,7 @@ Set up your application to capture handled errors using one of the following off
 {{< partial name="error_tracking/error-tracking-handled-errors.html" >}}
 <br />
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
