@@ -17,10 +17,10 @@ Datadog APM offers deeper visibility than X-Ray. You can enrich traces with busi
 
 | Capability | AWS X-Ray | Datadog APM |
 |------------|-----------|-------------|
-| Payload Visibility | None | Collect, visualize, and query the [JSON request and response payloads][1] |
 | Enhanced Metrics | Limited CloudWatch metrics | Numerous [real-time metrics][2] with queryable tags  |
-| Trace → Log Correlation | Manually log the X-Ray trace ID to use in queries | [Automatic support][3] |
+| Trace → Log Correlation | None | [Automatic support][3] |
 | Sampling & Retention | AWS-managed | [User-defined][4] |
+| Payload Visibility | None | Collect, visualize, and query the [JSON request and response payloads][1] |
 | Integrations | Limited to core AWS services | [Comprehensive support][5] for AWS & 3rd party services |
 | Distributed Tracing | Primitive subsegments | [Support through hybrid environments][6] |
 | Step Functions Support | Limited support | [End-to-end trace merging][7] |
