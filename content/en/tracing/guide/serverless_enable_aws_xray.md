@@ -13,7 +13,7 @@ X-Ray is natively integrated and can be enabled in just a few steps, making it c
 
 Datadog APM offers deeper visibility than X-Ray. You can enrich traces with business or user context, follow async workflows across services, and capture payloads at every step. It supports custom sampling and retention, letting you dial down ingestion on noisy paths while retaining critical traces longer. This level of control is especially useful for scaling systems and debugging edge cases that are hard to reproduce.
 
-### Feature comparison
+## Lambda Functions
 
 | Capability | AWS X-Ray | Datadog APM |
 |------------|-----------|-------------|
@@ -23,7 +23,16 @@ Datadog APM offers deeper visibility than X-Ray. You can enrich traces with busi
 | Payload Visibility | None | Collect, visualize, and query the [JSON request and response payloads][1] |
 | Integrations | Limited to core AWS services | [Comprehensive support][5] for AWS & 3rd party services |
 | Distributed Tracing | Primitive subsegments | [Support through hybrid environments][6] |
-| Step Functions Support | Limited support | [End-to-end trace merging][7] |
+
+## Step Functions
+
+| Capability | AWS X-Ray | Datadog APM |
+|------------|-----------|-------------|
+| Enhanced Metrics | Limited CloudWatch metrics | [Detailed metrics for each step execution][9] |
+| Trace → Log Correlation | None | Automatic support |
+| Distributed Tracing | Limited cross-service visibility | [Full distributed tracing across Step Functions and Lambda][7], including other Step Functions |
+| Input/Output Visibility | None | Capture and visualize input and output data at each step |
+| Distributed Maps | None | [Full support for distributed maps][10] |
 
 ## Enable AWS X-Ray
 
@@ -37,3 +46,5 @@ If AWS X-Ray meets your current requirements, see the [AWS X-Ray integration doc
 [6]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing
 [7]: https://docs.datadoghq.com/serverless/step_functions/merge-step-functions-lambda?tab=serverlessframework
 [8]: https://docs.datadoghq.com/integrations/amazon_xray/
+[9]: https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics
+[10]: https://docs.datadoghq.com/serverless/step_functions/distributed-maps
