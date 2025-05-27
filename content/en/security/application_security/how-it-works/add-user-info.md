@@ -301,8 +301,7 @@ track_user(
 
 {{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-user-info-legacy" %}}
 
-This example shows how to set user monitoring tags and enable user blocking capability, using the legacy API.
-But using instead the new User Tracking SDK is encouraged.
+This example shows how to set user monitoring tags and enable user blocking capability using the legacy API; however, using the new User Tracking SDK, described above, is encouraged.
 
 ```python
 from ddtrace.contrib.trace_utils import set_user
@@ -741,7 +740,7 @@ Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track use
 
 Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track users and user events.
 
-The following examples show how to track login events, signup events or custom events.
+The following examples show how to track login events, signup events, or custom events.
 
 {{% collapse-content title="User Tracking SDK" level="h4" expanded="true" id="python-business-logic-sdk" %}}
 
@@ -821,7 +820,7 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 
 {{% collapse-content title="FastAPI Toy App with SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
 
-The following example is a fully functionning Toy application using the User Tracking SDK with a memory based user database. It's only provided as an example to illustrate the possible usage of the SDK and does not provide the necessary requirements of a real application, like a persistent data model or a secure authentification system.
+The following example is a fully functioning Toy application that uses the User Tracking SDK with a memory-based user database. This example illustrates the possible usage of the SDK but does not provide the necessary requirements of a real application, such as a persistent data model or a secure authentication system.
 
 ```python
 from uuid import uuid4
@@ -929,7 +928,7 @@ async def whoami(request: Request) -> User:
 
 {{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-business-logic-legacy" %}}
 
-Available since dd-trace-py v1.9, using the new User Tracking SDK instead is now encouraged.
+The preferred method is to use the new User Tracking SDK (available since dd-trace-py v1.9) instead of the Legacy API.
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
