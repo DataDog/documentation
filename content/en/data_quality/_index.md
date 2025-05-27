@@ -2,6 +2,8 @@
 title: Data Quality Monitoring
 ---
 
+<div class="alert alert-info">Data Quality Monitoring is in Preview.</div>
+
 Data Quality Monitoring helps you detect and troubleshoot issues in your data workflows before they cause problems in reporting dashboards, machine learning models, or other downstream systems. It alerts you to common issues such as data freshness problems, volume anomalies, and column-level quality issues, and provides the context needed to trace them back to upstream jobs or data sources.
 
 {{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; one table is flagged with a triggered alert" style="width:100%;" >}}
