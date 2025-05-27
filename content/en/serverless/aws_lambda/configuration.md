@@ -648,6 +648,8 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the Extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
+
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
