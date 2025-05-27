@@ -126,7 +126,7 @@
         - action: pull-and-push-file
           branch: main
           globs:
-          - "*/datadog_checks/*/__about__.py"
+          - "*/README.md"
           options:
             dest_path: '/integrations/'
             file_name: 'zoom_incident_management.md'
