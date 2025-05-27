@@ -64,17 +64,91 @@ jobs:
                 .map(review => review.user.login)
             );
 
-            // Check if documentation team has approved
+            // Check if documentation team has approved by looking at requested reviewers and comments
             let hasDocumentationApproval = false;
+            let isDocumentationTeamRequested = false;
+            
             try {
-              const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
-                org: owner,
-                team_slug: DOCUMENTATION_TEAM,
+              // Get requested reviewers to see if documentation team is requested
+              const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
+                owner,
+                repo,
+                pull_number: number,
               });
               
-              hasDocumentationApproval = teamMembers.some(member => 
-                approvals.has(member.login)
+              // Check if documentation team is in requested reviewers
+              isDocumentationTeamRequested = reviewers.teams.some(team => 
+                team.slug === DOCUMENTATION_TEAM
               );
+              
+              if (isDocumentationTeamRequested) {
+                console.log('Documentation team review is requested. Checking for approval indicators...');
+                
+                // Get all comments (including review comments)
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: number,
+                });
+                
+                const { data: reviewComments } = await github.rest.pulls.listReviewComments({
+                  owner,
+                  repo,
+                  pull_number: number,
+                });
+                
+                // Combine all comments
+                const allComments = [...comments, ...reviewComments];
+                
+                // Look for documentation team approval indicators in comments
+                const approvalPatterns = [
+                  /docs?\s*team\s*approved?/i,
+                  /documentation\s*team\s*approved?/i,
+                  /docs?\s*approved?/i,
+                  /documentation\s*approved?/i,
+                  /@DataDog\/documentation\s*approved?/i,
+                  /lgtm.*docs?/i,
+                  /docs?.*lgtm/i
+                ];
+                
+                // Check if any comment from an approver contains approval patterns
+                const docApprovalFromComment = allComments.some(comment => {
+                  const hasApprovalPattern = approvalPatterns.some(pattern => 
+                    pattern.test(comment.body)
+                  );
+                  const isFromApprover = approvals.has(comment.user.login);
+                  
+                  if (hasApprovalPattern && isFromApprover) {
+                    console.log(`Found documentation approval indicator from ${comment.user.login}: "${comment.body.substring(0, 100)}..."`);
+                    return true;
+                  }
+                  return false;
+                });
+                
+                // Also check if any reviewer has approved AND mentioned docs in their review
+                const docApprovalFromReview = reviews.some(review => {
+                  const isApproval = review.state === 'APPROVED';
+                  const mentionsDocs = review.body && approvalPatterns.some(pattern => 
+                    pattern.test(review.body)
+                  );
+                  
+                  if (isApproval && mentionsDocs) {
+                    console.log(`Found documentation approval in review from ${review.user.login}`);
+                    return true;
+                  }
+                  return false;
+                });
+                
+                hasDocumentationApproval = docApprovalFromComment || docApprovalFromReview;
+                
+                if (!hasDocumentationApproval && approvals.size > 0) {
+                  console.log(`Found ${approvals.size} approval(s), but no documentation team approval indicators found in comments.`);
+                }
+              } else {
+                // If documentation team is not requested, we don't need their approval
+                console.log('Documentation team review not requested for this PR.');
+                hasDocumentationApproval = true;
+              }
               
               console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
               
@@ -97,9 +171,14 @@ jobs:
             );
 
             // Prepare comment content
-            const commentBody = hasDocumentationApproval 
-              ? `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`
-              : `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@${owner}/${DOCUMENTATION_TEAM}** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.`;
+            let commentBody;
+            if (!isDocumentationTeamRequested) {
+              commentBody = `## ℹ️ Documentation Team Review\n\nNo documentation team review is required for this pull request.`;
+            } else if (hasDocumentationApproval) {
+              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n\nThis PR is ready to merge from a documentation review perspective.`;
+            } else {
+              commentBody = `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@${owner}/${DOCUMENTATION_TEAM}** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.\n\n**For documentation team members**: When approving, please include one of these phrases in your review or comment:\n- "docs team approved"\n- "documentation approved"\n- "docs approved"\n- "@DataDog/documentation approved"\n\n${approvals.size > 0 ? `**Note**: Found ${approvals.size} approval(s), but no documentation team approval indicators found in comments.` : ''}`;
+            }
 
             // Update or create comment
             if (botComment) {
@@ -119,8 +198,10 @@ jobs:
             }
 
             // Set final status
-            if (!hasDocumentationApproval) {
+            if (isDocumentationTeamRequested && !hasDocumentationApproval) {
               core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM}`);
+            } else if (!isDocumentationTeamRequested) {
+              console.log('Documentation team review not required for this PR.');
             } else {
               console.log('Documentation team has approved this PR.');
             }
