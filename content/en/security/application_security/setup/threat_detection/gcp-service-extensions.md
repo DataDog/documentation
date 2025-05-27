@@ -1,12 +1,14 @@
 ---
-title: Enabling AAP for GCP Service Extensions
+title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/threat_detection/gcp-service-extensions
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
-      text: "AAP Service Extension's source code"
+      text: "App and API Protection Service Extension's source code"
     - link: 'https://cloud.google.com/service-extensions/docs/overview'
       tag: "Documentation"
       text: "Google Cloud Service Extensions overview"
@@ -18,11 +20,11 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="AAP Service Extensions is in Preview" >}}
-To try the preview of AAP Service Extensions for GCP, follow the setup instructions below.
+{{< callout url="#" btn_hidden="true" header="App and API Protection Service Extensions is in Preview" >}}
+To try the preview of App and API Protection Service Extensions for GCP, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable App and API Protection with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection (AAP) Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
+You can enable App and API Protection (AAP) with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
 
 ## Prerequisites
 
@@ -38,14 +40,14 @@ You can enable App and API Protection with GCP Service Extensions within GCP Clo
 
 ## Enabling threat detection
 
-To set up the AAP Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
+To set up the App and API Protection Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
 
 **Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's App and API Protection integration.
 
 {{< tabs >}}
 {{% tab "Google Cloud Console" %}}
 
-1. Create a VM Compute instance using the [Datadog AAP Service Extensions Docker image][1].
+1. Create a VM Compute instance using the [Datadog App and API Protection Service Extensions Docker image][1].
 
     See [Configuration](#configuration) for available environment variables when setting up your VM instance.
 
@@ -77,7 +79,7 @@ To set up the AAP Service Extension in your GCP environment, use the Google Clou
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select all **Events** from the list where you want AAP to run detection (Request Headers and Response Headers are **required**).
+    4. Select all **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
 
 </br>
 
@@ -90,7 +92,7 @@ To set up the AAP Service Extension in your GCP environment, use the Google Clou
 
 {{% tab "Terraform" %}}
 
-You can use Terraform to automate the deployment of the AAP GCP Service Extension. This simplifies the process of setting up the service extension to work with your existing load balancer.
+You can use Terraform to automate the deployment of the App and API Protection GCP Service Extension. This simplifies the process of setting up the service extension to work with your existing load balancer.
 
 ### Prerequisites for Terraform deployment
 
@@ -111,7 +113,7 @@ The Terraform deployment will create the following components:
 
 ### Deployment Steps
 
-The AAP Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
+The App and API Protection Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
 
 1. Create a new directory and the necessary Terraform files:
 
@@ -120,7 +122,7 @@ The AAP Service Extension deployment requires several components that work toget
     touch main.tf variables.tf
     ```
 
-2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the AAP Service Extension, including network rules, VM instances, and load balancer configuration:
+2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the App and API Protection Service Extension, including network rules, VM instances, and load balancer configuration:
 
    ```hcl
    # main.tf
@@ -202,7 +204,7 @@ The AAP Service Extension deployment requires several components that work toget
    # Service Extension Callout Container Configuration
    #----------------------------------------------------------
 
-   # Datadog AAP GCP Service Extension container configuration
+   # Datadog App and API Protection GCP Service Extension container configuration
    module "gce-container-aap-service-extension" {
      source = "terraform-google-modules/container-vm/google"
 
@@ -255,10 +257,10 @@ The AAP Service Extension deployment requires several components that work toget
    # Load Balancer Integration
    #----------------------------------------------------------
 
-   # Unmanaged Instance Group including the AAP Service Extension instance
+   # Unmanaged Instance Group including the App and API Protection Service Extension instance
    resource "google_compute_instance_group" "aap_se_instance_group" {
      name        = "${var.project_prefix}-instance-group"
-     description = "Unmanaged instance group for the AAP Service Extension"
+     description = "Unmanaged instance group for the App and API Protection Service Extension"
      zone        = var.zone
 
      named_port {
@@ -311,7 +313,7 @@ The AAP Service Extension deployment requires several components that work toget
    # GCP Service Extension configuration for traffic interception
    resource "google_network_services_lb_traffic_extension" "default" {
      name        = "${var.project_prefix}-service-extension"
-     description = "Datadog AAP Service Extension"
+     description = "Datadog App and API Protection Service Extension"
      location    = "global"
 
      load_balancing_scheme = "EXTERNAL_MANAGED"
@@ -331,7 +333,7 @@ The AAP Service Extension deployment requires several components that work toget
          timeout   = "0.5s"
          fail_open = false # If the extension fails, the request is dropped
 
-         # Supported events for the AAP Service Extension
+         # Supported events for the App and API Protection Service Extension
          supported_events = ["REQUEST_HEADERS", "REQUEST_BODY", "RESPONSE_HEADERS", "RESPONSE_BODY"]
        }
      }
@@ -448,7 +450,7 @@ The service extension automatically inspects all traffic passing through your lo
 
 ## Configuration
 
-The Datadog AAP Service Extension Docker image supports the following configuration settings:
+The Datadog App and API Protection Service Extension Docker image supports the following configuration settings:
 
 | Environment variable                   | Default value   | Description                                                       |
 |----------------------------------------|-----------------|-------------------------------------------------------------------|
@@ -467,7 +469,7 @@ Configure the container to send traces to your Datadog Agent using the following
   <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].
+The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ## Limitations
 
@@ -486,4 +488,4 @@ The GCP Service Extensions have the following limitations:
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/
