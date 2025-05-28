@@ -303,10 +303,10 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://istio.io/
-[2]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
-[3]: https://docs.datadoghq.com/agent/remote_config/?tab=helm#enabling-remote-configuration
-[4]: https://docs.datadoghq.com/tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator
-[5]: https://docs.datadoghq.com/tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator#cluster-agent-admission-controller
+[2]: /containers/kubernetes/installation/?tab=datadogoperator
+[3]: /agent/remote_config/?tab=helm#enabling-remote-configuration
+[4]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator
+[5]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator#cluster-agent-admission-controller
 [6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
-[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[7]: /tracing/trace_collection/library_config/go/
+[8]: /security/application_security/setup/threat_detection/
