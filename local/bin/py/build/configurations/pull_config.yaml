@@ -126,7 +126,7 @@
         - action: pull-and-push-file
           branch: main
           globs:
-          - "*/README.md"
+          - "zoom_incident_management/README.md"
           options:
             dest_path: '/integrations/'
             file_name: 'zoom_incident_management.md'
