@@ -21,7 +21,9 @@ You can reference and perform CRUD (Create, Read, Update, and Delete) operations
 
 ## Create a workflow or app from a datastore {#create-workflow-app}
 
-You can get started with a workflow or app directly from a datastore.
+You can get started with a workflow or app directly from a datastore. Each time you create a datastore, Datadog asks you if you'd like to create a workflow or app, or view your datastore.
+
+{{< img src="/actions/datastore/datastore-toast.png" alt="When you create a datastore, Datadog asks if you'd like to create a workflow or app." style="width:100%;" >}}
 
 ### Workflow Automation
 
@@ -92,6 +94,13 @@ To use a datastore in an existing workflow, add a datastore action:
 
    {{< img src="/actions/datastore/datastore-create.png" alt="Add the datastore from an App Builder action" style="width:100%;" >}}
 
+## Update a Datastore with Terraform (#update-terraform)
+
+You can use a workflow to update a Datastore with Terraform by following these steps:
+1. Initialize a datastore by [creating one from the UI][9].
+1. Use Terraform to define a workflow that updates the datastore.
+1. Run the workflow to create or modify rows in the datastore.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -104,3 +113,4 @@ To use a datastore in an existing workflow, add a datastore action:
 [6]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.getDatastoreItem
 [7]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.listDatastoreItems
 [8]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.putDatastoreItem
+[9]: /actions/datastore/create/#create-a-datastore
