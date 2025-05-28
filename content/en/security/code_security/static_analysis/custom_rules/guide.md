@@ -365,7 +365,6 @@ A captured node is represented by an object that contains the following fields:
 * `cstType` --- the node's type.
 * `start` --- an object that contains the starting position of the node in the source code.
 * `end` --- an object that contains the position of the character that follows the end of the node.
-* `field` --- if this node is a field of its parent node, this contains the field's name.
 * `text` --- the content of the node.
 
 The `start` and `end` fields are objects that contain `line` and `col` fields. Those fields are 1-based: the first line of a file and the first column of a line are number 1. The position in the `start` field is inclusive: it points to the first character in the node. The position in the `end` field ie exclusive: it points to the first character after the node.
@@ -416,6 +415,15 @@ function displayLeaves(node) {
     displayLeaves(child);
   }
 }
+```
+
+If you call `ddsa.getChildren(node)` on a node with fields, the nodes contained in those fields will be returned among the children and will contain an additional `fieldName` property.
+
+```javascript
+// Get the content of the `then` and `else` fields of an `if_statement` node.
+let children = ddsa.getChildren(ifStatementNode);
+let thenField = children.find(n => n.fieldName === 'then');
+let elseField = children.find(n => n.fieldName === 'else');
 ```
 
 You can compare two node objects with `==` to know if they point to the same node.
