@@ -46,7 +46,7 @@ First, configure your Datadog API and application keys by adding `DD_APP_KEY` an
 Next, run SCA by following instructions for your chosen CI provider below.
 
 ## GitHub Actions
-SCA can run as a job in your GitHub Actions workflows. The action provided below invokes [Datadog osv-scanner][10], our recommended SBOM generator, on your codebase and uploads the results into Datadog.
+SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][10], on your codebase and uploads the results into Datadog.
 
 Add the following code snippet in `.github/workflows/datadog-sca.yml`. Make sure to replace
 the `dd_site` attribute with the [Datadog site][12] you are using.
@@ -92,8 +92,7 @@ The GitHub Action works for the following languages and following files:
 ## Generic CI Providers
 If you don't use GitHub Actions, you can run the [datadog-ci][14] CLI directly in your CI pipeline platform and upload your SBOM to Datadog.
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][17].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][17]. Afterwards, uploads from your non-default branches will succeed.
 
 Prerequisites:
 
@@ -121,18 +120,18 @@ export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
-# Download the latest Datadog OSV Scanner:
-# https://github.com/DataDog/osv-scanner/releases
-DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/download/osv-scanner_linux_amd64.zip
+# Download the latest Datadog SBOM Generator:
+# https://github.com/DataDog/datadog-sbom-generator/releases
+DATADOG_SBOM_GENERATOR_URL=https://github.com/DataDog/datadog-sbom-generator/releases/latest/download/datadog-sbom-generator_linux_amd64.zip
 
-# Install OSV Scanner
-mkdir /osv-scanner
-curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-unzip /osv-scanner/osv-scanner.zip -d /osv-scanner
-chmod 755 /osv-scanner/osv-scanner
+# Install Datadog SBOM Generator
+mkdir /datadog-sbom-generator
+curl -L -o /datadog-sbom-generator/datadog-sbom-generator.zip $DATADOG_SBOM_GENERATOR_URL
+unzip /datadog-sbom-generator/datadog-sbom-generator.zip -d /datadog-sbom-generator
+chmod 755 /datadog-sbom-generator/datadog-sbom-generator
 
-# Run OSV Scanner and scan your dependencies
-/osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
+# Run Datadog SBOM Generator to scan your dependencies
+/datadog-sbom-generator/datadog-sbom-generator scan --output=/tmp/sbom.json /path/to/repository
 
 # Upload results to Datadog
 datadog-ci sbom upload /tmp/sbom.json
@@ -163,7 +162,7 @@ When installing a GitHub App, the following permissions are required to enable c
 Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process. 
+If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
 
 [1]: https://github.com/DataDog/gitlab-integration-setup
 
@@ -187,7 +186,7 @@ If you are an admin in your Azure portal, you can configure Entra apps to connec
 4. Select the scan types you want to use.
 5. Select **Azure DevOps** as your source code management provider.
 6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following: 
+7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
    1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
    2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
 8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
@@ -206,7 +205,7 @@ First, set your environment variables (note: the Datadog UI will fill these valu
 ```shell
 export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
 export DD_API_KEY="..."                         # Datadog API Key
-``` 
+```
 
 Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
 ```shell
@@ -233,7 +232,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Upload third-party SBOM to Datadog
 
-While Datadog preferred SBOM generator is [our own osv-scanner fork][10], it is possible to ingest a
+Datadog recommends using the [Datadog SBOM generator][10], but it is also possible to ingest a
 third-party SBOM.
 
 Our tooling supports the following SBOM standards:
@@ -283,6 +282,20 @@ datadog:
 {{< /code-block >}}
 
 
+If you want all the files in a repository to be associated with a service, you can use the glob `**/*` as follows:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - "**/*"
+{{< /code-block >}}
+
 #### Detecting file usage patterns
 
 Datadog detects file usage in additional products such as Error Tracking and associate
@@ -321,7 +334,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [7]: /integrations/github
 [8]: /integrations/guide/source-code-integration
 [9]: /security/code_security/dev_tool_int/github_pull_requests/
-[10]: https://github.com/DataDog/osv-scanner
+[10]: https://github.com/DataDog/datadog-sbom-generator
 [11]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
