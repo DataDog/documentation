@@ -40,7 +40,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
-### Start from AI
+### Start with AI
 
 You can use Bits AI to create an app for you. To get started:
 1. From [App Builder][1], click **New App**.
@@ -50,6 +50,8 @@ You can use Bits AI to create an app for you. To get started:
    - `Provide a list of PagerDuty services and their status in a table. Include a search input above the table.`
    - `Display GitHub pull requests in a table.`
 1. Click **Submit** (**↑**).
+
+After Bits creates your app, you can continue to enter prompts to iterate on your app.
 
 ### Create a custom app
 
