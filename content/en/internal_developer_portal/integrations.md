@@ -50,7 +50,7 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 
 1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
 1. Obtain your [PagerDuty API Access Key][61].
-1. Paste the key on the [Pagerduty Integration Setup][52] page.
+1. Paste the key on the [PagerDuty Integration Setup][52] page.
 
    {{< img src="tracing/software_catalog/pagerduty-token.png" alt="PagerDuty integration setup form with the API key field highlighted." style="width:100%;" >}}
 
