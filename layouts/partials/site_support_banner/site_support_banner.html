@@ -2,9 +2,29 @@
 {{ $dot := . }}
 
 {{ $product_id := .Page.Params.product_id }}
+{{ $product_paths := split .Page.Path "/" }}
 {{ $unsupported_sites := .Site.Params.unsupported_sites }}
 
-{{ $unsupported_product := index $unsupported_sites $product_id }}
+{{ $unsupported_product := dict }}
+{{ if $product_id }}
+    {{ if index $unsupported_sites $product_id }}
+        {{ $unsupported_product = index $unsupported_sites $product_id }}
+    {{ else }}
+        {{ range $product_paths }}
+            {{ if index $unsupported_sites . }}
+                {{ $unsupported_product = index $unsupported_sites . }}
+                {{ break }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ else }}
+    {{ range $product_paths }}
+        {{ if index $unsupported_sites . }}
+            {{ $unsupported_product = index $unsupported_sites . }}
+            {{ break }}
+        {{ end }}
+    {{ end }}
+{{ end }}
 
 {{ if $unsupported_product }}
     {{/*  concatenate the unsupported regions into a comma separated list  */}}
@@ -19,5 +39,8 @@
     <div class="d-none site-region-container" data-region="{{ $unsupported_regions }}">
         <div class="alert alert-warning">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
     </div>
+{{ else }}
+    <p>cool</p>
 {{ end }}
+
 

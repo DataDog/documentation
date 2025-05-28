@@ -4,8 +4,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
-cascade:
-  product_id: datadog_cloudcraft
 ---
 
 ## Overview
