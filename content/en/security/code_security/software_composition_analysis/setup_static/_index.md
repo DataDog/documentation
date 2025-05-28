@@ -338,16 +338,13 @@ are set to your API key, APP key, and [Datadog site][12], respectively.
 datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
-## Link results to Datadog services and teams
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
 {{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-
 The [schema version `v3`][15] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of globs that should match paths in the repository.
-
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
@@ -359,10 +356,7 @@ datadog:
       paths:
         - path/to/service/code/**
 {{< /code-block >}}
-
-
 If you want all the files in a repository to be associated with a service, you can use the glob `**/*` as follows:
-
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
@@ -374,33 +368,39 @@ datadog:
       paths:
         - "**/*"
 {{< /code-block >}}
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog links files to services by detecting their usage in other products, such as Error Tracking.
-
-For example, if a service named `foo` has a log entry or stack trace with the path `/modules/foo/bar.py`, Datadog associates `/modules/foo/bar.py` with the `foo` service.
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
 {{% /collapse-content %}}
+
 {{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
 
-Datadog matches files to services by looking for service names in repository URLs and file paths.
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
 
-- If a repository URL matches a service name (for example, service `myservice` and repository `https://github.com/myorganization/myservice.git`), all files in that repository are linked to the service.
-- If no repository match is found, Datadog checks the file path. If the path contains a service name (for example, `/path/to/myservice/foo.py`), the file is linked to that service. If multiple service names are present, the one closest to the filename is used.
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
 
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name closest to the filename is selected.
 {{% /collapse-content %}}
 
 If one method succeeds (in order), no further mapping attempts are made.
 
 ### Link results to teams
 
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected.
-For example, if `domains/ecommerce/apps/myservice/foo.py` is linked to the `myservice` service, the `myservice` team will be assigned to any violations found in that file.
+Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
 
-If no service or team is found, Datadog uses your repository’s `CODEOWNERS` file to determine ownership.
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
-**Note:** Make sure your Git provider teams are correctly mapped to your [Datadog teams][16] for this to work.
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
