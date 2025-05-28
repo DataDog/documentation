@@ -573,8 +573,28 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "ListDORADeployments": {
+    "description": "Use this API endpoint to get a list of deployment events.",
+    "summary": "Get a list of deployment events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of deployments."
+  },
+  "GetDORADeployment": {
+    "description": "Use this API endpoint to get a deployment event.",
+    "summary": "Get a deployment event"
+  },
+  "ListDORAFailures": {
+    "description": "Use this API endpoint to get a list of failure events.",
+    "summary": "Get a list of failure events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of failures."
+  },
+  "GetDORAFailure": {
+    "description": "Use this API endpoint to get a failure event.",
+    "summary": "Get a failure event"
+  },
   "CreateDORAIncident": {
-    "description": "Use this API endpoint to provide data about incidents for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send an incident event for DORA Metrics",
     "request_description": "",
     "request_schema_description": "Request to create a DORA incident event."
@@ -1328,22 +1348,22 @@
     "summary": "Get all aggregated connections"
   },
   "CreateOnCallEscalationPolicy": {
-    "description": "Create a new on-call escalation policy",
-    "summary": "Create on-call escalation policy",
+    "description": "Create a new On-Call escalation policy",
+    "summary": "Create On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to create a new escalation policy, including the policy data."
   },
   "DeleteOnCallEscalationPolicy": {
-    "description": "Delete an on-call escalation policy",
-    "summary": "Delete on-call escalation policy"
+    "description": "Delete an On-Call escalation policy",
+    "summary": "Delete On-Call escalation policy"
   },
   "GetOnCallEscalationPolicy": {
-    "description": "Get an on-call escalation policy",
-    "summary": "Get on-call escalation policy"
+    "description": "Get an On-Call escalation policy",
+    "summary": "Get On-Call escalation policy"
   },
   "UpdateOnCallEscalationPolicy": {
-    "description": "Update an on-call escalation policy",
-    "summary": "Update on-call escalation policy",
+    "description": "Update an On-Call escalation policy",
+    "summary": "Update On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
@@ -1366,22 +1386,22 @@
     "summary": "Resolve On-Call Page"
   },
   "CreateOnCallSchedule": {
-    "description": "Create a new on-call schedule",
-    "summary": "Create on-call schedule",
+    "description": "Create a new On-Call schedule",
+    "summary": "Create On-Call schedule",
     "request_description": "",
     "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
   },
   "DeleteOnCallSchedule": {
-    "description": "Delete an on-call schedule",
-    "summary": "Delete on-call schedule"
+    "description": "Delete an On-Call schedule",
+    "summary": "Delete On-Call schedule"
   },
   "GetOnCallSchedule": {
-    "description": "Get an on-call schedule",
-    "summary": "Get on-call schedule"
+    "description": "Get an On-Call schedule",
+    "summary": "Get On-Call schedule"
   },
   "UpdateOnCallSchedule": {
-    "description": "Update a new on-call schedule",
-    "summary": "Update on-call schedule",
+    "description": "Update a new On-Call schedule",
+    "summary": "Update On-Call schedule",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
@@ -1390,12 +1410,12 @@
     "summary": "Get the schedule on-call user"
   },
   "GetOnCallTeamRoutingRules": {
-    "description": "Get a team's on-call routing rules",
-    "summary": "Get on-call team routing rules"
+    "description": "Get a team's On-Call routing rules",
+    "summary": "Get On-Call team routing rules"
   },
   "SetOnCallTeamRoutingRules": {
-    "description": "Set a team's on-call routing rules",
-    "summary": "Set on-call team routing rules",
+    "description": "Set a team's On-Call routing rules",
+    "summary": "Set On-Call team routing rules",
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },

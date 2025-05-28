@@ -630,6 +630,20 @@ Adding user information to your RUM sessions helps you:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+The following attributes are available:
+
+| Attribute  | Type | Required |  Description                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | String | Yes | Unique user identifier.                                                                                  |
+| `usr.name`  | String | No | User friendly name, displayed by default in the RUM UI.                                                  |
+| `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
+
 The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
 | Attribute  | Type | Description                                                                                              |
@@ -637,6 +651,9 @@ The below attributes are optional but Datadog strongly recommends providing at l
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
