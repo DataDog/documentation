@@ -90,7 +90,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 {{% /tab %}}
 {{< /tabs >}}
 
-If your LLM provider is restricting IP addresses, you can get the list of IP ranges to enable by selecting your data center, querying [Datadog's IP ranges][5] and copying them from the `webhooks` section.
+If your LLM provider is restricting IP addresses, you can get the list of necessary IP ranges on [Datadog's IP ranges website][5], by selecting your data center and copying them from the `webhooks` section.
 
 ## Select and enable evaluations
 
@@ -184,6 +184,8 @@ def generate_answer():
 {{< /code-block >}}
 
 The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+
+Hallucination detection does not run if either the user query, the context or the span output is empty.
 
 You can find more examples of instrumentation in our [SDK documentation][6].
 
