@@ -1891,16 +1891,21 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
       weight: 106
-    - name: Query OpenTelemetry Metrics
-      url: metrics/open_telemetry/query_metrics/
+    - name: OpenTelemetry Metrics
+      url: metrics/open_telemetry/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
+      parent: metrics_otel
+      identifier: metrics_querying
+      weight: 201
     - name: OTLP Metric Types
       url: metrics/open_telemetry/otlp_metric_types
       parent: metrics_otel
       identifier: metrics_otlp_types
-      weight: 201
+      weight: 202
     - name: Metrics Types
       url: metrics/types/
       parent: metrics_top_level
