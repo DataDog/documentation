@@ -109,7 +109,7 @@ You can post **updates** over time to keep users informed, and then mark the inc
 
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page to a custom domain like `shopist.statuspage.datadoghq.com`.
+To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
 
 1. From your status page, click **Settings**.  
 1. Select **Custom Domain**.
