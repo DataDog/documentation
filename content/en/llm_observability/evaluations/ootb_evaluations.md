@@ -89,6 +89,9 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{< /tabs >}}
+
+If your LLM provider is restricting IP addresses, you can get the list of IP ranges to enable by selecting your data center, querying Datadog's IP ranges here[5] and copying them from the `webhooks` section.
+
 ## Select and enable evaluations
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
@@ -277,3 +280,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: https://app.datadoghq.com/llm/settings/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
+[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
