@@ -171,4 +171,3 @@ Update the rule in one of the following ways:
 [4]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.1.0
 [5]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html
 [6]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html
-[7]: /serverless/aws_lambda/installation/
