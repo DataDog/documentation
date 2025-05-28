@@ -117,7 +117,7 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 
 ## Logs
 
-{{< img src="service_management/mobile/log_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
 
 On the Logs page, you can view and search all of the logs or flex logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][23].
 
