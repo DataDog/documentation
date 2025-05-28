@@ -44,7 +44,7 @@ The System check is included in the [Datadog Agent][1] package. No additional in
 
 [Run the Agent's status subcommand][1] and look for `agentprofiling` under the Checks section.
 
-## Data Collected
+## Data collected
 
 ### Metrics
 
@@ -54,7 +54,7 @@ The Agent Profiling check does not include any metrics.
 
 The Agent Profiling check does not include any events.
 
-### Service Checks
+### Service checks
 
 The Agent Profiling check does not include any service checks.
 
