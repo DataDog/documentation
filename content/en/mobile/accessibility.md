@@ -53,27 +53,27 @@ To set a focus mode to include or exclude the Datadog Mobile App:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 1. Open **Settings** >> **Focus**.
 
-{{< img src="service_management/mobile/iOS_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 2. Tap a **Focus** or create your own.
 
-{{< img src="service_management/mobile/iOS_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 3. Tap **Allow Notifications From** and add the Datadog Mobile App. Alertnatively tap **Silence Notifications From** and add the Datadog Mobile App.
 
 {{% /tab %}}
 
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 1. Open **Settings** >> **Modes and Routines**.
 
-{{< img src="service_management/mobile/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 
 2. Tap a **Mode** or create your own.
 
-{{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="focus mode">}}
 3. Tap **Stay focused**>> **Restrict app usage** and add the Datadog Mobile App >> **Done**. Alteratively tap **Do not distrub** and add the Datadog Mobile App >> **Done**.
 
 {{% /tab %}}
