@@ -7,13 +7,14 @@ further_reading:
   text: "Product Analytics"
 ---
 
-<!-- {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}} -->
-
 ## Overview
 
-Journeys help you track user journeys from end-to-end to discover the different ways users navigate through your application. You can extract the data to design your app in a way that users actually use it - not how you think they use it.
+Use the various charts to visualize your users' journeys from end-to-end to discover the different ways users navigate through your application. You can extract the data to identify frictions in the user journey, measure the success of UX changes and inform your design decisions. 
+
+The [Analytics Explorer][1] contains views data aggregation for understanding how your product is being used. Create a widget in a dashboard out of that visualization and dive deeper into subsets of the events list depending on the interactions that the visualization enables. 
+
+
+
 
 ## Pathways
 
@@ -30,5 +31,5 @@ With [funnel analysis][1], you can understand the end-to-end conversion of a sin
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/journeys/pathways
+[1]: /product_analytics/charts/analytics_explorer/_index
 [2]: /product_analytics/journeys/funnel_analysis
