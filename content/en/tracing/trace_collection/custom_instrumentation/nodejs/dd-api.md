@@ -272,7 +272,7 @@ Additionally, traces can be excluded based on their resource name, so that the A
 ## dd-trace-api
 
 {{< callout btn_hidden="true" header="ddtrace-api is in Preview!">}}
-The <code>dd-trace-api</code> packages is in Preview and and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
+The <code>dd-trace-api</code> packages is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
 <br><br>The following steps are only necessary if you want to experiment with the in-Preview <code>ddtrace-api</code> package.{{< /callout >}}
 
 The [dd-trace-api package][5] provides a stable public API for Datadog APM's custom Node.js instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
@@ -285,7 +285,7 @@ This separation between interface (`dd-trace-api`) and implementation (`dd-trace
 
 To use `dd-trace-api`:
 
-1. Install the `dd-trace` and `dd-trace-api` libraries in your app. Note that `dd-trace` will be installed for you by single-step instrumentation, but you'll need to install `dd-trace-api` manually in your app.
+1. Install the `dd-trace` and `dd-trace-api` libraries in your app. **Note**: `dd-trace` is installed for you with single-step instrumentation, but you need to install `dd-trace-api` manually in your app.
    ```shell
    npm install dd-trace dd-trace-api
    ```
