@@ -1,18 +1,35 @@
-<div id="integrations" class="row integration-row mx-0" data-ref="container">
-  {{ .Inner }}
-  <div class="item" data-ref="item">
-    <div class="integration hover">
-      <div class="card-content">
-        <a href="{{ .Get "integration-request-link" }}" aria-label="request a missing integration form link" target="_blank">
-          <picture class="mx-auto my-auto">
-            <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{.Site.Params.img_url}}images/icon_question_mark.svg" alt="equest a missing integration" loading="lazy">
-          </picture>
-          <div class="text-center title">Missing Integration?</div>
-          <div class="blurb text-center">Request your missing integration</div>
+<style>
+  .appsec-integrations .card-body {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .appsec-integrations .card-body  .title {
+    font-weight: 600;
+  }
+
+  .appsec-integrations .card-body .description {
+    font-weight: 200;
+  }
+
+  .appsec-integrations .card-body button {
+    text-transform: uppercase;
+  }
+</style>
+
+<div class="appsec-integrationscontainer cards-dd">
+  <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
+    <!-- {{ .Inner }} -->
+
+    <div class="col card h-100">
+      <a href="{{ .Get "integration-request-link" }}" aria-label="request a missing integration form link" target="_blank">
+        <div class="card-body text-center py-2 px-1">
+          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{.Site.Params.img_url}}images/icon_question_mark.svg" alt="equest a missing integration" loading="lazy">
+          <div class="title">Missing Integration?</div>
+          <div class="description">Request your missing integration</div>
           <button type="button">Request Form</button>
-        </a>
-        <div class="dimmer-cloak"></div>
-      </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
