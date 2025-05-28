@@ -40,6 +40,17 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
+### Start from AI
+
+You can use Bits AI to create an app for you. To get started:
+1. From [App Builder][1], click **New App**.
+1. Click **Start with AI**.
+1. Enter a prompt that describes the app you want to create. Enter as much detail as you can to improve results. Here are some example queries:
+   - `Display a list of lambda functions in a table. Allow the user to filter by function name and specify the limit.`
+   - `Provide a list of PagerDuty services and their status in a table. Include a search input above the table.`
+   - `Display GitHub pull requests in a table.`
+1. Click **Submit** (**↑**).
+
 ### Create a custom app
 
 1. From [App Builder][1], click **New App**.
@@ -71,7 +82,7 @@ To delete or duplicate a component, select the component and click the three dot
 
 For a list of available UI components and their properties, see [Components][9].
 
-UI components can trigger reactions on an [Event][11]. 
+UI components can trigger reactions on an [Event][11].
 
 [Queries][12] populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
