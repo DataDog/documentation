@@ -282,7 +282,7 @@ spec:
   If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
 
 {{% /tab %}}
 {{< /tabs >}}
