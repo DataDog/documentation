@@ -94,7 +94,7 @@ To use a datastore in an existing workflow, add a datastore action:
 
    {{< img src="/actions/datastore/datastore-create.png" alt="Add the datastore from an App Builder action" style="width:100%;" >}}
 
-## Update a Datastore with Terraform (#update-terraform)
+## Update a Datastore with Terraform {#update-terraform}
 
 You can use a workflow to update a Datastore with Terraform by following these steps:
 1. Initialize a datastore by [creating one from the UI][9].
