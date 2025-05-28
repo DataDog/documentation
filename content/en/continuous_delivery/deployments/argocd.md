@@ -38,7 +38,7 @@ Choose one of the following setup methods based on how you installed Argo CD:
 - **Regular setup (kubectl apply)**: For standard Argo CD installations using `kubectl apply`
 - **Helm**: For Helm-based Argo CD deployments
 
-### Method 1: Regular setup (kubectl apply)
+### Regular setup (kubectl apply)
 
 Modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
 
@@ -76,7 +76,7 @@ data:
       send: [cd-visibility-template]
 ```
 
-### Method 2: Helm
+### Helm setup
 
 If you used Helm to install Argo CD, add the following configuration to your `values.yaml`:
 
@@ -113,7 +113,7 @@ notifications:
         send: [cd-visibility-template]
 ```
 
-### Configuration Summary
+### Configuration summary
 
 The following resources have been added:
 1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
