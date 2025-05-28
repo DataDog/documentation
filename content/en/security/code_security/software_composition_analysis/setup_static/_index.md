@@ -342,13 +342,7 @@ datadog-ci sbom upload /path/to/third-party-sbom.json
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
-2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
-3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
-
-If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
-
-#### Identifying the code location in the Software Catalog
+{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
 
 The [schema version `v3`][15] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
@@ -381,18 +375,23 @@ datadog:
         - "**/*"
 {{< /code-block >}}
 
-#### Detecting file usage patterns
+{{% /collapse-content %}}
 
+{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
 Datadog links files to services by detecting their usage in other products, such as Error Tracking.
 
 For example, if a service named `foo` has a log entry or stack trace with the path `/modules/foo/bar.py`, Datadog associates `/modules/foo/bar.py` with the `foo` service.
-
-#### Detecting service name in paths and repository names
+{{% /collapse-content %}}
+{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
 
 Datadog matches files to services by looking for service names in repository URLs and file paths.
 
 - If a repository URL matches a service name (for example, service `myservice` and repository `https://github.com/myorganization/myservice.git`), all files in that repository are linked to the service.
 - If no repository match is found, Datadog checks the file path. If the path contains a service name (for example, `/path/to/myservice/foo.py`), the file is linked to that service. If multiple service names are present, the one closest to the filename is used.
+
+{{% /collapse-content %}}
+
+If one method succeeds (in order), no further mapping attempts are made.
 
 ### Link results to teams
 
