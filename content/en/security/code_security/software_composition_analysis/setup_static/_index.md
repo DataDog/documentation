@@ -422,3 +422,17 @@ If no service or team is found, Datadog uses your repository’s `CODEOWNERS` fi
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/
+
+
+## Further Reading
+
+{{< whatsnext desc="More about SCA:">}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Other Code Security scanning for your repositories:">}}
+    {{< nextlink href="/security/code_security/static_analysis/" >}}Static Code Analysis (SAST){{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infrastructure as Code (IaC){{< /nextlink >}}
+    {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
+{{< /whatsnext >}}
+
