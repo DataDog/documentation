@@ -35,7 +35,7 @@ These are the available librdkafka options:
 - session.timeout.ms
 - socket.timeout.ms
 
-See [librdkafka documentation][3] for more information and to make sure your values have the correct type and are within range.
+See the [librdkafka documentation][3] for more information and to ensure your values have the correct type and are within range.
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
