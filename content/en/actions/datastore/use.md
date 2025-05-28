@@ -46,7 +46,7 @@ Datadog creates an app prepopulated with your datastore ID. From here, follow th
 To use a datastore in an existing app, add a datastore action:
 1. Click the Data (**{&nbsp;}**) icon to open the Data tab.
 1. Click the plus (**+**) icon, select **Action**, and add a Datastore action to add to your app. For a list of available datastore actions, see the [Action Catalog][4].
-1. Choose an existing connection or create one.
+1. Choose an existing connection or [create one][10].
 1. From the **Datastore ID** drop-down menu, select an existing datastore, or select **New Datastore** to create one.
 
    {{< img src="/actions/datastore/datastore-add-app.png" alt="Add the datastore from an App Builder action" style="width:100%;" >}}
@@ -114,3 +114,4 @@ You can use a workflow to update a Datastore with Terraform by following these s
 [7]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.listDatastoreItems
 [8]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.putDatastoreItem
 [9]: /actions/datastore/create/#create-a-datastore
+[10]: /actions/connections/#create-a-connection
