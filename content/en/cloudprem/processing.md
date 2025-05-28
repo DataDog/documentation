@@ -131,7 +131,7 @@ CloudPrem processing is designed to align closely with cloud-based [Datadog Log 
 Ignored processors appear as a warning in the indexer logs.
 
 ### Supported Processors:
-- attribute-remapper (overrideOnConflict is unsupported)
+- attribute-remapper
 - category-processor
 - date-remapper
 - grok-parser (limited compatibility)

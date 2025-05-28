@@ -3,15 +3,9 @@ title: Cloud Security
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: "Release Notes"
-    text: "See What's New in Datadog Security Compliance"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
-  - link: "/security/threats/setup"
-    tag: "Documentation"
-    text: "Uncover kernel-level threats with Workload Protection"
   - link: "/security/research_feed"
     tag: "Documentation"
     text: "Security Research Feed"
@@ -42,6 +36,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
     tag: "Blog"
     text: "How we use Datadog for detection as code"
+  - link: "https://www.datadoghq.com/blog/shared-responsibility-model/"
+    tag: "Blog"
+    text: "Simplifying the shared responsibility model: How to meet your cloud security obligations"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -59,7 +56,6 @@ Security and DevOps teams can act on the shared context of observability and sec
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
-- [**Workload Protection**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
