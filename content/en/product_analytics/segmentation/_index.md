@@ -21,13 +21,13 @@ The segments page includes a list of all of the segments you have created. You c
 
 The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
-{{< img src="product_analytics/segmentation/userprofiles_PANA.png" alt="A view of the User profile page.">}}
+{{< img src="product_analytics/segmentation/userprofiles_PANA.png" alt="A view of the User profiles page.">}}
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
 <p class="text-black">With the filtering capability on the User Profiles page, you can determine which users almost bought an item, but dropped before checking out. <br><br> Use the <code>Last Seen</code> and <code>Last Seen Application</code> attributes and specify the sessions that reached <code>Cart</code> but dropped before reaching the <code>click on CHECKOUT</code> step. Optionally, select the <code>Device Type</code> to further narrow this down.</p>
 
-{{< img src="product_analytics/segmentation/almost-bought_PANA.png" alt="A view of the User profile page.">}}
+{{< img src="product_analytics/segmentation/almost-bought_PANA.png" alt="A view of the User profiles page.">}}
 
 </div>
 <br>
@@ -128,15 +128,15 @@ User profiles are sourced from RUM events using `usr.id` as the aggregating attr
 
 The RUM SDK allows you to identify users by setting attributes such as User ID, Name, and Email (`usr.id`, `usr.name`, and `usr.email`). These attributes are then used to populate users onto the User Profiles page. 
 
-### Navigating the user profile page 
-The User Profile page allows you to see information on an individual user and correlate this to the group. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+### Navigating the user profiles page 
+The User Profiles page allows you to see information on an individual user and correlate this to the group. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
 {{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
 
 From the session history, you can identify where frustrations are detected and follow the link to the analytics details of these frustrations. 
 
-{{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profile page and its session history." style="width:70%;">}}
+{{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profiles page and its session history." style="width:70%;">}}
 <br>
 
 ## Build a segment
