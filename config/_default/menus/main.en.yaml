@@ -2470,51 +2470,56 @@ menu:
       identifier: overview
       parent: events
       weight: 2
+    - name: Aggregation Key Processor
+      url: service_management/events/pipelines_and_processors/aggregation_key
+      identifier: aggregation_key_processor
+      parent: overview
+      weight: 201
     - name: Arithmetic Processor
       url: service_management/events/pipelines_and_processors/arithmetic_processor
       identifier: arithmetic_processor
       parent: overview
-      weight: 201
+      weight: 202
     - name: Date Remapper
       url: service_management/events/pipelines_and_processors/date_remapper
       identifier: date_remapper
       parent: overview
-      weight: 202
+      weight: 203
     - name: Category Processor
       url: service_management/events/pipelines_and_processors/category_processor
       identifier: category_processor
       parent: overview
-      weight: 203
+      weight: 204
     - name: Grok Parser
       url: service_management/events/pipelines_and_processors/grok_parser
       identifier: grok_parser
       parent: overview
-      weight: 204
+      weight: 205
     - name: Lookup Processor
       url: service_management/events/pipelines_and_processors/lookup_processor
       identifier: lookup_processor
       parent: overview
-      weight: 205
+      weight: 206
     - name: Remapper
       url: service_management/events/pipelines_and_processors/remapper
       identifier: remapper
       parent: overview
-      weight: 206
+      weight: 207
     - name: Service Remapper
       url: service_management/events/pipelines_and_processors/service_remapper
       identifier: service_remapper
       parent: overview
-      weight: 207
+      weight: 208
     - name: Status Remapper
       url: service_management/events/pipelines_and_processors/status_remapper
       identifier: status_remapper
       parent: overview
-      weight: 208
+      weight: 209
     - name: String Builder Processor
       url: service_management/events/pipelines_and_processors/string_builder_processor
       identifier: string_builder_processor
       parent: overview
-      weight: 209
+      weight: 210
     - name: Explorer
       url: service_management/events/explorer/
       identifier: events_explorer
@@ -4517,7 +4522,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
       weight: 401
-    - name: Submit Evaluations
+    - name: Submit Custom Evaluations
       url: llm_observability/evaluations/submit_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
@@ -5493,6 +5498,11 @@ menu:
       parent: observability_pipelines_generate_metrics
       identifier: observability_pipelines_generate_metrics_syslog
       weight: 7023
+    - name: Run Multiple Pipelines on a Host
+      identifier: observability_run_multiple_pipelines_on_a_host
+      url: /observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/
+      parent: observability_pipelines_set_up_pipelines
+      weight: 108
     - name: Install the Worker
       url: observability_pipelines/install_the_worker/
       identifier: observability_pipelines_install_the_worker

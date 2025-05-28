@@ -648,6 +648,8 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
+
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
@@ -710,7 +712,7 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 ## Configure the Datadog Lambda extension for local testing
 
-To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
+Not all Lambda emulators support the AWS Lambda Telemetry API. To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_SERVERLESS_FLUSH_STRATEGY` to `periodically,1` in your local testing environment. Otherwise, the extension waits for responses from the AWS Lambda Telemetry API and blocks the invocation.
 
 ## Instrument AWS Lambda with the OpenTelemetry API
 
