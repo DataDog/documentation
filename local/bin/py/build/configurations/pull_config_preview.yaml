@@ -1,8 +1,8 @@
 ---
 - data:
-    - org_name: jenkinsci
+    # - org_name: jenkinsci
 
-      repos:
+    #   repos:
       # - repo_name: datadog-plugin
 
       #   contents:
