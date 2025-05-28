@@ -13,12 +13,13 @@ Datadog Software Composition Analysis (SCA) scans your repositories for open-sou
 
 **Supported languages:** C#, Go, Java, JavaScript, PHP, Python, Ruby
 
-To get started, go to [**Security** > **Code Security**][1] in Datadog and:
-
-1. Open [Security Settings][2].
+To get started:
+1. Open [**Security** > **Code Security** > **Security Settings**][2].
 2. Click **Manage Repositories** under "Activate scanning for your repositories".
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI Pipelines).
 4. Follow the setup instructions for your source code provider.
+
+The sections below cover the different ways to configure SCA for your repositories.
 
 ## Select where to run static SCA scans
 
@@ -51,15 +52,31 @@ Run SCA by following instructions for your chosen CI provider below, Datadog SCA
 
 You **must** scan your default branch at least once before results appear in Datadog **Code Security** page.
 
-[1]: /security/code_security/software_composition_analysis/setup_static/?tab=github#select-where-to-run-static-sca-scans
-[2]: /security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-where-to-run-static-sca-scans
-[3]: /security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-where-to-run-static-sca-scans
-[4]: /security/code_security/software_composition_analysis/setup_static/?tab=other#select-where-to-run-static-sca-scans
+[1]: /security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider
+[2]: /security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider
+[3]: /security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider
+[4]: /security/code_security/software_composition_analysis/setup_static/?tab=other#select-your-source-code-management-provider
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Run SCA scans in your CI Pipelines
+
+Datadog SCA scans libraries in the following languages and **requires** a lockfile to report them:
+
+| Language   | Package Manager    | Lockfile                                |
+|------------|-------------------|------------------------------------------|
+| C#         | .NET              | `packages.lock.json`                     |
+| Go         | mod               | `go.mod`                                 |
+| JVM        | Gradle            | `gradle.lockfile`                        |
+| JVM        | Maven             | `pom.xml`                                |
+| Node.js    | npm               | `package-lock.json`                      |
+| Node.js    | pnpm              | `pnpm-lock.yaml`                         |
+| Node.js    | yarn              | `yarn.lock`                              |
+| PHP        | composer          | `composer.lock`                          |
+| Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
+| Python     | poetry            | `poetry.lock`                            |
+| Ruby       | bundler           | `Gemfile.lock`                           |
 
 ### Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
@@ -163,24 +180,6 @@ To upload results to Datadog, you must be authenticated. To ensure you're authen
 | `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.    | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][12] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
-### Package Manager support
-
-SCA supports scanning for libraries in the following languages and lockfiles:
-
-| Language   | Package Manager    | Lockfile                                 |
-|------------|-------------------|------------------------------------------|
-| C#         | .NET              | `packages.lock.json`                     |
-| Go         | mod               | `go.mod`                                 |
-| JVM        | Gradle            | `gradle.lockfile`                        |
-| JVM        | Maven             | `pom.xml`                                |
-| Node.js    | npm               | `package-lock.json`                      |
-| Node.js    | pnpm              | `pnpm-lock.yaml`                         |
-| Node.js    | yarn              | `yarn.lock`                              |
-| PHP        | composer          | `composer.lock`                          |
-| Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
-| Python     | poetry            | `poetry.lock`                            |
-| Ruby       | bundler           | `Gemfile.lock`                           |
-
 ### Running options
 
 There are two ways to run SCA scans from within your CI Pipelines:
@@ -276,10 +275,8 @@ jobs:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Gitlab" %}}
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
+{{% tab "Other" %}}
+For all other providers, use the customizable script in the [section below](#run-via-customizable-script) to run SCA scans and upload results to Datadog.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -332,7 +329,7 @@ You can upload SBOMs generated by other tools if they meet these requirements:
 - All components have type `library`
 - All components have a valid `purl` attribute
 
-Third-party SBOM files are uploaded to Datadog using the [`datadog-ci` command](https://github.com/DataDog/datadog-ci/?tab=readme-ov-file#how-to-install-the-cli).
+Third-party SBOM files are uploaded to Datadog using the [`datadog-ci`](https://github.com/DataDog/datadog-ci/?tab=readme-ov-file#how-to-install-the-cli) command.
 
 You can use the following command to upload your third-party SBOM. Ensure the environment variables `DD_API_KEY`, `DD_APP_KEY` and `DD_SITE`
 are set to your API key, APP key, and [Datadog site][12], respectively.
