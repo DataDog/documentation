@@ -1605,6 +1605,7 @@ components:
       required:
       - data
       type: object
+      x-model-simple-name: AWSLSResponse
     AWSLogsServicesResponseAttributes:
       description: AWS Logs Services response body
       properties:
@@ -1619,6 +1620,7 @@ components:
       required:
       - logs_services
       type: object
+      x-model-simple-name: AWSLSResponseAttrs
     AWSLogsServicesResponseData:
       description: AWS Logs Services response body
       properties:
@@ -1635,6 +1637,7 @@ components:
       - id
       - type
       type: object
+      x-model-simple-name: AWSLSResponseData
     AWSLogsServicesResponseDataType:
       default: logs_services
       description: The `AWSLogsServicesResponseData` `type`.
@@ -1644,6 +1647,7 @@ components:
       type: string
       x-enum-varnames:
       - LOGS_SERVICES
+      x-model-simple-name: AWSLSResponseType
     AWSMetricsConfig:
       description: AWS Metrics Collection config.
       properties:
