@@ -227,6 +227,64 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
+{{% tab "Autodiscovery (Kubernetes)" %}}
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis via Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+  ```yaml
+  datadog:
+    traceroute:
+      enabled: true
+  ```
+Now that the module is enabled, Datadog will automatically detect Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+  ```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+      {
+        "network_path": {
+          "init_config": {
+            "min_collection_interval": 300
+          },
+          "instances": [
+                {
+                  "protocol": "TCP",
+                  "port": 443,
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "api.datadoghq.eu"
+                },
+                {
+                  "protocol": "UDP",
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "1.1.1.1"
+                },
+          ]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+# (...)
+  ```
+  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Network traffic paths (experimental)
@@ -366,5 +424,4 @@ datadog:
 
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
-
 
