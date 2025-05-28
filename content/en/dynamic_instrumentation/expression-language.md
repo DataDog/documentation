@@ -7,11 +7,12 @@ private: false
 
 The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
-For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
-
-In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
-
-Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
+| Example |
+|---------|
+| `someVar.someField` |
+| `request.headers["Host"]` |
+| `any(post.tags, {@it == "debugger"})` |
+| `@duration > 10 && len(p.data) < 100` |
 
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
@@ -25,7 +26,15 @@ It does **not** support:
 
 Try [autocomplete and search (in Preview)][6] for an improved user experience using the Expression Language.
 
-The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
+## Applications
+
+Expressions can be used to produce metrics or logs, and as conditions to emit filtered data.
+
+For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
+
+Logs can be emitted using templates. In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
+
+Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
 
 ## Contextual variables
 
@@ -34,7 +43,7 @@ The Expression Language provides contextual variables for different instrumentat
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
 | `@return`   | Provides access to the method return value. |
-| `@duration` | Provides access to the method call execution duration. |
+| `@duration` | Provides access to the method call execution duration, as a floating-point value in milliseconds. |
 | `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists). |
 | `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
 | `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
