@@ -4825,7 +4825,7 @@ menu:
       parent: tests
       identifier: tests_flaky_management
       weight: 8
-    - name: Flaky Tests
+    - name: Working with Flaky Tests
       url: tests/flaky_tests
       parent: tests
       identifier: tests_flaky_tests
