@@ -1891,8 +1891,8 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
       weight: 106
-    - name: Send OpenTelemetry Metrics to Datadog
-      url: metrics/open_telemetry/otlp_metrics/
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
