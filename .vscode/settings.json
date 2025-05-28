@@ -1,10 +1,5 @@
 {
     "files.associations": {
         "*.mdoc.md": "markdoc"
-    },
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#0F1E82",
-        "titleBar.activeBackground": "#152AB7",
-        "titleBar.activeForeground": "#F9F9FE"
     }
 }
