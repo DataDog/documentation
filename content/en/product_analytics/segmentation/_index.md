@@ -13,7 +13,7 @@ Analyze and understand individual users or segments (groups based on common char
 
 The User Profiles page lists data about your product's users. You can **search**, **sort**, and **filter** this list to find key users. You can use the [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment), to better analyze and understand usage of your product across a group. 
 
-The segments page includes a list of all of the segments you have created --- you can also create a segment from this page. Segmenting helps you to focus on some of your users based on various characteristics and behaviors in order to uncover valuable insights, identify trends, and make data-driven decisions that will optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization. 
+The segments page includes a list of all of the segments you have created. You can also create a segment from this page. Segmenting helps you to focus on some of your users based on various characteristics and behaviors in order to uncover valuable insights, identify trends, and make data-driven decisions that will optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization. 
 
 
 
