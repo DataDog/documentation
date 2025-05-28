@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Analyze and understand specific groups or segments of your user base using the [User Profile][3] and the [Segments][1] features. 
+Analyze and understand individual users or segments (groups based on common characteristics) of your user base using the [User Profiles][3] and the [Segments][1] features. 
 
 The User Profiles page lists your available product users. You can **list**, **search**, **sort**, and **filter** on these users to create a list of these key users. You can use the [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment), to better analyze and understand their usage of your product. 
 
