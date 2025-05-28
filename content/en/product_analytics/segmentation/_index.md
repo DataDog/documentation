@@ -23,7 +23,7 @@ The [User Profiles][3] page allows you to track and analyze the behavioral patte
 
 {{< img src="product_analytics/segmentation/userprofiles_PANA.png" alt="A view of the User profile page.">}}
 
-<div class="alert" style="background: #7757D3">
+<div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
 <p class="text-white">With the filtering capability on the User Profiles page, you can determine which users almost bought an item but dropped before checking out. <br><br> You can use the <code>Last Seen</code> <code>Last Seen Application</code> attributes and specify the sessions that reached <code>Cart</code> but dropped before reaching the <code>click on CHECKOUT</code> step. You have the option to also select the <code>Device Type</code> to further narrow this down.</p>
 
