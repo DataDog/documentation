@@ -21,13 +21,13 @@ The segments page includes a list of all of the segments you have created. You c
 
 The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
-{{< img src="product_analytics/segmentation/userprofiles_pana-2.png" alt="A view of the User profiles page.">}}
+{{< img src="product_analytics/segmentation/user_profiles_pana.png" alt="A view of the User profiles page." >}}
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
 <p class="text-black">With the filtering capability on the User Profiles page, you can determine which users almost bought an item, but dropped before checking out. <br><br> Use the <code>Last Seen</code> and <code>Last Seen Application</code> attributes and specify the sessions that reached <code>Cart</code> but dropped before reaching the <code>click on CHECKOUT</code> step. Optionally, select the <code>Device Type</code> to further narrow this down.</p>
 
-{{< img src="product_analytics/segmentation/almost-bought_PANA.png" alt="A view of the User profiles page.">}}
+{{< img src="product_analytics/segmentation/almost-bought_pana-2.png" alt="A view of the User profiles page.">}}
 
 </div>
 <br>
