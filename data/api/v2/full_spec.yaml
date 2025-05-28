@@ -31038,8 +31038,8 @@ components:
       description: Defines an action that is executed when a routing rule matches
         certain criteria.
       oneOf:
-      - $ref: '#/components/schemas/SlackAction'
-      - $ref: '#/components/schemas/TeamsAction'
+      - $ref: '#/components/schemas/SendSlackMessageAction'
+      - $ref: '#/components/schemas/SendTeamsMessageAction'
     RoutingRuleAttributes:
       description: Defines the configurable attributes of a routing rule, such as
         actions, query, time restriction, and urgency.
@@ -31055,6 +31055,7 @@ components:
           type: string
         time_restriction:
           $ref: '#/components/schemas/TimeRestrictions'
+          nullable: true
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
@@ -31070,8 +31071,7 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RoutingRuleRelationshipsPolicyData'
-      required:
-      - data
+          nullable: true
       type: object
     RoutingRuleRelationshipsPolicyData:
       description: Represents the policy data reference, containing the policy's ID
@@ -34325,7 +34325,7 @@ components:
       - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs or audit trail.
+      description: Source of events, either logs, audit trail, or Datadog events.
       enum:
       - logs
       - audit
@@ -34333,6 +34333,7 @@ components:
       - spans
       - security_runtime
       - network
+      - events
       example: logs
       type: string
       x-enum-varnames:
@@ -34342,6 +34343,7 @@ components:
       - SPANS
       - SECURITY_RUNTIME
       - NETWORK
+      - EVENTS
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -35143,6 +35145,65 @@ components:
       required:
       - selfServiceTrigger
       type: object
+    SendSlackMessageAction:
+      description: Sends a message to a Slack channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        type:
+          $ref: '#/components/schemas/SendSlackMessageActionType'
+        workspace:
+          description: The workspace ID.
+          example: WORKSPACE
+          type: string
+      required:
+      - type
+      - channel
+      - workspace
+      type: object
+    SendSlackMessageActionType:
+      default: send_slack_message
+      description: Indicates that the action is a send Slack message action.
+      enum:
+      - send_slack_message
+      example: send_slack_message
+      type: string
+      x-enum-varnames:
+      - SEND_SLACK_MESSAGE
+    SendTeamsMessageAction:
+      description: Sends a message to a Microsoft Teams channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        team:
+          description: The team ID.
+          example: TEAM
+          type: string
+        tenant:
+          description: The tenant ID.
+          example: TENANT
+          type: string
+        type:
+          $ref: '#/components/schemas/SendTeamsMessageActionType'
+      required:
+      - type
+      - channel
+      - tenant
+      - team
+      type: object
+    SendTeamsMessageActionType:
+      default: send_teams_message
+      description: Indicates that the action is a send Microsoft Teams message action.
+      enum:
+      - send_teams_message
+      example: send_teams_message
+      type: string
+      x-enum-varnames:
+      - SEND_TEAMS_MESSAGE
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
       properties:
@@ -37052,26 +37113,6 @@ components:
       type: string
       x-enum-varnames:
       - AGGREGATED_CONNECTION
-    SlackAction:
-      description: Sends a message to a Slack channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        type:
-          description: Must be set to "send_slack_message".
-          example: send_slack_message
-          type: string
-        workspace:
-          description: The workspace ID.
-          example: WORKSPACE
-          type: string
-      required:
-      - type
-      - channel
-      - workspace
-      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -38991,31 +39032,6 @@ components:
           $ref: '#/components/schemas/TeamUpdate'
       required:
       - data
-      type: object
-    TeamsAction:
-      description: Sends a message to a Microsoft Teams channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        team:
-          description: The team ID.
-          example: TEAM
-          type: string
-        tenant:
-          description: The tenant ID.
-          example: TENANT
-          type: string
-        type:
-          description: Must be set to "send_teams_message".
-          example: send_teams_message
-          type: string
-      required:
-      - type
-      - channel
-      - tenant
-      - team
       type: object
     TeamsField:
       description: Supported teams field.
