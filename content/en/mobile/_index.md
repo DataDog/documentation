@@ -265,6 +265,12 @@ On the Services page, you can view, search and filter all services that you have
 
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
+### Create an incident
+
+1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
+2. Click the **+** button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
 {{% /tab %}}
 
 {{% tab "Android" %}}
@@ -273,14 +279,14 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Create an incident
 
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
 2. Click the **+** button in the top right corner.
 3. Give your incident a title, severity, and commander.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
@@ -301,6 +307,7 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://apps.apple.com/app/datadog/id1391380318
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
