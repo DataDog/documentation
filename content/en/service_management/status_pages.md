@@ -47,7 +47,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
    | ----------------- | ----------- |
    | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated Datadog users can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
-   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: acme → acme.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
+   | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
 1. (Optional) [Add components](#add-components).
 1. Click **Save Settings**.
