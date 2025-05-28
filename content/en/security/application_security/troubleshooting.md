@@ -2,7 +2,6 @@
 title: Troubleshooting App and API Protection
 aliases:
   - /security_platform/application_security/troubleshooting
-  - /security/application_security/troubleshooting
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -11,7 +10,6 @@ further_reading:
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
-
 
 ## Overview
 
