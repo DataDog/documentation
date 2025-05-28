@@ -70,6 +70,7 @@ build-cdocs:
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -81,6 +82,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
+	@make update_websites_sources_module
 	@make server
 
 # Leave build scripts in place, but skip dependencies and sources_module
@@ -145,9 +147,6 @@ config:
 
 # Automatically download the latest module from websites-sources repo
 update_websites_sources_module:
-	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
-	node_modules/hugo-bin/vendor/hugo mod clean
-	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
 #######################################################################################################################
 # API Code Examples
