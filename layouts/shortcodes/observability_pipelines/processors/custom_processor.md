@@ -10,6 +10,6 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
 - Manipulate event [metadata](#event) and [paths](#path).
 
-See [VRL functions][10191] for a list of all the functions.
+See [VRL functions][10191] for the full list of available functions.
 
 [10191]: /observability_pipelines/processors/custom_processor#vrl-functions
