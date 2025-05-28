@@ -84,7 +84,7 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Users need the **Dashboards Report Write** [permission][2] to create and edit report schedules.
+Users need the **Dashboards write** AND **Dashboards Report Write** [permission][2] to create and edit report schedules.
 This permission can be granted by another user with the **User Access Manage** permission.
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions-2.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
