@@ -893,35 +893,35 @@
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call escalation policy returns \"Created\" response"
+      "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call schedule returns \"Created\" response"
+      "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Set on-call team routing rules returns \"OK\" response"
+      "description": "Set On-Call team routing rules returns \"OK\" response"
     }
   ],
   "UpdateOnCallEscalationPolicy": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call escalation policy returns \"OK\" response"
+      "description": "Update On-Call escalation policy returns \"OK\" response"
     }
   ],
   "UpdateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call schedule returns \"OK\" response"
+      "description": "Update On-Call schedule returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1254,6 +1254,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateResourceEvaluationFilters": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update resource filters returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringRule": [

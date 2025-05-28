@@ -33,6 +33,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Collect Profiling data](#collect-profiling-data)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
+- [Enable FIPS compliance](#enable-fips-compliance)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
 - [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
@@ -350,9 +351,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-**Notes**: 
+**Notes**:
    - The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
-   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.   
+   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -576,6 +577,40 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 
 For more advanced usage, see the [Dual Shipping guide][32].
 
+## Enable FIPS compliance
+
+<div class="alert alert-info">For a complete overview of FIPS compliance for AWS Lambda functions, refer to the dedicated <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> page.</div>
+
+To enable FIPS compliance for AWS Lambda functions, follow these steps:
+
+1. Use a FIPS-compliant extension layer by referencing the appropriate ARN:
+
+{{< tabs >}}
+{{% tab "AWS GovCLoud" %}}
+ ```sh
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{% tab "AWS Commercial" %}}
+ ```sh
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{< /tabs >}}
+
+2. For Lambda functions using Python, JavaScript, or Go, set the environment variable `DD_LAMBDA_FIPS_MODE` to `true`. This environment variable:
+   - In FIPS mode, the Lambda metric helper functions require the FIPS-compliant extension for metric submission
+   - Uses AWS FIPS endpoints for API key lookups
+   - Is enabled by default in GovCloud environments
+
+3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
+
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
+   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
+
 ## Propagate trace context over AWS resources
 
 Datadog automatically injects the trace context into outgoing AWS SDK requests and extracts the trace context from the Lambda event. This enables Datadog to trace a request or transaction over distributed services. See [Serverless Trace Propagation][33].
@@ -612,6 +647,8 @@ Datadog can collect the monitoring data from your Lambda functions either using 
 To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][38]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
+
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -675,7 +712,7 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 ## Configure the Datadog Lambda extension for local testing
 
-To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
+Not all Lambda emulators support the AWS Lambda Telemetry API. To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_SERVERLESS_FLUSH_STRATEGY` to `periodically,1` in your local testing environment. Otherwise, the extension waits for responses from the AWS Lambda Telemetry API and blocks the invocation.
 
 ## Instrument AWS Lambda with the OpenTelemetry API
 

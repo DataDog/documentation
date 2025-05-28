@@ -14,15 +14,15 @@ App and API Protection provides serverless capability for the following platform
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
   
-|Type           	| Threat Detection	| Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
-| --------------- | ----------------- | ------------------------------------------- | ----------------------------- |
-| Java  	      	| {{< X >}}         |                     	                			|	                    					|
-| .NET  	      	| {{< X >}}         |                     	                			|	                    					|
-| Node 		        | {{< X >}}     		| {{< X >}}	              		               	|                    						|
-| Python         	| {{< X >}}        	| {{< X >}}                              			|				                    		|
-| Ruby           	| {{< X >}}        	|  	                                     			|				                    		|
-| PHP            	| 		            	|	                                      			|				                    		|
-| Go   	        	| {{< X >}}        	| 	                                     			|				                    		|
+|Type           	| Threat Detection	|
+| --------------- | ----------------- |
+| Java  	        | {{< X >}}         |
+| .NET  	        | {{< X >}}         |
+| Node 	        | {{< X >}}     		|
+| Python         	| {{< X >}}        	|
+| Ruby           	| {{< X >}}        	|
+| PHP            	| 		            |
+| Go   	        | {{< X >}}        	|
 
 ### Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
@@ -59,15 +59,17 @@ Go
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type           	| Threat Detection	| Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
-| --------------- | ----------------- | ------------------------------------------- | ----------------------------- |
-| Java  		      | Preview         	| Preview	                			              |                    						|
-| .NET    	      | Preview         	| Preview	                			              |                    						|
-| Node 		        | Preview     		  | Preview	                			              |                    						|
-| Python   	      | Preview         	| Preview	                			              |                    						|
-| Ruby   	        | Preview         	| Preview	                			              |                    						|
-| PHP   	        | 		              |	        	                			            |                    		    		|
-| Go   		        | Preview         	| Preview	                			              |                    						|
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+   
+|Type           	| Threat Detection	|
+| --------------- | ----------------- |
+| Java  		      | Preview         	|
+| .NET    	      | Preview         	|
+| Node 		        | Preview     		  |
+| Python   	      | Preview         	|
+| Ruby   	        | Preview         	|
+| PHP   	        | 		              |
+| Go   		        | Preview         	|
 
 
 ## Azure App Service
@@ -76,14 +78,30 @@ Only *web applications* are supported. Azure Functions are not supported.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type       | OS			         | Threat Detection	| Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST) 	|
-|-----------|------------------|------------------|----------------------------------------------|--------------------------------|
-| Java  	  | Windows, Linux	 | {{< X >}}    	  | {{< X >}}	                                   | Preview (1.15.0)               |
-| .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                             | Preview (2.42.0)               |
-| Node 		  | Linux			       | {{< X >}}        | {{< X >}}        	                           | Preview (4.18.0)               |
-| Python   	| Linux			       | {{< X >}}        | {{< X >}}                                    |			                          |
-| Ruby   	  | Linux			       | {{< X >}}        | {{< X >}}      	                             |			                          |
-| PHP   	  | Linux			       |		        	    | {{< X >}} 	                                 |			                          |
+|Type       | OS			         | Threat Detection	|
+|-----------|------------------|------------------|
+| Java  	  | Windows, Linux	 | {{< X >}}    	  |
+| .NET    	| Windows, Linux	 | {{< X >}}        |
+| Node 		  | Linux			       | {{< X >}}        |
+| Python   	| Linux			       | {{< X >}}        |
+| Ruby   	  | Linux			       | {{< X >}}        |
+| PHP   	  | Linux			       |		        	    |
+
+
+## Azure App Service
+
+Only *web applications* are supported. Azure Functions are not supported.
+
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+   
+|Type       | OS			         | Threat Detection	|
+|-----------|------------------|------------------|
+| Java  	  | Windows, Linux	 | {{< X >}}    	  |
+| .NET    	| Windows, Linux	 | {{< X >}}        |
+| Node 		  | Linux			       | {{< X >}}        |
+| Python   	| Linux			       | {{< X >}}        |
+| Ruby   	  | Linux			       | {{< X >}}        |
+| PHP   	  | Linux			       |		        	    |
 
 
 [1]: /serverless/distributed_tracing/
@@ -91,4 +109,4 @@ Only *web applications* are supported. Azure Functions are not supported.
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
 [5]: /service_management/workflows/
-[6]: /security/application_security/threats/inapp_waf_rules/
+[6]: /security/application_security/policies/inapp_waf_rules/
