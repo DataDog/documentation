@@ -6,6 +6,10 @@ further_reading:
   text: "On-Call Documentation"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog On-Call.
 
 1. Install the [Datadog mobile app][1].
