@@ -189,7 +189,7 @@ Rules are applied in the same order as shown in the list.
 ## Visualize your allocations
 Changes to custom allocation rules may take up to 24 hours to be applied. After being applied, the new allocations can be seen throughout Cloud Cost Management on all costs that have Container Allocation enabled. Custom allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
 
-{{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations.png" alt="See your allocations throughout Datadog" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations-1.png" alt="See your allocations throughout Datadog" style="width:90%;" >}}
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
