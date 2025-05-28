@@ -308,7 +308,7 @@ After executing the query, the static analyzer executes the `visit()` function f
 * `filename` --- the name of the file being analyzed.
 * `code` --- the content of the file being analyzed.
 
-The `filename` and `code` arguments are strings; the `query` argument, however, is an object that contains the following fields:
+The `filename` and `code` arguments are strings; the `query` argument, however, is an object that contains the following properties:
 
 * `captures` --- an object that contains the nodes captured by the query, keyed by the capture name. If a capture contains more than one node, only the first node appears here.
 * `capturesList` --- similar to `captures` but contains lists of all nodes captured under a name. This is suitable for captures of repeated nodes via the `+` and `*` modifiers.
@@ -351,7 +351,7 @@ The names of the captures are used as the keys in the `query.captures` and `quer
 const { id, expr, node } = query.captures;
 ```
 
-The above code extracts the fields `id`, `expr`, and `node` from `query.captures` and assigns them to constants with the same names.
+The above code extracts the properties `id`, `expr`, and `node` from `query.captures` and assigns them to constants with the same names.
 
 If the capture names are not compatible with JavaScript variable names, you can still extract them but a little less conveniently.
 
@@ -360,18 +360,18 @@ const id = query.captures["id-node"];
 const expr = query.captures["20394];
 ```
 
-A captured node is represented by an object that contains the following fields:
+A captured node is represented by an object that contains the following properties:
 
 * `cstType` --- the node's type.
 * `start` --- an object that contains the starting position of the node in the source code.
 * `end` --- an object that contains the position of the character that follows the end of the node.
 * `text` --- the content of the node.
 
-The `start` and `end` fields are objects that contain `line` and `col` fields. Those fields are 1-based: the first line of a file and the first column of a line are number 1. The position in the `start` field is inclusive: it points to the first character in the node. The position in the `end` field ie exclusive: it points to the first character after the node.
+The `start` and `end` properties are objects that contain `line` and `col` properties. Those properties are 1-based: the first line of a file and the first column of a line are number 1. The position in the `start` property is inclusive: it points to the first character in the node. The position in the `end` property ie exclusive: it points to the first character after the node.
 
-You can use the `start` and `end` field to check the length of a node or the relative positions of two nodes. For example, if a node's `start` and `end` fields have the same values, the node is empty. If a node's `end` field has the same values as another node's `start` field, the nodes follow each other immediately.
+You can use the `start` and `end` property to check the length of a node or the relative positions of two nodes. For example, if a node's `start` and `end` properties have the same values, the node is empty. If a node's `end` property has the same values as another node's `start` property, the nodes follow each other immediately.
 
-(Note about old code: you may see some rules that use the `astType` field instead of `cstType`. Those rules are old, and you should use `cstType`. You may also see some rules that use `getCodeForNode(node, code)` or `getCodeForNode(node)` instead of `node.text`. You should use `node.text`.)
+(Note about old code: you may see some rules that use the `astType` property instead of `cstType`. Those rules are old, and you should use `cstType`. You may also see some rules that use `getCodeForNode(node, code)` or `getCodeForNode(node)` instead of `node.text`. You should use `node.text`.)
 
 ### Navigating the Parse Tree
 
@@ -447,7 +447,7 @@ function displaySiblings(node) {
 
 ### Reporting Findings and Offering Suggestions
 
-Use the `addError()` function to report a finding to the user. This function takes a `Violation` object that you can build with the `buildError()` function. This function takes five arguments: `startLine`, `startCol`, `endLine`, `endCol`, and `message`. Generally, you would use a node's `start` and `end` fields to get the values for the first four arguments.
+Use the `addError()` function to report a finding to the user. This function takes a `Violation` object that you can build with the `buildError()` function. This function takes five arguments: `startLine`, `startCol`, `endLine`, `endCol`, and `message`. Generally, you would use a node's `start` and `end` properties to get the values for the first four arguments.
 
 ```javascript
 function visit(query, filename, code) {
@@ -580,7 +580,7 @@ function getSiblingsBefore(node) {
 }
 ```
 
-You can then inspect and select the nodes you are interested in by checking their `cstType` and `text` fields.
+You can then inspect and select the nodes you are interested in by checking their `cstType` and `text` properties.
 
 ## Pitfalls
 
