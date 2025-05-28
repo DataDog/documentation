@@ -21,7 +21,7 @@ You must have [Data Streams Monitoring installed][1] on the producer and consume
 |        | Avro      | Protobuf  | Minimal tracer version |
 | ------ | --------- | --------- | ---------------------- |
 | Java   | {{< X >}} | {{< X >}} | v1.36+                 |
-| NodeJS | {{< X >}} | {{< X >}} | v5.24+ or v4.48+       |
+| Node.js | {{< X >}} | {{< X >}} | v5.24+ or v4.48+       |
 | Python | {{< X >}} | {{< X >}} | v2.14+                 |
 | .NET   |           | {{< X >}} | v3.15+                 |
 | Golang |           |           |                        |
