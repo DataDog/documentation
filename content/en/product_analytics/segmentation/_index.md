@@ -1,6 +1,6 @@
 ---
 title: Analyzing users and segments
-description: Analyze and understand specific groups or segments of your user base.
+description: Analyze and understand individual users and segments of your user base.
 further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
