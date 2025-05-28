@@ -4523,7 +4523,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
       weight: 401
-    - name: Submit Evaluations
+    - name: Submit Custom Evaluations
       url: llm_observability/evaluations/submit_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations
@@ -5499,6 +5499,11 @@ menu:
       parent: observability_pipelines_generate_metrics
       identifier: observability_pipelines_generate_metrics_syslog
       weight: 7023
+    - name: Run Multiple Pipelines on a Host
+      identifier: observability_run_multiple_pipelines_on_a_host
+      url: /observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/
+      parent: observability_pipelines_set_up_pipelines
+      weight: 108
     - name: Install the Worker
       url: observability_pipelines/install_the_worker/
       identifier: observability_pipelines_install_the_worker

@@ -104,9 +104,9 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 ### Bulk actions
 
-Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1], then choose actions such as `Run Tests Now`, `Pause Scheduling`, `Download CSV`, `Edit Tags`, `Edit Envs`, `Edit Teams`, or `Delete`. 
 
-{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
+{{< img src="synthetics/search/edit_tags_3.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### Test actions
 
