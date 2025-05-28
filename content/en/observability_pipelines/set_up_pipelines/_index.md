@@ -2,15 +2,15 @@
 title: Set Up Pipelines
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/"
-  tag: "Documentation"
-  text: "Observability Pipelines"
 - link: "observability_pipelines/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
 - link: "observability_pipelines/advanced_configurations/"
   tag: "Documentation"
   text: "Advanced configurations for Observability Pipelines"
+- link: "observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/"
+  tag: "Documentation"
+  text: "Run multiple pipelines on a host"
 - link: "observability_pipelines/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Observability Pipelines"
