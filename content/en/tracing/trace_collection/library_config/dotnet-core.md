@@ -368,4 +368,4 @@ The following configuration variables are for features that are available for us
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
 [22]: /tracing/trace_collection/library_config/#traces
-[22]: /profiler/
+[23]: /profiler/
