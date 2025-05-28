@@ -16,6 +16,7 @@ The User Profiles page lists data about your product's users. You can **search**
 The segments page includes a list of all of the segments you have created. You can also create a segment from this page. Segmenting helps you to focus on some of your users based on various characteristics and behaviors to uncover valuable insights, identify trends, and make data-driven decisions that optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization. 
 
 
+
 ## User profiles 
 
 The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
