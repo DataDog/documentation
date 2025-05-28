@@ -107,7 +107,7 @@ In addition to the Operating System (OS) requirements above:
       ```sh
       DD_SITE="ddog-gov.com" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" … bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
       ```
-   1. If you're installing with a package, [follow the instructions][4] to install the latest `datadog-fips-agent` package available for your platform.
+   1. If you're installing with a package, [follow the instructions][1] to install the latest `datadog-fips-agent` package available for your platform.
    1. Add `GOFIPS=1` to your Datadog environment variables, reload all service units, and restart the Datadog Agent service (`datadog-agent.service`). For example, if your host is using systemd:
 
       ```sh
@@ -117,11 +117,9 @@ In addition to the Operating System (OS) requirements above:
       ```
 1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
-      {{< img src="/agent/fips-linux.png" alt="Your image description" style="width:100%;" >}}
+      {{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
 
-[2]: /agent/configuration/fips-compliance/
-[3]: /integrations/guide/fips-integrations
-[4]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
+[1]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -144,13 +142,12 @@ if ($p.ExitCode -ne 0) {
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
    ```
 
-   {{< img src="/agent/fips-powershell.png" alt="Your image description" style="width:100%;" >}}
+   {{< img src="/agent/fips-powershell.png" alt="Agent status command output with FIPS Mode enabled - Windows" style="width:100%;" >}}
 
 
 **Note**: The program name for the FIPS Agent in **Add or Remove Programs** is "Datadog FIPS Agent."
 
 [1]: /agent/basic_agent_usage/windows/#uninstall-the-agent
-[2]: https://windows-agent.datadoghq.com/installers_v2.json
 
 {{% /tab %}}
 
@@ -206,6 +203,5 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
-[2]: /agent/configuration/fips-compliance/
 [3]: /integrations/guide/fips-integrations
 [4]: /integrations/guide/jmxfetch-fips
