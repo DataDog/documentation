@@ -53,6 +53,8 @@ You can use Bits AI to create an app for you. To get started:
 
 After Bits creates your app, you can continue to enter prompts to iterate on your app.
 
+You can click the **<i class="icon-bits-ai"></i> AI** button at any time to ask Bits for help.
+
 ### Create a custom app
 
 1. From [App Builder][1], click **New App**.
