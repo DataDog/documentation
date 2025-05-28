@@ -47,6 +47,38 @@ For Handoff to work, each device must:
 
 For more information about Handoff, read the [Apple Handoff documentation][3].
 
+## Focus Mode
+To set a focus mode to include or exclude the Datadog Mobile App:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+1. Open **Settings** >> **Focus**.
+
+{{< img src="service_management/mobile/iOS_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+2. Tap a **Focus** or create your own.
+
+{{< img src="service_management/mobile/iOS_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+3. Tap **Allow Notifications From** and add the Datadog Mobile App. Alertnatively tap **Silence Notifications From** and add the Datadog Mobile App.
+
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+1. Open **Settings** >> **Modes and Routines**.
+
+{{< img src="service_management/mobile/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+
+2. Tap a **Mode** or create your own.
+
+{{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+3. Tap **Stay focused**>> **Restrict app usage** and add the Datadog Mobile App >> **Done**. Alteratively tap **Do not distrub** and add the Datadog Mobile App >> **Done**.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Apple Watch
 To enable notifications for the Apple Watch when paired with your iPhone:
 1. Open the Watch app on your mobile device.
