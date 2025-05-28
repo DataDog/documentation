@@ -19,7 +19,7 @@ The segments page includes a list of all of the segments you have created. You c
 
 ## User profiles 
 
-The [User Profiles][3] page allows you to track and analyse the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
+The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
 {{< img src="product_analytics/segmentation/userprofiles_PANA.png" alt="A view of the User profile page.">}}
 
@@ -34,7 +34,7 @@ The [User Profiles][3] page allows you to track and analyse the behavioral patte
 
 ### User profile attributes
 
-The User Profile page includes a list of attributes to help you better segment your users. You can conduct a full-text search on `username` or `email`, sort, and filter based on these attributes:
+Each user profile on the page has attributes to help you better segment your users. You can conduct a full-text search on `username` or `email`, plus sort and filter based on any of these attributes:
 
 {{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="id-for-anchoring" %}}
 
@@ -72,10 +72,10 @@ Last City
 : `type:string` <br> The city of the user's last session.
 
 First Seen Country 
-: `type:string` <br> The ISO code of the country for the user's first session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
+: `type:string` <br> The ISO code of the country for the user's first session. The country's code is saved in the backend and the country's name is displayed in the UI.
 
 Last Seen Country
-: `type:string` <br> The ISO code of the country for the user's last session. <br> _(The country's code is saved in the back end and the country's name is displayed in the UI)_
+: `type:string` <br> The ISO code of the country for the user's last session. The country's code is saved in the backend and the country's name is displayed in the UI.
 
 First Region
 : `type:string` <br> The region of the user's first session.
@@ -86,18 +86,18 @@ Last Region
 
 <!-- #### Device related attributes  -->
 First Device Type
-: `type:string` <br> The device used in the user's first session (_for example: desktop, tablet_).
+: `type:string` <br> The device used in the user's first session (for example: desktop, tablet).
 
 Last Device Type
-: `type:string` <br> The device used in the user's last session (_for example: desktop, tablet_).
+: `type:string` <br> The device used in the user's last session (for example: desktop, tablet).
 
 
 <!-- #### OS related attributes  -->
 First OS Name
-: `type:string` <br> The operating system of the user's first session (_for example: Windows, iOS_).
+: `type:string` <br> The operating system of the user's first session (for example: Windows, iOS).
 
 Last OS Name
-: `type:string` <br> The operating system of the user's last session (_for example: Windows, iOS_).
+: `type:string` <br> The operating system of the user's last session (for example: Windows, iOS).
 
 First OS Version
 : `type:string` <br> The OS version of the user's first session.
@@ -108,10 +108,10 @@ Last OS Version
 
 <!-- #### Browser related attributes  -->
 First Browser Name
-: `type:string` <br> The browser used in the user's first session (_for example: Chrome, Safari_).
+: `type:string` <br> The browser used in the user's first session (for example: Chrome, Safari).
 
 Last Browser Name
-: `type:string` <br> The browser used in the user's last session (_for example: Chrome, Safari_).
+: `type:string` <br> The browser used in the user's last session (for example: Chrome, Safari).
 
 First Browser Version
 : `type:string` <br> The browser version from the user's first session.
@@ -129,7 +129,7 @@ User profiles are sourced from RUM events using `usr.id` as the aggregating attr
 The RUM SDK allows you to identify users by setting attributes such as User ID, Name, and Email (`usr.id`, `usr.name`, and `usr.email`). These attributes are then used to populate users onto the User Profiles page. 
 
 ### Navigating the user profile page 
-The User Profile page allows you to see information on individual users and correlate this to the group. You can use full-text search, filter, and sort through your user profiles. You can select an individual user's profile to see more detail on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+The User Profile page allows you to see information on an individual user and correlate this to the group. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
 {{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
