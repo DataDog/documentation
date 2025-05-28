@@ -7962,7 +7962,7 @@ menu:
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
       weight: 505
-    - name: Segmentation
+    - name: Analyzing users and segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
