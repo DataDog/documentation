@@ -129,7 +129,7 @@ User profiles are sourced from RUM events using `usr.id` as the aggregating attr
 The RUM SDK allows you to identify users by setting attributes such as User ID, Name, and Email (`usr.id`, `usr.name`, and `usr.email`). These attributes are then used to populate users onto the User Profiles page. 
 
 ### Navigating the user profiles page 
-The User Profiles page allows you to see information on an individual user and correlate this to the group. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
+The User Profiles page shows information on individual users. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
 {{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
