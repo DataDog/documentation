@@ -33,16 +33,16 @@ The infrastructure diagram excludes components like EBS, NAT Gateway, and Transi
 
 ### Observability 
 
-The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Logs, and more. This helps you to assess visibility gaps across your environment.
+The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Logs Management, and more. This helps you to assess visibility gaps across your environment.
 
-In the bottom-left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific featues. Each row shows:
+In the bottom left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific features. Each row shows:
 
 - Feature name (for example, APM, Logs, CNM)
 - Numerical coverage: X / Y (for example, 16/35), where:
   - X is the number of resources with that feature enabled
   - Y is the total number of relevant resources in the current view or filter
 
-- Visual cue: Green pins for resources with Agent + feature, and gray for without
+- Visual cue: Resources with both the Agent and feature enabled are marked with green pins, while those without are shown with gray pins.
 
 {{< img src="datadog_cloudcraft/observability_overlay_with_ccm.png" alt="Agent overlay in Cloudcraft, highlighting the collapsible legend at the bottom left hand side of the screen." width="100%" >}}
 
@@ -53,12 +53,13 @@ The observability overlay tracks coverage for the following:
 | Agent version     | Verifies if the Datadog Agent is installed and its version         |
 | APM               | Application Performance Monitoring (traces collected)        |
 | CNM               | Cloud Network Monitoring coverage                                 |
-| Logs              | Log collection status                                              |
-| CWS               | Cloud Workload Security coverage                                   |
-| CSPM              | Cloud Security Posture Management coverage                         |
+| Logs              | Log Management collection status                                              |
+| CWS               | Cloud Workload Protection coverage                                   |
+| CSPM              | Cloud Security Misconfigurations coverage                         |
 | Process           | Process monitoring enabled                                         |
-| CSM VM Hosts      | Coverage of CSM Vulnerability Management on hosts          |
-| CSM VM Containers | Coverage of CSM Vulnerability Management on containers                |
+| CSM VM Hosts      | Coverage of Cloud Security Vulnerabilities on hosts          |
+| CSM VM Containers | Coverage of Cloud Security Vulnerabilities on containers                |
+| USM | Coverage of Universal Service Monitoring                |
 
 ### Security
 
