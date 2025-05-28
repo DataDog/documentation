@@ -23,7 +23,7 @@ further_reading:
   text: "Watchdog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the Developer Overview Page!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for the Developer Overview Page!" >}}
 {{< /callout >}}
 
 ## Overview
@@ -42,7 +42,7 @@ The developer overview page centralizes the following information about your tea
 - Your team's Services and Scorecard performance
 - Your Issues, Errors, and Watchdog alerts
 
-### Using the developer overview page 
+### Using the developer overview page
 
 #### Get started
 
