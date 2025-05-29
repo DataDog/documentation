@@ -4,7 +4,7 @@ description: Using LLM Observability's Experiments feature
 private: true
 ---
 
-{{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 LLM Observability Experiments is in Preview.
 {{< /callout >}}
 
