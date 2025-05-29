@@ -2,7 +2,7 @@
 title: Scheduled CSV Reports
 ---
 
-{{< callout url="#" btn_hidden="false">}}  
+{{< callout url="#" btn_hidden="true" header="false">}}  
 Scheduled CSV Reports are in Preview.  
 {{< /callout >}}
 
