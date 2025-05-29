@@ -15,8 +15,6 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
-<!-- 
-{{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="A walkthrough of the Watchdog Explains product" video=true >}} -->
 
 Watchdog Explains is an investigation assistant that guides you to the root cause of anomalies on timeseries graphs. 
 
@@ -35,11 +33,7 @@ In Datadog, an investigation typically starts with graphs, then branches out int
 
 Start your investigation from any timeseries metric graph. Watchdog Explains highlights anomalies with a pink box. Click on a datapoint inside a pink higlight and selekct **View anomaly in full screen**.
 
-<!-- {{< img src="dashboards/graph_insights/watchdog_explains/graph_anomaly_detection.png" alt="Watchdog Explains highlights the anomalous parts of a graph based on historical data" style="width:90%;" >}} -->
-
-On the full-screen graph, you can view the tag that are responsible for the anomaly. Click on a tag to see evidence of how it contributes to the graph shape.
-
-<!-- {{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}} -->
+On the full-screen graph, you can view the tags that are responsible for the anomaly. Click on a tag to see how it contributes to the graph shape.
 
 
 ## Further reading
