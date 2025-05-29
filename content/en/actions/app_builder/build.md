@@ -42,18 +42,16 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 
 ### Start with AI
 
-You can use Bits AI to create an app for you. To get started:
+You can use Bits AI to create an app. To get started:
 1. From [App Builder][1], click **New App**.
 1. Click **Start with AI**.
-1. Enter a prompt that describes the app you want to create. Enter as much detail as you can to improve results. Here are some example queries:
+1. Enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example queries:
    - `Display a list of lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Provide a list of PagerDuty services and their status in a table. Include a search input above the table.`
    - `Display GitHub pull requests in a table.`
 1. Click **Submit** (**↑**).
 
-After Bits creates your app, you can continue to enter prompts to iterate on your app.
-
-You can click the **<i class="icon-bits-ai"></i> AI** button at any time to ask Bits for help.
+To iterate on an existing app, click the **<i class="icon-bits-ai"></i> AI** button to ask Bits for help.
 
 ### Create a custom app
 
