@@ -3788,21 +3788,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_ingestion_controls
       weight: 402
+    - name: Adaptive Sampling
+      url: tracing/trace_pipeline/adaptive_sampling/
+      parent: tracing_trace_pipeline
+      identifier: tracing_adaptive_sampling
+      weight: 403
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 403
+      weight: 404
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 404
+      weight: 405
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 405
+      weight: 406
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
