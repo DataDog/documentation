@@ -59,7 +59,7 @@ To view your incidents, go to the [Incidents][1] page to see a feed of all ongoi
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
-{{< img src="service_management/incidents/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 
 ## Describing the incident
