@@ -68,6 +68,9 @@ To set the adaptive sampling monthly target:
 2. Click **Manage Adaptive Sampling Target**.
   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_target_cta.png" alt="Call to action to set adaptive sampling target" style="width:100%;">}}
 3. Choose a target strategy for sampling:
+   - [Set budget by number of APM hosts](#set-budget-by-number-of-apm-hosts-recommended)
+   - [Set budget by data volume](#set-budget-by-data-volume)
+4. Click **Apply**.
 
 ### Set budget by number of APM hosts (Recommended)
 
@@ -121,8 +124,8 @@ To onboard a service to adaptive sampling:
 2. Click a service to view the **Service Ingestion Summary**.
 3. Click **Manage Ingestion Rate**.
 4. Choose **Datadog adaptive sampling rates** as your service's sampling strategy.
-5. Click **Apply**.
-6. (Optional) Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (for example, 100% of `GET /checkout` endpoints) or less (for example, 0.1% of `/health` requests) data.
+5. (Optional) Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (for example, 100% of `GET /checkout` endpoints) or less (for example, 0.1% of `/health` requests) data.
+6. Click **Apply**.
 
 <div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#requirements">Remote Configuration requirements</a> are met.</div>
 

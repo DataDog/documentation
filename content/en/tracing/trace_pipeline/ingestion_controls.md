@@ -35,7 +35,7 @@ The Ingestion Control page provides visibility into the ingestion configuration 
 
 Use the data in the ingestion control header to monitor your trace ingestion. The header displays the total amount of data ingested over the past hour, your estimated monthly usage, and the percentage of your allocated monthly ingestion limit, calculated based on your active APM infrastructure (such as hosts, Fargate tasks, and serverless functions).
 
-If the monthly usage is under `100%`, the projected ingested data fits within your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
+If the monthly usage is under `100%`, the projected ingested data fits within your monthly allotment. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
 ### Ingestion levels by service
 
@@ -104,8 +104,8 @@ The table lists the applied sampling rates by resource of the service.
 
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
-  - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
-  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
+  - `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies.
+  - `Local Configured` if a [sampling rule][8] was set locally in the tracing library.
   - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#configure-the-service-ingestion-rates-by-resource).
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
@@ -128,10 +128,35 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 ### Configure the service ingestion rates by resource
 
-When configuring sampling rates for a service by resource name, there are two sampling strategies you can use:
+When configuring sampling rates for a service by resource name, you can use two main strategies:
 
 - **Adaptive sampling**: Automatically adjust sampling rates to match a configured monthly ingested volume budget.
 - **Custom sampling**: Manually set explicit sampling rates by resource.
+
+Configurations for these strategies can be applied **Remotely** through the Datadog UI. This method allows changes to take effect immediately without redeploying your service. For **Custom Sampling**, you also have the option to apply configurations **Locally** by updating your service's configuration files and redeploying.
+
+Using **Remote Configuration** for service ingestion rates has specific requirements.
+
+{{% collapse-content title="Remote Configuration requirements" level="h4" expanded="false" id="remote-configuration-requirements" %}}
+
+- Datadog Agent [7.41.1][19] or higher.
+- [Remote Configuration][3]  enabled for your Agent.
+- `APM Remote Configuration Write` [permissions][20]. If you don't have these permissions, ask your Datadog admin to update your permissions from your organization settings.
+
+Find below the minimum tracing library version required for the feature:
+
+| Language | Minimum version required |
+|----------|--------------------------|
+| Java     | v1.34.0                  |
+| Go       | v1.64.0                  |
+| Python   | v.2.9.0                  |
+| Ruby     | v2.0.0                   |
+| Node.js  | v5.16.0                  |
+| PHP      | v1.4.0                   |
+| .NET     | v2.53.2                  |
+| C++      | v0.2.2                   |
+
+{{% /collapse-content %}}
 
 #### Adaptive sampling (Recommended)
 
@@ -155,17 +180,19 @@ To configure custom sampling rates for the service by resource name:
 1. Navigate to the [Ingestion Control][2] page.
 2. Click a service to view the **Service Ingestion Summary**.
 3. Click **Manage Ingestion rate**.
-4. Click **Add new rule** to set sampling rates for some resources.  
+4. Click **Custom sampling rates only**.
+5. Click **Add new rule** to set sampling rates for some resources.  
    **Note**: Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
    {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_custom.png" alt="Configuration Modal" style="width:100%;">}}
-5. Apply the configuration **Remotely** or **Locally**:
+6. Apply the configuration **Remotely** or **Locally**:
 {{< tabs >}}
 {{% tab "Remotely" %}}
 
 This option applies the configuration using Remote Configuration, so you **do not need** to redeploy the service for the change to take effect. You can observe the configuration changes from the [Live Search Explorer][100].
 
-1. Click **Apply** to save the configuration. 
-1. Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.  
+Click **Apply** to save the configuration. 
+
+Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.  
 
 <br><div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#remote-configuration-requirements">Remote Configuration requirements</a> are met.</div>
 
@@ -176,35 +203,13 @@ This option applies the configuration using Remote Configuration, so you **do no
 {{% tab "Locally" %}}
 
 This option generates configuration for you to apply manually.
-1. Apply the generated configuration to the indicated service.  
+1. Apply the generated configuration to your service.  
    **Note**: The service name value is case sensitive. It should match the case of your service name.
 1. Redeploy the service.
-1. Confirm that the new percentage has been applied by looking at the **Traffic Breakdown** column.
-1. Resources that have been configured locally display as `Configured Local` in the **Configuration** column.
+1. Confirm that the new percentage has been applied by looking at the **Traffic Breakdown** column. Resources that have been configured locally display as `Configured Local` in the **Configuration** column.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-{{% collapse-content title="Remote Configuration requirements" level="h4" expanded=false id="remote-configuration-requirements" %}}
-
-- Datadog Agent [7.41.1][2] or higher.
-- [Remote Configuration][3]  enabled for your Agent.
-- `APM Remote Configuration Write` [permissions][4]. If you don't have these permissions, ask your Datadog admin to update your permissions from your organization settings.
-
-Find below the minimum tracing library version required for the feature:
-
-| Language | Minimum version required |
-|----------|--------------------------|
-| Java     | v1.34.0                  |
-| Go       | v1.64.0                  |
-| Python   | v.2.9.0                  |
-| Ruby     | v2.0.0                   |
-| Node.js  | v5.16.0                  |
-| PHP      | v1.4.0                   |
-| .NET     | v2.53.2                  |
-| C++      | v0.2.2                   |
-
-{{% /collapse-content %}}
 
 ## Managing Datadog Agent ingestion configuration
 
@@ -259,3 +264,5 @@ To phrase it another way, Datadog uses the following precedence rules:
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
 [17]: /tracing/trace_pipeline/adaptive_sampling/
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
+[19]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
+[20]: /account_management/rbac/permissions/
