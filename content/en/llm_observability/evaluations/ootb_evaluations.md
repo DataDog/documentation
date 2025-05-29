@@ -90,7 +90,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 {{% /tab %}}
 {{< /tabs >}}
 
-If your LLM provider is restricting IP addresses, you can get the necessary IP ranges by navigating to [this website][5], selecting your data center, pasting the URL to your browser and copying from the `webhooks` section.
+If your LLM provider is restricting IP addresses, you can get the necessary IP ranges by navigating to [this website][5], selecting your `Datadog Site`, pasting the `GET` URL to your browser and copying the `webhooks` section.
 
 ## Select and enable evaluations
 
@@ -187,7 +187,7 @@ The variables dictionary should contain the key-value pairs your app uses to con
 
 Hallucination detection does not run if either the rag query, the rag context or the span output is empty.
 
-You can find more examples of instrumentation in our [SDK documentation][6].
+You can find more examples of instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
 
