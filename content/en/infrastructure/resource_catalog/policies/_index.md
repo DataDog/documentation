@@ -43,7 +43,7 @@ Custom policies require specific values in your cloud resource attributes within
 
 To create a custom policy:
 
-1. In the side navigation, click on **Resources > Policies**, which takes you to the [**Policies**][1] tab.
+1. In the side navigation, click on [**Resources > Policies**][1].
 2. Click the **New Custom Policy** button.
 3. Select a resource type from the dropdown menu.
 4. Optionally, search for additional dataset filters, such as `env: prod` to only include resources in production.
