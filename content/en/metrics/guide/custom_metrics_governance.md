@@ -220,9 +220,16 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 ## Summary of best practices
 
 1. Start by identifying your largest metric names (your Top Custom Metrics table or the Metrics Volume Page), begin using Metrics without Limits™ to optimize these top metrics to the most cost-effective volume. 
-1. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
-1. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
-1. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
+2. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
+3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
+4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
+
+Check out this interactive walk through of our custom metrics governance tools: 
+
+<iframe src="https://tour.datadoghq.com/cm9cxjt9x000004kyeo6lafv5" style="border:none;width:100%;height:100%;" allow="fullscreen" data-navattic-demo-id="cm9cxjt9x000004kyeo6lafv5"></iframe>
+
+
+<iframe src="https://tour.datadoghq.com/cm9cxjt9x000004kyeo6lafv5" style="position:fixed;border:none;top:0;left:0;bottom:0;right:0;width:100%;height:100%;margin:0;padding:0;z-index:999999;" allow="fullscreen" data-navattic-demo-id="cm9cxjt9x000004kyeo6lafv5"></iframe>
 
 ## Further reading
 
