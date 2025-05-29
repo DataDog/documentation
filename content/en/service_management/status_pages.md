@@ -21,9 +21,8 @@ Status Pages are part of Datadog's Incident Response suite, alongside On-Call an
 
 Use Status Pages to:
 
-* Share the real-time availability of critical systems and features  
-* Communicate service disruptions clearly during incidents  
-* Provide transparency during scheduled maintenance  
+* Share the availability of critical systems and features
+* Communicate service disruptions clearly during incidents
 * Reduce inbound support volume with proactive updates
 
 ## Configure permissions 
@@ -45,7 +44,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated Datadog users can view |
+   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated Datadog users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
@@ -78,7 +77,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.  
-- **Private**, access is limited to authenticated Datadog users.
+- **Private**, access is limited to authenticated Datadog users in your organization.
 
 ## Add an incident
 
