@@ -6,6 +6,7 @@ further_reading:
   text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 ## Overview
+<div class="alert alert-info">To instrument your Azure App Service with the <code>Datadog wrapper</code>, see <a href="/serverless/guide/azure_app_service_linux_code_wrapper_script">Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper</a>.</div>
 
 This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
 
@@ -114,10 +115,10 @@ To configure a new sidecar container go to `Deployment Center` which is located 
 {{< img src="serverless/azure_app_service/app-service-deployment-center-nav.png" alt="Azure App Service Configuration: The navigation menu which highlights where the deployment center resides." style="width:80%;" >}}
 
 1. Go to the the Containers tab on the top navigation 
-{{< img src="serverless/azure_app_service/app-service-containers-tab.png" alt="Azure App Service Deployment Ceneter: The Containers tab is selected." style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/app-service-containers-tab.png" alt="Azure App Service Deployment Center: The Containers tab is selected." style="width:80%;" >}}
 
-2. Click `Add`, which opens a submenu select `Custom Container`. This opens a side panel to configure the new sidecar container.
-{{< img src="serverless/azure_app_service/app-service-containers-tab.png" alt="Azure App Service Deployment Ceneter: The Containers tab is selected." style="width:80%;" >}}
+2. Click `Add`, Select `Custom Container` from the dropdown menu. This opens a side panel to configure the new sidecar container.
+{{< img src="serverless/azure_app_service/app-service-add-container.png" alt="Azure App Service Deployment Center: The Custom Container item is selected from a dropdown menu." style="width:80%;" >}}
 
 3. In the **Edit container** form, provide the following:
    - **Image source**: Docker Hub or other registries
