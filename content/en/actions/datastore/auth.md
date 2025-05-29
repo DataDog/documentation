@@ -48,7 +48,7 @@ During the datastore creation process, you're asked to set the organization acce
 
 To restrict access to an existing datastore for either an organization or individual:
 1. Hover over the datastore on the [Datastore page][6] and click the padlock (**Permissions**) icon.
-1. Use the drop-down menus to edit the permissions for a user or organization
+1. Use the drop-down menus to edit the permissions for a user or organization.
 1. Click **Save**.
 
 ## Elevate access
