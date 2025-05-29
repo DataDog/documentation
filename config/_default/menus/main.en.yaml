@@ -1896,15 +1896,15 @@ menu:
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
-    - name: Query OpenTelemetry Metrics
-      url: metrics/open_telemetry/query_metrics/
-      parent: metrics_otel
-      identifier: metrics_querying
-      weight: 201
     - name: OTLP Metric Types
       url: metrics/open_telemetry/otlp_metric_types
       parent: metrics_otel
       identifier: metrics_otlp_types
+      weight: 201
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
+      parent: metrics_otel
+      identifier: metrics_querying
       weight: 202
     - name: Metrics Types
       url: metrics/types/
