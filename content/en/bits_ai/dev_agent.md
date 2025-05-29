@@ -6,9 +6,15 @@ title: Bits AI Dev Agent
 <div class="alert alert-warning">Bits AI Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
+
 The Bits AI Dev Agent is a generative AI coding assistant that uses observability data to detect issues and suggest code changes. Integrated with Datadog products such as Error Tracking and Code Security, the Dev Agent identifies high-impact issues, creates production-ready pull requests, and iterates on code in response to developer feedback.
 
-{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
+Key capabilities include:
+
+- **Automatic PR creation**: Opens GitHub pull requests with production-ready fixes for high-impact issues.
+- **Responsive code updates**: Iterates on code in response to review comments—e.g., modifying logic or adding logging.
+- **Centralized PR tracking**: Surfaces all Dev Agent-generated pull requests in one place, with filters by status, product, and service.
 
 ## Supported Datadog products
 
@@ -44,17 +50,6 @@ The Dev Agent requires observability data to be tagged with `service` and `versi
 ### Enable the Dev Agent
 
 Placeholder for onboarding flow with **Enable Dev Agent** button.
-
-## Key capabilities
-
-### Proposes GitHub pull requests with fixes
-Automatically opens a PR when a high-impact issue is detected. The fix includes a description and links to the original signal. PRs follow your team's code style and formatting conventions.
-
-### Responds to developer feedback in PRs
-Updates the code in response to review comments, such as changing logic, adding logging, or returning a different status code. Updated commits are pushed automatically.
-
-### Tracks Dev Agent-generated PRs in a centralized view
-Helps teams monitor and filter pull requests created by the Dev Agent, including their current status, source product, and impacted service.
 
 [1]: /error_tracking
 [2]: /security/code_security
