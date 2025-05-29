@@ -75,27 +75,19 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 
 {{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **escalate** driects you to confirm esclation to the next policy level. Tapping **declare incident**, prompts you to enter a title and fill in relevant incident attributes.
-
-You can initiate a page to an individual or team, and also override existing shifts when necessary. For additional details, refer to the [Datadog On-Call documentation][20].
-
-To configure On-Call notifications on your mobile device, follow the steps outlined in [this guide][21].
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **escalate** driects you to confirm esclation to the next policy level. Tapping **declare incident**, prompts you to enter a title and fill in relevant incident attributes.
+{{% /tab %}}
+{{< /tabs >}}
+
+The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
 
 You can initiate a page to an individual or team, and also override existing shifts when necessary. For additional details, refer to the [Datadog On-Call documentation][20].
 
-To configure On-Call notifications on your mobile device, follow the steps outlined in [this guide][21].
-
-
-{{% /tab %}}
-{{< /tabs >}}
+To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
 ## Dashboards
 
@@ -104,26 +96,17 @@ To configure On-Call notifications on your mobile device, follow the steps outli
 
 {{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
-
-**Note:** To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
-
-**Note:** Dashboard links configured in UTC open in UTC on the mobile app. For more information about dashboard configurations, see [Dashboard Configurations][24].
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
-
-**Note:** To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
-
-**Note:** Dashboard links configured in UTC open in UTC on the mobile app. For more information about dashboard configurations, see [Dashboard Configurations][24].
-
 {{% /tab %}}
 {{< /tabs >}}
+
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
+
+**Note**: To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
 ## Monitors
 
@@ -132,26 +115,19 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 {{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
-
-For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access to previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. You can also view and run synthetic tests when viewing your synthetic monitors.
-
-**Note:** To set up or edit monitors, notifications, or saved views, you must use the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
 
 For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access to previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. You can also view and run synthetic tests when viewing your synthetic monitors.
 
-**Note:** To set up or edit monitors, notifications, or saved views, you must use the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
-
-{{% /tab %}}
-{{< /tabs >}}
+**Note**: To set up or edit monitors, notifications, or saved views, you must use the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
 
 ## Notebooks
 
@@ -160,23 +136,17 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 {{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-On the Notebooks page, you can view and search all of the notebooks that you have access to in your Datadog org, and filter them by tags. Notebook tags allow you to filter by favorites, team, and type. See [notebook tags][19] for more information.
-
-**Note:** To set up or edit a notebook, you need to [log in to the Datadog browser app][10]. For more information, see [Notebooks][18].
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-On the Notebooks page, you can view and search all of the notebooks that you have access to in your Datadog org, and filter them by tags. Notebook tags allow you to filter by favorites, team, and type. See [notebook tags][19] for more information.
-
-**Note:** To set up or edit a notebook, you need to [log in to the Datadog browser app][10]. For more information, see [Notebooks][18].
-
-
 {{% /tab %}}
 {{< /tabs >}}
+
+On the Notebooks page, you can view and search all of the notebooks that you have access to in your Datadog org, and filter them by tags. Notebook tags allow you to filter by favorites, team, and type. See [notebook tags][19] for more information.
+
+**Note**: To set up or edit a notebook, you need to [log in to the Datadog browser app][10]. For more information, see [Notebooks][18].
 
 ## Traces
 
@@ -185,25 +155,20 @@ On the Notebooks page, you can view and search all of the notebooks that you hav
 
 {{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
 
-On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][16].
-
-For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
-
-Additionally, Watchdog Insights surface latency outliers and error outliers. For more information, see [Watchdog Insights][26].
-**Note:** Watchdog is only available on iOS.
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][16].
 
 For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
 
-{{% /tab %}}
-{{< /tabs >}}
+**Only available on iOS** Watchdog Insights surface latency outliers and error outliers. For more information, see [Watchdog Insights][26].
+
 
 ## Logs
 
@@ -212,29 +177,22 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 
 {{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
 
-On the Logs page, you can view and search all of the logs or flex logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][23].
-
-You can also group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][22].
-
-**Note**: To toggle on flex logs, navigate to the logs list and tap on the top right to select enable flex logs.
-
-Additionally, Watchdog Insights surface log anomalies and outliers. For more information, see [Watchdog Insights for Logs][25].
-**Note:** Watchdog is only available on iOS.
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 On the Logs page, you can view and search all of the logs or flex logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][23].
 
 You can also group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][22].
 
 **Note**: To toggle on flex logs, navigate to the logs list and tap on the top right to select enable flex logs.
 
-{{% /tab %}}
-{{< /tabs >}}
+**Only available on iOS** Watchdog Insights surface log anomalies and outliers. For more information, see [Watchdog Insights for Logs][25].
+
 
 ## Services
 
@@ -243,18 +201,15 @@ You can also group by log patterns and select different log attributes for clust
 
 {{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
-
 {{% /tab %}}
 {{< /tabs >}}
+
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
 
 ## Incidents
 
@@ -263,20 +218,14 @@ On the Services page, you can view, search and filter all services that you have
 
 {{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
-
-### Create an incident
-
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the **+** button in the top right corner.
-3. Give your incident a title, severity, and commander.
-
 {{% /tab %}}
-
 {{% tab "Android" %}}
 
 {{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
 ### Create an incident
@@ -285,8 +234,6 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 2. Click the **+** button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
@@ -304,7 +251,7 @@ Check that you have notifications enabled for the Datadog app in your device app
 
 For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel.
 
-### Further Reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
