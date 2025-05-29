@@ -228,9 +228,6 @@ Check out this interactive walk through of our custom metrics governance tools:
 
 <iframe src="https://tour.datadoghq.com/cm9cxjt9x000004kyeo6lafv5" style="border:none;width:100%;height:100%;" allow="fullscreen" data-navattic-demo-id="cm9cxjt9x000004kyeo6lafv5"></iframe>
 
-
-<iframe src="https://tour.datadoghq.com/cm9cxjt9x000004kyeo6lafv5" style="position:fixed;border:none;top:0;left:0;bottom:0;right:0;width:100%;height:100%;margin:0;padding:0;z-index:999999;" allow="fullscreen" data-navattic-demo-id="cm9cxjt9x000004kyeo6lafv5"></iframe>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
