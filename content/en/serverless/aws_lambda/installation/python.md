@@ -274,7 +274,14 @@ module "lambda-datadog" {
 }
 ```
 
-1. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module. Then, specify the `source` and `version` of the module.
+1. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module. Then, specify the `source` and `version` of the module. If you want to avoid having Terraform re-create the resource, you can also add a `moved` block like this:
+
+```
+   moved {
+    from = aws_lambda_function.{your_lambda_function}
+    to   = module.{your_lambda_function}.aws_lambda_function.this
+   }
+```
 
 2. Set the `aws_lambda_function` arguments:
 
