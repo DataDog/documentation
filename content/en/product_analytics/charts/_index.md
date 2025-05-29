@@ -29,7 +29,7 @@ With [funnel analysis][2], you can understand the end-to-end conversion of a sin
 
 ### Retention Analysis
 
-With [retention analysis][4]...
+With [retention analysis][4] you can measure how often users are successfully returning to a page or action. This measure offers insight into overall user satisfaction with your application. 
 
 {{< img src="/product_analytics/overview_retention_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
