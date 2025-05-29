@@ -32,15 +32,11 @@ The instrumenter must be deployed to every region and account where you want to 
    The CloudFormation stack deploys the instrumenter function, **datadog-remote-instrumenter**, into your account and region. The stack also creates a CloudTrail and some adjacent resources.
 
 1. After the instrumenter function is deployed, select functions to instrument. 
-   You can select functions by tag or by function name. To enable instrumentation for multiple functions at once, you could apply a custom tag (for example, `dd_serverless_instrument:true`) to all the functions you want to instrument, and add that custom tag in the **Functions With Tags** box. 
+   You can select functions by tag or by function name. To enable instrumentation for multiple functions at once, you could apply a custom tag (for example, `dd_serverless_instrument:true`) to all the functions you want to instrument, and use this tag to select all of your desired functions.
    
-   You can also use the **Instrument** toggle to individually select functions to instrument.
-
    After you finish your selections, click **Enable Remote Instrumentation**.
 
    <div class="alert alert-info">Datadog recommends that you only instrument Lambda functions with a memory size greater than 256 MB.</div>
-
-   {{< img src="serverless/lambda/remote_instrumentation/select-function.png" alt="Your image description" style="width:100%;" >}}
 
 1. Confirm your function selections. You can also set the layer version, which is used for all future instrumentation. This version remains fixed until you manually update it. Updates can take a few minutes to be applied.
 
