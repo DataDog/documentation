@@ -121,9 +121,7 @@ If you are viewing the request that originated before the change event and the l
 
 If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
 
-This functionality is available for 
--  Python instrumented AWS Lambda functions on Datadog Lambda layer version 101 and above and Python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
--  Node instrumented AWS Lambda functions on Datadog Lambda layer version 103 and above and Node applications instrumented with []`dd-trace-js`] on version 
+This functionality is available for Python instrumented AWS Lambda functions on layer version 101 and above and python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
 
 ### DyanmoDB Change Stream Auto-linking
 
