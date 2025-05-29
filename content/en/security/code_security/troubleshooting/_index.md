@@ -123,7 +123,6 @@ For issues with Datadog Software Composition Analysis (SCA), include the followi
 While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
 
 Ingestion of SBOM files is verified for the following third-party tools:
-- [osv-scanner][7]
 - [trivy][8]
 
 To ingest your SBOM file into Datadog, follow the steps below:
@@ -153,10 +152,10 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### No package detected for C# projects
 
-Our SBOM generator, ([`osv-scanner`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
+The Datadog SBOM generator, ([`datadog-sbom-generator`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
 this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
-The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
+The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
 
 ### No results from Datadog-hosted scans for a repository using `git-lfs`
 
@@ -238,7 +237,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
-[7]: https://github.com/DataDog/osv-scanner
+[7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
