@@ -13631,6 +13631,19 @@ components:
       - retryStrategy
       - fallbackStepName
       type: object
+    Escalation:
+      description: The definition of `Escalation` object.
+      properties:
+        id:
+          description: The `Escalation` `id`.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EscalationRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationType'
+      required:
+      - type
+      type: object
     EscalationPolicy:
       description: Represents a complete escalation policy response, including policy
         data and optionally included related resources.
@@ -14140,6 +14153,44 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    EscalationRelationships:
+      description: The definition of `EscalationRelationships` object.
+      properties:
+        responders:
+          $ref: '#/components/schemas/EscalationRelationshipsResponders'
+      type: object
+    EscalationRelationshipsResponders:
+      description: The definition of `EscalationRelationshipsResponders` object.
+      properties:
+        data:
+          description: The `responders` `data`.
+          items:
+            $ref: '#/components/schemas/EscalationRelationshipsRespondersDataItems'
+          type: array
+      type: object
+    EscalationRelationshipsRespondersDataItems:
+      description: The definition of `EscalationRelationshipsRespondersDataItems`
+        object.
+      properties:
+        id:
+          description: The `items` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationRelationshipsRespondersDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationRelationshipsRespondersDataItemsType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -14156,6 +14207,15 @@ components:
             $ref: '#/components/schemas/EscalationTarget'
           type: array
       type: object
+    EscalationType:
+      default: escalation_policy_steps
+      description: Escalation policy steps resource type.
+      enum:
+      - escalation_policy_steps
+      example: escalation_policy_steps
+      type: string
+      x-enum-varnames:
+      - ESCALATION_POLICY_STEPS
     Event:
       description: The metadata associated with a request.
       properties:
@@ -38549,6 +38609,145 @@ components:
             $ref: '#/components/schemas/TeamLink'
           type: array
       type: object
+    TeamOnCallResponders:
+      description: The definition of `TeamOnCallResponders` object.
+      example:
+        data:
+          id: '123'
+          relationships:
+            escalations:
+              data:
+              - id: '123'
+                type: escalation_policy_steps
+            responders:
+              data:
+              - id: '123'
+                type: users
+          type: team_oncall_responders
+        included:
+        - attributes:
+            email: test@test.com
+            name: Test User
+            status: active
+          id: '123'
+          type: users
+        - id: '123'
+          relationships:
+            responders:
+              data:
+              - id: '123'
+                type: users
+          type: escalation_policy_steps
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamOnCallRespondersData'
+        included:
+          description: The `TeamOnCallResponders` `included`.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersIncluded'
+          type: array
+      type: object
+    TeamOnCallRespondersData:
+      description: The definition of `TeamOnCallRespondersData` object.
+      properties:
+        id:
+          description: The `TeamOnCallRespondersData` `id`.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationships'
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataType'
+      required:
+      - type
+      type: object
+    TeamOnCallRespondersDataRelationships:
+      description: The definition of `TeamOnCallRespondersDataRelationships` object.
+      properties:
+        escalations:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalations'
+        responders:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsResponders'
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalations:
+      description: The definition of `TeamOnCallRespondersDataRelationshipsEscalations`
+        object.
+      properties:
+        data:
+          description: The `escalations` `data`.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalationsDataItems'
+          type: array
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalationsDataItems:
+      description: The definition of `TeamOnCallRespondersDataRelationshipsEscalationsDataItems`
+        object.
+      properties:
+        id:
+          description: The `items` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalationsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalationsDataItemsType:
+      default: escalation_policy_steps
+      description: Escalation policy steps resource type.
+      enum:
+      - escalation_policy_steps
+      example: escalation_policy_steps
+      type: string
+      x-enum-varnames:
+      - ESCALATION_POLICY_STEPS
+    TeamOnCallRespondersDataRelationshipsResponders:
+      description: The definition of `TeamOnCallRespondersDataRelationshipsResponders`
+        object.
+      properties:
+        data:
+          description: The `responders` `data`.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsRespondersDataItems'
+          type: array
+      type: object
+    TeamOnCallRespondersDataRelationshipsRespondersDataItems:
+      description: The definition of `TeamOnCallRespondersDataRelationshipsRespondersDataItems`
+        object.
+      properties:
+        id:
+          description: The `items` `id`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsRespondersDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    TeamOnCallRespondersDataRelationshipsRespondersDataItemsType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    TeamOnCallRespondersDataType:
+      default: team_oncall_responders
+      description: Team oncall responders resource type.
+      enum:
+      - team_oncall_responders
+      example: team_oncall_responders
+      type: string
+      x-enum-varnames:
+      - TEAM_ONCALL_RESPONDERS
+    TeamOnCallRespondersIncluded:
+      description: The definition of `TeamOnCallRespondersIncluded` object.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Escalation'
     TeamPermissionSetting:
       description: Team permission setting
       properties:
@@ -54753,9 +54952,9 @@ paths:
               \       {\n          \"effective_date\": \"{{ timeISO('now - 10d') }}\",\n
               \         \"end_date\": \"{{ timeISO('now + 10d') }}\",\n          \"interval\":
               {\n            \"days\": 1\n          },\n          \"members\": [\n
-              \           {\n              \"user\": {\n                \"id\": \"890f29d4-0b7a-11f0-aeb2-760fcae4f596\"\n
-              \             }\n            }\n          ],\n          \"name\": \"Layer
-              1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
+              \           {\n              \"user\": {\n                \"id\": \"{{
+              user.data.id }}\"\n              }\n            }\n          ],\n          \"name\":
+              \"Layer 1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
               \"friday\",\n              \"end_time\": \"17:00:00\",\n              \"start_day\":
               \"monday\",\n              \"start_time\": \"09:00:00\"\n            }\n
               \         ],\n          \"rotation_start\": \"{{ timeISO('now - 5d')
@@ -54966,6 +55165,51 @@ paths:
       x-menu-order: 11
       x-undo:
         type: safe
+  /api/v2/on-call/teams/{team_id}/on-call:
+    get:
+      description: Get a team's on-call users at a given time
+      operationId: GetTeamOnCallUsers
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `responders`, `escalations`, `escalations.responders`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          example: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamOnCallResponders'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get team on-call users
+      tags:
+      - On-Call
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
       description: Get a team's On-Call routing rules
@@ -55049,11 +55293,14 @@ paths:
       x-given:
         routing_rules:
           parameters:
+          - name: team_id
+            source: dd_team.data.id
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"rules\": [\n
-              \       {\n          \"query\": \"\",\n          \"policy_id\": \"{{
-              escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"time_restriction\":
-              null,\n          \"actions\": []\n        }\n      ]\n    }\n  }\n}"
+            value: "{\n  \"data\": {\n    \"type\": \"team_routing_rules\",\n    \"id\":
+              \"{{ dd_team.data.id }}\",\n    \"attributes\": {\n      \"rules\":
+              [\n        {\n          \"query\": \"\",\n          \"policy_id\": \"{{
+              escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"actions\":
+              []\n        }\n      ]\n    }\n  }\n}"
           step: there are valid "routing_rules" in the system
       x-menu-order: 10
       x-permission:
