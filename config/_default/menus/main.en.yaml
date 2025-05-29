@@ -4547,11 +4547,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_cluster_map
       weight: 5
+    - name: Agent Monitoring
+      url: llm_observability/agent_monitoring
+      parent: llm_obs
+      identifier: llm_obs_agent_monitoring
+      weight: 6
+    - name: Experiments
+      url: llm_observability/experiments_preview
+      parent: llm_obs
+      identifier: llm_obs_experiments
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 6
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
