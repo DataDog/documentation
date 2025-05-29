@@ -16,7 +16,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10134
-    source_type_name: Nvidia Jetson
+    source_type_name: NVIDIA Jetson
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,13 +31,13 @@ display_on_public_website: true
 draft: false
 git_integration_title: nvidia_jetson
 integration_id: nvidia-jetson
-integration_title: Nvidia Jetson
+integration_title: NVIDIA Jetson
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: nvidia_jetson
-public_title: Nvidia Jetson
-short_description: Nvidia Jetson ボードに関するメトリクスを収集します
+public_title: NVIDIA Jetson
+short_description: NVIDIA Jetson ボードに関するメトリクスを収集します
 supported_os:
 - linux
 tile:
@@ -47,11 +47,11 @@ tile:
   - Category::IoT
   - Offering::Integration
   configuration: README.md#Setup
-  description: Nvidia Jetson ボードに関するメトリクスを収集します
+  description: NVIDIA Jetson ボードに関するメトリクスを収集します
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Nvidia Jetson
+  title: NVIDIA Jetson
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -59,14 +59,14 @@ tile:
 
 ## 概要
 
-このチェックは [Nvidia Jetson][1] ボードを監視します。
+このチェックは [NVIDIA Jetson][1] ボードを監視します。
 `tegrastats` から収集されたメトリクスを報告します。
 
 ## セットアップ
 
 ### インストール
 
-Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
+NVIDIA Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 ### 構成
@@ -97,11 +97,11 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ### サービスチェック
 
-Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
+NVIDIA Jetson インテグレーションには、サービスのチェック機能は含まれません。
 
 ### イベント
 
-Nvidia Jetson インテグレーションには、イベントは含まれません。
+NVIDIA Jetson インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 

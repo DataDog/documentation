@@ -27,7 +27,7 @@ For languages such as **Python**, **Java**, and **Ruby**, no additional configur
 
 #### Attributes for Error Tracking
 
-To enable Error Tracking, logs must include both of the following:
+To enable Error Tracking, logs must include the following attributes:
 
 - Either an `error.kind` or `error.stack` field. **Note**: if using `error.stack`, it must be a valid stack trace.
 - A status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`.

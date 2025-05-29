@@ -22,7 +22,7 @@ _2 minutes to complete_
 
 Datadog can show you the latency of your application over time and how it compares to similar moments in previous time frames such as last week or month. This example shows a web server for an e-commerce platform and monitors the latency performance for the server has seen over the past month.
 
-1. **Open the [Service Catalog][1]**.
+1. **Open the [Software Catalog][1]**.
 
     This page contains a list of all [services][2] providing data to Datadog. You can search over your services by keywords, filter them by `env` tag, and set the time frame.
 

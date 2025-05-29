@@ -12,6 +12,13 @@ further_reading:
 title: TCP Agent のログ用プロキシ
 ---
 
+{{% site-region region="us3,eu,us5,gov,ap1" %}}
+<div class="alert alert-warning">
+    TCP は {{< region-param key="dd_site_name" >}} サイトでは利用できません。詳細については<a href="/help/">サポート</a>にお問い合わせください。
+</div>
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
 ## 概要
 
 ログの収集には、Datadog Agent v6.0 以上が必要です。古いバージョンの Agent には、`log collection` インターフェイスが含まれていません。
@@ -284,6 +291,7 @@ stream {
 {{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
+{{% /site-region %}}
 
 
 ## その他の参考資料

@@ -28,9 +28,12 @@ import (
 	"log"
 	"os"
 
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
-	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+   ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
+   ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -49,18 +52,25 @@ To configure OpenTelemetry to use the Datadog trace provider:
    go get go.opentelemetry.io/otel
    ```
 
-3. Install the Datadog OpenTelemetry wrapper package `gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry` using the command:
+3. Install the Datadog OpenTelemetry wrapper package using the command:
 
    ```shell
    go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
+   ```
+
+   If you are using v2, do:
+
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry
    ```
 
 4. Import packages in the code:
 
    ```go
    import (
-     "go.opentelemetry.io/otel"
-     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+      "go.opentelemetry.io/otel"
+      ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // 1.x
+      // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
    )
    ```
 
@@ -116,19 +126,19 @@ t := otel.Tracer("")
 
 ### Setting errors on a span
 
-To set an error on a span, use the `setStatus` method like this:
+To set an error on a span, use the otel SetAttributes or ddtrace WithError options.
 
 ```go
 // Start a span.
-ctx, span := t.Start(context.Background(), "span_name")
+ctx, span := t.Start(context.Background(), "spanName") // where `t` refers to otel/trace
 
 ...
 // Set an error on a span with 'span.SetAttributes'.
-span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
+span.SetAttributes(attribute.String(ext.ErrorMsg, "errorMsg"))
 
 // ALternatively, it is possible to set an error on a span via end span options. 
-EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
-sp.End()
+EndOptions(span, tracer.WithError(errors.New("myErr"))) // where `tracer` refers to ddtrace/tracer
+span.End()
 
 ```
 

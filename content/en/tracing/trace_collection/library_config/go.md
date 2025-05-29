@@ -10,6 +10,9 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Package page"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "v2 Package page"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -33,7 +36,8 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -46,11 +50,20 @@ func main() {
     // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
     // Make sure this line stays in your main function.
     defer tracer.Stop()
+
+    // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
+    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGTERM)
+    go func() {
+        <-sigChan
+        tracer.Stop()
+    }()
 }
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3].
+See all available options in the [configuration documentation][3] (or [configuration documentation v2][20]).
 
 ### Unified service tagging
 
@@ -67,16 +80,16 @@ See all available options in the [configuration documentation][3].
 
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
+Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+Overrides the default trace Agent port for Datadog trace submission. Ignored if `DD_TRACE_AGENT_URL` is set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
-`DD_TRACE_SAMPLE_RATE`
-: **Default**: `nil`<br>
-Enable ingestion rate control.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.
+`DD_TRACE_AGENT_URL`
+: **Default**: `null` <br>
+Override the Agent URL used for trace submission. Supports `http://`, `https://`, and `unix://` protocols. Takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
 
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
@@ -116,19 +129,6 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `nil`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
-
-  <div class="alert alert-info">Support for sampling by resource and tags is in Preview.</div>
-
-  For more information, see [Ingestion Mechanisms][4].<br>
-  **Examples:**<br>
-  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
-  - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
-  - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
-
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
@@ -141,14 +141,14 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
   
 `DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
+: **Default**: none <br>
+A list of default tags to be added to every span, metric, and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`. Key-value pairs must be of string-convertible types.
 
 ### Agent  
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
+Override the default trace Agent host address for trace submission. Ignored if `DD_TRACE_AGENT_URL` is set.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
@@ -168,7 +168,7 @@ Added in version 1.26.0.
 ### Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext` <br>
+: **Default**: `datadog,tracecontext,baggage` <br>
 Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
 
 ## Configure APM environment name
@@ -192,6 +192,8 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [14]: https://github.com/w3c/trace-context
 [15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
-[17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
-[18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/
+[17]: /tracing/metrics/runtime_metrics/?tab=go
+[18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
+[20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
+[21]: /tracing/trace_collection/library_config/#traces

@@ -1,10 +1,10 @@
 ### Operation samples and explain plans
 
-Database Monitoring for Amazon DocumentDB gathers operation samples using the `currentOp` command. This command provides information about operations that are currently being executed on the MongoDB instance. Additionally, Database Monitoring collects explain plans for the read operation samples using the `explain` command, offering detailed insights into the query execution plans.
+Database Monitoring for Amazon DocumentDB gathers operation samples using the `currentOp` command. This command provides information about operations that are currently being executed on the DocumentDB instance. Additionally, Database Monitoring collects explain plans for the read operation samples using the `explain` command, offering detailed insights into the query execution plans.
 
 ### Replication state changes
 
-Database Monitoring for Amazon DocumentDB generates an event each time there is a change in the replication state within the MongoDB instance. This ensures that any changes in replication are promptly detected and reported.
+Database Monitoring for Amazon DocumentDB generates an event each time there is a change in the replication state within the DocumentDB instance. This ensures that any changes in replication are promptly detected and reported.
 
 ### Collection of schemas and indexes
 

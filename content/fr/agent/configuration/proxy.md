@@ -425,9 +425,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # La configuration suivante est valable pour HAProxy 1.8 et versions ultérieures
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CERTIFICATS> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CERTIFICATS> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Décommenter la configuration suivante pour les anciennes versions de HAProxy
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CERTIFICATS>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CERTIFICATS>
 
 backend datadog-api
     mode http
@@ -692,9 +692,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # La configuration suivante est valable pour HAProxy 1.8 et versions ultérieures
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CRT_CERTIFICATS_DATADOG> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CRT_CERTIFICATS_DATADOG> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Décommenter la configuration suivante pour les anciennes versions de HAProxy
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CRT_CERTIFICATS_DATADOG>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <CHEMIN_VERS_CRT_CERTIFICATS_DATADOG>
 
 backend datadog-api
     mode http
@@ -978,7 +978,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -1092,7 +1092,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }

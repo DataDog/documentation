@@ -19,6 +19,10 @@ further_reading:
 title: ライブプロセスモニター
 ---
 
+<div class="alert alert-warning">
+Live Processes および Live Process Monitoring は Enterprise プランに含まれています。他のプランをご利用の場合、この機能をリクエストするにはアカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> へご連絡ください。
+</div>
+
 ## 概要
 
 ライブプロセスモニターは、[Process Agent][1] によって収集されるデータを基に機能します。複数のホストまたはタグにまたがるプロセスグループのカウントに基づいて、警告またはアラートを生成するモニターを作成しましょう。

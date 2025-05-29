@@ -27,10 +27,11 @@ Esta es una introducción a las métricas en Datadog y por qué son útiles. Est
     {{< nextlink href="/metrics/units" >}}<u>Unidades de métricas</u>: obtén información sobre las unidades que se pueden asociar con las métricas.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Visualizar y consultar métricas" >}}
-    {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u>: explora todas tus métricas y realiza análisis.{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>Resumen de métricas</u>: descubre cómo informar de forma activa tus métricas de Datadog.{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtro avanzado</u>: filtra tus datos para limitar el alcance de las métricas devueltas.{{< /nextlink >}}
+{{< whatsnext desc="Visualize and query your metrics" >}}
+    {{< nextlink href="/metrics/explorer" >}}<u>Explorador de métricas</u> - Explora todas tus métricas y realiza análisis.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>Resumen de métricas</u> - Comprende tus métricas de Datadog que informan activamente.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtrado avanzado</u> - Filtra tus datos para reducir el contexto de las métricas devueltas.{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>Consultas anidadas</u> - Aplica capas adicionales de agregación para develar capacidades de consulta avanzadas.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Conocer y gestionar tus volúmenes de métricas personalizadas y costos" >}}
@@ -105,6 +106,8 @@ Consulta la documentación [tipos de métricas][16] para ver ejemplos más detal
 
 Puedes visualizar tus métricas y crear gráficos a lo largo de Datadog: en [Metrics Explorer][3], [dashboards][4] o [notebooks][5].
 
+**Consejo**: Para abrir la página Resumen de métricas a partir de la búsqueda global de Datadog, pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> y busca `metrics`.
+
 Acontinuación, puedes ver un ejemplo de visualización de series temporales:
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="Un gráfico de serie temporal que muestra una métrica de latencia representada por una línea azul única con varios picos" >}}
@@ -170,11 +173,15 @@ Hay cinco agregaciones que puedes aplicar para combinar los datos en cada interv
 
 Es importante recordar que la agregación temporal se aplica _siempre_ en cada consulta que se realiza.
 
-#### Agregación espacial
+#### Agregación de espacio
 
 La agregación espacial divide una única métrica en múltiples series temporales por etiquetas como host, contenedor y región. Por ejemplo, si deseas ver la latencia de tus instancias de EC2 por región, deberás utilizar la agregación espacial por función para combinar los hosts de cada región.
 
 Hay cuatro agregadores que se pueden aplicar cuando se utiliza la agregación espacial: _sum_, _min_, _max_ y _avg_. Utilizando el ejemplo anterior, supongamos que tus hosts están repartidos en cuatro regiones: us-east-1, us-east-2, us-west-1 y us-west-2. Los hosts de cada región deben combinarse mediante la función Aggregator. Si utilizas _max_ aggregator, se obtendrá la latencia máxima experimentada en los hosts de cada región, mientras que con _avg_ aggregator, se obtendría la latencia media por región.
+
+#### Consultas anidadas
+Añade capas de agregación adicionales a los resultados de las consultas existentes en tiempo y espacio con consultas anidadas en la interfaz de usuario o a través de la [API][27]. Para obtener más información, consulta la documentación [Consultas anidadas][26].
+
 
 ### Ver información en tiempo real sobre métricas
 
@@ -220,3 +227,5 @@ Lee la [documentación de Resumen de métricas][22] para obtener más detalles.
 [23]: /es/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /es/dashboards/functions/
 [25]: /es/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /es/metrics/nested_queries
+[27]: https://docs.datadoghq.com/es/api/latest/metrics/#query-timeseries-data-across-multiple-products

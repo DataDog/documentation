@@ -29,7 +29,7 @@ To configure inline code snippets in issues, set up the [source code integration
 
 #### Attributes for Error Tracking
 
-To enable Error Tracking, logs must include both of the following:
+To enable Error Tracking, logs must include the following attributes:
 
 - Either an `error.kind` or `error.stack` field. **Note**: if using `error.stack`, it must be a valid stack trace.
 - A `Service` attribute

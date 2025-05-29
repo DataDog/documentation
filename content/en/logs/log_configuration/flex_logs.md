@@ -10,6 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/cloud-siem-flex-logs/"
+  tag: "Blog"
+  text: "Cloud SIEM and Flex Logs: Enhanced security insights for the cloud"
+- link: "/logs/guide/flex_compute"
+  tag: "Documentation"
+  text: "Monitor Flex Compute Usage"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -19,6 +25,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 ## Overview
@@ -42,7 +51,7 @@ Datadog Log Management provides the following solutions:
 - Flex Logs for logs that need to be retained long-term, but sometimes need to be queried urgently, such as security, transaction, and network logs.
 - Archiving for logs that are infrequently queried and need to be stored long-term, such as audit and configuration logs.
 
-Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-the-flex-logs) for more information.
+Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-flex-logs) for more information.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
@@ -63,7 +72,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 
@@ -114,14 +123,14 @@ To disable Flex Logs:
 
 1. Remove Flex Storage from each index where Flex Logs is enabled.
 1. Navigate back to the [Flex Logs Control][5] page.
-1. Click **Disable Flex Logs**.
+1. Click the gear icon and select **Disable Flex Logs**.
 
 ## Upgrade and downgrade Flex Logs compute
 
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. 
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click **Save**.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 
@@ -206,13 +215,13 @@ The following list is an example of log sources that are good candidates for sen
 
 ### Flex Logs for multiple-organization accounts
 
-For each organization in which you want Flex Logs, you must enable a compute size per organization. Compute sizes cannot be shared across organizations.
+For each organization in which you want Flex Logs, you must enable a compute size per organization. Only one compute can be used per organization, and compute sizes cannot be shared across organizations. Starter and scalable compute cannot be used simultaneously in an organization.
 
 Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
 ### When the compute limit is reached
 
-When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
+When your organization reaches the compute limit in terms of concurrent queries, you may experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
 ## Further reading
 

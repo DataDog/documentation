@@ -14,8 +14,7 @@
               },
               {
                 "width": "auto",
-                "field": "message",
-                "is_clustering_pattern_field_path": true
+                "field": "message"
               }
             ],
             "query": {

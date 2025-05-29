@@ -20,7 +20,7 @@ You can install and configure the Datadog Browser SDK to start monitoring applic
 To install the Datadog Browser SDK to support Capacitor apps:
 
 1. Set up and install [RUM Browser Monitoring][3], following the steps for CDN sync, CDN async, or npm.
-2. Set the `allowFallbackToLocalStorage` parameter to `true` in the RUM initialization configuration.
+2. Set the `sessionPersistence` parameter to `"local-storage"` in the RUM initialization configuration.
 
    **Note**: This setting allows Datadog to collect RUM data without relying on browser cookies.
 
@@ -30,7 +30,7 @@ To install the Datadog Browser SDK to support Capacitor apps:
      clientToken: '<DATADOG_CLIENT_TOKEN>',
      site: '<DATADOG_SITE>',
      ...
-     allowFallbackToLocalStorage: true
+     sessionPersistence: "local-storage"
    });
    ```
 

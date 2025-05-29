@@ -34,6 +34,9 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 | [Partial retries][10] | Partial pipelines | View partially retried pipeline executions. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 | [Queue time][12] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Filter CI Jobs on the critical path][16] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][17] | Execution time  | View the amount of time pipelines have been running jobs. |
+
 
 ## Configure CI Visibility
 
@@ -69,6 +72,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    {
      "data": {
        "attributes": {
+         "provider_name": "<YOUR_CI_PROVIDER>",
          "resource": {
            "level": "pipeline",
            "unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
@@ -127,3 +131,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [13]: /continuous_integration/search/#search-for-pipelines
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: /glossary/#running-pipeline
+[16]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[17]: /glossary/#pipeline-execution-time

@@ -4,6 +4,9 @@ canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
 
+# don't publish cdocs source files
+ignoreFiles: ["\\.mdoc\\.md$"]
+
 publishDir: "./public"
 
 # taxonomies
@@ -98,6 +101,8 @@ module:
        lang: en
      - source: data
        target: data
+     - source: assets
+       target: assets
 
   mounts:
     # default mounts
@@ -149,6 +154,11 @@ security:
 outputFormats:
   Search:
     baseName: "search"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+  Partners:
+    baseName: "partners"
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true

@@ -2,7 +2,7 @@
 title: リマッパー
 ---
 
-## 概要
+## 概要 
 
 リマッパープロセッサーは、任意のソース属性やタグを、別のターゲット属性やタグにリマップします。例えば、`user` を `firstname` にリマップして、イベントエクスプローラーのログをターゲットにすることができます。
 
@@ -19,4 +19,4 @@ title: リマッパー
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="属性リマッパープロセッサー" style="width:80%;" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/event/settings/pipelines

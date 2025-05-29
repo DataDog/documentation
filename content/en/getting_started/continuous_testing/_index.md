@@ -78,7 +78,7 @@ To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jir
 
 ## Run your Continuous Testing tests
 
-To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. Then run your test directly in your IDE as a developer environment.
+To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. 
 
 ### Running tests in the CLI
 
@@ -94,24 +94,6 @@ You can use `datadog-ci` to execute only those tests tagged with specific [Datad
    ```
 
 For more information about running the Synthetics command and using reporters, see the [Configuration documentation][11].
-
-### Running tests in your IDE
-
-Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help you:
-
-* Use a [private location][13] or [a local environment][14] to accelerate development locally.
-* Run HTTP API tests and browser tests and see their results within VS Code.
-* Test only what matters by executing relevant tests at the same time.
-
-{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
-
-### Running tests in VS Code
-
-1. Open VS Code and install the Datadog Extension from the VS Code Extensions view.
-2. Open the Datadog Synthetics extension and sign in when prompted.
-3. Select a Synthetic test to run.
-4. Set a Start URL.
-5. Run the test.
 
 ## Examine results in the Synthetic Monitoring & Testing Results Explorer
 

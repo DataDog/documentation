@@ -86,12 +86,7 @@ See the [RUM Debug Symbols][4] page to view all uploaded symbols.
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ## Test your implementation
 
@@ -180,5 +175,5 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/#usage
 [4]: https://app.datadoghq.com/source-code/setup/rum

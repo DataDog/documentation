@@ -24,8 +24,11 @@ further_reading:
 
 
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
+All shared dashboards and their public accesss settings are listed in the [Public Sharing Settings page][3]. You can also add additional security configurations, such as disabling specific sharing types, or setting the Maximum Access Period for invitations on this page.
 
-Shared dashboards refresh every 30 seconds and this [refresh rate][1] cannot be customized.
+**Note**: When the shared dashboards feature is disabled, dashboards are no longer publicly accessible. However, their configurations remain viewable and editable. This feature operates independently of the `Active` or `Paused` status of individual dashboards, even `Active` shared dashboards become publicly inaccessible.
+
+Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
 ## Share states
 
@@ -53,6 +56,10 @@ To share a dashboard with one or more email addresses:
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
 
 **Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
+
+The Maximum Access Period of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3]. By default, it is not configured.
+
+**Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
 
 ### Access an invite-only shared dashboard
 
@@ -88,13 +95,18 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can add embedded shared dashboards to a website with an iframe. These embedded shared dashboards are only accessible by the configured website domains. To share an embedded dashboard:
+You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+This feature is not supported on Safari web browsers.
+
+The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
+
+To share an embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
 3. Select the **Embed** option in the **Select a Share Type** step.
 4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
-5. Add the website domains that you want to allowlist as embeddable domains.
+5. Add the referrers that you want to allowlist.
 6. Click **Share Dashboard** to create the share URL.
 
 ## Configuration Options
@@ -158,3 +170,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
+[3]: https://app.datadoghq.com/organization-settings/public-sharing

@@ -82,13 +82,29 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
    {{% /tab %}}
    {{< /tabs >}}
 
-#### Añade parámetros de ejecución
+### Añadir configuración de ejecución
 
-Haz clic en **Continuar con el test si este paso falla** para permitir que tu test continúe con los pasos siguientes tras el fallo de un paso. Esto asegura que tus tests son capaces de limpiarse a sí mismos. Por ejemplo, un test puede crear un recurso, realizar una serie de acciones en ese recurso y terminar con la eliminación de ese recurso.
+En **Execution Settings** (Configuración de ejecución), se encuentran disponibles las siguientes opciones:
+
+#### Éxito del paso:
+
+Haz clic en **If step succeeds, continue to next step** (Si el paso es exitoso, continuar con el siguiente paso) para que el test continúe con los pasos posteriores después de los pasos exitosos.  
+
+{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Captura de pantalla de la configuración de ejecución que muestra las opciones de éxito del paso para continuar con el siguiente paso" style="width:90%;" >}}
+
+Haz clic en **If step succeeds, exit test and mark it as passed** (Si el paso es exitoso, salir del test y marcarlo como superado) para salir del test una vez que se complete el paso de manera exitosa. De este modo, no se ejecutan pasos innecesarios y se evita marcar el test como fallido. 
+
+{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Captura de pantalla de la configuración de ejecución que muestra la salida y marca como superado del paso exitoso" style="width:90%;" >}}
+
+#### Fallo del paso
+
+Haz clic en **If step fails, continue to next step** (Si el paso falla, continuar con el siguiente paso) para continuar con los pasos posteriores después de que se haya producido una falla en el paso. Esto puede resultar útil para tareas de limpieza cuando quieres que continúen los pasos posteriores. Por ejemplo, un test puede crear un recurso, realizar varias acciones en este y finalizar con su eliminación. 
 
 En el caso de que uno de los pasos intermedios falle, es conveniente que esta configuración esté activada en todos los pasos intermedios para garantizar que el recurso se elimina al final del test y que no se crean falsos positivos.
 
 El test genera una alerta si un endpoint no responde como se esperaba. Tu test puede activar reintentos X veces después de Y ms en caso de un resultado de test fallido. Personaliza el intervalo de reintentos para adaptarlo a tu criterio de alerta.
+
+{{< img src="synthetics/multistep_tests/step_failure.png" alt="Captura de pantalla de la configuración de ejecución que muestra el fallo del paso" style="width:90%;" >}}
 
 #### Extraer variables de la respuesta
 
@@ -96,7 +112,7 @@ Opcionalmente, extrae variables de la respuesta de tu solicitud de API mediante 
 
 Para iniciar el parseo de una variable, haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta):
 
-1. Introduce un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres y sólo puede contener mayúsculas, números y guiones bajos. 
+1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
 2. Decide si prefieres extraer la variable de los encabezados o del cuerpo de la respuesta.
 
    * Extraer el valor del **encabezado de respuesta**: utiliza el encabezado de respuesta completa de tu solicitud de API como valor de la variable, o analízalo con una [`regex`][9].
@@ -106,7 +122,7 @@ Para iniciar el parseo de una variable, haz clic en **Extract a variable from re
 
 Puedes extraer hasta diez variables por paso de test. Una vez creada, esta variable se puede utilizar en los siguientes pasos de tu test de API multipaso. Para obtener más información, consulta [Usar variables](#usar-variables).
 
-### Indica la frecuencia del test
+### Indicar la frecuencia del test
 
 Los tests de API multipaso se pueden ejecutar:
 
@@ -126,7 +142,7 @@ Además de crear variables locales, puedes [extraer variables de cualquier paso]
 
 Puedes utilizar las [variables globales definidas en la `Settings`][14] y las [variables definidas localmente](#create-local-variables) en la URL, las opciones avanzadas y las aserciones de tus tests de API.
 
-Para visualizar tu lista de variables, escribe `{{` en el campo que desees.
+Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Uso de variables en los tests de API multipaso" video="true" width="90%" >}}
 
@@ -135,7 +151,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo que desees.
 Un test se considera `FAILED` si un paso no satisface una o varias afirmaciones o si la solicitud de un paso falla prematuramente. En algunos casos, el test puede fallar sin poder probar las afirmaciones contra el endpoint, estas razones incluyen:
 
 `CONNREFUSED`
-: No se ha podido establecer una conexión porque la máquina de destino la ha rechazado continuamente.
+: No se ha podido establecer una conexión, ya que la máquina de destino la ha rechazado continuamente.
 
 `CONNRESET`
 : el servidor remoto ha finalizado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o se haya bloqueado mientras respondía, o la pérdida de conectividad del servidor web.
@@ -150,9 +166,9 @@ Un test se considera `FAILED` si un paso no satisface una o varias afirmaciones 
 : no se ha podido realizar la conexión SSL. [Consulta la página de errores dedicada para obtener más información][15].
 
 `TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT` (tiempo de espera):
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60 segundos).
-  Para cada solicitud, solo se muestran en la cascada de la red las etapas completadas de la solicitud. Por ejemplo, en el caso de que solo se muestre `Total response time`, el límite de tiempo se produjo durante la resolución DNS.
+: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
+  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración de la solicitud y de las aserciones ha alcanzado la duración máxima (30 minutos).
 
 Para pasos de HTTP, consulta [fallos comunes en pasos de HTTP][15]. Para pasos de gRPC, consulta [fallos comunes de pasos de gRPC][16].
@@ -174,6 +190,7 @@ Puedes restringir el acceso a un test de API multipaso en función de los roles 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/synthetics/api_tests/http_tests
 [2]: /es/synthetics/api_tests/

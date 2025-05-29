@@ -16,7 +16,13 @@ further_reading:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
+<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the .NET runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/order-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
@@ -200,7 +206,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.5.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -210,7 +216,7 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 65
+  datadog_extension_layer_version = 67
   datadog_dotnet_layer_version = 16
 
   # aws_lambda_function arguments
@@ -243,7 +249,7 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog .NET Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 65
+  datadog_extension_layer_version = 67
   datadog_dotnet_layer_version = 16
 ```
 
@@ -305,8 +311,31 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
+
+## Adding Custom Spans
+
+When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer), ensure that a second version of the .NET tracer is not also packaged with your application code. Add `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+
+```xml
+<PackageReference Include="Datadog.Trace" Version="2.38.0">
+    <ExcludeAssets>runtime</ExcludeAssets>
+</PackageReference>
+```
+
+You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
+
 ## What's next?
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
@@ -328,3 +357,5 @@ module "lambda-datadog" {
 [4]: /serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /serverless/configuration/
 [6]: /security/application_security/serverless/
+[7]: https://github.com/DataDog/datadog-lambda-extension
+[8]: https://github.com/DataDog/datadog-lambda-extension/issues

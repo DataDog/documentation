@@ -123,7 +123,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
                d=o.createElement(u);d.async=1;d.src=n
                n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
+             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
              window.DD_RUM.onReady(function() {
                window.DD_RUM.init({
                  clientToken: '<CLIENT_TOKEN>',
@@ -135,9 +135,6 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                  // version: '1.0.0',
                  sessionSampleRate: 100,
                  sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
                });
              })
            `}
@@ -180,7 +177,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
          <body>
            <Script
              id="dd-rum-sync"
-             src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"
+             src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
              type="text/javascript"
              strategy="beforeInteractive"
            />
@@ -196,9 +193,6 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                  // version: '1.0.0',
                  sessionSampleRate: 100,
                  sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
                });
              `}
            </Script>
@@ -239,6 +233,6 @@ To start backend monitoring of your Next.js applications:
 [3]: /real_user_monitoring/browser/data_collected/
 [4]: /real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
+[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com

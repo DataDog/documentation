@@ -2,6 +2,9 @@
 title: Advanced Log Collection Configurations
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "/logs/guide/getting-started-lwl/"
+  tag: "Documentation"
+  text: "Getting started with Logging without Limits™"
 - link: "/logs/guide/how-to-set-up-only-logs/"
   tag: "Documentation"
   text: "Use the Datadog Agent for log collection only"
@@ -17,9 +20,6 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "/logs/logging_without_limits/"
-  tag: "Documentation"
-  text: "Logging without Limits*"
 - link: "/glossary/#tail"
   tag: Glossary
   text: 'Glossary entry for "tail"'
@@ -28,13 +28,18 @@ algolia:
 ---
 
 After you set up [log collection][1], you can customize your collection configuration:
-* [Filter logs](#filter-logs)
-* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Aggregate multi-line logs](#multi-line-aggregation)
-* [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-using-wildcards)
-* [Specify log file encodings](#log-file-encodings)
-* [Define global processing rules](#global-processing-rules)
+- [Filter logs](#filter-logs)
+  - [Exclude at match](#exclude-at-match)
+  - [Include at match](#include-at-match)
+- [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
+- [Multi-line aggregation](#multi-line-aggregation)
+- [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
+- [Commonly used log processing rules](#commonly-used-log-processing-rules)
+- [Tail directories using wildcards](#tail-directories-using-wildcards)
+  - [Tail most recently modified files first](#tail-most-recently-modified-files-first)
+- [Log file encodings](#log-file-encodings)
+- [Global processing rules](#global-processing-rules)
+- [Further Reading](#further-reading)
 
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
@@ -258,10 +263,6 @@ spec:
 
 ## Scrub sensitive data from your logs
 
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Sensitive Data Scanner using the Agent is in Preview. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
-{{< /callout >}}
-
 If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
 
 This replaces all matched groups with the value of the `replace_placeholder` parameter.
@@ -466,117 +467,9 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### Automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically. 
+## Automatically aggregate multi-line logs
 
-Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-```
-
-For containerized deployments, you can enable `auto_multi_line_detection` with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable.
-
-It can also be enabled or disabled (overriding the global config) per log configuration:
-
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: testApp
-    source: java
-    auto_multi_line_detection: true
-```
-
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
-
-If no pattern meets the line match threshold, add the `auto_multi_line_default_match_threshold` parameter with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-  auto_multi_line_default_match_threshold: 0.1
-```
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
-
-```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "testApp",
-        "auto_multi_line_detection": true
-      }]
-```
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
-
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: apps/v1
-metadata:
-  name: testApp
-spec:
-  selector:
-    matchLabels:
-      app: testApp
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
-          [{
-            "source": "java",
-            "service": "testApp",
-            "auto_multi_line_detection": true
-          }]
-      labels:
-        app: testApp
-      name: testApp
-    spec:
-      containers:
-        - name: '<CONTAINER_NAME>'
-          image: testApp:latest
-```
-
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
-
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-
-{{% /tab %}}
-{{< /tabs >}}
-
-With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
-
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
-
-Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
+See the dedicated [Auto Multi-line Detection and Aggregation][7] documentation.
 
 ## Commonly used log processing rules
 
@@ -625,15 +518,17 @@ logs:
 The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
-**Note2**: The path and exclude_paths values are case sensitive.
 
-## Tail most recently modified files first
+**Note**: The path and exclude_paths values are case sensitive.
 
-When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+### Tail most recently modified files first
 
-This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+The Agent limits the number of files it can tail simultaneously, as defined by the `logs_config.open_files_limit` parameter.
+By default, when more files match the wildcard pattern than this limit, the Agent prioritizes them by sorting filenames in reverse lexicographic order. This works well for log files named with timestamps or sequential numbering, ensuring that the most recent logs are tailed first.
 
-To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set logs_config.file_wildcard_selection_mode to by_modification_time. With this setting, the Agent continuously sorts files by their modification time. It always tails the most recently modified files first and stops tailing the least recently modified ones.
+
+To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
 
 This feature requires Agent version 7.40.0 or above.
 
@@ -739,3 +634,4 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [4]: /agent/faq/commonly-used-log-processing-rules
 [5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /agent/configuration/agent-commands/#agent-information
+[7]: /agent/logs/auto_multiline_detection

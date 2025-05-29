@@ -4,6 +4,9 @@ algolia:
   - 高度なログフィルター
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
+- link: /logs/guide/getting-started-lwl/
+  tag: ドキュメント
+  text: Logging without LimitsTM 入門
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: ドキュメント
   text: ログ収集専用として Datadog Agent を使用する
@@ -19,9 +22,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-- link: /logs/logging_without_limits/
-  tag: ドキュメント
-  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集の "tail" の項目
@@ -258,10 +258,6 @@ spec:
 {{< /tabs >}}
 
 ## ログの機密データのスクラビング
-
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Agent を使用した Sensitive Data Scanner は非公開ベータ版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
-{{< /callout >}}
 
 編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。
 
@@ -564,9 +560,9 @@ spec:
           image: testApp:latest
 ```
 
-複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数で `datadog.yaml` ファイルにカスタムパターンを追加することもできます。
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
 
-パターンがライン一致のしきい値に一致しない場合は、より低い値の `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数を追加します。これにより、自動複数行集計が機能するためにログが一致しなければならない頻度を決定するしきい値が構成されます。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 

@@ -1,8 +1,9 @@
 ---
 title: Bits AI
 disable_toc: false
-private: false
 is_beta: true
+aliases:
+    - /bits_ai/query_examples/
 further_reading:
     - link: "https://www.datadoghq.com/product/platform/bits-ai/"
       tag: "Product page"
@@ -20,6 +21,10 @@ further_reading:
       tag: "Blog"
       text: "Reimagining the way you run operations with autonomous investigations"
 ---
+
+{{< site-region region="gov" >}}
+Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
+{{< /site-region >}}
 
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
 
@@ -42,8 +47,6 @@ You can ask Bits AI questions such as:
 - `Are there any issues with example-service's dependencies?`
 
 When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
-
-For more example query syntax, see the [Example Natural Language Queries][2] guide.
 
 ### Streamline incident management
 

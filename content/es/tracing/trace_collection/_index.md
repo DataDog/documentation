@@ -37,9 +37,9 @@ Existen dos enfoques principales para instrumentar tu aplicación: automático o
 
 ### Instrumentación automática
 
-Crea {{< tooltip glossary="tramos" >}} para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
+Crea {{< tooltip glossary="span" >}} para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
 
-- [Instrumentación de paso único (fase beta)][7]: ejecuta un comando de instalación de una sola línea para instalar el Datadog Agent , habilitar APM e instrumentar todos tus servicios en tu host de Linux, máquina virtual, o contenedor.
+- [Instrumentación en un solo paso (Vista previa)][7]: Ejecuta un comando de instalación de una sola línea para instalar el Datadog Agent, habilitar APM e instrumentar todos tus servicios en tu host Linux, máquina virtual o contenedor.
 - [Bibliotecas de Datadog][8]: añade bibliotecas de rastreo de Datadog a tu aplicación.
 
 Para más información, consulta [Instrumentación automática][5].
@@ -52,6 +52,11 @@ Captura datos de observabilidad de código propio o funciones complejas que no s
 - [APIs de OpenTelemetry][10]: utiliza la compatibilidad con la API de OpenTelemetry en bibliotecas de Datadog para disponer de una instrumentación independiente de tu código.
 
 Para más información, consulta [Instrumentación personalizada][6].
+
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="La detección de servicios está en Vista previa">}}
+La detección de servicios proporciona una visibilidad completa del estado actual de la monitorización de aplicaciones, destacando cualquier brecha importante o trazas (traces) rotas en tu sistema. 
+{{< /callout >}}
+
 
 ## Tutoriales de configuración de APM
 

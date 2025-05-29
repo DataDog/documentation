@@ -30,7 +30,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信][27]
-- [プロファイリングデータの収集 (公開ベータ版)](#collect-profiling-data-public-beta)
+- [プロファイリングデータの収集](#collect-profiling-data)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -350,7 +350,7 @@ Datadog APM クライアントによって自動的にインスツルメント�
 
 ## APM スパンを取り込む際のサンプリングレートの選択
 
-サーバーレス関数の [APM トレース呼び出しのサンプリングレート][17]を管理するには、関数上で `DD_TRACE_SAMPLE_RATE` 環境変数を 0.000 (Lambda 関数呼び出しのトレースなし) と 1.000 (Lambda 関数呼び出しのすべてトレース) の間の値に設定します。
+サーバーレス関数の [APM トレース呼び出しのサンプリングレート][17]を管理するには、関数上で `DD_TRACE_SAMPLING_RULES` 環境変数を 0.000 (Lambda 関数呼び出しのトレースなし) と 1.000 (Lambda 関数呼び出しのすべてトレース) の間の値に設定します。
 
 メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
 
@@ -507,9 +507,9 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
 
 [101]: /ja/integrations/guide/source-code-integration/?tab=go#serverless
 
-## プロファイリングデータの収集 (公開ベータ版)
+## プロファイリングデータの収集
 
-Datadog の [Continuous Profiler][42] は Python バージョン 4.62.0 とレイヤーバージョン 62 以前でベータ版が利用可能です。このオプション機能は `DD_PROFILING_ENABLED` 環境変数を `true` に設定することで有効になります。
+Datadog の [Continuous Profiler][42] は Python バージョン 4.62.0 とレイヤーバージョン 62 以前でプレビュー版が利用可能です。このオプション機能は `DD_PROFILING_ENABLED` 環境変数を `true` に設定することで有効になります。
 
 Continuous Profiler は、実行中のすべての Python コードの CPU とヒープのスナップショットを定期的に取得するスレッドを生成することで動作します。これにはプロファイラー自身も含まれる場合があります。プロファイラー自身を無視したい場合は、 `DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
 

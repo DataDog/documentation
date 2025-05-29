@@ -23,7 +23,6 @@ Test Impact Analysis is only supported in the following versions and testing fra
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported.
 * `cucumber >= 3.0.0`
 
 ## Setup
@@ -36,28 +35,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Ruby][1]
 
 ## Run tests with Test Impact Analysis enabled
 
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-After completing setup, run your tests as you normally do:
-
-{{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-app bundle exec rake test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-After completing setup, run your tests as you normally do:
-
-{{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY bundle exec rake test
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+After completing setup, run your tests as you normally do.
 
 ## Disabling skipping for specific tests
 
@@ -185,4 +163,3 @@ Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/ruby
-[2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing

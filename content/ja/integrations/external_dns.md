@@ -31,7 +31,7 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: external_dns
@@ -113,7 +113,7 @@ metadata:
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://github.com/kubernetes-incubator/external-dns
 [2]: https://app.datadoghq.com/account/settings/agent/latest

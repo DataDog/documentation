@@ -27,7 +27,7 @@ categories:
 - contenedores
 - Kubernetes
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Servidor de métricas Kubernetes
-integration_version: 3.3.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_metrics_server
@@ -85,7 +85,7 @@ El check de Kube_metrics_server está incluido en el paquete del [Datadog Agent]
 
 Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
 
-1. Edita el archivo `kube_metrics_server.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de kube_metrics_server. Para ver todas las opciones de configuración disponibles, consulta el [ejemplo kube_metrics_server.d/conf.yaml][4].
+1. Edita el archivo `kube_metrics_server.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de kube_metrics_server. Para ver todas las opciones de configuración disponibles, consulta el [ejemplo kube_metrics_server.d/conf.yaml][1].
 
 2. [Reinicia el Agent][2].
 

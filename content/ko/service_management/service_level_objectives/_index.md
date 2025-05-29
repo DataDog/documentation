@@ -1,8 +1,8 @@
 ---
 aliases:
-- /monitors/monitor_uptime_widget/
-- /monitors/slos/
-- /monitors/service_level_objectives/
+- /ko/monitors/monitor_uptime_widget/
+- /ko/monitors/slos/
+- /ko/monitors/service_level_objectives/
 description: SLO 상태 추적
 further_reading:
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/

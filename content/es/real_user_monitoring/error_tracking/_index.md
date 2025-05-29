@@ -31,7 +31,7 @@ title: Seguimiento de errores en aplicaciones web y móviles
 
 ## Información general
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Detalles de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

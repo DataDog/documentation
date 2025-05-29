@@ -39,7 +39,7 @@ is_public: true
 manifest_version: 2.0.0
 name: oracle_cloud_infrastructure
 public_title: Oracle Cloud Infrastructure
-short_description: OCI は高性能コンピューティングとマイグレーションを提供します。OCI メトリクスインテグレーションは非公開ベータ版です。
+short_description: OCI は、ホスト環境において多様なアプリケーションをサポートするよう設計されたクラウドサービスの集合体です。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -50,7 +50,7 @@ tile:
   - Category::Oracle
   - Offering::Integration
   configuration: README.md#Setup
-  description: OCI は高性能コンピューティングとマイグレーションを提供します。OCI メトリクスインテグレーションは非公開ベータ版です。
+  description: OCI は、ホスト環境において多様なアプリケーションをサポートするよう設計されたクラウドサービスの集合体です。
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -244,7 +244,7 @@ ORM スタックは、テナンシー内のリージョンに関数コンテナ�
 
 Datadog の [OCI インテグレーション概要ダッシュボード][13]または [Metrics Explorer ページ][14]で `oci.*` メトリクスを表示します。
 
-<div class="alert alert-warning">OCI 関数メトリクス (<code>oci.faas</code> ネームスペース) とコンテナインスタンスメトリクス (<code>oci_computecontainerinstance</code> ネームスペース) はベータ版です。</div>
+<div class="alert alert-warning">OCI 関数メトリクス (<code>oci.faas</code> ネームスペース) とコンテナインスタンスメトリクス (<code>oci_computecontainerinstance</code> ネームスペース) はプレビュー版です。</div>
 
 ### メトリクスネームスペース
 
@@ -253,12 +253,12 @@ Datadog の [OCI インテグレーション概要ダッシュボード][13]ま�
 | [Autonomous Database][15]     | [oci_autonomous_database][16]                                                                                                            |
 | ブロックストレージ                 | [oci_blockstore][17]                                                                                                                     |
 | [コンピュート][18]                 | [oci_computeagent][19]、[rdma_infrastructure_health][20]、[gpu_infrastructure_health][21]、[oci_compute_infrastructure_health][22]       |
-| コンテナインスタンス (ベータ)     | [oci_computecontainerinstance][23]                                                                                                       |
+| コンテナインスタンス (プレビュー)     | [oci_computecontainerinstance][23]                                                                                                       |
 | [データベース][24]                | [oci_database][25]、[oci_database_cluster][26]                                                                                           |
 | ダイナミックルーティングゲートウェイ       | [oci_dynamic_routing_gateway][27]                                                                                                        |
 | FastConnect                   | [oci_fastconnect][28]                                                                                                                    |
 | ファイルストレージ                  | [oci_filestorage][29]                                                                                                                    |
-| 関数 (ベータ)               | [oci_faas][30]                                                                                                                           |
+| 関数 (プレビュー)              | [oci_faas][30]                                                                                                                           |
 | HeatWave MySQL                | [oci_mysql_database][31]                                                                                                                 |
 | Kubernetes エンジン             | [oci_oke][32]                                                                                                                            |
 | [ロードバランサー][33]           | [oci_lbaas][34]、[oci_nlb][35]                                                                                                           |
@@ -434,7 +434,7 @@ OCI インテグレーションには、イベントは含まれません。
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://docs.datadoghq.com/ja/getting_started/site/
 [12]: https://cloud.oracle.com/connector-hub/service-connectors
-[13]: https://app.datadoghq.com/dash/integration/31405/oracle-cloud-oci-overview
+[13]: https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview
 [14]: https://app.datadoghq.com/metric/explorer
 [15]: https://app.datadoghq.com/integrations/oci-autonomous-database
 [16]: https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-monitor-metrics-list.html

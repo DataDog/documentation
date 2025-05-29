@@ -52,7 +52,7 @@ RUM モバイルアプリ使用量ダッシュボードは、顧客がアプリ�
 
 RUM ユーザーデモグラフィックダッシュボードでは、アプリケーションの地理的な採用状況を把握することができます。
 
-- **Global Data**:
+- **Global Data**: 
   ユーザーのグローバルビューを取得し、どの国、地域、都市が最もアプリケーションを使用しているかを確認できます。
 - **Compare Continents and Compare Countries**:
   ユーザーの大陸や国によって、アプリケーションの体験がどのように異なるかを確認できます。
@@ -81,9 +81,9 @@ RUM フラストレーションシグナルダッシュボードは、ユーザ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/data_collected/
-[2]: /ja/real_user_monitoring/ios/data_collected/
-[3]: /ja/real_user_monitoring/android/data_collected/
-[4]: /ja/real_user_monitoring/reactnative/data_collected/
-[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [6]: /ja/data_security/real_user_monitoring/

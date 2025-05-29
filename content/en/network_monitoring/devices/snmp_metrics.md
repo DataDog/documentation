@@ -1,8 +1,5 @@
 ---
-title: Collect SNMP Metrics From Your Network Devices
-aliases:
-    - /network_performance_monitoring/devices/setup/
-    - /network_monitoring/devices/setup/
+title: SNMP Metrics
 further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
@@ -17,7 +14,11 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary.
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: `SNMPv1`, `SNMPv2`, and `SNMPv3`. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
+
+## Pre-requisites
+
+Agent v7.32+
 
 ## How it works
 
@@ -180,115 +181,11 @@ network_devices:
 
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
-**Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
-
-### Ping
-
-When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as Autodiscovered devices.
-
-#### Setup
-
-1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][7] documentation.
-
-2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices, or the [`datadog.yaml`][8] Agent configuration file for Autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
-
-3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the [linux.use_raw_socket][11] `system-probe` configuration below.
-
-**Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
-
-{{< tabs >}}
-{{% tab "Individual" %}}
-
-- To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section.
-
-	```yaml
-	    init_config:
-	      loader: core
-	      use_device_id_as_hostname: true
-	    instances:
-	    - ip_address: '1.2.3.4'
-	      community_string: 'sample-string'
-	      tags:
-	        - 'key1:val1'
-	        - 'key2:val2'
-	      ping:
-	        enabled: true            # (default false) enable the ping check
-	        linux:                   # (optional) Linux specific configuration
-	          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-	```
-
-{{% /tab %}}
-
-{{% tab "Autodiscovery" %}}
-
-- To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
-
-	```yaml
-   network_devices:
-     autodiscovery:
-       workers: 100
-       discovery_interval: 3600
-       loader: core
-       use_device_id_as_hostname: true
-       configs:
-         - network_address: 10.10.0.0/24
-           loader: core
-           snmp_version: 2
-           port: 161
-           community_string: '***'
-           tags:
-           - "key1:val1"
-           - "key2:val2"
-           ping:
-             enabled: true            # (default false) enable the ping check
-             linux:                   # (optional) Linux specific configuration
-               use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-	```
-
-{{% /tab %}}
-
-{{% tab "Use raw sockets (Linux only)" %}}
-
-If you're on Linux and want to use raw sockets for ping, you must also enable ping in the `system-probe` configuration file in addition to the Agent configuration.
-
-Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to true.
-
-```yaml
-ping:
-  enabled: true
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-After successfully enabling ping on your network devices, the **Ping State** column in the UI is enabled, allowing you to see the ping state statuses for your devices:
-
-{{< img src="/network_device_monitoring/snmp/ping_state_status.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
-
-The following are the status names in the **Ping State** column and their descriptions:
-
-| Status name  | Description                                             |
-|--------------|------------------------------------------------------|
-| Unreachable  | Device is unreachable through ping.                   |
-| Unmonitored  | Ping has not been configured for this device.        |
-| Ok           | Device is reachable through ping.                     |
-| N/A          | The devices do not support ping. |
-
-#### Metrics collected
-
-The following metrics are made available after enabling ping:
-
-| Metric name  | Description                                              |
-|--------------|------------------------------------------------------|
-| networkdevice.ping.avg_rtt  |       Average round-trip time |
-| networkdevice.ping.reachable |   Device reachability status        |
-| networkdevice.ping.packet_loss  |   Packet loss percentage |
-| networkdevice.ping.unreachable         | Device unreachable status |
-
+**Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][9]
 
 ## Validation
 
-[Run the Agent's status subcommand][9] and look for `snmp` under the Checks section.
+[Run the Agent's status subcommand][10] and look for `snmp` under the Checks section.
 
 ## Further Reading
 
@@ -303,6 +200,5 @@ The following metrics are made available after enabling ping:
 [6]: https://docs.datadoghq.com/network_monitoring/devices/supported_devices
 [7]: /agent
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /agent/configuration/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
-[11]: /network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
+[9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
+[10]: /agent/configuration/agent-commands/#agent-status-and-information

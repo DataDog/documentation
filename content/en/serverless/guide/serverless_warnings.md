@@ -1,10 +1,12 @@
 ---
 title: Serverless Warnings
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 aliases:
     - /serverless/troubleshooting/insights/
     - /serverless/insights/
@@ -84,7 +86,7 @@ More than 10% of invocations in the selected time range were throttled. Throttli
 
 ### High iterator age
 
-The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
+The function's iterator age was too high. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
 
 **Resolution:** Enable [distributed tracing][7] to isolate why your function has so much data being streamed to it. You can also consider increasing the shard count and batch size of the stream your function reads from.
 
@@ -98,7 +100,7 @@ No invocation in the selected time range used more than 10% of the allocated mem
 
 Attack attempts were detected targeting the serverless application. 
 
-**Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
+**Resolution:** Investigate the attack attempts in AAP by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
 ### Under provisioned
 

@@ -13,6 +13,9 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 Supported MongoDB major versions
 : 4.4, 5.0, 6.0, 7.0, 8.0
 
+Supported MongoDB editions
+: Community, Enterprise
+
 {{% dbm-mongodb-before-you-begin %}}
 
 ## Setup

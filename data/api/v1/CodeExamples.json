@@ -308,6 +308,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1490099434",
+      "description": "Create a new dashboard with query_table widget and cell_display_mode is trend"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_794302680",
       "description": "Create a new dashboard with query_table widget and text formatting"
     },
@@ -385,6 +390,11 @@
       "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3520534424",
+      "description": "Create a new dashboard with timeseries widget with custom_unit"
     },
     {
       "group": "dashboards",
@@ -587,6 +597,13 @@
       "description": "Send logs returns \"Response from server (always 200 empty JSON).\" response"
     }
   ],
+  "CreateLogsPipeline": [
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2707101123",
+      "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    }
+  ],
   "SubmitDistributionPoints": [
     {
       "group": "metrics",
@@ -612,6 +629,11 @@
     }
   ],
   "CreateMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "_1303514967",
+      "description": "Create a Cost Monitor returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "_3883669300",

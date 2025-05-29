@@ -40,12 +40,13 @@ The following table presents the list of collected features and the minimal Agen
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 | Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
 
-1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
+1. To enable storage cost allocation, set up [EBS metric collection][108].
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
-1. To enable Data transfer cost allocation, set up [Network Performance Monitoring][107]. **Note**: additional charges apply
+1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -53,7 +54,8 @@ The following table presents the list of collected features and the minimal Agen
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [106]: /integrations/dcgm/?tab=kubernetes#installation
-[107]: /network_monitoring/performance/setup
+[107]: /network_monitoring/cloud_network_monitoring/setup
+[108]: /integrations/amazon_ebs/#metric-collection
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -67,7 +69,7 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
@@ -88,14 +90,17 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
+
+**Note**: [GKE Autopilot][105] is only supported as an Agentless Kubernetes setup that is subject to [limitations](#agentless-kubernetes-costs).
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
+[105]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -110,6 +115,12 @@ Use the `allocated_resource` tag to visualize the spend resource associated with
 {{% tab "AWS" %}}
 
 These divided costs are enriched with tags from nodes, pods, tasks, and volumes. You can use these tags to break down costs by any associated dimensions.
+
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
 
 ### Compute
 
@@ -145,7 +156,7 @@ Next, Datadog examines the daily [workload resources][104] running on that node.
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
-[Network Performance Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network Performance Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
+[Cloud Network Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Cloud Network Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
 
 Datadog supports data transfer cost allocation using [standard 6 workload resources][104] only. For [custom workload resources][106], data transfer costs can be allocated down to the cluster level only, and not the node/namespace level.
 
@@ -153,11 +164,17 @@ Datadog supports data transfer cost allocation using [standard 6 workload resour
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [104]: https://kubernetes.io/docs/concepts/workloads/
-[105]: /network_monitoring/performance/setup
+[105]: /network_monitoring/cloud_network_monitoring/setup
 [106]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
 
 {{% /tab %}}
 {{% tab "Azure" %}}
+
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
 
 ### Compute
 
@@ -175,6 +192,12 @@ All other costs are given the same value and tags as the source metric `azure.co
 {{% /tab %}}
 {{% tab "Google" %}}
 
+### Kubernetes tag extraction
+
+Only _tags_ from the direct resource, such as a pod, as well as the underlying nodes, are added to cost metrics by default. To include labels as tags, annotations as tags, or tags from related resources such as namespaces, see [Kubernetes Tag Extraction][201].
+
+[201]: /containers/kubernetes/tag/
+
 ### Compute
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
@@ -187,7 +210,7 @@ All other costs are given the same value and tags as the source metric `gcp.cost
 
 ### Agentless Kubernetes costs
 
-To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set.
+To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with a number of limitations (see below).
 
 #### Limitations and differences from the Datadog Agent
 
@@ -246,8 +269,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of data transfer that is monitored by Network Performance Monitoring and allocated. |
-| Not monitored | Cost of data transfer not monitored by Network Performance Monitoring. This cost is not allocated. |
+| Usage | Cost of data transfer that is monitored by Cloud Network Monitoring and allocated. |
+| Not monitored | Cost of data transfer not monitored by Cloud Network Monitoring. This cost is not allocated. |
 
 {{% /tab %}}
 {{% tab "Azure" %}}

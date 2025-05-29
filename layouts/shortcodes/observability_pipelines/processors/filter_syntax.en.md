@@ -13,7 +13,7 @@ Filter query examples:
 - `host:COMP-A9JNGYK OR host:COMP-J58KAS`: This filter query only matches logs from the labeled hosts.
 - `@user.status:inactive`: This filters for logs with the status `inactive` nested under the `user` attribute.
 
-Learn more about writing filter queries in [Datadog's Log Search Syntax][4002].
+Queries run in the Observability Pipelines Worker are case sensitive. Learn more about writing filter queries in [Datadog's Log Search Syntax][4002].
 
 [4001]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [4002]: /logs/explorer/search_syntax/

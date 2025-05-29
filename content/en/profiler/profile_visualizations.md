@@ -61,7 +61,7 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
 
 ### Single profile
 
@@ -109,7 +109,7 @@ To access the timeline view:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,full_host" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -162,9 +162,9 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitely created by code are grouped under _Managed Threads_.
 
-Lanes on top are runtime activities that may impact performance.
+Lanes on top are runtime activities that may impact performance such as GC activity.
 
 The thread ID is shown as `<unique-id> [#OS-thread-id]`.
 
@@ -180,6 +180,10 @@ Fibers that run in this **thread** are represented in the same lane.
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
+{{< /programming-lang >}}
+
+{{< programming-lang lang="full_host" >}}
+Timeline view is currently not supported for Full Host profiling
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

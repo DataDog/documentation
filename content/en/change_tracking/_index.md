@@ -28,7 +28,14 @@ further_reading:
 - link: "/data_streams/"
   tag: "Documentation"
   text: "Data Streams Monitoring"
+- link: "https://www.datadoghq.com/blog/change-tracking/"
+  tag: "Blog"
+  text: "Unify visibility into changes to your services and dependencies"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -39,6 +46,7 @@ Change Tracking streamlines troubleshooting and incident response by surfacing r
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
 - Feature Flags
+- Configuration Changes
 - Database Modifications
 - Schema Changes
 - Scale Adjustments
@@ -68,9 +76,10 @@ To use change tracking on the Monitor Status Page, ensure the appropriate servic
 #### To analyze changes from the monitor status page:
 
 1. Go to the monitor status page for the monitor you are analyzing.
-1. Locate the **Recent Changes** section.
-1. Use the **Recent Changes** timeline together with the **Status & History** graphs to correlate change events with the alert.
-1. Click the change indicator in the **Recent Changes** timeline to view more details about the change in the side panel.
+1. Locate the change tracking timeline at the top of the page.
+   - For monitors with multiple graphs (dictated by the group by in the monitor query), filter to an individual group.
+1. Use the timeline together with the event graphs to correlate change events with the alert.
+1. Click the change indicator in the timeline to view more details about the change in the side panel.
 1. From the side panel, you can investigate more details about the change and take the following actions:
    - View the deployment in your CI/CD system.
    - View the latest commits in your repository.
@@ -109,21 +118,49 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
 ## Tracked changes
-
 Change Tracking follows these types of changes across your infrastructure:
 
-| Change Type | Tracking Requirements |
-| ----------- | ----------- |
-| Code Deployments (APM) | APM & [Deployment Tracking][4]. A version must be available on the service.
-| Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes
-| LaunchDarkly Feature Flag Events | Third Party Datadog Integrations ([LaunchDarkly only][5])
-| Custom Feature Flag Events | [Event Management API][6]
-| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.
-| CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration
-| PostgreSQL Database Table Change | [Database Monitoring (DBM)][8]
-| PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8]
-|  Kafka Schema Updates | [Data Streams Monitoring (DSM)][9]
-| Manual Kubernetes Deployment Scale Events | Kubernetes Audit Logging
+| Change Type                                                                       | Tracking Requirements                                                                          |
+|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Code Deployments (APM)                                                            | APM & [Deployment Tracking][4]. A version must be available on the service.                    |
+| Kubernetes Deployment Manifest Updates                                            | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)    |
+| LaunchDarkly Feature Flag Events (service tag must be defined on event)           | Third Party Datadog Integrations ([LaunchDarkly only][5])                                      |
+| Custom Feature Flag Events                                                        | [Event Management API][6]                                                                      |
+| Custom Configuration Change Events                                                | [Event Management API][6]                                                                      |
+| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
+| CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
+| PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                  | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation |
+| PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
+| Manual Kubernetes Deployment Scale Events                                         | Kubernetes Audit Logging                                                                       |
+
+### Optional enrichment for feature flag changes
+Change Tracking offers an optional way to enhance visibility into feature flag changes by automatically detecting affected services when tracing is set up for the feature flag client. This enhancement enables faster and more precise root cause analysis, especially when feature flag changes impact multiple services.
+
+#### To enable auto-enrichment of feature flag changes
+
+Auto-enrichment helps you identify which services are affected by feature flag changes by automatically detecting service dependencies through tracing. To set this up:
+
+1. Add tracing around your feature flag client code.
+2. Name the trace operation **experiments.IsEnabled**.
+3. Add a tag called **experiment_id**. Set its value to match the ID of the relevant feature flag.
+
+#### To toggle LaunchDarkly feature flags from the details panel
+
+If you discover that a feature flag change is causing issues, you can remediate it by toggling the flag directly from the Change Tracking side panel.
+
+<div class="alert alert-info">This feature is powered by Workflow Automation and is subject to <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Workflow Automation pricing</a>.</div>
+
+To enable and use this feature:
+
+1. Set up workflow connections following the [Workflow Connections documentation][11].
+1. Navigate to the service page you want to investigate.
+1. Locate the changes timeline in the **Service Summary** section.
+1. Click any feature flag change in the Change Tracking timeline to open the details panel.
+  {{< img src="/change_tracking/feature-flag-toggle.png" alt="Click feature flag events to view more detail and toggle the feature flag." style="width:90%;" >}}
+
+1. Click **Toggle Feature Flag** to turn the feature flag on or off.
 
 ## Further reading
 
@@ -138,3 +175,6 @@ Change Tracking follows these types of changes across your infrastructure:
 [7]: /watchdog/
 [8]: /database_monitoring/
 [9]: /data_streams/
+[10]: /database_monitoring/connect_dbm_and_apm/
+[11]: /service_management/workflows/connections/#work-with-connections
+[12]: /database_monitoring/schema_explorer

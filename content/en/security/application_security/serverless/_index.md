@@ -1,21 +1,21 @@
 ---
-title: Enabling ASM for Serverless
+title: Enabling AAP for Serverless
 aliases:
   - /security/application_security/getting_started/serverless
   - /security/application_security/enabling/serverless
 further_reading:
-    - link: "/security/application_security/how-appsec-works/"
+    - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
-      text: "How Application Security Works"
+      text: "How App and API Protection Works"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
-    - link: "/security/application_security/threats/"
+      text: "Troubleshooting App and API Protection"
+    - link: "/security/application_security/"
       tag: "Documentation"
-      text: "Application Threat Management"
+      text: "App and API Protection"
     - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
@@ -23,27 +23,27 @@ further_reading:
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
 
-See [compatibility requirements][4] for information about what ASM features are available for serverless functions.
+See [compatibility requirements][4] for information about what AAP features are available for serverless functions.
 
 ## AWS Lambda
 
-Configuring ASM for AWS Lambda involves:
+Configuring AAP for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Setting up ASM instrumentation by using the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
+2. Setting up AAP instrumentation by using the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ### Prerequisites
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
-  X-Ray tracing, by itself, is not sufficient for ASM and requires APM Tracing to be enabled.
+  X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
 
 ### Get started
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with ASM.
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with AAP.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -52,7 +52,7 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable ASM by updating your `serverless.yml` with the `enableASM` configuration parameter:
+2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
@@ -69,7 +69,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```
    See also the complete list of [plugin parameters][4] to further configure your lambda settings.
 
-4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+4. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
@@ -320,7 +320,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{< /site-region >}}
 
-3. Enable ASM by adding the following environment variables on your function deployment:
+3. Enable AAP by adding the following environment variables on your function deployment:
    ```yaml
    environment:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
@@ -333,7 +333,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - **Python**: Set your function's handler to `datadog_lambda.handler.handler`.
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 
-5. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+5. Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 ## Google Cloud Run
 
-<div class="alert alert-info">ASM support for Google Cloud Run is in Preview.</a></div>
+<div class="alert alert-info">AAP support for Google Cloud Run is in Preview.</a></div>
 
 ### How `serverless-init` works
 
@@ -944,7 +944,7 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 
 ### Setup
 #### Set application settings
-To enable ASM on your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
+To enable AAP on your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
@@ -953,7 +953,7 @@ To enable ASM on your application, begin by adding the following key-value pairs
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_APPSEC_ENABLED` value should be 1 in order to enable Application Security
+- `DD_APPSEC_ENABLED` value should be 1 in order to enable App and API Protection
 
 ### Identifying your startup command
 
@@ -1002,7 +1002,7 @@ Download the [`datadog_wrapper`][8] file from the releases and upload it to your
 
 ## Testing threat detection
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
    ```sh
    curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```

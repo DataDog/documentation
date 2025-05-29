@@ -7,19 +7,22 @@ further_reading:
 - link: "/watchdog/insights/"
   tag: "Documentation"
   text: "Learn more about Watchdog Insights"
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 ---
 
 ## Overview
 
-{{<callout url="https://www.datadoghq.com/private-beta/watchdog-explains-graph-insights/" header="Access the Preview!">}}
-Watchdog Explains is available in Preview. To request access, complete the form.
+{{<callout btn_hidden="true" header="Join the Preview!">}}
+Watchdog Explains is available in Preview.
 {{</callout >}}
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
 {{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="A walkthrough of the Watchdog Explains product" video=true >}}
 
-Watchdog Explains is an investigation assitant that guides you to the root cause of anomalies on any timeseries graph. 
+Watchdog Explains is an investigation assistant that guides you to the root cause of anomalies on any timeseries graph. 
 
 In Datadog, an investigation typically starts with graphs, then branches out into investigating individual assets. Watchdog Explains makes investigations more efficient by automatically showing which individual tags account could be responsible for a given spike. This allows you to focus your investigation on problematic areas of your infrastructure or software stack.
 

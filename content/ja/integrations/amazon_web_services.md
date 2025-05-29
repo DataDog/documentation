@@ -23,6 +23,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
   tag: ブログ
   text: AWS re:Invent 2022 のハイライト
+- link: https://www.datadoghq.com/blog/iam-least-privilege/
+  tag: ブログ
+  text: 最小権限の AWS IAM ポリシー作成のベストプラクティス
 git_integration_title: amazon_web_services
 has_logo: true
 integration_id: amazon-web-services

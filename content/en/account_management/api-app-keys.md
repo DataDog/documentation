@@ -14,7 +14,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ## Application keys
 
-[Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions and scopes of the user who created them.
+[Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them.
 
 ### Scopes 
 
@@ -56,6 +56,7 @@ To add a Datadog API key or client token:
 
 - Your org must have at least one API key and at most 50 API keys.
 - Key names must be unique across your organization.
+- Newly created API keys typically take a few seconds to become valid.
 
 ## Remove API keys or client tokens
 
@@ -70,6 +71,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 **Notes:**
 
 - Application key names cannot be blank.
+- Newly created Application keys typically take a few seconds to become valid.
 
 ## Remove application keys
 

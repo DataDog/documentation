@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-service-management/"
     tag: "Blog"
     text: "Ensure high service availability with Datadog Service Management"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+    tag: "Blog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
 ---
 
 
@@ -80,10 +83,12 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 
 - [PagerDuty][12] and [OpsGenie][13] to send incident notifications to your on-call engineers.
 - [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][18] to create and update Statuspage incidents.
 - [ServiceNow][19] to create a ServiceNow ticket for an incident.
+- [Confluence][22] to generate incident postmortems.
 
 
 ## Further Reading
@@ -110,3 +115,5 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
 [20]: /service_management/incident_management/describe
+[21]: /coterm
+[22]: /integrations/confluence/

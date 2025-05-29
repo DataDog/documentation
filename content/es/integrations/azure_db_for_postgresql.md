@@ -53,7 +53,7 @@ La integración Azure DB for PostgreSQL no incluye eventos.
 
 La integración Azure DB for PostgreSQL no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

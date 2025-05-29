@@ -2,9 +2,9 @@
 aliases:
 - /ko/integrations/azure_appserviceenvironment
 categories:
-- cloud
+- 클라우드
 - azure
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 description: 주요 Azure App Service Environment 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_environment/
@@ -35,7 +35,7 @@ Datadog Azure 통합을 사용하여 Azure App Service Environment에서 메트�
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_app_service_environment" >}}

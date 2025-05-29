@@ -20,6 +20,8 @@ If you are new to Datadog, [sign up for a Datadog account][1], then follow the D
   Interested in bulk-instrumenting AWS Lambdas directly from the Datadog UI? To participate, request access to the upcoming remote Lambda instrumentation Preview.
 {{< /callout >}} 
 
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed installation instructions in the next section.
 
 ## Installation instructions
@@ -27,6 +29,10 @@ The quick start process configures your Lambda functions on the fly. To instrume
 For the detailed installation instructions, select the Lambda runtime below:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
+
+## FIPS Compliance Support
+
+Datadog provides FIPS-compliant monitoring for AWS Lambda functions through dedicated FIPS-compliant Lambda extension layers and runtime-specific configurations. The FIPS-compliant components implement FIPS-certified cryptography and work with any Datadog site, but end-to-end FIPS compliance requires using the US1-FED site. If you need to maintain FIPS compliance while monitoring your Lambda functions, see the [AWS Lambda FIPS Compliance][4] documentation page for details.
 
 ## Advanced Configurations
 
@@ -45,3 +51,4 @@ After you're done with installation and you've set up telemetry collection, you 
 [1]: https://app.datadoghq.com/signup/
 [2]: https://app.datadoghq.com/signup/agent#lambda
 [3]: /serverless/configuration/
+[4]: /serverless/aws_lambda/fips-compliance/
