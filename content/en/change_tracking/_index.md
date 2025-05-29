@@ -33,6 +33,10 @@ further_reading:
   text: "Unify visibility into changes to your services and dependencies"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
+{{< /site-region >}}
+
 ## Overview
 
 Change Tracking streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
@@ -125,9 +129,8 @@ Change Tracking follows these types of changes across your infrastructure:
 | Custom Configuration Change Events                                                | [Event Management API][6]                                                                      |
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
 | CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
-| PostgreSQL Database Table Change                                                  | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                  | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation |
 | PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
-| SQL Server Database Table Change                                                  | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
 | Manual Kubernetes Deployment Scale Events                                         | Kubernetes Audit Logging                                                                       |
@@ -174,3 +177,4 @@ To enable and use this feature:
 [9]: /data_streams/
 [10]: /database_monitoring/connect_dbm_and_apm/
 [11]: /service_management/workflows/connections/#work-with-connections
+[12]: /database_monitoring/schema_explorer
