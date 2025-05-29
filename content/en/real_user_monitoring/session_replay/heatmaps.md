@@ -37,7 +37,7 @@ To get started with heatmaps:
 
 ## Getting started
 
-Navigate to [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**][2]. Select your application and view.
+Navigate to [**Digital Experience > Product Analytics > Session Replay > Heatmaps**][2]. Select your application and view.
 
 On the [Real User Monitoring landing page][3], select your application from the [application selector][4] and view. To the left of the timeframe selector, you can select the type of heatmap you would like to view: Top Elements, Click Map, or Scroll Map. This takes you to the [heatmap page][2] for a particular view.
 
