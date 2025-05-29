@@ -103,7 +103,7 @@ When a monitor alerts, you are linked directly to the **Resource Changes** page.
 
 Use this centralized page to:
 
-- **Identify potentially risky changes**: Scan the list of modifications that occurred during the incident window for the impacted service, environment, and related shared infrastructure.
+- **Identify risky changes**: Scan the list of modifications that occurred during the incident window for the impacted service, environment, and related shared infrastructure.
 - **Investigate the details**: For any suspicious change, select it to view the exact configuration modification as a side-by-side diff and related logs from cloud providers (like AWS CloudTrail) to understand who made the change and why.
 
 ## Supported resources
