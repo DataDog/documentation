@@ -37,7 +37,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM detection rules analyze logs and audit events and generate security signals when a threat is detected. You can use [out-of-the-box detections rules](#out-of-the-box-detection-rules) or [create custom detection rules](#custom-detection-rules). This document walks you through how to create a custom detection rule.
+Cloud SIEM detection rules analyze logs and audit events, and generate security signals when a threat is detected. You can use [out-of-the-box detections rules](#out-of-the-box-detection-rules) or [create custom detection rules](#custom-detection-rules). This document walks you through how to create a custom detection rule.
 
 ### Out-of-the-box detection rules
 
