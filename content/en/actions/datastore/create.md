@@ -90,7 +90,7 @@ Datastores have the following limitations:
 - Each row can be up to 100 KB in size.
 - The primary-key value is immutable, it cannot be changed after the row is created.
 
-Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
+Reach out to [support][5] if you have a use case that exceeds these limits.
 
 ## Further reading
 
@@ -100,3 +100,4 @@ Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case 
 [2]: /actions/datastore/use#create-workflow-app
 [3]: /actions/datastore/auth/
 [4]: /actions/datastore/use#multiple-datastores
+[5]: /help/
