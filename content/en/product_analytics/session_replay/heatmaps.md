@@ -10,9 +10,9 @@ further_reading:
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+<!-- {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
 All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
+{{< /callout >}} -->
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 

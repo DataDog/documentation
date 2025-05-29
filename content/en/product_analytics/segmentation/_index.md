@@ -1,5 +1,5 @@
 ---
-title: Segmentation
+title: Analyzing user groups
 description: Analyze and understand specific groups or segments of your user base.
 further_reading:
 - link: "/product_analytics/"
@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Overview
-
+<!-- in this section, make it about the user and what they do, revert what the first sentence says to start with the use case. -->
 Segmentation is a feature in Product Analytics that allows you to analyze and understand specific groups or segments of your user base. By segmenting your users based on various characteristics and behaviors, you can uncover valuable insights, identify trends, and make data-driven decisions to optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization.
 
 ## Build a segment
