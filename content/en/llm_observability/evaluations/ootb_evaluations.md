@@ -90,7 +90,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 {{% /tab %}}
 {{< /tabs >}}
 
-If your LLM provider is restricting IP addresses, you can get the necessary IP ranges by navigating to [this website][5], selecting your `Datadog Site`, pasting the `GET` URL to your browser and copying the `webhooks` section.
+If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][5], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
 
 ## Select and enable evaluations
 
