@@ -29,11 +29,11 @@ The infrastructure view provides a broad overview, grouping resources by Account
 
 The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway to reduce visual clutter and highlight the most important parts of your architecture.
 
-{{< img src="datadog_cloudcraft/cloudcraft_infra_diagram_with_ccm_2.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_infra_diagram_with_ccm_2.png" alt="Infrastructure overlay in Cloudcraft" style="width:100%;" >}}
 
 ### Observability 
 
-The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Logs Management, and more. This helps you to assess visibility gaps across your environment.
+The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
 
 In the bottom left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific features. Each row shows:
 
@@ -42,11 +42,19 @@ In the bottom left legend, the **View Datadog coverage by** dropdown allows you 
   - X is the number of resources with that feature enabled
   - Y is the total number of relevant resources in the current view or filter
 
-- Visual cue: Resources with both the Agent and feature enabled are marked with green pins, while those without are shown with gray pins.
+You can click any resource to open a side panel with direct links to Fleet Management, allowing you to deploy configurations or upgrade your Agent.
 
-{{< img src="datadog_cloudcraft/observability_overlay_with_ccm.png" alt="Agent overlay in Cloudcraft, highlighting the collapsible legend at the bottom left hand side of the screen." width="100%" >}}
+{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_ccm_1.png" alt="Observability overlay in Cloudcraft, highlighting the View Datadog coverage by drop down on the left hand side of the screen." width="100%" >}}
 
-The observability overlay tracks coverage for the following:
+Legend:
+
+| Pin Color | Description                                               |
+|-----------|-----------------------------------------------------------|
+| Green     | Agent and feature are both enabled                        |
+| Gray      | Feature is not enabled                                    |
+| Yellow    | Agent is installed but requires an upgrade               |
+
+The observability overlay tracks coverage for the following products:
 
 | Feature           | Description                                                        |
 |-------------------|--------------------------------------------------------------------|
@@ -75,7 +83,7 @@ This view is ideal for mapping attack surfaces during penetration tests or secur
 
 By default, the security overlay shows Critical, High, and Medium misconfigurations, which you can filter at the bottom of the screen.
 
-{{< img src="datadog_cloudcraft/cloudcraft_security_overlay_with_ccm_2.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_with_ccm_2.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 ### Cloud Cost Management 
 

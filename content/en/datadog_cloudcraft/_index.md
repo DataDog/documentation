@@ -24,7 +24,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_ccm.mp4" alt="Cloudcraft in Datadog video" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
 
 <div class="alert alert-info">Cloudcraft in Datadog is currently only available for AWS accounts.</a></div>
 
@@ -42,7 +42,7 @@ To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
 2. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
 
-{{< img src="datadog_cloudcraft/getting_started_2.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
+{{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
 **Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
 
@@ -52,7 +52,7 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.mp4" alt="Video showing the Group by feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
 
 ### Saved views 
 
@@ -69,7 +69,7 @@ To apply a saved view to your diagram:
 
 Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_ccm.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
 ### Filtering and search
 
@@ -77,7 +77,7 @@ Diagrams can be filtered by tags, such as team, application, or service, allowin
 
 Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
-{{< img src="datadog_cloudcraft/cloudcraft_filter_2.mp4" alt="Video showing the Filter feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_filter.png" alt="Filter feature in Cloudcraft" >}}
 
 ### Search and highlight
 
