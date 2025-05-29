@@ -142,7 +142,7 @@ To configure adaptive sampling:
 1. Navigate to the [Ingestion Control][2] page.
 2. Click a service to view the **Service Ingestion Summary**.
 3. Click **Manage Ingestion Rate**.
-4. Choose **Datadog adaptive sampling** rate as your service's sampling strategy.
+4. Choose **Datadog adaptive sampling rates** as your service's sampling strategy.
 5. Click **Apply**.
 
 <div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#remote-configuration-requirements">Remote Configuration requirements</a> are met.</div>

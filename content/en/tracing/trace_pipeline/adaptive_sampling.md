@@ -9,7 +9,7 @@ further_reading:
       text: "Ingestion Mechanisms"
     - link: "/tracing/trace_pipeline/ingestion_controls"
       tag: "Documentation"
-      text: "Ingestion Control Page"
+      text: "Ingestion Controls"
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" header="Request access to the Preview!" >}}
@@ -60,12 +60,12 @@ To get started with adaptive sampling, you first need to pick a target strategy 
 
 |          | Budget by Number of APM Hosts                                                                                                              | Budget by Data Volume                                                                 |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| **Pros** | Scales with the number of APM hosts and the number of services onboarded; only set it once                                                 | Ensures you never go over budget                                                      |
+| **Pros** | Scales with the number of APM hosts and the number of services onboarded; you only have to set it once                                                 | Ensures you never go over budget                                                      |
 | **Cons** | Not a good fit if you want to stay below a specific volume, as it may vary depending on the number of hosts reporting APM data to Datadog | You have to edit the budget every time you onboard a new service to adaptive sampling |
 
 To set the adaptive sampling monthly target:
 1. Navigate to the [Ingestion Control][18] page.
-2. Click **Manage Adaptive Sampling Target**
+2. Click **Manage Adaptive Sampling Target**.
   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_target_cta.png" alt="Call to action to set adaptive sampling target" style="width:100%;">}}
 3. Choose a target strategy for sampling:
 
@@ -115,12 +115,12 @@ The table includes:
 
 ### Onboard a service to adaptive sampling
 
-To onboard a service to adaptive sampling
+To onboard a service to adaptive sampling:
 
 1. Navigate to the [Ingestion Control][18] page.
 2. Click a service to view the **Service Ingestion Summary**.
 3. Click **Manage Ingestion Rate**.
-4. Choose **Datadog adaptive sampling** as your service's sampling strategy.
+4. Choose **Datadog adaptive sampling rates** as your service's sampling strategy.
 5. Click **Apply**.
 6. (Optional) Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (for example, 100% of `GET /checkout` endpoints) or less (for example, 0.1% of `/health` requests) data.
 
