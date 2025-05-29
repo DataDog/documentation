@@ -33,6 +33,10 @@ further_reading:
   text: "Unify visibility into changes to your services and dependencies"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
+{{< /site-region >}}
+
 ## Overview
 
 Change Tracking streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
