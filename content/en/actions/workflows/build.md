@@ -51,12 +51,12 @@ If you're not sure where to start, you can automatically generate a workflow, or
 To generate a workflow:
 1. From the [Workflow Automation][1] page, click **New Workflow**.
 1. Click **Create a workflow with AI**.
-1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
+1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to create your workflow.
 
 To iterate on an existing workflow:
 1. From an existing workflow, click **Edit with AI**.
-1. Enter a detailed description for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
+1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to add the functionality to your workflow.
 
 ## Create a custom workflow
