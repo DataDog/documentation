@@ -18,20 +18,9 @@ Using Software Composition Analysis provides organizations with the following be
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Set up Software Composition Analysis
-The following languages are supported:
-- Python
-- JavaScript
-- Java
-- C#
-- Go
-- Ruby
-- PHP
-
-You can also [upload a third-party SBOM to Datadog][13].
-
 SCA supports both static and runtime dependency detection:
-- For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [Code Security setup page][4] or see [static setup][1] to get started.
-- For runtime detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][2] to get started.
+- For **static detection**, you can scan from your CI/CD pipelines or from Datadog's infrastructure (GitHub-only). See [static setup][1] to get started.
+- For **runtime detection**, you can enable SCA on services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results
 ### Vulnerabilities explorer
@@ -85,7 +74,6 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
-[4]: https://app.datadoghq.com/security/configuration/code-security/setup
 [5]: /getting_started/code_security/
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /account_management/rbac/permissions/#integrations
