@@ -7,6 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/php
   - /security/application_security/getting_started/php
   - /security/application_security/enabling/tracing_libraries/threat_detection/php/
+  - /security/application_security/threats/setup/standalone/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
