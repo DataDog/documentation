@@ -9,25 +9,45 @@ further_reading:
 
 ## Overview
 
-Use the various charts to visualize your users' journeys from end-to-end to discover the different ways users navigate your application. You can extract the data to identify frictions in the user journey, measure the success of UX changes and inform your design decisions. 
+Use the various charts to visualize your users' journeys from end-to-end to discover the different ways users navigate your application. You can extract the data to identify frictions in the user journey, measure the success of UX changes and inform your application design decisions. 
 
-The [Analytics Explorer][1] contains views data aggregation for understanding how your product is being used. Create a widget in a dashboard out of that visualization and dive deeper into subsets of the events list depending on the interactions that the visualization enables. 
+## Determine which chart to use
 
 
-## Pathways
+### Pathways diagram
 
-{{< img src="/product_analytics/journeys/pa-pathways-1.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
+{{< img src="/product_analytics/overview_pathways_ga.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
 
-[Pathway diagrams][1] allow you to visualize all user journeys across your application to identify the most important contributions to a flow.
+The [Pathways diagram][3] allows you to visualize all user journeys across your application to identify the most important contributions to a flow.
 
-## Funnel analysis
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+### Funnel analysis
 
-With [funnel analysis][1], you can understand the end-to-end conversion of a single key workflow. You can get a detailed drilldown in the sidepanel to understand why conversation rates are what they are. For example, was there a performance issue that caused user dropoff? Are they experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
+{{< img src="/product_analytics/overview_funnel_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+
+With [funnel analysis][2], you can understand the end-to-end conversion of a single key workflow. You can get a detailed drilldown in the sidepanel to understand why conversation rates are what they are. For example, was there a performance issue that caused user dropoff? Are they experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
+
+### Retention Analysis
+
+With [retention analysis][4]...
+
+{{< img src="/product_analytics/overview_retention_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+
+<!-- <**content goes here **> -->
+
+### Analytic Explorer
+
+{{< img src="/product_analytics/overview_analytic_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+
+The [Analytics Explorer][1] contains views data aggregation to help you understand how your product is being used. Create a widget in a dashboard out of that visualization and dive deeper into subsets of the events list depending on the interactions that the visualization enables. 
+
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/charts/analytics_explorer/_index
-[2]: /product_analytics/journeys/funnel_analysis
+[1]: /product_analytics/charts/analytics_explorer/
+[2]: /product_analytics/charts/funnel_analysis
+[3]: /product_analytics/charts/pathways
+[4]: /product_analytics/charts/user_retention
+
+
