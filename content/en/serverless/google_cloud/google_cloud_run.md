@@ -90,7 +90,7 @@ The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [
 
 Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` which will forward all of files ending in `.log` in the `/shared-volume/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since we are using `NODE_OPTIONS` to actually start our tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which will forward all of the files ending in `.log` in the `/shared-logs/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since we are using `NODE_OPTIONS` to actually start our tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
 
 ```js
 const tracer = require('dd-trace').init({
@@ -102,25 +102,100 @@ Set `DD_PROFILING_ENABLED` to enable [Profiling][3].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
-[3]: https://docs.datadoghq.com/profiler/enabling/nodejs?tab=environmentvariables
+[3]: /profiler/enabling/nodejs?tab=environmentvariables
 [4]: /logs/log_collection/nodejs/?tab=winston30
 [5]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
 
 {{% /tab %}}
 {{% tab "Python" %}}
-#### Example Code
+#### app.py
 ```python
-# add the example code here, with traces, custom metrics, profiling, and logs
+# The tracer is configured to automatically instrument your application by
+# running it with `ddtrace-run` as seen in the `Dockerfile`.
+# The tracer will send profiling information with `DD_PROFILING_ENABLED`.
+
+import logging
+import os
+
+import datadog
+from flask import Flask, Response
+
+datadog.initialize(
+    statsd_host="127.0.0.1",
+    statsd_port=8125,
+)
+
+app = Flask(__name__)
+
+
+log_filename = os.environ.get(
+    "DD_SERVERLESS_LOG_PATH", "/shared-logs/logs/*.log"
+).replace("*.log", "app.log")
+os.makedirs(os.path.dirname(log_filename), exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename=log_filename,
+    # NOTE: log trace correlation is not currently supported
+    # in Google Cloud Run with python services.
+    format=(
+        "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] "
+        "[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] "
+        "- %(message)s"
+    ),
+)
+logger = logging.getLogger(__name__)
+
+
+@app.route("/")
+def home():
+    logger.info("Hello!")
+    datadog.statsd.distribution("our-sample-app.sample-metric", 1)
+
+    return Response(
+        '{"msg": "A traced endpoint with custom metrics"}',
+        status=200,
+        mimetype="application/json",
+    )
+
+
+app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "8080")))
+```
+
+Include the following `requirements.txt`
+```
+Flask
+ddtrace
+datadog
+```
+
+#### Dockerfile
+Your dockerfile can look something like this. This will create a minimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the x86_64 architecture (use the `--platform linux/arm64` for `docker build`).
+
+```dockerfile
+FROM python:3.13-slim
+
+COPY app.py requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8080
+CMD ["ddtrace-run", "python3", "app.py"]
 ```
 
 #### Details
-##### Tracing
+The `dd-trace-py` library provides support for [Tracing][1] and [Profiling][2]. The `datadog-py` library handles custom [Metrics][3].
 
-##### Profiling
+Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code.
 
-##### Metrics
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] is not currently supported for Google Cloud Run services. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which will forward all of the files ending in `.log` in the `/shared-logs/logs` directory.
 
-##### Logs
+Set `DD_PROFILING_ENABLED` to enable [Profiling][2].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[2]: /profiler/enabling/python
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
+[4]: /logs/log_collection/python/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/python
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -197,7 +272,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 
 | Variable | Container | Description |
 | -------- | --------- | ----------- |
-| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
+| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-logs/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. See also the details for your runtime above. |
@@ -210,9 +285,6 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 The `DD_SERVERLESS_LOG_PATH` environment variable is not required on the application. But it can be set there and then used to configure the application's log filename. This avoids manually synchronizing the Cloud Run service's log path with the application code that writes to it.
 
 The `DD_LOGS_ENABLED` environment variable is not required.
-
-TODO: write something about `DD_SOURCE`.
-
 {{< tabs >}}
 {{% tab "GCR UI" %}}
 1. On the Cloud Run service page, select **Edit & Deploy New Revision**.
@@ -244,11 +316,191 @@ TODO: write something about `DD_SOURCE`.
     - with some details.
 {{% /tab %}}
 {{% tab "Terraform" %}}
-1. Step
-1. by
-1. step
-1. instructions
-    - with some details.
+The following documentation assumes that you are using a Google Terraform provider similar to this:
+```terraform
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "6.37.0"
+    }
+  }
+}
+
+provider "google" {
+  project = "PROJECT-ID"
+  region  = "us-east1"
+}
+```
+
+Set up the following variables that we will need:
+```terraform
+variable "DATADOG_API_KEY" {
+  type      = string
+  sensitive = true
+  nullable  = false
+}
+
+variable "SERVICE" {
+  type    = string
+  default = "docs-google-cloud-examples"
+}
+
+variable "SHARED_VOLUME_BASE_NAME" {
+  type    = string
+  default = "shared-logs"
+}
+
+variable "SIDECAR_STARTUP_PROBE_PORT" {
+  type    = string
+  default = "9999"
+}
+```
+
+Edit your existing service definition:
+```terraform
+resource "google_cloud_run_v2_service" "service" {
+  deletion_protection = false
+
+  name     = "example-cloud-run-sidecar-python"
+  location = "us-east1"
+  ingress  = "INGRESS_TRAFFIC_ALL"
+  template {
+    # (1) Add the volume to your service
+    volumes {
+      name = var.SHARED_VOLUME_BASE_NAME
+      empty_dir {
+        medium = "MEMORY"
+      }
+    }
+
+    # (2) Set the `service` label for the service
+    labels = {
+      service = var.SERVICE
+    }
+
+    containers {
+      image = "our-test-image:latest"
+
+      ports {
+        container_port = 8080
+      }
+
+      # (3) Mount the shared volume to the app container
+      volume_mounts {
+        name       = var.SHARED_VOLUME_BASE_NAME
+        mount_path = "/${var.SHARED_VOLUME_BASE_NAME}"
+      }
+      env {
+        name  = "DD_SERVERLESS_LOG_PATH"
+        value = "/${var.SHARED_VOLUME_BASE_NAME}/logs/*.log"
+      }
+
+      # (4) Mark the sidecar dependency.
+      depends_on = ["datadog-sidecar"]
+
+      # (5) Add the other required environment variables
+      env {
+        name  = "DD_SERVICE"
+        value = var.SERVICE
+      }
+      env {
+        # NOTE: this is not currently supported for python.
+        name  = "DD_LOGS_INJECTION"
+        value = "true"
+      }
+      env {
+        name  = "DD_PROFILING_ENABLED"
+        value = "true"
+      }
+      env {
+        name  = "DD_APPSEC_ENABLED"
+        value = "true"
+      }
+
+      # (6, optional) Set a debug log level for datadog tooling
+      env {
+        name  = "DD_LOG_LEVEL"
+        value = "debug"
+      }
+      env {
+        name  = "DD_TRACE_DEBUG"
+        value = "true"
+      }
+    }
+
+    # (7) Add the sidecar container
+    containers {
+      name  = "datadog-sidecar"
+      image = "gcr.io/datadoghq/serverless-init:latest"
+
+      volume_mounts {
+        name       = var.SHARED_VOLUME_BASE_NAME
+        mount_path = "/${var.SHARED_VOLUME_BASE_NAME}"
+      }
+      env {
+        name  = "DD_SERVERLESS_LOG_PATH"
+        value = "/${var.SHARED_VOLUME_BASE_NAME}/logs/*.log"
+      }
+
+      startup_probe {
+        tcp_socket {
+          port = var.SIDECAR_STARTUP_PROBE_PORT
+        }
+      }
+      env {
+        name  = "DD_HEALTH_PORT"
+        value = var.SIDECAR_STARTUP_PROBE_PORT
+      }
+
+      env {
+        name  = "DD_API_KEY"
+        value = var.DATADOG_API_KEY
+      }
+      env {
+        name  = "DD_SITE"
+        value = "datadoghq.com"
+      }
+      env {
+        # NOTE: this is not currently supported for Python services.
+        name  = "DD_LOGS_INJECTION"
+        value = "true"
+      }
+      env {
+        name  = "DD_SERVICE"
+        value = var.SERVICE
+      }
+      env {
+        name  = "DD_VERSION"
+        value = "1"
+      }
+      env {
+        name  = "DD_ENV"
+        value = "dev"
+      }
+      env {
+        name  = "DD_TAGS"
+        value = "our-tag:custom-value"
+      }
+
+      # Optional: set a debug log level for the sidecar
+      env {
+        name  = "DD_LOG_LEVEL"
+        value = "debug"
+      }
+    }
+  }
+}
+
+# For ease of initial testing, expose the API to the internet.
+resource "google_cloud_run_v2_service_iam_binding" "binding" {
+  project  = google_cloud_run_v2_service.service.project
+  location = google_cloud_run_v2_service.service.location
+  name     = google_cloud_run_v2_service.service.name
+  role     = "roles/run.invoker"
+  members  = ["allUsers"]
+}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
