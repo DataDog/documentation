@@ -51,7 +51,7 @@ For example, if you have a 50-person support team, you can break up the team int
 - Page F → Support Schedule Group 1
 - Page G → Support Schedule Group 2
 
-#### Escalation behavior:
+#### Escalation behavior
 In round robin mode, if a page isn't acknowledged in time, it doesn't move to the next person in the round robin rotation. Instead, it escalates to the next step in the policy.
 
 If you want the page to go to the next target in the round robin, use only one round robin step in your escalation policy and configure it to repeat at least as many times as there are targets.
