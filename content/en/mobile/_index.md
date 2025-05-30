@@ -193,7 +193,7 @@ You can also group by log patterns and select different log attributes for clust
 
 **Note**: To toggle on flex logs, navigate to the logs list and tap on the top right to select enable flex logs.
 
-**Only available on iOS** Watchdog Insights surface log anomalies and outliers. For more information, see [Watchdog Insights for Logs][25].
+**Only available on iOS**: Watchdog Insights point to log anomalies and outliers. For more information, see [Watchdog Insights for Logs][25].
 
 
 ## Services
