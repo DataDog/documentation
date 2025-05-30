@@ -1,5 +1,5 @@
 ---
-title: Latency investigations
+title: Latency Investigations
 private: true
 further_reading:
 - link: "/watchdog/"
@@ -128,7 +128,7 @@ Based on this comprehensive analysis, Latency Investigations recommend a service
 **What you see**:
 
 - Details on how end-users or specific application pages (for example, `/checkout`) are affected by the problem.
-- User experience metrics such as increased page view load times.
+- User experience metrics such as increased pageview load times.
 - Information on which specific users, organizations, or accounts are most affected.
 
 ### Step 7: Get remediation advice
