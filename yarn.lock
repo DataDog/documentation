@@ -6527,9 +6527,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.3.tgz":
-  version: 1.0.3
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.3.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz":
+  version: 1.0.4
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz"
   dependencies:
     js-yaml: ^4.1.0
     jsdom: ^26.0.0
@@ -6539,19 +6539,20 @@ __metadata:
     typedoc-plugin-zod: ^1.3.1
     uuid: ^11.0.5
     zod: ^3.22.4
-  checksum: e6825dd85817ccb4f91879d0e86a0cd46982571a5508d2a3c8df4e9c7d5bb5eec5b84020bfd01b8f945e64958082de4a9c00dbc147e2f5a19b92af9a3b72d026
+  checksum: 296e81391b14fa96c0c9e6e925efebd2842a4cace54d206322ea039dfca00271444ccb5a115d23401864e884f14af90c8218889a872e7bd7d5551b864d98ee93
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz":
-  version: 1.1.9
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-watcher-support/cdocs-hugo-integration-v1.2.19.tgz":
+  version: 1.2.19
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-watcher-support/cdocs-hugo-integration-v1.2.19.tgz"
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
     "@vitejs/plugin-react": ^4.3.3
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.3.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz"
+    chokidar: ^4.0.3
     chroma-highlight: ^2.4.2
     interweave: ^13.1.0
     js-yaml: ^4.1.0
@@ -6569,7 +6570,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: 98ec8f23adf4058c97ed8ea94b1611276c016889c0d89f8621e6a6e4cec8773e82e4f8645d5f2b66799017e24776f88d8cfa1e212d8265c8cbf468d693db995a
+  checksum: cfd5df96ea2dfb807054510d4272de37639ff52a20d9ccaa0152d912f208284abb33cd74c6e77b1390199f4249e282792f945e3688ba7d443523fdfbbd9f982f
   languageName: node
   linkType: hard
 
@@ -6672,6 +6673,15 @@ __metadata:
     fsevents:
       optional: true
   checksum: d2f29f499705dcd4f6f3bbed79a9ce2388cf530460122eed3b9c48efeab7a4e28739c6551fd15bec9245c6b9eeca7a32baa64694d64d9b6faeb74ddb8c4a413d
+  languageName: node
+  linkType: hard
+
+"chokidar@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "chokidar@npm:4.0.3"
+  dependencies:
+    readdirp: ^4.0.1
+  checksum: a8765e452bbafd04f3f2fad79f04222dd65f43161488bb6014a41099e6ca18d166af613d59a90771908c1c823efa3f46ba36b86ac50b701c20c1b9908c5fe36e
   languageName: node
   linkType: hard
 
@@ -7619,7 +7629,7 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.1.9.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-watcher-support/cdocs-hugo-integration-v1.2.19.tgz"
     command-line-args: ^6.0.1
     cross-env: ^5.2.1
     del: 4.1.1
@@ -14492,6 +14502,13 @@ __metadata:
     string_decoder: ~1.1.1
     util-deprecate: ~1.0.1
   checksum: 65645467038704f0c8aaf026a72fbb588a9e2ef7a75cd57a01702ee9db1c4a1e4b03aaad36861a6a0926546a74d174149c8c207527963e0c2d3eee2f37678a42
+  languageName: node
+  linkType: hard
+
+"readdirp@npm:^4.0.1":
+  version: 4.1.2
+  resolution: "readdirp@npm:4.1.2"
+  checksum: 3242ee125422cb7c0e12d51452e993f507e6ed3d8c490bc8bf3366c5cdd09167562224e429b13e9cb2b98d4b8b2b11dc100d3c73883aa92d657ade5a21ded004
   languageName: node
   linkType: hard
 

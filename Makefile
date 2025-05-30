@@ -67,6 +67,13 @@ build-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js;
 
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site,
+# and run the watcher that rebuilds on change
+watch-cdocs: 
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js --watch;
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
