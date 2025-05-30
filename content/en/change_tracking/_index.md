@@ -41,7 +41,7 @@ further_reading:
 
 Change Tracking streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
 
-{{< img src="/change_tracking/change-tracking-overview.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
+{{< img src="/change_tracking/change-tracking-overview-2.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
 
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
@@ -64,7 +64,7 @@ Change Tracking is available on several pages in Datadog:
 
 View and analyze changes from the [monitor status page][1].
 
-{{< img src="/change_tracking/change-tracking-monitor-status-page.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
+{{< img src="/change_tracking/change-tracking-monitor-status-page-2.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
 
 #### Prerequisites
 
@@ -90,7 +90,7 @@ To use change tracking on the Monitor Status Page, ensure the appropriate servic
 
 View and analyze changes from the [service page][2].
 
-{{< img src="/change_tracking/change-tracking-service-page.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
+{{< img src="/change_tracking/change-tracking-service-page-2.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
 
 #### To analyze changes from the service page:
 
@@ -105,7 +105,7 @@ View and analyze changes from the [service page][2].
 
 View and analyze changes from any [dashboard][3].
 
-{{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
+{{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active-2.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
 
 #### Prerequisites
 To see relevant changes within the timeline and as overlays on your dashboard, ensure you have set at least one timeseries widget.
