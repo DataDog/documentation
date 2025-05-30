@@ -2470,51 +2470,56 @@ menu:
       identifier: overview
       parent: events
       weight: 2
+    - name: Aggregation Key Processor
+      url: service_management/events/pipelines_and_processors/aggregation_key
+      identifier: aggregation_key_processor
+      parent: overview
+      weight: 201
     - name: Arithmetic Processor
       url: service_management/events/pipelines_and_processors/arithmetic_processor
       identifier: arithmetic_processor
       parent: overview
-      weight: 201
+      weight: 202
     - name: Date Remapper
       url: service_management/events/pipelines_and_processors/date_remapper
       identifier: date_remapper
       parent: overview
-      weight: 202
+      weight: 203
     - name: Category Processor
       url: service_management/events/pipelines_and_processors/category_processor
       identifier: category_processor
       parent: overview
-      weight: 203
+      weight: 204
     - name: Grok Parser
       url: service_management/events/pipelines_and_processors/grok_parser
       identifier: grok_parser
       parent: overview
-      weight: 204
+      weight: 205
     - name: Lookup Processor
       url: service_management/events/pipelines_and_processors/lookup_processor
       identifier: lookup_processor
       parent: overview
-      weight: 205
+      weight: 206
     - name: Remapper
       url: service_management/events/pipelines_and_processors/remapper
       identifier: remapper
       parent: overview
-      weight: 206
+      weight: 207
     - name: Service Remapper
       url: service_management/events/pipelines_and_processors/service_remapper
       identifier: service_remapper
       parent: overview
-      weight: 207
+      weight: 208
     - name: Status Remapper
       url: service_management/events/pipelines_and_processors/status_remapper
       identifier: status_remapper
       parent: overview
-      weight: 208
+      weight: 209
     - name: String Builder Processor
       url: service_management/events/pipelines_and_processors/string_builder_processor
       identifier: string_builder_processor
       parent: overview
-      weight: 209
+      weight: 210
     - name: Explorer
       url: service_management/events/explorer/
       identifier: events_explorer
@@ -3783,21 +3788,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_ingestion_controls
       weight: 402
+    - name: Adaptive Sampling
+      url: tracing/trace_pipeline/adaptive_sampling/
+      parent: tracing_trace_pipeline
+      identifier: tracing_adaptive_sampling
+      weight: 403
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 403
+      weight: 404
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 404
+      weight: 405
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 405
+      weight: 406
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
@@ -6115,26 +6125,31 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
       weight: 711
+    - name: Reports
+      url: logs/reports/
+      parent: log_management
+      identifier: log_reports
+      weight: 8
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 8
+      weight: 9
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 9
+      weight: 10
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 10
+      weight: 11
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1001
+      weight: 1101
     # - name: CloudPrem
     #   pre: cloud
     #   url: cloudprem/
