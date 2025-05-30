@@ -328,7 +328,7 @@ When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDo
 You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
 
 ## What's next?
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry

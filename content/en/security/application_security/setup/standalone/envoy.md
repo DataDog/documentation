@@ -3,6 +3,8 @@ title: Enabling Application & API Protection for Envoy
 code_lang: envoy
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/standalone/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -115,4 +117,4 @@ The available functionality for Envoy version `1.71.0` has the following importa
 [5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/
