@@ -13,23 +13,23 @@ further_reading:
 
 Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, and do not require any additional setup after CCM is set up.
 
-## Getting Started
+## Getting started
 
 1. Navigate to the [Anomalies tab of the Cloud Cost page in Datadog][1].
 2. Review the list of active anomalies, sorted by cost impact.
 3. Click on an anomaly to investigate and take action.
-4. Use the filters to view Active, Past, or Resolved anomalies.
+4. Use the filters to view Active, Past, or Resolved anomalies across different dimensions, such as service name, team, or environment.
 
 ## How anomalies are defined
 
 Anomalies are significant, unexpected changes that stand out from typical patterns. Datadog automatically identifies anomalies using machine learning techniques that adapt to your specific usage patterns.
 
 Datadog's algorithm takes into account:
-- **Seasonality**: Recognizes regular patterns (for example, weekly scaling events)
+- **Seasonality**: Recognizes regular patterns (expected cost increases that happen on a regular schedule)
 - **Usage-based charges**: Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
 - **Cost impact**: Filters out low-impact anomalies to reduce noise
 
-For example, if your infrastructure typically scales up every Monday, Datadog recognizes this pattern and does not flag it as a cost anomaly. This helps you focus on truly unexpected changes that require attention.
+For example, if your system automatically scales up every Sunday night for weekly backups, Datadog recognizes this pattern and does not flag it as a cost anomaly. This helps you focus on truly unexpected changes that require attention.
 
 ## View cost anomalies
 
@@ -56,7 +56,7 @@ This is an example of the list of anomalies detected in your infrastructure:
 
 Follow these steps to investigate and resolve anomalies:
 
-1. **Click an anomaly** to open the side panel.
+1. Click **See more** on an anomaly to open the side panel.
 2. **Review the details** for services affected, teams involved, environments, impacted, or resource IDs that may be driving the cost anomaly.
 3. **Investigate further**:
    - View costs in Explorer
@@ -109,7 +109,7 @@ This is an example of how to mark a cost anomaly as significant and explain why 
 
 If you're not seeing expected anomalies:
 - Verify that CCM is [properly set up][2]
-- Check that you have the necessary permissions
+- Check that you have the necessary permissions for AWS
 - Review the time range of your anomaly view
 
 For more help, contact [Datadog Support][3].
