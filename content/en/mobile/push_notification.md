@@ -11,7 +11,9 @@ further_reading:
   tag: "Documentation"
   text: "Workflow Automation Documentation"
 ---
-
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notifications), so you can stay informed in real time from the Datadog mobile app.
 
 ## Set up push notifications
@@ -58,6 +60,9 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 For more information, see the [guide on setting up your mobile device for On-Call][4].
 
 ### Critical push notifications
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 {{< tabs >}}
 {{% tab "iOS" %}}
 
@@ -115,6 +120,10 @@ Receive status updates on your active incidents by setting up [Notification Rule
 By default if you have push notifications enabled and are assigned as a commander to an incident, you automatically receive push notification for the incident.
 
 ## Workflow automation notifications
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Create [workflow automations][3] that send mobile push notifications.
 
 1. On the workflow canvas, click the **+icon**.
