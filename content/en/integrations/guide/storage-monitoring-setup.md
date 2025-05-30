@@ -13,9 +13,13 @@ This guide explains how to configure Storage Monitoring in Datadog for your S3 b
 
 Access your Storage Monitoring data by navigating to **Infrastructure > Storage Monitoring**.
 
-## Setup for Amazon S3
+## Setup
 
-### Installation
+Select your cloud provider to access setup instructions.
+
+{{< partial name="cloud_storage_monitoring/storage-monitoring-setup.html" >}}
+
+### Setup for Amazon S3
 
 {{< tabs >}}
 {{% tab "Recommended: Storage Monitoring UI" %}}
@@ -397,6 +401,9 @@ If you encounter any issues or need assistance:
 
 
 ## Setup for Azure Blob Storage
+
+
+[link](#setup-for-azure-blob-storage)
 
 ### Installation
 
