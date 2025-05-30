@@ -1,5 +1,5 @@
 ---
-title: Datadog Kubernetes Autoscaling
+title: Kubernetes Autoscaling
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
@@ -15,10 +15,6 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/kubernetes-autoscaling/" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Preview!">}}
-Datadog Kubernetes Autoscaling is in Preview.
-{{< /callout >}}
-
 Datadog Kubernetes Autoscaling automates the scaling of your Kubernetes environments based on utilization metrics. This feature enables you to make changes to your Kubernetes environments from within Datadog.
 
 ## How it works
@@ -29,27 +25,21 @@ Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resourc
 
 Each cluster can have a maximum of 100 workloads optimized with Datadog Kubernetes Autoscaler.
 
-<div class="alert alert-info">During the Preview period, Preview users are granted access to Cloud Cost Management. For details, see <a href="#ingest-cost-data-with-cloud-cost-management">Ingest cost data with Cloud Cost Management</a></div>
-
 ### Compatibility
 
-- **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][10].
+- **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][9].
 - **Cluster autoscaling**: This feature works alongside cluster autoscaling solutions, such as Karpenter and Cluster Autoscaler.
 - **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload before you use Datadog Kubernetes Autoscaling to optimize it.
-<!-- TODO: this section could be massaged -->
 
 ### Requirements
 
-- [Remote Configuration][1] must be enabled for your organization. See [Enabling Remote Configuration][3].
-- [Helm][12], for updating your Datadog Agent
-- (For Datadog Operator users) [`kubectl` CLI][13], for updating the Datadog Agent
+- [Remote Configuration][1] must be enabled for your organization. See [Enabling Remote Configuration][2].
+- [Helm][3], for updating your Datadog Agent
+- (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent
 - The following user permissions:
    - Org Management (`org_management`)
    - API Keys Write (`api_keys_write`)
    - Workload Scaling Write (`orchestration_workload_scaling_write`)
-
-<div class="alert alert-info">During the Preview period, Preview users are granted access at an organization level... </div>
-<!-- how are permissions being handled during preview? how do capabilities map onto those user permissions?-->
 
 ## Setup
 
@@ -87,7 +77,7 @@ spec:
         tag: 7.58.1 # or 7.58.1-jmx
 ```
 
-3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, add the following highlighted lines to `datadog-agent.yaml`:
+3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=4-5" >}}
 ...
@@ -132,7 +122,7 @@ clusterChecksRunner:
     tag: 7.58.1 # or 7.58.1-jmx
 ```
 
-2. [Admission Controller][1] is enabled by default in the Datadog Helm chart. If you disabled it, add the following highlighted lines to `datadog-values.yaml`:
+2. [Admission Controller][1] is enabled by default in the Datadog Helm chart. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-values.yaml`:
 {{< highlight yaml "hl_lines=5-6" >}}
 ...
 clusterAgent:
@@ -161,99 +151,47 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{< /tabs >}}
 
 ### Ingest cost data with Cloud Cost Management
-Datadog's Kubernetes Autoscaling can work with [Cloud Cost Management][4] to make workload scaling recommendations based on cost data... 
-<!-- TODO: what does it use the cost data to do -->
+Datadog's Kubernetes Autoscaling works with [Cloud Cost Management][5] to make workload scaling recommendations based on cost data.
 
-<div class="alert alert-info">Kubernetes Autoscaling Preview users are granted limited access to <a href="/cloud_cost_management">Cloud Cost Management</a> during the Preview period. To coordinate this trial access, contact your customer success manager and CC <code>kubernetes-beta@datadoghq.com</code>. <br/><br/>If you are already using Cloud Cost Management, no action is required.</div>
-<!-- TODO: having to CC is probably not a great user experience -->
+See Cloud Cost setup instructions for [AWS][6], [Azure][7], or [Google Cloud][8].
 
-See Cloud Cost setup instructions for [AWS][5], [Azure][6], or [Google Cloud][7].
-
-If you do not enable Cloud Cost Management, all workload recommendations and autoscaling decisions are still valid and functional.
+Cost data enhances Kubernetes Autoscaling, but it is not required. All of Datadog's workload recommendations and autoscaling decisions are valid and functional without cost data.
 
 ## Usage
 
-### Identifying resources to scale
-In Datadog, navigate to **Containers** > [**Kubernetes Explorer**][8] and select the [**Autoscaling**][9] tab. Use the [**Cluster Scaling**][9] view to see a list of your clusters, sortable by total idle CPU or total idle memory. If you [enabled Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management), you can also see cost information and a trailing 30-day cost breakdown.
+### Identify resources to scale
 
-{{< img src="containers/autoscaling/explorer_view.png" alt="In Datadog, Infrastructure > Containers > Kubernetes Explorer > Autoscaling > Cluster Scaling. A table of clusters, displaying each cluster's idle CPU, idle memory, and costs. Each cluster has an 'Optimize Cluster' option." style="width:90%;" >}}
+Use your [Kubernetes Autoscaling page][10] to better understand the resource efficiency of your Kubernetes deployments. The [Summary view][11] displays information about optimization opportunities and estimated costs across your clusters and workloads. The [Cluster Scaling view][12] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. You can also use the [Workload Scaling view][13] to see a filterable list of all workloads across all clusters.
 
-Click **Optimize cluster** to open a detailed view of the selected cluster, including a table of this cluster's workloads.
+Click **Optimize** on any workload to see its scaling recommendation.
 
-{{< img src="containers/autoscaling/cluster_detail.png" alt="A detailed cluster view. At the top, widgets displaying cost metrics and scaling events. Below, a table of this cluster's workloads, displaying each deployment's idle CPU, idle memory, and costs. Each workload has an 'Optimize' option." style="width:90%;" >}}
+### Deploy recommendations with Autoscaling
 
-You can also use the [**Workload Scaling**][11] view to see a filterable list of all workloads across all clusters.
+After you identify a workload to optimize, examine its **Scaling Recommendation**. You can also click **Configure Recommendation** to make changes to the recommendation before you apply it.
 
-Select a workload and click **Optimize** to see its **Scaling Recommendations**. You can inspect the metrics backing the recommendation for each container within the deployment. 
+You can use Kubernetes Autoscaling to deploy a scaling recommendation in one of two ways:
 
-{{< img src="containers/autoscaling/workload_sidepanel.png" alt="A side panel is opened over the detailed cluster view. A section titled 'Scaling Recommendation' displays the text 'Set Memory on 2 containers and decrease replicas to 5'." style="width:90%;" >}}
-<!-- todo: will need a screenshot where the Enable Autoscaling button is active (need user with Workload Scaling Write permissions) -->
+- Click **Enable Autoscaling**. Datadog automatically applies the scaling recommendation to your workload.
+- Deploy a `DatadogPodAutoscaler` custom resource. Click **Export Recommendation** to see values for your CRD.
 
+### Deploy recommendations manually
 
-### Deploying recommendations
-
-You can deploy scaling recommendations:
-- **automatically**, with Datadog Kubernetes Autoscaling.
-
-   Select **Enable Autoscaling** to automatically apply your recommendations.
-- **manually**, with `kubectl patch`.
-
-   Select **Apply** to see a generated `kubectl patch` command.
-
-#### Autoscale a workload with a custom resource
-
-You can also deploy a `DatadogPodAutoscaler` custom resource to enable autoscaling for a workload. This custom resource targets a deployment.
-
-For example:
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogPodAutoscaler
-metadata:
-  name: <name>
-    # usually the same as your deployment object name
-spec:
-  constraints:
-    # Adjust constraints as safeguards
-    maxReplicas: 50
-    minReplicas: 1 
-  
-  owner: Local
-  policy: All
-    # Values: All, None
-    #   All - Allows automated recommendations to be applied. Default.
-    #   None - Computes recommendations without applying them (dry run).
-
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: <your Deployment name>
-  targets:
-    # Currently, recommendation is to use a single target with CPU Utilization of main container of the POD.
-    - type: ContainerResource
-      containerResource:
-        container: <main-container-name>
-        name: cpu
-        value:
-          type: Utilization
-          utilization: 75
-```
-<!-- some of the above should be edited -->
+As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click **Export Recommendation** to see a generated `kubectl patch` command.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config
-[2]: https://app.datadoghq.com/organization-settings/remote-config
-[3]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[4]: /cloud_cost_management
-[5]: /cloud_cost_management/aws
-[6]: /cloud_cost_management/azure
-[7]: /cloud_cost_management/google_cloud
-[8]: https://app.datadoghq.com/orchestration/explorer/pod
-[9]: https://app.datadoghq.com/orchestration/scaling/cluster
-[10]: /containers/kubernetes/distributions
-[11]: https://app.datadoghq.com/orchestration/scaling/workload
-[12]: https://helm.sh/
-[13]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[3]: https://helm.sh/
+[4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[5]: /cloud_cost_management
+[6]: /cloud_cost_management/aws
+[7]: /cloud_cost_management/azure
+[8]: /cloud_cost_management/google_cloud
+[9]: /containers/kubernetes/distributions
+[10]: https://app.datadoghq.com/orchestration/scaling/
+[11]: https://app.datadoghq.com/orchestration/scaling/summary
+[12]: https://app.datadoghq.com/orchestration/scaling/cluster
+[13]: https://app.datadoghq.com/orchestration/scaling/workload
