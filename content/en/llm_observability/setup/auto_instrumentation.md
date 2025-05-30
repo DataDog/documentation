@@ -36,6 +36,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
+| [LiteLLM](#litellm)                        | >= 1.65.4          | >= 3.9.0          |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -57,7 +58,7 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True, litellm=True)
 ```
 
 ## OpenAI
@@ -212,6 +213,28 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 - [RunnableSeq.invoke()][45]
 
 
+## LiteLLM
+
+The LiteLLM integration provides automatic tracing for the [LiteLLM Python SDK][46] and [proxy server router methods][47].
+
+### Traced methods
+
+The LiteLLM integration instruments the following methods:
+
+- [Chat Completions][48] (including streamed calls):
+  - `litellm.completion`
+  - `litellm.acompletion`
+- [Completions][49] (including streamed calls):
+  - `litellm.text_completion`
+  - `litellm.atext_completion`
+- Router Chat Completions (including streamed calls):
+  - `router.Router.completion`
+  - `router.Router.acompletion`
+- Router Completions (including streamed calls):
+  - `router.Router.text_completion`
+  - `router.Router.atext_completion`
+
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -238,7 +261,7 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
 [26]: https://docs.crewai.com/introduction
-[27]: https://docs.crewai.com/concepts/crews#kicking-off-a-crew 
+[27]: https://docs.crewai.com/concepts/crews#kicking-off-a-crew
 [28]: https://docs.crewai.com/concepts/tasks
 [29]: https://docs.crewai.com/concepts/agents
 [30]: https://docs.crewai.com/concepts/tools
@@ -257,6 +280,10 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 [43]: https://langchain-ai.github.io/langgraph/concepts/sdk/
 [44]: https://blog.langchain.dev/langgraph/#compile
 [45]: https://blog.langchain.dev/langgraph/#nodes
+[46]: https://docs.litellm.ai/docs/#litellm-python-sdk
+[47]: https://docs.litellm.ai/docs/routing
+[48]: https://docs.litellm.ai/docs/completion
+[49]: https://docs.litellm.ai/docs/text_completion
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
