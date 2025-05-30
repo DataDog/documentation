@@ -26,6 +26,7 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
+Check out this [interactive walk through][17] of our custom metrics governance tools. 
 
 ## Prerequisites
 
@@ -224,10 +225,6 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
 4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
 
-Check out this interactive walk through of our custom metrics governance tools: 
-
-<iframe src="https://tour.datadoghq.com/cm9cxjt9x000004kyeo6lafv5" style="border:none;width:100%;height:100%;" allow="fullscreen" data-navattic-demo-id="cm9cxjt9x000004kyeo6lafv5"></iframe>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -248,3 +245,4 @@ Check out this interactive walk through of our custom metrics governance tools:
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /metrics/summary/#metrics-related-assets
 [16]: /metrics/summary/#facet-panel
+[17]: https://tour.datadoghq.com/psl/swa0y11
