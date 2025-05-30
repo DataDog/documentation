@@ -106,7 +106,9 @@ To configure On-Call notifications on your mobile device, see the guide to [Set 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-**Note**: To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
+**Notes**: 
+- To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
+- Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
 
 ## Monitors
 
