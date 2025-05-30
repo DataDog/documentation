@@ -70,6 +70,5 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/getting_started/
-[2]: /bits_ai/query_examples
 [3]: /service_management/incident_management
 [4]: /bits_ai/managing_incidents/
