@@ -3,9 +3,6 @@ further_reading:
 - link: bits_ai/
   tag: 설명서
   text: Bits AI 갸요
-- link: bits_ai/query_examples
-  tag: 설명서
-  text: 자연어 쿼리 예
 - link: bits_ai/managing_incidents/
   tag: 설명서
   text: 인시던트 관리
