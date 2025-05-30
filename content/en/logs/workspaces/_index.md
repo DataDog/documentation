@@ -83,7 +83,7 @@ You can add a logs query or a reference table as a data source.
 
 ### Analysis cell
 
-1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. You can use natural language or SQL to query your data . An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
+1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. [For documentation on the SQL syntax features, click here](https://docs.datadoghq.com/ddsql_reference/ddsql_default/). You can also use natural language to query your data. An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
 1. If you are using SQL, click **Run** to run the SQL commands.
 1. Click the download icon to export the dataset as a CSV.
 
