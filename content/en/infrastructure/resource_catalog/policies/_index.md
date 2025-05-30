@@ -30,10 +30,10 @@ Specifically, you can:
 - Define a [custom policy](#create-a-custom-policy), which involves choosing a resource type, the attribute on the resource type, and target values the attribute should have.
 - Start from a set of [out-of-the-box policy](#start-with-an-out-of-the-box-policy-template) templates that span infrastructure reliability, cost optimization, operational excellence, and versioning.
 - Define a [tagging policy](#create-a-tagging-policy), which involves a resource type and the desired tag key and value the resource type should have.
-- Filter, group, and export the list of non-compliant resources for a policy so you can prioritize and assign the work.
+- Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score.
 - Filter all policies to a specific team (or any custom tag) to create a shareable view to individual teams to prioritize outreach to low-performing teams.
 - Group all policies to see compliance across teams (or any custom tag).
-- Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score.
+
 
 ## Create a custom policy
 
@@ -69,7 +69,7 @@ Chain multiple attributes in one policy (for example, require AWS CloudTrail log
 
 ### Start with an out-of-the-box policy template
 
-For insights into infrastructure health, across reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and real world experiences. Since each organization has unique requirements, filters can be applied to narrow the set of resources evaluated against a policy, and attribute target values can be customized as needed.
+For insights into infrastructure health, across reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to narrow the set of resources evaluated against a policy, and attribute target values can be customized as needed.
 
 {{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Catalog Policies" style="width:100%;" >}}
 
