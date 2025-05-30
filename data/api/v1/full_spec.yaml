@@ -14317,11 +14317,23 @@ components:
       enum:
       - http
       - grpc
+      - ssl
+      - dns
+      - tcp
+      - udp
+      - icmp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
       - HTTP
       - GRPC
+      - SSL
+      - DNS
+      - TCP
+      - UDP
+      - ICMP
+      - WEBSOCKET
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
