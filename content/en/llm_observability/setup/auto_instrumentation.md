@@ -36,7 +36,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
-| [LiteLLM](#litellm)                        | >= 1.65.4          | >= 3.9.0          |
+| [LiteLLM](#litellm)                        | >= 1.70.0          | >= 3.9.0          |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
