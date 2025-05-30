@@ -1,5 +1,5 @@
 ---
-title: Accessibility
+title: Shortcut Configurations
 further_reading:
 - link: "/mobile/"
   tag: "Documentation"
