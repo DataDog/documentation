@@ -3,7 +3,7 @@ title: pipeline breakdown execution time
 core_product:
   - ci-cd
 ---
-Total amount of time spent by the jobs on the critical path executing tasks.
+Total amount of time spent by CI jobs on the critical path executing tasks.
 
 The sum of all the breakdown metrics is equal to the pipeline duration (`@duration`).
 
