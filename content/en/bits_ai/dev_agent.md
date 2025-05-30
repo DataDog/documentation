@@ -14,7 +14,7 @@ The Bits AI Dev Agent is a generative AI coding assistant that uses observabilit
 
 - Opens GitHub pull requests with production-ready fixes when high-impact issues are detected.  
 - Iterates on code in response to review comments, including changes to logic or additional logging.  
-- Provides a single view of Dev Agent–generated pull requests, with filters for status, triggering product, and affected service.
+- Provides a single view of Dev Agent-generated pull requests, with filters for status, triggering product, and affected service.
 
 ## Supported Datadog products
 
