@@ -28,7 +28,7 @@ Bits AI is not available for the selected site ({{< region-param key="dd_site_na
 
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
 
-For detailed setup and usage instructions, see the [Getting Started][1] documentation.
+For detailed setup and usage instructions, see the [Chat with Bits][1] documentation.
 
 ## Features
 
@@ -58,7 +58,7 @@ Within [Datadog Incident Management][3], Bits AI can help you
 - **Find related incidents**: Search through your entire incident history and find similar incidents to the one you're currently in.
 - **Generate a postmortem:** Get a head start with a first draft, which you can then review and revise.
 
-See [Managing Incidents][4] for details.
+See [Coordinate Incidents][4] for details.
 
 ## Feedback
 
@@ -69,6 +69,6 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/getting_started/
+[1]: /bits_ai/chat_with_bits/
 [3]: /service_management/incident_management
-[4]: /bits_ai/managing_incidents/
+[4]: /bits_ai/bits_sre/coordinate_incidents/

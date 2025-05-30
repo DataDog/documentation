@@ -1,12 +1,14 @@
 ---
-title: Getting Started
+title: Chat with Bits
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "bits_ai/managing_incidents/"
+- link: "bits_ai/bits_sre/coordinate_incidents/"
   tag: "Documentation"
-  text: "Managing Incidents"
+  text: "Coordinate Incidents"
+aliases:
+- /bits_ai/getting_started/
 ---
 
 ## Querying in Datadog

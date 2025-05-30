@@ -1428,15 +1428,15 @@ menu:
       pre: bits-ai
       identifier: bits_ai
       parent: platform_heading
-      weight: 70000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
+      weight: 100000
+    - name: Chat with Bits
+      url: bits_ai/chat_with_bits
+      identifier: bits_ai_chat_with_bits
       parent: bits_ai
       weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
+    - name: Coordinate Incidents
+      url: bits_ai/bits_sre/coordinate_incidents
+      identifier: bits_ai_sre_coordinate_incidents
       parent: bits_ai
       weight: 2
     - name: Dashboards
@@ -1992,22 +1992,6 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
-    - name: Bits AI
-      url: bits_ai/
-      pre: bits-ai
-      identifier: bits_ai
-      parent: platform_heading
-      weight: 100000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
-      parent: bits_ai
-      weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
-      parent: bits_ai
-      weight: 2
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
