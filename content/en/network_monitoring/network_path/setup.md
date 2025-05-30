@@ -228,7 +228,7 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
 {{% tab "Autodiscovery (Kubernetes)" %}}
-Datadog Autodiscovery allows you to enable Network Path on a per-service basis via Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
 **Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
@@ -236,7 +236,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis v
     traceroute:
       enabled: true
   ```
-Now that the module is enabled, Datadog will automatically detect Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
   ```yaml
 apiVersion: v1
 kind: Pod
@@ -279,7 +279,7 @@ spec:
     - name: '<CONTAINER_NAME>'
 # (...)
   ```
-  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
+  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
