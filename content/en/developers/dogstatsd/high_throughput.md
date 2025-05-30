@@ -20,6 +20,10 @@ When DogStatsD is used to send a large volume of metrics to a single Agent, if p
 
 Most of the time the symptoms can be alleviated by tweaking some configuration options described below.
 
+<div class="alert alert-info">
+Working with a high volume of custom metrics? <b>Agent Data Plane</b> is a new Agent feature for processing high-volume custom metrics workloads with improved CPU and memory efficiency. This feature is currently in Preview. If you'd like to try out this feature, please reach out by filling out <a href="https://fill-me-out">this form</a>.
+</div>
+
 ## General tips
 
 ### Use Datadog official clients
