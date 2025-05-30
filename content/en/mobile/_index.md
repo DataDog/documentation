@@ -169,7 +169,7 @@ On the Traces page, you can view and search all of the traces that you have acce
 
 For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
 
-**Only available on iOS** Watchdog Insights surface latency outliers and error outliers. For more information, see [Watchdog Insights][26].
+**Only available on iOS**: Watchdog Insights point to latency outliers and error outliers. For more information, see [Watchdog Insights][26].
 
 
 ## Logs
