@@ -50,7 +50,7 @@ This opens the investigation side panel.
 
 Latency Investigations help you select two time ranges: a problematic subset (slow spans) and a baseline (fast/healthy spans). In some cases, if the latency anomaly was initially detected by Watchdog, these subsets may be pre-selected for you.
 
-The panel displays latency visualizations (such as heatmaps, percentile charts, and scatterplots of your spans' latency over time) to help you identify the latency spike. You can often interact directly with these visualizations, like the scatter plot, to precisely select or refine the cluster of slow spans you want to investigate further.
+The panel displays latency visualizations (such as heat maps, percentile charts, and scatterplots of your spans' latency over time) to help you identify the latency spike. You can often interact directly with these visualizations, like the scatter plot, to precisely select or refine the cluster of slow spans you want to investigate further.
 
 This comparison between the subset and baseline drives all subsequent analysis.
 
@@ -114,12 +114,12 @@ Based on this comprehensive analysis, Latency Investigations recommend a service
 - **Infrastructure**: High CPU utilization, pod restarts (for example, CrashLoopBackOff).
 - **Third-party services**: Increased error rates or response times from external dependencies, indicating a potential third-party outage.
 - **Network**: High TCP retransmit rate.
-- **Code-level**: N+1 query patterns, lock contention (potentially identified via profiling data).
-- **Database**: N+1 problems, missing indexes leading to slow queries or full table scans (identified via DBM data).
+- **Code-level**: N+1 query patterns, lock contention (potentially identified using profiling data).
+- **Database**: N+1 problems, missing indexes leading to slow queries or full table scans (identified using DBM data).
 
 **Additional analysis**: An analysis of a representative sample of fast and slow traces (for example, comparing their full request trees) may be used to provide a root cause hypothesis with further explanation.
 
-**Output**: The most plausible root cause is presented as a concise summary, often highlighting specific problematic interactions (for example, "extended duration of ServiceNow API interactions") and the services handling them (for example, the "collab integrations worker" service making calls to an external API). This summary, along with supporting evidence (like slow query details or explain plans if applicable), helps you quickly understand the issue without needing to manually sift through lengthy traces. Other potential root causes may be listed as discarded, with brief explanations.
+**Output**: The most plausible root cause is presented as a concise summary, often highlighting specific problematic interactions (for example, "extended duration of ServiceNow API interactions") and the services handling them (for example, the "collab integrations worker" service making calls to an external API). This summary, along with supporting evidence (like slow query details or explain plans if applicable), helps you understand the issue without needing to manually sift through lengthy traces. Other potential root causes may be listed as discarded, with brief explanations.
 
 ### Step 6: Understand impact
 
@@ -140,7 +140,7 @@ Based on this comprehensive analysis, Latency Investigations recommend a service
 - **Deployment issues**: Suggestion to roll back to a previous stable version to solve the issue immediately.
 - **Database issues**: A SQL query to create the missing index is generated for you to use.
 - **Infrastructure issues**: Suggestions for configuration changes like upscaling infrastructure or restarting a service.
-- **Code issues**: Fixes suggested via code generation (for example, to fix an N+1 problem where a database is called in a loop) or by disabling a feature flag.
+- **Code issues**: Fixes suggested with code generation (for example, to fix an N+1 problem where a database is called in a loop) or by disabling a feature flag.
 - **Dependency issues**: Identifying the specific internal service responsible for problematic calls to a downstream or third-party dependency, enabling you to contact the relevant team.
 
 Latency Investigations may suggest that a new version can be safely rolled forward once a fix (for example, for a network or database issue, or a failing third-party dependency) is implemented.
