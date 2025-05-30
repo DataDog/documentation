@@ -59,6 +59,14 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 ## How the destination works
 
+### AWS Authentication
+
+{{% observability_pipelines/aws_authentication/instructions %}}
+
+#### Permissions
+
+{{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
+
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
