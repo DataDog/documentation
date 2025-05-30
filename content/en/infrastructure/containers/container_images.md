@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security][2] to help you streamline your security efforts.
+The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities from [Cloud Security][2] found in your container images, and trace those vulnerabilities to specific layers, so you can pinpoint and remediate your security risks faster.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
