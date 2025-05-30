@@ -245,7 +245,24 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
-  datadog_cloudcraft:
-  - gov
-  workflows:
-  - gov
+  datadog_cloudcraft: [gov]
+  workflows: [gov]
+  ci_visibility: [gov]
+  actions: [gov]
+  fips-compliance: [us,us3,us5,eu,ap1]
+  fips-proxy: [us,us3,us5,eu,ap1]
+  fips-integrations: [us,us3,us5,eu,ap1]
+  fleet_automation: [gov]
+  remote_config: [gov]
+  continuous_delivery: [gov]
+  continuous_integration: [gov]
+  data_jobs: [gov]
+  dora_metrics: [gov]
+  resource_catalog: [gov]
+  adobe_experience_manager: [us3,ap1]
+  high_availability_datadog_agent: [gov]
+  llm_observability: [gov]
+  amazon_event_bridge: [gov]
+  roku_log_collection: [gov]
+  dynamic_quotas: [gov]
+  snmp_profile_manager: [gov]

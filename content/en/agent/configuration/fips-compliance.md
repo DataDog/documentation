@@ -17,10 +17,6 @@ algolia:
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud", "fips agent"]
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The Datadog FIPS Agent is available only in the US1-FED region.</a></div>
-{{< /site-region >}}
-
 The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent includes limited support for integrations that need to collect observability data that is external to the host.
 
 ## Supported platforms and limitations

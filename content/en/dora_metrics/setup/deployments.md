@@ -22,11 +22,6 @@ further_reading:
   text: "Learn about Deployment Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate).

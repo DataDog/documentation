@@ -11,10 +11,6 @@ further_reading:
   text: "Learn more about the Path View in Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
