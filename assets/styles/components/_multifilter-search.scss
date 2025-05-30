@@ -3,6 +3,8 @@
         display: none !important;
     }
     #multifilter-search-nav {
+        position: sticky;
+        top: 95px;
         align-self: flex-start;
         z-index: 2;
         background-color: white;
