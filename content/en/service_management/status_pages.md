@@ -44,11 +44,11 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated Datadog users within your Datadog organization can view |
+   | **Visibility**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Private** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. <br>*Example: shopist → shopist.status.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Company logo or Favicon** *(optional)* | Upload a logo or favicon to personalize the appearance of your status page |
-1. (Optional) [Add components](#add-components).
+1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
 
@@ -56,7 +56,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
 {{< img src="/service_management/status_pages/status_page_components.png" alt="Status page component configuration with live preview panel" style="width:100%;" >}}
 
-Components are the building blocks of your page. Each one represents a service or feature your users care about. Some examples of components include:
+Components are the building blocks of your status page. Each one represents a service or feature your users care about. Some examples of components include:
 - API Gateway  
 - Web Dashboard  
 - Database Cluster  
@@ -117,7 +117,7 @@ To match your branding, you have the option to map your status page to a custom 
 
 <div class="alert alert-warning">Custom domains require access to your DNS provider to add a CNAME or A record.</div>
 
-**Notes**
+**Notes**:
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
