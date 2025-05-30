@@ -26,17 +26,17 @@ All traceroute tools fundamentally perform the same process: they send packets w
   <tr>
     <td>ICMP</td>
     <td>Planned</td>
-    <td>`traceroute -I`</td>
+    <td><code>traceroute -I</code></td>
   </tr>
   <tr>
     <td>UDP</td>
     <td><i class='icon-check-bold'></td>
-    <td>`traceroute`</td>
+    <td><code>traceroute</code></td>
   </tr>
   <tr>
     <td>TCP SYN</td>
     <td><i class='icon-check-bold'></td>
-    <td>`tcptraceroute`</td>
+    <td><code>tcptraceroute</code></td>
   </tr>
   <tr>
     <td>TCP SACK</td>
@@ -60,7 +60,7 @@ Typically `traceroute` and `tcptraceroute` are made available by official packag
   <tr>
     <td>ICMP</td>
     <td>Planned</td>
-    <td>`tracert`</td>
+    <td><code>tracert</code></td>
   </tr>
   <tr>
     <td>UDP</td>
@@ -94,17 +94,17 @@ Windows does not have officially distributed TCP or UDP traceroute tools. Third-
   <tr>
     <td>ICMP</td>
     <td>Planned</td>
-    <td>`traceroute -I`</td>
+    <td><code>traceroute -I</code></td>
   </tr>
   <tr>
     <td>UDP</td>
     <td>Planned</td>
-    <td>`traceroute`</td>
+    <td><code>traceroute</code></td>
   </tr>
   <tr>
     <td>TCP SYN</td>
     <td>Planned</td>
-    <td>`tcptraceroute` (via homebrew)</td>
+    <td><code>tcptraceroute` (via homebrew)</td>
   </tr>
   <tr>
     <td>TCP SACK</td>
