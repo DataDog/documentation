@@ -1,19 +1,20 @@
 ---
 title: Experiments
-description: Using LLM Observability's Experiments feature
+description: Using LLM Observability Experiments feature
 private: true
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+{{< callout >}}
 LLM Observability Experiments is in Preview.
 {{< /callout >}}
 
 {{< img src="llm_observability/experiments/vis-experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 9 experiments across 8 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
-LLM Observability's [Experiments][9] feature helps you understand how changes to prompts, models, providers, or architecture influence performance. With this feature, you can:
+LLM Observability [Experiments][9] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
+
 - Create and version datasets
-- Run experiments
-- Compare experiment results
+- Run and manage experiments
+- Compare results to evaluate impact
 
 There are two ways to use Experiments:
 - [Python SDK](#usage-python-sdk) (Recommended)
