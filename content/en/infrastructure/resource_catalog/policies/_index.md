@@ -16,14 +16,14 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
-  Resource Catalog Policies are in Preview.
+  Resource Policies are in Preview.
 {{< /callout >}} 
 
 ## Overview
 
 {{< img src="/infrastructure/resource_catalog/policies/resource_policies_with_templates.png" alt="The Resource Catalog page showing the Policies tab and list of custom policies" width="100%">}}
 
-In Resource Catalog Policies, you can define policies on the desired optimal configuration of your infrastructure resources based on governance best practices in your organization. Some examples include improving ownership tag coverage on resources, or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or Lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
+In Resource Policies, you can define policies on the desired optimal configuration of your infrastructure resources based on governance best practices in your organization. Some examples include improving ownership tag coverage on resources, or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or Lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
 
 Specifically, you can:
 
@@ -31,9 +31,49 @@ Specifically, you can:
 - Start from a set of [out-of-the-box policy](#start-with-an-out-of-the-box-policy-template) templates that span infrastructure reliability, cost optimization, operational excellence, and versioning.
 - Define a [tagging policy](#create-a-tagging-policy), which involves a resource type and the desired tag key and value the resource type should have.
 - Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score.
-- Filter all policies to a specific team (or any custom tag) to create a shareable view to individual teams to prioritize outreach to low-performing teams.
-- Group all policies to see compliance across teams (or any custom tag).
+- Filter all policies to a specific team (or any custom tag) to create a shareable view to each responsible team.
+- Group all policies to see compliance across teams (or any custom tag) to prioritize outreach to low-performing teams.
 
+## Example Resource Policies
+
+<details open>
+<summary><strong>Operational excellence and versioning</strong></summary>
+
+- Amazon EC2 instances should only use approved AMIs (Golden AMI).
+- Amazon RDS instances running Postgres should use the latest compatible engine versions.
+- Amazon Lambda functions should not run deprecated runtimes.
+- Amazon ElastiCache should use the latest engine version.
+
+</details>
+
+<details>
+<summary><strong>Reliability</strong></summary>
+
+- Amazon RDS instances should have backup retention period > 0.
+- Amazon ECS services should have desired task count > 1.
+- Amazon ACM certificates should be in successful auto-renewal state.
+- Google Compute Instances should have automatic restart enabled.
+- Azure VMIs should be deployed across multiple AZs.
+
+</details>
+
+<details>
+<summary><strong>Security</strong></summary>
+
+- Amazon RDS instances should be encrypted.
+- Amazon CloudFront distributions should use TLS protocol version 1.2.
+- Amazon EBS volumes should be encrypted.
+
+</details>
+
+<details>
+<summary><strong>Cost optimization</strong></summary>
+
+- Amazon EBS volumes should use GP3 instead of GP2.
+- Google Compute Instances should use ARM architecture where possible.
+- Azure Managed Disks should be in the attached state.
+
+</details>
 
 ## Create a custom policy
 
@@ -69,9 +109,9 @@ Chain multiple attributes in one policy (for example, require AWS CloudTrail log
 
 ### Start with an out-of-the-box policy template
 
-For insights into infrastructure health, across reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to narrow the set of resources evaluated against a policy, and attribute target values can be customized as needed.
+For insights into infrastructure health, across reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to narrow the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
 
-{{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Catalog Policies" style="width:100%;" >}}
+{{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Policies" style="width:100%;" >}}
 
 ## Create a tagging policy
 
@@ -79,7 +119,7 @@ Tagging policies require specific tag keys and tag value formats on your infrast
 
 To create a tagging policy:
 
-1. Navigate to **Infrastructure > Resource Catalog** and click the [**Policies**][1] tab.
+1. In the side navigation, click on [**Resources > Policies**][1].
 2. Click the **New Tagging Policy** button.
 3. Choose the resource types the policy applies to.
 4. Define the required tag key and its allowed values.
