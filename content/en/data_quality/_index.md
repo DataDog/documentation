@@ -6,19 +6,20 @@ title: Data Quality Monitoring
 
 {{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; one table is flagged with a triggered alert" style="width:100%;" >}}
 
-Data Quality Monitoring helps you detect and troubleshoot issues in your data workflows before they cause problems in reporting dashboards, machine learning models, or other downstream systems. It alerts you to common issues such as data freshness problems, volume anomalies, and column-level quality issues, and provides the context needed to trace them back to upstream jobs or data sources.
+Data Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
 
-Key capabilities include:
+## Key capabilities
 
-- Automatic tracking of when data was last updated and how much was written
-- Built-in anomaly detection for metrics like row count, null count, and uniqueness
-- Monitor templates for threshold- and anomaly-based alerting
-- Lineage views that surface upstream sources and downstream consumers
-- Optional usage insights to identify high-value or rarely accessed tables
+With Data Quality Monitoring, you can:
+
+- Detect delayed updates and unexpected row count behavior in your tables
+- Surface changes in column-level metrics such as null counts or uniqueness
+- Set up monitors using static thresholds or historical baselines
+- Trace quality issues using lineage views that show upstream jobs and downstream impact
 
 ## Supported data sources
 
-Data Quality Monitoring supports the following platforms:
+Data Quality Monitoring supports the following data sources:
 
 - Snowflake
 - BigQuery
@@ -28,114 +29,152 @@ Data Quality Monitoring supports the following platforms:
 {{< tabs >}}
 {{% tab "Snowflake" %}}
 
-To monitor Snowflake data quality in Datadog, you must complete both the Snowflake configuration and Datadog integration steps. Before you begin, make sure that:
+To monitor Snowflake data in Datadog, you must configure both your Snowflake account and the Snowflake integration in Datadog. Before you begin, make sure that:
 
 - You have access to the `ACCOUNTADMIN` role in Snowflake.
-- You have generated an RSA key pair. You will paste the public key into Snowflake and upload the private key in Datadog. For more details, refer to the [Snowflake key-pair documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth).
+- You have generated an RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
 
-1. Define the required variables, then create a monitoring role, warehouse, and user with key-pair-only authentication.
+After you confirm the prerequisites above, complete the following setup steps in Snowflake:
 
+1. Define the following variables:
     ```sql
     SET role_name = 'DATADOG_ROLE';
     SET user_name = 'DATADOG_USER';
     SET warehouse_name = 'DATADOG_WH';
-    SET database_name = '<YOUR_DATABASE>';
+    SET database_name  = '<YOUR_DATABASE>';
 
+    ```
+1. Create a role, warehouse, and key-pair-authenticated user.
+
+    ```sql
+    USE ROLE ACCOUNTADMIN;
+
+    -- Create monitoring role
     CREATE ROLE IF NOT EXISTS IDENTIFIER($role_name);
     GRANT ROLE IDENTIFIER($role_name) TO ROLE SYSADMIN;
 
+    -- Create an X-SMALL warehouse (auto-suspend after 30s)
     CREATE WAREHOUSE IF NOT EXISTS IDENTIFIER($warehouse_name)
-    WAREHOUSE_SIZE = XSMALL
-    AUTO_SUSPEND = 30
-    AUTO_RESUME = TRUE
-    INITIALLY_SUSPENDED = TRUE;
+    WAREHOUSE_SIZE       = XSMALL
+    WAREHOUSE_TYPE       = STANDARD
+    AUTO_SUSPEND         = 30
+    AUTO_RESUME          = TRUE
+    INITIALLY_SUSPENDED  = TRUE;
 
+    -- Create Datadog user—key-pair only (no password)
+    -- Replace <PUBLIC_KEY> with your RSA public key (PEM, no headers/newlines)
     CREATE USER IF NOT EXISTS IDENTIFIER($user_name)
-    LOGIN_NAME = $user_name
-    DEFAULT_ROLE = $role_name
+    LOGIN_NAME        = $user_name
+    DEFAULT_ROLE      = $role_name
     DEFAULT_WAREHOUSE = $warehouse_name
-    RSA_PUBLIC_KEY = '<PUBLIC_KEY>';
+    RSA_PUBLIC_KEY    = '<PUBLIC_KEY>';
 
     GRANT ROLE IDENTIFIER($role_name) TO USER IDENTIFIER($user_name);
     ```
-
-1. Run the following command to grant the necessary privileges to enable Datadog to access warehouse resources, query execution history, and optional usage metadata.
+1. Grant monitoring privileges to the role.
 
     ```sql
+    -- Warehouse usage
     GRANT USAGE ON WAREHOUSE IDENTIFIER($warehouse_name) TO ROLE IDENTIFIER($role_name);
+
+    -- Account‐level monitoring (tasks, pipes, query history)
     GRANT MONITOR EXECUTION ON ACCOUNT TO ROLE IDENTIFIER($role_name);
+
+    -- Imported privileges on Snowflake’s ACCOUNT_USAGE
     GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE TO ROLE IDENTIFIER($role_name);
 
-    -- (Optional) Grant access to usage and billing metadata to support lineage and optimization insights
+    -- Imported privileges on any external data shares
+    -- GRANT IMPORTED PRIVILEGES ON DATABASE IDENTIFIER($database_name) TO ROLE IDENTIFIER($role_name);
+
+    -- Grant the following ACCOUNT_USAGE views to the new role. Do this if you wish to collect Snowflake account usage logs and metrics.
     GRANT DATABASE ROLE SNOWFLAKE.OBJECT_VIEWER TO ROLE IDENTIFIER($role_name);
     GRANT DATABASE ROLE SNOWFLAKE.USAGE_VIEWER TO ROLE IDENTIFIER($role_name);
     GRANT DATABASE ROLE SNOWFLAKE.GOVERNANCE_VIEWER TO ROLE IDENTIFIER($role_name);
     GRANT DATABASE ROLE SNOWFLAKE.SECURITY_VIEWER TO ROLE IDENTIFIER($role_name);
+
+    -- Grant ORGANIZATION_USAGE_VIEWER to the new role. Do this if you wish to collect Snowflake organization usage metrics.
     GRANT DATABASE ROLE SNOWFLAKE.ORGANIZATION_USAGE_VIEWER TO ROLE IDENTIFIER($role_name);
+
+    -- Grant ORGANIZATION_BILLING_VIEWER to the new role. Do this if you wish to collect Snowflake cost data.
     GRANT DATABASE ROLE SNOWFLAKE.ORGANIZATION_BILLING_VIEWER TO ROLE IDENTIFIER($role_name);
     ```
 
-1. Grant the role read-only access to all current and future tables, views, and other supported object types in your database.
+1. Grant read-only access to your data.
 
     ```sql
     USE DATABASE IDENTIFIER($database_name);
 
     CREATE OR REPLACE PROCEDURE grantFutureAccess(databaseName string, roleName string)
-    RETURNS string NOT NULL
-    LANGUAGE javascript
-    AS
+    returns string not null
+    language javascript
+    as
     $$
-    // Procedure logic omitted for brevity
-    $$;
+    var schemaResultSet = snowflake.execute({ sqlText: 'SELECT SCHEMA_NAME FROM ' + '"' + DATABASENAME + '"' + ".INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME != 'INFORMATION_SCHEMA';"});
+        
+    var numberOfSchemasGranted = 0;
+    while (schemaResultSet.next()) {
+        numberOfSchemasGranted += 1;
+        var schemaAndRoleSuffix = ' in schema "' + DATABASENAME + '"."' + 
+        schemaResultSet.getColumnValue('SCHEMA_NAME') + '" to role ' + ROLENAME + ';'
+
+        snowflake.execute({ sqlText: 'grant USAGE on schema "' + DATABASENAME + '"."' +  
+        schemaResultSet.getColumnValue('SCHEMA_NAME') + '" to role ' + ROLENAME + ';'});
+        snowflake.execute({ sqlText: 'grant SELECT on all tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on all views' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on all event tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on all external tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on all dynamic tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on future tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on future views' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on future event tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on future external tables' + schemaAndRoleSuffix});
+        snowflake.execute({ sqlText: 'grant SELECT on future dynamic tables' + schemaAndRoleSuffix});
+    }
+    
+    return 'Granted access to ' + numberOfSchemasGranted + ' schemas';
+    $$
+    ;
 
     GRANT USAGE ON DATABASE IDENTIFIER($database_name) TO ROLE IDENTIFIER($role_name);
     CALL grantFutureAccess('<DATABASE_NAME>', '<ROLE_NAME>');
     ```
 
-1. (Optional) If your organization uses Snowflake event tables, run the following commands to grant access to the relevant event table and assign application roles for event log access.
+1. (Optional) If your organization uses [Snowflake event tables][2], you can grant the Datadog role access to them.
 
     ```sql
+    -- Grant usage on the database, schema, and table of the event table
     GRANT USAGE ON DATABASE <EVENT_TABLE_DATABASE> TO ROLE IDENTIFIER($role_name);
     GRANT USAGE ON SCHEMA <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA> TO ROLE IDENTIFIER($role_name);
     GRANT SELECT ON TABLE <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA>.<EVENT_TABLE_NAME> TO ROLE IDENTIFIER($role_name);
 
+    -- Snowflake-provided application roles for event logs
     GRANT APPLICATION ROLE SNOWFLAKE.EVENTS_VIEWER TO ROLE IDENTIFIER($role_name);
     GRANT APPLICATION ROLE SNOWFLAKE.EVENTS_ADMIN TO ROLE IDENTIFIER($role_name);
+
     ```
 
-#### Datadog integration
+After completing the Snowflake setup, configure the Snowflake integration in Datadog.
 
-After completing the Snowflake setup, you must configure the integration in Datadog.
-
-1. Go to the [Snowflake integration tile in Datadog][1] and click **+ Add Snowflake account**.
-2. Enter your Snowflake account URL.
-3. In the **Data Monitoring** section, enable the following toggles:
+1. On the [Snowflake integration tile][3], click **Add Snowflake account**.
+1. Enter your Snowflake account URL.
+1. Under **Logs**, turn on:
    - **Query History Logs**
    - **Enable Query Logs with Access History**
-   - **Enable Data Monitoring for Snowflake tables**
-4. Set the username to `DATADOG_USER`.
-5. Upload your **unencrypted** RSA private key.
+1. Under **Data Observability**, turn on:
+   - **Enable Data Observability for Snowflake tables**
+1. Set the **User Name** to `DATADOG_USER`.
+1. Under **Configure a key pair authentication**, upload your unencrypted RSA private key.
 
-[1]: https://app.datadoghq.com/integrations?search=snowflake&integrationId=snowflake-web
+[1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
+[2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
+[3]: https://app.datadoghq.com/integrations?search=snowflake&integrationId=snowflake-web
 
 {{% /tab %}}
 {{% tab "BigQuery" %}}
 
-To monitor BigQuery data quality in Datadog, you must configure both your Google Cloud project and your Datadog integration settings.
-
-1. Follow the steps in the [Datadog GCP integration guide][1] to set up expanded BigQuery monitoring. This includes linking your project and service account.
-1. In the Google Cloud IAM console, assign the required roles to your Datadog service account:
-    - **BigQuery Resource Viewer** for query performance metrics
-    - **BigQuery Metadata Viewer** for data quality and table metadata
-1. In the Datadog UI, open the Google Cloud Platform integration tile and navigate to the **BigQuery** section. Enable the following toggles:
-    - **Query Performance**
-    - **Data Quality**
+To monitor BigQuery data in Datadog, you must configure permissions in your Google Cloud project and enable the relevant features in the Datadog integration. For detailed instructions, see the [Expanded BigQuery monitoring][1] section of the Datadog Google Cloud Platform documentation.
 
 [1]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#expanded-bigquery-monitoring
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: https://app.datadoghq.com/integrations?search=snowflake&integrationId=snowflake-web
-[2]: https://app.datadoghq.com/integrations?search=bigquery&integrationId=google-cloud-bigquery
-[3]: /monitors
