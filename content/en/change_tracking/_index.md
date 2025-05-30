@@ -96,9 +96,9 @@ View and analyze changes from the [service page][2].
 
 1. Navigate to the service page you want to investigate.
 1. Locate the changes timeline in the **Service Summary** section.
-1. Use the dropdown to view either:
+1. Use the service and dependencies tabs to view either:
    - Changes limited to the specific service (**Changes by Service**)
-   - Changes to the specific service and dependent services that might impact this service (**Changes by Service & Dependencies**)
+   - Changes to the specific service and dependent services that might impact this service (**Changes by Service + Dependencies**)
 1. Click the change indicator to view detailed information and take remediation actions.
 
 ### Dashboards
@@ -130,6 +130,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
 | CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
 | PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                  | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation |
+| MongoDB Index & SearchIndex Changes                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
