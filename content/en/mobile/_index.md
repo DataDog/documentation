@@ -73,12 +73,12 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -94,12 +94,12 @@ To configure On-Call notifications on your mobile device, see the guide to [Set 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+{{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+{{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -115,12 +115,12 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -136,12 +136,12 @@ For example, to filter on metric monitors related to the SRE team that is being 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -155,12 +155,12 @@ On the Notebooks page, you can view and search all of the notebooks that you hav
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+{{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS traces page showing list of traces with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+{{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android traces page showing list of traces with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -177,12 +177,12 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS logs page showing list of logs with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+{{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android logs page showing list of logs with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -201,12 +201,12 @@ You can also group by log patterns and select different log attributes for clust
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+{{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS services page showing list of services with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+{{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android services page showing list of services with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
