@@ -13,6 +13,8 @@ further_reading:
 
 Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, and do not require any additional setup after CCM is set up.
 
+{{< img src="cloud_cost/anomalies/cost_anomalies_new_list-2.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:80;" >}}
+
 ## Getting started
 
 1. Navigate to the [Anomalies tab of the Cloud Cost page in Datadog][1].
@@ -48,10 +50,6 @@ Each anomaly card shows:
 
 Anomalies are sorted by cost impact, with the most significant changes at the top.
 
-This is an example of the list of anomalies detected in your infrastructure:
-
-{{< img src="cloud_cost/anomalies/cost_anomalies_new_list.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:90;" >}}
-
 ## Take action on anomalies
 
 Follow these steps to investigate and resolve anomalies:
@@ -68,12 +66,17 @@ Follow these steps to investigate and resolve anomalies:
 
 ### Tag Influence
 
-Datadog automatically analyzes your cost anomalies to identify:
+Tag Influence in Datadog automatically analyzes your cost anomalies to identify:
+
 - Which specific resources are driving the cost changes
 - Which teams or services to contact about the changes
 - The impact of different tags on the cost anomaly
 
-Tag Influence analyzes the following tags by default:
+The feature is part of the anomaly investigation workflow, where you can see this analysis in the side panel when you click **See more** on an anomaly.
+
+{{< img src="cloud_cost/anomalies/cost_anomalies-tag-influence.png" alt="Click See More to see side panel showing anomaly details, investigation options, and action buttons" style="width:80;" >}}
+
+Under the **What happened** and **Why this happened** sections, you can see how Tag Influence analyzes the following tags by default:
 - Region name
 - Service name
 - Subaccount name
@@ -81,15 +84,7 @@ Tag Influence analyzes the following tags by default:
 - Service
 - Environment
 
-This automated analysis helps you:
-- Quickly identify the root cause of cost changes
-- Know who to contact about cost anomalies
-- Understand the impact of different infrastructure components
-- Reduce manual investigation time
-
-This is the side panel where you can take action on your cost anomaly:
-
-{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel.png" alt="Side panel showing anomaly details, investigation options, and action buttons" style="width:90;" >}}
+This automated analysis helps you identify the root cause of cost changes, know who to contact about cost anomalies, understand the impact of different infrastructure components, and reduce manual investigation time.
 
 ## Resolve anomalies
 
@@ -97,13 +92,17 @@ As you investigate anomalies, you may find anomalies that are not significant, w
 
 To resolve an anomaly:
 
-1. **Mark as significant or insignificant** to help improve the algorithm.
-2. **Add context** about why it's not an anomaly.
-3. **Resolve the anomaly** to move it to the Resolved tab.
+1. Click **Resolve Anomaly** to open the resolution popup.
+2. Select one of the following resolutions to help improve the algorithm:
+   - The anomaly amount was too small
+   - This is an unexpected increase
+   - This is an expected increase
+2. **Add context** about why it is or is not an anomaly.
+3. Click **Resolve** to move it to the Resolved tab.
 
 This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
-{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="Form for marking an anomaly as significant with explanation field" style="width:90;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-unexpected-1.png" alt="Form for marking an anomaly as unexpected with explanation field" style="width:80;" >}}
 
 ## Troubleshooting
 
