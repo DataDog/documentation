@@ -23,9 +23,9 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 <div class="alert alert-info">
   <strong>Working with a high volume of custom metrics?<strong>
   
-  <p>
+  <div>
     <em>Agent Data Plane</em> is a new Agent feature for processing high-volume custom metrics workloads with improved CPU and memory efficiency. This feature is in Preview. If you are interested in trying Agent Data Plane, reach out by filling out <a href="https://fill-me-out">this form</a>.
-  </p>
+  </div>
 </div>
 
 ## General tips
