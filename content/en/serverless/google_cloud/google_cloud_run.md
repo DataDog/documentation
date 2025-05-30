@@ -307,6 +307,10 @@ The `DD_LOGS_ENABLED` environment variable is not required.
 1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` and `DD_LOGS_INJECTION` environment variables as you did for the sidecar.
 1. Click the **Settings** tab and set the **Container start up order** to **Depends on** the sidecar container.
 1. **Deploy** the application.
+
+### Add a `service` label
+Add a `service` label which matches the `DD_SERVICE` value on the containers to the Google Cloud service. Access this through the service list, through the **Labels** button after selecting the service.
+
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
 1. Step
@@ -504,9 +508,6 @@ resource "google_cloud_run_v2_service_iam_binding" "binding" {
 {{% /tab %}}
 {{< /tabs >}}
 
-
-### Add a `service` label
-Add a `service` label which matches the `DD_SERVICE` value on the containers to the Google Cloud service. Access this through the service list, through the **Labels** button after selecting the service.
 
 
 ## Futher Reading
