@@ -327,6 +327,20 @@
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
   },
+  "ListCatalogKind": {
+    "description": "Get a list of entity kinds from Software Catalog.",
+    "summary": "Get a list of entity kinds"
+  },
+  "UpsertCatalogKind": {
+    "description": "Create or update kinds in Software Catalog.",
+    "summary": "Create or update kinds",
+    "request_description": "Kind YAML or JSON.",
+    "request_schema_description": "Create or update kind request."
+  },
+  "DeleteCatalogKind": {
+    "description": "Delete a single kind in Software Catalog.",
+    "summary": "Delete a single kind"
+  },
   "ListCatalogRelation": {
     "description": "Get a list of entity relations from Software Catalog.",
     "summary": "Get a list of entity relations"
