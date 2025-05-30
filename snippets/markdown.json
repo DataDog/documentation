@@ -270,7 +270,7 @@
 			"prefix": ";;whatsnext",
 			"body": [
 				"{{< whatsnext desc=\"Overall description goes here:\" >}}",
-				"   {{< nextlink href=\"link/here\" >}}Link desctiption goes here{{< /nextlink >}}",
+				"   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
 				"{{< /whatsnext >}}"
 			]
 	},
