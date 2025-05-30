@@ -53,7 +53,7 @@ Instrumentation starts when the application is launched.
 
 Add the `Datadog.Trace.Bundle` Nuget package to your project.
 
-**Note**: The next step involves [configuring environment variables](#configure-environment-variables) in Azure. .NET applications require [additional environment variables](#dotnet-additional-settings).
+**Note**: When you complete Step 2, ensure that you also set the [additional environment variables](#configure-environment-variables) required by the .NET tracer.
 
 {{% /tab %}} 
 {{% tab "PHP" %}}
@@ -139,13 +139,7 @@ For .NET applications, the following environment variables are **required** unle
 
 After your application restarts, go to Datadog's [APM Service page][4] and search for the service name you set for your application (`DD_SERVICE`).
 
-### Enable metrics
-
-To enable custom metrics for your application with DogStatsD, add the following environment variable to your Application Settings:
-
-| Name | Value |
-| ---- | ----- |
-| `DD_CUSTOM_METRICS_ENABLED` | `true` |
+### Custom metrics
 
 To configure your application to submit custom metrics, follow the appropriate steps for your runtime:
 
