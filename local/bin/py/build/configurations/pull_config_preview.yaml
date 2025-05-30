@@ -123,6 +123,22 @@
           - "*/assets/metrics/metric-spec.yaml"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - "zoom_incident_management/README.md"
+          options:
+            dest_path: '/integrations/'
+            file_name: 'zoom_incident_management.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/integrations-internal-core/blob/main/zoom_incident_management/README.md"]
+              public_title: Zoom Incident Management
+              custom_kind: integration
+              name: zoom_incident_management
+              is_public: true
+              integration_title: Zoom Incident Management
+              aliases:
+                - /service_management/incident_management/zoom_integration
 
       # - repo_name: marketplace
       #   contents:
