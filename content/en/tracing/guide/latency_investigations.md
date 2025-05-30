@@ -2,9 +2,9 @@
 title: Latency investigations
 private: true
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/watchdog/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Datadog Watchdog"
 ---
 
 {{< callout btn_hidden="true" >}}
