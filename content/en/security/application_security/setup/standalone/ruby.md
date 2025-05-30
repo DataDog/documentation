@@ -7,6 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/ruby
   - /security/application_security/getting_started/ruby
   - /security/application_security/enabling/tracing_libraries/threat_detection/ruby/
+  - /security/application_security/threats/setup/standalone/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
