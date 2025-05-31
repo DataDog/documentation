@@ -35,8 +35,8 @@ Supported test frameworks:
 | Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
 | Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
-| Cypress | >= 6.7.0 |
-| Playwright | >= 1.18.0 |
+| Cypress | >= 6.7.0 | `dd-trace>=6.0.0` only supports `>= 10.2.0`
+| Playwright | >= 1.18.0 | `dd-trace>=6.0.0` only supports `>= 1.38.0`
 | Vitest | >= 1.16.0 | Supported from `dd-trace>=4.42.0` and `dd-trace>=5.18.0`. Only supported from Node.js>=18.19 or Node.js>=20.6 |
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
@@ -818,10 +818,12 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value depends on the `dd-trace` version:
 
-- CI job name
-- Command used to run the tests (such as `yarn test`)
+- `dd-trace<6.0.0`: The default is a combination of:
+  - CI job name
+  - Command used to run the tests (such as `yarn test`)
+- `dd-trace>=6.0.0`: The default is the name of the executable.
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
