@@ -24,6 +24,10 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - RUM: Event attribute values only
 - Events: Event attribute values only
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
 If you don't want data to leave your environment before it gets redacted, use [Observability Pipelines][12] and the [Sensitive Data Scanner processor][13] to scan and redact sensitive data. See [Set Up Pipelines][14] for information on how to set up a pipeline and its components.
