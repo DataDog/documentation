@@ -1439,6 +1439,11 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
+    - name: MCP Server
+      url: bits_ai/mcp_server
+      identifier: bits_ai_mcp_server
+      parent: bits_ai
+      weight: 3
     - name: Dashboards
       url: dashboards/
       pre: dashboard
