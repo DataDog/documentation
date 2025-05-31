@@ -7708,6 +7708,18 @@ menu:
           - GetOnCallTeamRoutingRules
         unstable: []
         order: 9
+    - name: Get team on-call users
+      url: '#get-team-on-call-users'
+      identifier: on-call-get-team-on-call-users
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamOnCallUsers
+        unstable: []
+        order: 12
     - name: Get the schedule on-call user
       url: '#get-the-schedule-on-call-user'
       identifier: on-call-get-the-schedule-on-call-user
