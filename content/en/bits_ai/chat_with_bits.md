@@ -11,7 +11,23 @@ aliases:
 - /bits_ai/getting_started/
 ---
 
+Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
+
 ## Querying in Datadog
+
+{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
+Natural language querying is in Preview. Fill out this form to join the wait list.
+{{< /beta-callout >}} 
+
+Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
+
+You can ask Bits AI questions such as:
+- `Who is on call for example-service?`
+- `Find me the example-service dashboard.`
+- `What is going on with example-service?`
+- `Are there any issues with example-service's dependencies?`
+
+When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
 ### In the chat panel
 

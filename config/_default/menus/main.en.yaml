@@ -1429,14 +1429,19 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Chat with Bits
-      url: bits_ai/chat_with_bits
-      identifier: bits_ai_chat_with_bits
+    - name: Bits SRE
+      url: bits_ai/bits_sre
+      identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
     - name: Coordinate Incidents
       url: bits_ai/bits_sre/coordinate_incidents
       identifier: bits_ai_sre_coordinate_incidents
+      parent: bits_ai_sre
+      weight: 101
+    - name: Chat with Bits
+      url: bits_ai/chat_with_bits
+      identifier: bits_ai_chat_with_bits
       parent: bits_ai
       weight: 2
     - name: Dashboards

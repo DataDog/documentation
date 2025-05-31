@@ -26,29 +26,19 @@ further_reading:
 Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
 {{< /site-region >}}
 
-Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
+Bits is your AI teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details. 
 
-For detailed setup and usage instructions, see the [Chat with Bits][1] documentation.
+{{< whatsnext desc="Features" >}}
+   {{< nextlink href="bits_sre/_index.md" >}}Proactive alert investigation and incident coordination with Bits SRE{{< /nextlink >}}
+   <!-- {{< nextlink href="link" >}}Automated code fixes with Bits Dev{{< /nextlink >}} -->
+   <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits Security Analyst{{< /nextlink >}} -->
+   <!-- {{< nextlink href="link" >}}Take action on your systems with Action Interface{{< /nextlink >}} -->
+   {{< nextlink href="chat_with_bits.md" >}}Chat with Bits about your observability data{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Features
 
-### Query data in natural language
 
-{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Natural language querying is in Preview. Fill out this form to join the wait list.
-{{< /beta-callout >}} 
-
-Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
-
-You can ask Bits AI questions such as:
-- `Who is on call for example-service?`
-- `Find me the example-service dashboard.`
-- `What is going on with example-service?`
-- `Are there any issues with example-service's dependencies?`
-
-When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
-
-### Streamline incident management
+<!-- ### Streamline incident management
 
 Within [Datadog Incident Management][3], Bits AI can help you 
 
@@ -62,13 +52,12 @@ See [Coordinate Incidents][4] for details.
 
 ## Feedback
 
-Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
+Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager. -->
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/chat_with_bits/
 [3]: /service_management/incident_management
 [4]: /bits_ai/bits_sre/coordinate_incidents/
