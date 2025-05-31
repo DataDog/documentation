@@ -1,5 +1,5 @@
 ---
-title: Managing Incidents
+title: Coordinate Incidents
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"
@@ -7,9 +7,11 @@ further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "bits_ai/getting_started"
+- link: "bits_ai/chat_with_bits/"
   tag: "Documentation"
-  text: "Getting Started"
+  text: "Chat with Bits"
+aliases:
+- /bits_ai/managing_incidents/
 ---
 
 ## Overview
