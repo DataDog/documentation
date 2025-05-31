@@ -6849,6 +6849,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -6941,6 +6943,22 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorDraftStatus:
+      default: published
+      description: 'Whether a monitor is in draft or published state. Draft monitors
+        do not notify recipients. Draft monitors are currently in
+
+        preview and the field is only processed for enabled customers. This accepts
+        the values `draft`
+
+        and `published`. Defaults to published.'
+      enum:
+      - draft
+      - published
+      type: string
+      x-enum-varnames:
+      - DRAFT
+      - PUBLISHED
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -8024,6 +8042,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
