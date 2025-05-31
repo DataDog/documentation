@@ -152,6 +152,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
+{{% tab "Custom Processor" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
