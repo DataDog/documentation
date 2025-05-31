@@ -4028,6 +4028,7 @@ components:
       description: The ID of the AWS account.
       example: '123456789012'
       type: string
+      x-model-simple-name: AccountId
     AwsCURConfig:
       description: AWS CUR config.
       properties:
@@ -4274,6 +4275,7 @@ components:
           example: QUEUED
           type: string
       type: object
+      x-model-simple-name: OnDemandAttributes
     AwsOnDemandCreateAttributes:
       description: Attributes for the AWS on demand task.
       properties:
@@ -4285,6 +4287,7 @@ components:
       required:
       - arn
       type: object
+      x-model-simple-name: OnDemandCreateAttributes
     AwsOnDemandCreateData:
       description: Object for a single AWS on demand task.
       properties:
@@ -4296,6 +4299,7 @@ components:
       - type
       - attributes
       type: object
+      x-model-simple-name: OnDemandCreateData
     AwsOnDemandCreateRequest:
       description: Request object that includes the on demand task to submit.
       properties:
@@ -4304,6 +4308,7 @@ components:
       required:
       - data
       type: object
+      x-model-simple-name: OnDemandCreateRequest
     AwsOnDemandData:
       description: Single AWS on demand task.
       properties:
@@ -4316,6 +4321,7 @@ components:
         type:
           $ref: '#/components/schemas/AwsOnDemandType'
       type: object
+      x-model-simple-name: OnDemandData
     AwsOnDemandListResponse:
       description: Response object that includes a list of AWS on demand tasks.
       properties:
@@ -4325,12 +4331,14 @@ components:
             $ref: '#/components/schemas/AwsOnDemandData'
           type: array
       type: object
+      x-model-simple-name: OnDemandListResponse
     AwsOnDemandResponse:
       description: Response object that includes an AWS on demand task.
       properties:
         data:
           $ref: '#/components/schemas/AwsOnDemandData'
       type: object
+      x-model-simple-name: OnDemandResponse
     AwsOnDemandType:
       default: aws_resource
       description: The type of the on demand task. The value should always be `aws_resource`.
@@ -4340,6 +4348,7 @@ components:
       type: string
       x-enum-varnames:
       - AWS_RESOURCE
+      x-model-simple-name: OnDemandType
     AwsScanOptionsAttributes:
       description: Attributes for the AWS scan options.
       properties:
@@ -4361,6 +4370,7 @@ components:
           example: true
           type: boolean
       type: object
+      x-model-simple-name: ScanOptionsAttributes
     AwsScanOptionsCreateAttributes:
       description: Attributes for the AWS scan options to create.
       properties:
@@ -4387,6 +4397,7 @@ components:
       - vuln_containers_os
       - vuln_host_os
       type: object
+      x-model-simple-name: ScanOptionsCreateAttributes
     AwsScanOptionsCreateData:
       description: Object for the scan options of a single AWS account.
       properties:
@@ -4401,6 +4412,7 @@ components:
       - type
       - attributes
       type: object
+      x-model-simple-name: ScanOptionsCreateData
     AwsScanOptionsCreateRequest:
       description: Request object that includes the scan options to create.
       properties:
@@ -4409,6 +4421,7 @@ components:
       required:
       - data
       type: object
+      x-model-simple-name: ScanOptionsCreateRequest
     AwsScanOptionsData:
       description: Single AWS Scan Options entry.
       properties:
@@ -4421,6 +4434,7 @@ components:
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       type: object
+      x-model-simple-name: ScanOptionsData
     AwsScanOptionsListResponse:
       description: Response object that includes a list of AWS scan options.
       properties:
@@ -4430,12 +4444,14 @@ components:
             $ref: '#/components/schemas/AwsScanOptionsData'
           type: array
       type: object
+      x-model-simple-name: ScanOptionsListResponse
     AwsScanOptionsResponse:
       description: Response object that includes the scan options of an AWS account.
       properties:
         data:
           $ref: '#/components/schemas/AwsScanOptionsData'
       type: object
+      x-model-simple-name: ScanOptionsResponse
     AwsScanOptionsType:
       default: aws_scan_options
       description: The type of the resource. The value should always be `aws_scan_options`.
@@ -4445,6 +4461,7 @@ components:
       type: string
       x-enum-varnames:
       - AWS_SCAN_OPTIONS
+      x-model-simple-name: ScanOptionsType
     AwsScanOptionsUpdateAttributes:
       description: Attributes for the AWS scan options to update.
       properties:
@@ -4466,6 +4483,7 @@ components:
           example: true
           type: boolean
       type: object
+      x-model-simple-name: ScanOptionsUpdateAttributes
     AwsScanOptionsUpdateData:
       description: Object for the scan options of a single AWS account.
       properties:
@@ -4480,6 +4498,7 @@ components:
       - type
       - attributes
       type: object
+      x-model-simple-name: ScanOptionsUpdateData
     AwsScanOptionsUpdateRequest:
       description: Request object that includes the scan options to update.
       properties:
@@ -4488,6 +4507,7 @@ components:
       required:
       - data
       type: object
+      x-model-simple-name: ScanOptionsUpdateRequest
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
