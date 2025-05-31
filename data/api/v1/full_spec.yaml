@@ -3546,6 +3546,22 @@ components:
       example:
         focus: WORLD
       properties:
+        custom_extent:
+          description: A custom extent of the map defined by the lower left and upper
+            right corners.
+          example:
+          - -50
+          - -50
+          - 50
+          - 50
+          items:
+            description: The longitudinal and latitudinal coordinates of the bounding
+              box.
+            format: double
+            type: number
+          maxItems: 4
+          minItems: 4
+          type: array
         focus:
           description: The 2-letter ISO code of a country to focus the map on. Or
             `WORLD`.
