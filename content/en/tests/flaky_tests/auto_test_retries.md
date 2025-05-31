@@ -3,6 +3,7 @@ title: Auto Test Retries
 description: Retry failing test cases to avoid failing the build because of flaky tests.
 aliases:
   - /tests/auto_test_retries
+  - /tests/flaky_test_management/auto_test_retries
 further_reading:
   - link: "/tests"
     tag: "Documentation"
