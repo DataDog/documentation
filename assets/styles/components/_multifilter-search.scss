@@ -3,6 +3,8 @@
         display: none !important;
     }
     #multifilter-search-nav {
+        position: sticky;
+        top: 95px;
         align-self: flex-start;
         z-index: 2;
         background-color: white;
@@ -124,6 +126,15 @@
             }
             &::-webkit-search-cancel-button {
                 opacity: 0;
+            }
+        }
+    }
+
+    .table-wrapper {
+        table {
+            td {
+                min-width: 75px;
+                max-width: 175px;
             }
         }
     }
