@@ -12665,6 +12665,7 @@ components:
       type: string
       x-enum-varnames:
       - WORK
+      x-model-simple-name: EmailType
     Enabled:
       description: Field used to enable or disable the rule.
       example: true
@@ -14825,6 +14826,7 @@ components:
           description: Unique identifier for the User.
           type: string
       type: object
+      x-model-simple-name: User
     ExternalUserEmailType:
       description: Email address for the user.
       properties:
@@ -14837,6 +14839,7 @@ components:
           description: Email addresses for the user.
           type: string
       type: object
+      x-model-simple-name: UserEmail
     ExternalUserGroup:
       description: Definition of a group.
       properties:
@@ -14866,6 +14869,7 @@ components:
             type: string
           type: array
       type: object
+      x-model-simple-name: Group
     ExternalUserGroupMembersItems:
       description: The definition of a member belonging to a group.
       properties:
@@ -14887,6 +14891,7 @@ components:
           example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
           type: string
       type: object
+      x-model-simple-name: GroupMemberItem
     ExternalUserGroupMeta:
       description: Metadata associated with a group.
       properties:
@@ -14909,6 +14914,7 @@ components:
           example: Group
           type: string
       type: object
+      x-model-simple-name: GroupMeta
     ExternalUserGroupPatchRequest:
       description: Request object for patching a group.
       properties:
@@ -14925,6 +14931,7 @@ components:
             type: string
           type: array
       type: object
+      x-model-simple-name: GroupPatchRequest
     ExternalUserGroupPatchRequestOperationsItems:
       description: The definition of an individual patch operation in a patch request.
       properties:
@@ -14939,6 +14946,7 @@ components:
             the patch operation.
           example: "{\n    \"displayName\": \"Real new group\",\n    \"id\": \"80df3a9b-24f5-4ebf-9ba0-714455453621\"\n}"
       type: object
+      x-model-simple-name: GroupPatchOp
     ExternalUserGroupPatchRequestOperationsItemsOp:
       description: The operation to be performed.
       enum:
@@ -14950,6 +14958,7 @@ components:
       - ADD
       - REPLACE
       - REMOVE
+      x-model-simple-name: GroupPatchOpType
     ExternalUserMeta:
       description: Metadata associated with a user.
       properties:
@@ -14972,6 +14981,7 @@ components:
           example: User
           type: string
       type: object
+      x-model-simple-name: UserMeta
     ExternalUserNameType:
       description: The components of user's real name
       properties:
@@ -14980,6 +14990,7 @@ components:
             as appropriate, formatted for display.
           type: string
       type: object
+      x-model-simple-name: UserName
     ExternalUserPatchRequest:
       description: Request object for patching a user.
       properties:
@@ -14996,6 +15007,7 @@ components:
             type: string
           type: array
       type: object
+      x-model-simple-name: UserPatchRequest
     ExternalUserPatchRequestOperationsItems:
       description: The definition of an individual patch operation in a patch request.
       properties:
@@ -15008,6 +15020,7 @@ components:
         value:
           description: New value to use for the patch operation.
       type: object
+      x-model-simple-name: UserPatchOp
     ExternalUserPatchRequestOperationsItemsOp:
       description: The operation to be performed.
       enum:
@@ -15017,6 +15030,7 @@ components:
       x-enum-varnames:
       - ADD
       - REPLACE
+      x-model-simple-name: UserPatchOpType
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
@@ -19754,6 +19768,7 @@ components:
           minimum: 0
           type: integer
       type: object
+      x-model-simple-name: GroupListResponse
     ListExternalUserGroupResponseResourcesItems:
       description: Resources returned in response to a List groups request.
       properties:
@@ -19786,6 +19801,7 @@ components:
             type: string
           type: array
       type: object
+      x-model-simple-name: GroupResource
     ListExternalUserGroupResponseResourcesItemsMembersItems:
       description: The definition of a member belonging to a group in the List groups
         response.
@@ -19809,6 +19825,7 @@ components:
           example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
           type: string
       type: object
+      x-model-simple-name: GroupMember
     ListExternalUsersResponse:
       description: List users response object.
       example:
@@ -19884,6 +19901,7 @@ components:
           minimum: 0
           type: integer
       type: object
+      x-model-simple-name: UserListResponse
     ListExternalUsersResponseResourcesItems:
       description: Resources returned in response to a List users request.
       properties:
@@ -19917,6 +19935,7 @@ components:
           description: Unique identifier for the User.
           type: string
       type: object
+      x-model-simple-name: UserResource
     ListFindingsData:
       description: Array of findings.
       items:
