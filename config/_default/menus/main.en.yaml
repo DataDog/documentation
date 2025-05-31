@@ -2255,6 +2255,11 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_exception_replay
       weight: 101
+    - name: Capturing Handled Errors
+      url: error_tracking/backend/capturing_handled_errors
+      parent: error_tracking_backend
+      identifier: error_tracking_capturing_handled_errors
+      weight: 102
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
