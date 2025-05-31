@@ -3527,6 +3527,7 @@ components:
         type:
           $ref: '#/components/schemas/AuditLogsEventType'
       type: object
+      x-model-simple-name: Event
     AuditLogsEventAttributes:
       description: JSON object containing all event attributes and their associated
         values.
@@ -3564,6 +3565,7 @@ components:
           format: date-time
           type: string
       type: object
+      x-model-simple-name: EventAttributes
     AuditLogsEventType:
       default: audit
       description: Type of the event.
@@ -3573,6 +3575,7 @@ components:
       type: string
       x-enum-varnames:
       - Audit
+      x-model-simple-name: EventType
     AuditLogsEventsResponse:
       description: Response object with all events matching the request and pagination
         information.
@@ -3587,6 +3590,7 @@ components:
         meta:
           $ref: '#/components/schemas/AuditLogsResponseMetadata'
       type: object
+      x-model-simple-name: EventsResponse
     AuditLogsQueryFilter:
       description: Search and filter query settings.
       properties:
@@ -3608,6 +3612,7 @@ components:
           example: now
           type: string
       type: object
+      x-model-simple-name: QueryFilter
     AuditLogsQueryOptions:
       description: 'Global query options that are used during the query.
 
@@ -3625,6 +3630,7 @@ components:
           example: GMT
           type: string
       type: object
+      x-model-simple-name: QueryOptions
     AuditLogsQueryPageOptions:
       description: Paging attributes for listing events.
       properties:
@@ -3641,6 +3647,7 @@ components:
           maximum: 1000
           type: integer
       type: object
+      x-model-simple-name: PageOptions
     AuditLogsResponseLinks:
       description: Links attributes.
       properties:
@@ -3652,6 +3659,7 @@ components:
           example: https://app.datadoghq.com/api/v2/audit/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
+      x-model-simple-name: ResponseLinks
     AuditLogsResponseMetadata:
       description: The metadata associated with a request.
       properties:
@@ -3677,6 +3685,7 @@ components:
             $ref: '#/components/schemas/AuditLogsWarning'
           type: array
       type: object
+      x-model-simple-name: ResponseMetadata
     AuditLogsResponsePage:
       description: Paging attributes.
       properties:
@@ -3686,6 +3695,7 @@ components:
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
+      x-model-simple-name: ResponsePage
     AuditLogsResponseStatus:
       description: The status of the response.
       enum:
@@ -3696,6 +3706,7 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+      x-model-simple-name: ResponseStatus
     AuditLogsSearchEventsRequest:
       description: The request for a Audit Logs events list.
       properties:
@@ -3708,6 +3719,7 @@ components:
         sort:
           $ref: '#/components/schemas/AuditLogsSort'
       type: object
+      x-model-simple-name: SearchRequest
     AuditLogsSort:
       description: Sort parameters when querying events.
       enum:
@@ -3717,6 +3729,7 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+      x-model-simple-name: Sort
     AuditLogsWarning:
       description: Warning message indicating something that went wrong with the query.
       properties:
@@ -3734,6 +3747,7 @@ components:
             from the other indexes
           type: string
       type: object
+      x-model-simple-name: Warning
     AuthNMapping:
       description: The AuthN Mapping object returned by API.
       properties:
