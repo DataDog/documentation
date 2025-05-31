@@ -1,2 +1,3 @@
 i18n/*.json
 layouts/partials/table-of-contents/**/*.html
+*.mdoc.md
