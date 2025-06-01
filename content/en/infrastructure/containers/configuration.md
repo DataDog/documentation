@@ -214,10 +214,12 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    1. Add the following configuration to `datadog-values.yaml`:
 
-      ```
-      orchestratorExplorer:
+      ```yaml
+      datadog:
+        #(...)
+        orchestratorExplorer:
           customResources:
-              - <CUSTOM_RESOURCE_NAME>
+            - <CUSTOM_RESOURCE_NAME>
       ```
 
    1. Upgrade your Helm chart:
@@ -236,11 +238,17 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
 
-      ```
-      features:
-        orchestratorExplorer:
-          customResources:
-            - <CUSTOM_RESOURCE_NAME>
+      ```yaml
+      apiVersion: datadoghq.com/v2alpha1
+      kind: DatadogAgent
+      metadata:
+        name: datadog
+      spec:
+        #(...)
+        features:
+          orchestratorExplorer:
+            customResources:
+              - <CUSTOM_RESOURCE_NAME>
       ```
 
    1. Apply your new configuration:
