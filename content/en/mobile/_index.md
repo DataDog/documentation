@@ -5,6 +5,9 @@ aliases:
 algolia:
   tags: ["Datadog mobile app", "mobile device"]
 further_reading:
+- link: "/mobile/shortcut_configurations/"
+  tag: "Documentation"
+  text: "Shortcut Configurations"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Learn about Monitors and Alerting"
