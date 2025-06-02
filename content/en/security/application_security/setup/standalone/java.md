@@ -6,6 +6,7 @@ code_lang_weight: 0
 aliases:
   - /security_platform/application_security/getting_started/java
   - /security/application_security/getting_started/java
+  - /security/application_security/threats/setup/standalone/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -29,7 +30,7 @@ You can monitor App and API Protection for Java apps running in Docker, Kubernet
 ## Enabling Application & API Protection
 ### Get started
 
-1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Software Composition Analysis detection features):
+1. **Update your [Datadog Java library][1]** to at least version 0.94.0:
 
    {{< tabs >}}
    {{% tab "Wget" %}}
@@ -51,7 +52,7 @@ You can monitor App and API Protection for Java apps running in Docker, Kubernet
 
    To check that your service's language and framework versions are supported for Application & API Protection capabilities, see [Compatibility][2].
 
-2. **Run your Java application with Application & API Protection enabled.** From the command line:
+1. **Run your Java application with Application & API Protection enabled.** From the command line:
    ```shell
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.trace.enabled=false -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
