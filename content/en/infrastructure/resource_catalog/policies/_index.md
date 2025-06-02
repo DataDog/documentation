@@ -109,7 +109,7 @@ Chain multiple attributes in one policy (for example, require AWS CloudTrail log
 
 ### Start with an out-of-the-box policy template
 
-For insights into your infrastructure's reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to limit the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
+For insights into your infrastructure's reliability, cost optimization, operational excellence, and versioning, Datadog provides out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to limit the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
 
 {{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Policies" style="width:100%;" >}}
 
