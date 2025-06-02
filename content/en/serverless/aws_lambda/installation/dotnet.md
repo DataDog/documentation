@@ -18,6 +18,8 @@ further_reading:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the .NET runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/order-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
@@ -326,7 +328,7 @@ When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDo
 You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
 
 ## What's next?
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry

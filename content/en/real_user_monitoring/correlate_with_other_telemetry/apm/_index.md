@@ -281,7 +281,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM Flutter Monitoring][1].
 
-2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
+2. Follow the instructions under [Automatically track resources][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
     ```dart
     final configuration = DatadogConfiguration(
       // ...
@@ -291,8 +291,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/#automatic-resource-tracking
-
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration#automatically-track-resources
 {{% /tab %}}
 
 
@@ -375,7 +374,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 2. In your browser's developer tools, go to the **Network** tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
-[1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-are-rum-resources-linked-to-traces
+[1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -386,7 +385,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[2]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-are-rum-resources-linked-to-traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -397,7 +396,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
-[2]: https://docs.datadoghq.com//real_user_monitoring/correlate_with_other_telemetry/apm/?tab=iosrum#how-are-rum-resources-linked-to-traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=iosrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -409,7 +408,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -421,7 +420,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
@@ -433,7 +432,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=kotlinmultiplatformrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}

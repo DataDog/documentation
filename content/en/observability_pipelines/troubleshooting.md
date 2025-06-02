@@ -83,6 +83,50 @@ If you have configured your source to send logs to the Worker, make sure the por
 
 Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
 
+## Failed to connect error
+
+If you see an error similar to one of these errors:
+
+```
+Failed to connect to 34.44.228.240 port 80 after 56 ms: Couldn't connect to server
+```
+
+```
+connect to 35.82.252.23 port 80  failed: Operation timed out
+```
+
+```
+Failed to connect to ab52a1d16fxxxxxxxabd90c7526a1-1xxxx.us-west-2.elb.amazonaws.com port 80 after 225027 ms: Couldn't connect to server
+```
+
+And you:
+
+- Have a firewall between your source and your Workers, ensure traffic is allowed over your chosen port between the source and the Worker.
+- Have a firewall between the Workers and your destination, make sure it allows traffic from your Workers to the destination over the defined port.
+
+You can test your connectivity to your Observability Pipelines Worker endpoint using the `curl` command from your source location, provided that you have shell access to the source machine. For example, if you have a Datadog Agent source, the curl command looks something like this:
+
+```
+curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.com:80/api/v2/logs' -d '{"ddsource": "my_datadog","ddtags": "env:test","hostname": "i-02a4fxxxxx","message": "hello","service": "test"}' -v
+```
+
+The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
+
+## Worker is not starting
+
+If the Worker is not starting, Worker logs are not sent to Datadog and are not visible in Log Explorer for troubleshooting. To view the logs locally, use the following command:
+
+- For a VM-based environment:
+    ```
+    sudo journalctl -u observability-pipelines-worker.service -b
+    ```
+
+- For Kubernetes:
+    ```
+    kubectl logs <pod-name>
+    ```
+    An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
