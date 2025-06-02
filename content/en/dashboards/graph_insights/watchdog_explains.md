@@ -31,7 +31,7 @@ In Datadog, an investigation typically starts with graphs, then branches out int
 
 ## Investigate anomalies
 
-Start your investigation from any timeseries metric graph. Watchdog Explains highlights anomalies with a pink box. Click on a datapoint inside a pink higlight and selekct **View anomaly in full screen**.
+Start your investigation from any timeseries metric graph. Watchdog Explains highlights anomalies with a pink box. Click on a datapoint inside a pink highlight, and select **View anomaly in full screen**.
 
 On the full-screen graph, you can view the tags that are responsible for the anomaly. Click on a tag to see how it contributes to the graph shape.
 
