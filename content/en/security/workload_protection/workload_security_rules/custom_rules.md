@@ -52,7 +52,7 @@ Tags identify two things: the Agents using the policy and the infrastructure whe
 2. Open a policy and click **Edit**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
-When you add tags, Datadog displays how many agents the tags target as well as a list of the infrastructure running those agents. For example, `Tags match 144 agents`. 
+When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agents. For example, `Tags match 144 agents`. 
 
 ## Custom detection rules summary
 
