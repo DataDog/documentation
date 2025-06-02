@@ -106,6 +106,6 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
 [7]: https://app.datadoghq.com/cloud-maps
 [8]: /datadog_cloudcraft/overlays#infrastructure
-[9]: /datadog_cloudcraft/overlays#agent
+[9]: /datadog_cloudcraft/overlays#observability
 [10]: /datadog_cloudcraft/overlays#security
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
