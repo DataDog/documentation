@@ -92,6 +92,8 @@ Individual rules may have restrictions based on data availability. For example, 
 
 Each rule lists a score for the percentage of entities that are passing. Each scorecard has an overall score percentage that totals how many entities are passing, across all rules—**not** how many entities are passing all rules. Skipped and disabled rules are not included in this calculation.
 
+Scores for each rule can also be viewed **By Kind** and **By Team**. These tabs aggregate scores across an entity's kind (e.g., `service`, `queue`, `datastore`, `api`) or team as defined in Software Catalog. This score is calculated by averaging each entity's individual score within each kind or team. 
+
 ## Group rules into levels
 
 You can group rules into levels to categorize them by their criticality. There are three predefined levels: 
