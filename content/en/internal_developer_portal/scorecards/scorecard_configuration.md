@@ -86,7 +86,7 @@ Any docs defined
 
 ## How scores are calculated
 
-Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. An entity's score against custom rules is based on outcomes sent using the [Scorecards API][8] or through [Workflow Automation][9]. To exclude a particular custom rule from a service's score calculation, set its outcome to `skip` in the Scorecards API.
+Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. An entity's score against custom rules is based on outcomes sent using the [Scorecards API][8] or [Workflow Automation][9]. To exclude a particular custom rule from a service's score calculation, set its outcome to `skip` in the Scorecards API.
 
 Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][6]. 
 
