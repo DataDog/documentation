@@ -13,15 +13,11 @@ further_reading:
   text: Build Sankey widgets in Dashboards
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
-You can use Pathway diagrams to visualize all user journeys across your application to analyze the critical path.
+Pathway diagrams allow you to visualize all user journeys across your application to analyze the critical path.
 
-{{< img src="/product_analytics/journeys/pathways/pathways-overview.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/ga_pathway_diagrams_page.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors has a thinner node in the diagram.
 
