@@ -209,7 +209,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 
 ## JSON Aggregation
 
-In Agent version 7.67+ pretty printed and multiline JSON will be automatically aggregated into a single line so it can be used as a structured log. For example - if you have a log with multiline json among other messages. Auto multiline detection will identify valid JSON and aggregate it into a single line. So the following log:
+In Agent version 7.67+ pretty printed and multi-line JSON is automatically detected and aggregated into a single line. For example, the following log:
 
 ```
 2024-08-13 17:15:17 INFO My log message 1
@@ -237,7 +237,7 @@ will be aggregated into:
 2024-08-13 17:15:17 INFO My log message 4
 ```
 
-This allows Datadog to identify this JSON as a structured log and it's attributes will be queryable.
+This allows Datadog to identify the JSON as a structured log and allows its attributes to be automatically queryable.
 
 You can disable JSON aggregation with:
 
