@@ -205,9 +205,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### LLM Observability
 
-| Name                      | Description of audit event                                                                                    | Query in audit explorer                           |
-|---------------------------|---------------------------------------------------------------------------------------------------------------| --------------------------------------------------|
-| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (e.g. set sample rate) of an out-of-the-box evaluation metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
+| Name                      | Description of audit event                                                                                                                           | Query in audit explorer                           |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------| --------------------------------------------------|
+| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (e.g. set sample rate) of an [out-of-the-box evaluation][165] metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -556,3 +556,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [162]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Amodified
 [163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
 [164]:https://app.datadoghq.com/audit-trail?query=%20%40evt.name%3A"LLM%20Observability"%20%40action%3A%28enabled%20OR%20modified%20OR%20disabled%29%20%40asset.type%3Aevaluations
+[165]:/llm_observability/evaluations/ootb_evaluations
