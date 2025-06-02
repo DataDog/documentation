@@ -3,9 +3,20 @@
     width: 212px;
   }
 
+  .appsec-integrations .card img::hover {
+    display: none;
+  }
+
+  .appsec-integrations .card .description {
+    display: none;
+  }
+
+  .appsec-integrations .card .description::hover {
+    display: block;
+  }
 </style>
 
-<div class="appsec-integrations container cards-dd">
+<div class="appsec-integrations container cards-dd mb-3">
   <div class="row row-cols-2 row-cols-sm-4 g-2">
     <!-- {{ .Inner }} -->
 
@@ -15,8 +26,10 @@
           <div class="card-body text-center py-1 px-1">
             <img class="img-fluid mx-auto my-auto" src="{{.Site.Params.img_url}}images/icon_question_mark.svg" alt="equest a missing integration" loading="lazy">
             <div class="title fw-bold">Missing Integration?</div>
-            <div class="description lh-1">Request your missing integration</div>
-            <button type="button" class="btn btn-primary btn-sm mt-1 text-uppercase">Request Form</button>
+            <div class="description lh-1">
+              Request your missing integration
+              <button type="button" class="btn btn-primary btn-sm mt-1 text-uppercase">Request Form</button>
+            </div>
           </div>
         </a>
       </div>
