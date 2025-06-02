@@ -7,10 +7,6 @@ further_reading:
   text: "Product Analytics"
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 Journeys help you track user journeys from end-to-end to discover the different ways users navigate through your application. You can extract the data to design your app in a way that users actually use it - not how you think they use it.
