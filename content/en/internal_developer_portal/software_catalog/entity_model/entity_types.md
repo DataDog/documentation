@@ -194,6 +194,8 @@ Datastore entities can be:
 
 If Database Monitoring is enabled, the datastore entity page displays query throughput, latency, and error rates. Otherwise, the page shows basic trace-derived metrics and dependency relationships.
 
+{{< img src="/tracing/software_catalog/datastore-entity-page-dbm-setup-prompt.png" alt="The datastore entity page for web-store-mongo, with a modal prompting the user to set up Database Monitoring for more insights" style="width:100%;" >}}
+
 ### Example YAML definitions
 
 {{% collapse-content title="YAML definition for an inferred datastore" level="h4" expanded=false id="id-for-anchoring" %}}
