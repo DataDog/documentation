@@ -31,17 +31,17 @@ Specifically, you can:
 - Start from a set of [out-of-the-box policy](#start-with-an-out-of-the-box-policy-template) templates that span infrastructure reliability, cost optimization, operational excellence, and versioning.
 - Define a [tagging policy](#create-a-tagging-policy), which involves a resource type and the desired tag key and value the resource type should have.
 - Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score.
-- Filter all policies to a specific team (or any custom tag) to create a shareable view to each responsible team.
-- Group all policies to see compliance across teams (or any custom tag) to prioritize outreach to low-performing teams.
+- Filter policies by team (or any custom tag) to create a shareable view for each team.
+- Group policies by team (or any custom tag) to assess compliance and prioritize outreach to low-performing teams.
 
 ## Example Resource Policies
 
 <details open>
 <summary><strong>Operational excellence and versioning</strong></summary>
 
-- Amazon EC2 instances should only use approved AMIs (Golden AMI).
+- Amazon EC2 instances should only use approved Golden AMIs.
 - Amazon RDS instances running Postgres should use the latest compatible engine versions.
-- Amazon Lambda functions should not run deprecated runtimes.
+- AWS Lambda functions should not run deprecated runtimes.
 - Amazon ElastiCache should use the latest engine version.
 
 </details>
@@ -52,8 +52,8 @@ Specifically, you can:
 - Amazon RDS instances should have backup retention period > 0.
 - Amazon ECS services should have desired task count > 1.
 - Amazon ACM certificates should be in successful auto-renewal state.
-- Google Compute Instances should have automatic restart enabled.
-- Azure VMIs should be deployed across multiple AZs.
+- Google Compute Engine instances should have automatic restart enabled.
+- Azure Virtual Machines should be deployed across multiple AZs.
 
 </details>
 
@@ -70,7 +70,7 @@ Specifically, you can:
 <summary><strong>Cost optimization</strong></summary>
 
 - Amazon EBS volumes should use GP3 instead of GP2.
-- Google Compute Instances should use ARM architecture where possible.
+- Google Compute Engine instances should use ARM architecture where possible.
 - Azure Managed Disks should be in the attached state.
 
 </details>
