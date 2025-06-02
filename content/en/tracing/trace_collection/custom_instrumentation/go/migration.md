@@ -89,10 +89,10 @@ v2fix -fix .
 The tool makes the following changes:
 
 1. Updates import URLs from `gopkg.in/DataDog/dd-trace-go.v1` to `github.com/DataDog/dd-trace-go/v2`.
-1. Moves imports from `ddtrace/tracer` to `ddtrace` where appropriate.
-1. Converts `Span` and `SpanContext` calls to use pointers.
-1. Replaces unsupported `WithServiceName()` calls with `WithService()`.
-1. Updates `TraceID()` calls to `TraceIDLower()` for obtaining `uint64` trace IDs.
+1. Moves imports from `ddtrace` to `ddtrace/tracer` where appropriate.
+1. Converts `Span` and `SpanContext` calls to use concrete values.
+1. Replaces unsupported `WithServiceName` calls with `WithService`.
+1. Updates `TraceID` calls to `TraceIDLower` for obtaining `uint64` trace IDs.
 
 ## Troubleshooting
 
@@ -106,7 +106,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
 
 To:
 ```go
-import "github.com/DataDog/dd-trace-go/v2/ddtrace"
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 import "github.com/DataDog/dd-trace-go/v2/profiler"
 ```
 
@@ -145,7 +145,41 @@ func main() {
 
 ### API changes
 
-Improvements to the API have caused some functions to change. For example, child spans are started with `StartChild` rather than `ChildOf`:
+Improvements to the API have caused some functions and types to change. For more information, see the [godoc page for dd-trace-go v2][1].
+
+#### Spans
+
+`Span` and `SpanContext` are now represented as a struct rather than an interface, which means that references to these types must use a pointer. They have also been moved to live within the `tracer` package, so they must be accessed using `tracer.Span` rather than `ddtrace.Span`.
+
+v1:
+```go
+var sp ddtrace.Span = tracer.StartSpan("opname")
+var ctx ddtrace.SpanContext = sp.Context()
+```
+
+v2:
+```go
+var sp *tracer.Span = tracer.StartSpan("opname")
+var ctx *tracer.SpanContext = sp.Context()
+```
+
+##### Deprecated ddtrace interfaces
+
+All the interfaces in `ddtrace` have been removed in favor of struct types, except for `SpanContext`. The new types have moved into `ddtrace/tracer`.
+
+##### Deprecated constants and options
+
+The following constants and functions have been removed:
+
+* `ddtrace/ext.AppTypeWeb`
+* `ddtrace/ext.CassandraQuery`
+* `ddtrace/ext.CassandraBatch`
+* `ddtrace/tracer.WithPrioritySampling`; priority sampling is enabled by default.
+* `ddtrace/tracer.WithHTTPRoundTripper`; use `WithHTTPClient` instead.
+
+#### StartChild
+
+Child spans are started with `StartChild` rather than `ChildOf`:
 
 v1:
 ```go
@@ -173,9 +207,32 @@ func main() {
 }
 ```
 
+#### Trace IDs
+
+Rather than a `uint64`, trace IDs are now represented as a `string`. This change will allow support for 128-bit trace IDs. Old behavior may still be accessed by using the new `TraceIDLower()` method, though switching to 128-bit IDs is recommended.
+
+v1:
+```go
+sp := tracer.StartSpan("opname")
+fmt.Printf("traceID: %d\n", sp.Context().TraceID())
+```
+
+v2:
+```go
+sp := tracer.StartSpan("opname")
+fmt.Printf("traceID: %s\n", sp.Context().TraceID()) //recommended for using 128-bit IDs
+fmt.Printf("traceID: %d\n", sp.Context().TraceIDLower()) // for maintaining old behavior with 64-bit IDs
+```
+
+#### Span Links API
+
+`Span.AddSpanLink` has been renamed to `Span.AddLink`.
+
 ### Configuration changes
 
-The `WithServiceName()` option has been replaced with `WithService()` for consistency:
+#### WithService
+
+The `WithServiceName` option has been replaced with `WithService` for consistency:
 ```go
 // v1
 tracer.Start(tracer.WithServiceName("my-service"))
@@ -183,8 +240,81 @@ tracer.Start(tracer.WithServiceName("my-service"))
 // v2
 ddtrace.Start(ddtrace.WithService("my-service"))
 ```
+#### WithDogstatsdAddress
 
-For more information, see the [godoc page for dd-trace-go v2][1].
+`tracer.WithDogstatsdAddr` has been renamed as `tracer.WithDogstatsdAddress`. If you would like to specify a different DogStatsD address upon starting the tracer.
+
+v1:
+```go
+tracer.Start(tracer.WithDogstatsdAddr("10.1.0.12:4002"))
+```
+
+v2:
+```go
+tracer.Start(tracer.WithDogstatsdAddress("10.1.0.12:4002"))
+```
+
+#### WithAgentURL
+
+`tracer.WithAgentURL` sets the address by URL where the agent is located, in addition to the existing `WithAgentAddr` option. It is useful for setups where the agent is listening to a Unix Domain Socket:
+
+v2:
+```go
+tracer.Start(tracer.WithAgentURL("unix:///var/run/datadog/apm.socket"))
+```
+
+#### NewStartSpanConfig, WithStartSpanConfig & WithFinishConfig
+
+These functional options for `ddtrace/tracer.Tracer.StartSpan` and `ddtrace/tracer.Span.Finish` reduces the number of calls (in functional option form) in hot loops by giving the freedom to prepare a common span configuration in hot paths.
+
+v1:
+```go
+var err error
+span := tracer.StartSpan(
+	"operation",
+	ChildOf(parent.Context()),
+	Measured(),
+	ResourceName("resource"),
+	ServiceName(service),
+	SpanType(ext.SpanTypeWeb),
+	Tag("key", "value"),
+)
+defer span.Finish(tracer.NoDebugStack())
+```
+
+v2:
+```go
+cfg := tracer.NewStartSpanConfig(
+	tracer.ChildOf(parent.Context()),
+	tracer.Measured(),
+	tracer.ResourceName("resource"),
+	tracer.ServiceName(service),
+	tracer.SpanType(ext.SpanTypeWeb),
+	tracer.Tag("key", "value"),
+)
+finishCfg := tracer.NewFinishConfig(
+	NoDebugStack(),
+)
+// [...]
+// Reuse the configuration in your hot path:
+span := tracer.StartSpan("operation", tracer.WithStartSpanConfig(cfg))
+defer span.Finish(tracer.WithFinishConfig(finishCfg))
+```
+
+#### Sampling API simplified
+
+The following functions have been removed in favour of `SpanSamplingRules` and `TraceSamplingRules`:
+
+* `NameRule`
+* `NameServiceRule`
+* `RateRule`
+* `ServiceRule`
+* `SpanNameServiceMPSRule`
+* `SpanNameServiceRule`
+* `SpanTagsResourceRule`
+* `TagsResourceRule`
+
+Also, `ext.SamplingPriority` tag is deprecated. Use `ext.ManualKeep` and `ext.ManualDrop` instead.
 
 ## Further reading
 
