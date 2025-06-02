@@ -2,15 +2,15 @@
 title: Set Up Pipelines
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/"
-  tag: "Documentation"
-  text: "Observability Pipelines"
 - link: "observability_pipelines/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
 - link: "observability_pipelines/advanced_configurations/"
   tag: "Documentation"
   text: "Advanced configurations for Observability Pipelines"
+- link: "observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/"
+  tag: "Documentation"
+  text: "Run multiple pipelines on a host"
 - link: "observability_pipelines/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Observability Pipelines"
@@ -27,7 +27,7 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 {{% tab "Pipeline UI" %}}
 Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
 
-1. Navigate to [Observability Pipelines][4].
+1. Navigate to [Observability Pipelines][13].
 1. Select a template.
 1. Select and set up your source.
 1. Select and set up your destinations.
@@ -58,6 +58,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [10]: /observability_pipelines/set_up_pipelines/generate_metrics/
 [11]: /observability_pipelines/update_existing_pipelines/
 [12]: /observability_pipelines/install_the_worker/
+[13]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 
@@ -84,11 +85,11 @@ Pipelines created using Terraform are read-only in the UI. Use the [datadog_obse
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Advanced Configurations][11] for bootstrapping options.
+See [Advanced Configurations][5] for bootstrapping options.
 
 ### Index your Worker logs
 
-Make sure your Worker logs are [indexed][14] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+Make sure your Worker logs are [indexed][6] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 ## Clone a pipeline
 
@@ -111,5 +112,6 @@ Make sure your Worker logs are [indexed][14] in Log Management for optimal funct
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
-[11]: /observability_pipelines/advanced_configurations/
-[14]: /logs/log_configuration/indexes/
+[4]: https://app.datadoghq.com/observability-pipelines
+[5]: /observability_pipelines/advanced_configurations/
+[6]: /logs/log_configuration/indexes/

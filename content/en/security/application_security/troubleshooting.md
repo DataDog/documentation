@@ -6,11 +6,10 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog App and API Protection"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
-
 
 ## Overview
 
@@ -534,11 +533,6 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-
-## No vulnerabilities detected by Software Composition Analysis
-
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
-
 ### Confirm AAP is enabled
 
 You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
@@ -553,36 +547,33 @@ AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the App and API Protection product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Disabling threat management and protection
+## Disabling AAP
 
-To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable AAP, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
 * If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If threat management was activated using [Remote Configuration][16], do the following: 
-  1. Go to [Services][15] (**AAP** > **Catalog** > **Services**).
+* If AAP was activated using [Remote Configuration][16], do the following: 
+  1. Go to [Services][15].
   2. Select **Threat Management in Monitoring Mode**.
   3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   4. Click on a service.
   5. In the service details, in **Threat Detection**, click **Deactivate**.
 
-<div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
 
-* To disable threat management on your services in bulk, do the following: 
+* To disable AAP on your services in bulk, do the following: 
   1. Go to [Services][15].
   2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   3. Select the check boxes for the services where you want to disable threat detection.
   4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
-## Disabling Code Security
-
-To disable [Code Security][13], remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
   
 ## Need more help?
 

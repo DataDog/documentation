@@ -334,8 +334,8 @@ GlobalOpenTelemetry.set(object : OpenTelemetry {
         return ContextPropagators.noop()
     }
 })
-// and later on if you want to access the tracer provider
-val tracerProvider = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
+// and later on if you want to access the tracer
+val tracer = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -355,8 +355,8 @@ GlobalOpenTelemetry.set(new OpenTelemetry() {
         return ContextPropagators.noop();
     }
 });
-// and later on if you want to access the tracer provider
-final TracerProvider tracerProvider = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
+// and later on if you want to access the tracer
+final Tracer tracer = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
 ```
 {{% /tab %}}
 {{< /tabs >}}
