@@ -1,6 +1,6 @@
 The Observability Pipelines Worker supports all major Kubernetes distributions, such as:
 
-- AWS Elastic Kubernetes Service (EKS)
+- Amazon Elastic Kubernetes Service (EKS)
 - Azure Kubernetes Service (AKS)
 - Google Kubernetes Engine (GKE)
 - Red Hat Openshift
