@@ -20,7 +20,7 @@ With custom allocation rules, platform engineers and FinOps can:
 
 These are the general steps to create a custom allocation rule:
 
-1. **[Define the source costs](#define-the-source)**. Specify which costs you want to allocate by setting crtieria such as provider, product, spend type, or tags.
+1. **[Define the source costs](#define-the-source)**. Specify which costs to allocate by setting criteria such as provider, product, spend type, or tags.
    
    _Example: Untagged support costs, shared database costs._
 1. **Choose your [allocation method](#choose-an-allocation-method)**. Options include:
@@ -84,9 +84,9 @@ With the custom percentage strategy, you can define static custom percentages fo
 
 Costs are allocated based on the proportional spend of destination values. Similarly to even allocation, you can further customize your allocation by setting filters and partitions.
 
-In the example above, EC2 support fees across teams are allocated based on their share of overall EC2 spend. Proportions are calculated based on how much each team spent.
+In the preceding diagram, EC2 support fees across teams are allocated based on their share of overall EC2 spend. Proportions are calculated based on how much each team spent.
 
-To create a rule for this allocation, you could:
+To create a rule for this allocation, you can:
 
 - Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`).
 - Choose the allocation method: **Proportional by spend**.
@@ -106,9 +106,9 @@ You can also specify how cost proportions should be partitioned to ensure segmen
 
 Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
-For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user, as follows:
+For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
 
-To create a rule for the above allocation, you could:
+To create a rule for this allocation, you could:
 
 - Define the costs to allocate (source): **PostGreSQL costs** (`azure_product_family:dbforpostgresql`).
 - Choose the allocation method: **Dynamic by metric**
@@ -135,7 +135,7 @@ You can select multiple values for your destination tag. For instance, if you se
 
 ## Filtering
 
-A filter restricts which costs are included in an allocation rule, based on criteria you define. For example, you might only want to allocate costs where `aws_product` is `ec2` or where a specific tag is present. Filters help you target the allocation rule to just the relevant subset of your cloud spend.
+A filter restricts which costs are included in an allocation rule, based on criteria you define. For example, you might only want to allocate costs where `aws_product` is `ec2` or where a specific tag is present. Filters help you target the allocation rule to the relevant subset of your cloud spend.
 
 ## Partitioning
 
