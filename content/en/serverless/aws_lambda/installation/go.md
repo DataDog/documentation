@@ -127,13 +127,13 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
-  "github.com/aws/aws-lambda-go/events"
-  "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+	ddlambda "github.com/DataDog/datadog-lambda-go"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+	// httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+	// "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -161,8 +161,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	s.Finish()
 	return "ok", nil
 }
-
-}
 ```
 
 ## Minimize cold start duration
@@ -178,7 +176,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][4] to get alerted on attackers targeting your service
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to

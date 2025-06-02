@@ -193,7 +193,7 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 {{% tab "Node.js" %}}
 **Remote configuration**
 
-Starting from version <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+Starting from version <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, for Node.js applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
@@ -251,7 +251,7 @@ Read more about sampling controls in the [PHP tracing library documentation][1].
 {{% tab "C++" %}}
 **Remote configuration**
 
-Starting from version <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+Starting from version <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, for C++ applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
