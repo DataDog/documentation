@@ -32,7 +32,7 @@ After configuring your Scorecards, you can view entity-level scores, track score
 
 The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see what level your specific entity or subset of entities has reached and the number of rules passed within each level.  
 
-Click **View Details** from the Scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all levels, rules applied to the level within each, and the `pass`, `fail`, or `no data` state for the entity for each rule. 
+Click **View Details** from the Scorecard, or open the service details side panel and navigate to the Scorecards tab. Both views lists all levels, the rules applied within each level, and the entity’s state---`pass`, `fail`, or `no data`---for each rule.
 
 ## Track scores over time
 
