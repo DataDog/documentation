@@ -10,9 +10,6 @@ further_reading:
 - link: "bits_ai/getting_started"
   tag: "Documentation"
   text: "Getting Started"
-- link: "bits_ai/query_examples"
-  tag: "Documentation"
-  text: "Example Natural Language Queries"
 ---
 
 ## Overview
