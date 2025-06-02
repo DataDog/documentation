@@ -8,7 +8,7 @@ title: Visualize relationships with Security Graph
 
 One of the most persistent challenges in cloud security is understanding how compute, storage, identity, and networking components interact with each other. With Security Graph, you can model your cloud environment as a relationship graph. Visualize and query the connections between your cloud resources, such as EC2 instances, IAM roles, S3 buckets, and security groups, combining data from your Agentless and Agent-based cloud scans. Investigate these relationships so you can surface indirect access paths, assess identity risks, and respond more effectively to emerging threats.
 
-**Note**: Security Graph currently only supports AWS resources.
+**Note**: Security Graph only supports AWS resources.
 
 {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 
