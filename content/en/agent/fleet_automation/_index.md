@@ -50,12 +50,22 @@ Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, A
 - The services that the Agent is monitoring
 - The Agent's Remote Configuration status
 - The products that are enabled on the Agent
+- Agent Audit Trail events including configuration changes, upgrades and flares
 
 ### Examine an Agent
 
-Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
+Selecting an Agent gives you more information about it, including its configuration, connected integrations, audit events and a support tab that you can use to send a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
+
+### View Agent Audit Trail events
+
+The Audit Events tab displays Audit Trail events associated with the selected Agent.
+Use this tab to:
+- Identify configuration changes, API key updates, installs, upgrades and support flares.
+- Determine when changes were made and from where
+
+Audit Trail event visibility depends on your plan. If Audit Trail is not enabled, events from the past 24 hours are available. If it is enabled, events are retained for up to 90 days.
 
 ### Send a remote flare
 
