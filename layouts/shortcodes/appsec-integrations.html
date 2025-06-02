@@ -17,19 +17,20 @@
   }
 </style>
 
-<div class="appsec-integrationscontainer cards-dd">
-  <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
+<div class="appsec-integrations container cards-dd">
+  <div class="row row-cols-2 row-cols-sm-4 g-2">
     <!-- {{ .Inner }} -->
-
-    <div class="col card h-100">
-      <a href="{{ .Get "integration-request-link" }}" aria-label="request a missing integration form link" target="_blank">
-        <div class="card-body text-center py-2 px-1">
-          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{.Site.Params.img_url}}images/icon_question_mark.svg" alt="equest a missing integration" loading="lazy">
-          <div class="title">Missing Integration?</div>
-          <div class="description">Request your missing integration</div>
-          <button type="button">Request Form</button>
-        </div>
-      </a>
+    <div class="col">
+      <div class="card h-100">
+        <a href="{{ .Get "integration-request-link" }}" aria-label="request a missing integration form link" target="_blank">
+          <div class="card-body text-center py-2 px-1">
+            <img class="img-fluid mx-auto my-auto" src="{{.Site.Params.img_url}}images/icon_question_mark.svg" alt="equest a missing integration" loading="lazy">
+            <div class="title">Missing Integration?</div>
+            <div class="description">Request your missing integration</div>
+            <button type="button">Request Form</button>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
