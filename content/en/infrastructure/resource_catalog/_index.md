@@ -97,7 +97,7 @@ Clicking on any resource opens a side panel with details including:
 ## Resource Changes (in Preview)
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
-  esource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+Resource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}} 
 
 Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps you monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
