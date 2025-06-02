@@ -1,6 +1,10 @@
 {{/*  "Inserts a banner at the top of the page if a site is not supported"  */}}
 {{ $dot := . }}
 
+{{/*  "Translation support"  */}}
+{{$text := .Site.Params.site_support_banner | default "" | safeHTML }}
+
+
 {{/* "First checks if the file has a site_support_id param. Falls back to the file path. " */}}
 {{ $site_support_id := .Page.Params.site_support_id }}
 {{ $product_paths := split .Page.Path "/" }}
@@ -31,7 +35,7 @@
     {{ $unsupported_regions = substr $unsupported_regions 0 -1 }}
     
     <div class="d-none site-region-container" data-region="{{ $unsupported_regions }}">
-        <div class="alert alert-warning">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
+        <div class="alert alert-warning">{{ $text }} ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
     </div>
 {{ end }}
 
