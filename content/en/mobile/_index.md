@@ -88,7 +88,7 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 
 The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
 
-You can initiate a page to an individual or team, and also override existing shifts when necessary. For additional details, refer to the [Datadog On-Call documentation][20].
+You can initiate a page to an individual or team, and also override existing shifts when necessary. For more information, see [Datadog On-Call][20].
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
