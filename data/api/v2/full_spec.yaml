@@ -9569,6 +9569,9 @@ components:
           type: array
         target:
           $ref: '#/components/schemas/CreatePageRequestDataAttributesTarget'
+          example:
+            identifier: my-team
+            type: team_handle
         title:
           description: The title of the page.
           example: 'Service: Test is down'
@@ -9582,6 +9585,9 @@ components:
       type: object
     CreatePageRequestDataAttributesTarget:
       description: Information about the target to notify (such as a team or user).
+      example:
+        identifier: my-team
+        type: team_handle
       properties:
         identifier:
           description: Identifier for the target (for example, team handle or user
