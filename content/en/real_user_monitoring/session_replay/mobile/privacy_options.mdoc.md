@@ -32,7 +32,8 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Fine-grained masking
-Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
+
+Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs.
 
 ### Text and input masking
 
@@ -41,7 +42,8 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 {% img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;" /%}
 
 #### Mask sensitive inputs
-With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields. 
+
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields.
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -449,6 +451,9 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 Privacy overrides are not supported in SwiftUI.
 {% /alert %}
 
+<!-- Android or iOS -->
+{% if or(equals($platform, "android"), equals($platform, "ios")) %}
+
 ### Text and input override
 
 <!-- Android -->
@@ -476,12 +481,6 @@ myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
 ```
 {% /if %}
 <!-- end iOS -->
-
-<!-- React Native -->
-{% if equals($platform, "react_native") %}
-This feature is not supported on React Native.
-{% /if %}
-<!-- end React Native -->
 
 ### Image override
 
@@ -511,12 +510,6 @@ myView.dd.sessionReplayOverrides.imagePrivacy = nil
 {% /if %}
 <!-- end iOS -->
 
-<!-- React Native -->
-{% if equals($platform, "react_native") %}
-This feature is not supported on React Native.
-{% /if %}
-<!-- end React Native -->
-
 ### Touch override
 
 <!-- Android -->
@@ -544,12 +537,6 @@ myView.dd.sessionReplayOverrides.touchPrivacy = nil
 ```
 {% /if %}
 <!-- end iOS -->
-
-<!-- React Native -->
-{% if equals($platform, "react_native") %}
-This feature is not supported on React Native.
-{% /if %}
-<!-- end React Native -->
 
 ### Hidden elements override
 
@@ -586,9 +573,12 @@ myView.dd.sessionReplayOverrides.hide = false
 {% /if %}
 <!-- end iOS -->
 
+{% /if %}
+<!-- end iOS or Android -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
-This feature is not supported on React Native.
+Privacy override content for React Native will go here.
 {% /if %}
 <!-- end React Native -->
 
