@@ -157,7 +157,7 @@ this file, you can update your project definition to generate it. Follow these [
 
 The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
 
-### No Results from Datadog-hosted Scans
+### No results from Datadog-hosted scans
 
 Datadog-hosted SCA scans do **not** support repositories that:
 
