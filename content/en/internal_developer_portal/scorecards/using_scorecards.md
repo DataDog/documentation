@@ -28,11 +28,11 @@ Scorecards are in Preview.
 
 After configuring your Scorecards, you can view entity-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.
 
-## View service-level details and scores
+## View entity-level details and scores
 
 The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see what level your specific entity or subset of entities has reached and the number of rules passed within each level.  
 
-Click **View Details** from the Scorecard, or open the service details side panel and navigate to the Scorecards tab. Both views lists all levels, the rules applied within each level, and the entity’s state---`pass`, `fail`, or `no data`---for each rule.
+Click **View Details** from the Scorecard, or open the entity details side panel and navigate to the Scorecards tab. Both views lists all levels, the rules applied within each level, and the entity’s state---`pass`, `fail`, or `no data`---for each rule.
 
 ## Track scores over time
 
@@ -49,7 +49,7 @@ You can generate Scorecard reports, which send scheduled overviews of Scorecard 
 To create a Report:
 
 1. Click **Create Report** on the Scorecards page. 
-2. Choose whether to include all defined entities across your organization or a specific team's services. 
+2. Choose whether to include all defined entities across your organization or a specific team's entities. 
 3. Set the date, time, and frequency at which you want to receive these reports.
 4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed. 
 5. Click **Enable this Workflow**.

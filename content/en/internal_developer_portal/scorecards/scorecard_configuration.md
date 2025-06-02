@@ -86,7 +86,7 @@ Any docs defined
 
 ## How scores are calculated
 
-Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. An entity's score against custom rules is based on outcomes sent using the [Scorecards API][8] or [Workflow Automation][9]. To exclude a particular custom rule from a service's score calculation, set its outcome to `skip` in the Scorecards API.
+Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. An entity's score against custom rules is based on outcomes sent using the [Scorecards API][8] or [Workflow Automation][9]. To exclude a particular custom rule from an entity's score calculation, set its outcome to `skip` in the Scorecards API.
 
 Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][6]. 
 
@@ -98,7 +98,7 @@ Scores for each rule can also be viewed **By Kind** and **By Team**. These tabs 
 
 You can group rules into levels to categorize them by their criticality. There are three predefined levels: 
 
-- **Level 1 - Basic rules:** These rules reflect the baseline expectations for every production service, such as having an on-call owner, monitoring in place, or a team defined.
+- **Level 1 - Basic rules:** These rules reflect the baseline expectations for every production entity, such as having an on-call owner, monitoring in place, or a team defined.
 - **Level 2 - Intermediate rules:** These rules reflect strong engineering practices that should be adopted across most entities. Examples might include defining SLOs or linking documentation within Software Catalog.
 - **Level 3 - Advanced rules:** These aspirational rules represent mature engineering practices. These may not apply to every entity but are valuable goals for teams.
 

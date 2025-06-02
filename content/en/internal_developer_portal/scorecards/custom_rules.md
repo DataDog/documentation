@@ -62,9 +62,9 @@ To set up a custom rule evaluation using Workflow Automation:
 3. Set a schedule for your Workflow to run on.
 4. Click plus (+) icon to add a step.
 5. Use the [**List all entity definitions** action][6] to fetch all defined entities from Software Catalog.
-6. Insert a [For loop][7] to iterate over each service one-by-one.
+6. Insert a [For loop][7] to iterate over each entity one-by-one.
 7. Select the action needed to fetch your evaluation data.
-8. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.
+8. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each entity.
 9. Use the [**Update scorecard rule outcome** action][3] to send results to Scorecards.
 10. Run the Workflow and see your evaluations populate in Scorecards for your custom rule. 
 
