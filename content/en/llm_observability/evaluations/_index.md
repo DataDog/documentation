@@ -32,7 +32,6 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
-
 [1]: /llm_observability/evaluations/ootb_evaluations
 [2]: /llm_observability/evaluations/submit_evaluations
 [3]: /llm_observability/evaluations/ragas_evaluations

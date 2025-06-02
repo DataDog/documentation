@@ -8,10 +8,6 @@ further_reading:
 title: Journeys
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Todas las funciones de Análisis de productos tienen disponibilidad limitada. Para solicitar acceso, rellena el formulario.
-{{< /callout >}}
-
 ## Información general
 
 Journeys te ayuda a seguir el recorrido de los usuarios de principio a fin para descubrir las distintas formas en que navegan por tu aplicación. Puedes extraer los datos para diseñar tu aplicación de forma que los usuarios la utilicen realmente, no como tu crees que la utilizan.
@@ -24,7 +20,7 @@ Los [diagramas de Pathways][1] te permiten visualizar todos los recorridos de us
 
 ## Análisis del embudo
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Comprender las conversiones de extremo a extremo con el análisis de embudo.">}}
+{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Comprende las conversiones de extremo a extremo con el Análisis de embudo.">}}
 
 Con el [análisis de embudo][1], puedes comprender la conversión de extremo a extremo de un único flujo de trabajo clave. Puedes obtener un desglose detallado en el panel lateral para entender por qué las tasas de conversación son las que son. Por ejemplo, ¿hubo un problema de rendimiento que provocó la caída de usuarios? ¿Están experimentando un error que se produjo en una versión reciente? Ve una Session Replay de un usuario que se ha convertido o que ha abandonado para saber exactamente qué ha ocurrido.
 
