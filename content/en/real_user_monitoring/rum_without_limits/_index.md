@@ -26,6 +26,8 @@ RUM without Limits provides you flexibility over your RUM sessions volumes by de
 
 Even if you retain only a fraction of your sessions, Datadog provides [performance metrics][1] for all ingested sessions. This ensures an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained.
 
+**Note**: In RUM without Limits mode, you can only use default filters on the [Performance Monitoring Summary page][7]. This lets you see the entire dataset and prevents skewed performance metrics since the data is sampled and there are fewer tags available than in event attributes.
+
 This page identifies key components of RUM without Limits that can help you manage your RUM sessions volumes within your observability budget.
 
 ### For new applications
@@ -81,7 +83,7 @@ To alleviate this, set `traceSampleRate` to a percentage below 100% (to the prev
 
 On mobile applications, many concurrent versions can live together. However, existing versions are not necessarily sending 100% of sessions, which means that creating new retention filters reduces the data available in Datadog for these application versions.
 
-Datadog recommends creating the same retention filters for all application versions, independently of whether the SDK sampling rate is set to 100% or not. Ultimately, all valuable sessions will still end up being collected even if some sessions are not ingested for some older versions.
+Datadog recommends creating the same retention filters for all application versions, independently of whether the SDK sampling rate is set to 100% or not. Ultimately, all valuable sessions are still collected even if some sessions are not ingested for some older versions.
 
 See suggested retention filters and use cases in [Retention Filter Best Practices][5].
 
@@ -99,3 +101,4 @@ Create and configure [retention filters][6].
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/retention_filter_best_practices/
 [6]: /real_user_monitoring/rum_without_limits/retention_filters
+[7]: https://app.datadoghq.com/rum/performance-monitoring

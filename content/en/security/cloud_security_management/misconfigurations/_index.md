@@ -13,7 +13,7 @@ Cloud Security Misconfigurations makes it easier to assess and visualize the cur
 
 ## Detect misconfigurations across your cloud resources
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#manage-out-of-the-box-and-custom-compliance-rules). 
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#maintain-compliance-with-industry-frameworks-and-benchmarks). 
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of misconfigurations and analyze historical configurations with the [Misconfigurations Findings page][2].
 

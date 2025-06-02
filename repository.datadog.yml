@@ -13,3 +13,5 @@ team: webops-platform
 checks_to_ignore:
   - "Send PR Approval Status"
   - "Preview Synthetics"
+  - "Documentation Team Approval Check / check-documentation-team-approval (pull_request)"
+  - "Documentation Team Approval Check / check-documentation-team-approval (pull_request_review)"

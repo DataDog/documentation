@@ -3,12 +3,13 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/core-web-vitals-lab
   tag: Centro de aprendizaje
   text: 'Laboratorio interactivo: métricas de Core Web Vitals'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: Blog
-  text: Real User Monitoring (RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: Blog
   text: Monitor de métricas de Core Web Vitals con Datadog RUM y Monitorización Sintético
+- link: https://www.datadoghq.com/blog/single-page-apps-inp/
+  tag: Blog
+  text: Monitorizar la interactividad de aplicaciones de una sola página con Core
+    Web Vitals y Datadog
 - link: /real_user_monitoring/explorer/
   tag: Documentación
   text: Explorar tus vistas en Datadog
@@ -205,7 +206,7 @@ O cuando los usuarios se desplazan por primera vez:
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //Eliminar el evento de escucha para que solo se active una vez
+    //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
     window.DD_RUM.addTiming('first_scroll');
 });
@@ -221,7 +222,7 @@ Por ejemplo:
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //Eliminar el evento de escucha para que solo se active una vez
+    //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
