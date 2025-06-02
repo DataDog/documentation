@@ -84,7 +84,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
-
+| [Agent API key updated][164]                    | A Datadog Agent API key was changed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent API Key Updated"`                         |
+| [Agent upgrade succeeded][165]                    | A Datadog Agent was successfully upgraded.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Succeeded"`                         |
+| [Agent upgrade failed][166]                    | A Datadog Agent remote upgrade attempt failed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Failed"`                         |
 
 ### API request events
 
@@ -548,3 +550,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [161]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Aaccessed
 [162]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Amodified
 [163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[164]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20API%20Key%20Updated%22
+[165]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Succeeded%22
+[166]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Failed%22
+
+
