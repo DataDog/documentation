@@ -207,7 +207,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 | Name                      | Description of audit event                                                                                                                           | Query in audit explorer                           |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------| --------------------------------------------------|
-| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (e.g. set sample rate) of an [out-of-the-box evaluation][165] metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
+| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (for example, set sample rate) of an [out-of-the-box evaluation][165] metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
