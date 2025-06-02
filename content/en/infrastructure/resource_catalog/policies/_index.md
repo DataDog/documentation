@@ -49,11 +49,11 @@ Specifically, you can:
 <details>
 <summary><strong>Reliability</strong></summary>
 
-- Amazon RDS instances should have backup retention period > 0.
+- Amazon RDS instances should have at least 1 day of backup retention configured.
 - Amazon ECS services should have desired task count > 1.
 - Amazon ACM certificates should be in successful auto-renewal state.
 - Google Compute Engine instances should have automatic restart enabled.
-- Azure Virtual Machines should be deployed across multiple AZs.
+- Azure Virtual Machines should be deployed across multiple Availability Zones.
 
 </details>
 
@@ -109,7 +109,7 @@ Chain multiple attributes in one policy (for example, require AWS CloudTrail log
 
 ### Start with an out-of-the-box policy template
 
-For insights into infrastructure health, across reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to narrow the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
+For insights into your infrastructure's reliability, cost optimization, operational excellence, and versioning, Datadog provides a range of out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to limit the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
 
 {{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Policies" style="width:100%;" >}}
 
