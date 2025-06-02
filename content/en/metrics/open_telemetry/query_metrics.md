@@ -9,6 +9,8 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-and-opentelemetry-metric-compatibility/" btn_hidden="false" >}}
+Querying across Datadog and OpenTelemetry metrics is in Preview. To enable this feature, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}} 
 
 Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid environments where some hosts emit OTel-native metrics and others emit Datadog-native metrics. Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
 
