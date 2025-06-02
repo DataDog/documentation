@@ -27,7 +27,7 @@ Resource Changes is in Preview. Click <strong>Request Access</strong> and comple
 
 Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps you monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
 
-{{< img src="/infrastructure/resource_catalog/resource-changes.png" alt="Datadog Resource Changes interface showing a list of infrastructure configuration changes. The screen displays a VM instance named \"vm-new-jmcintyre-kafka\" with a StorageProfile update, including a side-by-side diff view highlighting changes in JSON format. The table shows multiple resources with timestamps, change types (mostly \"UPDATE\"), and details of the modifications. Filters are available at the top for cloud, region, environment, and other attributes." width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource-changes.png" alt="Datadog Resource Changes interface showing a list of infrastructure configuration changes. The table shows multiple resources with timestamps, change types, and details of the modifications. Filters are available at the top for cloud, region, environment, and other attributes." width="100%">}}
 
 Resource Changes supports a variety of resources, including:
 - Hosts
@@ -59,7 +59,7 @@ To view configuration changes for your resources:
 
 Snapshot Changes represent configuration and relationship updates that Datadog detects by comparing snapshots of your cloud resources, taken approximately every 5-15 minutes.
 
-To view Snapshot Changes, toggle **Snapshot Changes** on [**Infrastructure > Resources > Changes**][8].
+To view Snapshot Changes, toggle **Snapshot Changes** on [**Infrastructure > Resources > Resource Changes**][8].
 
 Key characteristics of Snapshot Changes:
 - **No Additional Setup**: Requires no extra configuration beyond enabling resource collection.
@@ -71,7 +71,7 @@ Key characteristics of Snapshot Changes:
 
 You can access Resource Changes in the Datadog platform in the following ways:
 
--  **Main Navigation**: Go to [**Infrastructure > Resources > Changes**][8].
+-  **Main Navigation**: Go to [**Infrastructure > Resources > Resource Changes**][8].
 -  **Within a Resource's Side Panel**:
     1. Open the side panel for a specific resource (for example, by clicking on a host in the Resource Catalog or a related host view).
     2. Scroll down to the **Recent Changes** section.
