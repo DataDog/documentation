@@ -24,23 +24,42 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 {{< tabs >}}
 {{% tab "Individual" %}}
 
-To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section.
+To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section:
 
 ```yaml
 init_config:
   loader: core
   use_device_id_as_hostname: true
-  instances:
-    - ip_address: '1.2.3.4'
-      community_string: 'sample-string'
-      tags:
-      - 'key1:val1'
-      - 'key2:val2'
   ping:
     enabled: true            # (default false) enable the ping check
     linux:                   # (optional) Linux specific configuration
-    use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+    use_raw_socket: true     # (optional, default false) send pings using a raw socket (see step 3 above)
+instances:
+  - ip_address: '1.2.3.4'
+    community_string: 'sample-string'
+    tags:
+    - 'key1:val1'
+    - 'key2:val2'
 ```
+
+Or, apply the ping configuration _per_ instance:
+
+```yaml
+init_config:
+  loader: core
+  use_device_id_as_hostname: true
+instances:
+  - ip_address: '1.2.3.4'
+    community_string: 'sample-string'
+    tags:
+      - 'key1:val1'
+      - 'key2:val2'
+    ping:
+      enabled: true            # (default false) enable the ping check
+      linux:                   # (optional) Linux specific configuration
+      use_raw_socket: true     # (optional, default false) send pings using a raw socket 
+```
+
 
 {{% /tab %}}
 

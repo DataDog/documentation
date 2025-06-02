@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/

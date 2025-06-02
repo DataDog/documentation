@@ -7,7 +7,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-warning">Automated debug logs are supported for Java, Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
@@ -16,7 +16,6 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
   - Java: `1.26.0` or greater
-  - Python: `2.11.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.46.0` or greater
 

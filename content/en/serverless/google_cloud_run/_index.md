@@ -368,6 +368,9 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
         # Correctly formatted container-dependencies annotation
         "run.googleapis.com/container-dependencies" = jsonencode({main-app = ["sidecar-container"]})
       }
+      labels = {
+        service = "<SERVICE_NAME>"
+      }
     }
     spec {
       # Define shared volume
@@ -487,9 +490,6 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
           }
         }
       }
-      labels = {
-       service : "<SERVICE_NAME>"
-      } 
     }
   }
 

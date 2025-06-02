@@ -77,3 +77,29 @@ if (window.DD_LOGS) {
     // Locally log to console
     window.DD_LOGS.logger.setHandler(Config.loggingHandler);
 }
+
+const handleCdocsCustomRumAction = () => {
+    const filterSelectorMenu = document.querySelector('.filter-selector-menu')
+
+    if (filterSelectorMenu) {
+        const filterButtons = filterSelectorMenu.querySelectorAll('.cdoc-filter__option')
+
+        for (const button of filterButtons) {
+            button.addEventListener('click', (e) => {
+                window.DD_RUM.addAction('cdocs_filter_button_clicked', {
+                    filter: e.target.dataset.filterId,
+                    option: e.target.dataset.optionId
+                })
+            })
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.clientFiltersManager) {
+        handleCdocsCustomRumAction();
+        clientFiltersManager.registerHook('afterRerender', handleCdocsCustomRumAction);
+    }
+})
+
+

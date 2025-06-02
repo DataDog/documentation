@@ -20,6 +20,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-Go
   tag: "Source Code"
   text: Tracing library open source code repository
+- link: /tracing/trace_collection/proxy_setup/apigateway
+  tag: "Documentation"
+  text: "Instrumenting Amazon API Gateway"
 ---
 
 ## Overview

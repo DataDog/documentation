@@ -1,5 +1,5 @@
 ---
-title: Storage Monitoring for Amazon S3 & Google Cloud Storage
+title: Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage
 private: true
 ---
 
@@ -7,20 +7,50 @@ private: true
 
 ## Overview
 
-Storage Monitoring for Amazon S3 & Google Cloud Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
+Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. It detects potential issues before they impact operations, and helps you make data-driven decisions about storage optimization. Use these insights to track storage growth, investigate access patterns, and optimize costs.
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 & GCS buckets.
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets, GCS buckets, and Azure Storage Accounts.
 
-You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Storage Monitoring**.
+Access your Storage Monitoring data by navigating to **Infrastructure > Storage Monitoring**.
 
 ## Setup for Amazon S3
 
 ### Installation
 
 {{< tabs >}}
+{{% tab "Recommended: Storage Monitoring UI" %}}
+
+The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][1]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
+
+1. Go to Datadog > Infrastructure > Storage Monitoring.
+
+2. Click [Add Buckets][1].
+
+{{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+
+3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
+
+  **Note**: For each AWS account that has the S3 buckets you want to monitor, make sure your Datadog IAM roles include the following permissions: `s3:GetObject`, `s3:ListObjects`, and `s3:PutInventoryConfiguration`.
+
+4. Select the S3 buckets you want to monitor with Storage Monitoring. You can select buckets from multiple AWS accounts at once.
+
+{{< img src="integrations/guide/storage_monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+
+5. Assign a destination bucket per region to store S3 inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
+
+- Source bucket: The S3 bucket you want to monitor with Storage Monitoring
+- Destination bucket: Used to store inventory reports (one per AWS region, can be reused)
+
+6. Complete the configuration. The inventory generation process will start within AWS within 24 hours of the first report.
+
+7. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
+
+[1]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
+
+{{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-The fastest way to set up Storage Monitoring is using the provided CloudFormation templates. This process involves two steps:
+You can also set up Storage Monitoring using the provided CloudFormation templates. This process involves two steps:
 
 #### Step 1: Configure inventory generation
 
@@ -363,4 +393,85 @@ If you encounter any issues or need assistance:
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: https://cloud.google.com/storage/docs/insights/using-inventory-reports#enable_the_api
 [3]: https://forms.gle/c7b8JiLENDaUEqGk8
+
+
+
+## Setup for Azure Blob Storage
+
+### Installation
+
+To set up Storage Monitoring for Azure Blob Storage, follow these steps:
+
+{{< tabs >}}
+{{% tab "Azure CLI" %}}
+
+To enable inventories for the selected storage accounts in each subscription, run the following script in your [Azure Cloud Shell][301]:
+
+```shell
+curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh \
+  | bash -s -- <client_id> <subscription_id> <comma_separated_storage_account_names>
+```
+
+Before running the script, set your [shell environment][302] to Bash and replace the various placeholder inputs with the correct values:
+- `<client_id>`: The client ID of an App Registration already set up using the [Datadog Azure integration][302]
+- `<subscription_id>`: The subscription ID of the Azure subscription containing the storage accounts
+- `<comma_separated_storage_account_names>`: A comma-separated list of the storage accounts you want to monitor. For example, `storageaccount1,storageaccount2`
+
+
+[301]: https://shell.azure.com
+[302]: /integrations/azure/#setup
+[303]: https://learn.microsoft.com/en-us/azure/cloud-shell/get-started/classic?tabs=azurecli#select-your-shell-environment
+{{% /tab %}}
+
+{{% tab "Azure Portal" %}}
+
+For Each Storage Account you wish to monitor, follow all of the steps here:
+
+
+#### Create a blob inventory policy
+1. In the Azure portal, navigate to your Storage Account.
+2. Go to **Data management** > **Blob inventory**.
+3. Click **Add**.
+4. Configure the policy:
+   - Name: **datadog-storage-monitoring**
+   - Destination container:
+      - Click **Create new**, and enter the name `datadog-storage-monitoring`.
+   - Object type to inventory: **Blob**
+   - Schedule: **Daily**
+   - Blob types: Select **Block blobs**, **Append blobs**, and **Page blobs**.
+   - Subtypes: Select **Include blob versions**
+   - Schema fields: Select All, or ensure that at least the following are selected:
+      - **Name**
+      - **Access tier**
+      - **Last modified**
+      - **Content length**
+      - **Server encrypted**
+      - **Current version status**
+      - **Version ID**
+   - Exclude prefix: datadog-storage-monitoring
+5. Click **Add**.
+
+#### Add the role assignment
+1. In the Azure portal, navigate to your Storage Account.
+2. Go to **Data storage** > **Containers**.
+3. Click on the **datadog-storage-monitoring** container.
+4. Click on **Access control (IAM)** in the left-hand menu.
+5. Click **Add** > **Add role assignment**.
+6. Fill out the role assignment:
+    - Role: Select **Storage Blob Data Reader**. Click **Next**.
+    - Assign access to: **User, group, or service principal**.
+    - Members: Click **+ Select members** and search for your App Registration by its name and select it.
+    - **Note**: This should be an App Registration set up in the Datadog Azure integration. Keep in mind the Client ID for later.
+7.  Click **Review + assign**.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Post-Installation
+
+After you finish with the above steps, fill out the [post-setup form][310].
+
+[310]: https://forms.gle/WXFbGyBwWfEo3gbM7
+
+
 
