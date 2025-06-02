@@ -118,36 +118,9 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
   - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
-2. Use the Datadog Agent image tag with embedded DDOT Collector:
+2. Enable the OpenTelemetry Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
-  ...
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-{{< /code-block >}}
-
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
-
-3. Enable the OpenTelemetry Collector:
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
-  ...
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-      containers:
-        otel-agent:
-          env:
-            - name: DD_OTELCOLLECTOR_ENABLED
-              value: "true"
-  ...
   # Enable Features
   features:
     otelCollector:
@@ -422,18 +395,6 @@ spec:
         secretName: datadog-secret
         keyName: app-key
 
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-      containers:
-        otel-agent:
-          env:
-            - name: DD_OTELCOLLECTOR_ENABLED
-              value: "true"
-
   # Enable Features
   features:
     apm:
@@ -608,13 +569,6 @@ spec:
       appSecret:
         secretName: datadog-secret
         keyName: app-key
-
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
 
   # Enable Features
   features:
