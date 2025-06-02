@@ -17,7 +17,11 @@ The setup configuration for this example consists of a Fargate task, Fargate ser
 
 [Create a task definition][1]. The task definition describes which containers to run, the configuration (such as the environment variables and ports), and the CPU and memory resources allocated for the task.
 
-The tasks should be deployed as a replica, where the minimum number of containers should be based on your log volume and the maximum number of containers should be able to absorb any spikes or growth in log volume. See [Best Practices for Scaling Observability Pipelines][5] to help determine CPU and memory resources needed. **Note**: The resource guidance provided is not for a single instance of the task, but for the total number of tasks. For example, if you want to send 3 TB of logs to the Worker, you could either deploy three replicas with one vCPU each or deploy one replica with three vCPUs.
+The tasks should be deployed as a replica with auto scaling enabled, where the minimum number of containers should be based on your log volume and the maximum number of containers should be able to absorb any spikes or growth in log volume. See [Best Practices for Scaling Observability Pipelines][5] to help determine how much CPU and memory resources to allocate.
+
+**Notes**:
+- The guidance for CPU and memory allocation is not for a single instance of the task, but for the total number of tasks. For example, if you want to send 3 TB of logs to the Worker, you could either deploy three replicas with one vCPU each or deploy one replica with three vCPUs.
+- Datadog recommends enabling load balancers for the pool of replica tasks.
 
 Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` allow the load balancer to do health checks on the Observability Pipelines Worker.
 
