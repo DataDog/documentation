@@ -95,9 +95,8 @@ spec:
       appKey: <DATADOG_APP_KEY>
     kubelet:
       host:
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
+        fieldRef:
+          fieldPath: spec.nodeName
       hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   override:
     clusterAgent:
@@ -123,9 +122,8 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   kubelet:
     host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
+      fieldRef:
+        fieldPath: spec.nodeName
     hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
 
 providers:
