@@ -1,5 +1,13 @@
+The Observability Pipelines Worker supports all major Kubernetes distributions, such as:
+
+- AWS Elastic Kubernetes Service (EKS)
+- Azure Kubernetes Service (AKS)
+- Google Kubernetes Engine (GKE)
+- Red Hat Openshift
+- Rancher
+
 1. Download the [Helm chart values file][601]. See the [full list of configuration options][603] available.
-    - If you are not using a managed service such as Amazon EKS, Google GKE, or Azure AKS, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
+    - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Add the Datadog chart repository to Helm:
     ```shell
