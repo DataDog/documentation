@@ -5605,6 +5605,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array-back@npm:^6.2.2":
+  version: 6.2.2
+  resolution: "array-back@npm:6.2.2"
+  checksum: baae1e3a1687300a307d3bdf09715f6415e1099b5729d3d8e397309fb1e43d90b939d694602892172aaca7e0aeed38da89d04aa4951637d31c2a21350809e003
+  languageName: node
+  linkType: hard
+
 "array-buffer-byte-length@npm:^1.0.1":
   version: 1.0.1
   resolution: "array-buffer-byte-length@npm:1.0.1"
@@ -6923,6 +6930,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"command-line-args@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "command-line-args@npm:6.0.1"
+  dependencies:
+    array-back: ^6.2.2
+    find-replace: ^5.0.2
+    lodash.camelcase: ^4.3.0
+    typical: ^7.2.0
+  peerDependencies:
+    "@75lb/nature": "*"
+  peerDependenciesMeta:
+    "@75lb/nature":
+      optional: true
+  checksum: a620375999762a852f8866856206852bb9cc51283a0c940520db1cdb1524ba49d9468bf6b0c86ef9c261b4131eb5a2db2b25f99725c7e45d69bea8453bd28922
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.15.1":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -7606,6 +7630,7 @@ __metadata:
     alpinejs: ^3.13.7
     bootstrap: ^5.2
     cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.2.2.tgz"
+    command-line-args: ^6.0.1
     cross-env: ^5.2.1
     del: 4.1.1
     eslint: ^6.8.0
@@ -9021,6 +9046,18 @@ __metadata:
   dependencies:
     to-regex-range: ^5.0.1
   checksum: b4abfbca3839a3d55e4ae5ec62e131e2e356bf4859ce8480c64c4876100f4df292a63e5bb1618e1d7460282ca2b305653064f01654474aa35c68000980f17798
+  languageName: node
+  linkType: hard
+
+"find-replace@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "find-replace@npm:5.0.2"
+  peerDependencies:
+    "@75lb/nature": "*"
+  peerDependenciesMeta:
+    "@75lb/nature":
+      optional: true
+  checksum: 964fb76cf084638c4202628c65c03763fd8627b84b18c0948470b429371d18c5a0340167097961222d4decbcc4502880d776c57c1c3ef5f3d0081b8fde0e17ea
   languageName: node
   linkType: hard
 
@@ -16861,6 +16898,13 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.23.2
   checksum: 77b46aa5f81acc0a4fa9980d1ebe0554a47757f1e97b1bb0ecf541a893089444b1c5c068e279d16b5fe18e1cb7dafc0298be57394925e11a77672f69d0faa7f2
+  languageName: node
+  linkType: hard
+
+"typical@npm:^7.2.0":
+  version: 7.3.0
+  resolution: "typical@npm:7.3.0"
+  checksum: edbb9beed7ffb355806d434d1dd0d41a2b78be0a41d9f1684fabbd4fb512ee220989b5ff91b04c79d19b850d6025d6c07417d63b8e7c9a3b2229a4a0676e17da
   languageName: node
   linkType: hard
 
