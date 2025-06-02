@@ -165,7 +165,7 @@ Datadog-hosted SCA scans do **not** support repositories that:
 - Contain invalid or reserved file paths (such as `/` or `\\`)
 - Contain file paths with parent directory traversal (`..`)
 
-If your repository has any of these, and cannot be updated to account for those constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
+If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
