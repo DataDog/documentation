@@ -1159,9 +1159,9 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
-    - name: Accessibility
-      url: mobile/accessibility
-      identifier: mobile_accessibility
+    - name: Shortcut Configurations
+      url: mobile/shortcut_configurations
+      identifier: mobile_shortcut_configurations
       parent: mobile
       weight: 3
     - name: Push Notifications
