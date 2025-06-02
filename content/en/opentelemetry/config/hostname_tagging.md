@@ -463,6 +463,21 @@ processors:
 ```
 **Note:** This is only supported if you have opted-in as described [here][7].
 
+### Host Aliases
+Host Aliases can be set via resource attribute `datadog.host.aliases`. 
+
+This can be set in a processor: 
+```
+processors:
+  transform:
+    trace_statements: &statements
+      - context: resource
+        statements:
+          - set(attributes["datadog.host.aliases"], ["alias1", "alias2", "alias3"])
+```
+
+**Note:** This is only supported if you have opted-in as described [here][7].
+
 ### Custom container tags
 
 Same as for custom host tags, custom containers tags can be set by prefixing resource attributes by `datadog.container.tag` in your OTEL instrumentation.
