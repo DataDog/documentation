@@ -1,16 +1,12 @@
-<div class="item" data-ref="item">
-  <div class="integration">
-    <div class="card-content">
-      <a href="{{ .Get "link" }}" aria-label="{{ .Get "name" }} datadog integration docs link">
-        <picture class="mx-auto my-auto">
-          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{ .Get "logo" }}" alt="{{ .Get "name" }} logo" loading="lazy">
-        </picture>
-        <div class="text-center picture-title">{{ .Get "name" }}</div>
-        <div class="text-center title">{{ .Get "name" }}</div>
-        <div class="blurb text-center">{{ .Get "description" }}</div>
-        <button type="button" class="btn btn-primary mt-1">Learn More</button>
-      </a>
-      <div class="dimmer-cloak"></div>
-    </div>
+<div class="col">
+  <div class="card h-100">
+    <a href="{{ .Get "link" }}" aria-label="{{ .Get "name" }} datadog integration docs link">
+      <div class="card-body text-center py-1 px-1">
+        <img class="img-fluid mx-auto my-auto" src="{{ .Get "logo" }}" alt="{{ .Get "name" }} logo" loading="lazy">
+        <div class="title fw-bold">{{ .Get "name" }}</div>
+        <div class="description lh-1">{{ .Get "description" }}</div>
+        <button type="button" class="btn btn-primary btn-sm mt-1 text-uppercase">Learn More</button>
+      </div>
+    </a>
   </div>
 </div>
