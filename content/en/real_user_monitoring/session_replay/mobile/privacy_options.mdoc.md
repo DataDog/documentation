@@ -578,16 +578,166 @@ myView.dd.sessionReplayOverrides.hide = false
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
-Privacy override content for React Native will go here.
+Privacy overrides are fully supported in React Native starting from version `2.8.0` of the Datadog [React Native SDK][2]. Although the underlying functionality is shared with native Android and iOS platforms, the integration in React Native is designed to align with common React patterns.
+
+### Behavior consistency
+
+React Native's implementation is built on the same foundation as the native Android and iOS SDKs. As a result, you can rely on the privacy features behaving the same way across all three platforms.
+
+### Usage with `SessionReplayView`
+
+The SDK provides a set of React components under the `SessionReplayView` namespace, which are used to configure privacy settings within your React Native application.
+
+To use them, import `SessionReplayView` as follows:
+
+```typescript {% filename="App.tsx" %}
+import { SessionReplayView } from "@datadog/mobile-react-native-session-replay";
+```
+
+This import provides access to four privacy-focused components.
+
+Each of these components behaves like a regular React Native View, meaning they can be used anywhere you would typically use a View, with the addition of privacy-related behavior.
+
+{% table %}
+- Component
+- Description
+- Properties
+---
+- `SessionReplayView.Privacy`
+- Adds support for customizing text, image, and touch privacy settings for its children.
+- 
+    - `textAndInputPrivacy?`: [TextAndInputPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L43)
+    - `imagePrivacy?`: [ImagePrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L15)
+    - `touchPrivacy?`: [TouchPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L32)
+    - `hide?`: `boolean`
+---
+- `SessionReplayView.MaskAll`
+- Applies the most restrictive privacy settings (`MaskAll` or platform equivalent) to all children.
+- 
+    - `showTouch?`: `boolean`
+---
+- `SessionReplayView.MaskNone`
+- Applies the least restrictive settings (`MaskNone` or platform equivalent). All child components are visible.
+- _(No additional properties)_
+---
+- `SessionReplayView.Hide`
+- Completely hides all child components from session replay.
+- _(No additional properties)_
+{% /table %}
+
+### Integration approaches
+
+There are two ways to apply privacy overrides in React Native:
+- Wrap specific components with a privacy-focused `SessionReplayView` to target only certain elements, or
+- Replace an entire `<View>` with a `SessionReplayView` to apply privacy settings to a whole section of your UI.
+
+This flexibility lets you control which parts of your app are masked or visible in session replays.
+
+{% tabs %}
+
+{% tab label="As wrappers" %}
+Use `SessionReplayView` components to wrap specific parts of your UI where you want to override privacy settings.
+
+For example, going from:
+
+```typescript {% filename="App.tsx" %}
+const App = () => {
+    return (
+        <View>
+            {/_ content _/}
+            <TextInput placeholder="First Name" value="Data" />
+            <TextInput placeholder="Last Name" value="Dog" />
+            {/* content */}
+        </View>
+    );
+}
+```
+
+To:
+
+```typescript {% filename="App.tsx" %}
+const App = () => {
+    return (
+        <View>
+            {/_ content _/}
+            <SessionReplayView.MaskAll showTouch={true}>
+                <TextInput placeholder="First Name" value="Data" />
+                <TextInput placeholder="Last Name" value="Dog" />
+            </SessionReplayView.MaskAll>
+            {/* content */}
+        </View>
+    );
+}
+```
+{% /tab %}
+
+{% tab label="As replacements" %}
+Replace an existing `<View>` with a `SessionReplayView` component directly. This is ideal when a view already encapsulates the section of the UI that needs modified privacy behavior.
+
+For example, instead of:
+
+```typescript {% filename="App.tsx" %}
+const App = () => {
+    return (
+        <View>
+        {/_ content _/}
+        </View>
+    );
+}
+```
+
+You can use:
+
+```typescript {% filename="App.tsx" %}
+const App = () => {
+    return (
+        <SessionReplayView.MaskNone>
+        {/_ content _/}
+        </SessionReplayView.MaskNone>
+    );
+}
+```
+{% /tab %}
+{% /tabs %}
+
+### Combining privacy components
+
+You can freely combine the `SessionReplayView` components to apply different privacy settings to distinct sections of your UI. This is especially useful when you need a mix of hidden elements, masked input fields, and visible content within the same screen.
+
+For example:
+
+```typescript {% filename="App.tsx" %}
+import { ImagePrivacyLevel, SessionReplayView, TextAndInputPrivacyLevel, TouchPrivacyLevel } from "@datadog/mobile-react-native-session-replay";
+
+const App = () => {
+    return (
+        <SessionReplayView.Privacy
+            textAndInputPrivacy={TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS}
+            imagePrivacy={ImagePrivacyLevel.MASK_NONE}
+            touchPrivacy={TouchPrivacyLevel.SHOW}>
+            {/_ content _/}
+            <SessionReplayView.MaskAll showTouch={true}>
+                {/* content */}
+                <SessionReplayView.MaskNone>
+                    {/* content */}
+                </SessionReplayView.MaskNone>
+                {/* content */}
+            </SessionReplayView.MaskAll>
+            {/* content */}
+            <SessionReplayView.Hide>
+                {/* content */}
+            </SessionReplayView.Hide>
+        </SessionReplayView.Privacy>
+    );
+}
+```
 {% /if %}
 <!-- end React Native -->
 
 ### Notes on WebViews
 
-• Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
-
-• When a WebView is marked as `hidden`, it is replaced by a placeholder in the replay. However, the WebView itself continues to collect and send data. To avoid this, it is recommended to use [browser SDK privacy settings][1] for managing WebView privacy, as they provide more targeted control.
-
+- Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
+- When a WebView is marked as `hidden`, it is replaced by a placeholder in the replay. However, the WebView itself continues to collect and send data. To avoid this, it is recommended to use [browser SDK privacy settings][1] for managing WebView privacy, as they provide more targeted control.
 
 ## How and what data is masked
 
@@ -705,10 +855,25 @@ The following chart shows how we apply different touch interaction strategies, u
 
 The following chart shows how we apply different image masking strategies:
 
-| Type           | Mask None | Mark Large Only (Android) <br/> / Mask Non Bundled Only (iOS) | Mask All 
-|----------------|-----------|---------------------------------------------------------------|---------|
-| Content Image  | Shown     | Masked                                                        | Masked |
-| System Image   | Shown     | Shown                                                         | Masked |
-
+{% table %}
+- Type
+- Mask None
+- 
+  {% if equals($platform, "android") %}Mark Large Only{% /if %}
+  {% if equals($platform, "ios") %}Mask Non Bundled Only{% /if %}
+  {% if equals($platform, "react_native") %}Mark Large Only (Android) / Mask Non Bundled Only (iOS){% /if %}
+- Mask All
+---
+- Content Image
+- Shown
+- Masked
+- Masked
+---
+- System Image
+- Shown
+- Shown
+- Masked
+{% /table %}
 
 [1]: /real_user_monitoring/session_replay/privacy_options
+[2]: https://github.com/DataDog/dd-sdk-reactnative
