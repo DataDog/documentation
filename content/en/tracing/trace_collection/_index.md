@@ -37,7 +37,7 @@ There are two main approaches to instrument your application: automatic or custo
 
 ### Automatic instrumentation
 
-Create {{< tooltip glossary="span" >}}s for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
+Create {{< tooltip glossary="spans" >}} for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
 
 - [Single Step Instrumentation][7]: Run a one-line installation command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
 - [Datadog libraries][8]: Add Datadog tracing libraries to your application.
