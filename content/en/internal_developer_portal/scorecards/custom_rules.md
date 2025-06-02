@@ -33,7 +33,7 @@ Datadog provides [default rules][1] so you can get started quickly with Scorecar
 To add and evaluate custom rules using the [Scorecards API][2]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
-2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
+2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, entity}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes and remarks in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
@@ -42,8 +42,8 @@ After initial setup, rules can also be enabled or disabled through the API.
 To evaluate and add custom rules in the Scorecards UI: 
 
 1. Click **Create Rule** on the Scorecards page.
-2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
-3. Navigate to the rule you created and select **Edit Outcome** next to the service that you want to evaluate.
+2. Specify the name of the rule, the scorecard it belongs to, a rule description, the owning team, which level the rule belongs to, and a scope, if necessary.
+3. Navigate to the rule you created and select **Edit Outcome** next to the entity that you want to evaluate.
 4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
 5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
@@ -61,7 +61,7 @@ To set up a custom rule evaluation using Workflow Automation:
 2. [Create a Workflow][5].
 3. Set a schedule for your Workflow to run on.
 4. Click plus (+) icon to add a step.
-5. Use the [**List service definitions** action][6] to fetch all defined services from Software Catalog.
+5. Use the [**List all entity definitions** action][6] to fetch all defined entities from Software Catalog.
 6. Insert a [For loop][7] to iterate over each service one-by-one.
 7. Select the action needed to fetch your evaluation data.
 8. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.
@@ -78,5 +78,5 @@ To set up a custom rule evaluation using Workflow Automation:
 [3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [5]: /service_management/workflows/build/
-[6]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.listServiceDefinitions
+[6]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.dd.softwarecatalog.listCatalogEntity
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop
