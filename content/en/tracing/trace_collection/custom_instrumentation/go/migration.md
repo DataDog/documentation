@@ -48,11 +48,11 @@ For more information, see [Go Library Compatibility][4].
 
 For the Profiler, only import paths need to be updated. The profiling API functionality remains the same between v1 and v2.
 
-### Application Security Management (ASM)
+### App and API Protection (AAP)
 
 Supported packages have changed between v1 and v2 of the Go tracer.
 
-For more information, see [ASM language and framework compatibility][3].
+For more information, see [AAP language and framework compatibility][3].
 
 ### Software Composition Analysis (SCA)
 
