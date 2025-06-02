@@ -2,7 +2,7 @@ import { getQueryParameterByName } from '../helpers/browser';
 import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
-    let codeTabsList = document.querySelectorAll('.code-tabs');
+    let codeTabsList = [];
     const { allowedRegions } = regionConfig;
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs');
     const codeTabParameters = allowedRegions.reduce((k, v) => ({ ...k, [v]: {} }), {});
@@ -80,7 +80,7 @@ const initCodeTabs = () => {
         resizeTimeout = setTimeout(detectTabWrapping, 150); // Increased debounce time
     };
 
-    const reload = () => {
+    const init = () => {
         // Clean up existing tabs first
         cleanupExistingTabs();
 
@@ -351,14 +351,14 @@ const initCodeTabs = () => {
         clientFiltersManager.registerHook('afterReveal', () => {
             // Reset stored tab on initial reveal
             currentActiveTab = null;
-            reload();
+            init();
         });
 
         // Update the tabs after the page is re-rendered
-        clientFiltersManager.registerHook('afterRerender', reload);
+        clientFiltersManager.registerHook('afterRerender', init);
     }
 
-    reload();
+    init();
 
     // Add window load event to handle final detection after everything is loaded
     window.addEventListener('load', () => {
