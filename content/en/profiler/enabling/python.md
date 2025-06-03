@@ -21,12 +21,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-Profiling is enabled through the Datadog tracing library.
-Prefer the latest tracing library release.
-See [Python Compatibility Requirements][17] for the current supported tracing library and Python versions.
-Some features depend on newer Python versions than the minimum required version for the tracing library.
-For more details, read [Profile Types][8].
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+Profiling is enabled through the Datadog tracing library. Datadog recommends that you use the latest tracing library release. See [Python Compatibility Requirements][17] for more information. Some features depend on newer Python versions than the minimum required version for the tracing library. For more details, read [Profile Types][8]. For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
 The installation requires pip version 18 or above.
 
