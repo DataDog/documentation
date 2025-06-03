@@ -257,7 +257,7 @@ PAYLOAD='{
     }
   }
 }'
-{{< code-block lang="bash" >}}
+{{< /code-block >}}
 
 Once you have created the analysis template, reference it from the Argo Rollout strategy:
 
