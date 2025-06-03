@@ -87,7 +87,7 @@ To create a workflow from scratch:
 
 {{% collapse-content title="From blueprint" level="h4" expanded=false id="workflow-from-blueprint" %}}
 
-{{< img src="tracing/internal_developer_portal/start-from-blueprint.png" alt="'Start from a Blueprint' modal in the Datadog app, showing several tiles with sample Scorecards blueprints" style="width:100%;" >}}
+{{< img src="/tracing/internal_developer_portal/start-from-blueprint2.png" alt="'Start from a Blueprint' modal in the Datadog app, showing several tiles with sample Scorecards blueprints" style="width:90%;" >}}
 
 Instead of creating a workflow from scratch, you can start with a Scorecards blueprint: 
 
