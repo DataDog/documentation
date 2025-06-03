@@ -70,7 +70,6 @@ To cancel a long running database query directly from Datadog:
 
 The query is canceled after the run completes.
 
-For information on enabling Datadog to cancel queries in your database (Postgres only), see [Setup Cancel Query integration][2]. Cancelling live queries is only available for Postgres.
 
 ## Schema
 
