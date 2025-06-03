@@ -159,6 +159,10 @@ nav_sections:
         link: llm_observability/
         icon: llm-observability
         desc: Trace, monitor, and secure your LLM applications
+      - title: Internal Developer Portal
+        link: internal_developer_portal
+        icon: internal-developer-portal-wui
+        desc: Unify telemetry, metadata, and workflows to accelerate delivery
   - nav_section:
     - name: 'Configuration'
     - navtiles:
