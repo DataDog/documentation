@@ -35331,6 +35331,11 @@ components:
           items:
             $ref: '#/components/schemas/SensitiveDataScannerProduct'
           type: array
+        samplings:
+          description: List of sampling rates per product type.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerSamplings'
+          type: array
       type: object
     SensitiveDataScannerGroupCreate:
       description: Data related to the creation of a group.
@@ -35531,10 +35536,22 @@ components:
           description: (Deprecated) Whether or not scanned events have multi-pass
             enabled.
           type: boolean
+        is_float_sampling_rate_enabled:
+          description: Whether or not the sampling rate for products can be set to
+            a float point number (as opposed to an integer).
+          type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
             standard.
           type: boolean
+        min_sampling_rate:
+          description: Global minimum sampling rate allowed for all product within
+            the org.
+          example: 10.0
+          format: double
+          maximum: 100.0
+          minimum: 0.0
+          type: number
         version:
           description: Version of the API.
           example: 0
@@ -35611,6 +35628,11 @@ components:
         is_enabled:
           description: Whether or not the rule is enabled.
           type: boolean
+        labels:
+          description: List of labels.
+          items:
+            type: string
+          type: array
         name:
           description: Name of the rule.
           type: string
@@ -35761,6 +35783,19 @@ components:
       properties:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerSamplings:
+      description: Sampling configurations for the Scanning Group.
+      properties:
+        product:
+          $ref: '#/components/schemas/SensitiveDataScannerProduct'
+        rate:
+          description: Rate at which data in product type will be scanned, as a percentage.
+          example: 100.0
+          format: double
+          maximum: 100.0
+          minimum: 0.0
+          type: number
       type: object
     SensitiveDataScannerStandardPattern:
       description: Data containing the standard pattern id.
@@ -61985,11 +62020,12 @@ paths:
             value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_group\",\n
               \   \"attributes\": {\n      \"name\": \"my-test-group\",\n      \"is_enabled\":
               false,\n      \"product_list\": [\n          \"logs\"\n      ],\n      \"filter\":
-              {\n          \"query\": \"*\"\n      }\n    },\n    \"relationships\":
-              {\n      \"configuration\": {\n        \"data\": {\n          \"id\":
-              \"{{ configuration.data.id }}\",\n          \"type\": \"{{ configuration.data.type
-              }}\"\n        }\n      },\n      \"rules\": {\n          \"data\": []\n
-              \     }\n    }\n  },\n  \"meta\": {}\n}"
+              {\n          \"query\": \"*\"\n      },\n      \"samplings\": [{\"product\":
+              \"logs\", \"rate\": 100}]\n    },\n    \"relationships\": {\n      \"configuration\":
+              {\n        \"data\": {\n          \"id\": \"{{ configuration.data.id
+              }}\",\n          \"type\": \"{{ configuration.data.type }}\"\n        }\n
+              \     },\n      \"rules\": {\n          \"data\": []\n      }\n    }\n
+              \ },\n  \"meta\": {}\n}"
           step: there is a valid "scanning_group" in the system
       x-menu-order: 4
       x-permission:
