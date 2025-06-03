@@ -14,18 +14,16 @@ See [Custom functions][10191] for the full list of available functions.
 
 To set up this processor:
 
-Click **Manage custom processors**.
-
-- If you have already added custom functions, click on a function in the list to edit or delete it. You can use the search bar to find a function by its name. Click **Add Custom Processor** to [add a function](#add-a-function).
-- If you have not created any functions yet, follow the instructions in [Add a function](#add-a-function) to create a function.
+- If you have not created any functions yet, click **Add custom processor** and follow the instructions in [Add a function](#add-a-function) to create a function.
+- If you have already added custom functions, click **Manage custom processors**. Click on a function in the list to edit or delete it. You can use the search bar to find a function by its name. Click **Add Custom Processor** to [add a function](#add-a-function).
 
 ##### Add a function
 
-1. Enter a name for the function.
+1. Enter a name for your custom processor.
 1. Add your script to modify your logs using [custom functions][10191].
 1. Optionally, check **Drop events on error** if you want to drop events that encounter an error during processing.
 1. Enter a sample log event.
-1. Click **Run** to process the log and see the output.
+1. Click **Run** to preview how the functions process the log. After the script has run, you can see the output for the log.
 1. Click **Save**.
 
 [10191]: /observability_pipelines/processors/custom_processor#custom-functions
