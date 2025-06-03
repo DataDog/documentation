@@ -57,7 +57,7 @@ instances:
 
 ## Setup Cancel Query integration
 
-In order to support cancelling a query throughout the Database Monitoring product, you need to setup the Private Actions Runner. Follow Datadog documentation on how to setup a Private Actions runner in your environment: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=docker#set-up-a-private-action-runner. You must enable the “Cancel Query” action for this runner.
+To support cancelling a query throughout the Database Monitoring product, [set up a private action runner][1] and enable the “Cancel Query” action for the runner.
 
 The runner runs using an existing user in the database, the user is required to have `pg_signal_backend` and `pg_read_all_stats` permissions in the database.
 
