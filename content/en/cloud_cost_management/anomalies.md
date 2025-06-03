@@ -17,7 +17,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 ## Getting started
 
-1. Navigate to the [Anomalies tab of the Cloud Cost page in Datadog][1].
+1. Navigate to the [Anomalies tab][1] of the Cloud Cost page in Datadog.
 2. Review the list of active anomalies, sorted by cost impact.
 3. Click on an anomaly to investigate and take action.
 4. Use the filters to view Active, Past, or Resolved anomalies across different dimensions, such as service name, team, or environment.
@@ -26,10 +26,10 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 Anomalies are significant, unexpected changes that stand out from typical patterns. Datadog automatically identifies anomalies using machine learning techniques that adapt to your specific usage patterns.
 
-Datadog's algorithm takes into account:
-- **Seasonality**: Recognizes regular patterns (expected cost increases that happen on a regular schedule)
-- **Usage-based charges**: Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
-- **Cost impact**: Filters out low-impact anomalies to reduce noise
+To distinguish between true anomalies and expected fluctuations, Datadog's algorithm:
+- Recognizes recurring cost spikes and dips, such as a cost increase every Monday 
+- Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
+- Filters out low-impact anomalies to reduce noise
 
 For example, if your system automatically scales up every Sunday night for weekly backups, Datadog recognizes this pattern and does not flag it as a cost anomaly. This helps you focus on truly unexpected changes that require attention.
 
@@ -55,7 +55,7 @@ Anomalies are sorted by cost impact, with the most significant changes at the to
 Follow these steps to investigate and resolve anomalies:
 
 1. Click **See more** on an anomaly to open the side panel.
-2. **Review the details** for services affected, teams involved, environments, impacted, or resource IDs that may be driving the cost anomaly.
+2. **Review the details** for services affected, teams involved, environments impacted, or resource IDs that may be driving the cost anomaly.
 3. **Investigate further**:
    - View costs in Explorer
    - Save the query to a Notebook
@@ -68,7 +68,7 @@ Follow these steps to investigate and resolve anomalies:
 
 Tag Influence in Datadog automatically analyzes your cost anomalies to identify:
 
-- Which specific resources are driving the cost changes
+- Which resources are driving the cost changes
 - Which teams or services to contact about the changes
 - The impact of different tags on the cost anomaly
 
