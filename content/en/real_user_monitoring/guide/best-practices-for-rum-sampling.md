@@ -46,7 +46,7 @@ RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on 
 
 For optimal monitoring, Datadog recommends sending 100% of your sessions to Datadog. This ensures highly accurate out-of-the-box and custom metrics and complete visibility into your user experience.
 
-However, if your application has very high traffic and ingestion costs are a concern, you can reduce the sampling rate. Keep in mind that lower sampling rates affect the accuracy of your metrics proportionally.
+However, if your application has very high traffic and ingestion costs are a concern, you can reduce the sampling rate. Keep in mind that lower sampling rates affect the accuracy of your [metrics][13] proportionally.
 
 #### Server-side (tail-based) sampling rate
 
@@ -62,10 +62,10 @@ For server-side sampling, Datadog recommends a two-step approach:
 With RUM without Limits, your server-side sampling should provide enough data for both troubleshooting and performance analysis while managing your data volume effectively.
 
 ### Sampling based on specific attributes
-Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is supported using [retention filters][12]. See the [Retention Filters Best Practices][13] guide to understand common retention filter types.
+Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is supported using [retention filters][12]. See the [Retention Filters Best Practices][14] guide to understand common retention filter types.
 
 ### Changing the sampling rate in the Datadog RUM UI
-You can change the sampling rate is only supported for server-side sampling and can be accomplished by [modifying the retention rate][14] from the retention filters page.
+You can change the sampling rate is only supported for server-side sampling and can be accomplished by [modifying the retention rate][15] from the retention filters page.
 
 During live outages, if a bug or incident occurs, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or you have more examples of a particular issue.
 
@@ -89,5 +89,6 @@ RUM ensures availability of data when user devices are offline. In low-network a
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup#sample-rum-sessions
 [11]: /data_security/data_retention_periods/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters
-[13]: /real_user_monitoring/rum_without_limits/retention_filters#best-practices
-[14]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
+[13]: /real_user_monitoring/rum_without_limits/metrics
+[14]: /real_user_monitoring/rum_without_limits/retention_filters#best-practices
+[15]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
