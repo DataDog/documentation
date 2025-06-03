@@ -258,7 +258,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
 [5]: /ddsql_reference/
-<<<<<<< HEAD
-=======
 [6]: /ddsql_reference/ddsql_default/
->>>>>>> master
