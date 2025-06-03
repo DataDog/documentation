@@ -23,13 +23,27 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-Deployment gates allow you to gate your deployments based on Datadog telemetry. For example, you can deploy a new change to a subset of customers and check a set of monitors before proceeding with the deployment. In this way, you can make sure that the changes you're deploying work as expected and reduce the amount of incidents caused by unsafe deployments.
+Deployment Gates help you control deployments based on Datadog telemetry. This approach helps prevent incidents by ensuring changes work as expected before wider rollout.
 
-The two main product concepts are gates and rules:
+The product consists of two main components:
 
-- A **gate** is defined for a service and environment, and it has a set of (one or more) rules to be evaluated.
-- A **rule** is a type of evaluation performed as part of a gate. For example, you can check the status of specific monitors by creating a new rule of type `Monitor`.
+- A [gate][1] is defined for a service and environment. It has a set of rules to be evaluated on.
+- A rule is a type of evaluation evaluated as part of a gate. For example, you can create:
+  - [Monitors rules][3] rules
+  - [APM Faulty Deployment Detection][4] rules
+
+For setup instructions, see [Set up Deployment Gates][4].
+
+You can track and analyze gate evaluations through the [Gate Evaluation page][5]:
+
+{{< img src="/deployment_gates/explore/explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /deployment_gates/setup/#create-a-deployment-gate
+[2]: /deployment_gates/setup/#rule-types?tab=monitors
+[3]: /deployment_gates/setup/#rule-types?tab=apm_faulty_deployment_detection
+[4]: /deployment_gates/setup
+[5]: /deployment_gates/explore

@@ -6,13 +6,18 @@ further_reading:
   text: "Set up Deployment Gates"
 ---
 
-The Deployment Gates UI provides two main functionalities.
+Navigate to [Software Delivery -> Deployment Gates -> Evaluations][1].
 
-First, you can use it to manage your gates and rules. For example, you can create new entities or modify the existing ones.
+The page allows you to:
+* View recent gate evaluations and failure reasons
+* Identify frequently failing rules and gates
+* Analyze common failure patterns
+* Track evaluation trends over time
 
-Then, you can use the UI to explore your gates and rules evaluations. Here, you can see the rules/gates that failed the most, and you can search, filter and aggregate the executions.
-
+{{< img src="/deployment_gates/explore/explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/ci/deployment-gates/evaluations
