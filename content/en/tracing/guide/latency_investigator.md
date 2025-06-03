@@ -67,7 +67,7 @@ The investigator compares trace data from both your selected slow and normal per
 
 Based on this comprehensive analysis, the investigator recommends a service as the likely latency bottleneck. Expand the latency bottleneck section to see details about the comparison between slow and normal traces. A table surfaces the changes in self-time and in the number of inbound requests by service.
 
-The following example shows two side-by-side flamegraphs that compare slow traces against healthy traces in more detail. Use the arrows to cycle through example traces and click **View** to open the trace in a full page view.
+The following example shows two side-by-side flame graphs that compare slow traces against healthy traces in more detail. Use the arrows to cycle through example traces and click **View** to open the trace in a full pageview.
 
 {{< img src="tracing/guide/apm_investigator/latency_bottleneck.png" alt="Latency bottleneck section" style="width:100%;">}}
 
