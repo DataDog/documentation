@@ -18,18 +18,18 @@ further_reading:
 Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
 
 ## How it works
-Datadog uses real-time and historical utilization metrics and event signals to make recommendations. You can then examine these recommendations and choose to deploy them.
+Datadog uses real-time and historical utilization metrics and event signals from your existing Datadog Agents to make recommendations. You can then examine these recommendations and choose to deploy them.
 
-Use Kubernetes Autoscaling alongside [Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management) to get impact estimates based on your underlying instance type costs.
+By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost values to show savings opportunities and impact estimates. You can also use Kubernetes Autoscaling alongside [Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management) to get reporting based on your exact instance type costs.
 
-Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resource that defines scaling behavior on a per-workload level. 
+Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resource that defines scaling behavior on a per-workload level. The Datadog Cluster Agent acts as the controller for this custom resource.
 
 Each cluster can have a maximum of 1000 workloads optimized with Datadog Kubernetes Autoscaler.
 
 ### Compatibility
 
 - **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][9].
-- **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload before you use Datadog Kubernetes Autoscaling to optimize it.
+- **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload before you use Datadog Kubernetes Autoscaling to optimize it. These workloads are identified in the application on your behalf.
 
 ### Requirements
 
@@ -154,7 +154,11 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 
 ### Ingest cost data with Cloud Cost Management
 
-By default, Datadog Kubernetes Autoscaling shows idle cost and savings estimates using fixed values for CPU and memory costs.
+By default, Datadog Kubernetes Autoscaling shows idle cost and savings estimates using the following fixed values:
+- $0.0295 per CPU core hour
+- $0.0053 per memory GB hour
+
+_Fixed cost values are subject to refinement over time._
 
 When [Cloud Cost Management][5] is enabled within an org, Datadog Kubernetes Autoscaling shows idle cost and savings estimates based on your exact bill cost of underlying monitored instances.
 
@@ -164,20 +168,25 @@ Cost data enhances Kubernetes Autoscaling, but it is not required. All of Datado
 
 ## Usage
 
-### Identify resources to scale
+### Identify resources to rightsize
 
-Use your [Kubernetes Autoscaling page][10] to better understand the resource efficiency of your Kubernetes deployments. The [Summary view][11] displays information about optimization opportunities and estimated costs across your clusters and workloads. The [Cluster Scaling view][12] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. You can also use the [Workload Scaling view][13] to see a filterable list of all workloads across all clusters.
+The [Autoscaling Summary page][11] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][12] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][13].
 
 Click **Optimize** on any workload to see its scaling recommendation.
 
 ### Deploy recommendations with Autoscaling
 
-After you identify a workload to optimize, examine its **Scaling Recommendation**. You can also click **Configure Recommendation** to make changes to the recommendation before you apply it.
+After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
 
-You can use Kubernetes Autoscaling to deploy a scaling recommendation in one of two ways:
+When you are ready to proceed with enabling Autoscaling for a workload, you have two options for deployment:
 
-- Click **Enable Autoscaling**. Datadog automatically applies the scaling recommendation to your workload.
-- Deploy a `DatadogPodAutoscaler` custom resource. Click **Export Recommendation** to see values for your CRD.
+- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.) 
+
+   Datadog automatically installs and configures autoscaling for this workload on your behalf.
+
+- Deploy a `DatadogPodAutoscaler` custom resource. 
+   
+   Use your existing deploy process to target and configure Autoscaling for your workload. Click **Export Recommendation** to see a suggested manifest configuration.
 
 ### Deploy recommendations manually
 
