@@ -183,7 +183,6 @@ This page holds relationship data of how the API interacts with dependencies, th
 
 {{% /tab %}}
 
-
 {{% tab "Datastore" %}}
 
 In Software Catalog, a datastore (`kind:datastore`) represents a data storage component or database that services depend on. Datastores can represent relational databases (such as PostgreSQL or MySQL), NoSQL datastores (such as Redis or MongoDB), data warehouses, and caches.
@@ -192,9 +191,7 @@ Datastore entities can be:
 - [**Inferred by APM**][1] when instrumented services make outbound calls to a database (for example, a PostgreSQL query).
 - [**Manually defined**][2] to represent uninstrumented datastores or enrich inferred ones with additional metadata.
 
-If Database Monitoring is enabled, the datastore entity page displays query throughput, latency, and error rates. Otherwise, the page shows basic trace-derived metrics and dependency relationships.
-
-{{< img src="/tracing/software_catalog/datastore-entity-page-dbm-setup-prompt.png" alt="The datastore entity page for web-store-mongo, with a modal prompting the user to set up Database Monitoring for more insights" style="width:100%;" >}}
+**Note**: If Database Monitoring is enabled, the datastore entity page displays query throughput, latency, and error rates. Otherwise, the page shows basic trace-derived metrics and dependency relationships.
 
 ### Example YAML definitions
 
@@ -202,7 +199,7 @@ If Database Monitoring is enabled, the datastore entity page displays query thro
 
 This example shows a `kind:datastore` definition for a database automatically detected by APM.
 
-**Note**: The `metadata.name` value must exactly match the [peer tags](#peer-tags) used by APM.
+**Note**: The `metadata.name` value must exactly match the [peer tags](#datastore-peer-tags) used by APM.
 
 ```
 apiVersion: v3
@@ -229,7 +226,6 @@ integrations:
 spec:
   lifecycle: "production"              
   tier: "Tier 1"               
-
 ```
 
 {{% /collapse-content %}}
@@ -263,12 +259,11 @@ integrations:
 spec:
   lifecycle: "production"              
   tier: "Tier 1"               
-
 ```
 
 {{% /collapse-content %}}
 
-### Peer tags
+### Datastore peer tags
 
 For inferred entities, Datadog uses standard span attributes to construct `peer.*` tags. The `metadata.name` value in your entity definition must exactly match the inferred peer tags. Manually defined datastores do not need to follow this convention. 
 
@@ -292,6 +287,109 @@ Learn more about [peer tags and inferred entities][3].
 
 {{% /tab %}}
 
+
+{{% tab "Queue" %}}
+
+In Software Catalog, a queue (`kind:queue`) represents a message queue or stream-based messaging component that services interact with. Queues can represent systems such as Apache Kafka, Amazon SQS, RabbitMQ, and Google Pub/Sub.
+
+Queue entities can be:
+- [**Inferred by APM**][1] when instrumented services produce to or consume from a messaging system.
+- [**Manually defined**][2] to represent uninstrumented queues or enrich inferred ones with additional metadata.
+
+**Note**: If [Data Streams Monitoring][3] is enabled, the queue entity page displays metrics such as throughput, service latency, and processing errors. Otherwise, the page shows basic trace-derived metrics and service dependency relationships.
+
+### Example YAML definitions
+
+{{% collapse-content title="YAML for an inferred queue" level="h4" expanded=false id="inferred-queue" %}}
+
+This example shows a `kind:queue` definition for a queue automatically detected by APM.
+
+**Note**: The `metadata.name` value must exactly match the [peer tags](#queue-peer-tags) used by APM.
+
+```
+apiVersion: v3
+kind: queue
+metadata:
+  name: peer.messaging.destination:checkout-events
+  displayName: "Checkout Events Queue (Kafka)"
+  description: Captures all checkout-related events for downstream processing
+  owner: shopist
+  additionalOwners:
+    - name: platform-team
+      type: team
+  links:
+    - name: "Queue Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/checkout-events
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/checkout-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/MESSAGING123
+spec:
+  lifecycle: "production"
+  tier: "Tier 1"
+```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for a manually defined queue" level="h4" expanded=false id="manual-queue" %}}
+
+This example shows a `kind:queue` definition for a manually declared queue.
+
+```
+apiVersion: v3
+kind: queue
+metadata:
+  name: checkout-events-kafka
+  displayName: "Checkout Events Queue (Kafka)"
+  description: Captures all checkout-related events for downstream processing
+  owner: shopist
+  additionalOwners:
+    - name: platform-team
+      type: team
+  links:
+    - name: "Queue Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/checkout-events
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/checkout-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/MESSAGING123
+spec:
+  lifecycle: "production"
+  tier: "Tier 1"
+```
+
+{{% /collapse-content %}}
+
+### Queue peer tags
+
+For inferred entities, Datadog uses standard span attributes to construct `peer.*` tags. The `metadata.name` value in your entity definition must exactly match the inferred peer tags. Manually defined queues do not need to follow this convention. 
+
+Common peer tags for `kind:queue` entities:
+
+Peer Tag | Source Attributes
+--------------------|-------------------
+`peer.aws.kinesis.stream` | `streamname`
+`peer.aws.sqs.queue` | `queuename`
+`peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
+`peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `ampqb.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
+`peer.messaging.system` | `messaging.system`
+
+Learn more about [peer tags and inferred entities][4].
+
+[1]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
+[2]: /internal_developer_portal/software_catalog/set_up/create_entities
+[3]: /data_streams/
+[4]: /tracing/services/inferred_services/?tab=agentv7600#naming-inferred-entities
+
+{{% /tab %}}
 
 {{% tab "Custom entities" %}}
 
