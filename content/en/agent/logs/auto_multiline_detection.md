@@ -207,9 +207,11 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 
 **Note**: Existing `auto_multi_line_extra_patterns` configurations are automatically supported [when migrating from V1][2].
 
-## JSON Aggregation
+## JSON aggregation
 
-In Agent version 7.67+ pretty printed and multi-line JSON is automatically detected and aggregated into a single line. For example, the following log:
+In Datadog Agent version 7.67+, pretty-printed or multi-line JSON is automatically detected and aggregated into a single line.
+
+For example, the following log:
 
 ```
 2024-08-13 17:15:17 INFO My log message 1
@@ -227,7 +229,7 @@ In Agent version 7.67+ pretty printed and multi-line JSON is automatically detec
 2024-08-13 17:15:17 INFO My log message 4
 ```
 
-will be aggregated into:
+is automatically converted to:
 
 ```
 2024-08-13 17:15:17 INFO My log message 1
@@ -303,7 +305,7 @@ logs_config:
   tag_truncated_logs: true
 ```
 
-These settings add the following _tags_ to your logs, allowing you to search for them in the logs explorer:
+These settings add the following _tags_ to your logs, allowing you to search for them in the Logs Explorer:
 
 - `multiline`: Shows the aggregation source (for example, `auto_multiline`, `multiline_regex`)
 - `truncated`: Shows truncation source (for example, `single_line`, `multi_line`)
@@ -319,7 +321,7 @@ logs_config:
     tag_aggregated_json: true
 ```
 
-This tag can be searched for by querying `aggregated_json:true` in the logs explorer. 
+You can search for this tag by querying `aggregated_json:true` in the Logs Explorer.
 
 ## Configuration reference
 
