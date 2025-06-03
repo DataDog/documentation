@@ -23,7 +23,7 @@ The [Logs Explorer][5] lets you search and view individual logs as a list. Howev
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-Natural Language Queries is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+Natural Language Queries is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}) site.
 </div>
 {{% /site-region %}}
 
@@ -114,4 +114,4 @@ You can interact with the search bar with your mouse, as well as by using keyboa
 [5]: /logs/explorer/
 [6]: /logs/explorer/search_syntax/#full-text-search
 [7]: https://app.datadoghq.com/organization-settings/preferences
-[8]: /account_management/rbac/permissions/
+[8]: /account_management/rbac/permissions/#access-management
