@@ -103,7 +103,7 @@ const exporter = new OTLPMetricExporter({
   temporalityPreference: AggregationTemporalityPreference.DELTA, // Ensure delta temporality
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
-    'dd-otel-metric-config': '{resource_attributes_as_tags: true}',
+    'dd-otel-metric-config': '{"resource_attributes_as_tags": true}',
     'dd-otlp-source': '${PARTNER_ID}', // For Datadog platform partners only. Use the ID provided by Datadog.
   },
 });
@@ -125,7 +125,7 @@ OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
     .setAggregationTemporalitySelector(
 			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
-    .addHeader("dd-otel-metric-config", "{resource_attributes_as_tags: true}")
+    .addHeader("dd-otel-metric-config", "{\"resource_attributes_as_tags\": true}")
     .addHeader("dd-otlp-source", "${PARTNER_ID}") // For Datadog platform partners only. Use the ID provided by Datadog.
     .build();
 ```
@@ -149,7 +149,7 @@ metricExporter, err := otlpmetrichttp.New(
 	otlpmetrichttp.WithHeaders(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
-			"dd-otel-metric-config": "{resource_attributes_as_tags: true}",
+			"dd-otel-metric-config": "{\"resource_attributes_as_tags\": true}",
       "dd-otlp-source": "${PARTNER_ID}", // For Datadog platform partners only. Use the ID provided by Datadog.
 		}),
 )
@@ -171,7 +171,7 @@ exporter = OTLPMetricExporter(
     preferred_temporality=deltaTemporality, # Ensure delta temporality
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
-        "dd-otel-metric-config": "{resource_attributes_as_tags: true}",
+        "dd-otel-metric-config": '{"resource_attributes_as_tags": true}',
         "dd-otlp-source": "${PARTNER_ID}" # Replace with the specific value provided by Datadog for your organization
     },
 )
