@@ -376,13 +376,11 @@ Common peer tags for `kind:queue` entities:
 
 Peer Tag | Source Attributes
 --------------------|-------------------
-`peer.aws.dynamodb.table` | `tablename`
-`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
-`peer.cassandra.contact.points` | `db.cassandra.contact.points`
-`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
-`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
-`peer.db.system` | `db.system`
-
+`peer.aws.kinesis.stream` | `streamname`
+`peer.aws.sqs.queue` | `queuename`
+`peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
+`peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `ampqb.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
+`peer.messaging.system` | `messaging.system`
 
 Learn more about [peer tags and inferred entities][4].
 
