@@ -1,20 +1,22 @@
 ---
-title: LLM Observability Java SDK Reference [BETA]
+title: LLM Observability Java SDK Reference
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 30
-aliases:
-    - /tracing/llm_observability/sdk/java
-    - /llm_observability/sdk/java
+private: true
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+The LLM Observability SDK for Java is in Preview.
+{{< /callout >}}
+
 ## Overview
 
-The LLM Observability SDK for Java (BETA) enhances the observability of your Java-based LLM applications. The SDK supports Java versions 8 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][4].
+The LLM Observability SDK for Java enhances the observability of your Java-based LLM applications. The SDK supports Java versions 8 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][4].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with wrapped functions or traced blocks. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -22,7 +24,7 @@ You can install and configure tracing of various operations such as workflows, t
 
 ### Prerequisites
 
-1. The beta `dd-trace-java` JAR must be downloaded to a folder that is accessible by your Datadog user, please contact our team for access.
+1. Download the `dd-trace-java` JAR.
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][1]).
 
@@ -37,11 +39,11 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 | Environment Variable      | System Property               | Description                                                                                                                                                                                                                                                                                  |
 | --------- |-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_SITE`      | `dd.site`                     | The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.                                                                                                                                                                                       |
-| `DD_LLMOBS_ENABLED`   | `dd.llmobs.enabled`           | Toggle to enable submitting data to LLM Observability. Should be set to `true`.                                                                                                                                                                                                              |
-| `DD_LLMOBS_ML_APP`      | `dd.llmobs.ml.app`            | The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. |
-| `DD_SERVICE`   | `dd.service`                  | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                                                                                           |
 | `DD_LLMOBS_AGENTLESS_ENABLED` | `dd.llmobs.agentless.enabled` | Only required if you are not using the Datadog Agent, in which case this should be set to `true`. Defaults to `false`.                                                                                                                                                                       |
+| `DD_SITE`      | `dd.site`                     | The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.                                                                                                                                                                                       |
+| `DD_SERVICE`   | `dd.service`                  | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                                                                                           |
+| `DD_LLMOBS_ML_APP`      | `dd.llmobs.ml.app`            | The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. |
+| `DD_LLMOBS_ENABLED`   | `dd.llmobs.enabled`           | Toggle to enable submitting data to LLM Observability. Should be set to `true`.                                                                                                                                                                                                              |
 | `DD_API_KEY` | `dd.api.key`                  | Your Datadog API key. Only required if you are not using the Datadog Agent.                                                                                                                                                                                                                  |
 
 #### Application naming guidelines
@@ -57,11 +59,11 @@ Your application name (the value of `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`) mu
 
 The name can be up to 193 characters long and may not contain contiguous or trailing underscores.
 
-### Starting a Span & Span Kinds
+### Starting a span
 
 There are several different methods to start a span, based on the kind of span that you are starting. See the [Span Kinds documentation][2] for a list of supported span kinds.
 
-All spans are started as an object instance of `LLMObsSpan`. And spans have methods that you can use to interact with and record data with.
+All spans are started as an object instance of `LLMObsSpan`. Each span has methods that you can use to interact with the span and record data.
 
 ### Finishing a span
 
@@ -82,7 +84,8 @@ Spans can be finished by calling `finish()` on a span object instance. It is rec
 
 ### LLM span
 
-To trace an LLM span, import and call the following method with the arguments listed below
+To trace an LLM span, import and call the following method with the arguments listed below:
+
 ```
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
@@ -91,23 +94,23 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 #### Arguments
 
 `spanName`
-: optional - _string_
+: optional - `String`
 <br/>The name of the operation. If not provided, `spanName` defaults to the kind of the span.
 
 `modelName`
-: optional - _string_ - **default**: `"custom"`
+: optional - `String` - **default**: `"custom"`
 <br/>The name of the invoked LLM.
 
 `modelProvider`
-: optional - _string_ - **default**: `"custom"`
+: optional - `String` - **default**: `"custom"`
 <br/>The name of the model provider.
 
 `mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value will result in overriding the ML App supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - `String`
+<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - _string_
+: optional - `String`
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 #### Example
@@ -127,7 +130,8 @@ public class MyJavaClass {
 
 
 ### Workflow span
-To trace a workflow span, import and call the following method with the arguments listed below
+To trace a workflow span, import and call the following method with the arguments listed below:
+
 ```
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
@@ -136,15 +140,15 @@ LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 #### Arguments
 
 `spanName`
-: optional - _string_
+: optional - `String`
 <br/>The name of the operation. If not provided, `spanName` defaults to the kind of the span.
 
 `mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value will result in overriding the ML App supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - `String`
+<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - _string_
+: optional - `String`
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 #### Example
@@ -174,20 +178,21 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 #### Arguments
 
 `spanName`
-: optional - _string_
+: optional - `String`
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value will result in overriding the ML App supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - `String`
+<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - _string_
+: optional - `String`
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 ### Tool span
 
-To trace a tool span, import and call the following method with the arguments listed below
+To trace a tool span, import and call the following method with the arguments listed below:
+
 ```java
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startToolSpan(spanName, mlApp, sessionID);
@@ -196,20 +201,21 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 #### Arguments
 
 `spanName`
-: optional - _string_
+: optional - `String`
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value will result in overriding the ML App supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - `String`
+<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - _string_
+: optional - `String`
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 ### Task span
 
-To trace a task span, import and call the following method with the arguments listed below
+To trace a task span, import and call the following method with the arguments listed below:
+
 ```java
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startTaskSpan(spanName, mlApp, sessionID);
@@ -218,15 +224,15 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 #### Arguments
 
 `spanName`
-: optional - _string_
+: optional - `String`
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value will result in overriding the ML App supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - `String`
+<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - _string_
+: optional - `String`
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 ## Tracking user sessions
@@ -252,21 +258,21 @@ public class MyJavaClass {
 
 The SDK provides several methods to annotate spans with inputs, outputs, metrics, and metadata.
 
-### Annotating Inputs & Outputs
+### Annotating inputs and outputs
 
-The `annotateIO()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following arguments:
+The `annotateIO()` member method of the `LLMObsSpan` interface accepts the following arguments:
 
 #### Arguments
 
-If any of these arguments are null or empty, nothing will happen. For example, if `inputData` is a non empty string while `outputData` is null, then only the `inputData` will be recorded.
+If an argument is null or empty, nothing happens. For example, if `inputData` is a non-empty string while `outputData` is null, then only `inputData` is recorded.
 
 `inputData`
 : optional - `String` or `List<LLMObs.LLMMessage>`
-<br />Either a String (for non-LLM spans) or a list of `LLMObs.LLMMessage`'s for LLM spans.
+<br />Either a string (for non-LLM spans) or a list of `LLMObs.LLMMessage`s for LLM spans.
 
 `outputData`
 : optional - `String` or `List<LLMObs.LLMMessage>`
-<br />Either a String (for non-LLM spans) or a list of `LLMObs.LLMMessage`'s for LLM spans.
+<br />Either a string (for non-LLM spans) or a list of `LLMObs.LLMMessage`s for LLM spans.
 
 #### LLM Messages
 LLM spans must be annotated with LLM Messages using the `LLMObs.LLMMessage` object.
@@ -274,11 +280,11 @@ LLM spans must be annotated with LLM Messages using the `LLMObs.LLMMessage` obje
 The `LLMObs.LLMMessage` object can be instantiated by callling `LLMObs.LLMMessage.from()` with the following arguments:
 
 `role`
-: required - String
+: required - `String`
 <br />A string describing the role of the author of the message
 
 `content`
-: required - String
+: required - `String`
 <br />A string containing the content of the message
 
 #### Example
@@ -306,11 +312,11 @@ public class MyJavaClass {
 }
 ```
 
-### Adding Metrics
+### Adding metrics
 
-#### Bulk Add Metrics
+#### Bulk add metrics
 
-The `setMetrics()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following arguments to attach multiple metrics in bulk:
+The `setMetrics()` member method of the `LLMObsSpan` interface accepts the following arguments to attach multiple metrics in bulk:
 
 ##### Arguments
 
@@ -318,18 +324,18 @@ The `setMetrics()` member method of a span (specifically the `LLMObsSpan` interf
 : required - `Map<String, Number>`
 <br /> A map of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (input_tokens, output_tokens, total_tokens, etc.).
 
-#### Add a Single Metric
+#### Add a single metric
 
-The `setMetric()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following arguments to attach a single metric:
+The `setMetric()` member method of the `LLMObsSpan` interface accepts the following arguments to attach a single metric:
 
 ##### Arguments
 
 `key`
 : required - `CharSequence`
-<br /> the name of the metric
+<br /> The name of the metric
 
 `value`
-: required - One of `int`, `long`, `double`
+: required - `int`, `long`, or `double`
 <br /> The value of the metric
 
 #### Examples
@@ -354,13 +360,13 @@ public class MyJavaClass {
 }
 ```
 
-### Adding Tags
+### Adding tags
 
 For more information about tags, see [Getting Started with Tags][3].
 
-#### Bulk Add Tags
+#### Bulk add tags
 
-The `setTags()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following arguments to attach multiple tags in bulk:
+The `setTags()` member method of the `LLMObsSpan` interface accepts the following arguments to attach multiple tags in bulk:
 
 ##### Arguments
 
@@ -368,9 +374,9 @@ The `setTags()` member method of a span (specifically the `LLMObsSpan` interface
 : required - `Map<String, Object>`
 <br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span’s context (session, environment, system, versioning, etc.).
 
-#### Add a Single Tag
+#### Add a single tag
 
-The `setTag()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following arguments to attach a single tag:
+The `setTag()` member method of the `LLMObsSpan` interface accepts the following arguments to attach a single tag:
 
 ##### Arguments
 
@@ -379,7 +385,7 @@ The `setTag()` member method of a span (specifically the `LLMObsSpan` interface)
 <br /> The key of the tag
 
 `value`
-: required - One of `int`, `long`, `double`, `boolean`, `String`
+: required - `int`, `long`, `double`, `boolean`, or `String`
 <br /> The value of the tag
 
 #### Examples
@@ -402,21 +408,21 @@ public class MyJavaClass {
 }
 ```
 
-### Annotating Errors
+### Annotating errors
 
 #### Adding a Throwable (Recommended)
 
-The `addThrowable()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following argument to attach a throwable with a stack trace:
+The `addThrowable()` member method of the `LLMObsSpan` interface accepts the following argument to attach a throwable with a stack trace:
 
 ##### Arguments
 
 `throwable`
 : required - `Throwable`
-<br /> The throwable / exception that occurred.
+<br /> The throwable/exception that occurred.
 
 #### Adding an error message
 
-The `setErrorMessage()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following argument to attach an error string:
+The `setErrorMessage()` member method of the `LLMObsSpan` interface accepts the following argument to attach an error string:
 
 ##### Arguments
 
@@ -424,9 +430,9 @@ The `setErrorMessage()` member method of a span (specifically the `LLMObsSpan` i
 : required - `String`
 <br /> The message of the error
 
-#### Setting an Error Flag
+#### Setting an error flag
 
-The `setError()` member method of a span (specifically the `LLMObsSpan` interface) accepts the following argument to indicate an error with the operation:
+The `setError()` member method of the `LLMObsSpan` interface accepts the following argument to indicate an error with the operation:
 
 ##### Arguments
 
@@ -456,12 +462,12 @@ public class MyJavaClass {
 }
 ```
 
-### Annotating Metadata
+### Annotating metadata
 
 The `setMetadata()` member method of the `LLMObsSpan` interface accepts the following arguments:
 
 `metadata`
-: required - Map<String, Object>
+: required - `Map<String, Object>`
 <br />A map of JSON serializable key-value pairs that contains metadata information relevant to the input or output operation described by the span
 
 #### Example
@@ -486,26 +492,24 @@ public class MyJavaClass {
 
 ## Evaluations
 
-The LLM Observability SDK provides the methods `LLMObs.SubmitEvaluation()` to help your traced LLM application submit evaluations to LLM Observability.
-
 ### Submit evaluations
 
-`LLMObs.SubmitEvaluation()` can be used to submit your custom evaluation associated with a given span.
+Use `LLMObs.SubmitEvaluation()` to submit your custom evaluation associated with a given span.
 
 #### Arguments
 
 The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 
 `llmObsSpan`
-: required - _LLMObsSpan_
+: required - `LLMObsSpan`
 <br />The span context to associate the evaluation with.
 
 `label`
-: required - _string_
+: required - `String`
 <br />The name of the evaluation.
 
 `categoricalValue` or `scoreValue`
-: required - _string or double_
+: required - `String` or `double`
 <br />The value of the evaluation. Must be a string (for categorical evaluations) or a double (for score evaluations).
 
 `tags`
