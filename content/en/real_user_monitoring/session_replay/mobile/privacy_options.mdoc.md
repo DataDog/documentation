@@ -781,7 +781,7 @@ Sensitive text can be detected in:
 {% /if %}
 
 <!-- iOS -->
-{% if equals($platform, "iOS") %}
+{% if equals($platform, "ios") %}
 Sensitive text can be detected in:
 
 - Text Field
