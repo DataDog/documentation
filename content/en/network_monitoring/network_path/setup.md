@@ -184,7 +184,7 @@ instances:
     port: 443 # optional port number, default is 80
 ```
 
-**Note**: In Windows Client OS enviroments, raw packets are currently not supported. To work around this, ensure the protocol is TCP, and you use our syn_socket tcp_method (Agent `v7.67+` is required). For example:
+**Note**: In Windows Client OS environments, raw packets are not supported. To work around this, ensure the protocol is TCP, and use `syn_socket` tcp_method (Agent `v7.67+` is required). For example:
 
 ```yaml
 init_config:
