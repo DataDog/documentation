@@ -1,5 +1,7 @@
 ---
 title: Enabling App and API Protection for GCP Service Extensions
+aliases:
+  - alb
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 50
@@ -31,7 +33,7 @@ You can enable App and API Protection (AAP) with GCP Service Extensions within G
 - In your GCP project, you have either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
 - A GCP project with a Cloud Load Balancer is configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
 - Compute Engine API and Network Services API are enabled:
-  
+
   ```bash
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
   ```
@@ -54,7 +56,7 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     </div>
 
 2. Add the VM to an unmanaged instance group.
-  
+
     Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
 3. Create a backend service with the following settings:
