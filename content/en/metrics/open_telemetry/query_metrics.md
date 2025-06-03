@@ -12,12 +12,12 @@ further_reading:
 Querying across Datadog and OpenTelemetry metrics is in Preview. To enable this feature, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}} 
 
-Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid environments where some hosts emit OTel-native metrics and others emit Datadog-native metrics. Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
+Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid environments where some hosts emit OTel metrics and others emit Datadog metrics. Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
 
 Datadog helps you bridge this gap by enabling you to:
 
 - Query OTel and Datadog metrics together.
-- Understand how OTel and Datadog metrics map to each other.
+- Use Combined Mode to automatically map and merge OTel and Datadog metrics.
 
 ## Unify OpenTelemetry and Datadog metrics in queries
 
