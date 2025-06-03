@@ -19,7 +19,7 @@ Your branch name MUST follow the `<name>/<description>` convention and include t
 
 If your branch doesn't follow this format, rename it or create a new branch and PR.
 
-[6/5/2025] Merge queue has been disabled on the documentation repo. If you write access to the repo, the PR has been reviewed by a Documentation team member, and all of the required checks have passed, you can use the **Squash and Merge** button to merge the PR. If you don't have write access, or you need help, reach out in the #documentation channel in Slack.
+[6/5/2025] Merge queue has been disabled on the documentation repo. If you have write access to the repo, the PR has been reviewed by a Documentation team member, and all of the required checks have passed, you can use the **Squash and Merge** button to merge the PR. If you don't have write access, or you need help, reach out in the #documentation channel in Slack.
 
 ### Additional notes
 <!-- Anything else we should know when reviewing?-->
