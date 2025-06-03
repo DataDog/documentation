@@ -169,13 +169,13 @@ If any of these conditions apply to your repository, and you cannot update your 
 
 ### Missing libraries
 
-To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria will be excluded:
+To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria are excluded:
 
 - **Missing version**: The library does not specify a version.
 - **Non-ASCII name**: The library name contains characters outside the ASCII character set.
 - **Empty purl**: The package URL (purl) field is missing or blank.
 - **Invalid purl**: The package URL is present but not in a valid purl format.
-- **Unsupported language**: The library is associated with a programming language that Datadog does not currently support.
+- **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
