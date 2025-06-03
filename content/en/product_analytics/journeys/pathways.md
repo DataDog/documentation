@@ -13,10 +13,6 @@ further_reading:
   text: Build Sankey widgets in Dashboards
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 You can use Pathway diagrams to visualize all user journeys across your application to analyze the critical path.

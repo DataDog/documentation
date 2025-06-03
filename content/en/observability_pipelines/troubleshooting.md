@@ -79,6 +79,8 @@ If you see the error `Too many files` and the Worker processes repeatedly restar
 
 If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
 
+If you are using RHEL and need to forward logs from one port (for example UDP/514) to the port the Worker is listening on (for example, UDP/1514, which is an unprivileged port), you can use [`firewalld`][14] to forward logs from port 514 to port 1514.
+
 ## Logs are not getting forwarded to the destination
 
 Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
@@ -140,3 +142,4 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/install_the_worker/worker_commands/
+[14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
