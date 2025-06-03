@@ -2,7 +2,6 @@
 title: Setup App and API Protection
 disable_sidebar: true
 type: multi-code-lang
-customClass: integrations # add the CSS class ".integrations" to the HTML body so the js loads accordingly
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -21,56 +20,64 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
-## Language Integrations
+Learn how to setup App and API Protection on all the supported platforms and environments.
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="Python" description="Setup Application Security for Python applications" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/python" >}}
-  {{< appsec-integration name=".NET" description="Setup Application Security for .NET applications" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/dotnet" >}}
-  {{< appsec-integration name="Java" description="Setup Application Security for Java applications" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/java" >}}
-  {{< appsec-integration name="Node.js" description="Setup Application Security for Node.js applications" logo="https://static.datadoghq.com/static/images/logos/node_avatar.svg" link="/security/application_security/setup/standalone/nodejs" >}}
-  {{< appsec-integration name="PHP" description="Setup Application Security for PHP applications" logo="https://static.datadoghq.com/static/images/logos/php_avatar.svg" link="/security/application_security/setup/standalone/php" >}}
-  {{< appsec-integration name="Go" description="Setup Application Security for Go applications" logo="https://static.datadoghq.com/static/images/logos/go_avatar.svg" link="/security/application_security/setup/standalone/go" >}}
-  {{< appsec-integration name="Ruby" description="Setup Application Security for Ruby applications" logo="https://static.datadoghq.com/static/images/logos/ruby_avatar.svg" link="/security/application_security/setup/standalone/ruby" >}}
+<div class="alert alert-info">
+  <p class="fs-bold">Missing your environment?<p>
+  Send us a request for your missing environment <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">here</a>.
+</div>
+
+## Languages
+
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Python" logo="https://static.datadoghq.com/static/images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/python" >}}
+  {{< appsec-integration name="Node.js" logo="https://static.datadoghq.com/static/images/logos/node_avatar.svg" link="/security/application_security/setup/standalone/nodejs" >}}
+  {{< appsec-integration name="Java" logo="https://static.datadoghq.com/static/images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/java" >}}
+  {{< appsec-integration name="Go" logo="https://static.datadoghq.com/static/images/logos/go_avatar.svg" link="/security/application_security/setup/standalone/go" >}}
+  {{< appsec-integration name="Ruby" logo="https://static.datadoghq.com/static/images/logos/ruby_avatar.svg" link="/security/application_security/setup/standalone/ruby" >}}
+  {{< appsec-integration name=".NET" logo="https://static.datadoghq.com/static/images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/dotnet" >}}
+  {{< appsec-integration name="PHP" logo="https://static.datadoghq.com/static/images/logos/php_avatar.svg" link="/security/application_security/setup/standalone/php" >}}
 {{< /appsec-integrations >}}
 
-## Proxy Integrations
+## Proxies
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="NGINX" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx_avatar.svg" link="/security/application_security/setup/standalone/nginx" >}}
-  {{< appsec-integration name="Envoy" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/envoy_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
-  {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/istio" >}}
+{{< appsec-integrations >}}
+  {{< appsec-integration name="NGINX" logo="https://static.datadoghq.com/static/images/logos/nginx_avatar.svg" link="/security/application_security/setup/standalone/nginx" >}}
+  {{< appsec-integration name="Envoy" logo="https://static.datadoghq.com/static/images/logos/envoy_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
+  {{< appsec-integration name="Istio" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/istio" >}}
 {{< /appsec-integrations >}}
 
-## Cloud and Containers Integrations
+## Cloud and Container Platforms
 
-### Google Cloud Platform (GCP) Integrations
+### Kubernetes
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="Google Application Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Cloud Load Balancer" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Service Extension" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Cloud Run" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
+{{< appsec-integrations >}}
+  {{< appsec-integration name="NGINX Ingress Controller" logo="https://static.datadoghq.com/static/images/logos/nginx-ingress-controller_avatar.svg" link="/security/application_security/setup/standalone/nginx-ingress-controller" >}}
+  {{< appsec-integration name="Istio" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
 {{< /appsec-integrations >}}
 
-### Microsoft Azure Integrations
+### Amazon Web Services (AWS)
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="Azure App Service" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
+{{< appsec-integrations >}}
+  {{< appsec-integration name="AWS WAF" logo="https://static.datadoghq.com/static/images/logos/amazon-waf_avatar.svg" link="/security/application_security/setup/standalone/aws/waf" >}}
+  {{< appsec-integration name="AWS Lambda" logo="https://static.datadoghq.com/static/images/logos/amazon-lambda_avatar.svg" link="/security/application_security/setup/standalone/aws/lambda" >}}
+  {{< appsec-integration name="AWS Fargate" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
 {{< /appsec-integrations >}}
 
-### Amazon Web Services (AWS) Integrations
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="AWS WAF" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-waf_avatar.svg" link="/security/application_security/setup/standalone/aws/waf" >}}
-  {{< appsec-integration name="AWS Lambda" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/amazon-lambda_avatar.svg" link="/security/application_security/setup/standalone/aws/lambda" >}}
-  {{< appsec-integration name="AWS Fargate" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/aws-fargate_avatar.svg" link="/security/application_security/setup/standalone/aws/fargate" >}}
+### Google Cloud Platform (GCP)
+
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Google Application Load Balancer" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Cloud Load Balancer" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Service Extension" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Cloud Run" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
 {{< /appsec-integrations >}}
 
-### Kubernetes Integrations
+### Microsoft Azure
 
-{{< appsec-integrations integration-request-link="https://forms.gle/nMGq2Hhe7Z4sCKdy6" >}}
-  {{< appsec-integration name="NGINX Ingress Controller" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/nginx-ingress-controller_avatar.svg" link="/security/application_security/setup/standalone/nginx-ingress-controller" >}}
-  {{< appsec-integration name="Istio" description="Lorem Ipsum" logo="https://static.datadoghq.com/static/images/logos/istio_avatar.svg" link="/security/application_security/setup/standalone/envoy" >}}
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Azure App Service" logo="https://static.datadoghq.com/static/images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/setup/standalone/azure/app_service" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading
