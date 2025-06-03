@@ -66,3 +66,5 @@ The runner runs using an existing user in the database, the user is required to 
 Create a Postgres connection in Datadog Actions Connections, and name and configure the connection:
 
 {{< img src="database_monitoring/db-cancel-query-connection-modal.png" alt="The Connection creation modal for the Cancel Query feature" style="width:90%;" >}}
+
+[1]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
