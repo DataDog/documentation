@@ -513,7 +513,7 @@ The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 <br />The value of the evaluation. Must be a string (for categorical evaluations) or a double (for score evaluations).
 
 `tags`
-: optional - _dictionary_
+: optional - `Map<String, Object>`
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][3].
 
 
