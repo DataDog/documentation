@@ -8,7 +8,7 @@ private: true
 LLM Observability Experiments is in Preview.
 {{< /callout >}}
 
-{{< img src="llm_observability/experiments/vis-experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 9 experiments across 8 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
 LLM Observability [Experiments][9] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
@@ -917,12 +917,12 @@ Handle the ingestion of experiment spans or respective evaluation metrics.
 
 
 
-[1]: https://github.com/DataDog/llm-experiments-examples
+[1]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
 [5]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [6]: https://pandas.pydata.org/docs/user_guide/advanced.html#multiindex-advanced-indexing
-[7]: tk
+[7]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
