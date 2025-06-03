@@ -225,7 +225,7 @@ Thread lifetime (in Timeline) (v3.19+)
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
 Garbage Collector CPU consumption (v3.19+)
-: The time Garbage Collector's threada spent running on the CPU.<br />
+: The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
 Note: **Allocations** and **Live Heap** profiling are in beta until .NET 10, where required better statistical allocation sampling will be available.
