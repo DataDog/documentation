@@ -160,12 +160,13 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Google Cloud integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Google Cloud. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
-   | Name         | Value                                                                                              |
-   |--------------|----------------------------------------------------------------------------------------------------|
-   | `DD_ENV`     | How you want to tag your env for [Unified Service Tagging][9]. For example, `prod`.                |
-   | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].                                 |
-   | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9].                                 |
-   | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                          |
+   | Name         | Value                                                                                                |
+   |--------------|------------------------------------------------------------------------------------------------------|
+   | `DD_ENV`     | How you want to tag your env for [Unified Service Tagging][9]. For example, `prod`.                  |
+   | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].                                   |
+   | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9].                                   |
+   | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                            |
+   | `DD_SITE`    | [Datadog site][13] - Set this tag if you are in a different site. **Default** is US1 `datadoghq.com` |
 
 8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
