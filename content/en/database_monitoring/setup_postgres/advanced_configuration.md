@@ -55,7 +55,7 @@ instances:
         collection_interval: 0.1
 ```
 
-## Setup Cancel Query integration
+## Set up Cancel Query integration
 
 To support cancelling a query throughout the Database Monitoring product, [set up a private action runner][1] and enable the “Cancel Query” action for the runner.
 
