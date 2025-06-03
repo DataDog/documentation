@@ -62,6 +62,8 @@ The **Active Connections** tab of the host details panel displays the live queri
 
 ### Cancel a live query
 
+You can [set up the Cancel Query integration][2] to cancel live Postgres queries.
+
 To cancel a long running database query directly from Datadog:
 1. In **Active Connections**, click **Cancel Query**:
    {{< img src="database_monitoring/db-cancel-query-button.png" alt="The Cancel Query button inside the Active Connections panel" style="width:90%;" >}}
