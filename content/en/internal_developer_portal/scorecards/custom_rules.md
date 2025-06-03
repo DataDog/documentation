@@ -53,18 +53,18 @@ To evaluate and add custom rules in the Scorecards UI:
 
 Workflow Automation allows you to automate the evaluation of your custom rules in Datadog using the [**Update scorecard rule outcome** action][3]. 
 
-When you create a custom rule, you have the following options for evaluating that rule:
+When you create a custom rule, you can evaluate it using one of the following options:
 - **Add Workflow**:
-  - create a workflow from scratch,
-  - create a workflow from a [Scorecards blueprint][4], or
-  - link an existing custom workflow.
-- **Explore the [Scorecards API][8]**.
+  - Create a workflow from scratch.
+  - Create a workflow from a [Scorecards blueprint][4].
+  - Link an existing custom workflow.
+- **Use the [Scorecards API][8]**.
 
 {{< img src="tracing/internal_developer_portal/custom-evaluation-prompt.png" alt="A custom rule side panel, showing two options for evaluating that rule: Add Workflow, and Explore the Scorecards API" style="width:100%;" >}}
 
 ### Create workflow 
 
-After creating your custom rule, choose the **Add Workflow** option when prompted to configure the evaluation criteria for that rule. From there, you can create a workflow from scratch or from a blueprint.
+After creating your custom rule, choose the **Add Workflow** option when prompted to configure its evaluation criteria. From there, you can create a workflow from scratch or use a blueprint.
 
 {{% collapse-content title="From scratch" level="h4" expanded=false id="workflow-from-scratch" %}}
 
@@ -73,14 +73,14 @@ After creating your custom rule, choose the **Add Workflow** option when prompte
 To create a workflow from scratch: 
 
 1. Set a schedule for your workflow to run on.
-1. Click plus (+) icon to add a step.
+1. Click the plus (+) icon to add a step.
 1. Select the [**List service definitions** action][6] to fetch all defined services from Software Catalog.
-1. Click plus (+) icon to add a step.
+1. Click the plus (+) icon to add a step.
 1. Select the [For loop][7] to iterate over each service one-by-one.
 1. Select the action needed to fetch your evaluation data (for example: "List monitors" or "Get repository content" from GitHub). 
 1. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.
 1. Use the [**Update scorecard rule outcome** action][3] to send results to Scorecards.
-1. Run the workflow and see your evaluations populate in Scorecards for your custom rule.
+1. Run the workflow to see your evaluations appear in Scorecards for your custom rule.
 1. Publish the workflow; unpublished workflows do not run automatically. 
 
 {{% /collapse-content %}}
@@ -96,27 +96,27 @@ Instead of creating a workflow from scratch, you can start with a Scorecards blu
    
    **Note**: All Scorecards blueprints include the [**Update scorecard rule outcome** action][3] to send results to Scorecards. Do not delete this step.
 
-1. Run the workflow and see your evaluations populate in Scorecards for your custom rule.
+1. Run the workflow to see your evaluations appear in Scorecards for your custom rule.
 1. Publish the workflow; unpublished workflows do not run automatically. 
 
 {{% /collapse-content %}}
 
-Once created, the workflow is automatically linked to the Scorecard rule. Click the link to navigate to the workflow, make changes, and view information like workflow owner, run history, and last modified date. 
+After the workflow is created, it is automatically linked to the Scorecard rule. Click the link to open the workflow, make changes, and view details such as the owner, run history, and last modified date.
 
 {{< img src="tracing/internal_developer_portal/linked-workflow.png" alt="The detailed panel for an individual Scorecard, highlighting the linked workflow automation" style="width:100%;" >}}
 
 All Workflows created from the Scorecards page or from a Scorecards blueprint are automatically tagged with `source: scorecards` for searching and filtering. 
 
-**Note**: Clicking the red un-link button on a Scorecard rule removes the workflow from the rule but does not automatically unpublish the workflow. Unlinked workflows should also be unpublished to prevent evaluations from running for the rule. 
+**Note**: Clicking the red unlink button on a Scorecard rule removes the workflow from the rule but does not automatically unpublish the workflow. To prevent evaluations from running, you should also unpublish any unlinked workflows.
 
 ### Link existing workflow
 
-After creating your custom rule, choose the **Add Workflow** option to configure the evaluation criteria for that rule. Search for and select a existing workflow to link to the rule. 
+After creating your custom rule, choose the **Add Workflow** option to configure its evaluation criteria. Search for and select an existing workflow to link to the rule. 
 
-You can also link existing workflows to any custom rule that already generates outcomes:
-1. Click on the custom rule.
+You can also link an existing workflow to any custom rule that already generates outcomes:
+1. Click the custom rule.
 1. Select **Link Workflow**.
-1. Search for the existing workflow, and select to link. 
+1. Search for a workflow and select it to link it to the rule.
 
 {{< img src="tracing/internal_developer_portal/link-workflow.png" alt="Detailed panel for an individual custom rule with an arrow highlighting the <b>Link workflow<b> button" style="width:100%;" >}}
 
