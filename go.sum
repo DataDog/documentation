@@ -8,3 +8,5 @@ github.com/DataDog/websites-sources v0.0.0-20250530181203-97d3892e641b h1:t4WXtl
 github.com/DataDog/websites-sources v0.0.0-20250530181203-97d3892e641b/go.mod h1:RvGhXV0uQC6Ocs+n84QyL97kows6vg6VG5ZLQMHw4Fs=
 github.com/DataDog/websites-sources v0.0.0-20250602200419-0e42ce935433 h1:Fsx7WwwTL3pd9Z0/M3WZXXoPH2JWms1HJpuX6K35xYk=
 github.com/DataDog/websites-sources v0.0.0-20250602200419-0e42ce935433/go.mod h1:RvGhXV0uQC6Ocs+n84QyL97kows6vg6VG5ZLQMHw4Fs=
+github.com/DataDog/websites-sources v0.0.0-20250603203822-19b49b3d8e35 h1:SheinDQaM2OLxEdCUNchvTVdEHp4FcvbShY3PjTs3Xc=
+github.com/DataDog/websites-sources v0.0.0-20250603203822-19b49b3d8e35/go.mod h1:RvGhXV0uQC6Ocs+n84QyL97kows6vg6VG5ZLQMHw4Fs=
