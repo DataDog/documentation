@@ -42,15 +42,14 @@ Actions run in Action Interface require standard [Action credentials][5], either
 
 You can perform an action using the Action Interface. Let's look at an example where you check the status of an ECS cluster.
 
-1. Go to the [Action Interface][8].
+1. Go to the [Action Interface][8].  
   {{< img src="/service_management/action_interface/action_interface_landing.png" alt="Action Interface home page" >}}
-
-1. Enter the prompt, `I want to check the status of an ECS Cluster`, and press **Enter**.
-  Bits AI responds with something like the following:
-  {{< img src="/service_management/action_interface/list_ecs_clusters_response.png" alt="Action Interface home page" >}}
-  
-1. Click the **List ECS cluster** action.
-2. In the action, in **Connection**, select the connection to the AWS account you want to use. Connections are set up in [Action Catalog][1].
+2. Enter the prompt, `List ECS clusters`, and press **Enter**.
+  Bits AI responds a request for the AWS region.
+3. Enter a region.
+    Bits AI responds with something like, `Here's a Datadog Action to address your request. Review and click 'Execute Action' to proceed.`
+4. Click the **List ECS cluster** action.
+5. In the action, in **Connection**, select the connection to the AWS account you want to use. Connections are set up in [Action Catalog][1].
   Bits AI will continue to use the same connection for the duration of the chat session.
 1. In **Region**, select the AWS region where the clusters are hosted.
 2. In **Limit**, enter `5`.
