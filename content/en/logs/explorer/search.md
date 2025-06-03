@@ -21,7 +21,13 @@ The [Logs Explorer][5] lets you search and view individual logs as a list. Howev
 
 ## Natural language queries
 
-<div class="alert alert-info"><strong>Built with Llama</strong>, Natural Language Queries (NLQ) for Logs is in Preview. To access this feature, request through <a href="https://www.datadoghq.com/product-preview/natural-language-queries-for-logs/">this form</a>.</div>
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Natural Language Queries is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+
+<div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click **Ask** in the search field.
 
