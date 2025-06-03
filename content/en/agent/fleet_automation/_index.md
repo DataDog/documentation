@@ -21,7 +21,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
 
 ## Use cases
 
@@ -54,9 +54,9 @@ Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, A
 
 ### Examine an Agent
 
-Selecting an Agent gives you more information about it, including its configuration, connected integrations, audit events and a support tab that you can use to send a remote flare.
+Selecting an Agent gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
-{{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_agent1.png" alt="An Agent's integration information" style="width:100%;" >}}
 
 ### View Agent Audit Trail events
 
@@ -73,10 +73,11 @@ After you enable Remote Configuration on an Agent, you can send a flare from Dat
 
 When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
 
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Send a remote flare" style="width:100%;" >}}
+
 ## Remote Agent Management
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
-
 
 ## Control access to Fleet Automation
 
