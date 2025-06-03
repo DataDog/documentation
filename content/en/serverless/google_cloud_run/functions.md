@@ -223,7 +223,7 @@ Add the same value from `DD_SERVICE` to a `service` label on your cloud function
 |-----------|-------------------------------------------------------------|
 | `service` | The name of your service matching the `DD_SERVICE` env var. |
 
-For more information on how to add labels, see Google Cloud's (Configure labels for services)[https://cloud.google.com/run/docs/configuring/services/labels] documentation.
+For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
 
 ## Environment variables
 
