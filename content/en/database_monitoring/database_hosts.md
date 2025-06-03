@@ -107,4 +107,4 @@ The **Configuration** tab of the host details panel provides a direct view into 
 {{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/databases
-[2]: /database_monitoring/setup_postgres/advanced_configuration/#setup-cancel-query-integration
+[2]: /database_monitoring/setup_postgres/advanced_configuration/#set-up-cancel-query-integration
