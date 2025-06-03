@@ -8,12 +8,12 @@ title: Bits Dev Agent
 
 {{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
 
-Bits Dev Agent is a generative AI coding assistant that uses observability data to detect, diagnose, and fix high-impact issues in your code. It opens production-ready pull requests and iterates on fixes based on developer feedback.
+Bits Dev Agent is a generative AI coding assistant that uses observability data to detect, diagnose, and fix high-impact issues in your code. It can open production-ready pull requests and iterates on fixes based on developer feedback.
 
 ## Key capabilities
 
 - Opens GitHub pull requests with production-ready fixes when high-impact issues are detected.  
-- Iterates on code in response to review comments, including changes to logic or additional logging.  
+- Iterates on code in response to chat messages and review comments.  
 - Provides a single view of Dev Agent-generated pull requests, with filters for status, triggering product, and affected service.
 
 ## Supported Datadog products
@@ -22,9 +22,10 @@ Bits Dev Agent is available for the following Datadog products:
 
 | Product                | Availability          | Issues Detected                                                                |
 |------------------------|----------------------|---------------------------------------------------------------------------------|
-| [Error Tracking][1]    | General Availability | Crashes, panics, exceptions, unhandled errors                                   |
+| [Error Tracking][1]    | Limited Availability | Crashes, panics, exceptions, unhandled errors                                   |
 | [Code Security][2]     | Preview              | Security issues in first-party code and open source dependencies                |
-| [Profiler][3]          |                      | Performance bottlenecks identified through span and profile analysis            |
+| [Profiler][3]          | Preview              | Performance bottlenecks identified through span and profile analysis            |
+| [Proactive Recommendations][4]          | Preview              | Performance recommendations identified through trace analysis            |
 
 ## Setup
 
