@@ -69,10 +69,6 @@ You can change the sampling rate is only supported for server-side sampling and 
 
 During live outages, if a bug or incident occurs, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or you have more examples of a particular issue.
 
-### Accounting for mobile devices that go offline or crash
-
-RUM ensures availability of data when user devices are offline. In low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
