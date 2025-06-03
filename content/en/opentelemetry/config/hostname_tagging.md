@@ -464,9 +464,9 @@ processors:
 **Note:** This is only supported if you have opted-in as described [here][7].
 
 ### Host Aliases
-Host Aliases can be set via resource attribute `datadog.host.aliases`. 
+You can set Host Aliases with the resource attribute `datadog.host.aliases`. 
 
-This can be set in a processor: 
+Set this attribute in a processor: 
 ```
 processors:
   transform:
