@@ -1,8 +1,6 @@
 ---
 title: Tag Analysis
-description: "Tag analysis"
 private: true
-aliases:
 further_reading:
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
