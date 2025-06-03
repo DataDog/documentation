@@ -41,7 +41,7 @@ In addition to the default columns, you can add your own columns to your workspa
 1. Click the attribute you want to add as a column.
 1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**.
 
-### Calculated fields queries 
+### Calculated fields queries
 
 You can take existing Log Explorer queries with [Calculated Fields][4] and directly open them in Workspaces. To transfer these queries from the Log Explorer, click **Open in New Workspace**. The Calculated Fields will automatically be converted into a Transformation cell.
 
@@ -75,15 +75,15 @@ You can add a logs query or a reference table as a data source.
         1. Enter a query. The reserved attributes of the filtered logs are added as columns.
         1. Click **datasource_x** at the top of the cell to rename the data source.
         1. Click **Columns** to see the columns available. Click **as** for a column to add an alias.
-        1. To add additional columns to the dataset:  
-            a. Click on a log.  
-            b. Click the cog next to the facet you want to add as a column.  
-            c. Select **Add…to…dataset**.  
+        1. To add additional columns to the dataset:
+            a. Click on a log.
+            b. Click the cog next to the facet you want to add as a column.
+            c. Select **Add…to…dataset**.
 1. Click the download icon to export the dataset as a CSV.
 
 ### Analysis cell
 
-1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. [For documentation on the SQL syntax features, click here](https://docs.datadoghq.com/ddsql_reference/ddsql_default/). You can also use natural language to query your data. An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
+1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. See [SQL syntax features][6] documentation. You can also use natural language to query your data. An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
 1. If you are using SQL, click **Run** to run the SQL commands.
 1. Click the download icon to export the dataset as a CSV.
 
@@ -258,3 +258,7 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
 [5]: /ddsql_reference/
+<<<<<<< HEAD
+=======
+[6]: /ddsql_reference/ddsql_default/
+>>>>>>> master
