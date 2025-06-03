@@ -25,7 +25,7 @@ This guide walks you through best practices for RUM sampling so you can capture 
 
 #### Client-side (head-based) sampling rate
 
-IF With [RUM without Limits][2], client-side sampling rate helps you control the ingested portion of your session or how many sessions you send from your applications to Datadog.
+If With [RUM without Limits][2], client-side sampling rate helps you control the ingested portion of your session or how many sessions you send from your applications to Datadog.
 
 Before each new user session, the SDK draws a random floating-point number between 0 and 100, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the random number is higher, the session is not kept and events are not collected until the end of the session.
 
@@ -35,7 +35,7 @@ You can set the sampling rate with the SDK ([Browser][3], [Android][4], [iOS][5]
 
 With RUM without Limits, server-side sampling rate defines which sessions you want to keep in Datadog for a particular [retention period][11].
 
-The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session OR matches one of the events making up the sessions (view/action/error/resource etc) the whole session will be stored. The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria or discard the rest. Learn more about [how retention filters work][12].
+The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on.), the whole session is stored. The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria or discard the rest. Learn more about [how retention filters work][12].
 
 ### The effect of sampling on data and metrics that are available in RUM
 RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on sessions that are sampled. For example, if the sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions. 
@@ -46,7 +46,7 @@ RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on 
 
 For optimal monitoring, Datadog recommends sending 100% of your sessions to Datadog. This ensures highly accurate out-of-the-box and custom metrics and complete visibility into your user experience.
 
-However, if your application has very high traffic and ingestion costs are a concern, you can reduce the sampling rate. Keep in mind that lower sampling rates will affect the accuracy of your metrics proportionally.
+However, if your application has very high traffic and ingestion costs are a concern, you can reduce the sampling rate. Keep in mind that lower sampling rates affect the accuracy of your metrics proportionally.
 
 #### Server-side (tail-based) sampling rate
 
@@ -62,10 +62,10 @@ For server-side sampling, Datadog recommends a two-step approach:
 With RUM without Limits, your server-side sampling should provide enough data for both troubleshooting and performance analysis while managing your data volume effectively.
 
 ### Sampling based on specific attributes
-Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is supported using [retention filters][12]. This guide helps you understand common retention filter types to achieve this.
+Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is supported using [retention filters][12]. See the [Retention Filters Best Practices][13] guide to understand common retention filter types.
 
 ### Changing the sampling rate in the Datadog RUM UI
-You can change the sampling rate is only supported for server-side sampling and can be accomplished by [modifying the retention rate][15] from the retention filters page.
+You can change the sampling rate is only supported for server-side sampling and can be accomplished by [modifying the retention rate][14] from the retention filters page.
 
 During live outages, if a bug or incident occurs, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or you have more examples of a particular issue.
 
@@ -89,5 +89,5 @@ RUM ensures availability of data when user devices are offline. In low-network a
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup#sample-rum-sessions
 [11]: /data_security/data_retention_periods/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters
-[13]: /real_user_monitoring/rum_without_limits/metrics
+[13]: /real_user_monitoring/rum_without_limits/retention_filters#best-practices
 [14]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
