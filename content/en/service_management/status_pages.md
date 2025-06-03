@@ -9,8 +9,8 @@ further_reading:
   text: "Learn more about On-Call Scheduling"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/status-pages/" header="Limited Availability">}}
-  Incident Management Status Pages is in Limited Availability.
+{{< callout url="https://www.datadoghq.com/product-preview/status-pages/">}}
+  Incident Management Status Pages is in Preview.
 {{< /callout >}}
 
 ## Overview
