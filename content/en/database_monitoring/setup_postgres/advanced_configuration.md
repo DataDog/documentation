@@ -61,7 +61,7 @@ To support cancelling a query throughout the Database Monitoring product, [set u
 
 The runner runs using an existing user in the database, the user is required to have `pg_signal_backend` and `pg_read_all_stats` permissions in the database.
 
-### Create a Connection to the Private Actions Runner
+### Create a Connection to the Private Action Runner
 
 Create a Postgres connection in Datadog Actions Connections, and name and configure the connection:
 
