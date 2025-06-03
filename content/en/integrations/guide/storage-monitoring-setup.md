@@ -175,7 +175,7 @@ Once the inventory configuration is set up and your inventory files begin appear
 
 If you need to manage multiple buckets, complex inventory policies, encryption, or cross-account setups, you can use the [terraform-aws-s3-bucket module][402].
 
-### Troubleshooting AWS setup
+### Troubleshooting
 
 - S3 Inventory files are delivered daily, and may take up to 24 hours to appear after setup.
 - Ensure IAM permissions allow S3 to write inventory files to your destination bucket.
@@ -251,7 +251,7 @@ To verify your setup:
    - Confirm the Datadog integration can access the files:
        - Navigate to **Infrastructure -> Storage Monitoring -> Installation Recommendations** to see if the bucket you configured is showing in the list
 
-### Troubleshooting AWS setup
+### Troubleshooting
 
 If you encounter any issues or need assistance:
 - Make sure to use only one destination bucket for all inventory files per AWS account
