@@ -19,7 +19,7 @@ further_reading:
 
 {{< img src="cloud_cost/.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:80%;" >}}
 
-While [CCM Recommendations][1] are designed to be informative and actionable from the start, you can customize recommendations that you receive to fit your specific business use cases and needs. Set your own metric thresholds and evaluation time frames to reduce unnecessary alerts and focus on the recommendations that matter most.
+[CCM Recommendations][1] are designed to be informative and actionable from the start. You can customize these recommendations to fit your specific business use cases and needs. Set your own metric thresholds and evaluation time frames to reduce unnecessary alerts and focus on the recommendations that matter most.
 
 With custom recommendations, you can:
 - Configure multiple rules for any default recommendation
@@ -38,13 +38,13 @@ Click a recommendation, then click **Create New Configuration** to get started.
 
 ### Step 1: Set custom metric thresholds
 
-You can determine a value for each metric threshold used to generate recommendations for resources.
+You can set a value for each metric threshold used to generate resource recommendations.
 
 Any metric threshold unavailable for customization is grayed out.
 
 ### Step 2: Customize the evaluation time frame
 
-Adjust the evaluation time frame to better match your business's seasonality or operational patterns. Options include: 1 week, 2 weeks, 15 days, 3 weeks, 1 month, 2 months, and 3 months.
+Adjust the evaluation time frame to match your business's seasonality or operational patterns. Options include: 1 week, 2 weeks, 15 days, 3 weeks, 1 month, 2 months, and 3 months.
 
 ### Step 3: Apply this rule to all resources or add a filter
 
