@@ -71,7 +71,7 @@ Learn how to setup App and API Protection on all the supported platforms and env
   {{< appsec-integration name="Google Application Load Balancer" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/service-extensions" >}}
   {{< appsec-integration name="Google Cloud Load Balancer" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
   {{< appsec-integration name="Google Service Extension" logo="https://static.datadoghq.com/static/images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Cloud Run" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud_run" >}}
+  {{< appsec-integration name="Google Cloud Run" logo="https://static.datadoghq.com/static/images/logos/google-cloud-run_avatar.svg" link="/security/application_security/setup/standalone/gcp/cloud-run" >}}
 {{< /appsec-integrations >}}
 
 ### Microsoft Azure
