@@ -71,6 +71,8 @@ For a comprehensive view of how specific OTel and Datadog metrics relate, check 
 2. Search for a known Datadog or OTel metric.
 3. Open the **Metric Details** side panel.
 
+Alternatively, click **Edit in Metrics Summary** when inputting a metric in the query editor.
+
 This panel displays metric mappings, including complex relationships. For example, it shows how `otel.system.cpu.utilization` maps to multiple Datadog metrics like `system.cpu.idle`, `system.cpu.user`, and others.
 
 {{< img src="/metrics/otel/mappings.png" alt="Metrics Summary Details panel showing OTel and Datadog mappings" style="width:100%;" >}}
