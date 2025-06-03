@@ -7,9 +7,6 @@ is_beta: true
 private: false
 title: Autocompletar y buscar
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La función Autocompletar y buscar no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
 La función Autocompletar y buscar están en fase beta pública para Python y .NET.

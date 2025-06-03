@@ -16,10 +16,6 @@ further_reading:
 title: Conexiones
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation y App Builder no son compatibles con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Dado que las acciones se conectan con sistemas de software externos, es posible que debas autenticar tu cuenta de Datadog en la integración correspondiente. Una aplicación o flujo de trabajo sólo puede ejecutarse correctamente si todas las acciones que requieren autenticación pueden verificar la identidad de tu cuenta de Datadog. Cuando concedas permisos a Datadog, asegúrate de que sigues las prácticas recomendadas de seguridad y de que sólo concedes los permisos necesarios para que se ejecute una aplicación o un flujo de trabajo.
 
 Las acciones pueden autenticarse de dos maneras:

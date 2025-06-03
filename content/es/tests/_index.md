@@ -5,6 +5,7 @@ aliases:
 - /es/continuous_integration/integrate_tests/
 - /es/continuous_integration/tests/
 cascade:
+  site_support_id: test_optimization
   algolia:
     rank: 70
     tags:

@@ -16,10 +16,6 @@ further_reading:
 title: Detección temprana de defectos
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La detección temprana de defectos no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" header="¡Obtén la vista previa!" >}}
 La detección temprana de defectos está en vista previa.
 {{< /callout >}}

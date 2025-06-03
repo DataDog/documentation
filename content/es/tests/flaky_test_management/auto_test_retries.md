@@ -13,10 +13,6 @@ further_reading:
 title: Reintentos automáticos de tests
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Resumen
 
 La función Reintentos de test automáticos de Test Optimization permite reintentar tests fallidos hasta N veces para evitar que falle la compilación debido a tests defectuosos:

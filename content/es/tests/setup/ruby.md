@@ -19,10 +19,6 @@ title: Tests de Ruby
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Lenguajes compatibles:

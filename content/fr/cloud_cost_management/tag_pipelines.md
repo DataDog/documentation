@@ -7,7 +7,7 @@ title: Pipelines de tags
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Cloud Cost Management n'est pas prise en charge par ce site.</div>
+<div class="alert alert-warning">La solution Cloud Cost Management n'est pas prise en charge par ce site.</div>
 {{< /site-region >}}
 
 ## Présentation
