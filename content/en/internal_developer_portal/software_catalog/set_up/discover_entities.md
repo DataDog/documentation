@@ -35,9 +35,9 @@ For information about discovering endpoints, see [Discovering Endpoints from APM
 
 ### Managing automatically-named services 
 
-To adjust how inferred entities reflect in Software Catalog, you can:
+To adjust how inferred entities appear in Software Catalog, you can:
 
-- Assign a display name to change how an entity appears in the Software Catalog.
+- Assign a display name to identify an entity by a custom name.
 - [Filter out entities][3] by type (database, queue, third-party).
 - [Remove service overrides][4] such as `service:my-service-http-client` from your catalog or map.
 
