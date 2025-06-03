@@ -41,4 +41,4 @@ See [the setup section][1] on how to enable Datadog to cancel queries in your da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/setup_postgres/advanced_configuration/#setup-cancel-query-integration
+[1]: /database_monitoring/setup_postgres/advanced_configuration/#set-up-cancel-query-integration
