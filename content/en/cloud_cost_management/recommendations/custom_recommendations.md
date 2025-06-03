@@ -40,7 +40,7 @@ Click a recommendation, then click **Create New Configuration** to get started.
 
 You can set a value for each metric threshold used to generate resource recommendations.
 
-Any metric threshold unavailable for customization is grayed out.
+Metric thresholds that cannot be customized appear grayed out.
 
 ### Step 2: Customize the evaluation time frame
 
