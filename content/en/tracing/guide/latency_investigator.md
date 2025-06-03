@@ -28,17 +28,14 @@ The APM Investigator helps you:
 
 ## Starting an investigation
 
-Launch investigations from APM service pages or resource pages.
-
-To begin:
+Launch an investigation from an APM service page or a resource page.
 
 1. Navigate to a service showing latency issues.
-2. Find the latency graph showing the anomaly.
-3. Hover over the graph and click **Investigate**.
+2. Find the **Latency** graph showing the anomaly.
+3. Hover over the graph and click **Investigate**. This opens the investigation side panel.
+
 
 {{< img src="tracing/guide/apm_investigator/apm_investigator_entrypoint.png" alt="APM Investigator entrypoint" style="width:90%;">}}
-
-This opens the investigation side panel.
 
 ## Investigation workflow
 
@@ -63,7 +60,7 @@ The investigator identifies whether latency originates from your service or its 
 The investigator compares trace data from both your selected slow and normal periods. To find the service responsible for the latency increase, it compares:
 
 - **Execution Time** (self-time; the time spent on the service that is not spent in downstream dependencies) spent within each service across the two datasets. The service with the largest absolute latency increase is the primary focus.
-- **Call Patterns Between Services**: It analyzes changes in the number of requests between services. For example, if service Y significantly increases its calls to downstream service X, the investigator might identify Y as the bottleneck.
+- **Call Patterns Between Services**: Analyzes changes in the number of requests between services. For example, if service Y significantly increases its calls to downstream service X, the investigator might identify Y as the bottleneck.
 
 Based on this comprehensive analysis, the investigator recommends a service as the likely latency bottleneck. Expand the latency bottleneck section to see details about the comparison between slow and normal traces. A table surfaces the changes in self-time and in the number of inbound requests by service.
 
@@ -71,7 +68,7 @@ The following example shows two side-by-side flame graphs that compare slow trac
 
 {{< img src="tracing/guide/apm_investigator/latency_bottleneck.png" alt="Latency bottleneck section" style="width:100%;">}}
 
-From the table, click the `+` icon that appears when you hover over a row to add that service to the context of investigation for further analysis of recent changes on the service.
+To investigate recent changes to a service, click the `+` icon that appears when you hover over a row to add it as context for your investigation.
 
 ### Step 2: Correlate to recent changes
 
@@ -94,7 +91,7 @@ The investigator also uses [Tag Analysis][1] to help you discover shared attribu
 
 The section surfaces:
 - Tag distributions comparing the slow and normal datasets across all span dimensions.
-- Highlights of the most discriminating dimensions that might help understand the latency issue, such as `org_id`, `kubernetes_cluster`, or `datacenter.name`.
+- Highlights of the most discriminating dimensions that might help you understand the latency issue, such as `org_id`, `kubernetes_cluster`, or `datacenter.name`.
 
 The APM Investigator only surfaces this section when dimensions show significant differentiation that is worth examining.
 
