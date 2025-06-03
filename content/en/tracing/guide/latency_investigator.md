@@ -13,7 +13,7 @@ APM Investigator is in Preview. To request access, fill out this form.
 
 ## Overview
 
-The APM Investigator diagnoses and resolves application latency issues through a guided, step-by-step workflow. It consolidates analysis tools in a single interface to accelerate root cause identification.
+The APM Investigator helps you diagnose and resolve application latency issues through a guided, step-by-step workflow. It consolidates analysis tools into a single interface so you can identify root causes and take action.
 
 {{< img src="tracing/guide/apm_investigator/apm_investigator.png" alt="APM Investigator UI" style="width:90%;">}}
 
