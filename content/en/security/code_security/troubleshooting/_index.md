@@ -167,6 +167,16 @@ Datadog-hosted SCA scans do **not** support repositories that:
 
 If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
 
+### Missing libraries
+
+To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria will be excluded:
+
+- **Missing version**: The library does not specify a version.
+- **Non-ASCII name**: The library name contains characters outside the ASCII character set.
+- **Empty purl**: The package URL (purl) field is missing or blank.
+- **Invalid purl**: The package URL is present but not in a valid purl format.
+- **Unsupported language**: The library is associated with a programming language that Datadog does not currently support.
+
 ## No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
