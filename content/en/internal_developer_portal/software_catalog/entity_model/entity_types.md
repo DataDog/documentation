@@ -183,6 +183,111 @@ This page holds relationship data of how the API interacts with dependencies, th
 
 {{% /tab %}}
 
+{{% tab "Queue" %}}
+
+In Software Catalog, a queue (`kind:queue`) represents a message queue or stream-based messaging component that services interact with. Queues can represent systems such as Apache Kafka, Amazon SQS, RabbitMQ, and Google Pub/Sub.
+
+Queue entities can be:
+- [**Inferred by APM**][1] when instrumented services produce to or consume from a messaging system.
+- [**Manually defined**][2] to represent uninstrumented queues or enrich inferred ones with additional metadata.
+
+**Note**: If [Data Streams Monitoring][3] is enabled, the queue entity page displays metrics such as throughput, service latency, and processing errors. Otherwise, the page shows basic trace-derived metrics and service dependency relationships.
+
+### Example YAML definitions
+
+{{% collapse-content title="YAML for an inferred queue" level="h4" expanded=false id="inferred-queue" %}}
+
+This example shows a `kind:queue` definition for a queue automatically detected by APM.
+
+**Note**: The `metadata.name` value must exactly match the [peer tags](#queue-peer-tags) used by APM.
+
+```
+apiVersion: v3
+kind: queue
+metadata:
+  name: peer.messaging.destination:checkout-events
+  displayName: "Checkout Events Queue (Kafka)"
+  description: Captures all checkout-related events for downstream processing
+  owner: shopist
+  additionalOwners:
+    - name: platform-team
+      type: team
+  links:
+    - name: "Queue Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/checkout-events
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/checkout-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/MESSAGING123
+spec:
+  lifecycle: "production"
+  tier: "Tier 1"
+```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for a manually defined queue" level="h4" expanded=false id="manual-queue" %}}
+
+This example shows a `kind:queue` definition for a manually declared queue.
+
+```
+apiVersion: v3
+kind: queue
+metadata:
+  name: checkout-events-kafka
+  displayName: "Checkout Events Queue (Kafka)"
+  description: Captures all checkout-related events for downstream processing
+  owner: shopist
+  additionalOwners:
+    - name: platform-team
+      type: team
+  links:
+    - name: "Queue Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/checkout-events
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/checkout-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/MESSAGING123
+spec:
+  lifecycle: "production"
+  tier: "Tier 1"
+```
+
+{{% /collapse-content %}}
+
+### Queue peer tags
+
+For inferred entities, Datadog uses standard span attributes to construct `peer.*` tags. The `metadata.name` value in your entity definition must exactly match the inferred peer tags. Manually defined queues do not need to follow this convention. 
+
+Common peer tags for `kind:queue` entities:
+
+Peer Tag | Source Attributes
+--------------------|-------------------
+`peer.aws.dynamodb.table` | `tablename`
+`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
+`peer.cassandra.contact.points` | `db.cassandra.contact.points`
+`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
+`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
+`peer.db.system` | `db.system`
+
+
+Learn more about [peer tags and inferred entities][4].
+
+[1]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
+[2]: /internal_developer_portal/software_catalog/set_up/create_entities
+[3]: /data_streams/
+[4]: /tracing/services/inferred_services/?tab=agentv7600#naming-inferred-entities
+
+{{% /tab %}}
+
 {{% tab "Custom entities" %}}
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
