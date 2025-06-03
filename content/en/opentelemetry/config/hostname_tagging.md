@@ -463,8 +463,8 @@ processors:
 ```
 **Note:** This is only supported if you have opted-in as described [here][7].
 
-### Host Aliases
-You can set Host Aliases with the resource attribute `datadog.host.aliases`. 
+### Host aliases
+You can set host aliases with the resource attribute `datadog.host.aliases`. 
 
 Set this attribute in a processor: 
 ```
