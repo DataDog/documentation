@@ -35,7 +35,7 @@ Use Natural Language Queries (NLQ) to describe what you're looking for in plain 
 
 The system translates natural language input into Datadog queries and understands context such as services, attributes, tags, and time ranges. It also detects relevant fields automatically and enables users to create visualizations using simple descriptions—for example, "Top 20 services by errors" or "Show errors from service X in the past 24 hours."
 
-To disable NLQ, navigate to [Organization Settings > Preferences][7] and toggle off the Natural Language Queries feature.
+To disable NLQ, you must have [`org_management` permissions][8]. Navigate to [Organization Settings > Preferences][7] and toggle off the Natural Language Queries feature.
 
 ## Search query
 
@@ -114,3 +114,4 @@ You can interact with the search bar with your mouse, as well as by using keyboa
 [5]: /logs/explorer/
 [6]: /logs/explorer/search_syntax/#full-text-search
 [7]: https://app.datadoghq.com/organization-settings/preferences
+[8]: /account_management/rbac/permissions/
