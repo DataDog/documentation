@@ -27,7 +27,7 @@ Datadog analyzes metrics and sample data from DBM to identify your systems' high
 | **Missing Index**       | The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.                | <i class='icon-check-bold'> | <i class='icon-check-bold'> |                             | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | **Unused Index**        | The index has not been used in any execution plans recently.                                                                                           | <i class='icon-check-bold'> |  <i class='icon-check-bold'> |                             | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
-## Take Action on recommendations
+## Take action on recommendations
 
 Datadog now provides ways to act on certain recommendations directly within Datadog.
 
