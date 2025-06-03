@@ -90,7 +90,7 @@ By default, Session Replay data is retained for 30 days. To extend retention to 
 Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When a customer enrolls in the preview for Data Access Control, Datadog disables Session Replay Playlists.
 
 ### Logs
-Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control, and then manually migrate your configuration from Log Management permissions to Data Access Control.
+Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
 
 ## Select tags for access
 
