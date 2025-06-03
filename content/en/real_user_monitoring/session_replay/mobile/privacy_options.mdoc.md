@@ -772,14 +772,51 @@ Find below a description of how Datadog's recorder treats each text type.
 Sensitive text includes passwords, e-mails, and phone numbers marked in a platform-specific way,
 and other forms of sensitivity in text available to each platform.
 
-This includes passwords, e-mails and phone numbers in:
+<!-- Android -->
+{% if equals($platform, "android") %}
+Sensitive text can be detected in:
 
-- Text Field (iOS)
-- Text View (iOS)
-- Edit Text (Android)
-- Address information (iOS + Android)
-- Credit card numbers (iOS)
-- One-time codes (iOS)
+- Edit Text
+- Address information
+{% /if %}
+
+<!-- iOS -->
+{% if equals($platform, "iOS") %}
+Sensitive text can be detected in:
+
+- Text Field
+- Text View
+- Credit card numbers
+- One-time codes
+{% /if %}
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
+Sensitive text can be detected in the following components.
+
+{% table %}
+- Component
+- Platform(s)
+---
+- Text Field
+- iOS
+---
+- Text View
+- iOS
+---
+- Edit Text
+- Android
+---
+- Address information
+- iOS, Android
+---
+- Credit card numbers
+- iOS
+---
+- One-time codes
+- iOS
+{% /table %}
+{% /if %}
 
 #### Input and option text
 
@@ -787,6 +824,33 @@ Input and option text is text entered by the user with a keyboard or other text-
 
 This includes the below.
 
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+- User-entered text in:
+  - Text Field
+  - Text View
+- User-selected options in:
+  - Value Picker
+  - Segment
+- Notable exclusions:
+  - Placeholder (hint) texts in Text Field and Text View (not entered by the user)
+  - Non-editable texts in Text View
+  - Month, day, and year labels in Date Picker (generic values)
+{% /if %}
+
+<!-- Android -->
+{% if equals($platform, "android") %}
+- User-entered text in:
+  - Edit Text
+- User-selected options in:
+  - Drop Down List
+- Notable exclusions:
+  - Placeholder (hint) texts in Edit Text (not entered by the user)
+  - Month, day, and year labels in Date Picker (generic values)
+{% /if %}
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
 - User-entered text in:
   - Text Field (iOS)
   - Text View (iOS)
@@ -799,24 +863,59 @@ This includes the below.
   - Placeholder (hint) texts in Text Field, Text View and Edit Text (not entered by the user)
   - Non-editable texts in Text View (iOS).
   - Month, day, and year labels in Date Picker (generic values)
+{% /if %}
 
 #### Static text
 Static text is any text that is not directly entered by the user. This includes the below.
 
 All texts in:
 
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+- Texts in non-editable Text View
+- Month, day, and year labels in the date and time picker
+- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
+- Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar
+{% /if %}
+
+<!-- Android -->
+{% if equals($platform, "android") %}
+- Checkbox and Radio Button titles
+- Month, day, and year labels in the date and time picker
+- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
+- Other controls, not considered as "user input elements", such as Tabs
+{% /if %}
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
 - Checkbox and Radio Button titles (Android)
 - Texts in non-editable Text View (iOS)
 - Month, day and year labels in the date and time picker
 - Values updated in response to gesture interaction with input elements, such as the current value of the Slider
 - Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
+{% /if %}
 
 #### Hint text
 Hint text is static text in editable text elements or option selectors that is displayed when no value is given. This includes:
 
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+- Placeholders in Text Field
+- Placeholders in Text View
+{% /if %}
+
+<!-- Android -->
+{% if equals($platform, "android") %}
+- Hints in Edit Text
+- Prompts in Drop Down lists
+{% /if %}
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
 - Placeholders in Text Field (iOS), Text View (iOS)
 - Hints in Edit Text (Android)
 - Prompts in Drop Down lists (Android)
+{% /if %}
 
 ### Appearance masking
 
@@ -832,15 +931,63 @@ Revealing attributes are attributes that can reveal or suggest the value of inpu
 
 This includes:
 
+<!-- iOS -->
+{% if equals($platform, "ios") %}
 **Shapes**
-- Background of selected option in Segment (iOS)
-- Circle surrounding the selected date in a Date Picker (iOS)
-- Selection mark in Checkbox (Android)
-- Thumb of a Slider (iOS and Android)
+- Background of selected option in Segment
+- Circle surrounding the selected date in a Date Picker
+- Thumb of a Slider
 
 **Text attributes**
-- The color of a label rendering the selected date in Date Picker (iOS)
-- The position of the first and last option in Value Picker (iOS and Android)
+- The color of a label rendering the selected date in Date Picker
+- The position of the first and last option in Value Picker
+{% /if %}
+
+<!-- Android -->
+{% if equals($platform, "android") %}
+**Shapes**
+- Selection mark in Checkbox
+- Thumb of a Slider
+
+**Text attributes**
+- The position of the first and last option in Value Picker
+{% /if %}
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
+**Shapes**
+
+{% table %}
+- Type
+- Platform(s)
+---
+- Background of selected option in Segment
+- iOS
+---
+- Circle surrounding the selected date in Date Picker
+- iOS
+---
+- Selection mark in Checkbox
+- Android
+---
+- Thumb of a Slider
+- iOS, Android
+{% /table %}
+
+**Text attributes**
+
+{% table %}
+- Type
+- Platform(s)
+---
+- The color of a label rendering the selected date in Date Picker
+- iOS
+---
+- The position of the first and last option in Value Picker
+- iOS, Android
+{% /table %}
+{% /if %}
+<!-- end React Native -->
 
 ### Touch interactions
 
