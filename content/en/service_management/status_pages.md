@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/status-pages/">}}
-  Incident Management Status Pages is in Preview.
+Status Pages is in Preview.
 {{< /callout >}}
 
 ## Overview
