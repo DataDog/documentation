@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Analytics Explorer contains views data aggregation for understanding how your product is being used. You can control:
+The [Analytics Explorer][1] page contains views data aggregation for understanding how your product is being used. You can control:
 
 * The event type (Sessions, Views, or Actions) to see views by.
 * The query that filters the set of views to analyze.
