@@ -94,34 +94,18 @@ Clicking on any resource opens a side panel with details including:
 - **Service and team ownership** of the resource
 - **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
 
-## Recent changes
+## Resource Changes (in Preview)
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
-  <strong>Recent Changes</strong> is in Preview, but you can easily request access! Use this form to submit your request today.
+Resource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}} 
 
-**Recent Changes** displays a 7-day history of all configuration changes to [supported resources][15] across your environments. To forward change events from your cloud environments, either enable Snapshot Changes through Resource Collection or follow the links for your cloud providers in the sections below.
+Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps you monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
 
-**Prerequisites**: 
-   - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the Preview][9].
-   - Optionally, you can configure change event forwarding through one of the following cloud providers.
+For more information, see [Resource Changes][16].
 
-#### Snapshot Changes
+{{< img src="/infrastructure/resource_catalog/resource-changes.png" alt="Datadog Resource Changes interface showing a list of infrastructure configuration changes. The screen displays a VM instance named \"vm-new-jmcintyre-kafka\" with a StorageProfile update, including a side-by-side diff view highlighting changes in JSON format. The table shows multiple resources with timestamps, change types (mostly \"UPDATE\"), and details of the modifications. Filters are available at the top for cloud, region, environment, and other attributes." width="100%">}}
 
-Snapshot Changes is a generated Event Stream captured every 5 - 15 minutes through resource collection and requires no additional setup. For more frequent change updates, follow the links for your cloud providers in the following sections.
-
-#### AWS
-
-See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config. AWS Config captures configuration changes in real time, or to the extent allowed by your configuration.
-
-#### Azure
-
-To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14]. Azure Resource Graph captures configuration changes every 10 minutes.
-
-#### Google Cloud Platform
-
-See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription. Google Cloud Asset Inventory captures configuration changes every 10 minutes.
 
 ## Further reading
 
@@ -142,3 +126,4 @@ See the [Resource changes collection][8] section of the Google Cloud Platform in
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
+[16]: /infrastructure/resource_catalog/resource_changes/

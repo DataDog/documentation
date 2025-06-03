@@ -1159,9 +1159,9 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
-    - name: Accessibility
-      url: mobile/accessibility
-      identifier: mobile_accessibility
+    - name: Shortcut Configurations
+      url: mobile/shortcut_configurations
+      identifier: mobile_shortcut_configurations
       parent: mobile
       weight: 3
     - name: Push Notifications
@@ -2818,6 +2818,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_policies
       weight: 10002
+    - name: Resource Changes
+      url: infrastructure/resource_catalog/resource_changes/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_changes
+      weight: 10003
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -7338,11 +7343,16 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
       weight: 108
+    - name: Jetpack Compose Instrumentation
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_jetpack_compose_instrumentation
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 109
+      weight: 110
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
@@ -8004,7 +8014,7 @@ menu:
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
       weight: 505
-    - name: Segmentation
+    - name: Analyzing users and segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
