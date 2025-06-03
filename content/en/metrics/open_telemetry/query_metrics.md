@@ -59,7 +59,7 @@ To provide clarity when querying, the metric source and equivalent metrics are d
 
 - **Source pill**: In the query editor, a **Datadog** or **OTel** pill appears next to the metric name, indicating its origin.
 
-- **Equivalent metrics sist**: The editor also shows a list of metrics considered equivalent to the one you've queried. This includes complex one-to-many mappings, often defined by tag-based rules. For example, `otel.system.cpu.utilization` maps to multiple Datadog CPU state metrics (`system.cpu.idle`, `system.cpu.iowait`, etc.).
+- **Equivalent metrics list**: The editor also shows a list of metrics considered equivalent to the one you've queried. This includes complex one-to-many mappings, often defined by tag-based rules. For example, `otel.system.cpu.utilization` maps to multiple Datadog CPU state metrics (`system.cpu.idle`, `system.cpu.iowait`, etc.).
 
 {{< img src="/metrics/otel/source.png" alt="Source pill and equivalent metrics list" style="width:75%;" >}}
 

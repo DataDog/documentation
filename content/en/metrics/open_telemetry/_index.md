@@ -24,7 +24,7 @@ To send OpenTelemetry metrics to Datadog, you have three main options:
 - [Datadog Agent][4]
 - [Agentless Deployment][5]
 
-For more information about which setup is right for you, see [Send Data to Datadog][6].
+For more information about which setup is right for you, see [Send OpenTelemetry Data to Datadog][6].
 
 ## Query across Datadog and OpenTelemetry metrics 
 
