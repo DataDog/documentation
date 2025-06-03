@@ -183,6 +183,116 @@ This page holds relationship data of how the API interacts with dependencies, th
 
 {{% /tab %}}
 
+
+{{% tab "Datastore" %}}
+
+In Software Catalog, a datastore (`kind:datastore`) represents a data storage component or database that services depend on. Datastores can represent relational databases (such as PostgreSQL or MySQL), NoSQL datastores (such as Redis or MongoDB), data warehouses, and caches.
+
+Datastore entities can be:
+- [**Inferred by APM**][1] when instrumented services make outbound calls to a database (for example, a PostgreSQL query).
+- [**Manually defined**][2] to represent uninstrumented datastores or enrich inferred ones with additional metadata.
+
+If Database Monitoring is enabled, the datastore entity page displays query throughput, latency, and error rates. Otherwise, the page shows basic trace-derived metrics and dependency relationships.
+
+{{< img src="/tracing/software_catalog/datastore-entity-page-dbm-setup-prompt.png" alt="The datastore entity page for web-store-mongo, with a modal prompting the user to set up Database Monitoring for more insights" style="width:100%;" >}}
+
+### Example YAML definitions
+
+{{% collapse-content title="YAML definition for an inferred datastore" level="h4" expanded=false id="id-for-anchoring" %}}
+
+This example shows a `kind:datastore` definition for a database automatically detected by APM.
+
+**Note**: The `metadata.name` value must exactly match the [peer tags](#peer-tags) used by APM.
+
+```
+apiVersion: v3
+kind: datastore
+metadata:
+  name: peer.db.name:web-store-mongo,peer.db.system:mongodb                
+  displayName: "Store Inventory DB (MongoDB)"   
+  description: Stores order transaction data for Shopist e-commerce
+  owner: shopist            
+  additionalOwners:
+    - name: infra-team
+      type: team
+  links:
+    - name: "DB Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/orders-db
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/orders-db-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/ORD123  
+spec:
+  lifecycle: "production"              
+  tier: "Tier 1"               
+
+```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML definition for a manually defined datastore" level="h4" expanded=false id="id-for-anchoring" %}}
+
+This example shows a `kind:datastore` definition for a manually declared datastore.
+
+```
+apiVersion: v3
+kind: datastore
+metadata:
+  name: web-store-mongo               
+  displayName: "Store Inventory DB (MongoDB)"   
+  description: Stores order transaction data for Shopist e-commerce
+  owner: shopist            
+  additionalOwners:
+    - name: infra-team
+      type: team
+  links:
+    - name: "DB Runbook"
+      type: runbook
+      url: https://wiki.internal/runbooks/orders-db
+    - name: "Schema Repo"
+      type: repo
+      provider: github
+      url: https://github.com/org/orders-db-schema
+integrations:
+  pagerduty:
+    serviceURL: https://pagerduty.com/services/ORD123  
+spec:
+  lifecycle: "production"              
+  tier: "Tier 1"               
+
+```
+
+{{% /collapse-content %}}
+
+### Peer tags
+
+For inferred entities, Datadog uses standard span attributes to construct `peer.*` tags. The `metadata.name` value in your entity definition must exactly match the inferred peer tags. Manually defined datastores do not need to follow this convention. 
+
+Common peer tags for datastore entities:
+
+Peer Tag | Source Attributes
+--------------------|-------------------
+`peer.aws.dynamodb.table` | `tablename`
+`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
+`peer.cassandra.contact.points` | `db.cassandra.contact.points`
+`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
+`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
+`peer.db.system` | `db.system`
+
+Learn more about [peer tags and inferred entities][3].
+
+
+[1]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
+[2]: /internal_developer_portal/software_catalog/set_up/create_entities
+[3]: /tracing/services/inferred_services/?tab=agentv7600#naming-inferred-entities
+
+{{% /tab %}}
+
+
 {{% tab "Custom entities" %}}
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
