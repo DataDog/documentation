@@ -1,46 +1,41 @@
 ---
-title: Latency Investigations
+title: APM Investigator
 private: true
 further_reading:
-- link: "/watchdog/"
+- link: "/tracing/"
   tag: "Documentation"
-  text: "Datadog Watchdog"
+  text: "Datadog APM"
 ---
 
-{{< callout btn_hidden="true" >}}
-Latency Investigations is in Preview.
+{{< callout url="https://www.datadoghq.com/support/" header="Request access to the Preview!" >}}
+APM Investigator is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 ## Overview
 
-APM Latency Investigations help you diagnose and resolve application latency issues through a guided, step-by-step investigation workflow. It consolidates multiple analytical perspectives into a single interface, reducing the time needed to identify root causes and implement solutions.
+The APM investigator help you diagnose and resolve application latency issues through a guided, step-by-step investigation workflow. It consolidates relevant analysis sections into a single interface, reducing the time needed to identify the root cause of the issue.
 
-## Requirements
-
-[TODO]
+{{< img src="tracing/guide/apm_investigator/apm_investigator.png" alt="APM investigator UI" style="width:90%;">}}
 
 ## Key capabilities
 
-Latency Investigations help you:
+The APM Investigator allows you to:
 
-- **Identify the source**: Determine whether latency originates from your service or downstream dependencies.
-- **Narrow the scope**: Isolate issues to specific data centers, clusters, or user segments.
-- **Find root causes**: Detect database slowness, third-party service failures, network issues, or infrastructure problems.
-- **Get actionable fixes**: Receive specific remediation steps like rollback commands, scaling recommendations, or code changes.
+- **Investigate a custom cluster of slow requests**: Select the problematic set of requests that you wish to investigate from the latency scatter plot.
+- **Identify the source of latency**: Determine whether latency originates from your service, a downstream dependency, databases or third party APIs.
+- **Narrow the scope**: Isolate issues to specific data centers, clusters, or user segments with [Tag Analysis][1].
+- **Find root causes**: Detect faulty deployments, database slowness, third-party service failures, infrastructure problems, or service level issues.
 
 ## Starting an investigation
 
-You can launch investigations from:
-
-- APM latency monitor status pages
-- Watchdog latency anomaly notifications
-- APM service pages
+You can launch investigations from APM service pages and resource pages.
 
 To begin:
-
 1. Navigate to a service with latency issues reflected on a latency graph.
 2. Find the latency graph showing the anomaly.
 3. Hover over the graph and click **Investigate**.
+
+{{< img src="tracing/guide/apm_investigator/apm_investigator_entrypoint.png" alt="APM investigator entrypoint" style="width:90%;">}}
 
 This opens the investigation side panel.
 
@@ -48,13 +43,27 @@ This opens the investigation side panel.
 
 ### Define context: Select problematic and baseline spans
 
-Latency Investigations help you select two time ranges: a problematic subset (slow spans) and a baseline (fast/healthy spans). In some cases, if the latency anomaly was initially detected by Watchdog, these subsets may be pre-selected for you.
+To trigger the latency analysis, select two zones on the point plot: a problematic subset (slow spans) and a baseline (fast/healthy spans). If the latency anomaly was initially detected by Watchdog, these are be pre-selected for you.
 
-The panel displays latency visualizations (such as heat maps, percentile charts, and scatterplots of your spans' latency over time) to help you identify the latency spike. You can often interact directly with these visualizations, like the scatter plot, to precisely select or refine the cluster of slow spans you want to investigate further.
+{{< img src="tracing/guide/apm_investigator/latency_selection.png" alt="Selection of slow spans on the point plot" style="width:90%;">}}
 
-This comparison between the subset and baseline drives all subsequent analysis.
+This comparison between the slow and normal spans drives all subsequent analysis.
 
-### Step 1: Analyze deployment changes
+### Step 1: Identify the latency bottleneck
+
+The investigator first helps you answer the following question: _Is this me or someone else ?_ It automatically pinpoints whether latency stems from your service or its downstream dependencies (downstream service, database, third-party dependency).
+
+**Analysis approach**:
+The investigator compares trace data from both your selected problematic (slow) and baseline (fast) periods. To find the service responsible for the latency increase, it compares:
+
+* The **Execution Time** (self-time, i.e. time spent on the service, which is not spent in downstream dependencies) spent within each service across the two datasets. The service with the largest absolute increase in latency between the problematic subset and baseline is a key point of interest.
+* The **Call patterns between services**: It analyzes changes in the number of requests between services. For instance, if a service Y significantly increases its calls to downstream service X, Y might be identified as the bottleneck.
+
+Based on this comprehensive analysis, Latency Investigations recommend a service as the likely latency bottleneck. Expand the latency bottleneck section to see details about the comparison between slow and normal traces. A table surfaces the changes in self-time and in the number of inbound requests by service. Below, find two side-by-side flamegraphs to compare slow vs. normal traces in more details. Use the arrows to cycle through examplar traces and click `View` to open the trace in full page.
+
+{{< img src="tracing/guide/apm_investigator/latency_bottleneck.png" alt="Latency bottleneck section" style="width:100%;">}}
+
+### Step 2: Analyze deployment changes
 
 **Purpose**: Determine if recent deployments on the service caused the latency increase.
 
@@ -68,19 +77,6 @@ This comparison between the subset and baseline drives all subsequent analysis.
 - **High**: A deployment happened within 10 minutes (before or after) the start of the latency spike, OR a deployment occurred within 1 hour before the spike start, and the new version's p90 latency is 25% higher than the previous version.
 - **Medium**: A deployment happened within 1 hour before the spike start, and the p90 latency of the new version is 10%-25% higher than the previous; OR a deployment occurred within 6 hours before the spike start, and the p90 latency is 25% higher.
 - **Low**: A deployment happened within 6 hours before the spike start, and the p90 latency is 10%-25% higher.
-
-### Step 2: Identify the latency bottleneck
-
-**Purpose**: Pinpoint whether latency stems from your service or its downstream dependencies (downstream service, database, third-party dependency).
-
-**Analysis approach**:
-Latency Investigations analyze trace data from both your selected problematic (slow) and baseline (fast) periods. It considers several factors to pinpoint the service most likely responsible for the latency increase:
-
-* **Execution Time**: It compares the execution time (self-time) spent within each service across the two periods. The service with the largest absolute increase in latency between the problematic subset and baseline is a key point of interest.
-* **Traffic Patterns**: It analyzes changes in call volume between services, as a significant increase in requests to a service can cause latency. For instance, if a service Y significantly increases its calls to downstream service X, Y might be identified as the bottleneck.
-* **Critical Path Analysis**: The system may aggregate slow and fast traces into a combined graph of service-to-service calls, where each connection (edge) stores latency and traffic data. It then examines the sequence of calls in traces (the critical paths) to find edges that represent a high proportion (for example, >=10%) of the total latency difference between slow and fast traces. Crucially, it identifies bottlenecks where this latency increase isn't due to slowness in downstream dependencies or changes in request volume.
-
-Based on this comprehensive analysis, Latency Investigations recommend a service as the likely latency bottleneck. This recommendation is often accompanied by a relevance level (High, Medium, or Low). This level indicates the confidence that the identified service is the true source, based on the proportion of its latency increase that cannot be readily explained by downstream issues or traffic changes.
 
 ### Step 3: Find common patterns (Tag analysis)
 
@@ -155,3 +151,5 @@ By following this systematic approach, Latency Investigations help reduce:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_explorer/tag_analysis
