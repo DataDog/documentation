@@ -29,7 +29,7 @@ With Risk Insights, you can:
 
 On the [Risk Insights Explorer][4], you can view all entities that have a non-zero risk score associated to them.
 
-{{< img src="security/entities/entities-explorer2.png" alt="A list of entities and their risk scores in the Risk Insights Explorer" style="width:100%;" >}}
+{{< img src="security/entities/entities-explorer3.png" alt="A list of entities and their risk scores in the Risk Insights Explorer" style="width:100%;" >}}
 
 ### Quickly build context on an entity
 
