@@ -1,4 +1,4 @@
-ta---
+---
 title: Query Across Datadog and OpenTelemetry Metrics
 aliases:
 - metrics/open_telemetry/otlp_metrics/
