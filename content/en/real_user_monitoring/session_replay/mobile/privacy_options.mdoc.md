@@ -795,6 +795,7 @@ Sensitive text can be detected in:
 
 - Text Field
 - Text View
+- Address information
 - Credit card numbers
 - One-time codes
 {% /if %}
