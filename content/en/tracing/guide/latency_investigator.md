@@ -59,7 +59,7 @@ The investigator identifies whether latency originates from your service or its 
 **Analysis approach**:
 The investigator compares trace data from both your selected slow and normal periods. To find the service responsible for the latency increase, it compares:
 
-- **Execution Time** (self-time; the time spent on the service that is not spent in downstream dependencies) spent within each service across the two datasets. The service with the largest absolute latency increase is the primary focus.
+**Execution Time**: Compares each service's "self-time", defined as the time spent on its own processing, excluding waits for downstream dependencies, across the two datasets. The service with the largest absolute latency increase is the primary focus.
 - **Call Patterns Between Services**: Analyzes changes in the number of requests between services. For example, if service Y significantly increases its calls to downstream service X, the investigator might identify Y as the bottleneck.
 
 Based on this comprehensive analysis, the investigator recommends a service as the likely latency bottleneck. Expand the latency bottleneck section to see details about the comparison between slow and normal traces. A table surfaces the changes in self-time and in the number of inbound requests by service.
