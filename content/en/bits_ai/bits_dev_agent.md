@@ -29,7 +29,6 @@ Bits Dev Agent is available for the following Datadog products:
 | [Error Tracking][1]    | Limited Availability | Crashes, panics, exceptions, unhandled errors                                   |
 | [Code Security][2]     | Preview              | Security issues in first-party code and open source dependencies                |
 | [Profiler][3]          | Preview              | Performance bottlenecks identified through span and profile analysis            |
-| [Proactive Recommendations][4]          | Preview              | Performance recommendations identified through trace analysis            |
 
 ## Setup
 
