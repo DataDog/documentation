@@ -38,25 +38,6 @@ Bits is your AI teammate in Datadog, built to automate development, security, an
    {{< nextlink href="bits_ai/chat_with_bits" >}}Chat with Bits about your observability data{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-
-<!-- ### Streamline incident management
-
-Within [Datadog Incident Management][3], Bits AI can help you 
-
-- **Stay informed:** Get an up-to-date summary of the incident when you join an incident Slack channel.
-- **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service."
-- **Update incidents:** Update the severity level and status of an incident.
-- **Find related incidents**: Search through your entire incident history and find similar incidents to the one you're currently in.
-- **Generate a postmortem:** Get a head start with a first draft, which you can then review and revise.
-
-See [Coordinate Incidents][4] for details.
-
-## Feedback
-
-Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager. -->
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
