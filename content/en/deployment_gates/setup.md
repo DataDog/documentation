@@ -64,7 +64,7 @@ Example queries:
 [2]: /monitors/manage/#triggered-monitors
 {{% /tab %}}
 {{% tab "APM Faulty Deployment Detection" %}}
-This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare new service versions against previous behavior. It can detect:
+This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare the deployed version against previous versions of the same service. It can detect:
 * new types of errors
 * significant increases in error rates.
 
