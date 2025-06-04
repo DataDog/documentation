@@ -529,7 +529,7 @@ Evaluations must be joined to a single span. You can identify the target span us
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
 
-Reminder: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. If you’d like to enable or configure out-of-the-box evaluations for your application, you can do so from the Evaluations section of the LLM Observability settings page.
+**Note**: Custom evaluations are powered by custom evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][16] page in Datadog.
 
 #### Arguments
 
@@ -555,7 +555,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
 
-*Note*: Exactly one of span or span_with_tag_value is required. Supplying both, or neither, will raise a ValueError.
+**Note**: Exactly one of `span` or `span_with_tag_value` is required. Supplying both, or neither, raises a ValueError.
 
 `ml_app`
 : required - _string_
@@ -825,3 +825,4 @@ def server_process_request(request):
 [13]: /llm_observability/setup/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
 [15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
+[16]: https://app.datadoghq.com/llm/settings/evaluations
