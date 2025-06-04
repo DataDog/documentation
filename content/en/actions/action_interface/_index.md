@@ -33,7 +33,7 @@ For more information, see [Bits AI][3].
 
 Actions run in Action Interface require standard [Action credentials][5], either through [Integration tiles][7] or [Connections][2]:
 
-- Some actions run in Action Interface require a Connection to use for the action and the required [Connection credentials][6]. 
+- Some actions run in Action Interface require both a Connection and [Connection credentials][6]. 
   - Connections ensure a user can't trigger an action unless the user has access to a Connection with the required credentials.
 - Other actions are set up using Integration tiles (for example, PagerDuty).
   - Integration tiles are configured with the appropriate roles and permissions in your Datadog organization.
@@ -68,6 +68,6 @@ You can rely on the Action Interface to inform you if your action is not configu
 [4]: /account_management/audit_trail/
 [5]: /actions/workflows/access/#action-credentials
 [6]: /actions/connections/#connection-credentials
-[7]: /developers/integrations/create_a_tile
+[7]: /getting_started/integrations/#permissions
 [8]: https://app.datadoghq.com/actions/ai
 [9]: /actions/workflows/limits/
