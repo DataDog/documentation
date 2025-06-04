@@ -81,4 +81,5 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [2]: /real_user_monitoring/browser/setup/
