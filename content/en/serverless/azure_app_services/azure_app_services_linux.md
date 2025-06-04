@@ -124,7 +124,7 @@ For .NET applications, the following environment variables are **required** unle
    1. In Azure, navigate to **Deployment** > **Deployment Center**. Select the **Containers** tab.
    1. Click **Add** and select **Custom container**.
    1. In the **Edit container** form, provide the following:
-      - **Image source**: Docker Hub or other registries
+      - **Image source**: Other container registries
       - **Image type**: Public
       - **Registry server URL**: `index.docker.io`
       - **Image and tag**: `datadog/serverless-init:latest`
