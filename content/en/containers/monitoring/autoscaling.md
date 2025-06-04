@@ -63,6 +63,7 @@ spec:
     orchestratorExplorer:
       customResources:
       - datadoghq.com/v1alpha1/datadogpodautoscalers
+      - datadoghq.com/v1alpha2/datadogpodautoscalers
     autoscaling:
       workload:
         enabled: true
@@ -71,13 +72,21 @@ spec:
   override:
     clusterAgent:
       image:
-        tag: 7.58.1
+        tag: 7.66.1
+      env:
+        - name: DD_AUTOSCALING_FAILOVER_ENABLED
+          value: "true"
     nodeAgent:
       image:
-        tag: 7.58.1 # or 7.58.1-jmx
+        tag: 7.66.1 # or 7.66.1-jmx
+      env:
+        - name: DD_AUTOSCALING_FAILOVER_ENABLED
+          value: "true"
+        - name: DD_AUTOSCALING_FAILOVER_METRICS
+          value: container.memory.usage container.cpu.usage
     clusterChecksRunner
       image:
-        tag: 7.58.1 # or 7.58.1-jmx
+        tag: 7.66.1 # or 7.66.1-jmx
 ```
 
 3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
@@ -102,27 +111,19 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Add the following to your `datadog-values.yaml` configuration file:
+1. Ensure you are using Agent and Cluster Agent v7.66.1+. Add the following to your `datadog-values.yaml` configuration file:
 
 ```yaml
 datadog:
   orchestratorExplorer:
     customResources:
     - datadoghq.com/v1alpha1/datadogpodautoscalers
+    - datadoghq.com/v1alpha2/datadogpodautoscalers
   autoscaling:
     workload:
       enabled: true
   kubernetesEvents:
     unbundleEvents: true
-clusterAgent:
-  image:
-    tag: 7.58.1
-agents:
-  image:
-    tag: 7.58.1 # or 7.58.1-jmx
-clusterChecksRunner:
-  image:
-    tag: 7.58.1 # or 7.58.1-jmx
 ```
 
 2. [Admission Controller][1] is enabled by default in the Datadog Helm chart. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-values.yaml`:
@@ -130,7 +131,7 @@ clusterChecksRunner:
 ...
 clusterAgent:
   image:
-    tag: 7.58.1
+    tag: 7.66.1
   admissionController:
     enabled: true
 ...
