@@ -3,7 +3,7 @@ title: Action Interface
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/action-interface/" btn_hidden="false" header="Join the Preview!" >}}
-Action Interface is in Preview. Contact your Customer Success Manager to get access.
+Action Interface is in Preview. 	Click **Request Access** and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 Actions Interface is an AI chat interface where you can configure and execute actions from the [Action Catalog][1] using prompts. For example, `I want to update an ECS service to scale capacity` or `I want to create a service to run tasks`. 
