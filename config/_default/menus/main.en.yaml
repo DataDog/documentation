@@ -1159,9 +1159,9 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
-    - name: Accessibility
-      url: mobile/accessibility
-      identifier: mobile_accessibility
+    - name: Shortcut Configurations
+      url: mobile/shortcut_configurations
+      identifier: mobile_shortcut_configurations
       parent: mobile
       weight: 3
     - name: Push Notifications
@@ -2008,11 +2008,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2260,6 +2255,11 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_exception_replay
       weight: 101
+    - name: Capturing Handled Errors
+      url: error_tracking/backend/capturing_handled_errors
+      parent: error_tracking_backend
+      identifier: error_tracking_capturing_handled_errors
+      weight: 102
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
@@ -2454,12 +2454,18 @@ menu:
       parent: oncall
       identifier: oncall_guides
       weight: 8
+    - name: Status Pages
+      url: service_management/status_pages/
+      pre: status-page-wui
+      parent: service_management_heading
+      identifier: status_pages
+      weight: 40000
     - name: Event Management
       url: service_management/events/
       pre: events
       identifier: events
       parent: service_management_heading
-      weight: 40000
+      weight: 50000
     - name: Ingest Events
       url: service_management/events/ingest/
       identifier: event_ingest
@@ -2595,7 +2601,7 @@ menu:
       pre: case-management
       parent: service_management_heading
       identifier: case_management
-      weight: 50000
+      weight: 60000
     - name: Projects
       url: service_management/case_management/projects
       parent: case_management
@@ -2812,6 +2818,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_policies
       weight: 10002
+    - name: Resource Changes
+      url: infrastructure/resource_catalog/resource_changes/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_changes
+      weight: 10003
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -5653,81 +5664,86 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 902
+    - name: Custom Processor
+      url: observability_pipelines/processors/custom_processor
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_custom_processor
+      weight: 903
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 903
+      weight: 904
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 904
+      weight: 905
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 905
+      weight: 906
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 906
+      weight: 907
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 907
+      weight: 908
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 908
+      weight: 909
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 909
+      weight: 910
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 910
+      weight: 911
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 911
+      weight: 912
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 912
+      weight: 913
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 913
+      weight: 914
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 914
+      weight: 915
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 915
+      weight: 916
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 916
+      weight: 917
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 917
+      weight: 918
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -6135,26 +6151,31 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
       weight: 711
+    - name: Reports
+      url: logs/reports/
+      parent: log_management
+      identifier: log_reports
+      weight: 8
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 8
+      weight: 9
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 9
+      weight: 10
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 10
+      weight: 11
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1001
+      weight: 1101
     # - name: CloudPrem
     #   pre: cloud
     #   url: cloudprem/
@@ -6465,6 +6486,11 @@ menu:
       parent: workload_protection
       identifier: workload_protection_troubleshooting
       weight: 206
+    - name: Security Graph
+      url: security/cloud_security_management/security_graph/
+      parent: csm
+      identifier: security_graph
+      weight: 3
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -7316,11 +7342,16 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
       weight: 108
+    - name: Jetpack Compose Instrumentation
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_jetpack_compose_instrumentation
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 109
+      weight: 110
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
@@ -7982,7 +8013,7 @@ menu:
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
       weight: 505
-    - name: Segmentation
+    - name: Analyzing users and segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
