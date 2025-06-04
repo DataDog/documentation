@@ -7963,14 +7963,6 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-<<<<<<< HEAD
-    - name: Heatmaps
-      url: product_analytics/session_replay/heatmaps
-      parent: pa_session_replay
-      identifier: pa_heatmaps
-      weight: 303
-    - name: Analyzing User Groups
-=======
     - name: Analytics Explorer
       url: product_analytics/analytics_explorer/
       parent: product_analytics
@@ -8002,7 +7994,6 @@ menu:
       identifier: pa_analytics_export
       weight: 505
     - name: Analyzing users and segments
->>>>>>> 8af75bd067bf5355075c3a82560dbba182eb2325
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
