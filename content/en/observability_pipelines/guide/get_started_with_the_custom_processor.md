@@ -284,4 +284,4 @@ For this example, you have a service field that contains an incorrect service na
 [1]: /observability_pipelines/processors/custom_processor/#decode_base16
 [2]: /observability_pipelines/processors/custom_processor/#encode_base64
 [3]: /observability_pipelines/processors/custom_processor/#encode_base16
-[4]: 
+[4]: https://www.datadoghq.com/blog/migrate-historical-logs
