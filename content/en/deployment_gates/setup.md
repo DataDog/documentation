@@ -361,7 +361,7 @@ spec:
 When you are integrating the Deployment Gates product into your Continuous Delivery workflow, an evaluation phase is recommended to confirm that the product is working as you expect before it impacts your deployments. This can be done using the Dry Run evaluation mode and the Gates Executions page:
 1. Create a new Gate for your service and set the evaluation mode as `Dry Run`.
 2. Add the Gate evaluation in your deployment process. As the evaluation mode is dry run, the Deployment Gates API response will always contain a `pass` status and the deployments will not be impacted by the gate result.
-3. After a certain period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see what were the statuses of the gates and rules evaluated. On the contrary to the API responses, the Gate status in the UI doesn't take into consideration the evaluation mode (`Dry run` or `Active`). It means you can understand when the gate would have failed and what was the reason behind it.
+3. After a certain period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see what were the statuses of the gates and rules evaluated. On the contrary to the API responses, the Gate status in the UI doesn't take into consideration the evaluation mode (`Dry Run` or `Active`). It means you can understand when the gate would have failed and what was the reason behind it.
 4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from `Dry Run` to `Active`. Afterwards, the API will start returning the "real" status and your deployments will start to be promoted or rolled back based on the gate result.
 
 ## Further reading
