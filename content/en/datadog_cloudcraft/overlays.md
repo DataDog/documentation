@@ -35,16 +35,24 @@ The infrastructure diagram excludes components like EBS, NAT Gateway, and Transi
 
 The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
 
+On the Observability overlay, you can take action on individual resources or groups of resources:
+
+- Click a single host to open a side panel with direct links to Fleet Automation, where you can deploy configurations or upgrade the Agent.
+- Click a resource group, such as a subnet or VPC, to open a side panel that allows you to apply bulk updates across one or more hosts.
+
+**Note**:
+The type of side panel shown depends on whether [Fleet Automation][1] is enabled:
+- If Fleet Automation is enabled, clicking a resource opens the Fleet Automation side panel.
+- If Fleet Automation is not enabled, clicking a resource opens the standard resource side panel.
+
+{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet.mp4" alt="Observability overlay in Cloudcraft, showing the bulk update feature and navigating to Fleet Automation." video=true >}}
+
 In the bottom left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific features. Each row shows:
 
 - Feature name (for example, APM, Logs, CNM)
 - Numerical coverage: X / Y (for example, 16/35), where:
   - X is the number of resources with that feature enabled
   - Y is the total number of relevant resources in the current view or filter
-
-You can click any resource to open a side panel with direct links to Fleet Management, allowing you to deploy configurations or upgrade your Agent.
-
-{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_ccm_1.png" alt="Observability overlay in Cloudcraft, highlighting the View Datadog coverage by drop down on the left hand side of the screen." width="100%" >}}
 
 Legend:
 
@@ -107,3 +115,5 @@ This enables faster, in-context cost optimization without switching views.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/fleet_automation
