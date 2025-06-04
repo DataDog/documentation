@@ -121,8 +121,8 @@ To create inferred spans, API Gateway must pass the following headers to your ba
 
 | Header | Value |
 | ------ | ----- |
-| `x-dd-proxy` | `"aws-apigateway"` |
-| `x-dd-proxy-request-time-ms` | `"${context.requestTimeEpoch}000"` |
+| `x-dd-proxy` | `aws-apigateway` |
+| `x-dd-proxy-request-time-ms` | `${context.requestTimeEpoch}000` |
 | `x-dd-proxy-domain-name` | `$context.domainName` |
 | `x-dd-proxy-httpmethod` | `$context.httpMethod` |
 | `x-dd-proxy-path` | `$context.path` |
