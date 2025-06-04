@@ -34,7 +34,7 @@ The product consists of two main components:
 
 For setup instructions, see [Set up Deployment Gates][4].
 
-You can track and analyze gate evaluations through the [Gate Evaluation page][5]:
+Once the setup is completed, you can track and analyze gate evaluations through the [Gate Evaluation page][5]:
 
 {{< img src="/deployment_gates/explore/deployment_gates_explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
