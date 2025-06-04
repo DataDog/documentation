@@ -28,11 +28,11 @@ Bits Dev Agent is available for the following Datadog products:
 |------------------------|----------------------|---------------------------------------------------------------------------------|
 | [Error Tracking][1]    | Limited Availability | Crashes, panics, exceptions, unhandled errors                                   |
 | [Code Security][2]     | Preview              | Security issues in first-party code and open source dependencies                |
-| [Profiler][3]          | Preview              | Performance bottlenecks identified through span and profile analysis            |
+| [Continuous Profiler][3]          | Preview              | Performance bottlenecks identified through span and profile analysis            |
 
 ## Setup
 
-<div class="alert alert-info">At this time, Bits Dev Agent only supports GitHub.</div>
+<div class="alert alert-info">At this time, Bits Dev Agent supports GitHub only.</div>
 
 ### Enable the GitHub integration
 
