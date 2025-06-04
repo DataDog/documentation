@@ -171,11 +171,11 @@ All the interfaces in `ddtrace` have been removed in favor of struct types, exce
 
 The following constants and functions have been removed:
 
-* `ddtrace/ext.AppTypeWeb`
-* `ddtrace/ext.CassandraQuery`
-* `ddtrace/ext.CassandraBatch`
-* `ddtrace/tracer.WithPrioritySampling`; priority sampling is enabled by default.
-* `ddtrace/tracer.WithHTTPRoundTripper`; use `WithHTTPClient` instead.
+- `ddtrace/ext.AppTypeWeb`
+- `ddtrace/ext.CassandraQuery`
+- `ddtrace/ext.CassandraBatch`
+- `ddtrace/tracer.WithPrioritySampling`; priority sampling is enabled by default.
+- `ddtrace/tracer.WithHTTPRoundTripper`; use `WithHTTPClient` instead.
 
 #### StartChild
 
