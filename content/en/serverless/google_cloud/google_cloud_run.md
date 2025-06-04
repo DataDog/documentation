@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through our [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run. We only support Google Cloud Run Services, not Google Cloud Run Jobs.
+[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through the [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run. lae only support Google Cloud Run Services, not Google Cloud Run Jobs.
 
 ## Setup
 
@@ -69,7 +69,7 @@ You can use `npm install dd-trace` to add the tracer to your package.
 
 #### Dockerfile
 
-Your `Dockerfile` can look something like this. This will create a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
+Your `Dockerfile` can look something like this. This creates a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
 
 ```dockerfile
 FROM node:22-slim
@@ -90,7 +90,7 @@ The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [
 
 Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which will forward all of the files ending in `.log` in the `/shared-logs/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since we are using `NODE_OPTIONS` to actually start our tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since it is using `NODE_OPTIONS` to actually start the tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
 
 ```js
 const tracer = require('dd-trace').init({
@@ -114,7 +114,7 @@ The `dd-trace-py` library provides support for [Tracing][1]. The `datadog-py` li
 
 Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] is not currently supported for Google Cloud Run services. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which will forward all of the files ending in `.log` in the `/shared-logs/logs` directory.
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] is not supported for Google Cloud Run services. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
@@ -197,7 +197,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 
 | Variable | Container | Description |
 | -------- | --------- | ----------- |
-| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-logs/logs/*.log`. - **Required** |
+| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent looks for logs. For example `/shared-logs/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. See also the details for your runtime above. |
