@@ -89,12 +89,12 @@ v2fix -fix .
 The tool makes the following changes:
 
 1. Updates import URLs from `gopkg.in/DataDog/dd-trace-go.v1` to `github.com/DataDog/dd-trace-go/v2`.
-1. Moves imports from `ddtrace` to `ddtrace/tracer` where appropriate.
-1. Converts `Span` and `SpanContext` calls to use concrete values.
-1. Replaces unsupported `WithServiceName` calls with `WithService`.
-1. Updates `TraceID` calls to `TraceIDLower` for obtaining `uint64` trace IDs.
+2. Moves imports from `ddtrace` to `ddtrace/tracer` where appropriate.
+3. Converts `Span` and `SpanContext` calls to use concrete values.
+4. Replaces unsupported `WithServiceName` calls with `WithService`.
+5. Updates `TraceID` calls to `TraceIDLower` for obtaining `uint64` trace IDs.
 
-## Troubleshooting
+## Breaking changes
 
 ### Import path changes
 
@@ -165,7 +165,7 @@ var ctx *tracer.SpanContext = sp.Context()
 
 ##### Deprecated ddtrace interfaces
 
-All the interfaces in `ddtrace` have been removed in favor of struct types, except for `SpanContext`. The new types have moved into `ddtrace/tracer`.
+All the interfaces in `ddtrace` have been removed in favor of struct types. The new types have moved into `ddtrace/tracer`.
 
 ##### Deprecated constants and options
 
