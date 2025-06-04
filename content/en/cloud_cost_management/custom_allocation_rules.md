@@ -52,7 +52,6 @@ Use the dropdown filters to specify the cloud provider, specific products or ser
 
 ## Choose an allocation method
 
-Choosing the right allocation method ensures that costs are attributed fairly and transparently, supporting accurate showback, chargeback, or internal reporting.
 
 Below is a description of how each allocation method works with examples.
 
