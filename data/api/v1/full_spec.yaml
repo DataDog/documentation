@@ -7394,7 +7394,7 @@ components:
             For example, a query grouped by `cluster` and `namespace` cannot notify
             on `region`.
 
-            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+            Setting `notify_by` to `["*"]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
