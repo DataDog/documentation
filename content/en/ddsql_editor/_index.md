@@ -11,11 +11,6 @@ further_reading:
   text: "DDSQL Reference (Preview)"
 ---
 
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
