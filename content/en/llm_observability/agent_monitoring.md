@@ -4,7 +4,7 @@ title: Agent Monitoring
 
 ## Overview
 
-LLM Observability allows you to monitor, troubleshoot, and imiprove your agentic application. For agentic applications built on [OpenAI Agents SDK][1], [LangGraph][2], or [CrewAI][3], you can start monitoring the health and quality of your single or multi agentic system using the LLM Observability SDK for Python.
+LLM Observability allows you to monitor, troubleshoot, and improve your agentic applications. With the LLM Observability SDK for Python, you can monitor the health and quality of your single- or multi-agentic systems built on [OpenAI Agents SDK][1], [LangGraph][2], or [CrewAI][3].
 
 For your agentic applications, LLM Observability allows you to:
 
