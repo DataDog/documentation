@@ -153,14 +153,14 @@ API_KEY="<YOUR_API_KEY>"
 
 PAYLOAD=$(cat <<EOF
 {
- "data": {
-   "type": "deployment_gates_evaluation_request",
-   "attributes": {
-     "service": "$1",
-     "env": "$2",
-     "version": "$3"
-   }
- }
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "$1",
+      "env": "$2",
+      "version": "$3"
+    }
+  }
 }
 EOF
 )
@@ -257,14 +257,14 @@ spec:
 
                         PAYLOAD=$(cat <<EOF
                         {
-                        "data": {
-                          "type": "deployment_gates_evaluation_request",
-                          "attributes": {
-                            "service": "{{ args.service }}",
-                            "env": "{{ args.env }}"
-                            "version": "{{ args.version }}"
+                          "data": {
+                            "type": "deployment_gates_evaluation_request",
+                            "attributes": {
+                              "service": "{{ args.service }}",
+                              "env": "{{ args.env }}"
+                              "version": "{{ args.version }}"
+                            }
                           }
-                        }
                         }
                         EOF
                         )
