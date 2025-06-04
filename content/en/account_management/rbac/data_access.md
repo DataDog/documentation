@@ -78,7 +78,7 @@ Terraform support will be announced after Data Access Control is generally avail
 
 ## Usage constraints
 
-After you turn on Data Access Control, Datadog disables or limits certain other features to control access to sensitive data. See the list of affected features below to see how they are restricted.
+After you turn on Data Access Control, Datadog disables or limits other features to control access to sensitive data. See the list of affected features below to see how they are restricted.
 
 ### Real User Monitoring (RUM)
 
