@@ -139,7 +139,7 @@ services:
 ```
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Local file (Archivo local)" %}}
 
 Puedes almacenar plantillas de Autodiscovery como archivos locales en el directorio montado `/conf.d`. Debes reiniciar tus contenedores del Agent cada vez que cambias, añades o eliminas plantillas.
 
@@ -272,7 +272,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "File" (Archivo) %}}
+{{% tab "File (Archivo)" %}}
 1. Crea un archivo `conf.d/redisdb.d/conf.yaml` en tu host:
 
    ```yaml
@@ -294,7 +294,7 @@ labels:
 2. Monta tu carpeta host `conf.d/` en la carpeta `conf.d` del Agent contenedorizado.
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Key-value store (Base de datos clave-valor)" %}}
 
 Los siguientes comandos etcd crean una plantilla de con integración Redis con un parámetro de `password` personalizado:
 
