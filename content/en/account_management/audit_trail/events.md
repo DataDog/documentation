@@ -38,6 +38,7 @@ further_reading:
 - [Error Tracking](#error-tracking-events)
 - [Infrastructure Monitoring](#infrastructure-monitoring)
 - [Log Management](#log-management-events)
+- [LLM Observability](#llm-observability)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
 - [Security Notification events](#security-notification-events)
@@ -201,6 +202,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
 | [Saved view][106] | A user created, modified, or deleted a saved view. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:saved_view` |
 | [Log forwarding][103] | A user created, modified, or deleted a custom destination. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:log_forwarding` |
+
+### LLM Observability
+
+| Name                      | Description of audit event                                                                                                                           | Query in audit explorer                           |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------| --------------------------------------------------|
+| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (for example, set sample rate) of an [out-of-the-box evaluation][165] metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -548,3 +555,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [161]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Aaccessed
 [162]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Amodified
 [163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[164]:https://app.datadoghq.com/audit-trail?query=%20%40evt.name%3A"LLM%20Observability"%20%40action%3A%28enabled%20OR%20modified%20OR%20disabled%29%20%40asset.type%3Aevaluations
+[165]:/llm_observability/evaluations/ootb_evaluations

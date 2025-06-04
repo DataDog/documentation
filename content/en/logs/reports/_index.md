@@ -8,7 +8,7 @@ Scheduled CSV Reports are in Preview.
 
 ## Overview
 
-Scheduled CSV Reports let you automatically receive recurring, structured data exports through email. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
+Scheduled CSV Reports let you automatically receive recurring, structured data exports through email or Slack. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
 
 ## Define a query
 
@@ -19,7 +19,7 @@ To schedule a CSV Report, the query must meet the following conditions:
 * The query is not a composite query (no [subqueries][2])  
 * "Group into" (fields/patterns/transactions) is not selected  
 * The query doesn't use [calculated fields][3] or [Reference Tables][4]
-* The CSV is limited to 250k rows
+* The CSV is limited to 50k rows
 
 ## Schedule a CSV report
 
