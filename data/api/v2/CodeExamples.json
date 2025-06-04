@@ -212,6 +212,11 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1295653933",
+      "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
     }
   ],
   "CreateCSMThreatsAgentPolicy": [
