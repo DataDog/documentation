@@ -66,7 +66,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
     
     To enable CORS:
 
-    - Add crossorigin="anonymous" attribute to `<script/>` tags
+    - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
     - Ensure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
     
     ```javascript
