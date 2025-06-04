@@ -220,7 +220,7 @@ This is a general behavior and should be changed based on your personal use case
 
 {{% /tab %}}
 {{% tab "Argo Rollout" %}}
-To call deployment gates from an Argo Rollout Kubernetes Resource, you can create an [AnalysisTemplate][`] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes Job that will be used to perform the analysis:
+To call deployment gates from an Argo Rollout Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes Job that will be used to perform the analysis:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -310,7 +310,7 @@ spec:
                         exit 0
 ```
 
-* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env` and any other optionnal fields needed. For more information, see the [official Argo Rollouts docs][3].
+* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env` and any other optionnal fields needed (like `version`). For more information, see the [official Argo Rollouts docs][2].
 * The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
 * The `backoffLimit` field is set to 0 as the job might fail in case that the gate evaluation fails, and it should not be retried in that case.
 
@@ -350,10 +350,9 @@ spec:
         - ...
 ```
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
-[3]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
-[4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+[1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
+[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+
 {{% /tab %}}
 {{< /tabs >}}
 

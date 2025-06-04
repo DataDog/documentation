@@ -29,8 +29,8 @@ The product consists of two main components:
 
 - A [gate][1] is defined for a service and environment. It has a set of rules to be evaluated on.
 - A rule is a type of evaluation evaluated as part of a gate. For example, you can create:
-  - [Monitors][3] rules
-  - [APM Faulty Deployment Detection][4] rules
+  - [Monitors][2] rules
+  - [APM Faulty Deployment Detection][3] rules
 
 For setup instructions, see [Set up Deployment Gates][4].
 
