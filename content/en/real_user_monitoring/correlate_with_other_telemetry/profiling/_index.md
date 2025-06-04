@@ -62,7 +62,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 4. Setup Cross-Origin Resource Sharing (CORS) if needed.
 
-    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from myapp.com, and JavaScript files are served from static.myapp.com. If that's the case, you have to use cors script loading; otherwise, these JavaScript files will be invisible for the profiler. By default, your browser loads JavaScript in no-cors mode. 
+    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from myapp.com, and JavaScript files are served from static.myapp.com. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. 
     
     To opt-in for cors mode, you have to:
 
