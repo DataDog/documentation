@@ -28,9 +28,9 @@ Datadog APM can create **synthetic root spans** for requests that pass through A
 
 ### Prerequisites
 
-- Amazon API Gateway is deployed as a [REST API][5] (V1) or [HTTP API][6] (V2).
+- Amazon API Gateway is deployed as a [REST API][5] (v1) or [HTTP API][6] (v2).
   
-  **Note**: If using HTTP API (V2), `context.requestTimeEpoch` provides second-level granularity, unlike v1 (REST APIs) which provides millisecond precision. This means span duration is approximate. 
+  **Note**: If using HTTP API (v2), `context.requestTimeEpoch` provides second-level granularity, unlike REST APIs (v1) which provide millisecond precision. This means span duration is approximate. 
 
 - `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in the application container:
   {{< code-block lang="shell" >}}
@@ -57,8 +57,11 @@ Datadog APM can create **synthetic root spans** for requests that pass through A
 
 ## Setup
 
-API Gateway must pass the following headers in the request for the tracer to create the inferred span:
-| header | value |
+{{< tabs >}}
+{{% tab "REST API (v1)" %}}
+
+To create inferred spans, API Gateway must pass the following headers to your backend services:
+| Header | Value |
 | ------ | ----- |
 | `x-dd-proxy` | `'aws-apigateway'` |
 | `x-dd-proxy-request-time-ms` | `context.requestTimeEpoch` |
@@ -67,14 +70,9 @@ API Gateway must pass the following headers in the request for the tracer to cre
 | `x-dd-proxy-path` | `context.path` |
 | `x-dd-proxy-stage` | `context.stage` |
 
-To pass the headers, complete the following steps for your API type:
+To pass in the required headers, you can use the AWS CDK or AWS Console:
 
-### REST API (V1)
-
-To pass in the required headers, you can use the AWS CDK or AWS Console.
-
-{{< tabs >}}
-{{% tab "AWS CDK" %}}
+{{% collapse-content title="AWS CDK" level="h4" expanded=false id="id-for-anchoring" %}}
 
 Add the headers under `requestParameters` and use `$context` variables:
 
@@ -97,9 +95,12 @@ const resource = api.root.addResource('myresource');
  # other settings here
  });
 ```
-{{% /tab %}}
 
-{{% tab "AWS Console" %}}
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="AWS Console" level="h4" expanded=false id="id-for-anchoring" %}}
+
 
 1. In the AWS Management Console, navigate to API Gateway and go to your API's **Resources** page. 
 
@@ -109,12 +110,27 @@ const resource = api.root.addResource('myresource');
 
 {{< img src="tracing/trace_collection/apigateway/console_headers.png" alt="Your HTTP headers for your API in API Gateway, after you have added all six header parameters." style="width:100%;" >}}
 
+
+{{% /collapse-content %}}
+
 {{% /tab %}}
-{{< /tabs >}}
 
-### HTTP API (V2)
+{{% tab "HTTP API (v2)" %}}
 
-Attach the parameter mapping that injects the headers.
+To create inferred spans, API Gateway must pass the following headers to your backend services:
+
+| Header | Value |
+| ------ | ----- |
+| `x-dd-proxy` | `"aws-apigateway"` |
+| `x-dd-proxy-request-time-ms` | `"${context.requestTimeEpoch}000"` |
+| `x-dd-proxy-domain-name` | `$context.domainName` |
+| `x-dd-proxy-httpmethod` | `$context.httpMethod` |
+| `x-dd-proxy-path` | `$context.path` |
+| `x-dd-proxy-stage` | `$context.stage` |
+
+**Note**: `context.requestTimeEpoch` returns a timestamp in seconds in v2 APIs. Datadog expects milliseconds, so you must multiply it by 1000 by appending `000`.
+
+Attach the parameter mapping that injects the headers:
 
 {{< code-block lang="typescript" >}}
    import { DatadogAPIGatewayV2ParameterMapping }
@@ -135,6 +151,10 @@ Attach the parameter mapping that injects the headers.
      }],
    });
 {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Update sampling rules
 
