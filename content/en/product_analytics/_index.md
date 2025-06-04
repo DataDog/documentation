@@ -36,10 +36,6 @@ To start using Product Analytics, enable it for each application where you want 
 
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
-<!-- ------------------------------------------------------------------ -->
-<!--                THIS IS THE NEW VERSION                             -->
-<!-- ------------------------------------------------------------------ -->
-
 ## Navigating the Product Analytics UI
 Each Product Analytics feature provides context into your users journey. This section describe the context each feature can provide for your individual use case.
 
@@ -51,10 +47,11 @@ The [Home][3] page gives you a birds eye view of your users' activity and a puls
 By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. You can navigate to anywhere in Product Analytics from the home page. 
 
 ### Track conversion rates and their evolution over time
-The Product analytics charts help you visualize your users' journey as they use your product. Each chart provides a different view into their journey.
+The Product analytics charts help you visualize your users' journey as they use your product.
 
 {{< img src="/product_analytics/pana_charts_video.mp4" alt="visualize your users' journey with charts." video="true">}}
 
+Each chart type provides a different view into the user's journey:
 
 [Pathways][1]
 : you can visualize all user journeys across your application to analyze the critical path.
