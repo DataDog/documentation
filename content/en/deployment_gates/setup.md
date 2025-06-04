@@ -1,5 +1,5 @@
 ---
-title: Set Up Deployment Gates
+title: Set up Deployment Gates
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"
