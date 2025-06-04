@@ -9,7 +9,7 @@ further_reading:
 Setting up Deployment Gates involves two steps:
 
 1. Configure your gate and rules in the Datadog UI
-2. Update your deployment pipeline to use the Deployment Gates API
+2. Update your deployment pipeline to interact with the Deployment Gates API
 
 ## Create a deployment gate
 
