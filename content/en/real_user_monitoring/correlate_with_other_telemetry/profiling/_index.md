@@ -57,26 +57,65 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
         });
     ```
 
-4. Setup Cross-Origin Resource Sharing (CORS) if needed.
+4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
-    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from cdn.com, and JavaScript files are served from static.cdn.com. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. 
+    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from `cdn.com`, and JavaScript files are served from `static.cdn.com`. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. For more information, see the [Browser profiling and CORS](#cors) section.
     
     To enable CORS:
 
     - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
     - Ensure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
     
-    ```javascript
-    app.get("/", (request, response) => {
-        … 
-        response.header("Access-Control-Allow-Origin", "*");
-        response.header("Access-Control-Allow-Headers",
-        …
-    });
-    ```
+       ```javascript
+       app.get("/", (request, response) => {
+           … 
+           response.header("Access-Control-Allow-Origin", "*");
+           response.header("Access-Control-Allow-Headers",
+           …
+       });
+       ```
+
+{{% collapse-content title="Browser profiling and CORS" level="h4" expanded=false id="cors" %}}
+#### Why would I need to set CORS?
+
+If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
+
+To summarize:
+
+- If a script is loaded from a same-origin source, then attribution is allowed, and you can see profiling data attributed to this script.
+- If a script is loaded cross-origin _without_ a permissive CORS policy (like `Access-Control-Allow-Origin` allowing the page origin), then attribution is blocked, and you do not see profiling data attributed to this script.
+
+This CORS policy ensures that only scripts explicitly intended to be profiled by other origins can be profiled.
+
+#### How does CORS relate to browser profiling?
+
+When you start Datadog's browser profiler (which uses the [JS Self-Profiling API][3]), the profiler can capture stack traces of JavaScript execution—but it only includes _attribution_ (function names, URLs, etc.) for the following scripts:
+
+- Scripts that have the same origin as the page initiating the profiling
+- Cross-origin scripts that explicitly opt-in using CORS
+
+This protects third-party content and users from leaking execution details across security boundaries.
+
+#### Why is the crossorigin="anonymous" attribute needed?
+
+Without the `crossorigin="anonymous"` attribute, the browser does not make a CORS-enabled request for the script. The browser fetches the script without CORS, meaning:
+
+- No CORS policy applies.
+- No credentials (cookies, HTTP auth, etc.) are sent.
+- The fetched script is not eligible for detailed attribution in performance entries or stack traces. This stack frames are displayed as "(anonymous)" or with no attribution.
+
+To protect cross-origin script privacy, _both_ sides must agree to share information:
+- The page must explicitly request a CORS-enabled fetch, with `crossorigin="anonymous"`.
+- The server must permit this, with an `Access-Control-Allow-Origin` header in the response.
+
+A script is eligible for attribution the JS Self-Profiling API only when both of the above conditions are true.
+
+{{% /collapse-content %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [2]: /real_user_monitoring/browser/setup/
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
