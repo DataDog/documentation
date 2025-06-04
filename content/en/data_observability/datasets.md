@@ -15,7 +15,7 @@ further_reading:
     text: 'Database Monitoring'
 ---
 
-<div class="alert alert-info">Data Observability for Datasets is in Preview.</div>
+<div class="alert alert-info">Data Observability is in Preview.</div>
 
 {{< img src="data_observability/data_quality_tables.png" alt="Datasets page showing a list of tables with columns for query count, storage size, row count, and last data update; two tables are flagged with triggered alerts" style="width:100%;" >}}
 
