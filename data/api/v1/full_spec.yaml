@@ -1181,7 +1181,6 @@ components:
           readOnly: true
           type: string
         is_read_only:
-          default: false
           deprecated: true
           description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
@@ -14458,8 +14457,8 @@ components:
         operator:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         type:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
       required:
@@ -14515,6 +14514,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
       type: object
     SyntheticsAssertionJSONSchemaMetaSchema:
@@ -14622,8 +14622,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         timingsScope:
           $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
@@ -14633,6 +14633,20 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTargetValue:
+      description: Value used by the operator in assertions. Can be either a number
+        or string.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
+    SyntheticsAssertionTargetValueNumber:
+      description: Numeric value used by the operator in assertions.
+      format: double
+      type: number
+    SyntheticsAssertionTargetValueString:
+      description: String value used by the operator in assertions. Supports templated
+        variables.
+      type: string
     SyntheticsAssertionTimingsScope:
       description: Timings scope for response time assertions.
       enum:
@@ -14717,6 +14731,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
         xPath:
           description: The X path to assert.
@@ -24291,10 +24306,11 @@ components:
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).

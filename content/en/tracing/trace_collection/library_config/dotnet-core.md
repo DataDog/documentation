@@ -207,17 +207,17 @@ Note that UDS is only supported on .NET Core 3.1 and above.<br>
 For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Available since version `2.20.0`
 
 `DD_TRACE_PROPAGATION_STYLE`
-: **Default**: `datadog,tracecontext`<br>
+: **Default**: `datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
 Available since version `2.20.0`
 
@@ -272,6 +272,7 @@ Added in version 2.5.1.
 : List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `Namespace.TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
 **Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
 **Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+`DD_TRACE_METHODS` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][23] product instead. <br>
 Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
 
@@ -367,3 +368,4 @@ The following configuration variables are for features that are available for us
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
 [22]: /tracing/trace_collection/library_config/#traces
+[23]: /profiler/

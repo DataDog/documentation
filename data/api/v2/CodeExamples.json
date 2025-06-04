@@ -200,32 +200,39 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
-  "UpdateCSMThreatsAgentRule": [
+  "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Workload Protection policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Workload Protection policy returns \"OK\" response"
     }
   ],
   "ArchiveCase": [
@@ -886,28 +893,35 @@
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call escalation policy returns \"Created\" response"
+      "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call schedule returns \"Created\" response"
+      "description": "Create On-Call schedule returns \"Created\" response"
+    }
+  ],
+  "SetOnCallTeamRoutingRules": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Set On-Call team routing rules returns \"OK\" response"
     }
   ],
   "UpdateOnCallEscalationPolicy": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call escalation policy returns \"OK\" response"
+      "description": "Update On-Call escalation policy returns \"OK\" response"
     }
   ],
   "UpdateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call schedule returns \"OK\" response"
+      "description": "Update On-Call schedule returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1240,6 +1254,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateResourceEvaluationFilters": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update resource filters returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringRule": [

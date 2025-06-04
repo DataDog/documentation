@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -27,83 +27,89 @@ Add the following environment variables to your `datadog-agent` container defini
   "containerDefinitions": [
     {
       "name": "datadog-agent",
+      ...
+      "mountPoints": [
+        {
+          "sourceVolume": "docker_sock",
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "proc",
+          "containerPath": "/host/proc/",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "cgroup",
+          "containerPath": "/host/sys/fs/cgroup",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "passwd",
+          "containerPath": "/etc/passwd",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "os_release",
+          "containerPath": "/host/etc/os-release",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "kernel_debug",
+          "containerPath": "/sys/kernel/debug"
+        },
+        {
+          "sourceVolume": "root",
+          "containerPath": "/host/root",
+          "readOnly": true
+        }
+      ],
+      ...
+      "environment": [
         ...
-        "mountPoints": [
-          {
-            "sourceVolume": "docker_sock",
-            "containerPath": "/var/run/docker.sock",
-            "readOnly": true
-          },
-          {
-            "sourceVolume": "proc",
-            "containerPath": "/host/proc/",
-            "readOnly": true
-          },
-          {
-            "sourceVolume": "cgroup",
-            "containerPath": "/host/sys/fs/cgroup",
-            "readOnly": true
-          },
-          {
-            "sourceVolume": "passwd",
-            "containerPath": "/etc/passwd",
-            "readOnly": true
-          },
-          {
-            "sourceVolume": "os_release",
-            "containerPath": "/host/etc/os-release",
-            "readOnly": true
-          },
-          {
-            "sourceVolume": "kernel_debug",
-            "containerPath": "/sys/kernel/debug"
-          },
-          {
-            "sourceVolume": "root",
-            "containerPath": "/host/root",
-            "readOnly": true
-          }
-        ],
-        ...
-        "environment": [
-          ...
-          {
-            "name": "DD_COMPLIANCE_CONFIG_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_SYSTEM_PROBE_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_SBOM_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_CONTAINER_IMAGE_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_SBOM_HOST_ENABLED",
-            "value": "true"
-          }
-        ]
+        {
+          "name": "DD_COMPLIANCE_CONFIG_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_SYSTEM_PROBE_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_SBOM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_CONTAINER_IMAGE_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_SBOM_HOST_ENABLED",
+          "value": "true"
+        }
+      ],
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN",
+            "SYS_RESOURCE",
+            "SYS_PTRACE",
+            "NET_ADMIN",
+            "NET_BROADCAST",
+            "NET_RAW",
+            "IPC_LOCK",
+            "CHOWN"
+          ]
+        }
+      },
     }
   ],
   ...
@@ -151,20 +157,6 @@ Add the following environment variables to your `datadog-agent` container defini
       }
     }
   ],
-  "linuxParameters": {
-    "capabilities": {
-      "add": [
-        "SYS_ADMIN",
-        "SYS_RESOURCE",
-        "SYS_PTRACE",
-        "NET_ADMIN",
-        "NET_BROADCAST",
-        "NET_RAW",
-        "IPC_LOCK",
-        "CHOWN"
-      ]
-    }
-  },
   "requiresCompatibilities": [
     "EC2"
   ]

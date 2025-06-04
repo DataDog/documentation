@@ -67,11 +67,26 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
+
+   The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
+   ```yaml
+   ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
+   ```
+
+   Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
+
+   For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
+   
+
 [1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [5]: https://openlineage.io/docs/integrations/airflow/
+[6]: https://airflow.apache.org/docs/apache-airflow/2.9.3/configurations-ref.html#log-filename-template
+[7]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+[8]: https://docs.datadoghq.com/integrations/airflow/?tab=containerized
 
 
 ## Validation
@@ -226,7 +241,41 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 
 ## Advanced Configuration
 
-### Link your Spark jobs with Airflow task
+### Link your dbt jobs with Airflow tasks
+
+You can monitor your dbt jobs that are running in Airflow by connecting the dbt telemetry with respective Airflow tasks, using [OpenLineage dbt integration][6].
+
+To see the link between Airflow tasks and dbt jobs, follow those steps:
+
+1. Install `openlineage-dbt`. Reference [Using dbt with Amazon MWAA][7] to setup dbt in the virtual environment.
+
+```shell
+pip3 install openlineage-dbt>=1.33.0
+```
+
+2. Change the dbt invocation to `dbt-ol` (OpenLineage wrapper for dbt).
+
+Also, add the --consume-structured-logs flag to view dbt jobs while the command is still running.
+
+```bash
+dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR
+```
+
+3. In your DAG file, add the OPENLINEAGE_PARENT_ID variable to the environment of the Airflow task that runs the dbt process:
+
+```python
+dbt_run = BashOperator(
+    task_id="dbt_run",
+    dag=dag,
+    bash_command=f"dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR",
+    append_env=True,
+    env={
+        "OPENLINEAGE_PARENT_ID": "{{ macros.OpenLineageProviderPlugin.lineage_parent_id(task_instance) }}",
+    },
+)
+```
+
+### Link your Spark jobs with Airflow tasks
 You can troubleshoot Airflow tasks that run Spark jobs more efficiently by connecting the Spark job run info and telemetry with the respective Airflow task.
 
 **Prerequisites**: your Spark jobs are currently monitored through [Data Jobs Monitoring][2] and are submitted through [SparkSubmitOperator][5]s from your Airflow jobs.
@@ -264,3 +313,5 @@ To see the link between Airflow task and the Spark application it submitted, fol
 [3]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#lazy-load-plugins
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/macros.html#lineage-job-run-macros
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
+[6]: https://openlineage.io/docs/integrations/dbt/
+[7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
