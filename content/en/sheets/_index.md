@@ -43,7 +43,7 @@ From the header of the far right column of your table, click the Plus icon to **
 
 ## Lookup
 
-Lookup enriches your existing data and adds more context to your table. Click **Add Lookup** at the top of the page to add columns from another table or data source, such as [Reference Tables][4], Logs, or RUM data. Lookup is like a left join or a vlookup in Excel or Google Sheets; it matches records on a common column, and returns additional columns of data to enrich your existing Sheets table.
+Lookup enriches your existing data and adds more context to your table. Click **Add Lookup** at the top of the page to add columns from another table or data source, such as [Reference Tables][4], logs, or RUM data. Lookup is like a left join or a vlookup in Excel or Google Sheets; it matches records on a common column, and returns additional columns of data to enrich your existing Sheets table.
 
 {{< img src="/sheets/lookup.png" alt="Example Lookup which adds a user's team metadata sourced from a reference table" style="width:90%;" >}}
 
