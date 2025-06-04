@@ -18,15 +18,7 @@ further_reading:
 
 ## Overview
 
-To go beyond core web vitals, you can pair RUM with Browser Profiling for full end-to-end visibility into how your application behaves in users' browsers. While the Optimization page helps you identify what your users are experiencing, the browser profiler helps you understand _why_ those issues are happening. 
-With profiling data alongside RUM insights, you can:
-
-- Pinpoint exactly what code was executing during a given Long Animation Frame (LoAF)
-- Understand how JavaScript execution and rendering tasks affect user-perceived performance
-- Diagnose unresponsive moments on the page that may not be tied to loading issues
-- Identify inefficient rendering that slow down page responsiveness after the initial load
-
-This deeper insight accelerates root cause analysis, eliminates the guesswork of reproducing issues, and helps prioritize the right frontend optimizations with confidence.
+Browser profiling provides visibility into how your application behaves in your users' browsers, helping you to understand root causes behind unresponsive applications (whether unresponsiveness happens at page load, of further down the page's lifecycle). Using profiling data alongside RUM insights enables you to see what code is executed during a [Long Animation Frame (LoAF)][1], understanding how JavaScript execution and rendering tasks affect user-perceived performance.
 
 To get started, ensure browser profiling is enabled in your RUM SDK configuration. When browser profiling is enabled, you can click on a profiled event sample to see a profile section.
 
