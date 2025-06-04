@@ -242,7 +242,7 @@ ddtrace.Start(ddtrace.WithService("my-service"))
 ```
 #### WithDogstatsdAddress
 
-`tracer.WithDogstatsdAddress` has been renamed as `tracer.WithDogstatsdAddr`. If you would like to specify a different DogStatsD address upon starting the tracer.
+`tracer.WithDogstatsdAddress` has been renamed to `tracer.WithDogstatsdAddr`. Use this option to specify a different DogStatsD address when starting the tracer.
 
 v1:
 ```go
