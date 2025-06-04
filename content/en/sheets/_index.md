@@ -56,7 +56,7 @@ After you add a table of data to a spreadsheet, analyze and add context to your 
 1. In the **Rows** and **Columns** section, select the dimensions you want to analyze, such as the status of logs.
 1. In the **Calculations** section, select the dimensions you want to use in calculations, including sum, average, count, min, and max.
 
-{{< img src="/sheets/pivot_table_example.png" alt="Example pivot table configuration panel" style="width:90%;" >}}
+{{< img src="/sheets/example_pivot_table.png" alt="Example pivot table configuration panel" style="width:90%;" >}}
 
 ### Visualizations
 
