@@ -7,8 +7,8 @@ further_reading:
       tag: 'Documentation'
       text: 'Reducing Data Related Risks'
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/" header="Join the Preview!">}}
-  Data Access Control is in Preview
+{{< callout url="#" header="false">}}
+  Data Access Control is in Limited Availability
 {{< /callout >}}
 
 ## Overview
@@ -211,4 +211,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [8]: /data_security/
 [9]: /software_catalog/customize/
 [10]: /account_management/rbac/data_access/#supported-telemetry
-[11]: /logs/guide/logs-rbac-permissions/
+[11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
