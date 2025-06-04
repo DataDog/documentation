@@ -529,6 +529,8 @@ Evaluations must be joined to a single span. You can identify the target span us
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
 
+Reminder: Custom evaluations are distinct from out-of-the-box evaluations. if you’d like to configure out-of-the-box evaluations for your application, you can do so from the evaluations section of the LLM Observability settings page.
+
 #### Arguments
 
 The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
@@ -546,12 +548,14 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 <br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
 
 `span`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `span_id` (string) and `trace_id` (string). Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
 
 `span_with_tag_value`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
+
+*Note*: Exactly one of span or span_with_tag_value is required. Supplying both, or neither, will raise a ValueError.
 
 `ml_app`
 : required - _string_
