@@ -43,7 +43,7 @@ WHERE tags->'region' = 'us-east-1' -- env is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-### Explore your infrastructure data
+## Explore your infrastructure data
 
 View and filter the list of tables and fields in the schema side panel:
 
@@ -53,15 +53,17 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-### Save and share queries
+## Save and share queries
 
-Save useful queries, or export the data as CSV.
+Save useful queries for future reference or download the data as CSV.
 
-{{< img src="/ddsql_editor/save-query.png" alt="DDSQL Editor interface showing query results with save option highlighted" style="width:90%;" >}}
+{{< img src="/ddsql_editor/save_export.png" alt="DDSQL Editor interface showing query results with save and export options highlighted" style="width:90%;" >}}
+
+Export a saved query to a dashboard by clicking **Save to Dashboard**. From a dashboard you can visualize results and send Scheduled Reports.
 
 Browse and re-run recent or saved queries in the side panel.
 
-{{< img src="/ddsql_editor/queries-tab.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
+{{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
 
 ## Permissions
 
