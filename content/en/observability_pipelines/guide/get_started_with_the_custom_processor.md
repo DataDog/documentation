@@ -238,6 +238,37 @@ Sample log containing the `ddtags` array with Datadog tags.
 ### Custom function to extract the env field
 
 ```
+#Extract a tag from ddtags array and elevate as log attribute
+.my_tag, err = filter(array!(.ddtags)) -> |_index, value| {
+    #Keep any elements that have the key name "env"
+    starts_with(value, "env:")
+}
+#Assign env to be value of the key
+.env = split!(.my_tag[0], ":")[1]
+del(.my_tag)
+
+```
+
+#### Output
+
+```
+{
+   "ddsource": "python",
+   "ddtags": [
+       "env:prod",
+       "team:sre",
+       "service:chaos-engineering",
+       "version:1.0.0",
+       "pod_name:load-generator-main-abcde"
+   ],
+   "env": "prod",
+   "hostname": "gke-prod-node-abc123.internal",
+   "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+   "service": "chaos-engineering",
+   "source_type": "datadog_agent",
+   "status": "info",
+   "timestamp": "2025-005-27T05:26:18.205Z"
+}
 ```
 
 ## Reference another field's value
