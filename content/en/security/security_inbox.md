@@ -36,7 +36,7 @@ The findings that appear in Security Inbox are generated from App and API Protec
 - A curated set of [identity risks][1] for [Cloud Security Identity Risks][3], compiled by Datadog Security Research.
 - Application library vulnerabilities for [Software Composition Analysis(SCA)][4]. All high and critical application library vulnerabilities on production services under attack appear in the inbox.
 - Application code vulnerabilities for [Code Security vulnerabilities][5]. All high and critical application code vulnerabilities appear in the inbox.
-- Emerging vulnerabilities, which are infrastructure vulnerabilities that have had CVEs published in the last 30 days and that have a [Datadog severity score][10] of Critical, or that the Datadog Security Research team has published.
+- Emerging vulnerabilities, which are infrastructure vulnerabilities that have had CVEs published in the last 30 days and that have a [Datadog severity score][10] of Critical, or that the Datadog Security Research team has published. When Datadog rates a vulnerability as Critical, that means it's an exploitable critical vulnerability that affects an internet-facing production resource.
 - [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in Security Inbox by default.
 
 Security Inbox also takes the following detected risks into consideration when determining which findings appear in the inbox:
