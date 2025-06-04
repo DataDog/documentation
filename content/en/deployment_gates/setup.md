@@ -255,19 +255,16 @@ spec:
                         API_URL="https://api.datadoghq.com/api/unstable/deployments/gates/evaluate"
                         API_KEY="<YOUR_API_KEY>"
 
-                        PAYLOAD=$(cat <<EOF
-                        {
+                        PAYLOAD='{
                           "data": {
                             "type": "deployment_gates_evaluation_request",
                             "attributes": {
                               "service": "{{ args.service }}",
-                              "env": "{{ args.env }}"
-                              "version": "{{ args.version }}"
+                              "env": "{{ args.env }}",
+                              "version": "{{ args.version }}",
                             }
                           }
-                        }
-                        EOF
-                        )
+                        }'
 
                         current_attempt=0
                         while [ $current_attempt -lt $MAX_RETRIES ]; do
