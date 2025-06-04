@@ -7,8 +7,8 @@ further_reading:
   text: "Datadog APM"
 ---
 
-{{< callout url="https://www.datadoghq.com/support/" header="Request access to the Preview!" >}}
-APM Investigator is in Preview. To request access, fill out this form.
+{{< callout url="" btn_hidden="true" header="Request access to the Preview!" >}}
+APM Investigator is in Preview. To request access, contact <a href="/help/">Datadog Support</a>.
 {{< /callout >}}
 
 ## Overview
