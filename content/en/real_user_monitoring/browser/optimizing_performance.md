@@ -93,7 +93,7 @@ You can select another sample event using the dropdown in the top left, and expa
 {{< img src="real_user_monitoring/browser/optimizing_performance/view-event-samples.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
 
 ## Browser profiling within event samples
-For deeper root cause analysis, use Browser Profiling alongside RUM to identify what JavaScript or rendering activity caused slow or unresponsive experiences. Profiling reveals performance issues that aren't always visible through Core Web Vitals alone. To get started, ensure browser [profiling is enabled in your RUM SDK configuration][12].
+For deeper root cause analysis, use browser profiling alongside RUM to identify what JavaScript or rendering activity is causing slow or unresponsive experiences. Profiling reveals performance issues that aren't always visible through Core Web Vitals alone. To get started, [ensure that browser profiling is enabled in your RUM SDK configuration][12].
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" alt="Profling example when digging into an event sample." style="width:100%;" >}}
 
 ## Further Reading
