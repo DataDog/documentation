@@ -31,7 +31,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 ### Setup RUM
 1. Set up [RUM Browser Monitoring][2].
 
-2. Initialize the RUM SDK. Configure the following:
+2. Initialize the RUM SDK and configure the following initialization parameters:
     - `profilingSampleRate` initialization parameter which sets the percentage of page navigations that will get profiled.
     - `enableExperimentalFeatures` initialization parameter which enabled profiling for the app
     ```javascript
