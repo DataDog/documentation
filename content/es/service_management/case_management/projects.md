@@ -11,7 +11,7 @@ title: Proyectos
 <div class="alert alert-warning">
 La gestión de casos no está disponible en el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
-{{% /región del sitio %}}
+{{% /site-region %}}
 
 ## Resumen
 
