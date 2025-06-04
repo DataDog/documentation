@@ -28,7 +28,7 @@ With profiling data alongside RUM insights, you can:
 
 This deeper insight accelerates root cause analysis, eliminates the guesswork of reproducing issues, and helps prioritize the right frontend optimizations with confidence.
 
-To get started, ensure browser profiling is enabled in your RUM SDK configuration. When youc click an event sample now, you will get a profile section if we have profiled this event. 
+To get started, ensure browser profiling is enabled in your RUM SDK configuration. When browser profiling is enabled, you can click on a profiled event sample to see a profile section.
 
 ## Usage
 
