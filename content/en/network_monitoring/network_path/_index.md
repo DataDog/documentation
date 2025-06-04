@@ -3,15 +3,6 @@ title: Network Path
 description: Investigate network traffic paths
 is_beta: true
 further_reading:
-- link: "/network_monitoring/network_path/list_view"
-  tag: "Documentation"
-  text: "Learn more about the List View in Network Path"
-- link: "/network_monitoring/network_path/path_view"
-  tag: "Documentation"
-  text: "Learn more about the Path View in Network Path"
-- link: "/network_monitoring/network_path/setup"
-  tag: "Documentation"
-  text: "Setup Network Path"
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
@@ -39,9 +30,21 @@ The following diagram depicts the typical flow of a network path from a source (
 
 **Note**: By default, Datadog executes a `traceroute` every five minutes.
 
+## Next steps
+
+Use the following views and tools to set up Network Path and investigate network performance and connectivity issues:
+
+- [Setup][4]: Setup and configure Network Path on your environments.
+- [List View][2]: A comprehensive overview of all monitored network paths, allowing you to detect connectivity issues, analyze performance metrics, and filter for paths that need attention.
+- [Path View][3]: A visual display of the network path between a source and destination, enabling you to identify where issues arise, whether within your own infrastructure or with external providers.
+- [Traceroute variants][5]: Learn how to use the `traceroute` and `tracert` commands to diagnose and resolve network issues.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network/path
+[2]: /network_monitoring/network_path/list_view
+[3]: /network_monitoring/network_path/path_view
+[4]: /network_monitoring/network_path/setup
+[5]: /network_monitoring/cloud_network_monitoring/guide/traceroute_variants
