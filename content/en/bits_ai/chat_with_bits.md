@@ -37,16 +37,6 @@ Some responses from Bits AI include a **suggestions** button. Clicking it displa
 
 {{< img src="bits_ai/getting_started/chat_panel_star_service.png" alt="Bits AI chat panel with example question of 'How do I star a service' and Bits AI's answer" style="width:90%;">}}
 
-### In a search bar
-
-Some Datadog search bars support natural language querying. 
-
-{{< img src="bits_ai/getting_started/ai-enabled-search-bar.png" alt="Search bar with natural language querying enabled" style="width:90%;">}}
-
-Where available, the feature can be accessed by typing a space into the search bar, then choosing from the suggested queries or typing a new query.
-
-{{< img src="bits_ai/getting_started/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
-
 ### On the mobile app
 
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}

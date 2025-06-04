@@ -27,15 +27,15 @@ For best results, see [Optimize monitors for Bits SRE][1].
 
 On the [Bits AI Investigations][2] page, you can chat with Bits to gather additional information about the investigation or the services involved. Click the **Suggested replies** bubble for examples.
 
-| Functionality                                      | Example prompts                                                                    | Data source                          |
-|----------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------|
-| **Understand the status of its investigation**     | `What's the latest status of the investigation?`                                   | Investigation findings               |
-| **Ask for elaborations of its findings**           | `Tell me more about the {issue}.`                                                  | Investigation findings               |
-| **Look up information about a service**            | `Are there any open incidents for {example-service}?`                              | Software Catalog service definitions |
-| **Find recent changes for a service**              | `Were there any recent changes on {example-service}?`                              | Change Tracking events               |
-| **Find a dashboard**                               | `Give me the {example-service} dashboard.`                                         | Dashboards                           |
-| **Query APM request, error, and duration metrics** | `What's the current error rate for {example-service}?`                             | APM metrics                          |
-| **Search for information in Confluence**           | `Find me the runbook in Confluence to rollback deployments for {example-service}.` | Confluence                           |
+| Functionality                                  | Example prompts                                                                    | Data source                          |
+|------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------|
+| Understand the status of its investigation     | `What's the latest status of the investigation?`                                   | Investigation findings               |
+| Ask for elaborations of its findings           | `Tell me more about the {issue}.`                                                  | Investigation findings               |
+| Look up information about a service            | `Are there any open incidents for {example-service}?`                              | Software Catalog service definitions |
+| Find recent changes for a service              | `Were there any recent changes on {example-service}?`                              | Change Tracking events               |
+| Find a dashboard                               | `Give me the {example-service} dashboard.`                                         | Dashboards                           |
+| Query APM request, error, and duration metrics | `What's the current error rate for {example-service}?`                             | APM metrics                          |
+| Search for information in Confluence           | `Find me the runbook in Confluence to rollback deployments for {example-service}.` | Confluence                           |
 
 ## Help Bits SRE learn
 
