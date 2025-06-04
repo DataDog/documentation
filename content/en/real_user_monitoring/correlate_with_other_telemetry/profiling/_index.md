@@ -51,7 +51,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
     })
     ```
 
-3. Configure your web servers to serve HTML page with the following HTTP Response Header: `Document-Policy: js-profiling`
+3. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
     ```javascript
         app.get("/", (request, response) => {
             … 
