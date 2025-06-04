@@ -1,7 +1,7 @@
 ---
 title: Data Observability
 further_reading:
-  - link: '/datasets'
+  - link: '/data_observability/datasets'
     tag: 'Documentation'
     text: 'Datasets'
   - link: '/data_jobs'
