@@ -19,7 +19,7 @@ further_reading:
 <div class="alert alert-warning">Deployment Gates are not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/" >}}
+{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
