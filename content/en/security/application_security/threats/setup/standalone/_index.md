@@ -85,7 +85,7 @@ Learn how to setup App and API Protection on all the following supported platfor
 ### Microsoft Azure
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/threats/setup/standalone/azure/app_service" >}}
+  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/threats/setup/standalone/azure/app-service" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading

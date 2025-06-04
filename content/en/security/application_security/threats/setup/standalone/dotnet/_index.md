@@ -7,6 +7,12 @@ aliases:
   - /security_platform/application_security/getting_started/dotnet
   - /security/application_security/getting_started/dotnet
   - /security/application_security/enabling/tracing_libraries/threat_detection/dotnet/
+  - /security/application_security/threats/setup/standalone/docker/dotnet
+  - /security/application_security/threats/setup/standalone/linux/dotnet
+  - /security/application_security/threats/setup/standalone/windows/dotnet
+  - /security/application_security/threats/setup/standalone/macos/dotnet
+  - /security/application_security/threats/setup/standalone/kubernetes/dotnet
+
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

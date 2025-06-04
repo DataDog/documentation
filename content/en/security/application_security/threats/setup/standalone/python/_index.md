@@ -7,6 +7,11 @@ aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
   - /security/application_security/enabling/tracing_libraries/threat_detection/python
+  - /security/application_security/threats/setup/standalone/docker/php
+  - /security/application_security/threats/setup/standalone/linux/php
+  - /security/application_security/threats/setup/standalone/windows/php
+  - /security/application_security/threats/setup/standalone/macos/php
+  - /security/application_security/threats/setup/standalone/kubernetes/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

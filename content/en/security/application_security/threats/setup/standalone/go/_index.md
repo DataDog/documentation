@@ -7,6 +7,11 @@ aliases:
   - /security_platform/application_security/getting_started/go
   - /security/application_security/getting_started/go
   - /security/application_security/enabling/tracing_libraries/threat_detection/go/
+  - /security/application_security/threats/setup/standalone/docker/go
+  - /security/application_security/threats/setup/standalone/linux/go
+  - /security/application_security/threats/setup/standalone/windows/go
+  - /security/application_security/threats/setup/standalone/macos/go
+  - /security/application_security/threats/setup/standalone/kubernetes/go
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

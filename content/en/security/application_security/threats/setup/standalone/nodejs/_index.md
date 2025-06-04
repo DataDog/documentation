@@ -7,6 +7,11 @@ aliases:
   - /security_platform/application_security/getting_started/nodejs
   - /security/application_security/getting_started/nodejs
   - /security/application_security/enabling/tracing_libraries/threat_detection/nodejs/
+  - /security/application_security/threats/setup/standalone/docker/nodejs
+  - /security/application_security/threats/setup/standalone/linux/nodejs
+  - /security/application_security/threats/setup/standalone/windows/nodejs
+  - /security/application_security/threats/setup/standalone/macos/nodejs
+  - /security/application_security/threats/setup/standalone/kubernetes/nodejs
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
