@@ -97,11 +97,9 @@ The APM Investigator only surfaces this section when dimensions show significant
 
 ### End user impact
 
-This section shows:
+Above the point plot, you can find a preview of how many end-users, account and application pages (for example, `/checkout`) are affected by the problem. This information is collected if you enabled the connection between [RUM and traces][3].
 
-- Details on how end-users or specific application pages (for example, `/checkout`) are affected by the problem.
-- User experience metrics such as increased pageview load times.
-- Information on which specific users, organizations, or accounts are most affected.
+{{< img src="tracing/guide/apm_investigator/end_user_impact.png" alt="End user impact" style="width:80%;">}}
 
 ### Root cause
 
@@ -115,3 +113,4 @@ The APM Investigator helps reduce **Mean Time to Resolution (MTTR)** by accelera
 
 [1]: /tracing/trace_explorer/tag_analysis
 [2]: /change_tracking/
+[3]: /tracing/other_telemetry/rum/
