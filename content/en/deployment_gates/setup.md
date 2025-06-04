@@ -25,7 +25,7 @@ Setting up Deployment Gates involves two steps:
    - **Dry Run**: Enable to test gate behavior without impacting deployments. The evaluation of 
 a dry run gate will always respond with a pass status, but the in-app result will be the real status based 
 on rules evaluation. It is particularly useful when performing an initial evaluation of the 
-gate behavior without impacting your deployments. 
+gate behavior without any real impact on your deployment pipeline. 
 
 ## Add rules to your gate
 
