@@ -28,7 +28,7 @@ To enable Remote Agent Management:
 
 1. Use the generated Agent installation command to upgrade your Agent.
 
-<div class="alert alert-info">**Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.</div>
+<div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -47,18 +47,18 @@ To enable Remote Agent Management:
 
 To upgrade your Agents:
 1. [Enable Remote Agent Management](#setup).
-2. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
+1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
 
    {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
-3. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
+1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
-4. Review deployment plan and click **Upgrade Agents** to start the upgrade.
+1. Review the deployment plan and click **Upgrade Agents** to start the upgrade.
 
    {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Review upgrade deployment plan" style="width:100%;" >}}
 
-5. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
+1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
 ### Upgrade process

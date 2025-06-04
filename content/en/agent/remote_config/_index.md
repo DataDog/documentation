@@ -317,4 +317,4 @@ datadog:
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
-[29]: https://docs.datadoghq.com/agent/fleet_automation/remote_management/#upgrade-your-agents
+[29]: /agent/fleet_automation/remote_management/#upgrade-your-agents
