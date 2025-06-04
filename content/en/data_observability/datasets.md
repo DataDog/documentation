@@ -1,16 +1,16 @@
 ---
-title: Data Quality Monitoring
+title: Datasets
 ---
 
-<div class="alert alert-info">Data Quality Monitoring is in Preview.</div>
+<div class="alert alert-info">Datasets is in Preview.</div>
 
-{{< img src="data_quality/data_quality_tables.png" alt="Data Quality Monitoring page showing a list of tables with columns for query count, storage size, row count, and last data update; two tables are flagged with triggered alerts" style="width:100%;" >}}
+{{< img src="data_observability/data_quality_tables.png" alt="Datasets page showing a list of tables with columns for query count, storage size, row count, and last data update; two tables are flagged with triggered alerts" style="width:100%;" >}}
 
-Data Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
+Data Observability Datasets detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
 
 ## Key capabilities
 
-With Data Quality Monitoring, you can:
+With Datasets, you can:
 
 - Detect delayed updates and unexpected row count behavior in your tables
 - Surface changes in column-level metrics such as null counts or uniqueness
@@ -19,7 +19,7 @@ With Data Quality Monitoring, you can:
 
 ## Supported data sources
 
-Data Quality Monitoring supports the following data sources:
+Datasets supports the following data sources:
 
 - Snowflake
 - BigQuery

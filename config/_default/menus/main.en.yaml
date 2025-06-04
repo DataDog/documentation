@@ -4492,12 +4492,17 @@ menu:
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
-    - name: Data Quality Monitoring
-      url: data_quality/
-      pre: books
-      identifier: data_quality
+    - name: Data Observability
+      url: data_observability/
+      pre: inventories
+      identifier: data_observability
       parent: apm_heading
       weight: 70000
+    - name: Datasets
+      url: data_observability/datasets
+      identifier: datasets
+      parent: data_observability
+      weight: 100000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
