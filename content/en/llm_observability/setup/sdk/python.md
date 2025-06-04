@@ -529,7 +529,7 @@ Evaluations must be joined to a single span. You can identify the target span us
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
 
-Reminder: Custom evaluations are distinct from out-of-the-box evaluations. if you’d like to configure out-of-the-box evaluations for your application, you can do so from the evaluations section of the LLM Observability settings page.
+Reminder: Custom evaluations are powered by custom evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. If you’d like to enable or configure out-of-the-box evaluations for your application, you can do so from the Evaluations section of the LLM Observability settings page.
 
 #### Arguments
 
