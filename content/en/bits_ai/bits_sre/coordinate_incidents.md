@@ -1,5 +1,5 @@
 ---
-title: Coordinate Incidents
+title: Coordinate incidents
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"
@@ -14,7 +14,26 @@ aliases:
 - /bits_ai/managing_incidents/
 ---
 
-## Overview
+## Get started with coordinating incidents
+
+Bits SRE helps coordinate incidents—especially those involving multiple teams—by suggesting next steps throughout the incident lifecycle. This streamlines communication and improves overall process management.
+
+<div class="alert alert-info">These features require <a href="/service_management/incident_management/">Datadog Incident Management</a>.</div>
+
+
+1. Connect Datadog to Slack.
+   1. In Slack, run the `/dd connect` command.
+   1. Follow the on-screen prompts to complete the connection process. 
+1. Enable the Slack integration in Datadog Incident Management.
+   1. Navigate to Incident > Settings > Integrations > Slack.
+   1. Enable the following toggles:
+      - Push Slack channel messages to the incident timeline
+      - Activate Bits AI features in incident Slack channels for your organization<br />
+      **Note**: Bits AI's incident management features can only be activated for one Datadog organization within a single Slack workspace.
+1. To interact with Bits AI in a Slack channel, invite it by running the `@Datadog` command.
+
+
+<!-- ## Overview
 
 <div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
 
@@ -79,4 +98,4 @@ To generate an AI-assisted postmortem draft:
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems
 [2]: https://app.datadoghq.com/incidents
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: https://app.datadoghq.com/incidents/settings#Integrations -->

@@ -1434,7 +1434,12 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Coordinate Incidents
+    - name: Investigate alerts
+      url: bits_ai/bits_sre/investigate_alerts
+      identifier: bits_ai_sre_investigate_alerts
+      parent: bits_ai_sre
+      weight: 100
+    - name: Coordinate incidents
       url: bits_ai/bits_sre/coordinate_incidents
       identifier: bits_ai_sre_coordinate_incidents
       parent: bits_ai_sre
