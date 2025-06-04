@@ -47,7 +47,7 @@ Monitor rules evaluate the state of your monitors. The evaluation fails if:
 **Configuration**:
 Enter a monitor query using [Search Monitor syntax][1]. You can filter on:
 * Monitor static tags, with the syntax `service:transaction-backend`.
-* Tags within monitor query, with the syntax `scope:"service:transaction-backend"`.
+* Tags within the monitor's query, with the syntax `scope:"service:transaction-backend"`.
 * [Tags within monitor "group by"][2], with the syntax `group:"service:transaction-backend"`.
 
 Example queries:
