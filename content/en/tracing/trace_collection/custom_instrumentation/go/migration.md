@@ -265,7 +265,7 @@ tracer.Start(tracer.WithAgentURL("unix:///var/run/datadog/apm.socket"))
 
 #### NewStartSpanConfig, WithStartSpanConfig, and WithFinishConfig
 
-These functional options for `ddtrace/tracer.Tracer.StartSpan` and `ddtrace/tracer.Span.Finish` reduces the number of calls (in functional option form) in hot loops by giving the freedom to prepare a common span configuration in hot paths.
+These functional options for `ddtrace/tracer.Tracer.StartSpan` and `ddtrace/tracer.Span.Finish` reduce the number of calls (in functional option form) in hot loops by giving the freedom to prepare a common span configuration in hot paths.
 
 v1:
 ```go
