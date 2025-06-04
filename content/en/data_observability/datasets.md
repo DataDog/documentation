@@ -1,12 +1,25 @@
 ---
 title: Datasets
+further_reading:
+  - link: '/data_observability'
+    tag: 'Documentation'
+    text: 'Data Observability'
+  - link: '/data_jobs'
+    tag: 'Documentation'
+    text: 'Data Jobs Monitoring'
+  - link: '/data_streams'
+    tag: 'Documentation'
+    text: 'Data Streams Monitoring'
+  - link: '/database_monitoring'
+    tag: 'Documentation'
+    text: 'Database Monitoring'
 ---
 
 <div class="alert alert-info">Datasets is in Preview.</div>
 
 {{< img src="data_observability/data_quality_tables.png" alt="Datasets page showing a list of tables with columns for query count, storage size, row count, and last data update; two tables are flagged with triggered alerts" style="width:100%;" >}}
 
-Data Observability Datasets detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
+Datasets detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
 
 ## Key capabilities
 
@@ -178,3 +191,7 @@ To monitor BigQuery data in Datadog, you must configure permissions in your Goog
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
