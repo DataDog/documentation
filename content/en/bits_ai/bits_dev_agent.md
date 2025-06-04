@@ -32,7 +32,7 @@ Bits Dev Agent is available for the following Datadog products:
 
 ## Setup
 
-<div class="alert alert-info">At this time, Bits Dev Agent supports GitHub only.</div>
+<div class="alert alert-info">At this time, Bits Dev Agent only supports GitHub.</div>
 
 ### Enable the GitHub integration
 
