@@ -1,8 +1,5 @@
 ---
 title: Connect RUM and Profiling
-aliases:
-- /real_user_monitoring/connect_rum_and_profiling
-- /real_user_monitoring/platform/connect_rum_and_profiling/
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
