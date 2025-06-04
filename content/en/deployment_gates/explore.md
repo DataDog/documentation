@@ -14,7 +14,7 @@ The page allows you to:
 * Analyze common failure patterns
 * Track evaluation trends over time
 
-{{< img src="/deployment_gates/explore/explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
+{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
 ## Further reading
 
