@@ -30,7 +30,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 2. Initialize the RUM SDK and configure the following initialization parameters:
     - `profilingSampleRate`, which sets the percentage of page navigations that are profiled
-    - `enableExperimentalFeatures`, which enables profiling for the app
+    - `enableExperimentalFeatures` initialization parameter which enabled profiling for the app
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -42,7 +42,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
       //  env: 'production',
       //  version: '1.0.0',
       profilingSampleRate: 100,
-      enableExperimentalFeatures: ['profiling'], // if not specified, defaults to 100
+      enableExperimentalFeatures: ['profiling'],
       trackLongTasks: true,
       trackUserInteractions: true,
     })
@@ -59,7 +59,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 4. Setup Cross-Origin Resource Sharing (CORS) if needed.
 
-    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from myapp.com, and JavaScript files are served from static.myapp.com. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. 
+    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from cdn.com, and JavaScript files are served from static.cdn.com. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. 
     
     To enable CORS:
 
