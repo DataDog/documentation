@@ -108,94 +108,19 @@ Set `DD_PROFILING_ENABLED` to enable [Profiling][3].
 
 {{% /tab %}}
 {{% tab "Python" %}}
-#### app.py
-```python
-# The tracer is configured to automatically instrument your application by
-# running it with `ddtrace-run` as seen in the `Dockerfile`.
-# The tracer will send profiling information with `DD_PROFILING_ENABLED`.
+See the [Sample App][6] for an example of metrics, tracing, and logging in a python app. It includes a deploy script that uses terraform.
 
-import logging
-import os
-
-import datadog
-from flask import Flask, Response
-
-datadog.initialize(
-    statsd_host="127.0.0.1",
-    statsd_port=8125,
-)
-
-app = Flask(__name__)
-
-
-log_filename = os.environ.get(
-    "DD_SERVERLESS_LOG_PATH", "/shared-logs/logs/*.log"
-).replace("*.log", "app.log")
-os.makedirs(os.path.dirname(log_filename), exist_ok=True)
-
-logging.basicConfig(
-    level=logging.INFO,
-    filename=log_filename,
-    # NOTE: log trace correlation is not currently supported
-    # in Google Cloud Run with python services.
-    format=(
-        "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] "
-        "[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] "
-        "- %(message)s"
-    ),
-)
-logger = logging.getLogger(__name__)
-
-
-@app.route("/")
-def home():
-    logger.info("Hello!")
-    datadog.statsd.distribution("our-sample-app.sample-metric", 1)
-
-    return Response(
-        '{"msg": "A traced endpoint with custom metrics"}',
-        status=200,
-        mimetype="application/json",
-    )
-
-
-app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "8080")))
-```
-
-Include the following `requirements.txt`
-```
-Flask
-ddtrace
-datadog
-```
-
-#### Dockerfile
-Your dockerfile can look something like this. This will create a minimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the x86_64 architecture (use the `--platform linux/arm64` for `docker build`).
-
-```dockerfile
-FROM python:3.13-slim
-
-COPY app.py requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-EXPOSE 8080
-CMD ["ddtrace-run", "python3", "app.py"]
-```
-
-#### Details
-The `dd-trace-py` library provides support for [Tracing][1] and [Profiling][2]. The `datadog-py` library handles custom [Metrics][3].
+The `dd-trace-py` library provides support for [Tracing][1]. The `datadog-py` library handles custom [Metrics][3].
 
 Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code.
 
 Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] is not currently supported for Google Cloud Run services. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which will forward all of the files ending in `.log` in the `/shared-logs/logs` directory.
 
-Set `DD_PROFILING_ENABLED` to enable [Profiling][2].
-
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
-[2]: /profiler/enabling/python
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
 [4]: /logs/log_collection/python/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/python
+[6]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -320,191 +245,10 @@ Add a `service` label which matches the `DD_SERVICE` value on the containers to 
     - with some details.
 {{% /tab %}}
 {{% tab "Terraform" %}}
-The following documentation assumes that you are using a Google Terraform provider similar to this:
-```terraform
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "6.37.0"
-    }
-  }
-}
+The [Python Sample App][1] includes an example of a terraform configuration. It is imporant to note that the `service` value needs to be set in a few different places, and the shared log volume needs to be wired up to both the application and the sidecar containers.
 
-provider "google" {
-  project = "PROJECT-ID"
-  region  = "us-east1"
-}
-```
+[1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
 
-Set up the following variables that we will need:
-```terraform
-variable "DATADOG_API_KEY" {
-  type      = string
-  sensitive = true
-  nullable  = false
-}
-
-variable "SERVICE" {
-  type    = string
-  default = "docs-google-cloud-examples"
-}
-
-variable "SHARED_VOLUME_BASE_NAME" {
-  type    = string
-  default = "shared-logs"
-}
-
-variable "SIDECAR_STARTUP_PROBE_PORT" {
-  type    = string
-  default = "9999"
-}
-```
-
-Edit your existing service definition:
-```terraform
-resource "google_cloud_run_v2_service" "service" {
-  deletion_protection = false
-
-  name     = "example-cloud-run-sidecar-python"
-  location = "us-east1"
-  ingress  = "INGRESS_TRAFFIC_ALL"
-  template {
-    # (1) Add the volume to your service
-    volumes {
-      name = var.SHARED_VOLUME_BASE_NAME
-      empty_dir {
-        medium = "MEMORY"
-      }
-    }
-
-    # (2) Set the `service` label for the service
-    labels = {
-      service = var.SERVICE
-    }
-
-    containers {
-      image = "our-test-image:latest"
-
-      ports {
-        container_port = 8080
-      }
-
-      # (3) Mount the shared volume to the app container
-      volume_mounts {
-        name       = var.SHARED_VOLUME_BASE_NAME
-        mount_path = "/${var.SHARED_VOLUME_BASE_NAME}"
-      }
-      env {
-        name  = "DD_SERVERLESS_LOG_PATH"
-        value = "/${var.SHARED_VOLUME_BASE_NAME}/logs/*.log"
-      }
-
-      # (4) Mark the sidecar dependency.
-      depends_on = ["datadog-sidecar"]
-
-      # (5) Add the other required environment variables
-      env {
-        name  = "DD_SERVICE"
-        value = var.SERVICE
-      }
-      env {
-        # NOTE: this is not currently supported for python.
-        name  = "DD_LOGS_INJECTION"
-        value = "true"
-      }
-      env {
-        name  = "DD_PROFILING_ENABLED"
-        value = "true"
-      }
-      env {
-        name  = "DD_APPSEC_ENABLED"
-        value = "true"
-      }
-
-      # (6, optional) Set a debug log level for datadog tooling
-      env {
-        name  = "DD_LOG_LEVEL"
-        value = "debug"
-      }
-      env {
-        name  = "DD_TRACE_DEBUG"
-        value = "true"
-      }
-    }
-
-    # (7) Add the sidecar container
-    containers {
-      name  = "datadog-sidecar"
-      image = "gcr.io/datadoghq/serverless-init:latest"
-
-      volume_mounts {
-        name       = var.SHARED_VOLUME_BASE_NAME
-        mount_path = "/${var.SHARED_VOLUME_BASE_NAME}"
-      }
-      env {
-        name  = "DD_SERVERLESS_LOG_PATH"
-        value = "/${var.SHARED_VOLUME_BASE_NAME}/logs/*.log"
-      }
-
-      startup_probe {
-        tcp_socket {
-          port = var.SIDECAR_STARTUP_PROBE_PORT
-        }
-      }
-      env {
-        name  = "DD_HEALTH_PORT"
-        value = var.SIDECAR_STARTUP_PROBE_PORT
-      }
-
-      env {
-        name  = "DD_API_KEY"
-        value = var.DATADOG_API_KEY
-      }
-      env {
-        name  = "DD_SITE"
-        value = "datadoghq.com"
-      }
-      env {
-        # NOTE: this is not currently supported for Python services.
-        name  = "DD_LOGS_INJECTION"
-        value = "true"
-      }
-      env {
-        name  = "DD_SERVICE"
-        value = var.SERVICE
-      }
-      env {
-        name  = "DD_VERSION"
-        value = "1"
-      }
-      env {
-        name  = "DD_ENV"
-        value = "dev"
-      }
-      env {
-        name  = "DD_TAGS"
-        value = "our-tag:custom-value"
-      }
-
-      # Optional: set a debug log level for the sidecar
-      env {
-        name  = "DD_LOG_LEVEL"
-        value = "debug"
-      }
-    }
-  }
-}
-
-# For ease of initial testing, expose the API to the internet.
-resource "google_cloud_run_v2_service_iam_binding" "binding" {
-  project  = google_cloud_run_v2_service.service.project
-  location = google_cloud_run_v2_service.service.location
-  name     = google_cloud_run_v2_service.service.name
-  role     = "roles/run.invoker"
-  members  = ["allUsers"]
-}
-```
 {{% /tab %}}
 {{< /tabs >}}
 
