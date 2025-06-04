@@ -36,7 +36,7 @@ For incoming log fields or events encoded in Base64, use the [`decode_base64`][1
 
 Example log event containing a Base64 field to decode:
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "level": "info",
@@ -50,14 +50,14 @@ Example log event containing a Base64 field to decode:
 
 Use the `decode_base64` function to decode `payload` and store the result in a new field called `decoded_payload`.
 
-```
+```yaml
 .decoded_payload = decode_base64!(.payload)
 ```
 
 
 Alternatively, you can rewrite the original `payload` value with the decoded value by replacing `decoded_payload` in the previous function with `payload`.
 
-```
+```yaml
 .payload = decode_base64!(.payload)
 ```
 
@@ -65,7 +65,7 @@ Alternatively, you can rewrite the original `payload` value with the decoded val
 
 The output when you use `decoded_payload` to store the decoded value.
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "level": "info",
@@ -84,7 +84,7 @@ The output when you use `decoded_payload` to store the decoded value.
 
 Example input of an event encoded in Base64:
 
-```
+```json
 {
     "raw": "eyJ0aW1lc3RhbXAiOiAiMjAyNS0wNS0yOFQxOTozMDowMFoiLCAibGV2ZWwiOiAiaW5mbyIsICJtessagemIjogIlVzZXIgbG9naW4gc3VjY2Vzc2Z1bCJ9"
 }
@@ -94,7 +94,7 @@ Example input of an event encoded in Base64:
 
 The script to decode the entire Base64-encoded event `raw`.
 
-```
+```yaml
 .json_string = decode_base64!(.raw)`
 .full_event = parse_json!(.json_string)
 . = .full_event
@@ -104,7 +104,7 @@ The script to decode the entire Base64-encoded event `raw`.
 
 #### Output
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "level": "info",
@@ -122,7 +122,7 @@ For outgoing log fields or events that you want to encode in Base64, use the [`e
 
 Example log event containing the `message` field that you want to encode in Base64:
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "level": "info",
@@ -136,13 +136,13 @@ Example log event containing the `message` field that you want to encode in Base
 
 Use the `encode_base64` function to decode `message` and store the result in a new field called `encoded_message`.
 
-```
+```yaml
 .encoded_message = encode_base64!(.message)
 ```
 
 Alternatively, you can overwrite the original message field (`message`) with the decoded value by replacing `encoded_message` in the previous function with `message`.
 
-```
+```yaml
 .message = encode_base64!(.message)
 ```
 
@@ -150,7 +150,7 @@ Alternatively, you can overwrite the original message field (`message`) with the
 
 The output when you use `encoded_message` to store the encoded value.
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "level": "info",
@@ -170,7 +170,7 @@ If you want to migrate archived logs from other platforms, ensuring those logs h
 
 If the Worker does not find the `timestamp` field on a log, the timestamp of when the Worker received the log is used. This is an example of a log showing the timestamp of when the Worker received the log, as well as the log's historical timestamp (`historical_ts`), which is the value that the Worker is looking for.
 
-```
+```json
 {
     "timestamp": "2025-05-28T19:30:00Z",
     "historical_ts": "2019-03-14T17:30:00Z",
@@ -183,7 +183,7 @@ If the Worker does not find the `timestamp` field on a log, the timestamp of whe
 
 For the above example, you can create a function to store the ingested timestamp in a new field and remap `timestamp` to the `historical_ts` value.
 
-```
+```yaml
 #Create a new field for the ingested/processed timestamp
 .ingested_ts = {{.timestamp}}
 
@@ -197,7 +197,7 @@ del(.historical_ts)
 
 #### Output
 
-```
+```json
 {
     "timestamp": "2019-03-14T17:30:00Z",
     "ingested_ts": "2025-05-28T19:30:00Z",
@@ -216,7 +216,7 @@ Fields nested within the Datadog tags (`ddtags`) array can contain useful inform
 
 Sample log containing the `ddtags` array with Datadog tags.
 
-```
+```json
 {
     "timestamp": "2025-005-27T05:26:18.205Z",
     "status": "info",
@@ -237,7 +237,7 @@ Sample log containing the `ddtags` array with Datadog tags.
 
 ### Custom function to extract the env field
 
-```
+```yaml
 #Extract a tag from ddtags array and elevate as log attribute
 .my_tag, err = filter(array!(.ddtags)) -> |_index, value| {
     #Keep any elements that have the key name "env"
@@ -251,7 +251,7 @@ del(.my_tag)
 
 #### Output
 
-```
+```json
 {
    "ddsource": "python",
    "ddtags": [
@@ -281,7 +281,7 @@ If you want a field's value to be based on another field, you can dynamically re
 
 For this example, you have a service field that contains an incorrect service name, and you want to use the value of `app_id` for the service instead.
 
-```
+```json
 {
     "timestamp": "2025-05-27T05:26:18.205Z",
     "status": "info",
@@ -292,14 +292,14 @@ For this example, you have a service field that contains an incorrect service na
 
 #### Custom function
 
-```
+```yaml
 #Overwrite service to be the value of app_id
 .service = {{.app_id}}
 ```
 
 #### Output
 
-```
+```json
 {
   "timestamp": "2025-05-27T05:26:18.205Z",
   "status": "info",
