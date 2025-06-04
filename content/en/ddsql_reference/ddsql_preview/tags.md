@@ -16,7 +16,7 @@ The DDSQL Editor is in Preview.
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
 
-Tags are modeled in DDSQL with the key as a column name, and values in a `group` type, a sorted set of strings with tag-like "= is contains" semantics.
+Tags are modeled in DDSQL with the key as a column name, and values in a `hstore` type, a sorted set of strings with tag-like "= is contains" semantics.
 
 ## Equality comparisons
 
