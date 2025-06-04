@@ -22,13 +22,13 @@ This guide walks you through how to use the following functions in your Custom P
 
 It also goes over example scripts that address common use cases, such as:
 
-- [Remapping timestamps for historical logs](#remap-timestamps-for-historical-logs)
+- [Remap timestamps for historical logs](#remap-timestamps-for-historical-logs)
 - [Extract a field from the Datadog tags array (`ddtags`)](#extract-a-field-from-the-datadog-tags-array)
 - [Reference another field's value](#reference-another-fields-value)
 
 ## Decode Base64
 
-For incoming log fields or events encoded in base64, use the [`decode_base64`][1] function to decode the field or event. This function's syntax also works for [`decode_base16`][1].
+For incoming log fields or events encoded in Base64, use the [`decode_base64`][1] function to decode the field or event. This function's syntax also works for [`decode_base16`][1].
 
 ### Example
 
@@ -82,7 +82,7 @@ The output when you use `decoded_payload` to store the decoded value.
 
 #### Input
 
-Example input of an event encoded in base64:
+Example input of an event encoded in Base64:
 
 ```
 {
@@ -162,7 +162,7 @@ The output when you use `encoded_message` to store the encoded value.
 
 ## Remap timestamps for historical logs
 
-If you want to migrate archived logs from other platforms, ensuring tthosehe logs have the correct historical timestamp is essential. Refer to [Migrate Historical Logs][4] blog on how to migrate historical logs from specific platforms like Splunk and Elasticsearch. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
+If you want to migrate archived logs from other platforms, ensuring those logs have the correct historical timestamp is essential. Refer to the [Migrate Historical Logs][4] blog post on how to migrate historical logs from specific platforms like Splunk and Elasticsearch. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
 
 ### Example
 
@@ -179,7 +179,7 @@ If the Worker does not find the `timestamp` field on a log, the timestamp of whe
 }
 ```
 
-#### Custom Function
+#### Custom function
 
 For the above example, you can create a function to store the ingested timestamp in a new field and remap `timestamp` to the `historical_ts` value.
 
@@ -208,7 +208,7 @@ del(.historical_ts)
 
 ## Extract a field from the Datadog tags array
 
-Fields nested within the Datadog tags (`ddtags`) array, may contain important information that you want to extract as a top level key-value pair or dynamically use as the value for another field.
+Fields nested within the Datadog tags (`ddtags`) array can contain useful information. You may want to extract these fields as top level key-value pairs, or as values for other fields.
 
 ### Example
 
@@ -242,7 +242,7 @@ Sample log containing the `ddtags` array with Datadog tags.
 
 ## Reference another field's value
 
-Dynamically referencing another field's value is useful when you don't want to hardcode a field's value and want the value to be based on another field.
+If you want a field's value to be based on another field, you can dynamically reference the other field's value.
 
 ### Example
 
