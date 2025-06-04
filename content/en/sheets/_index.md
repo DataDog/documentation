@@ -6,10 +6,6 @@ further_reading:
   text: "Functions and Operators"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/datadog-sheets/" btn_hidden="false" header="Join the Preview!">}}
-Sheets is available in <strong>Preview</strong>. To qualify for this preview, you should have existing use cases where you currently use spreadsheets (such as Excel or Google Sheets) with Datadog's metrics, logs, or RUM data. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data. 
