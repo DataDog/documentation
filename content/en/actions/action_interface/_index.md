@@ -3,7 +3,7 @@ title: Action Interface
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/action-interface/" btn_hidden="false" header="Join the Preview!" >}}
-Action Interface is in Preview. Contact your Customer Success Manager to get access.
+Action Interface is in Preview. 	Click **Request Access** and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 Actions Interface is an AI chat interface where you can configure and execute actions from the [Action Catalog][1] using prompts. For example, `I want to update an ECS service to scale capacity` or `I want to create a service to run tasks`. 
@@ -33,7 +33,7 @@ For more information, see [Bits AI][3].
 
 Actions run in Action Interface require standard [Action credentials][5], either through [Integration tiles][7] or [Connections][2]:
 
-- Some actions run in Action Interface require a Connection to use for the action and the required [Connection credentials][6]. 
+- Some actions run in Action Interface require both a Connection and [Connection credentials][6]. 
   - Connections ensure a user can't trigger an action unless the user has access to a Connection with the required credentials.
 - Other actions are set up using Integration tiles (for example, PagerDuty).
   - Integration tiles are configured with the appropriate roles and permissions in your Datadog organization.
@@ -68,6 +68,6 @@ You can rely on the Action Interface to inform you if your action is not configu
 [4]: /account_management/audit_trail/
 [5]: /actions/workflows/access/#action-credentials
 [6]: /actions/connections/#connection-credentials
-[7]: /developers/integrations/create_a_tile
+[7]: /getting_started/integrations/#permissions
 [8]: https://app.datadoghq.com/actions/ai
 [9]: /actions/workflows/limits/
