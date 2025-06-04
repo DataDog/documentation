@@ -43,9 +43,9 @@ You can initiate Tag Analysis from several locations:
 
 {{< img src="/tracing/trace_explorer/tag_analysis/timeseries_entrypoint.png" alt="Analyze time range" style="width:80%;" >}}
 
-- **Trace Explorer and Service Page Scatterplot Graph**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against.
+- **Trace Explorer and Service Page Point plot Graph**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against.
 
-{{< img src="/tracing/trace_explorer/tag_analysis/scatterplot_entrypoint.png" alt="Analyse scatterplot slice" style="width:80%;" >}}
+{{< img src="/tracing/trace_explorer/tag_analysis/scatterplot_entrypoint.png" alt="Analyse point plot slice" style="width:80%;" >}}
 
 Click **Analyze** to see the results in the Tag Analysis side panel.
 
@@ -53,7 +53,7 @@ Click **Analyze** to see the results in the Tag Analysis side panel.
 
 Tag Analysis results appear in a side panel and include:
 
-- **The subset and baseline definition**: For comparisons based on time and duration, a scatterplot graph represents the subset and baseline selections. Redraw the subset or baseline to refine the selection and compare specific duration and time ranges.
+- **The subset and baseline definition**: For comparisons based on time and duration, a point plot graph represents the subset and baseline selections. Redraw the subset or baseline to refine the selection and compare specific duration and time ranges.
 
 {{< img src="/tracing/trace_explorer/tag_analysis/subset_baseline_definition.png" alt="Subset and baseline detinifion" style="width:80%;" >}}
 
@@ -65,7 +65,7 @@ Tag Analysis results appear in a side panel and include:
 {{< img src="/tracing/trace_explorer/tag_analysis/relevant_dimension.png" alt="Tag analysis relevant dimension" style="width:70%;" >}}
 
 - From the analysis results, you can:
-  - Color the scatter plot by any attribute for further investigation.
+  - Color the point plot by any attribute for further investigation.
   - Group by a relevant attribute to examine and compare groups with [Trace Groups][2].
   - Filter by a `key:value` pair to isolate spans driving the issue.
   - Drill deeper into associated individual spans and traces.
