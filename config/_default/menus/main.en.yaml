@@ -1159,9 +1159,9 @@ menu:
       identifier: mobile_intune
       parent: mobile
       weight: 2
-    - name: Accessibility
-      url: mobile/accessibility
-      identifier: mobile_accessibility
+    - name: Shortcut Configurations
+      url: mobile/shortcut_configurations
+      identifier: mobile_shortcut_configurations
       parent: mobile
       weight: 3
     - name: Push Notifications
@@ -2008,11 +2008,6 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
-    - name: Natural Language Querying
-      url: bits_ai/query_examples
-      identifier: bits_ai_natural_language_querying
-      parent: bits_ai
-      weight: 3
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2260,6 +2255,11 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_exception_replay
       weight: 101
+    - name: Capturing Handled Errors
+      url: error_tracking/backend/capturing_handled_errors
+      parent: error_tracking_backend
+      identifier: error_tracking_capturing_handled_errors
+      weight: 102
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
@@ -2454,12 +2454,18 @@ menu:
       parent: oncall
       identifier: oncall_guides
       weight: 8
+    - name: Status Pages
+      url: service_management/status_pages/
+      pre: status-page-wui
+      parent: service_management_heading
+      identifier: status_pages
+      weight: 40000
     - name: Event Management
       url: service_management/events/
       pre: events
       identifier: events
       parent: service_management_heading
-      weight: 40000
+      weight: 50000
     - name: Ingest Events
       url: service_management/events/ingest/
       identifier: event_ingest
@@ -2595,7 +2601,7 @@ menu:
       pre: case-management
       parent: service_management_heading
       identifier: case_management
-      weight: 50000
+      weight: 60000
     - name: Projects
       url: service_management/case_management/projects
       parent: case_management
@@ -2812,6 +2818,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_policies
       weight: 10002
+    - name: Resource Changes
+      url: infrastructure/resource_catalog/resource_changes/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_changes
+      weight: 10003
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -6460,6 +6471,11 @@ menu:
       parent: workload_protection
       identifier: workload_protection_troubleshooting
       weight: 206
+    - name: Security Graph
+      url: security/cloud_security_management/security_graph/
+      parent: csm
+      identifier: security_graph
+      weight: 3
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -7311,11 +7327,16 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
       weight: 108
+    - name: Jetpack Compose Instrumentation
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_jetpack_compose_instrumentation
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 109
+      weight: 110
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
@@ -7977,7 +7998,7 @@ menu:
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
       weight: 505
-    - name: Segmentation
+    - name: Analyzing users and segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
