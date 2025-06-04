@@ -64,7 +64,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
     This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from myapp.com, and JavaScript files are served from static.myapp.com. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. 
     
-    To opt-in for cors mode, you have to:
+    To enable CORS:
 
     - Add crossorigin="anonymous" attribute to `<script/>` tags
     - Ensure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
