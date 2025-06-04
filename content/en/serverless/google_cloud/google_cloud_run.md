@@ -69,7 +69,7 @@ You can use `npm install dd-trace` to add the tracer to your package.
 
 #### Dockerfile
 
-Your `Dockerfile` can look something like this. This creates a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
+Your `Dockerfile` can look something like this. This creates a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
 
 ```dockerfile
 FROM node:22-slim
