@@ -23,7 +23,9 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-Deployment Gates help you control deployments based on Datadog telemetry. This approach prevents production incidents by ensuring changes work as expected before wider rollout.
+Deployment Gates gives you data-driven control over your production deployments. Instead of hoping for the best when rolling out changes, you can deploy to a subset of production while Datadog automatically monitors your key metrics and APM data.
+
+By evaluating monitors and performance metrics in real-time, Deployment Gates helps catch issues early - if something looks wrong in your initial rollout, the deployment stops before impacting your entire customer base. This brings concrete, metrics-based validation to your deployment process, replacing gut feelings with actual data.
 
 The product consists of two main components:
 
