@@ -2,6 +2,8 @@
 title: Network Path traceroute variants
 description: Network Path traceroute tariants
 is_beta: true
+aliases:
+- /network_monitoring/cloud_network_monitoring/guide/traceroute_variants/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
