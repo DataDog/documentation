@@ -14,13 +14,13 @@ further_reading:
 
 Observability Pipelines enables you to transform your logs before sending them to your destinations. Use the Custom Processor to create scripts with custom functions that conditionally modify log fields, values, and events.
 
-This guide walks you through how to use the following functions in your script:
+This guide walks you through how to use the following functions in your Custom Processor script:
 
 - [Decode Base64](#decode-base64)
 - [Decode an entire Base64 event](#decode-an-entire-base64-encoded-event)
 - [Encode Base64](#encode-base64)
 
-It also goes over example scripts for the Custom Processor to address common use cases, such as:
+It also goes over example scripts that address common use cases, such as:
 
 - [Remapping timestamps for historical logs](#remap-timestamps-for-historical-logs)
 - [Extract a field from the Datadog tags array (`ddtags`)](#extract-a-field-from-the-datadog-tags-array)
@@ -63,6 +63,8 @@ Alternatively, you can rewrite the original `payload` value with the decoded val
 
 #### Output
 
+The output when you use `decoded_payload` to store the decoded value.
+
 ```
 {
     "timestamp": "2025-05-28T19:30:00Z",
@@ -90,6 +92,8 @@ Example input of an event encoded in base64:
 
 #### Custom function
 
+The script to decode the entire Base64-encoded event `raw`.
+
 ```
 .json_string = decode_base64!(.raw)`
 .full_event = parse_json!(.json_string)
@@ -116,7 +120,7 @@ For outgoing log fields or events that you want to encode in Base64, use the [`e
 
 #### Input
 
-Example log event containing a message field to encode in Base64:
+Example log event containing the `message` field that you want to encode in Base64:
 
 ```
 {
@@ -144,6 +148,8 @@ Alternatively, you can overwrite the original message field (`message`) with the
 
 #### Output
 
+The output when you use `encoded_message` to store the encoded value.
+
 ```
 {
     "timestamp": "2025-05-28T19:30:00Z",
@@ -156,7 +162,7 @@ Alternatively, you can overwrite the original message field (`message`) with the
 
 ## Remap timestamps for historical logs
 
-If you want to migrate archived logs from other platforms, ensuring the logs have the correct, historical timestamp is essential. Refer to this blog for an end-to-end guide on how to migrate historical logs from specific platforms like Splunk and Elasticsearch. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
+If you want to migrate archived logs from other platforms, ensuring tthosehe logs have the correct historical timestamp is essential. Refer to [Migrate Historical Logs][4] blog on how to migrate historical logs from specific platforms like Splunk and Elasticsearch. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
 
 ### Example
 
@@ -202,13 +208,13 @@ del(.historical_ts)
 
 ## Extract a field from the Datadog tags array
 
-Fields nested within the Datadog tags (`ddtags`) array, may contain important information that you want to either extract as a top level key-value pair or dynamically use as the value for another field.
+Fields nested within the Datadog tags (`ddtags`) array, may contain important information that you want to extract as a top level key-value pair or dynamically use as the value for another field.
 
 ### Example
 
 #### Input
 
-Sample log containing the `ddtags` array for Datadog tags.
+Sample log containing the `ddtags` array with Datadog tags.
 
 ```
 {
@@ -238,11 +244,11 @@ Sample log containing the `ddtags` array for Datadog tags.
 
 Dynamically referencing another field's value is useful when you don't want to hardcode a field's value and want the value to be based on another field.
 
-For this example, you have a service field that contains an incorrect service name, and you want to use the value of `app_id` for the service instead.
-
 ### Example
 
 #### Input
+
+For this example, you have a service field that contains an incorrect service name, and you want to use the value of `app_id` for the service instead.
 
 ```
 {
@@ -278,3 +284,4 @@ For this example, you have a service field that contains an incorrect service na
 [1]: /observability_pipelines/processors/custom_processor/#decode_base16
 [2]: /observability_pipelines/processors/custom_processor/#encode_base64
 [3]: /observability_pipelines/processors/custom_processor/#encode_base16
+[4]: 
