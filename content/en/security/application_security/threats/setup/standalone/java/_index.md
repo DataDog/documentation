@@ -10,7 +10,7 @@ aliases:
   - /security/application_security/threats/setup/standalone/linux/java
   - /security/application_security/threats/setup/standalone/windows/java
   - /security/application_security/threats/setup/standalone/macos/java
-  - /security/application_security/threats/setup/standalone/kubernetes/javaj
+  - /security/application_security/threats/setup/standalone/kubernetes/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
