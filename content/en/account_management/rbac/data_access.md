@@ -7,7 +7,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Reducing Data Related Risks'
 ---
-{{< callout url="#" header="false">}}
+{{< callout url="#" header="false" btn_hidden="true">}}
   Data Access Control is in Limited Availability
 {{< /callout >}}
 
