@@ -63,7 +63,7 @@ Datadog APM can create **synthetic root spans** for requests that pass through A
 To create inferred spans, API Gateway must pass the following headers to your backend services:
 | Header | Value |
 | ------ | ----- |
-| `x-dd-proxy` | `'aws-apigateway'` |
+| `x-dd-proxy` | `'aws-apigateway'` <br><br> **Note**: Single quotes must be included. |
 | `x-dd-proxy-request-time-ms` | `context.requestTimeEpoch` |
 | `x-dd-proxy-domain-name` | `context.domainName` |
 | `x-dd-proxy-httpmethod` | `context.httpMethod` |
