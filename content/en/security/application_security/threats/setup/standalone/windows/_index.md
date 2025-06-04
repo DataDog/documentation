@@ -28,13 +28,13 @@ Learn how to setup App and API Protection on your Windows-based services by sele
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" logo="{{.Site.Params.img_url}}images/logos/python_avatar.svg" link="/security/application_security/setup/standalone/windows/python" >}}
-  {{< appsec-integration name="Node.js" logo="{{.Site.Params.img_url}}images/logos/node_avatar.svg" link="/security/application_security/setup/standalone/windows/nodejs" >}}
-  {{< appsec-integration name="Java" logo="{{.Site.Params.img_url}}images/logos/java_avatar.svg" link="/security/application_security/setup/standalone/windows/java" >}}
-  {{< appsec-integration name="Go" logo="{{.Site.Params.img_url}}images/logos/go_avatar.svg" link="/security/application_security/setup/standalone/windows/go" >}}
-  {{< appsec-integration name="Ruby" logo="{{.Site.Params.img_url}}images/logos/ruby_avatar.svg" link="/security/application_security/setup/standalone/windows/ruby" >}}
-  {{< appsec-integration name=".NET" logo="{{.Site.Params.img_url}}images/logos/dotnet_avatar.svg" link="/security/application_security/setup/standalone/windows/dotnet" >}}
-  {{< appsec-integration name="PHP" logo="{{.Site.Params.img_url}}images/logos/php_avatar.svg" link="/security/application_security/setup/standalone/windows/php" >}}
+  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/threats/setup/standalone/windows/python" >}}
+  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/threats/setup/standalone/windows/nodejs" >}}
+  {{< appsec-integration name="Java" avatar="java" link="/security/application_security/threats/setup/standalone/windows/java" >}}
+  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/threats/setup/standalone/windows/go" >}}
+  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/threats/setup/standalone/windows/ruby" >}}
+  {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/threats/setup/standalone/windows/dotnet" >}}
+  {{< appsec-integration name="PHP" avatar="php" link="/security/application_security/threats/setup/standalone/windows/php" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading

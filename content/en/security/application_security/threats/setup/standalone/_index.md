@@ -30,29 +30,29 @@ Learn how to setup App and API Protection on all the following supported platfor
 ## Languages
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" logo="{{.Site.Params.img_url}}images/logos/python_avatar.svg" link="/security/application_security/threats/setup/standalone/python" >}}
-  {{< appsec-integration name="Node.js" logo="{{.Site.Params.img_url}}images/logos/node_avatar.svg" link="/security/application_security/threats/setup/standalone/nodejs" >}}
-  {{< appsec-integration name="Java" logo="{{.Site.Params.img_url}}images/logos/java_avatar.svg" link="/security/application_security/threats/setup/standalone/java" >}}
-  {{< appsec-integration name="Go" logo="{{.Site.Params.img_url}}images/logos/go_avatar.svg" link="/security/application_security/threats/setup/standalone/go" >}}
-  {{< appsec-integration name="Ruby" logo="{{.Site.Params.img_url}}images/logos/ruby_avatar.svg" link="/security/application_security/threats/setup/standalone/ruby" >}}
-  {{< appsec-integration name=".NET" logo="{{.Site.Params.img_url}}images/logos/dotnet_avatar.svg" link="/security/application_security/threats/setup/standalone/dotnet" >}}
-  {{< appsec-integration name="PHP" logo="{{.Site.Params.img_url}}images/logos/php_avatar.svg" link="/security/application_security/threats/setup/standalone/php" >}}
+  {{< appsec-integration name="Python" avatar="python" link="python" >}}
+  {{< appsec-integration name="Node.js" avatar="node link="./nodejs" >}}
+  {{< appsec-integration name="Java" avatar="java" link="/security/application_security/threats/setup/standalone/java" >}}
+  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/threats/setup/standalone/go" >}}
+  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/threats/setup/standalone/ruby" >}}
+  {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/threats/setup/standalone/dotnet" >}}
+  {{< appsec-integration name="PHP" avatar="php" link="/security/application_security/threats/setup/standalone/php" >}}
 {{< /appsec-integrations >}}
 
 ## Proxies
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="NGINX" logo="{{.Site.Params.img_url}}images/logos/nginx_avatar.svg" link="/security/application_security/threats/setup/standalone/nginx" >}}
-  {{< appsec-integration name="Envoy" logo="{{.Site.Params.img_url}}images/logos/envoy_avatar.svg" link="/security/application_security/threats/setup/standalone/envoy" >}}
-  {{< appsec-integration name="Istio" logo="{{.Site.Params.img_url}}images/logos/istio_avatar.svg" link="/security/application_security/threats/setup/standalone/istio" >}}
+  {{< appsec-integration name="NGINX" avatar="nginx" link="/security/application_security/threats/setup/standalone/nginx" >}}
+  {{< appsec-integration name="Envoy" avatar="envoy" link="/security/application_security/threats/setup/standalone/envoy" >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="/security/application_security/threats/setup/standalone/istio" >}}
 {{< /appsec-integrations >}}
 
 ## Host Platforms
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Linux" logo="{{.Site.Params.img_url}}images/logos/linux_avatar.svg" link="/security/application_security/threats/setup/standalone/linux" >}}
-  {{< appsec-integration name="Docker" logo="{{.Site.Params.img_url}}images/logos/docker_avatar.svg" link="/security/application_security/threats/setup/standalone/docker" >}}
-  {{< appsec-integration name="Windows" logo="{{.Site.Params.img_url}}images/logos/windows_avatar.svg" link="/security/application_security/threats/setup/standalone/windows" >}}
+  {{< appsec-integration name="Linux" avatar="linux" link="/security/application_security/threats/setup/standalone/linux" >}}
+  {{< appsec-integration name="Docker" avatar="docker" link="/security/application_security/threats/setup/standalone/docker" >}}
+  {{< appsec-integration name="Windows" avatar="windows" link="/security/application_security/threats/setup/standalone/windows" >}}
 {{< /appsec-integrations >}}
 
 ## Cloud and Container Platforms
@@ -60,32 +60,32 @@ Learn how to setup App and API Protection on all the following supported platfor
 ### Kubernetes
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Kubernetes" logo="{{.Site.Params.img_url}}images/logos/kubernetes_avatar.svg" link="/security/application_security/threats/setup/standalone/kubernetes" >}}
-  {{< appsec-integration name="NGINX Ingress Controller" logo="{{.Site.Params.img_url}}images/logos/nginx-ingress-controller_avatar.svg" link="/security/application_security/threats/setup/standalone/kubernetes/nginx-ingress-controller" >}}
-  {{< appsec-integration name="Istio" logo="{{.Site.Params.img_url}}images/logos/istio_avatar.svg" link="/security/application_security/threats/setup/standalone/istio" >}}
+  {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="/security/application_security/threats/setup/standalone/kubernetes" >}}
+  {{< appsec-integration name="NGINX Ingress Controller" avatar="nginx-ingress-controller" link="/security/application_security/threats/setup/standalone/kubernetes/nginx-ingress-controller" >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="/security/application_security/threats/setup/standalone/istio" >}}
 {{< /appsec-integrations >}}
 
 ### Amazon Web Services (AWS)
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="AWS WAF" logo="{{.Site.Params.img_url}}images/logos/amazon-waf_avatar.svg" link="/security/application_security/threats/setup/standalone/aws/waf" >}}
-  {{< appsec-integration name="AWS Lambda" logo="{{.Site.Params.img_url}}images/logos/amazon-lambda_avatar.svg" link="/security/application_security/threats/setup/standalone/aws/lambda" >}}
-  {{< appsec-integration name="AWS Fargate" logo="{{.Site.Params.img_url}}images/logos/aws-fargate_avatar.svg" link="/security/application_security/threats/setup/standalone/aws/fargate" >}}
+  {{< appsec-integration name="AWS WAF" avatar="amazon-waf" link="/security/application_security/threats/setup/standalone/aws/waf" >}}
+  {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/threats/setup/standalone/aws/lambda" >}}
+  {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="/security/application_security/threats/setup/standalone/aws/fargate" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform (GCP)
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Google Application Load Balancer" logo="{{.Site.Params.img_url}}images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/threats/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Cloud Load Balancer" logo="{{.Site.Params.img_url}}images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/threats/setup/standalone/gcp/alb" >}}
-  {{< appsec-integration name="Google Service Extensions" logo="{{.Site.Params.img_url}}images/logos/google-cloud-loadbalancing_avatar.svg" link="/security/application_security/threats/setup/standalone/gcp/service-extensions" >}}
-  {{< appsec-integration name="Google Cloud Run" logo="{{.Site.Params.img_url}}images/logos/google-cloud-run_avatar.svg" link="/security/application_security/threats/setup/standalone/gcp/cloud-run" >}}
+  {{< appsec-integration name="Google Application Load Balancer" avatar="google-cloud-loadbalancing" link="/security/application_security/threats/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Cloud Load Balancer" avatar="google-cloud-loadbalancing" link="/security/application_security/threats/setup/standalone/gcp/alb" >}}
+  {{< appsec-integration name="Google Service Extensions" avatar="google-cloud-loadbalancing" link="/security/application_security/threats/setup/standalone/gcp/service-extensions" >}}
+  {{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="/security/application_security/threats/setup/standalone/gcp/cloud-run" >}}
 {{< /appsec-integrations >}}
 
 ### Microsoft Azure
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Azure App Service" logo="{{.Site.Params.img_url}}images/logos/azure-appserviceenvironment_avatar.svg" link="/security/application_security/threats/setup/standalone/azure/app_service" >}}
+  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/threats/setup/standalone/azure/app_service" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading
