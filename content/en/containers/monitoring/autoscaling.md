@@ -115,10 +115,6 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 ```yaml
 datadog:
-  orchestratorExplorer:
-    customResources:
-    - datadoghq.com/v1alpha1/datadogpodautoscalers
-    - datadoghq.com/v1alpha2/datadogpodautoscalers
   autoscaling:
     workload:
       enabled: true
