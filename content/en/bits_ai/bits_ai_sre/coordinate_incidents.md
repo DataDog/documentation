@@ -18,7 +18,7 @@ In the heat of an incident, Bits AI SRE handles general incident coordination so
 
 ## Get started with coordinating incidents
 
-Bits SRE helps coordinate incidents—especially those involving multiple teams—by suggesting next steps throughout the incident lifecycle. This streamlines communication and improves overall process management.
+Bits AI SRE helps coordinate incidents—especially those involving multiple teams—by suggesting next steps throughout the incident lifecycle. This streamlines communication and improves overall process management.
 
 <div class="alert alert-info">These features require <a href="/service_management/incident_management/">Datadog Incident Management</a>.</div>
 
@@ -26,7 +26,7 @@ Bits SRE helps coordinate incidents—especially those involving multiple teams�
    1. In Slack, run the `/dd connect` command.
    1. Follow the on-screen prompts to complete the connection process. 
 1. Enable the Slack integration in Datadog Incident Management.
-   1. Navigate to Incident > Settings > Integrations > Slack.
+   1. In the [Integrations] section of the Incidents settings page, find the **Slack** settings.
    1. Enable the following toggles:
       - Push Slack channel messages to the incident timeline
       - Activate Bits AI features in incident Slack channels for your organization<br />
@@ -62,7 +62,7 @@ When an incident is changed to resolved, Bits posts a final summary. This is vis
 
 Bits automatically flags related incidents if they are declared within 20 minutes of each other, helping you identify broader systemic issues. 
 
-## Chat with Bits SRE about incidents 
+## Chat with Bits AI SRE about incidents
 
 Use natural language prompts to request for information or take action from Slack:
 
@@ -115,3 +115,4 @@ To generate an AI-assisted postmortem draft:
 [1]: https://app.datadoghq.com/incidents/settings?section=message-templates
 [2]: https://app.datadoghq.com/incidents/settings?section=notification-rules
 [3]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
+[4]: https://app.datadoghq.com/incidents/settings?section=integrations

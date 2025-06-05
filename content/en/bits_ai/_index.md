@@ -31,7 +31,7 @@ Bits is your AI teammate in Datadog, built to automate development, security, an
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
-   {{< nextlink href="bits_ai/bits_sre" >}}Investigate alerts and coordinate incidents proactively with Bits SRE{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts and coordinate incidents proactively with Bits AI SRE{{< /nextlink >}}
    <!-- {{< nextlink href="link" >}}Automate code fixes with Bits Dev{{< /nextlink >}} -->
    <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits Security Analyst{{< /nextlink >}} -->
    <!-- {{< nextlink href="link" >}}Take action on your systems with Action Interface{{< /nextlink >}} -->
@@ -43,4 +43,4 @@ Bits is your AI teammate in Datadog, built to automate development, security, an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /service_management/incident_management
-[4]: /bits_ai/bits_sre/coordinate_incidents/
+[4]: /bits_ai/bits_ai_sre/coordinate_incidents/

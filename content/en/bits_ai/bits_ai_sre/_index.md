@@ -18,24 +18,12 @@ There are two main ways to enable Bits for automated investigations:
 - **Option 1: Use the Bits-Optimized Monitors list**
   - In Bits AI, go to the [**Monitor Management**][1] page. In the **Monitors** list, select one or more monitors, then click **Enable Bits AI**.
 - **Option 2: Add the Bits AI tag to a monitor**
-  1. In the [Monitors List][2], select one or more monitors to edit.
+  1. In the [Monitor List][2], select one or more monitors to edit.
      - To edit one monitor, click the monitor to open it, then click **Edit**.
      - To edit multiple monitors, select them, then click **Edit tags**.
   1. Add the `bitsai:enabled` tag to your selected monitors.
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform. 
-
-### Manually start an investigation
-
-Alternatively, you can manually invoke Bits on an individual monitor event. 
-
-<!-- TKTK CAN'T SEE BUTTON YET -->
-- **Option 1: Monitor Status Page**
-  -  In the [Monitors List][2], on a monitor status page, or an alert event, click the **Investigate with Bits AI** button.
-- **Option 2: Slack**
-  - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
-
-For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre) below.
 
 ### Configure where investigation results are sent
 
@@ -43,7 +31,7 @@ Bits can send investigation results to several destinations. By default, results
   - **Full investigation results** are available on the [Bits AI Investigations][3] page.
   - **A summary of the results** is available on the status page for the monitor.
 
-Additionally, you can configure optional destinations for investigation results to appear:
+In your [monitor notification settings][8], if you already have `@slack`, `@oncall`, or `@case` configured, Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][4] is installed in your workspace.
@@ -51,11 +39,23 @@ Additionally, you can configure optional destinations for investigation results 
 1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
 {{% /collapse-content %}}
 {{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
-If you have [Page from notifications][6] enabled in Datadog On-Call, you can see a summary of Bits' results on the On-Call page in both web and mobile.
+If you have [Page notifications][6] configured in Datadog On-Call, you can see a summary of Bits' results on the On-Call page.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
 Add the `@case-{project-name}` handle in the **Configure notifications and automations** section. 
 {{% /collapse-content %}}
+
+### Manually start an investigation
+
+Alternatively, you can manually invoke Bits on an individual monitor event. 
+
+<!-- TKTK CAN'T SEE BUTTON YET -->
+- **Option 1: Monitor Status Page**
+  -  In the [Monitor List][2], on a monitor status page, on an alert event, click the **Investigate with Bits AI** button.
+- **Option 2: Slack**
+  - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
+
+For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre) below.
 
 ### Optimize monitors for Bits AI SRE
 
@@ -85,3 +85,4 @@ To access investigations, users need the `bits_investigations_read` permission. 
 [5]: https://app.datadoghq.com/bits-ai/settings/integrations
 [6]: /service_management/on-call/pages/#page-from-notifications
 [7]: /account_management/rbac
+[8]: /monitors/notify

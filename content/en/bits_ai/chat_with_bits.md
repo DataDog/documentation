@@ -4,19 +4,14 @@ further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "bits_ai/bits_sre/coordinate_incidents/"
+- link: "bits_ai/bits_ai_sre/coordinate_incidents/"
   tag: "Documentation"
   text: "Coordinate Incidents"
 aliases:
 - /bits_ai/getting_started/
 ---
 
-
 ## Chat in Datadog
-
-{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Natural language querying is in Preview. Fill out this form to join the wait list.
-{{< /beta-callout >}} 
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 

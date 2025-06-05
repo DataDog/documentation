@@ -9,15 +9,17 @@ Investigations happen in two phases:
 1. **Initial context gathering**
    1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message—and making relevant queries. 
    1. It also automatically scans your Datadog environment for additional context.
-   1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any memories associated with the monitor. 
+   1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor. 
 1. **Root cause hypothesis generation and testing**
    - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
       - Metrics
       - Traces
       - Logs
       - Dashboards
-      - Change events
+      - [Change events][4]
       - Watchdog insights
+      - Monitor alerts
+      - Incidents
    - Hypotheses can end in one of three states: validated, invalidated, or inconclusive. 
 
 For best results, see [Optimize monitors for Bits AI SRE][1].
@@ -36,7 +38,7 @@ On the [Bits AI Investigations][2] page, you can chat with Bits to gather additi
 | Query APM request, error, and duration metrics | `What's the current error rate for {example-service}?`                             | APM metrics                          |
 | Search for information in Confluence           | `Find me the runbook in Confluence to rollback deployments for {example-service}.` | Confluence                           |
 
-## Help Bits SRE learn
+## Help Bits AI SRE learn
 
 Reviewing Bits' findings not only validates their accuracy, but also helps Bits learn from any mistakes it makes, helping it produce faster and more accurate investigations in the future.
 
@@ -51,6 +53,7 @@ At the end of an investigation, let Bits know if the conclusion it made was corr
 ### Manage memories 
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to [Bits-Enabled Monitors][3] to view and delete memories in the **Memories** column.
 
-[1]: /bits_ai/bits_sre#optimize-monitors-for-bits-sre
+[1]: /bits_ai/bits_ai_sre#optimize-monitors-for-bits-sre
 [2]: https://app.datadoghq.com/bits-ai/investigations
 [3]: https://app.datadoghq.com/bits-ai/monitors/enabled
+[4]: /change_tracking
