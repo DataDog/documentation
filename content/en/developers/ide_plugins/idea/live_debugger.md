@@ -18,7 +18,7 @@ The **Live Debugger** in the Datadog tool window shows the defined logpoints and
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-The tree on the left shows all logpoints created by the current user. Select a logpoint to display its details, including log messages emitted during the past 24 hours. At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to show log events for the selected logpoint.
+The tree on the left shows all logpoints created by the current user. Select a logpoint to display its status and the log messages emitted during the past 24 hours. At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to show log events for the selected logpoint.
 
 To navigate to the source code location for a logpoint, right-click and select **Jump to Source**.
 
@@ -27,16 +27,16 @@ In the source editor, an icon is shown in the gutter for any line that has a log
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
-Click the icon to open the Datadog tool window and select the logpoint. Right-click the icon for options to enable, disable, edit, and delete the logpoint. These actions are described in later sections.
+Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to enable, disable, edit, and delete the logpoint. These actions are described in later sections.
 
 ## Managing logpoints
 
 ### Add a logpoint
-To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, the log message you would like to have emitted at runtime, an optional logpoint condition expression, and the depth for variable capture:
+To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, the log message you would like to have emitted at runtime, and an optional logpoint condition expression:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/new-log-probe.png" alt="Add a new log probe" style="width:75%;" >}}
+{{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
-The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed.  
+The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed.  If a condition is defined, log events will be generated only when the condition evaluates to true.
 
 Logpoints expire automatically after 60 minutes.
 
@@ -48,9 +48,9 @@ Notice that the remote code may be a different version compared to the source co
 ### Edit a logpoint
 To modify the log message for a logpoint, right-click the logpoint and select **Edit**:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/edit-log-probe.png" alt="Edit a log probe" style="width:75%;" >}}
+{{< img src="/developers/ide_plugins/idea/live_debugger/edit-logpoint.png" alt="Edit a log probe" style="width:75%;" >}}
 
-You can update the log message, the logpoint condition, and the depth for variable capture. Changing the service or environment requires deleting the logpoint and creating a new one.
+You can update the log message and the (optional) logpoint condition. Changing the service or environment requires deleting the logpoint and creating a new one.
 
 **Note**: Applying changes to the logpoint also extends the expiration time to 60 minutes.
 
