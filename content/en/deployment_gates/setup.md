@@ -90,7 +90,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 Once a gate is configured with at least one rule, you can evaluate the gate while you are deploying the related service via an API call: 
 
 ```bash
-curl -X POST "https://api.datadoghq.com/api/unstable/deployments/gates/evaluate" \
+curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/deployments/gates/evaluate" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -d @- << EOF
@@ -150,7 +150,7 @@ Use this script as a starting point for your integration:
 # Configuration
 MAX_RETRIES=3
 DELAY_SECONDS=5
-API_URL="https://api.datadoghq.com/api/unstable/deployments/gates/evaluate"
+API_URL="https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/deployments/gates/evaluate"
 API_KEY="<YOUR_API_KEY>"
 
 PAYLOAD=$(cat <<EOF
@@ -254,7 +254,7 @@ spec:
                         # Configuration
                         MAX_RETRIES=3
                         DELAY_SECONDS=5
-                        API_URL="https://api.datadoghq.com/api/unstable/deployments/gates/evaluate"
+                        API_URL="https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/deployments/gates/evaluate"
                         API_KEY="<YOUR_API_KEY>"
 
                         PAYLOAD='{
