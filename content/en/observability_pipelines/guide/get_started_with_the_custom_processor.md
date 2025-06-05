@@ -162,7 +162,7 @@ The output when you use `encoded_message` to store the encoded value.
 
 ## Remap timestamps for historical logs
 
-If you want to migrate archived logs from other platforms, ensuring those logs have the correct historical timestamp is essential. Refer to the [Migrate Historical Logs][4] blog post on how to migrate historical logs from specific platforms like Splunk and Elasticsearch. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
+If you want to migrate archived logs from other platforms, ensuring those logs have the correct historical timestamp is essential. Remapping logs with historical timestamps enables you to handle older logs stored for compliance, audit, and archive purposes.
 
 ### Example
 
@@ -315,4 +315,3 @@ For this example, you have a service field that contains an incorrect service na
 [1]: /observability_pipelines/processors/custom_processor/#decode_base16
 [2]: /observability_pipelines/processors/custom_processor/#encode_base64
 [3]: /observability_pipelines/processors/custom_processor/#encode_base16
-[4]: https://www.datadoghq.com/blog/migrate-historical-logs
