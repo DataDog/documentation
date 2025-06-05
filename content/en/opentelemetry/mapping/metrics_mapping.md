@@ -21,6 +21,8 @@ The following diagram shows the process of mapping the metrics from OpenTelemetr
 
 {{< img src="opentelemetry/guide/metrics_mapping/otel-mapping-metrics.png" alt="The decision process for mapping OpenTelemetry metric names to Datadog metric names. If an OTel metric is not used by any Datadog product, or if its semantics are the same as Datadog's, it is sent as-is to Datadog. Otherwise, a Datadog-style metric is created from the OTel metric and sent to Datadog." style="width:100%;" >}}
 
+<div class="alert alert-info"><strong>Want to unify OpenTelemetry and Datadog metrics in your queries?</strong> Learn how to <a href="/metrics/open_telemetry/query_metrics">query across Datadog and OpenTelemetry metrics</a> from the Metrics Query Editor.</div>
+
 ## Use of the `otel` prefix
 
 To differentiate the metrics captured by the `hostmetrics` receiver from Datadog Agent, we add a prefix, `otel`, for metrics collected by the collector. If a metric name starts with `system.` or `process.`, `otel.` is prepended to the metric name. Monitoring the same infrastructure artifact using both Agent and Collector is not recommended. 
