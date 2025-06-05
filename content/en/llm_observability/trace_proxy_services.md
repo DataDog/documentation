@@ -145,7 +145,7 @@ app.post('/chat', async (req, res) => {
 {{% /tab %}}
 {{< /tabs >}}
 
-All requests to the proxy service can now be viewed as top-level spans within the LLM trace view:
+All requests to the proxy service can then be viewed as top-level spans within the LLM trace view:
 
 1. In the [LLM trace][1] page, select **All Applications** from the top-left dropdown.
 2. Switch to the **All Spans** view in the top-right dropdown.
