@@ -17,7 +17,7 @@ Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid e
 Datadog helps you bridge this gap by enabling you to:
 
 - Query OTel and Datadog metrics together.
-- Use Combined Mode to automatically map and merge OTel and Datadog metrics.
+- Understand metric sources and mappings.
 
 ## Unify OpenTelemetry and Datadog metrics in queries
 
