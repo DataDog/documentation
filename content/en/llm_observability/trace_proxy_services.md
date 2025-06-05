@@ -43,7 +43,7 @@ const llmobs = tracer.llmobs;
 {{< /tabs >}}
 
 
-In your specific services that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name:
+If you have a service that orchestrates ML applications which send requests to an LLM proxy or gateway, enable LLM Observability with the ML application name:
 
 {{< tabs >}}
 {{% tab "Python" %}}
