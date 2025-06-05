@@ -191,8 +191,8 @@ instances:
 
 Agent `v7.59+` is required.
 
-To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
   ```yaml
   datadog:
@@ -224,8 +224,66 @@ To enable Network Path with Kubernetes using Helm, add the below to your `values
               - "tag_key2:tag_value2"
 ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+{{% /tab %}}
+{{% tab "Autodiscovery (Kubernetes)" %}}
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+  ```yaml
+  datadog:
+    traceroute:
+      enabled: true
+  ```
+After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+  ```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+      {
+        "network_path": {
+          "init_config": {
+            "min_collection_interval": 300
+          },
+          "instances": [
+                {
+                  "protocol": "TCP",
+                  "port": 443,
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "api.datadoghq.eu"
+                },
+                {
+                  "protocol": "UDP",
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "1.1.1.1"
+                },
+          ]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+# (...)
+  ```
+  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -326,6 +384,38 @@ Agent `v7.61+` is required.
 [3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Agent `v7.59+` is required.
+
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
+**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+
+```yaml
+datadog:
+  connections_monitoring:
+    enabled: true
+
+## Set to true to enable the Traceroute Module of the System Probe
+  traceroute:
+    enabled: true
+
+## @param collector - custom object - optional
+  ## Configuration related to Network Path Collector.
+  #
+  collector:
+    ## @param workers - integer - optional - default: 4
+    ## @env DD_WORKERS - integer - optional - default: 4
+    ## The `workers` refers to the number of concurrent workers available for network path execution.
+    #
+    # workers: 4
+
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
@@ -334,5 +424,4 @@ Agent `v7.61+` is required.
 
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
-
 

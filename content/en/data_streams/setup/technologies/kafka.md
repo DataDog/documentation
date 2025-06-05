@@ -34,10 +34,14 @@ title: Data Streams Monitoring for Kafka
       <td>1.66.0 or later</td>
     </tr>
     <tr>
-      <td><a href="/data_streams/nodejs">Node.js</a></td>
+      <td rowspan="2"><a href="/data_streams/nodejs">Node.js</a></td>
       <td><a href="https://www.npmjs.com/package/kafkajs">kafkajs</a></td>
       <td>2.39.0 or 3.26.0 or 4.5.0</td>
       <td>5.25.0 or later</td>
+    </tr>
+    <tr><td><a href="https://github.com/confluentinc/confluent-kafka-javascript">confluent-kafka-javascript</a></td>
+    <td>5.52.0</td>
+    <td>5.52.0 or later</td>
     </tr>
     <tr>
       <td><a href="/python">Python</a></td>
@@ -56,6 +60,19 @@ title: Data Streams Monitoring for Kafka
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
+
+### Supported Kafka deployments
+
+Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready-to-go metrics][7] independently of how Kafka is deployed. Additionally, the following Kafka deployments have further integration support, providing more insights into the health of your Kafka cluster:
+
+|Model             |Integration                                 |
+|------------------|--------------------------------------------|
+|Self Hosted       |[Kafka Broker][8] & [Kafka Consumer][13]                           |
+|Confluent Platform|[Confluent Platform][11]                    |
+|Confluent Cloud   |[Confluent Cloud][12]                       |
+|Amazon MSK        |[Amazon MSK][10] or [Amazon MSK (Agent)][9] |
+|Red Panda         |Not yet integrated
+
 ### Setting up Data Streams Monitoring
 See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.NET][6].
 
@@ -67,3 +84,10 @@ See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.
 [4]: /data_streams/setup/language/nodejs
 [5]: /data_streams/setup/language/python
 [6]: /data_streams/setup/language/dotnet
+[7]: /data_streams/#measure-end-to-end-pipeline-health-with-new-metrics
+[8]: /integrations/kafka/?tab=host
+[9]: /integrations/amazon_msk/
+[10]: /integrations/amazon_msk_cloud/
+[11]: /integrations/confluent_platform/
+[12]: /integrations/confluent_cloud/
+[13]: /integrations/kafka/?tab=host#kafka-consumer-integration

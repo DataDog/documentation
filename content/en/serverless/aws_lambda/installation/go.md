@@ -21,6 +21,8 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>Metric()</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
@@ -125,13 +127,13 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
-  "github.com/aws/aws-lambda-go/events"
-  "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+	ddlambda "github.com/DataDog/datadog-lambda-go"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+	// httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+	// "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -159,8 +161,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	s.Finish()
 	return "ok", nil
 }
-
-}
 ```
 
 ## Minimize cold start duration
@@ -176,7 +176,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][4] to get alerted on attackers targeting your service
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to

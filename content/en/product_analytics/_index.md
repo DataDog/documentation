@@ -13,10 +13,6 @@ further_reading:
   text: "Analytics Explorer"
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Product Analytics is in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}

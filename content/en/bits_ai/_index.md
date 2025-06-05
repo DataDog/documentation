@@ -34,10 +34,6 @@ For detailed setup and usage instructions, see the [Getting Started][1] document
 
 ### Query data in natural language
 
-{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Natural language querying is in Preview. Fill out this form to join the wait list.
-{{< /beta-callout >}} 
-
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
 You can ask Bits AI questions such as:
@@ -70,6 +66,5 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/getting_started/
-[2]: /bits_ai/query_examples
 [3]: /service_management/incident_management
 [4]: /bits_ai/managing_incidents/

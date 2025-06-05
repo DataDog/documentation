@@ -9,6 +9,10 @@ further_reading:
       text: "Set up Sensitive Data Scanner"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
+Human name PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 ## Overview
 
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.

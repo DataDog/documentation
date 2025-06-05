@@ -55,7 +55,7 @@ Datadog provides different levels of support depending on the type of component:
 
 - **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
 
-- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent. Datadog provides assistance with configuration and usage, but feature development and enhancements for these components are managed through the OpenTelemetry community.
+- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent. 
 
 - **Custom Components**: OpenTelemetry components that are not included with the Agent by default and are added through the [custom components process][2]. Datadog provides guidance on the integration process but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the OpenTelemetry community or the component maintainers.
 
@@ -99,6 +99,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 - [datadogexporter][38]
 - [debugexporter][39]
+- [loadbalancingexporter][55]
 - [otlpexporter][40]
 - [otlphttpexporter][41]
 - [sapmexporter][42]
@@ -176,7 +177,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [5]: /universal_service_monitoring/
 [7]: /network_monitoring/cloud_network_monitoring/
 [9]: /agent/fleet_automation/
-[11]: https://github.com/DataDog/datadog-agent/blob/386130a34dde43035c814f9a9b08bc72eb20e476/comp/otelcol/collector-contrib/impl/manifest.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
 [18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
@@ -216,3 +217,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [52]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/ddflareextension#readme
 [53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
