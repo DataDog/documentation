@@ -34,7 +34,7 @@ DDSQL is a query language for Datadog data. It implements several standard SQL o
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
 FROM aws.ec2_instance
-WHERE tags->'region' = 'us-east-1' -- env is a tag, not a column
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
@@ -63,6 +63,27 @@ Browse and re-run recent or saved queries in the side panel.
 ## Permissions
 
 To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
+
+## Tags
+
+DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+
+```sql
+SELECT instance_type, count(instance_type)
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
+GROUP BY instance_type
+```
+
+Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+
+You can also compare tag values as strings or entire tag sets:
+
+```sql
+SELECT *
+FROM k8s.daemonsets da INNER JOIN k8s.deployments de
+ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
+```
 
 ## Further reading
 
