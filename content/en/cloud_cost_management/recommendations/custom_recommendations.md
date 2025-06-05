@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="cloud_cost/recommendations/custom-recommendations-overview-no-history.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:80%;" >}}
+{{< img src="cloud_cost/recommendations/custom-recommendations-overview-no-history.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:100%;" >}}
 
 [CCM Recommendations][1] are designed to be informative and actionable from the start. You can customize these recommendations to fit your specific business use cases and needs. Set your own metric thresholds and evaluation time frames to reduce unnecessary alerts and focus on the recommendations that matter most.
 
