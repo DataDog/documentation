@@ -34,10 +34,14 @@ title: Data Streams Monitoring for Kafka
       <td>1.66.0 or later</td>
     </tr>
     <tr>
-      <td><a href="/data_streams/nodejs">Node.js</a></td>
+      <td rowspan="2"><a href="/data_streams/nodejs">Node.js</a></td>
       <td><a href="https://www.npmjs.com/package/kafkajs">kafkajs</a></td>
       <td>2.39.0 or 3.26.0 or 4.5.0</td>
       <td>5.25.0 or later</td>
+    </tr>
+    <tr><td><a href="https://github.com/confluentinc/confluent-kafka-javascript">confluent-kafka-javascript</a></td>
+    <td>5.52.0</td>
+    <td>5.52.0 or later</td>
     </tr>
     <tr>
       <td><a href="/python">Python</a></td>

@@ -32,13 +32,13 @@ further_reading:
 
 ## Overview
 
-The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, Google Container Registry (GCR), and ECR-Public.
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 
-| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+| ECR-Public                                                           | Google Container Registry                                       | Docker Hub                                             |
 |----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
 | [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
 | [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
