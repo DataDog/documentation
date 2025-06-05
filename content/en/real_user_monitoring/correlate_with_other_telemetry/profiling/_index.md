@@ -19,7 +19,7 @@ Browser Profiling is in Preview.
 
 ## Overview
 
-Browser profiling provides visibility into how your application behaves in your users' browsers, helping you to understand root causes behind unresponsive applications (whether unresponsiveness happens at page load, of further down the page's lifecycle). Using profiling data alongside RUM insights enables you to see what code is executed during a [Long Animation Frame (LoAF)][1], understanding how JavaScript execution and rendering tasks affect user-perceived performance.
+Browser profiling provides visibility into how your application behaves in your users' browsers, helping you to understand root causes behind unresponsive applications (whether unresponsiveness happens at page load, or further down the page's lifecycle). Using profiling data alongside RUM insights enables you to see what code is executed during a [Long Animation Frame (LoAF)][1], understanding how JavaScript execution and rendering tasks affect user-perceived performance.
 
 To get started, ensure browser profiling is enabled in your RUM SDK configuration. When browser profiling is enabled, you can click on a profiled event sample to see a profile section.
 
@@ -30,7 +30,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 2. Initialize the RUM SDK and configure the following initialization parameters:
     - `profilingSampleRate`, which sets the percentage of page navigations that are profiled
-    - `enableExperimentalFeatures` initialization parameter which enabled profiling for the app
+    - `enableExperimentalFeatures` initialization parameter which enables profiling for the app
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -101,13 +101,13 @@ Without the `crossorigin="anonymous"` attribute, the browser does not make a COR
 
 - No CORS policy applies.
 - No credentials (cookies, HTTP auth, etc.) are sent.
-- The fetched script is not eligible for detailed attribution in performance entries or stack traces. This stack frames are displayed as "(anonymous)" or with no attribution.
+- The fetched script is not eligible for detailed attribution in performance entries or stack traces. These stack frames are displayed as "(anonymous)" or with no attribution.
 
 To protect cross-origin script privacy, _both_ sides must agree to share information:
 - The page must explicitly request a CORS-enabled fetch, with `crossorigin="anonymous"`.
 - The server must permit this, with an `Access-Control-Allow-Origin` header in the response.
 
-A script is eligible for attribution the JS Self-Profiling API only when both of the above conditions are true.
+A script is eligible for attribution in the JS Self-Profiling API only when both of the above conditions are true.
 
 {{% /collapse-content %}}
 
