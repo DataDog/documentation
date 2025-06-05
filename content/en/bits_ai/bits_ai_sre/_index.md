@@ -6,8 +6,6 @@ title: Get started with Bits AI SRE
 
 Bits AI SRE is an autonomous AI agent that investigates alerts and coordinates incident response. When a monitor triggers, Bits proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause. If the alert escalates to an incident, Bits supports the response by managing stakeholder communications, surfacing relevant knowledge base content, highlighting related incidents, and accelerating the postmortem and incident follow-up process. By reducing manual effort, Bits ensures smoother and more efficient on-call operations.
 
-<div class="alert alert-info">Bits only supports metric (including anomaly, outlier, and integration), APM, and log monitors.</div>
-
 ## Get started with alert investigations
 
 Bits helps automate alert investigations so you can triage issues faster and reduce manual troubleshooting. Here's how to get started:
@@ -24,6 +22,8 @@ There are two main ways to enable Bits for automated investigations:
   1. Add the `bitsai:enabled` tag to your selected monitors.
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform. 
+
+<div class="alert alert-info">Bits only supports metric (including anomaly, outlier, and integration), APM, and log monitors.</div>
 
 ### Configure where investigation results are sent
 
