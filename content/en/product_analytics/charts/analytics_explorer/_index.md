@@ -51,13 +51,13 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
    {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
 
-4. Choose a field to [group][3] the measure by.
+3. Choose a field to [group][3] the measure by.
 
-   {{< img src="product_analytics/analytics/group_breakdown.png" alt="Group the measure by specific fields." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/pana_analytics_group_by.png" alt="Group the measure by specific fields." style="width:50%;">}}
 
-5. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
+4. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
-   {{< img src="product_analytics/analytics/time_interval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/pana_analytics_time_imterval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
 
 ## Further Reading
 
