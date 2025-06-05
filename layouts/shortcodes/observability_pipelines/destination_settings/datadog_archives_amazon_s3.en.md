@@ -4,7 +4,7 @@
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][10051] if you want to route logs to different object keys based on specific fields in your logs.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
-    - **Note**: [Rehydration][10052] only supports the following storage classes:
+    - **Note**: Rehydration only supports the following [storage classes][10052]:
         - Standard
         - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10053] are both disabled.
         - Standard-IA
@@ -15,5 +15,5 @@
     1. Optionally, enter the assumed role session name and external ID.
 
 [10051]: /observability_pipelines/destinations/#template-syntax
-[10052]: /logs/log_configuration/rehydrating/
+[10052]: /logs/log_configuration/archives/?tab=awss3#storage-class
 [10053]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
