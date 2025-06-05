@@ -85,9 +85,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
-| [Agent API key updated][165]                    | A Datadog Agent API key was changed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent API Key Updated"`                         |
-| [Agent upgrade succeeded][166]                    | A Datadog Agent was successfully upgraded.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Succeeded"`                         |
-| [Agent upgrade failed][167]                    | A Datadog Agent remote upgrade attempt failed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Failed"`  
+| [Agent API key updated][166]                    | A Datadog Agent API key was changed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent API Key Updated"`                         |
+| [Agent upgrade succeeded][167]                    | A Datadog Agent was successfully upgraded.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Succeeded"`                         |
+| [Agent upgrade failed][168]                    | A Datadog Agent remote upgrade attempt failed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Failed"`  
 
 ### API request events
 
