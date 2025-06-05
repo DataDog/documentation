@@ -5,7 +5,10 @@ aliases:
   - /security/application_security/threats/threat_management_setup/
   - /security/application_security/threats_detection/
   - /security/application_security/serverless
+  - /security/application_security/serverless/compatibility
+  - /security/application_security/setup/threat_detection
 disable_toc: false
+disable_sidebar: true
 ---
 
 Learn how to enable App and API Protection on all the following supported platforms and environments.
