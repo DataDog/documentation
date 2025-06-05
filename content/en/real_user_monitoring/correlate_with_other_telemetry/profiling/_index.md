@@ -11,6 +11,10 @@ further_reading:
     tag: "Documentation"
     text: "APM and Distributed Tracing"
 ---
+{{< callout url="https://www.datadoghq.com/product-preview/browser-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+Browser Profiling is in Preview.
+{{< /callout >}}
+
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" alt="Browser profiling example when analyzing an event sample." style="width:100%;" >}}
 
 ## Overview
