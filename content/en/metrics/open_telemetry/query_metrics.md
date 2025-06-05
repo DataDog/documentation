@@ -81,7 +81,7 @@ You can also see the tag-based logic used for these mappings. Hover over an equi
 
 {{< img src="/metrics/otel/tooltip.png" alt="Hover-over tooltip showing tag-based mapping logic" style="width:100%;" >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
