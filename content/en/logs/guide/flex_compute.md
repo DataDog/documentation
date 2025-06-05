@@ -42,8 +42,8 @@ Use this information to optimize your usage.
 1. **Improve dashboards experiencing slowdowns by:**
    - Pausing the auto-refresh of dashboards
       {{< img src="/logs/guide/flex_compute/pause_dashboard.png" alt="Dashboard interface showing the pause auto-refresh button to stop automatic dashboard updates" style="width:90%;" >}}
-   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage. For example, if dashboard widgets are only looking at a few "error" or "success" instances, but the logs themselves contain low information density, consider turning these logs into a metric.
-   - Organizing dashboard widgets into groups, and keep the group collapsed until needed. Widgets in a collapsed group do not load when the dashboard is opened
+   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage. For example, if dashboard widgets are only looking at a few "error" or "success" instances, but the logs themselves contain low information density, consider turning these logs into a metric
+   - Organizing dashboard widgets into groups, and keeping the groups collapsed until needed. Widgets in a collapsed group do not load when the dashboard is opened
 1. **Consider upgrading your Flex compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
 1. **Scope to the index** you are querying. If the logs you are querying belong to a specific index, scoping to that index can speed up your search.
 
