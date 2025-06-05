@@ -18,8 +18,6 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-{{< partial name="security-platform/appsec-serverless.html" >}}</br>
-
 See [compatibility requirements][4] for information about what AAP features are available for serverless functions.
 
 <div class="alert alert-info">AAP support for Google Cloud Run is in Preview.</a></div>
