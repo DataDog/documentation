@@ -15390,10 +15390,16 @@ components:
     FindingAttributes:
       description: The JSON:API attributes of the finding.
       properties:
+        datadog_link:
+          $ref: '#/components/schemas/FindingDatadogLink'
+        description:
+          $ref: '#/components/schemas/FindingDescription'
         evaluation:
           $ref: '#/components/schemas/FindingEvaluation'
         evaluation_changed_at:
           $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        external_id:
+          $ref: '#/components/schemas/FindingExternalId'
         mute:
           $ref: '#/components/schemas/FindingMute'
         resource:
@@ -15411,6 +15417,22 @@ components:
         vulnerability_type:
           $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
+    FindingDatadogLink:
+      description: The Datadog relative link for this finding.
+      example: /security/compliance?panels=cpfinding%7Cevent%7CruleId%3Adef-000-u5t%7CresourceId%3Ae8c9ab7c52ebd7bf2fdb4db641082d7d%7CtabId%3Aoverview
+      type: string
+    FindingDescription:
+      description: The description and remediation steps for this finding.
+      example: '## Remediation
+
+
+        1. In the console, go to **Storage Account**.
+
+        2. For each Storage Account, navigate to **Data Protection**.
+
+        3. Select **Set soft delete enabled** and enter the number of days to retain
+        soft deleted data.'
+      type: string
     FindingEvaluation:
       description: The evaluation of the finding.
       enum:
@@ -15428,6 +15450,10 @@ components:
       format: int64
       minimum: 1
       type: integer
+    FindingExternalId:
+      description: The cloud-based ID for the resource related to the finding.
+      example: arn:aws:s3:::my-example-bucket
+      type: string
     FindingID:
       description: The unique ID for this finding.
       example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
@@ -55619,13 +55645,19 @@ paths:
         the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
         parameters must be only among the documented ones and with values of correct
         types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
-        are not allowed.\n\n### Response\n\nThe response includes an array of finding
-        objects, pagination metadata, and a count of items that match the query.\n\nEach
-        finding object contains the following:\n\n- The finding ID that can be used
-        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
-        including status, evaluation, high-level resource details, muted state, and
-        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
-        stamps.\n- An array of associated tags.\n"
+        are not allowed.\n\n### Additional extension fields\n\nAdditional extension
+        fields are available for some findings.\n\nThe data is available when you
+        include the query parameter `?detailed_findings=true` in the request.\n\nThe
+        following fields are available for findings:\n- `external_id`: The resource
+        external ID related to the finding.\n- `description`: The description and
+        remediation steps for the finding.\n- `datadog_link`: The Datadog relative
+        link for the finding.\n\n### Response\n\nThe response includes an array of
+        finding objects, pagination metadata, and a count of items that match the
+        query.\n\nEach finding object contains the following:\n\n- The finding ID
+        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
+        Core attributes, including status, evaluation, high-level resource details,
+        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -55728,6 +55760,14 @@ paths:
           items:
             $ref: '#/components/schemas/FindingVulnerabilityType'
           type: array
+      - description: Return additional fields for some findings.
+        example:
+        - true
+        in: query
+        name: detailed_findings
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
