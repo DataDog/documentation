@@ -1,7 +1,8 @@
 ---
-title: Send Metrics from OpenTelemetry to Datadog
-aliases: 
+title: OpenTelemetry Metrics
+aliases:
   - /opentelemetry/otel_metrics
+  - /opentelemetry/reference/otel_metrics
 further_reading:
     - link: '/opentelemetry/'
       tag: 'Documentation'
@@ -19,11 +20,11 @@ further_reading:
 
 To send OpenTelemetry metrics to Datadog, you have three main options:
 
-- [OpenTelemetry Collector][11]
-- [Datadog Agent][12]
-- [Agentless Deployment][13]
+- [OpenTelemetry Collector][3]
+- [Datadog Agent][4]
+- [Agentless Deployment][5]
 
-For more information about which setup is right for you, see [Send OpenTelemetry Data to Datadog][10].
+For more information about which setup is right for you, see [Send OpenTelemetry Data to Datadog][6].
 
 ## Query across Datadog and OpenTelemetry metrics 
 
@@ -34,7 +35,13 @@ Datadog helps you bridge this gap by enabling you to:
 - Query OTel and Datadog metrics together.
 - Understand how OTel and Datadog metrics map to each other.
 
-For more information, read [Query Across Datadog and OpenTelemetry Metrics][14]
+For more information, read [Query Across Datadog and OpenTelemetry Metrics][7].
+
+## OTLP metric types
+
+The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
+
+For more information, read [OTLP metric types][10].
 
 ## Out-of-the-box dashboards
 
@@ -50,15 +57,11 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
-[4]: https://opentelemetry.io/docs/
-[5]: /opentelemetry/otel_collector_datadog_exporter/
-[6]: /opentelemetry/otlp_ingest_in_the_agent/
-[7]: /opentelemetry/
+[3]: /opentelemetry/setup/collector_exporter/
+[4]: /opentelemetry/setup/agent
+[5]: /opentelemetry/setup/agentless
+[6]: /opentelemetry/setup/
+[7]: /metrics/open_telemetry/query_metrics
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[10]: /opentelemetry/setup/
-[11]: /opentelemetry/setup/collector_exporter/
-[12]: /opentelemetry/setup/agent
-[13]: /opentelemetry/setup/agentless
-[14]: /metrics/open_telemetry/query_metrics
+[10]: /metrics/open_telemetry/otlp_metric_types
