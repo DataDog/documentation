@@ -47,4 +47,4 @@ Use the following views and tools to set up Network Path and investigate network
 [2]: /network_monitoring/network_path/list_view
 [3]: /network_monitoring/network_path/path_view
 [4]: /network_monitoring/network_path/setup
-[5]: /network_monitoring/cloud_network_monitoring/guide/traceroute_variants
+[5]: /network_monitoring/network_path/guide/traceroute_variants
