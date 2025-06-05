@@ -15,7 +15,7 @@ further_reading:
 Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
-1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s) in the workspace.
+1. [Install the Datadog Agent](#install-the-datadog-agent) on your Databricks cluster(s) in the workspace.
 
 
 ### Configure the Datadog-Databricks integration
