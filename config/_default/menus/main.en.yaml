@@ -3168,51 +3168,56 @@ menu:
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
       weight: 104
+    - name: Remote Instrumentation
+      url: serverless/aws_lambda/remote_instrumentation
+      identifier: serverless_aws_lambda_remote_instrumentation
+      parent: serverless_aws_lambda
+      weight: 105
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 105
+      weight: 106
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 106
+      weight: 107
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 107
+      weight: 108
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 108
+      weight: 109
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 110
+      weight: 111
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless_aws_lambda
       identifier: libraries_integrations
-      weight: 111
+      weight: 112
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 112
+      weight: 113
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 113
+      weight: 114
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -6179,7 +6184,7 @@ menu:
     # - name: CloudPrem
     #   pre: cloud
     #   url: cloudprem/
-    #   parent: log_management_heading 
+    #   parent: log_management_heading
     #   identifier: cloud_prem
     #   weight: 30000
     - name: Security Overview
@@ -6400,11 +6405,6 @@ menu:
       parent: csm_setup_iac_scanning
       identifier: csm_setup_iac_scanning_exclusions
       weight: 10000
-    - name: Set Up IaC Remediation
-      url: security/cloud_security_management/setup/iac_remediation
-      parent: csm_setup
-      identifier: csm_setup_iac_remediation
-      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -6817,6 +6817,11 @@ menu:
     - name: SAST Custom Rules Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Guide
+      identifier: sec_static_analysis_custom_rules_guide
+      url: /security/code_security/static_analysis/custom_rules/guide/
       parent: sec_static_analysis
       weight: 5
     - name: Software Composition Analysis (SCA)
