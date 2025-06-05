@@ -73,8 +73,10 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 2. **Primary Operation Name**: Auto-populated from your service [APM primary operation][3] settings.
 
 **Notes**:
+- For optimal analysis confidence, wait at least 15 minutes after deployment starts before evaluating the gate.
 - Analysis runs per [additional primary tag][4] value plus an aggregate analysis. If you only want to consider a single primary tag, you can specify it in the evaluation query (see below).
 - New errors and error rate increases are detected at the resource level.
+- This rule type does not support services marked as `database` or `inferred service`.
 
 [1]: /watchdog/faulty_deployment_detection/
 [2]: /tracing/services/resource_page/
