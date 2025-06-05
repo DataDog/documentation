@@ -6400,11 +6400,6 @@ menu:
       parent: csm_setup_iac_scanning
       identifier: csm_setup_iac_scanning_exclusions
       weight: 10000
-    - name: Set Up IaC Remediation
-      url: security/cloud_security_management/setup/iac_remediation
-      parent: csm_setup
-      identifier: csm_setup_iac_remediation
-      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
