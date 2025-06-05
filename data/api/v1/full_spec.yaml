@@ -6849,6 +6849,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -6941,6 +6943,28 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorDraftStatus:
+      default: published
+      description: 'Indicates whether the monitor is in a draft or published state.
+
+
+        `draft`: The monitor appears as Draft and does not send notifications.
+
+        `published`: The monitor is active and evaluates conditions and notify as
+        configured.
+
+
+        This field is in preview. The draft value is only available to customers with
+        the feature enabled.
+
+        '
+      enum:
+      - draft
+      - published
+      type: string
+      x-enum-varnames:
+      - DRAFT
+      - PUBLISHED
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -7394,7 +7418,7 @@ components:
             For example, a query grouped by `cluster` and `namespace` cannot notify
             on `region`.
 
-            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+            Setting `notify_by` to `["*"]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
@@ -8024,6 +8048,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
