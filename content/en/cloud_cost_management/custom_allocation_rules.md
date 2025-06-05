@@ -48,7 +48,7 @@ Navigate to [**Cloud Cost > Custom Allocation Rules**][2], which is a section un
 
 ## Define the source
 
-Use the dropdown filters to specify the cloud provider, specific products or services, cost types, and any other attributes or tags that help you target the right costs.
+From the dropdown, pick the shared cost you’d like to allocate.
 
 ## Choose an allocation method
 
