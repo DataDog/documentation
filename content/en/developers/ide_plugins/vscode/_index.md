@@ -1,6 +1,6 @@
 ---
 title: Datadog Extension for VS Code & Cursor
-description: Integrate Datadog telemetry and insights into your source code in VS Code and other IDEs.
+description: Integrate Datadog telemetry and insights into your source code in VS Code and other code editors.
 is_beta: true
 aliases:
 - '/developers/ide_integrations/vscode/'
@@ -32,7 +32,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development. It can also be used in Cursor and other forks of VS Code.
+The Datadog extension for Visual Studio Code (VS Code) brings Datadog to your code editor to accelerate your development. It can also be used in Cursor and other forks of VS Code.
 
 {{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
