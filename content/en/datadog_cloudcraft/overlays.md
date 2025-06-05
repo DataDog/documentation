@@ -38,12 +38,8 @@ The Observability overlay shows where the Datadog Agent is installed and what fe
 On the Observability overlay, you can take action on individual resources or groups of resources:
 
 - Click a single host to open a side panel with direct links to Fleet Automation, where you can deploy configurations or upgrade the Agent.
-- Click a resource group, such as a subnet or VPC, to open a side panel that allows you to apply bulk updates across one or more hosts.
-
-**Note**:
-The type of side panel shown depends on whether [Fleet Automation][1] is enabled:
-- If Fleet Automation is enabled, clicking a resource opens the Fleet Automation side panel.
-- If Fleet Automation is not enabled, clicking a resource opens the standard resource side panel.
+- Click a resource group, such as a subnet or VPC, to open a side panel that allows you to apply bulk updates across all the hosts in that resource group.
+- To select multiple (but not all) hosts, hold down the <kbd>Command</kbd> key on Mac or the <kbd>Control</kbd> key on Windows while clicking on each host.
 
 {{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet.mp4" alt="Observability overlay in Cloudcraft, showing the bulk update feature and navigating to Fleet Automation." video=true >}}
 
