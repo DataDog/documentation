@@ -8,6 +8,9 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
+- link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
+  tag: "Blog"
+  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 ---
 
 {{< site-region region="gov" >}}
@@ -23,6 +26,8 @@ LLM Observability associates evaluations with individual spans so you can view t
 LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
 ## Connect your LLM provider account
+
+Configure the LLM provider you would like to use for bring-your-own-key evaluations. You only have to complete this step once.
 
 {{< tabs >}}
 {{% tab "OpenAI" %}}
@@ -87,25 +92,25 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{< /tabs >}}
+
+If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][5], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
+
 ## Select and enable evaluations
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
    - Configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you select the edit icon to configure the evaluation for an individual LLM application.
    - Evaluations can be disabled by selecting the disable icon for an individual LLM application.
-1. If you select **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
-1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider.
-1. Select the account you want to run the evaluation on.
-1. Choose whether you want the evaluation to run on traces (the root span of each trace) or spans (which include LLM, Workflow, and Agent spans).
-   - If you select to run the evaluation on spans, you must select at least one span name to save your configured evaluation.
-1. Select the span names you would like your evaluation to run on. (Optional if traces is selected).
-1. Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
-1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A sampling percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
-1. (Optional) For Failure to Answer, if OpenAI or Azure OpenAI is selected, configure the evaluation by selecting what types of answers should be considered Failure to Answer. This configuration is detailed in [Failure to Answer Configuration][5].
+1. If you chose **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
+1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and choose an account.
+1. Configure the data to run the evaluation on:
+   - Select **traces** (the root span of each trace) or **spans** (LLM, Workflow, and Agent).
+   - If you selected spans, you must select at least one **span name**.
+   - (Optional) Specify any or all **tags** you want this evaluation to run on.
+   - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
+1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
-
-For more information about evaluations, see [Terms and Concepts][1].
 
 ### Estimated token usage
 
@@ -130,7 +135,7 @@ This check identifies and flags user inputs that deviate from the configured acc
 
 You can provide topics for this evaluation.
 
-1. Go to [**LLM Observability > Applications**][4].
+1. Go to [**LLM Observability > Applications**][3].
 1. Select the application you want to add topics for.
 1. At the right corner of the top panel, select **Settings**.
 1. Beside **Topic Relevancy**, click **Configure Evaluation**.
@@ -183,6 +188,10 @@ def generate_answer():
 
 The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
+Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
+
+You can find more examples of instrumentation in the [SDK documentation][6].
+
 ##### Hallucination configuration
 
 Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled.
@@ -207,7 +216,7 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 ##### Failure to Answer Configuration
-The types of Failure to Answer are defined below and can be configured when the Failure to Answer evaluation is enabled.
+You can configure the evaluation by selecting what types of answers should be considered Failure to Answer. This feature is only available if OpenAI or Azure OpenAI is selected for the LLM provider.
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -269,14 +278,15 @@ This check ensures that sensitive information is handled appropriately and secur
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
-| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][5], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
+| Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][4], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/terms/
 [2]: https://app.datadoghq.com/llm/settings/evaluations
-[3]: /llm_observability/terms/#topic-relevancy
-[4]: https://app.datadoghq.com/llm/applications
-[5]: /llm_observability/terms/#failure-to-answer-configuration
+[3]: https://app.datadoghq.com/llm/applications
+[4]: /security/sensitive_data_scanner/
+[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+

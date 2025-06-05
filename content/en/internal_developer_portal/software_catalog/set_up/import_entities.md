@@ -10,7 +10,6 @@ aliases:
   - /service_catalog/customize/import_entries_integrations/
   - /service_catalog/customize/import_entries_backstage/
   - /software_catalog/customize/import_entries_backstage
-
   - /service_catalog/customize/import_entries_servicenow/   ## alias for Import Entries from ServiceNow page
   - /software_catalog/customize/import_entries_servicenow
 further_reading:

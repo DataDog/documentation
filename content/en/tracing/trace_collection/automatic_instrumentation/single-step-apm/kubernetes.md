@@ -196,12 +196,13 @@ This configuration enables APM for all pods except those that have either of the
        enabled: true
        targets:
          - name: "default-target"
-           matchExpressions:
-             - key: app
-               operator: NotIn
-               values:
-               - app1
-               - app2
+           podSelector:
+               matchExpressions:
+                 - key: app
+                   operator: NotIn
+                   values:
+                   - app1
+                   - app2
 {{< /highlight >}}
 
 {{< /collapse-content >}}

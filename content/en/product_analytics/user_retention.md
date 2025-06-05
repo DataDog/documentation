@@ -7,10 +7,6 @@ further_reading:
       text: Product Analytics
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction.
 

@@ -21,7 +21,7 @@ title: Webhooks で検出された脅威の修復を自動化する
 
 {{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
 
-Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group-based Detection Rule. This process automatically sends the webhook's JSON payload to the designated Amazon API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
+一度設定が完了すると、AWS ユーザーが AWS 環境内で設定に問題のあるリソース (例: 過度に許可されたセキュリティグループやユーザーロールなど) を作成した場合、Datadog ログ管理が関連ログを取り込み、セキュリティグループに基づく検知ルールがトリガーされます。このプロセスにより、Webhook の JSON ペイロードが指定された Amazon API Gateway の URL に自動送信され、続いて AWS Lambda 関数が起動して問題のリソースを自動的に削除します。
 
 ## 不審な IP アドレスを禁止する
 
@@ -92,6 +92,6 @@ Datadog はセキュリティシグナルを生成し、違反行為だけでな
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /ja/security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#new-value
+[5]: /ja/security/cloud_siem/detection_rules/?tab=threshold#new-value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /ja/security/cloud_siem/detection_rules/?tab=threshold#define-a-search-query
