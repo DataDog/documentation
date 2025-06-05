@@ -11189,40 +11189,23 @@ components:
           description: The type of the event.
           type: string
       type: object
-    DORAFetchResponse:
-      description: Response for the DORA fetch endpoints.
+    DORAFailureRequest:
+      description: Request to create a DORA failure event.
       properties:
         data:
-          $ref: '#/components/schemas/DORAEvent'
-      type: object
-    DORAGitInfo:
-      description: Git info for DORA Metrics events.
-      properties:
-        commit_sha:
-          $ref: '#/components/schemas/GitCommitSHA'
-        repository_url:
-          $ref: '#/components/schemas/GitRepositoryURL'
-      required:
-      - repository_url
-      - commit_sha
-      type: object
-    DORAIncidentRequest:
-      description: Request to create a DORA incident event.
-      properties:
-        data:
-          $ref: '#/components/schemas/DORAIncidentRequestData'
+          $ref: '#/components/schemas/DORAFailureRequestData'
       required:
       - data
       type: object
-    DORAIncidentRequestAttributes:
-      description: Attributes to create a DORA incident event.
+    DORAFailureRequestAttributes:
+      description: Attributes to create a DORA failure event.
       properties:
         env:
-          description: Environment name that was impacted by the incident.
+          description: Environment name that was impacted by the failure.
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp when the incident finished. It must be in nanoseconds,
+          description: Unix timestamp when the failure finished. It must be in nanoseconds,
             milliseconds, or seconds, and it should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
@@ -11230,15 +11213,15 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID. Must have at least 16 characters. Required to
-            update a previously sent incident.
+          description: Failure ID. Must have at least 16 characters. Required to update
+            a previously sent failure.
           type: string
         name:
-          description: Incident name.
+          description: Failure name.
           example: Webserver is down failing all requests.
           type: string
         services:
-          description: Service names impacted by the incident. If possible, use names
+          description: Service names impacted by the failure. If possible, use names
             registered in the Service Catalog. Required when the team field is not
             provided.
           example:
@@ -11247,11 +11230,11 @@ components:
             type: string
           type: array
         severity:
-          description: Incident severity.
+          description: Failure severity.
           example: High
           type: string
         started_at:
-          description: Unix timestamp when the incident started. It must be in nanoseconds,
+          description: Unix timestamp when the failure started. It must be in nanoseconds,
             milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
@@ -11269,43 +11252,60 @@ components:
       required:
       - started_at
       type: object
-    DORAIncidentRequestData:
+    DORAFailureRequestData:
       description: The JSON:API data.
       properties:
         attributes:
-          $ref: '#/components/schemas/DORAIncidentRequestAttributes'
+          $ref: '#/components/schemas/DORAFailureRequestAttributes'
       required:
       - attributes
       type: object
-    DORAIncidentResponse:
-      description: Response after receiving a DORA incident event.
+    DORAFailureResponse:
+      description: Response after receiving a DORA failure event.
       properties:
         data:
-          $ref: '#/components/schemas/DORAIncidentResponseData'
+          $ref: '#/components/schemas/DORAFailureResponseData'
       required:
       - data
       type: object
-    DORAIncidentResponseData:
-      description: Response after receiving a DORA incident event.
+    DORAFailureResponseData:
+      description: Response after receiving a DORA failure event.
       properties:
         id:
-          description: The ID of the received DORA incident event.
+          description: The ID of the received DORA failure event.
           example: 4242fcdd31586083
           type: string
         type:
-          $ref: '#/components/schemas/DORAIncidentType'
+          $ref: '#/components/schemas/DORAFailureType'
       required:
       - id
       type: object
-    DORAIncidentType:
-      default: dora_incident
-      description: JSON:API type for DORA incident events.
+    DORAFailureType:
+      default: dora_failure
+      description: JSON:API type for DORA failure events.
       enum:
-      - dora_incident
-      example: dora_incident
+      - dora_failure
+      example: dora_failure
       type: string
       x-enum-varnames:
-      - DORA_INCIDENT
+      - DORA_FAILURE
+    DORAFetchResponse:
+      description: Response for the DORA fetch endpoints.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAEvent'
+      type: object
+    DORAGitInfo:
+      description: Git info for DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_url:
+          $ref: '#/components/schemas/GitRepositoryURL'
+      required:
+      - repository_url
+      - commit_sha
+      type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
       properties:
@@ -15390,10 +15390,16 @@ components:
     FindingAttributes:
       description: The JSON:API attributes of the finding.
       properties:
+        datadog_link:
+          $ref: '#/components/schemas/FindingDatadogLink'
+        description:
+          $ref: '#/components/schemas/FindingDescription'
         evaluation:
           $ref: '#/components/schemas/FindingEvaluation'
         evaluation_changed_at:
           $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        external_id:
+          $ref: '#/components/schemas/FindingExternalId'
         mute:
           $ref: '#/components/schemas/FindingMute'
         resource:
@@ -15411,6 +15417,22 @@ components:
         vulnerability_type:
           $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
+    FindingDatadogLink:
+      description: The Datadog relative link for this finding.
+      example: /security/compliance?panels=cpfinding%7Cevent%7CruleId%3Adef-000-u5t%7CresourceId%3Ae8c9ab7c52ebd7bf2fdb4db641082d7d%7CtabId%3Aoverview
+      type: string
+    FindingDescription:
+      description: The description and remediation steps for this finding.
+      example: '## Remediation
+
+
+        1. In the console, go to **Storage Account**.
+
+        2. For each Storage Account, navigate to **Data Protection**.
+
+        3. Select **Set soft delete enabled** and enter the number of days to retain
+        soft deleted data.'
+      type: string
     FindingEvaluation:
       description: The evaluation of the finding.
       enum:
@@ -15428,6 +15450,10 @@ components:
       format: int64
       minimum: 1
       type: integer
+    FindingExternalId:
+      description: The cloud-based ID for the resource related to the finding.
+      example: arn:aws:s3:::my-example-bucket
+      type: string
     FindingID:
       description: The unique ID for this finding.
       example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
@@ -47198,9 +47224,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/dora/deployments:
     post:
       description: Use this API endpoint to get a list of deployment events.
@@ -47284,6 +47307,55 @@ paths:
         - dora_metrics_read
       x-undo:
         type: safe
+  /api/v2/dora/failure:
+    post:
+      description: 'Use this API endpoint to provide failure data for DORA metrics.
+
+
+        This is necessary for:
+
+        - Change Failure Rate
+
+        - Time to Restore'
+      operationId: CreateDORAFailure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAFailureRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send a failure event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
   /api/v2/dora/failures:
     post:
       description: Use this API endpoint to get a list of failure events.
@@ -47369,7 +47441,12 @@ paths:
         type: safe
   /api/v2/dora/incident:
     post:
-      description: 'Use this API endpoint to provide failure data for DORA metrics.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure`
+        instead.
+
+
+        Use this API endpoint to provide failure data for DORA metrics.
 
 
         This is necessary for:
@@ -47382,20 +47459,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DORAIncidentRequest'
+              $ref: '#/components/schemas/DORAFailureRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAIncidentResponse'
+                $ref: '#/components/schemas/DORAFailureResponse'
           description: OK
         '202':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAIncidentResponse'
+                $ref: '#/components/schemas/DORAFailureResponse'
           description: OK - but delayed due to incident
         '400':
           content:
@@ -47416,9 +47493,6 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -55571,13 +55645,19 @@ paths:
         the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
         parameters must be only among the documented ones and with values of correct
         types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
-        are not allowed.\n\n### Response\n\nThe response includes an array of finding
-        objects, pagination metadata, and a count of items that match the query.\n\nEach
-        finding object contains the following:\n\n- The finding ID that can be used
-        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
-        including status, evaluation, high-level resource details, muted state, and
-        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
-        stamps.\n- An array of associated tags.\n"
+        are not allowed.\n\n### Additional extension fields\n\nAdditional extension
+        fields are available for some findings.\n\nThe data is available when you
+        include the query parameter `?detailed_findings=true` in the request.\n\nThe
+        following fields are available for findings:\n- `external_id`: The resource
+        external ID related to the finding.\n- `description`: The description and
+        remediation steps for the finding.\n- `datadog_link`: The Datadog relative
+        link for the finding.\n\n### Response\n\nThe response includes an array of
+        finding objects, pagination metadata, and a count of items that match the
+        query.\n\nEach finding object contains the following:\n\n- The finding ID
+        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
+        Core attributes, including status, evaluation, high-level resource details,
+        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -55680,6 +55760,14 @@ paths:
           items:
             $ref: '#/components/schemas/FindingVulnerabilityType'
           type: array
+      - description: Return additional fields for some findings.
+        example:
+        - true
+        in: query
+        name: detailed_findings
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
