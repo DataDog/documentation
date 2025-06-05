@@ -17,7 +17,12 @@ This guide gets you started on a path to creating dashboards. These basic dashbo
 
 ## Create a dashboard
 
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page. 
+
+{{< img src="dashboards/pana_dashboard_overview.png" alt="Adding a new dashboard" style="width:70%;">}}
+
+
+Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -52,8 +57,9 @@ The refresh rate of a private dashboard depends on the time frame you are viewin
 | 6 months     | 1 hour       |
 | 1 year       | 1 hour       |
 
-## View dashboards on mobile devices
 
-View your dashboards in a mobile-friendly format with the Datadog Mobile App, available on the [Apple App Store][2] and [Google Play Store][3]. The Mobile App comes equipped with mobile home screen widgets that allow you to monitor service health and infrastructure without opening the mobile app.
 
-**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information on installing the app, see the [Datadog Mobile App][1] documentation.
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/product-analytics/dashboard/list
