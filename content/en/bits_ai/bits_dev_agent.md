@@ -24,11 +24,11 @@ Bits Dev Agent is a generative AI coding assistant that uses observability data 
 
 Bits Dev Agent is available for the following Datadog products:
 
-| Product                | Availability          | Issues Detected                                                                |
-|------------------------|----------------------|---------------------------------------------------------------------------------|
-| [Error Tracking][1]    | Limited Availability | Crashes, panics, exceptions, unhandled errors                                   |
-| [Code Security][2]     | Preview              | Security issues in first-party code and open source dependencies                |
-| [Continuous Profiler][3]          | Preview              | Performance bottlenecks identified through span and profile analysis            |
+| Product                   | Availability          | Issues Detected                                                    |
+|---------------------------|----------------------|--------------------------------------------------------------------|
+| [Error Tracking][1]       | Limited Availability | Crashes, panics, exceptions, unhandled errors                      |
+| [Code Security][2]        | Preview              | Security issues in first-party code and open source dependencies   |
+| [Continuous Profiler][3]  | Preview              | Code-level performance issues                                      |
 
 ## Setup
 
