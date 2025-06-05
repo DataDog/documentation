@@ -10,10 +10,10 @@ author:
 categories:
 - 自動化
 - クラウド
-- 構成 & デプロイ
-- developer tools
+- 構成とデプロイ
+- 開発ツール
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -91,7 +91,7 @@ Firefly の統合ポリシーエンジンにより、危険な構成ミスやコ
 4. API キーをコピーして、専用の行に貼り付けます。
 5. **Done** をクリックします。
 
-## Agent
+## サポート
 何か質問はありますか？メール [contact@gofirefly.io][1] またはアプリ内チャットをご利用ください。
 
 [1]: mailto:contact@gofirefly.io
