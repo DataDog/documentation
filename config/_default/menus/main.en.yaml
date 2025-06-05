@@ -2765,6 +2765,21 @@ menu:
       parent: actions_heading
       identifier: datastore
       weight: 30000
+    - name: Create and Manage Datastores
+      url: actions/datastore/create/
+      parent: datastore
+      identifier: datastore_create
+      weight: 1
+    - name: Use Datastores
+      url: actions/datastore/use/
+      parent: datastore
+      identifier: datastore_use
+      weight: 2
+    - name: Authentication and Access
+      url: actions/datastore/auth/
+      parent: datastore
+      identifier: datastore_auth
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
