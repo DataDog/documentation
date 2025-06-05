@@ -111,11 +111,15 @@ The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, "non-b
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
+Find out more in the [Live Debugger documentation][20].
+
 ## Continuous Profiler
 
-The [**Continuous Profiler**][22] highlights resource consumption using profiling data collected from deployed systems to help developers identify and fix bottlenecks.
+The [**Continuous Profiler**][22] highlights resource consumption (CPU, memory allocation and thrown exceptions, for example) using profiling data collected from deployed services.  This information helps developers write more efficient code and eliminate bottlenecks.
 
 {{< img src="/developers/ide_plugins/idea/continuous_profiler/flamegraph.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
+
+Find out more in the [Continuous Profiler documentation][22].
 
 ## CI Test Runs
 You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:

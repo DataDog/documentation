@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The **Continuous Profiler** highlights resource consumption using profiling data collected from deployed systems to help developers identify and fix bottlenecks.
+The **Continuous Profiler** highlights resource consumption (CPU, memory allocation and thrown exceptions, for example) using profiling data collected from deployed services.  This information helps developers write more efficient code and eliminate bottlenecks.
 
 ## Profiler tab
 
