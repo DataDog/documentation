@@ -59,9 +59,7 @@ Use this step to add a reason and unique name to your configuration so you can a
 
 ### Step 5: Save the recommendation
 
-Click **Save** to save your customized recommendation.
-
-- Recommendations that have already been customized **once** are labeled **Configured**.
+Click **Save** to save your customized recommendation. Recommendations that have already been customized **once** are labeled **Configured**.
 
 ## Updating custom recommendations
 
