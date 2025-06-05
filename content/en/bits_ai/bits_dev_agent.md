@@ -50,10 +50,6 @@ To use Bits Dev Agent, you must install the [GitHub integration][4]. For full in
 
 Bits Dev Agent uses the `service` and `version` telemetry tags to match issues such as errors or vulnerabilities to the version of your code that was running at the time. To configure telemetry tagging, see the [Tag your telemetry with Git information][6] section of the Datadog Source Code Integration documentation.
 
-### Enable Bits Dev Agent
-
-To activate Bits Dev Agent, go to a supported product page (such as Error Tracking or Code Security) and click **Enable Dev Agent**. If any required configuration is missing, Datadog prompts you to complete the remaining setup before activation.
-
 [1]: /error_tracking
 [2]: /security/code_security
 [3]: /profiler/
