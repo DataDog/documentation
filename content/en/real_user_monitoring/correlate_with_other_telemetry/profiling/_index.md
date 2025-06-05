@@ -28,8 +28,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 ### Setup RUM
 1. Set up [RUM Browser Monitoring][2].
 
-2. Initialize the RUM SDK and configure the following initialization parameters:
-    - `profilingSampleRate`, which sets the percentage of page navigations that are profiled
+2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of page navigations that are profiled.
     - `enableExperimentalFeatures` initialization parameter which enables profiling for the app
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
