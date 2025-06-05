@@ -4,6 +4,7 @@ aliases:
   - /tracing/software_catalog/scorecards/custom_rules
   - /tracing/service_catalog/scorecards/custom_rules
   - /service_catalog/scorecards/custom_rules
+  - /software_catalog/scorecards/custom_rules
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
