@@ -7,7 +7,7 @@ further_reading:
       text: 'Getting Started with Profiler'
 ---
 
-{{< callout url="https://corpsite-preview.datadoghq.com/fitzage/web-6620/product-preview/browser-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/full-host-profiler/" btn_hidden="false" header="Join the Preview!" >}}
 Full Host is in Preview.
 {{< /callout >}}
 
