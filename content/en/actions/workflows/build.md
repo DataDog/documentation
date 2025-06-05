@@ -59,6 +59,8 @@ To iterate on an existing workflow:
 1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to add the functionality to your workflow.
 
+<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack</a></a></div>
+
 ## Create a custom workflow
 
 To create a workflow, click **New workflow** on the [Workflow Automation][1] page.
