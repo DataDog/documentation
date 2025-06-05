@@ -29,13 +29,13 @@ Learn how to setup App and API Protection on your Google Cloud Run functions by 
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/python" >}}
-  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/nodejs" >}}
-  {{< appsec-integration name="Java" avatar="java" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/java" >}}
-  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/go" >}}
-  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/ruby" >}}
-  {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/dotnet" >}}
-  {{< appsec-integration name="PHP" avatar="php" link="/security/application_security/threats/setup/standalone/gcp/cloud-run/php" >}}
+  {{< appsec-integration name="Python" avatar="python" link="./python" >}}
+  {{< appsec-integration name="Node.js" avatar="node" link="./nodejs" >}}
+  {{< appsec-integration name="Java" avatar="java" link="./java" >}}
+  {{< appsec-integration name="Go" avatar="go" link="./go" >}}
+  {{< appsec-integration name="Ruby" avatar="ruby" link="./ruby" >}}
+  {{< appsec-integration name=".NET" avatar="dotnet" link="./dotnet" >}}
+  {{< appsec-integration name="PHP" avatar="php" link="./php" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading

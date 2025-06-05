@@ -40,7 +40,7 @@ Learn how to enable App and API Protection on all the following supported platfo
 
 ## Cloud and Container Platforms
 
-### Kubernetes (k8s)
+### Kubernetes (K8s)
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
@@ -58,7 +58,7 @@ Learn how to enable App and API Protection on all the following supported platfo
   {{< appsec-integration name="Google Application Load Balancer" avatar="google-cloud-loadbalancing" link="./gcp/alb" >}}
   {{< appsec-integration name="Google Cloud Load Balancer" avatar="google-cloud-loadbalancing" link="./gcp/alb" >}}
   {{< appsec-integration name="Google Service Extensions" avatar="google-cloud-loadbalancing" link="./gcp/service-extensions" >}}
-  {{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="/security/application_security/threats/setup/standalone/gcp/cloud-run" >}}
+  {{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="./gcp/cloud-run" >}}
 {{< /appsec-integrations >}}
 
 ### Microsoft Azure
