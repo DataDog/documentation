@@ -1430,17 +1430,17 @@ menu:
       parent: platform_heading
       weight: 100000
     - name: Bits SRE
-      url: bits_ai/bits_sre
+      url: bits_ai/bits_ai_sre
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
     - name: Investigate alerts
-      url: bits_ai/bits_sre/investigate_alerts
+      url: bits_ai/bits_ai_sre/investigate_alerts
       identifier: bits_ai_sre_investigate_alerts
       parent: bits_ai_sre
       weight: 100
     - name: Coordinate incidents
-      url: bits_ai/bits_sre/coordinate_incidents
+      url: bits_ai/bits_ai_sre/coordinate_incidents
       identifier: bits_ai_sre_coordinate_incidents
       parent: bits_ai_sre
       weight: 101

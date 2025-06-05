@@ -11,9 +11,8 @@ aliases:
 - /bits_ai/getting_started/
 ---
 
-Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
 
-## Querying in Datadog
+## Chat in Datadog
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
 Natural language querying is in Preview. Fill out this form to join the wait list.

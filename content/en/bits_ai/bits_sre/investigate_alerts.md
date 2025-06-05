@@ -2,15 +2,14 @@
 title: Investigate alerts
 ---
 
-## How Bits SRE investigates
+## How Bits AI SRE investigates
 
 Investigations happen in two phases:
 
 1. **Initial context gathering**
    1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message—and making relevant queries. 
-   1. It then automatically scans your Datadog environment for additional context.
+   1. It also automatically scans your Datadog environment for additional context.
    1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any memories associated with the monitor. 
-   1. Initial findings are returned in under a minute. 
 1. **Root cause hypothesis generation and testing**
    - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
       - Metrics
@@ -21,9 +20,9 @@ Investigations happen in two phases:
       - Watchdog insights
    - Hypotheses can end in one of three states: validated, invalidated, or inconclusive. 
 
-For best results, see [Optimize monitors for Bits SRE][1].
+For best results, see [Optimize monitors for Bits AI SRE][1].
 
-## Chat with Bits SRE about the investigation
+## Chat with Bits AI SRE about the investigation
 
 On the [Bits AI Investigations][2] page, you can chat with Bits to gather additional information about the investigation or the services involved. Click the **Suggested replies** bubble for examples.
 
@@ -31,7 +30,7 @@ On the [Bits AI Investigations][2] page, you can chat with Bits to gather additi
 |------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------|
 | Understand the status of its investigation     | `What's the latest status of the investigation?`                                   | Investigation findings               |
 | Ask for elaborations of its findings           | `Tell me more about the {issue}.`                                                  | Investigation findings               |
-| Look up information about a service            | `Are there any open incidents for {example-service}?`                              | Software Catalog service definitions |
+| Look up information about a service            | `Are there any ongoing incidents for {example-service}?`                              | Software Catalog service definitions |
 | Find recent changes for a service              | `Were there any recent changes on {example-service}?`                              | Change Tracking events               |
 | Find a dashboard                               | `Give me the {example-service} dashboard.`                                         | Dashboards                           |
 | Query APM request, error, and duration metrics | `What's the current error rate for {example-service}?`                             | APM metrics                          |
@@ -39,7 +38,7 @@ On the [Bits AI Investigations][2] page, you can chat with Bits to gather additi
 
 ## Help Bits SRE learn
 
-Reviewing Bits' findings not only validates their accuracy, but also helps Bits learn from any mistakes it makes, helping it produce future investigations that are faster and more helpful.
+Reviewing Bits' findings not only validates their accuracy, but also helps Bits learn from any mistakes it makes, helping it produce faster and more accurate investigations in the future.
 
 ### During the investigation
 You can guide Bits' learning by:

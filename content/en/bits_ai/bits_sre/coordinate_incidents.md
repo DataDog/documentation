@@ -14,7 +14,7 @@ aliases:
 - /bits_ai/managing_incidents/
 ---
 
-In the heat of an incident, Bits handles general incident coordination so you can focus on resolution. From proactive updates to AI-assisted postmortems, Bits streamlines your incident response workflow in Slack and Datadog.
+In the heat of an incident, Bits AI SRE handles general incident coordination so you can focus on resolution. From proactive updates to AI-assisted postmortems, Bits streamlines your incident response workflow in Slack and Datadog.
 
 ## Get started with coordinating incidents
 
@@ -35,7 +35,7 @@ Bits SRE helps coordinate incidents—especially those involving multiple teams�
 
 ## Customize stakeholder notifications 
 
-Use AI to dynamically populate key details in stakeholder notifications—delivering clearer, faster updates across the tools your team already uses. Notification rules support delivery to a wide variety of destinations, including email, Datadog On-Call, MS Teams, Slack, and more, ensuring AI-enhanced updates reach the right people—on the right platform—at the right time.
+Bits can dynamically populate key details in stakeholder notifications—delivering clearer, faster updates across the tools your team already uses. Notification rules support delivery to a wide variety of destinations, including email, Datadog On-Call, MS Teams, Slack, and more, ensuring AI-enhanced updates reach the right people—on the right platform—at the right time.
 
 1. In your Incidents settings, go to [Message Templates][1].
 1. Create a new template or edit an existing one.

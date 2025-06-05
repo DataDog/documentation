@@ -1,10 +1,10 @@
 ---
-title: Get started with Bits SRE
+title: Get started with Bits AI SRE
 ---
 
 ## Overview
 
-Bits SRE is an autonomous AI agent that investigates alerts and coordinates incident response. When a monitor triggers, Bits proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause. If the alert escalates to an incident, Bits supports the response by managing stakeholder communications, surfacing relevant knowledge base content, highlighting related incidents, and accelerating the postmortem and incident follow-up process. By reducing manual effort, Bits ensures smoother and more efficient on-call operations.
+Bits AI SRE is an autonomous AI agent that investigates alerts and coordinates incident response. When a monitor triggers, Bits proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause. If the alert escalates to an incident, Bits supports the response by managing stakeholder communications, surfacing relevant knowledge base content, highlighting related incidents, and accelerating the postmortem and incident follow-up process. By reducing manual effort, Bits ensures smoother and more efficient on-call operations.
 
 <div class="alert alert-info">Bits only supports metric (including anomaly, outlier, and integration), APM, and log monitors.</div>
 
@@ -35,7 +35,7 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 - **Option 2: Slack**
   - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
 
-For best results, see [Optimize monitors for Bits SRE](#optimize-monitors-for-bits-sre) below.
+For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre) below.
 
 ### Configure where investigation results are sent
 
@@ -57,7 +57,7 @@ If you have [Page from notifications][6] enabled in Datadog On-Call, you can see
 Add the `@case-{project-name}` handle in the **Configure notifications and automations** section. 
 {{% /collapse-content %}}
 
-### Optimize monitors for Bits SRE
+### Optimize monitors for Bits AI SRE
 
 To help Bits produce the most accurate and helpful investigation results, follow these guidelines:
 
@@ -72,7 +72,7 @@ To help Bits produce the most accurate and helpful investigation results, follow
     - A Datadog notebook with key graphs or instructions 
     - A Confluence page
 
-### Restrict access to investigations
+### Restrict access to Bits investigations
 
 To access investigations, users need the `bits_investigations_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see [Access Control][7].
 
