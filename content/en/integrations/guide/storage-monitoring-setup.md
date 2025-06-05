@@ -29,7 +29,30 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 
 3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
 
-   **Note**: For each AWS account containing S3 buckets to monitor, ensure your Datadog IAM role includes the `s3:GetObject`, `s3:ListObjects`, and `s3:PutInventoryConfiguration` permissions.
+   **Note**: Ensure Datadog is able to access your inventory files by adding the `s3:GetObject` and `s3:ListBucket` permissions to the Datadog IAM integration role for the accounts which own those buckets. These read-only permissions should be scoped to only the inventory destination buckets. The destination buckets' policies also must allow your source bucket to write inventory configurations.
+
+   Example source-bucket policy:
+
+      ```json
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "AllowListInventoryBucket",
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": "arn:aws:s3:::storage-monitoring-s3-inventory-destination"
+            },
+            {
+              "Sid": "AllowGetInventoryObjects",
+              "Effect": "Allow",
+              "Action": "s3:GetObject",
+              "Resource": "arn:aws:s3:::storage-monitoring-s3-inventory-destination/*"
+            }
+          ]
+        }
+
+      ```
 
 4. Select the S3 buckets you want to monitor with Storage Monitoring. You can select buckets from multiple AWS accounts at once.
 
