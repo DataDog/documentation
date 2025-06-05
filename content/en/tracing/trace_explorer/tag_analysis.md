@@ -10,8 +10,8 @@ further_reading:
   text: 'Trace Groups'
 ---
 
-{{< callout url="https://www.datadoghq.com/support/" header="Request access to the Preview!" >}}
-Tag Analysis is in Preview. To request access, contact Datadog support.
+{{< callout url="https://www.datadoghq.com/product-preview/tag-analysis/" header="Request access to the Preview!" >}}
+Tag Analysis is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 ## Overview
