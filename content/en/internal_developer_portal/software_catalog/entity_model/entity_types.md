@@ -398,7 +398,7 @@ You can define custom entity types beyond service, system, datastore, queue, and
 Example YAML:
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
   apiVersion: v3
-  kind: custom.library
+  kind: library
   metadata:
     name: my-library
     displayName: My Library
