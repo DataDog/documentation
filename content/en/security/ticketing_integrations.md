@@ -120,7 +120,7 @@ Here's an example from a Static Code (SAST) signal:
 
 {{< img src="security/bidir-jira-existing.png" alt="signal with existing Jira ticket" responsive="true" style="width:100%;">}}
 
-Hover of the Jira ticket to see its details.
+Hover over the Jira ticket to see its details.
 
 {{< img src="security/bidir-jira-existing-hover.png" alt="signal with existing Jira ticket" responsive="true" style="width:100%;">}}
 
