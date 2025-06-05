@@ -11,7 +11,7 @@ further_reading:
 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-recommendations/" btn_hidden="false" header="Join the Preview!">}}
   Custom Recommendations is in Preview.
 {{< /callout >}}
 
