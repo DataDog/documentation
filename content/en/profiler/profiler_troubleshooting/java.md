@@ -163,7 +163,13 @@ Override templates let you specify profiling properties to override. However, th
     ```
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
+    
+## PODs are getting evicted due to disk usage
 
+The profiler uses ephemeral storage (usually /tmp) to save captured profiling data.
+If the node is under disk pressure and the pod hasn't requested ephemeral storage, it may be evicted.
+
+Fix: Request a small amount of ephemeral storage (e.g., 100MB) in the pod spec.
 
 ## Further Reading
 
