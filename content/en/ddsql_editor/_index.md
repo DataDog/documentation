@@ -66,7 +66,7 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 
 ## Tags
 
-DDSQL exposes Tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
 
 ```sql
 SELECT instance_type, count(instance_type)
