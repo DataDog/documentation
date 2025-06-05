@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="cloud_cost/.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:80%;" >}}
+{{< img src="cloud_cost/recommendations/custom-recommendations-overview-no-history.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:80%;" >}}
 
 [CCM Recommendations][1] are designed to be informative and actionable from the start. You can customize these recommendations to fit your specific business use cases and needs. Set your own metric thresholds and evaluation time frames to reduce unnecessary alerts and focus on the recommendations that matter most.
 
@@ -46,11 +46,9 @@ Metric thresholds that cannot be customized appear grayed out.
 
 Adjust the evaluation time frame to match your business's seasonality or operational patterns. Options include: 1 week, 2 weeks, 15 days, 3 weeks, 1 month, 2 months, and 3 months.
 
-### Step 3: Apply this rule to all resources or add a filter
+### Step 3: Apply this rule to all resources
 
-You can select whether to apply the rule to **All Resources** or **Some Resources**.
-
-If you choose to apply the rule to **Some Resources**, you can filter resources by their tag - team, service, environment - for more specific parts of your business.
+The rule applies to all resources in your environment.
 
 ### Step 4: (optional) Label and document the customization
 
@@ -64,7 +62,6 @@ Use this step to add a reason and unique name to your configuration so you can a
 Click **Save** to save your customized recommendation.
 
 - Recommendations that have already been customized **once** are labeled **Configured**.
-- Recommendations that have been customized **more than once** are labeled with the **number of rules** that are associated with it.
 
 ## Updating custom recommendations
 
@@ -78,42 +75,8 @@ To update a custom recommendation:
 4. Click **Save**.
 5. In the confirmation popup, click **Yes, save custom parameters** to apply your changes.
 
-## Disabling custom recommendations
-
-Temporarily stop applying a custom recommendation without deleting its configuration.
-
-To disable a custom recommendation:
-
-1. Go to [**Cloud Cost > Settings > Configure Recommendations**][2].
-2. Select the customized recommendation.
-3. Click the toggle next to the recommendation to disable it.
-4. Click **Save**.
-
-## Viewing configuration history
-
-Track changes and review the history of your custom recommendations.
-
-1. Navigate to [**Cloud Cost > Settings > Configure Recommendations**][2].
-2. Select the customized recommendation.
-3. Click the **History** tab.
-4. Review the list of updates, with the most recent at the top.
-
-## Restoring configuration versions
-
-Revert a custom recommendation to a previous version or to its default settings if needed.
-
-{{< img src="cloud_cost/.png" alt="Go to the history tab to revert your rule to a previous version or its default settings." style="width:80%;" >}}
-
-To restore configuration versions:
-
-1. Navigate to [**Cloud Cost > Settings > Configure Recommendations**][2].
-2. Go to the customized recommendation.
-3. Click the **History** tab.
-4. Hover over the version you want to restore and click **Restore this version**.
-5. Click **Save**.
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/recommendations/
-[2]: 
+[2]: https://app.datadoghq.com/cost/settings/configure-recommendations
