@@ -1891,8 +1891,8 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
       weight: 106
-    - name: Send OpenTelemetry Metrics to Datadog
-      url: metrics/open_telemetry/otlp_metrics/
+    - name: OpenTelemetry Metrics
+      url: metrics/open_telemetry/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
@@ -1901,6 +1901,11 @@ menu:
       parent: metrics_otel
       identifier: metrics_otlp_types
       weight: 201
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
+      parent: metrics_otel
+      identifier: metrics_querying
+      weight: 202
     - name: Metrics Types
       url: metrics/types/
       parent: metrics_top_level
@@ -3442,6 +3447,11 @@ menu:
       parent: network_path
       identifier: network_path_path_view
       weight: 503
+    - name: Guides
+      url: network_monitoring/network_path/guide
+      parent: network_path
+      identifier: network_path_guides
+      weight: 504
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
