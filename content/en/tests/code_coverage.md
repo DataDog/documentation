@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/code_coverage/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
 Datadog is building a new dedicated Code Coverage product. Sign up for the Preview!
 {{< /callout >}}
 
