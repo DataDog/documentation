@@ -27,11 +27,11 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 ## Build a funnel
 
-To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][1] and click **Funnel**.
+To build a funnel, navigate to [**Product Analytics > Charts**][1] and click **Funnel**.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
-From this page, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+From this page, choose your starting view or action and click on `+ Step` to build additional steps. You can also use drag and drop functionality to move steps around.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_video1.mp4" alt="Filtering network map with search" video=true >}}
 
