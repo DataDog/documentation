@@ -3,11 +3,11 @@ description: A complete guide to writing custom rules for Datadog.
 title: Static Code Analysis Custom Rule Guide
 ---
 
-This guide builds on the [Static Analysis Custom Rules Tutorial][1] to give a full description of how to write custom rules, along with tips and tricks and common pitfalls to avoid.
+This guide builds on the [Static Analysis Custom Rules Tutorial][1], providing a full description of how to write custom rules, along with tips, tricks, and common pitfalls to avoid.
 
 ## Overview
 
-A static analyzer rule is composed of three parts: a Tree Sitter query to find interesting code constructs, a JavaScript function to analyze that code and generate findings, and tests that verify that the rule works correctly.
+A static analyzer rule consists of three parts: a Tree-sitter query to find relevant code constructs, a JavaScript function to analyze the code and generate findings, and tests that verify the rule works correctly.
 
 When you run a static analysis, the analyzer takes each file in your code repository, checks its filename extension to determine its language, parses the file with Tree Sitter, and then executes the rules for that language.
 
@@ -33,7 +33,7 @@ You can add patterns after the node type and before the closing parenthesis. The
 (func-decl (arg-list) (body))
 ```
 
-This example matches nodes of type `func-decl` that contain a node of type `arg-list` followed by a node of type `body`, possibly with other nodes in between. In the following parse tree, this query would match the subtrees outlined in blue, but not the subtree outlined in orange.
+This example matches nodes of type `func-decl` containing a node of type `arg-list`, followed by a node of type `body`, possibly with other nodes in between. In the following parse tree, this query would match the subtrees outlined in blue, but not the subtree outlined in orange.
 
 {{< img src="/security/code_security/custom_rule_guide_parse_trees.png" alt="An example parse tree with two examples highlighted." style="height:20em;" >}}
 
@@ -302,7 +302,7 @@ function visit(query, filename, code) {
 
 ### The `visit()` Function
 
-After executing the query, the static analyzer executes the `visit()` function for every match. This function receives three arguments:
+After executing the query, the static analyzer executes the `visit()` function for each match. This function receives three arguments:
 
 * `query` --- information about the current match.
 * `filename` --- the name of the file being analyzed.
@@ -389,7 +389,7 @@ function visit(query, filename, code) {
 }
 ```
 
-You can also keep calling `ddsa.getParent(node)` and `ddsa.getChildren(node)` on the nodes returned by these functions to keep navigating the parse tree. Calling `ddsa.getParent()` on the root node returns `undefined`, while calling `ddsa.getChildren()` on a leaf tree returns an empty list.
+You can continue calling `ddsa.getParent(node)` and `ddsa.getChildren(node)` on the nodes returned by these functions to navigate the parse tree. Calling `ddsa.getParent()` on the root node returns `undefined`, while calling `ddsa.getChildren()` on a leaf tree returns an empty list.
 
 ```javascript
 function visit(query, filename, code) {
@@ -586,7 +586,7 @@ You can then inspect and select the nodes you are interested in by checking thei
 
 ### Adding predicates doesn't speed up the query
 
-If your Tree Sitter query is slow, you might think that you could speed it up by adding predicates to prune the search tree. However, the Tree Sitter query engine doesn't work that way: it ignores all predicates when it walks the tree in search of nodes that match the pattern, and it only applies those predicates at the end to filter the results list.
+If your Tree Sitter query is slow, you might try to speed it up by adding predicates to prune the search tree. However, this method doesn't work with the Tree Sitter query engine. The engine ignores all predicates when it walks the tree in search of nodes that match the pattern, and it only applies those predicates at the end to filter the results list.
 
 Therefore, while adding predicates might reduce the number of times that your `visit()` function is called, it won't reduce the amount of work that the static analyzer will do at query time.
 
@@ -615,7 +615,7 @@ For example, you might write a query like this one to capture pairs of methods i
 
 For a class with only two methods, this query will only return one node; however, for a class with 10 methods, it will return 45. For a class with 100 methods, it will return 4950 nodes!
 
-To avoid this, you should use modifiers like `+` or `*` to capture the whole list of methods in one single query result, or use `.` to indicate that the child nodes must appear next to each other.
+To avoid this problem, use modifiers like `+` or `*` to capture the whole list of methods in one single query result. Alternatively, use `.` to indicate that the child nodes must appear next to each other.
 
 ```scheme
 (class_declaration
@@ -664,11 +664,11 @@ The problem is that the Tree Sitter query engine will get every `var_declaration
 
 One solution is to write a query that finds one of the nodes and then use `ddsa.getParent()` and `ddsa.getChildren()` to find the other node.
 
-Another solution, which is not always possible, would be to gather all candidate nodes without trying to pair them up, and then process them in the JavaScript code.
+Another potential solution is to gather all candidate nodes without trying to pair them up, and then process them in the JavaScript code.
 
 #### Trying to match a pattern at several nesting levels
 
-You can easily write a pattern that finds a node that contains a child node that matches a pattern. However, you cannot write a pattern that finds a node that contains a descendent at an arbitrary nesting level.
+You can write a pattern to find a node containing a child node that matches a pattern. However, you cannot write a pattern to find a node containing a descendent at an arbitrary nesting level.
 
 Some rule writers tried to solve this by specifying several alternatives, each one with the pattern of interest at a different nesting level.
 
@@ -714,7 +714,7 @@ function visit(query, filename, code) {
 }
 ```
 
-We've already mentioned the problems with this approach. First, the query engine goes down every branch of the parse tree to try and match the pattern, which could take a long time. Additionally, if there are two or more alternatives, the query engine will return one match for every set of nodes that matches one combination of choices.
+We've already mentioned the problems with this approach. First, the query engine goes down every branch of the parse tree to try and match the pattern, which might take a long time. Additionally, if there are two or more alternatives, the query engine will return one match for every set of nodes that matches one combination of choices.
 
 A solution for this problem is to write a query for the child node and then use `ddsa.getParent()` to locate the ancestor node. This also has the advantage that it gives us unlimited nesting levels.
 
