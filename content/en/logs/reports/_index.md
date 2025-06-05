@@ -19,7 +19,7 @@ To schedule a CSV Report, the query must meet the following conditions:
 * The query is not a composite query (no [subqueries][2])  
 * "Group into" (fields/patterns/transactions) is not selected  
 * The query doesn't use [calculated fields][3] or [Reference Tables][4]
-* The CSV is limited to 250k rows
+* The CSV is limited to 50k rows
 
 ## Schedule a CSV report
 

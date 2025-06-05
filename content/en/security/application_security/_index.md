@@ -101,6 +101,6 @@ For information on disabling AAP or its features, see the following:
 [7]: https://dashcon.io/appsec
 [8]: /security/code_security/software_composition_analysis/
 [9]: /security/code_security/
-[10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[10]: /security/application_security/troubleshooting/#disabling-aap
 [11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /security/application_security/troubleshooting/#disabling-code-security
