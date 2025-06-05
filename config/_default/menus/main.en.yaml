@@ -1891,8 +1891,8 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
       weight: 106
-    - name: Send OpenTelemetry Metrics to Datadog
-      url: metrics/open_telemetry/otlp_metrics/
+    - name: OpenTelemetry Metrics
+      url: metrics/open_telemetry/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
@@ -1901,6 +1901,11 @@ menu:
       parent: metrics_otel
       identifier: metrics_otlp_types
       weight: 201
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
+      parent: metrics_otel
+      identifier: metrics_querying
+      weight: 202
     - name: Metrics Types
       url: metrics/types/
       parent: metrics_top_level
@@ -6174,7 +6179,7 @@ menu:
     # - name: CloudPrem
     #   pre: cloud
     #   url: cloudprem/
-    #   parent: log_management_heading 
+    #   parent: log_management_heading
     #   identifier: cloud_prem
     #   weight: 30000
     - name: Security Overview
@@ -6812,6 +6817,11 @@ menu:
     - name: SAST Custom Rules Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Guide
+      identifier: sec_static_analysis_custom_rules_guide
+      url: /security/code_security/static_analysis/custom_rules/guide/
       parent: sec_static_analysis
       weight: 5
     - name: Software Composition Analysis (SCA)
