@@ -30,7 +30,7 @@ Code Analysis está en vista previa.
 <div class="alert alert-danger">
     El análisis de código no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
 </div>
-{{% /región del sitio %}}
+{{% /site-region %}}
 
 ## Visión general
 Para configurar Datadog Static Analysis, vaya a [**Software Delivery** > **Code Analysis**][1].

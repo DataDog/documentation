@@ -198,7 +198,7 @@ spec:
 La integración Kubeflow no incluye eventos.
 
 ### Checks de servicio
-{{< get-servicio-checks-from-git "kubeflow" >}}
+{{< get-service-checks-from-git "kubeflow" >}}
 
 
 ## Resolución de problemas
