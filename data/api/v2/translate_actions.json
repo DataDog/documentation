@@ -583,6 +583,12 @@
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
   },
+  "CreateDORAFailure": {
+    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send a failure event for DORA Metrics",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA failure event."
+  },
   "ListDORAFailures": {
     "description": "Use this API endpoint to get a list of failure events.",
     "summary": "Get a list of failure events",
@@ -594,10 +600,10 @@
     "summary": "Get a failure event"
   },
   "CreateDORAIncident": {
-    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send an incident event for DORA Metrics",
     "request_description": "",
-    "request_schema_description": "Request to create a DORA incident event."
+    "request_schema_description": "Request to create a DORA failure event."
   },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
