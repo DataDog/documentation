@@ -21,10 +21,6 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 
 ## Usage
 
-### Prerequisites
--   Your services use an HTTP server.
--   Your HTTP servers are using [a library that supports profiling](#supported-libraries).
-
 ### Setup RUM
 1. Set up [RUM Browser Monitoring][2].
 
@@ -42,7 +38,6 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
       //  env: 'production',
       //  version: '1.0.0',
       profilingSampleRate: 100,
-      enableExperimentalFeatures: ['profiling'],
       trackLongTasks: true,
       trackUserInteractions: true,
     })
