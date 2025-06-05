@@ -26,16 +26,16 @@ You can specify the following parameters for the profiling data:
 
 The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
 
-### Top list
+## Top list
 
 The **Top List** sub-tab shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. These are the methods that are most likely candidates for optimization.
 
-{{< img src="/developers/ide_plugins/idea/top-list1.png" alt="The Top-list view" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/continuous_profiler/top-list.png" alt="The Top-list view" style="width:100%;" >}}
 
 - Double-clicking an item in the list (or selecting **Jump to Source** from the context menu) opens a source code editor showing where the method is defined.
 - To see a flame graph visualization of a method, select **Search in Flame Graph** from the context menu.
 
-#### Call tree
+### Call tree
 
 The call tree to the right of the **Top List** shows the paths that lead to (and from) the selected method.
 
@@ -43,11 +43,11 @@ The default **Caller Hierarchy** view shows the callers (or predecessors) of the
 
 Right-click on a method in the call tree to see options to navigate to the source editor or flame graph.
 
-### Flame graph
+## Flame graph
 
 A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin collects multiple individual profiles from the requested time frame, and aggregates them. Each individual profile covers a 60 second interval within the requested time frame.
 
-{{< img src="/developers/ide_plugins/idea/flamegraph1.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/continuous_profiler/flamegraph.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
 
 Each time you change the profile type, the time frame, or the environment, the Datadog plugin generates a new flame graph.
 
@@ -65,7 +65,7 @@ Profiling samples include stack trace and line number information. Use the **Sep
 
 {{< img src="/developers/ide_plugins/idea/separate-flamegraph-by.png" alt="Use the tooltip button to separate frames by method or line number" style="width:40%;" >}}
 
-### Source highlighting
+## Source highlighting
 
 When the Continuous Profiler tab is active, the plugin adds code highlights to the source code editor margin. For Top Methods, an icon appears in the editor margin, and line-level highlights appear in the code based on the active Profiling data.
 - Hover over the icon to see more information.
