@@ -5,6 +5,7 @@ type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/envoy
+  - /security/application_security/threats_detection/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -105,6 +106,16 @@ For example:
 The available functionality for Envoy version `1.71.0` has the following important limitations:
 
 * The request body is not inspected, regardless of its content type.
+
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
 ## Further Reading
 
