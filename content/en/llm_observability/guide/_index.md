@@ -18,7 +18,5 @@ cascade:
     {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application-in-aws-lambda" >}}Trace an LLM Application in AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/llm_observability/trace_proxy_services" >}}Trace Proxy and Gateway Services{{< /nextlink >}}
     {{< nextlink href="/llm_observability/evaluations/" >}}Evaluations{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/evaluations/submit_nemo_evaluations" >}}Submit NVIDIA NeMo Custom Evaluations{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/guide/ragas_quickstart" >}}Ragas Quickstart{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/llm_observability_and_apm" >}}Using LLM Observability and APM{{< /nextlink >}}
 {{< /whatsnext >}}

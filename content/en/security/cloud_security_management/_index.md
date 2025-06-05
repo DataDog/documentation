@@ -6,9 +6,6 @@ further_reading:
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
-  - link: "/security/threats/setup"
-    tag: "Documentation"
-    text: "Uncover kernel-level threats with Workload Protection"
   - link: "/security/research_feed"
     tag: "Documentation"
     text: "Security Research Feed"
@@ -59,7 +56,6 @@ Security and DevOps teams can act on the shared context of observability and sec
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
-- [**Workload Protection**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
@@ -85,6 +81,10 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 {{< img src="security/csm/findings_page.png" alt="Cloud Security Findings page" width="100%">}}
 
 ## Investigate resources
+
+Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
+
+{{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -126,3 +126,4 @@ To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3
 [14]: /security/security_inbox
 [15]: https://app.datadoghq.com/security/feed
 [16]: /security/research_feed
+[17]: /security/cloud_security_management/security_graph
