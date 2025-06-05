@@ -235,7 +235,7 @@ Sample log containing the `ddtags` array with Datadog tags.
 }
 ```
 
-### Custom function to extract the env field
+#### Custom function to extract the env field
 
 ```yaml
 #Extract a tag from ddtags array and elevate as log attribute
