@@ -9,14 +9,7 @@ further_reading:
   tag: 'Blog'
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
-
-<<<<<<< HEAD:content/en/product_analytics/session_replay/heatmaps.md
-<!-- {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}} -->
-
-=======
->>>>>>> 8af75bd067bf5355075c3a82560dbba182eb2325:content/en/product_analytics/heatmaps.md
+## Overview
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps:
