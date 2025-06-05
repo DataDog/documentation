@@ -27,4 +27,4 @@ To set up this processor:
 1. Click **Save**.
 
 [10191]: /observability_pipelines/processors/custom_processor#custom-functions
-[10192]: observability_pipelines/guide/get_started_with_the_custom_processor
+[10192]: /observability_pipelines/guide/get_started_with_the_custom_processor
