@@ -23,13 +23,15 @@ Select your cloud storage service to access setup instructions.
 The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][1]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
 
 1. Go to Datadog > Infrastructure > Storage Monitoring.
-2. Click [Add Buckets][1].
+2. Click [Add Buckets][501].
 
 {{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
 
-   **Note**: Ensure Datadog is able to access your inventory files by adding the `s3:GetObject` and `s3:ListBucket` permissions to the Datadog IAM integration role for the accounts which own those buckets. These read-only permissions should be scoped to only the inventory destination buckets. The destination buckets' policies also must allow your source bucket to write inventory configurations.
+   **Note**: Ensure Datadog is able to access your inventory files by adding the `s3:GetObject` and `s3:ListBucket` permissions to the Datadog IAM integration role for the accounts which own those buckets. These read-only permissions should be scoped to only the inventory destination buckets. 
+   
+   The destination buckets' policies also must allow your source bucket to write inventory configurations. See [Creating a destination bucket policy][502] in the AWS documentation for more information.
 
    Example source-bucket policy:
 
@@ -65,8 +67,8 @@ The fastest way to set up Storage Monitoring is going to **Infrastructure > Stor
 6. Complete the configuration. The inventory generation process will start within AWS within 24 hours of the first report.
 7. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
 
-[1]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
-
+[501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
+[502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
