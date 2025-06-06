@@ -34,8 +34,6 @@ Bits AI is not available for the selected site ({{< region-param key="dd_site_na
 
 Bits is your AI teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
-{{< img src="bits_ai/overview.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
-
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
