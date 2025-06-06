@@ -5,6 +5,7 @@ aliases:
   - /software_catalog/self-service
   - /service_catalog/self-service
   - /software_catalog/self-service_actions
+  - /software_catalog/self_service_actions
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
