@@ -3,6 +3,8 @@ title: Nginx Compatibility Requirements
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /security/application_security/threats/setup/compatibility/nginx
 ---
 
 ## App and API Protection capabilities support
@@ -15,8 +17,6 @@ specified tracer version:
 | Threat Detection                       | 1.2.0                        |
 | Threat Protection                      | 1.3.0                        |
 | Customize response to blocked requests | 1.3.0                        |
-| Software Composition Analysis (SCA)    | not applicable               |
-| Code Security                          | not applicable               |
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 
