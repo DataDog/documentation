@@ -21,7 +21,7 @@ You use Error Tracking to simplify debugging by grouping thousands of similar er
 Issue correlation also helps reduce noise from the issue list by identifying the most critical issues. This allows you to alert the right team and reach a quicker resolution. 
 
 ## Identify correlated issues
-To identify which issues across your services are correlated, navigate to the Error Tracking page at [**Error > Issues**][1]
+To identify which issues across your services are correlated, navigate to the Error Tracking page at [**Error > Issues**][1].
 
 {{< img src="error_tracking/issue-correlation-et-page.png" alt="The issues list in the Error Tracking Explorer" style="width:70%;" >}}
 
