@@ -162,7 +162,7 @@ Added in version 1.17.0. <br>
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively. Applies to web server integrations(ASP.NET, ASP.NET Core, ASP.NET WebAPI, etc...). For incoming requests and outgoing responses handled by these frameworks. This feature does not apply to outbound HTTP client calls.<br><br>
 **Example** (with specified tag names): `User-ID:userId`<br>
 If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
 **Example** (without specified tag names): `User-ID`<br>
