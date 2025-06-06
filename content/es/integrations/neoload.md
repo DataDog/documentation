@@ -42,26 +42,26 @@ public_title: NeoLoad
 short_description: Monitorizar y analizar los resultados de tests de rendimiento de
   NeoLoad
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Notifications
-  - Category::Testing
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
+  - Categoría::Notificaciones
+  - Categoría::Tests
+  - Oferta::Integración
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  configuration: README.md#Configuración
   description: Monitorizar y analizar los resultados de tests de rendimiento de NeoLoad
   media:
   - caption: Dashboard de tests de rendimiento de NeoLoad
     image_url: images/neoload-dashboard.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: NeoLoad
 ---
 

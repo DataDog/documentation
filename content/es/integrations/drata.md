@@ -41,7 +41,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Compliance
+  - Categoría::Cumplimiento
   - Category::Log Collection
   - Category::Security
   - Offering::Integration
