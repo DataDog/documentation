@@ -50,7 +50,7 @@ To match multiple routes, type a wildcard instead of choosing a single view name
 
 {{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img3.png" alt="A Pathways diagram that uses a wildcard to match several routes" style="width:90%;" >}}
 
-## Analyze a Pathways diagram
+## Analyze a pathways diagram
 
 You can hover over a diagram node to view the number of sessions that included visits to that view.
 
