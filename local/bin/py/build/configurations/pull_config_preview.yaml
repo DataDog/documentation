@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs11123/azure-automated-logs
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
