@@ -3,7 +3,7 @@ title: Custom Processor
 disable_toc: false
 ---
 
-{{< callout src="#" header="false" btn_hidden="true" >}}
+{{< callout src="#" btn_hidden="true" >}}
 The Custom Processor is in Preview. Reach out to your account manager to request access.
 {{< /callout >}}
 
