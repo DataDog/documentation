@@ -46475,9 +46475,10 @@ paths:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/csm/onboarding/agents:
@@ -65488,9 +65489,10 @@ paths:
       - Usage Metering
       x-menu-order: 45
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -65595,9 +65597,10 @@ paths:
       - Usage Metering
       x-menu-order: 6
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -65679,9 +65682,10 @@ paths:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -66025,9 +66029,10 @@ paths:
       - Usage Metering
       x-menu-order: 7
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
