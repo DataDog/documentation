@@ -164,7 +164,7 @@ Use the following environment variables to configure runtime metrics in your app
 **Description**: Enables the collection of runtime metrics. Metrics are sent to the Datadog agent, as configured for the instrumented application.
 
 `DD_RUNTIME_ID_ENABLED`
-: **Default**: `false` for NodeJs, Ruby and Python languages <br>
+: **Default**: `false` for Node.js, Ruby and Python languages <br>
 **Description**: Provides a runtime_id tag along with every metric. The runtime_id represents the application's process identifier and allows you to directly correlate runtime metrics with individual running applications.
 
 `DD_AGENT_HOST`
