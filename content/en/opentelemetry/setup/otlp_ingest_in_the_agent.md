@@ -21,7 +21,7 @@ further_reading:
 
 OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
 
-OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as Application Security Management, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
+OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol to a Collector with Datadog Exporter, which forwards to Datadog's platform." style="width:100%;" >}}
 
@@ -104,11 +104,11 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
 <div class="alert alert-warning">
-<strong>Known Issue</strong>: Agent versions 7.61.0 through 7.63.0 have an issue where OTLP ingestion pipelines may fail to start in Docker environments, showing the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br>
-If you are using an affected version, you can use one of these workarounds:<br>
+<strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
+If you are using an affected version, you can use one of these workarounds:<br><br>
 1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
 2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
-3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br><br>
 These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
 
 [1]: /agent/docker/

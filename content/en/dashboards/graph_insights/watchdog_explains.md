@@ -7,12 +7,15 @@ further_reading:
 - link: "/watchdog/insights/"
   tag: "Documentation"
   text: "Learn more about Watchdog Insights"
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 ---
 
 ## Overview
 
-{{<callout url="https://www.datadoghq.com/private-beta/watchdog-explains-graph-insights/" header="Access the Preview!">}}
-Watchdog Explains is available in Preview. To request access, complete the form.
+{{<callout btn_hidden="true" header="Join the Preview!">}}
+Watchdog Explains is available in Preview.
 {{</callout >}}
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>

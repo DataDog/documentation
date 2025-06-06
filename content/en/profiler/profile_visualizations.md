@@ -61,7 +61,7 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
 
 ### Single profile
 
@@ -109,7 +109,7 @@ To access the timeline view:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,full_host" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -180,6 +180,10 @@ Fibers that run in this **thread** are represented in the same lane.
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
+{{< /programming-lang >}}
+
+{{< programming-lang lang="full_host" >}}
+Timeline view is currently not supported for Full Host profiling
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

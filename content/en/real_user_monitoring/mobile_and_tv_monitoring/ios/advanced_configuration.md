@@ -192,6 +192,8 @@ In addition to the [default RUM attributes][6] captured by the RUM iOS SDK autom
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
+<div class="alert alert-info">Custom attributes are intended for small, targeted pieces of information (e.g., IDs, flags, or short labels). Avoid attaching large objects such as full HTTP response payloads. This can significantly increase event size and impact performance.</div>
+
 ### Set a custom global attribute
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
