@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-Use this guide to set up logging from your Azure subscriptions to Datadog.
+Use this guide to set up logging from your Azure subscriptions to any Datadog site.
 
-Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream to an Event Hub, use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, use the Azure Event Hub process.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, you can use an Azure Resource Manager (ARM) template to [automate log forwarding setup][9] across your Azure environment with no manual configuration. This feature automatically manages and scales log forwarding services.
 
-Follow these steps to send Azure logs to any Datadog site.
+Alternatively, you can manually set up a log forwarding pipeline using an Azure Event Hub to collect [Azure logs][2]. For resources that cannot stream to an Event Hub, you can use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, use the automated ARM template or Azure Event Hub process.
 
 **US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
 
@@ -29,6 +29,24 @@ Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatib
 ## Setup
 
 {{< tabs >}}
+
+{{% tab "Automated" %}}
+
+1. Open the [Automated Log Forwarding ARM template][201] in Azure.
+2. Configure your Azure project and instance details on the [Basics tab][202].
+3. Enter your Datadog credentials on the [Datadog Configuration tab][203].
+4. Acknowledge deployment warnings on the [Deployment tab][204].
+5. Start the deployment process on the [Review + create tab][205].
+
+See [Azure Automated Log Forwarding Architecture and Configuration][206] for more details.
+
+[201]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[202]: /logs/guide/azure-automated-log-forwarding/#basics
+[203]: /logs/guide/azure-automated-log-forwarding/#datadog-configuration
+[204]: /logs/guide/azure-automated-log-forwarding/#deployment
+[205]: /logs/guide/azure-automated-log-forwarding/#review--create
+[206]: /logs/guide/azure-automated-logs-architecture/
+{{% /tab %}}
 
 {{% tab "Event Hub" %}}
 
@@ -143,11 +161,11 @@ After configuring an App Registration, you can [create a log archive][3] that wr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
+[2]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/data-sources
 [3]: /logs/log_configuration/archives/?tab=azurestorage#configure-an-archive
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [6]: /data_security/pci_compliance/?tab=logmanagement
 [7]: /integrations/guide/azure-programmatic-management/#datadog-azure-integration
 [8]: /integrations/guide/azure-manual-setup/#setup
-
+[9]: /logs/guide/azure-automated-log-forwarding/
