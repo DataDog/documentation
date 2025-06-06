@@ -42,10 +42,10 @@ Bits can dynamically populate key details in stakeholder notifications—deliver
 1. In the message body, insert any of the following AI variables:
    | Field                   | Variable                               |
    |-------------------------|----------------------------------------|
-   | AI issue                | `{{incident.ai_issue}}`                |
-   | AI impact               | `{{incident.ai_impact}}`               |
-   | AI contributing factors | `{{incident.ai_contributing_factors}}` |
-   | AI remediation          | `{{incident.ai_remediation}}`          |
+   | AI Contributing Factors | `{{incident.ai_contributing_factors}}` |
+   | AI Impact               | `{{incident.ai_impact}}`               |
+   | AI Issue                | `{{incident.ai_issue}}`                |
+   | AI Remediation          | `{{incident.ai_remediation}}`          |
 1. Click **Save** to save the template.
 1. Go to your incident [Notification Rules][2].
 1. Click **New Rule**.
@@ -54,9 +54,11 @@ Bits can dynamically populate key details in stakeholder notifications—deliver
 
 ## Proactive incident summaries
 
-When you join an incident channel in Slack (connected to Datadog Incident Management), Bits automatically posts a summary containing key information about the incident such as the issue, contributing factors, impact, and remediation. This summary is only visible to you. 
+When you join an incident channel in Slack (connected to Datadog Incident Management), Bits automatically posts a summary containing key information about the incident such as the contributing factors, impact, issue, and remediation. This summary is only visible to you. 
 
 When an incident is changed to resolved, Bits posts a final summary. This is visible to everyone in the channel.
+
+{{< img src="bits_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
 ## Related incident detection
 

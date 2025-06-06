@@ -24,6 +24,8 @@ Investigations happen in two phases:
 
 For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
 
+{{< img src="bits_ai/how_bits_investigates.png" alt="Example Bits investigation and conclusion for why a monitor was triggered" style="width:100%;" >}}
+
 ## Get started with alert investigations
 
 ### Optimize monitors for Bits AI SRE
@@ -40,6 +42,8 @@ To help Bits produce the most accurate and helpful investigation results, follow
     - A trace query
     - A Datadog notebook with key graphs or instructions 
     - A Confluence page
+
+{{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ### Enable Bits on monitors for automated investigations
 
