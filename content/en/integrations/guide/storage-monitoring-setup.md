@@ -22,17 +22,21 @@ Select your cloud storage service to access setup instructions.
 
 The fastest way to set up Storage Monitoring is going to **Infrastructure > Storage Monitoring > [Add Buckets][1]**. On the Add Buckets page, you can configure multiple S3 buckets for Storage Monitoring in one go.
 
-1. Go to Datadog > Infrastructure > Storage Monitoring.
+1. Go to Datadog > **Infrastructure** > **Storage Monitoring**.
 2. Click [Add Buckets][501].
 
 {{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 3. Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
 
-   **Note**: Ensure Datadog is able to access your inventory files by adding the `s3:GetObject` and `s3:ListBucket` permissions to the Datadog IAM integration role for the accounts which own those buckets. These read-only permissions should be scoped to only the inventory destination buckets. 
+   1. **Allow Datadog to read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
+      - `s3:GetObject`
+      - `s3:ListBucket`
+      
+      Scope these read-only permissions to only the destination buckets containing your S3 inventory files.
+      
+   1. **Allow source buckets to write to destination buckets.** The destination buckets must include a policy that allows the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details.
    
-   The destination buckets' policies also must allow your source bucket to write inventory configurations. See [Creating a destination bucket policy][502] in the AWS documentation for more information.
-
    Example source-bucket policy:
 
       ```json
@@ -147,7 +151,7 @@ After completing the CloudFormation setup, fill out the [post-setup form][105] w
 
 You can use the Terraform `aws_s3_bucket_inventory` resource to set up Storage Monitoring. 
 
-The example below shows how to enable daily inventory on an S3 bucket for Datadog monitoring. To use this example:
+The following example shows how to enable daily inventory on an S3 bucket for Datadog monitoring. To use this example:
 
    - Replace `<MY_MONITORED_BUCKET>` with the name of the bucket to be monitored.
    - Replace `<MY_INVENTORY_DESTINATION>` with the name of the bucket that receives your inventory files.
@@ -189,7 +193,7 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 
 **Notes**:
 
-   - The destination bucket can be your source bucket, but for security/logical separation, many organizations use a separate bucket.
+   - The destination bucket can be your source bucket, but for security and logical separation, many organizations use a separate bucket.
    - The `optional_fields` section is recommended for Datadog prefix metrics.
 
 ### Post-setup steps
@@ -225,7 +229,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 2. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListObjects` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
-### Step 3: Configure Inventory generation
+### Step 3: Configure inventory generation
 
 For each bucket you want to monitor:
 1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
@@ -498,7 +502,7 @@ curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh \
 Before running the script, set your [shell environment][302] to Bash and replace the various placeholder inputs with the correct values:
 - `<CLIENT_ID>`: The client ID of an App Registration already set up using the [Datadog Azure integration][302]
 - `<SUBSCRIPTION_ID>`: The subscription ID of the Azure subscription containing the storage accounts
-- `<COMMA_SEPARATED_STORAGE_ACCOUNT_NAMES>`: A comma-separated list of the storage accounts you want to monitor. For example, `storageaccount1,storageaccount2`
+- `<COMMA_SEPARATED_STORAGE_ACCOUNT_NAMES>`: A comma-separated list of the storage accounts you want to monitor (for example, `storageaccount1,storageaccount2`)
 
 [301]: https://shell.azure.com
 [302]: /integrations/azure/#setup
