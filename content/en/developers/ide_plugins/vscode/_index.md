@@ -86,6 +86,8 @@ Install the extension either directly in the IDE, or from the web:
 
 ### MCP server setup (Cursor only)
 
+<div class="alert alert-info">The Datadog MCP server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
+
 In Cursor, the extension includes access to the Datadog Model Context Protocol (MCP) server. Enable the MCP server to enhance Cursor's AI capabilities with your specific Datadog environment.
 
 1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
