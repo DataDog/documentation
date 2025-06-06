@@ -18,7 +18,7 @@ Issue Correlation with Error Tracking is currently in Preview, but you can easil
 
 You use Error Tracking to simplify debugging by grouping thousands of similar errors into a single issue. Use issue correlation to determine the cause of the issue, the impact it has on other services, and if the error is a result of a downstream dependency. 
 
-Issue correlation also helps in reducing noise from the issue list by identifying the most critical issues. This allows you to alert the right team and reach a quicker resolution. 
+Issue correlation also helps reduce noise from the issue list by identifying the most critical issues. This allows you to alert the right team and reach a quicker resolution. 
 
 ## Identify correlated issues
 To identify which issues across your services are correlated, navigate to the Error Tracking page at [**Error > Issues**][1]
