@@ -85,7 +85,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
-
+| [Agent API key updated][166]                    | A Datadog Agent API key was changed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent API Key Updated"`                         |
+| [Agent upgrade succeeded][167]                    | A Datadog Agent was successfully upgraded.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Succeeded"`                         |
+| [Agent upgrade failed][168]                    | A Datadog Agent remote upgrade attempt failed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Failed"`  
 
 ### API request events
 
@@ -557,3 +559,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
 [164]:https://app.datadoghq.com/audit-trail?query=%20%40evt.name%3A"LLM%20Observability"%20%40action%3A%28enabled%20OR%20modified%20OR%20disabled%29%20%40asset.type%3Aevaluations
 [165]:/llm_observability/evaluations/ootb_evaluations
+[166]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20API%20Key%20Updated%22
+[167]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Succeeded%22
+[168]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Failed%22
