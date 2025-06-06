@@ -20,7 +20,7 @@ Select your cloud storage service to access setup instructions.
 {{< tabs >}}
 {{% tab "Recommended: Storage Monitoring UI" %}}
 
-The fastest way to configure Storage Monitoring is through the **Add Buckets** page in Datadog, where you can set up multiple S3 buckets at the same time.
+The fastest way to configure Storage Monitoring is through the [Add Buckets][501] page in Datadog, where you can set up multiple S3 buckets at the same time.
 
 1. Go to Datadog > **Infrastructure** > **Storage Monitoring**.
 2. Click [Add Buckets][501].
