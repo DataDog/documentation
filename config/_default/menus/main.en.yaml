@@ -4780,12 +4780,28 @@ menu:
       parent: cd
       identifier: cd_monitors
       weight: 4
+    - name: Deployment Gates
+      url: deployment_gates/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: deployment_gates
+      weight: 30000
+    - name: Setup
+      url: deployment_gates/setup/
+      parent: deployment_gates
+      identifier: deployment_gates_setup
+      weight: 1
+    - name: Explore
+      url: deployment_gates/explore/
+      parent: deployment_gates
+      identifier: deployment_gates_explore
+      weight: 2
     - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
       identifier: tests
-      weight: 30000
+      weight: 40000
     - name: Setup
       url: tests/setup/
       parent: tests
