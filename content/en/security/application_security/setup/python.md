@@ -9,6 +9,7 @@ aliases:
   - /security/application_security/enabling/tracing_libraries/threat_detection/python
   - /security/application_security/threats/setup/threat_detection/python
   - /security/application_security/threats_detection/python
+  - /security/application_security/setup/aws/fargate/python
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
