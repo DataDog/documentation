@@ -190,7 +190,7 @@ Select a stack trace frame and inspect the values of all the variables that Data
 
 {{< tabs >}}
 {{% tab "VS Code" %}}
-This extension feature is not yet supported in VS Code.
+This extension feature is not supported in VS Code.
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
