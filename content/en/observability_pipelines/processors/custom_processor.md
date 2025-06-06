@@ -4,7 +4,7 @@ disable_toc: false
 ---
 
 {{< callout src="#" header="false" btn_hidden="true" >}}
-The Custom Processor is in Preview.
+The Custom Processor is in Preview. Reach out to your account manager to request access.
 {{< /callout >}}
 
 {{% observability_pipelines/processors/custom_processor %}}
