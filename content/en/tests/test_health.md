@@ -21,9 +21,11 @@ further_reading:
 
 ## Overview
 
-The [Test Health][5] dashboard provides analytics to help teams manage and optimize their testing in CI. This includes sections showing the current impact of test flakiness and how Test Optimization is mitigating these problems.
+The [Test Health][5] dashboard provides analytics to help teams manage and optimize their testing in CI. This includes sections showing the current impact of test flakiness and how Test Optimization is mitigating these problems. 
 
-{{< img src="tests/test-health.png" alt="Test Health dashboard" style="width:100%;" >}}
+The dashboard also provides [Test Health recommendations](#test-health-recommendations) to suggest specific Datadog features and strategies you can enable to reduce flaky test failures and recover CI time.
+
+{{< img src="tests/test-health-2.png" alt="Test Health dashboard" style="width:100%;" >}}
 
 ## Summary metrics
 
@@ -95,6 +97,19 @@ These Test Optimization features help you save CI time and costs:
 - **[Auto Test Retries][1]**: If a single flaky test fails during your session, the entire duration of the CI job is lost. Auto Test Retries allow flaky tests to rerun, increasing the likelihood of passing.
 - **[Test Impact Analysis][4]**: By running only tests relevant to your code changes, you reduce the overall duration of the test session. This also prevents pipelines from failing due to unrelated flaky tests if you skip them.
 
+## Test Health recommendations
+
+The Test Health dashboard provides data-driven, repository-specific suggestions for improving the reliability and efficiency of your testing. Select a repository with a light bulb icon to view recommended features, and use the toggles to turn on features directly from the dashboard.
+
+{{< img src="tests/test-health-recommendations.png" alt="Recommendations side panel opened on the Test Health dashboard" style="width:100%;" >}}
+
+Each recommendation estimates how much you can reduce test failures and CI time by enabling a specific Test Optimization feature. Recommendations may include the following:
+
+- **[Auto Test Retries][1]**: Retry failing tests to avoid failing your build due to flaky tests.
+- **[Test Impact Analysis][4]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.
+
+The dashboard only recommends features that are available in a given repository, based on [supported][6] programming languages and test frameworks.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -104,3 +119,4 @@ These Test Optimization features help you save CI time and costs:
 [3]: /quality_gates/
 [4]: /tests/test_impact_analysis/
 [5]: https://app.datadoghq.com/ci/test/health
+[6]: /tests/#supported-features
