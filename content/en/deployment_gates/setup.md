@@ -227,8 +227,8 @@ This is a general behavior, and you should change it based on your personal use 
 
 [1]: /getting_started/site/
 {{% /tab %}}
-{{% tab "Argo Rollout" %}}
-To call Deployment Gates from an Argo Rollout Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
+{{% tab "Argo Rollouts" %}}
+To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
 
 Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example, {{< region-param key="dd_site" code="true" >}}).
 
@@ -321,7 +321,7 @@ spec:
 * The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
 * The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
 
-After you have created the analysis template, reference it from the Argo Rollout strategy:
+After you have created the analysis template, reference it from the Argo Rollouts strategy:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -364,7 +364,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Recommendation for first-time onboardings
+## Recommendation for first-time onboarding
 
 When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase is recommended to confirm the product is working as expected before it impacts deployments. You can do this using the Dry Run evaluation mode and the **Deployment Gates Evaluations** page:
 1. Create a gate for a service and set the evaluation mode as `Dry Run`.
