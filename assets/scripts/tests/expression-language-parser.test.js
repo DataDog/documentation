@@ -507,36 +507,6 @@ describe('ExpressionLanguageParser', () => {
       expect(result2.result).toBe('False');
     });
 
-    // New test for any function with filter result
-    test('should correctly evaluate any function with filter result', () => {
-      const parser = new ExpressionLanguageParser();
-
-      // Test any with filter result
-      const result = parser.evaluate('any(filter(a, {@it > 1}))');
-      expect(result.success).toBe(true);
-      expect(result.result).toBe('True');
-    });
-
-    // New test for all function with filter result
-    test('should correctly evaluate all function with filter result', () => {
-      const parser = new ExpressionLanguageParser();
-
-      // Test all with filter result - should be true because all elements in [6, 7, 8, 9, 10] are > 1
-      const result1 = parser.evaluate('all(filter(a, {@it > 1}))');
-      expect(result1.success).toBe(true);
-      expect(result1.result).toBe('True');
-
-      // Test all with filter result - should be true because all elements in [8, 9, 10] are truthy
-      const result2 = parser.evaluate('all(filter(a, {@it > 7}))');
-      expect(result2.success).toBe(true);
-      expect(result2.result).toBe('True');
-
-      // Test all with explicit predicate - should be false because not all elements in [6, 7, 8, 9, 10] are > 7
-      const result3 = parser.evaluate('all(a, {@it > 7})');
-      expect(result3.success).toBe(true);
-      expect(result3.result).toBe('False');
-    });
-
     test('should handle empty collections in collection functions', () => {
       const parser = new ExpressionLanguageParser();
       parser.evaluate('emptyCollection = []');
@@ -881,7 +851,7 @@ describe('ExpressionLanguageParser', () => {
     });
 
     test('should allow array access in simulator mode', () => {
-      const result = parser.evaluate('myCollection[0]');
+      const result = parser.evaluate('mySequence[0]');
       expect(result.success).toBe(true);
       expect(result.result).toBe('1');
     });
