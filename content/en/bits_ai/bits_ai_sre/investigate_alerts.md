@@ -97,8 +97,6 @@ Investigations happen in two phases:
 
 For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
 
-{{< img src="bits_ai/how_bits_investigates.png" alt="Example Bits investigation and conclusion for why a monitor was triggered" style="width:100%;" >}}
-
 ## Chat with Bits AI SRE about the investigation
 
 On the [Bits AI Investigations][2] page, you can chat with Bits to gather additional information about the investigation or the services involved. Click the **Suggested replies** bubble for examples.
@@ -124,6 +122,8 @@ You can guide Bits' learning by:
 
 ### After the investigation
 At the end of an investigation, let Bits know if the conclusion it made was correct or not. If it was inaccurate, provide Bits with the correct root cause so that it can learn from the discrepancy.
+
+{{< img src="bits_ai/help_bits_ai_learn.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
 
 ### Manage memories 
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to [Bits-Enabled Monitors][3] to view and delete memories in the **Memories** column.

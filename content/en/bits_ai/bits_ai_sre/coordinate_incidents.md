@@ -28,9 +28,10 @@ Bits AI SRE helps coordinate incidents—especially those involving multiple tea
 1. Enable the Slack integration in Datadog Incident Management.
    1. In the [Integrations][4] section of the Incidents settings page, find the **Slack** settings.
    1. Enable the following toggles:
-      - Push Slack channel messages to the incident timeline
-      - Activate Bits AI features in incident Slack channels for your organization<br />
+      - **Push Slack channel messages to the incident timeline**
+      - **Activate Bits AI features in incident Slack channels for your organization**<br />
       **Note**: Bits AI's incident management features can only be activated for one Datadog organization within a single Slack workspace.
+      {{< img src="bits_ai/coordinate_incidents_slack_settings.png" alt="Slack integration settings with the specified toggles enabled" style="width:100%;" >}}
 1. To interact with Bits AI in a Slack channel, invite it by running the `@Datadog` command.
 
 ## Customize stakeholder notifications 
@@ -40,12 +41,33 @@ Bits can dynamically populate key details in stakeholder notifications—deliver
 1. In your Incidents settings, go to [Message Templates][1].
 1. Create a new template or edit an existing one.
 1. In the message body, insert any of the following AI variables:
-   | Field                   | Variable                               |
-   |-------------------------|----------------------------------------|
-   | AI Contributing Factors | `{{incident.ai_contributing_factors}}` |
-   | AI Impact               | `{{incident.ai_impact}}`               |
-   | AI Issue                | `{{incident.ai_issue}}`                |
-   | AI Remediation          | `{{incident.ai_remediation}}`          |
+   <table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Variable</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>AI Contributing Factors</td>
+            <td><code>{{incident.ai_contributing_factors}}</code></td>
+        </tr>
+        <tr>
+            <td>AI Impact</td>
+            <td><code>{{incident.ai_impact}}</code></td>
+        </tr>
+        <tr>
+            <td>AI Issue</td>
+            <td><code>{{incident.ai_issue}}</code></td>
+        </tr>
+        <tr>
+            <td>AI Remediation</td>
+            <td><code>{{incident.ai_remediation}}</code></td>
+        </tr>
+    </tbody>
+   </table>
+   {{< img src="bits_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:100%;" >}}
 1. Click **Save** to save the template.
 1. Go to your incident [Notification Rules][2].
 1. Click **New Rule**.
