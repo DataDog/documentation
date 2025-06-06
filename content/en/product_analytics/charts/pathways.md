@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Pathway diagrams allow you to visualize all user journeys across your application to analyze the critical path.
+Pathways diagrams allow you to visualize all user journeys across your application to analyze the critical path.
 
 {{< img src="/product_analytics/journeys/pathways/ga_pathway_diagrams_page.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
 
