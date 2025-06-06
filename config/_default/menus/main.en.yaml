@@ -2013,6 +2013,11 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: bits_ai
+      identifier: bits_ai_dev_agent
+      weight: 4
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2195,6 +2200,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_issue_correlation
       weight: 9
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: error_tracking
+      identifier: error_tracking_bits_ai_dev_agent
+      weight: 5
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
@@ -7933,41 +7943,46 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: User Retention
-      url: product_analytics/user_retention
+    - name: Vizualizing with Charts
+      url: product_analytics/charts
       parent: product_analytics
-      identifier: pa_user_retention
+      identifier: pa_charts
       weight: 1
-    - name: Journeys
-      url: product_analytics/journeys
-      parent: product_analytics
-      identifier: pa_journeys
-      weight: 2
-    - name: Pathway Diagrams
-      url: product_analytics/journeys/pathways
-      parent: pa_journeys
+    - name: Pathways Diagram
+      url: product_analytics/charts/pathways
+      parent: pa_charts
       identifier: pa_pathways
-      weight: 201
+      weight: 101
     - name: Funnel Analysis
-      url: product_analytics/journeys/funnel_analysis
-      parent: pa_journeys
+      url: product_analytics/charts/funnel_analysis
+      parent: pa_charts
       identifier: pa_funnel_analysis
-      weight: 202
-    - name: Heatmaps
-      url: product_analytics/heatmaps
+      weight: 102
+    - name: User Retention
+      url: product_analytics/charts/user_retention
+      parent: pa_charts
+      identifier: pa_user_retention
+      weight: 103
+    - name: Analytics Explorer
+      url: product_analytics/charts/analytics_explorer
+      parent: pa_charts
+      identifier: pa_analytics_explorer
+      weight: 104
+    - name: Dashboards
+      url: product_analytics/dashboards
       parent: product_analytics
-      identifier: pa_heatmaps
-      weight: 3
-    - name: Session Replay
+      identifier: pa_dashboard
+      weight: 2
+    - name: Replaying User Activity
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 4
+      weight: 3
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 401
+      weight: 301
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -7992,7 +8007,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 402
+      weight: 302
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -8042,17 +8057,17 @@ menu:
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 6
+      weight: 4
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 7
+      weight: 5
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 8
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2
