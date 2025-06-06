@@ -113,9 +113,9 @@ For insights into your infrastructure's reliability, cost optimization, operatio
 
 {{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Policies" style="width:100%;" >}}
 
-### Remediate with native actions
+### Remediate with Native Actions
 
-All policy templates come equipped with suggested remediation steps based on industry best practices, as well as Datadog Native Actions in some cases. Using native actions, you can remediate misconfigurations without ever leaving Datadog for the following policy templates:
+All policy templates come equipped with suggested remediation steps based on industry best practices, as well as Datadog Native Actions in some cases. Using Native Actions, you can remediate misconfigurations without ever leaving Datadog for the following policy templates:
 
 * Amazon RDS instances should be configured with Multi-AZ deployment  
 * Amazon EBS volume type should be upgraded from GP2 to GP3  
