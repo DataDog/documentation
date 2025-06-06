@@ -17,7 +17,7 @@
   },
   {
     "client": "datadog-api-client-typescript",
-    "version": "v1.35.0"
+    "version": "services/workflow_automation/0.0.1-beta.1"
   },
   {
     "client": "datadog-api-client-rust",
