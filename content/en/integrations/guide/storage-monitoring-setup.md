@@ -149,7 +149,7 @@ After completing the CloudFormation setup, fill out the [post-setup form][105] w
 
 {{% tab "Terraform" %}}
 
-You can use the Terraform `aws_s3_bucket_inventory` resource to set up Storage Monitoring. 
+You can use the Terraform [aws_s3_bucket_inventory][403] resource to set up Storage Monitoring. 
 
 The following example shows how to enable daily inventory on an S3 bucket for Datadog monitoring. To use this example:
 
@@ -212,6 +212,7 @@ If you need to manage multiple buckets, complex inventory policies, encryption, 
 
 [401]: https://docs.google.com/forms/d/e/1FAIpQLScd0xor8RQ76N6BemvvMzg9UU7Q90svFrNGY8n83sMF2JXhkA/viewform
 [402]: https://github.com/terraform-aws-modules/terraform-aws-s3-bucket/tree/master/examples/s3-inventory
+[403]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_inventory
 {{% /tab %}}
 
 {{% tab "AWS Console" %}}
@@ -270,6 +271,18 @@ After completing the above steps, fill out the [post-setup form][205] with the f
 [205]: https://forms.gle/L97Ndxr2XLen1GBs7
 [206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 {{% /tab %}}
+
+{{% tab "Existing S3 inventory" %}}
+
+If you have already configured S3 inventory for the buckets you want to monitor, choose **one** of the following options:
+
+- Fill out [this form][601] to share your configurations with Datadog
+- [Reach out to us][602] to use an API for setting up multiple buckets
+
+[601]: [https://forms.gle/dhDbSxTvCUDXg1QR7]
+[602]: mailto:storage-monitoring@datadoghq.com
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Validation
@@ -475,8 +488,6 @@ To verify your setup:
 4. Navigate to Infrastructure -> Storage Monitoring -> Installation Recommendations to see if your configured bucket appears in the list
 
 ### Troubleshooting
-
-
 
 If you encounter any issues or need assistance:
 - Use only one destination bucket for all inventory files per Google Cloud project
