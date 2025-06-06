@@ -6677,7 +6677,7 @@ menu:
       parent: asm_serverless
       identifier: asm_serverless_compat
       weight: 1
-    - name: Overview
+    - name: Attack Summary
       url: security/application_security/overview
       parent: application_security
       identifier: application_security_overview
