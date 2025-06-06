@@ -575,6 +575,14 @@ components:
       required: true
       schema:
         type: string
+    KindID:
+      description: Entity kind.
+      in: path
+      name: kind_id
+      required: true
+      schema:
+        example: my-job
+        type: string
     MetricID:
       description: The name of the log-based metric.
       in: path
@@ -19425,6 +19433,90 @@ components:
       - index
       - caseIndex
       type: object
+    KindAttributes:
+      description: Kind attributes.
+      properties:
+        description:
+          description: Short description of the kind.
+          type: string
+        displayName:
+          description: User friendly name of the kind.
+          type: string
+        name:
+          description: The kind name.
+          example: my-job
+          minLength: 1
+          type: string
+      type: object
+    KindData:
+      description: Schema that defines the structure of a Kind object in the Software
+        Catalog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/KindAttributes'
+        id:
+          description: A read-only globally unique identifier for the entity generated
+            by Datadog.  User supplied values are ignored.
+          example: 4b163705-23c0-4573-b2fb-f6cea2163fcb
+          minLength: 1
+          type: string
+        meta:
+          $ref: '#/components/schemas/KindMetadata'
+        type:
+          description: Kind.
+          type: string
+      type: object
+    KindMetadata:
+      description: Kind metadata.
+      properties:
+        createdAt:
+          description: The creation time.
+          type: string
+        modifiedAt:
+          description: The modification time.
+          type: string
+      type: object
+    KindObj:
+      description: Schema for kind.
+      properties:
+        description:
+          description: Short description of the kind.
+          type: string
+        displayName:
+          description: The display name of the kind. Automatically generated if not
+            provided.
+          type: string
+        kind:
+          description: The name of the kind to create or update. This must be in kebab-case
+            format.
+          example: my-job
+          type: string
+      required:
+      - kind
+      type: object
+    KindRaw:
+      description: Kind definition in raw JSON or YAML representation.
+      example: 'kind: service
+
+        displayName: Service
+
+        description: A service entity in the catalog.
+
+        '
+      type: string
+    KindResponseData:
+      description: List of kind responses.
+      items:
+        $ref: '#/components/schemas/KindData'
+      type: array
+    KindResponseMeta:
+      description: Kind response metadata.
+      properties:
+        count:
+          description: Total kinds count.
+          format: int64
+          type: integer
+      type: object
     Layer:
       description: Encapsulates a layer resource, holding attributes like rotation
         details, plus relationships to the members covering that layer.
@@ -20152,6 +20244,14 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/HistoricalJobListMeta'
+      type: object
+    ListKindCatalogResponse:
+      description: List kind response.
+      properties:
+        data:
+          $ref: '#/components/schemas/KindResponseData'
+        meta:
+          $ref: '#/components/schemas/KindResponseMeta'
       type: object
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
@@ -40195,6 +40295,19 @@ components:
       description: Upsert entity response included item.
       oneOf:
       - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+    UpsertCatalogKindRequest:
+      description: Create or update kind request.
+      oneOf:
+      - $ref: '#/components/schemas/KindObj'
+      - $ref: '#/components/schemas/KindRaw'
+    UpsertCatalogKindResponse:
+      description: Upsert kind response.
+      properties:
+        data:
+          $ref: '#/components/schemas/KindResponseData'
+        meta:
+          $ref: '#/components/schemas/KindResponseMeta'
+      type: object
     Urgency:
       description: Specifies the level of urgency for a routing rule (low, high, or
         dynamic).
@@ -44838,6 +44951,125 @@ paths:
       tags:
       - Software Catalog
       x-menu-order: 3
+      x-undo:
+        type: idempotent
+  /api/v2/catalog/kind:
+    get:
+      description: Get a list of entity kinds from Software Catalog.
+      operationId: ListCatalogKind
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of kinds in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterByID'
+      - $ref: '#/components/parameters/FilterByName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListKindCatalogResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity kinds
+      tags:
+      - Software Catalog
+      x-menu-order: 4
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+    post:
+      description: Create or update kinds in Software Catalog.
+      operationId: UpsertCatalogKind
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCatalogKindRequest'
+        description: Kind YAML or JSON.
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertCatalogKindResponse'
+          description: ACCEPTED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create or update kinds
+      tags:
+      - Software Catalog
+      x-codegen-request-body-name: body
+      x-given:
+        kind:
+          parameters:
+          - name: body
+            value: "{\n  \"kind\": \"my-job\",\n  \"displayName\": \"My Job\",\n  \"description\":
+              \"A job entity in the catalog.\"\n}"
+          step: there is a valid kind
+      x-menu-order: 5
+      x-undo:
+        operationId: DeleteCatalogKind
+        parameters:
+        - name: kind_id
+          source: data[0].id
+        type: unsafe
+  /api/v2/catalog/kind/{kind_id}:
+    delete:
+      description: Delete a single kind in Software Catalog.
+      operationId: DeleteCatalogKind
+      parameters:
+      - $ref: '#/components/parameters/KindID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a single kind
+      tags:
+      - Software Catalog
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v2/catalog/relation:
