@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="/serverless/google_cloud#sidecar-vs-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
 
 The recommended process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
 
@@ -69,7 +69,7 @@ You can use `npm install dd-trace` to add the tracer to your package.
 
 #### Dockerfile
 
-Your `Dockerfile` can look something like this. This creates a minimal application container with metrics, traces, logs, and profiling. 
+Your `Dockerfile` can look something like this. This creates a minimal application container with metrics, traces, logs, and profiling.
 
 **Note**: The Dockerfile needs to be built for the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
 
@@ -114,9 +114,11 @@ See the [Sample App][6] for an example of metrics, tracing, and logging in a Pyt
 
 The `dd-trace-py` library provides support for [tracing][1]. The `datadog-py` library handles custom [metrics][3].
 
-Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code.
+Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code. This is usually done with `ddtrace-run python app.py`. The [Sample App][6] includes a `Dockerfile` which uses this pattern.
 
-Application [logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and trace correlation][5] is not supported for Google Cloud Run services. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log`, which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory.
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory.
+
+[Log and Trace Correlation][5] is not supported for Google Cloud Run services written in Python.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
@@ -212,6 +214,8 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 The `DD_SERVERLESS_LOG_PATH` environment variable is not required on the application. But it can be set there and then used to configure the application's log filename. This avoids manually synchronizing the Cloud Run service's log path with the application code that writes to it.
 
 The `DD_LOGS_ENABLED` environment variable is not required.
+
+The `DD_SERVICE` lable needs to be set on the Sidecar and the Application. The service value should also be set on the `service` label applied to the Google Cloud Run service. This will ensure that the Google Cloud integration correctly picks up the Cloud Run service. More information about Google Cloud labels can be found in the [official docs][15].
 {{< tabs >}}
 {{% tab "GCR UI" %}}
 1. On the Cloud Run service page, select **Edit & Deploy New Revision**.
@@ -247,11 +251,13 @@ Add a `service` label which matches the `DD_SERVICE` value on the containers to 
     - with some details.
 {{% /tab %}}
 {{% tab "Terraform" %}}
-The [Python Sample App][1] includes an example of a Terraform configuration.
+<<<<<<< HEAD
+The [Python Sample App][1] includes an example of a Terraform configuration. The app uses the `google_cloud_run_v2_service` [resource][2] from the `hashicorp/google` provider.
 
 **Note**: The `service` value needs to be set in multiple locations, and the shared log volume needs to be connected to both the application and the sidecar containers.
 
 [1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
+[2]: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_v2_service
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -276,3 +282,4 @@ The [Python Sample App][1] includes an example of a Terraform configuration.
 [12]: /tracing/other_telemetry/connect_logs_and_traces/go
 [13]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [14]: /getting_started/tagging/unified_service_tagging/
+[15]: https://cloud.google.com/run/docs/configuring/services/labels
