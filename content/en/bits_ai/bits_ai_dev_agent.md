@@ -26,7 +26,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 
 | Product                   | Availability          | Issues Detected                                                    |
 |---------------------------|----------------------|--------------------------------------------------------------------|
-| [Error Tracking][1]       | Limited Availability | Crashes, panics, exceptions, unhandled errors                      |
+| [Error Tracking][1]       | Preview              | Crashes, panics, exceptions, unhandled errors                      |
 | [Code Security][2]        | Preview              | Security issues in first-party code and open source dependencies   |
 | [Continuous Profiler][3]  | Preview              | Code-level performance issues                                      |
 
