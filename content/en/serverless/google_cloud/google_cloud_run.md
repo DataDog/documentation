@@ -215,7 +215,7 @@ The `DD_SERVERLESS_LOG_PATH` environment variable is not required on the applica
 
 The `DD_LOGS_ENABLED` environment variable is not required.
 
-The `DD_SERVICE` lable needs to be set on the Sidecar and the Application. The service value should also be set on the `service` label applied to the Google Cloud Run service. This will ensure that the Google Cloud integration correctly picks up the Cloud Run service. More information about Google Cloud labels can be found in the [official docs][15].
+The `DD_SERVICE` lable needs to be set on the Sidecar and the Application. The service value should also be set on the `service` label applied to the Google Cloud Run service. This ensures that the Google Cloud integration correctly picks up the Cloud Run service. More information about Google Cloud labels can be found in the [official docs][15].
 {{< tabs >}}
 {{% tab "GCR UI" %}}
 1. On the Cloud Run service page, select **Edit & Deploy New Revision**.
@@ -251,10 +251,9 @@ Add a `service` label which matches the `DD_SERVICE` value on the containers to 
     - with some details.
 {{% /tab %}}
 {{% tab "Terraform" %}}
-<<<<<<< HEAD
 The [Python Sample App][1] includes an example of a Terraform configuration. The app uses the `google_cloud_run_v2_service` [resource][2] from the `hashicorp/google` provider.
 
-**Note**: The `service` value needs to be set in multiple locations, and the shared log volume needs to be connected to both the application and the sidecar containers.
+**Note**: The `service` value needs to be set in multiple locations. The shared log volume needs to be connected to both the application and the sidecar containers.
 
 [1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
 [2]: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_v2_service
