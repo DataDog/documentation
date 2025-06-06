@@ -6,8 +6,8 @@ description: Descubre cómo capturar y reproducir visualmente la experiencia de 
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: Blog
-  text: Utiliza Session Replay de Datadog para ver en tiempo real los recorridos de
-    los usuarios
+  text: Uso de Datadog Session Replay para ver los recorridos de los usuarios en tiempo
+    real
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
   text: Utilizar el análisis del embudo para comprender y optimizar los flujos de
@@ -35,7 +35,7 @@ El SDK del navegador RUM es de [código abierto][1] y aprovecha el proyecto de c
 
 Más información sobre [Session Replay para navegadores][3].
 
-## Session Replay para móvil
+## Session Replay para móviles
 
 Session Replay para móviles amplía la visibilidad de tus aplicaciones móviles reproduciendo visualmente cada interacción del usuario, como toques, deslizamientos y desplazamientos. Está disponible para aplicaciones nativas, tanto en Android como en iOS. La reproducción visual de las interacciones del usuario en tus aplicaciones facilita la reproducción de fallos y errores, así como la comprensión del recorrido del usuario para introducir mejoras en la interfaz de usuario.
 
@@ -55,7 +55,7 @@ Para ver tu propio historial de reproducción, consulta la lista de reproducció
 
 Puedes crear una lista de reproducción de Session Replays para organizarlas según los patrones que observes. Para obtener más información, consulta [Listas de reproducción de Session Replay][8].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
