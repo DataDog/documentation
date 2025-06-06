@@ -1,28 +1,28 @@
 ---
-title: Bits Dev Agent
+title: Bits AI Dev Agent
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Bits Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Bits AI Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
+{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
 
-Bits Dev Agent is a generative AI coding assistant that uses observability data to detect, diagnose, and fix high-impact issues in your code. It can open production-ready pull requests and iterates on fixes based on developer feedback.
+Bits AI Dev Agent is a generative AI coding assistant that uses observability data to detect, diagnose, and fix high-impact issues in your code. It can open production-ready pull requests and iterates on fixes based on developer feedback.
 
 ## Key capabilities
 
 - Opens GitHub pull requests with production-ready fixes when high-impact issues are detected.  
 - Iterates on code in response to chat messages and review comments.
-- Provides a single view of Dev Agent-generated pull requests, with filters for status, triggering product, and affected service.
+- Provides a single view of Bits AI Dev Agent-generated pull requests, with filters for status, triggering product, and affected service.
 
 ## Supported Datadog products
 
-Bits Dev Agent is available for the following Datadog products:
+Bits AI Dev Agent is available for the following Datadog products:
 
 | Product                   | Availability          | Issues Detected                                                    |
 |---------------------------|----------------------|--------------------------------------------------------------------|
@@ -32,14 +32,14 @@ Bits Dev Agent is available for the following Datadog products:
 
 ## Setup
 
-<div class="alert alert-info">At this time, Bits Dev Agent supports GitHub only.</div>
+<div class="alert alert-info">At this time, Bits AI Dev Agent supports GitHub only.</div>
 
 ### Enable the GitHub integration
 
-To use Bits Dev Agent, you must install the [GitHub integration][4]. For full installation and configuration steps, see the [GitHub integration guide][5].
+To use Bits AI Dev Agent, you must install the [GitHub integration][4]. For full installation and configuration steps, see the [GitHub integration guide][5].
 
 <div class="alert alert-info">
-  To support Bits Dev Agent functionality, the GitHub integration must be granted the following permissions:
+  To support Bits AI Dev Agent functionality, the GitHub integration must be granted the following permissions:
   <ul style="font-size: inherit; padding-left: 1.25rem; margin-top: 0.5rem;">
     <li style="font-size: inherit;"><strong>Repository contents</strong> (<code>contents: read</code>, <code>contents: write</code>)</li>
     <li style="font-size: inherit;"><strong>Pull requests</strong> (<code>pull_requests: write</code>)</li>
@@ -48,7 +48,7 @@ To use Bits Dev Agent, you must install the [GitHub integration][4]. For full in
 
 ### Tag telemetry with service and version
 
-Bits Dev Agent uses the `service` and `version` telemetry tags to match issues such as errors or vulnerabilities to the version of your code that was running at the time. To configure telemetry tagging, see the [Tag your telemetry with Git information][6] section of the Datadog Source Code Integration documentation.
+Bits AI Dev Agent uses the `service` and `version` telemetry tags to match issues such as errors or vulnerabilities to the version of your code that was running at the time. To configure telemetry tagging, see the [Tag your telemetry with Git information][6] section of the Datadog Source Code Integration documentation.
 
 [1]: /error_tracking
 [2]: /security/code_security
