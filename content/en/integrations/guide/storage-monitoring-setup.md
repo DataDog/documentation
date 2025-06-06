@@ -279,7 +279,7 @@ If you have already configured S3 inventory for the buckets you want to monitor,
 - Fill out [this form][601] to share your configurations with Datadog
 - [Reach out to us][602] to use an API for setting up multiple buckets
 
-[601]: [https://forms.gle/dhDbSxTvCUDXg1QR7]
+[601]: https://forms.gle/dhDbSxTvCUDXg1QR7
 [602]: mailto:storage-monitoring@datadoghq.com
 {{% /tab %}}
 
