@@ -15,10 +15,6 @@ further_reading:
 
 {{< product-availability >}}
 
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in Preview.
-{{< /callout >}}
-
 {{< whatsnext desc="DDSQL (Preview) References:" >}}
     {{< nextlink href="ddsql_reference/ddsql_preview/functions" >}}Functions{{< /nextlink >}}
     {{< nextlink href="ddsql_reference/ddsql_preview/data_types" >}}Data Types{{< /nextlink >}}
