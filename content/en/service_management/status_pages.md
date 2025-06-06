@@ -9,15 +9,15 @@ further_reading:
   text: "Learn more about On-Call Scheduling"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/status-pages/" header="Limited Availability">}}
-  Incident Management Status Pages is in Limited Availability.
+{{< callout url="https://www.datadoghq.com/product-preview/status-pages/">}}
+Status Pages is in Preview.
 {{< /callout >}}
 
 ## Overview
 
 {{< img src="service_management/status_pages/shopist_status_page_example.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages are part of Datadog's Incident Response suite, alongside On-Call and Incident Management. They let your team proactively communicate **real-time service availability**, **incidents**, and **maintenance updates** with customers or internal stakeholders through a shareable web page.
+Status Pages are part of Datadog's Incident Response suite, alongside On-Call and Incident Management. They let your team proactively communicate **service availability**, **incidents**, and **maintenance updates** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
