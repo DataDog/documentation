@@ -20,7 +20,7 @@ schema-version: v1
 kind: mergegate
 rules:
   - require: commit-signatures
-    enforcement: warn
+    enforcement: active
     excluded_emails:
       - 'robot-guacbot-guacamole@datadoghq.com'
       - 'guacbot@users.noreply.github.com'
