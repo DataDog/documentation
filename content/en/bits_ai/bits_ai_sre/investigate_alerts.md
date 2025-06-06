@@ -22,7 +22,78 @@ Investigations happen in two phases:
       - Incidents
    - Hypotheses can end in one of three states: validated, invalidated, or inconclusive. 
 
-For best results, see [Optimize monitors for Bits AI SRE][1].
+For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
+
+## Get started with alert investigations
+
+### Optimize monitors for Bits AI SRE
+
+To help Bits produce the most accurate and helpful investigation results, follow these guidelines:
+
+- Scope the monitor to a service by either filtering the query to a specific service or grouping it by service, where appropriate. 
+- Tag the monitor with a service, where appropriate. 
+- Add relevant troubleshooting steps to the monitor message to give Bits a starting point. Think of the first page you'd visit in Datadog if this monitor were to fire. Consider including:
+  - Plain-language instructions 
+  - At least one helpful link to:
+    - A Datadog dashboard
+    - A logs query 
+    - A trace query
+    - A Datadog notebook with key graphs or instructions 
+    - A Confluence page
+
+### Enable Bits on monitors for automated investigations
+
+There are two main ways to enable Bits for automated investigations: 
+- **Option 1: Use the Bits-Enabled Monitors list**
+  1. In Bits AI, go to the [**Bits-Enabled Monitors**][5] page. 
+  1. In the **Monitors** tab, select one or more monitors, then click **Enable Bits AI**.
+- **Option 2: Add the Bits AI tag to a monitor**
+  1. In the [Monitor List][6], select one or more monitors to edit.
+     - To edit one monitor, click the monitor to open it, then click **Edit**.
+     - To edit multiple monitors, select them, then click **Edit tags**.
+  1. Add the `bitsai:enabled` tag to your selected monitors.
+
+You can also add the tag to your desired monitors using the Datadog API or Terraform. 
+
+<div class="alert alert-info">Bits only supports metric, logs, APM, anomaly, forecast, integration, and outlier monitors for investigations.</div>
+
+### Configure where investigation results are sent
+
+Bits can send investigation results to several destinations. By default, results appear in two places:
+  - **Full investigation results** are available on the [Bits AI Investigations][2] page.
+  - **A summary of the results** is available on the status page for the monitor.
+
+Additionally, if you already have already configured `@slack`, `@oncall`, or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
+
+{{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
+1. Ensure the [Datadog Slack app][7] is installed in your workspace.
+1. Go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace.
+1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
+{{% /collapse-content %}}
+{{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
+If you have [Page notifications][10] configured in Datadog On-Call, you can see a summary of Bits' results on the On-Call page.
+{{% /collapse-content %}}
+{{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
+Add the `@case-{project-name}` handle in the **Configure notifications and automations** section. 
+{{% /collapse-content %}}
+
+### Manually start an investigation
+
+Alternatively, you can manually invoke Bits on an individual monitor event. 
+
+<!-- TKTK CAN'T SEE BUTTON YET -->
+- **Option 1: Monitor Status Page**
+  -  On the monitor status page for an alert event, click **Investigate with Bits AI**.
+- **Option 2: Slack**
+  - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
+
+For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
+
+### Restrict access to Bits investigations
+
+To access investigations, users need the `bits_investigations_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see [Access Control][11].
+
+**Note**: Your organization's third-party AI enablement status is always respected, even when users have this permission. 
 
 ## Chat with Bits AI SRE about the investigation
 
@@ -53,7 +124,13 @@ At the end of an investigation, let Bits know if the conclusion it made was corr
 ### Manage memories 
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to [Bits-Enabled Monitors][3] to view and delete memories in the **Memories** column.
 
-[1]: /bits_ai/bits_ai_sre#optimize-monitors-for-bits-sre
 [2]: https://app.datadoghq.com/bits-ai/investigations
 [3]: https://app.datadoghq.com/bits-ai/monitors/enabled
 [4]: /change_tracking
+[5]: https://app.datadoghq.com/bits-ai/monitors/all
+[6]: https://app.datadoghq.com/monitors/manage
+[7]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
+[8]: /monitors/notify
+[9]: https://app.datadoghq.com/bits-ai/settings/integrations
+[10]: /service_management/on-call/pages/#page-from-notifications
+[11]: /account_management/rbac
