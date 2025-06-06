@@ -40,7 +40,7 @@ On the [Bits AI Investigations][2] page, you can chat with Bits to gather additi
 
 ## Help Bits AI SRE learn
 
-Reviewing Bits' findings not only validates their accuracy, but also helps Bits learn from any mistakes it makes, helping it produce faster and more accurate investigations in the future.
+Reviewing Bits' findings not only validates their accuracy, but also helps Bits learn from any mistakes it makes, enabling it to produce faster and more accurate investigations in the future.
 
 ### During the investigation
 You can guide Bits' learning by:

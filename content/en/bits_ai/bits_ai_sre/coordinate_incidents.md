@@ -16,7 +16,7 @@ aliases:
 
 In the heat of an incident, Bits AI SRE handles general incident coordination so you can focus on resolution. From proactive updates to AI-assisted postmortems, Bits streamlines your incident response workflow in Slack and Datadog.
 
-## Get started with coordinating incidents
+## Get started with incident coordination
 
 Bits AI SRE helps coordinate incidents—especially those involving multiple teams—by suggesting next steps throughout the incident lifecycle. This streamlines communication and improves overall process management.
 

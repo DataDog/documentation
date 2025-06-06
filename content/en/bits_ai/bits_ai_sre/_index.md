@@ -8,13 +8,13 @@ Bits AI SRE is an autonomous AI agent that investigates alerts and coordinates i
 
 ## Get started with alert investigations
 
-Bits helps automate alert investigations so you can triage issues faster and reduce manual troubleshooting. Here's how to get started:
 
 ### Enable Bits on monitors for automated investigations
 
 There are two main ways to enable Bits for automated investigations: 
-- **Option 1: Use the Bits-Optimized Monitors list**
-  - In Bits AI, go to the [**Monitor Management**][1] page. In the **Monitors** list, select one or more monitors, then click **Enable Bits AI**.
+- **Option 1: Use the Bits-Enabled Monitors list**
+  1. In Bits AI, go to the [**Bits-Enabled Monitors**][1] page. 
+  1. In the **Monitors** tab, select one or more monitors, then click **Enable Bits AI**.
 - **Option 2: Add the Bits AI tag to a monitor**
   1. In the [Monitor List][2], select one or more monitors to edit.
      - To edit one monitor, click the monitor to open it, then click **Edit**.
@@ -23,7 +23,7 @@ There are two main ways to enable Bits for automated investigations:
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform. 
 
-<div class="alert alert-info">Bits only supports metric (including anomaly, outlier, and integration), APM, and log monitors.</div>
+<div class="alert alert-info">Bits only supports metric, logs, APM, anomaly, forecast, integration, and outlier monitors for investigations.</div>
 
 ### Configure where investigation results are sent
 
@@ -31,7 +31,7 @@ Bits can send investigation results to several destinations. By default, results
   - **Full investigation results** are available on the [Bits AI Investigations][3] page.
   - **A summary of the results** is available on the status page for the monitor.
 
-In your [monitor notification settings][8], if you already have `@slack`, `@oncall`, or `@case` configured, Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
+Additionally, if you already have already configured `@slack`, `@oncall`, or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][4] is installed in your workspace.
@@ -51,7 +51,7 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 
 <!-- TKTK CAN'T SEE BUTTON YET -->
 - **Option 1: Monitor Status Page**
-  -  In the [Monitor List][2], on a monitor status page, on an alert event, click the **Investigate with Bits AI** button.
+  -  On the monitor status page for an alert event, click **Investigate with Bits AI**.
 - **Option 2: Slack**
   - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
 

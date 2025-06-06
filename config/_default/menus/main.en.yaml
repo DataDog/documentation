@@ -1429,7 +1429,7 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits SRE
+    - name: Bits AI SRE
       url: bits_ai/bits_ai_sre
       identifier: bits_ai_sre
       parent: bits_ai
