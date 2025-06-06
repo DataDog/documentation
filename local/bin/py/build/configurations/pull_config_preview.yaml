@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: WEBINT-1709/apiazza-dd/clarify-workday-docs
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
