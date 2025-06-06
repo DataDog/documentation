@@ -175,7 +175,7 @@ The [Autoscaling Summary page][11] provides a starting point for platform teams 
 
 Click **Optimize** on any workload to see its scaling recommendation.
 
-### Deploy recommendations with Autoscaling
+### Deploy Autoscaling
 
 After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
 
