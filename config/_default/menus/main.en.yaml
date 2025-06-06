@@ -2195,6 +2195,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
+    - name: Issue Correlation
+      url: error_tracking/issue_correlation
+      parent: error_tracking
+      identifier: error_tracking_issue_correlation
+      weight: 9
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
