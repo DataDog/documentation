@@ -60,7 +60,11 @@ Cloud Security leverages both the Datadog Agent and Agentless. It includes a var
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-{{< img src="security/csm/csm_overview_3.png" alt="Cloud Security in Datadog" width="100%">}}
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The new Cloud Security Summary shown below is in Preview. To get started, contact your Customer Success representative.
+{{< /callout >}} 
+
+{{< img src="security/csm/csm_overview_4.png" alt="Cloud Security Summary in Datadog" width="100%">}}
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
