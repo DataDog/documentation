@@ -107,11 +107,24 @@ Chain multiple attributes in one policy (for example, require AWS CloudTrail log
 
 {{< img src="/infrastructure/resource_catalog/policies/custom_policy.mp4" alt="Video showing how to create a custom policy with a target resource attribute and desired value" video=true >}}
 
-### Start with an out-of-the-box policy template
+## Start with an out-of-the-box policy template
 
 For insights into your infrastructure's reliability, cost optimization, operational excellence, and versioning, Datadog provides out-of-the-box policy templates. These templates are curated using cloud provider best practices and customer stories. Since each organization has unique requirements, filters can be applied to limit the set of resources evaluated against a policy, and an attribute's target values can be customized as needed.
 
 {{< img src="/infrastructure/resource_catalog/policies/policy_templates.png" alt="Out-of-the-box policy templates in Resource Policies" style="width:100%;" >}}
+
+### Remediate with native actions
+
+All policy templates come equipped with suggested remediation steps based on industry best practices, as well as Datadog Native Actions in some cases. Using native actions, you can remediate misconfigurations without ever leaving Datadog for the following policy templates:
+
+* Amazon RDS instances should be configured with Multi-AZ deployment  
+* Amazon EBS volume type should be upgraded from GP2 to GP3  
+* Amazon DynamoDB point-in-time recovery should be enabled  
+* Google Compute instances should have automatic restart enabled
+
+As shown in the video below, some policy templates allow you to enable actions and provide instructions for the responsible team to remediate non-compliant resources. This enables them to update cloud resource configurations directly from Datadog. To ensure the team can perform these actions, verify they have read/write permissions for the required cloud accounts. 
+
+{{< img src="/infrastructure/resource_catalog/policies/policy_templates.mp4" alt="Using policy templates in Datadog to enable remediation actions for cloud resources" video=true >}}
 
 ## Create a tagging policy
 
