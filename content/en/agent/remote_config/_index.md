@@ -63,7 +63,8 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 The following products and features are supported with Remote Configuration:
 
 ### Fleet Automation
-**[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
+- **[Upgrade your entire fleet of Datadog Agents][29] directly from the Datadog site** in a few clicks.
+- **[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 
 ### App and API Protection (AAP)
 
@@ -316,3 +317,4 @@ datadog:
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
+[29]: /agent/fleet_automation/remote_management/#upgrade-your-agents

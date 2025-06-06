@@ -150,6 +150,7 @@ Single Step Instrumentation supports Node.js 16.x and above, which is available 
 
 | .NET Version     | Support                         | Notes                                |
 |------------------|---------------------------------|--------------------------------------|
+| .NET 9           | <i class="icon-check-bold"></i> |                                      |
 | .NET 8           | <i class="icon-check-bold"></i> |                                      |
 | .NET 7           | <i class="icon-check-bold"></i> |                                      |
 | .NET 6           | <i class="icon-check-bold"></i> | Versions below 6.0.13 not supported. |

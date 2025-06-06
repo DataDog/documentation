@@ -362,8 +362,8 @@
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1768887482",
+      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
