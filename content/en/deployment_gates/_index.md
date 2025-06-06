@@ -23,20 +23,18 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-Deployment Gates provides data-driven control over your production rollouts. It evaluates Datadog telemetry - such as targeted monitors and APM anomalies - to determine the health of new releases in real time.
+Deployment Gates provide data-driven control over your production rollouts. They evaluate Datadog telemetry—such as targeted monitors and APM anomalies—to determine the health of new releases in real time.
 
 By monitoring key indicators with Deployment Gates, you can automatically halt a release if anomalies or performance regressions are detected, preventing unstable code from reaching a wider user base.
 
 The product consists of two main components:
 
-- A [gate][1] is defined for a service and environment. It has a set of rules to be evaluated on.
-- A rule is a type of evaluation evaluated as part of a gate. For example, you can create:
-  - [Monitors][2] rules
-  - [APM Faulty Deployment Detection][3] rules
+- A [gate][1] is defined for a service and environment. Each gate is evaluated on a set of rules.
+- A rule is a type of evaluation evaluated as part of a gate. You can create these types of rules:
+  - [Monitors][2]
+  - [APM Faulty Deployment Detection][3]
 
-For setup instructions, see [Set up Deployment Gates][4].
-
-Once the setup is completed, you can track and analyze gate evaluations through the [Gate Evaluation page][5]:
+For setup instructions, see [Set up Deployment Gates][4]. After the setup is completed, you can track and analyze gate evaluations through the [Deployment Gates Evaluations][5] page:
 
 {{< img src="/deployment_gates/explore/deployment_gates_explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
