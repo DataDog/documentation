@@ -142,7 +142,7 @@ If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gat
 
 {{< tabs >}}
 {{% tab "Generic script" %}}
-Use this script as a starting point for your integration:
+Use this script as a starting point for your integration. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example {{< region-param key="dd_site" code="true" >}}).
 
 ```bash
 #!/bin/sh
@@ -150,7 +150,7 @@ Use this script as a starting point for your integration:
 # Configuration
 MAX_RETRIES=3
 DELAY_SECONDS=5
-API_URL="https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/deployments/gates/evaluate"
+API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
 API_KEY="<YOUR_API_KEY>"
 
 PAYLOAD=$(cat <<EOF
@@ -220,9 +220,12 @@ On a high-level, the script has the following characteristics:
 
 This is a general behavior and should be changed based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). In case those commands are not available, install them at the beginning of the script (for example by adding `apk add --no-cache curl jq`).
 
+[1]: /getting_started/site/
 {{% /tab %}}
 {{% tab "Argo Rollout" %}}
-To call deployment gates from an Argo Rollout Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes Job that will be used to perform the analysis:
+To call deployment gates from an Argo Rollout Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes Job that will be used to perform the analysis.
+
+Use this script as a starting point for your integration. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example {{< region-param key="dd_site" code="true" >}}).
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -254,7 +257,7 @@ spec:
                         # Configuration
                         MAX_RETRIES=3
                         DELAY_SECONDS=5
-                        API_URL="https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/deployments/gates/evaluate"
+                        API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
                         API_KEY="<YOUR_API_KEY>"
 
                         PAYLOAD='{
@@ -351,6 +354,7 @@ spec:
 
 [1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
 [2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+[3]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
