@@ -26,7 +26,7 @@ Bits AI SRE helps coordinate incidents—especially those involving multiple tea
    1. In Slack, run the `/dd connect` command.
    1. Follow the on-screen prompts to complete the connection process. 
 1. Enable the Slack integration in Datadog Incident Management.
-   1. In the [Integrations] section of the Incidents settings page, find the **Slack** settings.
+   1. In the [Integrations][4] section of the Incidents settings page, find the **Slack** settings.
    1. Enable the following toggles:
       - Push Slack channel messages to the incident timeline
       - Activate Bits AI features in incident Slack channels for your organization<br />

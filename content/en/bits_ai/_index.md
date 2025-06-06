@@ -20,6 +20,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
       tag: "Blog"
       text: "Reimagining the way you run operations with autonomous investigations"
+    - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
+      tag: "Blog"
+      text: "Introducing Bits AI SRE, your AI on-call teammate"
+    - link: "https://www.datadoghq.com/blog/bits-ai-security-analyst/"
+      tag: "Blog"
+      text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
 ---
 
 {{< site-region region="gov" >}}
