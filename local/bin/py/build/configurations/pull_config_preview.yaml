@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: rtrieu/docs-10969-flink-integration-gov-config
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
