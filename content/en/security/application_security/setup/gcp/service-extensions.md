@@ -5,6 +5,8 @@ type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/gcp-service-extensions
+  - /security/application_security/threats_detection/gcp-service-extensions
+  - /security/application_security/setup/gcp/alb
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -33,7 +35,7 @@ You can enable App and API Protection (AAP) with GCP Service Extensions within G
 - In your GCP project, you have either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
 - A GCP project with a Cloud Load Balancer is configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
 - Compute Engine API and Network Services API are enabled:
-  
+
   ```bash
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
   ```
@@ -56,7 +58,7 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     </div>
 
 2. Add the VM to an unmanaged instance group.
-  
+
     Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
 3. Create a backend service with the following settings:
@@ -476,6 +478,16 @@ The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inher
 The GCP Service Extensions have the following limitations:
 
 * The request body is not inspected, regardless of its content type.
+
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
 ## Further Reading
 

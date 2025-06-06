@@ -8,6 +8,8 @@ aliases:
   - /security/application_security/getting_started/nodejs
   - /security/application_security/enabling/tracing_libraries/threat_detection/nodejs/
   - /security/application_security/threats/setup/threat_detection/nodejs
+  - /security/application_security/threats_detection/nodejs
+  - /security/application_security/setup/aws/fargate/nodejs
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -151,13 +153,22 @@ DD_APPSEC_ENABLED=true node app.js
 
 If you need additional assistance, contact [Datadog support][6].
 
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/setup/threat_detection/nodejs
-[3]: /security/application_security/setup/threat_detection/nodejs
+[2]: /security/application_security/setup/compatibility/nodejs
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: /help
