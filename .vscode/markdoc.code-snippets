@@ -125,5 +125,25 @@
         "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"
+    },
+
+    "Frontmatter Example": {
+        "prefix": ";;frontmatter",
+        "body": [
+            "---",
+            "title: ${1:topic title}",
+            "disable_toc: false",
+            "aliases:",
+            "  - ${2:/path/path/}",
+            "further_reading:",
+            "- link: \"${3:/path/}\"",
+            "  tag: \"Documentation\"",
+            "  text: \"${4:title}\"",
+            "- link: \"${5:https://www.datadoghq.com/blog/path/}\"",
+            "  tag: \"Blog\"",
+            "  text: \"${6:blog title}\"",
+            "---"
+        ],
+        "description": "YAML frontmatter for a documentation topic with aliases and further_reading"
     }
 }
