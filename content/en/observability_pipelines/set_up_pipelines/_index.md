@@ -23,6 +23,11 @@ further_reading:
 In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud storage provider and another specified destination.
 
 ## Set up a pipeline
+
+{{< callout src="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/" header="Join the Preview!" btn_hidden=false >}}
+Creating pipelines using Datadog API or Terraform is in Preview. Click <b>Request Access</b> to fill out the form.
+{{< /callout >}}
+
 {{< tabs >}}
 {{% tab "Pipeline UI" %}}
 Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
@@ -61,7 +66,6 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [13]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
-
 {{% tab "API" %}}
 
 You can use Datadog API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
