@@ -68,7 +68,7 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 
 After you declare an incident from Slack, it generates an incident channel.
 
-## From Workbench
+## From Handoff Notifications
 
 The Handoff Notification feature in the displays callout cards beside the navigation when you are paged or added to active incidents. These cards allow you to:
 
