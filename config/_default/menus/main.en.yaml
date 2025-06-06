@@ -1449,6 +1449,11 @@ menu:
       identifier: bits_ai_chat_with_bits
       parent: bits_ai
       weight: 2
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: bits_ai
+      identifier: bits_ai_dev_agent
+      weight: 3
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1901,8 +1906,8 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
       weight: 106
-    - name: Send OpenTelemetry Metrics to Datadog
-      url: metrics/open_telemetry/otlp_metrics/
+    - name: OpenTelemetry Metrics
+      url: metrics/open_telemetry/
       parent: metrics_top_level
       identifier: metrics_otel
       weight: 2
@@ -1911,6 +1916,11 @@ menu:
       parent: metrics_otel
       identifier: metrics_otlp_types
       weight: 201
+    - name: Query OpenTelemetry Metrics
+      url: metrics/open_telemetry/query_metrics/
+      parent: metrics_otel
+      identifier: metrics_querying
+      weight: 202
     - name: Metrics Types
       url: metrics/types/
       parent: metrics_top_level
@@ -2179,21 +2189,26 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: error_tracking
+      identifier: error_tracking_bits_ai_dev_agent
+      weight: 5
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
-      weight: 5
+      weight: 6
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 6
+      weight: 7
     - name: Track Browser and Mobile Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend
-      weight: 7
+      weight: 8
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2754,6 +2769,21 @@ menu:
       parent: actions_heading
       identifier: datastore
       weight: 30000
+    - name: Create and Manage Datastores
+      url: actions/datastore/create/
+      parent: datastore
+      identifier: datastore_create
+      weight: 1
+    - name: Use Datastores
+      url: actions/datastore/use/
+      parent: datastore
+      identifier: datastore_use
+      weight: 2
+    - name: Authentication and Access
+      url: actions/datastore/auth/
+      parent: datastore
+      identifier: datastore_auth
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3157,51 +3187,56 @@ menu:
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
       weight: 104
+    - name: Remote Instrumentation
+      url: serverless/aws_lambda/remote_instrumentation
+      identifier: serverless_aws_lambda_remote_instrumentation
+      parent: serverless_aws_lambda
+      weight: 105
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 105
+      weight: 106
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 106
+      weight: 107
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 107
+      weight: 108
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 108
+      weight: 109
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 110
+      weight: 111
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless_aws_lambda
       identifier: libraries_integrations
-      weight: 111
+      weight: 112
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 112
+      weight: 113
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 113
+      weight: 114
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -4739,12 +4774,28 @@ menu:
       parent: cd
       identifier: cd_monitors
       weight: 4
+    - name: Deployment Gates
+      url: deployment_gates/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: deployment_gates
+      weight: 30000
+    - name: Setup
+      url: deployment_gates/setup/
+      parent: deployment_gates
+      identifier: deployment_gates_setup
+      weight: 1
+    - name: Explore
+      url: deployment_gates/explore/
+      parent: deployment_gates
+      identifier: deployment_gates_explore
+      weight: 2
     - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
       identifier: tests
-      weight: 30000
+      weight: 40000
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6168,7 +6219,7 @@ menu:
     # - name: CloudPrem
     #   pre: cloud
     #   url: cloudprem/
-    #   parent: log_management_heading 
+    #   parent: log_management_heading
     #   identifier: cloud_prem
     #   weight: 30000
     - name: Security Overview
@@ -6389,11 +6440,6 @@ menu:
       parent: csm_setup_iac_scanning
       identifier: csm_setup_iac_scanning_exclusions
       weight: 10000
-    - name: Set Up IaC Remediation
-      url: security/cloud_security_management/setup/iac_remediation
-      parent: csm_setup
-      identifier: csm_setup_iac_remediation
-      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -6651,7 +6697,7 @@ menu:
       parent: asm_serverless
       identifier: asm_serverless_compat
       weight: 1
-    - name: Overview
+    - name: Attack Summary
       url: security/application_security/overview
       parent: application_security
       identifier: application_security_overview
@@ -6806,6 +6852,11 @@ menu:
     - name: SAST Custom Rules Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Guide
+      identifier: sec_static_analysis_custom_rules_guide
+      url: /security/code_security/static_analysis/custom_rules/guide/
       parent: sec_static_analysis
       weight: 5
     - name: Software Composition Analysis (SCA)
@@ -7897,41 +7948,46 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: User Retention
-      url: product_analytics/user_retention
+    - name: Vizualizing with Charts
+      url: product_analytics/charts
       parent: product_analytics
-      identifier: pa_user_retention
+      identifier: pa_charts
       weight: 1
-    - name: Journeys
-      url: product_analytics/journeys
-      parent: product_analytics
-      identifier: pa_journeys
-      weight: 2
-    - name: Pathway Diagrams
-      url: product_analytics/journeys/pathways
-      parent: pa_journeys
+    - name: Pathways Diagram
+      url: product_analytics/charts/pathways
+      parent: pa_charts
       identifier: pa_pathways
-      weight: 201
+      weight: 101
     - name: Funnel Analysis
-      url: product_analytics/journeys/funnel_analysis
-      parent: pa_journeys
+      url: product_analytics/charts/funnel_analysis
+      parent: pa_charts
       identifier: pa_funnel_analysis
-      weight: 202
-    - name: Heatmaps
-      url: product_analytics/heatmaps
+      weight: 102
+    - name: User Retention
+      url: product_analytics/charts/user_retention
+      parent: pa_charts
+      identifier: pa_user_retention
+      weight: 103
+    - name: Analytics Explorer
+      url: product_analytics/charts/analytics_explorer
+      parent: pa_charts
+      identifier: pa_analytics_explorer
+      weight: 104
+    - name: Dashboards
+      url: product_analytics/dashboards
       parent: product_analytics
-      identifier: pa_heatmaps
-      weight: 3
-    - name: Session Replay
+      identifier: pa_dashboard
+      weight: 2
+    - name: Replaying User Activity
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 4
+      weight: 3
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 401
+      weight: 301
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -7956,7 +8012,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 402
+      weight: 302
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -8006,17 +8062,17 @@ menu:
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 6
+      weight: 4
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 7
+      weight: 5
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 8
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2

@@ -188,13 +188,15 @@ There are no required integrations for PHP.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
+The following Go frameworks should be instrumented using the out-of-the-box APM integrations.
 
-- [gRPC][2] ([v2][8])
-- [net/http][3] ([v2][9])
-- [Gorilla Mux][4] ([v2][10])
-- [Echo][5] ([v2][11])
-- [Chi][6] ([v2][12])
+{{% tracing-go-v2 %}}
+
+- [gRPC][8] ([v1][2])
+- [net/http][9] ([v1][3])
+- [Gorilla Mux][10] ([v1][4])
+- [Echo][11] ([v1][5])
+- [Chi][12] ([v1][6])
 
 Please be sure to reference the docs appropriate for your version (v1.x or v2.x) of the Go Tracer. If your framework is not supported, [create a new issue][7] in the Go repository.
 
@@ -209,6 +211,7 @@ Please be sure to reference the docs appropriate for your version (v1.x or v2.x)
 [10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
 [12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5/v2
+[13]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
