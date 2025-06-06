@@ -113,7 +113,7 @@ If a secret fails to resolve (either by returning a non-zero exit code or a non-
 
 For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh` starting with version v7.32.0. This script supports reading secrets from:
 
-* Files, using: `ENC[file@/path/to/file]`
+* Files: using `ENC[file@/path/to/file]`
 * Kubernetes Secrets, using: `ENC[k8s_secret@namespace/secret-name/key]`
 
 {{< tabs >}}
