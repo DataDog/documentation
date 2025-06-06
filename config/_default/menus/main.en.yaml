@@ -7888,7 +7888,7 @@ menu:
       parent: product_analytics
       identifier: pa_charts
       weight: 1
-    - name: Pathway Diagrams
+    - name: Pathways Diagram
       url: product_analytics/charts/pathways
       parent: pa_charts
       identifier: pa_pathways
