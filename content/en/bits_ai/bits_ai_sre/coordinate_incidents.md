@@ -1,5 +1,5 @@
 ---
-title: Coordinate incidents
+title: Coordinate Incidents
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"

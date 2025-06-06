@@ -1,5 +1,5 @@
 ---
-title: Investigate alerts
+title: Investigate Alerts
 ---
 
 ## Get started with alert investigations
@@ -26,7 +26,7 @@ Bits can send investigation results to several destinations. By default, results
   - **Full investigation results** are available on the [Bits AI Investigations][2] page.
   - **A summary of the results** is available on the status page for the monitor.
 
-Additionally, if you already have already configured `@slack`, `@oncall`, or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
+Additionally, if you have already configured `@slack`, `@oncall`, or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][7] is installed in your workspace.
@@ -65,7 +65,6 @@ To help Bits produce the most accurate and helpful investigation results, follow
     - A logs query 
     - A trace query
     - A Datadog notebook with key graphs or instructions 
-    - A Confluence page
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -80,7 +79,7 @@ To access investigations, users need the `bits_investigations_read` permission. 
 Investigations happen in two phases:
 
 1. **Initial context gathering**
-   1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message—and making relevant queries. 
+   1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message, and uses them to make relevant queries.
    1. It also automatically scans your Datadog environment for additional context.
    1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor. 
 1. **Root cause hypothesis generation and testing**
