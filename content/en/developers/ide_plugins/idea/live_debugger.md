@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The Live Debugger enables you to add logpoints—auto-expiring, “non-breaking breakpoints”—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 60 minutes.
+The Live Debugger enables you to add logpoints—auto-expiring, "non-breaking breakpoints"—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 60 minutes.
 
 ## Live Debugger tab
 The **Live Debugger** in the Datadog tool window shows the defined logpoints and their related output:
