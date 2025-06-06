@@ -37,17 +37,17 @@ To start using Product Analytics, enable it for each application where you want 
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
 ## Navigating the Product Analytics UI
-Each Product Analytics feature provides context into your users journey. This section describe the context each feature can provide for your individual use case.
+Each Product Analytics feature provides context into your users' journeys. This section describes the context each feature can provide for your individual use case.
 
 ### Understand product adoption
-The [Home][3] page gives you a birds eye view of your users' activity and a pulse into your product's adoption. This is where you most often land when accessing Product Analytics.
+The [Home][3] page gives you a bird's-eye view of your users' activity and a pulse into your product's adoption. This is where you most often land when accessing Product Analytics.
 
 {{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
 By default, this page displays the `active users`, `page views` and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. You can navigate to anywhere in Product Analytics from the home page. 
 
 ### Track conversion rates and their evolution over time
-The Product analytics charts help you visualize your users' journey as they use your product.
+The Product Analytics charts help you visualize your users' journey as they use your product.
 
 {{< img src="/product_analytics/pana_charts_video.mp4" alt="visualize your users' journey with charts." video="true">}}
 
@@ -83,7 +83,7 @@ Suppose you want to make changes to your application interface but want to first
 : Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application’s usage patterns and design pitfalls
 
 [Heatmaps][7]
-: Also written as heat maps is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: [Click maps][7], [Top elements][7], [Scroll maps][7]. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: [Click maps][7], [Top elements][7], [Scroll maps][7]. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
 [Playlist][10]
 : You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][10].

@@ -19,7 +19,7 @@ The retention graph displays the percentage of users who completed the return ev
 {{< img src="product_analytics/retention/pana_retention_overview-2.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
 <div class="alert alert-info">
-<strong>Note:</strong> The retention chart displays grey when partial data is available for a given time period or cohort. This is because the time period is not finished and we cannot yet accurately compute the retention rate. 
+<strong>Note:</strong> The retention chart displays grey when partial data is available for a given time period or cohort. This is because the time period is not finished and Datadog cannot yet accurately compute the retention rate. 
 </div>
 
 
@@ -27,8 +27,8 @@ You can further scope the retention measure based on when the return event occur
 
 - `Return on or after`: the user has to complete the "Return event" on or after the period to be counted as retained. 
 
-- `Return on`: the user has to do the "Return event" on the period to be counted as retained
-It's useful to understand the likelihood of a user to come back after a given period
+- `Return on`: the user has to do the "Return event" on the period to be counted as retained.
+It's useful to understand the likelihood of a user to come back after a given period.
 
 
 ## Prerequisites
@@ -56,7 +56,7 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to All users.
 
 ### 4. Add filters
-Optionally, add any desired filter criteria, such as the user's country, device type or operating system.
+Optionally, add any desired filter criteria, such as the user's country, device type, or operating system.
 
 
 ## Analyze the graph

@@ -36,7 +36,7 @@ With Analytics visualizations, you can:
     {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Groups{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}export{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}Export{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Build a query

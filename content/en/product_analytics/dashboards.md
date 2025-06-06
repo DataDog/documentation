@@ -19,7 +19,7 @@ This guide gets you started on a path to creating dashboards. These basic dashbo
 
 To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page. 
 
-{{< img src="dashboards/pana_dashboard_overview.png" alt="Adding a new dashboard" style="width:70%;">}}
+{{< img src="product_analytics/dashboard/pana_dashboard_overview.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 
 Enter a dashboard name and choose a layout option.
