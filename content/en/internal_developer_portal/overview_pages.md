@@ -65,7 +65,6 @@ To use the developer overview page with your data, [connect your data sources][1
 Provide values for the filters at the top of the page to personalize your view:
 - **Team**: Name of your [Datadog Team][8] 
 - **Github_Org**: Name of your GitHub Organization
-- **Github_Team**: Name of your GitHub Team
 - **Github_Username**: Your GitHub username
 
 **Note**: These filters persist when you return to **My Workspace**. 
