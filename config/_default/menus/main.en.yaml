@@ -2194,7 +2194,7 @@ menu:
       url: error_tracking/issue_correlation
       parent: error_tracking
       identifier: error_tracking_issue_correlation
-      weight: 5
+      weight: 9
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
