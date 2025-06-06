@@ -1,5 +1,7 @@
 ---
 title: Export Product Analytics Events and Graphs
+aliases:
+- /product_analytics/analytics_explorer/export
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

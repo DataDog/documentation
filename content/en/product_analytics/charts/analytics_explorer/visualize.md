@@ -1,5 +1,7 @@
 ---
 title: Visualize
+aliases:
+- /product_analytics/analytics_explorer/visualize
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
