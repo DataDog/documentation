@@ -1,0 +1,194 @@
+---
+title: Asserting Canvas Content with JavaScript
+
+further_reading:
+    - link: '/synthetics/browser_tests'
+      tag: 'Documentation'
+      text: 'Learn about Browser Tests'
+---
+
+## Overview
+
+Canvas content is rendered as pixels, not as individual [Shadow Document Object Model (DOM)][3] elements. This means you cannot use traditional selectors like XPath or CSS to target elements within a canvas. As a result, Datadog Synthetic Monitoring assertions such as **click** or **hover** do not work on elements drawn inside a canvas.
+
+To address this, Datadog uses [custom JavaScript assertions][1] to directly analyze the canvas's pixel data and confirm that the expected content is present.
+
+## What is an HTML canvas?
+The [`canvas`][2] element is an HTML tag that allows you to draw graphics using JavaScript. It provides a space for rendering visual content such as charts, images, and animations.
+
+This element is supported by all major modern browsers. Depending on the JavaScript library used, it can display custom labels in response to user actions such as clicking or hovering on a graph:
+
+{{< img src="/synthetics/guide/canvas-content-javascript/graph.mp4" alt="Graphing a metric in Datadog using the Metrics Explorer." video=true >}}
+
+## Interacting with a canvas
+
+To work with a canvas element in JavaScript:
+
+- Select the canvas using `document.getElementById()` or `document.querySelector()` and assign it to a variable.
+- Get the rendering context by calling the `.getContext()` method on the canvas element, specifying the context type. The most common is `'2d'` for [two-dimensional graphics][4].
+
+For example, define your canvas element:
+
+```javascript
+<canvas id="canvas_ID"></canvas>
+```
+
+Then, adjust its content with JavaScript:
+
+```javascript
+//Store the canvas in a variable using its identifier
+const canvas_variable = document.getElementById("canvas_ID");
+//Obtain the context
+const ctx = canvas_variable.getContext("2d");
+//This code will draw a Green rectangle
+ctx.fillStyle = "green";
+ctx.fillRect(10, 10, 150, 100);
+```
+
+Mozilla offers this [playground][5], where you can experiment with, copy, and modify this example.
+
+## Finding a pixel based on a color
+
+To verify that a graph is using the expected colors, refer to this [example graph][6] from the JavaScript solid and dashed line charts. In this example, confirm that the colors coral and green appear as expected in the visualization.
+
+The most effective approach is to locate at least one pixel rendered in coral and one in green. Start by identifying a pixel that matches the coral color.
+
+The following script demonstrates how to loop through the `x, y` coordinates to find the first pixel that matches the target color:
+
+{{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript assertion" %}}
+{{< code-block lang="javascript" >}}
+
+// Defining the canvas element as a Variable
+const canvas = document.querySelector('canvas_ID');
+
+// Obtain the context
+const ctx = canvas.getContext('2d');
+
+/* 
+ Collect the full canvas area starting in coordinates 0,0
+
+ The variable imageData will contain:
+  - width: the width of the canvas
+  - height: the height of the canvas
+  - data: an array containing the RGBA values of every pixel within the canvas
+*/
+const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+// Variable that stores the array of RGBA values
+const data = imageData.data;
+
+// RGBA definition of the color we are loooking for (coral color)
+const targetColor = { r: 240, g: 128, b: 128 };
+
+// Tolerance threshold (see note at the bottom)
+const maxDistance = 20;
+
+// Function that calculates Ecluedian distance
+function colorDistance(r1, g1, b1, r2, g2, b2) {
+  return Math.sqrt(
+    (r1 - r2) ** 2 +
+    (g1 - g2) ** 2 +
+    (b1 - b2) ** 2
+  );
+}
+
+// Flag that tells if the pixel color has been found or not
+let found = false;
+
+// Loop over the X axis of the canvas
+for (let x = 0; x < canvas.width && !found; x++) {
+
+  // Loop over the Y axis of the canvas
+  for (let y = 0; y < canvas.height; y++) {
+
+    //See note at the bottom.
+    const index = (y * canvas.width + x) * 4;
+    const r = data[index];
+    const g = data[index + 1];
+    const b = data[index + 2];
+    const a = data[index + 3];
+    
+    if (a > 0 && colorDistance(r, g, b, targetColor.r, targetColor.g, targetColor.b) < maxDistance) {
+      found = true;
+      break;
+    }
+  }
+}
+
+// Return the boolean variable to tell if the Step was successful (true) or not (false)
+return found;
+{{< /code-block >}}
+
+**Notes**:
+
+`maxDistance`: This variable indicates how similar the current pixel's color is to the target color.
+
+- A distance of 0 means an exact match.
+- A distance of 20 means a small visual variation, not noticeable to the human eye.
+
+`const data = imageData.data;`:
+The `imageData.data` variable is a typed array where each pixel is represented by four consecutive values: `[R, G, B, A, R, G, B, A, ...]`. This means every pixel occupies 4 bytes, regardless of whether the canvas uses transparency.
+
+- The first pixel's data is at indexes `0–3: data[0] = red, data[1] = green, data[2] = blue, data[3] = alpha`
+- The second pixel begins at index 4, and so on. This is why we use the following expression to loop through the canvas:
+
+    `const index = (y * canvas.width + x) * 4;` and then evaluate non opaque contents with a > 0.
+
+If you know your canvas is fully opaque, you can skip checking the alpha (a) value in your code. However, remember that the alpha channel is still present in the array.
+
+{{% /collapse-content %}}
+
+## Clicking on canvas
+
+JavaScript allows you to programmatically trigger events on elements, enabling you to simulate user interactions. You can use the `addEventListener()` method to make HTML elements respond to specific actions, such as clicks.
+
+After a listener is set up, you can dispatch (or trigger) a click event. With this approach, you can create a custom function to simulate a user click at specific coordinates:
+
+{{% collapse-content title="Custom function example" level="h4" expanded=false id="Custom function" %}}
+{{< code-block lang="javascript" >}}
+//Store the canvas in a variable using its selector
+const canvas = document.querySelector('canvas_selector')
+
+//Add a JavaScript Listener for 'Click' actions.
+canvas.addEventListener('click', function(event) {
+
+  //Obtain the bounding box of the canvas to calculate the click position.
+  const canvasRect = canvas.getBoundingClientRect();
+  const x = event.clientX - canvasRect.left;
+  const y = event.clientY - canvasRect.top;
+});
+
+//Function that simulates a User's Click - expects a canvas and coordinates X,Y.
+function simulateCanvasClick(user_canvas, x, y) {
+
+  //Obtain the bounding box of the canvas to calculate the click position.
+  const rect = user_canvas.getBoundingClientRect();
+
+  //Define the Click event using the received coordinates
+  const click_event = new MouseEvent('click', {
+    clientX: rect.left + x,
+    clientY: rect.top + y
+  });
+
+  // Perform the click
+  // Using dispatch will fire the event in line 20
+  user_canvas.dispatchEvent(click_event);
+}
+
+//Clicks on an element inside a canvas in coordinates 620, 8
+simulateCanvasClick(canvas, 620, 8);
+
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/guide/custom-javascript-assertion/
+[2]: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+[3]: /synthetics/guide/browser-tests-using-shadow-dom/
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext#parameters
+[5]: https://developer.mozilla.org/en-US/play
+[6]: https://julinvictus.github.io/canvas_example/
