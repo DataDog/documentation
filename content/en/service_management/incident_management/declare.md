@@ -68,6 +68,21 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 
 After you declare an incident from Slack, it generates an incident channel.
 
+## From Workbench
+
+The Handoff Notification feature in the displays callout cards beside the navigation when you are paged or added to active incidents. These cards allow you to:
+
+- View and acknowledge On-Call pages
+- Navigate to relevant incident resources
+- Preview Slack messages from incident channels
+- Take direct actions on incidents
+
+{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+
+Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
+
+You can declare an incident from individual Handoff Notification cards.
+
 ## What's next
 
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
