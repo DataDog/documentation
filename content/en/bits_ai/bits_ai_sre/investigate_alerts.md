@@ -2,48 +2,7 @@
 title: Investigate alerts
 ---
 
-## How Bits AI SRE investigates
-
-Investigations happen in two phases:
-
-1. **Initial context gathering**
-   1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message—and making relevant queries. 
-   1. It also automatically scans your Datadog environment for additional context.
-   1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor. 
-1. **Root cause hypothesis generation and testing**
-   - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
-      - Metrics
-      - Traces
-      - Logs
-      - Dashboards
-      - [Change events][4]
-      - Watchdog insights
-      - Monitor alerts
-      - Incidents
-   - Hypotheses can end in one of three states: validated, invalidated, or inconclusive. 
-
-For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
-
-{{< img src="bits_ai/how_bits_investigates.png" alt="Example Bits investigation and conclusion for why a monitor was triggered" style="width:100%;" >}}
-
 ## Get started with alert investigations
-
-### Optimize monitors for Bits AI SRE
-
-To help Bits produce the most accurate and helpful investigation results, follow these guidelines:
-
-- Scope the monitor to a service by either filtering the query to a specific service or grouping it by service, where appropriate. 
-- Tag the monitor with a service, where appropriate. 
-- Add relevant troubleshooting steps to the monitor message to give Bits a starting point. Think of the first page you'd visit in Datadog if this monitor were to fire. Consider including:
-  - Plain-language instructions 
-  - At least one helpful link to:
-    - A Datadog dashboard
-    - A logs query 
-    - A trace query
-    - A Datadog notebook with key graphs or instructions 
-    - A Confluence page
-
-{{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ### Enable Bits on monitors for automated investigations
 
@@ -93,11 +52,52 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 
 For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
 
+### Optimize monitors for Bits AI SRE
+
+To help Bits produce the most accurate and helpful investigation results, follow these guidelines:
+
+- Scope the monitor to a service by either filtering the query to a specific service or grouping it by service, where appropriate. 
+- Tag the monitor with a service, where appropriate. 
+- Add relevant troubleshooting steps to the monitor message to give Bits a starting point. Think of the first page you'd visit in Datadog if this monitor were to fire. Consider including:
+  - Plain-language instructions 
+  - At least one helpful link to:
+    - A Datadog dashboard
+    - A logs query 
+    - A trace query
+    - A Datadog notebook with key graphs or instructions 
+    - A Confluence page
+
+{{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
+
 ### Restrict access to Bits investigations
 
 To access investigations, users need the `bits_investigations_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see [Access Control][11].
 
 **Note**: Your organization's third-party AI enablement status is always respected, even when users have this permission. 
+
+## How Bits AI SRE investigates
+
+Investigations happen in two phases:
+
+1. **Initial context gathering**
+   1. Bits begins by looking at any troubleshooting steps, Confluence pages, or Datadog links that you've added to the monitor's message—and making relevant queries. 
+   1. It also automatically scans your Datadog environment for additional context.
+   1. Thirdly, if you've interacted with a previous investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor. 
+1. **Root cause hypothesis generation and testing**
+   - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
+      - Metrics
+      - Traces
+      - Logs
+      - Dashboards
+      - [Change events][4]
+      - Watchdog insights
+      - Monitor alerts
+      - Incidents
+   - Hypotheses can end in one of three states: validated, invalidated, or inconclusive. 
+
+For best results, see [Optimize monitors for Bits AI SRE](#optimize-monitors-for-bits-ai-sre).
+
+{{< img src="bits_ai/how_bits_investigates.png" alt="Example Bits investigation and conclusion for why a monitor was triggered" style="width:100%;" >}}
 
 ## Chat with Bits AI SRE about the investigation
 
