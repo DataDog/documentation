@@ -23,10 +23,6 @@ further_reading:
 
 {{< product-availability >}}
 
-<div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
-</div>
-
 ## Overview
 
 SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
@@ -443,6 +439,27 @@ This table provides an overview of the supprted window functions. For comprehens
 | `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
 | `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
+
+## Tags
+
+DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+
+```sql
+SELECT instance_type, count(instance_type)
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
+GROUP BY instance_type
+```
+
+Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+
+You can also compare tag values as strings or entire tag sets:
+
+```sql
+SELECT *
+FROM k8s.daemonsets da INNER JOIN k8s.deployments de
+ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
+```
 
 ## Further reading
 
