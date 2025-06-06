@@ -71,6 +71,8 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
+<!-- Commenting out due to a bug (ref: DOCS-11035)
+
 ## Istio Sampling
 
 To control the volume of Istio traces that are sent to Datadog, configure a
@@ -99,6 +101,8 @@ spec:
 environment variable names to values. The environment variable values are
 themselves strings, and in the case of `DD_TRACE_SAMPLING_RULES`, the string
 value is a JSON array of objects.
+
+-->
 
 ## Environment variables
 

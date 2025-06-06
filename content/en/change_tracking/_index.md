@@ -135,6 +135,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
 | Manual Kubernetes Deployment Scale Events                                         | Kubernetes Audit Logging                                                                       |
+| Cloud Infrastructure Resource Changes (AWS, Azure, GCP)                          | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding |
 
 ### Optional enrichment for feature flag changes
 Change Tracking offers an optional way to enhance visibility into feature flag changes by automatically detecting affected services when tracing is set up for the feature flag client. This enhancement enables faster and more precise root cause analysis, especially when feature flag changes impact multiple services.
@@ -179,3 +180,4 @@ To enable and use this feature:
 [10]: /database_monitoring/connect_dbm_and_apm/
 [11]: /service_management/workflows/connections/#work-with-connections
 [12]: /database_monitoring/schema_explorer
+[13]: /infrastructure/resource_catalog/resource_changes/
