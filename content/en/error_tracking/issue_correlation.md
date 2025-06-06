@@ -25,7 +25,7 @@ To identify which issues across your services are correlated, navigate to the Er
 
 {{< img src="error_tracking/issue-correlation-et-page.png" alt="The issues list in the Error Tracking Explorer" style="width:70%;" >}}
 
-Select an issue to open the issue's details side panel
+Select an issue to open the issue's details side panel.
 
 {{< img src="error_tracking/issue-correlation-side-panel.png" alt="The details of an issue in the Error Tracking Explorer" style="width:70%;" >}}
 
