@@ -10,11 +10,11 @@ further_reading:
 
 ## Overview
 
-[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through our [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run. We only support Google Cloud Run Services, not Google Cloud Run Jobs.
+[Google Cloud Run][1] is a fully managed serverless platform for deploying and scaling container-based applications in Google Cloud. Datadog provides metrics and logs collection for these services through the [Google Cloud Integration][2]. This page describes the process of instrumenting your application code running in Google Cloud Run. Datadog only supports Google Cloud Run Services, not Google Cloud Run Jobs.
 
 ## Setup
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="./#sidecar-vs.-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with in-process instrumentation, see <a href="./google_cloud_run_in_process">Google Cloud Run In-Process</a>. For details on the tradeoffs between the Sidecar instrumentation described here and In-Process instrumentation, see <a href="/serverless/google_cloud#sidecar-vs-in-process-instrumentation-for-google-cloud-run">Sidecar vs. In-Process Instrumentation for Google Cloud Run</a>.</div>
 
 The recommended process for instrumenting Google Cloud Run applications is to install a tracer and use a [Sidecar][3] to collect the custom metrics and traces from your application. The application is configured to write its logs to a volume shared with the sidecar which then forwards them to Datadog.
 
@@ -69,7 +69,9 @@ You can use `npm install dd-trace` to add the tracer to your package.
 
 #### Dockerfile
 
-Your `Dockerfile` can look something like this. This will create a minmimal application container with metrics, traces, logs, and profiling. Note that the dockerfile needs to be built for the the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
+Your `Dockerfile` can look something like this. This creates a minimal application container with metrics, traces, logs, and profiling.
+
+**Note**: The Dockerfile needs to be built for the x86_64 architecture (use the `--platform linux/arm64` parameter for `docker build`).
 
 ```dockerfile
 FROM node:22-slim
@@ -90,7 +92,7 @@ The `dd-trace-js` library provides support for [Tracing][1], [Metrics][2], and [
 
 Set the `NODE_OPTIONS="--require dd-trace/init"` environment variable in your docker container to include the `dd-trace/init` module when the Node.js process starts.
 
-Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and Trace Correlation][5] possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-volume/logs/*.log` which will forward all of files ending in `.log` in the `/shared-volume/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since we are using `NODE_OPTIONS` to actually start our tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
+Application [logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). [Log and trace correlation][5] is possible when logging is combined with the `dd-trace-js` library. The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory. The application container needs the `DD_LOGS_INJECTION` environment variable to be set since it is using `NODE_OPTIONS` to actually start the tracer. If you do not use `NODE_OPTIONS`, call the `dd-trace` `init` method with the `logInjection: true` configuration parameter:
 
 ```js
 const tracer = require('dd-trace').init({
@@ -102,25 +104,27 @@ Set `DD_PROFILING_ENABLED` to enable [Profiling][3].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
-[3]: https://docs.datadoghq.com/profiler/enabling/nodejs?tab=environmentvariables
+[3]: /profiler/enabling/nodejs/
 [4]: /logs/log_collection/nodejs/?tab=winston30
 [5]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
 
 {{% /tab %}}
 {{% tab "Python" %}}
-#### Example Code
-```python
-# add the example code here, with traces, custom metrics, profiling, and logs
-```
+See the [Sample App][6] for an example of metrics, tracing, and logging in a Python app. It includes a deploy script that uses Terraform.
 
-#### Details
-##### Tracing
+The `dd-trace-py` library provides support for [tracing][1]. The `datadog-py` library handles custom [metrics][3].
 
-##### Profiling
+Wrap the application in `ddtrace-run` to automatically apply tracing instrumentation to the code. This is usually done with `ddtrace-run python app.py`. The [Sample App][6] includes a `Dockerfile` which uses this pattern.
 
-##### Metrics
+Application [Logs][4] need to be sent to a file that the sidecar container can access. The container setup is detailed [below](#containers). The sidecar finds log files based on the `DD_SERVERLESS_LOG_PATH` environment variable, usually `/shared-logs/logs/*.log` which forwards all of the files ending in `.log` in the `/shared-logs/logs` directory.
 
-##### Logs
+[Log and Trace Correlation][5] is not supported for Google Cloud Run services written in Python.
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
+[4]: /logs/log_collection/python/
+[5]: /tracing/other_telemetry/connect_logs_and_traces/python
+[6]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -197,7 +201,7 @@ A sidecar `gcr.io/datadoghq/serverless-init:latest` container is used to collect
 
 | Variable | Container | Description |
 | -------- | --------- | ----------- |
-| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent will look for logs. For example `/shared-volume/logs/*.log`. - **Required** |
+| `DD_SERVERLESS_LOG_PATH` | Sidecar (and Application, see notes) | The path where the agent looks for logs. For example `/shared-logs/logs/*.log`. - **Required** |
 | `DD_API_KEY`| Sidecar | [Datadog API key][5] - **Required**|
 | `DD_SITE` | Sidecar | [Datadog site][6] - **Required** |
 | `DD_LOGS_INJECTION` | Sidecar *and* Application | When `true`, enrich all logs with trace data for supported loggers in [Java][7], [Node][8], [.NET][9], and [PHP][10]. See additional docs for [Python][11], [Go][12], and [Ruby][13]. See also the details for your runtime above. |
@@ -211,8 +215,7 @@ The `DD_SERVERLESS_LOG_PATH` environment variable is not required on the applica
 
 The `DD_LOGS_ENABLED` environment variable is not required.
 
-TODO: write something about `DD_SOURCE`.
-
+The `DD_SERVICE` lable needs to be set on the Sidecar and the Application. The service value should also be set on the `service` label applied to the Google Cloud Run service. This ensures that the Google Cloud integration correctly picks up the Cloud Run service. More information about Google Cloud labels can be found in the [official docs][15].
 {{< tabs >}}
 {{% tab "GCR UI" %}}
 1. On the Cloud Run service page, select **Edit & Deploy New Revision**.
@@ -235,6 +238,10 @@ TODO: write something about `DD_SOURCE`.
 1. Click the **Variables & Secrets** tab and set the `DD_SERVICE` and `DD_LOGS_INJECTION` environment variables as you did for the sidecar.
 1. Click the **Settings** tab and set the **Container start up order** to **Depends on** the sidecar container.
 1. **Deploy** the application.
+
+### Add a `service` label
+Add a `service` label which matches the `DD_SERVICE` value on the containers to the Google Cloud service. Access this through the service list, by selecting the service and then clicking the **Labels** button.
+
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
 1. Step
@@ -244,17 +251,16 @@ TODO: write something about `DD_SOURCE`.
     - with some details.
 {{% /tab %}}
 {{% tab "Terraform" %}}
-1. Step
-1. by
-1. step
-1. instructions
-    - with some details.
+The [Python Sample App][1] includes an example of a Terraform configuration. The app uses the `google_cloud_run_v2_service` [resource][2] from the `hashicorp/google` provider.
+
+**Note**: The `service` value needs to be set in multiple locations. The shared log volume needs to be connected to both the application and the sidecar containers.
+
+[1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
+[2]: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_v2_service
+
 {{% /tab %}}
 {{< /tabs >}}
 
-
-### Add a `service` label
-Add a `service` label which matches the `DD_SERVICE` value on the containers to the Google Cloud service. Access this through the service list, through the **Labels** button after selecting the service.
 
 
 ## Futher Reading
@@ -275,3 +281,4 @@ Add a `service` label which matches the `DD_SERVICE` value on the containers to 
 [12]: /tracing/other_telemetry/connect_logs_and_traces/go
 [13]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [14]: /getting_started/tagging/unified_service_tagging/
+[15]: https://cloud.google.com/run/docs/configuring/services/labels
