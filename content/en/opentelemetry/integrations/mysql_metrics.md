@@ -20,7 +20,7 @@ To collect MySQL metrics with OpenTelemetry for use with Datadog:
 
 1. Configure the [MySQL receiver][1] in your OpenTelemetry Collector configuration.
 2. Optionally, configure the [host metrics receiver][6] if your OpenTelemetry Collector is running on the same server as your MySQL database.
-3. Optionally configure the [file log receiver][7] if your OpenTelemetry Collector is running on the same server as your MySQL database.
+3. Optionally, configure the [file log receiver][7] if your OpenTelemetry Collector is running on the same server as your MySQL database.
 4. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
 ### MySQL Receiver
