@@ -6,6 +6,12 @@ further_reading:
 title: 사례 보기 및 관리
 ---
 
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+
 ## 개요
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="모든 사례 보기, 상태 선택 옵션 및 할당 번호 보기를 표시하는 사례 관리 폐이지" style="width:100%;" >}}
@@ -38,7 +44,7 @@ title: 사례 보기 및 관리
 
 보다 복잡한 쿼리를 작성하려면 `AND`, `OR`, 그리고 `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority `P2` or `P3`과 같은 대소문자를 구분하는 불리언 연산자를 사용할 수 있습니다.
 
-아울러, 좌상단의 전역 검색 바를 사용하여 모든 프로젝트의 사례를 검색할 수 있습니다.
+아울러, 좌상단의 검색 바에서 모든 프로젝트의 사례를 검색할 수 있습니다.
 
 ## 보기 생성하기
 

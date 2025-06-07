@@ -5,6 +5,7 @@ assets:
   dashboards:
     Sedai Overview: assets/dashboards/sedai_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: sedai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10249
     source_type_name: Sedai
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,9 +26,10 @@ categories:
 - automation
 - cloud
 - cost management
-- notification
+- notifications
 - orchestration
 - provisioning
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
 display_on_public_website: true
@@ -36,7 +39,6 @@ integration_id: sedai
 integration_title: Sedai
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sedai
 public_title: Sedai
@@ -52,12 +54,13 @@ tile:
   - Category::Automation
   - Category::Cloud
   - Category::Cost Management
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Une plateforme autonome de gestion intelligente de vos applications
     cloud
@@ -67,7 +70,8 @@ tile:
   title: Sedai
 ---
 
-## Présentation
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+## Section Overview
 
 Sedai est une plateforme cloud autonome qui gère de façon proactive des environnements de production, dans le but d'éviter tout problème, de gagner en disponibilité, d'améliorer les performances et de réduire les coûts liés au cloud. Cet outil de SRE détecte, hiérarchise et analyse à votre place les données de surveillance, afin de modifier de façon autonome et sécurisée les environnements de production sans appliquer le moindre seuil. 
 
@@ -81,7 +85,7 @@ Activez cette intégration pour recevoir dans la plateforme Datadog des notifica
 
 * **Mesures proactives** : Sedai modifie à votre place les environnements de production afin que vos ressources ne rencontrent aucun problème de disponibilité et que leur exécution soit optimisée en tout temps.
 
-## Implémentation
+## Configuration
 
 Dans Sedai :
 

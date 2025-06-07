@@ -36,7 +36,7 @@ author:
 categories:
 - セキュリティ
 - kubernetes
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md
 display_on_public_website: true
@@ -105,13 +105,13 @@ Datadog とのインテグレーションを構成して重要な Akeyless Gatew
 
 ```
 metrics:
-  enabled: true
+  enabled: true  
   config: |
-    exporters:
+    exporters:    
       datadog:
         api:
           key: "<Your Datadog API key>"
-          site: <Your Datadog server site>
+          site: <Your Datadog server site>         
     service:
       pipelines:
         metrics:

@@ -27,7 +27,7 @@ categories:
 - nube
 - configuración y despliegue
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_on_public_website: true
@@ -43,26 +43,26 @@ public_title: Altostra
 short_description: Envía automáticamente tus logs de aplicaciones en la nube desde
   Altostra a Datadog
 supported_os:
-- linux
-- macos
-- windows
+- Linux
+- macOS
+- Windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Automation
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Log Collection
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::macOS
+  - Sistema operativo compatible::Windows
+  - Categoría::Automatización
+  - Categoría::Nube
+  - Categoría::Configuración y despliegue
+  - Categoría::Recopilación de logs
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Envía automáticamente tus logs de aplicaciones en la nube desde Altostra
     a Datadog
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Altostra
 ---
 
@@ -102,8 +102,8 @@ La integración de Datadog está disponible en la consola web de Altostra en [in
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://app.altostra.com/team/settings/integrations/logging
 [2]: https://app.altostra.com/environments
-[3]: /es/help
+[3]: https://app.datadoghq.com/help

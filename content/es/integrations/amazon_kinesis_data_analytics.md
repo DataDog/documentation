@@ -51,14 +51,14 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 
 La integración de Amazon Kinesis Data Analytics no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon Kinesis Data Analytics no incluye ningún check de
 servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][5].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

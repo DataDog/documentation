@@ -28,7 +28,7 @@ categories:
 - gestión de costes
 - notificaciones
 - orquestación
-- suministro
+- aprovisionamiento
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
@@ -42,8 +42,8 @@ is_public: true
 manifest_version: 2.0.0
 name: sedai
 public_title: Sedai
-short_description: Plataforma autónoma para la gestión inteligente tus aplicaciones
-  en la nube
+short_description: Una plataforma autónoma para gestionar de forma inteligente tus
+  aplicaciones en la nube
 supported_os:
 - linux
 - windows
@@ -51,22 +51,22 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - Category::Cloud
-  - Category::Cost Management
-  - Categoría::Notificaciones
+  - Categoría::Automatización
+  - Categoría::Nube
+  - Categoría::Gestión de costes
+  - Category::Notifications
   - Categoría::Orquestación
-  - Categoría::Suministro
+  - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
-  configuration: README.md#Setup
-  description: Plataforma autónoma para la gestión inteligente tus aplicaciones en
-    la nube
+  configuration: README.md#Configuración
+  description: Una plataforma autónoma para gestionar de forma inteligente tus aplicaciones
+    en la nube
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Sedai
 ---
 
@@ -79,9 +79,9 @@ Habilita esta integración para recibir notificaciones en Datadog sobre las acci
 
 ### Funcionamiento
 
-* **Sin Agent:** Se conecta sin problemas a tus cuentas en la nube y detecta y comprende automáticamente los entornos de producción.
+* **Agentless:** Se conecta sin problemas a tus cuentas en la nube y detecta y comprende automáticamente entornos de producción.
 
-* **Sin configuración:** Se conecta fácilmente a la API Datadog e identifica, prioriza y aprende de forma inteligente el comportamiento de las métricas.
+* **No necesita configuración:** Se conecta fácilmente a la API Datadog e identifica, prioriza y aprende de forma inteligente el comportamiento de las métricas.
 
 * **Acciones proactivas:** Actúa de forma segura en la producción en tu nombre para garantizar que los recursos eviten problemas de disponibilidad y funcionen de forma óptima en todo momento.
 
@@ -109,7 +109,7 @@ En Sedai:
 
 Esta integración envía eventos a Datadog.
 
-## Ayuda
+## Soporte
 
 Si necesitas ayuda con esta integración, ponte en contacto con el [servicio de asistencia de Datadog][6].
 

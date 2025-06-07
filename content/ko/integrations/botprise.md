@@ -21,7 +21,8 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- events
+- 경고
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
 display_on_public_website: true
@@ -31,14 +32,13 @@ integration_id: botprise
 integration_title: Botprise
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: botprise
 public_title: Botprise
 short_description: Botprise 통합으로 생성된 이벤트를 모니터링하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -47,8 +47,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: 생성된 이벤트를 모니터링할 수 있는 Botprise 통합
+  description: Botprise 통합으로 생성된 이벤트를 모니터링하기
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -78,13 +79,13 @@ Botprise-Datadog 통합을 사용하려면 Botprise를 사용하는 고객이어
 6. Datadog Rest API를 호출할 수 있도록 [API 키와 Application Key]를 생성하세요.
 
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
 Botprise 통합은 메트릭을 제공하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Botprise 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

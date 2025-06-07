@@ -2,7 +2,7 @@
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentación
-  text: Búsqueda de tus eventos
+  text: Buscar tus eventos
 title: Agrupación de eventos de RUM
 ---
 

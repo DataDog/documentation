@@ -22,8 +22,8 @@ assets:
     source_type_name: RapDev Sophos
   logs: {}
   monitors:
-    '[RapDev Sophos] Managed Endpoint Health has Changed': assets/monitors/sophos_endpoint_health.json
-    '[RapDev Sophos] Sophos Service on Managed Endpoint is Stopped': assets/monitors/sophos_service_running.json
+    Endpoint is no longer in good health: assets/monitors/sophos_endpoint_health.json
+    Sophos Service is stopped: assets/monitors/sophos_service_running.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,9 +31,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
-- セキュリティ
-custom_kind: integration
+- marketplace
+- security
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -97,7 +97,7 @@ Sophos インテグレーションは、Sophos が管理するエンドポイン
 ### ダッシュボード
 1. RapDev Sophos ダッシュボード
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io
@@ -116,4 +116,4 @@ Sophos インテグレーションは、Sophos が管理するエンドポイン
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

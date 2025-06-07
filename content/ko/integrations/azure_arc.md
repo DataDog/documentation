@@ -1,31 +1,61 @@
 ---
-aliases: []
+app_id: azure-arc
+app_uuid: 0afa2450-f495-4e18-bdd7-c1cd43e3aebf
+assets:
+  dashboards:
+    azure_arc: assets/dashboards/azure_arc.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.arc_vm.count
+      metadata_path: metadata.csv
+      prefix: azure.arc_
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 801
+    source_type_name: Azure Arc
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-description: 주요 Azure Arc 메트릭을 추적하세요.
-doc_link: https://docs.datadoghq.com/integrations/azure_arc/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-arc-integration/
-  tag: 블로그
-  text: Datadog을 활용해 Azure Arc 하이브리드 인프라스트럭처 모니터링
 git_integration_title: azure_arc
-has_logo: true
 integration_id: azure-arc
-integration_title: Microsoft Azure Arc
+integration_title: Azure Arc
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_arc
-public_title: Datadog-Microsoft Azure Arc 통합
+public_title: Azure Arc
 short_description: 주요 Azure Arc 메트릭을 추적하세요.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 주요 Azure Arc 메트릭을 추적하세요.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/azure-arc-integration/
+  support: README.md#Support
+  title: Azure Arc
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Azure Arc는 데이터 센터, 에지 및 멀티 클라우드 환경에서 유연하게 실행할 수 있는 애플리케이션 및 서비스를 빌드할 수 있도록 Azure 플랫폼을 확장하는 브리지입니다.
@@ -65,9 +95,12 @@ Azure Arc 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 참고 자료
 
-{{< partial name="whats-next/whats-next.html" >}}
+기타 유용한 문서, 링크 및 기사:
+
+[Monitor your Azure Arc hybrid infrastructure with Datadog][5]
 
 [1]: https://docs.datadoghq.com/ko/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
 [2]: https://docs.datadoghq.com/ko/integrations/azure/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_arc/azure_arc_metadata.csv
 [4]: https://docs.datadoghq.com/ko/help/
+[5]: https://www.datadoghq.com/blog/azure-arc-integration/

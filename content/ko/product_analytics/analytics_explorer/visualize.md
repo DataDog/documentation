@@ -44,7 +44,7 @@ title: 시각화
 
 {{< img src="product_analytics/analytics/visualize/analytics-nested-table-1.png" alt="Analytics Explorer의 중첩 테이블" style="width:90%;">}}
 
-## 디스트리뷰션
+## 분포
 
 선택한 기간 동안 측정 속성의 분포를 표시하여 값이 변동하는지 확인할 수 있습니다.
 

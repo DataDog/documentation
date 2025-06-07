@@ -14,10 +14,6 @@ further_reading:
 title: Análisis de productos
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Análisis de productos tiene disponibilidad limitada. Para solicitar acceso, rellena el formulario.
-{{< /callout >}}
-
 ## Información general
 
 {{< img src="product_analytics/overview-1.png" alt="Página de inicio del Análisis de productos.">}}
@@ -29,7 +25,7 @@ Análisis de productos te ayuda a conocer mejor el comportamiento de los usuario
 - Seguimiento de los principales patrones de comportamiento de los usuarios
 - Visualización de los botones con los que más y menos se interactúa en una página determinada
 
-## Para empezar
+## Empezando
 
 Para empezar a utilizar el Análisis de productos, actívalo para cada aplicación en la que desees monitorizar el comportamiento de los usuarios:
 
@@ -45,7 +41,7 @@ Por defecto, los datos de Análisis de productos se conservan durante 15 meses. 
 
 La retención de usuarios es una métrica para medir el porcentaje de usuarios activos que siguen utilizando tu producto, aplicación o servicio durante un periodo determinado. Utiliza el [Análisis de retención][2] para medir cómo un grupo de usuarios se involucra con características específicas a lo largo del tiempo y comprender dónde se producen los abandonos.
 
-{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Gráfico de retención para diferentes eventos" style="width:90%;" >}}
+{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Gráfico de retención para eventos que difieren" style="width:90%;" >}}
 
 ## Trazar el recorrido del usuario
 
@@ -79,3 +75,4 @@ Los [mapas de calor][7] visualizan los elementos con los que más se ha interact
 [6]: /es/product_analytics/segmentation/
 [7]: /es/product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
+[9]: https://app.datadoghq.com/rum/list

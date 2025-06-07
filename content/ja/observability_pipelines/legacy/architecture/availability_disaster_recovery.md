@@ -5,8 +5,12 @@ title: (レガシー) 高可用性と災害復旧
 ---
 
 {{< site-region region="gov" >}}
-Observability Pipelines は、US1-FED Datadog サイトでは利用できません。このガイドは、大規模な本番環境レベルのデプロイメント向けです。
+<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
 {{< /site-region >}}
+
+<div class="alert alert-info">
+このガイドは、大規模な本番環境レベルのデプロイメント向けです。
+</div>
 
 観測可能性パイプラインの文脈では、高可用性とは、システムに問題が発生しても観測可能性パイプラインワーカーが利用可能であることを指します。
 
