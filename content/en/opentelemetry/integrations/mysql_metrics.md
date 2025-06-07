@@ -53,13 +53,13 @@ processors:
   cumulativetodelta: {}
 
   deltatorate:
-   metrics:
-     - mysql.connection.count
-     - mysql.commands
-     - mysql.operations
-     - mysql.query.slow.count
-     - mysql.connection.errors
-     - system.network.io
+    metrics:
+      - mysql.connection.count
+      - mysql.commands
+      - mysql.operations
+      - mysql.query.slow.count
+      - mysql.connection.errors
+      - system.network.io
 
 ```
 
