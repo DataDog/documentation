@@ -40,6 +40,8 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
 | **Fixed** | The test has passed consistently and is no longer considered flaky. |
 
+<div class="alert alert-info"><strong>Note:</strong> Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
+
 ## Investigate a flaky test
 
 For more information about a specific flaky test, use these options in the actions menu at the end of each row:
@@ -54,6 +56,20 @@ For any flaky test, you can create a case and use [Case Management][3] to track 
 ## Flaky Test Policies
 
 Configure Flaky Test Policies that govern how tests move through the lifecycle. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days. 
+
+## Compatibility
+
+Flaky Test Management features have minimum version requirements for each programming language. The table below outlines the minimum versions needed to quarantine, disable, and attempt to fix flaky tests:
+
+| Language   | Quarantine & Disable | Attempt to fix   |
+| ---------- | -------------------- | ---------------- |
+| .NET       | 3.13.0+              | 3.17.0+          |
+| Go         | 1.73.0+              | Not available    |
+| Java       | 1.48.0+              | 1.50.0+          |
+| JavaScript | 5.44.0+              | 5.52.0+          |
+| Python     | 3.3.0+               | 3.8.0+           |
+| Ruby       | 1.13.0+              | 1.17.0+          |
+
 
 ## Further reading
 
