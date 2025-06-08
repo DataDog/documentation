@@ -4,12 +4,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"
   text: "Stay up to date on the latest incidents with Bits AI"
-- link: "bits_ai/"
-  tag: "Documentation"
-  text: "Bits AI Overview"
-- link: "bits_ai/chat_with_bits/"
-  tag: "Documentation"
-  text: "Chat with Bits"
 aliases:
 - /bits_ai/managing_incidents/
 ---
@@ -135,6 +129,10 @@ To generate an AI-assisted postmortem draft:
 1. Under **Choose Template**, select either the out-of-the-box **General incident with AI content** template, or a custom template that you've created.
 1. Click **Generate**. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.
 1. Review the AI-generated postmortem draft. It serves as a starting point for your incident responders. Datadog recommends reviewing and refining the draft before sharing it.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents/settings?section=message-templates
 [2]: https://app.datadoghq.com/incidents/settings?section=notification-rules

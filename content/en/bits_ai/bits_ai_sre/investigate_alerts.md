@@ -34,10 +34,10 @@ Additionally, if you have already configured `@slack`, `@oncall`, or `@case` [no
 1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
 {{% /collapse-content %}}
 {{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
-If you have [Page notifications][10] configured in Datadog On-Call, you can see a summary of Bits' results on the On-Call page.
+In the **Configure notifications and automations** section, add the @oncall-{team} handle.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
-Add the `@case-{project-name}` handle in the **Configure notifications and automations** section. 
+In the **Configure notifications and automations** section, add the `@case-{project-name}` handle.
 {{% /collapse-content %}}
 
 ### Manually start an investigation

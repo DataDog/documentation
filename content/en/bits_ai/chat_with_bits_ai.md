@@ -1,5 +1,5 @@
 ---
-title: Chat with Bits
+title: Chat with Bits AI
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"

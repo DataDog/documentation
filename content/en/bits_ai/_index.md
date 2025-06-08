@@ -8,18 +8,6 @@ further_reading:
     - link: "https://www.datadoghq.com/product/platform/bits-ai/"
       tag: "Product page"
       text: "Bits AI"
-    - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
-      tag: "Blog"
-      text: "Introducing Bits AI, Your New DevOps Copilot"
-    - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
-      tag: "Blog"
-      text: "Stay up to date on the latest incidents with Bits AI"
-    - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/"
-      tag: "Press release"
-      text: "Bits AI announcement"
-    - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
-      tag: "Blog"
-      text: "Reimagining the way you run operations with autonomous investigations"
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
       text: "Introducing Bits AI SRE, your AI on-call teammate"
@@ -32,16 +20,16 @@ further_reading:
 Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
 {{< /site-region >}}
 
-Bits is your AI teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
+Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
    {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts and coordinate incidents proactively with Bits AI SRE{{< /nextlink >}}
-   <!-- {{< nextlink href="link" >}}Automate code fixes with Bits Dev{{< /nextlink >}} -->
-   <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits Security Analyst{{< /nextlink >}} -->
-   <!-- {{< nextlink href="link" >}}Take action on your systems with Action Interface{{< /nextlink >}} -->
-   {{< nextlink href="bits_ai/chat_with_bits" >}}Chat with Bits about your observability data{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits AI Dev Agent{{< /nextlink >}}
+   <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits AI Security Analyst{{< /nextlink >}} -->
+   {{< nextlink href="actions/action_interface" >}}Take action on your systems with Action Interface{{< /nextlink >}}
+   {{< nextlink href="bits_ai/chat_with_bits_ai" >}}Chat with Bits about your observability data{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
