@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout btn_hidden="true" >}}
-Flaky Test Management is currently in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+Flaky Test Management is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
