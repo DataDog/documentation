@@ -18,18 +18,13 @@ products:
 
 {{< product-availability >}}
 
-{{< callout btn_hidden="false" header="Join the Preview!" >}}
-This feature is in Preview. Contact your Customer Success Manager to get access.
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
+Jira Bidirectional Syncing is in Preview. Contact your Customer Success Manager to get access.
 {{< /callout >}}
 
-Datadog Security supports ticketing management using Datadog [Case Management][1] and third-party integrations, such as [Jira][2].
+You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2]. For details, see [Case Management integration with third-party ticketing tools][3].
 
-Datadog Case Management is available for all security products.
-
-Notes:
-
-- If you are new to Datadog Case Management, review the [Datadog Case Management][1] documentation.
-- Review Case Management [integration with third-party ticketing tools][3]. Integrations must be set up before you can use birdirectional case management integration with Jira.
+This page discusses using Datadog Security with Datadog Case Management for ticketing management.
 
 
 ## Case management and security products
@@ -43,15 +38,15 @@ Case management is supported for all security products that use signals:
 
 Open any signal in these products and use the **Create Case** button to create a case in Datadog.
 
-## Bidirectial case management with Jira
+## Bidirectional ticket syncing with Jira
 
 This sections describe how to use your Datadog Jira integration to sync tickets between Datadog Case Management and Jira bidirectionally. 
 
-Bidirectionally synchronization enables you to update Jira tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in Jira.
+Bidirectional syncing enables you to update Jira tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in Jira.
 
 ### Supported products
 
-Birdirectional Datadog Case Management integration with Jira is supported for the following Code Security vulnerability categories:
+Bidirectional syncing is supported for the following Code Security vulnerability categories:
 
 - Libraries (SCA)
 - Static Code (SAST)
@@ -60,7 +55,7 @@ Birdirectional Datadog Case Management integration with Jira is supported for th
 
 ### Single source of truth
 
-Birdirectional Case Management integration with Jira enables you to sync Jira tickets with Datadog cases, but Datadog is the single source of truth for issue resolution.
+Bidirectional syncing with Jira enables you to sync Jira tickets with Datadog cases, but Datadog is the single source of truth for issue resolution.
 
 A Datadog finding's related Jira ticket can be closed manually, but a Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed from the list of signals when someone closes a related Jira ticket.
 
@@ -68,20 +63,20 @@ Closing a Datadog case without remediation does not close the finding either.
 
 Remediation of the finding in Datadog or defining an exception by muting the finding are the only ways to close a finding. Once the finding is remediated, its related cases and Jira tickets are closed.
 
-### Set up birdirectional case management integration with Jira
+### Set up bidirectional syncing
 
-The following steps set up birdirectional case management integration with Jira and use Code Security vulnerabilites to verify that setup is successful.
+The following steps set up bidirectional syncing with Jira and use Code Security vulnerabilities to verify that setup is successful.
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
-   1. A [Datadog Jira integration][2].
+   1. The [Datadog Jira integration][2].
    2. A [webhook for the Jira integration][8]. Configuring a webhook enables cases created in Case Management to automatically create issues in Jira and keep both resources synced.
    3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
-   4. A [Jira integration within the project][3].
-      1. Enable and configure the **Sync data between Case Management and Jira** option.
+   4. The [Jira integration is configured within the project][3].
+      1. Enable the **Sync data between Case Management and Jira** option.
       2. In **Title**, select **Two-way sync**.
       3. Complete the remaining settings, and then click **Save changes**.
 2. Verify that birdirectional case management integration with Jira is working:
-   1. Open Code Security [Vulnerbilities][5].
+   1. Open Code Security [Vulnerabilities][5].
    2. Open any vulnerability.
    3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**).
    4. Click the **Jira** tab.
@@ -93,9 +88,9 @@ If you do not see the **Sync with Datadog (via Case Management)** section, ensur
 
 ### Create bidirectional case management tickets
 
-This procedure uses Code Security vulnerabilites to demonstrate how to create bidirectional case management tickets.
+The following steps create a bidirectional Case Management ticket.
 
-1. Open Code Security [Vulnerbilities][5].
+1. Open Code Security [Vulnerabilities][5].
 2. Open any vulnerability.
 3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**).
 4. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating new Jira ticket.
@@ -118,11 +113,11 @@ Existing bidirectional Jira tickets are listed in a signal's **Ticketing** or **
 
 Here's an example from a Static Code (SAST) signal:
 
-{{< img src="security/bidir-jira-existing.png" alt="signal with existing Jira ticket" responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing.png" alt="signal with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
 
 Hover over the Jira ticket to see its details.
 
-{{< img src="security/bidir-jira-existing-hover.png" alt="signal with existing Jira ticket" responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing-hover.png" alt="Mouseover state for pill in previous image. Modal with Jira ticket details." responsive="true" style="width:100%;">}}
 
 Details such as assignee and status are provided along with a timeline of the Jira issue and Datadog case changes.
 
@@ -130,7 +125,7 @@ Closed Jira tickets are green.
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1]. 
 
-Deleting a case does not delete related Jira tickets, but deleting a case project deattaches all tickets from related signals.
+Deleting a case does not delete related Jira tickets, but deleting a case project detaches all tickets from related signals.
 
 ### Bidirectional case management facets
 
