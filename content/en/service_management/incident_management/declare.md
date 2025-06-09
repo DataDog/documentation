@@ -70,14 +70,14 @@ After you declare an incident from Slack, it generates an incident channel.
 
 ## From Handoff Notifications
 
-The Handoff Notification feature in the displays callout cards beside the navigation when you are paged or added to active incidents. These cards allow you to:
+The Handoff Notification feature displays callout cards beside the navigation when you are paged or added to active incidents. These cards allow you to:
 
 - View and acknowledge On-Call pages
 - Navigate to relevant incident resources
 - Preview Slack messages from incident channels
 - Take direct actions on incidents
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Handoff notification card showing incident details with options to view, acknowledge, and take actions" style="width:100%;" >}}
 
 Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
 
