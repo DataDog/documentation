@@ -7,6 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/go
   - /security/application_security/getting_started/go
   - /security/application_security/enabling/tracing_libraries/threat_detection/go/
+  - /security/application_security/threats/setup/threat_detection/go
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -30,11 +31,10 @@ You can monitor App and API Protection for Go apps running in Docker, Kubernetes
 ## Enabling threat detection
 ### Get started
 
-1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
+1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later). {{% tracing-go-v2 %}}
 
    ```shell
-   $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1 # v1
-   # $ go get -v -u github.com/DataDog/dd-trace-go/v2/ddtrace/tracer # v2
+  $ go get -v -u github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
    ```
 
 2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.

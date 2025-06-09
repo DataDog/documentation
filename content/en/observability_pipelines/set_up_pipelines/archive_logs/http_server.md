@@ -201,6 +201,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
+{{% tab "Custom Processor" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
