@@ -236,8 +236,10 @@ The following configuration options behave consistently across the latest versio
 : **Default**: `user.id,session.id,account.id` <br>
 **Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
 **Caveats**: Not supported in Java, Ruby, Go, C++, and .NET <br>
-**Description**: A comma-separated list of baggage keys, sent via HTTP headers, to automatically tag as `baggage.<key>` (e.g. `bagagge.user.id`) on the local root span. Only baggage extracted from incoming headers is supported. Baggage set via the baggage API is not included.
-Set to `*` to tag all baggage keys (use with caution to avoid exposing sensitive data). Set to an empty string to disable the feature.
+**Description**: A comma-separated list of baggage keys that are automatically applied as span tags to the local root span. For example, a baggage item `user.id:123` is tagged as `baggage.user.id:123`.<br>
+This feature only applies to baggage extracted from incoming HTTP headers. Baggage set with the baggage API is not included.
+  - To tag all baggage items, set the value to `*`. Use this with caution to avoid exposing sensitive data in tags.
+  - To disable this feature, set the value to an empty string.
 
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
