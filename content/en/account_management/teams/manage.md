@@ -45,7 +45,7 @@ From the settings dialog, use the menu to customize the following team settings:
 - Page layout
 - Permissions
 - Notifications
-- Github connection
+- GitHub connection
 
 ## Team membership
 
