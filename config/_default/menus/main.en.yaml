@@ -7955,11 +7955,6 @@ menu:
       parent: product_analytics
       identifier: pa_charts
       weight: 1
-    - name: Journeys
-      url: product_analytics/journeys
-      parent: product_analytics
-      identifier: pa_journeys
-      weight: 2
     - name: Pathway Diagrams
       url: product_analytics/journeys/pathways
       parent: pa_journeys
