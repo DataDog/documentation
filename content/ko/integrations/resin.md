@@ -39,7 +39,7 @@ public_title: Resin
 short_description: Resin 내 스레드 풀 및 연결 풀 설정 추적하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -50,7 +50,7 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: resin 내 스레드 풀 및 연결 풀 설정 추적하기
+  description: Resin 내 스레드 풀 및 연결 풀 설정 추적하기
   media: []
   overview: README.md#Overview
   support: README.md#Support

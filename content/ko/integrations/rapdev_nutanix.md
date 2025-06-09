@@ -64,7 +64,7 @@ public_title: Nutanix
 short_description: Nutanix 리소스 사용량을 모니터링하여 환경을 보다 잘 이해하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md

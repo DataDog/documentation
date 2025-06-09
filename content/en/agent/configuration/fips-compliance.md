@@ -94,7 +94,7 @@ In addition to the Operating System (OS) requirements above:
       ```
 1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
-      {{< img src="/agent/fips-linux.png" alt="Your image description" style="width:100%;" >}}
+  {{< img src="/agent/fips-linux.png" alt="Your image description" style="width:100%;" >}}
 
 [2]: /agent/configuration/fips-compliance/
 [3]: /agent/guide/how-do-i-uninstall-the-agent/
