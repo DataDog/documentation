@@ -1454,6 +1454,11 @@ menu:
       identifier: bits_ai_chat_with_bits_ai
       parent: bits_ai
       weight: 3
+    - name: MCP Server
+      url: bits_ai/mcp_server
+      identifier: bits_ai_mcp_server
+      parent: bits_ai
+      weight: 4
     - name: Dashboards
       url: dashboards/
       pre: dashboard
