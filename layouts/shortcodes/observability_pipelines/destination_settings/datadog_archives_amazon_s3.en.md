@@ -11,7 +11,7 @@
         - Standard-IA
         - One Zone-IA
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
-1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier][10054] for authentication, do not select **Assume role**. The **Assume role** option is only if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
+1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier][10054] for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
     1. Enter the ARN of the IAM role you want to assume.
     1. Optionally, enter the assumed role session name and external ID.
     - **Note:** The [user or role you created earlier][10054] must have permission to assume this role so that the Worker can authenticate with AWS.
