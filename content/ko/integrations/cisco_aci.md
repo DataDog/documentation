@@ -22,6 +22,7 @@ assets:
     source: cisco-aci
   monitors:
     CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
+    Cisco ACI critical severity fault: assets/monitors/critical_fault.json
     Health score of device is critical: assets/monitors/critical_health_score.json
     Interface for a Cisco ACI device is down: assets/monitors/interface_down.json
 author:
@@ -40,7 +41,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.3.0
+integration_version: 4.5.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
@@ -129,13 +130,13 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
         #
         # send_ndm_metadata: false
 
-        # send_faultinst_faults - boolean - optional - default: false
-        # Set to `true` to enable collection of Cisco ACI faultInst faults as logs.
+        ## @param send_faultinst_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultInst faults as logs.
         #
         # send_faultinst_faults: false
 
-        # send_faultdelegate_faults - boolean - optional - default: false
-        # Set to `true` to enable collection of Cisco ACI faultDelegate faults as logs.
+        ## @param send_faultdelegate_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultDelegate faults as logs.
         #
         # send_faultdelegate_faults: false
    ```

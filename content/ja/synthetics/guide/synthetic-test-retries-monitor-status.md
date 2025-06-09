@@ -12,44 +12,44 @@ title: Synthetic テストのリトライがモニターステータスにどの
 
 ## 概要
 
-To reduce alert fatigue, Synthetic tests can be retried when a test run fails. If you have configured a test to be retried on failures, this is a _fast retry_. 
+アラート疲れ (alert fatigue) を軽減するために、テスト実行が失敗した場合に Synthetic テストをリトライ (再試行) できます。失敗時のリトライを設定している場合、これを「高速リトライ (fast retry)」と呼びます。
 
-With a fast retry, Datadog runs a Synthetic test multiple times before transitioning the test's monitor to alert and sending you a notification. For more information about monitors associated with your Synthetic tests, see [Use Synthetic Test Monitors][3].
+高速リトライでは、Datadog はモニターをアラート状態に切り替えて通知を送信する前に、Synthetic テストを複数回実行します。Synthetic テストに関連付けられたモニターの詳細については、[Synthetic テストモニターの使用][3]を参照してください。
 
-{{< img src="synthetics/guide/synthetics_test_retries/fast_retries.png" alt="Failed test runs with fast retries" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/fast_retries.png" alt="高速リトライを伴う失敗したテスト実行" style="width:100%;">}}
 
 
-## Group evaluations
+## グループ評価
 
-While fast retry results are used in the local group evaluation, only the final retry is taken into account in the total group evaluation. The original run and all intermediate retries are discarded from the evaluation.
+高速リトライ結果はローカルグループ評価で使用されますが、最終的なリトライ結果のみが合計グループ評価に考慮されます。元のテスト実行と途中のリトライ結果は評価対象から除外されます。
 
-Local Group Evaluation
-: Evaluation of the location status.
+ローカルグループ評価
+: ロケーションステータスの評価
 
 トータルグループ評価
 : テストステータスの評価。
 
-A run that is still failing after it has reached the maximum number of retries is considered final, and this final result is taken into account in the total group evaluation. 
+設定した最大リトライ回数に達してもなおテストが失敗している場合、その結果が最終判定となり、合計グループ評価に反映されます。
 
-## Retries that overlap with other test runs
+## 他のテストランとリトライが重なる場合
 
-In this example, a Synthetic test is scheduled to run every three minutes, and has a retry configured to a maximum of two times with a delay of two minutes.  
+以下の例では、Synthetic テストが 3 分ごとに実行され、リトライは最大 2 回まで、各リトライまでの待機時間を 2 分に設定しています。
 
-The evaluation only takes the final retry into account for the total group evaluation. 
+合計グループ評価では、最終的なリトライ結果のみが評価に考慮されます。
 
-When all retries fail:
+全リトライが失敗した場合:
 
-{{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="2 回リトライしてすべて失敗したテスト実行をローカルグループと合計グループで評価した図" style="width:100%;">}}
 
-Or when a retry is successful:
+リトライが成功した場合:
 
 {{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="2 回リトライされ、3 回目のリトライで成功したテスト実行を、ローカルグループおよびトータルグループとして評価" style="width:100%;">}}
 
-**Note:** Depending on what you set for the `minFailureDuration` and `minLocationsFailed` parameters, you may see different behavior.
+**注:** `minFailureDuration` と `minLocationsFailed` のパラメータ設定によっては、異なる動作が見られる場合があります。
 
-## Timestamps
+## タイムスタンプ
 
-The system populates the timestamp for a final result with the time when the test was retried, not the time the test was originally scheduled. Results are considered at the timestamp when the test was started. Due to the test's execution time, there may be a small delay before the results become available for the evaluation.
+最終結果のタイムスタンプには、テストがリトライされた時刻が使用され、元々テストがスケジュールされた時刻は使用されません。結果は、テストが開始された時点のタイムスタンプで評価されます。テストの実行時間のため、結果が評価に反映されるまでに若干の遅延が生じる場合があります。
 
 ## 参考資料
 

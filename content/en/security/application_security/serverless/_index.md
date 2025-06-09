@@ -4,18 +4,18 @@ aliases:
   - /security/application_security/getting_started/serverless
   - /security/application_security/enabling/serverless
 further_reading:
-    - link: "/security/application_security/how-appsec-works/"
+    - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
-      text: "How Application Security Works"
+      text: "How App and API Protection Works"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
-    - link: "/security/application_security/threats/"
+    - link: "/security/application_security/"
       tag: "Documentation"
-      text: "Application Threat Management"
+      text: "App and API Protection"
     - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
@@ -52,11 +52,11 @@ To install and configure the Datadog Serverless Framework plugin:
    serverless plugin install --name serverless-plugin-datadog
    ```
 
-2. Enable AAP by updating your `serverless.yml` with the `enableAAP` configuration parameter:
+2. Enable AAP by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
-       enableAAP: true
+       enableASM: true
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
@@ -65,7 +65,7 @@ To install and configure the Datadog Serverless Framework plugin:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
        enableDDTracing: true
-       enableAAP: true
+       enableASM: true
    ```
    See also the complete list of [plugin parameters][4] to further configure your lambda settings.
 
@@ -953,7 +953,7 @@ To enable AAP on your application, begin by adding the following key-value pairs
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_APPSEC_ENABLED` value should be 1 in order to enable Application Security
+- `DD_APPSEC_ENABLED` value should be 1 in order to enable App and API Protection
 
 ### Identifying your startup command
 

@@ -16,10 +16,6 @@ further_reading:
 title: Analytics Explorer
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Product Analytics의 모든 기능은 제한적으로 제공됩니다. 액세스를 요청하려면 양식을 작성하세요.
-{{< /callout >}}
-
 ## 개요
 
 Analytics Explorer에는 제품 사용 방법을 이해할 수 있는 뷰 데이터 집계가 포함되어 있습니다. 이를 통해 다음을 제어할 수 있습니다.
