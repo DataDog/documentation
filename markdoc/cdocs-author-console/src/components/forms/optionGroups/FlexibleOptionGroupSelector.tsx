@@ -5,7 +5,13 @@ import { CustomizationConfig } from 'cdocs-data';
 import { FormStatus, OptionGroup } from '../../../types';
 import OptionGroupBuilder from './OptionGroupBuilder';
 
+interface OptionGroupChoice {
+  label: string;
+  value: string;
+}
+
 export default function FlexibleOptionGroupSelector(props: {
+  selectedOptionGroupId?: string;
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: { optionGroupId: string; optionGroup: OptionGroup } }) => void;
 }) {
@@ -17,7 +23,7 @@ export default function FlexibleOptionGroupSelector(props: {
     return `\`${p.optionGroupId}\`: ${p.optionGroup.map((option) => option.label).join(', ')}`;
   };
 
-  const buildChoices = (optionGroupsById: Record<string, OptionGroup>): { label: string; value: string }[] => {
+  const buildChoices = (optionGroupsById: Record<string, OptionGroup>): OptionGroupChoice[] => {
     return Object.keys(optionGroupsById).map((optionGroupId) => {
       const options = optionGroupsById[optionGroupId];
       const label = buildOptionGroupLabel({ optionGroupId, optionGroup: options });
@@ -25,7 +31,25 @@ export default function FlexibleOptionGroupSelector(props: {
     });
   };
 
-  const [selectedOptionGroup, setSelectedOptionGroup] = useState<{ label: string; value: string } | null>(null);
+  const buildInitialSelection = (): OptionGroupChoice | null => {
+    if (props.selectedOptionGroupId) {
+      const selectedOptionGroup = optionGroupsById[props.selectedOptionGroupId];
+      if (selectedOptionGroup) {
+        return {
+          label: buildOptionGroupLabel({
+            optionGroupId: props.selectedOptionGroupId,
+            optionGroup: selectedOptionGroup
+          }),
+          value: props.selectedOptionGroupId
+        };
+      } else {
+        console.warn(`Option group with ID ${props.selectedOptionGroupId} not found in customizationConfig`);
+      }
+    }
+    return null;
+  };
+
+  const [selectedOptionGroup, setSelectedOptionGroup] = useState<OptionGroupChoice | null>(buildInitialSelection());
 
   const handleOptionGroupIdChange = (
     _event: React.SyntheticEvent,

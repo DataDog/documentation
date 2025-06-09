@@ -78,6 +78,7 @@ function FilterBuilder(props: {
         The user characteristic to filter on, such as their host or programming language.
       </p>
       <FlexibleTraitSelector
+        selectedTraitId={localFilter.trait_id}
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
           if (p.status === 'done' && p.data) {
@@ -91,6 +92,7 @@ function FilterBuilder(props: {
         <code>prog_lang</code> trait above, your option group would contain options like Python and JavaScript.
       </p>
       <FlexibleOptionGroupSelector
+        selectedOptionGroupId={localFilter.option_group_id}
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
           if (p.status === 'done' && p.data) {

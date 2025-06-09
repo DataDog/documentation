@@ -5,7 +5,13 @@ import { CustomizationConfig } from 'cdocs-data';
 import CreateTraitForm from './CreateTraitForm';
 import { FormStatus, TraitConfig } from '../../../types';
 
+interface TraitChoice {
+  label: string;
+  value: string;
+}
+
 export default function FlexibleTraitSelector(props: {
+  selectedTraitId?: string;
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: TraitConfig }) => void;
 }) {
@@ -18,10 +24,28 @@ export default function FlexibleTraitSelector(props: {
     });
   };
 
-  const [traitsById, setTraitsById] = useState<Record<string, TraitConfig>>(props.customizationConfig.traitsById);
-  const [selectedTraitOption, setSelectedTraitOption] = useState<{ label: string; value: string } | null>(null);
+  const buildInitialSelection = (): TraitChoice | null => {
+    if (props.selectedTraitId) {
+      const selectedTrait = props.customizationConfig.traitsById[props.selectedTraitId];
+      if (selectedTrait) {
+        const initialOption: TraitChoice = {
+          label: `${selectedTrait.label} (\`${selectedTrait.id}\`)${
+            selectedTrait.internal_notes ? `: ${selectedTrait.internal_notes}` : ''
+          }`,
+          value: selectedTrait.id
+        };
+        return initialOption;
+      } else {
+        console.warn(`Trait with ID ${props.selectedTraitId} not found in customizationConfig`);
+      }
+    }
+    return null;
+  };
 
-  const handleSelection = (_event: React.SyntheticEvent, selection: { label: string; value: string } | null) => {
+  const [traitsById, setTraitsById] = useState<Record<string, TraitConfig>>(props.customizationConfig.traitsById);
+  const [selectedTraitOption, setSelectedTraitOption] = useState<TraitChoice | null>(buildInitialSelection());
+
+  const handleSelection = (_event: React.SyntheticEvent, selection: TraitChoice | null) => {
     setSelectedTraitOption(selection);
 
     if (selection) {

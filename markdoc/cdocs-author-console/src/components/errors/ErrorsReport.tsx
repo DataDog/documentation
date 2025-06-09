@@ -46,7 +46,7 @@ const ErrorsPrintout = (props: { errorReportsByFilePath: Record<string, CdocsCor
                 {filename}
               </a>
             </h3>
-            <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
+            <div style={{ position: 'absolute', top: '20px', right: '25px' }}>
               <a
                 href="javascript:void(0)"
                 onClick={() => {

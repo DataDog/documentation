@@ -99,20 +99,25 @@ function FilterList({
     <div>
       {Object.keys(filtersByUuid).length === 0 && <div>No filters added yet.</div>}
       {Object.keys(filtersByUuid).map((uuid) => {
+        const filter = filtersByUuid[uuid];
         // Only show the edit and delete icons if the filter is not currently being edited
         let onEdit;
         let onDelete;
         if (currentFilterUuid !== uuid) {
-          onEdit = handleFilterRowEdit;
-          onDelete = handleFilterRowDelete;
+          onEdit = () => {
+            handleFilterRowEdit(filter);
+          };
+          onDelete = () => {
+            handleFilterRowDelete(filter);
+          };
         }
         return (
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
-            <FilterRow filter={filtersByUuid[uuid]} onDelete={onDelete} onEdit={onEdit} />
+            <FilterRow filter={filter} onDelete={onDelete} onEdit={onEdit} />
             {currentFilterUuid === uuid && (
               <FilterBuilder
                 customizationConfig={customizationConfig}
-                filter={filtersByUuid[currentFilterUuid]}
+                filter={filtersByUuid[uuid]}
                 onStatusChange={(p) => {
                   if (p.status === 'done' && p.data) {
                     handleFilterFormSave(p.data);
