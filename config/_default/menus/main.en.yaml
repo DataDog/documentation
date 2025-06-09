@@ -7998,7 +7998,7 @@ menu:
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 301
+      weight: 302
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -8023,7 +8023,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 302
+      weight: 303
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
