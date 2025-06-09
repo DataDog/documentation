@@ -94,10 +94,10 @@ Suppose you want to make changes to your application interface but want to first
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /product_analytics/user_retention
-[3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/pathways
+[2]: /product_analytics/charts/user_retention
+[3]: https://app.datadoghq.com/product-analytics
+[4]: /product_analytics/charts/funnel_analysis
+[5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
