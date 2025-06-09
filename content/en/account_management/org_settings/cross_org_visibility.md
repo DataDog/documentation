@@ -46,7 +46,9 @@ All types of metrics are supported, including [custom metrics][3], [trace metric
 
 ### List connections
 
-To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections. Listing connections requires the _Org Connections Read_ permission.
+To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections.
+
+Listing connections requires the _Org Connections Read_ permission. Additionally, you can use [granular access control][12] to restrict access to individual connections according to team, role, or user.
 
 ### Create a connection
 
@@ -156,3 +158,4 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [9]: /api/latest/organizations/#list-your-managed-organizations
 [10]: /dashboards/sharing/shared_dashboards/#public-shared-dashboards
 [11]: /getting_started/site
+[12]: /account_management/rbac/granular_access
