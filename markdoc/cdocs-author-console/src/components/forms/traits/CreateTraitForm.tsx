@@ -12,7 +12,8 @@ import { FormStatus } from '../../../types';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 /**
- * A form that allows the user to create a new trait.
+ * A form that allows the user to create a new trait,
+ * such as "host", "programming language", etc.
  */
 function CreateTraitForm(props: {
   customizationConfig: CustomizationConfig;
@@ -107,6 +108,7 @@ function CreateTraitForm(props: {
         </AccordionSummary>
         <AccordionDetails sx={{ paddingTop: '0px', marginTop: '-15px' }}>
           <h3>Create a new trait</h3>
+          {/* ID field */}
           <p>
             Trait ID
             <TextField
@@ -123,6 +125,8 @@ function CreateTraitForm(props: {
               required
             />
           </p>
+
+          {/* Label field */}
           <p>
             Trait label
             <TextField
@@ -139,6 +143,8 @@ function CreateTraitForm(props: {
               required
             />
           </p>
+
+          {/* Internal notes field */}
           <p>
             Internal notes (optional)
             <TextField
@@ -156,6 +162,8 @@ function CreateTraitForm(props: {
               rows={4}
             />
           </p>
+
+          {/* Display form errors, if any */}
           {formErrors.length > 0 && (
             <div style={{ color: 'red' }}>
               <ul>
@@ -166,7 +174,10 @@ function CreateTraitForm(props: {
             </div>
           )}
         </AccordionDetails>
+
+        {/* Actions at the bottom of the form */}
         <AccordionActions>
+          {/* Save button */}
           <Button
             onClick={handleSave}
             disabled={formStatus !== 'pending' || !newTraitConfig.id || !newTraitConfig.label}
@@ -176,6 +187,8 @@ function CreateTraitForm(props: {
           >
             Save
           </Button>
+
+          {/* Cancel button */}
           <Button variant="contained" onClick={cancelForm}>
             Cancel
           </Button>

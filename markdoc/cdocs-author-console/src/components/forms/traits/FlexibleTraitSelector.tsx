@@ -99,6 +99,7 @@ export default function FlexibleTraitSelector(props: {
 
   return (
     <div>
+      {/* Searchable dropdown for selecting an existing trait */}
       <Autocomplete
         disablePortal
         options={buildChoices(traitsById)}
@@ -112,6 +113,8 @@ export default function FlexibleTraitSelector(props: {
         }}
         onChange={handleSelection}
       />
+
+      {/* Form for creating a new trait */}
       <CreateTraitForm
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
