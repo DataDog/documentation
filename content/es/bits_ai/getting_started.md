@@ -3,9 +3,6 @@ further_reading:
 - link: bits_ai/
   tag: Documentación
   text: Descripción general de Bits AI
-- link: bits_ai/query_examples
-  tag: Documentación
-  text: Ejemplos de consultas en lenguaje natural
 - link: bits_ai/managing_incidents/
   tag: Documentación
   text: Gestión de incidencias
@@ -49,7 +46,7 @@ Una vez finalizada la configuración, puedes enviar consultas a `@Datadog` en le
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Salida de un ejemplo de consulta de dependencia de servicio en Slack" style="width:60%;">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
