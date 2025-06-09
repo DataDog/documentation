@@ -229,7 +229,7 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TRACE_BAGGAGE_MAX_BYTES`
 : **Default**: `8192` <br>
-**Supported Input**:  A non-zero positive integer <br>
+**Supported Input**:  A positive integer <br>
 **Description**: Maximum number of bytes in the baggage header value. Values less than 3 will prevent propagation (3 bytes is the shortest possible data, e.g. `a=b`).
 
 `DD_TRACE_BAGGAGE_TAG_KEYS`
