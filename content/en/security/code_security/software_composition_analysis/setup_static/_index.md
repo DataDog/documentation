@@ -404,15 +404,15 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
-### Reachability Analysis
+### Reachability analysis
 
-Datadog provides static reachability analysis to help teams determine whether vulnerable code paths in dependencies are actually referenced within their application. This feature allows for more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore unlikely to pose immediate risk.
+Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
 
-Reachability analysis relies solely on static code analysis. Datadog examines the application’s call graph to determine whether any execution paths lead to vulnerable methods identified in supported advisories, without relying on runtime or dynamic execution data.
+The analysis is based entirely on static code inspection. Datadog evaluates the application’s call graph to determine whether any execution paths lead to vulnerable methods defined in supported advisories. This approach does not incorporate runtime or dynamic execution data.
 
-At this time, reachability analysis is supported only for Java projects, and is limited to a specific set of vetted security advisories. Vulnerabilities outside this set are not eligible for reachability determination.
+Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
-#### Supported Advisories
+#### Supported advisories
 
 Static reachability analysis is currently available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
@@ -440,8 +440,6 @@ Static reachability analysis is currently available for the following advisories
 - [GHSA-mw36-7c6c-q4q2](https://osv.dev/vulnerability/GHSA-mw36-7c6c-q4q2)
 - [GHSA-hph2-m3g5-xxv4](https://osv.dev/vulnerability/GHSA-hph2-m3g5-xxv4)
 - [GHSA-j9h8-phrw-h4fh](https://osv.dev/vulnerability/GHSA-j9h8-phrw-h4fh)
-
-Datadog will continuing to expand support for additional advisories and ecosystems in future releases.
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
