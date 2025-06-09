@@ -68,11 +68,11 @@ To help Bits produce the most accurate and helpful investigation results, follow
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-### Restrict access to Bits investigations
+<!-- ### Restrict access to Bits investigations
 
 To access investigations, users need the `bits_investigations_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see [Access Control][11].
 
-**Note**: Your organization's third-party AI enablement status is always respected, even when users have this permission. 
+**Note**: Your organization's third-party AI enablement status is always respected, even when users have this permission.  -->
 
 ## How Bits AI SRE investigates
 
