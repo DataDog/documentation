@@ -17,6 +17,8 @@ There are two different ways of sampling, which control the data you send to Dat
 
 - **Server-side (tail-based) sampling**: Makes the sampling decision after data has been collected and sent to Datadog. It allows you to filter and retain specific sessions based on their characteristics (like errors or user attributes) using retention filters.
 
+_**Note**: Server-side sampling is only possible with the [retention filters][12] provided by [RUM without Limits][2]. If you need to use this but are on the legacy, client-side-only model, reach out to your account team._
+
 This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs. Learn more about how [sessions are defined][1] in RUM.
 
 ## Sampling configuration
@@ -25,7 +27,7 @@ This guide walks you through best practices for RUM sampling so you can capture 
 
 #### Client-side (head-based) sampling rate
 
-With [RUM without Limits][2], client-side sampling rate helps you control the ingested portion of your session or how many sessions you send from your applications to Datadog.
+With [RUM without Limits][2], client-side sampling rate helps you control how many sessions you send from your applications to Datadog.
 
 Before each new user session, the SDK draws a random floating-point number between 0 and 100, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the random number is higher, the session is not kept and events are not collected until the end of the session.
 
@@ -33,12 +35,14 @@ You can set the sampling rate with the SDK ([Browser][3], [Android][4], [iOS][5]
 
 #### Server-side (tail-based) sampling rate
 
-With RUM without Limits, server-side sampling rate defines which sessions you want to keep in Datadog for a particular [retention period][11].
+With RUM without Limits, server-side sampling rate defines which sessions you want to keep in Datadog (see details about the [retention period][11]).
 
-The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on), the whole session is stored. The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria and discard the rest. Learn more about [how retention filters work][12].
+The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on), the whole session is stored alongside all its events (and including the ones that proceeded the sampling decision). The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria and discard the rest. Learn more about [how retention filters work][12].
 
 ### The effect of sampling on data and metrics that are available in RUM
-RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on sessions that are sampled. For example, if the sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions. 
+RUM metrics, including the ones that come [out-of-the-box with RUM without Limits][13] (e.g. Core Web Vitals and usage numbers) and the [custom ones][16] that you can create yourself, are all calculated based on sessions that are ingested on Datadog. For example, if the client-sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions.
+
+_**Note**: with RUM without Limits, those metrics are computed before the [retention filters][12], i.e. before server-side sampling_
 
 ### Recommended sampling rate
 
@@ -88,3 +92,4 @@ During live outages, incidents, or bug investigations, you can increase sampling
 [13]: /real_user_monitoring/rum_without_limits/metrics
 [14]: /real_user_monitoring/guide/retention_filter_best_practices/
 [15]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
+[16]: /real_user_monitoring/platform/generate_metrics
