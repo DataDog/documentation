@@ -2774,33 +2774,24 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Action Interface
+      url: actions/action_interface/
+      pre: bits-ai
+      parent: actions_heading
+      identifier: action_interface
+      weight: 30000
     - name: Datastore
       url: actions/datastore/
       pre: datastores-wui
       parent: actions_heading
       identifier: datastore
-      weight: 30000
-    - name: Create and Manage Datastores
-      url: actions/datastore/create/
-      parent: datastore
-      identifier: datastore_create
-      weight: 1
-    - name: Use Datastores
-      url: actions/datastore/use/
-      parent: datastore
-      identifier: datastore_use
-      weight: 2
-    - name: Authentication and Access
-      url: actions/datastore/auth/
-      parent: datastore
-      identifier: datastore_auth
-      weight: 3
+      weight: 40000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
       parent: actions_heading
       identifier: action_catalog
-      weight: 40000
+      weight: 50000
     - name: Connections
       url: actions/connections/
       parent: action_catalog
