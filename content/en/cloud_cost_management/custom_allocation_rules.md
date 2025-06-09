@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to business dimensions such as teams, projects, or departments.
+Custom allocation rules let you split and assign shared costs to any available tags, such as teams, projects, or environments, supporting accurate showback and chargeback.
 
 The following allocation methods are available:
 
