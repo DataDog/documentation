@@ -10,6 +10,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { OptionConfig, FormStatus } from '../../../../types';
 
+/**
+ * A form for creating a new OptionConfig, such as { id: "aws", label: "AWS"}.
+ *
+ * If the user can't find an existing option that matches their needs,
+ * they can use this form to create a new one.
+ */
 function OptionBuilder(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: OptionConfig }) => void;
@@ -22,6 +28,7 @@ function OptionBuilder(props: {
   // The form begins as "done" because the accordion is closed,
   // and the user may not intend to add a new option
   const [formStatus, setFormStatus] = useState<FormStatus>('done');
+
   const [newOptionConfig, setNewOptionConfig] = useState(blankOption);
   const [formErrors, setFormErrors] = useState<string[]>([]);
 
@@ -45,10 +52,11 @@ function OptionBuilder(props: {
   };
 
   const handleAccordionToggle = () => {
-    // Open accordion
+    // Open the accordion
     if (formStatus === 'done') {
       setFormStatus('waiting');
       props.onStatusChange({ status: 'waiting' });
+      // Close the accordion
     } else {
       setFormStatus('done');
       clearForm();
@@ -56,6 +64,7 @@ function OptionBuilder(props: {
     }
   };
 
+  // Reset the form to its initial state
   const handleFormCancel = () => {
     setNewOptionConfig(blankOption);
     setFormStatus('done');
@@ -101,8 +110,11 @@ function OptionBuilder(props: {
       <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
         <Typography component="span">Add a new option</Typography>
       </AccordionSummary>
+
       <AccordionDetails sx={{ paddingTop: '0px', marginTop: '-15px' }}>
         <h4>Create a new option</h4>
+
+        {/* Option ID field */}
         <p>
           Option ID
           <TextField
@@ -119,6 +131,8 @@ function OptionBuilder(props: {
             required
           />
         </p>
+
+        {/* Option label field */}
         <p>
           Option label
           <TextField
@@ -136,6 +150,7 @@ function OptionBuilder(props: {
           />
         </p>
 
+        {/* Display form errors if any */}
         {formErrors.length === 0 && (
           <ul style={{ color: 'red' }}>
             {formErrors.map((error, index) => (
@@ -144,6 +159,8 @@ function OptionBuilder(props: {
           </ul>
         )}
       </AccordionDetails>
+
+      {/* Actions at the bottom of the form */}
       <AccordionActions>
         <Button
           variant="contained"

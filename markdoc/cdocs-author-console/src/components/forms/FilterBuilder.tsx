@@ -5,6 +5,9 @@ import { WizardFilter, TraitConfig, FormStatus } from '../../types';
 import FlexibleTraitSelector from './traits/FlexibleTraitSelector';
 import FlexibleOptionGroupSelector from './optionGroups/FlexibleOptionGroupSelector';
 
+/**
+ * A form that allows the user to build a filter for a cdoc.
+ */
 function FilterBuilder(props: {
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
@@ -12,6 +15,7 @@ function FilterBuilder(props: {
 }) {
   // The local copy of the filter, to hold any pending changes
   const [localFilter, setLocalFilter] = useState<WizardFilter>(props.filter);
+
   const [traitFormStatus, setTraitFormStatus] = useState<FormStatus>('waiting');
   const [optionGroupFormStatus, setOptionGroupFormStatus] = useState<FormStatus>('waiting');
 
@@ -73,6 +77,7 @@ function FilterBuilder(props: {
 
   return (
     <div>
+      {/* Trait form */}
       <h2>Trait</h2>
       <p style={{ fontSize: '0.9em' }}>
         The user characteristic to filter on, such as their host or programming language.
@@ -86,6 +91,8 @@ function FilterBuilder(props: {
           }
         }}
       />
+
+      {/* Option group form */}
       <h2>Option group</h2>
       <p style={{ fontSize: '0.9em' }}>
         The list of options the user can select for this filter. For example, if you've chosen the{' '}

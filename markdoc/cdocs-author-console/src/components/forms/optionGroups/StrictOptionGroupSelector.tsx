@@ -3,6 +3,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
 
+/**
+ * A searchable dropdown for selecting an existing option group.
+ */
 export default function StrictOptionGroupSelector(props: {
   customizationConfig: CustomizationConfig;
   onSelect: (optionGroupId: string) => void;
@@ -16,6 +19,7 @@ export default function StrictOptionGroupSelector(props: {
   });
 
   const [localOptionGroupId, setLocalOptionGroupId] = useState<string | null>(null);
+
   const handleOptionGroupIdChange = (
     _event: React.SyntheticEvent,
     selection: { label: string; value: string } | null

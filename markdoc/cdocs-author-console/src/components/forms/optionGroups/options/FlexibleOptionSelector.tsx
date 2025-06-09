@@ -5,6 +5,11 @@ import { CustomizationConfig } from 'cdocs-data';
 import OptionBuilder from './OptionBuilder';
 import { OptionConfig, FormStatus } from '../../../../types';
 
+interface OptionChoice {
+  label: string;
+  value: string;
+}
+
 /**
  * Select multiple options from the customization config.
  * New options can be added.
@@ -13,7 +18,8 @@ export default function FlexibleOptionSelector(props: {
   customizationConfig: CustomizationConfig;
   onStatusChange: (p: { status: FormStatus; data?: OptionConfig[] }) => void;
 }) {
-  const getDropdownChoices = (optionsById: Record<string, OptionConfig>) => {
+  // Create a list of dropdown choices from the optionsById object
+  const buildDropdownChoices = (optionsById: Record<string, OptionConfig>): OptionChoice[] => {
     const newDropdownChoices = Object.keys(optionsById).map((optionId) => {
       const option = optionsById[optionId];
       return { label: option.label, value: optionId };
@@ -23,13 +29,10 @@ export default function FlexibleOptionSelector(props: {
 
   const [newOptionIds, setNewOptionIds] = useState<string[]>([]);
   const [optionsById, setOptionsById] = useState<Record<string, OptionConfig>>(props.customizationConfig.optionsById);
-  const [dropdownSelections, setDropdownSelections] = useState<{ label: string; value: string }[]>([]);
+  const [dropdownSelections, setDropdownSelections] = useState<OptionChoice[]>([]);
   const [formStatus, setFormStatus] = useState<FormStatus>('waiting');
 
-  const getOptionConfigs = (
-    selections: { label: string; value: string }[],
-    optionsById: Record<string, OptionConfig>
-  ) => {
+  const getOptionConfigs = (selections: OptionChoice[], optionsById: Record<string, OptionConfig>) => {
     const selectedOptions = selections.map((selection) => {
       const option = optionsById[selection.value];
       if (!option) {
@@ -43,7 +46,7 @@ export default function FlexibleOptionSelector(props: {
     return selectedOptions;
   };
 
-  const handleSelectionChange = (_event: React.SyntheticEvent, newSelections: { label: string; value: string }[]) => {
+  const handleSelectionChange = (_event: React.SyntheticEvent, newSelections: OptionChoice[]) => {
     // Determine whether any new (currently nonexistent) options have been deselected
     const deselectedOptionIds = dropdownSelections
       .filter((selection) => !newSelections.some((newSelection) => newSelection.value === selection.value))
@@ -51,6 +54,9 @@ export default function FlexibleOptionSelector(props: {
 
     const deselectedNewOptionIds = deselectedOptionIds.filter((optionId) => newOptionIds.includes(optionId));
 
+    // Delete any new options that were deselected
+    // (essentially canceling their creation, since there is nowhere
+    // for them to exist)
     let updatedOptionsById = { ...optionsById };
     let updatedNewOptionIds = [...newOptionIds];
 
@@ -128,7 +134,7 @@ export default function FlexibleOptionSelector(props: {
         disablePortal
         value={dropdownSelections}
         multiple={true}
-        options={getDropdownChoices(optionsById)}
+        options={buildDropdownChoices(optionsById)}
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
           if (params.inputProps.value === '') {

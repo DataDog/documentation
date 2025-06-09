@@ -14,6 +14,9 @@ import FlexibleOptionSelector from './options/FlexibleOptionSelector';
 
 /**
  * A form that allows the user to create a new option group.
+ *
+ * It contains the new option form as a child form,
+ * allowing the user to create new options while creating the option group.
  */
 function OptionGroupBuilder(props: {
   customizationConfig: CustomizationConfig;
@@ -33,12 +36,14 @@ function OptionGroupBuilder(props: {
   const [optionGroupId, setOptionGroupId] = useState<string>('');
   const [optionGroup, setOptionGroup] = useState<OptionGroup>([]);
 
+  // Empty the form inputs and clear the errors
   const clearForm = () => {
     setOptionGroupId('');
     setOptionGroup([]);
     setFormErrors([]);
   };
 
+  // Reset the form to its initial state
   const cancelForm = () => {
     if (formStatus !== 'done') {
       setFormStatus('done');
@@ -118,6 +123,8 @@ function OptionGroupBuilder(props: {
         </AccordionSummary>
         <AccordionDetails sx={{ paddingTop: '0px', marginTop: '-15px' }}>
           <h3>Create a new option group</h3>
+
+          {/* Option group ID field */}
           <h4>Option group ID</h4>
           <TextField
             value={optionGroupId}
@@ -129,6 +136,8 @@ function OptionGroupBuilder(props: {
             fullWidth
             required
           />
+
+          {/* Dropdown for selecting (and optionally creating) options */}
           <h4>Options</h4>
           <FlexibleOptionSelector
             customizationConfig={props.customizationConfig}
@@ -140,6 +149,8 @@ function OptionGroupBuilder(props: {
               setFlexibleOptionSelectorStatus(p.status);
             }}
           />
+
+          {/* Display form errors if any */}
           {formErrors.length > 0 && (
             <div style={{ color: 'red' }}>
               <ul>
@@ -150,6 +161,8 @@ function OptionGroupBuilder(props: {
             </div>
           )}
         </AccordionDetails>
+
+        {/* Actions at the bottom of the form */}
         <AccordionActions>
           <Button
             onClick={handleSave}
