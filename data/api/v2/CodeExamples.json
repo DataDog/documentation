@@ -212,6 +212,11 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1295653933",
+      "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
     }
   ],
   "CreateCSMThreatsAgentPolicy": [
@@ -357,8 +362,8 @@
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1768887482",
+      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [

@@ -58,15 +58,15 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 
 La integración de Amazon S3 Storage Lens no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon S3 Storage Lens no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
