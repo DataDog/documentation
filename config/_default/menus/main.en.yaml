@@ -7955,16 +7955,26 @@ menu:
       parent: product_analytics
       identifier: pa_charts
       weight: 1
-    - name: Pathway Diagrams
-      url: product_analytics/journeys/pathways
-      parent: pa_journeys
+    - name: Pathways Diagram
+      url: product_analytics/charts/pathways
+      parent: pa_charts
       identifier: pa_pathways
-      weight: 201
+      weight: 101
     - name: Funnel Analysis
-      url: product_analytics/journeys/funnel_analysis
-      parent: pa_journeys
+      url: product_analytics/charts/funnel_analysis
+      parent: pa_charts
       identifier: pa_funnel_analysis
-      weight: 202
+      weight: 102
+    - name: User Retention
+      url: product_analytics/charts/user_retention
+      parent: pa_charts
+      identifier: pa_user_retention
+      weight: 103
+    - name: Analytics Explorer
+      url: product_analytics/charts/analytics_explorer
+      parent: pa_charts
+      identifier: pa_analytics_explorer
+      weight: 104
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics
