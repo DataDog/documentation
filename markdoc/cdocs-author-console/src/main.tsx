@@ -21,6 +21,34 @@ const theme = createTheme({
     secondary: {
       main: '#ff0099' // Datadog @pink-500
     }
+  },
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '4px 8px' // reduce vertical and horizontal padding
+        },
+        head: {
+          fontWeight: 600,
+          padding: '4px 8px'
+        },
+        body: {
+          padding: '4px 8px'
+        }
+      }
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          height: '32px' // optional: reduce row height
+        }
+      }
+    },
+    MuiTable: {
+      defaultProps: {
+        size: 'small' // this will help reduce default row height too
+      }
+    }
   }
 });
 
