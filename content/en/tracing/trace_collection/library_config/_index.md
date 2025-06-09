@@ -221,6 +221,24 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
+### Context Propagation
+`DD_TRACE_BAGGAGE_MAX_ITEMS`
+: **Default**: `64` <br>
+**Supported Input**:  A non-zero positive integer <br>
+**Description**: Maximum number of name/value pairs that can be propagated via baggage.
+
+`DD_TRACE_BAGGAGE_MAX_BYTES`
+: **Default**: `8192` <br>
+**Supported Input**:  A non-zero positive integer <br>
+**Description**: Maximum number of bytes in the baggage header value. Values less than 3 will prevent propagation (3 bytes is the shortest possible data, e.g. `a=b`).
+
+`DD_TRACE_BAGGAGE_TAG_KEYS`
+: **Default**: `user.id,session.id,account.id` <br>
+**Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
+**Caveats**: Not supported in Java, Ruby, Go, C++, and .NET <br/>
+**Description**: A comma-separated list of baggage keys, sent via HTTP headers, to automatically tag as `baggage.<key>` (e.g. `bagagge.user.id`) on the local root span. Only baggage extracted from incoming headers is supported. Baggage set via the baggage API is not included.
+Set to `*` to tag all baggage keys (use with caution to avoid exposing sensitive data). Set to an empty string to disable the feature.
+
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
