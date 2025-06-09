@@ -140,7 +140,7 @@ A list of method annotations to treat as `@Trace`.
 : **Environment Variable**: `DD_TRACE_METHODS`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
-List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
+List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls.
 `dd.trace.methods` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][22] product instead.
 
 `dd.trace.classes.exclude`
