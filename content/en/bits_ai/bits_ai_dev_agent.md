@@ -6,7 +6,7 @@ title: Bits AI Dev Agent
 <div class="alert alert-warning">Bits AI Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
 Bits AI Dev Agent is in Preview.
 {{< /callout >}}
 
