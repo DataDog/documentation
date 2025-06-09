@@ -2189,6 +2189,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
+    - name: Issue Correlation
+      url: error_tracking/issue_correlation
+      parent: error_tracking
+      identifier: error_tracking_issue_correlation
+      weight: 9
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
@@ -2763,33 +2768,24 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Action Interface
+      url: actions/action_interface/
+      pre: bits-ai
+      parent: actions_heading
+      identifier: action_interface
+      weight: 30000
     - name: Datastore
       url: actions/datastore/
       pre: datastores-wui
       parent: actions_heading
       identifier: datastore
-      weight: 30000
-    - name: Create and Manage Datastores
-      url: actions/datastore/create/
-      parent: datastore
-      identifier: datastore_create
-      weight: 1
-    - name: Use Datastores
-      url: actions/datastore/use/
-      parent: datastore
-      identifier: datastore_use
-      weight: 2
-    - name: Authentication and Access
-      url: actions/datastore/auth/
-      parent: datastore
-      identifier: datastore_auth
-      weight: 3
+      weight: 40000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
       parent: actions_heading
       identifier: action_catalog
-      weight: 40000
+      weight: 50000
     - name: Connections
       url: actions/connections/
       parent: action_catalog
@@ -7948,46 +7944,41 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: Vizualizing with Charts
-      url: product_analytics/charts
-      parent: product_analytics
-      identifier: pa_charts
-      weight: 1
-    - name: Pathways Diagram
-      url: product_analytics/charts/pathways
-      parent: pa_charts
-      identifier: pa_pathways
-      weight: 101
-    - name: Funnel Analysis
-      url: product_analytics/charts/funnel_analysis
-      parent: pa_charts
-      identifier: pa_funnel_analysis
-      weight: 102
     - name: User Retention
-      url: product_analytics/charts/user_retention
-      parent: pa_charts
-      identifier: pa_user_retention
-      weight: 103
-    - name: Analytics Explorer
-      url: product_analytics/charts/analytics_explorer
-      parent: pa_charts
-      identifier: pa_analytics_explorer
-      weight: 104
-    - name: Dashboards
-      url: product_analytics/dashboards
+      url: product_analytics/user_retention
       parent: product_analytics
-      identifier: pa_dashboard
+      identifier: pa_user_retention
+      weight: 1
+    - name: Journeys
+      url: product_analytics/journeys
+      parent: product_analytics
+      identifier: pa_journeys
       weight: 2
-    - name: Replaying User Activity
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 201
+    - name: Funnel Analysis
+      url: product_analytics/journeys/funnel_analysis
+      parent: pa_journeys
+      identifier: pa_funnel_analysis
+      weight: 202
+    - name: Heatmaps
+      url: product_analytics/heatmaps
+      parent: product_analytics
+      identifier: pa_heatmaps
+      weight: 3
+    - name: Session Replay
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 3
+      weight: 4
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 301
+      weight: 401
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -8012,7 +8003,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 302
+      weight: 402
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -8062,17 +8053,17 @@ menu:
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 4
+      weight: 6
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 6
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2

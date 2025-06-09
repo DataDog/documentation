@@ -21,7 +21,7 @@ The segments page includes a list of all of the segments you have created. You c
 
 The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
-{{< img src="product_analytics/segmentation/userprofiles_pana-ga.png" alt="A view of the User profiles page." >}}
+{{< img src="product_analytics/segmentation/user_profiles_pana.png" alt="A view of the User profiles page." >}}
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
