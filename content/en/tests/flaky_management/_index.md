@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/flaky-test-management/" >}}
 Flaky Test Management is in Preview. Complete the form to request access.
 {{< /callout >}}
 
@@ -38,9 +38,22 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Active** | The test is known to be flaky and is running in CI. |
 | **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. |
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
-| **Fixed** | The test has passed consistently and is no longer considered flaky. |
+| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#fix-a-flaky-test) to confirm a fix and automatically apply this status, instead of manually changing it. |
 
 <div class="alert alert-info"><strong>Note:</strong> Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
+
+## Confirm fixes for flaky tests
+
+When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
+
+1. For the test you are fixing, click **Fix this test** in the Flaky Test Management UI.
+1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
+1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`). 
+1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
+   - Retries any tests you're attempting to fix 20 times.
+   - Runs tests even if they are marked as `Disabled`.
+   - If all retries pass, updates the test's status to `Fixed`.
+   - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
 
 ## Investigate a flaky test
 
@@ -49,13 +62,9 @@ For more information about a specific flaky test, use these options in the actio
 - **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
 - **View related test executions**: Open the [Test Optimization Explorer][2] populated with all of the test's recent runs.
 
-## Remediate flaky tests
+## Create cases for flaky tests
 
 For any flaky test, you can create a case and use [Case Management][3] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row. 
-
-## Flaky Test Policies
-
-Configure Flaky Test Policies that govern how tests move through the lifecycle. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days. 
 
 ## Compatibility
 
