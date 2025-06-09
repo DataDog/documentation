@@ -6304,16 +6304,21 @@ menu:
       parent: security_platform
       identifier: security_ato_protection
       weight: 9
+    - name: Ticketing Integrations
+      url: security/ticketing_integrations
+      parent: security_platform
+      identifier: security_ticketing_integrations
+      weight: 10
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 10
+      weight: 11
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 11
+      weight: 12
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
