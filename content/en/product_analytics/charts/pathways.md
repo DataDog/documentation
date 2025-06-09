@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: '/product_analytics/journeys'
   tag: Documentation
-  text: Journeys
+  text: Charts
 - link: '/dashboards/widgets/sankey/'
   tag: Documentation
   text: Build Sankey widgets in Dashboards
