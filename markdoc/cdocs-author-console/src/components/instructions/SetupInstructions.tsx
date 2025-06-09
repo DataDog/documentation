@@ -1,21 +1,9 @@
 import CdocMarkupTemplate from './CdocMarkupTemplate';
-import { WizardFilter } from '../types';
+import { WizardFilter } from '../../types';
 import { CustomizationConfig } from 'cdocs-data';
-import Code from './Code';
+import Code from '../shared/Code';
 import Alert from '@mui/material/Alert';
-import { mergeCustomizationConfigs, buildConfigYaml } from '../dataUtils';
-
-function getNewConfigStatus(newConfig: CustomizationConfig) {
-  const hasNewTraits = Object.keys(newConfig.traitsById).length > 0;
-  const hasNewOptions = Object.keys(newConfig.optionsById).length > 0;
-  const hasNewOptionGroups = Object.keys(newConfig.optionGroupsById).length > 0;
-  return {
-    hasNewTraits,
-    hasNewOptions,
-    hasNewOptionGroups,
-    hasNewConfig: hasNewTraits || hasNewOptions || hasNewOptionGroups
-  };
-}
+import { mergeCustomizationConfigs, buildConfigYaml } from '../../dataUtils';
 
 function SetupInstructions({
   filters,
@@ -55,6 +43,18 @@ function SetupInstructions({
 }
 
 function ConfigSetupInstructions({ newConfig }: { newConfig: CustomizationConfig }) {
+  const getNewConfigStatus = (newConfig: CustomizationConfig) => {
+    const hasNewTraits = Object.keys(newConfig.traitsById).length > 0;
+    const hasNewOptions = Object.keys(newConfig.optionsById).length > 0;
+    const hasNewOptionGroups = Object.keys(newConfig.optionGroupsById).length > 0;
+    return {
+      hasNewTraits,
+      hasNewOptions,
+      hasNewOptionGroups,
+      hasNewConfig: hasNewTraits || hasNewOptions || hasNewOptionGroups
+    };
+  };
+
   const configStatus = getNewConfigStatus(newConfig);
   const newConfigYaml = buildConfigYaml(newConfig);
 
@@ -65,6 +65,8 @@ function ConfigSetupInstructions({ newConfig }: { newConfig: CustomizationConfig
   return (
     <>
       <h2>Add the required YAML configuration to the docs site</h2>
+
+      {/* Trait config, if any new traits */}
       {configStatus.hasNewTraits && (
         <>
           <h3>Add new traits</h3>
@@ -76,6 +78,8 @@ function ConfigSetupInstructions({ newConfig }: { newConfig: CustomizationConfig
           <Code language="yaml">{newConfigYaml.traits}</Code>
         </>
       )}
+
+      {/* Options config, if any new options */}
       {configStatus.hasNewOptions && (
         <>
           <h3>Add new options</h3>
@@ -87,6 +91,8 @@ function ConfigSetupInstructions({ newConfig }: { newConfig: CustomizationConfig
           <Code language="yaml">{newConfigYaml.options}</Code>
         </>
       )}
+
+      {/* Option groups config, if any new option groups */}
       {configStatus.hasNewOptionGroups && (
         <>
           <h3>Add new option groups</h3>

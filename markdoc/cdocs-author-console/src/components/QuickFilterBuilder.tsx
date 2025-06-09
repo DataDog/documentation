@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import StrictTraitSelector from './forms/traits/StrictTraitSelector';
 import StrictOptionGroupSelector from './forms/optionGroups/StrictOptionGroupSelector';
-import Code from './Code';
+import Code from './shared/Code';
 import { DocTemplater } from './DocTemplater';
 import { buildWizardFilter } from '../dataUtils';
 

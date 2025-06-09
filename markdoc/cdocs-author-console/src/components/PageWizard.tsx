@@ -2,7 +2,7 @@ import { useState } from 'react';
 import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
-import SetupInstructions from './SetupInstructions';
+import SetupInstructions from './instructions/SetupInstructions';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
