@@ -83,7 +83,7 @@ You can add a logs query or a reference table as a data source.
 
 ### Analysis cell
 
-1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. You can use natural language or SQL to query your data . An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
+1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. See [SQL syntax features][6] documentation. You can also use natural language to query your data. An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
 1. If you are using SQL, click **Run** to run the SQL commands.
 1. Click the download icon to export the dataset as a CSV.
 
@@ -258,3 +258,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
 [5]: /ddsql_reference/
+[6]: /ddsql_reference/ddsql_default/

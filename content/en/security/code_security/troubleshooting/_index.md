@@ -157,14 +157,25 @@ this file, you can update your project definition to generate it. Follow these [
 
 The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
 
-### No results from Datadog-hosted scans for a repository using `git-lfs`
+### No results from Datadog-hosted scans
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
+Datadog-hosted SCA scans do **not** support repositories that:
 
-### Datadog-hosted scan did not run for a repository with a backslash (`\`) in the file path
+- Use [Git Large File Storage][18] (`git-lfs`)
+- Contain invalid or reserved file paths (such as `/` or `\\`)
+- Contain file paths with parent directory traversal (`..`)
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\`). If your repository includes such paths,
-you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
+If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
+
+### Missing libraries
+
+To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria are excluded:
+
+- **Missing version**: The library does not specify a version.
+- **Non-ASCII name**: The library name contains characters outside the ASCII character set.
+- **Empty purl**: The package URL (purl) field is missing or blank.
+- **Invalid purl**: The package URL is present but not in a valid purl format.
+- **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
@@ -246,4 +257,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options

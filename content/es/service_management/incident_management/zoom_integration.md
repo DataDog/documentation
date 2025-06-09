@@ -18,7 +18,7 @@ Para instalar la aplicación Datadog para Zoom:
 2. Ve a **Integrations** (Integraciones) y activa la opción **Automatically create a meeting in Zoom for every incident** (Crear automáticamente una reunión en Zoom para cada incidencia). Este ajuste sustituye el botón **Add Video Call** (Añadir videollamada) por el botón **Start Zoom Call** (Iniciar llamada de Zoom) para crear reuniones de Zoom con un solo clic desde la página de resumen de incidencias de Datadog.
 3. Cuando hagas clic en el botón **Start Zoom Call** (Iniciar llamada de Zoom), se te pedirá que añadas la aplicación Datadog Zoom App. Asegúrate de permitir ver y gestionar la información en nombre de Zoom.
 
-## Uso
+## Utilización
 
 Una vez instalada la aplicación, puedes hacer clic en el botón **Start Zoom Call** (Iniciar llamada de Zoom) desde una incidencia para crear una nueva llamada de Zoom y vincularla automáticamente a la incidencia.
 
@@ -42,7 +42,7 @@ Para eliminar la aplicación Datadog para Zoom:
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de soporte de Datadog][1].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][1].
 
 [1]: /es/help/
 [2]: https://developers.zoom.us/docs/integrations/oauth-scopes/
