@@ -1,6 +1,9 @@
 ---
 title: Analytics Explorer
 description: ""
+aliases:
+- /product_analytics/analytics_explorer/
+- /product_analytics/journeys
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

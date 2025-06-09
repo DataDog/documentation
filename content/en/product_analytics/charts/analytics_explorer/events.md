@@ -1,5 +1,7 @@
 ---
 title: Events Side Panel
+aliases:
+- /product_analytics/analytics_explorer/events
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
