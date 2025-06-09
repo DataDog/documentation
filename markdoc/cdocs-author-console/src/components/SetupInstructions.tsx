@@ -45,7 +45,7 @@ function SetupInstructions({
                 <span style={{ backgroundColor: 'yellow' }}>traits config directory</span>, or add to an existing traits
                 list in that directory.
               </p>
-              <Code contents={newConfigYaml.traits} language="yaml" />
+              <Code language="yaml">{newConfigYaml.traits}</Code>
             </>
           )}
           {configStatus.hasNewOptions && (
@@ -56,7 +56,7 @@ function SetupInstructions({
                 <span style={{ backgroundColor: 'yellow' }}>options config directory</span>, or add to an existing
                 options list in that directory.
               </p>
-              <Code contents={newConfigYaml.options} language="yaml" />
+              <Code language="yaml">{newConfigYaml.options}</Code>
             </>
           )}
           {configStatus.hasNewOptionGroups && (
@@ -67,7 +67,7 @@ function SetupInstructions({
                 <span style={{ backgroundColor: 'yellow' }}>option groups config directory</span>, or add to an existing
                 option groups collection in that directory.
               </p>
-              <Code contents={newConfigYaml.optionGroups} language="yaml" />
+              <Code language="yaml">{newConfigYaml.optionGroups}</Code>
             </>
           )}
         </>

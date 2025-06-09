@@ -13,7 +13,8 @@ function buildFrontmatterMarkup({
   traitId: string | null;
   optionGroupId: string | null;
 }): string {
-  return `  - trait_id: ${traitId || '<CHOOSE_A_TRAIT_ABOVE>'}
+  return `content_filters:
+  - trait_id: ${traitId || '<CHOOSE_A_TRAIT_ABOVE>'}
     option_group_id: ${optionGroupId || '<CHOOSE_AN_OPTION_GROUP_ABOVE>'}
 `;
 }
@@ -79,14 +80,14 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
 
           <h3>Frontmatter</h3>
           <p>
-            Add this to the <code>content_filters:</code> section of your page's frontmatter:
+            Add the filter to the <code>content_filters:</code> section of your page's frontmatter:
           </p>
-          <Code contents={buildFrontmatterMarkup({ traitId, optionGroupId })} language="yaml" />
+          <Code language="yaml">{buildFrontmatterMarkup({ traitId, optionGroupId })}</Code>
 
           <h3>
             Example <code>if</code> blocks
           </h3>
-          <Code contents={ifBlocksContent} language="text" />
+          <Code language="text">{ifBlocksContent}</Code>
         </>
       )}
     </div>

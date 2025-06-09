@@ -40,7 +40,7 @@ function CdocMarkupTemplate(props: { filters: WizardFilter[]; customizationConfi
   const templater = new DocTemplater(props);
 
   const contents = buildMarkup(templater);
-  return <Code contents={contents} language="text" />;
+  return <Code language="text">{contents}</Code>;
 }
 
 export default CdocMarkupTemplate;
