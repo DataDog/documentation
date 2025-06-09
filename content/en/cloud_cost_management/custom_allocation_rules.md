@@ -112,7 +112,7 @@ To create a rule for this allocation, you could:
 - Define the costs to allocate (source): **PostGreSQL costs** (`azure_product_family:dbforpostgresql`).
 - Choose the allocation method: **Dynamic by metric**
 - Choose the [destination tag](#define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Refine the allocation by applying [filters](#filtering): **EC2** (`aws_product:ec2`).
+- Refine the allocation by applying [filters](#filtering): **Production** (`environment:production`).
 - Define the metric query used to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
 - Create suballocations by [partitioning](#partitioning) the allocation rule: **environment** (`env`).
 
