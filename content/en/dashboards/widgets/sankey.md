@@ -9,7 +9,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-The Sankey widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+The Sankey widget is not available in the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
