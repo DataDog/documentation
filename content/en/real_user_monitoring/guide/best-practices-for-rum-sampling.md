@@ -17,7 +17,7 @@ There are two different ways of sampling, which control the data you send to Dat
 
 - **Server-side (tail-based) sampling**: Makes the sampling decision after data has been collected and sent to Datadog. It allows you to filter and retain specific sessions based on their characteristics (like errors or user attributes) using retention filters.
 
-_**Note**: Server-side sampling is only possible with the [retention filters][12] provided by [RUM without Limits][2]. If you need to use this but are on the legacy, client-side-only model, reach out to your account team._
+  **Note**: Server-side sampling is only possible with the [retention filters][12] provided by [RUM without Limits][2]. If you need to use this but are on the legacy, client-side-only model, reach out to your account team.
 
 This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs. Learn more about how [sessions are defined][1] in RUM.
 
@@ -40,9 +40,10 @@ With RUM without Limits, server-side sampling rate defines which sessions you wa
 The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on), the whole session is stored alongside all its events (and including the ones that proceeded the sampling decision). The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria and discard the rest. Learn more about [how retention filters work][12].
 
 ### The effect of sampling on data and metrics that are available in RUM
-RUM metrics, including the ones that come [out-of-the-box with RUM without Limits][13] (e.g. Core Web Vitals and usage numbers) and the [custom ones][16] that you can create yourself, are all calculated based on sessions that are ingested on Datadog. For example, if the client-sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions.
 
-_**Note**: with RUM without Limits, those metrics are computed before the [retention filters][12], i.e. before server-side sampling_
+RUM metrics, including the ones that come [out-of-the-box with RUM without Limits][13] (such as Core Web Vitals and usage numbers) and the [custom ones][16] that you can create yourself, are all calculated based on sessions that are ingested on Datadog. For example, if the client-sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions.
+
+**Note**: With RUM without Limits, those metrics are computed before the [retention filters][12] - in other words, before server-side sampling.
 
 ### Recommended sampling rate
 
@@ -66,9 +67,11 @@ For server-side sampling, Datadog recommends a two-step approach:
 With RUM without Limits, your server-side sampling should provide enough data for both troubleshooting and performance analysis while managing your data volume effectively.
 
 ### Sampling based on specific attributes
+
 Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is supported using [retention filters][12]. See the [Retention Filters Best Practices][14] guide to understand common retention filter types.
 
 ### Changing the sampling rate in the Datadog RUM UI
+
 Changing the sampling rate is only supported for server-side sampling, and can be accomplished by [modifying the retention rate][15] from the retention filters page.
 
 During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
