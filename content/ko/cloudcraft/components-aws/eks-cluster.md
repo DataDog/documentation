@@ -7,7 +7,7 @@ title: EKS Cluster 구성 요소
 
 EKS Cluster 구성 요소를 사용하여 Amazon Web Services 아키텍처에서 Amazon EKS 클러스터를 시각화합니다.
 
-{{< img src="cloudcraft/components-aws/eks-cluster/component-eks-cluster-diagram.png" alt="상호 연결된 AWS 구성 요소를 보여주는 아이소메트릭 Cloudcraft 다이어그램의 스크린샷. responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/eks-cluster/component-eks-cluster-diagram.png" alt="상호 연결된 AWS 구성 요소를 보여주는 아이소메트릭 Cloudcraft 다이어그램의 스크린샷." responsive="true" style="width:60%;">}}
 
 ## 도구 모음
 
