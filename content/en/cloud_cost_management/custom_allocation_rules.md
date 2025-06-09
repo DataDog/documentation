@@ -59,7 +59,7 @@ With the custom percentage strategy, you can define static custom percentages fo
 
 {{% tab "Proportional" %}}
 
-{{< img src="cloud_cost/custom_allocation_rules/proportional_diagram-1.png" alt="Diagram illustrating the proportional split strategy" style="width:70%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/proportional_diagram-2.png" alt="Diagram illustrating the proportional split strategy" style="width:70%;" >}}
 
 Costs are allocated based on the proportional spend of destination values. Similarly to even allocation, you can further customize your allocation by setting filters and partitions.
 
@@ -139,7 +139,7 @@ With this partition, the same even allocation rule is applied to each environmen
 
 With this partition, the same proportional allocation rule is applied to each environment.
 
-{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram-1.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:100%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram-2.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:100%;" >}}
 
 {{% /tab %}}
 
