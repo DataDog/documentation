@@ -7989,7 +7989,6 @@ menu:
       parent: product_analytics
       identifier: pa_session_replay
       weight: 3
-      weight: 3
     - name: Heatmaps
       url: product_analytics/session_replay/heatmaps
       parent: pa_session_replay
