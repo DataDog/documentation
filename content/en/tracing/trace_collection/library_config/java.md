@@ -141,6 +141,7 @@ A list of method annotations to treat as `@Trace`.
 **Default**: `null`<br>
 **Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
 List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
+`dd.trace.methods` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][22] product instead.
 
 `dd.trace.classes.exclude`
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
@@ -650,3 +651,4 @@ Deprecated since version 1.9.0
 [19]: /security/application_security/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces
+[22]: /profiler/
