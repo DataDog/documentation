@@ -4,6 +4,7 @@ aliases:
 - /real_user_monitoring/product_analytics/sankey
 - /product_analytics/sankey
 - /product_analytics/journeys/sankey
+- /product_analytics/journeys/pathways
 further_reading:
 - link: '/product_analytics/journeys'
   tag: Documentation

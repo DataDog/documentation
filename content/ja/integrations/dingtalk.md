@@ -2,7 +2,7 @@
 categories:
 - コラボレーション
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームの DingTalk Group に送信
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/

@@ -1,28 +1,56 @@
 ---
-aliases:
-- /ko/integrations/azure_eventgrid
+app_id: azure-eventgrid
+app_uuid: 55b5c82c-bba0-4bb5-b9a7-50096b97f0bb
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.eventgrid_topics.publish_success_count
+      metadata_path: metadata.csv
+      prefix: azure.eventgrid
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 291
+    source_type_name: Azure Event Grid
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-description: 주요 Azure Event Grid 메트릭을 추적하세요.
-doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_event_grid
-has_logo: true
 integration_id: azure-eventgrid
-integration_title: Microsoft Azure Event Grid
+integration_title: Azure Event Grid
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_event_grid
-public_title: Datadog-Microsoft Azure Event Grid 통합
+public_title: Azure Event Grid
 short_description: 주요 Azure Event Grid 메트릭을 추적하세요.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 주요 Azure Event Grid 메트릭을 추적하세요.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Event Grid
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Azure Event Grid는 게시-구독 모델을 사용하여 균일한 이벤트 소비를 가능케 하는 완전 관리 지능형 이벤트 라우팅 서비스입니다.
