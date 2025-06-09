@@ -7975,6 +7975,11 @@ menu:
       parent: pa_charts
       identifier: pa_analytics_explorer
       weight: 104
+    - name: Dashboards
+      url: product_analytics/dashboards
+      parent: product_analytics
+      identifier: pa_dashboard
+      weight: 2
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics
