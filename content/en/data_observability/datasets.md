@@ -177,6 +177,7 @@ After completing the Snowflake setup, configure the Snowflake integration in Dat
    - **Enable Data Observability for Snowflake tables**
 1. Set the **User Name** to `DATADOG_USER`.
 1. Under **Configure a key pair authentication**, upload your unencrypted RSA private key.
+1. Click **Save**.
 
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
