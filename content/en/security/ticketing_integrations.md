@@ -84,8 +84,6 @@ You are ready to start creating bidirectional Case Management tickets.
 
 If you do not see the **Sync with Datadog (via Case Management)** section, ensure that you have set up the prerequisites.
 
- 
-
 ### Create bidirectional Case Management tickets
 
 The following steps create a bidirectional Case Management ticket.
