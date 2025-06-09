@@ -244,18 +244,21 @@ Add a `service` label which matches the `DD_SERVICE` value on the containers to 
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
-1. Step
-1. by
-1. step
-1. instructions
-    - with some details.
+The [Python Sample App][1] includes an example of the YAML configuration. It uses the [Google CLoud Run YAML format][2] with the [gcloud run services replace][3] command to deploy the service. The sample yaml file includes placeholders for various fields that are specific to the app being deployed.
+
+**Note**: The `service` value needs to be set in multiple locations. The shared log volume needs to be connected to both the application and the sidecar containers.
+
+[1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/python
+[2]: https://cloud.google.com/run/docs/reference/yaml/v1
+[3]: https://cloud.google.com/sdk/gcloud/reference/run/services/replace
+
 {{% /tab %}}
 {{% tab "Terraform" %}}
 The [Python Sample App][1] includes an example of a Terraform configuration. The app uses the `google_cloud_run_v2_service` [resource][2] from the `hashicorp/google` provider.
 
 **Note**: The `service` value needs to be set in multiple locations. The shared log volume needs to be connected to both the application and the sidecar containers.
 
-[1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/aleksandr.pasechnik/gcp-docs-refresh/cloud-run/sidecar/python
+[1]: https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/python
 [2]: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_v2_service
 
 {{% /tab %}}
