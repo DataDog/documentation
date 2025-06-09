@@ -221,7 +221,7 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
-### Context Propagation
+### Context propagation
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
 : **Default**: `64` <br>
 **Supported Input**:  A non-zero positive integer <br>
