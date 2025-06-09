@@ -181,6 +181,88 @@ simulateCanvasClick(canvas, 620, 8);
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+## Asserting on elements triggered by clicks
+
+Now that the key pieces are in place, you can build a complete flow that includes a Synthetics assertion. In the following example, the test:
+
+- Scans the canvas for the first pixel matching a target color
+- Simulates a click at that location
+
+{{% collapse-content title="Canvas interaction" level="h4" expanded=false id="Canvas interaction" %}}
+{{< code-block lang="javascript" >}}
+// Defining the canvas element as a Variable
+const canvas = document.querySelector('canvas_selector');
+
+// Obtain the context
+const ctx = canvas.getContext('2d');
+
+// Add a JavaScript Listener for 'Click' actions.
+canvas.addEventListener('click', function(event) {
+  const canvasRect = canvas.getBoundingClientRect();
+  const x = event.clientX - canvasRect.left;
+  const y = event.clientY - canvasRect.top;
+  console.log('Clicked at relative canvas position:', x, y);
+});
+
+// Function that simulates a User's Click - expects a canvas and coordinates X,Y.
+function simulateCanvasClick(user_canvas, x, y) {
+  const rect = user_canvas.getBoundingClientRect();
+  const click_event = new MouseEvent('click', {
+    clientX: rect.left + x,
+    clientY: rect.top + y
+  });
+  user_canvas.dispatchEvent(click_event);
+}
+
+// Collect the full canvas area starting in coordinates 0,0
+const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+// Variable that stores the array of RGBA values
+const data = imageData.data;
+
+// RGBA definition of the color we are loooking for (adjust the RGB values)
+const targetColor = { r: A, g: B, b: C };
+
+// Tolerance threshold
+const maxDistance = 20;
+
+// Function that calculates Eucledian distance
+function colorDistance(r1, g1, b1, r2, g2, b2) {
+  return Math.sqrt(
+    (r1 - r2) ** 2 +
+    (g1 - g2) ** 2 +
+    (b1 - b2) ** 2
+  );
+}
+
+// Flag that tells if the pixel color has been found or not
+let found = false;
+
+// Loop over the canvas
+for (let x = 0; x < canvas.width && !found; x++) {
+  for (let y = 0; y < canvas.height; y++) {
+    const index = (y * canvas.width + x) * 4;
+    const r = data[index];
+    const g = data[index + 1];
+    const b = data[index + 2];
+    const a = data[index + 3];
+
+    if (colorDistance(r, g, b, targetColor.r, targetColor.g, targetColor.b) < maxDistance) {
+      found = true;
+      simulateCanvasClick(canvas, x, y);
+      break;
+    }
+  }
+}
+
+return found;
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+In most cases click actions display or adds a new HTML element (such as a div) that you can assert against. For example, after clicking the purple dot inside the canvas, the message "You clicked the point!" appears in a `<div>`.
+
+## Troubleshooting
+
 
 ## Further Reading
 
