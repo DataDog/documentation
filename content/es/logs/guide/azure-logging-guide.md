@@ -12,9 +12,6 @@ further_reading:
 title: Enviar logs de Azure a Datadog
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Reenvío automatizado de logs para Azure (en Vista previa)">}}
-Configura el reenvío de logs automáticamente en tu entorno Azure (no es necesaria ninguna configuración manual). Esta función gestiona y escala automáticamente los servicios de reenvío de logs.{{< /callout >}}
-
 ## Información general
 
 Utiliza esta guía para configurar la gestión de logs de tus suscripciones Azure en Datadog.
