@@ -32,7 +32,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
-- To view security misconfigurations on the [Security findings overlay][10], [Cloud Security][3] must be enabled.
+- To view security misconfigurations on the [Security overlay][10], [Cloud Security][3] must be enabled.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
 
