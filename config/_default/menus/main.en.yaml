@@ -7950,10 +7950,10 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: User Retention
-      url: product_analytics/user_retention
+    - name: Vizualizing with Charts
+      url: product_analytics/charts
       parent: product_analytics
-      identifier: pa_user_retention
+      identifier: pa_charts
       weight: 1
     - name: Journeys
       url: product_analytics/journeys
