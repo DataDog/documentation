@@ -5,7 +5,7 @@ title: Componente del equilibrador de carga
 
 Utiliza el componente del equilibrador de carga para representar los equilibradores de carga de aplicaciones y red de tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/load-balancer/component-load-balancer-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente "Equilibrador de carga" de AWS." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/load-balancer/component-load-balancer-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente Equilibrador de carga de AWS." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 
