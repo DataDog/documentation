@@ -1,5 +1,4 @@
 ---
-title: RUM Recommendations
 private: true
 further_reading:
   - link: "https://www.datadoghq.com/blog/rum-optimization/"
