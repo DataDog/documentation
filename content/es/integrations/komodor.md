@@ -8,8 +8,8 @@ author:
   sales_email: sales@komodor.com
   support_email: support@komodor.com
 categories:
-- contenedores
-- kubernetes
+- rastreo
+- Kubernetes
 - notificaciones
 custom_kind: integración
 dependencies:
@@ -34,13 +34,13 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Containers
-  - Category::Kubernetes
+  - Categoría::Kubernetes
   - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Seguimiento de los cambios en todo el entorno y el stack tecnológico
     de K8s
   media:
@@ -65,8 +65,8 @@ tile:
   - caption: Vista de métricas de Datadog que muestra el enlace de vuelta a Komodor.
     image_url: images/Komodor_screen_07.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Automatización de Komodor
 ---
 
@@ -91,7 +91,7 @@ Con esta integración, puedes enlazar a Datadog métricas con enlaces de desplie
 
 4. Utiliza [anotaciones][7] de Kubernetes para enriquecer el servicio de Komodor y las pantallas de despliegue con enlaces a dashboards de Datadog APM relevantes, así como enlaces dinámicos a métricas de servicio y rangos temporales específicos dentro de Datadog.
 
-## Agent
+## Soporte
 
 Si deseas más información, [visita nuestro sitio web][8] o [ponte en contacto con nosotros][9].
 
