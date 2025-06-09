@@ -225,12 +225,12 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
 : **Default**: `64` <br>
 **Supported Input**:  A positive integer <br>
-**Description**: Maximum number of name/value pairs that can be propagated via baggage.
+**Description**: The maximum number of key-value pairs in the baggage header.
 
 `DD_TRACE_BAGGAGE_MAX_BYTES`
 : **Default**: `8192` <br>
 **Supported Input**:  A positive integer <br>
-**Description**: Maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
+**Description**: The maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
 
 `DD_TRACE_BAGGAGE_TAG_KEYS`
 : **Default**: `user.id,session.id,account.id` <br>
