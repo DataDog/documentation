@@ -8,7 +8,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-recommendations/" header="Join the Preview!">}}
-  RUM Recommendations is in Preview. To access this feature, register <a href="https://www.datadoghq.com/product-preview/rum-recommendations/">here</a>.
+  RUM Recommendations is in Preview.
 {{< /callout >}}
 
 ## Overview
