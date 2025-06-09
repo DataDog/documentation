@@ -12,6 +12,9 @@ further_reading:
   text: "CoTerm Configuration Rules"
 ---
 
+## View recorded terminal sessions
+At the beginning and end of every recorded terminal session, CoTerm displays a link to view the session in Datadog. You can also [view all recorded terminal sessions][7].
+
 ## CoTerm CLI command structure
 
 ```shell
@@ -24,7 +27,7 @@ Run `ddcoterm --help` for all options and commands.
 
 CoTerm records terminal sessions that you can play back and review in Datadog. For your security, sensitive data (such as passwords and API keys) are [automatically redacted][1]. Any processes launched in the terminal session are recorded as [events][2].
 
-### Launch a recorded terminal session
+### Launch and record an interactive terminal session
 To manually launch Datadog CoTerm and record the entirety of your terminal session:
 
 ```shell
@@ -75,7 +78,7 @@ process_config:
           end
    {{< /code-block >}}
 
-With this configuration, CoTerm intercepts any `kubectl scale` command without a `--context` flag. 
+With this configuration, CoTerm intercepts any `kubectl scale` command without a `--context` flag.
 
 {{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm: No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
 
@@ -101,14 +104,14 @@ process_config:
           actions: ["record", "logs", "process_info", "approval"]
    {{< /code-block >}}
 
-With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes.
+With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes. You can also configure [case automation rules][8] to trigger workflows based on approval requests.
 
 #### Manually require approval
 
 To create an approval request manually, run:
 
 ```shell
-ddcoterm approve 
+ddcoterm approve
 ```
 
 #### Bypass approval
@@ -131,3 +134,5 @@ COTERM_BREAK_GLASS=true kubectl delete foo
 [4]: /coterm/rules
 [5]: /service_management/incident_management/
 [6]: /coterm/install
+[7]: https://app.datadoghq.com/terminal-streams
+[8]: /service_management/case_management/automation_rules/

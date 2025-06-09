@@ -154,6 +154,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
+{{% tab "Custom Processor" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
@@ -208,6 +213,20 @@ To set up the destination, follow the instructions for the cloud provider you ar
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
+{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
+
 {{% /tab %}}
 {{% tab "Sample" %}}
 
@@ -233,6 +252,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% tab "Split array" %}}
 
 {{% observability_pipelines/processors/split_array %}}
+
+{{% /tab %}}
+{{% tab "Throttle" %}}
+
+{{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}

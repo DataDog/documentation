@@ -223,9 +223,8 @@ The Calendar application uses the OpenTelemetry logging exporter in its Logback 
 
 Additionally, environment variables configure the OpenTelemetry environment to export logs, metrics, and traces:
 
-1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
-2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
-3. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics and traces to be sent with OTLP.
+1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otelcol.yml`.
+2. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics, traces, and logs to be sent with OTLP.
 
 ## Correlating observability data
 
@@ -233,10 +232,10 @@ Additionally, environment variables configure the OpenTelemetry environment to e
 
 The Calendar application is already configured with unified service tagging:
 
-1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
+1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otelcol.yml`.
 2. The following lines enable the correlation between application traces and other observability data: 
 
-   {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
+   {{< code-block lang="yaml" filename="docker-compose-otelcol.yml" collapsible="true" disable_copy="true" >}}
 environment:
   - OTEL_SERVICE_NAME=calendar-otel
   - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker,service.version=<IMAGE_TAG>
@@ -249,7 +248,7 @@ To start generating and forwarding observability data to Datadog, you need to ru
 1. Run the application from the `calendar/` folder:
 
    {{< code-block lang="sh" >}}
-docker compose -f deploys/docker/docker-compose-otel.yml up
+docker compose -f deploys/docker/docker-compose-otelcol.yml up
 {{< /code-block >}}
    This command creates a Docker container with the OpenTelemetry Collector and the Calendar service.
 

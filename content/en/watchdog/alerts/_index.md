@@ -102,7 +102,7 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Watchdog requires at least 0.5 requests per second for an endpoint to be monitored. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
 #### Required data history
 
@@ -143,7 +143,6 @@ Watchdog looks at infrastructure metrics from the following integrations:
   * [Amazon Web Services][5]:
     * [S3][6]
     * [ELB/ALB/NLB][7]
-    * [CloudFront][8]
     * [DynamoDB][9]
     * [RDS][10]
     * [ECS][11]
@@ -161,7 +160,6 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [5]: /integrations/amazon_web_services/
 [6]: /integrations/amazon_s3/
 [7]: /integrations/amazon_elb/
-[8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
 [10]: /integrations/amazon_rds/
 [11]: /containers/amazon_ecs/?tab=awscli

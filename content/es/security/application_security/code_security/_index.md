@@ -39,19 +39,21 @@ Las reglas de detección de Code Security admiten los siguientes lenguajes.
 | Crítica | Inyección NoSQL                       | FALSO | VERDADERO  | VERDADERO    | FALSO  |
 | Crítica | Inyección SQL                         | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Crítica | Falsificación de solicitudes del lado del servidor (SSRF)    | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
-| Crítica | Inyección de comandos                     | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
+| Crítica | Inyección de código                        | FALSO | FALSO | VERDADERO    | FALSO  |
+| Imprescindible | Inyección de comandos                     | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Elevada     | Inyección LDAP                        | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Elevada     | Secretos codificados                     | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Elevada     | Contraseñas codificadas                   | FALSO | FALSO | VERDADERO    | FALSO  |
 | Elevada     | Recorrido de la ruta                        | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Elevada     | Violación de los límites de confianza              | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
 | Elevada     | Cross-Site Scripting (XSS)            | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
+| Elevada     | Deserialización no fiable             | VERDADERO  | FALSO | FALSO   | FALSO  |
 | Elevada     | Redirección no validada                  | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Elevada     | Inyección XPath                       | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
 | Elevada     | Inyección de cabeceras                      | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Elevada     | Fuga en la lista de directorios                | VERDADERO  | FALSO | FALSO   | FALSO  |
-| Elevada     | Escape HTML por defecto no válido           | VERDADERO  | FALSO | FALSO   | FALSO  |
-| Elevada     | Verb Tampering                        | VERDADERO  | FALSO | FALSO   | FALSO  |
+| Alto     | Escape HTML por defecto no válido           | VERDADERO  | FALSO | FALSO   | FALSO  |
+| Alto     | Verb Tampering                        | VERDADERO  | FALSO | FALSO   | FALSO  |
 | Media   | Cookie no SameSite                    | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Media   | Cookie insegura                       | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Media   | Cookie no HttpOnly                    | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
@@ -60,14 +62,14 @@ Las reglas de detección de Code Security admiten los siguientes lenguajes.
 | Media   | Fuga de stacktraces                       | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
 | Media   | Inyección de reflexión                  | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
 | Media   | Protocolo de autenticación inseguro      | VERDADERO  | VERDADERO  | FALSO   | FALSO  |
-| Media   | Clave codificada                         | FALSO | VERDADERO  | FALSO   | FALSO  |
-| Media   | Diseño JSP inseguro                   | VERDADERO  | FALSO | FALSO   | FALSO  |
+| Medio   | Clave codificada                         | FALSO | VERDADERO  | FALSO   | FALSO  |
+| Medio   | Diseño JSP inseguro                   | VERDADERO  | FALSO | FALSO   | FALSO  |
 | Baja      | Cabecera HSTS faltante                   | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Baja      | Cabecera de X-Content-Type-Options faltante | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Baja      | Aleatoriedad débil                       | VERDADERO  | VERDADERO  | VERDADERO    | VERDADERO   |
 | Baja      | Consola de administración activa                  | VERDADERO  | FALSO | FALSO   | FALSO  |
-| Baja      | Tiempo de espera de la sesión                       | VERDADERO  | FALSO | FALSO   | FALSO  |
-| Baja      | Reescritura de sesiones                     | VERDADERO  | FALSO | FALSO   | FALSO  |
+| Bajo      | Tiempo de espera de la sesión                       | VERDADERO  | FALSO | FALSO   | FALSO  |
+| Bajo      | Reescritura de sesiones                     | VERDADERO  | FALSO | FALSO   | FALSO  |
 
 ## Exploración y gestión de las vulnerabilidades del código
 
@@ -90,13 +92,13 @@ La puntuación del riesgo se adapta al contexto específico del tiempo de ejecuc
 
 {{< img src="/security/application_security/code_security/vulnerability_prioritization.png" alt="Prioridad de las vulnerabilidades en Code Security" style="width:100%;" >}}
 
-## Corrrección
+## Corrección
 
 Datadog Code Security proporciona automáticamente la información que los equipos necesitan para identificar dónde se encuentra una vulnerabilidad en una aplicación, desde el nombre del archivo afectado hasta el método y el número de línea exactos.
 
 {{< img src="/security/application_security/code_security/code_security_remediation.png" alt="Corrección de las vulnerabilidades en Code Security" style="width:100%;" >}}
 
-Cuando la [integración GitHub][7] está habilitada, la seguridad del código muestra la primera versión afectada de un servicio, la confirmación que ha generado la vulnerabilidad y un fragmento del código vulnerable. Esta información permite a los equipos saber dónde y cuándo se ha producido una vulnerabilidad y les ayuda a definir prioridades en su trabajo.
+Cuando la [integración GitHub][7] está habilitada, Code Security muestra la primera versión afectada de un servicio, la confirmación que ha generado la vulnerabilidad y un fragmento del código vulnerable. Esta información permite a los equipos saber dónde y cuándo se ha producido una vulnerabilidad y les ayuda a definir prioridades en su trabajo.
 
 {{< img src="/security/application_security/code_security/vulnerability_code_snippet.png" alt="Fragmento del código vulnerable" style="width:100%;" >}}
 
@@ -110,11 +112,15 @@ Las recomendaciones permiten cambiar el estado de una vulnerabilidad, asignarla 
 
 **Nota:** Para crear incidencias sobre vulnerabilidades en Jira, debes configurar la integración Jira y tener el permiso `manage_integrations`. Para obtener instrucciones detalladas, consulta la documentación de la [integración Jira][3] y la documentación [Control del acceso basado en roles][4].
 
-## Para habilitar Code Security
+## Para activar Code Security
 
-Para habilitar Code Security, puedes utilizar la [instrumentación en un solo paso][8] o configurar la [biblioteca de rastreo de Datadog][9]. Para encontrar instrucciones detalladas para ambos métodos, consulta la sección [**Seguridad > Seguridad de aplicaciones > Parámetros**][10].
+Para activar Code Security, configura la [biblioteca de rastreo de Datadog][9]. Encontrarás instrucciones detalladas para ambos métodos en la sección [**Security > Application Security > Settings** (Seguridad > Seguridad de aplicaciones > Parámetros)][10].
 
 Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][11].
+
+## Desactivar Code Security
+
+Para obtener información sobre la desactivación de Code Security, consulta [Desactivación de Code Security][12].
 
 ## Referencias adicionales
 
@@ -127,7 +133,7 @@ Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Dat
 [5]: /es/security/application_security/code_security/setup/compatibility/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /es/integrations/github/
-[8]: /es/security/application_security/code_security/setup/
 [9]: /es/security/application_security/code_security/setup/
 [10]: https://app.datadoghq.com/security/configuration/asm/setup
 [11]: https://www.datadoghq.com/support/
+[12]: /es/security/application_security/troubleshooting/#disabling-code-security

@@ -4,6 +4,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Create a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3853850379",
+      "description": "Create a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "ReorderApmRetentionFilters": [
@@ -18,6 +23,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Update a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3916044058",
+      "description": "Update a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "CreateAWSAccount": [
@@ -190,32 +200,44 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
-  "UpdateCSMThreatsAgentRule": [
+  "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1295653933",
+      "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Workload Protection policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Workload Protection policy returns \"OK\" response"
     }
   ],
   "ArchiveCase": [
@@ -340,8 +362,8 @@
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1768887482",
+      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -809,6 +831,13 @@
       "description": "Create a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "CreateMonitorNotificationRule": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor notification rule returns \"OK\" response"
+    }
+  ],
   "UpdateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -816,11 +845,39 @@
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "UpdateMonitorNotificationRule": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Update a monitor notification rule returns \"OK\" response"
+    }
+  ],
   "UpdateDeviceUserTags": [
     {
       "group": "network_device_monitoring",
       "suffix": "",
       "description": "Update the tags for a device returns \"OK\" response"
+    }
+  ],
+  "CreatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Create a new pipeline returns \"OK\" response"
+    }
+  ],
+  "UpdatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Update a pipeline returns \"OK\" response"
+    }
+  ],
+  "ValidatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Validate an observability pipeline returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
@@ -835,6 +892,41 @@
       "group": "okta_integration",
       "suffix": "",
       "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
+  "CreateOnCallEscalationPolicy": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call escalation policy returns \"Created\" response"
+    }
+  ],
+  "CreateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule returns \"Created\" response"
+    }
+  ],
+  "SetOnCallTeamRoutingRules": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Set On-Call team routing rules returns \"OK\" response"
+    }
+  ],
+  "UpdateOnCallEscalationPolicy": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update On-Call escalation policy returns \"OK\" response"
+    }
+  ],
+  "UpdateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update On-Call schedule returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1047,6 +1139,13 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateCustomFramework": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a custom framework returns \"OK\" response"
+    }
+  ],
   "CreateSignalNotificationRule": [
     {
       "group": "security_monitoring",
@@ -1141,6 +1240,13 @@
       "description": "Update an existing rule returns \"OK\" response"
     }
   ],
+  "UpdateCustomFramework": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a custom framework returns \"OK\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1153,6 +1259,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateResourceEvaluationFilters": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update resource filters returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringRule": [

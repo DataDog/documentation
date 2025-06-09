@@ -33,7 +33,14 @@ The setup below uses the [Webhook notification service][5] of Argo CD to send no
 
 First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
 
-Then, modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
+Choose one of the following setup methods based on how you installed Argo CD:
+
+- **Regular setup (kubectl apply)**: For standard Argo CD installations using `kubectl apply`
+- **Helm**: For Helm-based Argo CD deployments
+
+### Regular setup (kubectl apply)
+
+Modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
 
 ```yaml
 apiVersion: v1
@@ -69,15 +76,53 @@ data:
       send: [cd-visibility-template]
 ```
 
+### Helm setup
+
+If you used Helm to install Argo CD, add the following configuration to your `values.yaml`:
+
+```yaml
+notifications:
+  notifiers:
+    service.webhook.cd-visibility-webhook: |
+      url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+      headers:
+        - name: "DD-CD-PROVIDER-ARGOCD"
+          value: "true"
+        - name: "Content-Type"
+          value: "application/json"
+        - name: "DD-API-KEY"
+          value: $dd-api-key
+  templates:
+    template.cd-visibility-template: |
+      webhook:
+        cd-visibility-webhook:
+          method: POST
+          body: |
+            {
+              "app": {{toJson .app}},
+              "context": {{toJson .context}},
+              "service_type": {{toJson .serviceType}},
+              "recipient": {{toJson .recipient}},
+              "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
+            }
+  triggers:
+    trigger.cd-visibility-trigger: |
+      - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
+        send: [cd-visibility-template]
+      - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
+        send: [cd-visibility-template]
+```
+
+### Configuration summary
+
 The following resources have been added:
 1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
 2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
-<div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
-If your Argo CD application source is not a defined commit SHA (for example, if you are using Helm repositories), adjust the body by removing that line and the comma in the previous line.
-</div>
+The `commit_metadata` field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
+- You are already syncing your repository information to Datadog (see [Synchronize repository metadata to Datadog][20]).
+- Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
@@ -200,7 +245,7 @@ To enable automatic service tagging, you need to [monitor your Kubernetes infras
 - `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
 - `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Software Catalog][13] based on the service label.
 
-Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
+Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `Rollout`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
 Add the following annotations to your Argo CD application:
 - `dd_multiservice`: `true`. This annotation specifies whether Datadog automatically infers the services deployed in a sync based on the changed Kubernetes resources.
@@ -220,7 +265,7 @@ metadata:
 
 ## Visualize deployments in Datadog
 
-The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Explore CD Visibility Deployments][10].
 
 ## Troubleshooting
 
@@ -250,3 +295,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
 [18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [19]: https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#resource-hooks
+[20]: /continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog

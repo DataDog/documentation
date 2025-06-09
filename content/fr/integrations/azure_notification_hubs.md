@@ -1,10 +1,11 @@
 ---
 aliases:
-  - /fr/integrations/azure_notificationhubs
+- /fr/integrations/azure_notificationhubs
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- notifications
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'Azure Notification Hubs.
 doc_link: https://docs.datadoghq.com/integrations/azure_notification_hubs/
@@ -15,14 +16,15 @@ integration_id: azure-notificationhubs
 integration_title: Microsoft Azure Notification Hubs
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_notification_hubs
 public_title: Intégration Datadog/Microsoft Azure Notification Hubs
 short_description: Surveillez des métriques clés d'Azure Notification Hubs.
 version: '1.0'
 ---
-## Présentation
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Section Overview
 
 Azure Notification Hubs est un service de notifications Push facile à utiliser et évolutif qui vous permet d'envoyer des notifications vers n'importe quelle plateforme (iOS, Android, Windows, Kindle, Baidu, etc.) depuis n'importe quel backend (cloud ou local).
 

@@ -156,6 +156,11 @@ cascade:
     lang: en
   aliases:
     - /integrations/agentil_software_sap_hana/
+- _target:
+    path: /integrations/azure_virtual_network
+    lang: en
+  aliases:
+    - /integrations/azure_virtual_networks
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

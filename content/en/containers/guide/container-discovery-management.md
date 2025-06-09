@@ -33,6 +33,17 @@ You can set exceptions in two ways:
 
 ## Agent configuration
 
+Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+- container name (`name`)
+- container image name (`image`)
+- Kubernetes namespace (`kube_namespace`)
+
+<div class="alert alert-warning">
+
+The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
+
+</div>
+
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
 
@@ -47,12 +58,9 @@ In **Agent v7.20+**, use the following environment variables to exclude containe
 
 In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
 
-Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
-
-
 <div class="alert alert-info">
 
-Image name filters (`image`) are matched across full image name including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
+Image name filters (`image`) are matched across full image name, including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
 
 </div>
 

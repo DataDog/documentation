@@ -22,11 +22,11 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
 ## Setup
 
-{{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="Geomap Graph your data section of widget configuration">}}
+{{< img src="dashboards/widgets/geomap/geomap_setup3.png" alt="Geomap Graph your data section of widget configuration">}}
 
 ### Configuration
 1. Choose the visualization layer:
-    * **Regions**: Aggregate measures at a country level.
+    * **Regions**: Aggregate measures at a country or country subdivisions level.
     * **Points**: Overlay events as points on the map to display geographic event data.
 
 2. Choose the data to graph: <br>
@@ -35,11 +35,11 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   {{% tab "Regions" %}}
   |  Data source    | Notes    | 
   | --------------  | -------- |
-  |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
-  |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
+  |Log Events   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
+  |Metric   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
   |RUM   | See the [RUM documentation][6] to configure a RUM query. |
   |SLO | See the [SLO search documentation][7] to configure an SLO query. |
-  |Security Signals <br> Application Security <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
+  |Security Signals <br> App and API Protection <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags

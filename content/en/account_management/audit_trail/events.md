@@ -29,14 +29,16 @@ further_reading:
 #### Product-Specific Events
 - [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
+- [App and API Protection (AAP)](#app-and-api-protection)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Quality Gates](#quality-gates-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
+- [Infrastructure Monitoring](#infrastructure-monitoring)
 - [Log Management](#log-management-events)
+- [LLM Observability](#llm-observability)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
 - [Security Notification events](#security-notification-events)
@@ -49,6 +51,8 @@ further_reading:
 - [Event Management](#event-management)
 - [Private Action Runners](#private-action-runners)
 - [Observability Pipelines](#observability-pipelines)
+- [On-Call](#on-call)
+- [Network Device Monitoring](#network-device-monitoring)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -81,7 +85,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
-
+| [Agent API key updated][166]                    | A Datadog Agent API key was changed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent API Key Updated"`                         |
+| [Agent upgrade succeeded][167]                    | A Datadog Agent was successfully upgraded.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Succeeded"`                         |
+| [Agent upgrade failed][168]                    | A Datadog Agent remote upgrade attempt failed.                    | `@evt.name:"Datadog Agent" @metadata.event_name:"Agent Upgrade Failed"`  
 
 ### API request events
 
@@ -109,7 +115,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 | [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
-### Application Security Management
+### App and API Protection
 
 {{% audit-trail-asm %}}
 
@@ -198,6 +204,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
 | [Saved view][106] | A user created, modified, or deleted a saved view. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:saved_view` |
 | [Log forwarding][103] | A user created, modified, or deleted a custom destination. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:log_forwarding` |
+
+### LLM Observability
+
+| Name                      | Description of audit event                                                                                                                           | Query in audit explorer                           |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------| --------------------------------------------------|
+| [Evaluation Metrics][164] | A user has enabled, disabled, or modified the configuration (for example, set sample rate) of an [out-of-the-box evaluation][165] metric for an application. | `@evt.name:"LLM Observability" @action:(enabled OR modified OR disabled) @asset.type:evaluations` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -340,6 +352,43 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Access worker component list][137] | A user accessed the worker component list for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"worker component list"` |
 | [Access deployment list][138] | A user accessed the deployment list for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:deployment` |
 | [Access pipeline draft][139] | A user accessed a draft pipeline.  | `@evt.name:"Observability Pipelines" @asset.type:draft` |
+
+### On-Call
+| Name                               | Description of audit event            | Query in audit explorer                                              |
+|------------------------------------|---------------------------------------|----------------------------------------------------------------------|
+| [Create a schedule][140]           | A user created a schedule.            | `@evt.name:"On-Call" @asset.type:schedule @action:created`           |
+| [Modify a schedule][141]           | A user modified a schedule.           | `@evt.name:"On-Call" @asset.type:schedule @action:modified`          |
+| [Delete a schedule][142]           | A user deleted a schedule.            | `@evt.name:"On-Call" @asset.type:schedule @action:deleted`           |
+| [Create an escalation policy][143] | A user created an escalation policy.  | `@evt.name:"On-Call" @asset.type:escalation_policy @action:created`  |
+| [Modify an escalation policy][144] | A user modified an escalation policy. | `@evt.name:"On-Call" @asset.type:escalation_policy @action:modified` |
+| [Delete an escalation policy][145] | A user deleted an escalation policy.  | `@evt.name:"On-Call" @asset.type:escalation_policy @action:deleted`  |
+| [Create team rules][146]           | A user created team rules.            | `@evt.name:"On-Call" @asset.type:team_rules @action:created`         |
+| [Modify team rules][147]           | A user modified team rules.           | `@evt.name:"On-Call" @asset.type:team_rules @action:modified`        |
+| [Create a schedule override][148]  | A user created a schedule override.   | `@evt.name:"On-Call" @asset.type:override @action:created`           |
+| [Modify a schedule override][149]  | A user modified a schedule override.  | `@evt.name:"On-Call" @asset.type:override @action:modified`          |
+| [Delete a schedule override][150]  | A user deleted a schedule override.   | `@evt.name:"On-Call" @asset.type:override @action:deleted`           |
+
+### Infrastructure Monitoring
+| Name                                  | Description of audit event              | Query in audit explorer                                                                               |
+|---------------------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [Enable Container Image Trends][151]  | A user enabled Container Image Trends.  | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:enabled`  |
+| [Disable Container Image Trends][152] | A user disabled Container Image Trends. | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:disabled` |
+
+### Network Device Monitoring
+| Name                                  | Description of audit event                | Query in audit explorer                                                                    |
+|---------------------------------------|-------------------------------------------|--------------------------------------------------------------------------------------------|
+| [Modify NetFlow port mappings][153]   | A user modified NetFlow port mappings.    | `@evt.name:"Network Device Monitoring" @asset.type:netflow_port_mappings @action:modified` |
+| [Delete NetFlow port mappings][154]   | A user deleted NetFlow port mappings.     | `@evt.name:"Network Device Monitoring" @asset.type:netflow_port_mappings @action:deleted`  |
+| [Access network device profiles][155] | A user accessed network device profiles.  | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device details][156]  | A user accessed network device details.   | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network interfaces][157]      | A user accessed network interfaces.       | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network devices list][158]    | A user accessed the network devices list. | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device facets][159]   | A user accessed network device facets.    | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device groups][160]   | A user accessed network device groups.    | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+| [Access network device tags][161]     | A user accessed network device tags.      | `@evt.name:"Network Device Monitoring" @asset.type:network_device_tags @action:accessed`   |
+| [Modify network device tags][162]     | A user modified network device tags."     | `@evt.name:"Network Device Monitoring" @asset.type:network_device_tags @action:modified`   |
+| [Access network MIB leaves][163]      | A user accessed network MIB leaves.       | `@evt.name:"Network Device Monitoring" @asset.type:network_device @action:accessed`        |
+
 
 ## Further Reading
 
@@ -484,3 +533,32 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [137]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22worker%20component%20list%22
 [138]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Adeployment&agg_m=count
 [139]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Adraft&agg_m=count&agg_m_source=base
+[140]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Acreated%20%40asset.type%3Aschedule
+[141]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Amodified%20%40asset.type%3Aschedule
+[142]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Adeleted%20%40asset.type%3Aschedule
+[143]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Acreated%20%40asset.type%3Aescalation_policy
+[144]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Amodified%20%40asset.type%3Aescalation_policy
+[145]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Adeleted%20%40asset.type%3Aescalation_policy
+[146]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Acreated%20%40asset.type%3Ateam_rules
+[147]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Amodified%20%40asset.type%3Ateam_rules
+[148]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Acreated%20%40asset.type%3Aoverride
+[149]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Amodified%20%40asset.type%3Aoverride
+[150]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Adeleted%20%40asset.type%3Aoverride
+[151]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Aenabled
+[152]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Adisabled
+[153]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetflow_port_mappings%20%40action%3Amodified
+[154]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetflow_port_mappings%20%40action%3Adeleted
+[155]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[156]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[157]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[158]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[159]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[160]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[161]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Aaccessed
+[162]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device_tags%20%40action%3Amodified
+[163]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Network%20Device%20Monitoring%22%20%40asset.type%3Anetwork_device%20%40action%3Aaccessed
+[164]:https://app.datadoghq.com/audit-trail?query=%20%40evt.name%3A"LLM%20Observability"%20%40action%3A%28enabled%20OR%20modified%20OR%20disabled%29%20%40asset.type%3Aevaluations
+[165]:/llm_observability/evaluations/ootb_evaluations
+[166]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20API%20Key%20Updated%22
+[167]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Succeeded%22
+[168]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Failed%22
