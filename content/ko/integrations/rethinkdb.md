@@ -28,7 +28,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - 로그 수집
 custom_kind: 통합
 dependencies:
@@ -47,7 +47,7 @@ short_description: RethinkDB 클러스터에서 상태, 성능 및 기타 메트
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -123,7 +123,7 @@ RethinkDB 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있으�
 #### 로그 수집
 
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
     ```yaml
     logs_enabled: true

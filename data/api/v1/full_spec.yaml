@@ -14343,11 +14343,23 @@ components:
       enum:
       - http
       - grpc
+      - ssl
+      - dns
+      - tcp
+      - udp
+      - icmp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
       - HTTP
       - GRPC
+      - SSL
+      - DNS
+      - TCP
+      - UDP
+      - ICMP
+      - WEBSOCKET
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -17414,6 +17426,9 @@ components:
             example: ''
             type: string
           type: array
+        checkCertificateRevocation:
+          description: Check for certificate revocation.
+          type: boolean
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
@@ -17443,6 +17458,9 @@ components:
           type: string
         httpVersion:
           $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
+        isMessageBase64Encoded:
+          description: Whether the message is base64 encoded.
+          type: boolean
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
