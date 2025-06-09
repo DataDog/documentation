@@ -235,7 +235,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_BAGGAGE_TAG_KEYS`
 : **Default**: `user.id,session.id,account.id` <br>
 **Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
-**Caveats**: Not supported in Java, Ruby, Go, C++, and .NET <br/>
+**Caveats**: Not supported in Java, Ruby, Go, C++, and .NET <br>
 **Description**: A comma-separated list of baggage keys, sent via HTTP headers, to automatically tag as `baggage.<key>` (e.g. `bagagge.user.id`) on the local root span. Only baggage extracted from incoming headers is supported. Baggage set via the baggage API is not included.
 Set to `*` to tag all baggage keys (use with caution to avoid exposing sensitive data). Set to an empty string to disable the feature.
 
