@@ -5,7 +5,7 @@ title: Componente ElastiCache
 
 Utiliza el componente ElastiCache para representar la caché en memoria o los almacenes de datos de tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/elasticache/component-elasticache-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente "ElastiCache" de AWS." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/elasticache/component-elasticache-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente ElastiCache de AWS." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 
