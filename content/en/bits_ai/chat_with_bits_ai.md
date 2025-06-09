@@ -1,15 +1,27 @@
 ---
-title: Getting Started
+title: Chat with Bits AI
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "bits_ai/managing_incidents/"
+- link: "bits_ai/bits_ai_sre/coordinate_incidents/"
   tag: "Documentation"
-  text: "Managing Incidents"
+  text: "Coordinate Incidents"
+aliases:
+- /bits_ai/getting_started/
 ---
 
-## Querying in Datadog
+## Chat in Datadog
+
+Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
+
+You can ask Bits AI questions such as:
+- `Who is on call for example-service?`
+- `Find me the example-service dashboard.`
+- `What is going on with example-service?`
+- `Are there any issues with example-service's dependencies?`
+
+When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
 ### In the chat panel
 
@@ -18,16 +30,6 @@ To open the chat panel in the app, click **Bits AI** at the bottom-left corner o
 Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
 {{< img src="bits_ai/getting_started/chat_panel_star_service.png" alt="Bits AI chat panel with example question of 'How do I star a service' and Bits AI's answer" style="width:90%;">}}
-
-### In a search bar
-
-Some Datadog search bars support natural language querying. 
-
-{{< img src="bits_ai/getting_started/ai-enabled-search-bar.png" alt="Search bar with natural language querying enabled" style="width:90%;">}}
-
-Where available, the feature can be accessed by typing a space into the search bar, then choosing from the suggested queries or typing a new query.
-
-{{< img src="bits_ai/getting_started/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
 
 ### On the mobile app
 
