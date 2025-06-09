@@ -55,7 +55,7 @@ The most effective approach is to locate at least one pixel rendered in coral an
 
 The following script demonstrates how to loop through the `x, y` coordinates to find the first pixel that matches the target color:
 
-{{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript assertion" %}}
+{{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript_assertion" %}}
 {{< code-block lang="javascript" >}}
 
 // Defining the canvas element as a Variable
@@ -144,7 +144,7 @@ JavaScript allows you to programmatically trigger events on elements, enabling y
 
 After a listener is set up, you can dispatch (or trigger) a click event. With this approach, you can create a custom function to simulate a user click at specific coordinates:
 
-{{% collapse-content title="Custom function example" level="h4" expanded=false id="Custom function" %}}
+{{% collapse-content title="Custom function example" level="h4" expanded=false id="Custom_function" %}}
 {{< code-block lang="javascript" >}}
 //Store the canvas in a variable using its selector
 const canvas = document.querySelector('canvas_selector')
@@ -188,7 +188,7 @@ Now that the key pieces are in place, you can build a complete flow that include
 - Scans the canvas for the first pixel matching a target color
 - Simulates a click at that location
 
-{{% collapse-content title="Canvas interaction" level="h4" expanded=false id="Canvas interaction" %}}
+{{% collapse-content title="Canvas interaction" level="h4" expanded=false id="Canvas_interaction" %}}
 {{< code-block lang="javascript" >}}
 // Defining the canvas element as a Variable
 const canvas = document.querySelector('canvas_selector');
@@ -259,10 +259,40 @@ return found;
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-In most cases click actions display or adds a new HTML element (such as a div) that you can assert against. For example, after clicking the purple dot inside the canvas, the message "You clicked the point!" appears in a `<div>`.
+In most cases click actions display or adds a new HTML element (such as a div) that you can assert against. 
 
 ## Troubleshooting
 
+Working with `<canvas>` elements and JavaScript interactions can be complex, especially for users unfamiliar with browser scripting. The examples in this article are provided as general guidance and can be adapted to fit specific use cases.
+
+**Note**: Datadog support can assist with issues related to how Synthetic Monitoring interacts with `<canvas>`, however, we do not provide debugging support for custom JavaScript implementations. This includes modifying variables in JavaScript assertions to avoid conflicts with a website's existing code.
+
+Below are tips and common questions that may help guide you through troubleshooting.
+
+### How to get exact coordinates?
+
+To reliably click the same spot on a `<canvas>` in every test run, without knowing the exact x and y coordinates, you can use the [`addListener`](#asserting-on-elements-triggered-by-clicks) method described above. Add a print statement inside the function to log the coordinates when you click:
+
+{{% collapse-content title="Add listener with console.log" level="h4" expanded=false id="Add listener" %}}
+{{< code-block lang="javascript" >}}
+const canvas = document.querySelector('canvas_selector')
+canvas.addEventListener('click', function(event) {
+  const canvasRect = canvas.getBoundingClientRect();
+  const x = event.clientX - canvasRect.left;
+  const y = event.clientY - canvasRect.top;
+  console.log('Clicked at relative canvas position:', x, y);
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+### How to choose the right color?
+
+A good starting point is to inspect CSS styles using your browser Developer Tools. Most styles include the color's RGB definition.
+
+Some users may prefer to work with HEX color values (for example, `#9c27b0`), however, `<canvas>` elements _require_ colors in RGBA format. To convert HEX to RGBA, users can use online tools or simple conversion scripts.
+
+## Need help?
+
+Contact [Datadog support][7] for further assistance.
 
 ## Further Reading
 
@@ -274,3 +304,4 @@ In most cases click actions display or adds a new HTML element (such as a div) t
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext#parameters
 [5]: https://developer.mozilla.org/en-US/play
 [6]: https://julinvictus.github.io/canvas_example/
+[7]: /help
