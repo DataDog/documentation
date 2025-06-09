@@ -1,8 +1,5 @@
 ---
 title: LLM Observability Java SDK Reference
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 30
 private: true
 ---
 

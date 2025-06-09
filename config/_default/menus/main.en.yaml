@@ -2013,6 +2013,11 @@ menu:
       identifier: bits_ai_managing_incidents
       parent: bits_ai
       weight: 2
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: bits_ai
+      identifier: bits_ai_dev_agent
+      weight: 4
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2190,21 +2195,31 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
+    - name: Issue Correlation
+      url: error_tracking/issue_correlation
+      parent: error_tracking
+      identifier: error_tracking_issue_correlation
+      weight: 9
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
+      parent: error_tracking
+      identifier: error_tracking_bits_ai_dev_agent
+      weight: 5
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
-      weight: 5
+      weight: 6
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 6
+      weight: 7
     - name: Track Browser and Mobile Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend
-      weight: 7
+      weight: 8
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2759,18 +2774,24 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Action Interface
+      url: actions/action_interface/
+      pre: bits-ai
+      parent: actions_heading
+      identifier: action_interface
+      weight: 30000
     - name: Datastore
       url: actions/datastore/
       pre: datastores-wui
       parent: actions_heading
       identifier: datastore
-      weight: 30000
+      weight: 40000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
       parent: actions_heading
       identifier: action_catalog
-      weight: 40000
+      weight: 50000
     - name: Connections
       url: actions/connections/
       parent: action_catalog
@@ -3168,51 +3189,56 @@ menu:
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
       weight: 104
+    - name: Remote Instrumentation
+      url: serverless/aws_lambda/remote_instrumentation
+      identifier: serverless_aws_lambda_remote_instrumentation
+      parent: serverless_aws_lambda
+      weight: 105
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 105
+      weight: 106
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 106
+      weight: 107
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 107
+      weight: 108
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 108
+      weight: 109
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 110
+      weight: 111
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless_aws_lambda
       identifier: libraries_integrations
-      weight: 111
+      weight: 112
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 112
+      weight: 113
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 113
+      weight: 114
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -4750,12 +4776,28 @@ menu:
       parent: cd
       identifier: cd_monitors
       weight: 4
+    - name: Deployment Gates
+      url: deployment_gates/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: deployment_gates
+      weight: 30000
+    - name: Setup
+      url: deployment_gates/setup/
+      parent: deployment_gates
+      identifier: deployment_gates_setup
+      weight: 1
+    - name: Explore
+      url: deployment_gates/explore/
+      parent: deployment_gates
+      identifier: deployment_gates_explore
+      weight: 2
     - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
       identifier: tests
-      weight: 30000
+      weight: 40000
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6400,11 +6442,6 @@ menu:
       parent: csm_setup_iac_scanning
       identifier: csm_setup_iac_scanning_exclusions
       weight: 10000
-    - name: Set Up IaC Remediation
-      url: security/cloud_security_management/setup/iac_remediation
-      parent: csm_setup
-      identifier: csm_setup_iac_remediation
-      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -6662,7 +6699,7 @@ menu:
       parent: asm_serverless
       identifier: asm_serverless_compat
       weight: 1
-    - name: Overview
+    - name: Attack Summary
       url: security/application_security/overview
       parent: application_security
       identifier: application_security_overview
