@@ -527,7 +527,7 @@ El Acceso global está activado por defecto, ya que es probable que su uso sea n
 {{% tab "APT-based Linux" %}}
 Dada la naturaleza de máquina única de la instalación, no se proporciona soporte integrado para el balanceo de carga. Tendrás que proporcionar tus propios balanceadores de carga, utilizando cualquiera que sea la norma de tu empresa.
 {{% /tab %}}
-{{% tab {{% tab "RPM-based Linux" %}} %}}
+{{% tab "RPM-based Linux" %}}
 Dada la naturaleza de máquina única de la instalación, no se proporciona soporte integrado para el balanceo de carga. Tendrás que proporcionar tus propios balanceadores de carga, utilizando cualquiera que sea la norma de tu empresa.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}

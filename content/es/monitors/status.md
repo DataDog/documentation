@@ -115,7 +115,7 @@ Para delimitar el contexto de la vista **Status & History** (Estado e historial)
 
 Para investigar más a fondo la evolución de tus métricas, haz clic en **Open in a notebook** (Abrir en un notebook), junto al gráfico de estado. Esto genera un [notebook][8] de investigación con un gráfico formateado de la consulta del monitor.
 
-{{< img src="monitors/monitor_status/notebook-button2.png" alt="Botón "Abrir en notebook"" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Botón Abrir en notebook" style="width:90%;">}}
 
 El notebook coincide con el intervalo de tiempo del periodo de evaluación del monitor e incluye logs relacionados, cuando es pertinente.
 

@@ -446,7 +446,7 @@ Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varí
 
 ## Limitaciones conocidas
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "pytest" %}}
 

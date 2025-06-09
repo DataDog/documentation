@@ -1,52 +1,52 @@
 ---
-"app_id": "wmi"
-"app_uuid": "ddd1578f-d511-4d57-b5dd-33c0ea7c391e"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "115"
-    "source_type_name": "WMI"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "windows"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "wmi_check"
-"integration_id": "wmi"
-"integration_title": "Check de WMI (legacy)"
-"integration_version": "3.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "wmi_check"
-"public_title": "Check de WMI (legacy)"
-"short_description": "Recopila y grafica cualquier métrica de WMI".
-"supported_os":
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Windows"
-  - "Supported OS::Windows"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Recopila y grafica cualquier métrica de WMI".
-  "media": []
-  "overview": "README.md#Información general"
-  "support": "README.md#Soporte"
-  "title": "Check de WMI (legacy)"
+app_id: wmi
+app_uuid: ddd1578f-d511-4d57-b5dd-33c0ea7c391e
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 115
+    source_type_name: WMI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- windows
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: wmi_check
+integration_id: wmi
+integration_title: Check de WMI (legacy)
+integration_version: 3.2.0
+is_public: true
+manifest_version: 2.0.0
+name: wmi_check
+public_title: Check de WMI (legacy)
+short_description: Recopila y grafica cualquier métrica de WMI.
+supported_os:
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Windows
+  - Supported OS::Windows
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Recopila y grafica cualquier métrica de WMI.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Check de WMI (legacy)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -107,7 +107,7 @@ instances:
 ```
 
 <div class="alert alert-info">
-Por defecto, la configuración utiliza la cláusula de filtro para limitar las métricas extraídos. Configura los filtros con valores válidos o elimínalos para recopilar métricas, como se muestra arriba.
+Por defecto, la configuración utiliza la cláusula de filtro para limitar las métricas extraídos. Configura los filtros con valores válidos o elimínalos para recopilar métricas, como se muestra` arriba.
 </div>
 
 Las definiciones de métricas incluyen tres componentes:
