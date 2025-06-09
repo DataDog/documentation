@@ -7980,21 +7980,21 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
-    - name: Heatmaps
-      url: product_analytics/heatmaps
-      parent: product_analytics
-      identifier: pa_heatmaps
-      weight: 3
-    - name: Session Replay
+    - name: Replaying User Activity
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 4
+      weight: 3
+    - name: Heatmaps
+      url: product_analytics/session_replay/heatmaps
+      parent: pa_session_replay
+      identifier: pa_heatmaps
+      weight: 301
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 401
+      weight: 302
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -8019,7 +8019,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 402
+      weight: 303
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -8035,36 +8035,6 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Analytics Explorer
-      url: product_analytics/analytics_explorer/
-      parent: product_analytics
-      identifier: pa_analytics_explorer
-      weight: 5
-    - name: Search Syntax
-      url: product_analytics/analytics_explorer/search_syntax
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_search_syntax
-      weight: 501
-    - name: Group
-      url: product_analytics/analytics_explorer/group
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_group
-      weight: 502
-    - name: Visualize
-      url: product_analytics/analytics_explorer/visualize
-      parent: pa_analytics_explorer
-      identifier: visualize
-      weight: 503
-    - name: Events
-      url: product_analytics/analytics_explorer/events
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_events
-      weight: 504
-    - name: Export
-      url: product_analytics/analytics_explorer/export
-      parent: pa_analytics_explorer
-      identifier: pa_analytics_export
-      weight: 505
     - name: Analyzing users and segments
       url: product_analytics/segmentation/
       parent: product_analytics
