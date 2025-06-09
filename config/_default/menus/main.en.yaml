@@ -1428,22 +1428,37 @@ menu:
       pre: bits-ai
       identifier: bits_ai
       parent: platform_heading
-      weight: 70000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
+      weight: 100000
+    - name: Bits AI SRE
+      url: bits_ai/bits_ai_sre
+      identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
+    - name: Investigate alerts
+      url: bits_ai/bits_ai_sre/investigate_alerts
+      identifier: bits_ai_sre_investigate_alerts
+      parent: bits_ai_sre
+      weight: 100
+    - name: Coordinate incidents
+      url: bits_ai/bits_ai_sre/coordinate_incidents
+      identifier: bits_ai_sre_coordinate_incidents
+      parent: bits_ai_sre
+      weight: 101
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
+      identifier: bits_ai_dev_agent
       weight: 2
+    - name: Chat with Bits AI
+      url: bits_ai/chat_with_bits_ai
+      identifier: bits_ai_chat_with_bits_ai
+      parent: bits_ai
+      weight: 3
     - name: MCP Server
       url: bits_ai/mcp_server
       identifier: bits_ai_mcp_server
       parent: bits_ai
-      weight: 9
+      weight: 4
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2002,27 +2017,6 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
-    - name: Bits AI
-      url: bits_ai/
-      pre: bits-ai
-      identifier: bits_ai
-      parent: platform_heading
-      weight: 100000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
-      parent: bits_ai
-      weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
-      parent: bits_ai
-      weight: 2
-    - name: Bits AI Dev Agent
-      url: bits_ai/bits_ai_dev_agent
-      parent: bits_ai
-      identifier: bits_ai_dev_agent
-      weight: 4
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2779,33 +2773,24 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Action Interface
+      url: actions/action_interface/
+      pre: bits-ai
+      parent: actions_heading
+      identifier: action_interface
+      weight: 30000
     - name: Datastore
       url: actions/datastore/
       pre: datastores-wui
       parent: actions_heading
       identifier: datastore
-      weight: 30000
-    - name: Create and Manage Datastores
-      url: actions/datastore/create/
-      parent: datastore
-      identifier: datastore_create
-      weight: 1
-    - name: Use Datastores
-      url: actions/datastore/use/
-      parent: datastore
-      identifier: datastore_use
-      weight: 2
-    - name: Authentication and Access
-      url: actions/datastore/auth/
-      parent: datastore
-      identifier: datastore_auth
-      weight: 3
+      weight: 40000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
       parent: actions_heading
       identifier: action_catalog
-      weight: 40000
+      weight: 50000
     - name: Connections
       url: actions/connections/
       parent: action_catalog
