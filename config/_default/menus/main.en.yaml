@@ -7984,6 +7984,7 @@ menu:
       parent: product_analytics
       identifier: pa_session_replay
       weight: 3
+      weight: 3
     - name: Heatmaps
       url: product_analytics/session_replay/heatmaps
       parent: pa_session_replay
@@ -7993,7 +7994,7 @@ menu:
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 302
+      weight: 301
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -8018,7 +8019,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 303
+      weight: 302
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -8038,17 +8039,17 @@ menu:
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 4
+      weight: 6
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 6
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2
