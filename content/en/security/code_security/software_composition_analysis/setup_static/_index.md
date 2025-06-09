@@ -408,7 +408,7 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 
 Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
 
-The analysis is based entirely on static code inspection. Datadog evaluates the application's call graph to determine whether any execution paths lead to vulnerable methods defined in supported advisories. This approach does not incorporate runtime or dynamic execution data.
+This functionality is supported only when using the [Datadog SBOM Generator][1] with the `--reachability` flag enabled or when running scans through Datadog-hosted infrastructure.
 
 Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
