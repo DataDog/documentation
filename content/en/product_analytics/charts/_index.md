@@ -1,5 +1,5 @@
 ---
-title: Journeys
+title: Visualizing with Charts
 aliases:
 - /product_analytics/journeys
 description: Journeys help you understand the path your users follow as they discover your product, service, or brand.
