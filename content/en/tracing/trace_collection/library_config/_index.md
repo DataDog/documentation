@@ -230,7 +230,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_BAGGAGE_MAX_BYTES`
 : **Default**: `8192` <br>
 **Supported Input**:  A positive integer <br>
-**Description**: Maximum number of bytes in the baggage header value. Values less than 3 will prevent propagation (3 bytes is the shortest possible data, e.g. `a=b`).
+**Description**: Maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
 
 `DD_TRACE_BAGGAGE_TAG_KEYS`
 : **Default**: `user.id,session.id,account.id` <br>
