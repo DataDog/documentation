@@ -7994,6 +7994,11 @@ menu:
       parent: pa_session_replay
       identifier: pa_heatmaps
       weight: 301
+    - name: Playlists
+      url: product_analytics/session_replay/playlists
+      parent: pa_session_replay
+      identifier: pa_playlists
+      weight: 302
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay

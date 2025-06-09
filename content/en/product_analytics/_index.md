@@ -82,11 +82,11 @@ Suppose you want to make changes to your application interface but want to first
 [Session replay][11] 
 : Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application’s usage patterns and design pitfalls
 
-[Heatmaps][7]
-:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: [Click maps][7], [Top elements][7], [Scroll maps][7]. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+[Heatmaps][10]
+:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: [Click maps][10], [Top elements][10], [Scroll maps][10]. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
-[Playlist][10]
-: You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][10].
+[Playlist][12]
+: You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
 <br>
 
 
@@ -99,8 +99,8 @@ Suppose you want to make changes to your application interface but want to first
 [4]: /product_analytics/journeys/funnel_analysis
 [5]: /product_analytics/journeys/pathways
 [6]: /product_analytics/segmentation/
-[7]: /product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
 [10]: /product_analytics/session_replay/heatmaps
 [11]: /product_analytics/session_replay/_index
+[12]: /product_analytics/session_replay/playlist
