@@ -18,10 +18,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Jira Bidirectional Syncing is in Preview. Contact your Customer Success Manager to get access.
-{{< /callout >}}
-
 You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2]. For details, see [Case Management integration with third-party ticketing tools][3].
 
 This page discusses using Datadog Security with Datadog Case Management for ticketing management.
@@ -40,7 +36,9 @@ Open any signal in these products and use the **Create Case** button to create a
 
 ## Bidirectional ticket syncing with Jira
 
-This sections describe how to use your Datadog Jira integration to sync tickets between Datadog Case Management and Jira bidirectionally. 
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
+Jira Bidirectional Syncing is in Preview. Contact your Customer Success Manager to get access.
+{{< /callout >}}
 
 Bidirectional syncing enables you to update Jira tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in Jira.
 
@@ -109,9 +107,9 @@ Notes:
 
 ### Manage bidirectional Case Management tickets
 
-Existing bidirectional Jira tickets are listed in a signal's **Ticketing** or **Next Steps** sections.
+Existing bidirectional Jira tickets are listed in a signal or vulnerability's **Ticketing** or **Next Steps** sections.
 
-Here's an example from a Static Code (SAST) signal:
+Here's an example from a Static Code (SAST) vulnerability:
 
 {{< img src="security/bidir-jira-existing.png" alt="signal with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
 
@@ -129,7 +127,7 @@ Deleting a case does not delete related Jira tickets, but deleting a case projec
 
 ### Bidirectional Case Management facets
 
-There are several case management facets, including:
+There are several case management facets under **Triage**, including:
 
 - Case Key 
 - Jira Key
