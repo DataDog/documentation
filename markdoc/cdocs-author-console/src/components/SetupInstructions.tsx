@@ -27,52 +27,16 @@ function SetupInstructions({
   customizationConfig: CustomizationConfig;
 }) {
   console.log('[SetupInstructions] received newConfig:', JSON.stringify(newConfig, null, 2));
-  const configStatus = getNewConfigStatus(newConfig);
-  const newConfigYaml = buildConfigYaml(newConfig);
 
   return (
     <div>
       <h1>Setup instructions</h1>
       <Alert severity="info">You can copy any markup by clicking it.</Alert>
-      {configStatus.hasNewConfig && (
-        <>
-          <h2>Add the required YAML configuration to the docs site</h2>
-          {configStatus.hasNewTraits && (
-            <>
-              <h3>Add new traits</h3>
-              <p>
-                Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ backgroundColor: 'yellow' }}>traits config directory</span>, or add to an existing traits
-                list in that directory.
-              </p>
-              <Code language="yaml">{newConfigYaml.traits}</Code>
-            </>
-          )}
-          {configStatus.hasNewOptions && (
-            <>
-              <h3>Add new options</h3>
-              <p>
-                Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ backgroundColor: 'yellow' }}>options config directory</span>, or add to an existing
-                options list in that directory.
-              </p>
-              <Code language="yaml">{newConfigYaml.options}</Code>
-            </>
-          )}
-          {configStatus.hasNewOptionGroups && (
-            <>
-              <h3>Add new option groups</h3>
-              <p>
-                Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ backgroundColor: 'yellow' }}>option groups config directory</span>, or add to an existing
-                option groups collection in that directory.
-              </p>
-              <Code language="yaml">{newConfigYaml.optionGroups}</Code>
-            </>
-          )}
-        </>
-      )}
 
+      {/* YAML configuration instructions */}
+      <ConfigSetupInstructions newConfig={newConfig} />
+
+      {/* Document setup instructions */}
       <h2>Create the page</h2>
       <p>
         <ol>
@@ -87,6 +51,54 @@ function SetupInstructions({
         customizationConfig={mergeCustomizationConfigs(customizationConfig, newConfig)}
       />
     </div>
+  );
+}
+
+function ConfigSetupInstructions({ newConfig }: { newConfig: CustomizationConfig }) {
+  const configStatus = getNewConfigStatus(newConfig);
+  const newConfigYaml = buildConfigYaml(newConfig);
+
+  if (!configStatus.hasNewConfig) {
+    return null;
+  }
+
+  return (
+    <>
+      <h2>Add the required YAML configuration to the docs site</h2>
+      {configStatus.hasNewTraits && (
+        <>
+          <h3>Add new traits</h3>
+          <p>
+            Create a new <code>.yaml</code> file in the{' '}
+            <span style={{ backgroundColor: 'yellow' }}>traits config directory</span>, or add to an existing traits
+            list in that directory.
+          </p>
+          <Code language="yaml">{newConfigYaml.traits}</Code>
+        </>
+      )}
+      {configStatus.hasNewOptions && (
+        <>
+          <h3>Add new options</h3>
+          <p>
+            Create a new <code>.yaml</code> file in the{' '}
+            <span style={{ backgroundColor: 'yellow' }}>options config directory</span>, or add to an existing options
+            list in that directory.
+          </p>
+          <Code language="yaml">{newConfigYaml.options}</Code>
+        </>
+      )}
+      {configStatus.hasNewOptionGroups && (
+        <>
+          <h3>Add new option groups</h3>
+          <p>
+            Create a new <code>.yaml</code> file in the{' '}
+            <span style={{ backgroundColor: 'yellow' }}>option groups config directory</span>, or add to an existing
+            option groups collection in that directory.
+          </p>
+          <Code language="yaml">{newConfigYaml.optionGroups}</Code>
+        </>
+      )}
+    </>
   );
 }
 
