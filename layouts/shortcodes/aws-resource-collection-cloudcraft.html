@@ -7,17 +7,19 @@
     </tr>
   </thead>
   <tbody>
-    {{- range .data.product_resource_types_permissions -}}
-      {{- if eq .ProductCode $product_code -}}
-        {{- range .ResourceTypesPermissions }}
-          <tr>
-            <td>
-              {{ .ResourceType }}
-            </td>
-            <td class="text-nowrap">
-              {{ .Permissions }}
-            </td>
-          </tr>
+    {{ with .Site.Data.product_resource_types_permissions }}
+      {{- range . -}}
+        {{- if eq .ProductCode $product_code -}}
+          {{- range .ResourceTypesPermissions }}
+            <tr>
+              <td>
+                {{ .ResourceType }}
+              </td>
+              <td class="text-nowrap">
+                {{ .Permissions }}
+              </td>
+            </tr>
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
