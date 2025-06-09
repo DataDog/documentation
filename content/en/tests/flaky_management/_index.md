@@ -42,6 +42,17 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 <div class="alert alert-info"><strong>Note:</strong> Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Investigate a flaky test
+
+For more information about a specific flaky test, use these options in the actions menu at the end of each row:
+
+- **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
+- **View related test executions**: Open the [Test Optimization Explorer][2] populated with all of the test's recent runs.
+
+## Create cases for flaky tests
+
+For any flaky test, you can create a case and use [Case Management][3] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row. 
+
 ## Confirm fixes for flaky tests
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
@@ -54,17 +65,6 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
    - Runs tests even if they are marked as `Disabled`.
    - If all retries pass, updates the test's status to `Fixed`.
    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
-
-## Investigate a flaky test
-
-For more information about a specific flaky test, use these options in the actions menu at the end of each row:
-
-- **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
-- **View related test executions**: Open the [Test Optimization Explorer][2] populated with all of the test's recent runs.
-
-## Create cases for flaky tests
-
-For any flaky test, you can create a case and use [Case Management][3] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row. 
 
 ## Compatibility
 
