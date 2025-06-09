@@ -130,7 +130,7 @@ To create a log probe:
 1. Select **Log** as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
-1. Optionally enable extra data capturing from the probe. (Beta)
+1. (In Preview) Optionally enable extra data capturing from the probe.
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
 
 Log probes are enabled by default on all service instances that match the specified environment and version. They are rate-limited to execute at most 5000 times per second, on each instance of your service.
@@ -141,7 +141,7 @@ You can also set a condition on a log probe using the [expression language][15].
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
 
-**Beta**: If you enable **Capture method parameters and local variables** on the log probe, all execution context is added the log event:
+(In Preview) If you enable **Capture method parameters and local variables** on the log probe, all execution context is added the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following default limits:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.

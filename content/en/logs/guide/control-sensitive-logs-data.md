@@ -17,6 +17,10 @@ further_reading:
     text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 ## Overview
 
 Logs may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, consider the following:
