@@ -50,6 +50,8 @@ If a bug or incident occurs, you can increase sampling to collect 100% of your b
 
 RUM ensures availability of data when user devices are offline. In low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
+**Note**: This behavior only applies to mobile applications using mobile RUM SDKs.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
