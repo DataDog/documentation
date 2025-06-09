@@ -414,7 +414,7 @@ Reachability analysis is available exclusively for Java projects and applies onl
 
 #### Supported advisories
 
-Static reachability analysis is currently available for the following advisories:
+Static reachability analysis is available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
 - [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
 - [GHSA-7rjr-3q55-vv33](https://osv.dev/vulnerability/GHSA-7rjr-3q55-vv33)
