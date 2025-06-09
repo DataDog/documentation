@@ -90,8 +90,8 @@ Install the extension either directly in the IDE, or from the web:
 
 In Cursor, the extension includes access to the Datadog Model Context Protocol (MCP) server. Enable the MCP server to enhance Cursor's AI capabilities with your specific Datadog environment.
 
-1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
-2. Find the **Datadog** server and turn on the toggle to enable it. A list of available tools is displayed (click the refresh button if necessary).
+1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP Tools** tab.
+2. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (click the refresh button if necessary).
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 {{% /tab %}}
