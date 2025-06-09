@@ -21,7 +21,7 @@ Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources t
 ## How it works
 Datadog uses real-time and historical utilization metrics and event signals from your existing Datadog Agents to make recommendations. You can then examine these recommendations and choose to deploy them.
 
-By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost values to show savings opportunities and impact estimates. You can also use Kubernetes Autoscaling alongside [Cloud Cost Management](#ingest-cost-data-with-cloud-cost-management) to get reporting based on your exact instance type costs.
+By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost values to show savings opportunities and impact estimates. You can also use Kubernetes Autoscaling alongside [Cloud Cost Management](#idle-cost-and-savings-estimates) to get reporting based on your exact instance type costs.
 
 Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resource that defines scaling behavior on a per-workload level. The Datadog Cluster Agent acts as the controller for this custom resource.
 
@@ -29,7 +29,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 
 ### Compatibility
 
-- **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][9].
+- **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][5].
 - **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload before you use Datadog Kubernetes Autoscaling to optimize it. These workloads are identified in the application on your behalf.
 
 ### Requirements
@@ -149,25 +149,43 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### Ingest cost data with Cloud Cost Management
+### Idle cost and savings estimates
 
-By default, Datadog Kubernetes Autoscaling shows idle cost and savings estimates using the following fixed values:
+{{< tabs >}}
+{{% tab "With Cloud Cost Management" %}}
+If [Cloud Cost Management][1] is enabled within an org, Datadog Kubernetes Autoscaling shows idle cost and savings estimates based on your exact bill cost of underlying monitored instances.
+
+See Cloud Cost setup instructions for [AWS][2], [Azure][3], or [Google Cloud][4].
+
+Cloud Cost Management data enhances Kubernetes Autoscaling, but it is not required. All of Datadog's workload recommendations and autoscaling decisions are valid and functional without Cloud Cost Management.
+
+[1]: /cloud_cost_management
+[2]: /cloud_cost_management/aws
+[3]: /cloud_cost_management/azure
+[4]: /cloud_cost_management/google_cloud
+{{% /tab %}}
+
+{{% tab "Default" %}}
+If Cloud Cost Management is **not** enabled, Datadog Kubernetes Autoscaling shows idle cost and savings estimates using the following formulas and fixed values:
+
+**Cluster idle**: `(max(cpu_usage, cpu_requests, cpu_capacity) - max(cpu_usage, cpu_requests)) *0.0295 + (max(memory_usage, memory_requests, memory_capacity) - max(memory_usage, memory_requests)) * 0.0053`
+
+**Workload idle**: `(max(cpu_usage, cpu_requests) - cpu_usage) *0.0295 + (max(memory_usage, memory_requests) - memory_usage) * 0.0053`
+
+**Fixed values**:
 - $0.0295 per CPU core hour
 - $0.0053 per memory GB hour
 
+
 _Fixed cost values are subject to refinement over time._
-
-When [Cloud Cost Management][5] is enabled within an org, Datadog Kubernetes Autoscaling shows idle cost and savings estimates based on your exact bill cost of underlying monitored instances.
-
-See Cloud Cost setup instructions for [AWS][6], [Azure][7], or [Google Cloud][8].
-
-Cost data enhances Kubernetes Autoscaling, but it is not required. All of Datadog's workload recommendations and autoscaling decisions are valid and functional without cost data.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Usage
 
 ### Identify resources to rightsize
 
-The [Autoscaling Summary page][11] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][12] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][13].
+The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
 
 Click **Optimize** on any workload to see its scaling recommendation.
 
@@ -197,12 +215,7 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[5]: /cloud_cost_management
-[6]: /cloud_cost_management/aws
-[7]: /cloud_cost_management/azure
-[8]: /cloud_cost_management/google_cloud
-[9]: /containers/kubernetes/distributions
-[10]: https://app.datadoghq.com/orchestration/scaling/
-[11]: https://app.datadoghq.com/orchestration/scaling/summary
-[12]: https://app.datadoghq.com/orchestration/scaling/cluster
-[13]: https://app.datadoghq.com/orchestration/scaling/workload
+[5]: /containers/kubernetes/distributions
+[6]: https://app.datadoghq.com/orchestration/scaling/summary
+[7]: https://app.datadoghq.com/orchestration/scaling/cluster
+[8]: https://app.datadoghq.com/orchestration/scaling/workload
