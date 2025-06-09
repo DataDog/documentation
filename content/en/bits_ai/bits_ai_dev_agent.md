@@ -7,7 +7,7 @@ title: Bits AI Dev Agent
 {{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent is in Preview.
+Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 {{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
