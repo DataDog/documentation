@@ -224,7 +224,7 @@ The following configuration options behave consistently across the latest versio
 ### Context propagation
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
 : **Default**: `64` <br>
-**Supported Input**:  A non-zero positive integer <br>
+**Supported Input**:  A positive integer <br>
 **Description**: Maximum number of name/value pairs that can be propagated via baggage.
 
 `DD_TRACE_BAGGAGE_MAX_BYTES`
