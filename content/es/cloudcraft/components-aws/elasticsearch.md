@@ -5,7 +5,7 @@ title: Componente Elasticsearch
 
 Utiliza el componente Elasticsearch para representar los clústeres de Elasticsearch desde tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/elasticsearch/component-elasticsearch-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente "Elasticsearch" de AWS." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/elasticsearch/component-elasticsearch-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente Elasticsearch de AWS." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 
