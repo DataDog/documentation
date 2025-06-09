@@ -45,32 +45,32 @@ public_title: Sedai
 short_description: Plataforma autónoma para la gestión inteligente tus aplicaciones
   en la nube
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Gestión de costes
+  - Category::Automation
+  - Category::Cloud
+  - Category::Cost Management
   - Categoría::Notificaciones
   - Categoría::Orquestación
   - Categoría::Suministro
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Plataforma autónoma para la gestión inteligente tus aplicaciones en
     la nube
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Sedai
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 ## Información general
 
 Sedai es una plataforma de nube autónoma que gestiona proactivamente entornos de producción para prevenir problemas y mejorar la disponibilidad, el rendimiento y los costes de la nube. Como piloto automático inteligente para las ingenierías de fiabilidad de sitios (SRE), Sedai detecta, prioriza y analiza de forma independiente los datos de monitorización para actuar de forma segura y autónoma en la producción sin umbrales.
@@ -109,7 +109,7 @@ En Sedai:
 
 Esta integración envía eventos a Datadog.
 
-## Compatibilidad
+## Ayuda
 
 Si necesitas ayuda con esta integración, ponte en contacto con el [servicio de asistencia de Datadog][6].
 
