@@ -3,6 +3,7 @@ title: Early Flake Detection
 description: Detect flakiness before it impacts your default branch using Early Flake Detection.
 aliases:
   - /tests/early_flake_detection
+  - /tests/flaky_test_management/early_flake_detection
 further_reading:
   - link: "/tests"
     tag: "Documentation"
