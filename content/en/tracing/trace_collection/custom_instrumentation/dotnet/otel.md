@@ -5,7 +5,7 @@ type: multi-code-lang
 code_lang_weight: 2
 description: 'Instrument your .NET application with the OpenTelemetry API, to send traces to Datadog.'
 algolia:
-    tags: ["C#"]
+    tags: ["C#","APM"]
 aliases:
 - /tracing/trace_collection/otel_instrumentation/dotnet/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
