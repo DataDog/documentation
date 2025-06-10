@@ -1,9 +1,10 @@
 ---
 categories:
 - aws
-- cloud
-- 준수
+- 클라우드
+- compliance
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: 핵심 Amazon Inspector 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_inspector/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: Amazon Inspector
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_inspector
 public_title: Datadog-Amazon Inspector 통합
@@ -33,7 +33,7 @@ Amazon Inspector는 보안 취약성 검사 서비스로 보안 및 AWS 리소�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -48,13 +48,13 @@ Amazon Inspector를 설정해 로그를 S3 버킷 또는 클라우드와치(Clou
 
 **참고**: S3 버킷에 로깅하면 `amazon_inspector`이 _대상 접두어_로 설정되어 있는지 확인하세요.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
 1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
 2. 람다 함수가 설치되면 AWS  콘솔에서 Amazon Inspector 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 수동 트리거를 추가합니다.
 
     - [S3 버킷에서 수동 트리거 추가][5]
-    - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]
+    - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
 
 ## 수집한 데이터
 
