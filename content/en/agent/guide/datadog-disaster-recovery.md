@@ -32,7 +32,6 @@ To enable Datadog Disaster Recovery, follow the relevant steps for when:
 3. [you have linked the DDR org to your primary org](#when-you-have-linked-the-ddr-org-to-your-primary-org)
 4. [you are ready to test the failover process](#when-you-are-ready-to-test-the-failover-process)
 
-<!-------- GROUP 1------------------------------------------------------------->
 #### when you are ready to configure Datadog Disaster Recovery: 
 {{% collapse-content title=" 1. Create your secondary Datadog organization" level="h5" %}}
 Identify which site your primary organization is on by matching your Datadog website URL to the [`SITE URL`][4] in the table. Then, select a secondary site for your DDR organization.
@@ -47,7 +46,7 @@ Identify which site your primary organization is on by matching your Datadog web
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
-For example, if you are hosted in `US1` (https://app.datadoghq.com), you may choose to select the `US5` Datadog site **which is hosted on GCP Central US and is geographically separated from your primary organization**(`INCLUDE THIS?`). This ensures observability continuity in the event of a regional disaster.<br><br>
+<!-- left off here -->
 **Note**: Datadog can set this up for you if you'd prefer. 
 {{% /collapse-content %}}
 
