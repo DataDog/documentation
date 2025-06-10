@@ -122,9 +122,9 @@ All policy templates come equipped with suggested remediation steps based on ind
 * Amazon DynamoDB point-in-time recovery should be enabled  
 * Google Compute instances should have automatic restart enabled
 
-As shown in the video below, some policy templates allow you to enable actions and provide instructions for the responsible team to remediate non-compliant resources. This enables them to update cloud resource configurations directly from Datadog. To ensure the team can perform these actions, verify they have read/write permissions for the required cloud accounts. 
+As shown in the video below, on the policy template, you can enable an action and provide instructions for the responsible team to remediate non-compliant resources. This enables them to update cloud resource configurations directly from Datadog. To ensure the team can perform these actions, create a [connection][2] and give read/write permissions to the appropriate team members to run the action.
 
-{{< img src="/infrastructure/resource_catalog/policies/policy_templates.mp4" alt="Using policy templates in Datadog to enable remediation actions for cloud resources" video=true >}}
+{{< img src="/infrastructure/resource_catalog/policies/policy_templates_2.mp4" alt="Using policy templates in Datadog to enable remediation actions for cloud resources" video=true >}}
 
 ## Create a tagging policy
 
@@ -158,3 +158,4 @@ To export the list of non-compliant resources for a policy, click the policy, th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/infrastructure/catalog/governance
+[2]: /actions/connections/

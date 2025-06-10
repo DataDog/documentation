@@ -23,7 +23,7 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tndf/yum/rpm              | {{< X >}}         | {{< X >}}         |
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
-| Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                |                   | {{< X >}}         |
+| Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                | {{< X >}}         | {{< X >}}         |
 
 {{% collapse-content title="Windows limitations" level="h4" %}}
 - Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.
@@ -37,15 +37,16 @@ Cloud Security Vulnerabilities supports vulnerability scanning for the following
 
 | Language | Supported Package Manager | Supported Files                                                      | Agentless support | Agent support     |
 |----------|---------------------------|----------------------------------------------------------------------|-------------------|-------------------|
-| Ruby     | bundler                   | Gemfile.lock, gemspec                                                | {{< X >}}         |                   |
-| .NET     | nuget                     | packages.lock.json, packages.config, .deps.json, *packages.props     | {{< X >}}         |                   |
-| Go       | mod                       | Binaries built by Go, go.mod                                         | {{< X >}}         |                   |
-| Java     | Gradle, Maven             | pom.xml, *gradle.lockfile, JAR/WAR/PAR/EAR (with pom.properties)     | {{< X >}}         |                   |
-| Node.js  | npm, pnpm, yarn           | package-lock.json, yarn.lock, pnpm-lock.yaml, package.json           | {{< X >}}         |                   |
-| PHP      | composer                  | composer.lock                                                        | {{< X >}}         |                   |
-| Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package | {{< X >}}         |                   |
+| Ruby     | bundler                   | Gemfile.lock, gemspec                                                | {{< X >}}         | {{< X >}}         |
+| .NET     | nuget                     | packages.lock.json, packages.config, .deps.json, *packages.props     | {{< X >}}         | {{< X >}}         |
+| Go       | mod                       | Binaries built by Go, go.mod                                         | {{< X >}}         | {{< X >}}         |
+| Java     | Gradle, Maven             | pom.xml, *gradle.lockfile, JAR/WAR/PAR/EAR (with pom.properties)     | {{< X >}}         | {{< X >}}         |
+| Node.js  | npm, pnpm, yarn           | package-lock.json, yarn.lock, pnpm-lock.yaml, package.json           | {{< X >}}         | {{< X >}}         |
+| PHP      | composer                  | composer.lock                                                        | {{< X >}}         | {{< X >}}         |
+| Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package | {{< X >}}         | {{< X >}}         |
 
-**Note**: For Agent-based vulnerability management in application libraries, see [Software Composition Analysis][1].
+**Note**: Agent-based vulnerability management in application libraries is available in Agent versions [7.64 or newer][2].
 
 
 [1]: /security/code_security/software_composition_analysis/
+[2]: https://github.com/DataDog/datadog-agent/releases

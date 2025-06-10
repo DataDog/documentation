@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Autoscaling
-private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
