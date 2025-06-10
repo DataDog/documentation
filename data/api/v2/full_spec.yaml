@@ -23019,6 +23019,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsChannelAttributes
     MicrosoftTeamsChannelInfoResponseData:
       description: Channel data from a response.
       properties:
@@ -23035,6 +23036,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsChannelData
     MicrosoftTeamsChannelInfoType:
       default: ms-teams-channel-info
       description: Channel info resource type.
@@ -23044,6 +23046,7 @@ components:
       type: string
       x-enum-varnames:
       - MS_TEAMS_CHANNEL_INFO
+      x-model-simple-name: TeamsChannelInfoType
     MicrosoftTeamsCreateTenantBasedHandleRequest:
       description: Create tenant-based handle request.
       properties:
@@ -23066,6 +23069,7 @@ components:
         data:
           $ref: '#/components/schemas/MicrosoftTeamsChannelInfoResponseData'
       type: object
+      x-model-simple-name: TeamsGetChannelResponse
     MicrosoftTeamsTenantBasedHandleAttributes:
       description: Tenant-based handle attributes.
       properties:
@@ -23092,6 +23096,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsTenantHandleAttrs
     MicrosoftTeamsTenantBasedHandleInfoResponseAttributes:
       description: Tenant-based handle attributes.
       properties:
@@ -23133,6 +23138,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsTenantHandleAttributes
     MicrosoftTeamsTenantBasedHandleInfoResponseData:
       description: Tenant-based handle data from a response.
       properties:
@@ -23149,6 +23155,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsTenantHandleData
     MicrosoftTeamsTenantBasedHandleInfoType:
       default: ms-teams-tenant-based-handle-info
       description: Tenant-based handle resource type.
@@ -23158,6 +23165,7 @@ components:
       type: string
       x-enum-varnames:
       - MS_TEAMS_TENANT_BASED_HANDLE_INFO
+      x-model-simple-name: TeamsTenantHandleInfoType
     MicrosoftTeamsTenantBasedHandleRequestAttributes:
       description: Tenant-based handle attributes.
       properties:
@@ -23226,6 +23234,7 @@ components:
       type: object
       x-merge-override:
         required: false
+      x-model-simple-name: TeamsTenantHandleResponseData
     MicrosoftTeamsTenantBasedHandleType:
       default: tenant-based-handle
       description: Specifies the tenant-based handle resource type.
@@ -23235,6 +23244,7 @@ components:
       type: string
       x-enum-varnames:
       - TENANT_BASED_HANDLE
+      x-model-simple-name: TeamsTenantHandleType
     MicrosoftTeamsTenantBasedHandlesResponse:
       description: Response with a list of tenant-based handles.
       properties:
@@ -23267,6 +23277,7 @@ components:
       required:
       - data
       type: object
+      x-model-simple-name: TeamsTenantHandlesResponse
     MicrosoftTeamsUpdateTenantBasedHandleRequest:
       description: Update tenant-based handle request.
       properties:
