@@ -102,5 +102,5 @@ Suppose you want to make changes to your application interface but want to first
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
 [10]: /product_analytics/session_replay/heatmaps
-[11]: /product_analytics/session_replay/_index
-[12]: /product_analytics/session_replay/playlist
+[11]: /product_analytics/session_replay/
+[12]: /product_analytics/session_replay/playlists
