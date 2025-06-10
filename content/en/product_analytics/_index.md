@@ -34,7 +34,7 @@ To start using Product Analytics, enable it for each application where you want 
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
-By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
+By default, Product Analytics data is retained for 15 months. Learn more about [Datadog's data retention periods][1].
 
 ## Navigating the Product Analytics UI
 Each Product Analytics feature provides context into your users' journeys. This section describes the context each feature can provide for your individual use case.
@@ -93,7 +93,7 @@ Suppose you want to make changes to your application interface but want to first
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/privacy/
+[1]: /data_security/data_retention_periods/
 [2]: /product_analytics/charts/user_retention
 [3]: https://app.datadoghq.com/product-analytics
 [4]: /product_analytics/charts/funnel_analysis
