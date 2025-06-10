@@ -126,6 +126,9 @@ function OptionGroupBuilder(props: {
 
           {/* Option group ID field */}
           <h4>Option group ID</h4>
+          <p>
+            This must end in <em>_options</em> or <em>_options_v2</em>, <em>_options_v3</em>, and so on.
+          </p>
           <TextField
             value={optionGroupId}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
