@@ -243,7 +243,7 @@ Here's an example showing how to set it up:
    ```
    We are configuring one backend of type `aws.secrets` under the name `staging-aws`
 4. Set the correct access rights for the binary as described in [Agent security requirements](#agent-security-requirements):
-   ```bash
+   ```sh
    chown dd-agent:dd-agent datadog-secret-backend
    chmod 500 datadog-secret-backend
    ```
