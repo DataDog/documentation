@@ -4,7 +4,6 @@ import { AuthorConsoleData } from './schemas';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import ErrorsReport from './components/errors/ErrorsReport';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -14,42 +13,22 @@ import QuickFilterBuilder from './components/QuickFilterBuilder';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import BoltIcon from '@mui/icons-material/Bolt';
 import PageWizard from './components/PageWizard';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ paddingTop: '10px' }}>{children}</Box>}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  };
-}
+import ErrorsReport from './components/errors/ErrorsReport';
+import CustomTabPanel from './components/tabs/CustomTabPanel';
+import { a11yTabProps } from './components/tabs/utils';
 
 function App() {
   const tabParamVals = ['build-errors', 'quick-filter', 'page-wizard'];
+
   const [consoleData, setConsoleData] = useState<AuthorConsoleData | null>(null);
   const [hasErrors, setHasErrors] = useState<boolean>(false);
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
+  /**
+   * Set the current tab index to a target index,
+   * and update the URL with the corresponding
+   * tab parameter value.
+   */
   function setTabWithIndex(tabIndex: number) {
     const tabParamVal = tabParamVals[tabIndex];
     const searchParams = new URLSearchParams(window.location.search);
@@ -58,6 +37,10 @@ function App() {
     setCurrentTabIndex(tabIndex);
   }
 
+  /**
+   * Detect the user's desired tab from the URL,
+   * if present.
+   */
   function setTabFromUrl() {
     const searchParams = new URLSearchParams(window.location.search);
     const tabKey = searchParams.get('tab');
@@ -71,6 +54,7 @@ function App() {
     setCurrentTabIndex(tabIndex);
   }
 
+  // Fetch the latest Cdocs build data from the JSON file
   useEffect(() => {
     fetch('data.json')
       .then((response) => response.json())
@@ -84,12 +68,8 @@ function App() {
     setTabFromUrl();
   }, []);
 
-  const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
-    setTabWithIndex(currentTabIndex);
-  };
-
   if (!consoleData) {
-    return null;
+    return 'No Cdocs build data found.';
   }
 
   let buildStatusIcon = <CheckCircleIcon />;
@@ -114,11 +94,13 @@ function App() {
         </span>
       </h1>
       <Box sx={{ width: '100%' }}>
+        {/* Tabs nav */}
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={currentTabIndex}
-            onChange={handleTabChange}
-            aria-label="basic tabs example"
+            onChange={(_event: React.SyntheticEvent, currentTabIndex: number) => {
+              setTabWithIndex(currentTabIndex);
+            }}
             TabIndicatorProps={{ style: { backgroundColor: '#632ca6' } }}
             textColor="inherit"
           >
@@ -126,19 +108,27 @@ function App() {
               disableRipple
               label="Build errors"
               icon={buildStatusIcon}
-              {...a11yProps(0)}
+              {...a11yTabProps(0)}
               sx={{ color: '#632ca6' }}
             />
-            <Tab disableRipple label="Quick filter" icon={<BoltIcon />} {...a11yProps(1)} sx={{ color: '#632ca6' }} />
+            <Tab
+              disableRipple
+              label="Quick filter"
+              icon={<BoltIcon />}
+              {...a11yTabProps(1)}
+              sx={{ color: '#632ca6' }}
+            />
             <Tab
               disableRipple
               label="Page wizard"
               icon={<AutoFixHighIcon />}
-              {...a11yProps(2)}
+              {...a11yTabProps(2)}
               sx={{ color: '#632ca6' }}
             />
           </Tabs>
         </Box>
+
+        {/* Errors tab */}
         <CustomTabPanel value={currentTabIndex} index={0}>
           {hasErrors && (
             <>
@@ -149,7 +139,14 @@ function App() {
               >
                 <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>The latest cdocs build has errors.</AlertTitle>
               </Alert>
-              <ErrorsReport errorsByFilePath={consoleData.errorsByFilePath} />
+              <div>
+                <h2>Compilation errors</h2>
+                <p>
+                  Checking the box next to an error has no effect — it's optional for tracking your fixes between
+                  builds.
+                </p>
+                <ErrorsReport errorReportsByFilePath={consoleData.errorsByFilePath} />
+              </div>
             </>
           )}
           {!hasErrors && (
@@ -162,9 +159,13 @@ function App() {
             </Alert>
           )}
         </CustomTabPanel>
+
+        {/* Quick filter tab */}
         <CustomTabPanel value={currentTabIndex} index={1}>
           <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
+
+        {/* Page wizard tab */}
         <CustomTabPanel value={currentTabIndex} index={2}>
           <PageWizard customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
