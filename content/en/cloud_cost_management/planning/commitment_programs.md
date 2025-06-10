@@ -8,9 +8,11 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
+<div class="alert alert-info">CCM Commitment Programs supports AWS RDS Reserved Instances.</div>
+
 ## Overview
 
-Cloud providers such as AWS, Azure, and GCP offer significant discounts through commitment-based programs. These programs can help you save substantially on your cloud bills, but managing them effectively can be challenging. Datadog's Commitment Programs feature provides a dedicated page in Cloud Cost Management (CCM) to give you comprehensive visibility into the performance and status of your cloud discount programs so that you make the most of them.
+Cloud providers offer significant discounts through commitment-based programs. These programs can help you save substantially on your cloud bills, but managing them effectively can be challenging. Datadog's Commitment Programs feature provides a dedicated page in Cloud Cost Management (CCM) to give you comprehensive visibility into the performance and status of your cloud discount programs so that you make the most of them.
 
 With this feature, you can:
 - Track how effectively you are utilizing your commitments
@@ -23,7 +25,7 @@ This page describes the information available on the [Commitment Programs page][
 ## Getting Started
 
 1. Access the Commitment Programs page in Cloud Cost Management by navigating to: [**Cloud Cost > Planning > Commitment Programs**][1].
-2. **Review the KPIs** in the [commitments overview](#commitments-overview) section for your cloud providers and services.
+2. **Review the KPIs** in the [commitments overview](#commitments-overview) section.
 3. **Explore detailed pages** to analyze utilization, coverage, and expiring commitments.
 4. **Use filters** to focus on specific accounts, regions, or services.
 5. **Take action** based on insights—adjust workloads, purchase new commitments, or plan renewals to optimize your cloud spend.
