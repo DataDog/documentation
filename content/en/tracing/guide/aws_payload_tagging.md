@@ -193,13 +193,12 @@ The default value (758) is the maximum the Datadog Agent can accept. Increasing 
 {{< programming-lang lang="java" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
-- API Gateway
 
 
 
@@ -209,7 +208,7 @@ To enable tag extraction for additional services, use this environment variable:
 
 ```sh
 # Default values
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis,DynamoDb
 ```
 
 <div class="alert alert-warning">
