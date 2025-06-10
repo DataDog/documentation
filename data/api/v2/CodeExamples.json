@@ -908,6 +908,13 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateOnCallScheduleOverride": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an override returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",

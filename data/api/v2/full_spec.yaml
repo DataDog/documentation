@@ -13745,6 +13745,21 @@ components:
       required:
       - type
       type: object
+    EscalationPoliciesResponse:
+      description: Response with a list of escalation policies.
+      properties:
+        data:
+          description: A list of escalation policies.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyData'
+          type: array
+        included:
+          description: Provides any included related resources, such as steps or targets,
+            returned with the policy.
+          items:
+            $ref: '#/components/schemas/EscalationPolicyIncluded'
+          type: array
+      type: object
     EscalationPolicy:
       description: Represents a complete escalation policy response, including policy
         data and optionally included related resources.
@@ -27393,6 +27408,28 @@ components:
       - TEAM_ID
       - TEAM_HANDLE
       - USER_ID
+    OnCallUserRelationship:
+      description: The definition of `OnCallUserRelationship` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallUserRelationshipData'
+      type: object
+    OnCallUserRelationshipData:
+      description: The definition of `OnCallUserRelationshipData` object.
+      properties:
+        id:
+          description: The ID of the user.
+          type: string
+        type:
+          $ref: '#/components/schemas/OnCallUserRelationshipType'
+      type: object
+    OnCallUserRelationshipType:
+      description: The definition of `OnCallUserRelationshipType` object.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -28031,6 +28068,118 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+    Override:
+      description: The definition of `Override` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OverrideAttributes'
+        id:
+          description: The ID of the override.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OverrideRelationships'
+        type:
+          $ref: '#/components/schemas/OverrideType'
+      type: object
+    OverrideAttributes:
+      description: The definition of `OverrideAttributes` object.
+      properties:
+        end:
+          description: The end time of the override.
+          format: date-time
+          type: string
+        start:
+          description: The start time of the override.
+          format: date-time
+          type: string
+      type: object
+    OverrideCreateData:
+      description: The definition of `OverrideCreateData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OverrideCreateDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/OverrideCreateDataRelationships'
+        type:
+          $ref: '#/components/schemas/OverrideCreateDataType'
+      required:
+      - attributes
+      - type
+      type: object
+    OverrideCreateDataAttributes:
+      description: The definition of `OverrideCreateDataAttributes` object.
+      properties:
+        end:
+          description: The end time of the override.
+          example: ''
+          format: date-time
+          type: string
+        start:
+          description: The start time of the override.
+          example: ''
+          format: date-time
+          type: string
+      required:
+      - start
+      - end
+      type: object
+    OverrideCreateDataRelationships:
+      description: The definition of `OverrideCreateDataRelationships` object.
+      properties:
+        user:
+          $ref: '#/components/schemas/OnCallUserRelationship'
+      type: object
+    OverrideCreateDataType:
+      description: The definition of `OverrideCreateDataType` object.
+      enum:
+      - overrides
+      example: overrides
+      type: string
+      x-enum-varnames:
+      - OVERRIDES
+    OverrideRelationships:
+      description: The definition of `OverrideRelationships` object.
+      properties:
+        user:
+          $ref: '#/components/schemas/OnCallUserRelationship'
+      type: object
+    OverrideRequest:
+      description: The definition of `OverrideRequest` object.
+      properties:
+        data:
+          description: The `OverrideRequest` `data`.
+          items:
+            $ref: '#/components/schemas/OverrideCreateData'
+          type: array
+      required:
+      - data
+      type: object
+    OverrideResponse:
+      description: The definition of `OverrideResponse` object.
+      properties:
+        data:
+          description: The `OverrideResponse` `data`.
+          items:
+            $ref: '#/components/schemas/Override'
+          type: array
+      type: object
+    OverrideType:
+      default: overrides
+      description: The definition of `OverrideType` object.
+      enum:
+      - overrides
+      type: string
+      x-enum-varnames:
+      - OVERRIDES
+    OverridesResponse:
+      description: The definition of `OverridesResponse` object.
+      properties:
+        data:
+          description: The `OverridesResponse` `data`.
+          items:
+            $ref: '#/components/schemas/Override'
+          type: array
+      type: object
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -33077,6 +33226,21 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    SchedulesResponse:
+      description: Response with a list of on-call schedules.
+      properties:
+        data:
+          description: A list of on-call schedules.
+          items:
+            $ref: '#/components/schemas/ScheduleData'
+          type: array
+        included:
+          description: Any additional resources related to this schedule, such as
+            teams and layers.
+          items:
+            $ref: '#/components/schemas/ScheduleDataIncludedItem'
+          type: array
+      type: object
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -38871,7 +39035,7 @@ components:
       type: object
     TeamOnCallRespondersData:
       description: Defines the main on-call responder object for a team, including
-        relationships and metadata.
+        relationships.
       properties:
         id:
           description: Unique identifier of the on-call responder configuration.
@@ -54866,6 +55030,39 @@ paths:
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/on-call/escalation-policies:
+    get:
+      description: Get a list of all escalation policies.
+      operationId: ListOnCallEscalationPolicies
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscalationPoliciesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of all escalation policies
+      tags:
+      - On-Call
+      x-menu-order: 14
+      x-undo:
+        type: safe
     post:
       description: Create a new On-Call escalation policy
       operationId: CreateOnCallEscalationPolicy
@@ -54926,7 +55123,7 @@ paths:
               \"teams\"\n          }\n        ]\n      }\n    },\n    \"type\": \"policies\"\n
               \ }\n}"
           step: there is a valid "escalation_policy" in the system
-      x-menu-order: 5
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -54967,7 +55164,7 @@ paths:
       summary: Delete On-Call escalation policy
       tags:
       - On-Call
-      x-menu-order: 8
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -55015,7 +55212,7 @@ paths:
       summary: Get On-Call escalation policy
       tags:
       - On-Call
-      x-menu-order: 7
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -55069,7 +55266,7 @@ paths:
       summary: Update On-Call escalation policy
       tags:
       - On-Call
-      x-menu-order: 6
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -55314,6 +55511,39 @@ paths:
         parameters: []
         type: unsafe
   /api/v2/on-call/schedules:
+    get:
+      description: Get a list of all on-call schedules.
+      operationId: ListOnCallSchedules
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of all on-call schedules
+      tags:
+      - On-Call
+      x-menu-order: 5
+      x-undo:
+        type: safe
     post:
       description: Create a new On-Call schedule
       operationId: CreateOnCallSchedule
@@ -55413,7 +55643,7 @@ paths:
       summary: Delete On-Call schedule
       tags:
       - On-Call
-      x-menu-order: 3
+      x-menu-order: 4
       x-permission:
         operator: AND
         permissions:
@@ -55513,7 +55743,7 @@ paths:
       summary: Update On-Call schedule
       tags:
       - On-Call
-      x-menu-order: 4
+      x-menu-order: 3
       x-permission:
         operator: AND
         permissions:
@@ -55570,9 +55800,163 @@ paths:
       summary: Get the schedule on-call user
       tags:
       - On-Call
-      x-menu-order: 11
+      x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/on-call/schedules/{schedule_id}/overrides:
+    get:
+      description: Get a list of all overrides for a given schedule.
+      operationId: ListOnCallScheduleOverrides
+      parameters:
+      - description: The ID of the on-call schedule.
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: The start time (in ISO-8601 format) of the time range to filter
+          overrides by. Only overrides that overlap with this time range will be returned.
+        in: query
+        name: filter[start]
+        required: true
+        schema:
+          type: string
+      - description: The end time (in ISO-8601 format) of the time range to filter
+          overrides by. Only overrides that overlap with this time range will be returned.
+        in: query
+        name: filter[end]
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverridesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of all overrides for a schedule
+      tags:
+      - On-Call
+      x-menu-order: 8
+      x-undo:
+        type: safe
+    post:
+      description: Create an override for a given schedule.
+      operationId: CreateOnCallScheduleOverride
+      parameters:
+      - description: The ID of the on-call schedule.
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OverrideRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverrideResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an override
+      tags:
+      - On-Call
+      x-given:
+        override:
+          parameters:
+          - name: schedule_id
+            source: schedule.data.id
+          - name: body
+            value: "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"start\":
+              \"{{ timeISO('now') }}\",\n        \"end\": \"{{ timeISO('now + 1h')
+              }}\"\n      },\n      \"relationships\": {\n        \"user\": {\n          \"data\":
+              {\n            \"id\": \"{{ user.data.id }}\",\n            \"type\":
+              \"users\"\n          }\n        }\n      },\n      \"type\": \"overrides\"\n
+              \   }\n  ]\n}"
+          step: there is a valid "override" in the system
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteOnCallScheduleOverride
+        parameters:
+        - name: override_id
+          source: data[0].id
+        type: unsafe
+  /api/v2/on-call/schedules/{schedule_id}/overrides/{override_id}:
+    delete:
+      description: Delete an override for a given schedule.
+      operationId: DeleteOnCallScheduleOverride
+      parameters:
+      - description: The ID of the on-call schedule.
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the override.
+        in: path
+        name: override_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an override
+      tags:
+      - On-Call
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
   /api/v2/on-call/teams/{team_id}/on-call:
     get:
       description: Get a team's on-call users at a given time
@@ -55615,7 +55999,7 @@ paths:
       summary: Get team on-call users
       tags:
       - On-Call
-      x-menu-order: 12
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v2/on-call/teams/{team_id}/routing-rules:
@@ -55652,7 +56036,7 @@ paths:
       summary: Get On-Call team routing rules
       tags:
       - On-Call
-      x-menu-order: 9
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
@@ -55710,7 +56094,7 @@ paths:
               escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"actions\":
               []\n        }\n      ]\n    }\n  }\n}"
           step: there are valid "routing_rules" in the system
-      x-menu-order: 10
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:

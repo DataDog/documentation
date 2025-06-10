@@ -1367,6 +1367,10 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "ListOnCallEscalationPolicies": {
+    "description": "Get a list of all escalation policies.",
+    "summary": "Get a list of all escalation policies"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -1405,6 +1409,10 @@
     "description": "Resolves an On-Call Page.\n",
     "summary": "Resolve On-Call Page"
   },
+  "ListOnCallSchedules": {
+    "description": "Get a list of all on-call schedules.",
+    "summary": "Get a list of all on-call schedules"
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new On-Call schedule",
     "summary": "Create On-Call schedule",
@@ -1428,6 +1436,20 @@
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
     "summary": "Get the schedule on-call user"
+  },
+  "ListOnCallScheduleOverrides": {
+    "description": "Get a list of all overrides for a given schedule.",
+    "summary": "Get a list of all overrides for a schedule"
+  },
+  "CreateOnCallScheduleOverride": {
+    "description": "Create an override for a given schedule.",
+    "summary": "Create an override",
+    "request_description": "",
+    "request_schema_description": "The definition of `OverrideRequest` object."
+  },
+  "DeleteOnCallScheduleOverride": {
+    "description": "Delete an override for a given schedule.",
+    "summary": "Delete an override"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",
