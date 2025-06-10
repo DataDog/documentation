@@ -27,6 +27,8 @@ aliases:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
+{{% tracing-go-v2 %}}
+
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
@@ -127,13 +129,11 @@ import (
 	"net/http"
 	"time"
 
-	ddlambda "github.com/DataDog/datadog-lambda-go"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-	// httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-	// "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  ddlambda "github.com/DataDog/datadog-lambda-go"
+  "github.com/aws/aws-lambda-go/events"
+  "github.com/aws/aws-lambda-go/lambda"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -196,4 +196,4 @@ Enabling any of these features cause the extension to default back to the fully 
 [4]: /security/application_security/serverless/
 [5]: https://github.com/DataDog/datadog-lambda-extension
 [6]: https://github.com/DataDog/datadog-lambda-extension/issues
-
+[7]: /tracing/trace_collection/custom_instrumentation/go/migration

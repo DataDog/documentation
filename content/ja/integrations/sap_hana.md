@@ -157,6 +157,13 @@ HANA テナント、シングルテナント、システムデータベースの
 
 #### ログ収集
 
+1. お使いの SAP HANA データベースで監査ログを読み取れるようにするには、次のコマンドを実行してください。
+
+    ```shell
+    GRANT AUDIT READ TO DD_MONITOR;
+    GRANT SELECT ON SYS.AUDIT_LOG TO DD_MONITOR
+    ```
+
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
    ```yaml

@@ -37,7 +37,7 @@ For GitHub repositories, you can run Datadog SCA scans directly on Datadog infra
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 <div class="alert alert-info">
-Datadog-hosted SCA does not support repositories using <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a>.<br/>Instead, use <b>CI Pipelines</b> for these repositories.
+Datadog-hosted SCA does not support repositories using <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a> or file paths with parent directory traversal (<code>..</code>).<br/>Instead, use <b>run SCA scans in your CI Pipelines</b> for these repositories.
 </div>
 
 {{% /tab %}}
@@ -338,6 +338,8 @@ are set to your API key, APP key, and [Datadog site][12], respectively.
 datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
+## Features
+
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
@@ -401,6 +403,43 @@ detected in this file.
 If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
+
+### Reachability analysis
+
+Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
+
+This functionality is supported only when using the [Datadog SBOM Generator][1] with the `--reachability` flag enabled or when running scans through Datadog-hosted infrastructure.
+
+Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
+
+#### Supported advisories
+
+Static reachability analysis is available for the following advisories:
+- [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
+- [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
+- [GHSA-7rjr-3q55-vv33](https://osv.dev/vulnerability/GHSA-7rjr-3q55-vv33)
+- [GHSA-2p3x-qw9c-25hh](https://osv.dev/vulnerability/GHSA-2p3x-qw9c-25hh)
+- [GHSA-cm59-pr5q-cw85](https://osv.dev/vulnerability/GHSA-cm59-pr5q-cw85)
+- [GHSA-qrx8-8545-4wg2](https://osv.dev/vulnerability/GHSA-qrx8-8545-4wg2)
+- [GHSA-p8pq-r894-fm8f](https://osv.dev/vulnerability/GHSA-p8pq-r894-fm8f)
+- [GHSA-64xx-cq4q-mf44](https://osv.dev/vulnerability/GHSA-64xx-cq4q-mf44)
+- [GHSA-g5w6-mrj7-75h2](https://osv.dev/vulnerability/GHSA-g5w6-mrj7-75h2)
+- [GHSA-xw4p-crpj-vjx2](https://osv.dev/vulnerability/GHSA-xw4p-crpj-vjx2)
+- [GHSA-cxfm-5m4g-x7xp](https://osv.dev/vulnerability/GHSA-cxfm-5m4g-x7xp)
+- [GHSA-3ccq-5vw3-2p6x](https://osv.dev/vulnerability/GHSA-3ccq-5vw3-2p6x)
+- [GHSA-mjmj-j48q-9wg2](https://osv.dev/vulnerability/GHSA-mjmj-j48q-9wg2)
+- [GHSA-36p3-wjmg-h94x](https://osv.dev/vulnerability/GHSA-36p3-wjmg-h94x)
+- [GHSA-ww97-9w65-2crx](https://osv.dev/vulnerability/GHSA-ww97-9w65-2crx)
+- [GHSA-8jrj-525p-826v](https://osv.dev/vulnerability/GHSA-8jrj-525p-826v)
+- [GHSA-4wrc-f8pq-fpqp](https://osv.dev/vulnerability/GHSA-4wrc-f8pq-fpqp)
+- [GHSA-4cch-wxpw-8p28](https://osv.dev/vulnerability/GHSA-4cch-wxpw-8p28)
+- [GHSA-6w62-hx7r-mw68](https://osv.dev/vulnerability/GHSA-6w62-hx7r-mw68)
+- [GHSA-2q8x-2p7f-574v](https://osv.dev/vulnerability/GHSA-2q8x-2p7f-574v)
+- [GHSA-rmr5-cpv2-vgjf](https://osv.dev/vulnerability/GHSA-rmr5-cpv2-vgjf)
+- [GHSA-4jrv-ppp4-jm57](https://osv.dev/vulnerability/GHSA-4jrv-ppp4-jm57)
+- [GHSA-mw36-7c6c-q4q2](https://osv.dev/vulnerability/GHSA-mw36-7c6c-q4q2)
+- [GHSA-hph2-m3g5-xxv4](https://osv.dev/vulnerability/GHSA-hph2-m3g5-xxv4)
+- [GHSA-j9h8-phrw-h4fh](https://osv.dev/vulnerability/GHSA-j9h8-phrw-h4fh)
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup

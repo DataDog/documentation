@@ -6263,8 +6263,7 @@ menu:
           - v2
         operationids:
           - CreateDORAIncident
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get a failure event
       url: '#get-a-failure-event'
@@ -6290,6 +6289,18 @@ menu:
           - ListDORAFailures
         unstable: []
         order: 4
+    - name: Send a failure event for DORA Metrics
+      url: '#send-a-failure-event-for-dora-metrics'
+      identifier: dora-metrics-send-a-failure-event-for-dora-metrics
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDORAFailure
+        unstable: []
+        order: 2
     - name: Get a deployment event
       url: '#get-a-deployment-event'
       identifier: dora-metrics-get-a-deployment-event
@@ -6324,8 +6335,7 @@ menu:
           - v2
         operationids:
           - CreateDORADeployment
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
@@ -7708,6 +7718,18 @@ menu:
           - GetOnCallTeamRoutingRules
         unstable: []
         order: 9
+    - name: Get team on-call users
+      url: '#get-team-on-call-users'
+      identifier: on-call-get-team-on-call-users
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamOnCallUsers
+        unstable: []
+        order: 12
     - name: Get the schedule on-call user
       url: '#get-the-schedule-on-call-user'
       identifier: on-call-get-the-schedule-on-call-user
@@ -8938,6 +8960,42 @@ menu:
           - ListCatalogRelation
         unstable: []
         order: 3
+    - name: Delete a single kind
+      url: '#delete-a-single-kind'
+      identifier: software-catalog-delete-a-single-kind
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogKind
+        unstable: []
+        order: 6
+    - name: Create or update kinds
+      url: '#create-or-update-kinds'
+      identifier: software-catalog-create-or-update-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogKind
+        unstable: []
+        order: 5
+    - name: Get a list of entity kinds
+      url: '#get-a-list-of-entity-kinds'
+      identifier: software-catalog-get-a-list-of-entity-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogKind
+        unstable: []
+        order: 4
     - name: Delete a single entity
       url: '#delete-a-single-entity'
       identifier: software-catalog-delete-a-single-entity
