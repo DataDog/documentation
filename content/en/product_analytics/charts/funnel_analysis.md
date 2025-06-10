@@ -133,8 +133,5 @@ You can share the entire visualization or individual widgets.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/browser/data_collected/#session-metrics
-[4]: /real_user_monitoring/session_replay
-[5]: /dashboards/
+[5]: /product-analytics/dashboards/
 [6]: /notebooks/
