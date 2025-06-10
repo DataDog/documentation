@@ -103,5 +103,5 @@ For the remaining visualization options, click on the graph and click **View eve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/analytics_explorer/
+[1]: https://app.datadoghq.com/product-analytics/explorer
 [2]: /product_analytics/charts/funnel_analysis
