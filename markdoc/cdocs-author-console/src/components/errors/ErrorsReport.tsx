@@ -10,7 +10,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import { useState } from 'react';
 
-const ErrorsPrintout = (props: { errorReportsByFilePath: Record<string, CdocsCoreError[]> }) => {
+const ErrorsReport = (props: { errorReportsByFilePath: Record<string, CdocsCoreError[]> }) => {
   const [textWasCopied, setTextWasCopied] = useState(false);
 
   const handleTextCopy = () => {
@@ -134,16 +134,6 @@ const ErrorsPrintout = (props: { errorReportsByFilePath: Record<string, CdocsCor
           </Paper>
         );
       })}
-    </div>
-  );
-};
-
-const ErrorsReport = (props: { errorsByFilePath: Record<string, CdocsCoreError[]> }) => {
-  return (
-    <div>
-      <h2>Compilation errors</h2>
-      <p>Checking the box next to an error has no effect — it's optional for tracking your fixes between builds.</p>
-      <ErrorsPrintout errorReportsByFilePath={props.errorsByFilePath} />
     </div>
   );
 };
