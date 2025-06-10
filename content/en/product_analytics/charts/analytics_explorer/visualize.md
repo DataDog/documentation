@@ -12,7 +12,7 @@ further_reading:
 
 Visualizations define the outcomes of the filters and aggregates displayed in the [Analytics Explorer][1]. Select the relevant visualization type to surface the information you need under the search query.
 
-## Timeseries
+## Timeseries -- change
 
 Visualize the evolution of a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) over a selected time frame.
 
