@@ -7705,7 +7705,7 @@ menu:
         operationids:
           - SetOnCallTeamRoutingRules
         unstable: []
-        order: 10
+        order: 16
     - name: Get On-Call team routing rules
       url: '#get-on-call-team-routing-rules'
       identifier: on-call-get-on-call-team-routing-rules
@@ -7717,7 +7717,7 @@ menu:
         operationids:
           - GetOnCallTeamRoutingRules
         unstable: []
-        order: 9
+        order: 15
     - name: Get team on-call users
       url: '#get-team-on-call-users'
       identifier: on-call-get-team-on-call-users
@@ -7729,7 +7729,43 @@ menu:
         operationids:
           - GetTeamOnCallUsers
         unstable: []
-        order: 12
+        order: 17
+    - name: Delete an override
+      url: '#delete-an-override'
+      identifier: on-call-delete-an-override
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallScheduleOverride
+        unstable: []
+        order: 9
+    - name: Create an override
+      url: '#create-an-override'
+      identifier: on-call-create-an-override
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallScheduleOverride
+        unstable: []
+        order: 7
+    - name: Get a list of all overrides for a schedule
+      url: '#get-a-list-of-all-overrides-for-a-schedule'
+      identifier: on-call-get-a-list-of-all-overrides-for-a-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallScheduleOverrides
+        unstable: []
+        order: 8
     - name: Get the schedule on-call user
       url: '#get-the-schedule-on-call-user'
       identifier: on-call-get-the-schedule-on-call-user
@@ -7741,7 +7777,7 @@ menu:
         operationids:
           - GetScheduleOnCallUser
         unstable: []
-        order: 11
+        order: 6
     - name: Update On-Call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule
@@ -7753,7 +7789,7 @@ menu:
         operationids:
           - UpdateOnCallSchedule
         unstable: []
-        order: 4
+        order: 3
     - name: Get On-Call schedule
       url: '#get-on-call-schedule'
       identifier: on-call-get-on-call-schedule
@@ -7777,7 +7813,7 @@ menu:
         operationids:
           - DeleteOnCallSchedule
         unstable: []
-        order: 3
+        order: 4
     - name: Create On-Call schedule
       url: '#create-on-call-schedule'
       identifier: on-call-create-on-call-schedule
@@ -7790,6 +7826,18 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
+    - name: Get a list of all on-call schedules
+      url: '#get-a-list-of-all-on-call-schedules'
+      identifier: on-call-get-a-list-of-all-on-call-schedules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallSchedules
+        unstable: []
+        order: 5
     - name: Update On-Call escalation policy
       url: '#update-on-call-escalation-policy'
       identifier: on-call-update-on-call-escalation-policy
@@ -7801,7 +7849,7 @@ menu:
         operationids:
           - UpdateOnCallEscalationPolicy
         unstable: []
-        order: 6
+        order: 12
     - name: Get On-Call escalation policy
       url: '#get-on-call-escalation-policy'
       identifier: on-call-get-on-call-escalation-policy
@@ -7813,7 +7861,7 @@ menu:
         operationids:
           - GetOnCallEscalationPolicy
         unstable: []
-        order: 7
+        order: 11
     - name: Delete On-Call escalation policy
       url: '#delete-on-call-escalation-policy'
       identifier: on-call-delete-on-call-escalation-policy
@@ -7825,7 +7873,7 @@ menu:
         operationids:
           - DeleteOnCallEscalationPolicy
         unstable: []
-        order: 8
+        order: 13
     - name: Create On-Call escalation policy
       url: '#create-on-call-escalation-policy'
       identifier: on-call-create-on-call-escalation-policy
@@ -7837,7 +7885,19 @@ menu:
         operationids:
           - CreateOnCallEscalationPolicy
         unstable: []
-        order: 5
+        order: 10
+    - name: Get a list of all escalation policies
+      url: '#get-a-list-of-all-escalation-policies'
+      identifier: on-call-get-a-list-of-all-escalation-policies
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallEscalationPolicies
+        unstable: []
+        order: 14
     - name: On-Call Paging
       url: /api/latest/on-call-paging/
       identifier: on-call-paging
