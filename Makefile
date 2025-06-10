@@ -284,7 +284,7 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	fi;
 	@tmp_dir=$$(mktemp -d) && \
 	echo "TEMP DIR IS: $${tmp_dir}" && \
-	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir || { echo "script repo clone failed"; exit 1; } && \
+	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo "Moving files to python directory..." && \
 		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(PY_PATH)/ && \
