@@ -1,7 +1,14 @@
 import { CustomizationConfig, buildFiltersManifest, Frontmatter, FiltersManifest } from 'cdocs-data';
-import { WizardFilter } from '../types';
-import { buildFrontmatterData } from '../dataUtils';
+import { WizardFilter } from '../../types';
+import { buildFrontmatterData } from '../../dataUtils';
 
+/**
+ * DocTemplater is a utility class that builds markup snippets intended to
+ * serve as examples of conditional content, page filter configuration, and so on.
+ *
+ * Given a set of user-selected filters and a customization configuration,
+ * it generates frontmatter, example `if` blocks, and other Markdoc markup strings.
+ */
 export class DocTemplater {
   filters: WizardFilter[];
   customizationConfig: CustomizationConfig;
@@ -19,6 +26,9 @@ export class DocTemplater {
     });
   }
 
+  /**
+   * Build the frontmatter markup based on the user-selected filters.
+   */
   buildFrontmatterMarkup() {
     let frontmatter = `---
 title: Your Title Here`;
@@ -40,6 +50,9 @@ content_filters:`;
     return frontmatter;
   }
 
+  /**
+   * Create the markup for an `if` block based on a filter.
+   */
   buildIfBlock(filter: WizardFilter) {
     const options = Object.values(this.filtersManifest.optionGroupsById[filter.option_group_id]);
 
@@ -59,6 +72,9 @@ ${option.label}-specific content goes here.
     return markup;
   }
 
+  /**
+   * Create the markup for an equals function, such as `equals($color, "blue")`.
+   */
   buildEqualsFnExample() {
     const filters = Object.values(this.filtersManifest.filtersByTraitId);
     if (filters.length === 0) {
@@ -73,6 +89,10 @@ ${option.label}-specific content goes here.
     return `equals($${firstFilter.config.trait_id}, "${firstFilterOption.id}")`;
   }
 
+  /**
+   * Create a markup example that demonstrates how to combine filters
+   * into more complex conditions when needed, assuming two filters are present.
+   */
   buildNestedIfBlockExample() {
     const manifest = this.filtersManifest;
 
@@ -113,6 +133,10 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
 `;
   }
 
+  /**
+   * Create example Markdoc markup that uses the `if` tag to conditionally display content
+   * based on the user-selected filters.
+   */
   buildIfBlocks() {
     let ifBlocks = '';
 
@@ -125,6 +149,9 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
     return ifBlocks;
   }
 
+  /**
+   * Create a Markdoc table that lists all traits and their valid values.
+   */
   buildTraitsAndValuesTable() {
     let table = '{% table %}\n';
     table += '* Trait\n';

@@ -1,7 +1,7 @@
 import { WizardFilter } from '../../types';
 import { CustomizationConfig } from 'cdocs-data';
 import Code from '../shared/Code';
-import { DocTemplater } from '../DocTemplater';
+import { DocTemplater } from './DocTemplater';
 
 function buildMarkup(templater: DocTemplater) {
   return `
