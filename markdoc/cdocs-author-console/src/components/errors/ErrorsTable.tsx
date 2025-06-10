@@ -76,14 +76,14 @@ const ErrorsTable = ({
 
                 {/* Line number cell, if at least one error has a line number */}
                 {errorsHaveLineNumbers && (
-                  <TableCell sx={{ fontSize: '1em' }}>
+                  <TableCell sx={{ fontSize: '1em', width: '75px' }}>
                     <a href={vsCodeLink + ':' + startingLine}>{startingLine}</a>
                   </TableCell>
                 )}
 
                 {/* Search term cell, if at least one error has a search term */}
                 {errorsHaveSearchTerms && (
-                  <TableCell sx={{ fontSize: '1em' }}>
+                  <TableCell sx={{ fontSize: '1em', width: '225px' }}>
                     <code
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
