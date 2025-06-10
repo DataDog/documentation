@@ -107,7 +107,7 @@ You can dismiss individual insights and set filters to view the categories of in
 
 ## Live Debugger
 
-The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, "non-breaking breakpoints"—to your runtime code to collect information for debugging.
+The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging.
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
@@ -115,7 +115,7 @@ Find out more in the [Live Debugger documentation][20].
 
 ## Continuous Profiler
 
-The [**Continuous Profiler**][22] highlights resource consumption (CPU, memory allocation and thrown exceptions, for example) using profiling data collected from deployed services.  This information helps developers write more efficient code and eliminate bottlenecks.
+The [**Continuous Profiler**][22] highlights resource consumption (such as CPU, memory allocation, and thrown exceptions) using profiling data collected from deployed services.  This information helps developers write more efficient code and eliminate bottlenecks.
 
 {{< img src="/developers/ide_plugins/idea/continuous_profiler/flamegraph.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
 

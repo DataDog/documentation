@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The **Continuous Profiler** highlights resource consumption (CPU, memory allocation, and thrown exceptions amongst others) using profiling data collected from deployed services.  This information helps developers eliminate bottlenecks and write more efficient code.
+The **Continuous Profiler** highlights resource consumption (such as CPU, memory allocation, and thrown exceptions) using profiling data collected from deployed services.  This information helps developers eliminate bottlenecks and write more efficient code.
 
 ## Profiler tab
 
@@ -32,7 +32,7 @@ The **Top List** sub-tab shows the methods that consume the most resources based
 
 {{< img src="/developers/ide_plugins/idea/continuous_profiler/top-list.png" alt="The Top-list view" style="width:100%;" >}}
 
-- Double-clicking an item in the list (or selecting **Jump to Source** from the context menu) opens a source code editor showing where the method is defined.
+- Double-click an item in the list (or selecting **Jump to Source** from the context menu) to open a source code editor showing where the method is defined.
 - To see a flame graph visualization of a method, select **Search in Flame Graph** from the context menu.
 
 ### Call tree
@@ -45,16 +45,16 @@ Right-click on a method in the call tree to see options to navigate to the sourc
 
 ## Flame graph
 
-A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin collects multiple individual profiles from the requested time frame, and aggregates them. Each individual profile covers a 60 second interval within the requested time frame.
+A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin collects multiple individual profiles from the requested time frame and aggregates them. Each individual profile covers a 60 second interval within the requested time frame.
 
 {{< img src="/developers/ide_plugins/idea/continuous_profiler/flamegraph.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
 
 Each time you change the profile type, the time frame, or the environment, the Datadog plugin generates a new flame graph.
 
 You can navigate the flame graph in several ways:
-- Double-click on any frame to focus on that method and all the methods that it has called during the sampling period.
+- Double-click any frame to focus on that method and all the methods that it has called during the sampling period.
 - Use the minimap to pan around the graph.
-- Right-click on a method and select **Jump to Source** to go to the corresponding point in the source code.
+- Right-click a method and select **Jump to Source** to go to the corresponding point in the source code.
 
 Hovering over a method displays a tooltip with the following information:
 - The class name and method signature
