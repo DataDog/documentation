@@ -13,7 +13,7 @@ Datadog recomienda la macro serverless CloudFormation para los clientes que util
 La macro configura automáticamente la ingesta de métricas, trazas (traces) y logs desde tus aplicaciones serverless mediante:
 
 - Instalación y configuración de la biblioteca Datadog Lambda biblioteca y la extensión Lambda para tus funciones de [Python][1], [Node.js][2], [.NET][9] y [Java][10] Lambda.
-- Habilitación de la recopilación métricas mejoradas de Lambda y métricas personalizadas de tus funciones Lambda.
+- Habilitación de la recopilación de métricas de Lambda mejoradas y métricas personalizadas de tus funciones de Lambda.
 - Administración de suscripciones desde Datadog Forwarder a tus grupos de logs de funciones Lambda, si lo deseas.
 
 ## Instalación
@@ -44,26 +44,26 @@ aws cloudformation create-stack \
 Para desplegar tu aplicación serverless con SAM, añade la macro CloudFormation Datadog serverless en la sección `Transform` en tu archivo `template.yml`, después de la transformación SAM requerida. Añade también un parámetro de `DDGitData` y pásalo a la macro para habilitar integración con el código fuente de Datadog:
 
 ```yaml
-Transformar:
+Transform:
   - AWS::Serverless-2016-10-31
-  - Nombre: DatadogServerless
-    Parámetros:
+  - Name: DatadogServerless
+    Parameters:
       stackName: !Ref "AWS::StackName"
       apiKey: "<DATADOG_API_KEY>"
-      pythonLayerVersion: "<LAYER_VERSION>" # Utiliza el parámetro apropiado para otros tiempos de ejecución
+      pythonLayerVersion: "<LAYER_VERSION>" # Use appropriate parameter for other runtimes
       extensionLayerVersion: "<LAYER_VERSION>"
-      servicio: "<SERVICE>" # Opcional
-      variable de entorno: "<ENV>" # Opcional
-      versión: "<VERSION>" # Opcional
-      etiquetas (tags): "<TAGS>" # Opcional
-      # Pasa DDGitData aquí para habilitar el etiquetado de la integración del código fuente
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
+      version: "<VERSION>" # Optional
+      tags: "<TAGS>" # Optional
+      # Pass DDGitData here to enable Source Code Integration tagging
       gitData: !Ref DDGitData
-      # Para obtener parámetros adicionales, consulta la sección de configuración
+      # For additional parameters, see the Configuration section
 
-Parámetros:
+Parameters:
   DDGitData:
-    Tipo: Cadena
-    Por defecto: ""
+    Type: String
+    Default: ""
     Description: "The output of $(git rev-parse HEAD),$(git config --get remote.origin.url). Used for Datadog Source Code Integration tagging"
 ```
 
@@ -78,20 +78,20 @@ Nota: Si no modificaste el archivo `template.yml` proporcionado cuando instalast
 Nota: Si deseas especificar algo de las configuración solo una vez, puedes modificar `template.yml` y añadir las variables de entorno que desees configurar para esa región. Esta es una forma de controlar los valores por defecto adicionales. El ejemplo siguiente configura `DD_API_KEY_SECRET_ARN` y `DD_ENV`, que la macro tratará como valores por defecto:
 
 ```yaml
-Recursos:
+Resources:
   MacroFunction:
-    Tipo: AWS::Serverless::Function
+    Type: AWS::Serverless::Function
     DependsOn: MacroFunctionZip
-    Propiedades:
+    Properties:
       FunctionName:
         Fn::If:
           - SetFunctionName
           - Ref: FunctionName
           - Ref: AWS::NoValue
-      Descripción: Procesos de una plantilla de CloudFormation para instalar Datadog Lambda layers para funciones Lambda.
-      Controlador: src/index.handler
+      Description: Processes a CloudFormation template to install Datadog Lambda layers for Lambda functions.
+      Handler: src/index.handler
       ...
-      Entorno:
+      Environment:
         Variables:
           DD_API_KEY_SECRET_ARN: "arn:aws:secretsmanager:us-west-2:123456789012:secret:DdApiKeySecret-e1v5Yn7TvIPc-d1Qc4E"
           DD_ENV: "dev"
@@ -139,13 +139,13 @@ Para configurar más tu complemento, utiliza los siguientes parámetros personal
 | `tags`                      | Una lista separada por comas de pares de clave:valor como una sola cadena. Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_TAGS` en todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, la macro analiza la cadena y configura cada par de clave:valor como una etiqueta en todas las funciones Lambda.                                                                                                                                                                |
 | `logLevel`                  | Configura el nivel de log. Configura en `DEBUG` para un registro extendido.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `captureLambdaPayload`      | Etiqueta automáticamente el tramo (span) de ejecución de la función con cargas útiles de solicitud y respuesta, para que puedan mostrarse en la aplicación de APM.                                                                                                                                                                                                                                                                                                                                                                 |
-| `enableColdStartTracing`    | Configurado en `false` para desactivar el Rastreo de inicio en frío. Se utiliza en Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `enableColdStartTracing`    | Configurado en `false` para desactivar el Rastreo de inicio en frío. Se utiliza en NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `coldStartTraceMinDuration` | Configura la duración mínima (en milisegundos) de un evento de carga de módulo que se va a rastrear a través del rastreo de inicio en frío. Número. Por defecto es `3`.                                                                                                                                                                                                                                                                                                                                                                   |
 | `coldStartTraceSkipLibs`    | Opcionalmente omitir la creación de tramos de inicio en frío para un lista separada por comas de bibliotecas. Útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución.                                                                                                                                                                                                                                                                                                                                       |
-| `enableProfiling`           | Habilita el Datadog Continuous Profiler con `true`. Compatible con Beta para Node.js y Python. Por defecto en `false`.                                                                                                                                                                                                                                                                                                                                                                                   |
-| `encodeAuthorizerContext`   | Cuando se configure en `true` para los autorizadores Lambda, el contexto del rastreo se codificará en la respuesta para la propagación. Compatible con Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                              |
-| `decodeAuthorizerContext`   | Cuando se configure en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se lo encuentra). Compatible con Node.js y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                       |
-| `apmFlushDeadline`          | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS Lambda es menor que el valor configurado, el rastreador intenta enviar los tramos activos actuales y todos los tramos finalizados. Compatible con Node.js y Python. El valor por defecto es `100` milisegundos.                                                                                                                                                                                    |
+| `enableProfiling`           | Habilita el Datadog Continuous Profiler con `true`. Compatible con Beta para NodeJS y Python. Por defecto en `false`.                                                                                                                                                                                                                                                                                                                                                                                   |
+| `encodeAuthorizerContext`   | Cuando se configure en `true` para los autorizadores Lambda, el contexto del rastreo se codificará en la respuesta para la propagación. Compatible con NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                                              |
+| `decodeAuthorizerContext`   | Cuando se configure en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se lo encuentra). Compatible con NodeJS y Python. Por defecto es `true`.                                                                                                                                                                                                                                                                                                       |
+| `apmFlushDeadline`          | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS Lambda es menor que el valor configurado, el rastreador intenta enviar los tramos activos actuales y todos los tramos finalizados. Compatible con NodeJS y Python. El valor por defecto es `100` milisegundos.                                                                                                                                                                                    |
 
 ## Cómo funciona
 
@@ -165,22 +165,22 @@ Para ayudarte a depurar problemas, puedes consultar en los logs de CloudWatch la
 Este error se produce cuando proporcionas un `forwarderArn` y estás desplegando tu función Lambda por primera vez, por lo que no existe actualmente ningún grupo de logs y la macro no puede crear este grupo de logs ni suscribirse al Forwarder por ti. Una forma de solucionar este problema es definir explícitamente la propiedad `FunctionName` en tu Lambda (consulta el ejemplo siguiente).
 
 ```yml
-Recursos:
+Resources:
   MyLambda:
-    Tipo: AWS::Serverless::Function
-    Propiedades:
-      Controlador: index.handler
-      Tiempo de ejecución: nodejs12.x
-      FunctionName: MyFunctionName # Añade esta propiedad a tus Lambdas
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      FunctionName: MyFunctionName # Add this property to your Lambdas
 ```
 
 Si no puedes (o prefieres no) definir el `FunctionName` explícitamente, elimina el parámetro `forwarderArn` de la plantilla SAM o del código fuente CDK y, en su lugar, define los filtros de suscripción utilizando el recurso [AWS::Logs::SubscriptionFilter][7] como se indica a continuación.
 
 ```yaml
-Recursos:
+Resources:
   MyLogSubscriptionFilter:
-    Tipo: "AWS::Logs::SubscriptionFilter"
-    Propiedades:
+    Type: "AWS::Logs::SubscriptionFilter"
+    Properties:
       DestinationArn: "<DATADOG_FORWARDER_ARN>"
       LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
       FilterPattern: ""
@@ -193,10 +193,10 @@ La opción `forwarderArn` no funciona cuando `FunctionName` contiene funciones d
 Elimina el parámetro `forwarderArn` de la plantilla SAM o del código fuente CDK y, en su lugar, define los filtros de suscripción utilizando el recurso [AWS::Logs::SubscriptionFilter][7] como se indica a continuación.
 
 ```yaml
-Recursos:
+Resources:
   MyLogSubscriptionFilter:
-    Tipo: "AWS::Logs::SubscriptionFilter"
-    Propiedades:
+    Type: "AWS::Logs::SubscriptionFilter"
+    Properties:
       DestinationArn: "<DATADOG_FORWARDER_ARN>"
       LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
       FilterPattern: ""

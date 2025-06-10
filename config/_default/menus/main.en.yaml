@@ -1428,17 +1428,37 @@ menu:
       pre: bits-ai
       identifier: bits_ai
       parent: platform_heading
-      weight: 70000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
+      weight: 100000
+    - name: Bits AI SRE
+      url: bits_ai/bits_ai_sre
+      identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
+    - name: Investigate alerts
+      url: bits_ai/bits_ai_sre/investigate_alerts
+      identifier: bits_ai_sre_investigate_alerts
+      parent: bits_ai_sre
+      weight: 100
+    - name: Coordinate incidents
+      url: bits_ai/bits_ai_sre/coordinate_incidents
+      identifier: bits_ai_sre_coordinate_incidents
+      parent: bits_ai_sre
+      weight: 101
+    - name: Bits AI Dev Agent
+      url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
+      identifier: bits_ai_dev_agent
       weight: 2
+    - name: Chat with Bits AI
+      url: bits_ai/chat_with_bits_ai
+      identifier: bits_ai_chat_with_bits_ai
+      parent: bits_ai
+      weight: 3
+    - name: MCP Server
+      url: bits_ai/mcp_server
+      identifier: bits_ai_mcp_server
+      parent: bits_ai
+      weight: 4
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1997,27 +2017,6 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
-    - name: Bits AI
-      url: bits_ai/
-      pre: bits-ai
-      identifier: bits_ai
-      parent: platform_heading
-      weight: 100000
-    - name: Getting Started
-      url: bits_ai/getting_started
-      identifier: bits_ai_getting_started
-      parent: bits_ai
-      weight: 1
-    - name: Managing Incidents
-      url: bits_ai/managing_incidents
-      identifier: bits_ai_managing_incidents
-      parent: bits_ai
-      weight: 2
-    - name: Bits AI Dev Agent
-      url: bits_ai/bits_ai_dev_agent
-      parent: bits_ai
-      identifier: bits_ai_dev_agent
-      weight: 4
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -4533,6 +4532,17 @@ menu:
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
+    - name: Data Observability
+      url: data_observability/
+      pre: inventories
+      identifier: data_observability
+      parent: apm_heading
+      weight: 70000
+    - name: Datasets
+      url: data_observability/datasets
+      identifier: datasets
+      parent: data_observability
+      weight: 100000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
@@ -4599,11 +4609,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_cluster_map
       weight: 5
+    - name: Agent Monitoring
+      url: llm_observability/agent_monitoring
+      parent: llm_obs
+      identifier: llm_obs_agent_monitoring
+      weight: 6
+    - name: Experiments
+      url: llm_observability/experiments_preview
+      parent: llm_obs
+      identifier: llm_obs_experiments
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 6
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -6310,16 +6330,21 @@ menu:
       parent: security_platform
       identifier: security_ato_protection
       weight: 9
+    - name: Ticketing Integrations
+      url: security/ticketing_integrations
+      parent: security_platform
+      identifier: security_ticketing_integrations
+      weight: 10
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 10
+      weight: 11
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 11
+      weight: 12
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
