@@ -139,14 +139,7 @@ function App() {
               >
                 <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>The latest cdocs build has errors.</AlertTitle>
               </Alert>
-              <div>
-                <h2>Compilation errors</h2>
-                <p>
-                  Checking the box next to an error has no effect — it's optional for tracking your fixes between
-                  builds.
-                </p>
-                <ErrorsReport errorReportsByFilePath={consoleData.errorsByFilePath} />
-              </div>
+              <ErrorsReport errorReportsByFilePath={consoleData.errorsByFilePath} />
             </>
           )}
           {!hasErrors && (
