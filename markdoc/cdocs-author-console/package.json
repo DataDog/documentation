@@ -11,7 +11,7 @@
     "prod": "yarn build && open dist/index.html",
     "lint": "eslint .",
     "preview": "vite preview",
-    "copy-mock-data": "cp -r ./src/mocks/data.json ./dist/data.json"
+    "copy-mock-data": "mkdir -p dist && cp -r ./src/mocks/data.json ./dist/data.json"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
