@@ -14,8 +14,6 @@ function SetupInstructions({
   newConfig: CustomizationConfig;
   customizationConfig: CustomizationConfig;
 }) {
-  console.log('[SetupInstructions] received newConfig:', JSON.stringify(newConfig, null, 2));
-
   return (
     <div>
       <h1>Setup instructions</h1>

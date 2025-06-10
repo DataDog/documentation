@@ -84,8 +84,6 @@ export default function FlexibleTraitSelector(props: {
    * update the selected dropdown choice, and notify the parent component.
    */
   const handleNewTraitSave = (traitConfig: TraitConfig) => {
-    console.log('Handling new trait save:', traitConfig);
-
     // Add the new trait to the known traits
     setTraitsById((prev) => ({
       ...prev,
@@ -118,7 +116,6 @@ export default function FlexibleTraitSelector(props: {
       <CreateTraitForm
         customizationConfig={props.customizationConfig}
         onStatusChange={(p) => {
-          console.log('NewTraitForm status change:', p);
           if (p.status === 'done' && p.data) {
             handleNewTraitSave(p.data);
           } else {

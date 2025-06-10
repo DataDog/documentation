@@ -4,6 +4,12 @@ import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './instructions/SetupInstructions';
 
+/**
+ * A form that generates setup instructions for a customizable doc.
+ * These instructions update automatically as the user configures
+ * the desired filters for their page. The filters can include new traits,
+ * new option groups, and new options.
+ */
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
   const [newConfig, setNewConfig] = useState<CustomizationConfig>({
@@ -13,7 +19,6 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
   });
 
   const onFilterListChange = (p: { filters: WizardFilter[]; newConfig: CustomizationConfig }) => {
-    console.log('[PageWizard] received data:', JSON.stringify(p, null, 2));
     setFilters([...p.filters]);
     setNewConfig(p.newConfig);
   };

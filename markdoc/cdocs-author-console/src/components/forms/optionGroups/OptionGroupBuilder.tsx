@@ -145,7 +145,6 @@ function OptionGroupBuilder(props: {
           <FlexibleOptionSelector
             customizationConfig={props.customizationConfig}
             onStatusChange={(p) => {
-              console.log('[NewOptionGroupForm] FlexibleOptionSelector status change:', p);
               if (p.status === 'done' && p.data) {
                 setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
               }

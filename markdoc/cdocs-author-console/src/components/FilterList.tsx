@@ -49,7 +49,6 @@ function FilterList({
   };
 
   const handleFilterFormSave = (filter: WizardFilter) => {
-    console.log('handleFilterFormChange', filter);
     if (!currentFilterUuid) {
       throw new Error('No current filter to edit');
     }

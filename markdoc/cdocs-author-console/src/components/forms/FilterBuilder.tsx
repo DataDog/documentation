@@ -20,7 +20,6 @@ function FilterBuilder(props: {
   const [optionGroupFormStatus, setOptionGroupFormStatus] = useState<FormStatus>('waiting');
 
   const handleTraitSave = ({ traitConfig }: { traitConfig: TraitConfig }) => {
-    console.log('handleTraitSave', traitConfig);
     const updatedFilter = {
       ...localFilter,
       trait_id: traitConfig.id,
@@ -33,9 +32,6 @@ function FilterBuilder(props: {
       }
     };
     setLocalFilter(updatedFilter);
-
-    console.log('updatedFilter after trait save', updatedFilter);
-
     setTraitFormStatus('done');
 
     if (optionGroupFormStatus === 'done') {
@@ -44,7 +40,6 @@ function FilterBuilder(props: {
   };
 
   const handleOptionGroupSave = (p: { optionGroupId: string; optionGroup: OptionGroup }) => {
-    console.log('handleOptionGroupSave', p);
     const newCustomizationConfig: CustomizationConfig = {
       ...localFilter.customizationConfig,
       optionGroupsById: {
@@ -65,8 +60,6 @@ function FilterBuilder(props: {
     };
 
     setLocalFilter(updatedFilter);
-
-    console.log('updatedFilter after option group save', updatedFilter);
 
     setOptionGroupFormStatus('done');
 

@@ -19,6 +19,10 @@ function buildFrontmatterMarkup({
 `;
 }
 
+/**
+ * A form that allows the user to quickly build a page filter
+ * using an existing trait and option group.
+ */
 export default function QuickFilterBuilder(props: { customizationConfig: CustomizationConfig }) {
   const [traitId, setTraitId] = useState<string | null>(null);
   const [optionGroupId, setOptionGroupId] = useState<string | null>(null);
