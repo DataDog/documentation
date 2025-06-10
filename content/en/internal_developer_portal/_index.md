@@ -29,6 +29,9 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 - [Self-Service Actions][2] and [Scorecards][3] translate platform policies into one-click tasks, ensuring every change meets observability, security, and production criteria. 
 - Built-in [Engineering Reports][4] give platform engineers and leaders real-time visibility into software quality, standards adoption, and developer experience, making it easy to identify gaps and drive data-backed decisions.
 
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
+{{< /callout >}}
+
 ## Common use cases
 
 {{< whatsnext desc=" " >}}
