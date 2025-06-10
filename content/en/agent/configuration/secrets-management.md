@@ -357,7 +357,7 @@ On Linux, the command outputs file mode, owner and group for the executable. On 
 
 Example on Linux:
 
-```bash
+```sh
 datadog-agent secret
 === Checking executable rights ===
 Executable path: /path/to/you/executable
