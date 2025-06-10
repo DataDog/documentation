@@ -3608,6 +3608,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 9
+    - name: Custom Recommendations
+      url: cloud_cost_management/recommendations/custom_recommendations
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_custom_recommendations
+      weight: 901
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
@@ -4527,6 +4532,17 @@ menu:
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
+    - name: Data Observability
+      url: data_observability/
+      pre: inventories
+      identifier: data_observability
+      parent: apm_heading
+      weight: 70000
+    - name: Datasets
+      url: data_observability/datasets
+      identifier: datasets
+      parent: data_observability
+      weight: 100000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
@@ -4593,11 +4609,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_cluster_map
       weight: 5
+    - name: Agent Monitoring
+      url: llm_observability/agent_monitoring
+      parent: llm_obs
+      identifier: llm_obs_agent_monitoring
+      weight: 6
+    - name: Experiments
+      url: llm_observability/experiments_preview
+      parent: llm_obs
+      identifier: llm_obs_experiments
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 6
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
