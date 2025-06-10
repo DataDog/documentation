@@ -29,7 +29,9 @@
     "/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/test/config/mocks/invalidSite/content/en/bad_nested_pref_value_reference.mdoc.md": [
       {
         "message": "Invalid value found in markup: \"bleu\" is not a valid value for the filter ID \"color\".",
-        "searchTerm": "bleu"
+        "data": {
+          "searchTerm": "bleu"
+        }
       }
     ],
     "/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/test/config/mocks/invalidSite/content/en/bad_placeholder.mdoc.md": [
@@ -43,23 +45,23 @@
     "/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/test/config/mocks/invalidSite/content/en/bad_pref_value_reference.mdoc.md": [
       {
         "message": "Invalid value found in markup: \"bleu\" is not a valid value for the filter ID \"color\".",
-        "searchTerm": "bleu"
+        "data": { "searchTerm": "bleu" }
       }
     ],
     "/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/test/config/mocks/invalidSite/content/en/bad_variable_id.mdoc.md": [
       {
         "message": "Invalid filter ID found in markup: colour",
-        "searchTerm": "colour"
+        "data": { "searchTerm": "colour" }
       }
     ],
     "/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/test/config/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md": [
       {
         "message": "Node 'if' is missing closing",
-        "lines": [6, 7]
+        "data": { "lines": [6, 7] }
       },
       {
         "message": "Node 'if' is missing closing",
-        "lines": [9, 10]
+        "data": { "lines": [9, 10] }
       }
     ]
   },
