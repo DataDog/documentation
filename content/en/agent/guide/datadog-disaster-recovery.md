@@ -15,8 +15,9 @@ further_reading:
 {{< /callout >}}
 
 ## Overview 
-Datadog Disaster Recovery (DDR) provides you with observability continuity in rare outage events that may impact a cloud service provider region or Datadog services running within a cloud provider region. In such cases, DDR enables your organization to meet critical observability, availability, and business continuity goals. You can also recover live observability at an alternate, functional Datadog site in typically under an hour with DDR. <br><br>
-Additionally, Datadog Disaster Recover allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
+Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals. You can also recover live observability at an alternate, functional Datadog site in typically under an hour with DDR. <br><br>
+
+DDR allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
 
 
 ## Prerequisites 
