@@ -274,6 +274,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
+{{% tab "Tags Processor" %}}
+
+{{% observability_pipelines/processors/tags_processor %}}
+
+{{% /tab %}}
 {{% tab "Throttle" %}}
 
 {{% observability_pipelines/processors/throttle %}}
