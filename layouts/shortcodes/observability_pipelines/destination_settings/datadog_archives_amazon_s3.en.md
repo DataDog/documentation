@@ -3,7 +3,6 @@
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][10051] if you want to route logs to different object keys based on specific fields in your logs.
-    - **Note**: Do not add a leading `/` if you are going to rehydrate your logs.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
     - **Note**: Rehydration only supports the following [storage classes][10052]:
         - Standard
