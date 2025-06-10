@@ -2906,11 +2906,16 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
+    - name: Autoscaling
+      url: containers/monitoring/autoscaling
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_autoscaling
+      weight: 105
     - name: Amazon Elastic Container Explorer
       url: infrastructure/containers/amazon_elastic_container_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
-      weight: 105
+      weight: 106
     - name: Docker and other runtimes
       url: containers/docker/
       parent: containers
