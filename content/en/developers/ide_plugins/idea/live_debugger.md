@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The Live Debugger enables you to add logpoints—auto-expiring, "non-breaking breakpoints"—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 60 minutes.
+The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 60 minutes.
 
 ## Live Debugger tab
 The **Live Debugger** in the Datadog tool window shows the defined logpoints and their related output:
@@ -36,12 +36,12 @@ To add a logpoint, right-click on a line of code in the source editor and select
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
-The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed.  If a condition is defined, log events will be generated only when the condition evaluates to true.
+The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. If a condition is defined, log events are generated only when the condition evaluates to true.
 
 Logpoints expire automatically after 60 minutes.
 
 #### Local and remote versions
-Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if possible, so that you can see exactly where the logpoint will be placed. This requires that your application or service is [tagged with Git information][4].
+Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if possible, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
 
 <div class="alert alert-info"><b>Tip</b>: Checking out this revision locally shows you the same code in your IDE that is running remotely, which simplifies the live debugging experience. However, this is not required as the Datadog plugin maps local line numbers for logpoints to remote line numbers based on Git commit information.</div>
 
