@@ -53,16 +53,16 @@ The Product Analytics charts help you visualize your users' journey as they use 
 
 Each chart type provides a different view into the user's journey:
 
-[Pathways][1]
+[Pathways][5]
 : you can visualize all user journeys across your application to analyze the critical path.
 
-[Funnel][1]
+[Funnel][4]
 : track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop off rate.
 
-[Retention][1]
+[Retention][2]
 :  measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
 
-[Analytics][1]
+[Analytics][13]
 : contains views data aggregation for understanding how your product is being used.
 
 
@@ -104,3 +104,5 @@ Suppose you want to make changes to your application interface but want to first
 [10]: /product_analytics/session_replay/heatmaps
 [11]: /product_analytics/session_replay/
 [12]: /product_analytics/session_replay/playlists
+[13]: /product_analytics/charts/analytics_explorer
+
