@@ -24,6 +24,7 @@ function FilterList({
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
 
   // TODO: Upsert any required new config after a filter is added or edited
+  // @ts-ignore, this just isn't implemented all the way yet
   const [newConfig, setNewConfig] = useState<CustomizationConfig>({
     traitsById: {},
     optionsById: {},

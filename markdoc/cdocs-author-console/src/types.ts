@@ -1,4 +1,4 @@
-import { CustomizationConfig, Frontmatter, FiltersManifest } from 'cdocs-data';
+import { CustomizationConfig } from 'cdocs-data';
 
 export interface NewOptionConfig {
   id: string;

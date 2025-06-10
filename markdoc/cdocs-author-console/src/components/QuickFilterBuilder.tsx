@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import StrictTraitSelector from './forms/traits/StrictTraitSelector';
 import StrictOptionGroupSelector from './forms/optionGroups/StrictOptionGroupSelector';
