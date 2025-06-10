@@ -282,8 +282,8 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
 		exit 1; \
 	fi;
-	@tmp_dir=$$(mktemp -d) || { echo "Failed to create temporary directory"; exit 1; } && \
-	echo "cool cool cool" && \
+	@tmp_dir=$$(mktemp -d) && \
+	echo "TEMP DIR IS: $${tmp_dir}" && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir || { echo "script repo clone failed"; exit 1; } && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo "Moving files to python directory..." && \
