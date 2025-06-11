@@ -7,7 +7,7 @@
             {{ end }}
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">{{ i18n "table_of_contents_heading"}}</p>
             {{ if ne .Params.disable_toc true }}
-              {{ if eq .Page.File.TranslationBaseName "custom_processor" }}
+              {{ if eq .Page.Name "Custom Processor" }}
               {{ $functions := $.Site.Data.reference.functions | default (dict) }}
               <nav id="TableOfContents">
                 <ul>
