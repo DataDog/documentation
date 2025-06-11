@@ -274,7 +274,7 @@ Below are tips and common questions that may help guide you through troubleshoot
 
 ### Get exact coordinates
 
-To reliably click the same spot on a `<canvas>` in every test run, without knowing the exact x and y coordinates, you can use the [`addEventListener`](#clicking-on-canvas) method described above. Add a print statement inside the function to log the coordinates when you click:
+To determine the x and y coordinates of where you clicked on the `<canvas>`, use `console.log` to add a print statement to the [`addEventListener`](#clicking-on-canvas) method. This will print the coordinates to the browser's [DevTools Console][8].
 
 {{% collapse-content title="Add listener with console.log" level="h4" expanded=false id="Add listener" %}}
 {{< code-block lang="javascript" >}}
@@ -308,3 +308,4 @@ Contact [Datadog support][7] for further assistance.
 [5]: https://developer.mozilla.org/en-US/play
 [6]: https://julinvictus.github.io/canvas_example/
 [7]: /help
+[8]: https://developer.chrome.com/docs/devtools/console/log#javascript
