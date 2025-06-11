@@ -239,7 +239,7 @@ El nombre puede tener hasta 193 caracteres y no puede contener guiones bajos con
 Utiliza este endpoint para enviar evaluaciones asociadas a un determinado tramo a Datadog.
 
 Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/eval-metric`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 
 Método
 : `POST`

@@ -116,9 +116,9 @@ Webex インテグレーションは、ミーティング、参加者、ライ�
 
 [1]: mailto:sales@rapdev.io
 [2]: https://developer.webex.com/docs/integrations#scopes
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: mailto:support@rapdev.io
 [5]: https://www.rapdev.io/#Get-in-touch
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-webex" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-webex" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -11,16 +11,11 @@ further_reading:
   text: "DDSQL Reference (Preview)"
 ---
 
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
 
-{{< img src="ddsql_editor/query-result.png" alt="The result of a SQL query shown on the DDSQL page in Datadog" style="width:100%;" >}}
+{{< img src="/ddsql_editor/query-results-cloud-provider-host-count.png" alt="The result of a SQL query showing cloud provider host count on the DDSQL page in Datadog" style="width:100%;" >}}
 
 ## Query in natural language
 
@@ -30,38 +25,36 @@ Type your question into the search box, and Datadog builds the SQL query for you
 
 ## Use SQL syntax (DDSQL)
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
-
-<div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
-</div>
+DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. For more information, see the [DDSQL Reference][6].
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
-FROM aws_ec2_instance
-WHERE env = 'staging' -- env is a tag, not a column
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-### Explore your infrastructure data
+## Explore your infrastructure data
 
 View and filter the list of tables and fields in the schema side panel:
 
-{{< img src="ddsql_editor/schema-explorer.png" alt="A list of available tables" style="width:90%;" >}}
+{{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Side panel showing a list of available tables for querying in the DDSQL Editor" style="width:90%;" >}}
 
 Click a table name to view its columns and relationships:
 
-{{< img src="ddsql_editor/table-details.png" alt="The details of a table, including its columns and relationships" style="width:60%;" >}}
+{{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-### Save and share queries
+## Save and share queries
 
-Save useful queries, or export the data as CSV.
+Save useful queries for future reference or download the data as CSV.
 
-{{< img src="ddsql_editor/save-or-export-result.png" alt="A query result with the save and export actions shown" style="width:90%;" >}}
+{{< img src="/ddsql_editor/save_export.png" alt="DDSQL Editor interface showing query results with save and export options highlighted" style="width:90%;" >}}
 
-Browse and re-run saved queries in the side panel.
+Export a saved query to a dashboard by clicking **Save to Dashboard**. From a dashboard you can visualize results and send Scheduled Reports.
 
-{{< img src="ddsql_editor/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
+Browse and re-run recent or saved queries in the side panel.
+
+{{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
 
 ## Permissions
 
@@ -72,7 +65,8 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /ddsql_reference/ddsql_preview/tags
+[2]: /ddsql_reference/ddsql_default/#tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
 [5]: /help/
+[6]: /ddsql_reference/ddsql_default/
