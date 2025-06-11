@@ -8030,6 +8030,11 @@ menu:
       parent: pa_session_replay
       identifier: pa_heatmaps
       weight: 301
+    - name: Playlists
+      url: product_analytics/session_replay/playlists
+      parent: pa_session_replay
+      identifier: pa_playlists
+      weight: 302
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
@@ -8079,17 +8084,17 @@ menu:
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 4
+      weight: 6
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 6
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2
