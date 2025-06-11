@@ -182,7 +182,7 @@ Remote configuration will be turned on by default on your new organization and y
 
 
 {{% collapse-content title=" 10. Update your Datadog Agent configuration" level="h5" %}}
-Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery. 
+Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured secondary Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic DR exercises/drills. 
 
 Configure your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
