@@ -3,7 +3,7 @@ title: Socket Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' Socket source to receive logs from Socket. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Socket source to receive logs from socket connections (TCP or UDP). Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 
@@ -11,9 +11,9 @@ Use Observability Pipelines' Socket source to receive logs from Socket. Select a
 
 ## Set up the source in the pipeline UI
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
-
 {{% observability_pipelines/source_settings/socket %}}
+
+##  Send logs to the Observability Pipelines Worker over a socket connection
 
 {{% observability_pipelines/log_source_configuration/socket %}}
 
