@@ -5811,11 +5811,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
+    - name: Tags Processor
+      url: observability_pipelines/processors/tags_processor
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tags_processor
+      weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 918
+      weight: 919
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -5881,10 +5886,10 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
       weight: 1012
-    - name: Syslog
-      url: observability_pipelines/destinations/syslog
+    - name: Socket
+      url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_syslog
+      identifier: observability_pipelines_socket
       weight: 1013
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
@@ -5896,6 +5901,11 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
       weight: 1015
+    - name: Syslog
+      url: observability_pipelines/destinations/syslog
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_syslog
+      weight: 1016
     - name: Environment Variables
       url: observability_pipelines/environment_variables/
       parent: observability_pipelines
