@@ -1,5 +1,5 @@
 ---
-title: Asserting Canvas Content with JavaScript
+title: Asserting canvas content with JavaScript
 
 further_reading:
     - link: '/synthetics/browser_tests'
