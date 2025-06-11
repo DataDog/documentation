@@ -8,17 +8,17 @@ aliases:
     - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
     - /network_monitoring/performance/guide/manage_traffic_costs_with_npm/
 ---
-Network traffic can be costly, especially in cloud environments. Cloud providers apply different rates depending on whether traffic stays within an availability zone (AZ), moves between AZs, crosses regions, or goes out to the public internet. Cross-regional and egress traffic tend to be the most expensive, and they are also more prone to errors, latency, and security risks.
+Network traffic can be costly, especially in cloud environments. Cloud providers apply different rates depending on whether traffic stays within an availability zone (AZ), moves between AZs, crosses regions, or goes out to the public internet. Cross-regional and egress traffic tend to be the most expensive, prone to errors, latency, and security risks.
 
 Cloud Network Monitoring (CNM) allows you to track all of the traffic patterns described above by mapping dependencies between any tags in Datadog, including service, container, availability zone, region, datacenter, etc. This insight into your dependencies and the traffic volume they produce (which is ultimately what cloud providers charge for) can be used to monitor and optimize your traffic-related costs. 
 
 ## Datadog's story
 
-When Datadog migrated to Kubernetes, the process of moving stateless services was, as expected, more efficient than migrating stateful services like Kafka, so stateless services were migrated first. This resulted in terabytes of new cross-AZ traffic between stateful services (all located in one AZ) and stateless services (distributed across other AZs), causing a significant and unexpected increase in the cloud bill. Leveraging Datadog's own CNM product, we identified the root cause: an inefficient migration strategy that led to costly and suboptimal network communication. Ultimately, sharding the stateful services helped to greatly reduce cloud provider traffic costs.
+When Datadog migrated to Kubernetes, the process of moving stateless services was, as expected, more efficient than migrating stateful services like Kafka, so stateless services were migrated first. This resulted in terabytes of new cross-AZ traffic between stateful services (all located in one AZ) and stateless services (distributed across other AZs), causing a significant and unexpected increase in the cloud bill. Leveraging Datadog's own CNM product, Datadog identified the root cause: an inefficient migration strategy that led to costly and suboptimal network communication. Ultimately, sharding the stateful services helped greatly reduce cloud provider traffic costs.
 
 ## Steps for managing traffic costs 
 
-1. To find similar issues in your own environment, you can start by scoping your [`client` and `server` tags][1] to traffic between regions, availability zones, and datacenters:
+1. To find similar issues in your own environment, you can start by scoping traffic between regions, availability zones, and data centers using your [`client` and `server` tags][1]:
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/availability_zone_2.png" alt="Group traffic flows by availability zone and datacenter">}}
    
     An increase in your traffic bill is almost always tied to an increase in one of these types of traffic. In many cases you may want to group traffic by asymmetric search terms. That is, you want to see the source of the traffic in terms of one tag, and also see the destination in terms of another tag. You can use this kind of asymmetric query to identify costly dependencies between your on-prem datacenters and cloud regions, as well as between clouds. One particularly helpful view is to group the source of the traffic by service, and the destination across availability zones.
@@ -32,7 +32,7 @@ When Datadog migrated to Kubernetes, the process of moving stateless services wa
 
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/single_service_2.png" alt="Search for a single service, sorted by availability zone.">}}
 
-3. Similarly, you can use the team tag to identify engineering teams that generate the most, for instance, cross-regional traffic.
+3. Similarly, you can use the team tag to identify engineering teams that generate the most cross-regional traffic, for instance.
 
    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/team_region_2.png" alt="Use the team tag to isolate traffic.">}}
 
@@ -45,7 +45,7 @@ When Datadog migrated to Kubernetes, the process of moving stateless services wa
 
 ## Visualizing traffic costs 
 
-You can visualize cross-AZ or inter-AZ traffic using the [Network Map][2] to quickly pinpoint bottlenecks. This view illustrates how to validate that the EU and US availability zones are not communicating, to ensure compliance with GDPR and protection of data. 
+You can visualize cross-AZ or inter-AZ traffic using the [Network Map][2] to pinpoint bottlenecks. This view illustrates how to validate that the EU and US availability zones are not communicating, to ensure compliance with GDPR and protection of data. 
 Cross-AZ traffic:
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/cross-az-traffic_2.png" alt="Cross-AZ traffic in Network Map">}}
 Inter-AZ service-to-service traffic:
