@@ -70,7 +70,7 @@ After you declare an incident from Slack, it generates an incident channel.
 
 ## From Handoff Notifications
 
-The Handoff Notification feature displays callout cards beside the navigation when you are paged or added to active incidents. These cards allow you to:
+The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
 
 - View and acknowledge On-Call pages
 - Navigate to relevant incident resources
