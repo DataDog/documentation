@@ -174,7 +174,7 @@ You can optionally add the following attributes to the failure events:
 - `repository_url`
 - `commit_sha`
 - `version`
-- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [DORA Metrics][25] page.
+- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [**DORA Metrics** page][14].
 
 See the [DORA Metrics API reference documentation][13] for the full spec and additional code samples.
 
