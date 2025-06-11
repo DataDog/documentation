@@ -1,6 +1,9 @@
 ---
 title: Send Azure Logs to Datadog
 further_reading:
+- link: "https://www.datadoghq.com/blog/azure-log-forwarding/"
+  tag: "Blog"
+  text: "Send Azure logs to Datadog faster and more easily with automated log forwarding"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
