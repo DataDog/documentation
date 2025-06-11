@@ -11095,6 +11095,17 @@ components:
       - version
       - name
       type: object
+    DORACustomTags:
+      description: A list of user-defined tags. The tags must follow the `key:value`
+        pattern. Up to 100 may be added per event.
+      example:
+      - language:java
+      - department:engineering
+      items:
+        description: Tags in the form of `key:value`.
+        type: string
+      nullable: true
+      type: array
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -11106,6 +11117,8 @@ components:
     DORADeploymentRequestAttributes:
       description: Attributes to create a DORA deployment event.
       properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
         env:
           description: Environment name to where the service was deployed.
           example: staging
@@ -11208,6 +11221,8 @@ components:
     DORAFailureRequestAttributes:
       description: Attributes to create a DORA failure event.
       properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
         env:
           description: Environment name that was impacted by the failure.
           example: staging
