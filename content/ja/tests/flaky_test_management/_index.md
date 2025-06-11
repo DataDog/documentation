@@ -14,10 +14,6 @@ further_reading:
 title: 不安定なテストの管理
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility はご利用いただけません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 不安定なテスト (flaky test) とは、同一のコミットに対する複数回のテスト実行で、合格と失敗の両方が生じるテストを指します。あるコードをコミットして CI を実行した際にテストが失敗し、再度 CI を実行すると同じテストが合格するような場合、そのテストは品質を検証する指標としての信頼性が低いと言えます。

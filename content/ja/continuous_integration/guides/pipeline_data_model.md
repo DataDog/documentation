@@ -7,10 +7,6 @@ further_reading:
 title: パイプラインのデータモデルと実行タイプ
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このガイドでは、CI Visibility でパイプライン実行をプログラムで設定する方法を説明し、CI Visibility がサポートするパイプライン実行のタイプを定義します。

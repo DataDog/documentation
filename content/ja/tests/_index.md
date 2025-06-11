@@ -41,10 +41,6 @@ further_reading:
 title: Datadog の Test Optimization
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Optimization は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Test Optimization][1] は、テストから見た視点で CI のヘルス状態を把握できる機能です。重要なメトリクスやテスト結果を表示することで、パイプライン全体ではなく、担当しているコードに関連するパフォーマンス問題やテスト失敗を調査できます。
