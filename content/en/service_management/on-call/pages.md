@@ -35,7 +35,7 @@ To page a team through email:
 
 ### Page manually
 
-You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. Paging manually offers to alert a Datadog team or an individual directly even if they aren't currently On-Call.
+You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. This offers to alert a Datadog team or an individual directly (even if they aren't On-Call).
 
 #### Through Datadog
 
