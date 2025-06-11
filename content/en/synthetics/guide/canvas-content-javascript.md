@@ -50,13 +50,13 @@ Mozilla offers this [playground][5], where you can experiment with, copy, and mo
 
 ## Finding a pixel based on a color
 
-1. Verify that the following graph uses the expected colors coral and green:
+Confirm that the following graph uses the expected colors coral and green:
 
-   {{< img src="/synthetics/guide/canvas-content-javascript/canvas_screenshot.png" alt="Example site traffic graph." >}}
+{{< img src="/synthetics/guide/canvas-content-javascript/canvas_screenshot.png" alt="Example site traffic graph." >}}
 
-2. The most effective approach is to locate at least one pixel rendered in coral and one in green. Start by identifying a pixel that matches the coral color.
+- The most effective approach is to locate at least one pixel rendered in coral and one in green. Start by identifying a pixel that matches the coral color.
 
-3. The following script demonstrates how to loop through the `x, y` coordinates of the canvas to assert that at least one of its pixels matches the target color:
+- The following script demonstrates how to loop through the `x, y` coordinates of the canvas to assert that at least one of its pixels matches the target color:
 
 {{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript_assertion" %}}
 {{< code-block lang="javascript" >}}
