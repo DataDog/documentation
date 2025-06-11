@@ -43,6 +43,10 @@ Some Observability Pipelines components require setting up environment variables
 ### Logstash
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### Socket
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
+
 ### Splunk HEC
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
 
