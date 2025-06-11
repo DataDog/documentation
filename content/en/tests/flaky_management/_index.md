@@ -38,7 +38,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Active** | The test is known to be flaky and is running in CI. |
 | **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. |
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
-| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#fix-a-flaky-test) to confirm a fix and automatically apply this status, instead of manually changing it. |
+| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm a fix and automatically apply this status, instead of manually changing it. |
 
 <div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
 
