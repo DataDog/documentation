@@ -1,1 +1,3 @@
-REUSE INSTRUCTIONS
+- Socket address:
+    - The Observability Pipelines Worker sends processed logs to this address.
+	- Stored as the environment variable `DD_OP_DESTINATION_SOCKET_ADDRESS`.
