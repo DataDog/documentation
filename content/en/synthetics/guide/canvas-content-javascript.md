@@ -1,6 +1,6 @@
 ---
 title: Asserting canvas content with JavaScript
-
+description: Learn how to test and assert canvas content in Synthetic Browser Tests using JavaScript pixel analysis, color detection, and simulated user interactions.
 further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
@@ -11,13 +11,13 @@ further_reading:
 
 Canvas content is rendered as raw pixel data rather than as structured HTML elements. This means you cannot target elements within a canvas using traditional selectors like XPath or CSS, since there is no underlying DOM representation of the visual content. As a result, actions such as **click** or **hover** cannot interact with elements drawn inside a canvas.
 
-To address this, you can leverage [custom JavaScript assertions][1] to analyze the canvas' pixel data and verify that the expected content is present.
+To address this, you can leverage [custom JavaScript assertions][1] to analyze the canvas's pixel data and verify that the expected content is present.
 
 ## What is an HTML canvas?
 
 The [`canvas`][2] element is an HTML tag that provides a drawable region in the browser, allowing you to render dynamic graphics using JavaScript. It's commonly used for displaying visual content such as charts, graphs, image editing tools, and animations.
 
-Supported by all major modern browsers, the `<canvas>` element is highly versatile. When combined with JavaScript libraries such as `Chart.js` or `D3.js`, it can render interactive visualizations that respond to user actions like clicks or hovers, enabling features such as custom tooltips or highlighting data points.
+Supported by all major modern browsers, the `<canvas>` element is versatile. When combined with JavaScript libraries such as `Chart.js` or `D3.js`, it can render interactive visualizations that respond to user actions like clicks or hovers, enabling features such as custom tooltips or highlighting datapoints.
 
 {{< img src="/synthetics/guide/canvas-content-javascript/graph.mp4" alt="Graphing a metric in Datadog using the Metrics Explorer." video=true >}}
 
@@ -41,7 +41,7 @@ Then, adjust its content with JavaScript:
 const canvas_variable = document.getElementById("canvas_ID");
 //Obtain the context
 const ctx = canvas_variable.getContext("2d");
-//This code will draw a Green rectangle
+//This code draws a green rectangle
 ctx.fillStyle = "green";
 ctx.fillRect(10, 10, 150, 100);
 ```
@@ -68,7 +68,7 @@ const canvas = document.querySelector('canvas_ID');
 const ctx = canvas.getContext('2d');
 
 /* 
- Collect the full canvas area starting in coordinates 0,0
+ Collect the full canvas area starting at coordinates 0,0
 
  The variable imageData will contain:
   - width: the width of the canvas
@@ -80,13 +80,13 @@ const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 // Variable that stores the array of RGBA values
 const data = imageData.data;
 
-// RGBA definition of the color we are loooking for (coral color)
+// RGBA definition of the color we are looking for (coral color)
 const targetColor = { r: 240, g: 128, b: 128 };
 
 // Tolerance threshold (see note at the bottom)
 const maxDistance = 20;
 
-// Function that calculates Ecluedian distance
+// Function that calculates Euclidean distance
 function colorDistance(r1, g1, b1, r2, g2, b2) {
   return Math.sqrt(
     (r1 - r2) ** 2 +
@@ -133,7 +133,7 @@ return found;
 The `imageData.data` variable is a typed array where each pixel is represented by four consecutive values: `[R, G, B, A, R, G, B, A, ...]`. This means every pixel occupies 4 bytes, regardless of whether the canvas uses transparency.
 
 - The first pixel's data is at indexes `0–3: data[0] = red, data[1] = green, data[2] = blue, data[3] = alpha`
-- The second pixel begins at index 4, and so on. This is why we use the following expression to loop through the canvas:
+- The second pixel begins at index 4, and so on. This is why you should use the following expression to loop through the canvas:
 
     `const index = (y * canvas.width + x) * 4;` and then evaluate non opaque contents with a > 0.
 
@@ -223,13 +223,13 @@ const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 // Variable that stores the array of RGBA values
 const data = imageData.data;
 
-// RGBA definition of the color we are loooking for (adjust the RGB values)
+// RGBA definition of the color we are looking for (adjust the RGB values)
 const targetColor = { r: A, g: B, b: C };
 
 // Tolerance threshold
 const maxDistance = 20;
 
-// Function that calculates Eucledian distance
+// Function that calculates Euclidean distance
 function colorDistance(r1, g1, b1, r2, g2, b2) {
   return Math.sqrt(
     (r1 - r2) ** 2 +
@@ -262,13 +262,13 @@ return found;
 {{< /code-block >}}
 {{% /collapse-content %}}
 
- Based on the behavior of your app, **click** actions display or adds a new HTML element (such as a `div`) that you can assert against. 
+ Based on the behavior of your app, **click** actions display or add a new HTML element (such as a `div`) that you can assert against. 
 
 ## Troubleshooting
 
 Working with `<canvas>` elements and JavaScript interactions can be complex, especially for users unfamiliar with browser scripting. The examples in this article are provided as general guidance and can be adapted to fit specific use cases.
 
-**Note**: Datadog support can assist with issues related to how Synthetic Monitoring interacts with `<canvas>`, however, we do not provide debugging support for custom JavaScript implementations. 
+**Note**: Datadog support can assist with issues related to how Synthetic Monitoring interacts with `<canvas>`, but cannot provide debugging support for custom JavaScript implementations. 
 
 Below are tips and common questions that may help guide you through troubleshooting.
 
@@ -290,9 +290,9 @@ canvas.addEventListener('click', function(event) {
 
 ### Choosing the right color
 
-A good starting point is to inspect CSS styles using your browser Developer Tools. Most styles include the color's RGB definition.
+A good starting point is to inspect CSS styles using your browser's Developer Tools. Most styles include the color's RGB definition.
 
-The canvas element only supports RGBA color values, formats like HEX are not supported. If you have a HEX color, you'll need to convert it to RGBA using an online tool or a conversion script.
+The canvas element only supports RGBA color values. Formats like HEX are not supported. If you have a HEX color, you need to convert it to RGBA using an online tool or a conversion script.
 
 ## Need help?
 
