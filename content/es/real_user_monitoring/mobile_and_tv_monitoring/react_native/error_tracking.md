@@ -1,8 +1,8 @@
 ---
 aliases:
 - /es/real_user_monitoring/error_tracking/reactnative
-code_lang: reactnative
-code_lang_weight: 60
+- /es/real_user_monitoring/mobile_and_tv_monitoring/reactnative/error_tracking
+- /es/real_user_monitoring/error_tracking/mobile/reactnative/
 description: Configura el seguimiento de errores para tus proyectos React Native.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -16,7 +16,6 @@ further_reading:
   text: Datadog ahora ofrece la notificación de fallos y el seguimiento de errores
     React Native
 title: Notificación de fallos y seguimiento de errores React Native
-type: lenguaje de código múltiple
 ---
 
 ## Información general
@@ -51,7 +50,7 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
-## Obtener trazas de stack tecnológico desofuscadas
+## Obtener trazas (traces) de stack tecnológico desofuscadas
 
 Los símbolos de depuración se utilizan para desenmascarar stack traces, lo que ayuda a depurar errores. Con un ID de compilación único que se genera, Datadog hace coincidir automáticamente los stack traces correctos con los símbolos de depuración correspondientes. Esto garantiza que, independientemente de cuándo se hayan cargado los símbolos de depuración (ya sea durante las compilaciones de preproducción o de producción), se disponga de la información correcta para un control de calidad eficaz al revisar los fallos y errores notificados en Datadog.
 
@@ -204,11 +203,11 @@ Abre tu `.xcworkspace` con Xcode, luego selecciona tu proyecto > Fases de la com
 ```shell
 set -e
 WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
-# Añade estas dos líneas
+# Add these two lines
 REACT_NATIVE_XCODE="./datadog-sourcemaps.sh"
 export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
-# Edita la siguiente línea
+# Edit the next line
 /bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
 ```
 
@@ -262,8 +261,8 @@ Cambia el script añadiendo esto después de la línea `set -e`:
 
 ```bash
 set -e
-export SOURCEMAP_FILE=./build/main.jsbundle.map # <- añade esta línea para generar mapas de origen
-# no realices ningún cambio al resto del script
+export SOURCEMAP_FILE=./build/main.jsbundle.map # <- add this line to output source maps
+# leave the rest of the script unchanged
 ```
 
 En adelante, podrás encontrar los mapas de origen de tu paquete en cada compilación de iOS.
@@ -296,19 +295,19 @@ Edita tu fase de compilación de la siguiente forma:
 
 ```bash
 set -e
-export SOURCEMAP_FILE=./build/main.jsbundle.map # <- añade esta línea para generar mapas de origen
-# Para React Native v0.70, debes definir USE_HERMES como verdadero para que se generen mapas de origen
+export SOURCEMAP_FILE=./build/main.jsbundle.map # <- add this line to output source maps
+# For React Native 0.70, you need to set USE_HERMES to true for source maps to be generated
 export USE_HERMES=true
 
-# no realices ningún cambio al resto del script
+# keep the rest of the script unchanged
 
-# añade estas líneas para componer los mapas de origen del empaquetador y el compilador en un único archivo
+# add these lines to compose the packager and compiler source maps into one file
 REACT_NATIVE_DIR=../node_modules/react-native
 
 if [ -f "$REACT_NATIVE_DIR/scripts/find-node-for-xcode.sh" ]; then
     source "$REACT_NATIVE_DIR/scripts/find-node-for-xcode.sh"
 else
-    # Antes de RN v0.70, el script se llamaba find-node.sh
+    # Before RN 0.70, the script was named find-node.sh
     source "$REACT_NATIVE_DIR/scripts/find-node.sh"
 fi
 source "$REACT_NATIVE_DIR/scripts/node-binary.sh"
@@ -388,10 +387,10 @@ Si especificaste un `bundleAssetName` en tu configuración de React en `android/
 Después de ejecutar tu compilación, carga tu mapa de origen ejecutando esto desde la raíz de tu proyecto React Native:
 
 ```bash
-export DATADOG_API_KEY= # rellena con tu clave de API
-export SERVICE=com.myapp # sustituye por tu nombre de servicio 
-export VERSION=1.0.0 # sustituye por el nombre de la versión de android/app/build.gradle
-export BUILD=100 # sustituye por el código de la versión de android/app/build.gradle
+export DATADOG_API_KEY= # fill with your API key
+export SERVICE=com.myapp # replace by your service name
+export VERSION=1.0.0 # replace by the versionName from android/app/build.gradle
+export BUILD=100 # replace by the versionCode from android/app/build.gradle
 export BUNDLE_PATH=android/app/build/generated/assets/react/release/index.android.bundle
 export SOURCEMAP_PATH=android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
 
@@ -469,8 +468,8 @@ Dentro del bucle, añade el siguiente fragmento:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /es/real_user_monitoring/reactnative/
-[4]: /es/real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
+[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/react_native/
+[4]: /es/real_user_monitoring/mobile_and_tv_monitoring/ios/error_tracking/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester
