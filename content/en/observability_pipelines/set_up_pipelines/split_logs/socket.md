@@ -1,5 +1,5 @@
 ---
-title: Split Logs for Socket
+title: Split Logs for the Socket Source
 disable_toc: false
 ---
 

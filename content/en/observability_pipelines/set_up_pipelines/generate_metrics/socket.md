@@ -1,5 +1,5 @@
 ---
-title: Generate Metrics for Socket
+title: Generate Metrics for the Socket Source
 disable_toc: false
 ---
 

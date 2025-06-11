@@ -1,5 +1,5 @@
 ---
-title: Archive Logs for Socket
+title: Archive Logs for the Socket Source
 disable_toc: false
 ---
 

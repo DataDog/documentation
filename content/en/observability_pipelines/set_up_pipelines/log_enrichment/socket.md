@@ -1,5 +1,5 @@
 ---
-title: Log Enrichment for Socket
+title: Log Enrichment for the Socket Source
 disable_toc: false
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Dual Ship Logs for Socket
+title: Dual Ship Logs for the Socket Source
 disable_toc: false
 ---
 

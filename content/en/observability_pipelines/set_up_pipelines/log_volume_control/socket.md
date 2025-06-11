@@ -1,5 +1,5 @@
 ---
-title: Log Volume Control for Socket
+title: Log Volume Control for the Socket Source
 disable_toc: false
 ---
 
