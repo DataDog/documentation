@@ -13,19 +13,20 @@ This guide assumes that you have configured [Database Monitoring][1].
 
 
 Supported databases
-: Postgres, SQL Server
+: Postgres, MySQL, SQL Server
 
 
 Supported authentication types and Agent versions
 :
 
 
-| Authentication Type                      | Agent Version | Postgres  | SQL Server |
-|:-----------------------------------------|:--------------|:---------:|:----------:|
-| [IAM][2]                                 |               |           |            |
-|                                          | 7.46          | {{< X >}} |            |
-| [Microsoft Entra ID Managed Identity][9] |               |           |            |
-|                                          | 7.48          | {{< X >}} | {{< X >}}  |
+| Authentication Type                      | Agent Version | Postgres  | MySQL      | SQL Server |
+|:-----------------------------------------|:--------------|:---------:|:----------:|:----------:|
+| [IAM][2]                                 |               |           |            |            |
+|                                          | 7.46          | {{< X >}} |            |            |
+|                                          | 7.67          |           | {{< X >}}  |            |
+| [Microsoft Entra ID Managed Identity][9] |               |           |            |            |
+|                                          | 7.48          | {{< X >}} |            | {{< X >}} |
 
 
 
@@ -128,8 +129,10 @@ AWS also supports wildcards for specifying the resource, for example if you want
   ],
 ```
 
-3. Log in to your database instance as the root user, and grant the `rds_iam` [role][20] to the new user:
+3. Log in to your database instance as the root user, and create an IAM authenticated [role][20]:
 
+{{< tabs >}}
+{{% tab "Postgres" %}}
 
 ```tsql
 CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
@@ -142,6 +145,22 @@ For example, for the `datadog` user you would run:
 CREATE USER datadog WITH LOGIN;
 GRANT rds_iam TO datadog;
 ```
+{{% /tab %}}
+{{% tab "MySQL" %}}
+
+```tsql
+CREATE USER <YOUR_IAM_ROLE> IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
+ALTER USER <YOUR_IAM_ROLE>@'%' REQUIRE SSL;
+```
+
+For example, for the `datadog` user you would run:
+
+```tsql
+CREATE USER 'datadog' IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
+ALTER USER 'datadog'@'%' REQUIRE SSL;
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 **Note:** this has to be a new user created without a password, or IAM authentication will fail.
@@ -243,8 +262,7 @@ Map the IAM role to the Kubernetes service account where the Agent is running. F
 {{< /tabs >}}
 
 
-2. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
-
+2. Update your Postgres or MySQL instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 ```yaml
 instances:
@@ -612,4 +630,4 @@ instances:
 [17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
 [18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
-[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL
+[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html
