@@ -23,6 +23,10 @@ DDR allows you to periodically conduct disaster recovery drills to not only test
 ## Prerequisites 
 Datadog Agents versions **7.54 or above** is required for Datadog Disaster Recovery. 
 
+#### Supported telemetry types and products
+The Agent-based failover description provided above supports failover of metrics, traces, and logs telemetry types, and supports Datadog Infrastructure Monitoring, APM, and Logs products.
+
+Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the [Disaster Recovery team](mailto:disaster-recovery@datadoghq.com) to learn about upcoming capabilities and your specific needs if they are not covered above.
 
 ## Setup 
 To enable Datadog Disaster Recovery, follow the relevant steps for when:
@@ -46,24 +50,28 @@ Identify which site your primary organization is on by matching your Datadog web
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
-<!-- left off here -->
+For example, if you are hosted in [US1](https://app.datadoghq.com), you may choose to select another Datadog site to ensure observability continuity in the event of a regional disaster. All Datadog sites are geographically separated.
+
+Contact your Customer Success Manager or [Datadog Support](https://www.datadoghq.com/support/) to help you select the secondary Datadog site and configure your new organization to be your secondary failover organization.
+
+Note that if you're also sending telemetry to Datadog using cloud provider integrations, you'll need to add your cloud provider accounts in the secondary org. Datadog will not use cloud providers to receive telemetry data while the secondary site is passive.
+
 **Note**: Datadog can set this up for you if you'd prefer. 
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 2. Contact Datadog to share your new organization" level="h5" %}}
-Share your organization name with your Datadog contact(`IS THIS THE CSM`?) and they will configure your new organization to be your secondary failover organization.<br><br>
+Share your organization name with your Datadog [customer success manager](mailto:success@datadoghq.com) and they will configure your new organization to be your secondary failover organization.<br><br>
 **Note**: This organization will appear in your Datadog billing hierarchy, but all usage and cost associated will _not_ be billed during the private beta.
 {{% /collapse-content %}} <br>
 
 
 
-<!------GROUP 2------------------------------------------------------------->
 #### when Datadog confirms your new organization as your secondary failover organization
 {{% collapse-content title=" 3. Confirm the public IDs of your orgs" level="h5" %}}
 Once the Datadog team has completed the configuration of the designated orgs, they will share with you the public IDs of the primary org and the DDR org. You can confirm these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
 
-**Note:** If any of your sites is in a region other than the `US1` region, you would need to specify the <SITE> parameter.
+**Note:** If any of your sites is in a region other than the `US1` region, you would need to specify the `<SITE>` parameter.
 
 ``` shell
 # Run this command to get the Public ID for your primary site. 
