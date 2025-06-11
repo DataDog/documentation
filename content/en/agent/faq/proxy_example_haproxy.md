@@ -201,7 +201,7 @@ frontend network_path_frontend
     option tcplog
     default_backend datadog-network-path
 
-# This declares the endpoint where your Agents connects to
+# This declares the endpoint where your Agents connect to
 # retrieve agent packages for Remote Agent Management.
 frontend install-forwarder
     bind *:3848
@@ -501,7 +501,7 @@ frontend network_path_frontend
     option tcplog
     default_backend datadog-network-path
 
-# This declares the endpoint where your Agents connects to
+# This declares the endpoint where your Agents connect to
 # retrieve agent packages for Remote Agent Management.
 frontend install-forwarder
     bind *:3848 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
