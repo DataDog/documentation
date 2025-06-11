@@ -9,14 +9,15 @@ further_reading:
 
 ## Overview
 
-Canvas content is rendered as pixels, not as individual [Shadow Document Object Model (DOM)][3] elements. This means you cannot use traditional selectors like XPath or CSS to target elements within a canvas. As a result, Datadog Synthetic Monitoring assertions such as **click** or **hover** do not work on elements drawn inside a canvas.
+Canvas content is rendered as raw pixel data rather than as structured HTML elements. This means you cannot target elements within a canvas using traditional selectors like XPath or CSS, since there is no underlying DOM representation of the visual content. As a result, actions such as **click** or **hover** cannot interact with elements drawn inside a canvas.
 
-To address this, Datadog uses [custom JavaScript assertions][1] to directly analyze the canvas's pixel data and confirm that the expected content is present.
+To address this, you can leverage [custom JavaScript assertions][1] to analyze the canvas' pixel data and verify that the expected content is present.
 
 ## What is an HTML canvas?
-The [`canvas`][2] element is an HTML tag that allows you to draw graphics using JavaScript. It provides a space for rendering visual content such as charts, images, and animations.
 
-This element is supported by all major modern browsers. Depending on the JavaScript library used, it can display custom labels in response to user actions such as clicking or hovering on a graph:
+The [`canvas`][2] element is an HTML tag that provides a drawable region in the browser, allowing you to render dynamic graphics using JavaScript. It's commonly used for displaying visual content such as charts, graphs, image editing tools, and animations.
+
+Supported by all major modern browsers, the `<canvas>` element is highly versatile. When combined with JavaScript libraries such as `Chart.js` or `D3.js`, it can render interactive visualizations that respond to user actions like clicks or hovers, enabling features such as custom tooltips or highlighting data points.
 
 {{< img src="/synthetics/guide/canvas-content-javascript/graph.mp4" alt="Graphing a metric in Datadog using the Metrics Explorer." video=true >}}
 
@@ -49,11 +50,13 @@ Mozilla offers this [playground][5], where you can experiment with, copy, and mo
 
 ## Finding a pixel based on a color
 
-To verify that a graph is using the expected colors, refer to this [example graph][6] from the JavaScript solid and dashed line charts. In this example, confirm that the colors coral and green appear as expected in the visualization.
+1. Verify that the following graph uses the expected colors coral and green:
 
-The most effective approach is to locate at least one pixel rendered in coral and one in green. Start by identifying a pixel that matches the coral color.
+   {{< img src="/synthetics/guide/canvas-content-javascript/canvas_screenshot.png" alt="Example site traffic graph." >}}
 
-The following script demonstrates how to loop through the `x, y` coordinates to find the first pixel that matches the target color:
+2. The most effective approach is to locate at least one pixel rendered in coral and one in green. Start by identifying a pixel that matches the coral color.
+
+3. The following script demonstrates how to loop through the `x, y` coordinates of the canvas to assert that at least one of its pixels matches the target color:
 
 {{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript_assertion" %}}
 {{< code-block lang="javascript" >}}
@@ -259,36 +262,37 @@ return found;
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-In most cases click actions display or adds a new HTML element (such as a div) that you can assert against. 
+ Based on the behavior of your app, **click** actions display or adds a new HTML element (such as a `div`) that you can assert against. 
 
 ## Troubleshooting
 
 Working with `<canvas>` elements and JavaScript interactions can be complex, especially for users unfamiliar with browser scripting. The examples in this article are provided as general guidance and can be adapted to fit specific use cases.
 
-**Note**: Datadog support can assist with issues related to how Synthetic Monitoring interacts with `<canvas>`, however, we do not provide debugging support for custom JavaScript implementations. This includes modifying variables in JavaScript assertions to avoid conflicts with a website's existing code.
+**Note**: Datadog support can assist with issues related to how Synthetic Monitoring interacts with `<canvas>`, however, we do not provide debugging support for custom JavaScript implementations. 
 
 Below are tips and common questions that may help guide you through troubleshooting.
 
-### How to get exact coordinates?
+### Get exact coordinates
 
-To reliably click the same spot on a `<canvas>` in every test run, without knowing the exact x and y coordinates, you can use the [`addListener`](#asserting-on-elements-triggered-by-clicks) method described above. Add a print statement inside the function to log the coordinates when you click:
+To reliably click the same spot on a `<canvas>` in every test run, without knowing the exact x and y coordinates, you can use the [`addEventListener`](#clicking-on-canvas) method described above. Add a print statement inside the function to log the coordinates when you click:
 
 {{% collapse-content title="Add listener with console.log" level="h4" expanded=false id="Add listener" %}}
 {{< code-block lang="javascript" >}}
-const canvas = document.querySelector('canvas_selector')
+const canvas = document.querySelector('canvas_selector');
 canvas.addEventListener('click', function(event) {
   const canvasRect = canvas.getBoundingClientRect();
   const x = event.clientX - canvasRect.left;
   const y = event.clientY - canvasRect.top;
   console.log('Clicked at relative canvas position:', x, y);
+});
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-### How to choose the right color?
+### Choosing the right color
 
 A good starting point is to inspect CSS styles using your browser Developer Tools. Most styles include the color's RGB definition.
 
-Some users may prefer to work with HEX color values (for example, `#9c27b0`), however, `<canvas>` elements _require_ colors in RGBA format. To convert HEX to RGBA, users can use online tools or simple conversion scripts.
+The canvas element only supports RGBA color values, formats like HEX are not supported. If you have a HEX color, you'll need to convert it to RGBA using an online tool or a conversion script.
 
 ## Need help?
 
@@ -300,7 +304,6 @@ Contact [Datadog support][7] for further assistance.
 
 [1]: /synthetics/guide/custom-javascript-assertion/
 [2]: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
-[3]: /synthetics/guide/browser-tests-using-shadow-dom/
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext#parameters
 [5]: https://developer.mozilla.org/en-US/play
 [6]: https://julinvictus.github.io/canvas_example/
