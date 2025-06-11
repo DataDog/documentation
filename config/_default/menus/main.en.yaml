@@ -3994,17 +3994,17 @@ menu:
       parent: endpoint_observability
       weight: 1003
     - name: Dynamic Instrumentation
-      url: dynamic_instrumentation/
+      url: tracing/dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
       weight: 11
     - name: Enabling
-      url: dynamic_instrumentation/enabling
+      url: tracing/dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
       weight: 1101
     - name: Expression Language
-      url: dynamic_instrumentation/expression-language
+      url: tracing/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
       weight: 1102

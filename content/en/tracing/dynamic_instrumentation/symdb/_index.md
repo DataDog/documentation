@@ -2,6 +2,8 @@
 title: Autocomplete and Search
 is_beta: true
 private: false
+aliases:
+    - /dynamic_instrumentation/symbdb
 further_reading:
   - link: /dynamic_instrumentation/
     tag: Documentation

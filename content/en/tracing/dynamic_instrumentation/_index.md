@@ -1,8 +1,8 @@
 ---
 title: Dynamic Instrumentation
 aliases:
-    - /tracing/dynamic_instrumentation/
     - /dynamic_instrumentation/how-it-works/
+    - /dynamic_instrumentation/
 is_beta: false
 private: false
 further_reading:

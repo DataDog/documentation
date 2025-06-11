@@ -1,7 +1,7 @@
 ---
 title: Enable Dynamic Instrumentation for Python
 aliases:
-    - /tracing/dynamic_instrumentation/enabling/python/
+    - /dynamic_instrumentation/enabling/python/
 private: false
 code_lang: python
 type: multi-code-lang

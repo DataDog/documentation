@@ -1,6 +1,8 @@
 ---
 title: Dynamic Instrumentation Expression Language
 private: false
+aliases:
+    - /dynamic_instrumentation/expression-language
 ---
 
 ## Overview

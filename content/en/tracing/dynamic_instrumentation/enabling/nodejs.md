@@ -4,6 +4,8 @@ private: false
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+    - /dynamic_instrumentation/enabling/nodejs
 further_reading:
     - link: 'agent'
       tag: 'Documentation'

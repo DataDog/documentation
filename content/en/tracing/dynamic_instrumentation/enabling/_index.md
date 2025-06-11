@@ -2,7 +2,7 @@
 title: Enabling Dynamic Instrumentation
 type: multi-code-lang
 aliases:
-    - /tracing/dynamic_instrumentation/enabling/
+    - /dynamic_instrumentation/enabling/
 private: false
 further_reading:
     - link: '/agent/'
