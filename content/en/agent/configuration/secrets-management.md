@@ -166,7 +166,7 @@ password: ENC[file@/etc/secret-volume/password]
 
 [Docker swarm secrets][3] are mounted in the `/run/secrets` folder. For example, the Docker secret `db_prod_passsword` is located in `/run/secrets/db_prod_password` in the Agent container. This would be referenced in the configuration with `ENC[file@/run/secrets/db_prod_password]`.
 
-**Example: Reading a Kubernetes Secret Across Namespaces**
+#### Example: Reading a Kubernetes Secret Across Namespaces
 
 If you want the Agent to read a Secret from a different namespace, use the `k8s_secret@` prefix. For example:
 ```
@@ -231,7 +231,6 @@ Here's an example showing how to set it up:
      ]
    }
    ```
-3. Download the binary to your EC2 instance and configure it at /datadog-secret-backend.yaml:
 
 3. Download the latest release of [datadog-secret-backend][5] on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary. The example below shows a configuration for a backend of type `aws.secrets` under the name `staging-aws`:
    ```
@@ -456,11 +455,10 @@ The `dd-agent` user is created when you install the Datadog Agent.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
-**Windows**
 
-##### Rights related errors
+##### Rights-related errors
 
-If you encounter one of the following errors, then something is missing in your setup. See the [Windows instructions](#windows).
+The following errors indicate that something is missing in your setup.
 
 1. If any other group or user than needed has rights on the executable, a similar error to the following is logged:
    ```
@@ -566,7 +564,7 @@ When reading Secrets directly from Kubernetes you can double check your permissi
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
+Consider the previous [Kubernetes Secrets example](#example-reading-a-kubernetes-secret-across-namespaces), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
 
 In this case, use the following command:
 
