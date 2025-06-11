@@ -74,14 +74,14 @@ Once the Datadog team has completed the configuration of the designated orgs, th
 **Note:** If any of your sites is in a region other than the `US1` region, you would need to specify the `<SITE>` parameter.
 
 ``` shell
-# Run this command to get the Public ID for your primary site. 
-curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
+# Run this command to verify the Public ID for your primary site replacing the `<DD-SITE-PARAMETER>` with the correct value. 
+curl -X GET "https://api.<DD-SITE-PARAMETER>/api/v1/org/<PUBLIC-ID>" \
 -H "Accept: application/json" \
 -H "DD-API-KEY: ${PRIMARY_DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${PRIMARY_DD_APP_KEY}"
 
-# Run this command to get the Public ID for your DDR site. 
-curl -X GET "https://api.<SITE>.datadoghq.com/api/v1/org/<PUBLIC-ID>" \
+# Run this command to verify the Public ID for your DDR site replacing the `<DD-SITE-PARAMETER>` with the correct value
+curl -X GET "https://api.<DD-SITE-PARAMETER>/api/v1/org/<PUBLIC-ID>" \
 -H "Accept: application/json" \
 -H "DD-API-KEY: ${DDR_DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DDR_DD_APP_KEY}"
@@ -114,8 +114,6 @@ curl -v -H "Content-Type: application/json" -H
 
 
 
-
-<!------GROUP 3------------------------------------------------------------->
 #### when you have linked the DDR org to your primary org
 {{% collapse-content title=" 5. Create your Datadog API and App key for syncing" level="h5" %}}
 At the secondary Datadog site, create a set of `API key` **and** `App key`. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
@@ -195,18 +193,20 @@ multi_region_failover:
   site:<DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
   api_key:<DDR_SITE_API_KEY>
 ```
+
+Setting the **enabled** field to `true` enables the Agent to ship Agent metadata to the secondary Datadog site so you can view Agents and your Infra Hosts in the secondary site. Note that while you can see your Agents and Infra Hosts at the secondary site, you will not receive telemetry until DDR failover is activated.
+
 During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. 
 
 Your Datadog contact will work with you on scheduling dedicated time windows for failover testing to measure performance and Recovery Time Objective(RTO).
 {{% /collapse-content %}} <br>
 
 
-
-
-<!-------GROUP 4------------------------------------------------------------->
 #### when you are ready to test the failover process
 {{% collapse-content title=" 11. Activate and test DDR failover" level="h5" %}}
 There are several methods that can be used for activating/testing the DDR failover. 
+
+**Agent in non-containerized environments**
 
 For Agent deployments in non-containerized environments, use the below Agent CLI commands:
 
@@ -215,6 +215,8 @@ agent config set multi_region_failover.failover_metrics true
 agent config set multi_region_failover.failover_logs true
 agent config set multi_region_failover.failover_traces true
 ```
+
+**Agent in containerized environments**
 
 If you are running the Agent in a containerized environment like Kubernetes, the Agent command-line tool can still be used, but it needs to be invoked on the container running the Agent. 
 
@@ -248,6 +250,20 @@ DD_MULTI_REGION_FAILOVER_TRACES=true
 DD_MULTI_REGION_FAILOVER_SITE=ADD_NEW_ORG_SITE
 DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 ```
+
+**Cloud integrations failover**
+
+1. Integrations must be configured in both Primary and Secondary organizations.
+
+2. Integrations only run in one Datacenter at a time. Keep in mind that:
+  - Integrations normally run only in the Primary data center.
+  - During an integration failover, integrations will run only in the Secondary data center.
+  - During testing, integration telemetry will be spread over both organizations.
+  - Cancelling a failover returns integrations to running in the Primary data center.
+
+3. Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the secondary region.
+
+
 {{% /collapse-content %}}<br>
 
 
@@ -255,8 +271,6 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-<!------LINKS ------------------------------------------------------------->
 [1]: https://app.datadoghq.com/organization-settings/users
 [2]: https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning
 [3]: https://github.com/DataDog/datadog-sync-cli
