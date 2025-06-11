@@ -11,22 +11,25 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="false" >}}
- Datadog Disaster Recovery is in preview. To request access, complete the form.
+ Datadog Disaster Recovery is currently in Preview, but you can easily request access! Use this form to submit your request.
 {{< /callout >}}
 
 ## Overview 
-Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals. You can also recover live observability at an alternate, functional Datadog site in typically under an hour with DDR. <br><br>
+Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals.
 
-DDR allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
+DDR also allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
 
 
 ## Prerequisites 
 Datadog Agents versions **7.54 or above** is required for Datadog Disaster Recovery. 
 
 #### Supported telemetry types and products
-The Agent-based failover description provided on this page supports failover of metrics, traces, and logs telemetry types, and supports Datadog Infrastructure Monitoring, APM, and Logs products.
+The Agent-based failover description provided on this page supports failover of metrics, traces, and logs telemetry types. It also supports Datadog Infrastructure Monitoring, APM, and Logs products.
 
+<div class="alert alert-info">
 Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the [Disaster Recovery team](mailto:disaster-recovery@datadoghq.com) to learn about upcoming capabilities and your specific needs if they are not covered above.
+</div>
+
 
 ## Setup 
 To enable Datadog Disaster Recovery, follow the relevant steps for when:
@@ -52,16 +55,18 @@ Identify which site your primary organization is on by matching your Datadog web
 
 For example, if you are hosted in [US1](https://app.datadoghq.com), you may choose to select another Datadog site to ensure observability continuity in the event of a regional disaster. All Datadog sites are geographically separated.
 
-Contact your Customer Success Manager or [Datadog Support](https://www.datadoghq.com/support/) to help you select the secondary Datadog site and configure your new organization to be your secondary failover organization.
+Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) to help you select the secondary Datadog site and configure your new organization to be your secondary failover organization.
 
-Note that if you're also sending telemetry to Datadog using cloud provider integrations, you'll need to add your cloud provider accounts in the secondary org. Datadog will not use cloud providers to receive telemetry data while the secondary site is passive.
+Note that if you're also sending telemetry to Datadog using cloud provider integrations, you'll need to add your cloud provider accounts in the secondary org. 
+
+Datadog will not use cloud providers to receive telemetry data while the secondary site is passive.
 
 **Note**: Datadog can set this up for you if you'd prefer. 
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 2. Contact Datadog to share your new organization" level="h5" %}}
-Share your organization name with your Datadog [customer success manager](mailto:success@datadoghq.com) and they will configure your new organization to be your secondary failover organization.<br><br>
+Share your organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) and they will configure your new organization to be your secondary failover organization.<br><br>
 **Note**: This organization will appear in your Datadog billing hierarchy, but all usage and cost associated will _not_ be billed during the private beta.
 {{% /collapse-content %}} <br>
 
@@ -69,9 +74,7 @@ Share your organization name with your Datadog [customer success manager](mailto
 
 #### when Datadog confirms your new organization as your secondary failover organization
 {{% collapse-content title=" 3. Confirm the public IDs of your orgs" level="h5" %}}
-Once the Datadog team has completed the configuration of the designated orgs, they will share with you the public IDs of the primary org and the DDR org. You can confirm these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
-
-**Note:** If any of your sites is in a region other than the `US1` region, you would need to specify the `<SITE>` parameter.
+After the Datadog team has completed the configuration of the designated orgs, Datadog will share with you the public IDs of the primary org and the DDR org. You can verify these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
 
 ``` shell
 # Run this command to verify the Public ID for your primary site replacing the `<DD-SITE-PARAMETER>` with the correct value. 
@@ -140,10 +143,10 @@ Each item can be added to the sync scope using the sync-cli configuration availa
 
 ```shell 
 destination_api_url="https://api.us5.datadoghq.com"
-destination_api_key="<API_KEY>"
-destination_app_key="<APP_KEY>"
-source_api_key="<API_KEY>"
-source_app_key="<APP_KEY>"
+destination_api_key="<US5_API_KEY>"
+destination_app_key="<US5_APP_KEY>"
+source_api_key="<EU_API_KEY>"
+source_app_key="<EU_APP_KEY>"
 source_api_url="https://api.datadoghq.eu"
 filter=["Type=Dashboards;Name=title","Type=Monitors;Name=tags;Value=sync:true"]
 
@@ -173,25 +176,24 @@ Verify that your secondary org is accessible and that your Dashboards and Monito
 
 
 {{% collapse-content title=" 9. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
-[Remote configuration (RC)][7] is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control; alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
+[Remote configuration (RC)][7] is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control. Alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
 
 Remote configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
 {{% /collapse-content %}}
 
+{{% collapse-content title=" 10. Update your Datadog Agent version and configuration" level="h5" %}}
+Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured secondary Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic disaster recovery exercises/drills. 
 
-{{% collapse-content title=" 10. Update your Datadog Agent configuration" level="h5" %}}
-Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured secondary Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic DR exercises/drills. 
+After updating your Agent, configure your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
-Configure your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
-
-```shell 
+```shell
 multi_region_failover:
   enabled: true
   failover_metrics: false
   failover_logs: false
   failover_traces: false
-  site:<DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
-  api_key:<DDR_SITE_API_KEY>
+  site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  api_key: <DDR_SITE_API_KEY>
 ```
 
 Setting the **enabled** field to `true` enables the Agent to ship Agent metadata to the secondary Datadog site so you can view Agents and your Infra Hosts in the secondary site. Note that while you can see your Agents and Infra Hosts at the secondary site, you will not receive telemetry until DDR failover is activated.
@@ -272,7 +274,7 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/users
-[2]: https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning
+[2]: /account_management/saml/#just-in-time-jit-provisioning
 [3]: https://github.com/DataDog/datadog-sync-cli
 [4]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
 [5]: https://github.com/DataDog/datadog-sync-cli/blob/main/README.md 
