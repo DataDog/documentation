@@ -121,7 +121,7 @@ The `metrics` configuration is a list of metrics to retrieve as custom metrics. 
 
 For a full list of available parameters for instances, including `namespace` and `metrics`, see the [sample configuration openmetrics.d/conf.yaml][9].
 
-**Note:** The check limits itself to 2000 metric by default. Specify the optional `max_returned_metrics` parameter to modify this limit.
+**Note**: The check limits itself to 2000 metric by default. Specify the optional `max_returned_metrics` parameter to modify this limit.
 
 ## Getting started
 
