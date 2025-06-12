@@ -19,10 +19,21 @@ further_reading:
 
 On the [Monitor Settings page][1], you can access and control the following topics:
 
+* [Organization Settings](#organization-settings)
 * [Tag Policies](#tag-policies)
 * [Notification Rules](#notification-rules)
 * [Deleted Monitors](#deleted-monitors)
 
+
+## Organization Settings
+
+### Monitors time zone preference
+
+Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
+
+{{< img src="monitors/settings/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
+
+The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
 
 ## Tag policies
 
