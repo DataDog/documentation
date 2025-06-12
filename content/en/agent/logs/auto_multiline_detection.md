@@ -80,7 +80,7 @@ logs:
 
 #### Per integration multi-line integration settings
 
-You can set auto multiline settings individually on each integration. The integration accepts the same settings as the normal `datadog.yaml` file:
+You can set auto multi-line settings individually on each integration. The integration accepts the same settings as the normal `datadog.yaml` file:
 
 ```yaml
 logs:
