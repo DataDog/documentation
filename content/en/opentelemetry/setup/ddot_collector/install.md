@@ -38,6 +38,10 @@ Install and set up the following on your machine:
 - [Docker][50]
 - [kubectl][5]
 
+{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
 ## Install the Datadog Agent with OpenTelemetry Collector
 
 ### Select installation method
@@ -872,7 +876,7 @@ public String getDate() {
 
 Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
 
-If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application’s Deployment manifest file:
+If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application's Deployment manifest file:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 env:
   ...

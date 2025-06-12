@@ -26,7 +26,7 @@ author:
 categories:
 - notifications
 - テスト
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -78,7 +78,7 @@ NeoLoad インテグレーションを使用すると、NeoLoad テストのパ�
 
 ## セットアップ
 
-### 構成
+### 設定
 
 NeoLoad の構成の詳細な手順については、[NeoLoad に関するドキュメント][3]に従ってください。NeoLoad バージョン 9.1 からは、NeoLoad 内にある Datadog Connector の **Push Counters** 構成で、どのメトリクスを送信するかを選択できるようになりました。
 

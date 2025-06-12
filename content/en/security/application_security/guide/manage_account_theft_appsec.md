@@ -734,6 +734,6 @@ This is general guidance. Depending on your applications and environments, there
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
 [28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/threats/inapp_waf_rules/
+[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
