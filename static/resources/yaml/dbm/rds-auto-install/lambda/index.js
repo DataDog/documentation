@@ -124,6 +124,7 @@ SECURITY DEFINER;
 const executeSql = async (client, sql) => {
   try {
     const res = await client.query(sql);
+    return res;
   } catch (err) {
     console.error("Error executing SQL", err);
   }

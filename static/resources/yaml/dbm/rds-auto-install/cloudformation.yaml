@@ -1,11 +1,7 @@
 # Automatically setup RDS instances to be ready for the Datadog integration
 # Before deploying, run deploy.sh in the lambda subdirectory to build the Lambda function
-# To deploy run:
-# aws cloudformation deploy \
-# --template-file cloudformation.yaml \
-# --stack-name rds-auto-install \
-# --capabilities CAPABILITY_IAM \
-# --parameters VPC=$(aws cloudformation describe-stacks --stack-name "rds-auto-install-demo" --query "Stacks[0].Outputs[?ExportName=='VPCId'].OutputValue" --output text)
+#
+# To deploy run deploy.sh in the same directory as this file
 #
 
 
