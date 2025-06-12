@@ -1,11 +1,11 @@
 ---
-title: Archive Logs for the Socket Source
+title: Archive Logs for the Socket Source (TCP or UDP) 
 disable_toc: false
 ---
 
 ## Overview
 
-Use the Observability Pipelines Worker to format your logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Send your logs over a socket connection to the Observability Pipelines Worker to format your logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 

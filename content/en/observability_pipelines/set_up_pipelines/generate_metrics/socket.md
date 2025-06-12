@@ -1,11 +1,11 @@
 ---
-title: Generate Metrics for the Socket Source
+title: Generate Metrics for the Socket Source (TCP or UDP)
 disable_toc: false
 ---
 
 ## Overview
 
-Send logs to the Observability Pipelines Worker so that you can generate metrics from those logs.
+Send logs over a socket connection to the Observability Pipelines Worker so that you can generate metrics from those logs.
 
 {{% observability_pipelines/use_case_images/generate_metrics %}}
 

@@ -1,11 +1,11 @@
 ---
-title: Log Volume Control for the Socket Source
+title: Log Volume Control for the Socket Source (TCP or UDP)
 disable_toc: false
 ---
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the Socket source so that you only route useful logs to your destinations.
+Send your logs over a socket connection to the Observability Pipelines Worker so that you only route useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 

@@ -1,11 +1,11 @@
 ---
-title: Log Enrichment for the Socket Source
+title: Log Enrichment for the Socket Source (TCP or UDP)
 disable_toc: false
 ---
 
 ## Overview
 
-Send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to their destination.
+Send logs over a socket connection to the Observability Pipelines Worker so you can enrich and transform your logs before routing them to their destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 

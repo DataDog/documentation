@@ -1,11 +1,11 @@
 ---
-title: Split Logs for the Socket Source
+title: Split Logs for the Socket Source (TCP or UDP)
 disable_toc: false
 ---
 
 ## Overview
 
-Send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Send logs over a socket connection to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 

@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Redaction for the Socket Source
+title: Sensitive Data Redaction for the Socket Source (TCP or UDP) 
 disable_toc: false
 ---
 
