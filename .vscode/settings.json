@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.mdoc.md": "markdoc",
+        "*.md": "markdown"
+    },
+    "[markdoc]": {
+        "editor.defaultFormatter": "stripe.markdoc-language-support",
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2
+    }
+}

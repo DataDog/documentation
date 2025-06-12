@@ -7,24 +7,27 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/aws"
+- link: "/cloud_cost_management/setup/aws"
   tag: "Documentation"
   text: "Gain insights into your AWS bill"
-- link: "/cloud_cost_management/azure"
+- link: "/cloud_cost_management/setup/azure"
   tag: "Documentation"
   text: "Gain insights into your Azure bill"
-- link: "/cloud_cost_management/google_cloud"
+- link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
-- link: "/cloud_cost_management/saas_costs"
+- link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/custom"
+- link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
   tag: "Blog"
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
+- link: "https://www.datadoghq.com/blog/datadog-costs/"
+  tag: "Blog"
+  text: "Understand and manage your Datadog spend with Datadog cost data in Cloud Cost Management"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
@@ -74,7 +77,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 
 [1]: /cloud_cost_management/
 [2]: /cloud_cost_management/monitors
-[3]: /cloud_cost_management/saas_costs
+[3]: /cloud_cost_management/setup/saas_costs
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [6]: /account_management/rbac/

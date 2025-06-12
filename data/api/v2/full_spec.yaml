@@ -228,11 +228,27 @@ components:
       schema:
         type: string
     CloudWorkloadSecurityAgentRuleID:
-      description: The ID of the Agent rule.
+      description: The ID of the Agent rule
       example: 3b5-v82-ns6
       in: path
       name: agent_rule_id
       required: true
+      schema:
+        type: string
+    CloudWorkloadSecurityPathAgentPolicyID:
+      description: The ID of the Agent policy
+      example: 6517fcc1-cec7-4394-a655-8d6e9d085255
+      in: path
+      name: policy_id
+      required: true
+      schema:
+        type: string
+    CloudWorkloadSecurityQueryAgentPolicyID:
+      description: The ID of the Agent policy
+      example: 6517fcc1-cec7-4394-a655-8d6e9d085255
+      in: query
+      name: policy_id
+      required: false
       schema:
         type: string
     ConfluentAccountID:
@@ -347,6 +363,7 @@ components:
         type: string
     FilterByRef:
       description: Filter entities by reference
+      example: service:shopping-cart
       explode: true
       in: query
       name: filter[ref]
@@ -358,6 +375,32 @@ components:
       explode: true
       in: query
       name: filter[relation][type]
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationType'
+    FilterRelationByFromRef:
+      description: Filter relations by the reference of the first entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[from_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByToRef:
+      description: Filter relations by the reference of the second entity in the relation.
+      example: service:shopping-cart
+      explode: true
+      in: query
+      name: filter[to_ref]
+      required: false
+      schema:
+        type: string
+    FilterRelationByType:
+      description: Filter relations by type.
+      explode: true
+      in: query
+      name: filter[type]
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
@@ -532,6 +575,14 @@ components:
       required: true
       schema:
         type: string
+    KindID:
+      description: Entity kind.
+      in: path
+      name: kind_id
+      required: true
+      schema:
+        example: my-job
+        type: string
     MetricID:
       description: The name of the log-based metric.
       in: path
@@ -664,6 +715,14 @@ components:
       required: true
       schema:
         type: string
+    RelationInclude:
+      description: Include relationship data.
+      explode: true
+      in: query
+      name: include
+      required: false
+      schema:
+        $ref: '#/components/schemas/RelationIncludeType'
     ReportID:
       description: The ID of the report job.
       in: path
@@ -671,11 +730,26 @@ components:
       required: true
       schema:
         type: string
+    ResourceFilterAccountID:
+      description: Filter resource filters by cloud provider account ID. This parameter
+        is only valid when provider is specified.
+      in: query
+      name: account_id
+      required: false
+      schema:
+        type: string
+    ResourceFilterProvider:
+      description: Filter resource filters by cloud provider (e.g. aws, gcp, azure).
+      in: query
+      name: cloud_provider
+      required: false
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
         `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`.'
+        `connection`, `connection-group`, `rum-application`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -810,6 +884,13 @@ components:
       required: true
       schema:
         type: string
+    SkipCache:
+      description: Skip cache for resource filters.
+      in: query
+      name: skip_cache
+      required: false
+      schema:
+        type: boolean
     SpansMetricIDParameter:
       description: The name of the span-based metric.
       in: path
@@ -7267,8 +7348,240 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
+    CloudWorkloadSecurityAgentPoliciesListResponse:
+      description: Response object that includes a list of Agent policies
+      properties:
+        data:
+          description: A list of Agent policy objects
+          items:
+            $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyData'
+          type: array
+      type: object
+    CloudWorkloadSecurityAgentPolicyAttributes:
+      description: A Cloud Workload Security Agent policy returned by the API
+      properties:
+        blockingRulesCount:
+          description: The number of rules with the blocking feature in this policy
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
+        datadogManaged:
+          description: Whether the policy is managed by Datadog
+          example: false
+          type: boolean
+        description:
+          description: The description of the policy
+          example: My agent policy
+          type: string
+        disabledRulesCount:
+          description: The number of rules that are disabled in this policy
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
+        enabled:
+          description: Whether the Agent policy is enabled
+          example: true
+          type: boolean
+        hostTags:
+          description: The host tags defining where this policy is deployed
+          items:
+            type: string
+          type: array
+        hostTagsLists:
+          description: The host tags defining where this policy is deployed, the inner
+            values are linked with AND, the outer values are linked with OR
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        monitoringRulesCount:
+          description: The number of rules in the monitoring state in this policy
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
+        name:
+          description: The name of the policy
+          example: my_agent_policy
+          type: string
+        policyVersion:
+          description: The version of the policy
+          example: '1'
+          type: string
+        priority:
+          description: The priority of the policy
+          example: 10
+          format: int64
+          type: integer
+        ruleCount:
+          description: The number of rules in this policy
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
+        updateDate:
+          description: Timestamp in milliseconds when the policy was last updated
+          example: 1624366480320
+          format: int64
+          type: integer
+        updatedAt:
+          description: When the policy was last updated, timestamp in milliseconds
+          example: 1624366480320
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdaterAttributes'
+      type: object
+    CloudWorkloadSecurityAgentPolicyCreateAttributes:
+      description: Create a new Cloud Workload Security Agent policy
+      properties:
+        description:
+          description: The description of the policy
+          example: My agent policy
+          type: string
+        enabled:
+          description: Whether the policy is enabled
+          example: true
+          type: boolean
+        hostTags:
+          description: The host tags defining where this policy is deployed
+          items:
+            type: string
+          type: array
+        hostTagsLists:
+          description: The host tags defining where this policy is deployed, the inner
+            values are linked with AND, the outer values are linked with OR
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        name:
+          description: The name of the policy
+          example: my_agent_policy
+          type: string
+      required:
+      - name
+      type: object
+    CloudWorkloadSecurityAgentPolicyCreateData:
+      description: Object for a single Agent rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentPolicyCreateRequest:
+      description: Request object that includes the Agent policy to create
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyCreateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentPolicyData:
+      description: Object for a single Agent policy
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyAttributes'
+        id:
+          description: The ID of the Agent policy
+          example: 6517fcc1-cec7-4394-a655-8d6e9d085255
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyType'
+      type: object
+    CloudWorkloadSecurityAgentPolicyID:
+      description: The ID of the Agent policy
+      example: 6517fcc1-cec7-4394-a655-8d6e9d085255
+      type: string
+    CloudWorkloadSecurityAgentPolicyResponse:
+      description: Response object that includes an Agent policy
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyData'
+      type: object
+    CloudWorkloadSecurityAgentPolicyType:
+      default: policy
+      description: The type of the resource, must always be `policy`
+      enum:
+      - policy
+      example: policy
+      type: string
+      x-enum-varnames:
+      - POLICY
+    CloudWorkloadSecurityAgentPolicyUpdateAttributes:
+      description: Update an existing Cloud Workload Security Agent policy
+      properties:
+        description:
+          description: The description of the policy
+          example: My agent policy
+          type: string
+        enabled:
+          description: Whether the policy is enabled
+          example: true
+          type: boolean
+        hostTags:
+          description: The host tags defining where this policy is deployed
+          items:
+            type: string
+          type: array
+        hostTagsLists:
+          description: The host tags defining where this policy is deployed, the inner
+            values are linked with AND, the outer values are linked with OR
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        name:
+          description: The name of the policy
+          example: my_agent_policy
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentPolicyUpdateData:
+      description: Object for a single Agent policy
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyID'
+        type:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyType'
+      required:
+      - attributes
+      - type
+      type: object
+    CloudWorkloadSecurityAgentPolicyUpdateRequest:
+      description: Request object that includes the Agent policy with the attributes
+        to update
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdateData'
+      required:
+      - data
+      type: object
+    CloudWorkloadSecurityAgentPolicyUpdaterAttributes:
+      description: The attributes of the user who last updated the policy
+      properties:
+        handle:
+          description: The handle of the user
+          example: datadog.user@example.com
+          type: string
+        name:
+          description: The name of the user
+          example: Datadog User
+          nullable: true
+          type: string
+      type: object
     CloudWorkloadSecurityAgentRuleAction:
-      description: The action the rule can perform if triggered.
+      description: The action the rule can perform if triggered
       properties:
         filter:
           description: SECL expression used to target the container to apply the action
@@ -7276,79 +7589,143 @@ components:
           type: string
         kill:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleKill'
+        metadata:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata'
+        set:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
+      type: object
+    CloudWorkloadSecurityAgentRuleActionMetadata:
+      description: The metadata action applied on the scope matching the rule
+      properties:
+        image_tag:
+          description: The image tag of the metadata action
+          type: string
+        service:
+          description: The service of the metadata action
+          type: string
+        short_image:
+          description: The short image of the metadata action
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleActionSet:
+      description: The set action applied on the scope matching the rule
+      properties:
+        append:
+          description: Whether the value should be appended to the field
+          type: boolean
+        field:
+          description: The field of the set action
+          type: string
+        name:
+          description: The name of the set action
+          type: string
+        scope:
+          description: The scope of the set action
+          type: string
+        size:
+          description: The size of the set action
+          format: int64
+          type: integer
+        ttl:
+          description: The time to live of the set action
+          format: int64
+          type: integer
+        value:
+          description: The value of the set action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActions:
-      description: The array of actions the rule can perform if triggered.
+      description: The array of actions the rule can perform if triggered
       items:
         $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAction'
       nullable: true
       type: array
     CloudWorkloadSecurityAgentRuleAttributes:
-      description: A Cloud Workload Security Agent rule returned by the API.
+      description: A Cloud Workload Security Agent rule returned by the API
       properties:
         actions:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
         agentConstraint:
-          description: The version of the agent.
+          description: The version of the Agent
           type: string
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         category:
-          description: The category of the Agent rule.
+          description: The category of the Agent rule
           example: Process Activity
           type: string
         creationAuthorUuId:
-          description: The ID of the user who created the rule.
+          description: The ID of the user who created the rule
           example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         creationDate:
-          description: When the Agent rule was created, timestamp in milliseconds.
+          description: When the Agent rule was created, timestamp in milliseconds
           example: 1624366480320
           format: int64
           type: integer
         creator:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreatorAttributes'
         defaultRule:
-          description: Whether the rule is included by default.
+          description: Whether the rule is included by default
           example: false
           type: boolean
         description:
-          description: The description of the Agent rule.
+          description: The description of the Agent rule
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
-          description: Whether the Agent rule is enabled.
+          description: Whether the Agent rule is enabled
           example: true
           type: boolean
         expression:
-          description: The SECL expression of the Agent rule.
-          example: exec.file.name == \"sh\"
+          description: The SECL expression of the Agent rule
+          example: exec.file.name == "sh"
           type: string
         filters:
-          description: The platforms the Agent rule is supported on.
+          description: The platforms the Agent rule is supported on
+          items:
+            type: string
+          type: array
+        monitoring:
+          description: The monitoring policies that the rule belongs to
           items:
             type: string
           type: array
         name:
-          description: The name of the Agent rule.
+          description: The name of the Agent rule
           example: my_agent_rule
           type: string
+        product_tags:
+          description: The list of product tags associated with the rule
+          items:
+            type: string
+          type: array
         updateAuthorUuId:
-          description: The ID of the user who updated the rule.
+          description: The ID of the user who updated the rule
           example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         updateDate:
-          description: Timestamp in milliseconds when the Agent rule was last updated.
+          description: Timestamp in milliseconds when the Agent rule was last updated
           example: 1624366480320
           format: int64
           type: integer
         updatedAt:
-          description: When the Agent rule was last updated, timestamp in milliseconds.
+          description: When the Agent rule was last updated, timestamp in milliseconds
           example: 1624366480320
           format: int64
           type: integer
         updater:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdaterAttributes'
         version:
-          description: The version of the Agent rule.
+          description: The version of the Agent rule
           example: 23
           format: int64
           type: integer
@@ -7356,20 +7733,37 @@ components:
     CloudWorkloadSecurityAgentRuleCreateAttributes:
       description: Create a new Cloud Workload Security Agent rule.
       properties:
+        actions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         description:
           description: The description of the Agent rule.
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
-          description: Whether the Agent rule is enabled.
+          description: Whether the Agent rule is enabled
           example: true
           type: boolean
         expression:
           description: The SECL expression of the Agent rule.
-          example: exec.file.name == \"sh\"
+          example: exec.file.name == "sh"
           type: string
         filters:
-          description: The platforms the Agent rule is supported on.
+          description: The platforms the Agent rule is supported on
+          items:
+            type: string
+          type: array
+        monitoring:
+          description: The monitoring policies that the rule belongs to
           items:
             type: string
           type: array
@@ -7377,12 +7771,21 @@ components:
           description: The name of the Agent rule.
           example: my_agent_rule
           type: string
+        policy_id:
+          description: The ID of the policy where the Agent rule is saved
+          example: a8c8e364-6556-434d-b798-a4c23de29c0b
+          type: string
+        product_tags:
+          description: The list of product tags associated with the rule
+          items:
+            type: string
+          type: array
       required:
       - name
       - expression
       type: object
     CloudWorkloadSecurityAgentRuleCreateData:
-      description: Object for a single Agent rule.
+      description: Object for a single Agent rule
       properties:
         attributes:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateAttributes'
@@ -7393,7 +7796,7 @@ components:
       - type
       type: object
     CloudWorkloadSecurityAgentRuleCreateRequest:
-      description: Request object that includes the Agent rule to create.
+      description: Request object that includes the Agent rule to create
       properties:
         data:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateData'
@@ -7401,50 +7804,50 @@ components:
       - data
       type: object
     CloudWorkloadSecurityAgentRuleCreatorAttributes:
-      description: The attributes of the user who created the Agent rule.
+      description: The attributes of the user who created the Agent rule
       properties:
         handle:
-          description: The handle of the user.
+          description: The handle of the user
           example: datadog.user@example.com
           type: string
         name:
-          description: The name of the user.
+          description: The name of the user
           example: Datadog User
           nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleData:
-      description: Object for a single Agent rule.
+      description: Object for a single Agent rule
       properties:
         attributes:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAttributes'
         id:
-          description: The ID of the Agent rule.
+          description: The ID of the Agent rule
           example: 3dd-0uc-h1s
           type: string
         type:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
       type: object
     CloudWorkloadSecurityAgentRuleID:
-      description: The ID of the agent rule.
+      description: The ID of the Agent rule
       example: 3dd-0uc-h1s
       type: string
     CloudWorkloadSecurityAgentRuleKill:
       description: Kill system call applied on the container matching the rule
       properties:
         signal:
-          description: Supported signals for the kill system call.
+          description: Supported signals for the kill system call
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleResponse:
-      description: Response object that includes an Agent rule.
+      description: Response object that includes an Agent rule
       properties:
         data:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
       type: object
     CloudWorkloadSecurityAgentRuleType:
       default: agent_rule
-      description: The type of the resource. The value should always be `agent_rule`.
+      description: The type of the resource, must always be `agent_rule`
       enum:
       - agent_rule
       example: agent_rule
@@ -7452,23 +7855,49 @@ components:
       x-enum-varnames:
       - AGENT_RULE
     CloudWorkloadSecurityAgentRuleUpdateAttributes:
-      description: Update an existing Cloud Workload Security Agent rule.
+      description: Update an existing Cloud Workload Security Agent rule
       properties:
+        actions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
+        blocking:
+          description: The blocking policies that the rule belongs to
+          items:
+            type: string
+          type: array
         description:
-          description: The description of the Agent rule.
+          description: The description of the Agent rule
           example: My Agent rule
           type: string
+        disabled:
+          description: The disabled policies that the rule belongs to
+          items:
+            type: string
+          type: array
         enabled:
-          description: Whether the Agent rule is enabled.
+          description: Whether the Agent rule is enabled
           example: true
           type: boolean
         expression:
-          description: The SECL expression of the Agent rule.
-          example: exec.file.name == \"sh\"
+          description: The SECL expression of the Agent rule
+          example: exec.file.name == "sh"
           type: string
+        monitoring:
+          description: The monitoring policies that the rule belongs to
+          items:
+            type: string
+          type: array
+        policy_id:
+          description: The ID of the policy where the Agent rule is saved
+          example: a8c8e364-6556-434d-b798-a4c23de29c0b
+          type: string
+        product_tags:
+          description: The list of product tags associated with the rule
+          items:
+            type: string
+          type: array
       type: object
     CloudWorkloadSecurityAgentRuleUpdateData:
-      description: Object for a single Agent rule.
+      description: Object for a single Agent rule
       properties:
         attributes:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateAttributes'
@@ -7482,7 +7911,7 @@ components:
       type: object
     CloudWorkloadSecurityAgentRuleUpdateRequest:
       description: Request object that includes the Agent rule with the attributes
-        to update.
+        to update
       properties:
         data:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateData'
@@ -7490,23 +7919,23 @@ components:
       - data
       type: object
     CloudWorkloadSecurityAgentRuleUpdaterAttributes:
-      description: The attributes of the user who last updated the Agent rule.
+      description: The attributes of the user who last updated the Agent rule
       properties:
         handle:
-          description: The handle of the user.
+          description: The handle of the user
           example: datadog.user@example.com
           type: string
         name:
-          description: The name of the user.
+          description: The name of the user
           example: Datadog User
           nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRulesListResponse:
-      description: Response object that includes a list of Agent rule.
+      description: Response object that includes a list of Agent rule
       properties:
         data:
-          description: A list of Agent rules objects.
+          description: A list of Agent rules objects
           items:
             $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
@@ -9200,6 +9629,107 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    CreatePageRequest:
+      description: Full request to trigger an On-Call Page.
+      example:
+        data:
+          attributes:
+            description: Page details.
+            tags:
+            - service:test
+            target:
+              identifier: my-team
+              type: team_handle
+            title: Page title
+            urgency: low
+          type: pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatePageRequestData'
+      type: object
+    CreatePageRequestData:
+      description: The main request body, including attributes and resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreatePageRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/CreatePageRequestDataType'
+      required:
+      - type
+      type: object
+    CreatePageRequestDataAttributes:
+      description: Details about the On-Call Page you want to create.
+      properties:
+        description:
+          description: A short summary of the issue or context.
+          type: string
+        tags:
+          description: Tags to help categorize or filter the page.
+          items:
+            type: string
+          type: array
+        target:
+          $ref: '#/components/schemas/CreatePageRequestDataAttributesTarget'
+        title:
+          description: The title of the page.
+          example: 'Service: Test is down'
+          type: string
+        urgency:
+          $ref: '#/components/schemas/PageUrgency'
+      required:
+      - target
+      - title
+      - urgency
+      type: object
+    CreatePageRequestDataAttributesTarget:
+      description: Information about the target to notify (such as a team or user).
+      properties:
+        identifier:
+          description: Identifier for the target (for example, team handle or user
+            ID).
+          type: string
+        type:
+          $ref: '#/components/schemas/OnCallPageTargetType'
+      type: object
+    CreatePageRequestDataType:
+      default: pages
+      description: The type of resource used when creating an On-Call Page.
+      enum:
+      - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+      - PAGES
+    CreatePageResponse:
+      description: The full response object after creating a new On-Call Page.
+      example:
+        data:
+          id: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          type: pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatePageResponseData'
+      type: object
+    CreatePageResponseData:
+      description: The information returned after successfully creating a page.
+      properties:
+        id:
+          description: The unique ID of the created page.
+          type: string
+        type:
+          $ref: '#/components/schemas/CreatePageResponseDataType'
+      required:
+      - type
+      type: object
+    CreatePageResponseDataType:
+      default: pages
+      description: The type of resource used when creating an On-Call Page.
+      enum:
+      - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+      - PAGES
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -10564,8 +11094,6 @@ components:
       - handle
       - version
       - name
-      - description
-      - icon_url
       type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
@@ -10656,34 +11184,36 @@ components:
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENT
-    DORAGitInfo:
-      description: Git info for DORA Metrics events.
+    DORAEvent:
+      description: A DORA event.
       properties:
-        commit_sha:
-          $ref: '#/components/schemas/GitCommitSHA'
-        repository_url:
-          $ref: '#/components/schemas/GitRepositoryURL'
-      required:
-      - repository_url
-      - commit_sha
+        attributes:
+          description: The attributes of the event.
+          type: object
+        id:
+          description: The ID of the event.
+          type: string
+        type:
+          description: The type of the event.
+          type: string
       type: object
-    DORAIncidentRequest:
-      description: Request to create a DORA incident event.
+    DORAFailureRequest:
+      description: Request to create a DORA failure event.
       properties:
         data:
-          $ref: '#/components/schemas/DORAIncidentRequestData'
+          $ref: '#/components/schemas/DORAFailureRequestData'
       required:
       - data
       type: object
-    DORAIncidentRequestAttributes:
-      description: Attributes to create a DORA incident event.
+    DORAFailureRequestAttributes:
+      description: Attributes to create a DORA failure event.
       properties:
         env:
-          description: Environment name that was impacted by the incident.
+          description: Environment name that was impacted by the failure.
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp when the incident finished. It must be in nanoseconds,
+          description: Unix timestamp when the failure finished. It must be in nanoseconds,
             milliseconds, or seconds, and it should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
@@ -10691,14 +11221,15 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID. Required to update a previously sent incident.
+          description: Failure ID. Must have at least 16 characters. Required to update
+            a previously sent failure.
           type: string
         name:
-          description: Incident name.
+          description: Failure name.
           example: Webserver is down failing all requests.
           type: string
         services:
-          description: Service names impacted by the incident. If possible, use names
+          description: Service names impacted by the failure. If possible, use names
             registered in the Service Catalog. Required when the team field is not
             provided.
           example:
@@ -10707,11 +11238,11 @@ components:
             type: string
           type: array
         severity:
-          description: Incident severity.
+          description: Failure severity.
           example: High
           type: string
         started_at:
-          description: Unix timestamp when the incident started. It must be in nanoseconds,
+          description: Unix timestamp when the failure started. It must be in nanoseconds,
             milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
@@ -10729,43 +11260,167 @@ components:
       required:
       - started_at
       type: object
-    DORAIncidentRequestData:
+    DORAFailureRequestData:
       description: The JSON:API data.
       properties:
         attributes:
-          $ref: '#/components/schemas/DORAIncidentRequestAttributes'
+          $ref: '#/components/schemas/DORAFailureRequestAttributes'
       required:
       - attributes
       type: object
-    DORAIncidentResponse:
-      description: Response after receiving a DORA incident event.
+    DORAFailureResponse:
+      description: Response after receiving a DORA failure event.
       properties:
         data:
-          $ref: '#/components/schemas/DORAIncidentResponseData'
+          $ref: '#/components/schemas/DORAFailureResponseData'
       required:
       - data
       type: object
-    DORAIncidentResponseData:
-      description: Response after receiving a DORA incident event.
+    DORAFailureResponseData:
+      description: Response after receiving a DORA failure event.
       properties:
         id:
-          description: The ID of the received DORA incident event.
+          description: The ID of the received DORA failure event.
           example: 4242fcdd31586083
           type: string
         type:
-          $ref: '#/components/schemas/DORAIncidentType'
+          $ref: '#/components/schemas/DORAFailureType'
       required:
       - id
       type: object
-    DORAIncidentType:
-      default: dora_incident
-      description: JSON:API type for DORA incident events.
+    DORAFailureType:
+      default: dora_failure
+      description: JSON:API type for DORA failure events.
       enum:
-      - dora_incident
-      example: dora_incident
+      - dora_failure
+      example: dora_failure
       type: string
       x-enum-varnames:
-      - DORA_INCIDENT
+      - DORA_FAILURE
+    DORAFetchResponse:
+      description: Response for the DORA fetch endpoints.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAEvent'
+      type: object
+    DORAGitInfo:
+      description: Git info for DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_url:
+          $ref: '#/components/schemas/GitRepositoryURL'
+      required:
+      - repository_url
+      - commit_sha
+      type: object
+    DORAListDeploymentsRequest:
+      description: Request to get a list of deployments.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestData'
+      required:
+      - data
+      type: object
+    DORAListDeploymentsRequestAttributes:
+      description: Attributes to get a list of deployments.
+      properties:
+        from:
+          description: Minimum timestamp for requested events.
+          format: date-time
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: Search query with event platform syntax.
+          type: string
+        sort:
+          description: Sort order (prefixed with `-` for descending).
+          type: string
+        to:
+          description: Maximum timestamp for requested events.
+          format: date-time
+          type: string
+      type: object
+    DORAListDeploymentsRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DORAListDeploymentsRequestDataType'
+      required:
+      - attributes
+      type: object
+    DORAListDeploymentsRequestDataType:
+      description: The definition of `DORAListDeploymentsRequestDataType` object.
+      enum:
+      - dora_deployments_list_request
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENTS_LIST_REQUEST
+    DORAListFailuresRequest:
+      description: Request to get a list of failures.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAListFailuresRequestData'
+      required:
+      - data
+      type: object
+    DORAListFailuresRequestAttributes:
+      description: Attributes to get a list of failures.
+      properties:
+        from:
+          description: Minimum timestamp for requested events.
+          format: date-time
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: Search query with event platform syntax.
+          type: string
+        sort:
+          description: Sort order (prefixed with `-` for descending).
+          type: string
+        to:
+          description: Maximum timestamp for requested events.
+          format: date-time
+          type: string
+      type: object
+    DORAListFailuresRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAListFailuresRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DORAListFailuresRequestDataType'
+      required:
+      - attributes
+      type: object
+    DORAListFailuresRequestDataType:
+      description: The definition of `DORAListFailuresRequestDataType` object.
+      enum:
+      - dora_failures_list_request
+      type: string
+      x-enum-varnames:
+      - DORA_FAILURES_LIST_REQUEST
+    DORAListResponse:
+      description: Response for the DORA list endpoints.
+      properties:
+        data:
+          description: The list of DORA events.
+          items:
+            $ref: '#/components/schemas/DORAEvent'
+          type: array
+      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -10961,6 +11616,38 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataRelationshipsTeams:
+      description: Associates teams with this schedule in a data structure.
+      properties:
+        data:
+          description: An array of team references for this schedule.
+          items:
+            $ref: '#/components/schemas/DataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    DataRelationshipsTeamsDataItems:
+      description: Relates a team to this schedule, identified by `id` and `type`
+        (must be `teams`).
+      properties:
+        id:
+          description: The unique identifier of the team in this relationship.
+          example: 00000000-da3a-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/DataRelationshipsTeamsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    DataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
     DataScalarColumn:
       description: A column containing the numerical results for a formula or query.
       properties:
@@ -12520,7 +13207,6 @@ components:
           type: array
         repositoryURL:
           description: The repository path of the source code of the entity.
-          pattern: url
           type: string
       type: object
     EntityV3DatadogCodeLocations:
@@ -13046,13 +13732,25 @@ components:
       - retryStrategy
       - fallbackStepName
       type: object
+    Escalation:
+      description: Represents an escalation policy step.
+      properties:
+        id:
+          description: Unique identifier of the escalation step.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EscalationRelationships'
+        type:
+          $ref: '#/components/schemas/EscalationType'
+      required:
+      - type
+      type: object
     EscalationPolicy:
       description: Represents a complete escalation policy response, including policy
         data and optionally included related resources.
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: true
             retries: 2
@@ -13111,7 +13809,6 @@ components:
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: true
             retries: 2
@@ -13162,13 +13859,9 @@ components:
       description: Defines the attributes for creating an escalation policy, including
         its description, name, resolution behavior, retries, and steps.
       properties:
-        description:
-          description: Provides a detailed text description of the new escalation
-            policy.
-          type: string
         name:
           description: Specifies the name for the new escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13216,41 +13909,8 @@ components:
         including references to teams.
       properties:
         teams:
-          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
-    EscalationPolicyCreateRequestDataRelationshipsTeams:
-      description: Defines the relationship to teams within an escalation policy creation
-        request, referencing the teams to be associated with the policy.
-      properties:
-        data:
-          description: An array of team references for the new escalation policy.
-          items:
-            $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    EscalationPolicyCreateRequestDataRelationshipsTeamsDataItems:
-      description: Defines a single relationship to a team within an escalation policy
-        creation request. Contains the team's `id` and `type`.
-      properties:
-        id:
-          description: Specifies the unique identifier for the related team.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/EscalationPolicyCreateRequestDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    EscalationPolicyCreateRequestDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Indicates that the resource is of type `teams`.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     EscalationPolicyCreateRequestDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -13279,14 +13939,11 @@ components:
       type: object
     EscalationPolicyDataAttributes:
       description: Defines the main attributes of an escalation policy, such as its
-        description, name, and behavior on policy end.
+        name and behavior on policy end.
       properties:
-        description:
-          description: Provides a detailed text description of the escalation policy.
-          type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13307,7 +13964,7 @@ components:
         steps:
           $ref: '#/components/schemas/EscalationPolicyDataRelationshipsSteps'
         teams:
-          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       required:
       - steps
       type: object
@@ -13345,40 +14002,6 @@ components:
       type: string
       x-enum-varnames:
       - STEPS
-    EscalationPolicyDataRelationshipsTeams:
-      description: Defines the relationship to a collection of teams within an escalation
-        policy. Contains an array of team data references.
-      properties:
-        data:
-          description: An array of references to the teams associated with this escalation
-            policy.
-          items:
-            $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    EscalationPolicyDataRelationshipsTeamsDataItems:
-      description: Defines a relationship to a single team within an escalation policy.
-        Contains the team's `id` and `type`.
-      properties:
-        id:
-          description: Specifies the unique identifier for the team resource.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/EscalationPolicyDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    EscalationPolicyDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Indicates that the resource is of type `teams`.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     EscalationPolicyDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -13439,7 +14062,7 @@ components:
         targets.
       properties:
         targets:
-          $ref: '#/components/schemas/EscalationTarget'
+          $ref: '#/components/schemas/EscalationTargets'
       type: object
     EscalationPolicyStepTarget:
       description: Defines a single escalation target within a step for an escalation
@@ -13480,7 +14103,6 @@ components:
       example:
         data:
           attributes:
-            description: Escalation Policy 1 description
             name: Escalation Policy 1
             resolve_page_on_policy_end: false
             retries: 2
@@ -13530,12 +14152,9 @@ components:
       description: Defines the attributes that can be updated for an escalation policy,
         such as description, name, resolution behavior, retries, and steps.
       properties:
-        description:
-          description: Provides a detailed text description of the escalation policy.
-          type: string
         name:
           description: Specifies the name of the escalation policy.
-          example: On-call Escalation Policy
+          example: On-Call Escalation Policy
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -13586,41 +14205,8 @@ components:
         including references to teams.
       properties:
         teams:
-          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
-    EscalationPolicyUpdateRequestDataRelationshipsTeams:
-      description: Defines the relationship to teams within an escalation policy update
-        request, referencing the teams to be associated with or removed from the policy.
-      properties:
-        data:
-          description: An array of team references for the escalation policy update.
-          items:
-            $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItems:
-      description: Defines a single relationship to a team within an escalation policy
-        update request. Contains the team's `id` and `type`.
-      properties:
-        id:
-          description: Specifies the unique identifier for the related team.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    EscalationPolicyUpdateRequestDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Indicates that the resource is of type `teams`.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     EscalationPolicyUpdateRequestDataType:
       default: policies
       description: Indicates that the resource is of type `policies`.
@@ -13668,6 +14254,46 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    EscalationRelationships:
+      description: Contains the relationships of an escalation object, including its
+        responders.
+      properties:
+        responders:
+          $ref: '#/components/schemas/EscalationRelationshipsResponders'
+      type: object
+    EscalationRelationshipsResponders:
+      description: Lists the users involved in a specific step of the escalation policy.
+      properties:
+        data:
+          description: Array of user references assigned as responders for this escalation
+            step.
+          items:
+            $ref: '#/components/schemas/EscalationRelationshipsRespondersDataItems'
+          type: array
+      type: object
+    EscalationRelationshipsRespondersDataItems:
+      description: Represents a user assigned to an escalation step.
+      properties:
+        id:
+          description: Unique identifier of the user assigned to the escalation step.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EscalationRelationshipsRespondersDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EscalationRelationshipsRespondersDataItemsType:
+      default: users
+      description: Represents the resource type for users assigned as responders in
+        an escalation step.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     EscalationTarget:
       description: Represents an escalation target, which can be a team, user, or
         schedule.
@@ -13675,6 +14301,25 @@ components:
       - $ref: '#/components/schemas/TeamTarget'
       - $ref: '#/components/schemas/UserTarget'
       - $ref: '#/components/schemas/ScheduleTarget'
+    EscalationTargets:
+      description: A list of escalation targets for a step
+      properties:
+        data:
+          description: The `EscalationTargets` `data`.
+          items:
+            $ref: '#/components/schemas/EscalationTarget'
+          type: array
+      type: object
+    EscalationType:
+      default: escalation_policy_steps
+      description: Represents the resource type for individual steps in an escalation
+        policy used during incident response.
+      enum:
+      - escalation_policy_steps
+      example: escalation_policy_steps
+      type: string
+      x-enum-varnames:
+      - ESCALATION_POLICY_STEPS
     Event:
       description: The metadata associated with a request.
       properties:
@@ -14753,10 +15398,16 @@ components:
     FindingAttributes:
       description: The JSON:API attributes of the finding.
       properties:
+        datadog_link:
+          $ref: '#/components/schemas/FindingDatadogLink'
+        description:
+          $ref: '#/components/schemas/FindingDescription'
         evaluation:
           $ref: '#/components/schemas/FindingEvaluation'
         evaluation_changed_at:
           $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        external_id:
+          $ref: '#/components/schemas/FindingExternalId'
         mute:
           $ref: '#/components/schemas/FindingMute'
         resource:
@@ -14774,6 +15425,22 @@ components:
         vulnerability_type:
           $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
+    FindingDatadogLink:
+      description: The Datadog relative link for this finding.
+      example: /security/compliance?panels=cpfinding%7Cevent%7CruleId%3Adef-000-u5t%7CresourceId%3Ae8c9ab7c52ebd7bf2fdb4db641082d7d%7CtabId%3Aoverview
+      type: string
+    FindingDescription:
+      description: The description and remediation steps for this finding.
+      example: '## Remediation
+
+
+        1. In the console, go to **Storage Account**.
+
+        2. For each Storage Account, navigate to **Data Protection**.
+
+        3. Select **Set soft delete enabled** and enter the number of days to retain
+        soft deleted data.'
+      type: string
     FindingEvaluation:
       description: The evaluation of the finding.
       enum:
@@ -14791,6 +15458,10 @@ components:
       format: int64
       minimum: 1
       type: integer
+    FindingExternalId:
+      description: The cloud-based ID for the resource related to the finding.
+      example: arn:aws:s3:::my-example-bucket
+      type: string
     FindingID:
       description: The unique ID for this finding.
       example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
@@ -15079,10 +15750,6 @@ components:
     FullCustomFrameworkDataAttributes:
       description: Full Framework Data Attributes.
       properties:
-        description:
-          description: Framework Description
-          example: this is a security framework
-          type: string
         handle:
           description: Framework Handle
           example: sec2
@@ -15108,8 +15775,6 @@ components:
       - handle
       - version
       - name
-      - description
-      - icon_url
       - requirements
       type: object
     GCPMetricNamespaceConfig:
@@ -15537,6 +16202,26 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetResourceEvaluationFiltersResponse:
+      description: The definition of `GetResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    GetResourceEvaluationFiltersResponseData:
+      description: The definition of `GetResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      type: object
     GetRuleVersionHistoryData:
       description: Data for the rule version history.
       properties:
@@ -15741,7 +16426,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentials'
@@ -15766,7 +16450,6 @@ components:
         base_url:
           description: Base HTTP url for the integration
           example: http://datadoghq.com
-          pattern: url
           type: string
         credentials:
           $ref: '#/components/schemas/HTTPCredentialsUpdate'
@@ -17515,6 +18198,7 @@ components:
       description: The incident severity.
       enum:
       - UNKNOWN
+      - SEV-0
       - SEV-1
       - SEV-2
       - SEV-3
@@ -17524,6 +18208,7 @@ components:
       type: string
       x-enum-varnames:
       - UNKNOWN
+      - SEV_0
       - SEV_1
       - SEV_2
       - SEV_3
@@ -18748,6 +19433,90 @@ components:
       - index
       - caseIndex
       type: object
+    KindAttributes:
+      description: Kind attributes.
+      properties:
+        description:
+          description: Short description of the kind.
+          type: string
+        displayName:
+          description: User friendly name of the kind.
+          type: string
+        name:
+          description: The kind name.
+          example: my-job
+          minLength: 1
+          type: string
+      type: object
+    KindData:
+      description: Schema that defines the structure of a Kind object in the Software
+        Catalog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/KindAttributes'
+        id:
+          description: A read-only globally unique identifier for the entity generated
+            by Datadog.  User supplied values are ignored.
+          example: 4b163705-23c0-4573-b2fb-f6cea2163fcb
+          minLength: 1
+          type: string
+        meta:
+          $ref: '#/components/schemas/KindMetadata'
+        type:
+          description: Kind.
+          type: string
+      type: object
+    KindMetadata:
+      description: Kind metadata.
+      properties:
+        createdAt:
+          description: The creation time.
+          type: string
+        modifiedAt:
+          description: The modification time.
+          type: string
+      type: object
+    KindObj:
+      description: Schema for kind.
+      properties:
+        description:
+          description: Short description of the kind.
+          type: string
+        displayName:
+          description: The display name of the kind. Automatically generated if not
+            provided.
+          type: string
+        kind:
+          description: The name of the kind to create or update. This must be in kebab-case
+            format.
+          example: my-job
+          type: string
+      required:
+      - kind
+      type: object
+    KindRaw:
+      description: Kind definition in raw JSON or YAML representation.
+      example: 'kind: service
+
+        displayName: Service
+
+        description: A service entity in the catalog.
+
+        '
+      type: string
+    KindResponseData:
+      description: List of kind responses.
+      items:
+        $ref: '#/components/schemas/KindData'
+      type: array
+    KindResponseMeta:
+      description: Kind response metadata.
+      properties:
+        count:
+          description: Total kinds count.
+          format: int64
+          type: integer
+      type: object
     Layer:
       description: Encapsulates a layer resource, holding attributes like rotation
         details, plus relationships to the members covering that layer.
@@ -18786,7 +19555,7 @@ components:
           description: An optional list of time restrictions for when this layer is
             in effect.
           items:
-            $ref: '#/components/schemas/LayerAttributesRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time when the rotation starts (ISO 8601).
@@ -18810,63 +19579,6 @@ components:
           maximum: 2592000
           type: integer
       type: object
-    LayerAttributesRestrictionsItems:
-      description: 'Represents a time restriction within a layer, specifying the days
-        and times
-
-        when this layer is active or inactive.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsEndDay'
-        end_time:
-          description: The time of day the restriction ends (hh:mm:ss).
-          example: '17:00:00'
-          type: string
-        start_day:
-          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsStartDay'
-        start_time:
-          description: The time of day the restriction begins (hh:mm:ss).
-          example: 09:00:00
-          type: string
-      type: object
-    LayerAttributesRestrictionsItemsEndDay:
-      description: Defines the end day of the restriction within a Layer.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    LayerAttributesRestrictionsItemsStartDay:
-      description: Defines the start day of the restriction within a Layer.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     LayerRelationships:
       description: Holds references to objects related to the Layer entity, such as
         its members.
@@ -19533,6 +20245,14 @@ components:
         meta:
           $ref: '#/components/schemas/HistoricalJobListMeta'
       type: object
+    ListKindCatalogResponse:
+      description: List kind response.
+      properties:
+        data:
+          $ref: '#/components/schemas/KindResponseData'
+        meta:
+          $ref: '#/components/schemas/KindResponseMeta'
+      type: object
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
         and associated metadata.
@@ -19573,6 +20293,38 @@ components:
           $ref: '#/components/schemas/PowerpackResponseLinks'
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
+    ListRelationCatalogResponse:
+      description: List entity relation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationResponseData'
+        included:
+          $ref: '#/components/schemas/ListRelationCatalogResponseIncluded'
+        links:
+          $ref: '#/components/schemas/ListRelationCatalogResponseLinks'
+        meta:
+          $ref: '#/components/schemas/RelationResponseMeta'
+      type: object
+    ListRelationCatalogResponseIncluded:
+      description: List relation response included entities.
+      items:
+        $ref: '#/components/schemas/EntityData'
+      type: array
+    ListRelationCatalogResponseLinks:
+      description: List relation response links.
+      properties:
+        next:
+          description: Next link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=2
+          type: string
+        previous:
+          description: Previous link.
+          type: string
+        self:
+          description: Current link.
+          example: /api/v2/catalog/relation?filter[from_ref]=service:service-catalog&include=entity&page[limit]=2&page[offset]=0
+          type: string
       type: object
     ListRulesResponse:
       description: Scorecard rules response.
@@ -21305,38 +22057,8 @@ components:
       - space
       type: object
     MetricCustomAggregations:
-      description: 'A list of queryable aggregation combinations for a count, rate,
-        or gauge metric.
-
-        By default, count and rate metrics require the (time: sum, space: sum) aggregation
-        and
-
-        Gauge metrics require the (time: avg, space: avg) aggregation.
-
-        Additional time & space combinations are also available:
-
-
-        - time: avg, space: avg
-
-        - time: avg, space: max
-
-        - time: avg, space: min
-
-        - time: avg, space: sum
-
-        - time: count, space: sum
-
-        - time: max, space: max
-
-        - time: min, space: min
-
-        - time: sum, space: avg
-
-        - time: sum, space: sum
-
-
-        Can only be applied to non_distribution metrics that have a `metric_type`
-        of `count`, `rate`, or `gauge`.'
+      description: Deprecated. You no longer need to configure specific time and space
+        aggregations for Metrics Without Limits.
       example:
       - space: sum
         time: sum
@@ -24564,7 +25286,8 @@ components:
           description: Optional prefix for object keys within the GCS bucket.
           type: string
         metadata:
-          description: Custom metadata key-value pairs added to each object.
+          description: Custom metadata to attach to each object uploaded to the GCS
+            bucket.
           items:
             $ref: '#/components/schemas/ObservabilityPipelineMetadataEntry'
           type: array
@@ -24580,7 +25303,6 @@ components:
       - auth
       - storage_class
       - acl
-      - metadata
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -24859,8 +25581,7 @@ components:
       x-enum-varnames:
       - LOGSTASH
     ObservabilityPipelineMetadataEntry:
-      description: A custom metadata entry to attach to each object uploaded to the
-        GCS bucket.
+      description: A custom metadata entry.
       properties:
         name:
           description: The metadata key.
@@ -26660,6 +27381,18 @@ components:
             $ref: '#/components/schemas/OktaAccountResponseData'
           type: array
       type: object
+    OnCallPageTargetType:
+      description: The kind of target, `team_id` | `team_handle` | `user_id`.
+      enum:
+      - team_id
+      - team_handle
+      - user_id
+      example: team_id
+      type: string
+      x-enum-varnames:
+      - TEAM_ID
+      - TEAM_HANDLE
+      - USER_ID
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -27298,6 +28031,17 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+    PageUrgency:
+      default: high
+      description: On-Call Page urgency level.
+      enum:
+      - low
+      - high
+      example: high
+      type: string
+      x-enum-varnames:
+      - LOW
+      - HIGH
     Pagination:
       description: Pagination object.
       properties:
@@ -28949,6 +29693,114 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RelationAttributes:
+      description: Relation attributes.
+      properties:
+        from:
+          $ref: '#/components/schemas/RelationEntity'
+        to:
+          $ref: '#/components/schemas/RelationEntity'
+        type:
+          $ref: '#/components/schemas/RelationType'
+      type: object
+    RelationEntity:
+      description: Relation entity reference.
+      properties:
+        kind:
+          description: Entity kind.
+          type: string
+        name:
+          description: Entity name.
+          type: string
+        namespace:
+          description: Entity namespace.
+          type: string
+      type: object
+    RelationIncludeType:
+      description: Supported include types for relations.
+      enum:
+      - entity
+      - schema
+      type: string
+      x-enum-varnames:
+      - ENTITY
+      - SCHEMA
+    RelationMeta:
+      description: Relation metadata.
+      properties:
+        createdAt:
+          description: Relation creation time.
+          format: date-time
+          type: string
+        definedBy:
+          description: Relation defined by.
+          type: string
+        modifiedAt:
+          description: Relation modification time.
+          format: date-time
+          type: string
+        source:
+          description: Relation source.
+          type: string
+      type: object
+    RelationRelationships:
+      description: Relation relationships.
+      properties:
+        fromEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+        toEntity:
+          $ref: '#/components/schemas/RelationToEntity'
+      type: object
+    RelationResponse:
+      description: Relation response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RelationAttributes'
+        id:
+          description: Relation ID.
+          type: string
+        meta:
+          $ref: '#/components/schemas/RelationMeta'
+        relationships:
+          $ref: '#/components/schemas/RelationRelationships'
+        subtype:
+          description: Relation subtype.
+          type: string
+        type:
+          $ref: '#/components/schemas/RelationResponseType'
+      type: object
+    RelationResponseData:
+      description: Array of relation responses
+      items:
+        $ref: '#/components/schemas/RelationResponse'
+      type: array
+    RelationResponseMeta:
+      description: Relation response metadata.
+      properties:
+        count:
+          description: Total relations count.
+          format: int64
+          type: integer
+        includeCount:
+          description: Total included data count.
+          format: int64
+          type: integer
+      type: object
+    RelationResponseType:
+      description: Relation type.
+      enum:
+      - relation
+      type: string
+      x-enum-varnames:
+      - RELATION
+    RelationToEntity:
+      description: Relation to entity.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipItem'
+        meta:
+          $ref: '#/components/schemas/EntityMeta'
+      type: object
     RelationType:
       description: Supported relation types.
       enum:
@@ -29528,6 +30380,46 @@ components:
       required:
       - data
       type: object
+    ResourceFilterAttributes:
+      description: Attributes of a resource filter.
+      example:
+        aws:
+          '123456789':
+          - environment:production
+          - team:devops
+        azure:
+          sub-001:
+          - app:frontend
+        gcp:
+          project-abc:
+          - region:us-central1
+      properties:
+        cloud_provider:
+          additionalProperties:
+            additionalProperties:
+              items:
+                description: Tag filter in format "key:value"
+                example: environment:production
+                type: string
+              type: array
+            type: object
+          description: A map of cloud provider names (e.g., "aws", "gcp", "azure")
+            to a map of account/resource IDs and their associated tag filters.
+          type: object
+        uuid:
+          description: The UUID of the resource filter.
+          type: string
+      required:
+      - cloud_provider
+      type: object
+    ResourceFilterRequestType:
+      description: Constant string to identify the request type.
+      enum:
+      - csm_resource_filter
+      example: csm_resource_filter
+      type: string
+      x-enum-varnames:
+      - CSM_RESOURCE_FILTER
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -30428,8 +31320,8 @@ components:
       description: Defines an action that is executed when a routing rule matches
         certain criteria.
       oneOf:
-      - $ref: '#/components/schemas/SlackAction'
-      - $ref: '#/components/schemas/TeamsAction'
+      - $ref: '#/components/schemas/SendSlackMessageAction'
+      - $ref: '#/components/schemas/SendTeamsMessageAction'
     RoutingRuleAttributes:
       description: Defines the configurable attributes of a routing rule, such as
         actions, query, time restriction, and urgency.
@@ -30445,6 +31337,7 @@ components:
           type: string
         time_restriction:
           $ref: '#/components/schemas/TimeRestrictions'
+          nullable: true
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
@@ -30460,8 +31353,7 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RoutingRuleRelationshipsPolicyData'
-      required:
-      - data
+          nullable: true
       type: object
     RoutingRuleRelationshipsPolicyData:
       description: Represents the policy data reference, containing the policy's ID
@@ -31604,9 +32496,6 @@ components:
         data:
           attributes:
             name: On-Call Schedule
-            tags:
-            - tag1
-            - tag2
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           relationships:
@@ -31690,9 +32579,6 @@ components:
                 start_time: 09:00:00
               rotation_start: '2025-02-01T00:00:00Z'
             name: On-Call Schedule
-            tags:
-            - tag1
-            - tag2
             time_zone: America/New_York
           relationships:
             teams:
@@ -31722,10 +32608,10 @@ components:
       type: object
     ScheduleCreateRequestDataAttributes:
       description: Describes the main attributes for creating a new schedule, including
-        name, layers, time zone, and tags.
+        name, layers, and time zone.
       properties:
         layers:
-          description: The layers of on-call coverage that define rotation intervals
+          description: The layers of On-Call coverage that define rotation intervals
             and restrictions.
           items:
             $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems'
@@ -31734,11 +32620,6 @@ components:
           description: A human-readable name for the new schedule.
           example: Team A On-Call
           type: string
-        tags:
-          description: A list of tags for categorizing or filtering the schedule.
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone in which the schedule is defined.
           example: America/New_York
@@ -31763,11 +32644,11 @@ components:
           format: date-time
           type: string
         interval:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsInterval'
+          $ref: '#/components/schemas/LayerAttributesInterval'
         members:
           description: A list of members who participate in this layer's rotation.
           items:
-            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItems'
+            $ref: '#/components/schemas/ScheduleRequestDataAttributesLayersItemsMembersItems'
           type: array
         name:
           description: The name of this layer.
@@ -31777,7 +32658,7 @@ components:
           description: Zero or more time-based restrictions (for example, only weekdays,
             during business hours).
           items:
-            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time when the rotation for this layer starts (in ISO
@@ -31792,137 +32673,13 @@ components:
       - effective_date
       - members
       type: object
-    ScheduleCreateRequestDataAttributesLayersItemsInterval:
-      description: Defines how frequently the rotation repeats, using days and/or
-        seconds (up to certain limits).
-      properties:
-        days:
-          description: The number of full days in each rotation period.
-          example: 1
-          format: int32
-          maximum: 400
-          type: integer
-        seconds:
-          description: Extra seconds that may be added to extend the rotation beyond
-            whole days.
-          example: 300
-          format: int64
-          maximum: 2592000
-          type: integer
-      type: object
-    ScheduleCreateRequestDataAttributesLayersItemsMembersItems:
-      description: Defines a single member within a schedule layer, including the
-        reference to the underlying user.
-      properties:
-        user:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser'
-      type: object
-    ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser:
-      description: Identifies the user participating in this layer as a single object
-        with an `id`.
-      properties:
-        id:
-          description: The user's ID.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-      type: object
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems:
-      description: 'Defines a time restriction for a schedule layer, including which
-        day of the week
-
-        it starts and ends, along with start/end times.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
-        end_time:
-          description: The time of day when the restriction ends (hh:mm:ss).
-          type: string
-        start_day:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
-        start_time:
-          description: The time of day when the restriction begins (hh:mm:ss).
-          type: string
-      type: object
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
-      description: The weekday when the restriction period ends (Monday through Sunday).
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
-      description: The weekday when the restriction period starts (Monday through
-        Sunday).
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     ScheduleCreateRequestDataRelationships:
       description: Gathers relationship objects for the schedule creation request,
         including the teams to associate.
       properties:
         teams:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
-    ScheduleCreateRequestDataRelationshipsTeams:
-      description: Associates the new schedule with one or more teams.
-      properties:
-        data:
-          description: An array of team references for this schedule.
-          items:
-            $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    ScheduleCreateRequestDataRelationshipsTeamsDataItems:
-      description: 'Holds the relationship data linking this schedule to a particular
-        team,
-
-        identified by `id` and `type`.'
-      properties:
-        id:
-          description: A unique identifier for the team.
-          example: ''
-          type: string
-        type:
-          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    ScheduleCreateRequestDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Teams resource type.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     ScheduleCreateRequestDataType:
       default: schedules
       description: Schedules resource type.
@@ -31950,18 +32707,13 @@ components:
       - type
       type: object
     ScheduleDataAttributes:
-      description: Provides core properties of a schedule object, such as its name,
-        time zone, and tags.
+      description: Provides core properties of a schedule object such as its name
+        and time zone.
       properties:
         name:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
-        tags:
-          description: A list of tags associated with this schedule.
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone in which this schedule operates.
           example: America/New_York
@@ -31982,7 +32734,7 @@ components:
         layers:
           $ref: '#/components/schemas/ScheduleDataRelationshipsLayers'
         teams:
-          $ref: '#/components/schemas/ScheduleDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
     ScheduleDataRelationshipsLayers:
       description: Associates layers with this schedule in a data structure.
@@ -32016,38 +32768,6 @@ components:
       type: string
       x-enum-varnames:
       - LAYERS
-    ScheduleDataRelationshipsTeams:
-      description: Associates teams with this schedule in a data structure.
-      properties:
-        data:
-          description: An array of team references for this schedule.
-          items:
-            $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    ScheduleDataRelationshipsTeamsDataItems:
-      description: Relates a team to this schedule, identified by `id` and `type`
-        (must be `teams`).
-      properties:
-        id:
-          description: The unique identifier of the team in this relationship.
-          example: 00000000-da3a-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    ScheduleDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Teams resource type.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     ScheduleDataType:
       default: schedules
       description: Schedules resource type.
@@ -32118,6 +32838,22 @@ components:
       type: string
       x-enum-varnames:
       - MEMBERS
+    ScheduleRequestDataAttributesLayersItemsMembersItems:
+      description: Defines a single member within a schedule layer, including the
+        reference to the underlying user.
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleRequestDataAttributesLayersItemsMembersItemsUser'
+      type: object
+    ScheduleRequestDataAttributesLayersItemsMembersItemsUser:
+      description: Identifies the user participating in this layer as a single object
+        with an `id`.
+      properties:
+        id:
+          description: The user's ID.
+          example: 00000000-aba1-0000-0000-000000000000
+          type: string
+      type: object
     ScheduleTarget:
       description: Represents a schedule target for an escalation policy step, including
         its ID and resource type.
@@ -32183,10 +32919,6 @@ components:
                 start_time: 09:00:00
               rotation_start: '2025-02-01T00:00:00Z'
             name: On-Call Schedule Updated
-            tags:
-            - tag1
-            - tag2
-            - tag3
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           relationships:
@@ -32203,7 +32935,7 @@ components:
       type: object
     ScheduleUpdateRequestData:
       description: Contains all data needed to update an existing schedule, including
-        its attributes (such as name, layers, or tags) and any relationships to teams.
+        its attributes (such as name and time zone) and any relationships to teams.
       properties:
         attributes:
           $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributes'
@@ -32222,7 +32954,7 @@ components:
       type: object
     ScheduleUpdateRequestDataAttributes:
       description: Defines the updatable attributes for a schedule, such as name,
-        time zone, tags, and layers.
+        time zone, and layers.
       properties:
         layers:
           description: The updated list of layers (rotations) for this schedule.
@@ -32233,14 +32965,6 @@ components:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
-        tags:
-          description: A list of tags that you can associate with this schedule.
-          example:
-          - front-end
-          - team-a
-          items:
-            type: string
-          type: array
         time_zone:
           description: The time zone used when interpreting rotation times.
           example: America/New_York
@@ -32272,11 +32996,11 @@ components:
           example: 00000000-0000-0000-0000-000000000001
           type: string
         interval:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsInterval'
+          $ref: '#/components/schemas/LayerAttributesInterval'
         members:
           description: The members assigned to this layer.
           items:
-            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItems'
+            $ref: '#/components/schemas/ScheduleRequestDataAttributesLayersItemsMembersItems'
           type: array
         name:
           description: The name for this layer (for example, "Secondary Coverage").
@@ -32285,7 +33009,7 @@ components:
         restrictions:
           description: Any time restrictions that define when this layer is active.
           items:
-            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems'
+            $ref: '#/components/schemas/TimeRestriction'
           type: array
         rotation_start:
           description: The date/time at which the rotation begins (ISO 8601 format).
@@ -32299,138 +33023,13 @@ components:
       - name
       - rotation_start
       type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsInterval:
-      description: 'Specifies how the rotation repeats: number of days, plus optional
-        seconds, up to the given maximums.'
-      properties:
-        days:
-          description: How many days each rotation cycle should span.
-          example: 1
-          format: int32
-          maximum: 400
-          type: integer
-        seconds:
-          description: Additional seconds to add to the rotation cycle (for example,
-            partial days).
-          example: 300
-          format: int64
-          maximum: 2592000
-          type: integer
-      type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsMembersItems:
-      description: 'Defines a single member within a layer during an update request,
-        referring
-
-        to a specific user.'
-      properties:
-        user:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser'
-      type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser:
-      description: Identifies the user who is assigned to this member object. Only
-        `id` is required.
-      properties:
-        id:
-          description: The user's ID.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-      type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems:
-      description: 'Defines a time restriction object for a layer within a schedule
-        update, including
-
-        start and end days, as well as times.'
-      properties:
-        end_day:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
-        end_time:
-          description: The time at which this restriction ends (hh:mm:ss).
-          example: '17:00:00'
-          type: string
-        start_day:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
-        start_time:
-          description: The time at which this restriction starts (hh:mm:ss).
-          example: 09:00:00
-          type: string
-      type: object
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
-      description: Defines the day of the week on which the time restriction ends.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
-      description: Defines the day of the week on which the time restriction starts.
-      enum:
-      - monday
-      - tuesday
-      - wednesday
-      - thursday
-      - friday
-      - saturday
-      - sunday
-      type: string
-      x-enum-varnames:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
     ScheduleUpdateRequestDataRelationships:
       description: Houses relationships for the schedule update, typically referencing
         teams.
       properties:
         teams:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeams'
+          $ref: '#/components/schemas/DataRelationshipsTeams'
       type: object
-    ScheduleUpdateRequestDataRelationshipsTeams:
-      description: Defines the teams that this schedule update is associated with.
-      properties:
-        data:
-          description: An array of team references.
-          items:
-            $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItems'
-          type: array
-      type: object
-    ScheduleUpdateRequestDataRelationshipsTeamsDataItems:
-      description: Links the schedule to a team within an update request, identified
-        by `id` and `type`.
-      properties:
-        id:
-          description: The unique team identifier.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType:
-      default: teams
-      description: Teams resource type.
-      enum:
-      - teams
-      example: teams
-      type: string
-      x-enum-varnames:
-      - TEAMS
     ScheduleUpdateRequestDataType:
       default: schedules
       description: Schedules resource type.
@@ -32955,9 +33554,11 @@ components:
       example: true
       type: boolean
     SecurityMonitoringRuleKeepAlive:
-      description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window. For third
-        party detection method, this field is not used."
+      description: 'Once a signal is generated, the signal will remain "open" if a
+        case is matched at least once within
+
+        this keep alive window. For third party detection method, this field is not
+        used.'
       enum:
       - 0
       - 60
@@ -32987,9 +33588,10 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleMaxSignalDuration:
-      description: "A signal will \u201Cclose\u201D regardless of the query being
-        matched once the time exceeds the maximum duration.\nThis time is calculated
-        from the first seen timestamp."
+      description: 'A signal will "close" regardless of the query being matched once
+        the time exceeds the maximum duration.
+
+        This time is calculated from the first seen timestamp.'
       enum:
       - 0
       - 60
@@ -34005,7 +34607,7 @@ components:
       - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs or audit trail.
+      description: Source of events, either logs, audit trail, or Datadog events.
       enum:
       - logs
       - audit
@@ -34013,6 +34615,7 @@ components:
       - spans
       - security_runtime
       - network
+      - events
       example: logs
       type: string
       x-enum-varnames:
@@ -34022,6 +34625,7 @@ components:
       - SPANS
       - SECURITY_RUNTIME
       - NETWORK
+      - EVENTS
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -34823,6 +35427,65 @@ components:
       required:
       - selfServiceTrigger
       type: object
+    SendSlackMessageAction:
+      description: Sends a message to a Slack channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        type:
+          $ref: '#/components/schemas/SendSlackMessageActionType'
+        workspace:
+          description: The workspace ID.
+          example: WORKSPACE
+          type: string
+      required:
+      - type
+      - channel
+      - workspace
+      type: object
+    SendSlackMessageActionType:
+      default: send_slack_message
+      description: Indicates that the action is a send Slack message action.
+      enum:
+      - send_slack_message
+      example: send_slack_message
+      type: string
+      x-enum-varnames:
+      - SEND_SLACK_MESSAGE
+    SendTeamsMessageAction:
+      description: Sends a message to a Microsoft Teams channel.
+      properties:
+        channel:
+          description: The channel ID.
+          example: CHANNEL
+          type: string
+        team:
+          description: The team ID.
+          example: TEAM
+          type: string
+        tenant:
+          description: The tenant ID.
+          example: TENANT
+          type: string
+        type:
+          $ref: '#/components/schemas/SendTeamsMessageActionType'
+      required:
+      - type
+      - channel
+      - tenant
+      - team
+      type: object
+    SendTeamsMessageActionType:
+      default: send_teams_message
+      description: Indicates that the action is a send Microsoft Teams message action.
+      enum:
+      - send_teams_message
+      example: send_teams_message
+      type: string
+      x-enum-varnames:
+      - SEND_TEAMS_MESSAGE
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
       properties:
@@ -36505,6 +37168,115 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    Shift:
+      description: The definition of `Shift` object.
+      example:
+        data:
+          attributes:
+            end: '2025-05-07T03:53:01.206662873Z'
+            start: '2025-05-07T02:53:01.206662814Z'
+          id: 00000000-0000-0000-0000-000000000000
+          relationships:
+            user:
+              data:
+                id: 00000000-aba1-0000-0000-000000000000
+                type: users
+          type: shifts
+        included:
+        - attributes:
+            email: foo@bar.com
+            name: User 1
+            status: ''
+          id: 00000000-aba1-0000-0000-000000000000
+          type: users
+      properties:
+        data:
+          $ref: '#/components/schemas/ShiftData'
+          nullable: true
+        included:
+          description: The `Shift` `included`.
+          items:
+            $ref: '#/components/schemas/ShiftIncluded'
+          type: array
+      type: object
+    ShiftData:
+      description: The definition of `ShiftData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ShiftDataAttributes'
+        id:
+          description: The `ShiftData` `id`.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ShiftDataRelationships'
+        type:
+          $ref: '#/components/schemas/ShiftDataType'
+      required:
+      - type
+      type: object
+    ShiftDataAttributes:
+      description: The definition of `ShiftDataAttributes` object.
+      properties:
+        end:
+          description: The end time of the shift.
+          format: date-time
+          type: string
+        start:
+          description: The start time of the shift.
+          format: date-time
+          type: string
+      type: object
+    ShiftDataRelationships:
+      description: The definition of `ShiftDataRelationships` object.
+      properties:
+        user:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUser'
+      type: object
+    ShiftDataRelationshipsUser:
+      description: Defines the relationship between a shift and the user who is working
+        that shift.
+      properties:
+        data:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUserData'
+      required:
+      - data
+      type: object
+    ShiftDataRelationshipsUserData:
+      description: Represents a reference to the user assigned to this shift, containing
+        the user's ID and resource type.
+      properties:
+        id:
+          description: Specifies the unique identifier of the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ShiftDataRelationshipsUserDataType'
+      required:
+      - type
+      - id
+      type: object
+    ShiftDataRelationshipsUserDataType:
+      default: users
+      description: Indicates that the related resource is of type 'users'.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ShiftDataType:
+      default: shifts
+      description: Indicates that the resource is of type 'shifts'.
+      enum:
+      - shifts
+      example: shifts
+      type: string
+      x-enum-varnames:
+      - SHIFTS
+    ShiftIncluded:
+      description: The definition of `ShiftIncluded` object.
+      oneOf:
+      - $ref: '#/components/schemas/ScheduleUser'
     SingleAggregatedConnectionResponseArray:
       description: List of aggregated connections.
       example:
@@ -36623,26 +37395,6 @@ components:
       type: string
       x-enum-varnames:
       - AGGREGATED_CONNECTION
-    SlackAction:
-      description: Sends a message to a Slack channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        type:
-          description: Must be set to "send_slack_message".
-          example: send_slack_message
-          type: string
-        workspace:
-          description: The workspace ID.
-          example: WORKSPACE
-          type: string
-      required:
-      - type
-      - channel
-      - workspace
-      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -38079,6 +38831,150 @@ components:
             $ref: '#/components/schemas/TeamLink'
           type: array
       type: object
+    TeamOnCallResponders:
+      description: Root object representing a team's on-call responder configuration.
+      example:
+        data:
+          id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+          relationships:
+            escalations:
+              data:
+              - id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+                type: escalation_policy_steps
+            responders:
+              data:
+              - id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+                type: users
+          type: team_oncall_responders
+        included:
+        - attributes:
+            email: test@test.com
+            name: Test User
+            status: active
+          id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+          type: users
+        - id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+          relationships:
+            responders:
+              data:
+              - id: 111ee23r-aaaaa-aaaa-aaww-1234wertsd23
+                type: users
+          type: escalation_policy_steps
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamOnCallRespondersData'
+        included:
+          description: The `TeamOnCallResponders` `included`.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersIncluded'
+          type: array
+      type: object
+    TeamOnCallRespondersData:
+      description: Defines the main on-call responder object for a team, including
+        relationships and metadata.
+      properties:
+        id:
+          description: Unique identifier of the on-call responder configuration.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationships'
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataType'
+      required:
+      - type
+      type: object
+    TeamOnCallRespondersDataRelationships:
+      description: Relationship objects linked to a team's on-call responder configuration,
+        including escalations and responders.
+      properties:
+        escalations:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalations'
+        responders:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsResponders'
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalations:
+      description: Defines the escalation policy steps linked to the team's on-call
+        configuration.
+      properties:
+        data:
+          description: Array of escalation step references.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalationsDataItems'
+          type: array
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalationsDataItems:
+      description: Represents a link to a specific escalation policy step associated
+        with the on-call team.
+      properties:
+        id:
+          description: Unique identifier of the escalation step.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsEscalationsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    TeamOnCallRespondersDataRelationshipsEscalationsDataItemsType:
+      default: escalation_policy_steps
+      description: Identifies the resource type for escalation policy steps linked
+        to a team's on-call configuration.
+      enum:
+      - escalation_policy_steps
+      example: escalation_policy_steps
+      type: string
+      x-enum-varnames:
+      - ESCALATION_POLICY_STEPS
+    TeamOnCallRespondersDataRelationshipsResponders:
+      description: Defines the list of users assigned as on-call responders for the
+        team.
+      properties:
+        data:
+          description: Array of user references associated as responders.
+          items:
+            $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsRespondersDataItems'
+          type: array
+      type: object
+    TeamOnCallRespondersDataRelationshipsRespondersDataItems:
+      description: Represents a user responder associated with the on-call team.
+      properties:
+        id:
+          description: Unique identifier of the responder.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamOnCallRespondersDataRelationshipsRespondersDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    TeamOnCallRespondersDataRelationshipsRespondersDataItemsType:
+      default: users
+      description: Identifies the resource type for individual user entities associated
+        with on-call response.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    TeamOnCallRespondersDataType:
+      default: team_oncall_responders
+      description: Represents the resource type for a group of users assigned to handle
+        on-call duties within a team.
+      enum:
+      - team_oncall_responders
+      example: team_oncall_responders
+      type: string
+      x-enum-varnames:
+      - TEAM_ONCALL_RESPONDERS
+    TeamOnCallRespondersIncluded:
+      description: Represents an union of related resources included in the response,
+        such as users and escalation steps.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Escalation'
     TeamPermissionSetting:
       description: Team permission setting
       properties:
@@ -38202,8 +39098,6 @@ components:
         id:
           description: The team's unique identifier.
           type: string
-        relationships:
-          $ref: '#/components/schemas/TeamReferenceRelationships'
         type:
           $ref: '#/components/schemas/TeamReferenceType'
       required:
@@ -38226,46 +39120,6 @@ components:
           description: The full, human-readable name of the team.
           type: string
       type: object
-    TeamReferenceRelationships:
-      description: Collects the key relationship fields for a team reference, specifically
-        on-call users.
-      properties:
-        oncall_users:
-          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsers'
-      type: object
-    TeamReferenceRelationshipsOncallUsers:
-      description: Defines which users are on-call within a team, stored as an array
-        of references.
-      properties:
-        data:
-          description: The list of user references who are on-call for this team.
-          items:
-            $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItems'
-          type: array
-      type: object
-    TeamReferenceRelationshipsOncallUsersDataItems:
-      description: References a user who is on-call within this team, identified by
-        `id` and `type`.
-      properties:
-        id:
-          description: The unique identifier of the user.
-          example: 00000000-aba1-0000-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
-      required:
-      - type
-      - id
-      type: object
-    TeamReferenceRelationshipsOncallUsersDataItemsType:
-      default: users
-      description: Users resource type.
-      enum:
-      - users
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
     TeamReferenceType:
       default: teams
       description: Teams resource type.
@@ -38604,31 +39458,6 @@ components:
           $ref: '#/components/schemas/TeamUpdate'
       required:
       - data
-      type: object
-    TeamsAction:
-      description: Sends a message to a Microsoft Teams channel.
-      properties:
-        channel:
-          description: The channel ID.
-          example: CHANNEL
-          type: string
-        team:
-          description: The team ID.
-          example: TEAM
-          type: string
-        tenant:
-          description: The tenant ID.
-          example: TENANT
-          type: string
-        type:
-          description: Must be set to "send_teams_message".
-          example: send_teams_message
-          type: string
-      required:
-      - type
-      - channel
-      - tenant
-      - team
       type: object
     TeamsField:
       description: Supported teams field.
@@ -39289,6 +40118,52 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateResourceEvaluationFiltersRequest:
+      description: Request object to update a resource filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequestData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersRequestData:
+      description: The definition of `UpdateResourceFilterRequestData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `UpdateResourceEvaluationFiltersRequestData` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
+    UpdateResourceEvaluationFiltersResponse:
+      description: The definition of `UpdateResourceEvaluationFiltersResponse` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponseData'
+      required:
+      - data
+      type: object
+    UpdateResourceEvaluationFiltersResponseData:
+      description: The definition of `UpdateResourceFilterResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceFilterAttributes'
+        id:
+          description: The `data` `id`.
+          example: csm_resource_filter
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceFilterRequestType'
+      required:
+      - attributes
+      - type
+      type: object
     UpdateRuleRequest:
       description: Request to update a scorecard rule.
       properties:
@@ -39420,6 +40295,19 @@ components:
       description: Upsert entity response included item.
       oneOf:
       - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+    UpsertCatalogKindRequest:
+      description: Create or update kind request.
+      oneOf:
+      - $ref: '#/components/schemas/KindObj'
+      - $ref: '#/components/schemas/KindRaw'
+    UpsertCatalogKindResponse:
+      description: Upsert kind response.
+      properties:
+        data:
+          $ref: '#/components/schemas/KindResponseData'
+        meta:
+          $ref: '#/components/schemas/KindResponseMeta'
+      type: object
     Urgency:
       description: Specifies the level of urgency for a routing rule (low, high, or
         dynamic).
@@ -39427,6 +40315,7 @@ components:
       - low
       - high
       - dynamic
+      example: low
       type: string
       x-enum-varnames:
       - LOW
@@ -40891,6 +41780,7 @@ components:
             appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
               This does not restrict API or inventory SQL access to the vulnerability
               data source.
+            billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -44064,6 +44954,170 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/catalog/kind:
+    get:
+      description: Get a list of entity kinds from Software Catalog.
+      operationId: ListCatalogKind
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of kinds in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterByID'
+      - $ref: '#/components/parameters/FilterByName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListKindCatalogResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity kinds
+      tags:
+      - Software Catalog
+      x-menu-order: 4
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+    post:
+      description: Create or update kinds in Software Catalog.
+      operationId: UpsertCatalogKind
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCatalogKindRequest'
+        description: Kind YAML or JSON.
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertCatalogKindResponse'
+          description: ACCEPTED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create or update kinds
+      tags:
+      - Software Catalog
+      x-codegen-request-body-name: body
+      x-given:
+        kind:
+          parameters:
+          - name: body
+            value: "{\n  \"kind\": \"my-job\",\n  \"displayName\": \"My Job\",\n  \"description\":
+              \"A job entity in the catalog.\"\n}"
+          step: there is a valid kind
+      x-menu-order: 5
+      x-undo:
+        operationId: DeleteCatalogKind
+        parameters:
+        - name: kind_id
+          source: data[0].id
+        type: unsafe
+  /api/v2/catalog/kind/{kind_id}:
+    delete:
+      description: Delete a single kind in Software Catalog.
+      operationId: DeleteCatalogKind
+      parameters:
+      - $ref: '#/components/parameters/KindID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a single kind
+      tags:
+      - Software Catalog
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/catalog/relation:
+    get:
+      description: Get a list of entity relations from Software Catalog.
+      operationId: ListCatalogRelation
+      parameters:
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of relations in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/FilterRelationByType'
+      - $ref: '#/components/parameters/FilterRelationByFromRef'
+      - $ref: '#/components/parameters/FilterRelationByToRef'
+      - $ref: '#/components/parameters/RelationInclude'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRelationCatalogResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get a list of entity relations
+      tags:
+      - Software Catalog
+      x-menu-order: 3
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
@@ -44680,6 +45734,80 @@ paths:
         permissions:
         - security_monitoring_rules_read
         - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+  /api/v2/cloud_security_management/resource_filters:
+    get:
+      description: List resource filters.
+      operationId: GetResourceEvaluationFilters
+      parameters:
+      - $ref: '#/components/parameters/ResourceFilterProvider'
+      - $ref: '#/components/parameters/ResourceFilterAccountID'
+      - $ref: '#/components/parameters/SkipCache'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
+      summary: List resource filters
+      tags:
+      - Security Monitoring
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_read
+      x-undo:
+        type: safe
+    put:
+      description: Update resource filters.
+      operationId: UpdateResourceEvaluationFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResourceEvaluationFiltersRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceEvaluationFiltersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
+      summary: Update resource filters
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_filters_write
       x-undo:
         type: idempotent
   /api/v2/container_images:
@@ -45575,14 +46703,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/csm/onboarding/agents:
@@ -46326,16 +47456,232 @@ paths:
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/dora/deployments:
+    post:
+      description: Use this API endpoint to get a list of deployment events.
+      operationId: ListDORADeployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAListDeploymentsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a list of deployment events
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/deployments/{deployment_id}:
+    get:
+      description: Use this API endpoint to get a deployment event.
+      operationId: GetDORADeployment
+      parameters:
+      - description: The ID of the deployment event.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFetchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      - appKeyAuth: []
+      summary: Get a deployment event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/failure:
+    post:
+      description: 'Use this API endpoint to provide failure data for DORA metrics.
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+
+        This is necessary for:
+
+        - Change Failure Rate
+
+        - Time to Restore'
+      operationId: CreateDORAFailure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAFailureRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send a failure event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/dora/failures:
+    post:
+      description: Use this API endpoint to get a list of failure events.
+      operationId: ListDORAFailures
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAListFailuresRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a list of failure events
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
+  /api/v2/dora/failures/{failure_id}:
+    get:
+      description: Use this API endpoint to get a failure event.
+      operationId: GetDORAFailure
+      parameters:
+      - description: The ID of the failure event.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFetchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      - appKeyAuth: []
+      summary: Get a failure event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+      x-undo:
+        type: safe
   /api/v2/dora/incident:
     post:
-      description: 'Use this API endpoint to provide data about incidents for DORA
-        metrics.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure`
+        instead.
+
+
+        Use this API endpoint to provide failure data for DORA metrics.
 
 
         This is necessary for:
@@ -46348,20 +47694,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DORAIncidentRequest'
+              $ref: '#/components/schemas/DORAFailureRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAIncidentResponse'
+                $ref: '#/components/schemas/DORAFailureResponse'
           description: OK
         '202':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAIncidentResponse'
+                $ref: '#/components/schemas/DORAFailureResponse'
           description: OK - but delayed due to incident
         '400':
           content:
@@ -46379,12 +47725,9 @@ paths:
       tags:
       - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -52364,8 +53707,7 @@ paths:
           maximum: 2147483647
           minimum: 49
           type: integer
-      - description: The number of aggregations that a `count`, `rate`, or `gauge`
-          metric is configured to use. Max number of aggregation combos is 9.
+      - description: Deprecated. Number of aggregations has no impact on volume.
         example: 1
         in: query
         name: filter[num_aggregations]
@@ -52585,17 +53927,16 @@ paths:
       description: 'Create and define a list of queryable tag keys for an existing
         count/gauge/rate/distribution metric.
 
-        Optionally, include percentile aggregations on any distribution metric or
-        configure custom aggregations
+        Optionally, include percentile aggregations on any distribution metric. By
+        setting `exclude_tags_mode`
 
-        on any count, rate, or gauge metric. By setting `exclude_tags_mode` to true
-        the behavior is changed
+        to true, the behavior is changed from an allow-list to a deny-list, and tags
+        in the defined list are
 
-        from an allow-list to a deny-list, and tags in the defined list will not be
-        queryable.
+        not queryable. Can only be used with application keys of users with the `Manage
+        Tags for Metrics`
 
-        Can only be used with application keys of users with the `Manage Tags for
-        Metrics` permission.'
+        permission.'
       operationId: CreateTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -53528,7 +54869,7 @@ paths:
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/on-call/escalation-policies:
     post:
-      description: Create a new on-call escalation policy
+      description: Create a new On-Call escalation policy
       operationId: CreateOnCallEscalationPolicy
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -53562,7 +54903,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on-call escalation policy
+      summary: Create On-Call escalation policy
       tags:
       - On-Call
       x-given:
@@ -53570,9 +54911,9 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
-              unique }}\",\n      \"description\": \"{{ unique }}\",\n      \"resolve_page_on_policy_end\":
-              true,\n      \"retries\": 2,\n      \"steps\": [\n        {\n          \"assignment\":
-              \"default\",\n          \"escalate_after_seconds\": 3600,\n          \"targets\":
+              unique }}\",\n      \"resolve_page_on_policy_end\": true,\n      \"retries\":
+              2,\n      \"steps\": [\n        {\n          \"assignment\": \"default\",\n
+              \         \"escalate_after_seconds\": 3600,\n          \"targets\":
               [\n            {\n              \"id\": \"{{ dd_team.data.id }}\",\n
               \             \"type\": \"teams\"\n            },\n            {\n              \"id\":
               \"{{ schedule.data.id }}\",\n              \"type\": \"schedules\"\n
@@ -53588,6 +54929,10 @@ paths:
               \ }\n}"
           step: there is a valid "escalation_policy" in the system
       x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         operationId: DeleteOnCallEscalationPolicy
         parameters:
@@ -53596,7 +54941,7 @@ paths:
         type: unsafe
   /api/v2/on-call/escalation-policies/{policy_id}:
     delete:
-      description: Delete an on-call escalation policy
+      description: Delete an On-Call escalation policy
       operationId: DeleteOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53621,14 +54966,18 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on-call escalation policy
+      summary: Delete On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
     get:
-      description: Get an on-call escalation policy
+      description: Get an On-Call escalation policy
       operationId: GetOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53665,14 +55014,18 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call escalation policy
+      summary: Get On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
-      description: Update an on-call escalation policy
+      description: Update an On-Call escalation policy
       operationId: UpdateOnCallEscalationPolicy
       parameters:
       - description: The ID of the escalation policy
@@ -53715,15 +55068,256 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on-call escalation policy
+      summary: Update On-Call escalation policy
       tags:
       - On-Call
       x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
+  /api/v2/on-call/pages:
+    post:
+      description: 'Trigger a new On-Call Page.
+
+        '
+      operationId: CreateOnCallPage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePageResponse'
+          description: OK.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Create On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 1
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/acknowledge:
+    post:
+      description: 'Acknowledges an On-Call Page.
+
+        '
+      operationId: AcknowledgeOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Acknowledge On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 2
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/escalate:
+    post:
+      description: 'Escalates an On-Call Page.
+
+        '
+      operationId: EscalateOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Escalate On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 3
+      x-undo:
+        parameters: []
+        type: unsafe
+  /api/v2/on-call/pages/{page_id}/resolve:
+    post:
+      description: 'Resolves an On-Call Page.
+
+        '
+      operationId: ResolveOnCallPage
+      parameters:
+      - description: The page ID.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+      responses:
+        '202':
+          description: Accepted.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      servers:
+      - url: https://{site}
+        variables:
+          site:
+            default: navy.oncall.datadoghq.com
+            description: The globally available endpoint for On-Call.
+            enum:
+            - saffron.oncall.datadoghq.com
+            - navy.oncall.datadoghq.com
+            - coral.oncall.datadoghq.com
+            - teal.oncall.datadoghq.com
+            - beige.oncall.datadoghq.eu
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      summary: Resolve On-Call Page
+      tags:
+      - On-Call Paging
+      x-menu-order: 4
+      x-undo:
+        parameters: []
+        type: unsafe
   /api/v2/on-call/schedules:
     post:
-      description: Create a new on-call schedule
+      description: Create a new On-Call schedule
       operationId: CreateOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -53757,7 +55351,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Create on-call schedule
+      summary: Create On-Call schedule
       tags:
       - On-Call
       x-given:
@@ -53768,20 +55362,23 @@ paths:
               \       {\n          \"effective_date\": \"{{ timeISO('now - 10d') }}\",\n
               \         \"end_date\": \"{{ timeISO('now + 10d') }}\",\n          \"interval\":
               {\n            \"days\": 1\n          },\n          \"members\": [\n
-              \           {\n              \"user\": {\n                \"id\": \"890f29d4-0b7a-11f0-aeb2-760fcae4f596\"\n
-              \             }\n            }\n          ],\n          \"name\": \"Layer
-              1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
+              \           {\n              \"user\": {\n                \"id\": \"{{
+              user.data.id }}\"\n              }\n            }\n          ],\n          \"name\":
+              \"Layer 1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
               \"friday\",\n              \"end_time\": \"17:00:00\",\n              \"start_day\":
               \"monday\",\n              \"start_time\": \"09:00:00\"\n            }\n
               \         ],\n          \"rotation_start\": \"{{ timeISO('now - 5d')
-              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"tags\":
-              [\n        \"tag1\",\n        \"tag2\"\n      ],\n      \"time_zone\":
+              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"time_zone\":
               \"America/New_York\"\n    },\n    \"relationships\": {\n      \"teams\":
               {\n        \"data\": [\n          {\n            \"id\": \"65aea9d0-941c-4607-bf8a-14fc0dac2820\",\n
               \           \"type\": \"teams\"\n          }\n        ]\n      }\n    },\n
               \   \"type\": \"schedules\"\n  }\n}"
           step: there is a valid "schedule" in the system
       x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         operationId: DeleteOnCallSchedule
         parameters:
@@ -53790,7 +55387,7 @@ paths:
         type: unsafe
   /api/v2/on-call/schedules/{schedule_id}:
     delete:
-      description: Delete an on-call schedule
+      description: Delete an On-Call schedule
       operationId: DeleteOnCallSchedule
       parameters:
       - description: The ID of the schedule
@@ -53815,14 +55412,18 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Delete on-call schedule
+      summary: Delete On-Call schedule
       tags:
       - On-Call
       x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
     get:
-      description: Get an on-call schedule
+      description: Get an On-Call schedule
       operationId: GetOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -53857,14 +55458,18 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call schedule
+      summary: Get On-Call schedule
       tags:
       - On-Call
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
-      description: Update a new on-call schedule
+      description: Update a new On-Call schedule
       operationId: UpdateOnCallSchedule
       parameters:
       - description: 'Comma-separated list of included relationships to be returned.
@@ -53907,15 +55512,117 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Update on-call schedule
+      summary: Update On-Call schedule
       tags:
       - On-Call
       x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
+  /api/v2/on-call/schedules/{schedule_id}/on-call:
+    get:
+      description: Retrieves the user who is on-call for the specified schedule at
+        a given time.
+      operationId: GetScheduleOnCallUser
+      parameters:
+      - description: 'Specifies related resources to include in the response as a
+          comma-separated list. Allowed value: `user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule.
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      - description: Retrieves the on-call user at the given timestamp (ISO-8601).
+          Defaults to the current time if omitted."
+        in: query
+        name: filter[at_ts]
+        schema:
+          example: '2025-05-07T02:53:01Z'
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shift'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get the schedule on-call user
+      tags:
+      - On-Call
+      x-menu-order: 11
+      x-undo:
+        type: safe
+  /api/v2/on-call/teams/{team_id}/on-call:
+    get:
+      description: Get a team's on-call users at a given time
+      operationId: GetTeamOnCallUsers
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `responders`, `escalations`, `escalations.responders`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          example: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamOnCallResponders'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get team on-call users
+      tags:
+      - On-Call
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
-      description: Get a team's on-call routing rules
+      description: Get a team's On-Call routing rules
       operationId: GetOnCallTeamRoutingRules
       parameters:
       - description: The team ID
@@ -53944,14 +55651,18 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get on-call team routing rules
+      summary: Get On-Call team routing rules
       tags:
       - On-Call
       x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
       x-undo:
         type: safe
     put:
-      description: Set a team's on-call routing rules
+      description: Set a team's On-Call routing rules
       operationId: SetOnCallTeamRoutingRules
       parameters:
       - description: The team ID
@@ -53986,19 +55697,26 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Set on-call team routing rules
+      summary: Set On-Call team routing rules
       tags:
       - On-Call
       x-given:
         routing_rules:
           parameters:
+          - name: team_id
+            source: dd_team.data.id
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"rules\": [\n
-              \       {\n          \"query\": \"\",\n          \"policy_id\": \"{{
-              escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"time_restriction\":
-              null,\n          \"actions\": []\n        }\n      ]\n    }\n  }\n}"
+            value: "{\n  \"data\": {\n    \"type\": \"team_routing_rules\",\n    \"id\":
+              \"{{ dd_team.data.id }}\",\n    \"attributes\": {\n      \"rules\":
+              [\n        {\n          \"query\": \"\",\n          \"policy_id\": \"{{
+              escalation_policy.data.id }}\",\n          \"urgency\": \"low\",\n          \"actions\":
+              []\n        }\n      ]\n    }\n  }\n}"
           step: there are valid "routing_rules" in the system
       x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_write
       x-undo:
         type: idempotent
   /api/v2/org_configs:
@@ -54162,13 +55880,19 @@ paths:
         the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
         parameters must be only among the documented ones and with values of correct
         types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
-        are not allowed.\n\n### Response\n\nThe response includes an array of finding
-        objects, pagination metadata, and a count of items that match the query.\n\nEach
-        finding object contains the following:\n\n- The finding ID that can be used
-        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
-        including status, evaluation, high-level resource details, muted state, and
-        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
-        stamps.\n- An array of associated tags.\n"
+        are not allowed.\n\n### Additional extension fields\n\nAdditional extension
+        fields are available for some findings.\n\nThe data is available when you
+        include the query parameter `?detailed_findings=true` in the request.\n\nThe
+        following fields are available for findings:\n- `external_id`: The resource
+        external ID related to the finding.\n- `description`: The description and
+        remediation steps for the finding.\n- `datadog_link`: The Datadog relative
+        link for the finding.\n\n### Response\n\nThe response includes an array of
+        finding objects, pagination metadata, and a count of items that match the
+        query.\n\nEach finding object contains the following:\n\n- The finding ID
+        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
+        Core attributes, including status, evaluation, high-level resource details,
+        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -54271,6 +55995,14 @@ paths:
           items:
             $ref: '#/components/schemas/FindingVulnerabilityType'
           type: array
+      - description: Return additional fields for some findings.
+        example:
+        - true
+        in: query
+        name: detailed_findings
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -55171,8 +56903,14 @@ paths:
         type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
-      description: Get the list of Cloud Security Management Threats Agent rules.
+      description: 'Get the list of Workload Protection agent rules.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: ListCSMThreatsAgentRules
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID'
       responses:
         '200':
           content:
@@ -55184,22 +56922,25 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all CSM Threats Agent rules
+      summary: Get all Workload Protection agent rules
       tags:
       - CSM Threats
-      x-menu-order: 3
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
-      description: Create a new Cloud Security Management Threats Agent rule with
-        the given parameters.
+      description: 'Create a new Workload Protection agent rule with the given parameters.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: CreateCSMThreatsAgentRule
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
-        description: The definition of the new Agent rule.
+        description: The definition of the new agent rule
         required: true
       responses:
         '200':
@@ -55216,7 +56957,7 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a CSM Threats Agent rule
+      summary: Create a Workload Protection agent rule
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
@@ -55227,9 +56968,12 @@ paths:
             value: "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\":
               {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
-              \     \"enabled\": true\n     }\n  }\n}"
+              \     \"enabled\": true,\n      \"product_tags\": [\"security:attack\",
+              \"technique:T1059\"],\n      \"actions\": [{\"set\": {\"name\": \"test_set\",
+              \"value\": \"test_value\", \"scope\": \"process\"}}],\n      \"policy_id\":
+              \"{{ policy.data.id }}\"\n     }\n  }\n}"
           step: there is a valid "agent_rule_rc" in the system
-      x-menu-order: 4
+      x-menu-order: 3
       x-undo:
         operationId: DeleteCSMThreatsAgentRule
         parameters:
@@ -55238,10 +56982,15 @@ paths:
         type: unsafe
   /api/v2/remote_config/products/cws/agent_rules/{agent_rule_id}:
     delete:
-      description: Delete a specific Cloud Security Management Threats Agent rule.
+      description: 'Delete a specific Workload Protection agent rule.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: DeleteCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      - $ref: '#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID'
       responses:
         '204':
           description: OK
@@ -55251,18 +57000,22 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a CSM Threats Agent rule
+      summary: Delete a Workload Protection agent rule
       tags:
       - CSM Threats
-      x-menu-order: 6
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
-      description: Get the details of a specific Cloud Security Management Threats
-        Agent rule.
+      description: 'Get the details of a specific Workload Protection agent rule.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: GetCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      - $ref: '#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID'
       responses:
         '200':
           content:
@@ -55276,25 +57029,30 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a CSM Threats Agent rule
+      summary: Get a Workload Protection agent rule
       tags:
       - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
     patch:
-      description: 'Update a specific Cloud Security Management Threats Agent rule.
+      description: 'Update a specific Workload Protection Agent rule.
 
-        Returns the Agent rule object when the request is successful.'
+        Returns the agent rule object when the request is successful.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: UpdateCSMThreatsAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      - $ref: '#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID'
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
-        description: New definition of the Agent rule.
+        description: New definition of the agent rule
         required: true
       responses:
         '200':
@@ -55313,22 +57071,100 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a CSM Threats Agent rule
+      summary: Update a Workload Protection agent rule
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/remote_config/products/cws/policy:
+    get:
+      description: 'Get the list of Workload Protection policies.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
+      operationId: ListCSMThreatsAgentPolicies
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentPoliciesListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Workload Protection policies
+      tags:
+      - CSM Threats
+      x-menu-order: 6
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new Workload Protection policy with the given parameters.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
+      operationId: CreateCSMThreatsAgentPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyCreateRequest'
+        description: The definition of the new Agent policy
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a Workload Protection policy
+      tags:
+      - CSM Threats
+      x-codegen-request-body-name: body
+      x-given:
+        policy:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"policy\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
+              \"My agent policy\",\n      \"hostTags\": [\"env:staging\"],\n      \"enabled\":
+              true\n     }\n  }\n}"
+          step: there is a valid "policy_rc" in the system
+      x-menu-order: 8
+      x-undo:
+        operationId: DeleteCSMThreatsAgentPolicy
+        parameters:
+        - name: policy_id
+          source: data.id
+        type: unsafe
   /api/v2/remote_config/products/cws/policy/download:
     get:
-      description: 'The download endpoint generates a CSM Threats policy file from
-        your currently active
+      description: 'The download endpoint generates a Workload Protection policy file
+        from your currently active
 
-        CSM Threats rules, and downloads them as a `.policy` file. This file can then
-        be deployed to
+        Workload Protection agent rules, and downloads them as a `.policy` file. This
+        file can then be deployed to
 
-        your Agents to update the policy running in your environment.'
+        your agents to update the policy running in your environment.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
       operationId: DownloadCSMThreatsPolicy
       responses:
         '200':
@@ -55342,12 +57178,109 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get the latest CSM Threats policy
+      summary: Download the Workload Protection policy
       tags:
       - CSM Threats
-      x-menu-order: 1
+      x-menu-order: 11
       x-undo:
         type: safe
+  /api/v2/remote_config/products/cws/policy/{policy_id}:
+    delete:
+      description: 'Delete a specific Workload Protection policy.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
+      operationId: DeleteCSMThreatsAgentPolicy
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
+      responses:
+        '202':
+          description: OK
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a Workload Protection policy
+      tags:
+      - CSM Threats
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
+    get:
+      description: 'Get the details of a specific Workload Protection policy.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
+      operationId: GetCSMThreatsAgentPolicy
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a Workload Protection policy
+      tags:
+      - CSM Threats
+      x-menu-order: 7
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Workload Protection policy.
+
+        Returns the policy object when the request is successful.
+
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site.
+        Please reference the (US1-FED) specific resource below.'
+      operationId: UpdateCSMThreatsAgentPolicy
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyUpdateRequest'
+        description: New definition of the Agent policy
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a Workload Protection policy
+      tags:
+      - CSM Threats
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/obs_pipelines/pipelines:
     get:
       description: Retrieve a list of pipelines.
@@ -55700,6 +57633,8 @@ paths:
 
         - Connection Groups: `connection-group`
 
+        - RUM Applications: `rum-application`
+
 
         #### Supported relations for resources
 
@@ -55739,7 +57674,9 @@ paths:
 
         Connections                 | `viewer`, `resolver`, `editor`
 
-        Connection Groups           | `viewer`, `editor`'
+        Connection Groups           | `viewer`, `editor`
+
+        RUM Application             | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -58320,13 +60257,16 @@ paths:
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
-      description: 'The download endpoint generates a Cloud Workload Security policy
-        file from your currently active
+      description: 'The download endpoint generates a Workload Protection policy file
+        from your currently active
 
-        Cloud Workload Security rules, and downloads them as a .policy file. This
+        Workload Protection agent rules, and downloads them as a `.policy` file. This
         file can then be deployed to
 
-        your Agents to update the policy running in your environment.'
+        your agents to update the policy running in your environment.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: DownloadCloudWorkloadPolicyFile
       responses:
         '200':
@@ -58340,10 +60280,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get the latest Cloud Workload Security policy
+      summary: Download the Workload Protection policy (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 1
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -59231,7 +61171,10 @@ paths:
         type: idempotent
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
-      description: Get the list of Agent rules.
+      description: 'Get the list of agent rules.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: ListCloudWorkloadSecurityAgentRules
       responses:
         '200':
@@ -59244,10 +61187,10 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get all Cloud Workload Security Agent rules
+      summary: Get all Workload Protection agent rules (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 3
+      x-menu-order: 12
       x-permission:
         operator: OR
         permissions:
@@ -59255,14 +61198,17 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a new Agent rule with the given parameters.
+      description: 'Create a new agent rule with the given parameters.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: CreateCloudWorkloadSecurityAgentRule
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
-        description: The definition of the new Agent rule.
+        description: The definition of the new agent rule
         required: true
       responses:
         '200':
@@ -59279,7 +61225,7 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a Cloud Workload Security Agent rule
+      summary: Create a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
@@ -59292,7 +61238,7 @@ paths:
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
               \     \"enabled\": true\n     }\n  }\n}"
           step: there is a valid "agent_rule" in the system
-      x-menu-order: 4
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -59305,7 +61251,10 @@ paths:
         type: unsafe
   /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
     delete:
-      description: Delete a specific Agent rule.
+      description: 'Delete a specific agent rule.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: DeleteCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59318,10 +61267,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a Cloud Workload Security Agent rule
+      summary: Delete a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -59329,7 +61278,10 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get the details of a specific Agent rule.
+      description: 'Get the details of a specific agent rule.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: GetCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59346,10 +61298,10 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a Cloud Workload Security Agent rule
+      summary: Get a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
-      x-menu-order: 2
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -59357,9 +61309,12 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: 'Update a specific Agent rule.
+      description: 'Update a specific agent rule.
 
-        Returns the Agent rule object when the request is successful.'
+        Returns the agent rule object when the request is successful.
+
+
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.'
       operationId: UpdateCloudWorkloadSecurityAgentRule
       parameters:
       - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
@@ -59368,7 +61323,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
-        description: New definition of the Agent rule.
+        description: New definition of the agent rule
         required: true
       responses:
         '200':
@@ -59387,11 +61342,11 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a Cloud Workload Security Agent rule
+      summary: Update a Workload Protection agent rule (US1-FED)
       tags:
       - CSM Threats
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -63763,14 +65718,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 45
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -63870,14 +65827,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
       x-menu-order: 6
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -63954,14 +65913,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get historical cost across your account
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -64300,14 +66261,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get projected cost across your account
       tags:
       - Usage Metering
       x-menu-order: 7
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
@@ -65326,10 +67289,14 @@ tags:
 
     Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.'
   name: CSM Coverage Analysis
-- description: Cloud Security Management Threats (CSM Threats) monitors file, network,
-    and process activity across your environment to detect real-time threats to your
-    infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
-    for more information on setting up CSM Threats.
+- description: 'Workload Protection monitors file, network, and process activity across
+    your environment to detect real-time threats to your infrastructure. See [Workload
+    Protection](https://docs.datadoghq.com/security/workload_protection/) for more
+    information on setting up Workload Protection.
+
+
+    **Note**: These endpoints are split based on whether you are using the US1-FED
+    site or not. Please reference the specific resource for the site you are using.'
   name: CSM Threats
 - description: View and manage cases and projects within Case Management. See the
     [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
@@ -65361,9 +67328,12 @@ tags:
     See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
     more information.
   name: Containers
-- description: Send events for DORA Metrics to measure and improve software delivery.
-    See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
-    information.
+- description: 'Search or send events for DORA Metrics to measure and improve your
+    software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/)
+    for more information.
+
+
+    **Note**: DORA Metrics are not available in the US1-FED site.'
   name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
@@ -65572,6 +67542,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/service_management/on-call/
   name: On-Call
+- description: 'Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)
+
+    pages directly through the Datadog API.'
+  externalDocs:
+    url: https://docs.datadoghq.com/service_management/on-call/
+  name: On-Call Paging
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'

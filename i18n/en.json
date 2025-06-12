@@ -291,5 +291,11 @@
   },
   "available_for": {
     "other": "Available for"
+  },
+  "join_now": {
+    "other": "Join Now"
+  },
+  "datadog_partner_network": {
+    "other": "Datadog Partner Network Documentation"
   }
 }

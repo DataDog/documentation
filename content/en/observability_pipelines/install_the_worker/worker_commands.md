@@ -23,6 +23,8 @@ If you are using a containerized environment, use the `docker exec` or `kubectl 
 
 Usage example: `observability-pipelines-worker tap <OPTIONS> <COMPONENT_ID>`
 
+You can use the [`top` command](#run-tap-or-top-the-worker) to find the ID of the component you want to `tap` into.
+
 | Options                          | Descriptions                                                                                                   |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `-i`, `--interval <INTERVAL>`    | Interval to sample events at, in milliseconds (default: `500`).                                                |
