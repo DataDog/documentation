@@ -9,6 +9,15 @@ Parameters:
   VPC:
     Type: "AWS::EC2::VPC::Id"
     Description: "The VPC to deploy the resources in"
+  SubnetId:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: "The subnet to deploy the Lambda function in"
+  LambdaBucket:
+    Type: String
+    Description: "The S3 bucket containing the Lambda function code"
+  LambdaKey:
+    Type: String
+    Description: "The S3 key for the Lambda function code"
 
 Resources:
   # The SNS topic is used as the target for RDS instance events
@@ -197,3 +206,24 @@ Resources:
       SecurityGroupEgress:
       - IpProtocol: "-1"
         CidrIp: "0.0.0.0/0"
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: !Ref LambdaBucket
+        S3Key: !Ref LambdaKey
+      # Environment:
+      #   Variables:
+      #     ADMIN_USER_SECRET_ARN: !Ref AdminUserSecretArn
+      #     DATADOG_USER_SECRET_ARN: !Ref DatadogUserSecretArn
+      Runtime: nodejs22.x
+      Timeout: 10
+      MemorySize: 128
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+        SubnetIds:
+          - !Ref SubnetId

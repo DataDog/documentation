@@ -206,9 +206,9 @@ Outputs:
   VPCId:
     Description: "VPC ID"
     Value: !Ref VPC
-  # SubnetAId:
-  #   Description: "Subnet A ID"
-  #   Value: !Ref SubnetA
+  SubnetAId:
+    Description: "Subnet A ID"
+    Value: !Ref SubnetA
   # SubnetCId:
   #   Description: "Subnet C ID"
   #   Value: !Ref SubnetC

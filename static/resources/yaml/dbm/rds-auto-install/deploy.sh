@@ -6,5 +6,6 @@ aws cloudformation deploy \
 --capabilities CAPABILITY_IAM \
 --parameters \
 "ParameterKey=VPC,ParameterValue=$(aws cloudformation describe-stacks --stack-name "rds-auto-install-demo" --query "Stacks[0].Outputs[?ExportName=='VPCId'].OutputValue" --output text)" \
+"ParameterKey=SubnetId,ParameterValue=$(aws cloudformation describe-stacks --stack-name "rds-auto-install-demo" --query "Stacks[0].Outputs[?ExportName=='SubnetAId'].OutputValue" --output text)" \
 ParameterKey=LambdaBucket,ParameterValue=rds-auto-install-demo \
 "ParameterKey=LambdaKey,ParameterValue=$(tar c -C lambda index.js package.json package-lock.json | md5 -q).zip"
