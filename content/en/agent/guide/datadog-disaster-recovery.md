@@ -122,7 +122,7 @@ curl -v -H "Content-Type: application/json" -H
 At the secondary Datadog site, create a set of `API key` **and** `App key`. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
 
 <div class="alert alert-info">
-For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your Agent.
+For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your Agent. Contact your [Customer Success Manager](mailto:success@datadoghq.com) for any questions regarding this.
 </div>
 {{% /collapse-content %}}
 
