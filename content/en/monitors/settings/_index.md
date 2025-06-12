@@ -25,7 +25,7 @@ On the [Monitor Settings page][1], you can access and control the following topi
 * [Deleted Monitors](#deleted-monitors)
 
 
-## Organization Settings
+## Organization settings
 
 ### Monitors time zone preference
 
