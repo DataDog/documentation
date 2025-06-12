@@ -23,9 +23,9 @@ author:
   sales_email: oran.moshai@aquasec.com
   support_email: oran.moshai@aquasec.com
 categories:
-- incident-teams
+- コンテナ
 - ログの収集
-- security
+- セキュリティ
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md

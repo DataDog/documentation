@@ -23,7 +23,7 @@ author:
 categories:
 - 메트릭
 - 알림
-custom_kind: 통합
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
 display_on_public_website: true
@@ -38,18 +38,18 @@ name: nobl9
 public_title: Nobl9
 short_description: Nobl9으로 SLI 수집, SLO 계산, 오류 예산 알림 활성화하기
 supported_os:
-- linux
-- 윈도우즈(Windows)
+- 리눅스
+- windows
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Metrics
+  - 카테고리::메트릭
   - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
+  - 제공::통합
   configuration: README.md#Setup
   description: Nobl9으로 SLI 수집, SLO 계산, 오류 예산 알림 활성화하기
   media: []

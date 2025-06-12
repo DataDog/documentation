@@ -12,10 +12,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check:
-      - coredns.request_count
-      - coredns.request_count.count
-      - coredns.build_info
+      check: coredns.request_count
       metadata_path: metadata.csv
       prefix: coredns.
     process_signatures:
@@ -79,7 +76,7 @@ tile:
   title: CoreDNS
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -132,7 +129,7 @@ LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/met
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de Docker][2].
 
-Luego, configura [integraciones de logs][3] como etiquetas Docker:
+Luego, configura [integraciones de logs][3] como etiquetas (labels) Docker:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]'
@@ -146,13 +143,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 
 #### Kubernetes
 
-Para Configurar este check para un Agent que se ejecuta en Kubernetes:
+Para configurar este check para un Agent que se ejecuta en Kubernetes:
 
 ##### Recopilación de métricas
 
 Configura [plantillas de integraciones Autodiscovery][1] como anotaciones de pod en tu contenedor de aplicación. Las plantillas también se pueden configurar con [un archivo, un configmap o un almacén de clave-valor][2].
 
-**Anotaciones v1** (para el Datadog Agent v7.36 o anterior)
+**Anotaciones v1** (para Datadog Agent v7.36 o anterior)
 
 ```yaml
 apiVersion: v1
@@ -205,7 +202,7 @@ spec:
 
 Para activar el modo heredado de este check basado en OpenMetrics, sustituye `openmetrics_endpoint` por `prometheus_url`:
 
-**Anotaciones v1** (para el Datadog Agent v7.36 o anterior)
+**Anotaciones v1** (para Datadog Agent v7.36 o anterior)
 
 ```yaml
     ad.datadoghq.com/coredns.instances: |
@@ -267,7 +264,7 @@ Para configurar este check para un Agent que se ejecuta en ECS:
 
 ##### Recopilación de métricas
 
-Configura [plantillas de integraciones de Autodiscovery][1] como etiquetas (labels) Docker en el contenedor de tu aplicación:
+Establece las [plantillas de integraciones de Autodiscovery][1] como etiquetas (labels) Docker en el contenedor de tu aplicación:
 
 ```json
 {
@@ -299,7 +296,7 @@ Para activar el modo heredado de este check basado en OpenMetrics, sustituye `op
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de ECS][2].
 
-Luego, configura [integraciones de logs][3] como etiquetas Docker:
+Luego, configura [integraciones de logs][3] como etiquetas (labels) Docker:
 
 ```yaml
 {
@@ -342,7 +339,7 @@ El check de CoreDNS no incluye eventos.
 
 ## Referencias adicionales
 
-Documentación útil adicional, enlaces y artículos:
+Más enlaces, artículos y documentación útiles:
 
 - [Métricas clave para la monitorización CoreDNS][9]
 - [Herramientas para la recopilación de métricas y logs de CoreDNS][10]

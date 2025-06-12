@@ -2,7 +2,7 @@
 categories:
 - azure
 - nube
-- network
+- la red
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Virtual Network.
@@ -41,7 +41,7 @@ Obtén métricas de Azure Virtual Network para:
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 ### Métricas
@@ -54,7 +54,7 @@ La integración Azure Virtual Network no incluye eventos.
 ### Checks de servicios
 La integración Azure Virtual Network no incluye checks de servicios.
 
-## Solucionar problemas
+## Resolución de problemas
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/

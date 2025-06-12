@@ -24,9 +24,11 @@ further_reading:
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
 </div>
 
-This page details common use cases for adding and customizing observability with Datadog APM.
+<div class="alert alert-info">
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
+</div>
 
-{{% tracing-go-v2 %}}
+This page details common use cases for adding and customizing observability with Datadog APM.
 
 ## Adding tags
 
@@ -43,7 +45,8 @@ import (
     "log"
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" 
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +76,8 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -93,7 +97,8 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 package main
 
 import (
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -124,9 +129,9 @@ Unlike other Datadog tracing libraries, when tracing Go applications, it's recom
 
 ### Manually creating a new span
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][12] (or [the v1 godoc page][4]):
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4] (or [the v2 godoc page][12]):
 
-There are two functions available to create spans. API details are available for `StartSpan` [here][13] (or [here for v1][5]) and for `StartSpanFromContext` [here][14] (or [here for v1][6]).
+There are two functions available to create spans. API details are available for `StartSpan` [here][5] (or [here for v2][13]) and for `StartSpanFromContext` [here][6] (or [here for v2][14]).
 
 ```go
 //Create a span with a resource name, which is the child of parentSpan.
@@ -162,7 +167,8 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -188,7 +194,8 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

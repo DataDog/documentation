@@ -698,8 +698,8 @@ import (
 
 
    "github.com/DataDog/datadog-go/v5/statsd"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 

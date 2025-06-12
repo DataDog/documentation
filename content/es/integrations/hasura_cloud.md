@@ -65,7 +65,7 @@ tile:
   title: Hasura Cloud
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -99,7 +99,7 @@ Los logs, las métricas, y las trazas de tu proyecto Hasura Cloud se envían aut
 {{< get-metrics-from-git "hasura_cloud" >}}
 
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Hasura Cloud no incluye checks de servicio.
 
@@ -113,6 +113,6 @@ La integración Hasura Cloud no incluye eventos.
 
 [1]: https://hasura.io/cloud/
 [2]: https://hasura.io/docs/latest/observability/integrations/datadog/
-[3]: https://app.datadoghq.com/logs
+[3]: http://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/es/logs/explorer/facets/#create-facets
 [5]: https://docs.datadoghq.com/es/help/

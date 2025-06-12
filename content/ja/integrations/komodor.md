@@ -8,7 +8,7 @@ author:
   sales_email: sales@komodor.com
   support_email: support@komodor.com
 categories:
-- incident-teams
+- コンテナ
 - kubernetes
 - notifications
 custom_kind: integration
@@ -89,7 +89,7 @@ Komodor は、K8s スタック全体の変更を追跡し、その波及効果�
 
 4. Kubernetes [アノテーション][7]を使用して、Datadog APM ダッシュボードへの関連リンクや、Datadog 内の特定のサービスメトリクスや時間範囲への動的リンクで Komodor サービスやデプロイ画面をリッチ化することができます。
 
-## サポート
+## Agent
 
 詳しくは、[Web サイトをご覧いただく][8]か、または[お問い合わせ][9]ください。
 

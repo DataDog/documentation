@@ -1,23 +1,13 @@
 ---
 title: Entity Types
 disable_toc: false
-further_reading:
-- link: "/internal_developer_portal/software_catalog/set_up/create_entities"
-  tag: "Documentation"
-  text: "Create entities in Software Catalog"
-- link: "/internal_developer_portal/software_catalog/set_up/discover_entities"
-  tag: "Documentation"
-  text: "Learn how entities are discovered in Software Catalog"
-- link: "/internal_developer_portal/software_catalog/set_up/import_entities"
-  tag: "Documentation"
-  text: "Import entities into Software Catalog"
 ---
 
 ## Overview
 
 In Software Catalog, an entity represents the smallest building block of modern microservice-based architecture. As of [schema definition v3.0][1]+, an entity can be an instrumented APM service, a datastore, a system, an API, a queue, or even a custom-defined entity. 
 
-See GitHub for [full schema definitions][2]. 
+See GitHub for [full schema definitions][1]. 
 
 ## Entity types
 
@@ -408,7 +398,7 @@ You can define custom entity types beyond service, system, datastore, queue, and
 Example YAML:
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
   apiVersion: v3
-  kind: library
+  kind: custom.library
   metadata:
     name: my-library
     displayName: My Library
@@ -447,11 +437,6 @@ Example YAML:
 
 {{< /tabs >}}
 
-[1]: /internal_developer_portal/software_catalog/entity_model
-[2]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
+[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[2]: /tracing/services/inferred_services/?tab=agentv7551#naming-inferred-entities

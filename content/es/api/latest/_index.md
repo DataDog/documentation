@@ -238,7 +238,7 @@ O consulta directamente en las bibliotecas:
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-¿Estás intentando empezar con la aplicación? Consulta los [documentos "Empezando con"][7] de Datadog.
+¿Quieres empezar a utilizar la aplicación? Consulta los documentos generales [Empezando][7] de Datadog.
 
 ## Referencias adicionales
 

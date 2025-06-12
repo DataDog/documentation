@@ -54,7 +54,7 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, toggle on **extend resource collection** from the [Resource Catalog][5] setup page. 
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
 **Note**: Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
 

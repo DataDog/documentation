@@ -10,6 +10,7 @@ aliases:
   - /service_catalog/customize/import_entries_integrations/
   - /service_catalog/customize/import_entries_backstage/
   - /software_catalog/customize/import_entries_backstage
+
   - /service_catalog/customize/import_entries_servicenow/   ## alias for Import Entries from ServiceNow page
   - /software_catalog/customize/import_entries_servicenow
 further_reading:
@@ -33,7 +34,7 @@ If you already have data or services registered in Backstage or ServiceNow, you 
 To import Backstage definitions:
 
 - **API or Terraform**: Replace the YAMLs in your requests with Backstage YAMLs. 
-- **GitHub integration**: Save your Backstage YAMLs in a repository with Datadog read permissions. Datadog scans for files named `catalog-info.yaml` in your repositories.
+- **GitHub integration**: Save your Backstage YAMLs in a repository with Datadog read permissions. Datadog scans for files named [`catalog-info.yaml`][1] in your repositories.
 
 During import, Datadog maps Backstage data to Datadog data:
 | Backstage Field | Datadog Mapping |
@@ -82,4 +83,5 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/software/settings/get-started
 [2]: /integrations/servicenow/#service-ingestion

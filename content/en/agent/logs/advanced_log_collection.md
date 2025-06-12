@@ -79,10 +79,6 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-<div class="alert alert-info">
-For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
-</div>
-
 In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
@@ -105,10 +101,6 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-
-<div class="alert alert-info">
-For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
-</div>
 
 To configure using Autodiscovery to collect container logs on a given container (with the name `CONTAINER_NAME`) within your pod, add the following annotations to your pod's `log_processing_rules`:
 

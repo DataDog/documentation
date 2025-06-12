@@ -28,7 +28,7 @@ author:
 categories:
 - recopilación de logs
 - colas de mensajes
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -44,27 +44,27 @@ public_title: Redpanda
 short_description: Monitoriza el estado y el rendimiento general de tus clústeres
   Redpanda.
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
-  - Category::Message Queues
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Recopilación de logs
+  - Categoría::Colas de mensajes
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Monitoriza el estado y el rendimiento general de tus clústeres Redpanda.
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Redpanda
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 ## Información general
 
@@ -87,9 +87,9 @@ Conecta Datadog con [Redpanda][1] para ver métricas clave y añadir grupos de m
 Para configurar este check para un Agent que se ejecuta en un host, ejecuta `datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>`.
 
 {{% /tab %}}
-{{% tab "Contenedores" %}}
+{{% tab "Contenedorizado" %}}
 
-#### Contenedores
+#### Contenedorizado
 
 En entornos contenedorizados, la mejor manera de utilizar esta integración con el Docker Agent es crear el Agent con la integración Redpanda instalada. 
 
@@ -168,9 +168,9 @@ Por defecto, la recopilación de logs se encuentra deshabilitada en el Datadog A
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedores" %}}
+{{% tab "Contenedorizado" %}}
 
-#### Contenedores
+#### Contenedorizado
 
 ##### Recopilación de métricas
 

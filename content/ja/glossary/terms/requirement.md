@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- cloud security
+- csm
 title: 要件
 ---
 

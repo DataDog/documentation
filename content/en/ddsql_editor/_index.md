@@ -25,12 +25,16 @@ Type your question into the search box, and Datadog builds the SQL query for you
 
 ## Use SQL syntax (DDSQL)
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. For more information, see the [DDSQL Reference][6].
+DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
+
+<div class="alert alert-warning">
+  There are two different <strong>variants</strong> of DDSQL. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
+</div>
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
 FROM aws.ec2_instance
-WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
+WHERE tags->'region' = 'us-east-1' -- env is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
@@ -65,8 +69,7 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /ddsql_reference/ddsql_default/#tags
+[2]: /ddsql_reference/ddsql_preview/tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
 [5]: /help/
-[6]: /ddsql_reference/ddsql_default/

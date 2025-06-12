@@ -4,7 +4,7 @@ code_lang: ddsql_preview
 type: multi-code-lang
 code_lang_weight: 2
 products: 
-- name: DDSQL Editor (Preview)
+- name: DDSQL Editor
   url: /ddsql_editor/
   icon: ddsql
 further_reading:

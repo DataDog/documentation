@@ -22,7 +22,7 @@ author:
   support_email: david.bouchare@datadoghq.com
 categories:
 - métricas
-- red
+- network
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
@@ -46,15 +46,15 @@ tile:
   - Category::Network
   - Supported OS::Linux
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Integración de Sendmail para monitorizar colas de correos
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Sendmail
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -75,7 +75,7 @@ En el caso de las versiones 7.21/6.21 o posteriores del Agent, sigue las siguie
    datadog-agent integration install -t datadog-sendmail==<INTEGRATION_VERSION>
    ```
 
-2. Configura tu integración similar a las [integraciones][4] centrales.
+2. Configura tu integración como si fuese una [integración][4] de base.
 
 ### Configuración
 
@@ -103,7 +103,7 @@ Sendmail no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][10].
+¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
 
 [1]: https://www.proofpoint.com/us/open-source-email-solution

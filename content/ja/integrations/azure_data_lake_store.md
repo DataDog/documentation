@@ -1,58 +1,29 @@
 ---
-app_id: azure-datalakestore
-app_uuid: 56d73475-119f-498c-b8d8-b192f89aaba0
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.datalakestore_accounts.read_requests
-      metadata_path: metadata.csv
-      prefix: azure.datalakestore_accounts
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 289
-    source_type_name: Azure Data Lake Store
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ja/integrations/azure_datalakestore
 categories:
 - azure
 - クラウド
 - data stores
 custom_kind: インテグレーション
 dependencies: []
-display_on_public_website: true
+description: Azure Data Lake Store のキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
 draft: false
 git_integration_title: azure_data_lake_store
+has_logo: true
 integration_id: azure-datalakestore
-integration_title: Azure Data Lake Store
+integration_title: Microsoft Azure Data Lake Store
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_data_lake_store
-public_title: Azure Data Lake Store
+public_title: Datadog-Microsoft Azure Data Lake Store インテグレーション
 short_description: Azure Data Lake Store のキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Azure
-  - Category::Cloud
-  - Category::Data Stores
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure Data Lake Store のキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Data Lake Store
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Data Lake Store は、ビッグデータ分析を可能にする無制限のデータレイクです。

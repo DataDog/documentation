@@ -43,7 +43,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Seguimiento de incidentes
+  - Categoría::Seguimiento de problemas
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
@@ -59,7 +59,7 @@ tile:
   title: Gremlin
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -93,7 +93,7 @@ La integración Gremlin no proporciona métricas.
 
 La integración Gremlin envía eventos a tu [Flujo de eventos Datadog][4] cuando se inician o detienen ataques en Gremlin.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Gremlin no incluye checks de servicio.
 
@@ -103,7 +103,7 @@ La integración Gremlin no incluye checks de servicio.
 
 ## Referencias adicionales
 
-Documentación útil adicional, enlaces y artículos:
+Más enlaces, artículos y documentación útiles:
 
 - [Monitorización de Gremlin de su propio servicio de Ingeniería del Caos con Datadog][6]
 

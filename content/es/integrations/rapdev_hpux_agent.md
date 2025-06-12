@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones del Marketplace
+  subcategory: Integraciones de Marketplace
 app_id: rapdev-hpux-agent
 app_uuid: 5e611b0d-a099-4823-a4ba-e42b1012b3b5
 assets:
@@ -25,7 +25,7 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,14 +39,14 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_hpux_agent
 pricing:
-- billing_type: recuento_etiquetas
+- billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.rapdev.hpux_agent
   product_id: hpux-agent
   short_description: Precio unitario por host
   tag: host
   unit_label: HP-UX Agent
-  unit_price: 100.0
+  unit_price: 40
 public_title: HP-UX Agent
 short_description: Agent del sistema que proporciona métricas para HP-UX 11.31 para
   hppa e itanium
@@ -54,10 +54,10 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Marketplace
-  - Oferta::Integración
-  - Tipo de datos enviados::Métricas
-  configuration: README.md#Configuración
+  - Category::Marketplace
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
   description: Agent del sistema que proporciona métricas para HP-UX 11.31 para hppa
     e itanium
   media:
@@ -70,13 +70,13 @@ tile:
   - caption: Logs
     image_url: images/3.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: HP-UX Agent
-  uninstallation: README.md#Desinstalación
+  uninstallation: README.md#Uninstallation
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
+<!--  FUENTE https://github.com/DataDog/marketplace -->
 
 ## Información general
 
@@ -86,7 +86,7 @@ El HP-UX Agent proporciona los metadatos de host necesarios para admitir la list
 
 El HP-UX Agent usa las mismas URLs y puertos que los Agents nativos. Actualmente, el HP-UX Agent admite métricas de infraestructura central, checks de procesos y colas de log. No admite checks del Agente personalizados, integraciones ni checks de servicio.
 
-## Ayuda
+## Agent
 
 Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales: 
 
@@ -100,4 +100,4 @@ Hecho con ❤️ en Boston
 *¿Esta no es la integración que estás buscando? ¿Falta una función esencial para tu organización? Envíanos una [nota](mailto:support@rapdev.io) y la crearemos.*
 
 ---
-Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">adquiere esta aplicación en el Marketplace</a>.
+Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.

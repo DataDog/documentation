@@ -26,7 +26,7 @@ is_public: true
 manifest_version: 2.0.0
 name: firefly
 public_title: Firefly
-short_description: Actualiza tu nube
+short_description: Actualizar tu nube según las normas
 supported_os:
 - linux
 - windows
@@ -34,17 +34,17 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Configuración y despliegue
-  - Categoría::Herramientas de desarrollo
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  configuration: README.md#Configuración
-  description: Actualiza tu nube
+  configuration: README.md#Setup
+  description: Actualizar tu nube según las normas
   media:
   - caption: Inventario completo en la nube
     image_url: images/FF-inventory.png
@@ -55,11 +55,11 @@ tile:
   - caption: Detectar y corregir desviaciones
     image_url: images/FF-fix-drifts.png
     media_type: imagen
-  - caption: Detectar y corregir infracciones de política
+  - caption: Detectar y corregir infracciones de políticas
     image_url: images/FF-insights.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Firefly
 ---
 
@@ -71,7 +71,7 @@ Firefly es una solución de gestión de recursos en la nube que ayuda a los equi
 Firefly ayuda a los equipos a hacer que sus recursos Datadog sean inmutables, versionados, escalables y monitorizados, gestionándolos como código en cualquier herramienta Infrastructure-as-Code (IaC) de su elección.
 
 ### Inventario completo en la nube
-Obtén un inventario con capacidad de búsqueda completa de todos los activos de Datadog junto con otros activos en la nube, como AWS, K8s, GCP, Okta, etc.
+Obtén un inventario que permita cualquier búsqueda de todos los recursos Datadog junto con otros recursos en la nube, como AWS, K8s, GCP, Okta, etc.
 
 ### Codificación automática
 Convierte automáticamente en código uno o varios recursos Datadog, incluidas las especificaciones de Terraform, Pulumi, Cloudformation y CDK.
@@ -91,7 +91,7 @@ Utiliza el motor de políticas unificado de Firefly para encontrar errores de co
 4. Copia la clave API y pégala en la línea correspondiente.
 5. Haz clic en **Done** (Listo).
 
-## Soporte
+## Ayuda
 ¿Tienes alguna duda? Envía un correo electrónico a [contact@gofirefly.io][1] o utiliza el chat de la aplicación.
 
 [1]: mailto:contact@gofirefly.io

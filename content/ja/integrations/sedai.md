@@ -24,10 +24,10 @@ author:
   support_email: praveen.prakash@sedai.io
 categories:
 - 自動化
-- クラウド
+- cloud
 - コスト管理
 - notifications
-- オーケストレーション
+- orchestration
 - プロビジョニング
 custom_kind: integration
 dependencies:

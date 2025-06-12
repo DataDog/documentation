@@ -8,10 +8,6 @@ further_reading:
 
 [Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Apache Spark and Databricks jobs.
 
-{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring/" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
-Databricks Serverless Job Monitoring helps you detect issues with jobs running on Serverless or SQL Warehouse compute. Complete the form to request access.
-{{< /callout >}}
-
 ## Setup
 
 <div class="alert alert-info"><a href="https://docs.databricks.com/en/security/network/front-end/index.html">Databricks Networking Restrictions</a> can block some Datadog functions. Add the following Datadog IP ranges to your allow-list: {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IPs" >}}, {{< region-param key="ip_ranges_url_api" link="true" text="API IPs" >}}.</div>
@@ -19,7 +15,7 @@ Databricks Serverless Job Monitoring helps you detect issues with jobs running o
 Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
-1. [Install the Datadog Agent](#install-the-datadog-agent) on your Databricks cluster(s) in the workspace.
+1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s) in the workspace.
 
 
 ### Configure the Datadog-Databricks integration

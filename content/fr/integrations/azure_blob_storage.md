@@ -1,60 +1,27 @@
 ---
-app_id: azure-blob-storage
-app_uuid: 57ef97b4-651a-432d-9dc5-f56a94449d75
-assets:
-  dashboards:
-    azure_blob_storage: assets/dashboards/azure_blob_storage.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.storage_storageaccounts_blobservices.blob_count
-      metadata_path: metadata.csv
-      prefix: azure.storage_storageaccounts_blobservices
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 226
-    source_type_name: Azure Blob Storage
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - data stores
 custom_kind: integration
 dependencies: []
-display_on_public_website: true
+description: Surveillez des métriques clés de Stockage Blob Azure.
+doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
 draft: false
 git_integration_title: azure_blob_storage
+has_logo: true
 integration_id: azure-blob-storage
-integration_title: Azure Blob Storage
+integration_title: Stockage Blob Microsoft Azure
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_blob_storage
-public_title: Azure Blob Storage
+public_title: Intégration Datadog/Stockage Blob Microsoft Azure
 short_description: Surveillez des métriques clés de Stockage Blob Azure.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Azure
-  - Category::Cloud
-  - Category::Data Stores
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez des métriques clés de Stockage Blob Azure.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Blob Storage
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Section Overview
 
 Stockage Blob Azure est une solution de stockage d'objets conçue par Microsoft pour le cloud. Le stockage de blobs est optimisé pour d'importants volumes de données non structurées. Recueillez des métriques de Stockage Blob Azure pour :

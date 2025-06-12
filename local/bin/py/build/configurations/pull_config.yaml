@@ -421,7 +421,7 @@
               title: Continuous Testing and CircleCI Orb
               aliases:
                 - /synthetics/cicd_integrations/circleci_orb
-
+      
       - repo_name: synthetics-test-automation-bitrise-step-upload-application
         contents:
         - action: pull-and-push-file
@@ -434,7 +434,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-
+      
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
@@ -514,6 +514,65 @@
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
 
+      - repo_name: dd-source
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
+          options:
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_cc.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloudcraft.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_ccm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloud-cost-management.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_csm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloud-security-monitoring.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_npm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-network-performance-monitoring.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_rc.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-resource-catalog.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/aws_future_permissions.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-upcoming-permissions.md"
+
       - repo_name: web-ui
         contents:
           - action: pull-and-push-file
@@ -587,7 +646,7 @@
               front_matters:
                 title: Migrate DatadogAgent CRDs to v2alpha1
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
-
+                
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
@@ -620,4 +679,4 @@
               front_matters:
                 dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
                 title: (Legacy) Ruby Compatibility Requirements
-
+          

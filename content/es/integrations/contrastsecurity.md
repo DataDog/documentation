@@ -25,7 +25,7 @@ author:
 categories:
 - recopilación de logs
 - seguridad
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_on_public_website: true
@@ -60,7 +60,7 @@ tile:
   title: Contrast Security
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -107,7 +107,7 @@ La integración Contrast no incluye métricas.
 
 La integración Contrast no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Contrast no incluye checks de servicio.
 

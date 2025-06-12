@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/status/
+- link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
 title: サービスチェックモニター
@@ -60,7 +60,7 @@ Datadog で[サービスチェックモニター][6]を作成するには、メ�
     *  何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。たとえば、問題修正を確実にするには、`4` 回の `OK` ステータスでモニターを解決します。
 
 
-[1]: /ja/monitors/status
+[1]: /ja/monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -87,7 +87,7 @@ Datadog で[サービスチェックモニター][6]を作成するには、メ�
 
 ### 通知
 
-**Configure notifications and automations** (通知と自動化の構成) セクションの詳しい説明は、[通知][11]のページをご覧ください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][11] page.
 
 ## その他の参考資料
 

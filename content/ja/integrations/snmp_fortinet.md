@@ -20,7 +20,7 @@ author:
 categories:
 - ネットワーク
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_fortinet/README.md
 display_on_public_website: true
@@ -89,12 +89,12 @@ SNMP インテグレーションをインストールして構成するには、
 
 お役に立つドキュメント、リンクや記事:
 
-* [Datadog を使用した SNMP の監視][5]
+* [Monitor SNMP with Datadog][5]
 
 
 
-[1]: https://docs.datadoghq.com/ja/network_monitoring/devices/data
-[2]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup
-[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
+[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
+[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

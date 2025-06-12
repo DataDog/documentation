@@ -1,7 +1,6 @@
 {
     "files.associations": {
-        "*.mdoc.md": "markdoc",
-        "*.md": "markdown"
+        "*.mdoc.md": "markdoc"
     },
     "[markdoc]": {
         "editor.defaultFormatter": "stripe.markdoc-language-support",

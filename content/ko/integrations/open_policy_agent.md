@@ -26,11 +26,11 @@ author:
   sales_email: ara.pulido@datadoghq.com
   support_email: ara.pulido@datadoghq.com
 categories:
-- compliance
+- 준수
 - 설정 및 배포
 - 컨테이너
 - 로그 수집
-- security
+- 보안
 custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
@@ -81,7 +81,7 @@ tile:
 다음과 같이 쿠버네티스(Kubernetes) 클러스터에서 open_policy_agent 점검을 설치합니다.
 
 1. [개발자 툴킷][3]을 설치합니다.
-2. `integrations-extras` 리포지토리를 복제합니다.
+2. `integrations-extras` 리포지토리 복제:
 
    ```shell
    git clone https://github.com/DataDog/integrations-extras.git.
@@ -90,7 +90,7 @@ tile:
 3. `integrations-extras/` 경로로 `ddev` config을 업데이트합니다.
 
    ```shell
-   ddev config set repos.extras ./integrations-extras
+   ddev config set extras ./integrations-extras
    ```
 
 4. `open_policy_agent` 패키지를 빌드하려면 다음을 실행합니다.

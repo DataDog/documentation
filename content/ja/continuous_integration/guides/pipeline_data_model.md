@@ -19,12 +19,12 @@ title: パイプラインのデータモデルと実行タイプ
 
 ## データモデル
 
-パイプラインの実行は、[APM の分散トレース][1]と同様にトレースとしてモデル化され、スパンがパイプラインの各部分の実行を表します。CI Visibility でパイプライン実行を表すデータモデルは、4 つのレベルで構成されます。
+Pipeline executions are modeled as traces, similar to an [APM distributed trace][1], where spans represent the execution of different parts of the pipeline. The CI Visibility data model for representing pipeline executions consists of four levels:
 
 | レベル名 | 説明 |
 | ---------- | ----------- |
 | パイプライン (必須)  | 他のすべてのレベルを子として含む、最上位のルートスパン。パイプラインの開始から終了までの全体的な実行を表します。CI プロバイダーによっては、このレベルを `build` や `workflow` と呼ぶこともあります。 |
-| ステージ      | ユーザーが定義した名前でジョブをグループ化するレベルです。一部の CI プロバイダーでは、このレベルが存在しない場合があります。 |
+| ステージ      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
 | ジョブ        | コマンドが実行される最小の作業単位。このレベルのタスクはすべて 1 つのノードで実行する必要があります。 |
 | 手順       | CI プロバイダーによっては、このレベルはシェルスクリプトやジョブ内で実行されるアクションを表します。 |
 
@@ -32,13 +32,13 @@ title: パイプラインのデータモデルと実行タイプ
 
 {{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行トレースの例" style="width:100%;">}}
 
-ステージ、ジョブ、ステップは、親となるパイプラインとまったく同じパイプライン名であることが期待されます。名前が一致しない場合、一部のパイプラインでステージやジョブ、ステップの情報が欠ける可能性があります。たとえば、ジョブサマリーのテーブルにジョブが表示されない場合などです。
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
 
 ### パイプライン固有 ID
 
-同じレベル内のすべてのパイプライン実行は、一意の識別子を持たなければなりません。たとえば、パイプラインとジョブが同じ一意 ID を持つことは可能ですが、2 つのパイプラインが同じ一意 ID を持つことはできません。
+All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.
 
-異なるタイムスタンプで同じ ID を送信すると、ユーザーインターフェイスが意図しない動作を示す場合があります。たとえば、フレームグラフに別のパイプライン実行のスパンタグが表示されることがあります。また、同一のタイムスタンプで重複した ID を送信すると、最後に受信したパイプライン実行の値のみが保存されます。
+When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only the values of the last pipeline execution received are stored.
 
 ## パイプライン実行タイプ
 
@@ -54,15 +54,15 @@ title: パイプラインのデータモデルと実行タイプ
 
 ### 完全なリトライ
 
-パイプラインを完全にリトライする場合は、リトライごとに異なるパイプラインの一意の ID を使用する必要があります。
+Full retries of a pipeline must have different pipeline unique IDs. 
 
-公開 API エンドポイントでは、`previous_attempt` フィールドを設定して以前のリトライと関連付けることができます。Datadog 上ではリトライは別のパイプライン実行として扱われ、開始時刻と終了時刻はそのリトライに対応する範囲のみを含みます。
+In the public API endpoint, you can populate the `previous_attempt` field to link to previous retries. Retries are treated as separate pipeline executions in Datadog, and the start and end time should only encompass that retry.
 
 ### 部分的なリトライ
 
 パイプライン内のジョブのサブセットをリトライする場合は、新しいパイプライン固有 ID を持つ新しいパイプラインイベントを送信する必要があります。新しいジョブのペイロードは、新しいパイプライン固有 ID にリンクされていなければなりません。前回のリトライとリンクさせるには、`previous_attempt` フィールドを追加します。
 
-部分リトライも同様に別のパイプラインとして扱われます。開始時刻と終了時刻には、元のパイプライン実行の時間を含めてはいけません。部分リトライでは、前回の実行で実行されたジョブのペイロードは送信しないでください。また、実行時間を集計する際に部分リトライを除外するため、部分リトライの場合は `partial_retry` フィールドを `true` に設定します。
+Partial retries are treated as separate pipelines as well. The start and end time must not include the time of the original retry. For a partial retry, do not send payloads for jobs that ran in the previous attempt. Also, set the `partial_retry` field to `true` on partial retries to exclude them from aggregation when calculating run times.
 
 例えば、`P` という名前のパイプラインには `J1`、`J2`、`J3` という 3 つのジョブがあり、順次実行されます。`P` の最初の実行では、`J1` と `J2` のみが実行され、`J2` は失敗します。
 
@@ -80,7 +80,7 @@ title: パイプラインのデータモデルと実行タイプ
 2. `J3` のジョブペイロード。ID は `J3_1`、パイプライン ID は `P_2`。
 3. `P` のパイプラインペイロード。ID は `P_2`。
 
-ID の実際の値自体は重要ではありません。重要なのは、上記のとおりパイプラインの実行に応じて適切に変更されていることです。
+The actual values of the IDs are not important. What matters is that they are correctly modified based on the pipeline run as specified above.
 
 ### ブロッ クされたパイプライン
 
@@ -88,7 +88,7 @@ ID の実際の値自体は重要ではありません。重要なのは、上�
 
 {{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="ブロックされたパイプライン実行の流れ" style="width:100%;">}}
 
-残りのパイプラインデータは、異なるパイプラインの一意 ID を用いて別のペイロードで送信する必要があります。2 つ目のパイプラインでは、ブロックされたパイプラインから再開されたことを示すために `is_resumed` を `true` に設定できます。
+The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. In the second pipeline, you can set `is_resumed` to `true` to signal that the execution was resumed from a blocked pipeline.
 
 ### ダウンストリームパイプライン
 
@@ -100,7 +100,7 @@ ID の実際の値自体は重要ではありません。重要なのは、上�
 
 ## Git 情報
 
-パイプライン実行をトリガーしたコミットの Git 情報を提供することが強く推奨されます。Git 情報のないパイプライン実行は [Recent Code Changes ページ][4]に表示されません。最低限、リポジトリの URL、コミット SHA、および作者のメールアドレスが必要です。詳細は[公開 API エンドポイント仕様][3]を参照してください。
+Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear on the [Recent Code Changes page][4]. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
 
 ## 参考資料
 

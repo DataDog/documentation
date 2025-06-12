@@ -1,56 +1,28 @@
 ---
-app_id: azure-cognitiveservices
-app_uuid: 0d77c8ca-d9b6-46a5-925e-c942e00425a2
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.cognitiveservices_accounts.total_calls
-      metadata_path: metadata.csv
-      prefix: azure.cognitiveservices_accounts
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 282
-    source_type_name: Azure Cognitive Services
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ja/integrations/azure_cognitiveservices
 categories:
 - クラウド
 - azure
 custom_kind: インテグレーション
 dependencies: []
-display_on_public_website: true
+description: Azure Cognitive Services のキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
 draft: false
 git_integration_title: azure_cognitive_services
+has_logo: true
 integration_id: azure-cognitiveservices
-integration_title: Azure Cognitive Services
+integration_title: Microsoft Azure Cognitive Services
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_cognitive_services
-public_title: Azure Cognitive Services
+public_title: Datadog-Microsoft Azure Cognitive Services インテグレーション
 short_description: Azure Cognitive Services のキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure Cognitive Services のキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Cognitive Services
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Cognitive Services は、開発者に AI やデータサイエンスに関する直接的なスキルや知識がなくても、インテリジェントなアプリケーションを構築するために使用できる API、SDK、およびサービスです。
@@ -61,7 +33,7 @@ Datadog Azure インテグレーションを使用して、Azure Cognitive Servi
 
 ### インストール
 
-If you haven't already, set up the [Microsoft Azure integration][1]. No additional installation are required.
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

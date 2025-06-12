@@ -1,56 +1,28 @@
 ---
-app_id: azure-appserviceenvironment
-app_uuid: 918d0126-a4b0-4d8d-b38b-718c6115938d
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.web_hostingenvironments_multirolepools.cpu_percentage
-      metadata_path: metadata.csv
-      prefix: azure.web_hostingenv
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 278
-    source_type_name: Azure App Service 환경
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ko/integrations/azure_appserviceenvironment
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-display_on_public_website: true
+description: 주요 Azure App Service Environment 메트릭을 추적하세요.
+doc_link: https://docs.datadoghq.com/integrations/azure_app_service_environment/
 draft: false
 git_integration_title: azure_app_service_environment
+has_logo: true
 integration_id: azure-appserviceenvironment
-integration_title: Azure App Service 환경
+integration_title: Microsoft Azure App Service Environment
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_app_service_environment
-public_title: Azure App Service 환경
+public_title: Datadog-Microsoft Azure App Service Environment 통합
 short_description: 주요 Azure App Service Environment 메트릭을 추적하세요.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: 주요 Azure App Service Environment 메트릭을 추적하세요.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure App Service 환경
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Azure App Service Environment는 대규모로 App Service 앱을 안전하게 실행하도록 완전히 격리된 전용 환경을 제공하는 Azure App Service 기능입니다.

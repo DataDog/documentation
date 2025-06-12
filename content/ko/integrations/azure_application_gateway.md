@@ -1,56 +1,28 @@
 ---
-app_id: azure-applicationgateway
-app_uuid: f797ba91-33c8-49e8-9316-159ca6c83764
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.network_applicationgateways.current_connections
-      metadata_path: metadata.csv
-      prefix: azure.network_applicationgateways
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 280
-    source_type_name: Azure Application Gateway
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ko/integrations/azure_applicationgateway
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-display_on_public_website: true
+description: Azure Application Gateway의 핵심 메트릭 추적하기
+doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
 draft: false
 git_integration_title: azure_application_gateway
+has_logo: true
 integration_id: azure-applicationgateway
-integration_title: Azure Application Gateway
+integration_title: Microsoft Azure Application Gateway
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_application_gateway
-public_title: Azure Application Gateway
+public_title: Datadog-Microsoft Azure Application Gateway 통합
 short_description: Azure Application Gateway의 핵심 메트릭 추적하기
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure Application Gateway의 핵심 메트릭 추적하기
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Application Gateway
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Azure Application Gateway는 내 애플리케이션의 트래픽을 관리하도록 해주는 웹 트래픽 로드 밸런서입니다.

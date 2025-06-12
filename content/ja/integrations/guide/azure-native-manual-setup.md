@@ -26,19 +26,19 @@ title: Azure Native インテグレーション手動セットアップガイド
 
 ## 概要
 
-本ガイドでは、Azure で Datadog リソースを作成し、Datadog の Azure ネイティブインテグレーションを手動でセットアップする手順を説明します。
+Use this guide to manually set up the Datadog Azure Native integration through creation of the Datadog resource in Azure.
 
-Datadog リソースは Azure 環境の管理とデータ収集を効率化します。Datadog では可能な限りこの方法の利用を推奨しています。これにより、標準の Azure インテグレーションでメトリクス収集やログ転送 (Event Hub の設定) に用いられていた App Registration 資格情報の手順を置き換えることができます。
+The Datadog resource streamlines management and data collection for your Azure environment. Datadog recommends using this method when possible. This replaces the App Registration credential process used by the standard Azure integration for metric collection and Event Hub setup for log forwarding.
 
 ### 前提条件
 
 #### 必要なアクセス許可
 
-Azure ネイティブインテグレーションをセットアップするには、リンクする Azure サブスクリプションで **Owner** 権限、リンク先の Datadog 組織で **Admin** 権限をそれぞれ持っている必要があります。セットアップを開始する前に、適切なアクセス権限があることを確認してください。
+To set up the Azure Native integration, you must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog organization you are linking them to. Ensure you have the appropriate access before starting the setup.
 
 ## セットアップ
 
-Azure インテグレーションを構成するには、Azure 上で Datadog リソースを作成する必要があります。これらのリソースは、Datadog 組織と Azure サブスクリプションの間の接続 (リンク) を表します。1 つの Datadog リソースで複数の Azure サブスクリプションを Datadog に接続することが可能です。
+Configuring the Azure integration requires the creation of a Datadog resource in Azure. These resources represent the connection or link between a Datadog organization and an Azure subscription. Multiple Azure subscriptions can be connected to Datadog with a single Datadog resource. 
 
 Azure に Datadog リソースを作成するには、2 つのオプションがあります。
 
@@ -46,24 +46,24 @@ Azure に Datadog リソースを作成するには、2 つのオプションが
 
 2. 新しい Datadog オーガニゼーションを作成。このフローは、あまり一般的ではありません。まだ Datadog オーガニゼーションをお持ちでなく、Azure Marketplace を通じて有料プランを始める場合はこのオプションを使用します。新しい Datadog オーガニゼーションを作成し、請求プランを選択して、関連する Azure サブスクリプションをリンクして監視できます。
 
-**注**: Azure の **Create a new Datadog organization** オプションを通じてトライアルを利用することはできません。無料トライアルを開始するには、まず [US3 サイトで Datadog のトライアル組織を作成][1]してください。その後、リンクのフローを使用して監視対象のサブスクリプションを追加します。
+**Note**: Trials are not available through the **Create a new Datadog organization** option in Azure. To get started with a free trial, first [create a trial Datadog org on the US3 site][1]. Then use the linking flow to add any subscriptions you want to monitor.
 
-Datadog リソースを作成すると、対応するサブスクリプションのデータ収集が開始されます。Datadog の構成、管理、デプロイに関する詳細は [Managing the Azure Native Integration][2] ガイドを参照してください。
+Once you create a Datadog resource, data collection begins for the associated subscription. See details for using this resource to configure, manage, and deploy Datadog in the [Managing the Azure Native Integration][2] guide.
 
-### Datadog リソースを作成する
+### Create a Datadog resource
 
-Azure サブスクリプションを監視するには、まず Azure の [Datadog Service ページ][3]に移動し、新しい Datadog リソースを作成するオプションを選択します。
-{{< img src="integrations/azure/azure-us3-dd-service.png" alt="Azure US3 Datadog サービス" responsive="true" style="width:90%;">}}
+To start monitoring an Azure subscription, navigate to the [Datadog Service page in Azure][3] and select the option to create a new Datadog resource:
+{{< img src="integrations/azure/azure-us3-dd-service.png" alt="Azure US3 Datadog Service" responsive="true" style="width:90%;">}}
 
 **Link Azure subscription to an existing Datadog organization** または **Create a new Datadog organization** を選択します。リンクの方がより一般的なアクションです。まだリンクしていない Azure サブスクリプションのモニタリングの構成に、このオプションを使用します。Datadog をまだご利用でなく、有料プランを新規で開始したいお客様のみ **Create** フローを選択してください。
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource1.png" alt="Azure US3 Datadog リソースの作成" responsive="true" style="width:90%;">}}
 
-**注**: Azure ポータルを通じて新しく作成された Datadog 組織の請求は、自動的に Azure の請求に統合されます。該当する場合、この利用分は組織の [MACC][4] に含まれます。
+**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][4] if applicable.
 
 ### SSO コンフィギュレーション
 
-_(オプション)_: Azure で新しい Datadog 組織を作成する際に[シングルサインオン (SSO)][5] を構成できます。後から設定することも可能です。最初に設定する場合は、まず Datadog エンタープライズギャラリーアプリを作成してください。
+_(Optional)_: You can configure [single sign-on (SSO)][5] during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
 
 ### コンフィギュレーション {#configuration-us3}
 
@@ -80,9 +80,9 @@ _(オプション)_: Azure で新しい Datadog 組織を作成する際に[シ�
 | プロパティ             | 説明                                                                                                                                                                                                                  |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | サブスクリプション         | Datadog で監視する Azure サブスクリプション。Datadog リソースはこのサブスクリプションに存在します。オーナーのアクセス権限が必要です。                                                                                       |
-| リソースグループ       | 新しいリソースグループを作成するか、既存のものを使用します。[リソースグループ][5]は、Azure ソリューションの関連リソースを格納するコンテナです。                                                                                 |
+| リソースグループ       | Create a new resource group or use an existing one. A [resource group][5] is a container that holds related resources for an Azure solution.                                                                                 |
 | Resource name        | Datadog リソースの名前を指定します。推奨される名前の付け方は、次のようになります。`subscription_name-datadog_org_name`                                                                                                         |
-| 所在地             | ロケーションは West US2 です。ここは Azure 上にホストされている Datadog の US3 サイトの場所ですが、Datadog の利用には影響しません。[Datadog のすべてのサイト][1]と同様に、US3 サイトは完全な SaaS 型で、Azure の全リージョンに加えて他クラウドやオンプレミス ホストの監視もサポートしています。 |
+| 所在地             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
 | Datadog オーガニゼーション | 認証ステップが完了すると、Datadog 組織名がリンク先の Datadog 組織の名前に設定されます。Datadog サイトには US3 が設定されます。                                                                                                                                |
 
 **Link to Datadog organization** をクリックして Datadog の認証ウィンドウを開き、Datadog にサインインします。
@@ -91,7 +91,7 @@ _(オプション)_: Azure で新しい Datadog 組織を作成する際に[シ�
 
 {{< img src="integrations/azure/azure-us3-select-org.png" alt="Azure US3 Datadog オーガニゼーションの選択" responsive="true" style="width:90%;">}}
 
-OAuth フローが完了したら、Datadog 組織名が正しいことを確認してください。
+When the OAuth flow is complete, verify the Datadog organization name is correct.
 
 [1]: /ja/getting_started/site/
 [2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
@@ -111,7 +111,7 @@ OAuth フローが完了したら、Datadog 組織名が正しいことを確認
 | サブスクリプション         | Datadog で監視する Azure サブスクリプション。Datadog リソースはこのサブスクリプションに存在します。オーナーのアクセス権限が必要です。                                                                                       |
 | リソースグループ       | 新しいリソースグループを作成するか、既存のものを使用します。[リソースグループ][2]は、Azure ソリューションの関連リソースを格納するコンテナです。                                                                                 |
 | Resource name        | Datadog リソースの名前。この名前が新しい Datadog オーガニゼーションに割り当てられます。                                                                                                                                    |
-| 所在地             | ロケーションは West US2 です。ここは Azure 上にホストされている Datadog の US3 サイトの場所ですが、Datadog の利用には影響しません。[Datadog のすべてのサイト][1]と同様に、US3 サイトは完全な SaaS 型で、Azure の全リージョンに加えて他クラウドやオンプレミス ホストの監視もサポートしています。 |
+| 所在地             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
 | Datadog オーガニゼーション | Datadog のオーガニゼーション名はリソース名に、Datadog サイトは US3 に設定されています。                                                                                                                                |
 | 料金プラン         | 利用可能な Datadog 料金プランのリスト。プライベートオファーがある場合は、このドロップダウンに表示されます。                                                                                                                 |
 | 請求期間         | 月間。                                                                                                                                                                                                                      |

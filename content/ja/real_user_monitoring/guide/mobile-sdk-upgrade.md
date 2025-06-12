@@ -5,46 +5,46 @@ further_reading:
   text: RUM データを Explorer で確認
 - link: /real_user_monitoring/guide/mobile-sdk-deprecation-policy
   tag: ドキュメント
-  text: Datadog Mobile SDK の廃止方針
+  text: Deprecation Policy for Datadog Mobile SDKs
 title: RUM Mobile SDK のアップグレード
 ---
 
 ## 概要
 
-Mobile RUM、Logs、Trace SDK のメジャーバージョン間を移行する際は、このガイドに従ってください。各 SDK の機能や特長の詳細については、それぞれのドキュメントを参照してください。
+Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
-## v1 から v2 へ
+## From v1 to v2
 {{< tabs >}}
 {{% tab "Android" %}}
 
-v1 から v2 への移行は、モノリシックな SDK からモジュラー アーキテクチャーへの移行を意味します。RUM、Trace、Logs、Session Replay などがそれぞれ独立したモジュールとなり、必要なものだけをアプリケーションに組み込めます。
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
 
-SDK v2 は、iOS SDK、Android SDK、その他の Datadog 製品間で API レイアウトと命名規則を統一しています。
+SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 により、Android および iOS アプリで [Mobile Session Replay][1] を利用できます。
+SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
 [1]: /ja/real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-v1 から v2 への移行は、モノリシックな SDK からモジュラー アーキテクチャーへの移行を意味します。RUM、Trace、Logs、Session Replay などがそれぞれ独立したモジュールとなり、必要なものだけをアプリケーションに組み込めます。
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
 
-SDK v2 は、iOS SDK、Android SDK、その他の Datadog 製品間で API レイアウトと命名規則を統一しています。
+SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 により、Android および iOS アプリで [Mobile Session Replay][1] を利用できます。
+SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
 [1]: /ja/real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-v1 から v2 へ移行すると、パフォーマンスが向上します。
+The migration from v1 to v2 comes with improved performance.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-v1 から v2 へ移行すると、パフォーマンスが向上し、v2 ネイティブ SDK が提供する追加機能も利用可能になります。
+The migration from v1 to v2 comes with improved performance and additional features supplied by the v2 Native SDKs.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -52,7 +52,7 @@ v1 から v2 へ移行すると、パフォーマンスが向上し、v2 ネイ�
 {{< tabs >}}
 {{% tab "Android" %}}
 
-v2 ではアーティファクトがモジュール化されています。以下のアーティファクトを採用してください:
+Artifacts are modularized in v2. Adopt the following artifacts:
 
 * RUM: `com.datadoghq:dd-sdk-android-rum:x.x.x`
 * Logs: `com.datadoghq:dd-sdk-android-logs:x.x.x`
@@ -61,22 +61,22 @@ v2 ではアーティファクトがモジュール化されています。以�
 * WebView Tracking: `com.datadoghq:dd-sdk-android-webview:x.x.x`
 * OkHttp instrumentation: `com.datadoghq:dd-sdk-android-okhttp:x.x.x`
 
-**注**: NDK Crash Reporting と WebView Tracking を使用する場合は、それぞれのイベントを RUM と Logs に送信するために RUM および Logs のアーティファクトを追加する必要があります。
+**Note**: If you use NDK Crash Reporting and WebView Tracking, you must add RUM and Logs artifacts to report events to RUM and Logs respectively.
 
-`com.datadoghq:dd-sdk-android` アーティファクトは廃止されたため、Gradle ビルド スクリプトからその参照を削除してください。
+Reference to the `com.datadoghq:dd-sdk-android` artifact should be removed from your Gradle build script, as this artifact doesn't exist anymore.
 
-**注**: 他のすべてのアーティファクトの Maven 座標に変更はありません。
+**Note**: The Maven coordinates of all the other artifacts stay the same.
 
-<div class="alert alert-warning">v2 は Android API 19 (KitKat) をサポートしません。サポートされる最小 SDK は API 21 (Lollipop) です。Kotlin 1.7 が必要です。SDK 自体は Kotlin 1.8 でコンパイルされているため、Kotlin 1.6 以下のコンパイラでは SDK クラスのメタデータを読み取れません。</div>
+<div class="alert alert-warning">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
 
-以下のようなエラーが発生した場合:
+Should you encounter an error such as the following:
 
 ```
 A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
 Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
 ```
 
-ビルド スクリプトに以下のルールを追加してください (詳細は関連する [Stack Overflow の issue][2] を参照してください)。
+Add the following rules to your build script (more details in the relevant [Stack Overflow issue][2]):
 
 ```kotlin
 dependencies {
@@ -91,7 +91,7 @@ dependencies {
 }
 ```
 
-SDK のセットアップ例については、[Android サンプル アプリケーション][3] を参照してください。
+See the [Android sample application][3] for an example of how to set up the SDK.
 
 [2]: https://stackoverflow.com/a/75298544
 [3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
@@ -99,7 +99,7 @@ SDK のセットアップ例については、[Android サンプル アプリケ
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-v2 ではライブラリがモジュール化されています。以下のライブラリを採用してください:
+Libraries are modularized in v2. Adopt the following libraries:
 
 - `DatadogCore`
 - `DatadogLogs`
@@ -108,10 +108,10 @@ v2 ではライブラリがモジュール化されています。以下のラ�
 - `DatadogRUM`
 - `DatadogWebViewTracking`
 
-これらは既存の `DatadogCrashReporting` および `DatadogObjc` に加えて取り込む必要があります。
+These come in addition to the existing `DatadogCrashReporting` and `DatadogObjc`.
 
 <details>
-  <summary>SPM (推奨)</summary>
+  <summary>SPM (Recommended)</summary>
 
   ```swift
 let package = Package(
@@ -156,18 +156,18 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  `Cartfile` はそのままです:
+  The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
 
-  Xcode では、以下のフレームワークを **必ず** リンクしてください:
+  In Xcode, you **must** link the following frameworks:
   ```
   DatadogInternal.xcframework
   DatadogCore.xcframework
   ```
 
-  次に、使用したいモジュールを選択できます:
+  Then you can select the modules you want to use:
   ```
   DatadogLogs.xcframework
   DatadogTrace.xcframework
@@ -179,46 +179,33 @@ let package = Package(
   ```
 </details>
 
-**注**: Crash Reporting と WebView Tracking を使用する場合は、それぞれのイベントを RUM と Logs に送信するために RUM および Logs のモジュールを追加する必要があります。
+**Note**: When using Crash Reporting and WebView Tracking, you must add the RUM and Logs modules to report events to RUM and Logs respectively.
 
 {{% /tab %}}
 
 {{% tab "React Native" %}}
 
-package.json 内の `@datadog/mobile-react-native` を更新してください:
+Update `@datadog/mobile-react-native` in your package.json:
 
 ```json
 "@datadog/mobile-react-native": "2.0.0"
 ```
 
-iOS の Pod を更新してください:
+Update your iOS pods:
 
 ```bash
 (cd ios && bundle exec pod update)
 ```
 
-`0.67` より新しい React Native バージョンを使用する場合は Java 17 を、`0.67` 以下の場合は Java 11 を使用してください。現在の Java バージョンを確認するには、ターミナルで次のコマンドを実行します:
+If you use a React Native version strictly over `0.67`, use Java version 17. If you use React Native version equal or below ot `0.67`, use Java version 11. To check your Java version, run the following in a terminal:
 
 ```bash
 java --version
 ```
 
-### React Native < 0.73 の場合
+### For React Native < 0.73
 
-`android/build.gradle` ファイルで `kotlinVersion` を指定し、Kotlin 依存関係の競合を回避してください:
-
-```groovy
-buildscript {
-    ext {
-        // targetSdkVersion = ...
-        kotlinVersion = "1.8.21"
-    }
-}
-```
-
-### React Native < 0.68 の場合
-
-`android/build.gradle` ファイル内で `kotlinVersion` を指定し、Kotlin 依存関係の競合を回避してください:
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
 
 ```groovy
 buildscript {
@@ -229,7 +216,20 @@ buildscript {
 }
 ```
 
-`android/build.gradle` で `com.android.tools.build:gradle` のバージョンが `5.0` 未満の場合、`android/gradle.properties` ファイルに以下を追加してください:
+### For React Native < 0.68
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+If you are using a version of `com.android.tools.build:gradle` below `5.0` in your `android/build.gradle`, add in your `android/gradle.properties` file:
 
 ```properties
 android.jetifier.ignorelist=dd-sdk-android-core
@@ -237,7 +237,7 @@ android.jetifier.ignorelist=dd-sdk-android-core
 
 ### トラブルシューティング
 
-#### Android ビルドが `Unable to make field private final java.lang.String java.io.File.path accessible` で失敗する
+#### Android build fails with `Unable to make field private final java.lang.String java.io.File.path accessible`
 
 If your Android build fails with an error like:
 
@@ -251,7 +251,7 @@ Execution failed for task ':app:processReleaseMainManifest'.
 
 You are using Java 17, which is not compatible with your React Native version. Switch to Java 11 to solve the issue.
 
-#### Android ビルドが `Unsupported class file major version 61` で失敗する
+#### Android build fails with `Unsupported class file major version 61`
 
 If your Android build fails with an error like:
 
@@ -266,13 +266,13 @@ Could not determine the dependencies of task ':app:lintVitalRelease'.
          > Failed to transform '/Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar' using Jetifier. Reason: IllegalArgumentException, message: Unsupported class file major version 61. (Run with --stacktrace for more details.)
 ```
 
-Android Gradle Plugin のバージョンが `5.0` 未満です。修正するには、`android/gradle.properties` ファイルに次を追加してください:
+You use a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
 
 ```properties
 android.jetifier.ignorelist=dd-sdk-android-core
 ```
 
-#### Android ビルドが `Duplicate class kotlin.collections.jdk8.*` で失敗する
+#### Android build fails with `Duplicate class kotlin.collections.jdk8.*`
 
 If your Android build fails with an error like:
 
@@ -315,7 +315,7 @@ dependencies {
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-pubspec.yaml の `datadog_flutter_plugin` を更新してください:
+Update `datadog_flutter_plugin` in your pubspec.yaml:
 
 ```yaml
 dependencies:
@@ -324,20 +324,20 @@ dependencies:
 
 ## トラブルシューティング
 
-### 重複インターフェイス (iOS)
+### Duplicate interface (iOS)
 
-`datadog_flutter_plugin` を v2.0 にアップグレード後、iOS ビルドでこのエラーが表示される場合:
+If you see this error while building iOS after upgrading to `datadog_flutter_plugin` v2.0:
 
 ```
 Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlugin'
 /Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
 ```
 
-`flutter clean && flutter pub get` を実行し、再ビルドしてください。通常はこれで問題が解決します。
+Try performing `flutter clean && flutter pub get` and rebuilding. This usually resolves the issue.
 
-### 重複クラス (Android)
+### Duplicate classes (Android)
 
-`datadog_flutter_plugin` を v2.0 にアップグレード後、Android ビルドでこのエラーが表示される場合:
+If you see this error while building Android after the upgrading to `datadog_flutter_plugin` v2.0:
 
 ```
 FAILURE: Build failed with an exception.
@@ -347,7 +347,7 @@ Execution failed for task ':app:checkDebugDuplicateClasses'.
 > A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
 ```
 
-`build.gradle` ファイルで Kotlin バージョンを 1.8 以上に更新していることを確認してください。
+Make sure that you've updated your version of Kotlin to at least 1.8 in your `build.gradle` file.
 
 {{% /tab %}}
 
@@ -356,31 +356,31 @@ Execution failed for task ':app:checkDebugDuplicateClasses'.
 ### SDK の初期化
 {{< tabs >}}
 {{% tab "Android" %}}
-さまざまなプロダクトを独立したモジュールとして切り出したことにより、SDK の設定はモジュール単位で整理されました。
+With the extraction of different products into independent modules, the SDK configuration is organized by module.
 
-`com.datadog.android.core.configuration.Configuration.Builder` クラスには以下の変更があります:
+`com.datadog.android.core.configuration.Configuration.Builder` class has the following changes:
 
-* クライアント トークン、環境名、バリアント名 (デフォルト値は空文字列)、サービス名 (デフォルト値はマニフェストから取得したアプリケーション ID) を**コンストラクタ**で指定する必要があります。
-* `com.datadog.android.core.configuration.Credentials` クラスは削除されました。
-* `logsEnabled`、`tracesEnabled`、`rumEnabled` はコンストラクタから削除され、各プロダクトごとの設定で有効化します (下記参照)。
-* `crashReportsEnabled` 引数は削除されました。JVM クラッシュレポートの有効/無効は `Configuration.Builder.setCrashReportsEnabled` メソッドで設定できます。デフォルトでは有効です。
-* RUM、Logs、Trace の各プロダクト設定メソッドは `Configuration.Builder` から削除され、個別のプロダクト設定に置き換えられました (下記参照)。
+* Client token, env name, variant name (default value is empty string), and service name (default value is application ID taken from the manifest) should be provided in the constructor.
+* The `com.datadog.android.core.configuration.Credentials` class is removed.
+* `logsEnabled`, `tracesEnabled`, and `rumEnabled` are removed from the constructor in favour of individual product configuration (see below).
+* `crashReportsEnabled` constructor argument is removed. You can enable or disable JVM crash reporting with the `Configuration.Builder.setCrashReportsEnabled` method. By default, JVM crash reporting is enabled.
+* RUM, Logs, and Trace product configuration methods are removed from `Configuration.Builder` in favor of the individual product configuration (see below).
 
-`Datadog.initialize` メソッドの引数から `Credentials` クラスが削除されました。
+The `Datadog.initialize` method has the `Credentials` class removed from the list of the arguments.
 
-`com.datadog.android.plugin` パッケージと関連するすべてのクラス/メソッドは削除されました。
+The `com.datadog.android.plugin` package and all related classes/methods are removed.
 
 ### Logs
 
-Logs に関連するクラスは、すべて厳密に `com.datadog.android.log` パッケージ内に集約されています。
+All the classes related to the Logs product are strictly contained in the `com.datadog.android.log` package.
 
-Logs プロダクトを使用するには、次のアーティファクトをインポートしてください:
+To use Logs product, import the following artifact:
 
 ```kotlin
 implementation("com.datadoghq:dd-sdk-android-logs:x.x.x")
 ```
 
-下記スニペットで Logs プロダクトを有効化できます:
+You can enable the Logs product with the following snippet:
 
 ```kotlin
 val logsConfig = LogsConfiguration.Builder()
@@ -394,7 +394,7 @@ val logger = Logger.Builder()
     .build()
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -402,21 +402,21 @@ API 変更点:
 |`com.datadog.android.core.configuration.Configuration.Builder.useCustomLogsEndpoint`|`com.datadog.android.log.LogsConfiguration.Builder.useCustomEndpoint`|
 |`com.datadog.android.log.Logger.Builder.setLoggerName`|`com.datadog.android.log.Logger.Builder.setName`|
 |`com.datadog.android.log.Logger.Builder.setSampleRate`|`com.datadog.android.log.Logger.Builder.setRemoteSampleRate`|
-|`com.datadog.android.log.Logger.Builder.setDatadogLogsEnabled`|このメソッドは削除されました。Datadog へのログ送信を無効にする場合は、`com.datadog.android.log.Logger.Builder.setRemoteSampleRate(0f)` を使用してください。|
+|`com.datadog.android.log.Logger.Builder.setDatadogLogsEnabled`|This method has been removed. Use `com.datadog.android.log.Logger.Builder.setRemoteSampleRate(0f)` instead to disable sending logs to Datadog.|
 |`com.datadog.android.log.Logger.Builder.setServiceName`|`com.datadog.android.log.Logger.Builder.setService`|
 |`com.datadog.android.log.Logger.Builder.setDatadogLogsMinPriority`|`com.datadog.android.log.Logger.Builder.setRemoteLogThreshold`|
 
 ### Trace
 
-Trace に関連するクラスは、すべて厳密に `com.datadog.android.trace` パッケージ内に集約されています (以前は `com.datadog.android.tracing` 配下にありました)。
+All the classes related to the Trace product are strictly contained in the `com.datadog.android.trace` package (this means that all classes residing in `com.datadog.android.tracing` before have moved).
 
-Trace プロダクトを使用するには、次のアーティファクトをインポートしてください:
+To use the Trace product, import the following artifact:
 
 ```kotlin
 implementation("com.datadoghq:dd-sdk-android-trace:x.x.x")
 ```
 
-下記スニペットで Trace プロダクトを有効化できます:
+You can enable the Trace product with the following snippet:
 
 ```kotlin
 val traceConfig = TraceConfiguration.Builder()
@@ -432,7 +432,7 @@ val tracer = AndroidTracer.Builder()
 GlobalTracer.registerIfAbsent(tracer)
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -443,15 +443,15 @@ API 変更点:
 
 ### RUM
 
-RUM に関連するクラスは、すべて厳密に `com.datadog.android.rum` パッケージ内に集約されています。
+All classes related to the RUM product are strictly contained in the `com.datadog.android.rum` package.
 
-RUM プロダクトを使用するには、次のアーティファクトをインポートしてください:
+To use the RUM product, import the following artifact:
 
 ```kotlin
 implementation("com.datadoghq:dd-sdk-android-rum:x.x.x")
 ```
 
-以下のスニペットで RUM プロダクトを有効化できます:
+You can enable the RUM product with the following snippet:
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(rumApplicationId)
@@ -461,7 +461,7 @@ val rumConfig = RumConfiguration.Builder(rumApplicationId)
 Rum.enable(rumConfig)
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -477,70 +477,70 @@ API 変更点:
 |`com.datadog.android.core.configuration.Configuration.Builder.disableInteractionTracking`|`com.datadog.android.rum.RumConfiguration.Builder.disableUserInteractionTracking`|
 |`com.datadog.android.core.configuration.Configuration.Builder.sampleRumSessions`|`com.datadog.android.rum.RumConfiguration.Builder.setSessionSampleRate`|
 |`com.datadog.android.core.configuration.Configuration.Builder.sampleTelemetry`|`com.datadog.android.rum.RumConfiguration.Builder.setTelemetrySampleRate`|
-|`com.datadog.android.rum.RumMonitor.Builder`|このクラスは削除されました。`Rum.enable` 呼び出し時に RUM モニターが作成および登録されます。|
+|`com.datadog.android.rum.RumMonitor.Builder`|This class has been removed. The RUM monitor is created and registered during the `Rum.enable` call.|
 |`com.datadog.android.rum.RumMonitor.Builder.sampleRumSessions`|`com.datadog.android.rum.RumConfiguration.Builder.setSessionSampleRate`|
 |`com.datadog.android.rum.RumMonitor.Builder.setSessionListener`|`com.datadog.android.rum.RumConfiguration.Builder.setSessionListener`|
 |`com.datadog.android.rum.RumMonitor.addUserAction`|`com.datadog.android.rum.RumMonitor.addAction`|
 |`com.datadog.android.rum.RumMonitor.startUserAction`|`com.datadog.android.rum.RumMonitor.startAction`|
 |`com.datadog.android.rum.RumMonitor.stopUserAction`|`com.datadog.android.rum.RumMonitor.stopAction`|
-|`com.datadog.android.rum.GlobalRum.registerIfAbsent`|このメソッドは削除されました。`Rum.enable` 呼び出し時に RUM モニターが作成および登録されます。|
+|`com.datadog.android.rum.GlobalRum.registerIfAbsent`|This method has been removed. The RUM monitor is created and registered during the `Rum.enable` call.|
 |`com.datadog.android.rum.GlobalRum`|`com.datadog.android.rum.GlobalRumMonitor`|
 |`com.datadog.android.rum.GlobalRum.addAttribute`|`com.datadog.android.rum.RumMonitor.addAttribute`|
 |`com.datadog.android.rum.GlobalRum.removeAttribute`|`com.datadog.android.rum.RumMonitor.removeAttribute`|
 
 ### NDK Crash Reporting
 
-アーティファクト名は以前と同じです: `com.datadoghq:dd-sdk-android-ndk:x.x.x`
+The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-ndk:x.x.x`.
 
-以下のスニペットで NDK クラッシュレポートを有効化できます:
+You can enable NDK Crash Reporting with the following snippet:
 
 ```kotlin
 NdkCrashReports.enable()
 ```
 
-この設定は `com.datadog.android.core.configuration.Configuration.Builder.addPlugin` 呼び出しを置き換えます。
+This configuration replaces the `com.datadog.android.core.configuration.Configuration.Builder.addPlugin` call.
 
-**注**: NDK クラッシュレポートを RUM と Logs で受信するには、RUM と Logs プロダクトを有効にしておく必要があります。
+**Note**: You should have RUM and Logs products enabled to receive NDK crash reports in RUM and Logs respectively.
 
 ### WebView Tracking
 
-アーティファクト名は以前と同じです: `com.datadoghq:dd-sdk-android-webview:x.x.x`
+The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-webview:x.x.x`
 
-以下のスニペットで WebView トラッキングを有効化できます:
+You can enable WebView Tracking with the following snippet:
 
 ```kotlin
 WebViewTracking.enable(webView, allowedHosts)
 ```
 
-**注**: WebView から送信されるイベントを RUM と Logs で受信するには、RUM と Logs プロダクトを有効にしておく必要があります。
+**Note**: You should have RUM and Logs products enabled to receive events coming from WebView in RUM and Logs respectively.
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
-|`com.datadog.android.webview.DatadogEventBridge`|このメソッドは `internal` に変更されました。代わりに `WebViewTracking` を使用してください。|
-|`com.datadog.android.rum.webview.RumWebChromeClient`|このクラスは削除されました。代わりに `WebViewTracking` を使用してください。|
-|`com.datadog.android.rum.webview.RumWebViewClient`|このクラスは削除されました。代わりに `WebViewTracking` を使用してください。|
+|`com.datadog.android.webview.DatadogEventBridge`|This method became an `internal` class. Use `WebViewTracking` instead.|
+|`com.datadog.android.rum.webview.RumWebChromeClient`|This class was removed. Use `WebViewTracking` instead.|
+|`com.datadog.android.rum.webview.RumWebViewClient`|This class was removed. Use `WebViewTracking` instead.|
 
 ### OkHttp Tracking
 
-OkHttp トラッキングを使用するには、次のアーティファクトをインポートしてください:
+To use OkHttp Tracking, import the following artifact:
 
 ```kotlin
 implementation("com.datadoghq:dd-sdk-android-okhttp:x.x.x")
 ```
 
-OkHttp インスツルメンテーションは、OkHttp クライアントの後に Datadog SDK を初期化できるため、Datadog SDK より前に `com.datadog.android.okhttp.DatadogEventListener`、`com.datadog.android.okhttp.DatadogInterceptor`、`com.datadog.android.okhttp.trace.TracingInterceptor` を作成できます。SDK が初期化されると、OkHttp インスツルメンテーションは Datadog へのイベント送信を開始します。
+OkHttp instrumentation supports the initialization of the Datadog SDK after the OkHttp client, allowing you to create `com.datadog.android.okhttp.DatadogEventListener`, `com.datadog.android.okhttp.DatadogInterceptor`, and `com.datadog.android.okhttp.trace.TracingInterceptor` before the Datadog SDK. OkHttp instrumentation starts reporting events to Datadog once the Datadog SDK is initialized.
 
-`com.datadog.android.okhttp.DatadogInterceptor` と `com.datadog.android.okhttp.trace.TracingInterceptor` の両方は、リモート設定システムとの連携によりサンプリングを動的に制御できます。
+Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system.
 
-サンプリングを動的に調整するには、`com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` のコンストラクタに `com.datadog.android.core.sampling.Sampler` インターフェイスを実装した独自クラスを渡してください。各リクエストごとにサンプリング判定が行われます。
+To dynamically adjust sampling, provide your own implementation of the `com.datadog.android.core.sampling.Sampler` interface in the `com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` constructor. It is queried for each request to make the sampling decision.
 
-### `dd-sdk-android-ktx` モジュールの削除
+### `dd-sdk-android-ktx` module removal
 
-利用する Datadog SDK ライブラリの粒度を高めるため、`dd-sdk-android-ktx` モジュールは削除されました。コードは他のモジュールに分割され、RUM と Trace 向けの拡張メソッドを提供します。
+To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
 
-| `1.x`                                                                                     | '2.0'                                                                                       | モジュール名                       |
+| `1.x`                                                                                     | '2.0'                                                                                       | Module name                       |
 |-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-----------------------------------|
 | `com.datadog.android.ktx.coroutine#kotlinx.coroutines.CoroutineScope.launchTraced`        | `com.datadog.android.trace.coroutines#kotlinx.coroutines.CoroutineScope.launchTraced`       | `dd-sdk-android-trace-coroutines` |
 | `com.datadog.android.ktx.coroutine#runBlockingTraced`                                     | `com.datadog.android.trace.coroutines#runBlockingTraced`                                    | `dd-sdk-android-trace-coroutines` |
@@ -560,20 +560,20 @@ OkHttp インスツルメンテーションは、OkHttp クライアントの後
 
 ### セッション リプレイ
 
-Mobile Session Replay のセットアップと構成については、[Mobile Session Replay のセットアップと構成][4]を参照してください。
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
 
 [4]: /ja/real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-異なるプロダクトを独立したモジュールに抽出したことにより、SDK の設定はモジュール単位で整理されました。
+With the extraction of different products into independent modules, the SDK configuration is organized by module.
 
-> SDK は任意のプロダクトを有効化する前に初期化する必要があります。
+> The SDK must be initialized before enabling any product.
 
-SDK 初期化の Builder パターンは廃止され、構造体定義に置き換えられました。以下は `1.x` の初期化が `2.0` ではどのようになるかを示す例です。
+The Builder pattern of the SDK initialization has been removed in favor of structure definitions. The following example shows how a `1.x` initialization would translate in `2.0`.
 
-**V1 の初期化**
+**V1 Initialization**
 ```swift
 import Datadog
 
@@ -588,7 +588,7 @@ Datadog.initialize(
         .set(serviceName: "<service name>")
         .build()
 ```
-**V2 の初期化**
+**V2 Initialization**
 ```swift
 import DatadogCore
 
@@ -602,7 +602,7 @@ Datadog.initialize(
 )
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -616,7 +616,7 @@ API 変更点:
 
 ### Logs
 
-Logs に関連するクラスは、すべて厳密に `DatadogLogs` モジュールに含まれています。まずこのプロダクトを有効化してください:
+All the classes related to Logs are strictly in the `DatadogLogs` module. You first need to enable the product:
 
 ```swift
 import DatadogLogs
@@ -624,7 +624,7 @@ import DatadogLogs
 Logs.enable(with: Logs.Configuration(...))
 ```
 
-次に、ロガー インスタンスを作成できます:
+Then, you can create a logger instance:
 
 ```swift
 import DatadogLogs
@@ -634,7 +634,7 @@ let logger = Logger.create(
 )
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -651,7 +651,7 @@ API 変更点:
 
 ### Trace
 
-Trace に関連するクラスは、すべて厳密に `DatadogTrace` モジュールに含まれています。まずこのプロダクトを有効化してください:
+All the classes related to Trace are strictly in the `DatadogTrace` module. You first need to enable the product:
 
 ```swift
 import DatadogTrace
@@ -661,7 +661,7 @@ Trace.enable(
 )
 ```
 
-次に、共有 Tracer インスタンスにアクセスできます:
+Then, you can access the shared Tracer instance:
 
 ```swift
 import DatadogTrace
@@ -669,7 +669,7 @@ import DatadogTrace
 let tracer = Tracer.shared()
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -684,7 +684,7 @@ API 変更点:
 
 ### RUM
 
-RUM に関連するクラスは、すべて厳密に `DatadogRUM` モジュールに含まれています。まずこのプロダクトを有効化してください:
+All the classes related to RUM are strictly in the `DatadogRUM` module. You first need to enable the product:
 
 ```swift
 import DatadogRUM
@@ -694,7 +694,7 @@ RUM.enable(
 )
 ```
 
-次に、共有 RUM モニター インスタンスにアクセスできます:
+Then, you can access the shared RUM monitor instance:
 
 ```swift
 import DatadogRUM
@@ -702,7 +702,7 @@ import DatadogRUM
 let monitor = RUMMonitor.shared()
 ```
 
-API 変更点:
+API changes:
 
 |`1.x`|`2.0`|
 |---|---|
@@ -725,7 +725,7 @@ API 変更点:
 
 ### クラッシュレポート
 
-クラッシュ レポートを有効化するには、RUM と Logs を有効化し、それぞれのプロダクトにレポートを送信できるようにしてください。
+To enable Crash Reporting, make sure to enable RUM and Logs to report to those products respectively.
 
 ```swift
 import DatadogCrashReporting
@@ -739,7 +739,7 @@ CrashReporting.enable()
 
 ### WebView Tracking
 
-WebViewTracking を有効化する場合も、RUM と Logs を有効化して、それぞれにイベントを送信できるようにしてください。
+To enable WebViewTracking, make sure to also enable RUM and Logs to report to those products respectively.
 
 ```swift
 import WebKit
@@ -755,58 +755,58 @@ WebViewTracking.enable(webView: webView)
 
 ### セッション リプレイ
 
-Mobile Session Replay のセットアップ方法については [Mobile Session Replay のセットアップと構成][5]を参照してください。
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
 
 [5]: /ja/real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-SDK 初期化の変更は不要です。
+No change in the SDK initialization is needed.
 
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
 
-## SDK 設定の変更
+## SDK Configuration Changes
 
-Datadog のネイティブ SDK のモジュラー化に伴い、一部の設定プロパティが移動またはリネームされました。
+Certain configuration properties have been moved or renamed to support modularity in Datadog's native SDKs.
 
-以下の構造体がリネームされました:
+The following structures have been renamed:
 
 | `1.x` | `2.x` |
 |-------|-------|
 | `DdSdkConfiguration` | `DatadogConfiguration` |
-| `LoggingConfiguration` | `DatadogLoggingConfiguration` |
+| `LoggingConfiguartion` | `DatadogLoggingConfiguration` |
 | `RumConfiguration` | `DatadogRumConfiguration` |
 | `DdSdkExistingConfiguration` | `DatadogAttachConfiguration` |
 
-以下のプロパティが変更されました:
+The following properties have changed:
 
 | 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `DdSdkConfiguration.trackingConsent`| 削除 | `Datadog.initialize` の一部 | |
-| `DdSdkConfiguration.customEndpoint` | 削除 | 現在はフィーチャーごとに設定されます | |
+| `DdSdkConfiguration.trackingConsent`| 削除 | Part of `Datadog.initialize` | |
+| `DdSdkConfiguration.customEndpoint` | 削除 | Now configured per-feature | |
 | `DdSdkConfiguration.serviceName` | `DatadogConfiguration.service` | |
 | `DdSdkConfiguration.logEventMapper` | `DatadogLoggingConfiguration.eventMapper` | |
 | `DdSdkConfiguration.customLogsEndpoint` | `DatadogLoggingConfiguration.customEndpoint` | |
 | `DdSdkConfiguration.telemetrySampleRate` | `DatadogRumConfiguration.telemetrySampleRate` | |
 
-さらに、以下の API が変更されました:
+In addition, the following APIs have changed:
 
 | 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `Verbosity` | 削除 | `CoreLoggerLevel` または `LogLevel` を参照してください |
-| `DdLogs DatadogSdk.logs` | `DatadogLogging DatadogSdk.logs` | 型が変更されました |
-| `DdRum DatadogSdk.rum` | `DatadogRum DatadogSdk.rum` | 型が変更されました
+| `Verbosity` | 削除 | See `CoreLoggerLevel` or `LogLevel` |
+| `DdLogs DatadogSdk.logs` | `DatadogLogging DatadogSdk.logs` | Type changed |
+| `DdRum DatadogSdk.rum` | `DatadogRum DatadogSdk.rum` | Type changed
 | `Verbosity DatadogSdk.sdkVerbosity` | `CoreLoggerLevel DatadogSdk.sdkVerbosity` |
-| `DatadogSdk.runApp` | `DatadogSdk.runApp` | `trackingConsent` パラメーターが追加されました |
-| `DatadogSdk.initialize` | `DatadogSdk.initialize` | `trackingConsent` パラメーターが追加されました |
-| `DatadogSdk.createLogger` | `DatadogLogging.createLogger` | 移動しました |
+| `DatadogSdk.runApp` | `DatadogSdk.runApp` | Added `trackingConsent` parameter |
+| `DatadogSdk.initialize` | `DatadogSdk.initialize` | Added `trackingConsent` parameter |
+| `DatadogSdk.createLogger` | `DatadogLogging.createLogger` | Moved |
 
-## Flutter Web の変更点
+## Flutter Web Changes
 
-Flutter Web を使用するクライアントは、Datadog Browser SDK v5 を使用するように更新してください。`index.html` の import を次のように変更します:
+Clients using Flutter Web should update to using the Datadog Browser SDK v5. Change the following import in your `index.html`:
 
 ```diff
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
@@ -815,41 +815,41 @@ Flutter Web を使用するクライアントは、Datadog Browser SDK v5 を使
 +  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 
-**注**: Datadog はサイトごとに1つの CDN バンドルを提供しています。すべてのサイト URL については [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) を参照してください。
+**Note**: Datadog provides one CDN bundle per site. See the [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) for a list of all site URLs.
 
-## Logs プロダクトの変更点
+## Logs product changes
 
-v1 と同様に、`DatadogConfiguration.loggingConfiguration` メンバーを設定することで Datadog Logging を有効化できます。ただし v1 と異なり、Datadog はデフォルト ロガーを自動で作成しません。`DatadogSdk.logs` は `DatadogLogging` のインスタンスとなり、これを使用してログを作成できます。多くのオプションは `DatadogLoggerConfiguration` に移動し、開発者が個々のロガーをより細かく制御できるようになりました。
+As with v1, Datadog Logging can be enabled by setting the `DatadogConfiguration.loggingConfiguration` member. However, unlike v1, Datadog does not create a default logger for you. `DatadogSdk.logs` is now an instance of `DatadogLogging`, which can be used to create logs. Many options were moved to `DatadogLoggerConfiguration` to give developers more granular support over individual loggers.
 
-API 変更点
+The following APIs have changed:
 
 | 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `LoggingConfiguration` | `DatadogLoggingConfiguration` | 大半のメンバーはリネームされ、`DatadogLoggerConfiguration` に移動しました |
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` | Renamed most members are now on `DatadogLoggerConfiguration` |
 | `LoggingConfiguration.sendNetworkInfo` | `DatadogLoggerConfiguration.networkInfoEnabled` | |
 | `LoggingConfiguration.printLogsToConsole` | `DatadogLoggerConfiguration.customConsoleLogFunction` | |
-| `LoggingConfiguration.sendLogsToDatadog` | 削除されました。代わりに `remoteLogThreshold` を使用してください | |
+| `LoggingConfiguration.sendLogsToDatadog` | Removed. Use `remoteLogThreshold` instead | |
 | `LoggingConfiguration.datadogReportingThreshold` | `DatadogLoggerConfiguration.remoteLogThreshold` | |
 | `LoggingConfiguration.bundleWithRum` | `DatadogLoggerConfiguration.bundleWithRumEnabled` | |
 | `LoggingConfiguration.bundleWithTrace` | `DatadogLoggerConfiguration.bundleWithTraceEnabled` | |
 | `LoggingConfiguration.loggerName` | `DatadogLoggerConfiguration.name` | |
 | `LoggingConfiguration.sampleRate` | `DatadogLoggerConfiguration.remoteSampleRate` | |
 
-## RUM プロダクトの変更点
+## RUM Product Changes
 
-API 変更点
+The following APIs have changed:
 
 | 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `RumConfiguration` | `DatadogRumConfiguration` | 型がリネームされました |
-| `RumConfiguration.vitalsUpdateFrequency` | `DatadogRumConfiguration.vitalsUpdateFrequency` | バイタルの更新を無効にするには `null` を設定してください |
+| `RumConfiguration` | `DatadogRumConfiguration` | Type renamed |
+| `RumConfiguration.vitalsUpdateFrequency` | `DatadogRumConfiguration.vitalsUpdateFrequency` | Set to `null` to disable vitals updates |
 | `RumConfiguration.tracingSampleRate` | `DatadogRumConfiguration.traceSampleRate` |
 | `RumConfiguration.rumViewEventMapper` | `DatadogRumConfiguration.viewEventMapper` |
 | `RumConfiguration.rumActionEventMapper` | `DatadogRumConfiguration.actionEventMapper` |
 | `RumConfiguration.rumResourceEventMapper` | `DatadogRumConfiguration.resourceEventMapper` |
 | `RumConfiguration.rumErrorEventMapper` | `DatadogRumConfiguration.rumErrorEventMapper` |
 | `RumConfiguration.rumLongTaskEventMapper` | `DatadogRumConfiguration.longTaskEventMapper` |
-| `RumUserActionType` | `RumActionType` | 型がリネームされました |
+| `RumUserActionType` | `RumActionType` | Type renamed |
 | `DdRum.addUserAction` | `DdRum.addAction` | |
 | `DdRum.startUserAction` | `DdRum.startAction` | |
 | `DdRum.stopUserAction` | `DdRum.stopAction` | |
@@ -857,7 +857,7 @@ API 変更点
 | `DdRum.stopResourceLoading` | `DdRum.stopResource` | |
 | `DdRum.stopResourceLoadingWithError` | `DdRum.stopResourceWithError` | |
 
-さらに、イベント マッパーではビュー名を変更できなくなりました。ビューをリネームする場合は、カスタム [`ViewInfoExtractor`](https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html) を使用してください。
+Additionally, event mappers no longer allow you to modify their view names. To rename a view, use a custom [`ViewInfoExtractor`](https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html) instead.
 
 
 {{% /tab %}}

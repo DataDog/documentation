@@ -21,8 +21,8 @@ author:
   sales_email: support@getcortexapp.com
   support_email: support@getcortexapp.com
 categories:
-- logs-restriction-queries-update-a-restriction-query
-custom_kind: インテグレーション
+- インシデント
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_on_public_website: true

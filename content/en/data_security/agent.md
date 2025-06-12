@@ -161,7 +161,6 @@ agent diagnose show-metadata agent-telemetry
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
-| logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |

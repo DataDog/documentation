@@ -26,7 +26,7 @@ short_description: Monitoriza métricas y logs de Amazon DocumentDB.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Amazon DocumentDB es un servicio de base de datos de documentos rápida, escalable, de alta disponibilidad y totalmente gestionada que admite cargas de trabajo de MongoDB.

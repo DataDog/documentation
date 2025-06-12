@@ -1,58 +1,28 @@
 ---
-app_id: azure-load-balancer
-app_uuid: a97ccfda-404d-4972-a995-63885350075a
-assets:
-  dashboards:
-    azure_load_balancer: assets/dashboards/azure_load_balancer.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.network_loadbalancers.byte_count
-      metadata_path: metadata.csv
-      prefix: azure.network_loadbalancers
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 296
-    source_type_name: Azure 로드 밸런서
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ko/integrations/azure_loadbalancer
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-display_on_public_website: true
+description: Azure Load Balancer의 핵심 메트릭 추적하기.
+doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
 draft: false
 git_integration_title: azure_load_balancer
+has_logo: true
 integration_id: azure-load-balancer
-integration_title: Azure 로드 밸런서
+integration_title: Microsoft Azure Load Balancer
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_load_balancer
-public_title: Azure 로드 밸런서
+public_title: Datadog-Microsoft Azure Load Balancer 통합
 short_description: Azure Load Balancer의 핵심 메트릭 추적하기.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure Load Balancer의 핵심 메트릭 추적하기.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure 로드 밸런서
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Azure Load Balancer는 인바운드 및 아웃바운드 시나리오를 지원하고, 대기 시간은 낮추면서 처리량을 높이며, TCP와 UDP 애플리케이션에서 흐름을 수백만 개까지 규모 조정할 수 있습니다.

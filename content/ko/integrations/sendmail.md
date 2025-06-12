@@ -23,7 +23,7 @@ author:
 categories:
 - 메트릭
 - 네트워크
-custom_kind: 통합
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -38,14 +38,14 @@ name: sendmail
 public_title: Sendmail
 short_description: 메일 대기열 모니터링을 위한 Sendmail 통합
 supported_os:
-- linux
+- 리눅스
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 'Category::Metrics '
+  - 카테고리::메트릭
   - Category::Network
   - Supported OS::Linux
-  - Offering::Integration
+  - 제공::통합
   configuration: README.md#Setup
   description: 메일 대기열 모니터링을 위한 Sendmail 통합
   media: []
@@ -77,7 +77,7 @@ Sendmail 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 �
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 설정
+### 구성
 
 1. 에이전트의 설정 디렉터리 루트의 `conf.d/` 폴더에 있는 `sendmail.d/conf.yaml` 파일을 편집하여 sendmail 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 sendmail.d/conf.yaml][5]을 참조하세요.
 

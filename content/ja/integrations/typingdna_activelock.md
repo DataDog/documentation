@@ -21,7 +21,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/typingdna_activelock/README.md
 display_on_public_website: true
@@ -43,7 +43,6 @@ tile:
   classifier_tags:
   - Category::Log Collection
   - Category::Security
-  - Submitted Data Type::Logs
   - Offering::Integration
   - Supported OS::Windows
   - Supported OS::macOS
@@ -73,7 +72,7 @@ Datadog でデータを視覚化するためには、カスタム ActiveLock ア
 
 ## セットアップ
 
-### 設定
+### 構成
 
 Datadog API キーを生成するには
 
@@ -99,7 +98,7 @@ Datadog で ActiveLock のログを見るには、[ログエクスプローラ�
 
 ## 収集データ
 
-### ログ収集
+### 収集データ
 
 TypingDNA ActiveLock のログは、各アプリケーションから直接 Datadog に収集され送信されます。
 

@@ -22,7 +22,7 @@ short_description: Rastrea métricas clave de AWS Database Migration Service (DM
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 AWS Database Migration Service (DMS) es un servicio en la nube que facilita la migración de bases de datos relacionales, almacenes de datos, bases de datos NoSQL y otros tipos de almacenes de datos.
@@ -66,7 +66,7 @@ Configura AWS Database Migration Service para enviar logs a un bucket de S3 o a 
 
 La integración de AWS Database Migration Service (DMS) no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de AWS Database Migration Service (DMS) no incluye ningún check de servicio.
 

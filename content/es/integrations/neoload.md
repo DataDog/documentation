@@ -49,19 +49,19 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Notifications
-  - Categoría::Tests
+  - Category::Testing
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Monitorizar y analizar los resultados de tests de rendimiento de NeoLoad
   media:
   - caption: Dashboard de tests de rendimiento de NeoLoad
     image_url: images/neoload-dashboard.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: NeoLoad
 ---
 

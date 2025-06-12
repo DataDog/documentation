@@ -1,56 +1,28 @@
 ---
-app_id: azure-streamanalytics
-app_uuid: 190f11bb-ba6e-42ed-bdf8-b86c747d64be
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.streamanalytics_streamingjobs.input_events
-      metadata_path: metadata.csv
-      prefix: azure.streamanalytics_streamingjobs
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 302
-    source_type_name: Azure Stream Analytics
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /fr/integrations/azure_streamanalytics
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-display_on_public_website: true
+description: Surveillez des métriques clés d'Azure Stream Analytics.
+doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
 draft: false
 git_integration_title: azure_stream_analytics
+has_logo: true
 integration_id: azure-streamanalytics
-integration_title: Azure Stream Analytics
+integration_title: Microsoft Azure Stream Analytics
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_stream_analytics
-public_title: Azure Stream Analytics
+public_title: Intégration Datadog/Microsoft Azure Stream Analytics
 short_description: Surveillez des métriques clés d'Azure Stream Analytics.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez des métriques clés d'Azure Stream Analytics.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Stream Analytics
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Section Overview
 
 Azure Stream Analytics est un moteur de traitement d'événements conçu pour analyser d'importants volumes de données diffusées à partir d'appareils.

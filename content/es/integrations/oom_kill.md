@@ -23,7 +23,7 @@ author:
 categories:
 - sistema operativo y sistema
 - gestión de eventos
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_on_public_website: true
@@ -38,23 +38,23 @@ name: oom_kill
 public_title: OOM Kill
 short_description: Seguimiento del proceso OOM kills por el sistema o cgroup.
 supported_os:
-- Linux
+- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Categoría::Sistema operativo y sistema
-  - Categoría::Gestión de eventos
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Category::OS & System
+  - Category::Event Management
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento del proceso OOM kills por el sistema o cgroup.
   media: []
-  overview: README.md#Información general
+  overview: README.md#Overview
   support: README.md#Soporte
   title: OOM Kill
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -69,12 +69,12 @@ El check OOM Kill está incluido en el paquete del [Datadog Agent][1]. Se basa e
 
 El programa eBPF utilizado por el System Probe se compila en tiempo de ejecución y requiere que tengas acceso a los encabezados del kernel adecuados.
 
-En distribuciones de tipo Debian, instala las cabeceras de kernel de la siguiente manera:
+En las distribuciones similares a Debian, instala los encabezados del kernel de la siguiente manera:
 ```sh
 apt install -y linux-headers-$(uname -r)
 ```
 
-En distribuciones de tipo RHEL, instala las cabeceras de kernel de la siguiente manera:
+En las distribuciones similares a RHEL, instala los encabezados del kernel de la siguiente manera:
 ```sh
 yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
@@ -123,7 +123,7 @@ Además de montar `system-probe.yaml` y `oom_kill.d/conf.yaml` como se ha descri
 
 Con [Datadog Helm chart][4], asegúrate de que los parámetros `datadog.systemProbe` y `datadog.systemProbe.enableOOMKill` están habilitados en el archivo `values.yaml`.
 
-### Configuración con el Operator (v1.0.0 o posterior)
+### Configuración con el Operator (v1.0.0+)
 
 Establece el parámetro `features.oomKill.enabled` en el manifiesto del DatadogAgent:
 ```yaml
@@ -137,7 +137,7 @@ spec:
       enabled: true
 ```
 
-**Nota**: Cuando utilices COS (Contenedor Optimized OS), anula el volumen `src` en el Agent del nodo:
+**Nota**: Cuando utilices COS (Container Optimized OS), anula el volumen `src` en el nodo del Agent:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -164,7 +164,7 @@ spec:
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### Checks de servicios
+### Checks de servicio
 
 El check OOM Kill no incluye ningún check de servicio.
 

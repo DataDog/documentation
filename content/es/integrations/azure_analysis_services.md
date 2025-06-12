@@ -1,56 +1,28 @@
 ---
-app_id: azure-analysisservices
-app_uuid: 1705f0be-a2cb-4ebe-83f4-edc42bf735f6
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.analysisservices_servers.command_pool_job_queue_length
-      metadata_path: metadata.csv
-      prefix: azure.servicios_analisis_servidores
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 276
-    source_type_name: Análisis Azure servicios
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /es/integrations/azure_analysisservices
 categories:
 - nube
 - azure
 custom_kind: integración
 dependencies: []
-display_on_public_website: true
+description: Rastrea las métricas clave de Azure Analysis Services.
+doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
 draft: false
 git_integration_title: azure_analysis_services
+has_logo: true
 integration_id: azure-analysisservices
-integration_title: Análisis Azure servicios
+integration_title: Microsoft Azure Analysis Services
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+manifest_version: '1.0'
 name: azure_analysis_services
-public_title: Análisis Azure servicios
+public_title: Integración de Datadog y Microsoft Azure Analysis Services
 short_description: Rastrea las métricas clave de Azure Analysis Services.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Categoría::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Rastrea las métricas clave de Azure Analysis Services.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Análisis Azure servicios
+version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Analysis Services es una plataforma como servicio (PaaS) totalmente gestionada que proporciona modelos de datos de nivel empresarial en la nube.
@@ -61,7 +33,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure A
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -79,7 +51,7 @@ La integración Azure Analysis Services no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_analysis_services/azure_analysis_services_metadata.csv

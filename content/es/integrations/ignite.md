@@ -27,8 +27,8 @@ categories:
 - almacenamiento en caché
 - almacenes de datos
 - recopilación de logs
-- network
-custom_kind: integración
+- la red
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_on_public_website: true
@@ -36,16 +36,16 @@ draft: false
 git_integration_title: ignite
 integration_id: ignite
 integration_title: ignite
-integration_version: 3.1.0
+integration_version: 2.4.0
 is_public: true
 manifest_version: 2.0.0
 name: ignite
 public_title: ignite
 short_description: Recopila métricas de tu servidor de Ignite.
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -53,9 +53,9 @@ tile:
   - Categoría::Almacenes de datos
   - Categoría::Recopilación de logs
   - Categoría::Red
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
+  - SO compatible::Linux
+  - SO compatible::Windows
+  - SO compatible::macOS
   - Oferta::Integración
   configuration: README.md#Configuración
   description: Recopila métricas de tu servidor de Ignite.
@@ -65,7 +65,7 @@ tile:
   title: ignite
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-core -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -91,20 +91,20 @@ Para la generación de logs, se recomienda habilitar [log4j][3] para beneficiars
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host:
+Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
 
 1. Edita el archivo `ignite.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent, para empezar a recopilar los datos de rendimiento de Ignite. Consulta el [archivo de ejemplo ignite.d/conf.yaml][1] para conocer todas las opciones de configuración disponibles.
 
    Este check tiene un límite de 350 métricas por instancia. El número de métricas devueltas se indica en [la página de estado][2].
-   Puedes especificar las métricas que te interesan editando la configuración a continuación.
+   Puedes especificar las métricas que te interesen al editar la configuración que se muestra abajo.
    Para saber cómo personalizar la recopilación de métricas, consulta la [documentación sobre los checks JMX][3].
    Si necesitas monitorizar más métricas, ponte en contacto con el [servicio de asistencia de Datadog][4].
 
-2. [Reinicia el Agent][5]
+2. [Reinicia el Agent][5].
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones del Agent a partir de la 6.0_
 
 1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; debes habilitarla en el archivo `datadog.yaml`:
 
@@ -136,11 +136,11 @@ _Disponible para la versión 6.0 o posteriores del Agent_
 [4]: https://docs.datadoghq.com/es/help/
 [5]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedores" %}}
+{{% tab "Contenedorizado" %}}
 
 #### Contenedores
 
-En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+En el caso de los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican abajo.
 
 ##### Recopilación de métricas
 
@@ -148,7 +148,7 @@ Para recopilar métricas con la integración de Datadog y Ignite, consulta la gu
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones del Agent a partir de la 6.0_
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Docker][3].
 
@@ -176,7 +176,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 La integración de Ignite no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 {{< get-service-checks-from-git "ignite" >}}
 
 

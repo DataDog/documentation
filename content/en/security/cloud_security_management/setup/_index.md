@@ -36,6 +36,7 @@ To get started with Cloud Security, review the following:
 - [Enable additional features](#enable-additional-features)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
   - [IaC scanning](#iac-scanning)
+  - [IaC remediation](#iac-remediation)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
 - [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
@@ -113,6 +114,10 @@ Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail 
 
 Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Cloud Security][10].
 
+### IaC remediation
+
+Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Cloud Security][5].
+
 ### Deploy via cloud integrations
 
 Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security via Cloud Integrations][7].
@@ -131,6 +136,7 @@ For information on disabling Cloud Security, see the following:
 [2]: /security/cloud_security_management/agentless_scanning
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs
+[5]: /security/cloud_security_management/setup/iac_remediation
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities

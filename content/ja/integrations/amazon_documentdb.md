@@ -3,8 +3,8 @@ categories:
 - クラウド
 - data stores
 - aws
-- log collection
-custom_kind: integration
+- ログの収集
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/

@@ -190,8 +190,6 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-{{% tracing-go-v2 %}}
-
 Manually keep a trace:
 
 ```Go
@@ -200,8 +198,10 @@ package main
 import (
     "log"
     "net/http"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext // 2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -225,8 +225,10 @@ import (
     "log"
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

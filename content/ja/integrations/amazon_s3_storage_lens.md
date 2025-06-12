@@ -1,10 +1,10 @@
 ---
 categories:
-- aws
+- AWS
 - クラウド
 - data stores
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Amazon S3 Storage Lens の主要なメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_s3_storage_lens

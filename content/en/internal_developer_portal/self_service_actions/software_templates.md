@@ -4,8 +4,6 @@ aliases:
   - /service_catalog/software_templates
   - /software_catalog/software_templates
   - /software_catalog/self-service/software_templates
-  - /software_catalog/self_service_actions/software_templates
-  - /software_catalog/self-service_actions/software_templates
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"

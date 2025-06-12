@@ -21,11 +21,11 @@ author:
   sales_email: sales@opsnow.com
   support_email: support@opsnow.com
 categories:
-- アラート
+- アラート設定
 - 自動化
 - コラボレーション
-- logs-restriction-queries-update-a-restriction-query
-- apm
+- インシデント
+- モバイル
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md

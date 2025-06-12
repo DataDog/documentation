@@ -15,10 +15,6 @@ further_reading:
 title: Uso de LLM Observability y APM
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta guía explica cómo puedes utilizar tanto LLM Observability como APM para vincular  [tramos][6] de LLM Observability y APM en Datadog. 
@@ -62,6 +58,7 @@ Para acceder a la información específica del LLM, selecciona un tramo de APM e
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/llm_observability/setup/sdk/
 [2]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/

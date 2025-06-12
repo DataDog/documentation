@@ -21,10 +21,10 @@ author:
   sales_email: developer@configcat.com
   support_email: developer@configcat.com
 categories:
-- 構成とデプロイ
+- 構成 & デプロイ
 - notifications
 - プロビジョニング
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
 display_on_public_website: true
@@ -76,7 +76,7 @@ tile:
 
 1. [Datadog サブスクリプション][5]を入手します。
 2. [Datadog API キー][6]を取得します。
-    ![Datadog イベント][7] 
+    ![Datadog イベント][7]
 4. ConfigCat ダッシュボードで [integrations タブ][8]を開きます。
 5. Datadog の _CONNECT_ ボタンをクリックし、Datadog API キーを設定します。
 6. これで完了です。機能フラグに何かしらの変更を加え、次に Datadog でイベントをチェックします。

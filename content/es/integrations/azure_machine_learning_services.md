@@ -2,7 +2,7 @@
 categories:
 - nube
 - azure
-- ai/ml
+- ia/ml
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Machine Learning.
@@ -36,7 +36,7 @@ Obtén métricas de Azure Machine Learning para:
 * Monitorizar la utilización de tus nodos de machine learning
 * Optimizar el rendimiento frente al coste
 
-## Configuración
+## Ajuste
 ### Instalación
 
 Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
@@ -49,13 +49,13 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ### Eventos
 La integración Azure Machine Learning no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 La integración Azure Machine Learning no incluye checks de servicios.
 
 ## Solucionar problemas
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
-## Referencias adicionales
+## Lectura adicional
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/

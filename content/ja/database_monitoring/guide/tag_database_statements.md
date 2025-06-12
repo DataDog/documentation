@@ -25,7 +25,7 @@ SQL ステートメントの実行をサポートする任意のデータベー�
 /*key='val'*/ SELECT * from FOO
 ```
 
-複数のタグをカンマで区切ります。
+Separate multiple tags with commas:
 ```sql
 /*key1='val1',key2='val2'*/ SELECT * from FOO
 ```
@@ -53,7 +53,7 @@ func main() {
 
 ## DBM でタグを探る
 
-[Samples ページ][4]で、カスタムタグを使用して **Explain Plans** ビュー と **Query Samples** ビュー をフィルタリングします。
+On the [Samples page][4], filter the **Explain Plans** and **Query Samples** views by custom tag.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="カスタムタグで実行計画をフィルターします。">}}
 

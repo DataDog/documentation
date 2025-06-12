@@ -24,11 +24,11 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 컨테이너
+- ㅊ
 - 쿠버네티스(Kubernetes)
 - 로그 수집
-- 오케스트레이션
-custom_kind: 통합
+- orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_on_public_website: true
@@ -43,8 +43,8 @@ name: kube_scheduler
 public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler 모니터링
 supported_os:
-- linux
-- 윈도우즈(Windows)
+- 리눅스
+- windows
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -56,7 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
+  - 제공::통합
   configuration: README.md#Setup
   description: Kubernetes Scheduler 모니터링
   media: []
@@ -82,7 +82,7 @@ tile:
 
 Kubernetes Scheduler 점검은 [Datadog Agent][3] 패키지에 포함되어 있으므로 서버에 추가 설치가 필요하지 않습니다.
 
-### 설정
+### 구성
 
 아래 파라미터 적용에 대한 지침은 [Autodiscovery 통합 템플릿][4]을 참조하세요. 
 
@@ -90,7 +90,7 @@ Kubernetes Scheduler 점검은 [Datadog Agent][3] 패키지에 포함되어 있�
 
 1. Agent의 설정 디렉터리 루트에서 `conf.d/` 폴더에 있는 `kube_scheduler.d/conf.yaml` 파일을 편집하여 kube_scheduler 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 kube_scheduler.d/conf.yaml][5]을 참조하세요.
 
-2. [에이전트를 재시작합니다][6].
+2. [Agent를 재시작합니다][6].
 
 #### 로그 수집
 

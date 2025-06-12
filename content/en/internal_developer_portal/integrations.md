@@ -4,7 +4,6 @@ aliases:
   - /tracing/software_catalog/integrations
   - /tracing/service_catalog/integrations
   - /service_catalog/integrations
-  - /software_catalog/integrations
 further_reading:
 - link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"

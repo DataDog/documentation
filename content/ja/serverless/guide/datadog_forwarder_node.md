@@ -156,10 +156,10 @@ CDK プロジェクトで以下の Yarn または NPM コマンドを実行し�
 
 ```sh
 #Yarn
-yarn add --dev datadog-cdk-constructs-v2
+yarn add --dev datadog-cdk-constructs
 
 #NPM
-npm install datadog-cdk-constructs-v2 --save-dev
+npm install datadog-cdk-constructs --save-dev
 ```
 
 ### インスツルメントする
@@ -168,12 +168,12 @@ npm install datadog-cdk-constructs-v2 --save-dev
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
-import { DatadogLambda } from "datadog-cdk-constructs-v2";
+import { Datadog } from "datadog-cdk-constructs";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
+    const datadog = new Datadog(this, "Datadog", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
       service: "<SERVICE>",  // オプション
@@ -194,7 +194,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][1]をご覧ください。
 
 
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs-v2
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}

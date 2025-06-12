@@ -179,13 +179,12 @@ end
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
-  {{% tracing-go-v2 %}}
-
 ```go
 package ledger
 
 import (
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 // [...]
@@ -222,8 +221,6 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/go/migration
-
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

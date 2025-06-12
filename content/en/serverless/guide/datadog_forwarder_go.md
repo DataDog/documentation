@@ -33,7 +33,7 @@ go get github.com/DataDog/datadog-lambda-go
 Follow these steps to instrument the function:
 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
-2. Import the required packages in the file declaring your Lambda function handler. {{% tracing-go-v2 %}}
+2. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
     package main
@@ -41,8 +41,10 @@ Follow these steps to instrument the function:
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
-      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+      // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+      // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
     )
     ```
 3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
@@ -150,4 +152,3 @@ Learn more about [custom metric submission][7].
 [5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
-[8]: /tracing/trace_collection/custom_instrumentation/go/migration

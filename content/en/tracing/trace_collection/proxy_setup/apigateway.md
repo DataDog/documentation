@@ -77,24 +77,23 @@ To pass in the required headers, you can use the AWS CDK or AWS Console:
 Add the headers under `requestParameters` and use `$context` variables:
 
 ```
-import { DatadogAPIGatewayRequestParameters } from "datadog-cdk-constructs-v2";
-
-// Datadog integration definition
-const ddIntegration = new apigateway.Integration({
-  type: apigateway.IntegrationType.HTTP_PROXY,
-  integrationHttpMethod: "ANY",
-  options: {
-    connectionType: apigateway.ConnectionType.INTERNET,
-    requestParameters: DatadogAPIGatewayRequestParameters,
-  },
-  uri: `http://${loadBalancer.loadBalancerDnsName}`,
-});
-
-const api = new apigateway.RestApi(this, "MyApi", {
-  restApiName: "my-api-gateway",
-  deployOptions: { stageName: "prod" },
-  defaultIntegration: ddIntegration, // Datadog instrumentation applied here
-});
+const resource = api.root.addResource('myresource');
+ resource.addMethod('ANY', new apigateway.Integration({
+   # other configurations
+   options: {
+     # other options
+     requestParameters: {
+       "integration.request.header.x-dd-proxy": "'aws-apigateway'",
+       "integration.request.header.x-dd-proxy-request-time-ms": "context.requestTimeEpoch",
+       "integration.request.header.x-dd-proxy-domain-name": "context.domainName",
+       "integration.request.header.x-dd-proxy-httpmethod": "context.httpMethod",
+       "integration.request.header.x-dd-proxy-path": "context.path",
+       "integration.request.header.x-dd-proxy-stage": "context.stage",
+     }
+   }
+ })
+ # other settings here
+ });
 ```
 
 {{% /collapse-content %}}

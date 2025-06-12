@@ -13,19 +13,19 @@ title: コンバージョン率でアラートを出す
 
 ## RUM エクスプローラーでファネルを作成する
 
-Datadog で [Digital Experience > Product Analytics > Funnels][1] に移動します。
+In Datadog, navigate to [Digital Experience > Product Analytics > Funnels][1].
 
-{{< img src="real_user_monitoring/funnel_analysis/rum-funnel-creation-2.png" alt="主要なアクションがハイライトされたファネル作成ページ" style="width:100%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/rum-funnel-creation-2.png" alt="The funnel creation page with key actions highlighted" style="width:100%;" >}}
 
-**Define steps for measuring conversion** セクションで、ビューとアクションからステップを作成します。バーグラフをクリックすると、ユーザーのコンバージョンと離脱に関する分析を表示するサイドパネルが開きます。ファネルに後続のビューまたはアクションを追加するには、**+** をクリックして、よく使用される次のステップから選択します。
+In the **Define steps for measuring conversion** section, create some steps from your views and actions. You can click on the bar graphs to see a side panel with analytics about user conversions and dropoffs. To add a subsequent view or action in the funnel, click **+** and select from frequent next steps.
 
-## コンバージョン率グラフをエクスポートする
+## Export the conversion rate graph
 
 ファネルには、全体のコンバージョン率とドロップオフ率、コンバージョンまたはドロップオフセッションの数、コンバージョンまたはドロップオフセッションのパーセンテージが表示されます。
 
-**Save to Dashboard** ボタンをクリックし、ドロップダウンメニューから既存のダッシュボードを選択してグラフをエクスポートします。必要に応じて、**New Dashboard** をクリックしてダッシュボードを作成します。
+Click the **Save to Dashboard** button and select an existing dashboard from the dropdown menu to export the graph to. Optionally, click **New Dashboard** to create a dashboard.
 
-## コンバージョン率クエリを編集する
+## Edit the conversion rate query
 
 ダッシュボードでは、ウィジェットを編集し、**Graph your data** の下でコンバージョン率のクエリにアクセスすることができます。
 

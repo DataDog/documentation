@@ -134,8 +134,6 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-{{% tracing-go-v2 %}}
-
 To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
 or enable the debug mode during the `Start` config:
 
@@ -143,7 +141,8 @@ or enable the debug mode during the `Start` config:
 package main
 
 import (
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -164,7 +163,8 @@ package main
 import (
   "time"
 
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {

@@ -8960,42 +8960,6 @@ menu:
           - ListCatalogRelation
         unstable: []
         order: 3
-    - name: Delete a single kind
-      url: '#delete-a-single-kind'
-      identifier: software-catalog-delete-a-single-kind
-      parent: software-catalog
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteCatalogKind
-        unstable: []
-        order: 6
-    - name: Create or update kinds
-      url: '#create-or-update-kinds'
-      identifier: software-catalog-create-or-update-kinds
-      parent: software-catalog
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpsertCatalogKind
-        unstable: []
-        order: 5
-    - name: Get a list of entity kinds
-      url: '#get-a-list-of-entity-kinds'
-      identifier: software-catalog-get-a-list-of-entity-kinds
-      parent: software-catalog
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListCatalogKind
-        unstable: []
-        order: 4
     - name: Delete a single entity
       url: '#delete-a-single-entity'
       identifier: software-catalog-delete-a-single-entity
