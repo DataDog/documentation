@@ -47,7 +47,7 @@ short_description: Una plataforma autónoma para gestionar de forma inteligente 
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -57,10 +57,10 @@ tile:
   - Category::Notifications
   - Categoría::Orquestación
   - Category::Provisioning
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Una plataforma autónoma para gestionar de forma inteligente tus aplicaciones
     en la nube
