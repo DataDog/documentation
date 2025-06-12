@@ -30,6 +30,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 {{% appsec-getstarted %}}
 
 ## Enabling threat detection
+
 ### Get started
 
 1. **Update your Datadog Python library package** to at least version 1.2.2. Run the following:

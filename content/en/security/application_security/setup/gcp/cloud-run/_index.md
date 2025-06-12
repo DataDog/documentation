@@ -21,7 +21,7 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
-Learn how to setup App and API Protection on your Google Cloud Run functions by selecting the programming language your function is written with.
+Learn how to setup App and API Protection (AAP) on your Google Cloud Run functions by selecting the programming language your function is written with.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>

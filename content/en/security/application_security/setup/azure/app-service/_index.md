@@ -21,7 +21,7 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-### Compatibility
+## Compatibility
 
 Only *web applications* are supported. Azure Functions are not supported.
 
@@ -36,8 +36,8 @@ Only *web applications* are supported. Azure Functions are not supported.
 | Ruby   	  | Linux			       | {{< X >}}        |
 | PHP   	  | Linux			       |		        	    |
 
-### Setup
-#### Set application settings
+## Setup
+### Set application settings
 To enable AAP on your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
@@ -70,7 +70,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 **Note**: The application restarts when new settings are saved.
 
-#### Set General Settings
+### Set General Settings
 
 {{< tabs >}}
 {{% tab "Node, .NET, PHP, Python" %}}

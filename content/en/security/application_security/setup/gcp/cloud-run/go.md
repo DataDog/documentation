@@ -28,7 +28,8 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 
 ## Compatibility
 
-<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview.</div>
+
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
 ## Get started

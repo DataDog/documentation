@@ -21,18 +21,18 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Configuring AAP for AWS Lambda involves:
+Configuring App and API Protection (AAP) for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from AAP. Find them on [the Security tab of your Software Catalog][1].
 2. Setting up AAP instrumentation by using either the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
-### Prerequisites
+## Prerequisites
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
   X-Ray tracing, by itself, is not sufficient for AAP and requires APM Tracing to be enabled.
 
-### Compatibility
+## Compatibility
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
@@ -46,7 +46,7 @@ Configuring AAP for AWS Lambda involves:
 | PHP            	| 		            |
 | Go   	        | {{< X >}}        	|
 
-### Supported trigger types
+## Supported trigger types
 Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
 - API Gateway v1 (Rest API)
@@ -56,7 +56,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
 
 
-### Additional language specific compatibility information
+## Additional language specific compatibility information
 
 Node.js
 : If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
@@ -65,7 +65,7 @@ Java
 : To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024MB of memory.
 : If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
 
-### Get started
+## Get started
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
