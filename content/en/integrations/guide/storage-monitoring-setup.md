@@ -1,6 +1,13 @@
 ---
 title: Storage Monitoring for Amazon S3, Google Cloud Storage, and Azure Blob Storage
 private: true
+further_reading:
+    - link: "https://www.datadoghq.com/blog/datadog-storage-monitoring/"
+      tag: "Blog"
+      text: "Optimize and troubleshoot cloud storage at scale with Storage Monitoring"
+    - link: "https://www.datadoghq.com/blog/storage-monitoring-recommendations/"
+      tag: "Blog"
+      text: "Reduce cloud storage costs and improve operational efficiency with Datadog Storage Monitoring"
 ---
 
 <div class="alert alert-info">Storage Monitoring is in Preview.</div>
@@ -566,5 +573,9 @@ For Each Storage Account you wish to monitor, follow all of the steps here:
 ### Post-Installation
 
 After you finish with the above steps, fill out the [post-setup form][310].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [310]: https://forms.gle/WXFbGyBwWfEo3gbM7

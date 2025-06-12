@@ -18,14 +18,14 @@ Datadog HTTP API는 콘텐츠 헤더 `application/logplex-1`에 정의된 Logple
 * 다음 명령어로 HTTPS 드레인을 설정합니다.
 
 ```text
-heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
+heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&ddtags=env:<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
 ```
 
 * [Datadog API 키][2]를 `<DD_API_KEY>`로 바꿉니다.
 * 애플리케이션 [환경][3]을 `<ENV>`으로 바꿉니다.
 * 애플리케이션 이름을 `<APPLICATION_NAME>`, `<SERVICE>`로 바꿉니다.
 * 원하는 호스트 이름을 `<HOST>`로 바꿉니다.
-**참고**:  
+**참고**: 
    - [호스트 섹션][4]에 따라 메트릭 및 트레이스는 기본 호스트 이름을 Dyno 이름으로 설정합니다. 로그의 호스트 이름으로 Dyno 이름을 동적 설정할 수 없습니다. `dyno`, `dynotype` 태그를 사용하여 메트릭, 트레이스, 로그를 상호 연관시킵니다.
    - 빌드팩은 `dyno` 태그(Dyno 이름을 나타냄. 예:`web.1`) `dynotype`(`run` 또는 `web`과 같은 Dyno 유형)를 자동으로 추가합니다. 자세한 내용을 확인하려면 [태그로 시작하기][3] 지침을 참조하세요.
 

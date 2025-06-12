@@ -23,7 +23,7 @@ author:
 categories:
 - métricas
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
 display_on_public_website: true
@@ -39,24 +39,24 @@ public_title: Nobl9
 short_description: Nobl9 permite la recopilación de SLI, el cálculo de SLO y las alertas
   de presupuesto de errores
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Metrics
-  - Category::Notifications
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Métricas
+  - Categoría::Notificaciones
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Nobl9 permite la recopilación de SLI, el cálculo de SLO y las alertas
     de presupuesto de errores
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Nobl9
 ---
 

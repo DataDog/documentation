@@ -161,8 +161,8 @@ To enable Remote Configuration:
    ```yaml
    datadog:
      apiKey: xxx
-   remoteConfiguration:
-     enabled: true
+     remoteConfiguration:
+       enabled: true
    ```
 
    {{% /tab %}}
