@@ -3,7 +3,7 @@ title: Agent Monitoring
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}). </div>
+<div class="alert alert-warning">LLM Observability is not available for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
