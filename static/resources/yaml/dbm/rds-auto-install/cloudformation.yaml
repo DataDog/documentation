@@ -24,7 +24,7 @@ Resources:
   SNS:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: !Sub ${AWS::StackName}-rds-db-instance-events
+      TopicName: rds-db-instance-events
 
   # This subscription automatically routes messages to the SQS queue
   # to be processed by the Lambda function
@@ -42,7 +42,7 @@ Resources:
   SQS:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: !Sub ${AWS::StackName}-rds-db-instance-events
+      QueueName: rds-db-instance-events
       VisibilityTimeout: 30
       MessageRetentionPeriod: 3600 # 1 hour
 
@@ -143,24 +143,6 @@ Resources:
                 - ec2:AssignPrivateIpAddresses
                 - ec2:UnassignPrivateIpAddresses
               Resource: "*"
-      # The Lambda itself inherits the EC2 permissions so we need to deny them
-      - PolicyName: "DenyEC2"
-        PolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: Deny
-              Action:
-                - ec2:CreateNetworkInterface
-                - ec2:DescribeNetworkInterfaces
-                - ec2:DescribeSubnets
-                - ec2:DeleteNetworkInterface
-                - ec2:AssignPrivateIpAddresses
-                - ec2:UnassignPrivateIpAddresses
-              Resource: "*"
-              Condition:
-                ArnEquals:
-                  - lambda:SourceFunctionArn:
-                    - !GetAtt LambdaFunction.Arn
       # Allow the Lambda to read from the SQS queue
       - PolicyName: "AllowSQS"
         PolicyDocument:
@@ -227,3 +209,27 @@ Resources:
           - !Ref LambdaSecurityGroup
         SubnetIds:
           - !Ref SubnetId
+
+  # The Lambda itself inherits the EC2 permissions so we need to deny them to the Lambda function
+  # This is a separate policy to avoid a circular dependency
+  LambdaFunctionDenyPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: "LambdaFunctionDenyPolicy"
+      Roles:
+        - !Ref LambdaExecutionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Deny
+            Action:
+              - ec2:CreateNetworkInterface
+              - ec2:DescribeNetworkInterfaces
+              - ec2:DescribeSubnets
+              - ec2:DeleteNetworkInterface
+              - ec2:AssignPrivateIpAddresses
+              - ec2:UnassignPrivateIpAddresses
+            Resource: "*"
+            Condition:
+              ArnEquals:
+                lambda:SourceFunctionArn: !GetAtt LambdaFunction.Arn
