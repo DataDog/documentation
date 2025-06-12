@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" >}}
-Datadog Disaster Recovery is currently in Preview, but you can easily request access! Use this form to submit your request.
+Datadog Disaster Recovery is in Preview, but you can request access! Use this form to submit your request.
 {{< /callout >}}
 
 ## Overview 
@@ -57,17 +57,17 @@ For example, if you are hosted in [US1](https://app.datadoghq.com), you may choo
 
 Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) to help you select the secondary Datadog site and configure your new organization to be your secondary failover organization.
 
-Note that if you're also sending telemetry to Datadog using cloud provider integrations, you'll need to add your cloud provider accounts in the secondary org. 
+If you're also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the secondary org. 
 
-Datadog will not use cloud providers to receive telemetry data while the secondary site is passive.
+Datadog does not use cloud providers to receive telemetry data while the secondary site is passive.
 
 **Note**: Datadog can set this up for you if you'd prefer. 
 {{% /collapse-content %}}
 
 
 {{% collapse-content title=" 2. Contact Datadog to share your new organization" level="h5" %}}
-Share your organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) and they will configure your new organization to be your secondary failover organization.<br><br>
-**Note**: This organization will appear in your Datadog billing hierarchy, but all usage and cost associated will _not_ be billed during the private beta.
+Share your organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure your new organization to be your secondary failover organization.<br><br>
+**Note**: This organization appears in your Datadog billing hierarchy, but all usage and cost associated is _not_  billed during the private beta.
 {{% /collapse-content %}} <br>
 
 
@@ -139,7 +139,7 @@ Datadog provides a tool called [Datadog sync-cli][3] to copy your dashboards, mo
 
 Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization.
 
-Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here’s an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
+Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here's an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
 
 ```shell 
 destination_api_url="https://api.us5.datadoghq.com"
