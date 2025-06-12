@@ -54,10 +54,6 @@ further_reading:
 title: Application Security Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficas de llamas" width="75%">}}
 
 Application Security Management (ASM) de Datadog ofrece protección frente a ataques a nivel de aplicación cuyo fin es aprovechar vulnerabilidades en el código, como la Falsificación de solicitudes del lado del servidor (SSRF), la Inyección SQL, Log4Shell y el Cross-site scripting (XSS) reflejado. Puedes monitorizar y proteger aplicaciones hospedadas directamente en un servidor, Docker, Kubernetes, AWS ECS y (para los lenguajes compatibles) AWS Fargate.

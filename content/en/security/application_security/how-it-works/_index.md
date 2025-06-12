@@ -7,10 +7,6 @@ aliases:
   - /security/guide/how-appsec-works/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog App and API Protection provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:

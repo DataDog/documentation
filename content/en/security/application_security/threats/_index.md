@@ -15,10 +15,6 @@ further_reading:
   text: "How AAP Works"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog's App and API Protection (AAP) App and API Protection protects web applications and APIs from a wide range of security threats, including: 
 
 - Exploit attempts

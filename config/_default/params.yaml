@@ -251,6 +251,7 @@ unsupported_sites:
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
   app_builder: [gov]
+  application_security: [gov]
   autocomplete_search: [gov]
   case_management: [gov,ap1]
   ci_visibility: [gov]
