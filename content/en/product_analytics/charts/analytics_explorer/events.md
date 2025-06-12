@@ -14,7 +14,7 @@ The Product Analytics Explorer displays individual events in a side panel format
 
 {{< img src="real_user_monitoring/explorer/events/performance_side_panel.png" alt="Application performance graph and Core Web Vitals in the Performance tab" width="80%" >}}
 
-General context information is provided at the top. Scroll to the waterfall to see the actual content of the event. 
+General context information is provided at the top. Scroll to the waterfall to see the content of the event. 
 
 Context about your users and their applications, including the OS, country, code version, and more, is captured when the event is generated. Context also refers to the event itself, which includes information specific to the event type. For example, the event side panel shows the view path while the **Errors** side panel shows the error message.
 
