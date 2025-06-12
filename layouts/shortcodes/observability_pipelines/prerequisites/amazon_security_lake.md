@@ -4,7 +4,6 @@
 1. Follow the [Getting Started with Amazon Security Lake][10071] to set up Amazon Security Lake, and make sure to:
     - Enable Amazon Security Lake for the AWS account.
     - Select the AWS regions where S3 buckets will be created for OCSF data.
-    - Take note of the Amazon Security Lake S3 bucket name. The bucket name is used when you set up the Amazon Security Lake destination in Observability Pipelines.
 1. Follow [Collecting data from custom sources in Security Lake][10072] to create a custom source in Amazon Security Lake.
     - When you [configure a custom log source in Security Lake in the AWS console][10073]:
         - Enter a source name.
