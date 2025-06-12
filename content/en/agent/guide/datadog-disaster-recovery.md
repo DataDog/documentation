@@ -10,8 +10,8 @@ further_reading:
   text: "Getting Started with Datadog Sites"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="false" >}}
- Datadog Disaster Recovery is currently in Preview, but you can easily request access! Use this form to submit your request.
+{{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" >}}
+Datadog Disaster Recovery is currently in Preview, but you can easily request access! Use this form to submit your request.
 {{< /callout >}}
 
 ## Overview 
