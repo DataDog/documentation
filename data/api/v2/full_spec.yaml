@@ -41780,6 +41780,7 @@ components:
             appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
               This does not restrict API or inventory SQL access to the vulnerability
               data source.
+            billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -46702,6 +46703,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
@@ -65716,6 +65718,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
@@ -65824,6 +65827,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
@@ -65909,6 +65913,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get historical cost across your account
       tags:
       - Usage Metering
@@ -66256,6 +66261,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get projected cost across your account
       tags:
       - Usage Metering
