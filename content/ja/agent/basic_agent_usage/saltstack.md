@@ -87,7 +87,7 @@ file_roots:
         - datadog
     ```
 
-### 構成
+### 設定
 
 計算式のコンフィギュレーションはピラーファイルの `datadog` キー内に記述する必要があります。これには `config`、 `install_settings`、`checks` の 3 つが含まれます。
 

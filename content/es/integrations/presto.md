@@ -32,7 +32,7 @@ author:
 categories:
 - almacenes de datos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
 display_on_public_website: true
@@ -69,7 +69,7 @@ tile:
   title: Presto
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -102,9 +102,9 @@ Utiliza la configuración predeterminada en tu archivo `presto.d/conf.yaml` para
 
 #### Recopilación de logs
 
-Disponible para la versión 6.0 o posteriores del Agent
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada por defecto en el Datadog Agent. Actívala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -138,13 +138,13 @@ Ejecuta el [subcomando de estado del Agent][5] y busca `presto` en la sección C
 
 Presto no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "presto" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 
 [1]: https://docs.datadoghq.com/es/integrations/presto/
