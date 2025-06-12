@@ -1,0 +1,203 @@
+# Automatically setup RDS instances to be ready for the Datadog integration
+# Before deploying, run deploy.sh in the lambda subdirectory to build the Lambda function
+# To deploy run:
+# aws cloudformation deploy \
+# --template-file cloudformation.yaml \
+# --stack-name rds-auto-install \
+# --capabilities CAPABILITY_IAM \
+# --parameters VPC=$(aws cloudformation describe-stacks --stack-name "rds-auto-install-demo" --query "Stacks[0].Outputs[?ExportName=='VPCId'].OutputValue" --output text)
+#
+
+
+Parameters:
+  VPC:
+    Type: "AWS::EC2::VPC::Id"
+    Description: "The VPC to deploy the resources in"
+
+Resources:
+  # The SNS topic is used as the target for RDS instance events
+  SNS:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub ${AWS::StackName}-rds-db-instance-events
+
+  # This subscription automatically routes messages to the SQS queue
+  # to be processed by the Lambda function
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref SNS
+      Protocol: sqs
+      RawMessageDelivery: true
+      Endpoint: !GetAtt SQS.Arn
+
+  # The SQS queue holds messages about RDS instance events
+  # There can be a delay between event creation and all permissions
+  # being applied, so we use a queue to retry until the permissions are set
+  SQS:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub ${AWS::StackName}-rds-db-instance-events
+      VisibilityTimeout: 30
+      MessageRetentionPeriod: 3600 # 1 hour
+
+  # This policy allows the SNS topic to send messages to the SQS queue
+  SQSPolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref SQS
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sns.amazonaws.com
+            Action: sqs:SendMessage
+            Resource: !GetAtt SQS.Arn
+            Condition:
+              ArnEquals:
+                "aws:SourceArn": !Ref SNS
+
+  # Map SQS queue directly to the Lambda function
+  SQSLambdaMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 1
+      EventSourceArn: !GetAtt SQS.Arn
+      FunctionName: !GetAtt LambdaFunction.Arn
+      Enabled: true
+      MaximumBatchingWindowInSeconds: 0
+
+  # Subscribe to all RDS instance modification events
+  # availability and maintence events may include version changes
+  # configuration change events may include changes that enable new Datadog features
+  RDSEventSubscription:
+    Type: "AWS::RDS::EventSubscription"
+    Properties:
+      SnsTopicArn: !GetAtt SNS.TopicArn
+      EventCategories:
+        - "availability"
+        - "configuration change"
+        - "creation"
+        - "maintenance"
+      SourceType: "db-instance"
+      Enabled: true
+
+  # Allow any RDS instance to publish to the SNS topic
+  RDSPermission:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: events.rds.amazonaws.com
+          Action: sns:Publish
+          Resource: "*"
+          Condition:
+            StringEquals:
+              "aws:SourceAccount": !Ref AWS::AccountId
+      Topics:
+        - !GetAtt SNS.TopicArn
+
+  # Permissions for the Lambda function that processes the SQS messages
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+      - PolicyName: "AllowLogs"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: "*"
+      # The execution role for Lambdas within a VPC need permissions to manage network interfaces
+      - PolicyName: "AllowEC2"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:CreateNetworkInterface
+                - ec2:DescribeNetworkInterfaces
+                - ec2:DescribeSubnets
+                - ec2:DeleteNetworkInterface
+                - ec2:AssignPrivateIpAddresses
+                - ec2:UnassignPrivateIpAddresses
+              Resource: "*"
+      # The Lambda itself inherits the EC2 permissions so we need to deny them
+      - PolicyName: "DenyEC2"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Deny
+              Action:
+                - ec2:CreateNetworkInterface
+                - ec2:DescribeNetworkInterfaces
+                - ec2:DescribeSubnets
+                - ec2:DeleteNetworkInterface
+                - ec2:AssignPrivateIpAddresses
+                - ec2:UnassignPrivateIpAddresses
+              Resource: "*"
+              Condition:
+                ArnEquals:
+                  - lambda:SourceFunctionArn:
+                    - !GetAtt LambdaFunction.Arn
+      # Allow the Lambda to read from the SQS queue
+      - PolicyName: "AllowSQS"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+                - sqs:GetQueueAttributes
+              Resource: !GetAtt SQS.Arn
+      # Allow access to the RDS instances and master secrets
+      - PolicyName: "AllowRDS"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - rds:DescribeDBInstances
+              Resource: "*"
+              # Condition:
+              #   StringEquals:
+              #     "aws:ResourceTag/datadoghq.com/install-dbm": "true"
+      # Allow access to the RDS instances and master secrets
+      - PolicyName: "AllowSecrets"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+                - secretsmanager:DescribeSecret
+              Resource: "*"
+              Condition:
+                StringEquals:
+                  "aws:ResourceTag/aws:secretsmanager:owningService": "rds"
+
+  LambdaSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "Lambda traffic"
+      VpcId: !Ref VPC
+      SecurityGroupEgress:
+      - IpProtocol: "-1"
+        CidrIp: "0.0.0.0/0"

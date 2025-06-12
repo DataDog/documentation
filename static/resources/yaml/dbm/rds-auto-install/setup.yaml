@@ -193,6 +193,15 @@ Resources:
           ToPort: 5432
           CidrIp: !GetAtt VPC.CidrBlock
 
+  # S3 Bucket for Lambda code upload
+  S3Bucket:
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AWS::StackName
+
+
 Outputs:
   VPCId:
     Description: "VPC ID"
