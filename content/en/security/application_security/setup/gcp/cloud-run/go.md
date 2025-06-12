@@ -29,7 +29,7 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 ## Compatibility
 
 <div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
-**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+**Note**: Threat Protection through Remote Configuration is not supported. Instead, use [Workflows][5] to block IPs in your [WAF][6].
 
 ## Get started
 
@@ -106,6 +106,6 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 [2]: /serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
 [4]: /security/application_security/serverless/compatibility
-[5]: /security/default_rules/security-scan-detected/
-[6]: /serverless/libraries_integrations/plugin/
+[5]: /actions/workflows/
+[6]: /security/application_security/waf-integration/
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
