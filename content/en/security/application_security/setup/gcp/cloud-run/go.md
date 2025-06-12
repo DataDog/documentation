@@ -1,5 +1,5 @@
 ---
-title: Enabling App and API Protection for Google Cloud Run
+title: Enabling App and API Protection for Google Cloud Run functions in Go
 further_reading:
     - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
