@@ -1,5 +1,5 @@
 ---
-title: Enabling App and API Protection for Google Cloud Run
+title: Enabling App and API Protection for Google Cloud Run functions in Python
 further_reading:
     - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
@@ -115,6 +115,6 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 [2]: /serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
 [4]: /security/application_security/serverless/compatibility
-[5]: /security/default_rules/security-scan-detected/
-[6]: /serverless/libraries_integrations/plugin/
+[5]: /actions/workflows/
+[6]: /security/application_security/waf-integration/
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
