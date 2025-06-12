@@ -26,7 +26,7 @@ author:
 categories:
 - recopilación de logs
 - colas de mensajes
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pulsar/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: pulsar
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 manifest_version: 2.0.0
 name: pulsar
@@ -103,7 +103,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
    logs_enabled: true
    ```
 
-3. Deselecciona y edita el bloque de configuración de logs en tu archivo `mapreduce.d/conf.yaml`. Cambia el valor de los parámetros de ruta según tu entorno. Consulta el [pulsar.d/conf.yaml de ejemplol][4] para ver todas las opciones de configuración disponibles.
+3. Deselecciona y edita el bloque de configuración de logs en tu archivo `pulsar.d/conf.yaml`. Cambia el valor de los parámetros de ruta según tu entorno. Consulta el [pulsar.d/conf.yaml de ejemplol][4] para ver todas las opciones de configuración disponibles.
    ```yaml
     logs:
       - type: file
