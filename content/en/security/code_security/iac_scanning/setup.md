@@ -1,5 +1,7 @@
 ---
-title: Setting up IaC Scanning for Cloud Security
+title: Setting up IaC Scanning
+aliases:
+  - /security/cloud_security_management/setup/iac_scanning/
 further_reading:
     - link: "/security/cloud_security_management/setup"
       tag: "Documentation"

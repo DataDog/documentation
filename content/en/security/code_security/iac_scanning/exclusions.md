@@ -1,5 +1,7 @@
 ---
 title: Setting up IaC Scanning Exclusions
+aliases:
+  - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
 further_reading:
     - link: "/security/cloud_security_management/iac_scanning"
       tag: "Documentation"
