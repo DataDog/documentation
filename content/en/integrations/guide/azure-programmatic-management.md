@@ -1,11 +1,13 @@
 ---
 title: Azure Integration Programmatic Management Guide
-
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
   text: "Azure Integration"
+- link: "https://www.datadoghq.com/blog/azure-log-forwarding/"
+  tag: "Blog"
+  text: "Send Azure logs to Datadog faster and more easily with automated log forwarding"
 ---
 
 ## Overview
