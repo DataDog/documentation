@@ -425,6 +425,13 @@
       "description": "Update a downtime returns \"OK\" response"
     }
   ],
+  "CreateEvent": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Post an event returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
