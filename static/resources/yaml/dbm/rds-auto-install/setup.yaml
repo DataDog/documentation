@@ -1,0 +1,211 @@
+# These resources setup a testing environment for the RDS Auto Install demonstration
+# Run `aws cloudformation deploy --template-file setup.yaml --stack-name rds-auto-install-demo` to deploy the stack
+Resources:
+# Networking
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+
+  VpcGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  RouteTable:
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref "VPC"
+
+  InternetRoute:
+    DependsOn: VpcGatewayAttachment
+    Type: AWS::EC2::Route
+    Properties:
+       RouteTableId: !Ref RouteTable
+       GatewayId: !Ref InternetGateway
+       DestinationCidrBlock: 0.0.0.0/0
+
+  SubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !Sub "${AWS::Region}a"
+      VpcId: !Ref "VPC"
+      CidrBlock: "10.0.0.0/17"
+
+  SubnetARouteTableAssociation:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref "SubnetA"
+      RouteTableId: !Ref "RouteTable"
+
+  # Some regions don't have -b
+  SubnetC:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !Sub "${AWS::Region}c"
+      VpcId: !Ref "VPC"
+      CidrBlock: "10.0.128.0/17"
+
+  SubnetCRouteTableAssociation:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref "SubnetC"
+      RouteTableId: !Ref "RouteTable"
+
+  SubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties:
+      DBSubnetGroupDescription: "Subnet Group"
+      SubnetIds:
+      - !Ref "SubnetA"
+      - !Ref "SubnetC"
+  VPCEndpointSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "VPC endpoints traffic"
+      VpcId: !Ref VPC
+      SecurityGroupEgress:
+      - IpProtocol: "-1"
+        CidrIp: "0.0.0.0/0"
+      SecurityGroupIngress:
+      - IpProtocol: "-1"
+        FromPort: 0
+        ToPort: 65535
+        Description: "VPC"
+        CidrIp: !GetAtt VPC.CidrBlock
+  # Secrets manager endpoint
+  SecretsManagerEndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Interface"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.secretsmanager"
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+      - !Ref "VPCEndpointSecurityGroup"
+      SubnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetC
+  # RDS endpoint
+  RDSEndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Interface"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.rds"
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+      - !Ref "VPCEndpointSecurityGroup"
+      SubnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetC
+
+  # ECR endpoints
+  ECRDKREndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Interface"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.dkr"
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+      - !Ref "VPCEndpointSecurityGroup"
+      SubnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetC
+  ECRAPIEndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Interface"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.ecr.api"
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+      - !Ref "VPCEndpointSecurityGroup"
+      SubnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetC
+  # ECR requires S3 access for image layers
+  S3Endpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Gateway"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.s3"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:GetObject
+            Resource:
+              - "*"
+      RouteTableIds:
+      - !Ref RouteTable
+  # Cloudwatch endpoint for awslogs
+  CloudwatchEndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      VpcId: !Ref VPC
+      VpcEndpointType: "Interface"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.logs"
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+      - !Ref "VPCEndpointSecurityGroup"
+      SubnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetC
+
+  # RDS
+  RDSAutoInstallDBInstance:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      DBInstanceIdentifier: !Sub "${AWS::StackName}-db-instance"
+      DBInstanceClass: db.t3.medium
+      Engine: postgres
+      EngineVersion: "17.2"
+      MasterUsername: root
+      ManageMasterUserPassword: true
+      EnableIAMDatabaseAuthentication: true
+      AllocatedStorage: "20"
+      DBSubnetGroupName: !Ref SubnetGroup
+      VPCSecurityGroups:
+        - !GetAtt RDSSecurityGroup.GroupId
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      GroupDescription: Security group for RDS Auto Install demo
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: !GetAtt VPC.CidrBlock
+
+Outputs:
+  VPCId:
+    Description: "VPC ID"
+    Value: !Ref VPC
+  # SubnetAId:
+  #   Description: "Subnet A ID"
+  #   Value: !Ref SubnetA
+  # SubnetCId:
+  #   Description: "Subnet C ID"
+  #   Value: !Ref SubnetC
+  # RDSInstanceEndpoint:
+  #   Description: "RDS Instance Endpoint"
+  #   Value: !GetAtt RDSAutoInstallDBInstance.Endpoint.Address
+  # RDSSecurityGroupId:
+  #   Description: "RDS Security Group ID"
+  #   Value: !GetAtt RDSSecurityGroup.GroupId
