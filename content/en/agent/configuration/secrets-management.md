@@ -166,7 +166,7 @@ password: ENC[file@/etc/secret-volume/password]
 
 [Docker swarm secrets][3] are mounted in the `/run/secrets` folder. For example, the Docker secret `db_prod_passsword` is located in `/run/secrets/db_prod_password` in the Agent container. This would be referenced in the configuration with `ENC[file@/run/secrets/db_prod_password]`.
 
-#### Example: Reading a Kubernetes Secret Across Namespaces
+#### Example: Reading a Kubernetes secret across namespaces
 
 If you want the Agent to read a Secret from a different namespace, use the `k8s_secret@` prefix. For example:
 ```
@@ -232,7 +232,7 @@ Here's an example showing how to set it up:
    }
    ```
 
-3. Download the latest release of [datadog-secret-backend][5] on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary. The example below shows a configuration for a backend of type `aws.secrets` under the name `staging-aws`:
+3. Download the latest release of [datadog-secret-backend][5] on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary. The following example shows a configuration for a backend of type `aws.secrets` under the name `staging-aws`:
    ```
    backends:
      staging-aws:
