@@ -1,5 +1,5 @@
 ---
-title: Setting up MySQL
+title: Setting up MySQL testing branch naming
 description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
 ---
