@@ -1,12 +1,13 @@
 export default {
-    allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'gov'],
+    allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'],
     dd_datacenter: {
         us: 'US1',
         us3: 'US3',
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
-        gov: 'US1-FED'
+        gov: 'US1-FED',
+        ap2: 'AP2'
     },
     dd_site: {
         us: 'datadoghq.com',
