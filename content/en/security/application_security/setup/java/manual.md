@@ -1,5 +1,5 @@
 ---
-title: Enabling AAP for Java
+title: Manual Setup for Java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -8,7 +8,6 @@ aliases:
   - /security/application_security/getting_started/java
   - /security/application_security/threats/setup/threat_detection/java
   - /security/application_security/threats_detection/java
-  - /security/application_security/setup/aws/fargate/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -22,12 +21,7 @@ further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
-
 ---
-
-You can monitor App and API Protection for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
-
-{{% appsec-getstarted %}}
 
 {{< callout btn_hidden="true" header="Shortcut options before manual setup:" >}}
 **Single Step APM Instrumentation**: For faster setup with automatic instrumentation, consider using [Single Step APM Instrumentation][1] which automatically installs the Datadog SDK with no additional configuration required.
@@ -93,75 +87,6 @@ To enable standalone mode:
 2. Keep `DD_APPSEC_ENABLED=true` environment variable
 3. This configuration will minimize APM data while maintaining full security monitoring capabilities
 
-### Deployment configuration
-
-Configure your deployment environment to enable AAP:
-
-{{< tabs >}}
-{{% tab "Docker CLI" %}}
-
-Add the AAP environment variable to your `docker run` command:
-
-```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
-```
-
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
-
-Add the following environment variable to your container Dockerfile:
-
-```dockerfile
-ENV DD_APPSEC_ENABLED=true
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Update your deployment configuration file and add the AAP environment variable:
-
-```yaml
-spec:
-  template:
-    spec:
-      containers:
-        - name: <CONTAINER_NAME>
-          image: <CONTAINER_IMAGE>/<TAG>
-          env:
-            - name: DD_APPSEC_ENABLED
-              value: "true"
-```
-
-{{% /tab %}}
-{{% tab "Amazon ECS" %}}
-
-Update your ECS task definition JSON file by adding this in the environment section:
-
-```json
-"environment": [
-  ...,
-  {
-    "name": "DD_APPSEC_ENABLED",
-    "value": "true"
-  }
-]
-```
-
-{{% /tab %}}
-{{% tab "AWS Fargate" %}}
-
-Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
-
-```shell
-java -javaagent:dd-java-agent.jar \
-     -Ddd.appsec.enabled=true \
-     -jar <YOUR_SERVICE>.jar \
-     <YOUR_SERVICE_FLAGS>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Enabling AAP
 
 ### Run your application with AAP enabled
@@ -185,6 +110,65 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service
 
 If you need additional assistance, contact [Datadog support][5].
 
+## Troubleshooting
+
+If you encounter issues while setting up App and API Protection for your Java application, check the following common problems and solutions:
+
+### No security signals appearing
+
+1. **Verify Agent version**
+   - Ensure you're running Datadog Agent v7.41.1 or higher
+   - Check Agent status: `datadog-agent status`
+
+2. **Check Java tracer version**
+   - Confirm you're using Java tracer v0.94.0 or higher
+   - Verify the tracer is loaded: `java -javaagent:/path/to/dd-java-agent.jar -version`
+
+3. **Verify environment variables**
+   - Ensure `DD_APPSEC_ENABLED=true` is set
+   - Check `DD_SERVICE` and `DD_ENV` are properly configured
+   - Verify `DD_APM_ENABLED=true` if using APM features
+
+4. **Check file system permissions**
+   - Ensure the application has write access to `/tmp`
+   - Verify the Java agent JAR is readable
+
+### Application fails to start
+
+1. **Check Java agent path**
+   - Verify the path to `dd-java-agent.jar` is correct
+   - Ensure the JAR file exists and is readable
+
+2. **Memory issues**
+   - If you see `OutOfMemoryError`, increase the JVM heap size
+   - Add `-Xmx` parameter to your Java command
+
+3. **Class loading errors**
+   - Check for conflicts with other Java agents
+   - Verify Java version compatibility
+
+### Performance impact
+
+1. **High latency**
+   - Check Agent resource usage
+   - Verify network connectivity between Agent and Datadog
+   - Consider adjusting sampling rates
+
+2. **High memory usage**
+   - Monitor JVM memory usage
+   - Adjust Agent resource limits if needed
+
+### Still having issues?
+
+If you're still experiencing problems:
+1. Check the [Application Security Monitoring troubleshooting guide][5]
+2. Review the [Java tracer documentation][6]
+3. Contact [Datadog support][7]
+
+[5]: /security/application_security/troubleshooting
+[6]: /tracing/trace_collection/compatibility_requirements/java
+[7]: /help
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -193,4 +177,4 @@ If you need additional assistance, contact [Datadog support][5].
 [2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/?tab=java#tracer-libraries
 [3]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [4]: /security/application_security/guide/standalone_application_security/
-[5]: /help
+[5]: /help 

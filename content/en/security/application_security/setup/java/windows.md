@@ -1,0 +1,123 @@
+---
+title: Setup App and API Protection for Java on Windows
+further_reading:
+- link: "/security/application_security/how-it-works/"
+  tag: "Documentation"
+  text: "How App and API Protection Works"
+- link: "/security/default_rules/?category=cat-application-security"
+  tag: "Documentation"
+  text: "OOTB App and API Protection Rules"
+- link: "/security/application_security/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting App and API Protection"
+---
+
+{{< callout btn_hidden="true" header="Shortcut options before manual setup:" >}}
+**Single Step APM Instrumentation**: For faster setup with automatic instrumentation, consider using [Single Step APM Instrumentation][1] which automatically installs the Datadog SDK with no additional configuration required.
+
+Once SSI is set up, you can enable App and API Protection by going to your APM service in the Datadog app → Service Configuration section → Enable Application Security Monitoring.
+{{< /callout >}}
+
+## Overview
+
+Datadog Application Security Management (ASM) provides App and API Protection (AAP) capabilities including:
+- **Application Security Monitoring**: Real-time threat detection and protection against attacks like SQL injection, XSS, and more
+- **Software Composition Analysis (SCA)**: Identification of vulnerable dependencies in your codebase
+- **Interactive Application Security Testing (IAST)**: Runtime vulnerability detection during testing
+
+ASM works by leveraging the Datadog Java tracing library to monitor HTTP requests, analyze patterns, and detect security threats in real-time. The library integrates seamlessly with your existing Windows-hosted application without requiring code changes.
+
+For detailed compatibility information, including supported Java versions, frameworks, and deployment environments, see [Single Step Instrumentation Compatibility][2].
+
+This guide explains how to set up App and API Protection (AAP) for Java applications running on Windows. The setup involves:
+1. Installing the Datadog Agent
+2. Configuring your Java application
+3. Enabling AAP monitoring
+
+## Prerequisites
+
+- Windows operating system
+- Java application
+- Datadog Agent installed on Windows
+- Administrator privileges for some configuration steps
+
+## Setup
+
+### 1. Install the Datadog Agent
+
+If you haven't already, install the Datadog Agent on your Windows host. You can download the installer from the [Datadog Agent installation page][3].
+
+## Library setup
+
+To enable AAP capabilities, you need the Datadog Java tracing library (version 0.94.0 or higher) installed in your application environment.
+
+### Download the library
+
+Download the latest version of the Datadog Java library:
+
+```powershell
+Invoke-WebRequest -Uri "https://dtdg.co/latest-java-tracer" -OutFile "dd-java-agent.jar"
+```
+
+### Verify compatibility
+
+To check that your service's language and framework versions are supported for AAP capabilities, see [Single Step Instrumentation Compatibility][2].
+
+## Service configuration
+
+### Standalone billing alternative
+
+If you want to use Application Security Management without APM tracing functionality, you can deploy with [Standalone App and API Protection][4]. This configuration reduces the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+To enable standalone mode:
+1. Set `DD_APM_TRACING_ENABLED=false` environment variable
+2. Keep `DD_APPSEC_ENABLED=true` environment variable
+3. This configuration will minimize APM data while maintaining full security monitoring capabilities
+
+### Enabling AAP
+
+#### Run your application with AAP enabled
+
+Start your Java application with the Datadog agent and AAP enabled:
+
+```powershell
+java -javaagent:path\to\dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY_SERVICE> -Ddd.env=<MY_ENV> -jar path\to\app.jar
+```
+
+**Important considerations:**
+- **File system requirements**: Read-only file systems are not currently supported. The application must have access to a writable temporary directory.
+- **Service identification**: Always specify `DD_SERVICE` (or `-Ddd.service`) and `DD_ENV` (or `-Ddd.env`) for proper service identification in Datadog.
+
+## Verify setup
+
+To verify that AAP is working correctly:
+
+1. Send some traffic to your application
+2. Check the [Application Signals Explorer][4] in Datadog
+3. Look for security signals and vulnerabilities
+
+## Troubleshooting
+
+If you don't see data in Datadog:
+1. Verify the Datadog Agent is running (check Services)
+2. Check Windows Event Viewer for any errors
+3. Ensure environment variables are set correctly
+4. Verify the Java agent is being loaded (check application logs)
+
+Common issues:
+- **Agent not running**: Check Services (services.msc) for "Datadog Agent"
+- **Permission issues**: Run as Administrator if needed
+- **Path issues**: Use absolute paths for the Java agent
+- **IIS issues**: Ensure application pool has correct permissions
+
+For more detailed troubleshooting, see the [Troubleshooting guide][5].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=
+[3]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[4]: https://app.datadoghq.com/security/appsec
+[5]: /security/application_security/troubleshooting 
