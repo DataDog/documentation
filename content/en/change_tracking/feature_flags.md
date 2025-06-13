@@ -16,7 +16,7 @@ Feature flag tracking in Datadog helps you correlate flag changes with system pe
 With feature flag tracking, you can:
 - View flag changes directly in your dashboards, monitors, and service pages
 - Automatically identify which services are affected by a flag change
-- Roll back problematic flags directly from the Datadog interface
+- Roll back problematic flags directly from inside Datadog
 
 {{< img src="/change_tracking/monitor.png" alt="The monitor graph shows the error spike correlated with the flag change." style="width:100%;" >}}
 
