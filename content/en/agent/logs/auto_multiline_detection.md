@@ -78,6 +78,25 @@ logs:
     auto_multi_line_detection: false
 ```
 
+#### Per integration multi-line integration settings
+
+You can set auto multi-line settings individually on each integration. The integration accepts the same settings as the normal `datadog.yaml` file:
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: testApp
+    source: java
+    auto_multi_line_detection: true
+    auto_multi_line_detection_custom_samples:
+      - sample: "ERROR [DatabaseService]"
+    auto_multi_line:
+        enable_json_detection: true
+        enable_datetime_detection: true
+        tokenizer_max_input_bytes: 50
+```
+
 ### Supported datetime formats
 
 Auto multi-line detection uses an algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. To prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
