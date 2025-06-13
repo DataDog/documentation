@@ -106,8 +106,7 @@ export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
 export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
 export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
 export USER_EMAIL=<USER_EMAIL>
-export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'"}}}'
-
+export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
 curl -v -H "Content-Type: application/json" -H 
 "dd-api-key:${PRIMARY_DD_API_KEY}" -H 
