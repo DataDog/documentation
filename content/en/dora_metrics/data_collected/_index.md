@@ -50,7 +50,7 @@ For more information about using tags, see [Getting Started with Tags][6].
 In addition to the tags above, deployment and failure events can be enriched with custom tags to filter DORA Metrics. There are three potential sources for these tags:
 
 - Software Catalog: If a deployment or failure event is associated with services in the software catalog, it will automatically be enriched with the `language` and the [custom tags defined in the Service Definitions][13].
-- Incident Management: Failure events created from a [Datadog Incident Management][14] it will be enriched with custom tags for any user defined [Single Select or Multi Select property fields][15].
+- Incident Management: Failure events created from [Datadog Incident Management][14] will be enriched with custom tags for any user-defined [Single Select or Multi Select property fields][15].
 - DORA Metrics API: Up to 100 user provided custom tags can be added to both deployment and failure events in the [API][7].
 
 For more information about using custom tags in DORA Metrics, see [DORA Metrics Overview][16].
