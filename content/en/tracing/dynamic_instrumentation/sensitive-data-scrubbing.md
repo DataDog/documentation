@@ -1,5 +1,7 @@
 ---
 title: Dynamic Instrumentation Sensitive Data Scrubbing
+aliases:
+    - /dynamic_instrumentation/sensitive-data-scrubbing/
 further_reading:
 - link: "/dynamic_instrumentation/enabling/"
   tag: "Documentation"

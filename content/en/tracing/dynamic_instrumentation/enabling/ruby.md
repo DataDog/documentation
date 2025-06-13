@@ -1,21 +1,32 @@
 ---
-title: Enable Dynamic Instrumentation for PHP
+title: Enable Dynamic Instrumentation for Ruby
 aliases:
-    - /tracing/dynamic_instrumentation/enabling/php/
-private: true
+    - /dynamic_instrumentation/enabling/ruby/
+private: false
+code_lang: ruby
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
       text: 'Getting Started with Datadog Agent'
 ---
 
+{{< beta-callout-private url="https://www.datadoghq.com/product-preview/dynamic-instrumentation-for-ruby/" >}}
+    Dynamic Instrumentation for Ruby is in limited preview, and is not available to all customers.
+    Request access to join the waiting list.
+    Note that <a href="#limitations">some limitations</a> apply to the preview.
+{{< /beta-callout-private >}}
+
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+
+**Note**: Dynamic Instrumentation is supported only for applications running in `production` environment (`RAILS_ENV`, `RACK_ENV`, etc.).
 
 ## Installation
 
 1. Install or upgrade your Agent to version [7.45.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the PHP tracing libraries to version 1.5.0, by following the [relevant instructions][2].
+3. Install or upgrade the Ruby tracing library to version 2.9.0 or higher, by following the [relevant instructions][2].
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
@@ -35,32 +46,35 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
-
 ## Limitations
+
+The following limitations apply to the limited preview:
 
 ### Supported features
 
-- Dynamic Logs, Metrics, Spans, and Span Tags
-- Local variable capture for Dynamic Logs
-- Dynamic Log conditions
-- Expression evaluation in Dynamic Log templates
-- [PII redaction][8] based on variable/property names and classes
+- [Dynamic Logs][8]
+- Capturing of variables for Dynamic Logs attached to a specific file/line
+- [PII redaction][10]
 - [Source code integration][9]
 
 ### Unsupported features
 
-- Instrumentation attached to a specific file/line
+- Dynamic Metrics, Spans, and Span Tags
+- Dynamic Log conditions
+- Local variable capture for Dynamic Logs attached to a method
+- Expression evaluation in Dynamic Log templates
+- Instrumenting third-party libraries
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: /tracing/trace_collection/dd_libraries/php/
+[2]: /tracing/trace_collection/dd_libraries/ruby/
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
-[9]: /integrations/guide/source-code-integration/?tab=php
-
+[8]: /dynamic_instrumentation/#creating-log-probes
+[9]: /integrations/guide/source-code-integration/?tab=ruby
+[10]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
