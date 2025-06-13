@@ -16,7 +16,7 @@ Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name,
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
-* Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
+* Using logical operators (`&&`, `||`, and `not()` or `!()`) to build complex Boolean conditions, for example: `!(isEmpty(user.email)) && not(contains(user.name, "abc"))`.
 * Using the `null` literal (equivalent to `nil` in Python).
 
 It does **not** support:
