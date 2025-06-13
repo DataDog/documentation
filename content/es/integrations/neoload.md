@@ -44,12 +44,12 @@ short_description: Monitorizar y analizar los resultados de tests de rendimiento
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Notifications
-  - Categoría::Tests
+  - Category::Tests
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
