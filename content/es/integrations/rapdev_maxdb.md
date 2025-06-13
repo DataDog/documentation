@@ -51,7 +51,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_maxdb
 pricing:
-- billing_type: recuento_etiquetas
+- billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.rapdev.maxdb
   product_id: maxdb
@@ -69,15 +69,15 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Almacenamiento en caché
-  - Categoría::Almacenes de datos
-  - Categoría::Marketplace
-  - Categoría::SAP
-  - Oferta::Integración
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Tipo de datos enviados::Métricas
+  - Category::Caching
+  - Category::Databases
+  - Category::Marketplace
+  - Category::SAP
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Data Type::Metrics
   configuration: README.md#Configuración
   description: Monitoriza el volumen, la caché, el esquema, la tabla y más desde las
     bases de datos de MaxDB

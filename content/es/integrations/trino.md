@@ -43,10 +43,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Oferta::Integración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Recopilar estadísticas de rendimiento y uso de clústeres Trino
   media: []

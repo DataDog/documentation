@@ -42,10 +42,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Métricas
-  - Categoría::Red
-  - Sistema operativo compatible::Linux
-  - Oferta::Integración
+  - Category::Metrics
+  - Category::Network
+  - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Integración de Sendmail para monitorizar colas de correos
   media: []

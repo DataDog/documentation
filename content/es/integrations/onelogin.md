@@ -44,12 +44,12 @@ team: web-integrations
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Categoría::Recopilación de logs
-  - Categoría::Seguridad
-  - Oferta::Integración
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Log Collection
+  - Category::Security
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Integración con logs de eventos OneLogin.
   media: []

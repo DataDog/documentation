@@ -54,16 +54,16 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Contenedores
-  - Categoría::Recopilación de logs
-  - Categoría::Métricas
-  - Categoría::Seguridad
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  - Tipo de datos enviados::Métricas
-  - Tipo de datos enviados::Logs
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Data Type Sent::Metrics
+  - Data Type Sent::Logs
   configuration: README.md#Configuración
   description: Observar y analizar logs, infracciones y métricas de JFrog Artifactory
     y Xray

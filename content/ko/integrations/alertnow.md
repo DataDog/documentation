@@ -48,7 +48,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Alerting
-  - 카테고리::자동화
+  - Category::Automation
   - Category::Collaboration
   - Category::Incidents
   - Category::Mobile

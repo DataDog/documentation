@@ -62,9 +62,9 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Nube
-  - Categoría::Almacenes de datos
-  - Categoría::Google Cloud
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Google Cloud
   - Category::Log Collection
   - Category::AI/ML
   - Offering::Integration
@@ -123,8 +123,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Vertex AI desde Google Clou
 ## Datos recopilados
 
 ### Métricas
-{{&lt; get-metrics-from-git "google_cloud_vertex_ai" &gt;}}
-
+{{< get-metrics-from-git "google_cloud_vertex_ai" >}}
 
 ### Checks de servicios
 

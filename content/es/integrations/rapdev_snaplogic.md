@@ -45,7 +45,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_snaplogic
 pricing:
-- billing_type: recuento_etiquetas
+- billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.rapdev.snaplogic
   product_id: snaplogic
@@ -62,14 +62,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Marketplace
-  - Oferta::Integración
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Categoría::Herramientas de desarrollo
-  - Tipo de datos enviados::Métricas
-  - Tipo de datos enviados::Logs
+  - Category::Marketplace
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Development Tools
+  - Data Type::Metrics
+  - Data Type::Logs
   configuration: README.md#Configuración
   description: Monitorizar pipelines y snaplexes SnapLogic
   media:

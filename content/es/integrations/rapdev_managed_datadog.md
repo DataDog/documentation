@@ -40,11 +40,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - SO compatible::Linux
-  - SO compatible::Windows
-  - SO compatible::macOS
-  - Categoría::Marketplace
-  - Oferta::Servicio profesional
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
   configuration: README.md#Configuración
   description: Aprovecha la experiencia en ingeniería de RapDev Datadog para gestionar
     y escalar tu entorno.

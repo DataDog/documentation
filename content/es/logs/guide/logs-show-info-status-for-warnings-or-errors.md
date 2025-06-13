@@ -30,7 +30,7 @@ title: Los logs muestran el estado de la información de advertencias o errores
 
 Por defecto, cuando la API de entrada de Datadog recibe un log, se genera un estado `INFO` y se agrega como el atributo `status`.
 
-{{<img src="logs/guide/original_log.png" alt="Panel de logs que muestra un log con el estado de la información, pero el mensaje muestra una advertencia". style="width:50%;">}}
+{{<img src="logs/guide/original_log.png" alt="Panel de logs que muestra un log con el estado de la información, pero el mensaje muestra una advertencia." style="width:50%;">}}
 
 Este `status` por defecto puede no reflejar siempre el estado real contenido en el propio log. En esta guía se explica cómo sustituir el valor por defecto por el estado real.
 

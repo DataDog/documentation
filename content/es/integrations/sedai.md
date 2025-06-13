@@ -51,16 +51,16 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Gestión de costes
+  - Category::Automation
+  - Category::Cloud
+  - Category::Cost Management
   - Category::Notifications
-  - Categoría::Orquestación
+  - Category::Orchestration
   - Category::Provisioning
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Una plataforma autónoma para gestionar de forma inteligente tus aplicaciones
     en la nube

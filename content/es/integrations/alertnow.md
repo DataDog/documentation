@@ -48,10 +48,10 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Alerting
-  - Categoría::Automatización
+  - Category::Automation
   - Category::Collaboration
   - Category::Incidents
-  - Categoría::Móvil
+  - Category::Mobile
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
