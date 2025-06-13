@@ -8,6 +8,8 @@ aliases:
   - /security/application_security/getting_started/php
   - /security/application_security/enabling/tracing_libraries/threat_detection/php/
   - /security/application_security/threats/setup/threat_detection/php
+  - /security/application_security/threats_detection/php
+  - /security/application_security/setup/aws/fargate/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -95,6 +97,16 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% appsec-getstarted-2-canary %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
 ## Further Reading
 

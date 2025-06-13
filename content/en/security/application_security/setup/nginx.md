@@ -8,6 +8,7 @@ aliases:
   - /security/application_security/getting_started/nginx
   - /security/application_security/enabling/tracing_libraries/threat_detection/nginx/
   - /security/application_security/threats/setup/threat_detection/nginx
+  - /security/application_security/threats_detection/nginx
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"
@@ -70,6 +71,16 @@ As of version 1.3.0, the available functionality has the following important lim
 
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
+
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
 ## Further Reading
 

@@ -7,6 +7,8 @@ aliases:
   - /security_platform/application_security/getting_started/java
   - /security/application_security/getting_started/java
   - /security/application_security/threats/setup/threat_detection/java
+  - /security/application_security/threats_detection/java
+  - /security/application_security/setup/aws/fargate/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -134,6 +136,16 @@ java -javaagent:dd-java-agent.jar \
 
 
 If you need additional assistance, contact [Datadog support][5].
+
+## Using AAP without APM tracing
+
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+
+1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+
+For more details, see [Standalone App and API Protection][standalone_billing_guide].
+[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
 ## Further Reading
 
