@@ -57,7 +57,7 @@ To start configuring data sources to send deployment and failure events to Datad
 
 ## Analyze DORA Metrics
 
-Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by team, service, repository, environment, time period, and by custom tags to compare trends over time.
+Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by team, service, repository, environment, time period, and by [custom tags][8] to compare trends over time.
 
 {{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
@@ -99,3 +99,4 @@ Within dashboards and graphs, custom tags are treated as [attributes][7]. In ord
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
 [7]: /dashboards/guide/quick-graphs/#graphing-events
+[8]: /dora_metrics/data_collected/#custom-tags
