@@ -5,7 +5,9 @@ further_reading:
       tag: 'Blog'
       text: 'Create and monitor LLM experiments with Datadog'
 ---
-
+{{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
+LLM Observability Experiments is in Preview.
+{{< /callout >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">LLM Observability is not available for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}). </div>
 {{< /site-region >}}
