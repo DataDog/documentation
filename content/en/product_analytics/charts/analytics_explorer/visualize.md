@@ -91,7 +91,7 @@ By default, events in the list visualization are organized by timestamp, with th
 
 ## Related events
 
-For all visualizations besides the [funnel](#funnels), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
+For all visualizations besides the [funnel][2], select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
 {{< img src="product_analytics/analytics/visualize/analytics-related-events.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
@@ -103,4 +103,5 @@ For the remaining visualization options, click on the graph and click **View eve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/analytics_explorer/
+[1]: https://app.datadoghq.com/product-analytics/explorer
+[2]: /product_analytics/charts/funnel_analysis
