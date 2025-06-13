@@ -27,7 +27,7 @@ This guide provides strategies for managing your RUM session volumes effectively
 
 ## Retention filter sequencing
 
-{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-2.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:80%" >}}
 
 Sequencing your retention filters properly ensures you store the RUM data you need. Based on the [retention filter logic][1], follow these best practices:
 
