@@ -21,7 +21,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is now generally available for Python, Java, .NET, and PHP.
+Exception Replay for APM Error Tracking is generally available for Python, Java, .NET, and PHP.
 </div>
 
 ## Overview
