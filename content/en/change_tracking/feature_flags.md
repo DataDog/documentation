@@ -1,5 +1,5 @@
 ---
-title: Track feature flag changes
+title: Track Feature Flag Changes
 further_reading:
   - link: "/change_tracking/"
     tag: "Documentation"
