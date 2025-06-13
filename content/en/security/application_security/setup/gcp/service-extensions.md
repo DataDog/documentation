@@ -81,8 +81,22 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select all **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
+    4. Select only **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
+    5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
+    <br>
+    <div class="alert alert-warning">
+      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 500 error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
+    </div>
+
+    <div class="alert alert-info">
+      <p>
+        <strong>Note:</strong> Currently, the service extension doesn't process request bodies. This means that even if you select request and response body events in the extension chain events, the service extension will not inspect the request body. See more in the <a href="#limitations">Limitations</a> section.
+      </p>
+      <p>
+        <strong>Note:</strong> If you select the **Request Body** and **Response Body** events, processing time will increase as the service extension needs to transfer and analyze these bodies. <strong>Adjust your timeout settings accordingly to accommodate the additional processing time.</strong>
+      </p>
+    </div>
 </br>
 
 {{% appsec-getstarted-2-plusrisk %}}
