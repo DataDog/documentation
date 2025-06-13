@@ -132,8 +132,6 @@ code_language_ids:
     apigateway: "Amazon API Gateway"
     ddsql_preview: "DDSQL (Preview)"
     ddsql_default: "DDSQL"
-    auto_multiline_page: "Automatic Multi-line Aggregation"
-    auto_multiline_legacy: "Automatic Multi-line Aggregation (Legacy)"
 branch: ""
 
 signupclass: sign-up-trigger

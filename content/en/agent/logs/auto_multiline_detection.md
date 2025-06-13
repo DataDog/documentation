@@ -1,8 +1,6 @@
 ---
 title: Automatic Multi-line Detection and Aggregation
 description: Use the Datadog Agent to detect and aggregate multi-line logs automatically
-code_lang: auto_multiline_page
-type: multi-code-lang
 further_reading:
 - link: "/agent/logs/advanced_log_collection"
   tag: "Documentation"
