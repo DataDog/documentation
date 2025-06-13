@@ -15,10 +15,6 @@
     "name": "Azure Integration",
     "description": "Configure your Datadog-Azure integration directly through the Datadog API.\nFor more information, see the [Datadog-Azure integration page](https://docs.datadoghq.com/integrations/azure)."
   },
-  "dashboard-lists": {
-    "name": "Dashboard Lists",
-    "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
-  },
   "dashboards": {
     "name": "Dashboards",
     "description": "Manage all your dashboards, as well as access to your shared dashboards, through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/) for more information."

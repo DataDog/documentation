@@ -41,20 +41,6 @@
       "description": "Update an Azure integration returns \"OK\" response"
     }
   ],
-  "CreateDashboardList": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Create a dashboard list returns \"OK\" response"
-    }
-  ],
-  "UpdateDashboardList": [
-    {
-      "group": "dashboard_lists",
-      "suffix": "",
-      "description": "Update a dashboard list returns \"OK\" response"
-    }
-  ],
   "CreateDashboard": [
     {
       "group": "dashboards",

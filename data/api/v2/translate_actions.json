@@ -549,6 +549,30 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
+  "ListDashboardLists": {
+    "description": "Fetch all of your existing dashboard list definitions.",
+    "summary": "Get all dashboard lists"
+  },
+  "CreateDashboardList": {
+    "description": "Create an empty dashboard list.",
+    "summary": "Create a dashboard list",
+    "request_description": "Create a dashboard list request body.",
+    "request_schema_description": "Your Datadog Dashboard List."
+  },
+  "DeleteDashboardList": {
+    "description": "Delete a dashboard list.",
+    "summary": "Delete a dashboard list"
+  },
+  "GetDashboardList": {
+    "description": "Fetch an existing dashboard list's definition.",
+    "summary": "Get a dashboard list"
+  },
+  "UpdateDashboardList": {
+    "description": "Update the name of a dashboard list.",
+    "summary": "Update a dashboard list",
+    "request_description": "Update a dashboard list request body.",
+    "request_schema_description": "Your Datadog Dashboard List."
+  },
   "DeleteDashboardListItems": {
     "description": "Delete dashboards from an existing dashboard list.",
     "summary": "Delete items from a dashboard list",
