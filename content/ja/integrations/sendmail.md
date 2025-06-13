@@ -22,7 +22,7 @@ author:
   support_email: david.bouchare@datadoghq.com
 categories:
 - モニター
-- ネットワーク
+- network
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
@@ -87,7 +87,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `sendmail` を探します。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "sendmail" >}}
@@ -97,7 +97,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 Sendmail には、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 {{< get-service-checks-from-git "sendmail" >}}
 
 
