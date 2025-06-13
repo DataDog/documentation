@@ -5,12 +5,9 @@ further_reading:
 - link: "/security/application_security/how-it-works"
   tag: "Documentation"
   text: "How App and API Protection Works"
-- link: "/security/application_security/threats/"
+- link: "/security/application_security"
   tag: "Documentation"
   text: "App and API Protection"
-- link: "/security/code_security/software_composition_analysis/"
-  tag: "Documentation"
-  text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
   tag: "Blog"
   text: "Accelerate security investigations with Datadog Threat Intelligence"
@@ -39,9 +36,6 @@ In-App WAF rules (formerly event rules)
 : A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
 : See [In-App WAF rules][12].
 
-interactive application security testing (IAST)
-: An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
-
 Remote Configuration
 : A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by Datadog App and API Protection to update In-App WAF rules, activate the product, and block attackers.
 : See [How Remote Configuration Works][8].
@@ -52,9 +46,6 @@ service
 signal
 : A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
 : See [Signals Explorer][13] in the app.
-
-software composition analysis (SCA)
-: Comparing the open source libraries loaded by your services to databases of known vulnerabilities. SCA helps you identify vulnerable dependencies, outdated libraries, and licensing issues in the open source libraries that your web services load.
 
 severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
@@ -145,7 +136,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [8]: /agent/remote_config/
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
-[12]: /security/application_security/threats/inapp_waf_rules
+[12]: /security/application_security/policies/inapp_waf_rules/
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /security/application_security/how-it-works/add-user-info/
 [15]: /security/application_security/how-it-works/trace_qualification/

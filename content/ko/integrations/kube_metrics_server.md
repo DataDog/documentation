@@ -24,10 +24,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- ㅊ
+- 컨테이너
 - 쿠버네티스(Kubernetes)
-- orchestration
-custom_kind: integration
+- 오케스트레이션
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -42,8 +42,8 @@ name: kube_metrics_server
 public_title: Kubernetes Metrics Server
 short_description: Kubernetes Metrics Server 모니터링
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -54,7 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes Metrics Server 모니터링
   media: []
@@ -76,25 +76,25 @@ tile:
 
 Kube_metrics_server 점검은 [Datadog Agent][2] 패키지에 포함되어 있으므로 서버에 추가 설치가 필요하지 않습니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 1. Agent의 설정 디렉터리 루트에서 `conf.d/` 폴더에 있는 `kube_metrics_server.d/conf.yaml` 파일을 편집하여 kube_metrics_server 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 kube_metrics_server.d/conf.yaml][4]을 참조하세요.
 
-2. [Agent를 재시작합니다][2].
+2. [에이전트를 재시작합니다][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 컨테이너화된 환경의 경우 아래 파라미터 적용에 대한 지침은 [Kubernetes Autodiscovery 통합 템플릿][1]을 참조하세요. 
 

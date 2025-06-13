@@ -11,10 +11,6 @@ further_reading:
   text: 'Plan and Usage Settings'
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  <a href="/real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#enforce-tags-to-be-set-at-the-org-level">Enforced RUM Usage Attribution</a> at the organization level is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
-{{< /callout >}}
-
 ## Overview
 
 The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. You can define up to three usage attribution tags per organization and manage them directly from the UI for each RUM application.

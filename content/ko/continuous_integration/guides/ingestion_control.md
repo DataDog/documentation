@@ -3,7 +3,7 @@ description: CI Visibility에서 특정 이벤트를 처리하지 않도록 제�
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: 블로그
-  text: Datadog Intelligent Test Runner로 CI 테스트 간소화
+  text: Datadog Test Impact Analysis를 사용해 CI 테스팅 간소화
 - link: /continuous_integration/pipelines
   tag: 설명서
   text: Pipeline Visibility에 대해 알아보기

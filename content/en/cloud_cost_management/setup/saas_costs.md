@@ -216,7 +216,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 
 {{% tab "OpenAI" %}}
 
-1. [Create an API key][101] in your account settings in OpenAI.
+1. Create a [project API key][101] or [admin API key][103] in your account settings in OpenAI. Make sure the key has read access to the Usage and Management API scopes.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
 3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
 4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
@@ -226,8 +226,9 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
 
-[101]: https://platform.openai.com/docs/quickstart/account-setup
+[101]: https://platform.openai.com/docs/api-reference/project-api-keys
 [102]: https://app.datadoghq.com/integrations/openai
+[103]: https://platform.openai.com/docs/api-reference/admin-api-keys
 
 {{% /tab %}}
 {{% tab "Fastly" %}}
