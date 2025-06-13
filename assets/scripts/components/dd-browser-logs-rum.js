@@ -55,7 +55,6 @@ if (window.DD_RUM) {
 }
 
 if (window.DD_LOGS) {
-    // init browser logs
     window.DD_LOGS.init({
         clientToken: Config.ddClientToken,
         forwardErrorsToLogs: true,
