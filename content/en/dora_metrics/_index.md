@@ -57,11 +57,7 @@ To start configuring data sources to send deployment and failure events to Datad
 
 ## Analyze DORA Metrics
 
-Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by service or environment, and compare trends over time.
-
-{{< img src="dora_metrics/dora_ui_1.png" alt="An overview of DORA Metrics calculations and insights in a given month" style="width:100%;" >}}
-
-You can examine visualizations and filter the collected data by team, service, repository, environment, time period, and by custom tags.
+Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by team, service, repository, environment, time period, and by custom tags to compare trends over time.
 
 {{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
