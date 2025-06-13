@@ -40,7 +40,7 @@ draft: false
 git_integration_title: voltdb
 integration_id: voltdb
 integration_title: VoltDB
-integration_version: 3.2.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: voltdb

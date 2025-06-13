@@ -10,10 +10,6 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/agent-upgrades/" btn_hidden="false" header="Try the Preview!">}}
-Upgrading Agents with Remote Management is in Preview. Use this form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. Remote Agent Management gives you access to:
@@ -32,7 +28,7 @@ To enable Remote Agent Management:
 
 1. Use the generated Agent installation command to upgrade your Agent.
 
-   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.
+<div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -45,11 +41,9 @@ To enable Remote Agent Management:
 ### Prerequisites
 
 * **User permissions**: Users must have the [Agent Upgrade][2] permission within Fleet Automation. The permission is enabled by default on the Datadog Admin role.
-* **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+* **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
 
 ### Upgrade your Agents
-
-<div class="alert alert-warning">Remote Agent upgrades are in Preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
 
 To upgrade your Agents:
 1. [Enable Remote Agent Management](#setup).
@@ -59,7 +53,11 @@ To upgrade your Agents:
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
-1. Click **Upgrade Agents** to start the upgrade.
+
+1. Review the deployment plan and click **Upgrade Agents** to start the upgrade.
+
+   {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Review upgrade deployment plan" style="width:100%;" >}}
+
 1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 

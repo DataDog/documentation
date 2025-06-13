@@ -24,7 +24,7 @@ author:
 categories:
 - almacenamiento en caché
 - almacenes de datos
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_on_public_website: true
@@ -32,7 +32,7 @@ draft: false
 git_integration_title: eventstore
 integration_id: eventstore
 integration_title: EventStore
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eventstore
@@ -59,7 +59,7 @@ tile:
   title: EventStore
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -110,7 +110,7 @@ El check es compatible con las principales plataformas.
 
 El check de EventStore no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 El check de EventStore no incluye checks de servicio.
 

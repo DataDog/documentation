@@ -107,13 +107,7 @@ LLMObs.enable(
 
 ### AWS Lambda setup
 
-Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers. Additionally, set `DD_TRACE_ENABLED` to `true` in your Lambda function's environment variables.
-
-If you are only expecting traces from LLM Observability, set `DD_LLMOBS_AGENTLESS_ENABLED` to `true` in your Lambda function's environment variables.
-
-If you are expecting APM traces from your Lambda function in addition to LLM Observability, leave `DD_EXTENSION_VERSION` unset in your Lambda function's environment variables if you are using `v66` or earlier of the Datadog-Extension layer. Otherwise, set `DD_EXTENSION_VERSION` to `compatibility` if you are using `v67` or later.
-
-**Note**: Using the `Datadog-Python` and `Datadog-Extension` layers automatically turns on all LLM Observability integrations, and force flushes spans at the end of the Lambda function.
+See the [AWS Lambda Quickstart Guide][15] to quickly integrate LLM Observability into your Lambda functions.
 
 #### Application naming guidelines
 
@@ -480,12 +474,12 @@ The SDK's `LLMObs.annotate_context()` method returns a context manager that can 
 
 The `LLMObs.annotation_context()` method accepts the following arguments:
 
-`name` 
+`name`
 : optional - _str_
 <br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
 
-`prompt` 
-: optional - _dictionary_ 
+`prompt`
+: optional - _dictionary_
 <br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
@@ -535,6 +529,8 @@ Evaluations must be joined to a single span. You can identify the target span us
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
 
+**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][16] page in Datadog.
+
 #### Arguments
 
 The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
@@ -552,12 +548,14 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 <br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
 
 `span`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `span_id` (string) and `trace_id` (string). Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
 
 `span_with_tag_value`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
+
+**Note**: Exactly one of `span` or `span_with_tag_value` is required. Supplying both, or neither, raises a ValueError.
 
 `ml_app`
 : required - _string_
@@ -636,6 +634,60 @@ def llm_call():
     span_context = LLMObs.export_span(span=None)
     return completion
 {{< /code-block >}}
+
+## Span processing
+
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+
+def redact_processor(span: LLMObsSpan) -> LLMObsSpan:
+    if span.get_tag("no_output") == "true":
+        for message in span.output:
+            message["content"] = ""
+    return span
+
+
+# If using LLMObs.enable()
+LLMObs.enable(
+  ...
+  span_processor=redact_processor,
+)
+# else when using `ddtrace-run`
+LLMObs.register_processor(redact_processor)
+
+with LLMObs.llm("invoke_llm_with_no_output"):
+    LLMObs.annotate(tags={"no_output": "true"})
+{{< /code-block >}}
+
+
+### Example: conditional modification with auto-instrumentation
+
+When using auto instrumentation, the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `annotation_context()` can be used in addition to a span processor.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+
+def redact_processor(span: LLMObsSpan) -> LLMObsSpan:
+    if span.get_tag("no_input") == "true":
+        for message in span.input:
+            message["content"] = ""
+    return span
+
+LLMObs.register_processor(redact_processor)
+
+
+def call_openai():
+    with LLMObs.annotation_context(tags={"no_input": "true"}):
+        # make call to openai
+        ...
+{{< /code-block >}}
+
 
 ## Advanced tracing
 
@@ -772,3 +824,5 @@ def server_process_request(request):
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/setup/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
+[15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
+[16]: https://app.datadoghq.com/llm/settings/evaluations

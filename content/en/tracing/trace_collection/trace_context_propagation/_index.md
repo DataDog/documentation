@@ -641,9 +641,12 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 ### Baggage
 
-_Currently available in Python, Ruby, PHP, Java, Node.js, C++, Go and .NET. For other languages, please reach out to [Support][11]_ 
-
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
+
+#### Adding baggage as span tags
+_Available in Python, PHP, and Node.js. For other languages, reach out to [Support][11]_ 
+
+By default, `user.id,session.id,account.id` baggage keys are added as span tags. To customize this configuration, see [Context Propagation Configuration][13]. Specified baggage keys are automatically added as span tags `baggage.<key>` (for example, `baggage.user.id`).
 
 ## Further reading
 
@@ -661,3 +664,4 @@ By default, Baggage is automatically propagated through a distributed request us
 [10]: https://www.w3.org/TR/baggage/
 [11]: /help
 [12]: #customize-trace-context-propagation
+[13]: /tracing/trace_collection/library_config#context-propagation

@@ -22,7 +22,7 @@ author:
   support_email: britt.treece@gmail.com
 categories:
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true

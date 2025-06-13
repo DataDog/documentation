@@ -27,13 +27,15 @@ After instrumentation, you can optionally:
 - [configure Unified Service Tags (USTs)](#configure-universal-service-tags)
 - [enable additional SDK-dependent products and features](#enable-sdk-dependent-products-and-features), such as Continuous Profiler or Application Security Monitoring
 
-Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
+Click on one of the following tiles to learn how to set up SSI for your deployment type:
 
 {{< partial name="apm/apm-single-step.html" >}} 
 
 <br>
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
+
+<div class="alert alert-info"> Single Step APM Instrumentation on Windows is in Preview.</div>
 
 ## Configure Unified Service Tags
 
@@ -42,6 +44,7 @@ Unified Service Tags (USTs) connect traces, metrics, and logs by applying consis
 Learn how to set USTs for:
 - [Linux][14]
 - [Docker][15]
+- [Windows][18]
 - [Kubernetes][16]
 
    **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
@@ -87,6 +90,16 @@ The available setup methods depend on your platform:
 [10]: /tracing/trace_collection/library_config/
 
 {{% /tab %}}
+
+{{% tab "Windows" %}}
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[10]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Troubleshooting
@@ -117,3 +130,4 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [15]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /integrations/windows_service/#tags
