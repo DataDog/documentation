@@ -20,8 +20,3 @@ LLM Observability Experiments supports the entire lifecycle of building LLM appl
 
 
 {{< img src="llm_observability/experiments/filtered_experiments.png" alt="The Experiment view in LLM Observability comparing 12 experiments across 9 fields. The line graph visualization charts the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
-
-
-{{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
-LLM Observability Experiments is in Preview.
-{{< /callout >}}
