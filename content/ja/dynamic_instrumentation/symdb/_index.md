@@ -7,9 +7,6 @@ is_beta: true
 private: false
 title: オートコンプリートと検索機能
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではオートコンプリートと検索機能はサポートされていません。</div>
-{{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
 オートコンプリートと検索機能は公開ベータ版です。

@@ -42,10 +42,6 @@ further_reading:
 title: Optimización de tests en Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La optimización de tests no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La [optimización de tests][1] ofrece una vista del estado de tu CI que prioriza los tests al mostrar métricas y resultados importantes de tus tests. Puede ayudarte a investigar los problemas de rendimiento y las fallas de tests que son más relevantes para tu trabajo, centrándose en el código del que eres responsable, en lugar de en los procesos que ejecutan tus pruebas.
