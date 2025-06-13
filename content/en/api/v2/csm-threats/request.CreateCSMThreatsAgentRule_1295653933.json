@@ -15,6 +15,9 @@
             "value": "test_value",
             "scope": "process"
           }
+        },
+        {
+          "hash": {}
         }
       ]
     },
