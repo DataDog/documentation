@@ -57,6 +57,23 @@ To update your RUM Application:
 2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
 3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
 
+## Manual configuration
+
+The log level can be configured in the IIS `applicationHost.config` file
+
+```
+<configuration>
+  <system.applicationHost>
+    <datadogRumServer logLevel="debug" />
+  </system.applicationHost>
+</configuration>
+```
+
+ The possible values are
+- **debug**
+- **info** (default)
+- **error**
+
 ## Troubleshooting
 
 ### RUM is not injected
