@@ -59,7 +59,7 @@ Dashboards provide real-time insights into the performance and health of systems
 ## Get started
 
 To create a dashboard: 
-1. click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu.
+1. Click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu.
 2. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
