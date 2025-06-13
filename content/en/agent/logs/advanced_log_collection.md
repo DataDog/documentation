@@ -374,9 +374,9 @@ This sends the following log to Datadog: `User email: masked_user@example.com`
 
 Automatic multi-line detection is helpful when you have many log sources with complex formats or when you don't have time to configure each source individually. This feature automatically detects and aggregates multi-line logs without requiring you to write custom regex patterns.
 
-See the dedicated [Auto Multi-line Detection and Aggregation][7] documentation.
+See the [Auto Multi-line Detection and Aggregation][7] documentation.
 
-For legacy support of the feature, see the dedicated [Automatic Multi-line Detection and Aggregation (Legacy)][8] documentation.
+For legacy support of the feature, see the [Automatic Multi-line Detection and Aggregation (Legacy)][8] documentation.
 
 ## Manually aggregate multi-line logs
 
