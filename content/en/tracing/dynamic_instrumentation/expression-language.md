@@ -9,7 +9,7 @@ aliases:
 
 The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
-For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
+For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
 
 In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
 
@@ -44,42 +44,45 @@ The Expression Language provides contextual variables for different instrumentat
 
 ## String operations
 
+The following examples assume a variable named `myString` with value `Hello, world!`:
+
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | {{< expression-language-evaluator expression="isEmpty(\"Hello\")" >}} |
-| `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(\"Hello\")" >}} |
-| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(\"Hello\", 0, 2)" >}} |
-| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(\"Hello\", \"He\")" >}} |
-| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(\"Hello\", \"lo\")" >}} |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-language-evaluator expression="contains(\"Hello\", \"ll\")" >}} |
-| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(\"Hello\", \"^H.*o$\")" >}} |
+| `len(value_src)`, `count(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(myString)" >}} |
+| `isEmpty(value_src)` | Checks whether the string is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(myString)" >}} |
+| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(myString, 0, 2)" >}} |
+| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(myString, \"He\")" >}} |
+| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(myString, \"rdl!\")" >}} |
+| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-language-evaluator expression="contains(myString, \"ll\")" >}} |
+| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(myString, \"^H.*!$\")" >}} |
 
 ## Collection operations
 
 When working with collections (lists, maps, and so on), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
 
-The following examples use a variable named `myCollection` defined as `[1,2,3]`:
+The following examples assume a variable named `mySequence` with value `[1,2,3,4]` and `myMap` with value `{"a": 1, "b": 2, "c": 3}`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="any(myCollection, {@it > 2})" >}} |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(myCollection, {@it < 4})" >}} |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(myCollection, {@it > 1})" >}} |
-| `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(myCollection)" >}} |
-| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | {{< expression-language-evaluator expression="myCollection[1]" >}} |
+| `len(value_src)`, `count(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(mySequence)" >}} {{< expression-language-evaluator expression="len(myMap)" >}}  |
+| `isEmpty(value_src)` | Checks whether the collection is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(mySequence)" >}} {{< expression-language-evaluator expression="isEmpty(myMap)" >}} |
+| `[ i ]`, `[ key ]` | For sequential containers returns the `i`-th item in the collection (where `i` must be an integer). For dictionaries, returns the value that corresponds to the `key` (where `key` must match the key type of the dictionary). If the item does not exist, the expression yields an error or returns null, depending on the language. | {{< expression-language-evaluator expression="mySequence[3]" >}} {{< expression-language-evaluator expression="myMap[\"b\"]" >}} |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference for sequential containers, and with `@key`, `@value` for dictionaries. | {{< expression-language-evaluator expression="any(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="any(myMap, {@value > 2})" >}} |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="all(myMap, {@key == \"b\"})" >}} |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(mySequence, {@it > 1})" >}} {{< expression-language-evaluator expression="filter(myMap, {@value > 1})" >}} |
 
-## Try It Out
+## Try your own conditions
 
 This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether a log line will be generated when instrumenting a method.
 
-Enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
+Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
 
 Available variables in this example:
 
 - `loops`: The route parameter hardcoded to `5`
-- `a`: An array of integers `[6, 7, 8, 9, 10]`
-- `b`: A dictionary/object `{"a": 1, "b": 2, "c": 3}`
-- `c`: A string `"hello world"`
+- `myString`: A string `"Hello, world!"`
+- `mySequence`: An array of integers `[1, 2, 3]`
+- `myMap`: A dictionary `{"a": 1, "b": 2, "c": 3}`
 - `i`: The current loop iteration index
 
 {{< expression-language-simulator >}}
