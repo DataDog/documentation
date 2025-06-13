@@ -3,9 +3,12 @@ title: IaC Scanning
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
-  - link: "/security/cloud_security_management/setup/iac_scanning"
+  - link: "/security/code_security/iac_scanning/setup"
     tag: "Documentation"
     text: "Setting up IaC Scanning"
+  - link: "/security/code_security/iac_scanning/exclusions"
+    tag: "Documentation"
+    text: "Setting up IaC Scanning Exclusions"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
@@ -21,6 +24,10 @@ Static Infrastructure as Code (IaC) scanning integrates with version control sys
 When you click on a finding, the side panel reveals additional details, including a short description of the IaC rule related to the finding and a preview of the offending code.
 
 {{< img src="security/csm/iac_scanning_finding_2.png" alt="Finding side panel highlighting undefined EBS volume encryption in Terraform code." width="100%">}}
+
+## Key capabilities
+
+## Getting started
 
 ## Further reading
 
