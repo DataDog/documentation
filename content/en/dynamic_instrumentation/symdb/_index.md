@@ -1,6 +1,6 @@
 ---
 title: Autocomplete and Search
-is_beta: true
+is_beta: false
 private: false
 further_reading:
   - link: /dynamic_instrumentation/
@@ -10,10 +10,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Autocomplete and search are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in Preview for Python and .NET.
-{{< /beta-callout >}}
 
 ## Overview
 
@@ -31,6 +27,10 @@ Autocomplete and search require the following:
 - [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
 - [Remote Configuration][3] is enabled in the Agent.
 - The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
+- Minimum required tracer versions:
+  - For Java applications, tracing library `dd-trace-java` 1.42.0 or higher.
+  - For Python applications, tracing library `dd-trace-py` 3.1.0 or higher.
+  - For .NET applications, tracing library `dd-trace-dotnet` 2.58.0 or higher.
 
 ### Enable autocomplete and search for your service
 
@@ -60,4 +60,3 @@ Dynamic Instrumentation also provides autocomplete for log templates and other t
 [3]: /agent/remote_config/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /dynamic_instrumentation/expression-language
-
