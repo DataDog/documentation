@@ -11421,6 +11421,47 @@ components:
             $ref: '#/components/schemas/DORAEvent'
           type: array
       type: object
+    DashboardList:
+      description: Your Datadog Dashboard List.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+        created:
+          description: Date of creation of the dashboard list.
+          format: date-time
+          readOnly: true
+          type: string
+        dashboard_count:
+          description: The number of dashboards in the list.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: The ID of the dashboard list.
+          format: int64
+          readOnly: true
+          type: integer
+        is_favorite:
+          description: Whether or not the list is in the favorites.
+          readOnly: true
+          type: boolean
+        modified:
+          description: Date of last edition of the dashboard list.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the dashboard list.
+          example: My Dashboard List
+          type: string
+        type:
+          description: The type of dashboard list.
+          example: manual_dashboard_list
+          readOnly: true
+          type: string
+      required:
+      - name
+      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -11456,6 +11497,14 @@ components:
           items:
             $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
+      type: object
+    DashboardListDeleteResponse:
+      description: Deleted dashboard list details.
+      properties:
+        deleted_dashboard_list_id:
+          description: ID of the deleted dashboard list.
+          format: int64
+          type: integer
       type: object
     DashboardListItem:
       description: A dashboard within a list.
@@ -11570,6 +11619,15 @@ components:
           type: integer
       required:
       - dashboards
+      type: object
+    DashboardListListResponse:
+      description: Information on your dashboard lists.
+      properties:
+        dashboard_lists:
+          description: List of all your dashboard lists.
+          items:
+            $ref: '#/components/schemas/DashboardList'
+          type: array
       type: object
     DashboardListUpdateItemsRequest:
       description: Request containing the list of dashboards to update to.
@@ -47125,6 +47183,253 @@ paths:
     x-merge-override:
       delete: true
       patch: true
+  /api/v2/dashboard/lists/manual:
+    get:
+      description: Fetch all of your existing dashboard list definitions.
+      operationId: ListDashboardLists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get all dashboard lists
+      tags:
+      - Dashboard Lists
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
+      x-undo:
+        type: safe
+    post:
+      description: Create an empty dashboard list.
+      operationId: CreateDashboardList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardList'
+        description: Create a dashboard list request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Create a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+      x-given:
+        dashboard_list:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\"\n}"
+          step: there is a valid "dashboard_list" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
+      x-undo:
+        operationId: DeleteDashboardList
+        parameters:
+        - name: list_id
+          source: id
+        type: unsafe
+  /api/v2/dashboard/lists/manual/{dashboard_list_id}:
+    delete:
+      description: Delete a dashboard list.
+      operationId: DeleteDashboardList
+      parameters:
+      - description: ID of the dashboard list to delete.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListDeleteResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete a dashboard list
+      tags:
+      - Dashboard Lists
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch an existing dashboard list's definition.
+      operationId: GetDashboardList
+      parameters:
+      - description: ID of the dashboard list to fetch.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get a dashboard list
+      tags:
+      - Dashboard Lists
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
+      x-undo:
+        type: safe
+    put:
+      description: Update the name of a dashboard list.
+      operationId: UpdateDashboardList
+      parameters:
+      - description: ID of the dashboard list to update.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardList'
+        description: Update a dashboard list request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Update a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
+      x-undo:
+        type: idempotent
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.

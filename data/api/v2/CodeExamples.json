@@ -378,6 +378,13 @@
       "description": "Add custom timeboard dashboard to an existing dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDashboardList": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "",
+      "description": "Create a dashboard list returns \"OK\" response"
+    }
+  ],
   "DeleteDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -388,6 +395,13 @@
       "group": "dashboard_lists",
       "suffix": "_2656706656",
       "description": "Delete custom timeboard dashboard from an existing dashboard list returns \"OK\" response"
+    }
+  ],
+  "UpdateDashboardList": [
+    {
+      "group": "dashboard_lists",
+      "suffix": "",
+      "description": "Update a dashboard list returns \"OK\" response"
     }
   ],
   "UpdateDashboardListItems": [

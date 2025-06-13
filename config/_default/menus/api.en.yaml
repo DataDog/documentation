@@ -372,118 +372,6 @@ menu:
           - DeleteAzureIntegration
         unstable: []
         order: 3
-    - name: Dashboard Lists
-      url: /api/latest/dashboard-lists/
-      identifier: dashboard-lists
-      generated: true
-    - name: Update items of a dashboard list
-      url: '#update-items-of-a-dashboard-list'
-      identifier: dashboard-lists-update-items-of-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateDashboardListItems
-        unstable: []
-        order: 3
-    - name: Add Items to a Dashboard List
-      url: '#add-items-to-a-dashboard-list'
-      identifier: dashboard-lists-add-items-to-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDashboardListItems
-        unstable: []
-        order: 2
-    - name: Get items of a Dashboard List
-      url: '#get-items-of-a-dashboard-list'
-      identifier: dashboard-lists-get-items-of-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetDashboardListItems
-        unstable: []
-        order: 1
-    - name: Delete items from a dashboard list
-      url: '#delete-items-from-a-dashboard-list'
-      identifier: dashboard-lists-delete-items-from-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteDashboardListItems
-        unstable: []
-        order: 4
-    - name: Update a dashboard list
-      url: '#update-a-dashboard-list'
-      identifier: dashboard-lists-update-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - UpdateDashboardList
-        unstable: []
-        order: 4
-    - name: Get a dashboard list
-      url: '#get-a-dashboard-list'
-      identifier: dashboard-lists-get-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - GetDashboardList
-        unstable: []
-        order: 3
-    - name: Delete a dashboard list
-      url: '#delete-a-dashboard-list'
-      identifier: dashboard-lists-delete-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - DeleteDashboardList
-        unstable: []
-        order: 5
-    - name: Create a dashboard list
-      url: '#create-a-dashboard-list'
-      identifier: dashboard-lists-create-a-dashboard-list
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - CreateDashboardList
-        unstable: []
-        order: 2
-    - name: Get all dashboard lists
-      url: '#get-all-dashboard-lists'
-      identifier: dashboard-lists-get-all-dashboard-lists
-      parent: dashboard-lists
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - ListDashboardLists
-        unstable: []
-        order: 1
     - name: Dashboards
       url: /api/latest/dashboards/
       identifier: dashboards
@@ -6335,6 +6223,118 @@ menu:
           - v2
         operationids:
           - CreateDORADeployment
+        unstable: []
+        order: 1
+    - name: Dashboard Lists
+      url: /api/latest/dashboard-lists/
+      identifier: dashboard-lists
+      generated: true
+    - name: Update items of a dashboard list
+      url: '#update-items-of-a-dashboard-list'
+      identifier: dashboard-lists-update-items-of-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDashboardListItems
+        unstable: []
+        order: 3
+    - name: Add Items to a Dashboard List
+      url: '#add-items-to-a-dashboard-list'
+      identifier: dashboard-lists-add-items-to-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDashboardListItems
+        unstable: []
+        order: 2
+    - name: Get items of a Dashboard List
+      url: '#get-items-of-a-dashboard-list'
+      identifier: dashboard-lists-get-items-of-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardListItems
+        unstable: []
+        order: 1
+    - name: Delete items from a dashboard list
+      url: '#delete-items-from-a-dashboard-list'
+      identifier: dashboard-lists-delete-items-from-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDashboardListItems
+        unstable: []
+        order: 4
+    - name: Update a dashboard list
+      url: '#update-a-dashboard-list'
+      identifier: dashboard-lists-update-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDashboardList
+        unstable: []
+        order: 4
+    - name: Get a dashboard list
+      url: '#get-a-dashboard-list'
+      identifier: dashboard-lists-get-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardList
+        unstable: []
+        order: 3
+    - name: Delete a dashboard list
+      url: '#delete-a-dashboard-list'
+      identifier: dashboard-lists-delete-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDashboardList
+        unstable: []
+        order: 5
+    - name: Create a dashboard list
+      url: '#create-a-dashboard-list'
+      identifier: dashboard-lists-create-a-dashboard-list
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDashboardList
+        unstable: []
+        order: 2
+    - name: Get all dashboard lists
+      url: '#get-all-dashboard-lists'
+      identifier: dashboard-lists-get-all-dashboard-lists
+      parent: dashboard-lists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDashboardLists
         unstable: []
         order: 1
     - name: Domain Allowlist
