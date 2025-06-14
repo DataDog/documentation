@@ -239,9 +239,9 @@ Here's an example showing how to set it up:
        backend_type: aws.secrets
    ```
 4. Set the correct access rights for the binary as described in [Agent security requirements](#agent-security-requirements):
-   ```
-   $> chown dd-agent:dd-agent datadog-secret-backend
-   $> chmod 500 datadog-secret-backend
+   ```sh
+   chown dd-agent:dd-agent datadog-secret-backend
+   chmod 500 datadog-secret-backend
    ```
 5. Configure the Agent to use the binary to resolve secrets and use the AWS secret (here as the `api_key`):
    ```
@@ -357,8 +357,8 @@ On Linux, the command outputs file mode, owner and group for the executable. On 
 
 Example on Linux:
 
-```shell
-$> datadog-agent secret
+```sh
+datadog-agent secret
 === Checking executable rights ===
 Executable path: /path/to/you/executable
 Check Rights: OK, the executable has the correct rights
