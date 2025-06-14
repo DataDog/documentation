@@ -17,7 +17,7 @@ Las acciones privadas permiten a sus flujos de trabajo y aplicaciones Datadog in
 Algunas acciones privadas, como Jenkins y PostgreSQL, requieren credenciales para poder funcionar. Para configurar credenciales para una acción privada, debes:
 1. Crear un archivo JSON para la credencial y utilizar la estructura JSON proporcionada en [Archivos de credenciales](#credential-files).
 2. Guardar tus archivos de credenciales en el directorio de configuración que creaste durante la configuración.
-3. Especificar la ruta a la credencial en la conexión del ejecutor. Utiliza la ruta a la credencial en el contenedor. Por ejemplo: `/etc/dd-action-runner/creds/jenkins_creds.json`.
+3. Especificar la ruta a la credencial en la conexión del ejecutor. Utiliza la ruta a la credencial en el contenedor. Por ejemplo: `/etc/dd-action-runner/config/credentials/jenkins_creds.json`.
 
 ## Archivos de credenciales
 
@@ -41,7 +41,7 @@ Incluye todas las credenciales en un único archivo.
 
 En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, las tres credenciales están almacenadas en un único archivo. Sustituye los valores del ejemplo en mayúsculas por tus credenciales.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -81,9 +81,9 @@ En la conexión del ejecutor, especifica la localización del archivo de credenc
 }
 {{< /code-block >}}
 
-En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. Tu conexión PostgreSQL apunta a la misma ruta para todas las credenciales. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/creds/creds.pgpass` en el ejecutor.
+En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. Tu conexión PostgreSQL apunta a la misma ruta para todas las credenciales. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/config/credentials/postgresql_token.json` en el ejecutor.
 
-{{< img src="service_management/private-runner-creds1.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
+{{< img src="service_management/private-runner-creds1.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/postgresql_token.json'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
@@ -108,7 +108,7 @@ Puedes incluir todas las credenciales en un único archivo o almacenar cada cred
 
 En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, las tres credenciales están almacenadas en un único archivo. Sustituye `USERNAME`, `TOKEN` y `DOMAIN` por tu nombre de usuario, tu token y tu dominio.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -128,9 +128,9 @@ En la conexión del ejecutor, especifica la localización del archivo de credenc
 }
 {{< /code-block >}}
 
-En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. Tu conexión Jenkins apunta a la misma ruta para todas las credenciales. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/creds/jenkins_creds.json` en el ejecutor.
+En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. Tu conexión Jenkins apunta a la misma ruta para todas las credenciales. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/config/credentials/jenkins_creds.json` en el ejecutor.
 
-{{< img src="service_management/single-file-creds.png" alt="Todas las rutas de credenciales de la conexión Jenkins apuntan a '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
+{{< img src="service_management/single-file-creds.png" alt="Todas las rutas de credenciales de la conexión Jenkins apuntan a '/etc/dd-action-runner/config/credentials/jenkins_creds.json'" style="width:80%;" >}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="Ejemplo de varios archivos" level="p" %}}
@@ -138,7 +138,7 @@ En este ejemplo, cada credencial de Jenkins está almacenada en un archivo indep
 
 Para la credencial de nombre de usuario, sustituye `USERNAME` por tu nombre de usuario.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_username.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/jenkins_username.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -152,7 +152,7 @@ Para la credencial de nombre de usuario, sustituye `USERNAME` por tu nombre de u
 
 Para la credencial de token, sustituye `TOKEN` por tu token.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -166,7 +166,7 @@ Para la credencial de token, sustituye `TOKEN` por tu token.
 
 Para la credencial de dominio, sustituye `DOMAIN` por tu dominio.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_domain.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/jenkins_domain.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -179,9 +179,9 @@ Para la credencial de dominio, sustituye `DOMAIN` por tu dominio.
 {{< /code-block >}}
 
 En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. Tu conexión Jenkins apunta a la ruta para de cada credencial. En este ejemplo, el archivo de credenciales está almacenado en las siguientes localizaciones del ejecutor.
-- `/etc/dd-action-runner/creds/jenkins_username.json`
-- `/etc/dd-action-runner/creds/jenkins_token.json`
-- `/etc/dd-action-runner/creds/jenkins_domain.json`
+- `/etc/dd-action-runner/config/credentials/jenkins_username.json`
+- `/etc/dd-action-runner/config/credentials/jenkins_token.json`
+- `/etc/dd-action-runner/config/credentials/jenkins_domain.json`
 
 {{< img src="service_management/multi-file-creds.png" alt="Cada ruta apunta a la localización del archivo de credenciales en el contenedor del ejecutor" style="width:80%;" >}}
 
@@ -197,7 +197,7 @@ La autenticación básica para la conexión HTTP requiere un archivo de credenci
 
 Sustituye `USERNAME` y `PASSWORD` por tu nombre de usuario y tu contraseña.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/http_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/http_creds.json" disable_copy="false" collapsible="true" >}}
 {
     "auth_type": "Basic Auth",
     "credentials": [
@@ -209,9 +209,9 @@ Sustituye `USERNAME` y `PASSWORD` por tu nombre de usuario y tu contraseña.
 }
 {{< /code-block >}}
 
-En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/creds/http_creds.json` en el ejecutor.
+En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/config/credentials/http_creds.json` en el ejecutor.
 
-{{< img src="service_management/http-creds.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/creds/http_creds.json'" style="width:80%;" >}}
+{{< img src="service_management/http-creds.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/http_creds.json'" style="width:80%;" >}}
 
 ### Autenticación mediante token
 
@@ -219,7 +219,7 @@ La autenticación mediante token para la conexión HTTP requiere un archivo de c
 
 El siguiente ejemplo incluye dos tokens denominados `TOKEN1` y `TOKEN2`. Sustituye los nombres y los valores de los tokens del ejemplo por los tuyos.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/http_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/http_creds.json" disable_copy="false" collapsible="true" >}}
 {
     "auth_type": "Token Auth",
     "credentials": [
@@ -235,7 +235,7 @@ El siguiente ejemplo incluye dos tokens denominados `TOKEN1` y `TOKEN2`. Sustitu
 }
 {{< /code-block >}}
 
-En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/creds/http_creds.json` en el ejecutor.
+En la conexión del ejecutor, especifica la localización del archivo de credenciales en el contenedor del ejecutor de acciones privadas. En este ejemplo, el archivo de credenciales está almacenado en `/etc/dd-action-runner/config/credentials/http_creds.json` en el ejecutor.
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
