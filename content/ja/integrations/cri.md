@@ -56,7 +56,7 @@ tile:
   title: CRI
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!-- SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -120,13 +120,13 @@ spec:
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "cri" >}}
 
 
-### サービスチェック
+### サービス チェック
 
 CRI には、サービスのチェック機能は含まれません。
 
