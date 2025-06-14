@@ -301,9 +301,7 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 
 ## Apple ARM64
 
-| macOS version  | Agent 7 |
-|----------------|---------|
-| >= 11.0 | >= 7.39.0 |
+Supported through Rosetta.
 
 {{% /tab %}}
 
