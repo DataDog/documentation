@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: SAASINT-4130/apiazza-dd/update-github-manifiest
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
