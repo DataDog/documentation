@@ -16,10 +16,6 @@ title: Automatización de flotas
 
 {{< callout btn_hidden="true">}}La automatización de flotas está en fase beta. Accede a ella desde la página <a href="https://app.datadoghq.com/fleet">Automatización de flotas</a> de Datadog.{{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La automatización de flotas no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Información general
 
 La automatización de flotas de Datadog te permite controlar de forma centralizada y gestionar en remoto Datadog Agents a escala para responder a tus necesidades de observabilidad en constante evolución.

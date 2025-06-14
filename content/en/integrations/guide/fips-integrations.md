@@ -9,10 +9,6 @@ algolia:
   tags: ["fips", "compliance", "fedramp", "govcloud"]
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The Datadog FIPS Agent is available only in the US1-FED region.</a></div>
-{{< /site-region >}}
-
 ## Overview
 
 As part of the FedRAMP High effort, several integrations have been verified for **FIPS 140-2** compliance. Integrations that are not mentioned below may function in compliance with FIPS 140-2 but have not been tested internally.

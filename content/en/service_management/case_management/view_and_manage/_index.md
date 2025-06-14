@@ -6,12 +6,6 @@ further_reading:
   text: "Case settings"
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}

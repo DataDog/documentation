@@ -14,10 +14,6 @@ title: Parámetros de los tests de aplicaciones móviles
 ---
 {{< jqmath-vanilla >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite tests de aplicaciones móviles.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Gestiona tus aplicaciones móviles cargadas y tus parámetros de paralelización en la [página de parámetros de Monitorización Synthetic y tests continuos][1].

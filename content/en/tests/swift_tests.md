@@ -14,10 +14,6 @@ further_reading:
   text: "Learn about RUM iOS and tvOS Monitoring"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Ensure that [Test Optimization][3] is already set up for Swift.

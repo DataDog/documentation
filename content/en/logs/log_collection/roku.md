@@ -8,11 +8,8 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: Learn how to explore your logs
+site_support_id: roku_log_collection
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Roku Log collection is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">Roku Log collection is in Preview.</div>

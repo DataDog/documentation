@@ -12,10 +12,6 @@ further_reading:
 title: CI パイプラインの検索と管理
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility をご利用いただけません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Pipelines ページ][1]は、サービスのビルドパイプラインを常に監視したい開発者にとって役立ちます。

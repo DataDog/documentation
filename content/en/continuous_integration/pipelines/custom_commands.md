@@ -8,10 +8,6 @@ further_reading:
     text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Custom commands provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
 
 {{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom commands" style="width:100%;">}}

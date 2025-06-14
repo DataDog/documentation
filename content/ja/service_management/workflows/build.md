@@ -20,10 +20,6 @@ further_reading:
 title: ワークフローの構築
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
-{{< /site-region >}}
-
 You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
 - 自分が作成したワークフローだけを表示したい場合は、**My workflows** をトグルします。

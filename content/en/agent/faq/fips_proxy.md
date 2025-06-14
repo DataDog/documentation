@@ -10,10 +10,6 @@ further_reading:
 
 <div class="alert alert-danger">The Datadog FIPS Proxy is no longer the recommended solution for FIPS-compliant encryption of the Datadog Agent. Use the <a href="/agent/configuration/fips-compliance">Datadog FIPS Agent</a> instead.</div>
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
-{{< /site-region >}}
-
 The Datadog Agent FIPS Proxy ensures that communication between the Datadog Agent and Datadog uses FIPS-compliant encryption.
 
 The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog. The Datadog Agent and the Agent FIPS Proxy must be configured in tandem to communicate with one another.

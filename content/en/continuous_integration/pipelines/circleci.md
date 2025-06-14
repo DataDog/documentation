@@ -17,10 +17,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.

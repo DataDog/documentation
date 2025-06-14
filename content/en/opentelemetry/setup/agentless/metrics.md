@@ -22,15 +22,12 @@ further_reading:
   - link: "/metrics/otlp/?tab=summary#mapping"
     tag: "Documentation"
     text: "OTLP Metrics Mapping in Datadog"
+site_support_id: otlp_agentless
 ---
 
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
-
-{{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Datadog OTLP metrics intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

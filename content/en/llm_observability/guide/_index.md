@@ -9,10 +9,6 @@ cascade:
         subcategory: LLM Observability Guides
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 {{< whatsnext desc="LLM Observability Guides:" >}}
     {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application" >}}Trace an LLM Application{{< /nextlink >}}
     {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application-in-aws-lambda" >}}Trace an LLM Application in AWS Lambda{{< /nextlink >}}

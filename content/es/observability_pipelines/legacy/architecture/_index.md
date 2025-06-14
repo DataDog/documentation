@@ -6,10 +6,6 @@ aliases:
 title: (LEGACY) Prácticas recomendadas para la arquitectura del agregador de OPW
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 <div class="alert alert-info">

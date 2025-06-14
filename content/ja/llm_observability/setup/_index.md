@@ -12,10 +12,6 @@ further_reading:
 title: LLM Observability のセットアップ
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択されたサイト ({{< region-param key="dd_site_name" >}}) では、現時点では LLM Observability はご利用いただけません。</div>
-{{< /site-region >}} 
-
 ## 概要 
 
 LLM Observability へのデータ送信を開始するには、[LLM Observability SDK for Python][1] を使用するか、[LLM Observability API][2] を呼び出してアプリケーションをインスツルメンテーションします。

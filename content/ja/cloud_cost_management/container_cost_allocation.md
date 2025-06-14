@@ -9,10 +9,6 @@ private: true
 title: コンテナのコストの割り当て
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Cost Management はサポートされていません。</div>
-{{< /site-region >}}
-
 {{< jqmath-vanilla >}}
 
 ## 概要

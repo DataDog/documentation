@@ -25,10 +25,6 @@ further_reading:
 title: Tests y monitorización de aplicaciones móviles
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite tests de aplicaciones móviles.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Los tests de aplicaciones móviles te permiten probar y monitorizar flujos (flows) de negocios clave para aplicaciones Android e iOS utilizando dispositivos reales. 

@@ -14,10 +14,6 @@ further_reading:
 ---
 {{< jqmath-vanilla >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Manage your uploaded mobile applications and your parallelization settings on the [Synthetic Monitoring & Continuous Testing Settings page][1].

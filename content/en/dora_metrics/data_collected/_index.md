@@ -15,11 +15,6 @@ further_reading:
   text: 'Getting started with Tags'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 DORA Metrics generates events that have associated fields and tags.

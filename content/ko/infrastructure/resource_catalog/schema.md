@@ -11,12 +11,6 @@ title: 클라우드 리소스 스키마 참조
 type: 스키마
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-선택한 사이트에서는 CSM 구성 오류를 사용할 수 없습니다.
-</div>
-{{< /site-region >}}
-
 다음 리소스 유형을 [리소스 카탈로그][2]에서 필터링해 사용할 수 있습니다.
 자세한 내용은 [CSM 구성 오류 커스텀 규칙][1]을 참고하세요.
 

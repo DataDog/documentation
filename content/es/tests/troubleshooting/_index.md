@@ -3,10 +3,6 @@ null
 ...
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para ayudarte a solucionar problemas de visibilidad de tests. Si necesita más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][2].

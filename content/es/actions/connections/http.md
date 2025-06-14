@@ -11,10 +11,6 @@ further_reading:
 title: Solicitudes HTTP
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation y App Builder no son compatibles con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Utiliza la acción **Realizar solicitud** para realizar una solicitud personalizada a un endpoint HTTP. Puedes controlar el método de solicitud y su contenido, cómo se autentica y procesa, y cómo debe responder a situaciones como certificados expirados o redirecciones. Si necesitas añadir rangos de direcciones IP de Datadog a tu lista de permisos para que la acción HTTP funcione como se espera, utiliza las IP indicadas en el objeto `webhooks`. Para obtener más información, consulta la [API de rangos de IP][1].
 
 Para añadir una solicitud HTTP:

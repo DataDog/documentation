@@ -12,10 +12,6 @@ further_reading:
 title: オンコール
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では On-Call はサポートされていません。</div>
-{{< /site-region >}}
-
 Datadog On-Call は、モニタリング、ページング、インシデント対応を 1 つのプラットフォームに統合しています。
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="ページのルーティングの概要。モニター、インシデント、セキュリティシグナル、または API 呼び出しからページがチーム (例: 「payments-team」) に送信され、その後、(例えば優先度に基づく) ルーティングルールに送られ、エスカレーションポリシーに従って処理されます。そこからスケジュールに送られるか、または直接ユーザーに送信されます。" style="width:100%;" >}}

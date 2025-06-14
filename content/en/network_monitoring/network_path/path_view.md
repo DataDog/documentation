@@ -9,9 +9,6 @@ further_reading:
   tag: "Blog"
   text: "Monitor cloud architecture and app dependencies with Datadog NPM"
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview 
 

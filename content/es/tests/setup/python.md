@@ -19,10 +19,6 @@ title: Tests Python
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Lenguajes compatibles:

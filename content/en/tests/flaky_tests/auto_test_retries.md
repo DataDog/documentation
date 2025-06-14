@@ -13,10 +13,6 @@ further_reading:
     text: "Learn about Flaky Test Management"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:

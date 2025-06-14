@@ -17,12 +17,6 @@ is_beta: true
 title: Datadog 리소스 카탈로그
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-이 사이트에서 리소스 카탈로그를 사용할 수 없습니다.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">리소스 카탈로그는 베타 버전입니다.</div>
 
 ## 개요

@@ -8,11 +8,8 @@ further_reading:
   tag: Documentation
   text: ログの調査方法
 title: Roku ログ収集
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Roku ログ収集は、US1-FED Datadog サイトではご利用いただけません。</div>
-{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">Roku ログ収集はベータ版です。</div>

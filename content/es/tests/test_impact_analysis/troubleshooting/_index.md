@@ -8,10 +8,6 @@ further_reading:
 title: Solucionar problemas de Test Impact Analysis
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Impact Analysis no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para solucionar problemas con Test Impact Analysis. Si necesitas más información, ponte en contacto con el [soporte de Datadog][1].

@@ -6,10 +6,6 @@ further_reading:
 title: Pipelines de tags
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Cloud Cost Management n'est pas prise en charge par ce site.</div>
-{{< /site-region >}}
-
 ## Présentation
 
 Pour surveiller efficacement vos coûts liés au cloud, vous devez comprendre parfaitement l'impact de chaque service, équipe et solution sur vos dépenses globales. Grâce aux pipelines de tags, vous êtes certain que vos ressources cloud utilisent des tags standard, ce qui vous permet de tenir compte de l'ensemble des données relatives aux coûts de vos ressources.

@@ -15,10 +15,6 @@ further_reading:
 title: Application Threat Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
-{{< /site-region >}}
-
 ASM Threat Management uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
 
 Threat Monitoring によって提起されたセキュリティシグナルは要約され、サービスの健全性とパフォーマンスを監視するために通常アクセスしているビューに表示されます。[サービスカタログ][1]と APM の個々のサービスページは、アプリケーションの脅威シグナルに関する洞察を提供し、脆弱性の調査、攻撃者のブロック、攻撃の露出のレビューを可能にします。

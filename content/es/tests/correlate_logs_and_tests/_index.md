@@ -7,10 +7,6 @@ further_reading:
 title: Correlacionar logs y tests
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Puedes correlacionar los datos de Test Optimization con [logs inyectados en Datadog][1], lo que te permite ver y analizar logs para casos de tests específicos.

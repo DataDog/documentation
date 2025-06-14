@@ -23,10 +23,6 @@ is_beta: true
 title: Cómo configurar datos de despliegue para métricas de DORA
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las métricas de DORA no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">Las métricas de DORA están en vista previa.</div>
 
 ## Información general

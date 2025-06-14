@@ -2,12 +2,6 @@
 title: Troubleshooting
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 This guide is intended to help you resolve issues with third-party integrations in Case Management. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.

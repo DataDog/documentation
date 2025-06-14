@@ -10,10 +10,6 @@ further_reading:
 title: CI Visibility용 수집 제어 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 제외 필터를 사용하면 Datadog이 처리하는 특정 이벤트를 제외할 하나 이상의 조건을 정의할 수 있어 CI Visibility 예산을 세밀하게 제어할 수 있습니다.

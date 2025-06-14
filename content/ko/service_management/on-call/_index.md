@@ -9,10 +9,6 @@ further_reading:
 title: 온콜
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 Datadog On-Call은 모니터링, 페이징, 인시던트 대응을 하나의 플랫폼에 통합합니다.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="페이지가 라우팅되는 방식에 대한 개요. 모니터, 인시던트, 보안 신호 또는 API 호출에서 페이지는 팀(예: 'payments-team')으로 전송된 다음 처리 규칙(예: 우선순위 기반)으로 전송되고 에스컬레이션 정책으로 전송됩니다. 그곳에서 스케줄로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}

@@ -8,10 +8,6 @@ title: Referencia del SDK de LLM Observability para Node.js
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Información general
 
 El SDK de LLM Observability para Node.js mejora la observabilidad de tus aplicaciones de LLM basadas en JavaScript. El SDK es compatible con las versiones 16 y posteriores de Node.js. Para obtener información sobre la compatibilidad de integración de LLM Observability, consulta [Auto Instrumentation][5].

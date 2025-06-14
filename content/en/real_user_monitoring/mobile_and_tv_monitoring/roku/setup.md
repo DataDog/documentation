@@ -16,11 +16,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Monitor your Roku channels with Datadog RUM
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku are not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 

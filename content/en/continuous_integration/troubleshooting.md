@@ -12,10 +12,6 @@ further_reading:
     text: "Learn about Test Impact Analyzer"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with CI Visibility. If you need additional help, contact [Datadog Support][2].

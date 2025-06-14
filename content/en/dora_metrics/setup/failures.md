@@ -26,11 +26,6 @@ further_reading:
   text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 Failure events are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 

@@ -16,10 +16,6 @@ further_reading:
     text: "Cloud Security Agentless Scanning"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. To learn more about Agentless Scanning's capabilities and how it works, see the [Agentless Scanning][12] docs.
 
 ## Prerequisites

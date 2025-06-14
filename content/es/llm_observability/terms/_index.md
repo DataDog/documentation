@@ -14,10 +14,6 @@ further_reading:
 title: Términos y conceptos de LLM Observability
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, LLM Observability no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La interfaz de usuario de LLM Observability proporciona muchas herramientas para solucionar problemas de rendimiento de conversaciones y correlacionar datos en todo el producto, lo que te permite encontrar y resolver problemas en modelos de lenguaje de gran tamaño (LLM).

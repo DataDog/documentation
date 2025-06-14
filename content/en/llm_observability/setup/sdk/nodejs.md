@@ -8,10 +8,6 @@ aliases:
     - /llm_observability/sdk/nodejs
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 The LLM Observability SDK for Node.js enhances the observability of your JavaScript-based LLM applications. The SDK supports Node.js versions 16 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][5].

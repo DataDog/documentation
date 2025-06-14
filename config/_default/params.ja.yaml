@@ -7,3 +7,4 @@ meta_description: Datadogが大規模なクラウドのモニタリングサー�
 meta_title: Datadogを始めてみましょう
 site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
+site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."

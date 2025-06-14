@@ -12,10 +12,6 @@ further_reading:
 title: Configurar LLM Observability
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Para comenzar a enviar datos a LLM Observability, instrumenta tu aplicación con el [SDK de LLM Observability para Python][1] o llamando a la [API de LLM Observability][2]. 

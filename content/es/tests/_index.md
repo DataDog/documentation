@@ -5,6 +5,7 @@ aliases:
 - /es/continuous_integration/integrate_tests/
 - /es/continuous_integration/tests/
 cascade:
+  site_support_id: test_optimization
   algolia:
     rank: 70
     tags:
@@ -40,10 +41,6 @@ further_reading:
   text: Aprende a solucionar problemas de optimización de tests
 title: Optimización de tests en Datadog
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La optimización de tests no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
 
 ## Información general
 

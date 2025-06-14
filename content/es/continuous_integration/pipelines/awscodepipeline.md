@@ -17,10 +17,6 @@ further_reading:
 title: Configurar el rastreo en un pipeline de AWS CodePipeline
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [AWS CodePipeline][1] es un servicio de entrega continua totalmente gestionado que te ayuda a automatizar tus pipelines de entrega para obtener actualizaciones rápidas y fiables de las aplicaciones y la infraestructura.

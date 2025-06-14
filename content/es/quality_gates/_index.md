@@ -30,10 +30,6 @@ title: Puertas de calidad
 Las Puertas de calidad están en vista previa.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las Puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Las Puertas de calidad te permiten controlar la calidad del software configurando reglas para bloquear despliegues de código de calidad inferior. Tú tienes el control de lo que se fusiona en la rama por defecto y se despliega en producción. También pueden asegurar que el código que se ejecuta en producción respete las normas de calidad más elevadas, reduciendo los incidentes y minimizando los comportamientos no deseados.

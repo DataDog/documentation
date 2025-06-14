@@ -18,10 +18,6 @@ further_reading:
 title: Datadog의 Pipeline Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 현재 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 [**Pipelines**][1] 페이지는 파이프라인의 중요한 메트릭과 결과를 표시하여 CI 상태에 대한 파이프라인 우선 보기를 제공합니다. 파이프라인을 유지 보수하는 대신 관련 코드를 유지 보수하므로 가장 우려되는 성능 문제나 테스트 실패를 조사하는 데 도움이 됩니다.

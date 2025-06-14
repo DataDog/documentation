@@ -12,10 +12,6 @@ title: (レガシー) Observability Pipelines をセットアップして、Data
   と Datadog に送信する
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## 概要

@@ -10,10 +10,6 @@ further_reading:
   text: "Learn about LLM Observability Key Terms and Concepts"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 

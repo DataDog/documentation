@@ -9,10 +9,8 @@ further_reading:
   text: Más información sobre las detecciones de despliegue defectuoso de un servicio
     de Watchdog
 title: Detección automática de API de nube y SaaS defectuosas
+site_support_id: watchdog_faulty_service_deployment
 ---
-{{< site-region region="us3,us5,eu,ap1,gov" >}}
-<div class="alert alert-warning">Las detecciones de despliegue defectuoso de un servicio de Watchdog no están disponibles para el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Información general
 

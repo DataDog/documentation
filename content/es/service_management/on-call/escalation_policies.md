@@ -6,10 +6,6 @@ further_reading:
 title: Políticas de elevación
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">El servicio de guardia no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 En Datadog On-Call, las políticas de elevación garantizan que las páginas se traten con prontitud. Las páginas se elevan a través de pasos predefinidos, a menos que se acuse recibo de ellas en los plazos establecidos.
 
 Datadog crea una política de elevación predeterminada cuando [incorporas un equipo a On-Call][1].

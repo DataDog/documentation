@@ -6,10 +6,6 @@ further_reading:
 title: Envío de eventos y logs a Datadog con destinos de API de Amazon EventBridge
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">El sitio Datadog para el gobierno no es compatible con Amazon EventBridge.</div>
-{{< /site-region >}}
-
 Amazon EventBridge es un bus de eventos serverless que te permite crear aplicaciones basadas en eventos. EventBridge puede integrarse con tus servicios AWS, pero la función de destinos de API te permite enviar y recibir datos fuera de AWS utilizando las API. En esta guía se indican los pasos necesarios para enviar tus eventos y logs desde EventBridge a Datadog. Para obtener más información sobre el envío de tus eventos desde Datadog a EventBridge, consulta la [documentación de la integración EventBridge][1].
 
 ## Configuración

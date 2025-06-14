@@ -5,10 +5,6 @@ aliases:
 title: LLM Observability Python SDK リファレンス
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 LLM Observability は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 LLM Observability SDK for Python は、Python ベースの LLM アプリケーションの可観測性を向上させます。この SDK は Python バージョン 3.7 以降をサポートしています。LLM Observability のインテグレーションサポートについては、[自動インスツルメンテーション][13]を参照してください。

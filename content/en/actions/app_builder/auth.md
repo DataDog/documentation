@@ -5,10 +5,6 @@ aliases:
     - /service_management/app_builder/auth
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 A few tools control access and authentication for apps and their components.
 
 ## Action credentials
