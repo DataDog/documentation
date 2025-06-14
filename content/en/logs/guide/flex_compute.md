@@ -30,7 +30,10 @@ The Flex Logs Controls page provides visualizations so you can assess how often 
 - Query slowdowns
 - Top sources of query slowdowns
 - Top users experiencing slowdowns
+  - Clicking on a user opens the history of their Flex queries in [Audit Trail](https://docs.datadoghq.com/account_management/audit_trail/#explore-audit-events)
+  - Note: Only Logs List queries are audited in Audit Trail. This does not include queries used for queries for visualizations like timeseries, toplist, and more. 
 - Top dashboards experiencing slowdowns
+  - Clicking on a dashboard opens the dashboard in a new tab. 
 
 ## Optimization recommendations
 
