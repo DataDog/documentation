@@ -100,6 +100,8 @@ For information on disabling AAP or its related capabilities, see the following:
 
 ## Reports and notifications
 
+{{% sec-hipaa-limits %}}
+
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
 2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
 
