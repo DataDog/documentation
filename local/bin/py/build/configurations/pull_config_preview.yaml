@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: aliciascott/DOCS-10750-Cisco-ACI
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
