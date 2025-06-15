@@ -47,7 +47,7 @@ nav_sections:
       link: mobile/
       title: Aplicación móvil
     - desc: Identificar, analizar y mitigar incidencias críticas en tu organización
-      icon: incident
+      icon: incidents
       link: service_management/incident_management
       title: Gestión de incidencias
     - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
@@ -75,7 +75,7 @@ nav_sections:
       title: Serverless
     - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
         el tráfico de tu red
-      icon: network-monitoring
+      icon: network
       link: network_monitoring/
       title: Monitorización de red
     - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad

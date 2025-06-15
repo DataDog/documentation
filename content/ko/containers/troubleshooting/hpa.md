@@ -9,12 +9,12 @@ further_reading:
 title: 커스텀 메트릭 서버 및 HPA 트러블슈팅
 ---
 
-## Cluster Agent 상태 및 플레어
+## Cluster Agent 상태 및 Flare
 
-Custom Metrics Server에 문제가 있는 경우:
+커스텀 메트릭 서버에 문제가 있는 경우:
 
-* 집계 레이어와 인증서가 설정되어 있는지 확인하세요.
-* 오토스케일링 하려는 메트릭을 사용할 수 있는지 확인하세요. HPA를 생성하면 Datadog Cluster Agent는 매니페스트를 구문 분석하고 Datadog에 쿼리하여 메트릭을 가져오려고 합니다. 메트릭 이름에 오타가 있거나 메트릭이 Datadog 계정 내에 존재하지 않는 경우, 다음 오류가 발생합니다:
+* 집계 레이어와 인증서가 설정되어 있는지 확인합니다.
+* 오토스케일링하려는 메트릭을 사용할 수 있는지 확인하세요. HPA를 생성하면 Datadog Cluster Agent가 매니페스트를 파싱하고 Datadog에 쿼리하여 메트릭 가져오기를 시도합니다. 메트릭 이름에 오타가 있거나 메트릭이 Datadog 계정에 존재하지 않는 경우 다음 오류가 발생합니다.
 
     ```text
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
@@ -31,9 +31,9 @@ Custom Metrics Server에 문제가 있는 경우:
     Number of external metrics detected: 2
 ```
 
-이 명령을 사용하면 외부 메트릭 공급자 프로세스의 오류가 표시됩니다. 더 자세한 출력을 원할 경우 다음 플레어 명령을 실행하세요: `agent flare`.
+외부 메트릭 공급자 프로세스 오류가 이 명령과 함께 표시됩니다. 보다 자세한 출력을 원하면 flare 명령을 실행하세요. `Agent flare`.
 
-플레어 명령은 다음 출력에서 나타나는 것과 같이 `custom-metrics-provider.log`를 포함한 zip 파일을 생성합니다:
+flare 명령은 다음과 같은 출력을 볼 수 있는 `custom-metrics-provider.log`를 포함하는 zip 파일을 생성합니다.
 
 ```text
   Custom Metrics Provider
@@ -64,9 +64,9 @@ Custom Metrics Server에 문제가 있는 경우:
     value: 268435456
 ```
 
-메트릭의 플래그 `Valid`가 `false`로 설정된 경우, 해당 메트릭은 HPA 파이프라인에서 고려되지 않습니다.
+메트릭 플래그 `Valid`가 `false`로 설정된 경우 메트릭이 HPA 파이프라인에서 고려되지 않습니다.
 
-## HPA 매니페스트 설명
+## HPA 매니페스트 설명하기
 
 HPA 매니페스트를 설명할 때 다음 메시지가 표시되는 경우:
 
@@ -79,7 +79,7 @@ Conditions:
 
 ```
 
-메트릭 공급자에 대해 적절한 RBAC 또는 서비스 연결이 설정되지 않았을 가능성이 높습니다. `kubectl get apiservices`가 표시되는지 확인하세요:
+메트릭 공급자에 적절한 RBAC 또는 서비스 연결이 설정되어 있지 않을 가능성이 높습니다. `kubectl get apiservices`가 표시되는지 확인하세요.
 
 ```text
 % kubectl get apiservices
@@ -88,7 +88,7 @@ NAME                                   SERVICE                                  
 v1beta1.external.metrics.k8s.io        default/datadog-cluster-agent-metrics-api   True        57s
 ```
 
-해당 파드에서 API 서비스, 서비스 및 포트 매핑이 모두 일치하는 경우, 외부 메트릭 API 서비스는 사용 가능한 `true`로 표시됩니다. 올바른 RBAC 권한을 가진 Cluster Agent도 마찬가지입니다. [외부 메트릭 제공자 등록[1] 단계에서 리소스를 생성했는지 확인하세요.
+API 서비스, 서비스, 포드의 포트 매핑이 모두 일치하는 경우 외부 메트릭 API 서비스가 `true` 옵션과 함께 표시되어야 합니다. 또한 Cluster Agent에 올바른 RBAC 권한이 있어야 합니다. [외부 메트릭 등록 공급자 등록][1] 단계에서 리소스를 생성했는지 확인하세요.
 
 HPA 매니페스트를 설명할 때 다음 오류가 표시되는 경우:
 
@@ -96,13 +96,13 @@ HPA 매니페스트를 설명할 때 다음 오류가 표시되는 경우:
 Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
-Datadog Cluster Agent가 실행 중이고, APIService에 이름이 등록된 포트 `8443`를 노출하는 서비스가 작동 중인지 확인합니다.
+Datadog Cluster Agent가 실행 중이고 APIService에 이름이 등록된 포트 `8443`를 노출하는 서비스가 활성화되어 있는지 확인합니다.
 
-## Datadog과 Kubernetes의 값 차이
+## Datadog 및 Kubernetes 간 값 차이
 
- Kubernetes가 리소스를 오토스케일링하면 HPA는 Cluster Agent에서 제공하는 메트릭 값을 기반으로 오토스케일링을 결정합니다. Cluster Agent는 Datadog API에서 반환된 정확한 메트릭 값을 쿼리하고 저장합니다. HPA가 `type: Value`와 함께 타겟을 사용하는 경우, 이 정확한 메트릭 값이 HPA에 제공됩니다. HPA가`type: AverageValue`를 사용하는 경우 이 메트릭 값은 현재 복제본 수로 나뉩니다.
+Kubernetes에서 리소스를 오토스케일링하기 때문에 HPA는 Cluster Agent에서 제공한 메트릭 값에 따라 확장 결정을 내립니다. Cluster Agent는 쿼리에서 반환된 정확한 메트릭 값을 Datadog API에 저장합니다. HPA의 목표 값이 `type: Value`인 경우, 해당 메트릭 값이 그대로 HPA에 제공됩니다. HPA가 `type: AverageValue`인 경우, 현재 복제 개수로 나뉩니다.
 
-따라서 다음과 같은 값이 반환될 수 있습니다:
+따라서 다음과 같은 값이 반환될 수 있습니다.
 
 ```text
 % kubectl get datadogmetric
@@ -114,9 +114,9 @@ NAME          REFERENCE          TARGETS         MINPODS   MAXPODS   REPLICAS   
 example-hpa   Deployment/nginx   3500m/5 (avg)   1         3         2          24
 ```
 
-`7`의 값을 복제본 `2`로 나누어 평균 `3.5`를 얻습니다. 두 유형 모두 HPA에 대해 지원되므로 쿼리와 대상 값을 설정할 때 고려하세요. [설정 예시에 대한 Cluster Agent 가이드][2]를 참조하세요.
+`7` 값을 복제값 `2`로 나누어 평균이 `3.5`입니다. HPA에는 두 가지 유형이 모두 지원되므로 쿼리 및 목표 값을 설정할 때 유형을 고려하면 됩니다. 설정 예시는 [Cluster Agent 가이드][2]를 참조하세요.
 
-*고지 사항*: Datadog Cluster Agent는 다른 HPA 매니페스트에 설정된 메트릭을 처리하고 기본적으로 30초마다 값을 가져오기 위해 Datadog을 쿼리합니다. Kubernetes는 기본적으로 30초마다 Datadog Cluster Agent를 쿼리합니다. 이 프로세스는 비동기적으로 수행되기 때문에 메트릭이 달라지는 경우 위의 규칙이 항상 적용되지는 않습니다. 그러나 문제 완화를 위해 두 가지 빈도를 모두 구성할 수 있습니다.
+*유의 사항*: Datadog Cluster Agent는 기본적으로 서로 다른 HPA 매니페스트에 설정된 메트릭을 처리하고 Datadog에 쿼리하여 30초마다 값을 얻습니다. Kubernetes는 기본적으로 Datadog Cluster Agent에 30초마다 쿼리합니다. 이 프로세스가 비동기적으로 완료되므로, 메트릭 값이 여럿일 경우에는 위 규칙이 항상 적용되지 않을 수 있습니다. 이때 두 쿼리의 주기를 설정해 문제를 해결할 수 있습니다.
 
 ## 참고 자료
 
