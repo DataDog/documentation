@@ -15,10 +15,6 @@ further_reading:
 title: Instrumenter vos tests Browser avec RUM
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 Test Visibility peut être intégré à la fonctionnalité [Real User Monitoring][2] de Datadog afin de vous offrir les outils dont vous avez besoin pour analyser en profondeur vos tests Browser.
