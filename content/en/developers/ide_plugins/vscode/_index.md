@@ -13,13 +13,16 @@ further_reading:
   text: "Learn about Source Code Integration"
 - link: "/bits_ai/mcp_server/"
   tag: "Documentation"
-  text: "Learn about the Datadog Model Context Protocol (MCP) server"
+  text: "Learn about the Datadog Model Context Protocol (MCP) Server"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 - link: "https://www.datadoghq.com/blog/exception-replay-datadog/"
   tag: "Blog"
   text: "Simplify production debugging with Datadog Exception Replay"
+- link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
+  tag: "Blog"
+  text: "Debug live production issues with the Datadog Cursor extension"
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
