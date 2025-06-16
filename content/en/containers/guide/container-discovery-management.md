@@ -105,12 +105,14 @@ Alternatively, you can also use `image:.*` or `kube_namespace:.*`. Configuring `
 
 ### Inclusion and exclusion behavior
 
-Inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
+Generally, inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
+
+The only exception to this rule is pod exclusion annotations like `ad.datadoghq.com/exclude`. Whenever an application has an exclusion annotation set to `true` this will take precedence and exclude the container from being autodiscovered for monitoring. For example, having a condition that would include every container like `DD_CONTAINER_INCLUDE = "image:.*"` does not gaurantee a container will be included if it has an exclusion annotation set on it. See [Pod exclude configuration](3) for more information.
 
 You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
@@ -253,6 +255,10 @@ In **Agent v7.45+** you can set annotations on your Kubernetes pods to control A
 | `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod    |
 | `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
 
+The `ad.datadoghq.com/exclude` annotation set on the application pod takes the highest priority. This means that even if a container matches inclusion through `DD_CONTAINER_INCLUDE`, the Agent will still ignore monitoring for that container. The same applies for the respective filtering configurations specific for metrics and logs.
+
+When applying annotation-based exclusions, the Agent checks for all relevant exclusion annotations on the container. For example, when configuring logs for an nginx container, the Agent will look for `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/nginx.exclude`, or `ad.datadoghq.com/nginx.logs_exclude` annotations to be `true` on the pod. The same applies for metrics.
+
 #### Exclude the entire pod:
 ```yaml
 apiVersion: apps/v1
@@ -309,3 +315,4 @@ metadata:
 
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
 [2]: /getting_started/containers/autodiscovery
+[3]: /containers/guide/container-discovery-management/?tab=datadogoperator#pod-exclude-configuration
