@@ -1,21 +1,21 @@
 ---
-title: Configure IaC Scanning Exclusions
+title: Configure IaC Security Exclusions
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
 further_reading:
-    - link: "/security/code_security/iac_scanning"
+    - link: "/security/code_security/iac_security"
       tag: "Documentation"
-      text: "IaC Scanning"
-    - link: "/security/code_security/iac_scanning/setup"
+      text: "IaC Security"
+    - link: "/security/code_security/iac_security/setup"
       tag: "Documentation"
-      text: "Setting up IaC Scanning for Code Security"
+      text: "Set up IaC Security for Code Security"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Static Infrastructure as Code (IaC) scanning is in Preview. To request access, complete the form.
+  Static Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-Infrastructure as Code (IaC) Scanning detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
+Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
 ## Exclusion methods
 
@@ -236,7 +236,7 @@ To control which parts of a file are scanned, add a comment that starts with `# 
 
 #### dd-iac-scan ignore
 
-Excludes the entire file from IaC scanning. This comment must be placed at the beginning of the file to take effect.
+Excludes the entire file from scanning. This comment must be placed at the beginning of the file to take effect.
 
 ```
 # dd-iac-scan ignore

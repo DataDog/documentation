@@ -6926,20 +6926,20 @@ menu:
       url: /security/code_security/iast/security_controls/
       parent: sec_iast
       weight: 2
-    - name: Infrastructure as Code (IaC)
-      identifier: code_security_iac_scanning
-      url: /security/code_security/iac_scanning/
+    - name: Infrastructure as Code (IaC) Security
+      identifier: code_security_iac_security
+      url: /security/code_security/iac_security/
       parent: code_security
       weight: 5
     - name: Setup
-      identifier: code_security_iac_scanning_setup
-      url: /security/code_security/iac_scanning/setup/
-      parent: code_security_iac_scanning
+      identifier: code_security_iac_security_setup
+      url: /security/code_security/iac_security/setup/
+      parent: code_security_iac_security
       weight: 100000
     - name: Exclusions
-      identifier: code_security_iac_scanning_exclusions
-      url: /security/code_security/iac_scanning/exclusions/
-      parent: code_security_iac_scanning
+      identifier: code_security_iac_security_exclusions
+      url: /security/code_security/iac_security/exclusions/
+      parent: code_security_iac_security
       weight: 100001
     - name: Developer Tool Integrations
       identifier: dev_tool_int
