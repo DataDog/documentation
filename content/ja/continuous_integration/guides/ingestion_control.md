@@ -10,10 +10,6 @@ further_reading:
 title: CI Visibility の取り込み制御の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 除外フィルターは、特定のイベントを Datadog の処理対象から除外する条件を 1 つ以上定義することで、CI Visibility の予算をきめ細かく制御することができます。

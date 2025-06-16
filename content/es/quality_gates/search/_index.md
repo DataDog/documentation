@@ -7,10 +7,6 @@ further_reading:
 title: Buscar y gestionar reglas de Puertas de calidad
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las Puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La página [**Reglas de las puertas de calidad**][1] es útil para los desarrolladores que quieren controlar las puertas de calidad de sus procesos de compilación. Puedes ver todas las reglas definidas por la organización.

@@ -7,9 +7,6 @@ further_reading:
 title: ログとテストの相関付け
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Optimization は利用できません。</div>{{< /site-region >}}
-
 ## 概要
 
 Test Optimization データと [Datadog に挿入されたログ][1]を相関付けることで、特定のテストケースに対するログの表示と分析が可能です。

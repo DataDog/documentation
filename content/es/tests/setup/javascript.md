@@ -22,10 +22,6 @@ title: Tests de JavaScript y TypeScript
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Marcos de test compatibles:
