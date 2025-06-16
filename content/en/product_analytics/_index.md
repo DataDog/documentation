@@ -34,7 +34,7 @@ To start using Product Analytics, enable it for each application where you want 
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
-By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
+By default, Product Analytics data is retained for 15 months. Learn more about [Datadog's data retention periods][1].
 
 ## Navigating the Product Analytics UI
 Each Product Analytics feature provides context into your users' journeys. This section describes the context each feature can provide for your individual use case.
@@ -53,16 +53,16 @@ The Product Analytics charts help you visualize your users' journey as they use 
 
 Each chart type provides a different view into the user's journey:
 
-[Pathways][1]
+[Pathways][5]
 : you can visualize all user journeys across your application to analyze the critical path.
 
-[Funnel][1]
+[Funnel][4]
 : track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop off rate.
 
-[Retention][1]
+[Retention][2]
 :  measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
 
-[Analytics][1]
+[Analytics][13]
 : contains views data aggregation for understanding how your product is being used.
 
 
@@ -82,25 +82,27 @@ Suppose you want to make changes to your application interface but want to first
 [Session replay][11] 
 : Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application’s usage patterns and design pitfalls
 
-[Heatmaps][7]
-:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: [Click maps][7], [Top elements][7], [Scroll maps][7]. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+[Heatmaps][10]
+:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: Click maps, Top elements, Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
-[Playlist][10]
-: You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][10].
+[Playlist][12]
+: You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
 <br>
 
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/privacy/
-[2]: /product_analytics/user_retention
-[3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/pathways
+[1]: /data_security/data_retention_periods/
+[2]: /product_analytics/charts/user_retention
+[3]: https://app.datadoghq.com/product-analytics
+[4]: /product_analytics/charts/funnel_analysis
+[5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
-[7]: /product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
 [10]: /product_analytics/session_replay/heatmaps
-[11]: /product_analytics/session_replay/_index
+[11]: /product_analytics/session_replay/
+[12]: /product_analytics/session_replay/playlists
+[13]: /product_analytics/charts/analytics_explorer
+

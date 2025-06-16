@@ -150,6 +150,12 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci tag ...
     ```
+   
+## Limitations
+
+- The maximum amount of tags that can be added to a pipeline or job is 100.
+- The maximum amount of measures that can be added to a pipeline or job is 100.
+- The maximum length of a tag or measure is 300 characters (key + value).
 
 ## Further reading
 

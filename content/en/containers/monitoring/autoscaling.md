@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Autoscaling
-private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
@@ -189,7 +188,7 @@ The [Autoscaling Summary page][6] provides a starting point for platform teams t
 
 Click **Optimize** on any workload to see its scaling recommendation.
 
-### Deploy recommendations with Autoscaling
+### Enable Autoscaling for a workload
 
 After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
 
@@ -201,7 +200,35 @@ When you are ready to proceed with enabling Autoscaling for a workload, you have
 
 - Deploy a `DatadogPodAutoscaler` custom resource. 
    
-   Use your existing deploy process to target and configure Autoscaling for your workload. Click **Export Recommendation** to see a suggested manifest configuration.
+   Use your existing deploy process to target and configure Autoscaling for your workload. 
+
+   {{% collapse-content title="Example DatadogPodAutoscaler CRD" level="h4" expanded=false id="id-for-anchoring" %}}
+   ```yaml
+   apiVersion: datadoghq.com/v1alpha2
+   kind: DatadogPodAutoscaler
+   metadata:
+     name: <name, usually same as Deployment object name>
+   spec:
+     targetRef:
+       apiVersion: apps/v1
+       kind: Deployment
+       name: <your Deployment name>
+     constraints:
+       # Adjust constraints as safeguards
+       maxReplicas: 50
+       minReplicas: 1
+     owner: Local
+     applyPolicy:
+       mode: Apply
+     objectives:
+       - type: PodResource
+         podResource:
+           name: cpu
+           value:
+             type: Utilization
+             utilization: 75
+   ```
+   {{% /collapse-content %}}
 
 ### Deploy recommendations manually
 

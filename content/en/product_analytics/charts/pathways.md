@@ -4,10 +4,11 @@ aliases:
 - /real_user_monitoring/product_analytics/sankey
 - /product_analytics/sankey
 - /product_analytics/journeys/sankey
+- /product_analytics/journeys/pathways
 further_reading:
 - link: '/product_analytics/journeys'
   tag: Documentation
-  text: Journeys
+  text: Charts
 - link: '/dashboards/widgets/sankey/'
   tag: Documentation
   text: Build Sankey widgets in Dashboards
@@ -71,4 +72,4 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey/pathways
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
-[3]: /real_user_monitoring/session_replay/
+[3]: /product_analytics/session_replay/

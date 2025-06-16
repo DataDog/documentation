@@ -1,6 +1,9 @@
 ---
 title: Analytics Explorer
 description: ""
+aliases:
+- /product_analytics/analytics_explorer/
+- /product_analytics/journeys
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -65,4 +68,4 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 [1]: https://app.datadoghq.com/product-analytics/explorer
 [2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[3]: /product_analytics/analytics_explorer/group/
+[3]: /product_analytics/charts/analytics_explorer/group

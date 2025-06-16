@@ -1,5 +1,7 @@
 ---
 title: User Retention
+aliases:
+- /product_analytics/user_retention/
 description: Measure user retention to understand overall user satisfaction with your application.
 further_reading:
     - link: '/product_analytics/'

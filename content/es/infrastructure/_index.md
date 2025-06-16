@@ -3,13 +3,13 @@ aliases:
 - /es/graphing/infrastructure/
 cascade:
 - _target:
+    lang: en
     path: /infrastructure/resource_catalog/aws_iam_user
-    lang: es
   aliases:
-  - /es/security/cspm/custom_rules/aws_iam_user/
+  - /security/cspm/custom_rules/aws_iam_user/
 - _target:
+    lang: en
     path: /infrastructure/**/*
-    lang: es
   algolia:
     rank: 70
 further_reading:
@@ -24,9 +24,14 @@ further_reading:
 title: Infraestructura
 ---
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Vídeo del mapa de hosts filtrado por hosts de Nginx" video="true">}}
+{{< learning-center-callout header="Únete a una sesión de Enablement" hide_image="true" btn_title="Inscríbite" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Explora y regístrate para las sesiones de Foundation Enablement. Obtén información sobre cómo la monitorización de infraestructura basada en SaaS de Datadog ofrece métricas, visualizaciones y alertas para asegurar que tus equipos de ingeniería puedan mantener y optimizar tus entornos híbridos o en la nube.
+{{< /learning-center-callout >}}
+
 
 ## Información general
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Vídeo del mapa de hosts filtrado por hosts de Nginx" video="true">}}
 
 La monitorización de la infraestructura incluye funciones básicas de Datadog que visualizan, monitorizan y miden el rendimiento de tus hosts, contenedores y procesos.
 

@@ -17,6 +17,7 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 ## Setup
 
 Learn how to [Setup and Configure Mobile Session Replay][1].
+
 ## Privacy options
 
 See [Privacy Options][2].

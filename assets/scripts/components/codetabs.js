@@ -223,13 +223,11 @@ const initCodeTabs = () => {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
                     }, 300);
                 }
-            } else {
+            } else if (firstTab) {
                 activateCodeTab(firstTab);
             }
-        } else {
-            if (codeTabsList.length > 0) {
-                activateCodeTab(firstTab);
-            }
+        } else if (firstTab) {
+            activateCodeTab(firstTab);
         }
     };
 
