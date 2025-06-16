@@ -83,7 +83,7 @@ Code repos defined
 : Identifying code repositories enables your engineers to perform an initial investigation into an issue without having to contact the service's owning team. This improves collaboration and helps your engineers increase their overall understanding of integration points.
 
 Docs defined
-: Linking documentation in the Software Catalog provides engineers with easy access to service-specific knowledge, such as architecture overviews, API references, and operational guides. This promotes better cross-team collaboration, accelerates onboarding, and deepens overall understanding of how services work and interact.
+: Linking documentation in the Software Catalog provides engineers with access to service-specific knowledge, such as architecture overviews, API references, and operational guides. This promotes better cross-team collaboration, accelerates onboarding, and deepens overall understanding of how services work and interact.
 
 ## How scores are calculated
 
