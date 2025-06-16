@@ -3,7 +3,7 @@ title: Datadog MCP Server
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
-  text: "Learn about the Datadog MCP Server" 
+  text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server" 
 - link: "developers/ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
   text: "Datadog Extension for Cursor"
