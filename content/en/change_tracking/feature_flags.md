@@ -32,8 +32,6 @@ To track LaunchDarkly feature flags in your services' Change Tracking timeline:
 1. Go to **Flags > `<your-feature-flag-name>` > Settings** in LaunchDarkly.
 1. In **Custom properties**, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
 1. Click **Save changes**.
-   
-    {{< img src="/change_tracking/service-tag.png" alt="The monitor graph shows the error spike correlated with the flag change." style="width:100%;" >}}
 
 ### Custom feature flags
 
@@ -119,7 +117,7 @@ To set up feature flag toggles using Workflow Automation:
 
 ### Use feature flag toggles
 
-To use feature flag toggles:
+To toggle feature flags on or off from inside Datadog:
 
 1. Click a LaunchDarkly feature flag change in the Change Tracking timeline.
 1. Click the **Toggle Feature Flag** button.

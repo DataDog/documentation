@@ -120,28 +120,22 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
 
-| Change Type                                                                       | Tracking Requirements                                                                          |
-|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| Code Deployments (APM)                                                            | APM & [Deployment Tracking][4]. A version must be available on the service.                    |
-| Kubernetes Deployment Manifest Updates                                            | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)    |
-| [LaunchDarkly Feature Flag Events][14] (service tag must be defined on event)           | Third Party Datadog Integrations ([LaunchDarkly only][5])                                      |
-| [Custom Feature Flag Events][14]                                                      | [Event Management API][6]                                                                      |
-| Custom Configuration Change Events                                                | [Event Management API][6]                                                                      |
-| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
-| CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
-| PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                  | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation |
-| MongoDB Index & SearchIndex Changes                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
-| PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
-| SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
-| Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
-| Manual Kubernetes Deployment Scale Events                                         | Kubernetes Audit Logging                                                                       |
-| Cloud Infrastructure Resource Changes (AWS, Azure, GCP)                          | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding |
+| Change Type                                                                      | Tracking Requirements                                                                                                                                                                   |
+|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Code Deployments (APM)                                                           | APM & [Deployment Tracking][4]. A version must be available on the service.                                                                                                             |
+| Kubernetes Deployment Manifest Updates                                           | Datadog Agent Set Up for Kubernetes (Add service label to Kubernetes yaml file if possible)                                                                                             |
+| Feature Flags                                                                    | Use the LaunchDarkly integration or send custom events using the Events API. See the [Feature Flag Tracking documentation][14] for setup and advanced options.                          |
+| Custom Configuration Change Events                                               | [Event Management API][6]                                                                                                                                                               |
+| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.                                                                                          |
+| CrashLoopBackOff Kubernetes Pod Crashes                                          | Kubernetes Integration (Add service label to Kubernetes yaml file if possible)                                                                                                          |
+| PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                 | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation |
+| MongoDB Index & SearchIndex Changes                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                                                                                                          |
+| PostgreSQL Database Settings Change                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                                                                                                          |
+| SQL Server Database Settings Change                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                                                                                                          |
+| Kafka Schema Updates                                                             | [Data Streams Monitoring (DSM)][9]                                                                                                                                                      |
+| Manual Kubernetes Deployment Scale Events                                        | Kubernetes Audit Logging                                                                                                                                                                |
+| Cloud Infrastructure Resource Changes (AWS, Azure, GCP)                          | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding                                                                                      |
 
-### Feature flag tracking
-
-Correlate feature flag changes from providers like LaunchDarkly or from custom events with performance data on your dashboards, monitors, and service pages. This allows you to quickly determine if a feature release is the root cause of an issue.
-
-For detailed setup instructions, advanced options like trace-based enrichment, and automated remediation with Workflow Automation, see the [Feature Flag Tracking][14] documentation.
 
 ## Further reading
 
