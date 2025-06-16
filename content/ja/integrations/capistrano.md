@@ -1,13 +1,13 @@
 ---
 categories:
-- automation
-- configuration & deployment
-- developer tools
-- orchestration
-- provisioning
-custom_kind: integration
+- 自動化
+- 構成とデプロイ
+- 開発ツール
+- オーケストレーション
+- プロビジョニング
+custom_kind: インテグレーション
 dependencies: []
-description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
+description: デプロイをキャプチャおよび検索し、キーメトリクスグラフ上に重ねて表示
 doc_link: https://docs.datadoghq.com/integrations/capistrano/
 draft: false
 git_integration_title: capistrano
@@ -19,7 +19,7 @@ is_public: true
 manifest_version: '1.0'
 name: capistrano
 public_title: Datadog-Capistrano インテグレーション
-short_description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
+short_description: デプロイをキャプチャおよび検索し、キーメトリクスグラフ上に重ねて表示
 version: '1.0'
 ---
 

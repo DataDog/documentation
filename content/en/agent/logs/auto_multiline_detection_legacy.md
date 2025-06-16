@@ -27,8 +27,11 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning">This document applies to Agent versions earlier than <strong>v7.65.0</strong>, or when the legacy auto multi-line detection is explicitly enabled. For more recent Agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a>.</div>
+<div class="alert alert-warning">This document applies to Agent versions earlier than <strong>v7.65.0</strong>, or when the legacy auto multi-line detection is explicitly enabled. 
 
+For more recent Agent versions, we offer new auto-multiline implementation that improve multiline detection with support for arbitrary timestamps, JSON aggregation, and per-integration configuration. , see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a>.
+
+If you are sending lots of multi-line logs and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection. If you know the specific format of your logs, it's recommended to use manual multi-line rules for more precise control. See <a href="/agent/logs/advanced_log_collection/#manually-aggregate-multi-line-logs">Manually aggregate multi-line logs</a> for details.</div>
 
 ## Global automatic multi-line aggregation
 With Agent 7.37+, you can enable `auto_multi_line_detection` to automatically detect [common multi-line patterns][1] across **all** configured log integrations.

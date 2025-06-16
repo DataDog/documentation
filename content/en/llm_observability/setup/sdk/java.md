@@ -1,8 +1,5 @@
 ---
 title: LLM Observability Java SDK Reference
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 30
 private: true
 ---
 
@@ -24,7 +21,7 @@ You can install and configure tracing of various operations such as workflows, t
 
 ### Prerequisites
 
-1. Download the `dd-trace-java` JAR.
+1. Download the [`dd-trace-java` JAR][5].
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][1]).
 
@@ -549,3 +546,5 @@ public class MyJavaClass {
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
 [4]: /llm_observability/setup/auto_instrumentation/?tab=java
+[5]: https://s3.us-east-1.amazonaws.com/dd-trace-java-builds/llmobs-java-sdk-integration/dd-java-agent.jar
+

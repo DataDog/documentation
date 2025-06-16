@@ -184,10 +184,10 @@ V3.0 contains the following changes from v2.2:
   {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Component of <code>kind:custom.library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
   apiVersion: v3
-  kind: custom.library
+  kind: library
   metadata:
     name: my-library
     displayName: My Library
@@ -531,10 +531,11 @@ extensions:
       schedule: "* * * * *"
       env:
         - name: "staging"
-          ci_pipeline: "//domains/examples/apps/hello-joe/config/k8s:release-staging"
-          branch: "hello-joe/staging"
-          schedule: "* * * * 1"
+          ci_pipeline: "ci-tool://shopist/k8s/staging-deploy"
+          branch: "main"
+          schedule: "0 9 * * 1"
 {{< /code-block >}}
+
 
 ## Schema validation through IDE plugin 
 

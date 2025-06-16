@@ -27,7 +27,7 @@ title: CentOS、Rocky、Alma Linux の基本的な Agent の使い方
 
 ## 概要
 
-このページでは、CentOS とその派生製品である Rocky Linux と Alma Linux 用の Datadog Agent の基本的な機能について説明します。Datadog Agent のインストールは、CentOs 用 [Agent のインストール手順][1]に従ってください。
+このページでは、CentOS およびその派生ディストリビューションである Rocky Linux と AlmaLinux 向け Datadog Agent の基本機能の概要を説明します。Datadog Agent をインストールするには、CentOS 向けの [Agent インストール手順][1]に従ってください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
