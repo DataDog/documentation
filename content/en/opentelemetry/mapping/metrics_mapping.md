@@ -19,17 +19,11 @@ Datadog products and visualizations are built on metrics and tags that follow sp
 
 <div class="alert alert-info"><strong>Want to unify OpenTelemetry and Datadog metrics in your queries?</strong> Learn how to <a href="/metrics/open_telemetry/query_metrics">query across Datadog and OpenTelemetry metrics</a> from the Metrics Query Editor.</div>
 
-## Mapping process
-
-The following diagram illustrates how Datadog maps OpenTelemetry metrics.
-
-{{< img src="opentelemetry/guide/metrics_mapping/otel-mapping-metrics-2.png" alt="The decision process for mapping OpenTelemetry metric names to Datadog metric names. If an OTel metric is not used by any Datadog product, or if its semantics are the same as Datadog's, it is sent as-is to Datadog. Otherwise, a Datadog-style metric is created from the OTel metric and sent to Datadog." style="width:90%;" >}}
-
 ## How OpenTelemetry metrics appear in Datadog
 
 To differentiate metrics from the OpenTelemetry Collector's [hostmetrics][12] receiver and the Datadog Agent, Datadog prepends `otel.` to any received metric that starts with `system.` or `process.`. Datadog does not recommend monitoring the same infrastructure with both the Datadog Agent and the OpenTelemetry Collector
 
-<div class="alert alert-info">Datadog is evaluating ways to improve the OTLP metric experience, including potentially deprecating this <code>otel</code> prefix. If you have feedback, reach out your account team.</div>
+<div class="alert alert-info">Datadog is evaluating ways to improve the OTLP metric experience, including potentially deprecating this <code>otel</code> prefix.</div>
 
 ## Metrics mappings
 
