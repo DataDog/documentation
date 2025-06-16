@@ -370,7 +370,17 @@ For instance, to scrub user information from the log `User email: foo.bar@exampl
 
 This sends the following log to Datadog: `User email: masked_user@example.com`
 
-## Multi-line aggregation
+## Automatically aggregate multi-line logs
+
+Automatic multi-line detection is helpful when you have many log sources with complex formats or when you don't have time to configure each source individually. This feature automatically detects and aggregates multi-line logs without requiring you to write custom regex patterns.
+
+See the [Auto Multi-line Detection and Aggregation][7] documentation.
+
+For legacy support of the feature, see the [Automatic Multi-line Detection and Aggregation (Legacy)][8] documentation.
+
+## Manually aggregate multi-line logs
+
+Manual multi-line rules give you precise control over log aggregation when you know your log formats. This approach is ideal for ensuring consistent log processing with custom regex patterns tailored to your specific log structure.
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. Use the `multi_line` type in the `log_processing_rules` parameter to aggregates all lines into a single entry until the given pattern is detected again.
 
@@ -475,9 +485,6 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-## Automatically aggregate multi-line logs
-
-See the dedicated [Auto Multi-line Detection and Aggregation][7] documentation.
 
 ## Commonly used log processing rules
 
@@ -643,3 +650,4 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /agent/configuration/agent-commands/#agent-information
 [7]: /agent/logs/auto_multiline_detection
+[8]: /agent/logs/auto_multiline_detection_legacy

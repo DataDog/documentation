@@ -25,10 +25,6 @@ further_reading:
 title: 원격 구성
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">원격 구성은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 원격 구성은 일부 제품 기능에 대해 인프라스트럭처에 배포된 Datadog 구성 요소(예: 에이전트, 추적 라이브러리, 관찰 가능 파이프라인 작업자)의 동작을 원격으로 구성 및 변경할 수 있는 Datadog 기능입니다. 원격 구성을 사용해 환경의 Datadog 구성 요소에 설정을 적용하여 필요에 따라 관리 비용을 절감하고 팀 간의 마찰을 줄이며 문제 해결 시간을 단축할 수 있습니다.
 

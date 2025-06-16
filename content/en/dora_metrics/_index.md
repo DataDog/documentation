@@ -28,11 +28,6 @@ further_reading:
   text: "Learn about the Software Catalog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that indicate the velocity and stability of software development.

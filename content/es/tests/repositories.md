@@ -21,10 +21,6 @@ further_reading:
 title: Repositorios
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization no está disponible en ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Utiliza la [página Repositories (Repositorios)][1] para conocer las tendencias de los tests de tus repositorios o investigar confirmaciones individuales para depurar problemas.

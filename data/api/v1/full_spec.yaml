@@ -17444,13 +17444,21 @@ components:
           description: DNS server port to use for DNS tests.
           type: string
         files:
-          description: Files to be used as part of the request in the test.
+          description: Files to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
           items:
             $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
           type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
+        form:
+          additionalProperties:
+            description: A single form entry.
+            type: string
+          description: Form to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
+          type: object
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
