@@ -17,17 +17,18 @@ further_reading:
 
 {{< img src="/code_security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
-Infrastructure as Code (IaC) scanning in Datadog automatically analyzes your Terraform files for security misconfigurations. Findings appear in the Code Security Vulnerabilities tab, where you can group, filter, and triage issues by severity, status, and more. For each finding, Datadog provides detailed remediation guidance, code diffs, and the ability to open a pull request or commit fixes directly from the UI.
+Infrastructure as Code (IaC) scanning automatically analyzes your Terraform files for security misconfigurations. Findings appear in the Code Security Vulnerabilities tab, where you can group, filter, and triage them by severity, status, and other attributes. For each finding, Datadog provides detailed remediation guidance and a code snippet showing the affected resource and file location.
 
 <div class="alert alert-info">Static IaC scanning supports GitHub for version control and Terraform for infrastructure as code.</div>
 
 ## Key capabilities
 
+With Infrastructure as Code (IaC) scanning, you can:
+
 - Scan Terraform files for security misconfigurations
 - Surface IaC misconfigurations in the Code Security Vulnerabilities tab
 - Group and filter findings by severity, triage status, and other facets
-- View detailed remediation guidance and code diffs for each finding
-- Open a pull request or commit fixes directly from the UI
+- View detailed remediation guidance and code snippets for each finding
 - Track finding status and history for triage and resolution
 - Configure scanning exclusions
 
