@@ -112,7 +112,7 @@ DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
 
-The only exception to this rule is pod exclusion annotations like `ad.datadoghq.com/exclude`. When an application has an exclusion annotation set to `true`, this takes precedence, and the container is excluded from being autodiscovered for monitoring. For example, having a condition that includes every container like `DD_CONTAINER_INCLUDE = "image:.*"` does not guarantee a container is included if it has an exclusion annotation set on it. See [Pod exclude configuration](3) for more information.
+The only exception to this rule is pod exclusion annotations like `ad.datadoghq.com/exclude`. When an application has an exclusion annotation set to `true`, this takes precedence, and the container is excluded from being autodiscovered for monitoring. For example, having a condition that includes every container like `DD_CONTAINER_INCLUDE = "image:.*"` does not guarantee a container is included if it has an exclusion annotation set on it. See [Container Discovery Management - Pod exclude configuration](#pod-exclude-configuration) for more information.
 
 You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
@@ -315,4 +315,3 @@ metadata:
 
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
 [2]: /getting_started/containers/autodiscovery
-[3]: /containers/guide/container-discovery-management/?tab=datadogoperator#pod-exclude-configuration
