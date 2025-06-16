@@ -20,25 +20,6 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 
-{{< whatsnext desc="Select a destination for more information:" >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
-    <!-- {{< nextlink href="observability_pipelines/destinations/amazon_security_lake" >}}Amazon Security Lake{{< /nextlink >}} -->
-    {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/crowdstrike_ng_siem" >}}CrowdStrike Next-Gen SIEM{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Logs{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Template syntax
 
 Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
@@ -52,7 +33,7 @@ The following table lists the destinations and fields that support template synt
 | Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Amazon S3         | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Elasticsearch     | Source type                         | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |

@@ -29,10 +29,10 @@ Incidents created from a monitor will inherit [field values][10] from the monito
 
 ## From a Security Signal
 
-Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3] for Cloud Security Management.
+Declare an incident directly from a Cloud SIEM or Workload Protection signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3].
 
-Declare an incident from an Application Security Management signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
-For more information, see [Investigate Security Signals][4] for Application Security Management. 
+Declare an incident from an App and API Protection signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
+For more information, see [Investigate Security Signals][4] for App and API Protection. 
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
@@ -68,6 +68,21 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 
 After you declare an incident from Slack, it generates an incident channel.
 
+## From Handoff Notifications
+
+The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
+
+- View and acknowledge On-Call pages
+- Navigate to relevant incident resources
+- Preview Slack messages from incident channels
+- Take direct actions on incidents
+
+{{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Handoff notification card showing incident details with options to view, acknowledge, and take actions" style="width:100%;" >}}
+
+Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
+
+You can declare an incident from individual Handoff Notification cards.
+
 ## What's next
 
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
@@ -76,8 +91,8 @@ After you declare an incident from Slack, it generates an incident channel.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /service_management/incident_management/incident_settings#information
-[3]: /security/threats/security_signals/#declare-an-incident
-[4]:/security/application_security/threats/security_signals/#declare-an-incident
+[3]: /security/workload_protection/security_signals/#declare-an-incident
+[4]:/security/workload_protection/security_signals/#declare-an-incident
 [5]: /service_management/case_management/view_and_manage
 [6]: /service_management/incident_management/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app

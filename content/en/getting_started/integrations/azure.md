@@ -51,7 +51,7 @@ See the following table for a summary of the various configuration options avail
 
 ***_All sites_** configurations can be used in the US3 site orgs, but only US3 site orgs can use the Azure Native integration.
 
-<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
+<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
 </div>
 
 ## Setup
@@ -111,7 +111,7 @@ If you are on the US3 site and use the Azure Native Integration, use the site se
 ### Azure Native integration
 If you are using the Azure Native integration, see the [Send Azure Logs with the Datadog Resource][18] guide for instructions on sending your _subscription level_, _Azure resource_, and _Azure Active Directory_ logs to Datadog.
 
-<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration"> App registration</a> to access these functionalities.
+<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration"> App registration</a> to access these functionalities.
 </div>
 
 {{% /site-region %}}
@@ -162,7 +162,7 @@ Still need help? Contact [Datadog support][17].
 [1]: https://docs.datadoghq.com/getting_started/agent/
 [2]: https://www.datadoghq.com/
 [3]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
-[4]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration
+[4]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration
 [5]: https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create
 [6]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/?tab=windows
 [7]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=azurecli

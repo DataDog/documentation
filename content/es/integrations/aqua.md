@@ -23,7 +23,7 @@ author:
   sales_email: oran.moshai@aquasec.com
   support_email: oran.moshai@aquasec.com
 categories:
-- contenedores
+- rastreo
 - recopilación de logs
 - seguridad
 custom_kind: integración
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: aqua
 integration_id: aqua
 integration_title: Aqua
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 manifest_version: 2.0.0
 name: aqua
@@ -42,19 +42,19 @@ public_title: Aqua
 short_description: Solución de seguridad completa desde el desarrollo hasta la producción
   para contenedores y aplicaciones nativas de la nube
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Categoría::Contenedores
+  - Categoría::Recopilación de logs
+  - Categoría::Seguridad
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Solución de seguridad completa desde el desarrollo hasta la producción
     para contenedores y aplicaciones nativas de la nube
@@ -154,7 +154,7 @@ Para los logs de Aqua Enforcer: **Disponible para Agent 6.0 o posteriores**
 
 Aqua no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "aqua" >}}
 
 

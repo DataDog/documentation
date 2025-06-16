@@ -41,6 +41,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sled-observability-pipelines/"
   tag: "blog"
   text: "How state, local, and education organizations can manage logs flexibly and efficiently using Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -53,7 +56,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_11042024.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
 Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#build-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 

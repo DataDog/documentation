@@ -440,10 +440,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | JVM versions | Operating Systems                                                                     | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8 to 17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)      | Supported                           | Latest         |
+| 8 to 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)      | Supported                           | Latest         |
 
 
 Datadog does not officially support any early-access versions of Java.
+
+Versions 22 and above are supported as in Preview.
 
 #### Web framework compatibility
 ##### Code Security Capability Notes
@@ -726,7 +728,7 @@ Datastore tracing provides:
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/

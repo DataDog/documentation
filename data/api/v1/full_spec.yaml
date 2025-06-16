@@ -1181,7 +1181,6 @@ components:
           readOnly: true
           type: string
         is_read_only:
-          default: false
           deprecated: true
           description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
@@ -3201,11 +3200,13 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - monitor
       - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - MONITOR
       - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
@@ -6848,6 +6849,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -6940,6 +6943,28 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorDraftStatus:
+      default: published
+      description: 'Indicates whether the monitor is in a draft or published state.
+
+
+        `draft`: The monitor appears as Draft and does not send notifications.
+
+        `published`: The monitor is active and evaluates conditions and notify as
+        configured.
+
+
+        This field is in preview. The draft value is only available to customers with
+        the feature enabled.
+
+        '
+      enum:
+      - draft
+      - published
+      type: string
+      x-enum-varnames:
+      - DRAFT
+      - PUBLISHED
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -7393,7 +7418,7 @@ components:
             For example, a query grouped by `cluster` and `namespace` cannot notify
             on `region`.
 
-            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+            Setting `notify_by` to `["*"]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
@@ -8023,6 +8048,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -13708,6 +13735,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13726,12 +13757,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true
@@ -14310,11 +14343,23 @@ components:
       enum:
       - http
       - grpc
+      - ssl
+      - dns
+      - tcp
+      - udp
+      - icmp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
       - HTTP
       - GRPC
+      - SSL
+      - DNS
+      - TCP
+      - UDP
+      - ICMP
+      - WEBSOCKET
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -14450,8 +14495,8 @@ components:
         operator:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         type:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
       required:
@@ -14507,6 +14552,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
       type: object
     SyntheticsAssertionJSONSchemaMetaSchema:
@@ -14614,8 +14660,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         timingsScope:
           $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
@@ -14625,6 +14671,20 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTargetValue:
+      description: Value used by the operator in assertions. Can be either a number
+        or string.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
+    SyntheticsAssertionTargetValueNumber:
+      description: Numeric value used by the operator in assertions.
+      format: double
+      type: number
+    SyntheticsAssertionTargetValueString:
+      description: String value used by the operator in assertions. Supports templated
+        variables.
+      type: string
     SyntheticsAssertionTimingsScope:
       description: Timings scope for response time assertions.
       enum:
@@ -14709,6 +14769,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
         xPath:
           description: The X path to assert.
@@ -16892,6 +16953,7 @@ components:
       - assertFromJavascript
       - assertPageContains
       - assertPageLacks
+      - assertRequests
       - click
       - extractFromJavascript
       - extractVariable
@@ -16920,6 +16982,7 @@ components:
       - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
+      - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
@@ -17363,6 +17426,9 @@ components:
             example: ''
             type: string
           type: array
+        checkCertificateRevocation:
+          description: Check for certificate revocation.
+          type: boolean
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
@@ -17378,13 +17444,21 @@ components:
           description: DNS server port to use for DNS tests.
           type: string
         files:
-          description: Files to be used as part of the request in the test.
+          description: Files to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
           items:
             $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
           type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
+        form:
+          additionalProperties:
+            description: A single form entry.
+            type: string
+          description: Form to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
+          type: object
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -17392,6 +17466,9 @@ components:
           type: string
         httpVersion:
           $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
+        isMessageBase64Encoded:
+          description: Whether the message is base64 encoded.
+          type: boolean
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -24276,15 +24353,17 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
-              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data
+              source in dashboards and notebooks. For more details, see the Cloud
+              Cost Management docs.
             cloud_cost_management_write: Configure cloud cost accounts and global
-              customizations.
+              customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
@@ -24313,7 +24392,7 @@ components:
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit and delete individual monitors.
+            monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
@@ -27018,7 +27097,10 @@ paths:
         type: safe
   /api/v1/graph/snapshot:
     get:
-      description: 'Take graph snapshots.
+      description: 'Take graph snapshots. Snapshots are PNG images generated by rendering
+        a specified widget in a web page and capturing it once the data is available.
+        The image is then uploaded to cloud storage.
+
 
         **Note**: When a snapshot is created, there is some delay before it is available.'
       operationId: GetGraphSnapshot
@@ -39134,7 +39216,7 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/pagerduty/
   name: PagerDuty Integration
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the
@@ -39244,7 +39326,7 @@ tags:
 
     Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
   name: Tags
-- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/)
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the

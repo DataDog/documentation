@@ -204,7 +204,7 @@ Your instrumented application can submit spans with timestamps up to 18 hours in
 Datadog accepts the following combinations for a given 40-minute interval:
 
 - 5000 unique `environments` and `service` combinations
-- 30 unique `second primary tag values` per environment
+- 100 unique `primary tag values` per additional primary tag
 - 100 unique `operation names` per environment and service
 - 1000 unique `resources` per environment, service, and operation name
 - 30 unique `versions` per environment and service
@@ -246,15 +246,15 @@ Datadog recommends tuning your instrumentation by renaming your services.
 
 Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
 
-### Use the second primary tag instead of putting metric partitions or grouping variables into service names
+### Use additional primary tags instead of putting metric partitions or grouping variables into service names
 
-Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
+You can use additional primary tags to group and aggregate your trace metrics. Use the dropdown to scope the performance data to a given cluster name or data center value.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
 
-Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
+Including metric partitions or grouping variables in service names instead of applying additional primary tags unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
-For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
+For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a primary tag.
 
 {{% /collapse-content %}}
 
@@ -358,14 +358,14 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [14]: /tracing/custom_instrumentation/
 [15]: /tracing/compatibility_requirements/
-[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
 [17]: /tracing/guide/setting_primary_tags_to_scope/
 [18]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi
 [19]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [20]: https://app.datadoghq.com/apm/traces
 [21]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [22]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[23]: /developers/guide/data-collection-resolution-retention/
+[23]: /data_security/data_retention_periods/
 [24]: /tracing/metrics/metrics_namespace/
 [25]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [26]: /tracing/trace_pipeline/generate_metrics/

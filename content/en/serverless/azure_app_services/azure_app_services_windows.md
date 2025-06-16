@@ -92,7 +92,7 @@ For example:
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
     - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
-    - Set `DD_APPSEC_ENABLED:true` to enable [Application Security][15].
+    - Set `DD_APPSEC_ENABLED:true` to enable [App and API Protection][15].
     - See a full list of [optional configuration variables][6].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
@@ -267,7 +267,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
    - `DD_ENV`: Your environment name
    - `DD_SERVICE`: Your service name (defaults to your Web App name)
    - `DD_RUNTIME_METRICS_ENABLED`: `true` to enable runtime metrics
-   - `DD_APPSEC_ENABLED`: `true` to enable [Application Security Management][11]
+   - `DD_APPSEC_ENABLED`: `true` to enable [App and API Protection][11]
 
    See the full list of [optional configuration settings][5].
 6. Select **Save**. This restarts your application.

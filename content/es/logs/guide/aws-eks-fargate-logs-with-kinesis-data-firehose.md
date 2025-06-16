@@ -9,37 +9,40 @@ further_reading:
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
   tag: Documentación
   text: Perfil de AWS Fargate
-title: Enviar logs de Amazon EKS Fargate logs con Amazon Data Firehose
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: Guía
+  text: Enviar logs a Datadog mientras se reducen los costes de transferencia de datos
+title: Enviar logs de Amazon EKS Fargate con Amazon Data Firehose
 ---
 
 ## Información general
 
-AWS Fargate en EKS proporciona una experiencia totalmente gestionada para la ejecución de cargas de trabajo Kubernetes. Amazon Data Firehose puede utilizarse junto con el enrutador de logs Fluent Bit de EKS para recopilar logs en Datadog. Esta guía proporciona una comparación del reenvío de logs a través de Amazon Data Firehose y de CloudWatch Logs, así como un ejemplo de aplicación de EKS Fargate para el reenvío de logs a Datadog a través de Amazon Data Firehose.
+AWS Fargate en EKS proporciona una experiencia totalmente gestionada de ejecución de cargas de trabajo Kubernetes. Amazon Data Firehose puede utilizarse junto con el enrutador de logs Fluent Bit de EKS para recopilar logs en Datadog. Esta guía proporciona una comparación del reenvío de logs a través de Amazon Data Firehose y de CloudWatch, así como una aplicación de ejemplo de EKS Fargate para el reenvío de logs a Datadog a través de Amazon Data Firehose.
 
-{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagrama del flujo de logs que muestra un clúster Fargate EKS enviando logs de contenedor, a través del enrutador de logs Fluent BIt, a Amazon Data Firehose y a un bucket de copia de seguridad S3 dentro de AWS, y luego a Datadog" responsive="true">}}
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagrama del flujo de logs que muestra un clúster EKS Fargate enviando logs de contenedor, a través del enrutador de logs Fluent BIt, a Amazon Data Firehose y a un bucket de copia de seguridad S3 dentro de AWS, y luego a Datadog" responsive="true">}}
 
-### Reenvío de logs de Amazon Data Firehose y CloudWatch
+### Reenvío de logs con Amazon Data Firehose y CloudWatch
 
 A continuación se indican las principales diferencias entre el uso de Amazon Data Firehose y CloudWatch para el reenvío de logs.
 
-- **Metadatos y etiquetado**: los metadatos, como el espacio de nombres y el ID de contenedor de Kubernetes, son accesibles como atributos estructurados al enviar logs mediante Amazon Data Firehose.
+- **Metadatos y etiquetado**: los metadatos, como el espacio de nombres y el ID de contenedor Kubernetes, son accesibles como atributos estructurados cuando se envían logs a través de Amazon Data Firehose.
 
-- **Costes de AWS**: los costes de AWS pueden variar según los casos de uso individuales, pero el consumo de Amazon Data Firehose suele ser menos costoso que el consumo comparable de CloudWatch Logs.
+- **Costes de AWS**: los costes de AWS pueden variar según los casos de uso individuales, pero el consumo de Amazon Data Firehose suele ser menos costoso que el consumo de logs comparable de CloudWatch.
 
 ## Requisitos
 1. Las siguientes herramientas de línea de comandos: [`kubectl`][6], [`aws`][7].
-2. Un clúster EKS con un [perfil Fargate][1] y un rol de ejecución de pod Fargate. En esta guía, el clúster se denomina `fargate-cluster` con un perfil Fargate denominado `fargate-profile` aplicado al espacio de nombres `fargate-namespace` . Si aún no dispones de estos recursos, consulta [Empezando con Amazon EKS][8], para crear el clúster ,y [Empezando con AWS Fargate utilizando Amazon EKS][9], para crear el perfil Fargate y el rol de ejecución del pod.
+2. Un clúster EKS con un [perfil de Fargate][1] y un rol de ejecución del pod Fargate. En esta guía, el clúster se denomina `fargate-cluster`, con un perfil de Fargate denominado `fargate-profile` aplicado al espacio de nombres `fargate-namespace`. Si aún no dispones de estos recursos, consulta [Empezando con Amazon EKS][8], para crear el clúster, y [Empezando con AWS Fargate utilizando Amazon EKS][9], para crear el perfil de Fargate y el rol de ejecución del pod.
 
 ## Configuración
 
-Los siguientes pasos describen el proceso para el envío de logs desde una aplicación de muestra desplegada en un clúster EKS a través de Fluent Bit y un flujo (stream) de entrega de Amazon Data Firehose a Datadog. Para maximizar la coherencia con las etiquetas (tags) estándar de Kubernetes en Datadog, se incluyen instrucciones para reasignar atributos seleccionados a etiquetas claves.
+Los siguientes pasos describen el proceso para el envío de logs desde una aplicación de ejemplo desplegada en un clúster EKS a través de Fluent Bit, y de un flujo (stream) de entrega de Amazon Data Firehose a Datadog. Para maximizar la coherencia con las etiquetas (tags) estándar de Kubernetes en Datadog, se incluyen instrucciones para reasignar atributos seleccionados a claves de etiqueta.
 
-1. [Crea un flujo de entrega de Amazon Data Firehose](#create-an-amazon-data-firehose-delivery-stream) que entregue logs a Datadog, junto con una copia de seguridad de S3 para cualquier entrega fallida de logs.
+1. [Crea un flujo de entrega de Amazon Data Firehose](#create-an-amazon-data-firehose-delivery-stream) que entregue logs a Datadog, junto con una copia de seguridad de S3 para cualquier entrega de logs fallida.
 2. [Configura Fluent Bit para Firehose en EKS Fargate](#configure-fluent-bit-for-firehose-on-an-eks-fargate-cluster).
 3. [Despliega una aplicación de ejemplo](#deploy-a-sample-application).
 4. [Aplica procesadores de reasignadores](#remap-attributes-for-log-correlation) para la correlación utilizando etiquetas de Kubernetes y la etiqueta `container_id`.
 
-### Crea un flujo de entrega de Amazon Data Firehose
+### Crear un flujo de entrega de Amazon Data Firehose
 
 Consulta la guía [Enviar logs de servicios AWS con Amazon Data Firehose de Datadog como destino][4] para configurar un flujo de entrega de Amazon Data Firehose.
 **Nota**: Configura la **Fuente** como `Direct PUT`.
@@ -53,6 +56,8 @@ kubectl create namespace aws-observability
 {{< /code-block >}}
 
 2. Crea el siguiente ConfigMap Kubernetes para Fluent Bit como `aws-logging-configmap.yaml`. Sustituye el nombre de tu flujo de entrega.
+
+<div class="alert alert-info">Para el nuevo <a href="https://docs.fluentbit.io/manual/pipeline/outputs/firehose">complemento Kinesis Firehose</a> de mayor rendimiento, utiliza el nombre del complemento <code>kinesis_firehose</code> en lugar de <code>amazon_data_firehose</code>. </div>
 
 {{< code-block lang="yaml" filename="" disable_copy="false" collapsible="false" >}}
 apiVersion: v1
@@ -73,7 +78,7 @@ data:
 
   output.conf: |
     [OUTPUT]
-        Name amazon_data_firehose
+        Name kinesis_firehose
         Match kube.*
         region <REGION>
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>
@@ -127,7 +132,7 @@ aws iam create-policy \
 
 ### Desplegar una aplicación de ejemplo
 
-Para generar logs y probar el flujo de entrega de Amazon Data Firehose, despliega una carga de trabajo de muestra en tu clúster EKS Fargate.
+Para generar logs y probar el flujo de entrega de Amazon Data Firehose, despliega un ejemplo de carga de trabajo en tu clúster EKS Fargate.
 
 1. Crea un manifiesto de despliegue `sample-deployment.yaml`.
 
@@ -216,7 +221,7 @@ Resultado esperado:
  ...
  {{< /code-block >}}
 
-4. Comprueba que los logs está en Datadog. En el [Explorador de logs de Datadog][10], busca `@aws.firehose.arn:"<ARN>"`, sustituyendo `<ARN>` por tu ARN de Amazon Data Firehose, para filtrar logs desde Amazon Data Firehose.
+4. Comprueba que los logs están en Datadog. En el [Explorador de logs de Datadog][10], busca `@aws.firehose.arn:"<ARN>"`, sustituyendo `<ARN>` por tu ARN de Amazon Data Firehose, para filtrar logs desde Amazon Data Firehose.
 
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_verification.jpg" alt="Verificación de líneas de logs NGINX en el Explorador de logs de Datadog" responsive="true">}}
 
@@ -236,7 +241,7 @@ Los logs de esta configuración requieren la reasignación de algunos atributos 
 4. Después de crear este pipeline, los logs emitidos por la aplicación de ejemplo se etiquetan como en este ejemplo con los atributos de logs reasignados a etiquetas de Kubernetes:
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_example_remapped.jpg" alt="Vista detallada de un log en Datadog con las etiquetas container_id, kube_container_name, kube_namespace, pod_name " responsive="true">}}
 
-## Leer más
+## Referencias adicionales
  {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html

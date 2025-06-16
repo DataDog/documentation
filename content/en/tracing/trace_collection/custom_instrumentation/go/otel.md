@@ -20,7 +20,7 @@ further_reading:
 
 ## Imports
  
-Import the following packages to setup the Datadog trace provider and use cases demonstrated below:
+Import the following packages to setup the Datadog trace provider and use cases demonstrated below. {{% tracing-go-v2 %}}
 
 ```go
 import (
@@ -28,12 +28,9 @@ import (
 	"log"
 	"os"
 
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
-   ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
-   ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" 
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -55,12 +52,6 @@ To configure OpenTelemetry to use the Datadog trace provider:
 3. Install the Datadog OpenTelemetry wrapper package using the command:
 
    ```shell
-   go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
-   ```
-
-   If you are using v2, do:
-
-   ```shell
    go get github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry
    ```
 
@@ -69,8 +60,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
    ```go
    import (
       "go.opentelemetry.io/otel"
-      ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // 1.x
-      // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
+      ddotel "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry"
    )
    ```
 
@@ -126,19 +116,19 @@ t := otel.Tracer("")
 
 ### Setting errors on a span
 
-To set an error on a span, use the `setStatus` method like this:
+To set an error on a span, use the otel SetAttributes or ddtrace WithError options.
 
 ```go
 // Start a span.
-ctx, span := t.Start(context.Background(), "span_name")
+ctx, span := t.Start(context.Background(), "spanName") // where `t` refers to otel/trace
 
 ...
 // Set an error on a span with 'span.SetAttributes'.
-span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
+span.SetAttributes(attribute.String(ext.ErrorMsg, "errorMsg"))
 
 // ALternatively, it is possible to set an error on a span via end span options. 
-EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
-sp.End()
+EndOptions(span, tracer.WithError(errors.New("myErr"))) // where `tracer` refers to ddtrace/tracer
+span.End()
 
 ```
 
@@ -212,3 +202,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
 [17]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[18]: /tracing/trace_collection/custom_instrumentation/go/migration

@@ -25,7 +25,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -89,7 +89,7 @@ tile:
 
 このインテグレーションには、イベントは含まれません。
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io
