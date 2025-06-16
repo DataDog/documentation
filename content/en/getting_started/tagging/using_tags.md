@@ -356,7 +356,7 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 
 ## DORA Metrics
 
-The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
+The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
 
 {{< img src="/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:80%;">}}
 
