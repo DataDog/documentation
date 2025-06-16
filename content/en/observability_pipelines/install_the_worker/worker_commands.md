@@ -11,7 +11,7 @@ further_reading:
 
 Usage example: `observability-pipelines-worker <COMMAND>`
 
-If you are using a containerized environment, use the `docker exec` or `kubectl exec` command to get a shell into the container to run the command.
+If you are using a containerized environment, use the `docker exec` or `kubectl exec` command to get a shell into the container to run the command. For example, `kubectl exec -it opw-observability-pipelines-worker-0 -- observability-pipelines-worker tap`, where `opw-observability-pipelines-worker-0` is the name of the Pod running the Worker.
 
 | Command   | Description                                                                                                           |
 |-----------|-----------------------------------------------------------------------------------------------------------------------|
