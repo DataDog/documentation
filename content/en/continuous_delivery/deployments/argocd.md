@@ -195,39 +195,23 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-The [`datadog-ci deployment correlate` command][14] can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. Both methods require version `2.44.0` or higher of the `datadog-ci` CLI.
+The [`datadog-ci deployment correlate-image` command][14] can be used to correlate an image with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit obtained by looking at the deployed images, if any.
 
-{{< tabs >}}
-{{% tab "Automatic" %}}
-In this method, the command automatically infers the current application commit (that is, the commit of the pipeline that the command is running in) and the configuration repository commits based on the current Git environment. For this to work properly, the command needs to be run between committing the changes and pushing them to the configuration repository:
+Here is an example on how you can run the command when generating the image that will later be deployed by Argo CD:
 ```yaml
-- job: JobToUpdateConfigurationRepository
-  run: |
-    # Update the configuration files
-    ...
-    git commit
-    # Correlate the deployment with the CI pipeline
-    export DD_BETA_COMMANDS_ENABLED=1
-    datadog-ci deployment correlate --provider argocd
-    git push
-```
-{{% /tab %}}
-{{% tab "Manual" %}}
-If the automatic setup is too limited for your use case, you can provide the configuration repository URL and SHAs manually:
-```yaml
-- job: JobToUpdateConfigurationRepository
-  run: |
-    # Correlate the deployment with the CI pipeline
-    export DD_BETA_COMMANDS_ENABLED=1
-    datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO_URL> --config-shas <COMMIT_SHA>
-```
-You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][1] for additional details.
+ steps:
+    - name: Correlate image with Datadog
+      shell: bash
+      run: |
+        echo "Correlating image: ${{ inputs.image-name }} with Datadog"
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
-{{% /tab %}}
-{{< /tabs >}}
+        datadog-ci deployment correlate-image --image ${{ inputs.image-name }} --repository-url ${{ inputs.repository-url }} --commit-sha ${{ inputs.commit-sha }}
 
-**Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, you still need to run this command to correctly associate deployments and CI pipelines.
+        echo "Successfully correlated ${{ inputs.image-name }} with Datadog"
+```
+
+
+This command will correlate images from deployment resources. If several images are present, we will consider only the correlated images, and look for an image with the service name in it.
 
 #### Validation
 
