@@ -21,7 +21,7 @@ Use the following instructions to enable Infrastructure as Code (IaC) scanning f
 
 ## Set up the GitHub integration
 
-Follow [the instructions][3] for creating a GitHub app for your organization.
+Follow [the instructions][1] for creating a GitHub app for your organization.
 
 <div class="alert alert-info">
   To use IaC scanning, the GitHub App must have <code>Read &amp; Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. You can grant this access to all repositories or restrict it to selected ones.
@@ -31,7 +31,7 @@ Follow [the instructions][3] for creating a GitHub app for your organization.
 
 After setting up the GitHub integration, enable IaC scanning for your repositories.
 
-1. On the [Code Security Setup page][4], expand the **Activate scanning for your repositories** section.
+1. On the [Code Security Setup page][2], expand the **Activate scanning for your repositories** section.
 1. Under **Select your source code management provider**, choose **GitHub**.
 1. Under **Where do you want the scans to run?**, select **Datadog**.
 1. In the GitHub account you want to configure, click **Select repositories**, or click **Edit** if Code Security features are already enabled.
@@ -43,5 +43,5 @@ After setting up the GitHub integration, enable IaC scanning for your repositori
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[4]: https://app.datadoghq.com/security/configuration/csm/setup
+[1]: /integrations/github/#setup
+[2]: https://app.datadoghq.com/security/configuration/code-security/setup
