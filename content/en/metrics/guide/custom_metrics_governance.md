@@ -13,6 +13,9 @@ further_reading:
 - link: "/metrics/volume/"
   tag: "Documentation"
   text: "Metrics Volume Management"
+- link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
+  tag: "Blog"
+  text: "Best practices for end-to-end custom metrics governance blog"
 ---
 
 ## Overview
