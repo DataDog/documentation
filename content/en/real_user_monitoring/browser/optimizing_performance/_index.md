@@ -2,7 +2,6 @@
 title: Optimizing Performance
 aliases:
   - real_user_monitoring/browser/monitoring_performance_vitals/
-  - real_user_monitoring/browser/optimizing_performance/
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"

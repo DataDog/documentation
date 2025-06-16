@@ -531,10 +531,11 @@ extensions:
       schedule: "* * * * *"
       env:
         - name: "staging"
-          ci_pipeline: "//domains/examples/apps/hello-joe/config/k8s:release-staging"
-          branch: "hello-joe/staging"
-          schedule: "* * * * 1"
+          ci_pipeline: "ci-tool://shopist/k8s/staging-deploy"
+          branch: "main"
+          schedule: "0 9 * * 1"
 {{< /code-block >}}
+
 
 ## Schema validation through IDE plugin 
 
