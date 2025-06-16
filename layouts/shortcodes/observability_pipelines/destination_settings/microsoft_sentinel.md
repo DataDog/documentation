@@ -1,9 +1,9 @@
 #### Prerequisites
 
 To set up the Microsoft Sentinel destination, you need to create a Workspace in Azure if you haven't already. In that workspace:
-1. [Add Microsoft Sentinel][10163] to that workspace.
+1. [Add Microsoft Sentinel][10163] to the workspace.
 1. [Create a Data Collection Endpoint (DCE)][10164].
-1. [Create a Logs Analytics Workspace][10165] in your workspace if you haven't already.
+1. [Create a Logs Analytics Workspace][10165] in the workspace if you haven't already.
 1. In the Logs Analytics Workspace, navigate to **Settings** > **Tables**.
     1. Click **+ Create**.
     1. Define a custom table (for example, `Custom-MyLogs_CL`). **Note**: The table name must start with `Custom-`. `CL` is automatically appended to the end of the table name. You need the table name to set up the Observability Pipelines Microsoft Sentinel destination.
