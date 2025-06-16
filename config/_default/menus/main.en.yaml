@@ -2926,7 +2926,7 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
-    - name: Autoscaling
+    - name: Kubernetes Autoscaling
       url: containers/monitoring/autoscaling
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_autoscaling
