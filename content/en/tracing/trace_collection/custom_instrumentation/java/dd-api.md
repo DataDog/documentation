@@ -22,7 +22,9 @@ further_reading:
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
 
-<div class="alert alert-info">The Datadog Java tracer is built on OpenTracing. Although OpenTracing is deprecated in favor of OpenTelemetry, the following examples correctly import the <code>opentracing</code> library.</div>
+<div class="alert alert-info">
+The Datadog Java tracer interoperates with the <code>opentracing-api</code> library. Although OpenTracing is deprecated in favor of OpenTelemetry, the examples on this page use OpenTracing types where needed. To compile these examples, add the <a href="https://mvnrepository.com/artifact/io.opentracing/opentracing-api"><code>opentracing-api</code></a> dependency to your project.
+</div>
 
 ## Adding tags
 
