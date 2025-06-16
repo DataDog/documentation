@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Static Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
+  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.

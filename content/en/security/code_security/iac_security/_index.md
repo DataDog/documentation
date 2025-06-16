@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Static Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
+  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 {{< img src="/code_security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}

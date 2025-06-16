@@ -15,7 +15,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Static Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
+  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security.
