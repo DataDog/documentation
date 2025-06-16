@@ -6926,7 +6926,7 @@ menu:
       url: /security/code_security/iast/security_controls/
       parent: sec_iast
       weight: 2
-    - name: IaC Scanning
+    - name: Infrastructure as Code (IaC)
       identifier: code_security_iac_scanning
       url: /security/code_security/iac_scanning/
       parent: code_security

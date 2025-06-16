@@ -1,14 +1,14 @@
 ---
-title: IaC Scanning
+title: Infrastructure as Code Scanning
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
   - link: "/security/code_security/iac_scanning/setup"
     tag: "Documentation"
-    text: "Setting up IaC Scanning"
+    text: "Set up IaC Scanning"
   - link: "/security/code_security/iac_scanning/exclusions"
     tag: "Documentation"
-    text: "Setting up IaC Scanning Exclusions"
+    text: "Configure IaC Scanning Exclusions"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
@@ -19,7 +19,7 @@ Infrastructure as Code (IaC) scanning in Datadog automatically analyzes your Ter
 
 <div class="alert alert-info">Static IaC scanning supports GitHub for version control and Terraform for infrastructure as code.</div>
 
-{{< img src="security/csm/iac_scanning_explorer3.png" alt="Cloud Security Findings page displaying detected misconfigurations in cloud resources" width="100%">}}
+{{< img src="security/code_security/infrastructure_as_code/iac_misconfigurations_explorer.png" alt="Code Security Vulnerabilities page displaying detected misconfigurations in cloud resources" width="100%">}}
 
 When you click on a finding, the side panel reveals additional details, including a short description of the IaC rule related to the finding and a preview of the offending code.
 

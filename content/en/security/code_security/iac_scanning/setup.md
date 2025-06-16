@@ -1,5 +1,5 @@
 ---
-title: Setting up IaC Scanning
+title: Set up Infrastructure as Code Scanning
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/
 further_reading:
@@ -8,7 +8,7 @@ further_reading:
     text: "Code Security"
   - link: "/security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions"
     tag: "Documentation"
-    text: "Setting up IaC Scanning Exclusions"
+    text: "Configure IaC Scanning Exclusions"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
@@ -23,20 +23,21 @@ Use the following instructions to enable Infrastructure as Code (IaC) scanning f
 
 Follow [the instructions][3] for creating a GitHub app for your organization.
 
-<div class="alert alert-info">To use IaC scanning, you must give the GitHub App <code>Read & Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. These permissions can be applied to all or select repositories.
+<div class="alert alert-info">
+  To use IaC scanning, the GitHub App must have <code>Read &amp; Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. You can grant this access to all repositories or restrict it to selected ones.
 </div>
 
 ## Enable IaC scanning for your repositories
 
-After you set up the GitHub integration, enable IaC scanning for the repositories in your GitHub account.
+After setting up the GitHub integration, enable IaC scanning for your repositories.
 
 1. On the [Code Security Setup page][4], expand the **Activate scanning for your repositories** section.
 1. Under **Select your source code management provider**, choose **GitHub**.
 1. Under **Where do you want the scans to run?**, select **Datadog**.
-1. For the GitHub account you want to configure, click **Select repositories** or **Edit** if you've already enabled other Code Security features for that account.
-1. To enable IaC scanning:
-  - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the on position.
-  - To enable it for a specific repository, toggle the **IaC** switch for that repository to the on position.
+1. In the GitHub account you want to configure, click **Select repositories**, or click **Edit** if Code Security features are already enabled.
+1. To enable IaC scanning, choose one of the following options:
+    - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the on position.
+    - To enable it for a specific repository, toggle the **IaC** switch for that repository to the on position.
 
 ## Further reading
 
