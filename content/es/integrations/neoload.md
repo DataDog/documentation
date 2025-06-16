@@ -50,7 +50,7 @@ tile:
   classifier_tags:
   - Category::Notifications
   - Categoría::Tests
-  - Oferta::Integración
+  - Offering::Integration
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
@@ -77,7 +77,7 @@ Con la integración NeoLoad puedes realizar un seguimiento de las métricas de l
 - Correlacionar el rendimiento de la aplicación con las métricas de los tests de carga en NeoLoad.
 - Analizar y visualizar métricas de NeoLoad en Datadog, como el rendimiento, los errores y el rendimiento, utilizando el dashboard predefinido o el [Explorador de métricas][2].
 
-## Configuración
+## Configurar
 
 ### Configuración
 
