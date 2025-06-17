@@ -177,7 +177,7 @@ Below are basic troubleshooting steps for resolving those issues:
 - Use dd-trace-java Version 1.47.0 or later
   Starting with v1.47.0, the profiler uses PID-specific subdirectories inside the configured temp directory. This reduces clutter and potential conflicts from orphaned files when JVM processes exit unexpectedly.
    
-- Specify a Custom Executable Temp Directory
+- Specify a custom executable temp directory
   To ensure proper operation across environments, explicitly configure a writable, executable temp directory using the following JVM option:
    ```
    -Ddd.profiling.tempdir=<path_to_writable_exec_enabled_directory>
