@@ -144,7 +144,7 @@ To create a new segment, navigate to **[Digital Experience Monitoring > Product 
 
 To create a new segment using Product Analytics data:
 
-1. Choose the user attribute you want to connect your data with. In the below example, it is `usr.id`, but you can use any user attribute available, such as `usr.email` or `usr.name`.
+1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** page on the Users & Segments page
 
 2. Under the **Select a data source** section, choose **Product Analytics** to filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
 
