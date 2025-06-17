@@ -2227,6 +2227,14 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    AddMemberTeamRequest:
+      description: Request to add a member team to super team's hierarchy
+      properties:
+        data:
+          $ref: '#/components/schemas/MemberTeam'
+      required:
+      - data
+      type: object
     Advisory:
       description: Advisory.
       properties:
@@ -21673,6 +21681,30 @@ components:
       - ms_channel_name
       - redirect_url
       type: object
+    MemberTeam:
+      description: A member team
+      properties:
+        id:
+          description: The member team's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/MemberTeamType'
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
+    MemberTeamType:
+      default: member_teams
+      description: Member team type
+      enum:
+      - member_teams
+      example: member_teams
+      type: string
+      x-enum-varnames:
+      - MEMBER_TEAMS
     Metadata:
       description: The metadata related to this request.
       properties:
@@ -35628,6 +35660,11 @@ components:
           items:
             $ref: '#/components/schemas/SensitiveDataScannerProduct'
           type: array
+        samplings:
+          description: List of sampling rates per product type.
+          items:
+            $ref: '#/components/schemas/SensitiveDataScannerSamplings'
+          type: array
       type: object
     SensitiveDataScannerGroupCreate:
       description: Data related to the creation of a group.
@@ -36058,6 +36095,19 @@ components:
       properties:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
+      type: object
+    SensitiveDataScannerSamplings:
+      description: Sampling configurations for the Scanning Group.
+      properties:
+        product:
+          $ref: '#/components/schemas/SensitiveDataScannerProduct'
+        rate:
+          description: Rate at which data in product type will be scanned, as a percentage.
+          example: 100.0
+          format: double
+          maximum: 100.0
+          minimum: 0.0
+          type: number
       type: object
     SensitiveDataScannerStandardPattern:
       description: Data containing the standard pattern id.
@@ -62676,11 +62726,12 @@ paths:
             value: "{\n  \"data\": {\n    \"type\": \"sensitive_data_scanner_group\",\n
               \   \"attributes\": {\n      \"name\": \"my-test-group\",\n      \"is_enabled\":
               false,\n      \"product_list\": [\n          \"logs\"\n      ],\n      \"filter\":
-              {\n          \"query\": \"*\"\n      }\n    },\n    \"relationships\":
-              {\n      \"configuration\": {\n        \"data\": {\n          \"id\":
-              \"{{ configuration.data.id }}\",\n          \"type\": \"{{ configuration.data.type
-              }}\"\n        }\n      },\n      \"rules\": {\n          \"data\": []\n
-              \     }\n    }\n  },\n  \"meta\": {}\n}"
+              {\n          \"query\": \"*\"\n      },\n      \"samplings\": [{\"product\":
+              \"logs\", \"rate\": 100}]\n    },\n    \"relationships\": {\n      \"configuration\":
+              {\n        \"data\": {\n          \"id\": \"{{ configuration.data.id
+              }}\",\n          \"type\": \"{{ configuration.data.type }}\"\n        }\n
+              \     },\n      \"rules\": {\n          \"data\": []\n      }\n    }\n
+              \ },\n  \"meta\": {}\n}"
           step: there is a valid "scanning_group" in the system
       x-menu-order: 4
       x-permission:
@@ -64560,6 +64611,166 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/{super_team_id}/member_teams:
+    get:
+      description: Get all member teams.
+      operationId: ListMemberTeams
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: List of fields that need to be fetched.
+        explode: false
+        in: query
+        name: fields[team]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/TeamsField'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get all member teams
+      tags:
+      - Teams
+      x-menu-order: 21
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Add a member team.
+
+        Adds the team given by the `id` in the body as a member team of the super
+        team.'
+      operationId: AddMemberTeam
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMemberTeamRequest'
+        required: true
+      responses:
+        '204':
+          description: Added
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Add a member team
+      tags:
+      - Teams
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        operationId: RemoveMemberTeam
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/team/{super_team_id}/member_teams/{member_team_id}:
+    delete:
+      description: Remove a super team's member team identified by `member_team_id`.
+      operationId: RemoveMemberTeam
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: member_team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Remove a member team
+      tags:
+      - Teams
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -66812,7 +67023,7 @@ paths:
       summary: Get user memberships
       tags:
       - Teams
-      x-menu-order: 1
+      x-menu-order: 19
       x-permission:
         operator: OR
         permissions:

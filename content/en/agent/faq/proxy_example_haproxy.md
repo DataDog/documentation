@@ -706,6 +706,10 @@ remote_configuration:
     rc_dd_url: haproxy.example.com:3846
     # Comment the line below to use encryption between the Agent and HAProxy
     no_tls: true
+
+installer:
+  registry:
+    url: haproxy.example.com:3847
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
