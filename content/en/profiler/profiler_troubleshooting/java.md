@@ -164,7 +164,7 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
-## Managing Issues related to tmp folder
+## Managing issues related to the tmp folder
 
 The Continuous Profiler may encounter errors related to the use of the system /tmp directory, particularly in environments with strict security or limited execution permissions (e.g., Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
 
