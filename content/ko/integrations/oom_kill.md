@@ -21,7 +21,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
+- OS & 시스템
 - 이벤트 관리
 custom_kind: 통합
 dependencies:

@@ -8,11 +8,8 @@ further_reading:
   tag: 설명서
   text: 로그 탐색 방법 알아보기
 title: Roku 로그 수집
+site_support_id: roku_log_collection
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Roku 로그 수집은 US1-FED Datadog 사이트에서 이용할 수 없습니다.</div>
-{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">Roku 로그 수집은 베타 서비스입니다.</div>

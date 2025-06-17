@@ -14,10 +14,6 @@ title: Puertas de calidad o facetas de ejecución de reglas
 Puertas de calidad está en vista previa.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Puertas de calidad no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Las facetas son atributos y etiquetas (tags) definidos por el usuario a partir de tus reglas o ejecuciones. Son útiles para el análisis de datos tanto [cualitativos](#qualitative-facets) como [cuantitativos](#quantitative-measures). Las facetas te permiten manipular tus reglas o ejecuciones en las consultas de búsqueda que aparecen en [dashboards][2] y en [notebooks][3].
@@ -30,11 +26,11 @@ El [Explorador de puertas de calidad][4] incluye facetas predefinidas como `Stat
 
 Utiliza facetas cualitativas para:
 
-- **Obtener una visión relativa** de los valores.
+- **Obtener información relativa** de los valores.
 - **Contar valores únicos**.
 - **Filtra** con frecuencia tus puertas de calidad en función de determinados valores. Por ejemplo, crea una faceta en una etiqueta (tag) de entorno para delimitar la resolución de problemas al desarrollo, el staging o los entornos de producción.<br>
 
-**Nota:** Aunque las facetas no son obligatorias para filtrar las etiquetas, definir facetas para las etiquetas que utilizas con frecuencia durante las investigaciones te ayudará a agilizar de resolución.
+**Nota:** Aunque las facetas no son necesarias para filtrar las etiquetas (tags), definir facetas para las etiquetas (tags) que utilizas a menudo durante las investigaciones te ayudará a reducir el tiempo de resolución.
 
 ### Medidas cuantitativas
 

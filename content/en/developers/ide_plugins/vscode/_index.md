@@ -13,13 +13,16 @@ further_reading:
   text: "Learn about Source Code Integration"
 - link: "/bits_ai/mcp_server/"
   tag: "Documentation"
-  text: "Learn about the Datadog Model Context Protocol (MCP) server"
+  text: "Learn about the Datadog Model Context Protocol (MCP) Server"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 - link: "https://www.datadoghq.com/blog/exception-replay-datadog/"
   tag: "Blog"
   text: "Simplify production debugging with Datadog Exception Replay"
+- link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
+  tag: "Blog"
+  text: "Debug live production issues with the Datadog Cursor extension"
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
@@ -84,11 +87,11 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
-### MCP server setup (Cursor only)
+### MCP Server setup (Cursor only)
 
-<div class="alert alert-info">The Datadog MCP server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
+<div class="alert alert-info">The Datadog MCP Server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
 
-In Cursor, the extension includes access to the [Datadog Model Context Protocol (MCP) server][3]. Enable the MCP server to enhance Cursor's AI capabilities with your specific Datadog environment.
+In Cursor, the extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Enable the MCP Server to enhance Cursor's AI capabilities with your specific Datadog environment.
 
 1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP Tools** tab.
 2. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
