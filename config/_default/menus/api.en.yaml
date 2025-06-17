@@ -9151,7 +9151,7 @@ menu:
         operationids:
           - GetUserMemberships
         unstable: []
-        order: 1
+        order: 19
     - name: Update permission setting for team
       url: '#update-permission-setting-for-team'
       identifier: teams-update-permission-setting-for-team
@@ -9320,6 +9320,45 @@ menu:
           - DeleteTeam
         unstable: []
         order: 5
+    - name: Remove a member team
+      url: '#remove-a-member-team'
+      identifier: teams-remove-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveMemberTeam
+        unstable:
+          - v2
+        order: 22
+    - name: Add a member team
+      url: '#add-a-member-team'
+      identifier: teams-add-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddMemberTeam
+        unstable:
+          - v2
+        order: 20
+    - name: Get all member teams
+      url: '#get-all-member-teams'
+      identifier: teams-get-all-member-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMemberTeams
+        unstable:
+          - v2
+        order: 21
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team
