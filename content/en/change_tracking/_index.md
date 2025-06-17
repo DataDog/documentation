@@ -134,8 +134,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | SQL Server Database Settings Change                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                                                                                                          |
 | Kafka Schema Updates                                                             | [Data Streams Monitoring (DSM)][9]                                                                                                                                                      |
 | Manual Kubernetes Deployment Scale Events                                        | Kubernetes Audit Logging                                                                                                                                                                |
-| Cloud Infrastructure Resource Changes (AWS, Azure, GCP)                          | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding                                                                                      |
-
+| Cloud Infrastructure Resource Changes ({{< tooltip text="in Preview" tooltip="This feature is in Preview and currently limited to a small sample of cloud resource changes. To request access, see the Resource Changes documentation linked in Tracking Requirements." >}}) | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding       
 
 ## Further reading
 
