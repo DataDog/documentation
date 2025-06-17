@@ -6,6 +6,7 @@ further_reading:
 - link: /logs/guide/reduce_data_transfer_fees
   tag: ガイド
   text: データ転送料金を削減しながら Datadog にログを送信する方法
+site_support_id: amazon_event_bridge
 title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
 site_support_id: amazon_event_bridge
 ---
@@ -16,7 +17,7 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
 
 始めるには、[Datadog アカウント][2]と [API キー][3]、[Amazon Eventbridge API 宛先][4]へのアクセスが必要です。
 
-### 構成
+### 設定
 
 1. [Amazon の API 宛先を作成][5]文書のステップに従い、Datadog を API 宛先として追加します。
     - キー名として `DD-API-KEY`、[Datadog API キー][3]を値として、API キー認証を使用します。

@@ -32,7 +32,7 @@ Aprovecha la integración con DingTalk para:
 
 La integración DingTalk se instala con el [cuadro de la integración DingTalk][1] de Datadog.
 
-## Configuración
+## Configurar
 
 Para integrar Datadog en un grupo DingTalk:
 

@@ -6,6 +6,7 @@ further_reading:
 - link: /logs/guide/reduce_data_transfer_fees
   tag: 가이드
   text: 데이터 전송 수수료를 줄이면서 로그를 Datadog로 보내는 방법
+site_support_id: amazon_event_bridge
 title: Amazon EventBridge API 목적지를 사용하여 이벤트 및 로그를 Datadog에 전송하기
 site_support_id: amazon_event_bridge
 ---
