@@ -88,6 +88,7 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     </div>
 
     <div class="alert alert-info">
+    <p><strong>Notes:</strong></p>
       <ul>
         <li>Currently, the service extension doesn't process request bodies. If you select request and response body events in the extension chain events, the service extension does not inspect the request body. For more information, see <a href="#limitations">Limitations</a>.</li>
         <li>If you select the <code>Request Body</code> and <code>Response Body</code> events, processing time will increase as the service extension needs to transfer and analyze these bodies. <strong>Adjust your timeout</strong> settings to accommodate the additional processing time.</li>
