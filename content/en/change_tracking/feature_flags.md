@@ -33,6 +33,8 @@ To track LaunchDarkly feature flags in your services' Change Tracking timeline:
 1. In **Custom properties**, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
 1. Click **Save changes**.
 
+For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Software Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
+
 ### Custom feature flags
 
 Send feature flag events from any provider using the [Events API][3]. Create a `change` category event and include a service tag to link the event to your service.
@@ -113,9 +115,9 @@ For example:
 ```python
 # Trace feature flag evaluation to enable auto-detection
 with tracer.trace("experiments.IsEnabled") as span:
-    span.set_tag("experiment_id", "payment-gateway-flag")
+    span.set_tag("experiment_id", "fallback_payments_test")
     # Your existing feature flag evaluation code
-    flag_value = evaluate_flag("payment-gateway-flag")
+    flag_value = evaluate_flag("fallback_payments_test")
 ```
 
 ## Remediate feature flag changes with Workflow Automation
@@ -155,3 +157,4 @@ To toggle feature flags on or off from inside Datadog:
 [4]: /tracing/trace_collection/
 [5]: https://app.datadoghq.com/apm/settings
 [6]: https://app.datadoghq.com/actions/connections
+[7]: https://app.datadoghq.com/software
