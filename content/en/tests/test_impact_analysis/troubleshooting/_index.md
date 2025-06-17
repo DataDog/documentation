@@ -8,10 +8,6 @@ further_reading:
   text: "Learn about Test Impact Analysis"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Impact Analysis is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with Test Impact Analysis. If you need additional help, contact [Datadog Support][1].

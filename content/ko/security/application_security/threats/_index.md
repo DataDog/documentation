@@ -15,10 +15,6 @@ further_reading:
 title: 애플리케이션 위협 관리
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">애플리케이션 보안 관리는 선택한 <a href="/getting_started/site">Datadog 사이트</a>에서 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ASM Threat Management는 APM 계측 애플리케이션의 트레이스 원격 측정을 사용하여 관찰된 동작을 알려진 공격 패턴과 비교하거나 비즈니스 로직 남용을 식별함으로써 실행 중인 서비스에 대한 위협 및 공격을 식별합니다.
 
 Threat Monitoring을 통해 제기된 보안 신호는 서비스 상태 및 성능을 모니터링하기 위해 이미 일반적으로 방문하는 보기에 요약되어 표시됩니다. APM의 [Service Catalog][1] 및 개별 Service Pages는 애플리케이션 위협 신호에 대한 인사이트를  제공하여 취약점을 조사하고, 공격자를 차단하고, 공격 노출을 검토할 수 있도록 해줍니다.

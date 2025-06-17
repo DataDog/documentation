@@ -7,14 +7,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
       text: 'Get granular LLM observability by instrumenting your LLM chains'
-    - link: '/llm_observability/submit_evaluations'
+    - link: '/llm_observability/evaluations'
       tag: 'Guide'
-      text: 'Submit Evaluations to LLM Observability'
+      text: 'Evaluation options for LLM Observability'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -206,6 +202,6 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 [12]: /llm_observability/setup/sdk/#annotating-a-span
 [13]: /llm_observability/setup/sdk/#tracking-user-sessions
 [14]: /llm_observability/setup/sdk/#tracing-multiple-applications
-[15]: /llm_observability/submit_evaluations
+[15]: /llm_observability/evaluations/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability

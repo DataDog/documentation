@@ -16,15 +16,11 @@ further_reading:
 - link: /integrations/
   tag: 설명서
   text: 통합에 대해 알아보기
-- link: /service_management/workflows/actions_catalog
+- link: /actions/actions_catalog
   tag: 설명서
   text: 워크플로우 작업 목록 보기
 title: 액세스 및 인증
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})는 워크플로우 자동화를 지원하지 않습니다.</div>
-{{< /site-region >}}
 
 몇 가지 도구로 워크플로우와 구성 요소에 대한 액세스 및 인증을 제어합니다.
 
@@ -105,7 +101,7 @@ Resolver
 1. 드롭다운 메뉴에서 역할을 선택합니다. **추가**를 클릭합니다. 선택한 역할이 대화 상자 하단에 추가됩니다.
 1. 역할 이름 옆의 드롭다운 메뉴에서 원하는 권한을 선택합니다.
 1. 역할에서 접근 권한을 삭제하려면 역할 이름 오른쪽의 휴지통 아이콘을 클릭합니다.
-1. **저장**을 클릭합니다.
+1. **Save**을 클릭합니다.
 
 ### 특정 워크플로우에 대한 접근 제한
 
@@ -130,7 +126,7 @@ Resolver
 1. 드롭다운 메뉴에서 역할을 선택합니다. **추가**를 클릭합니다. 선택한 역할이 대화 상자 하단에 추가됩니다.
 1. 역할 이름 옆의 드롭다운 메뉴에서 원하는 권한을 선택합니다.
 1. 역할에서 접근 권한을 삭제하려면 역할 이름 오른쪽의 휴지통 아이콘을 클릭합니다.
-1. **저장**을 클릭합니다.
+1. **Save**을 클릭합니다.
 
 **워크플로우 편집기에서 권한 제한하기**
 1. 워크플로우 편집기에서 톱니바퀴(**설정**) 아이콘을 클릭합니다.
@@ -139,7 +135,7 @@ Resolver
 1. 드롭다운 메뉴에서 역할을 선택합니다. **추가**를 클릭합니다. 선택한 역할이 대화 상자 하단에 추가됩니다.
 1. 역할 이름 옆의 드롭다운 메뉴에서 원하는 권한을 선택합니다.
 1. 역할에서 접근 권한을 삭제하려면 역할 이름 오른쪽의 휴지통 아이콘을 클릭합니다.
-1. **저장**을 클릭합니다.
+1. **Save**을 클릭합니다.
 
 ## 참고 자료
 
@@ -151,7 +147,7 @@ Resolver
 [2]: /ko/account_management/org_settings/service_accounts/
 [3]: /ko/account_management/rbac/
 [4]: /ko/service_management/workflows/trigger/
-[5]: /ko/service_management/workflows/actions_catalog/
+[5]: /ko/actions/actions_catalog/
 [6]: /ko/service_management/workflows/connections/
 [7]: /ko/account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow

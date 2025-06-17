@@ -677,4 +677,4 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [12]: /security/sensitive_data_scanner/
-[13]: /security/application_security/how-appsec-works/#data-privacy
+[13]: /security/application_security/how-it-works/#data-privacy

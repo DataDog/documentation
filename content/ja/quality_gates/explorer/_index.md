@@ -12,10 +12,6 @@ further_reading:
 title: Quality Gates Explorer
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点で Quality Gates は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Quality Gates Explorer を使用すると、任意のタグを用いて複数のレベルで品質ゲートまたはルールの実行結果を[検索およびフィルター](#search-and-filter)、[可視化](#visualize)、および[エクスポート](#export)できます。

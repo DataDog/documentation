@@ -33,7 +33,7 @@ author:
 categories:
 - marketplace
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,7 +47,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_sophos
 pricing:
-- billing_type: tag_count
+- billing_type: recuento_etiquetas
   includes_assets: true
   metric: datadog.marketplace.rapdev.sophos
   product_id: sophos
@@ -83,7 +83,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -97,8 +97,8 @@ La integración de Sophos monitoriza el estado general de los endpoints gestiona
 ### Dashboards
 1. Dashboard de RapDev Sophos
 
-## Agent
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
+## Ayuda
+Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Soporte: support@rapdev.io
 - Ventas: sales@rapdev.io
@@ -116,4 +116,4 @@ Hecho con ❤️ en Boston
 [4]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">adquiere esta aplicación en el Marketplace</a>.

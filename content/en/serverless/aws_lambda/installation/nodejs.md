@@ -27,11 +27,15 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>sendDistributionMetric</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/loyalty-point-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
+
+To use remote instrumentation, see See [Remote instrumentation for AWS Lambda][11].
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -273,7 +277,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.1.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -283,8 +287,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = 81
+  datadog_node_layer_version = 125
 
   # aws_lambda_function arguments
 }
@@ -309,8 +313,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = 81
+  datadog_node_layer_version = 125
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -434,7 +438,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
@@ -501,3 +505,4 @@ exports.handler = async (event) => {
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[11]: /serverless/aws_lambda/remote_instrumentation

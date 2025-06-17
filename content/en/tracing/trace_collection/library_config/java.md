@@ -140,7 +140,8 @@ A list of method annotations to treat as `@Trace`.
 : **Environment Variable**: `DD_TRACE_METHODS`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
-List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
+List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls.
+`dd.trace.methods` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][22] product instead.
 
 `dd.trace.classes.exclude`
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
@@ -314,7 +315,7 @@ When set to `true` db spans get assigned the remote database hostname as the ser
 `dd.appsec.enabled`
 : **Environment Variable**: `DD_APPSEC_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+When `true`, enables Datadog App and API Protection Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
 For more information, see [Enabling AAP for Java][19].
 
 ### Errors
@@ -447,10 +448,31 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
-`trace.cassandra.keyspace.statement.extraction.enabled`
+`dd.trace.cassandra.keyspace.statement.extraction.enabled`
 : **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
 **Default**: `false`<br>
 By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
+
+`dd.trace.websocket.messages.enabled`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_ENABLED` <br>
+**Default**: `false`<br>
+Enables tracing sent and received websocket messages (text and binary) and connection close events.
+
+`dd.trace.websocket.messages.inherit.sampling`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING` <br>
+**Default**: `true`<br>
+By default, websocket messages preserve the same sampling as the span captured during the handshake. This ensures that, if a handshake span has been sampled, all the messages in its session will also be sampled. To disable that behavior and sample each websocket message independently, set this configuration to `false`.
+
+`dd.trace.websocket.messages.separate.traces`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_SEPARATE_TRACES` <br>
+**Default**: `true`<br>
+By default, each received message generates a new trace. The handshake is linked to it as a span link. Setting this parameter to `false` causes all the spans captured during the session to be in the same trace.
+
+`dd.trace.websocket.tag.session.id`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_TAG_SESSION_ID` <br>
+**Default**: `false`<br>
+When set to `true`, the websocket spans have the tag `websocket.session.id` containing the session ID when available.
+
 
 **Note**:
 
@@ -460,6 +482,13 @@ By default, the keyspace is extracted only if it is configured during session cr
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+
+### UDS
+
+`dd.jdk.socket.enabled`
+: **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
+**Default**: `false`<br>
+Enable native JDK support for unix domain sockets.
 
 ### Examples
 
@@ -619,6 +648,7 @@ Deprecated since version 1.9.0
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
-[19]: /security/application_security/threats/setup/threat_detection/java/
+[19]: /security/application_security/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces
+[22]: /profiler/
