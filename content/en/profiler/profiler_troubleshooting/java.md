@@ -172,7 +172,7 @@ The Continuous Profiler may encounter errors related to the use of the system `/
 - Inability to load native .so libraries
 - Accumulation of stale temp files across JVM restarts or crashes
 
-Below are the basic troubleshooting steps for resolving the issue:
+Below are basic troubleshooting steps for resolving those issues:
 
 - Use dd-trace-java Version 1.47.0 or later
   Starting with v1.47.0, the profiler uses PID-specific subdirectories inside the configured temp directory. This reduces clutter and potential conflicts from orphaned files when JVM processes exit unexpectedly.
