@@ -35,7 +35,7 @@
 "manifest_version": "2.0.0"
 "name": "servicenow"
 "public_title": "ServiceNow"
-"short_description": "Crea incidentes de ServiceNow, rellena los CI de la CMDB y enriquece recursos, logs y eventos de Datadog con datos de la CMDB".
+"short_description": "Crea incidentes de ServiceNow, rellena los CI de la CMDB y enriquece recursos, logs y eventos de Datadog con datos de la CMDB"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -49,21 +49,21 @@
   - "Category::Event Management"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Crea incidentes de ServiceNow, rellena los CI de la CMDB y enriquece recursos, logs y eventos de Datadog con datos de la CMDB".
+  "description": "Crea incidentes de ServiceNow, rellena los CI de la CMDB y enriquece recursos, logs y eventos de Datadog con datos de la CMDB"
   "media":
-  - "caption": "Enriquece tu host Datadog con metadatos de la CMDB".
+  - "caption": "Enriquece tu host Datadog con metadatos de la CMDB"
     "image_url": "images/carousel_1.png"
     "media_type": "imagen"
-  - "caption": "Enriquece tus dispositivos de red Datadog con metadatos de la CMDB".
+  - "caption": "Enriquece tus dispositivos de red Datadog con metadatos de la CMDB"
     "image_url": "images/carousel_2.png"
     "media_type": "imagen"
-  - "caption": "Enriquece logs y eventos con tablas de referencia de la CMDB".
+  - "caption": "Enriquece logs y eventos con tablas de referencia de la CMDB"
     "image_url": "images/carousel_3.png"
     "media_type": "imagen"
-  - "caption": "Crea tickets de ServiceNow a partir de alertas de Datadog".
+  - "caption": "Crea tickets de ServiceNow a partir de alertas de Datadog"
     "image_url": "images/carousel_4.png"
     "media_type": "imagen"
-  - "caption": "Crea incidentes de ServiceNow con Datadog Incident Management".
+  - "caption": "Crea incidentes de ServiceNow con Datadog Incident Management"
     "image_url": "images/carousel_5.png"
     "media_type": "imagen"
   "overview": "README.md#Overview"

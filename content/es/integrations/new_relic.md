@@ -36,7 +36,7 @@
 "manifest_version": "2.0.0"
 "name": "new_relic"
 "public_title": "New Relic"
-"short_description": "New Relic es un servicio de monitorización de aplicación para aplicaciones web y móviles".
+"short_description": "New Relic es un servicio de monitorización de aplicación para aplicaciones web y móviles"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -45,7 +45,7 @@
   - "Category::Event Management"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "New Relic es un servicio de monitorización de aplicación para aplicaciones web y móviles".
+  "description": "New Relic es un servicio de monitorización de aplicación para aplicaciones web y móviles"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
