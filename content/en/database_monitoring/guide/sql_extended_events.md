@@ -21,7 +21,7 @@ This is useful for:
 - Debugging app behavior
 - Auditing unexpected errors or timeouts
 
-**Note:** The setup instructions below configure the event sessions and Agent configurations to capture event data, but at this stage, deobfuscated query and query error event data are not yet visible in Datadog.
+**Note:** The setup instructions below configure the required event sessions and Agent settings to capture deobfuscated query and error event data. However, this data is not yet visible in Datadog, as support for surfacing this data is still under development.
 
 ## Before you begin
 
