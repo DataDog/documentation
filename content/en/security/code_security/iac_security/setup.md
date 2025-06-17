@@ -1,5 +1,5 @@
 ---
-title: Set up Infrastructure as Code Security
+title: Set up IaC Security
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/
 further_reading:

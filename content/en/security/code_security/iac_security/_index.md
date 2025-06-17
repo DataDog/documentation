@@ -15,7 +15,7 @@ further_reading:
   Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-{{< img src="/code_security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
+{{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 Infrastructure as Code (IaC) Security automatically analyzes your Terraform files for security misconfigurations. Findings appear in the Code Security Vulnerabilities tab, where you can group, filter, and triage them by severity, status, and other attributes. For each finding, Datadog provides detailed remediation guidance and a code snippet showing the affected resource and file location.
 
