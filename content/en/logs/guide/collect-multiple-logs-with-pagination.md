@@ -32,7 +32,7 @@ You can retrieve logs from your Datadog site by sending a POST request to the ap
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
-curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list"
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
