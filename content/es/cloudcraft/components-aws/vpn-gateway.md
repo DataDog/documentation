@@ -5,7 +5,7 @@ title: Componente de VPN Gateway
 
 Utiliza el componente VPN Gateway para representar conexiones de VPN de sitio a sitio en tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/vpn-gateway/component-vpn-gateway-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS "VPN Gateway." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/vpn-gateway/component-vpn-gateway-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS VPN Gateway." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 
