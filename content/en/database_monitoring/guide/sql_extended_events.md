@@ -108,6 +108,7 @@ WITH (
     MAX_DISPATCH_LATENCY = 30 SECONDS,
     STARTUP_STATE = ON
 );
+
 ALTER EVENT SESSION datadog_query_completions ON SERVER STATE = START;
 GO
 ```
@@ -334,7 +335,7 @@ You can customize the Extended Events sessions to better fit your specific needs
   - [Increasing duration thresholds](#query-duration-threshold)
   - [Adding more specific filters](#event-filtering)
   - Disabling one or both sessions during peak load periods by running:
-  ```sql
+```sql
 IF EXISTS (
     SELECT * FROM sys.server_event_sessions WHERE name = 'datadog_query_completions'
 )
@@ -347,25 +348,10 @@ IF EXISTS (
 GO
 ```
 
-
 **Azure-Specific Considerations**
 - In Azure SQL Database, resources are more constrained
 - [Consider using more restrictive filtering if you're on lower-tier service levels](#event-filtering)
 - For elastic pools, monitor performance impact across all databases
-
-2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
-```yaml
-  xe_collection:
-    query_completions:
-      enabled: true
-    query_errors:
-      enabled: true
-```
-In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`.
-```yaml
-  collect_raw_query_statement:
-    enabled: true
-```
 
 ## Further reading
 
