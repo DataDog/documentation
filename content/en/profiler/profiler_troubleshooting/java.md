@@ -169,7 +169,7 @@ Override templates let you specify profiling properties to override. However, th
 The Continuous Profiler may encounter errors related to the use of the system `/tmp` directory, particularly in environments with strict security or limited execution permissions (for example, Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
 
 - Profiling startup failures
-- Inability to load native .so libraries
+- Inability to load native `.so` libraries
 - Accumulation of stale temp files across JVM restarts or crashes
 
 Below are basic troubleshooting steps for resolving those issues:
