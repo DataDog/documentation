@@ -1665,214 +1665,219 @@ menu:
       identifier: alerting
       parent: platform_heading
       weight: 60000
+    - name: Draft Monitors
+      url: monitors/draft/
+      parent: alerting
+      identifier: monitor_draft
+      weight: 1
     - name: Configure Monitors
       url: monitors/configuration/
       parent: alerting
       identifier: monitor_configuration
-      weight: 1
+      weight: 2
     - name: Monitor Templates
       url: monitors/templates/
       parent: alerting
       identifier: monitor_templates
-      weight: 2
+      weight: 3
     - name: Monitor Types
       url: monitors/types/
       parent: alerting
       identifier: monitor_types
-      weight: 3
+      weight: 4
     - name: Host
       url: monitors/types/host/
       parent: monitor_types
       identifier: monitor_types_host
-      weight: 301
+      weight: 401
     - name: Metric
       url: monitors/types/metric/
       parent: monitor_types
       identifier: monitor_types_metrics
-      weight: 202
+      weight: 402
     - name: Anomaly
       url: monitors/types/anomaly/
       parent: monitor_types
       identifier: monitor_types_anomaly
-      weight: 303
+      weight: 403
     - name: APM
       url: monitors/types/apm/
       parent: monitor_types
       identifier: monitor_types_apm
-      weight: 304
+      weight: 404
     - name: Audit Trail
       url: monitors/types/audit_trail/
       parent: monitor_types
       identifier: monitor_types_auditlogs
-      weight: 305
+      weight: 405
     - name: Change
       url: monitors/types/change-alert/
       parent: monitor_types
       identifier: monitor_types_change
-      weight: 306
+      weight: 406
     - name: CI/CD & Test
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
-      weight: 307
+      weight: 407
     - name: Cloud Cost
       url: monitors/types/cloud_cost/
       parent: monitor_types
       identifier: monitor_types_cloud_cost
-      weight: 308
+      weight: 408
     - name: Composite
       url: monitors/types/composite/
       parent: monitor_types
       identifier: monitor_types_composite
-      weight: 309
+      weight: 409
     - name: Database Monitoring
       url: monitors/types/database_monitoring/
       parent: monitor_types
       identifier: monitor_types_database_monitoring
-      weight: 310
+      weight: 410
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 311
+      weight: 411
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 312
+      weight: 412
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 313
+      weight: 413
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 314
+      weight: 414
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 315
+      weight: 415
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 316
+      weight: 416
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 317
+      weight: 417
     - name: Cloud Network Monitoring
       url: monitors/types/cloud_network_monitoring/
       parent: monitor_types
       identifier: monitor_types_cnm
-      weight: 318
+      weight: 418
     - name: NetFlow
       url: monitors/types/netflow/
       parent: monitor_types
       identifier: monitor_types_netflow
-      weight: 319
+      weight: 419
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 320
+      weight: 420
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 321
+      weight: 421
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 322
+      weight: 422
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 323
+      weight: 423
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 324
+      weight: 424
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 325
+      weight: 425
     - name: Notifications
       url: monitors/notify/
       parent: alerting
       identifier: monitors_notify
-      weight: 4
+      weight: 5
     - name: Notification Rules
       url: monitors/notify/notification_rules/
       parent: monitors_notify
       identifier: monitors_notify_notification_rules
-      weight: 401
+      weight: 501
     - name: Variables
       url: monitors/notify/variables/
       parent: monitors_notify
       identifier: monitors_notify_variables
-      weight: 402
+      weight: 502
     - name: Downtimes
       url: monitors/downtimes/
       parent: alerting
       identifier: monitors_notify_downtimes
-      weight: 5
+      weight: 6
     - name: Examples
       url: monitors/downtimes/examples
       parent: monitors_notify_downtimes
       identifier: monitors_notify_downtimes_examples
-      weight: 501
+      weight: 601
     - name: Manage Monitors
       url: monitors/manage/
       parent: alerting
       identifier: monitors_manage
-      weight: 6
+      weight: 7
     - name: Search Monitors
       url: monitors/manage/search/
       parent: monitors_manage
       identifier: monitors_manage_search
-      weight: 601
+      weight: 701
     - name: Check Summary
       url: monitors/manage/check_summary/
       parent: monitors_manage
       identifier: monitors_check_summary
-      weight: 603
+      weight: 702
     - name: Monitor Status
       url: monitors/status/status_page
       parent: alerting
       identifier: monitors_status
-      weight: 7
+      weight: 8
     - name: Status Graphs
       url: monitors/status/graphs
       parent: monitors_status
       identifier: monitors_status_graphs
-      weight: 701
+      weight: 801
     - name: Status Events
       url: monitors/status/events
       parent: monitors_status
       identifier: monitors_status_events
-      weight: 702
+      weight: 802
     - name: Monitor Settings
       url: monitors/settings/
-      weight: 8
+      weight: 9
       parent: alerting
       identifier: monitor_settings
     - name: Monitor Quality
       url: monitors/quality/
-      weight: 9
+      weight: 10
       parent: alerting
       identifier: monitor_quality
     - name: Guides
       url: monitors/guide/
-      weight: 10
+      weight: 11
       parent: alerting
       identifier: alerting_guide
     - name: Metrics
@@ -3999,17 +4004,17 @@ menu:
       parent: endpoint_observability
       weight: 1003
     - name: Dynamic Instrumentation
-      url: dynamic_instrumentation/
+      url: tracing/dynamic_instrumentation/
       identifier: dyninst
       parent: tracing
       weight: 11
     - name: Enabling
-      url: dynamic_instrumentation/enabling
+      url: tracing/dynamic_instrumentation/enabling
       identifier: dyninst_enable
       parent: dyninst
       weight: 1101
     - name: Expression Language
-      url: dynamic_instrumentation/expression-language
+      url: tracing/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
       weight: 1102
@@ -6724,27 +6729,7 @@ menu:
       parent: application_security
       identifier: appsec_threats_management_setup
       weight: 3
-    - name: Library Compatibility
-      url: security/application_security/setup/compatibility/
-      parent: appsec_threats_management_setup
-      identifier: appsec_compat_threats_mgmt
-      weight: 1
-    - name: Using Datadog Tracing Libraries
-      url: security/application_security/setup/threat_detection/
-      parent: appsec_threats_management_setup
-      identifier: appsec_threats_setup_threat_detection_setup
-      weight: 2
-    - name: App and API Protection for Serverless
-      url: security/application_security/serverless/
-      parent: appsec_threats_management_setup
-      identifier: asm_serverless
-      weight: 4
-    - name: Library Compatibility
-      url: security/application_security/serverless/compatibility/
-      parent: asm_serverless
-      identifier: asm_serverless_compat
-      weight: 1
-    - name: Attack Summary
+    - name: Overview
       url: security/application_security/overview
       parent: application_security
       identifier: application_security_overview

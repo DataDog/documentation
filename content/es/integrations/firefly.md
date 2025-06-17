@@ -30,14 +30,14 @@ short_description: Actualiza tu nube
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Configuración y despliegue
-  - Categoría::Herramientas de desarrollo
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
