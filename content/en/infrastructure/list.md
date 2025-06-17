@@ -97,6 +97,12 @@ To enable or disable the configuration view:
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
 
+#### Collector Configuration
+
+The OpenTelemetry Collector can send its configuration to Datadog to be displayed in the `Collector Configuration` section of the host detail panel.
+
+The Datadog Extension must be installed and configured according to [instructions in the component's README][12].
+
 ### Export
 
 For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
@@ -153,3 +159,4 @@ for host in infra['rows']:
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
