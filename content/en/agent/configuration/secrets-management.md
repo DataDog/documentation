@@ -334,6 +334,10 @@ By default the Agent randomly spreads its first refresh within the specified `se
 means that it resolves the API key at startup, then refreshes it within the first interval and every interval after that.
 This avoids having a fleet of Agents refreshing their API/APP key at the same time.
 
+To prevent any downtime, do not invalidate the old API and APP key before your entire fleet of Agents has the time to
+pull the updated keys from your secret management solution. You can track usage of your API keys in the [Fleet
+Management](https://app.datadoghq.com/fleet) page.
+
 You can disable this behavior by setting:
 ```yaml
 secret_refresh_scatter: false
