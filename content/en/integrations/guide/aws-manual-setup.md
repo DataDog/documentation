@@ -84,6 +84,9 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="ap1" >}}
 3. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+{{< site-region region="ap2" >}}
+3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< /site-region >}}
 {{< site-region region="gov" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
