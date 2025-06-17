@@ -113,6 +113,18 @@ To view additional information about the service entry spans for each node, hove
 {{% /tab %}}
 {{< /tabs >}}
 
+### Trace preview
+When a trace size exceeds 100MB, it cannot be fully visualized using the default trace side panel. In such cases, Trace Preview mode is enabled. This mode returns only the most critical spans to help you continue your investigation. These include:
+
+- Service entry level spans
+- Error spans
+- Long-running spans
+- Spans linked to other spans or traces
+
+The available visualization options for large traces are limited to the Waterfall and Map views. In Preview mode, the Waterfall view provides additional option to fetch spans that are not included by default. These spans are grouped and represented using number pills. Each pill displays the total number of spans available in that group. You can click on a number pill to expand and view all spans within that group.
+
+{{< img src="tracing/visualization/trace/trace-preview.png" alt="Trace preview" style="width:100%;">}}
+
 ## Span search
 
 In the Waterfall and Flamegraph visualizations, the search option allows you to find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
