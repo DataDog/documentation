@@ -2227,6 +2227,14 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    AddMemberTeamRequest:
+      description: Request to add a member team to super team's hierarchy
+      properties:
+        data:
+          $ref: '#/components/schemas/MemberTeam'
+      required:
+      - data
+      type: object
     Advisory:
       description: Advisory.
       properties:
@@ -11095,6 +11103,17 @@ components:
       - version
       - name
       type: object
+    DORACustomTags:
+      description: A list of user-defined tags. The tags must follow the `key:value`
+        pattern. Up to 100 may be added per event.
+      example:
+      - language:java
+      - department:engineering
+      items:
+        description: Tags in the form of `key:value`.
+        type: string
+      nullable: true
+      type: array
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -11106,6 +11125,8 @@ components:
     DORADeploymentRequestAttributes:
       description: Attributes to create a DORA deployment event.
       properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
         env:
           description: Environment name to where the service was deployed.
           example: staging
@@ -11208,6 +11229,8 @@ components:
     DORAFailureRequestAttributes:
       description: Attributes to create a DORA failure event.
       properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
         env:
           description: Environment name that was impacted by the failure.
           example: staging
@@ -21658,6 +21681,30 @@ components:
       - ms_channel_name
       - redirect_url
       type: object
+    MemberTeam:
+      description: A member team
+      properties:
+        id:
+          description: The member team's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/MemberTeamType'
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
+    MemberTeamType:
+      default: member_teams
+      description: Member team type
+      enum:
+      - member_teams
+      example: member_teams
+      type: string
+      x-enum-varnames:
+      - MEMBER_TEAMS
     Metadata:
       description: The metadata related to this request.
       properties:
@@ -64545,6 +64592,166 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/{super_team_id}/member_teams:
+    get:
+      description: Get all member teams.
+      operationId: ListMemberTeams
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: List of fields that need to be fetched.
+        explode: false
+        in: query
+        name: fields[team]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/TeamsField'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get all member teams
+      tags:
+      - Teams
+      x-menu-order: 21
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Add a member team.
+
+        Adds the team given by the `id` in the body as a member team of the super
+        team.'
+      operationId: AddMemberTeam
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMemberTeamRequest'
+        required: true
+      responses:
+        '204':
+          description: Added
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Add a member team
+      tags:
+      - Teams
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        operationId: RemoveMemberTeam
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/team/{super_team_id}/member_teams/{member_team_id}:
+    delete:
+      description: Remove a super team's member team identified by `member_team_id`.
+      operationId: RemoveMemberTeam
+      parameters:
+      - description: None
+        in: path
+        name: super_team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: member_team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Remove a member team
+      tags:
+      - Teams
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
@@ -66797,7 +67004,7 @@ paths:
       summary: Get user memberships
       tags:
       - Teams
-      x-menu-order: 1
+      x-menu-order: 19
       x-permission:
         operator: OR
         permissions:

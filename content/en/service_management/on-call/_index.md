@@ -12,10 +12,6 @@ cascade:
         rank: 70
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to routing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
@@ -47,7 +43,7 @@ A schedule defines specific times when Team members are assigned to respond to P
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty or Opsgenie.{{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/pages">}}<u>Send a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}

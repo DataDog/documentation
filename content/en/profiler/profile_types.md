@@ -216,6 +216,18 @@ Live Heap (in beta, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
 
+Outgoing HTTP requests (in Timeline) (in beta v3.19+)
+: Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
+_Requires: .NET 7+_
+
+Thread lifetime (in Timeline) (v3.19+)
+: Start and end of threads life to easily detect ThreadPool starvation and short lived threads.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
+
+Garbage Collector CPU consumption (v3.19+)
+: The time garbage collector's threads spent running on the CPU.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
+
 Note: **Allocations** and **Live Heap** profiling are in beta until .NET 10, where required better statistical allocation sampling will be available.
 
 

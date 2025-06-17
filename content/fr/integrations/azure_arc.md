@@ -1,31 +1,61 @@
 ---
-aliases: []
+app_id: azure-arc
+app_uuid: 0afa2450-f495-4e18-bdd7-c1cd43e3aebf
+assets:
+  dashboards:
+    azure_arc: assets/dashboards/azure_arc.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.arc_vm.count
+      metadata_path: metadata.csv
+      prefix: azure.arc_
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 801
+    source_type_name: Arc azur
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Arc.
-doc_link: https://docs.datadoghq.com/integrations/azure_arc/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-arc-integration/
-  tag: Blog
-  text: Surveillez votre infrastructure hybride Azure Arc avec Datadog
 git_integration_title: azure_arc
-has_logo: true
 integration_id: azure-arc
-integration_title: Microsoft Azure Arc
+integration_title: Arc azur
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_arc
-public_title: Intégration Datadog/Microsoft Azure Arc
+public_title: Arc azur
 short_description: Surveillez des métriques clés d'Azure Arc.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Arc.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/azure-arc-integration/
+  support: README.md#Support
+  title: Arc azur
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Arc est un pont qui étend la plateforme Azure pour vous permettre de créer des applications et des services exécutables dans des centres de données, en périphérie et dans des environnements multicloud.
@@ -65,9 +95,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-{{< partial name="whats-next/whats-next.html" >}}
+Documentation, liens et articles supplémentaires utiles :
+
+[Monitor votre infrastructure hybride Azure Arc avec Datadog][5]
 
 [1]: https://docs.datadoghq.com/fr/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
 [2]: https://docs.datadoghq.com/fr/integrations/azure/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_arc/azure_arc_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help/
+[5]: https://www.datadoghq.com/blog/azure-arc-integration/
