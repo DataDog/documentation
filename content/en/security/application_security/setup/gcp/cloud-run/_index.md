@@ -1,8 +1,6 @@
 ---
 title: Setup App and API Protection on Google Cloud Run functions
 disable_sidebar: true
-aliases:
-  - /security/application_security/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
