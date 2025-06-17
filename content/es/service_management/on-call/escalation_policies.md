@@ -6,10 +6,6 @@ further_reading:
 title: Políticas de escalado
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 En Datadog On-Call, las políticas de escalado garantizan que los llamados se traten con prontitud. Los llamados se escalan a través de pasos predefinidos, a menos que se acuse recibo de ellos en los plazos establecidos.
 
 Datadog crea una política de escalado predeterminada cuando [incorporas un equipo a On-Call][1].
