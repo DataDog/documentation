@@ -2341,6 +2341,20 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "ListMemberTeams": {
+    "description": "Get all member teams.",
+    "summary": "Get all member teams"
+  },
+  "AddMemberTeam": {
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "summary": "Add a member team",
+    "request_description": "",
+    "request_schema_description": "Request to add a member team to super team's hierarchy"
+  },
+  "RemoveMemberTeam": {
+    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "summary": "Remove a member team"
+  },
   "DeleteTeam": {
     "description": "Remove a team using the team's `id`.",
     "summary": "Remove a team"
