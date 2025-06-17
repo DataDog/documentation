@@ -152,7 +152,62 @@ Log4j 2 includes a JSON layout.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Add the JSON layout dependencies to your `pom.xml`. For example:
+2. Add the JSON layout template file (e.g. `MyLayout.json`) in the `src/main/resources` directory of your Java project. For example:
+    ```json
+    {
+       "timestamp":{
+          "$resolver":"timestamp",
+          "pattern":{
+             "format":"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+             "timeZone":"UTC"
+          }
+       },
+       "status":{
+          "$resolver":"level",
+          "field":"name"
+       },
+       "thread_name":{
+          "$resolver":"thread",
+          "field":"name"
+       },
+       "logger_name":{
+          "$resolver":"logger",
+          "field":"name"
+       },
+       "message":{
+          "$resolver":"message",
+          "stringified":true
+       },
+       "exception_class":{
+          "$resolver":"exception",
+          "field":"className"
+       },
+       "exception_message":{
+          "$resolver":"exception",
+          "field":"message"
+       },
+       "stack_trace":{
+          "$resolver":"exception",
+          "field":"stackTrace",
+          "stackTrace":{
+             "stringified":true
+          }
+       },
+       "host":"${hostName}",
+       "service":"${env:DD_SERVICE}",
+       "version":"${env:DD_VERSION}",
+       "dd.trace_id":{
+          "$resolver":"mdc",
+          "key":"dd.trace_id"
+       },
+       "dd.span_id":{
+          "$resolver":"mdc",
+          "key":"dd.span_id"
+       }
+    }
+    ```
+
+3. Add the JSON layout dependencies to your `pom.xml`. For example:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -243,6 +298,21 @@ writer.field.dd.env        = {context: dd.env}
 #### Inject trace IDs into your logs
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
+
+If you are _not_ correlating logs and traces, **remove** the MDC placeholders (`dd.trace_id` and `dd.span_id`) from the log patterns and/or configurations in the above examples.
+
+For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
+
+```json
+"dd.trace_id":{
+   "$resolver":"mdc",
+   "key":"dd.trace_id"
+},
+"dd.span_id":{
+   "$resolver":"mdc",
+   "key":"dd.span_id"
+}
+```
 
 ### Raw format
 
