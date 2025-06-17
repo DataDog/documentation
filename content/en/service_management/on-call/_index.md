@@ -43,7 +43,7 @@ A schedule defines specific times when Team members are assigned to respond to P
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty or Opsgenie.{{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/pages">}}<u>Send a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
