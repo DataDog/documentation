@@ -8,6 +8,7 @@ further_reading:
   text: データ転送料金を削減しながら Datadog にログを送信する方法
 site_support_id: amazon_event_bridge
 title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
+site_support_id: amazon_event_bridge
 ---
 
 Amazon EventBridge は、イベント駆動型アプリケーションの構築を可能にするサーバーレスイベントバスです。 EventBridge は AWS サービスと統合可能ですが、API 宛先機能を利用すると、API を使用して AWS 外からのデータをプッシュ/プルできます。このガイドでは、EventBridge から Datadog へイベントおよびログを送信する方法を解説します。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーション文書][1]をご参照ください。
