@@ -5,6 +5,13 @@ aliases:
   - /agent/guide/upgrade-between-agent-minor-versions
   - /agent/versions/upgrade_between_agent_minor_versions/
   - /agent/guide/upgrade
+further_reading:
+  - link: "/agent/troubleshooting/"
+    tag: "Documentation"
+    text: "Agent Troubleshooting"
+  - link: "/agent/basic_agent_usage/"
+    tag: "Documentation"
+    text: "Basic Agent Usage"
 ---
 
 ## Overview
