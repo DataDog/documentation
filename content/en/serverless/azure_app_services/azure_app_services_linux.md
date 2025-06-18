@@ -103,12 +103,13 @@ az login
 
 Then, run the following command to set up the sidecar container:
 
-
-{{< code-block lang="shell" >}}
+```bash
 export DD_API_KEY=<DATADOG_API_KEY>
-export DD_SITE={{< region-param key="dd_site" >}}
+export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+```
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 

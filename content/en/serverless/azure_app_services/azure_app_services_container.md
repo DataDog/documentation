@@ -207,11 +207,13 @@ az login
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```bash
 export DD_API_KEY=<DATADOG_API_KEY>
-export DD_SITE={{< region-param key="dd_site" >}}
+export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+```
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
 **Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
 
