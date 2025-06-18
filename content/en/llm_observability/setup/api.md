@@ -193,6 +193,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | duration  [*required*]     | float64           | The span's duration in nanoseconds.          |
 | meta [*required*]         | [Meta](#meta)              | The core content relative to the span.       |
 | status      | string            | Error status (`"ok"` or `"error"`). Defaults to `"ok"`.      |
+| apm_trace_id | string      | The ID of the associated APM trace. Defaults to to match the `trace_id` field.   |
 | metrics     | [Metrics](#metrics)           | Datadog metrics to collect.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |
