@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
+Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm or The Operator.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
