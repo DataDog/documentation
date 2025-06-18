@@ -7,7 +7,7 @@ aliases:
 
 A few tools control access and authentication for apps and their components.
 
-## App Execution Identity
+## App execution identity
 
 A published app runs using the Datadog user identity of its author. In edit mode, it runs as the current editor.
 
