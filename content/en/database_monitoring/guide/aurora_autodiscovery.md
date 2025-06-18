@@ -59,6 +59,8 @@ By default, the listener discovers all Aurora clusters in the account and region
 
 You must apply these tags to the DB cluster (Role: `Regional cluster`). For more information on tagging RDS resources, see the [AWS documentation][7].
 
+If you configure `tags` as an empty array, Autodiscovery will discovery all clusters in the account and region.
+
 ### Configure the Datadog Agent
 
 Autodiscovery uses an Agent service listener, which discovers all database host endpoints in an Aurora cluster and forwards discovered endpoints to the existing Agent check scheduling pipeline. You can configure the listener in the `datadog.yaml` file:
