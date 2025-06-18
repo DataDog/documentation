@@ -7,6 +7,10 @@ aliases:
 
 A few tools control access and authentication for apps and their components.
 
+## App Execution Identity
+
+A published app runs using the Datadog user identity of its author. In edit mode, it runs as the current editor.
+
 ## Action credentials
 
 Because app [actions][1] connect with external software systems, you may need to authenticate your Datadog account to a corresponding integration. An app can run successfully only if every action that requires authentication can verify the identity of your Datadog account.
