@@ -69,7 +69,7 @@ Looking at the individual graphs, you'll see the numbers align in the following 
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-This occurs because when a user appears multiple times during a rollup window, they appear once in the denominator but only once in the numerator. In this case, a user may be using both mobile and desktop. The following graph shows two offset graphs for a single user. The bottom graph indicates whether the user appeared on mobile during the 30-second or 5-minute interval, while the top graph indicates whether the user appeared at all.
+This occurs because when a user appears multiple times during a rollup window, they appear once in the denominator but multiple times in the numerator. In this case, a user may be using both mobile and desktop. The following graph shows two offset graphs for a single user. The bottom graph indicates whether the user appeared on mobile during the 30-second or 5-minute interval, while the top graph indicates whether the user appeared at all.
 
 Since the user appeared during most minutes, but only occasionally on mobile, they appear more often on mobile in longer time frames.
 
