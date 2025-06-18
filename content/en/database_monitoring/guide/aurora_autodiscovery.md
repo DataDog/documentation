@@ -95,6 +95,16 @@ database_monitoring:
         - "my-cluster-tag-key:value"
 ```
 
+To monitor all clusters in the account and region:
+
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      tags: []
+```
+
 The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
 
 ```yaml
@@ -211,7 +221,7 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%port%%                                 | The port of the Aurora instance                                                                                                               |
 | %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
-| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
+| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for the connection. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
