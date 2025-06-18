@@ -165,7 +165,7 @@ ALTER USER 'datadog'@'%' REQUIRE SSL;
 
 **Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
-4. Complete the Agent setup steps for your RDS ([Postgres][6], [MySQL][8]) or Aurora([Postgres][7], [MySQL][9]) instance.
+4. Complete the Agent setup steps for your RDS ([Postgres][6], [MySQL][8]) or Aurora ([Postgres][7], [MySQL][9]) instance.
 
 ### Enable IAM authentication for the Agent host in the same AWS account as the RDS instance
 
