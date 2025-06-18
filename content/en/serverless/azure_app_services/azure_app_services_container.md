@@ -213,6 +213,8 @@ export DD_SITE={{< region-param key="dd_site" >}}
 datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -w <app-service-name>
 ```
 
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
 
@@ -257,7 +259,7 @@ If you are setting up monitoring for a .NET application, configure the following
 | Variable name | Value |
 | ------------- | ----- |
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
-| `DD_TRACE_LOG_DIRECTORY` | `/home/Logfiles/dotnet` |
+| `DD_TRACE_LOG_DIRECTORY` | `/home/LogFiles/dotnet` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
 | `CORECLR_PROFILER` | `\{846F5F1C-F9AE-4B07-969E-05C26BC060D8\}` |
 | `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |
