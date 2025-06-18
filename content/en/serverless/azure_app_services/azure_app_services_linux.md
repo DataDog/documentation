@@ -97,14 +97,14 @@ First, install the [Datadog CLI][201] and [Azure CLI][202].
 
 Login to your Azure account using the Azure CLI:
 
-{{< code-block lang="bash" collapsible="false" >}}
+{{< code-block lang="shell" >}}
 az login
 {{< /code-block >}}
 
 Then, run the following command to set up the sidecar container:
 
 
-{{< code-block lang="bash" collapsible="false" >}}
+{{< code-block lang="shell" >}}
 export DATADOG_API_KEY=<DATADOG_API_KEY>
 export DD_SITE={{< region-param key="dd_site" >}}
 datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
