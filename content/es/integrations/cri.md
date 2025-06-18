@@ -63,7 +63,7 @@ tile:
 
 Este check monitoriza la interfaz de tiempo de ejecución de un contenedor
 
-## Configurar
+## Configuración
 
 ### Instalación
 

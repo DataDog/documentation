@@ -1,6 +1,6 @@
 ---
 categories:
-- クラウド
+- cloud
 - azure
 custom_kind: integration
 dependencies: []
