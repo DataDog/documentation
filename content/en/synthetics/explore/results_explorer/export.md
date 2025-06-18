@@ -14,7 +14,7 @@ further_reading:
 
 You can export the test runs table from the Results Explorer by clicking **Download as CSV**:
 
-{{< img src="continuous_testing/explorer/export_csv.png" alt="Export your test runs to CSV in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;"> }}
+{{< img src="continuous_testing/explorer/export_csv.png" alt="Export your test runs to CSV in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;" >}}
 
 Use this to generate raw test run data in bulk for debugging, reporting, and integrating with systems outside of Datadog. 
 
