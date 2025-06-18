@@ -68,7 +68,7 @@ build-cdocs:
 	@node ./local/bin/js/cdocs-build.js;
 
 # build .mdoc.md files, then watch for changes
-watch-cdocs: 
+watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
@@ -112,7 +112,7 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 
 # install the root level node modules
 node_modules: package.json yarn.lock
-	@yarn install --immutable
+	@yarn install
 
 # All the requirements for a full build
 dependencies: clean
