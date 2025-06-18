@@ -4884,6 +4884,54 @@ menu:
           - CreateActionConnection
         unstable: []
         order: 2
+    - name: Register a new App Key
+      url: '#register-a-new-app-key'
+      identifier: action-connection-register-a-new-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterAppKey
+        unstable: []
+        order: 5
+    - name: Get an existing App Key Registration
+      url: '#get-an-existing-app-key-registration'
+      identifier: action-connection-get-an-existing-app-key-registration
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAppKeyRegistration
+        unstable: []
+        order: 8
+    - name: Unregister an App Key
+      url: '#unregister-an-app-key'
+      identifier: action-connection-unregister-an-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnregisterAppKey
+        unstable: []
+        order: 7
+    - name: List App Key Registrations
+      url: '#list-app-key-registrations'
+      identifier: action-connection-list-app-key-registrations
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppKeyRegistrations
+        unstable: []
+        order: 6
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
