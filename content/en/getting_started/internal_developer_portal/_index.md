@@ -4,7 +4,10 @@ aliases:
   - /getting_started/service_catalog
   - /getting_started/software_catalog/
 further_reading:
-    - link: '/software_catalog/'
+    - link: '/internal_developer_portal'
+      tag: 'Documentation'
+      text: 'Internal Developer Portal'
+    - link: '/internal_developer_portal/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
     - link: 'https://learn.datadoghq.com/courses/managing-service-catalog'
@@ -13,15 +16,21 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/'
       tag: 'Blog'
       text: 'Simplify microservice governance with the Datadog Service Catalog'
-    - link: '/software_catalog/troubleshooting'
+    - link: '/internal_developer_portal/scorecards'
       tag: 'Documentation'
-      text: 'Troubleshooting'
-    - link: '/software_catalog/scorecards'
+      text: 'Scorecards'
+    - link: '/internal_developer_portal/self_service_actions'
       tag: 'Documentation'
-      text: 'Service Scorecards'
+      text: 'Self-Service Actions'
+    - link: '/internal_developer_portal/eng_reports'
+      tag: 'Documentation'
+      text: 'Engineering Reports'
+    - link: '/internal_developer_portal/overview_pages'
+      tag: 'Documentation'
+      text: 'Overview Pages'
 ---
 
-{{< img src="/getting_started/software_catalog/overview_image.jpeg" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}
+{{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
 
 ## Overview
 
