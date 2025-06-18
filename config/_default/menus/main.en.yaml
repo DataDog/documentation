@@ -3588,45 +3588,55 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
       weight: 4
+    - name: Planning
+      url: cloud_cost_management/planning
+      parent: cloud_cost
+      identifier: cloud_cost_planning
+      weight: 5
+    - name: Budgets
+      url: cloud_cost_management/planning/budgets
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_budgets
+      weight: 501
+    - name: Commitment Programs
+      url: cloud_cost_management/planning/commitment_programs
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_commitment_programs
+      weight: 502
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 5
+      weight: 6
     - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
-      weight: 6
+      weight: 7
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
-      weight: 7
+      weight: 8
     - name: Reports
       url: /cloud_cost_management/reports
       parent: cloud_cost
       identifier: cloud_cost_reports
-      weight: 8
+      weight: 9
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 9
+      weight: 10
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 901
+      weight: 1001
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 10
-    - name: Budgets
-      url: /cloud_cost_management/budgets
-      parent: cloud_cost
-      identifier: cloud_cost_budgets
       weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
