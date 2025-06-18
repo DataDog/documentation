@@ -94,7 +94,7 @@ Exploit Prevention leverages Runtime Application Self-Protection (RASP) technolo
 
 For library compatibility, see [Exploit Prevention][13].
 
-In addition to detecting malicious patterns in the request, Exploit Prevention differs from In-App WAF by tracking the actions performed by the application (SQL query executed, files accessed, etc.). Exploit Prevention is able to determine if user input modified the SQL query or restricted a file detrimentally and block it. 
+In addition to detecting malicious patterns in the request, Exploit Prevention differs from In-App WAF by tracking the actions performed by the application (SQL query executed, files accessed, and so on). Exploit Prevention is able to determine if user input modified the SQL query or restricted a file detrimentally, and block it. 
 
 For example, in a SQL injection attack, the goal of the attacker is to take control of the SQL query and change its meaning. Exploit Prevention parses the SQL query before execution and checks for any user parameter in the query. If one is present, Exploit Prevention checks if the SQL parser interpreted the parameter as multiple SQL tokens (changing the meaning of the SQL query). In that case, Exploit Prevention flags the query as injected.
 
