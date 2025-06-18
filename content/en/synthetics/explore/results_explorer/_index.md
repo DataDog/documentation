@@ -79,7 +79,7 @@ For more information about test batches, see [Search Test Batches][4].
 
 ## Export
 
-The Results Explorer supports [exporting test runs to CSV][9], enabling bulk access to raw test run data for debugging, reporting, and integration with external systems.
+You can [export test runs to CSV][9] from the Results Explorer for debugging, reporting, and integration with external systems.
 
 You can also save your Results Explorer configuration as a [saved view][10] to quickly revisit it during future investigations.
 
