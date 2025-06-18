@@ -32,7 +32,7 @@ Navigate the Commitment Programs page and take action.
 2. **Review the KPIs** in the [commitments overview](#commitments-overview) section.
 3. **Use filters** to focus on specific accounts, regions, or services.
 4. **Explore the [costs overview](#costs-overview)** to analyze utilization, coverage, and expiring commitments.
-5. **Review expiration dates** and renewal recommendations.
+5. **Review expiration dates and renewal recommendations in the [Commitments Explorer](#commitments-explorer)**.
 6. **Take action**. Based on the insights from the Commitment Programs page, you can:
 
    - Adjust workloads to make better use of your existing commitments and avoid extra on-demand charges.
@@ -46,10 +46,18 @@ The commitments overview section is where you can review the following Key Perfo
 
 {{< img src="cloud_cost/planning/commitments-overview.png" alt="Dashboard summarizing cloud commitment KPIs, providing a quick overview of savings performance and highlights areas needing attention." style="width:100%;" >}}
 
-- **Effective Savings Rate (ESR):** The percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments. _Example: Coverage is 90% but ESR is 65%—you may have underutilized commitments dragging down your savings._
-- **Absolute Savings:** The total dollar amount saved by using commitment programs versus on-demand rates. _Example: You spent $10,000 on cloud services last month, but would have spent $14,000 at on-demand rates, so your absolute savings is $4,000._
-- **Coverage:** The proportion of your usage protected by a discount program (such as Reserved Instances, Savings Plans, or {{< tooltip text="Committed Use Contracts" tooltip="Agreements with cloud providers to use a certain amount of resources for a discounted rate over a set period." >}}). _Example: If EC2 compute coverage is 50%, half of your usage is on-demand. Increasing coverage to 80% could reduce your bill._
-- **Utilization:** How much of your purchased commitments are actually being used. _Example: If a 1-year GCP Committed Use Contract is only 70% utilized, 30% is going unused and may need adjustment._
+- **Effective Savings Rate (ESR):** The percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments.
+
+  _Example: Coverage is 90% but ESR is 65%—you may have underutilized commitments dragging down your savings._
+- **Absolute Savings:** The total dollar amount saved by using commitment programs versus on-demand rates.
+
+  _Example: You spent $10,000 on cloud services last month, but would have spent $14,000 at on-demand rates, so your absolute savings is $4,000._
+- **Coverage:** The proportion of your usage protected by a discount program (such as Reserved Instances, Savings Plans, or {{< tooltip text="Committed Use Contracts" tooltip="Agreements with cloud providers to use a certain amount of resources for a discounted rate over a set period." >}}).
+
+  _Example: If EC2 compute coverage is 50%, half of your usage is on-demand. Increasing coverage to 80% could reduce your bill._
+- **Utilization:** How much of your purchased commitments are actually being used.
+
+  _Example: If a 1-year GCP Committed Use Contract is only 70% utilized, 30% is going unused and may need adjustment._
 
 ## Costs overview
 
@@ -99,7 +107,7 @@ The Commitments Explorer provides a detailed, interactive table of all your clou
 | DB engine | The database engine used by the instance (such as PostgreSQL, MySQL, SQL Server). |
 | Start date | The date when the Reserved Instance term begins. |
 | End date | The date when the Reserved Instance term ends. |
-| Multi-AZ | Indicates whether the Reserved Instance covers a Multi-Availability Zone deployment (Yes/No). |
+| Multi-AZ | Indicates whether the Reserved Instance covers a multiple availability zone deployment (Yes/No). |
 | Instance # | The number of database instances covered by the Reserved Instance. |
 | NFU # | The number of normalized units (NFUs) covered, which standardizes instance sizes for comparison. |
 | Utilization | The percentage of the Reserved Instance that is actually being used during the selected period. |
@@ -152,8 +160,11 @@ You manage multiple cloud accounts and want to ensure all are benefiting from co
 You want to report on the financial impact of your commitment programs to stakeholders.
 
 **How to use Commitment Programs**  
-1. In the **Costs Overvie**w, view the savings breakdown compared to on-demand pricing.
+1. In the **Costs Overview**, view the savings breakdown compared to on-demand pricing.
 2. Group costs by service, region, or account to highlight where the most savings are achieved.
 3. Export or screenshot the data for use in reports or presentations.
+
+## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
