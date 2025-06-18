@@ -17,6 +17,10 @@ Use the following instructions to enable Workload Protection.
 
 ## Installation
 
+{{< beta-callout url="" header="Workload Protection's Kubernetes user session instrumentation is in Preview !" btn_hidden="true">}}
+Workload Protection now integrates with Kubernetes to collect Kubernetes user credentials and enrich your events with real user identities to help you investigate signals. Follow the optional instructions below to test the preview !
+{{< /beta-callout >}}
+
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
@@ -31,6 +35,11 @@ Use the following instructions to enable Workload Protection.
       name: datadog
     spec:
       features:
+        # PREVIEW - Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+        # admissionController:
+        #   enabled: true
+        #   cwsInstrumentation:
+        #     enabled: true
         remoteConfiguration:
           enabled: true
         # Enables Threat Detection
@@ -48,16 +57,17 @@ Use the following instructions to enable Workload Protection.
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
-    
+
             # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
             # uncompressedLayersSupport: true
-    
+
           # Enables Host Vulnerability Management
           host:
             enabled: true
     ```
 
-2. Apply the changes and restart the Agent.
+2. (optional) Uncomment the `admissionController` section if you want to test the preview of Workload Protection's integration with Kubernetes for user identity collection.
+3. Apply the changes and restart the Agent.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
@@ -69,6 +79,13 @@ Use the following instructions to enable Workload Protection.
 
     ```yaml
     # datadog-values.yaml file
+
+    # PREVIEW - Integrate with Kubernetes to enrich Workload Protection events with Kubernetes user identities
+    # clusterAgent:
+    #   admissionController:
+    #     enabled: true
+    #     cwsInstrumentation:
+    #       enabled: true
     datadog:
       remoteConfiguration:
         enabled: true
@@ -98,45 +115,70 @@ Use the following instructions to enable Workload Protection.
         #   enabled: true
     ```
 
-2. Restart the Agent.
+2. (optional) Uncomment the `clusterAgent` section if you want to test the preview of Workload Protection's integration with Kubernetes for user identity collection.
+3. Restart the Agent.
 
 {{% /tab %}}
 
 {{% tab "DaemonSet" %}}
 
-Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
+1. Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
-```bash
-  # Source: datadog/templates/daemonset.yaml
-  apiVersion:app/1
-  kind: DaemonSet
-  [...]
-  spec:
-  [...]
-  spec:
+    ```bash
+      # Source: datadog/templates/daemonset.yaml
+      apiVersion:app/1
+      kind: DaemonSet
       [...]
-        containers:
-        [...]
-          - name: agent
-            [...]
-            env:
-              - name: DD_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
-          - name: system-probe
-            [...]
-            env:
-              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                value: "true"
-              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
-                value: "true"
+      spec:
+      [...]
+      spec:
           [...]
-```
+            containers:
+            [...]
+              - name: agent
+                [...]
+                env:
+                  - name: DD_REMOTE_CONFIGURATION_ENABLED
+                    value: "true"
+              - name: system-probe
+                [...]
+                env:
+                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+                    value: "true"
+                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                    value: "true"
+                  - name: DD_COMPLIANCE_CONFIG_ENABLED
+                    value: "true"
+                  - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                    value: "true"
+                  - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+                    value: "true"
+              [...]
+    ```
+
+   2. (optional) Add the following setting to the `env` section of `cluster-agent` in the `cluster-agent-deployment.yaml` file if you want to test the preview of Workload Protection's integration with Kubernetes for user identity collection.
+
+       ```bash
+         # Source: datadog/templates/cluster-agent-deployment.yaml
+         apiVersion:app/1
+         kind: Deployment
+         [...]
+         spec:
+           [...]
+           template:
+             [...]
+             spec:
+               [...]
+               containers:
+               [...]
+                 - name: cluster-agent
+                   [...]
+                   env:
+                     - name: DD_ADMISSION_CONTROLLER_ENABLED
+                       value: "true"
+                     - name: DD_RUNTIME_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_ENABLED
+                       value: "true"
+       ```
 
 {{% /tab %}}
 {{< /tabs >}}
