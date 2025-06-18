@@ -42,7 +42,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Metrics
+  - 'Category::Metrics '
   - Category::Network
   - Supported OS::Linux
   - Offering::Integration
@@ -81,7 +81,7 @@ Sendmail 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 �
 
 1. 에이전트의 설정 디렉터리 루트의 `conf.d/` 폴더에 있는 `sendmail.d/conf.yaml` 파일을 편집하여 sendmail 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 sendmail.d/conf.yaml][5]을 참조하세요.
 
-2. [에이전트를 재시작합니다][6].
+2. [Agent를 재시작합니다][6].
 
 ### 검증
 

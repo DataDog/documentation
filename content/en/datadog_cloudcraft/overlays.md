@@ -6,10 +6,6 @@ further_reading:
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Cloudcraft supports overlays that integrate data from multiple sources, enriching your diagrams with real-time insights. These views let you group and filter resources by key attributes, helping you focus on different parts of your architecture for troubleshooting, cost optimization, or security analysis. Each overlay is designed to address a specific operational goal, making it easy to adapt the diagram to your needs.

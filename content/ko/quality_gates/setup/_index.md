@@ -7,10 +7,6 @@ further_reading:
 title: 품질 게이트 규칙 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 ({{< region-param key="dd_site_name" >}}) 사이트에서 품질 게이트를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" >}}
 품질 게이트는 퍼블릭 베타 서비스입니다.
 {{< /callout >}}

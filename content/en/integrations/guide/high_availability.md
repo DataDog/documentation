@@ -7,14 +7,8 @@ further_reading:
 - link: "/network_monitoring/devices/glossary"
   tag: "Documentation"
   text: "Network Device Monitoring Terms and Concepts"
+site_support_id: high_availability_datadog_agent
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"> High Availability support of the Datadog Agent is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-
-{{< /site-region >}}
-
-<div class="alert alert-info"> High Availability support of the Datadog Agent is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 

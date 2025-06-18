@@ -6,10 +6,6 @@ aliases:
 disable_toc: false
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Private actions are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection. For more information on setting up a runner and pairing it with a connection, see [Private Actions][1].

@@ -5,6 +5,9 @@ further_reading:
 - link: "/opentelemetry/instrument/"
   tag: "Documentation"
   text: "Instrument Your Applications"
+- link: "https://www.datadoghq.com/blog/otel-deployments/"
+  tag: "Blog"
+  text: "How to select your OpenTelemetry deployment"
 ---
 
 There are multiple ways to send OpenTelemetry data to Datadog. Choose the method that best fits your infrastructure and requirements:
