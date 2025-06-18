@@ -70,13 +70,13 @@ spec:
   override:
     clusterAgent:
       image:
-        tag: 7.66.1
+        tag: 7.67.0
       env:
         - name: DD_AUTOSCALING_FAILOVER_ENABLED
           value: "true"
     nodeAgent:
       image:
-        tag: 7.66.1 # or 7.66.1-jmx
+        tag: 7.67.0 # or 7.67.0-jmx
       env:
         - name: DD_AUTOSCALING_FAILOVER_ENABLED
           value: "true"
@@ -84,7 +84,7 @@ spec:
           value: container.memory.usage container.cpu.usage
     clusterChecksRunner:
       image:
-        tag: 7.66.1 # or 7.66.1-jmx
+        tag: 7.67.0 # or 7.67.0-jmx
 ```
 
 3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
@@ -109,7 +109,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Ensure you are using Agent and Cluster Agent v7.66.1+. Add the following to your `datadog-values.yaml` configuration file:
+1. Ensure you are using Agent and Cluster Agent v7.67.0+. Add the following to your `datadog-values.yaml` configuration file:
 
 ```yaml
 datadog:
@@ -125,7 +125,7 @@ datadog:
 ...
 clusterAgent:
   image:
-    tag: 7.66.1
+    tag: 7.67.0
   admissionController:
     enabled: true
 ...
@@ -202,7 +202,7 @@ When you are ready to proceed with enabling Autoscaling for a workload, you have
    
    Use your existing deploy process to target and configure Autoscaling for your workload. 
 
-   {{% collapse-content title="Example DatadogPodAutoscaler CRD" level="h4" expanded=false id="id-for-anchoring" %}}
+   {{% collapse-content title="Example DatadogPodAutoscaler CR" level="h4" expanded=false id="id-for-anchoring" %}}
    ```yaml
    apiVersion: datadoghq.com/v1alpha2
    kind: DatadogPodAutoscaler
