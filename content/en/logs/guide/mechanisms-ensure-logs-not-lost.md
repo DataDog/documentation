@@ -20,7 +20,7 @@ further_reading:
 ## Log rotate
 
 When a file is rotated, the Agent keeps [tailing][1] the old file while starting to tail the newly created file in parallel.
-Although the Agent continues to tail the old file, it will prioritize using its resources to tail the most up-to-date files. 60 seconds after the rotation has been detected, the agent will close the rotated file and all remaining data will be lost. If this window is too short for your environment, it can be adjusted through the `logs_config.close_timeout` setting or the `DD_LOGS_CONFIG_CLOSE_TIMEOUT` env variable.
+Although the Agent continues to tail the old file, it prioritizes using its resources to tail the most up-to-date files. 60 seconds after the rotation has been detected, the agent closes the rotated file and all remaining data is lost. If this window is too short for your environment, it can be adjusted through the `logs_config.close_timeout` setting or the `DD_LOGS_CONFIG_CLOSE_TIMEOUT` env variable.
 
 ## Network issues
 
