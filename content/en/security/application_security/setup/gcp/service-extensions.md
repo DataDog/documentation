@@ -35,7 +35,7 @@ You can enable App and API Protection (AAP) with GCP Service Extensions within G
 - In your GCP project, you have either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
 - A GCP project with a Cloud Load Balancer is configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
 - Compute Engine API and Network Services API are enabled:
-
+  
   ```bash
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
   ```
@@ -58,7 +58,7 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     </div>
 
 2. Add the VM to an unmanaged instance group.
-
+  
     Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
 3. Create a backend service with the following settings:
@@ -81,8 +81,21 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select all **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
+    4. Select only **Events** from the list where you want App and API Protection to run detection (Request Headers and Response Headers are **required**).
+    5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
+    <br>
+    <div class="alert alert-warning">
+      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 500 error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
+    </div>
+
+    <div class="alert alert-info">
+    <p><strong>Notes:</strong></p>    
+      <ul>
+        <li>Currently, the service extension doesn't process request bodies. If you select request and response body events in the extension chain events, the service extension does not inspect the request body. For more information, see <a href="#limitations">Limitations</a>.</li>
+        <li>If you select the <code>Request Body</code> and <code>Response Body</code> events, processing time will increase as the service extension needs to transfer and analyze these bodies. <strong>Adjust your timeout</strong> settings to accommodate the additional processing time.</li>
+      </ul>
+    </div>
 </br>
 
 {{% appsec-getstarted-2-plusrisk %}}
@@ -481,7 +494,7 @@ The GCP Service Extensions have the following limitations:
 
 ## Using AAP without APM tracing
 
-If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
+If you want to use App and API Protection without APM tracing functionality, you can deploy with tracing disabled:
 
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
