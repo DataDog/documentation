@@ -169,12 +169,12 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: <USER_ID>
+        supplementalGroups:
+          - <GROUP_ID>
 {{< /highlight >}}
 
 - Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
