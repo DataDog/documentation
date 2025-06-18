@@ -201,17 +201,17 @@ First, install the [Datadog CLI][601] and [Azure CLI][602].
 
 Login to your Azure account using the Azure CLI:
 
-```bash
+{{< code-block lang="bash" collapsible="false" >}}
 az login
-```
+{{< /code-block >}}
 
 Then, run the following command to set up the sidecar container:
 
-```bash
+{{< code-block lang="bash" collapsible="false" >}}
 export DATADOG_API_KEY=<DATADOG_API_KEY>
 export DD_SITE={{< region-param key="dd_site" >}}
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -w <app-service-name>
-```
+datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+{{< /code-block >}}
 
 **Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
 
@@ -261,7 +261,7 @@ If you are setting up monitoring for a .NET application, configure the following
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
 | `DD_TRACE_LOG_DIRECTORY` | `/home/LogFiles/dotnet` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
-| `CORECLR_PROFILER` | `\{846F5F1C-F9AE-4B07-969E-05C26BC060D8\}` |
+| `CORECLR_PROFILER` | `{{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 | `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |
 </details>
 

@@ -6,37 +6,31 @@ further_reading:
   text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 ## Overview
-<div class="alert alert-info">To instrument your Azure App Service with the Datadog wrapper instead of using a sidecar, see <a href="/serverless/guide/azure_app_service_linux_code_wrapper_script">Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper</a>.</div>
-
-This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
-
-- Fully distributed APM tracing using automatic instrumentation.
-- Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
-- Support for manual APM instrumentation to customize spans.
-- `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][1].
-- Support for submitting logs using file tailing.
 
 This solution uses a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
 
+If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][17].
+
 **Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
-### Setup
+## Setup
 
-1. **Install a tracing library**. You must install a tracing library within the application package prior to deployment. 
+### Application
+
+Install the tracing library for your language:
 
 {{< tabs >}}
 {{% tab "Java" %}}
 Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
 
-1. Download the [latest version of Datadog's Java tracing library][1].
+1. Download the [latest version of Datadog's Java tracing library][101].
 1. Place the tracing library inside your project. It must be included with your deployment. 
    If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`. 
 1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
 
 Instrumentation starts when the application is launched.
 
-[1]: https://dtdg.co/latest-java-tracer
+[101]: https://dtdg.co/latest-java-tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
 1. Add the `ddtrace` package to your project using your package manager.
@@ -60,20 +54,19 @@ Add the `Datadog.Trace.Bundle` Nuget package to your project.
 
 Run the following script to install Datadog's PHP tracing library:
 
-```ssh
+```bash
 #!/usr/bin/env bash
 
 echo "Setting up Datadog tracing for PHP"
 DD_PHP_TRACER_VERSION=1.8.3
-
-    DD_PHP_TRACER_URL=https://github.com/DataDog/dd-trace-php/releases/download/${DD_PHP_TRACER_VERSION}/datadog-setup.php
+DD_PHP_TRACER_URL=https://github.com/DataDog/dd-trace-php/releases/download/${DD_PHP_TRACER_VERSION}/datadog-setup.php
 
 echo "Installing PHP tracer from ${DD_PHP_TRACER_URL}"
 if curl -LO --fail "${DD_PHP_TRACER_URL}"; then
-eval "php datadog-setup.php --php-bin=all"
+    eval "php datadog-setup.php --php-bin=all"
 else
-       echo "Downloading the tracer was unsuccessful"
-       return
+    echo "Downloading the tracer was unsuccessful"
+    return
 fi
 
 cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload
@@ -95,7 +88,39 @@ This script is intended to run as the startup command, which installs the tracin
 {{% /tab %}}
 {{< /tabs >}}
 
-2. **Configure environment variables**.
+### Instrumentation
+
+{{< tabs >}}
+{{% tab "Automated" %}}
+
+First, install the [Datadog CLI][601] and [Azure CLI][602].
+
+Login to your Azure account using the Azure CLI:
+
+```bash
+az login z
+```
+
+Then, run the following command to set up the sidecar container:
+
+```bash
+export DATADOG_API_KEY=<DATADOG_API_KEY>
+export DD_SITE="{{< region-param key="dd_site" >}}"
+datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -w <app-service-name>
+```
+
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+
+Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
+
+
+[601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+
+{{% /tab %}}
+{{% tab "Manual" %}}
+
+1. **Configure environment variables**.
    In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
 
 | Name | Value | Description |
@@ -119,7 +144,7 @@ For .NET applications, the following environment variables are **required** unle
 
 {{% /collapse-content %}}
 
-3. **Configure a sidecar container for Datadog**.
+2. **Configure a sidecar container for Datadog**.
 
    1. In Azure, navigate to **Deployment** > **Deployment Center**. Select the **Containers** tab.
    1. Click **Add** and select **Custom container**.
@@ -131,9 +156,12 @@ For .NET applications, the following environment variables are **required** unle
       - **Port**: 8126
    1. Select **Apply**.
 
-4. **Restart your application**.
+3. **Restart your application**.
 
    If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved. 
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### View traces in Datadog
 
@@ -179,3 +207,4 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [14]: /help
 [15]: /profiler
 [16]: https://app.datadoghq.com/organization-settings/api-keys
+[17]: /serverless/guide/azure_app_service_linux_code_wrapper_script
