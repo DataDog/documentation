@@ -165,7 +165,7 @@ ALTER USER 'datadog'@'%' REQUIRE SSL;
 
 **Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
-4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
+4. Complete the Agent setup steps for your RDS ([Postgres][6], [MySQL][8]) or Aurora([Postgres][7], [MySQL][9]) instance.
 
 ### Enable IAM authentication for the Agent host in the same AWS account as the RDS instance
 
@@ -618,16 +618,18 @@ instances:
 [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 [6]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
 [7]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
-[8]: /database_monitoring
-[9]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
-[10]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
-[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
-[12]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
-[13]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
-[14]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
-[15]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
-[16]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
-[17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
-[18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
-[19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
-[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html
+[8]: /database_monitoring/setup_mysql/rds/#grant-the-agent-access
+[9]: /database_monitoring/setup_mysql/aurora/#grant-the-agent-access
+[10]: /database_monitoring
+[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
+[12]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
+[13]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
+[14]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
+[15]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
+[16]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
+[17]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
+[18]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
+[19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
+[20]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[21]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[22]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html
