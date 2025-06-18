@@ -30,7 +30,7 @@ short_description: Actualiza tu nube
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -40,9 +40,9 @@ tile:
   - Categoría::Herramientas de desarrollo
   - Category::Notifications
   - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
   configuration: README.md#Configuración
   description: Actualiza tu nube
   media:
@@ -82,7 +82,7 @@ Obtén notificaciones en tiempo real de cualquier discrepancia entre tu Infrastr
 ### Detectar y corregir infracciones de políticas 
 Utiliza el motor de políticas unificado de Firefly para encontrar errores de configuración peligrosos o desaprovechamientos costosos y recibe alertas sobre infracciones de políticas, tanto de políticas personalizadas como preconfiguradas.
 
-## Configuración
+## Configurar
 
 ### Configurar la integración de Firefly y Datadog
 1. Crea una nueva clave de aplicación y una clave API Datadog.

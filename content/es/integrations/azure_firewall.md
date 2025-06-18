@@ -32,7 +32,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Firewal
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero la [integración de Microsoft Azure][1]. No hay otros pasos de instalación.
+Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
 

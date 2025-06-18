@@ -8,10 +8,6 @@ aliases:
     - /llm_observability/sdk/python
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][13].
@@ -529,6 +525,8 @@ Evaluations must be joined to a single span. You can identify the target span us
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
 
+**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][16] page in Datadog.
+
 #### Arguments
 
 The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
@@ -546,12 +544,14 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 <br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
 
 `span`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `span_id` (string) and `trace_id` (string). Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
 
 `span_with_tag_value`
-: required - _dictionary_
+: optional - _dictionary_
 <br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
+
+**Note**: Exactly one of `span` or `span_with_tag_value` is required. Supplying both, or neither, raises a ValueError.
 
 `ml_app`
 : required - _string_
@@ -821,3 +821,4 @@ def server_process_request(request):
 [13]: /llm_observability/setup/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
 [15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
+[16]: https://app.datadoghq.com/llm/settings/evaluations
