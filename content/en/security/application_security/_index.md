@@ -81,7 +81,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Exploit Prevention vs. In-App WAF
 
-This section provides a summary of Exploit Prevention and how it differs from In-App WAF rules.
+This section provides a summary of Exploit Prevention and how it differs from In-App Web Application Firewall (WAF) rules.
 
 Datadog AAP includes the [Exploit Prevention][14] and [In-App WAF][15] features to protect your applications against exploits. Exploit Prevention is an extension of In-App WAF. Exploit Prevention leverages In-App WAF as the first line of defense and then blocks attacks missed by the WAF.
 
