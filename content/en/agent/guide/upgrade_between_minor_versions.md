@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## Overview
-Datadog recommends you update your Datadog Agent with every minor and patch release, or, at a minimum, monthly. Upgrading to the latest major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. 
+Datadog recommends you [update your Datadog Agent][4] with every minor and patch release, or, at a minimum, monthly. Upgrading to the latest major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. 
 
 The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. This guide walks you through how to quickly roll out a new Agent version across your hosts in just a few clicks.
 
