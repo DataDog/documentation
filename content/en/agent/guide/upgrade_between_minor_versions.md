@@ -8,16 +8,17 @@ aliases:
 ---
 
 ## Overview
-Datadog recommends you [update your Datadog Agent][4] with every minor and patch release, or, at a minimum, monthly. Upgrading to the latest major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. 
-
-The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. This guide walks you through how to quickly roll out a new Agent version across your hosts in just a few clicks.
+Datadog recommends you update your Datadog Agent with every [minor and patch][6] release. This guide walks you through how to roll out a new Agent version across your hosts in just a few clicks.
 
 
-## Upgrade with Fleet Automation (recommended)
+## Upgrade between minor versions of the Agent
+### Upgrade remotely with Fleet Automation
 
-Datadog recommends using Fleet Automation’s [Remote Agent Management][2] to upgrade your Agent versions. If you’re already using Remote Agent Management, start an upgrade from [Fleet Automation][4].
+Fleet Automation allows you to upgrade Datadog Agents across Linux and Windows, and non-containerized environments remotely. In just a few clicks you can deploy the latest Agent release, keeping your fleet current with new features and security patches. To get setup, follow the [Fleet Automation Agent Upgrade guide][7].
 
-If you have not yet enabled remote configuration, follow the [configuration instructions][5] to enable it and use the remote agent management feature.  
+### Upgrade via script or configuration management tooling
+Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script. 
+
 
 ## Upgrade between minor versions of the Agent
 
@@ -60,8 +61,8 @@ Upgrading to the latest Agent minor version:
 {{< /tabs >}}
 
 
-## Upgrade to Datadog Agent 7 
-
+## Upgrade between major versions of the Agent
+### Upgrade to Datadog Agent 7 
 
 <div class="alert alert-info">
 Agent 7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">Check if your custom checks are Python 3 compatible</a> before upgrading to Agent 7.
@@ -142,3 +143,5 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 [3]: /agent/fleet_automation/remote_management/#setup
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[6]: https://github.com/DataDog/datadog-agent/releases?page=1
+[7]: https://docs.datadoghq.com/agent/fleet_automation/remote_management/#upgrade-your-agents
