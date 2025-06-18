@@ -443,7 +443,7 @@ $ eksctl create iamserviceaccount \
 {{% /tab %}}
 {{< /tabs >}}
 
-Update your Postgres instance config with an `aws` block as shown below:
+Update your Postgres or MySQL instance config with an `aws` block as shown below:
  - Specify the `region` of the RDS instance
  - Set `managed_authentication.enabled` to `true`
  - Specify the role ARN, replacing `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located, and `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role created in step 1
