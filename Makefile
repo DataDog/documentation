@@ -112,7 +112,7 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 
 # install the root level node modules
 node_modules: package.json yarn.lock
-	@yarn install
+	@yarn install --immutable
 
 # All the requirements for a full build
 dependencies: clean
