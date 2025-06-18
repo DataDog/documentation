@@ -7,21 +7,24 @@ aliases:
   - /agent/guide/upgrade
 ---
 
+## Overview
+Datadog recommends you update your Datadog Agent with every minor and patch release, or, at a minimum, monthly. Upgrading to the latest major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. 
+
+The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. This guide walks you through how to quickly roll out a new Agent version across your hosts in just a few clicks.
+
+
 ## Upgrade with Fleet Automation (recommended)
-Datadog recommends using Fleet Automation’s Remote Agent Upgrades to roll out a new Agent version across your hosts in just a few clicks.
 
-If you’re already using [Remote Agent Management][2], start an upgrade from Fleet Automation.
+Datadog recommends using Fleet Automation’s [Remote Agent Management][2] to upgrade your Agent versions. If you’re already using Remote Agent Management, start an upgrade from [Fleet Automation][4].
 
-Not configured yet? Follow the full setup in the [Remotely upgrade your Agents][3] guide.
-
-
+If you have not yet enabled remote configuration, follow the [configuration instructions][5] to enable it and use the remote agent management feature.  
 
 ## Upgrade between minor versions of the Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The recommended way to upgrade between minor versions of the Agent is to use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
+To upgrade between minor versions of the Agent is to use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
 
 Upgrading to a given Agent minor version:
 
@@ -43,7 +46,7 @@ URL to download a specific Agent minor version
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-The recommended way to upgrade between minor version of the Agent is to use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
+To upgrade between minor version of the Agent is to use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
 
 Upgrading to a given Agent minor version:
 
@@ -136,4 +139,6 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 
 [1]: /agent/guide/python-3/
 [2]: /agent/fleet_automation/remote_management
-[3]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[3]: /agent/fleet_automation/remote_management/#setup
+[4]: https://app.datadoghq.com/fleet/agent-upgrades
+[5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
