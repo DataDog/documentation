@@ -7187,11 +7187,16 @@ menu:
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
       weight: 6203
+    - name: Export Test Runs
+      url: synthetics/explore/results_explorer/export
+      parent: synthetics_results_explorer
+      identifier: synthetics_results_explorer_export_test_runs
+      weight: 6204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 6204
+      weight: 6205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
