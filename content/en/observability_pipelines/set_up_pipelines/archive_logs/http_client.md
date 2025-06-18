@@ -164,6 +164,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_settings/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -304,6 +309,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
+{{% tab "Tags Processor" %}}
+
+{{% observability_pipelines/processors/tags_processor %}}
+
+{{% /tab %}}
 {{% tab "Throttle" %}}
 
 {{% observability_pipelines/processors/throttle %}}
@@ -390,6 +400,11 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_env_vars/socket %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
