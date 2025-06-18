@@ -4,12 +4,16 @@ aliases:
   - /agent/faq/upgrade-between-agent-minor-versions
   - /agent/guide/upgrade-between-agent-minor-versions
   - /agent/versions/upgrade_between_agent_minor_versions/
-  - /agent/guide/upgrade_to_agent_6
+  - /agent/guide/upgrade
 ---
 
-## Overview 
+## Upgrade with Fleet Automation (recommended)
+Datadog recommends using Fleet Automation’s Remote Agent Upgrades to roll out a new Agent version across your hosts in just a few clicks.
 
-[Adding content about the Remote Management here]
+If you’re already using [Remote Agent Management][2], start an upgrade from Fleet Automation.
+
+Not configured yet? Follow the full setup in the [Remotely upgrade your Agents][3] guide.
+
 
 
 ## Upgrade between minor versions of the Agent
@@ -131,3 +135,5 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/python-3/
+[2]: /agent/fleet_automation/remote_management
+[3]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
