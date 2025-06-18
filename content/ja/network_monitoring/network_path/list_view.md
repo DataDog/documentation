@@ -11,8 +11,6 @@ is_beta: true
 title: リストビュー
 ---
 
-<div class="alert alert-info">Datadog Network Performance Monitoring 用 Network Path は、プレビュー版です。Datadog の担当者にご連絡の上、サインアップしてください。</div>
-
 ## 概要
 
 Network Path のリストビューは、さまざまなパスを探索するためのデフォルトビューです。 `hostname` や `service` などのソースでグループ化します。
