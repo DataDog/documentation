@@ -65,9 +65,10 @@ Each chart type provides a different view into the user's journey:
 [Analytics][13]
 : contains views data aggregation for understanding how your product is being used.
 
+<br>
 
 ### Track key user behavior patterns
-You may want to better understand a specific group of users. This could be for the purpose of improving their user experience, or nudge them to buy the content in their cart. Regardless of the purpose, you can use the [Users & Segment][6] section to group your users based on a desired characteristic.
+You may want to better understand a specific group of users. This could be for the purpose of improving their user experience, or nudge them to buy the content in their cart. Regardless of the purpose, you can use the [Users & Segments][6] section to group your users based on a desired characteristic.
 
 {{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
 
