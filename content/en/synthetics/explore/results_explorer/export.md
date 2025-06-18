@@ -16,7 +16,7 @@ Export a list of test runs from the Results Explorer by clicking **Download as C
 
 {{< img src="continuous_testing/explorer/export_csv.png" alt="Export your test runs to CSV in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;" >}}
 
-Use this to export test run data in bulk for debugging, reporting, and intergration with external systems. CI batches can be exported as well.
+Use this to export test run data in bulk for debugging, reporting, and integration with external systems. CI batches can be exported as well.
 
 Up to 100,000 rows can be exported at a time.
 
