@@ -1,5 +1,5 @@
 ---
-title: Upgrading your Datadog Agent
+title: Upgrade your Datadog Agent
 aliases:
   - /agent/faq/upgrade-between-agent-minor-versions
   - /agent/guide/upgrade-between-agent-minor-versions
