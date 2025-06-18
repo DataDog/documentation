@@ -93,29 +93,28 @@ This script is intended to run as the startup command, which installs the tracin
 {{< tabs >}}
 {{% tab "Automated" %}}
 
-First, install the [Datadog CLI][601] and [Azure CLI][602].
+First, install the [Datadog CLI][201] and [Azure CLI][202].
 
 Login to your Azure account using the Azure CLI:
 
-```bash
-az login z
-```
+{{< code-block lang="bash" collapsible="false" >}}
+az login
+{{< /code-block >}}
 
 Then, run the following command to set up the sidecar container:
 
-```bash
-export DATADOG_API_KEY=<DATADOG_API_KEY>
-export DD_SITE="{{< region-param key="dd_site" >}}"
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -w <app-service-name>
-```
 
-**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+{{< code-block lang="bash" collapsible="false" >}}
+export DATADOG_API_KEY=<DATADOG_API_KEY>
+export DD_SITE={{< region-param key="dd_site" >}}
+datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+{{< /code-block >}}
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
 
-[601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
-[602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -125,8 +124,8 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 | Name | Value | Description |
 |------|-------|-------------|
-| `DD_API_KEY` | Your Datadog API key. | See [Organization Settings > API Keys][16] in Datadog. |
-| `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Your [Datadog site][2]. Defaults to `datadoghq.com`. |
+| `DD_API_KEY` | Your Datadog API key. | See [Organization Settings > API Keys][301] in Datadog. |
+| `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Your [Datadog site][302]. Defaults to `datadoghq.com`. |
 | `DD_SERVICE` | Your application's service name. | Defaults to the name field value in `package.json`. |
 
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
@@ -136,11 +135,11 @@ For .NET applications, the following environment variables are **required** unle
 | Name | Value | Description |
 |------|-------|-------------|
 | `DD_DOTNET_TRACER_HOME`  | `/home/site/wwwroot/datadog`  | Path to tracing libraries, copied within the Docker file |
-| `DD_TRACE_LOG_DIRECTORY`   | `/home/Logfiles/dotnet`  | Where tracer logs are stored |
+| `DD_TRACE_LOG_DIRECTORY`   | `/home/LogFiles/dotnet`  | Where tracer logs are stored |
 | `CORECLR_ENABLE_PROFILING` | 1  | Instructs the .NET CLR that profiling should be enabled.                   | 
-| `CORECLR_PROFILER`         | `846F5F1C-F9AE-4B07-969E-05C26BC060D8` | Profiler GUID. |
+| `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` | Profiler GUID. |
 | `CORECLR_PROFILER_PATH`    | `/home/site/wwwroot/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so` | The profiler binary that the .NET CLR loads into memory, which contains the GUID. |
-| `DD_PROFILING_ENABLED` (_optional_) | `true` | Enables Datadog's [Continuous Profiler][15]. |
+| `DD_PROFILING_ENABLED` (_optional_) | `true` | Enables Datadog's [Continuous Profiler][303]. |
 
 {{% /collapse-content %}}
 
@@ -160,6 +159,9 @@ For .NET applications, the following environment variables are **required** unle
 
    If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved. 
 
+[301]: https://app.datadoghq.com/organization-settings/api-keys
+[302]: /getting_started/site/
+[303]: /profiler
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -196,7 +198,6 @@ Share the content of the **Log stream** with [Datadog Support][14].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /getting_started/site/
 [3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
 [4]: /tracing/services/service_page/
 [5]: https://github.com/brightcove/hot-shots
@@ -205,6 +206,4 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help
-[15]: /profiler
-[16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /serverless/guide/azure_app_service_linux_code_wrapper_script
