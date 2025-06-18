@@ -207,8 +207,8 @@ az login
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="bash" >}}
-export DATADOG_API_KEY=<DATADOG_API_KEY>
+{{< code-block lang="shell" >}}
+export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE={{< region-param key="dd_site" >}}
 datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
 {{< /code-block >}}
