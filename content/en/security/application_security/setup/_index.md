@@ -38,6 +38,14 @@ Learn how to enable App and API Protection on all the following supported platfo
   {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
 {{< /appsec-integrations >}}
 
+## Host Platforms
+
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Linux" avatar="linux" link="/linux" >}}
+  {{< appsec-integration name="Docker" avatar="docker" link="/docker" >}}
+  {{< appsec-integration name="Windows" avatar="windows" link="/windows" >}}
+{{< /appsec-integrations >}}
+
 ## Cloud and Container Platforms
 
 ### Kubernetes (K8s)
