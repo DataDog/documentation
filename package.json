@@ -17,6 +17,7 @@
         "build:hugo:preview": "yarn run build:hugo -D -F --environment preview",
         "build:hugo:live": "yarn run build:hugo -D -F --environment live",
         "build:live": "yarn run build:hugo:live",
+        "build:llm": "./node_modules/.bin/hugo -d ./public -s ./ --logLevel info && cp public/llm/index.md public/llms.txt",
         "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --workers 100 --logLevel info",
         "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --workers 100 --invalidateCDN --logLevel info",
         "deploy:liveAssets": "./node_modules/.bin/hugo deploy --target liveAssets -e live --maxDeletes 0 --workers 100 --logLevel info --debug",

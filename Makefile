@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data llm-docs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -68,7 +68,7 @@ build-cdocs:
 	@node ./local/bin/js/cdocs-build.js;
 
 # build .mdoc.md files, then watch for changes
-watch-cdocs: 
+watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
@@ -329,3 +329,8 @@ define source_repo
 		fi \
 	fi
 endef
+
+# build llm docs
+llm-docs: node_modules ## Generate LLM-friendly markdown documentation
+	@echo "Generating LLM documentation..."
+	@yarn run build:llm

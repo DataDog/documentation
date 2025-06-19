@@ -1,0 +1,199 @@
+# Documentation Generation Project Diary
+
+## Initial Planning (Current)
+
+### Requirements
+- Generate plain text/markdown version of docs alongside Hugo HTML output
+- Create high-level overview in llms.txt
+- Make process automatable for CI/CD pipeline
+- Maintain links between markdown files
+
+### Approach Considerations
+1. Hugo's built-in capabilities:
+   - Hugo can output multiple formats
+   - Templates can be conditionally rendered
+   - Custom output formats can be defined
+
+2. Implementation options:
+   a) Use Hugo's built-in markdown output format
+   b) Create custom output format
+   c) Create parallel build process using Hugo's data
+   d) Write custom template renderer
+
+### Next Steps
+- Investigate Hugo's output format capabilities
+- Test template modifications for markdown output
+- Design directory structure for markdown output
+- Plan automation approach
+
+## Implementation Progress
+
+### 1. Hugo Configuration (Current)
+- Added new LLMDocs output format in config.yaml
+- Configured output format for all content types (home, page, section)
+- Set up markdown as media type
+- Configured output path as "llm"
+
+### 2. Template Creation
+Created three key templates:
+1. `layouts/_default/single.llm.md` - For individual pages
+   - Strips HTML
+   - Maintains document structure
+   - Creates markdown-compatible links
+   - Shows related pages and navigation
+
+2. `layouts/_default/list.llm.md` - For section pages
+   - Lists all pages in section
+   - Shows subsections
+   - Maintains hierarchy
+   - Provides navigation links
+
+3. `layouts/index.llm.md` - Main overview page (llms.txt)
+   - High-level documentation structure
+   - Quick access to key sections
+   - Top pages for each section
+   - Usage instructions
+
+### Next Steps
+1. Test the generation process
+2. Add build script to automate generation
+3. Handle special cases (API docs, integrations)
+4. Add to CI/CD pipeline
+5. Document the process
+
+### 3. Build Script Implementation
+Created `scripts/generate-llm-docs.sh`:
+- Automated generation process
+- Creates output directory structure
+- Runs Hugo with LLMDocs format
+- Creates symlink for llms.txt
+- Cleans up any remaining HTML
+
+### How to Use
+1. Run the documentation generation:
+   ```bash
+   ./scripts/generate-llm-docs.sh
+   ```
+
+2. Output locations:
+   - Main overview: `public/llms.txt`
+   - All markdown files: `public/llm/`
+
+### Integration Notes
+- The process is fully automated
+- Can be added to existing build pipeline
+- Generates both HTML and markdown simultaneously
+- Maintains consistent structure with main docs
+
+### Future Considerations
+1. Performance optimization for large documentation sets
+2. Additional cleanup of complex HTML structures
+3. Handling of special content types (tables, code blocks)
+4. Version control integration
+5. Automated testing of markdown output
+
+### 4. Build Integration
+Added LLM docs generation to the Makefile:
+- Created new `llm-docs` target
+- Integrated with main `dependencies` target
+- Documentation will be generated automatically during build
+- Can also be generated separately with `make llm-docs`
+
+### Current Status
+✅ Implementation complete:
+1. Hugo configuration for markdown output
+2. Templates for converting content
+3. Build script for generation
+4. Makefile integration
+5. Documentation of process
+
+### Usage Instructions
+1. As part of full build:
+   ```bash
+   make dependencies
+   ```
+
+2. Generate LLM docs only:
+   ```bash
+   make llm-docs
+   ```
+
+3. Output locations:
+   - Main overview: `public/llms.txt`
+   - All markdown files: `public/llm/`
+
+### Next Steps
+1. Test the complete build process
+2. Add documentation about the LLM docs feature
+3. Consider adding configuration options for:
+   - Output directory customization
+   - Content filtering
+   - Format customization
+
+### 5. Implementation Revision
+After reviewing the existing build process:
+1. Removed separate shell script in favor of Hugo's native capabilities
+2. Added `build:llm` script to package.json
+3. Moved LLM docs generation out of dependencies
+4. Simplified the build process
+
+Rationale:
+- Hugo already handles multiple output formats natively
+- No need for a separate script when we can use Hugo directly
+- LLM docs are an additional output format, not a dependency
+- Consistent with existing build patterns in the codebase
+
+### Current Status
+✅ Implementation improved:
+1. Hugo configuration for markdown output (unchanged)
+2. Templates for converting content (unchanged)
+3. Build process simplified and integrated with yarn scripts
+4. Removed unnecessary shell script
+5. Documentation updated
+
+### Usage Instructions
+1. Generate LLM docs:
+   ```bash
+   make llm-docs
+   # or
+   yarn run build:llm
+   ```
+
+2. Output locations (unchanged):
+   - Main overview: `public/llms.txt`
+   - All markdown files: `public/llm/`
+
+### Next Steps
+1. Test the revised build process
+2. Consider adding LLM docs to specific build environments (preview, live)
+3. Add documentation about the LLM docs feature
+
+### 6. Output File Fixes
+Fixed issues with llms.txt generation:
+1. Properly configured Hugo's output formats:
+   - Added mediaType for markdown
+   - Set correct baseName and suffixes
+   - Configured proper output paths
+2. Changed from symlink to copy for llms.txt:
+   - More reliable across platforms
+   - Ensures file exists even if source is deleted
+3. Clarified the file generation process:
+   - Hugo generates markdown in public/llm/
+   - Build script copies index.md to llms.txt
+
+### File Generation Process
+1. Hugo generates:
+   - `public/llm/index.md` (main overview)
+   - `public/llm/**/*.md` (all other docs)
+2. Build script:
+   - Copies `public/llm/index.md` to `public/llms.txt`
+
+### Current Status
+✅ Implementation complete and verified:
+1. Hugo configuration properly set
+2. Output formats correctly defined
+3. File generation process working
+4. Documentation updated
+
+### Usage Instructions
+[Previous instructions remain the same...]
