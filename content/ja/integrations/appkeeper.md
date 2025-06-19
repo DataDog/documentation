@@ -21,10 +21,10 @@ author:
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
-- AWS
-- cloud
+- aws
+- クラウド
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -102,17 +102,15 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 
 ![スナップショット][6]
 
-詳細については、[AppKeeper のインテグレーションドキュメント][7]を参照してください。
-
 ## 収集データ
 
 ### メトリクス
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][8] を参照してください。
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][7] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
@@ -120,6 +118,5 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
-[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
-[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

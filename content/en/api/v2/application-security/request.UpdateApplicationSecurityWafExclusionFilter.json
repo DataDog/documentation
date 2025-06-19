@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Exclude false positives on a path",
+      "enabled": false,
+      "ip_list": [
+        "198.51.100.72"
+      ],
+      "on_match": "monitor"
+    },
+    "type": "exclusion_filter"
+  }
+}

@@ -21,6 +21,10 @@ The following operating systems and architectures are compatible:
 | Debian       | 10-12     | x86_64, arm64 |
 | Red Hat      | 7+        | x86_64, arm64 |
 | Ubuntu       | 20+ (LTS) | x86_64, arm64 |
+| Fedora       | 40        | x86_64, arm64 |
+| AlmaLinux    | 8+        | x86_64, arm64 |
+| Oracle Linux | 8+        | x86_64, arm64 |
+| Rocky Linux  | 8+        | x86_64, arm64 |
 
 <div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
 
@@ -32,7 +36,7 @@ The following container platforms are compatible:
 |-----------------|--------------------------------------------------------|---------|
 | Linux           | Not supported on hardened environments such as SELinux | GA      |
 | Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | Preview |
+| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
 
 ### Platform-specific requirements
 
@@ -79,6 +83,7 @@ This section provides language-specific compatibility requirements for Single St
 
 | Python Version | Support                         |
 |----------------|---------------------------------|
+| 3.13           | <i class="icon-check-bold"></i> |
 | 3.12           | <i class="icon-check-bold"></i> |
 | 3.11           | <i class="icon-check-bold"></i> |
 | 3.10           | <i class="icon-check-bold"></i> |
@@ -145,6 +150,7 @@ Single Step Instrumentation supports Node.js 16.x and above, which is available 
 
 | .NET Version     | Support                         | Notes                                |
 |------------------|---------------------------------|--------------------------------------|
+| .NET 9           | <i class="icon-check-bold"></i> |                                      |
 | .NET 8           | <i class="icon-check-bold"></i> |                                      |
 | .NET 7           | <i class="icon-check-bold"></i> |                                      |
 | .NET 6           | <i class="icon-check-bold"></i> | Versions below 6.0.13 not supported. |
@@ -161,20 +167,18 @@ Single Step Instrumentation supports Node.js 16.x and above, which is available 
 
 ### Supported PHP versions
 
-<div class="alert alert-warning">Using Single Step Instrumentation with PHP applications is in Preview.</div>
-
-
 | PHP Version | Support |
 |-------------|---------|
-| 8.3.x       | Preview |
-| 8.2.x       | Preview |
-| 8.1.x       | Preview |
-| 8.0.x       | Preview |
-| 7.4.x       | Preview |
-| 7.3.x       | Preview |
-| 7.2.x       | Preview |
-| 7.1.x       | Preview |
-| 7.0.x       | Preview |
+| 8.4.x       | <i class="icon-check-bold"></i> |
+| 8.3.x       | <i class="icon-check-bold"></i> |
+| 8.2.x       | <i class="icon-check-bold"></i> |
+| 8.1.x       | <i class="icon-check-bold"></i> |
+| 8.0.x       | <i class="icon-check-bold"></i> |
+| 7.4.x       | <i class="icon-check-bold"></i> |
+| 7.3.x       | <i class="icon-check-bold"></i> |
+| 7.2.x       | <i class="icon-check-bold"></i> |
+| 7.1.x       | <i class="icon-check-bold"></i> |
+| 7.0.x       | <i class="icon-check-bold"></i> |
 
 ### PHP extensions
 
@@ -191,6 +195,21 @@ SSI disables automatically when it detects:
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
+
+## Tracer libraries
+
+The following tracer library versions are supported for Single Step Instrumentation: 
+
+| Tracer Language  | Version   |
+|------------------|-----------|
+| Java             | 1.44.0+   | 
+| Python           | 2.20.1+   | 
+| Node.js          | 4+        | 
+| .NET             | 3.7.0+    | 
+| Ruby             | 2.5.0+    |  
+| PHP              | 1.6.0+    |  
+
+Single Step Instrumentation automatically downloads the tracer version compatible with your application's language version. 
 
 ## Further reading
 

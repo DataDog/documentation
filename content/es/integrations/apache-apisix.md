@@ -31,7 +31,7 @@ author:
 categories:
 - nube
 - métricas
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
 display_on_public_website: true
@@ -69,7 +69,7 @@ tile:
   title: Apache APISIX
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -101,9 +101,9 @@ Sigue las siguientes instrucciones de configuración.
 Para ejecutarlo como contenedor:
 
 ```shell
-# extrae la última imagen
+# pull the latest image
 $ docker pull datadog/dogstatsd:latest
-# ejecuta un contenedor separado
+# run a detached container
 $ docker run -d --name dogstatsd-agent -e DD_API_KEY=<Your API Key from step 2> -p 8125:8125/udp  datadog/dogstatsd
 ```
 
@@ -112,7 +112,7 @@ Si utilizas Kubernetes en tu entorno de producción, puedes desplegar `dogstatsd
 4. El siguiente es un ejemplo de cómo activar el complemento Datadog para una ruta específica. Esto supone que el Agent `dogstatsd` ya está en funcionamiento.
 
 ```shell
-# habilita el complemento para una ruta específica
+# enable plugin for a specific route
 $ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "plugins": {
@@ -133,7 +133,7 @@ Ahora, cualquier solicitud al URI del endpoint `/hello` generará las métricas 
 5. Para desactivar el complemento, elimina la configuración JSON correspondiente en la configuración del complemento para deshabilitar `datadog`. Los complementos APISIX se recargan en caliente, por lo que no es necesario reiniciar APISIX.
 
 ```shell
-# deshabilita el complemento para una ruta
+# disable plugin for a route
 curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/hello",

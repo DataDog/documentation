@@ -14,10 +14,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
@@ -29,6 +25,8 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [CI jobs failure analysis][28] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -299,11 +297,21 @@ CI Visibility does not support Infrastructure metrics for other executors.
 
 ### View error messages for pipeline failures
 
-Error messages are supported for GitLab versions 15.2.0 and above.
-
 For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+#### CI jobs failure analysis
+
+If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
+
+For a full explanation, see the guide on [using CI jobs failure analysis][28].
+
+#### Errors provided by GitLab
+
+Error messages are supported for GitLab versions 15.2.0 and above.
+
+The error information provided by GitLab is stored in `error.provider_message` and `error.provider_domain` tags.
 
 The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
@@ -438,3 +446,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [25]: /glossary/#custom-span
 [26]: /continuous_integration/explorer
 [27]: /continuous_integration/search/#search-for-pipelines
+[28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/

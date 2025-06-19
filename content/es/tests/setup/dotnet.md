@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/dotnet
-- /continuous_integration/tests/dotnet
-- /continuous_integration/tests/setup/dotnet
+- /es/continuous_integration/setup_tests/dotnet
+- /es/continuous_integration/tests/dotnet
+- /es/continuous_integration/tests/setup/dotnet
 code_lang: dotnet
 code_lang_weight: 0
 further_reading:
@@ -21,10 +21,6 @@ further_reading:
 title: Tests de .NET
 type: multi-code-lang
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) por el momento.</div>
-{{< /site-region >}}
 
 ## Compatibilidad
 

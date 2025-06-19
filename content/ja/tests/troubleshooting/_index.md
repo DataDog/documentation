@@ -6,10 +6,6 @@ further_reading:
 title: Test Optimization のトラブルシューティング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このページでは、Test Optimization に関する問題のトラブルシューティングに役立つ情報を提供します。さらにヘルプが必要な場合は、[Datadog サポート][2]にお問い合わせください。
@@ -189,7 +185,7 @@ JUnit のテストレポートが正しくないのは、次のような点が�
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /ja/tests/test_impact_analysis/
 [13]: /ja/tests/#parameterized-test-configurations
 [14]: /ja/tests/#supported-features

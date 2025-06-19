@@ -5,20 +5,15 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## Application Security capabilities support
+## Code Security capabilities support
 
-The following application security capabilities are supported in the nginx integration, for the
+The following code security capabilities are supported in the nginx integration, for the
 specified tracer version:
 
-| Application Security capability        | Minimum nginx module version |
-|----------------------------------------|------------------------------|
-| Threat Detection                       | 1.2.0                        |
-| Threat Protection                      | 1.2.0                        |
-| Customize response to blocked requests | 1.2.0                        |
+| Code Security capability               | Minimum nginx module version |
+|----------------------------------------|------------------------------
 | Software Composition Analysis (SCA)    | not applicable               |
-| Code Security                          | not applicable               |
-| Automatic user activity event tracking | not supported                |
-| API Security                           | not supported                |
+| Runtime Code Analysis (IAST)           | not applicable               |
 
 Please review nginx version 1.2.0 [limitations][1].
 
@@ -32,4 +27,4 @@ the unsupported capabilities, let us know! Fill out <a
 href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send
 details</a>.</div>
 
-[1]: /security/application_security/threats/setup/threat_detection/nginx
+[1]: /security/application_security/setup/nginx

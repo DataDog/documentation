@@ -1,6 +1,10 @@
 ---
 title: SentinelOne Destination
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"
+  tag: "blog"
+  text: "Optimize EDR logs and route them to SentinelOne with Observability Pipelines"
 ---
 
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
@@ -35,6 +39,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1,000,000       | 1                   |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://usea1-partners.sentinelone.net/login

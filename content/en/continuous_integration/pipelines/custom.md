@@ -15,10 +15,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 You can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
@@ -34,6 +30,9 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 | [Partial retries][10] | Partial pipelines | View partially retried pipeline executions. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 | [Queue time][12] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Filter CI Jobs on the critical path][16] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][17] | Execution time  | View the amount of time pipelines have been running jobs. |
+
 
 ## Configure CI Visibility
 
@@ -128,3 +127,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [13]: /continuous_integration/search/#search-for-pipelines
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: /glossary/#running-pipeline
+[16]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[17]: /glossary/#pipeline-execution-time

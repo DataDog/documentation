@@ -18,12 +18,6 @@ is_beta: true
 title: Resource Catalog Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-Le Resource Catalog n'est pas disponible pour ce site.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Le Resource Catalog est disponible en version bêta.</div>
 
 ## Présentation

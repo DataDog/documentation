@@ -106,7 +106,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in Preview for native mobile apps. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
@@ -164,7 +164,7 @@ View user sessions in segments, such as checking when latency impacts your premi
 
 View your [backend traces, logs, and infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs-2.png" alt="RUM and APM" >}}
 
 ### Error tracking and crash reporting
 
@@ -192,6 +192,30 @@ Watch [browser recordings][12] of real users interacting with your website and s
 
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
 
+
+## Permissions
+
+By default, all users can change an application's RUM configuration.
+
+Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
+1. Select **Manage App Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**.
+
+**Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
+
+You must have edit access to restore general access to a restricted application. Complete the following steps:
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
+1. Select **Manage App Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -200,7 +224,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [2]: /real_user_monitoring/platform/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/platform/connect_rum_and_traces/
+[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
 [7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
@@ -213,3 +237,4 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [15]: /real_user_monitoring/browser/setup/
 [16]: /real_user_monitoring/mobile_and_tv_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
+[18]: /account_management/rbac/

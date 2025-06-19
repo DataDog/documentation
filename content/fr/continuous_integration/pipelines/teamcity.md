@@ -11,10 +11,6 @@ further_reading:
 title: Configurer le tracing sur un pipeline TeamCity
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 [TeamCity][1] est une intégration en continu et un serveur de livraison qui optimise et automatise les processus de développements de logiciels.

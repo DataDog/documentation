@@ -8,7 +8,14 @@ further_reading:
 
 ## Overview
 
-With Case Automation Rules, you can automate actions based on predefined rules, reducing manual effort, improving response times, and ensuring consistency across case workflows.
+Case Automation Rules streamline your incident management workflow by automatically triggering actions when specific conditions are met, allowing teams to standardize their response processes.
+
+You can define automated actions based on three key triggers:
+- **Case creation** - Automatically assign new cases to on-call team members
+- **Status changes** - Trigger follow-up actions when cases move between states
+- **Attribute changes** - Respond instantly when case properties like priority are modified
+
+These capabilities deliver faster response times while reducing manual effort. Teams can focus on problem-solving instead of ticket management, ensuring consistent case handling with full audit transparency for compliance and visibility.
 
 ## Configuring automation rules
 

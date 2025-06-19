@@ -341,6 +341,7 @@ Las versiones 6 y 7 del Agent son compatibles con las siguientes versiones de [A
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
+- 7.3 TL3 SP0
 
 
 [1]: /es/agent/basic_agent_usage/aix/

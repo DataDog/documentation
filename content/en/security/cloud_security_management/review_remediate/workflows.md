@@ -3,33 +3,30 @@ title: Automate Security Workflows with Workflow Automation
 further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"
-    text: Cloud Security Management
+    text: Cloud Security
   - link: "/service_management/workflows/"
     tag: "Documentation"
     text: Workflow Automation
 aliases:
   - /security/cloud_security_management/workflows
 products:
-  - name: CSM Threats
-    url: /security/threats/
+  - name: Workload Protection
+    url: /security/workload_protection/
     icon: cloud-security-management
-  - name: CSM Misconfigurations
+  - name: Cloud Security Misconfigurations
     url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
-  - name: CSM Identity Risks
+  - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
+site_support_id: workflows
 ---
 
 {{< product-availability >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [Cloud Security][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Understanding how triggers and sources work
 

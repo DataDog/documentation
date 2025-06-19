@@ -40,7 +40,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 1. En la [página de la integración de AWS][2], asegúrate de que `Database Migration Service` está habilitado en la pestaña `Metric Collection`.
 2. Instala la [integración de Datadog y AWS Database Migration Service (DMS)][3].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -66,11 +66,11 @@ Configura AWS Database Migration Service para enviar logs a un bucket de S3 o a 
 
 La integración de AWS Database Migration Service (DMS) no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de AWS Database Migration Service (DMS) no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 

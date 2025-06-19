@@ -7,7 +7,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-warning">Automated debug logs are supported for Java, Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
@@ -16,15 +16,15 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
   - Java: `1.26.0` or greater
-  - Python: `2.11.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.46.0` or greater
 
 ### Send a flare
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 {{% remote-flare %}}
+For example:
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
 
 ## Enable debug mode
 
@@ -134,6 +134,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
 or enable the debug mode during the `Start` config:
 
@@ -141,8 +143,7 @@ or enable the debug mode during the `Start` config:
 package main
 
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -163,8 +164,7 @@ package main
 import (
   "time"
 
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

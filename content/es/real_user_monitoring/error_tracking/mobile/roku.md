@@ -13,11 +13,8 @@ further_reading:
   text: Visualizar los datos de seguimiento de errores en el explorador
 title: Notificación de fallos y seguimiento de errores de Roku
 type: lenguaje de código múltiple
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM para Roku no está disponible en el sitio US1-FED de Datadog.</div>
-{{< /site-region >}}
 
 ## Información general
 
