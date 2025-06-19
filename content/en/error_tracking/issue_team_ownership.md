@@ -13,6 +13,7 @@ To enable Issue Team Ownership, follow these steps:
 
 1. **Set Up Source Code Integration**
    - Ensure SCI is enabled and connected to a supported Git provider (e.g., GitHub).
+   - Double check every requested permission is granted.
 
     *Note : Issue Team Ownership currently only supports GitHub*
 
@@ -26,6 +27,8 @@ To enable Issue Team Ownership, follow these steps:
 
 2. **Link Your GitHub Teams to Datadog Teams**
    - In the Datadog **Teams** menu, map your Datadog teams to the corresponding GitHub teams.
+
+    *Note: Go to `Teams > Your Team > Settings > GitHub Connection`*
 
 Once configured, issues will automatically be attributed to the relevant teams based on the stack traces and the `CODEOWNERS` file.
 
