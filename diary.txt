@@ -197,3 +197,45 @@ Fixed issues with llms.txt generation:
 
 ### Usage Instructions
 [Previous instructions remain the same...]
+
+### 7. CI/CD Integration
+Integrated LLM docs generation into the main build pipeline:
+- Modified `package.json` to include `llms.txt` creation in `build:hugo:preview` and `build:hugo:live` scripts
+- This ensures LLM docs are automatically built for preview and live environments
+- No changes needed to CI configuration files
+- Follows existing build patterns
+
+### Final Status
+✅ Project complete:
+1. Hugo configured for markdown output
+2. Templates created for conversion
+3. Build scripts integrated with yarn/npm
+4. CI/CD pipeline integration complete
+5. Full process documented in diary
+
+### Final Usage
+- LLM docs are now automatically generated with every preview and live build
+- Manual generation is still possible with:
+  ```bash
+  make llm-docs
+  # or
+  yarn run build:llm
+  ```
+
+This completes the implementation. The LLM documentation is now fully integrated into the build and deployment pipeline.
+
+### 8. Final CI Integration
+Reverted to the Makefile-based approach for CI integration.
+- Added `llm-docs` back to the `dependencies` target in the `Makefile`.
+- The `build_preview` job in the CI pipeline explicitly runs `make dependencies`.
+- This is the most reliable method to ensure our documentation is generated before the `build_site` command is called.
+- Reverted the `package.json` scripts to their original state to prevent conflicts.
+
+### Final Generation Process
+1. The CI `build_preview` job calls `make dependencies`.
+2. `make dependencies` calls our `make llm-docs` target.
+3. `make llm-docs` runs `yarn run build:llm`.
+4. `yarn run build:llm` runs hugo to create the `/llm` directory and its contents, and then copies the index to create `llms.txt`.
+5. The external `build_site` command then runs, and our files are already present in the `public` directory.
+
+This approach ensures our files are generated regardless of what the opaque `build_site` command does.
