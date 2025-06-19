@@ -226,6 +226,49 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 
 **Note**: Existing `auto_multi_line_extra_patterns` configurations are automatically supported [when migrating from V1][2].
 
+## JSON aggregation
+
+In Datadog Agent version 7.67+, pretty-printed or multi-line JSON is automatically detected and aggregated into a single line.
+
+For example, the following log:
+
+```
+2024-08-13 17:15:17 INFO My log message 1
+2024-08-13 17:15:17 INFO My log message 2
+{
+    "id": "565290f7-6ce0-4d3d-be7f-685905c27f04",
+    "clusters": 6,
+    "samples": 1301,
+    "top_match": {
+        "score": 1317,
+        "weight": 1.108
+    }
+}
+2024-08-13 17:15:17 INFO My log message 3
+2024-08-13 17:15:17 INFO My log message 4
+```
+
+is automatically converted to:
+
+```
+2024-08-13 17:15:17 INFO My log message 1
+2024-08-13 17:15:17 INFO My log message 2
+{"id":"565290f7-6ce0-4d3d-be7f-685905c27f04","clusters":6,"samples": 1301,"top_match":{"score":1317,"weight":1.108}}
+2024-08-13 17:15:17 INFO My log message 3
+2024-08-13 17:15:17 INFO My log message 4
+```
+
+This allows Datadog to identify the JSON as a structured log and allows its attributes to be automatically queryable.
+
+You can disable JSON aggregation with:
+
+```yaml
+logs_config:
+  auto_multi_line:
+    enable_json_aggregation: false
+```
+
+
 ## Advanced customization
 
 Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step assigns a label to each log, and the aggregation step aggregates logs based on those labels.
@@ -281,13 +324,23 @@ logs_config:
   tag_truncated_logs: true
 ```
 
-These settings add the following _tags_ to your logs, allowing you to search for them in the logs explorer:
+These settings add the following _tags_ to your logs, allowing you to search for them in the Logs Explorer:
 
 - `multiline`: Shows the aggregation source (for example, `auto_multiline`, `multiline_regex`)
 - `truncated`: Shows truncation source (for example, `single_line`, `multi_line`)
 
 **Note:** The Agent truncates logs that are too long to process. If a line is too long before multiline aggregation, the Agent assigns it the `single_line` tag. If an incorrect pattern causes a log to overflow the aggregation buffer, the Agent applies the `multi_line` tag.
 
+
+You can also tag aggregated JSON logs.
+
+```yaml
+logs_config:
+  auto_multi_line:
+    tag_aggregated_json: true
+```
+
+You can search for this tag by querying `aggregated_json:true` in the Logs Explorer.
 
 ## Configuration reference
 

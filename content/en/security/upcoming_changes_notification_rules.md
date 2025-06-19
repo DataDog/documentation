@@ -12,7 +12,7 @@ further_reading:
 
 This article outlines upcoming changes to how [notification rules][1] are configured. These changes mostly impact [Cloud Security][4], and more specifically cloud configuration and infrastructure configuration signals. 
 
-Note that for the time being, the changes will only affect how you get notified after manually upgrading a notification rule, or after the final deprecation date is reached (early 2025). 
+<div class="alert alert-info">The changes only affect how you receive notifications after manually upgrading a notification rule, or after the final deprecation date is reached (second half of 2025).</div>
 
 ## Signals deprecation for Cloud Security Misconfigurations
 
@@ -50,7 +50,7 @@ When you create a notification rule, you are now required to choose between two 
 
 - Notification rules can now be configured for identity risks and attack paths, as well as container image vulnerabilities.
 - Cloud Security Misconfigurations notifications now contain the full finding metadata. Previously, the notification contained only limited signal metadata.
-- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (early 2025). Terraform support for Notification Rules will be available in late 2024. 
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (second half of 2025).
 
 ## How to migrate existing notifications
 

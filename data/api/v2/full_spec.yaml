@@ -7301,6 +7301,14 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        customMessage:
+          description: Custom/Overridden message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name of the rule (used in case of Default
+            rule update).
+          type: string
         filters:
           description: Additional queries to filter matched events before they are
             processed.
@@ -7595,12 +7603,18 @@ components:
           description: SECL expression used to target the container to apply the action
             on
           type: string
+        hash:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionHash'
         kill:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleKill'
         metadata:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata'
         set:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
+      type: object
+    CloudWorkloadSecurityAgentRuleActionHash:
+      additionalProperties: {}
+      description: An empty object indicating the hash action
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -33420,6 +33434,8 @@ components:
 
             based on the event counts in the previously defined queries.'
           type: string
+        customStatus:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
         name:
           description: Name of the case.
           type: string
@@ -33946,6 +33962,13 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        customMessage:
+          description: Custom/Overridden Message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name (used in case of Default rule update).
+          type: string
         filters:
           description: Additional queries to filter matched events before they are
             processed. This field is deprecated for log detection, signal correlation,
@@ -34277,6 +34300,14 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
+        customMessage:
+          description: Custom/Overridden message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name of the rule (used in case of Default
+            rule update).
+          type: string
         filters:
           description: Additional queries to filter matched events before they are
             processed. This field is deprecated for log detection, signal correlation,
@@ -34376,6 +34407,14 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        customMessage:
+          description: Custom/Overridden message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name of the rule (used in case of Default
+            rule update).
+          type: string
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
@@ -34763,6 +34802,14 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
+        customMessage:
+          description: Custom/Overridden message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name of the rule (used in case of Default
+            rule update).
+          type: string
         filters:
           description: Additional queries to filter matched events before they are
             processed. This field is deprecated for log detection, signal correlation,
@@ -34840,6 +34887,10 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        customQueryExtension:
+          description: Query extension to append to the logs query.
+          example: a > 3
+          type: string
         dataSource:
           $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
@@ -34903,6 +34954,14 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        customMessage:
+          description: Custom/Overridden message for generated signals (used in case
+            of Default rule update).
+          type: string
+        customName:
+          description: Custom/Overridden name of the rule (used in case of Default
+            rule update).
+          type: string
         defaultTags:
           description: Default Tags for default rules (included in tags)
           example:
@@ -35349,6 +35408,8 @@ components:
     SecurityMonitoringThirdPartyRuleCase:
       description: Case when signal is generated by a third party rule.
       properties:
+        customStatus:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
         name:
           description: Name of the case.
           type: string
@@ -57035,8 +57096,8 @@ paths:
               \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
               \     \"enabled\": true,\n      \"product_tags\": [\"security:attack\",
               \"technique:T1059\"],\n      \"actions\": [{\"set\": {\"name\": \"test_set\",
-              \"value\": \"test_value\", \"scope\": \"process\"}}],\n      \"policy_id\":
-              \"{{ policy.data.id }}\"\n     }\n  }\n}"
+              \"value\": \"test_value\", \"scope\": \"process\"}}, {\"hash\": {}}],\n
+              \     \"policy_id\": \"{{ policy.data.id }}\"\n     }\n  }\n}"
           step: there is a valid "agent_rule_rc" in the system
       x-menu-order: 3
       x-undo:
