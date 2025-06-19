@@ -85,7 +85,7 @@ NeoLoad の構成の詳細な手順については、[NeoLoad に関するドキ
 デフォルトの NeoLoad ダッシュボードをダッシュボードリストに追加するには、Datadog で NeoLoad インテグレーションをインストールします。
 
 
-## 収集されるデータ
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "neoload" >}}

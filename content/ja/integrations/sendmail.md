@@ -87,7 +87,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `sendmail` を探します。
 
-## 収集されるデータ
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "sendmail" >}}
