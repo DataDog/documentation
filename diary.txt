@@ -239,3 +239,18 @@ Reverted to the Makefile-based approach for CI integration.
 5. The external `build_site` command then runs, and our files are already present in the `public` directory.
 
 This approach ensures our files are generated regardless of what the opaque `build_site` command does.
+
+### 9. CI/CD Hotfix
+A CI pipeline failure was identified, caused by the `make llm-docs` command attempting to execute a `yarn run build:llm` script that no longer exists. This was a result of the decision in step 8 to revert to a pure Makefile-based approach for CI. The `package.json` was reverted, but the `Makefile` was not updated to match.
+
+The fix involved modifying the `Makefile`'s `llm-docs` target to run the required commands directly, instead of relying on the (now-removed) yarn script.
+
+### Updated Generation Process
+1. The CI `build_preview` job calls `make dependencies`.
+2. `make dependencies` calls our `make llm-docs` target.
+3. `make llm-docs` now directly runs:
+   - `./node_modules/.bin/hugo -d ./public -s ./ --logLevel info` to generate the LLM-friendly markdown.
+   - `cp public/llm/index.md public/llms.txt` to create the final overview file.
+4. The external `build_site` command then runs, with the files already present in the `public` directory.
+
+This change removes the broken dependency and makes the build process more resilient.

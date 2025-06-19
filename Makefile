@@ -333,4 +333,5 @@ endef
 # build llm docs
 llm-docs: node_modules ## Generate LLM-friendly markdown documentation
 	@echo "Generating LLM documentation..."
-	@yarn run build:llm
+	@./node_modules/.bin/hugo -d ./public -s ./ --logLevel info
+	@cp public/llm/index.md public/llms.txt
