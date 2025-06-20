@@ -190,7 +190,7 @@ To set up logging in your application, see [Node.js Log Collection][603]. To set
 
 ### Instrumentation
 
-Instrumentation is done through a sidecar container that runs alongside your main application container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
+Instrumentation is done using a sidecar container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
 
 {{< tabs >}}
 {{% tab "Automated" %}}
