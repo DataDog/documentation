@@ -6,9 +6,10 @@ Use the aggregation key processor to generate a custom aggregation key (`@aggreg
 
 **Notes**:
 
-- Attributes must start with the `@` symbol and follow the path of the standard attribute as it appears in your JSON. For example, `@evt.integration_id`. 
+- Attributes must start with the `@` symbol and follow the path of the standard attribute as it appears in your JSON. For example, `@evt.category`. 
 - Tag keys must follow a valid tag key format outlined in [Getting Started with Tags][2].
 - A maximum of 5 attributes or tag keys can be added to generate an aggregation key.
+- Events originating from different sources or integrations receive distinct aggregation keys.
 - By default, existing aggregation keys are overwritten by this processor. Adjust the toggle to configure this behavior.
 
 <div class="alert alert-warning">Aggregation keys are included by default in Datadog Monitor alerts and are not modified by the aggregation key processor. This ensures that monitor alert events retain their original keys and are not overwritten.</div>
