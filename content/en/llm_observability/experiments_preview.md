@@ -1,9 +1,10 @@
 ---
 title: Experiments
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/llm-experiments/'
-      tag: 'Blog'
-      text: 'Create and monitor LLM experiments with Datadog'
+  - link: 'https://www.datadoghq.com/blog/llm-experiments/'
+    tag: 'Blog'
+    text: 'Create and monitor LLM experiments with Datadog'
+
 ---
 {{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
 LLM Observability Experiments is in Preview.

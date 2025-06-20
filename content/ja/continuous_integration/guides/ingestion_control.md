@@ -3,7 +3,7 @@ description: CI Visibility で処理しないために特定のイベントを�
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: ブログ
-  text: Datadog Intelligent Test Runner による CI テストの効率化
+  text: Datadog Test Impact Analysis で CI テストを効率化
 - link: /continuous_integration/pipelines
   tag: ドキュメント
   text: Pipeline Visibility について

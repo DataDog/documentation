@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
   tag: "blog"
   text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/monitor-flex-compute-usage/"
+  tag: "Blog"
+  text: "Monitor and optimize your Flex Logs compute usage"
 ---
 
 ## Overview
