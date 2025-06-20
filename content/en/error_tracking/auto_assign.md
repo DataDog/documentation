@@ -12,9 +12,7 @@ further_reading:
 
 ## Overview
 
-Auto Assign helps teams quickly resolve issues by automatically assigning them to the most likely responsible developers. This feature analyzes git commit history to identify suspect commits that may have introduced the issue, then assigns the issue directly to the developer who made those commits.
-
-Auto Assign uses [suspect commits][1] to identify developers who may have introduced issues. When an issue is automatically assigned to a developer, they receive an immediate notification.
+Auto Assign helps teams quickly resolve issues by automatically assigning them to the most likely responsible developers. It uses [suspect commits][1] to identify developers who may have introduced issues, then assigns the issue directly to the developer who made those commits. When an issue is automatically assigned to a developer, they receive an immediate notification.
 
 ## Setup
 
