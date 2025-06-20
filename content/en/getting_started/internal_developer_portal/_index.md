@@ -56,7 +56,7 @@ IDP starts with [Software Catalog][1], a real-time inventory of your software ar
 You can add entities from:
 
 - [APM, USM, and RUM][7]: Automatically discovered based on application telemetry
-- [Manual definitions][8]: Created through the [Datadog app][9] or imported via tools like Terraform, Datadog APIs, or the GitHub integration
+- [Manual definitions][8]: Created through [Datadog][9] or imported through tools like Terraform, Datadog APIs, or the GitHub integration
 - [Third-party systems][10]: Through integrations with ServiceNow and Backstage
 
 Start with a basic definition to register the entity, then enrich it with metadata to add ownership and operational context, including:
