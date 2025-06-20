@@ -208,16 +208,16 @@ outputFormats:
         mediaType: 'text/plain'
         isPlainText: true
         baseName: 'index'
-         LLMDirectory:
-         baseName: 'llms'
-         isPlainText: true
-         mediaType: 'text/plain'
-         notAlternative: true
+    LLMDirectory:
+        baseName: 'llms'
+        isPlainText: true
+        mediaType: 'text/plain'
+        notAlternative: true
 
 outputs:
-  home: ['html', 'llmdirectory']
-  section: ['html', 'plaintext']
-  page: ['html', 'plaintext']
+    home: ['html', 'llmdirectory']
+    section: ['html', 'plaintext']
+    page: ['html', 'plaintext']
 
 timeout: '90s'
 
