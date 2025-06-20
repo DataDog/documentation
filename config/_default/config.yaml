@@ -204,11 +204,11 @@ outputFormats:
         isPlainText: true
         mediaType: 'text/plain'
         notAlternative: true
-    PlainText:
+    plaintext:
         mediaType: 'text/plain'
         isPlainText: true
         baseName: 'index'
-    LLMDirectory:
+    llmdirectory:
         baseName: 'llms'
         isPlainText: true
         mediaType: 'text/plain'
