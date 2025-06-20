@@ -16,11 +16,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Monitor your Roku channels with Datadog RUM
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku are not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -190,8 +187,6 @@ end sub
 {{< /site-region >}}
 
 #### Sample session rates
-
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 

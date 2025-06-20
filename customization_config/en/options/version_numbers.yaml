@@ -1,0 +1,13 @@
+options:
+
+# Earlier than 4.34.0
+- label: "<4.34.0"
+  id: lt_4_34_0
+
+# 4.34.0 or later
+- label: ">=4.34.0"
+  id: gte_4_34_0
+
+# 5.4.0 or later
+- label: ">=5.4.0"
+  id: gte_5_4_0

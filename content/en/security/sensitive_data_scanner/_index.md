@@ -66,6 +66,10 @@ The data that can be scanned and redacted are:
 - RUM: Event attribute values only
 - Events: Event attribute values only
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - [Create your own rules using regex patterns][3].
@@ -93,7 +97,7 @@ Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners
 
 Sensitive Data Scanner leverages its [entire rules library][10] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data that was scanned is sent back to Datadog.
 
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security.
 
 See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 

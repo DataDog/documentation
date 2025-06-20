@@ -20,10 +20,10 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
+  sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
 custom_kind: integration
 dependencies:
@@ -56,7 +56,7 @@ tile:
   title: CRI
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!-- SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -110,7 +110,7 @@ spec:
 
 **注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
 
-### 構成
+### 設定
 
 1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][2] を参照してください。
 
@@ -120,13 +120,13 @@ spec:
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "cri" >}}
 
 
-### サービスチェック
+### サービス チェック
 
 CRI には、サービスのチェック機能は含まれません。
 

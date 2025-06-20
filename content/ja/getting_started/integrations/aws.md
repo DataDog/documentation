@@ -114,7 +114,7 @@ title: AWS の概要
     a. インテグレーションする AWS リージョンを選択します。 
     b. Datadog [API キー][9]を追加します。 
     c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。 
-    d. 必要に応じて、[Cloud Security Management Misconfigurations][54] を有効にして、クラウド環境、ホスト、コンテナをスキャンして、誤構成やセキュリティリスクを検出します。
+    d. 必要に応じて、[Cloud Security Misconfigurations][54] を有効にして、クラウド環境、ホスト、コンテナをスキャンして、誤構成やセキュリティリスクを検出します。
 
 5. **Launch CloudFormation Template** をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。すべてのパラメーターは、事前の Datadog フォームでの選択に基づいて入力されているため、必要な場合以外は編集する必要はありません。
 **注:** `DatadogAppKey` パラメーターは、CloudFormation スタックが Datadog に API コールを行い、この AWS アカウントに対して Datadog の構成を追加・編集できるようにするものです。キーは自動的に生成され、Datadog アカウントに結びつけられます。
@@ -208,9 +208,9 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 [Cloud SIEM の概要][50]を参照して、すぐに使える[ログ検出ルール][51]に照らし合わせてログを評価します。これらのルールはカスタマイズ可能で、脅威が検出されると[セキュリティシグナルエクスプローラー][52]でアクセス可能なセキュリティシグナルが生成されます。適切なチームに通知するために、[通知ルール][53]を使用して複数のルールにまたがる通知設定を構成することができます。
 
-#### Cloud Security Management Misconfigurations
+#### Cloud Security Misconfigurations
 
-[CSM Misconfigurations の設定][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能な[クラウド][55]および[インフラストラクチャー][56]のコンプライアンスルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
+クラウド環境の誤構成を検出・評価する方法については、[Cloud Security Misconfigurations の設定][54] ガイドを参照してください。リソース構成データは、デフォルトで提供される [Cloud][55] と [Infrastructure][56] のコンプライアンスルールに照らして評価され、攻撃手法や潜在的な誤構成をフラグ付けすることで、迅速な対応と是正を実現します。
 
 ### トラブルシューティング
 

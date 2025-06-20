@@ -59,6 +59,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -87,6 +88,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
@@ -116,6 +118,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -124,7 +127,7 @@ datadog:
         fieldRef:
           fieldPath: spec.nodeName
     hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-    
+
 providers:
   aks:
     enabled: true
@@ -143,7 +146,7 @@ The AKS Kubelet certificate requires changing the Kubelet host to the `spec.node
 In some clusters, DNS resolution for `spec.nodeName` inside Pods does not work in AKS. This affects:
  - Windows nodes
  - Linux nodes, when the cluster is set up in a virtual network using custom DNS
- 
+
 In this case, use the AKS configuration provided below to set `tlsVerify: false` and remove any settings for the Kubelet host path (which defaults to `status.hostIP`). **Do not set the Kubelet host path and `tlsVerify: false` in the same configuration**.
 
 {{< tabs >}}
@@ -158,6 +161,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -179,6 +183,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -212,9 +217,11 @@ Since Agent 7.26, no specific configuration is required for GKE (whether you run
 
 GKE Autopilot requires some configuration, shown below.
 
-Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
+Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent, Process Agent and System-Probe containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Cloud Network Monitoring is supported from version 3.100.0 of the Helm chart and with GKE version 1.32.1-gke.1729000 or later
+Starting with Agent `7.65.0+` and version `3.113.0+` of the Helm chart, Datadog recommends using `datadog.kubelet.useApiServer` for the Agent to query the pod list from the API server. Avoid using the [deprecated read-only kubelet port][12].
+
+**Note**: Cloud Network Monitoring is supported from version `3.100.0` of the Helm chart and with GKE version `1.32.1-gke.1729000` or later.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -231,6 +238,12 @@ datadog:
   # Default value is `datadoghq.com' (the US1 site)
   # Documentation: https://docs.datadoghq.com/getting_started/site/
   site: <DATADOG_SITE>
+
+  # This option uses the API server to retrieve the node-level pod list from the API server.
+  # This setting is necessary to migrate away from the deprecated read-only kubelet port.
+  # Requires Agent 7.65.0+ and Datadog Helm chart version 3.113.0+.
+  kubelet:
+    useApiServer: true
 
 agents:
   containers:
@@ -533,6 +546,7 @@ spec:
     kubeStateMetricsCore:
       enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -556,6 +570,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -591,3 +606,4 @@ agents:
 [9]: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
 [10]: https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods
 [11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes
+[12]: https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port

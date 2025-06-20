@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -61,20 +61,39 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-# Download all dependencies and run the site
-start: setup-build-scripts ## Build and run docs including external content.
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-cdocs:
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js;
+
+# build .mdoc.md files, then watch for changes
+watch-cdocs: 
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js --watch;
+
+start:
+	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make setup-build-scripts
+	@make build-cdocs
 	@make server
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make update_websites_sources_module
+	@make server
+
+# Leave build scripts in place, but skip dependencies and sources_module
+# Useful for testing local changes to the CDOCS build script
+start-cdocs-preserve-build:
+	@make build-cdocs
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
@@ -95,12 +114,9 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 node_modules: package.json yarn.lock
 	@yarn install --immutable
 
-source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
-
 # All the requirements for a full build
-dependencies: clean source-dd-source
-	make hugpython all-examples update_pre_build node_modules placeholders
+dependencies: clean
+	make hugpython all-examples update_pre_build node_modules build-cdocs placeholders
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)

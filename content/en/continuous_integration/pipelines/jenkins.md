@@ -14,10 +14,6 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [Jenkins][19] is an automation server with continuous integration and delivery features. With its plugin architecture, Jenkins can be customized to fit any CI/CD need and automates all aspects of project development, testing, and deployment.
@@ -38,6 +34,8 @@ Set up tracing in Jenkins to collect data across various stages of your pipeline
 | [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
 | [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages.                                                   |
 | [Running pipelines][32] | Running pipelines | View pipeline executions that are running. Requires Jenkins plugin version >= 8.0.0                      |
+| [Filter CI Jobs on the critical path][33] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][34] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 The following Jenkins versions are supported:
 
@@ -1256,3 +1254,5 @@ try restarting the Jenkins instance.
 [30]: /developers/dogstatsd/
 [31]: /containers/docker/apm/#tracing-from-the-host
 [32]: /glossary/#running-pipeline
+[33]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[34]: /glossary/#pipeline-execution-time

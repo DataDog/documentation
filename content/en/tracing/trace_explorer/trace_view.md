@@ -113,6 +113,18 @@ To view additional information about the service entry spans for each node, hove
 {{% /tab %}}
 {{< /tabs >}}
 
+### Trace preview
+When a trace size exceeds 100MB, it cannot be fully visualized using the default trace side panel. In such cases, Trace Preview mode is enabled. This mode returns only the most critical spans to help you continue your investigation. These include:
+
+- Service entry level spans
+- Error spans
+- Long-running spans
+- Spans linked to other spans or traces
+
+The available visualization options for large traces are limited to the Waterfall and Map views. In Preview mode, the Waterfall view provides additional an option to fetch spans that are not included by default. These spans are grouped and represented using numbered pills. Each pill displays the total number of spans available in that group. You can click on a number pill to expand and view all spans within that group.
+
+{{< img src="tracing/visualization/trace/trace-preview.png" alt="Trace preview" style="width:100%;">}}
+
 ## Span search
 
 In the Waterfall and Flamegraph visualizations, the search option allows you to find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
@@ -228,11 +240,11 @@ Click on a service's span to see network dependencies of the service making the 
 
 See attack attempts that target the services of the distributed trace. You can see the pattern used by the attacker, the rule that detects the attack, and whether the attacker found a vulnerability in your service.
 
-Click **View in ASM** to investigate further using [Datadog Application Security Management][1].
+Click **View in AAP** to investigate further using [Datadog App and API Protection][1].
 
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
-[1]: /security/application_security/how-appsec-works/
+[1]: /security/application_security/how-it-works/
 {{% /tab %}}
 {{% tab "Profiles" %}}
 

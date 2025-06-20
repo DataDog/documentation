@@ -6,10 +6,6 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 A Page is sent to a Team and subsequently routed through that Team's escalation policies and schedules. After your Team is [onboarded to Datadog On-Call][1], you can start paging it.
 
 ### Page from notifications
@@ -21,7 +17,7 @@ You can send Pages to On-Call Teams wherever @-handles are supported, including 
 
 #### Monitors and dynamic urgencies
 
-If you send a Page through a monitor alert, and your Team's processing rule uses dynamic urgencies:
+If you send a Page through a monitor alert, and your Team's routing rule uses dynamic urgencies:
 - If the WARN threshold is crossed, the Page urgency is set to `low`.
 - If the ALERT threshold is crossed, the Page urgency is set to `high`.
 
@@ -35,7 +31,7 @@ To page a team through email:
 
 ### Page manually
 
-You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams.
+You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Datadog team or an individual directly (even if they aren't On-Call).
 
 #### Through Datadog
 
