@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-Auto Assign helps teams quickly resolve issues by automatically assigning them to the most likely responsible developers. It uses [suspect commits][1] to identify developers who may have introduced issues, then assigns the issue directly to the developer who made those commits. When an issue is automatically assigned to a developer, they receive an immediate notification.
+Auto Assign automates triaging by assigning issues to the author of their [suspect commit][1].
+
+This feature enables faster issue resolution by automatically assigning issues to developers most familiar with the relevant code, while reducing manual triage work. Developers are immediately notified when issues arise from their code.
 
 ## Setup
 
@@ -22,18 +24,15 @@ Once configured and enabled, issues are automatically assigned to developers bas
 
 - Ensure [Source Code Integration][2] is enabled and setup.
 - Install [the GitHub integration][3]. Make sure all requested permission is granted for the GitHub integration.
-
-### Ensure email consistency
-Developers must use the same email address in both Git and their Datadog account. This email matching is essential for Auto Assign to correctly identify and assign issues to the right users.
+- Developers must use the same email address in both Git and their Datadog account.
 
 ## How it works
 
 When an error occurs, Auto Assign:
 
-1. Analyzes the stack trace to identify suspect commits
-2. Determines the developer responsible for the most recent suspect commit
-3. Automatically assigns the issue to that developer
-4. Sends a notification to the assigned developer
+1. Analyzes the stack trace to identify a suspect commit
+2. Finds the author of this commit
+3. Assigns the issue to that developer and sends a notification.
 
 ## Managing assignments
 
@@ -42,13 +41,6 @@ Navigate to the Error Tracking configuration section in Datadog to manage Auto A
 
 ### Assignment management
 You can view assigned developers directly within each issue in Datadog. If needed, manual reassignment is always possible to override the automatic assignment.
-
-## Benefits
-
-- **Faster issue resolution**: Issues are automatically assigned to developers who are most familiar with the relevant code
-- **Direct accountability**: Individual developers receive clear ownership of issues related to their recent commits
-- **Proactive notifications**: Assigned developers are immediately notified when issues are detected, enabling quick response times
-- **Reduced triage time**: Eliminates manual assignment processes by automatically identifying the most likely responsible developer
 
 ## Further Reading
 
