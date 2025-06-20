@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Cloud providers offer commitment-based discount programs (like {{< tooltip text="Reserved Instance (RI)" tooltip="A type of cloud commitment where you reserve capacity for a specific instance type and term, usually at a discounted rate." >}} and {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}) to help you save on predictable usage. Datadog's Commitment Programs feature helps you monitor, optimize, and maximize the value of these discounts across your cloud environments.
+Cloud providers offer commitment-based discount programs (like {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance type for a one- or three-year term." >}} and {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}) to help you save on predictable usage. Datadog's Commitment Programs feature helps you monitor, optimize, and maximize the value of these discounts across your cloud environments.
 
 With this feature, you can:
 
@@ -48,7 +48,7 @@ The commitments overview section is where you can review the following Key Perfo
 
 - **Effective Savings Rate (ESR):** The percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments.
 
-  _Example: Coverage is 90% but ESR is 65%—you may have underutilized commitments dragging down your savings._
+  _Example: Your RIs may offer a 62% discount, but if your ESR is only 45%, it indicates that underutilized commitments are reducing your actual savings._
 - **Absolute Savings:** The total dollar amount saved by using commitment programs versus on-demand rates.
 
   _Example: You spent $10,000 on cloud services last month, but would have spent $14,000 at on-demand rates, so your absolute savings is $4,000._
@@ -92,25 +92,30 @@ Use this section to:
 
 The Commitments Explorer provides a detailed, interactive table of all your cloud commitment contracts, such as database reserved instances. It allows you to browse, search, filter, and sort your commitments by key attributes so you can track your inventory, monitor expiration dates, and identify opportunities to optimize usage and savings. 
 
-{{< img src="cloud_cost/planning/commitments-commitment-explorer-2.png" alt="Table showing AWS EC2 Reserved Instances commitments with the top section highlighting the columns button and five expired commitments, all of which had 100% utilization." style="width:100%;" >}}
+{{< img src="cloud_cost/planning/commitments-explorer-3.png" alt="Table of AWS RDS Reserved Instance commitments, highlighting the 'Columns' button, an expired commitment, and a commitment that is expiring soon." style="width:100%;" >}}
 
 - You can customize the table view by showing or hiding columns like Start Date, Multi-AZ, and NFU # (where applicable) to focus on the information most relevant to your needs.
-- The table also highlights commitments that are expiring soon.
+- The table also highlights commitments that have recently expired or are expiring soon, helping you plan renewals and avoid paying on-demand prices.
 
-| Column | Description |
-|--------|-------------|
-| Reservation ARN | The unique Amazon Resource Name identifying the Reserved Instance commitment. |
-| Payment model | The payment option selected for the Reserved Instance (such as No Upfront, Partial Upfront, All Upfront). |
-| Term | The duration of the Reserved Instance commitment (such as 1 Year, 3 Years). |
-| Region | The region where the Reserved Instance is applied. |
-| Instance type | The type and size of the database instance covered by the commitment (like `db.r6g.large`). |
-| DB engine | The database engine used by the instance (such as PostgreSQL, MySQL, SQL Server). |
-| Start date | The date when the Reserved Instance term begins. |
-| End date | The date when the Reserved Instance term ends. |
-| Multi-AZ | Indicates whether the Reserved Instance covers a multiple availability zone deployment (Yes/No). |
-| Instance # | The number of database instances covered by the Reserved Instance. |
-| NFU # | The number of normalized units (NFUs) covered, which standardizes instance sizes for comparison. |
-| Utilization | The percentage of the Reserved Instance that is actually being used during the selected period. |
+The columns displayed in the Commitments Explorer are customizable and vary depending on the product (for example, Amazon RDS or EC2) and the specific commitment program. The following table describes the available columns.
+
+| Column | Description | Product |
+|---|---|---|
+| Reservation ARN | The unique Amazon Resource Name (ARN) that identifies the Reserved Instance commitment. | All |
+| Payment Model | The payment option for the Reserved Instance (for example, No Upfront, Partial Upfront, All Upfront). | All |
+| Term | The duration of the Reserved Instance commitment (for example, 1 Year, 3 Years). | All |
+| Region | The AWS Region where the Reserved Instance is applied. | All |
+| Instance Type | The type and size of the instance covered by the commitment (for example, `db.r6g.large` for RDS or `m5.large` for EC2). | All |
+| Start Date | The date when the Reserved Instance term begins. | All |
+| End Date | The date when the Reserved Instance term ends. | All |
+| Instance # | The number of instances covered by the Reserved Instance. | All |
+| NFU # | The number of Normalization Factor Units (NFUs) covered, which standardizes instance sizes for comparison. | All |
+| Utilization | The percentage of the Reserved Instance that was used during the selected period. | All |
+| DB Engine | The database engine used by the instance (such as PostgreSQL, MySQL, SQL Server). | Amazon RDS |
+| Multi-AZ | Indicates whether the Reserved Instance covers a multiple availability zone deployment (Yes/No). | Amazon RDS |
+| OS | The operating system of the instance (for example, Linux or Windows). | Amazon EC2 |
+| Offering Class | The class of Reserved Instance (Standard or Convertible). | Amazon EC2 |
+| AZ | The specific Availability Zone where the Reserved Instance is located. | Amazon EC2 |
 
 ## Example use cases
 
@@ -137,12 +142,12 @@ Several Reserved Instances are set to expire next month, and you want to avoid u
 ### Targeting high on-demand spend
 
 **Scenario**  
-Your cloud bill shows a spike in on-demand usage in a specific region.
+Your cloud bill shows consistently high on-demand usage for a particular service or region.
 
 **How to use Commitment Programs**  
-1. Use the **On-demand Hot-Spots** section to identify which services, regions, or accounts are incurring high on-demand costs.
-2. Estimate potential savings by converting this usage to commitment-based pricing.
-3. Purchase new commitments or adjust workloads to reduce future on-demand costs.
+1. Use the **On-demand Hot-Spots** section to identify which services, regions, or accounts have significant and steady on-demand costs.
+2. Analyze the usage patterns to confirm they are predictable.
+3. Purchase new commitments to cover the consistent usage and reduce costs.
 
 ### Optimize commitment strategy across multiple accounts
 
