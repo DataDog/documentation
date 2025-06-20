@@ -152,7 +152,7 @@ To configure Datadog using SST v3, follow these steps:
       DD_SITE: "<DATADOG_SITE>",
     },
     layers: [
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:81",
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}",
     ],
   });
   ```

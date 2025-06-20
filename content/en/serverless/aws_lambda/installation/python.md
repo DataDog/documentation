@@ -316,7 +316,7 @@ To configure Datadog using SST v3, follow these steps:
   ```ts
   const app = new sst.aws.Function("MyApp", {
     handler: "lambda_function.lambda_handler",
-    runtime: "python3.12",
+    runtime: "python3.13",
     environment: {
       DD_ENV: "<ENVIRONMENT>",
       DD_SERVICE: "<SERVICE_NAME>",
@@ -325,15 +325,15 @@ To configure Datadog using SST v3, follow these steps:
       DD_SITE: "<DATADOG_SITE>",
     },
     layers: [
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:81",        
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:110",
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}",
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}",
     ],
   });
   ```
 
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
-  
-     - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python" >}}.
+
+     - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python-versions" >}}.
 
   2. Fill in the environment variable placeholders:
      - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
