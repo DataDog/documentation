@@ -112,11 +112,11 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
-You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
-
 ### Estimated token usage
 
-LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
+You can easiliy monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
+
+If you need more details, LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
 
 
 - `ml_obs.estimated_usage.llm.input.tokens`
