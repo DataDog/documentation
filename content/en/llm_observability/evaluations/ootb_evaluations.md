@@ -13,10 +13,6 @@ further_reading:
   text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Out-of-the-box evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
