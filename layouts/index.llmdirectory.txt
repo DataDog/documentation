@@ -1,0 +1,56 @@
+Datadog Documentation - LLM Directory
+=====================================
+
+This is a plain text directory of Datadog's documentation optimized for Large Language Model consumption.
+
+Site URL: {{ .Site.BaseURL }}
+Generated: {{ now.Format "2006-01-02 15:04:05" }}
+Total Pages: {{ len .Site.AllPages }}
+
+NAVIGATION STRUCTURE
+=====================
+
+{{ if .Site.Menus.main }}Main Navigation:
+{{ range .Site.Menus.main -}}
+- {{ .Name }} ({{ .URL }})
+{{ end }}
+
+{{ end }}TOP-LEVEL SECTIONS
+==================
+
+{{ range where .Site.Pages "Kind" "section" }}{{ if eq .Parent .Site.Home }}- {{ .Title }} ({{ .RelPermalink }})
+  Description: {{ .Summary | plainify | truncate 100 }}
+  Total Subsections: {{ len .Sections }}
+  Total Pages: {{ len .Pages }}
+
+{{ end }}{{ end }}RECENT UPDATES
+==============
+
+{{ range first 10 (.Site.RegularPages.ByLastmod.Reverse) }}- {{ .Title }} ({{ .RelPermalink }})
+  Updated: {{ .Lastmod.Format "2006-01-02" }}
+  Section: {{ .Section }}
+
+{{ end }}
+
+HOW TO USE THIS DIRECTORY
+==========================
+
+1. All documentation pages have corresponding .txt versions for LLM consumption
+   - Add .txt to any page URL to get the plain text version
+   - Example: /getting_started/ becomes /getting_started/index.txt
+
+2. Navigation structure:
+   - This file (llms.txt) provides the main directory
+   - Section pages list their child pages
+   - Individual pages contain the full content in plain text
+
+3. Content format:
+   - Title with underline
+   - Metadata (URL, last modified, tags, aliases)
+   - Clean plain text content
+   - Footer indicating LLM optimization
+
+For more information, visit: {{ .Site.BaseURL }}
+
+---
+Generated for LLM consumption from Datadog Documentation
