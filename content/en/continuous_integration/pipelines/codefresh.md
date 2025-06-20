@@ -11,13 +11,9 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications. 
+[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications.
 
 Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
@@ -29,23 +25,25 @@ Set up tracing in Codefresh to collect data on each step of your pipelines, anal
 | [Manual steps][8] | Manual steps | View manually triggered pipelines. |
 | [Parameters][9] | Parameters | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
 | [Pipeline failure reasons][10] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Filter CI Jobs on the critical path][12] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][13] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
 
 To set up the Datadog integration for [Codefresh][1]:
 
-1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **CONFIGURE** on the Datadog row.
-2. Click **ADD INTEGRATION**.
+1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **Configure** on the Datadog row.
+2. Click **Add Integration**.
 3. Fill the form with the following information:
-   * **Datadog site**: Select {{< region-param key="dd_site" code="true" >}} from the dropdown.
-   * **Token**: Add your [Datadog API Key][3].
-4. Click **SAVE** to save the integration.
+   * **Datadog site**: Select `{{< region-param key="dd_site" code="true" >}}` from the dropdown.
+   * **Token**: Add your [Datadog API key][3].
+4. Click **Save** to save the integration.
 
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][11].
 
 ## Further reading
 
@@ -61,3 +59,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [8]: /glossary/#manual-step
 [9]: /glossary/#parameter
 [10]: /glossary/#pipeline-failure
+[11]: /continuous_integration/search/#search-for-pipelines
+[12]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[13]: /glossary/#pipeline-execution-time

@@ -1,13 +1,7 @@
 ---
 title: (LEGACY) Monitoring
 disable_toc: false
-aliases:
-  - /observability_pipelines/monitoring/
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 

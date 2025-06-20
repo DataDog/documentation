@@ -1,28 +1,28 @@
 ---
-title: Integración de la facturación con Alibaba
+title: Facturación de la integración de Alibaba
 ---
 
 ## Información general
 
-Datadog cobra por todas las máquinas virtuales de Alibaba monitorizadas en Datadog. Estas máquinas son facturables con independencia de que el Datadog Agent esté o no instalado. **No se te cobrará dos veces** si estás ejecutando el Agent en una máquina virtual de Alibaba seleccionada por la integración de Alibaba.
+Datadog cobra todas las Máquinas Virtuales de Alibaba que estén siendo monitorizadas en Datadog. Estas máquinas son facturables independientemente de si el Datadog Agent está instalado. **No se te facturará dos veces** si estás ejecutando el Agent en una máquina virtual de Alibaba recogida por la integración de Alibaba.
 
-Otros recursos de Alibaba (CDN, Express Connect Instances, Aspara DB, etc.) no forman parte de la facturación mensual.
+Otros recursos de Alibaba (CDNs, instancias de Express Connect, bases de datos de Aspara, etc.) no forman parte de la facturación mensual.
 
 ## Exclusión de máquinas virtuales de Alibaba
 
-Usa el cuadro de [integración Datadog-Alibaba][1] para filtrar tus máquinas virtuales monitorizadas por Datadog que usen [etiquetas de host][2]. Ve a la pestaña **Configuración** y edita una cuenta existente o añade una nueva. Para filtrar por cada cuenta, haz clic en una de ellas y rellena el campo **Optionally limit metrics collection to hosts with tag:** (Opcionalmente, limitar la recopilación de métricas a los hosts con etiqueta:).
+Utiliza el cuadro de [integración de Datadog y Alibaba][1] para filtrar tus máquinas virtuales monitorizadas por Datadog con [etiquetas (tags) de host][2]. Ve a la pestaña **Configuration** (Configuración) y edita una cuenta existente o añade una nueva. El filtrado para cada cuenta se controla haciendo clic en ella y rellenando el campo **Optionally limit metrics collection to hosts with tag** (Opcionalmente, limita la recopilación de métricas a hosts con etiquetas):
 
 {{< img src="account_management/billing/alibaba_filter.png" alt="Filtro de máquinas virtuales de Alibaba" >}}
 
-Al añadir límites a usuarios de Alibaba existentes dentro del cuadro de integración, las máquinas virtuales detectadas previamente podrían permanecer en la [lista de infraestructura][3] hasta dos horas. Durante el periodo de transición, las máquinas virtuales muestran un estado de `???`. Esto no cuenta a efectos de facturación.
+Al añadir límites a cuentas de Alibaba existentes dentro del cuadro de integración, las máquinas virtuales descubiertas previamente podrían permanecer en [la lista de infraestructura][3] hasta 2 horas. Durante el período de transición, las máquinas virtuales muestran un estado de `???`. Esto no cuenta para tu facturación.
 
-Las máquinas virtuales con un Agent en ejecución siguen mostrándose y se incluyen en la facturación. Por tanto, usar la opción de límite solo sirve para máquinas virtuales sin ningún Agent en ejecución.
+Las máquinas virtuales con un Agent en ejecución siguen mostrándose y se incluyen en la facturación, por lo que utilizar la opción de límite sólo es útil para las máquinas virtuales sin un Agent en ejecución.
 
 ## Solucionar problemas
 
-Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][4].
+Si tienes preguntas técnicas, ponte en contacto con [el soporte de Datadog][4].
 
-Si tienes alguna pregunta sobre facturación, ponte en contacto con tu [asesor de clientes][5].
+Si tiene preguntas en Facturación, póngase en contacto con su gestor de [Éxito del cliente][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/alibaba-cloud
 [2]: /es/getting_started/tagging/using_tags/#integrations

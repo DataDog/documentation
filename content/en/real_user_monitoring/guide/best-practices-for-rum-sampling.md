@@ -1,6 +1,5 @@
 ---
 title: Best Practices for RUM Sampling
-
 description: Guide for RUM sampling.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -21,7 +20,7 @@ This guide walks you through best practices for RUM sampling so you can capture 
 Sessions are randomly sampled based on the percentage listed in the [SDK configuration][1]. To that end, make sure to use the correct configuration variable names for the SDK version being used.
 
 ### Configure the sampling rate
-Before each new user session, the SDK draws a random floating-point number between 0 and 1, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the value is higher, the session is not kept and events are not collected until the end of the session.
+Before each new user session, the SDK draws a random floating-point number between 0 and 100, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the random number is higher, the session is not kept and events are not collected until the end of the session.
 
 You can set the sampling rate with the SDK ([Browser][2], [Android][3], [iOS][4], [React Native][5], [Flutter][6], [Roku][7]), then deploy it in the application code.
 
@@ -39,7 +38,7 @@ In terms of setting an ideal sampling rate, it depends on the amount of traffic 
 Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
 
 ### Changing the sampling rate in the Datadog RUM UI
-Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
+Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, contact [Datadog Support][8] to create a feature request.
 
 ### Adjusting sampling during live outages
 
@@ -51,16 +50,18 @@ If a bug or incident occurs, you can increase sampling to collect 100% of your b
 
 RUM ensures availability of data when user devices are offline. In low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
+**Note**: This behavior only applies to mobile applications using mobile RUM SDKs.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/sampling-browser-plans/#overview
 [2]: /real_user_monitoring/guide/sampling-browser-plans/#overview
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#initialization-parameters
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
 [4]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
 [5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#sample-rum-sessions
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/#initialize-the-library
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/advanced_configuration/#sample-rum-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/#initialize-the-library
 [8]: /help
 [9]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions

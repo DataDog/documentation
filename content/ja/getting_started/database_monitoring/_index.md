@@ -15,10 +15,6 @@ further_reading:
 title: Database モニタリングの概要
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) ではデータベースモニタリングは利用できません。</div>
-{{% /site-region %}}
-
 ## 概要
 
 Datadog データベースモニタリングを使用すると、データベースの状態とパフォーマンスの理解を深め、問題の根本原因を特定しやすくなります。

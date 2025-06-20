@@ -4,23 +4,20 @@ disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
-    text: "Explore CSM Threats detection rules"
-  - link: "/security/threats/workload_security_rules"
+    text: "Explore Workload Protection detection rules"
+  - link: "/security/workload_protection/workload_security_rules"
     tag: "Documentation"
-    text: "Learn how to manage CSM Threats detection rules"
+    text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
-  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
-    tag: "Blog"
-    text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
-[Cloud Security Management Threats][9] (CSM Threats) security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
+[Workload Protection][9] security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
 
-To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
+To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security.
 
-{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+{{< img src="security/cws/signals_explorer.png" alt="Cloud Security Signals Explorer page" width="100%">}}
 
 ## Filter security signals
 
@@ -55,8 +52,9 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 Use [Incident Management][5] to create an incident for a security signal.
 
 1. On the [Signals Explorer][4], select a security signal.
-2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Declare incident**. Alternatively, select **Add to incident** to add the signal to an existing incident.
-3. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
+1. On the signal side panel under *Next Steps*, click the **Show all actions** dropdown menu and select **Declare incident**. 
+1. Alternatively, select **Add to incident** to add the signal to an existing incident.
+1. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
 
 ## Run a workflow
@@ -81,4 +79,4 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [6]: /service_management/case_management/
 [7]: /security/cloud_security_management/workflows
 [8]: /service_management/workflows
-[9]: /security/threats/
+[9]: /security/workload_protection/

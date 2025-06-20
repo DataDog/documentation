@@ -26,7 +26,7 @@ author:
 categories:
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 4.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ambari
@@ -99,7 +99,7 @@ Ambari チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 

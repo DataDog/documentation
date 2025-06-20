@@ -21,9 +21,9 @@ assets:
     source_type_id: 10215
     source_type_name: SingleStore
   monitors:
-    '[SingleStore] License expiration': assets/monitors/license_expiration.json
-    '[SingleStore] Read failures rate': assets/monitors/read_failures.json
-    '[SingleStore] Write failures rate': assets/monitors/write_failures.json
+    License will expire soon: assets/monitors/license_expiration.json
+    Read queries failure rate is high: assets/monitors/read_failures.json
+    Write queries failure rate is high: assets/monitors/write_failures.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -33,7 +33,7 @@ categories:
 - data stores
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: singlestore
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 2.2.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: singlestore

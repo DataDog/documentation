@@ -30,7 +30,7 @@ Ejemplo: `count_not_null(system.cpu.user{*} by {host})` devuelve una serie tempo
 
 {{< img src="dashboards/funciones/count/count_not_null.png" alt="Conteo de valores no nulos" style="width:80%;">}}
 
-## Otras funciones
+## Otros funciones
 
 {{< whatsnext desc="Consulta las demás funciones disponibles:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorítmica: implementa la detección de anomalías o outliers en la métrica.{{< /nextlink >}}

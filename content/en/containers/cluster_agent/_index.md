@@ -44,7 +44,8 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 |--------------------|----------------|-----------------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation           |
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Supports dynamic service account token |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | Supports `v1` API group               |
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup the Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
@@ -55,6 +56,9 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Monitoring the Cluster Agent
+The Datadog Agent includes an integration that automatically monitors the Cluster Agent. The integration runs on the regular Datadog Agent pod that is on the same node as the Cluster Agent. It will not run in the Cluster Agent itself. Refer to the [Datadog Cluster Agent integration documentation][4] for details.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,3 +66,4 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 [1]: /containers/guide/cluster_agent_autoscaling_metrics
 [2]: https://hub.docker.com/r/datadog/cluster-agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[4]: https://docs.datadoghq.com/integrations/datadog_cluster_agent/

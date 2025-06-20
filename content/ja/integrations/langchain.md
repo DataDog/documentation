@@ -18,8 +18,8 @@ assets:
     source_type_id: 10372
     source_type_name: LangChain
   monitors:
-    Error Rate: assets/monitors/error_rate.json
-    Request Latency: assets/monitors/request_duration.json
+    Error rate is high: assets/monitors/error_rate.json
+    Request duration is increasing: assets/monitors/request_duration.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,7 +29,7 @@ categories:
 - ai/ml
 - 開発ツール
 - コスト管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/langchain/README.md
 display_on_public_website: true

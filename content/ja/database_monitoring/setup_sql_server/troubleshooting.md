@@ -111,15 +111,15 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 #### Microsoft OLE DB Driver 2019
 
-This error is common after upgrading to the [`MSOLEDBSQL` 2019][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
+このエラーは、[`MSOLEDBSQL` 2019][6] ドライバーにアップグレードした後に、導入された[破壊的変更][7]のためによく発生します。最新バージョンのドライバーでは、SQL インスタンスへのすべての接続がデフォルトで暗号化されています。
 
-If you are using the latest version of the Microsoft OLE DB Driver for SQL Server, and trying to connect to a SQL Server instance which requires encrypted connections, you can use one of the following workarounds:
+最新版の Microsoft OLE DB Driver for SQL Server を使用して、暗号化接続を必要とする SQL Server インスタンスに接続しようとする場合、次のいずれかの回避策を使用することができます。
 
 1. 自己署名証明書とサーバーの Force Encryption 設定 (AWS では `rds.force_ssl=1`) により、クライアントが暗号化されて接続されるようにする場合:
 
-   - Change to a certificate that is trusted as part of the client's trust chain.
-   - Add the self-signed certificate as a trusted certificate on the client.
-   - Add `Trust Server Certificate=True;` to the connection string.
+   - クライアントのトラストチェーンの一部として信頼される証明書への変更。
+   - 自己署名証明書をクライアントの信頼できる証明書として追加する。
+   - 接続文字列に `Trust Server Certificate=True;` を追加する。
 
 これについては、[マイクロソフトのドキュメント][7]で詳しく説明されています。
 
@@ -145,12 +145,12 @@ If you are using the latest version of the Microsoft OLE DB Driver for SQL Serve
       adoprovider: MSOLEDBSQL
   ```
 
-#### Other Microsoft OLE DB and ODBC driver versions
+#### その他の Microsoft OLE DB および ODBC ドライバーのバージョン
 
-If you are using an OLE DB driver other than `MSOLEDBSQL` 2019 or ODBC drivers, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the `ODBC` driver:
+`MSOLEDBSQL` 2019 以外の OLE DB ドライバーまたは ODBC ドライバーを使用している場合、接続文字列に `TrustServerCertificate=yes` を設定することで、このエラーを解決することができます。例えば、`ODBC` ドライバーの場合:
 
   ```yaml
-  # this example uses SQL Server authentication
+  # この例では、SQL Server 認証を使用しています
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       username: datadog
@@ -320,11 +320,21 @@ SQL Server の技術的な制限により、正しいユーザーが実行して
 
 7.40.0 より古いバージョンの Agent では、`PROCEDURE` 統計が過大にカウントされるバグがあります。これにより、データベースをモニタリングする Query Metrics UI で `CREATE PROCEDURE...` の実行が多数表示されるようになります。この問題を解決するには、Datadog Agent を最新バージョンにアップグレードしてください。
 
+### エラー "The SELECT permission was denied on the object 'sysjobs’” (SELECT 権限がオブジェクト 'sysjobs' で拒否されました) により SQL Server Agent Job が収集されない
+
+SQL Server Agent Job のチェックには、msdb データベースに対する `SELECT` 権限が必要です。エラー `The SELECT permission was denied on the object 'sysjobs'` (SELECT 権限がオブジェクト 'sysjobs' で拒否されました) が表示された場合は、Agent が SQL Server インスタンスへの接続に使用しているユーザーに `SELECT` 権限を付与する必要があります。
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
+
 ## 既知の制限
 
 ### SQL Server 2012
 
-The following metrics are not available for SQL Server 2012:
+以下のメトリクスは、SQL Server 2012 では使用できません。
 
 - `sqlserver.files.read_io_stall_queued`
 - `sqlserver.files.write_io_stall_queued`
@@ -347,7 +357,7 @@ The following metrics are not available for SQL Server 2012:
 
 ### SQL Server 2014
 
-The following metrics are not available for SQL Server 2014:
+以下のメトリクスは、SQL Server 2014 では使用できません。
 
 - `sqlserver.ao.secondary_lag_seconds`
 - `sqlserver.latches.latch_wait_time`

@@ -7,9 +7,11 @@ aliases:
   - /serverless/real_time_enhanced_metrics
 ---
 
-This page discusses metrics for monitoring serverless applications on AWS Lambda. 
+This page discusses metrics for monitoring serverless applications on AWS Lambda. There are 3 ways to get metrics from AWS Lambda:
 
-After you [install Serverless Monitoring for AWS Lambda][1], Datadog generates [enhanced metrics](#enhanced-lambda-metrics) from your Lambda runtime. You can also [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
+- You can get Cloudwatch Lambda metrics from the [Datadog AWS integration][5]
+- You can get [enhanced metrics](#enhanced-lambda-metrics) by [installing Serverless Monitoring for AWS Lambda][1] through the Datadog Lambda Extension.
+- You can [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
@@ -33,9 +35,9 @@ Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-bo
 
 Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabled with the AWS Lambda integration. Enhanced metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace. You can view these metrics on the [Enhanced Lambda Metrics default dashboard][7].
 
-The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
+The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags.
 
-These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
+These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations. Enhanced metrics are enabled automatically with [Serverless Monitoring][1] but can be disabled by setting the `DD_ENHANCED_METRICS` environment variable to `false` on your Lambda function.
 
 `aws.lambda.enhanced.invocations`
 : Measures the number of times a function is invoked in response to an event or an invocation of an API call.
@@ -117,6 +119,18 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 
 `aws.lambda.enhanced.tmp_used`
 : Measures the space used in the /tmp directory.
+
+`aws.lambda.enhanced.fd_max`
+: Measures the total number of file descriptors available for use.
+
+`aws.lambda.enhanced.fd_use`
+: Measures the maximum number of file descriptors used over the duration of the function invocation.
+
+`aws.lambda.enhanced.threads_max`
+: Measures the total number of threads available for use.
+
+`aws.lambda.enhanced.threads_use`
+: Measures the maximum number of threads used over the duration of the function invocation.
 
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
@@ -223,6 +237,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // ensure all metrics are flushed before shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```
@@ -440,9 +470,9 @@ For example:
 
 #### Submitting many data points
 
-Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost. 
+Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost.
 
-You can aggregate the data points in your application to avoid the overhead. 
+You can aggregate the data points in your application to avoid the overhead.
 
 For example, in Python:
 
@@ -470,7 +500,7 @@ Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by defaul
 
 ### Understanding your metrics usage, volume, and pricing in Datadog
 
-Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17]. 
+Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17].
 
 [9]: /logs/logs_to_metrics/
 [10]: /tracing/trace_pipeline/generate_metrics/

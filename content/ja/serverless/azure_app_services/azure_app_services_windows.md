@@ -307,7 +307,7 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' }
 tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
 ```
 
-<div class="alert alert-info">Datadog の Node.js トレーサー <code>dd-trace</code> は、Azure App Service 拡張機能にパッケージされています。<code>NODE_PATH</code> に自動的に追加されます。<br/><br/><code>package.json</code> <strong>に依存関係として</strong> <code>dd-trace<strong> を追加する必要はありません。</strong><code>dd-trace</code> を依存関係として明示的に追加すると、拡張機能によって提供されるバージョンが上書きされる可能性があります。ローカルでテストする場合は、<a href="https://github.com/DataDog/datadog-aas-extension/releases">リリースノート</a>を参照して、Azure App Service 拡張機能のバージョンに適した Node.js トレーサーのバージョンを見つけてください。</div>
+<div class="alert alert-info">Datadog の Node.js トレーサー <code>dd-trace</code> は、Azure App Service 拡張機能にパッケージされています。<code>NODE_PATH</code> に自動的に追加されます。<br/><br/><strong>package.json</strong> <strong>に</strong> <code>dd-trace</code> <strong>を依存関係として追加する必要はありません。</strong> <code>dd-trace</code> を依存関係として明示的に追加すると、拡張機能によって提供されるバージョンが上書きされる可能性があります。ローカルでテストする場合は、<a href="https://github.com/DataDog/datadog-aas-extension/releases">リリースノート</a>を参照して、Azure App Service 拡張機能のバージョンに適した Node.js トレーサーのバージョンを見つけてください。</div>
 
 [カスタムメトリクス][10]に関する詳細を参照してください。
 
@@ -338,7 +338,7 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 - [Azure CLI][1] または [Azure Cloud Shell][2]。
 - Azure App Service の[ユーザースコープの資格情報][3]を使用します。資格情報をお持ちでない場合は、[Azure ポータル][4]から Web App または Function App にアクセスしてください。**Deployment** > **Deployment Center** に移動して、ユーザースコープの資格情報を作成または取得します。
 
-### 初めて拡張機能をインストールする{#powershell-first-time}
+### 初めて拡張機能をインストールする
 
 
 
@@ -371,7 +371,7 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 
 
 
-### リソースグループの拡張機能を更新する{#powershell-resource-group}
+### リソースグループの拡張機能を更新する
 
 
 更新スクリプトは、リソースグループ全体に適用されます。このスクリプトは、拡張機能がインストールされているすべての Web App または Function App を更新します。Datadog 拡張機能がインストールされていない App Service アプリは、影響を受けません。
@@ -391,7 +391,7 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 
 
 
-### 特定のバージョンの拡張機能をインストールする{#powershell-specific-version}
+### 特定のバージョンの拡張機能をインストールする
 
 Azure App Service UI は、拡張機能の特定のバージョンをインストールする機能をサポートしていません。インストールまたは更新スクリプトを使用して、これを行うことができます。
 

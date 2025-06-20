@@ -14,9 +14,9 @@ Las gráficas de alertas son gráficas de series temporales que muestran el esta
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Gráfica de alertas" >}}
 
-Este widget es compatible con monitores de alertas de consultas como métricas, anomalías, outliers, predicciones, APM e integraciones.
+Este widget es compatible con los monitores predeterminados de alertas de consultas programadas, como métricas, anomalías, outliers, predicciones, APM e integraciones.
 
-## Ajuste
+## Configuración
 
 ### Configuración
 

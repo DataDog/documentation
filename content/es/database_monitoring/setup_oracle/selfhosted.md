@@ -87,6 +87,9 @@ Inicia sesión como `sysdba` y concede los siguientes permisos:
 
 {{< /tabs >}}
 
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
+
 ### Crear una vista
 
 Inicia sesión como `sysdba`, crea una nueva `view` en el esquema `sysdba` y concede acceso al usuario del Agent:
@@ -123,17 +126,17 @@ Crea el archivo de configuración de Oracle Agent `/etc/datadog-agent/conf.d/ora
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # El nombre del servicio de Oracle CDB
+    service_name: "<CDB_SERVICE_NAME>" # Nombre del servicio Oracle CDB
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # El nombre del servicio de Oracle CDB
+    service_name: "<CDB_SERVICE_NAME>" # Nombre del servicio Oracle CDB
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
@@ -163,7 +166,7 @@ En la página de integraciones de Datadog, instala la [integración de Oracle][7
 
 #### Instalaciones existentes
 
-{{% dbm-existing-oracle-integración-setup %}}
+{{% dbm-existing-oracle-integration-setup %}}
 
 ### Validar la configuración
 

@@ -179,10 +179,14 @@ end
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
+  {{% tracing-go-v2 %}}
+
 ```go
 package ledger
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
 
 // [...]
 
@@ -218,6 +222,8 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[2]: /tracing/trace_collection/custom_instrumentation/go/migration
+
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -354,7 +360,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
 Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
 
-1. Go to the **[Service Catalog][1]**, and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
+1. Go to the **[Software Catalog][1]**, and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" style="width:90%;">}}
 

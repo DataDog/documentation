@@ -33,7 +33,7 @@ If you download historical views as a CSV, the data is limited to the last 90 da
 
 4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-5. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
+5. **Input the query**. The query syntax is the same as that of the [Log Explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
 6. Define the maximum number of logs that should be rehydrated in this historical view. If the limit of the rehydration is reached, the reloading is stopped but you still have access to the rehydrated logs.
 
@@ -71,7 +71,7 @@ During the creation of a historical view, you can use the built-in template vari
 
 After selecting "Rehydrate from Archive," the historical view is marked as "pending" until its content is ready to be queried.
 
-Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
+Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the Log Explorer.
 
 #### From the Log Explorer
 
@@ -85,7 +85,7 @@ Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoi
 
 The logs already indexed will remain queryable until the end of the retention period selected for that historical view, and all the logs already scanned and indexed will still be billed.
 
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
 
 ### Deleting historical views
 
@@ -93,13 +93,25 @@ Historical views stay in Datadog until they have exceeded the selected retention
 
 One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete_settings.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 
 ### Viewing deleted historical views
 
 View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
 
-{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
+{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Deleting Historical Views" width="75%" >}}
+
+### Set default limits for historical views
+
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of log rehydration across teams.
+
+These settings can be configured from the **Rehydration settings** panel, available from the Historical Views page.
+
+- **Default rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
+
+- **Retention period selector**: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+
+{{< img src="logs/archives/rehydration_limits.png" alt="Rehydration settings panel" style="width:75%;" >}}
 
 ## Setting up archive rehydrating
 

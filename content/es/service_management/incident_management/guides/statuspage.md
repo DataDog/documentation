@@ -13,7 +13,6 @@ further_reading:
 - link: synthetics/guide/synthetic-test-monitors/#integrate-your-synthetic-test-monitor-with-statuspage
   tag: Guía
   text: Integra tu monitor de tests Synthetic con Statuspage
-kind: Guía
 title: Integrar Statuspage con la Gestión de incidencias de Datadog
 ---
 

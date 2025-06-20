@@ -4,6 +4,26 @@ app_uuid: 86988058-9b89-45a8-b92f-5473a96e4a36
 assets:
   dashboards:
     Embrace Overview: assets/dashboards/embrace_mobile_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - embrace.session_total.five_minute
+      - embrace.session_total.hourly
+      - embrace.session_total.daily
+      - embrace.crash_total.five_minute
+      - embrace.crash_total.hourly
+      - embrace.crash_total.daily
+      - embrace.users_total.daily
+      metadata_path: metadata.csv
+      prefix: embrace.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 25653134
+    source_type_name: Embrace
 author:
   homepage: https://embrace.io
   name: Embrace
@@ -13,7 +33,7 @@ categories:
 - メトリクス
 - モバイル
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -38,20 +58,14 @@ tile:
   - Category::Metrics
   - Category::Mobile
   - Category::Network
-  - Offering::UI Extension
+  - Offering::Integration
+  - Submitted Data Type::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
   description: iOS、Android、React Native、Unity のためのモバイル可観測性
   media:
-  - caption: ウィジェットを追加して、Datadog から直接 Embrace のクラッシュおよびネットワーキングデータを監視。
-    image_url: images/datadog_dashboard.jpg
-    media_type: image
-  - caption: 影響を受けたすべてのユーザーセッションから、すべてのスタックトレースにアクセスして、アプリおよびセッションの詳細情報と共にクラッシュを調査。さらに、Embrace
-      のユーザーセッションの完全なリプレイに直接アクセスし、詳しいコンテキストを把握できます。
-    image_url: images/datadog_side_panel.jpg
-    media_type: image
   - caption: Embrace のユーザーセッションリプレイにより、ユーザーセッションの技術的および行動的詳細を時間単位で視覚化。問題を手動で再生しなくても、根本原因をすばやく認識できます。
     image_url: images/embrace_session.jpg
     media_type: image
@@ -80,10 +94,8 @@ tile:
 1. 無料トライアルを開始し、[Embrace のドキュメント][2]に従ってください。**Datadog でメトリクスを見る前に、このドキュメントに従う必要があります**。
 1. Embrace インテグレーションのセットアップが完了したら、Datadog に戻り両プラットフォームを接続します。
 1. 認証情報を使用してログインし、Embrace アカウントを認証して Datadog に接続します。
-1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
-1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -29,7 +29,7 @@ author:
 categories:
 - data stores
 - キャッシュ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
 display_on_public_website: true
@@ -71,7 +71,7 @@ tile:
 
 ## 概要
 
-**This integration is will be deprecated starting on November 1, 2024. Please use the latest [Redis Enterprise Datadog Integration][2] going forward. This new integration exposes all of the latest Redis Enterprise metrics and includes updated dashboards.**
+**このインテグレーションは 2024 年 11 月 1 日から非推奨となります。今後は最新の [Redis Enterprise Datadog インテグレーション][2]をご利用ください。この新しいインテグレーションは、最新の Redis Enterprise メトリクスをすべて公開し、更新されたダッシュボードも含まれています。**
 
 このインテグレーションにより、Datadog で [Redis Enterprise][3] を監視しメトリクスを取得できます。
 
@@ -95,7 +95,7 @@ Redis Enterprise Datadog インテグレーションで提供される、クラ�
 #### アクティブ/アクティブ Redis
 ![rofdash][7]
 
-#### Redis Enterprise events
+#### Redis Enterprise のイベント
 ![events][8]
 
 ### プロバイダー

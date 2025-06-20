@@ -25,9 +25,17 @@ aliases:
 
 <div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_bundlers/">mark the Datadog libraries as external</a>.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>sendDistributionMetric</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/loyalty-point-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
+
+To use remote instrumentation, see See [Remote instrumentation for AWS Lambda][11].
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -191,20 +199,21 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     import { Datadog } from "datadog-cdk-constructs";
 
     // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
+    import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
         nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
     });
-    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
+    datadogLambda.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
     ```
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<LAMBDA_FUNCTIONS>` with your Lambda functions.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
@@ -215,13 +224,15 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    Package the Datadog Lambda and tracing libraries within the image:
 
     ```sh
     npm install datadog-lambda-js dd-trace
     ```
 
     Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
+   
+    You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
 2. Install the Datadog Lambda Extension
 
@@ -266,7 +277,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.3.0"
+  version = "3.1.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -276,8 +287,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 81
+  datadog_node_layer_version = 125
 
   # aws_lambda_function arguments
 }
@@ -302,8 +313,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 81
+  datadog_node_layer_version = 125
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -377,9 +388,57 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
+
+## Span Auto-linking
+
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
+### Configure Auto-linking for DynamoDB PutItem
+
+To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
+
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `object` keyed by the table names as `strings`. Each value is an `array` of primary key fields (as `string`) for the associated table. The array can have exactly one or two elements, depending on the table's primary key schema.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+```js
+// Initialize the tracer with the configuration
+const tracer = require('dd-trace').init({
+  dynamoDb: {
+    tablePrimaryKeys: {
+      'table_name': ['key1', 'key2'],
+      'other_table': ['other_key']
+    }
+  }
+})
+```
+{{% /tab %}}
+
+{{% tab "Environment variable" %}}
+```sh
+export DD_TRACE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
+
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
@@ -442,4 +501,8 @@ exports.handler = async (event) => {
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
 [6]: /security/application_security/serverless/
-
+[7]: https://github.com/DataDog/datadog-lambda-extension
+[8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[11]: /serverless/aws_lambda/remote_instrumentation

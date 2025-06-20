@@ -25,7 +25,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
 display_on_public_website: true
@@ -33,7 +34,7 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 2.1.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: exchange_server
@@ -45,6 +46,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::ログの収集
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "filter-processor"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processors": [
+          {
+            "id": "filter-processor",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "type": "filter"
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Main Observability Pipeline"
+    },
+    "type": "pipelines"
+  }
+}

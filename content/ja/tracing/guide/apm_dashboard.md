@@ -35,7 +35,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="ダッシュボード 2" style="width:90%;">}}
 
-3. **Click on `View Dashboard`** in the success message.
+3. 成功メッセージの **`View Dashboard` をクリック**します。
 
    新しいダッシュボードでは、`web-store` サービスの `Hit/error count on service` グラフが利用可能になりました。このサービスのスループット全体とエラーの合計量が表示されます。
 
@@ -57,7 +57,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="ダッシュボード 4" style="width:90%;">}}
 
-    This specific breakdown is just one example of the many can choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
+   この具体的な内訳は、選択できる多くの一例にすぎません。`trace.` で始まるメトリクスには APM 情報が含まれることに注意することが重要です。[詳細については、APM メトリクスのドキュメント][3]を参照してください。
 
 6. **別の時系列をプレースホルダータイルにドラッグします**
 
@@ -107,7 +107,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="変数名と変数タグを追加するフィールドオプションを表示する Add Variable ポップオーバー" style="width:90%;">}}
 
-    You can now add this template variable to each of the graphs:
+    これで、このテンプレート変数を各グラフに追加できます。
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_dynamic_template_variable.png" alt="クエリに動的テンプレート変数を追加します。この例では、'$RG' を地域テンプレート変数に動的にスコープしています" style="width:90%;">}}
 

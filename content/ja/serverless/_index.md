@@ -34,8 +34,8 @@ title: サーバーレス
 
 <div class="alert alert-info"><a href="https://chat.datadoghq.com/">Datadog Slack コミュニティー</a>の <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> チャンネルで交わされるディスカッションを必ずチェックしましょう。</div>
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
-Learn how serverless monitoring enables your teams to stay agile and focus their time on building revenue-generating applications while reducing operational overhead.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+サーバーレスモニタリングを活用することで、チームが機敏に対応しつつ、運用負担を軽減し、収益を生み出すアプリケーションの開発に専念できる方法を学びましょう。
 {{< /learning-center-callout >}}
 
 [Datadog サーバーレスモニタリング][1]は、コンピューティングからのリアルタイムメトリクス、ログ、トレースおよび関連するフルマネージド API、キュー、ストリーム、データストアを収集することで、サーバーレスアプリケーションを稼働させるすべてのマネージドサービスに関する完全な可視性を提供します。

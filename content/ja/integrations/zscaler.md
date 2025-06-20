@@ -26,15 +26,12 @@ author:
   support_email: help@datadoghq.com
 categories:
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
-description: TODO
 display_on_public_website: true
-doc_link: https://docs.datadoghq.com/integrations/zscaler/
 draft: false
 git_integration_title: zscaler
-has_logo: true
 integration_id: z-scaler
 integration_title: Zscaler
 integration_version: ''
@@ -61,7 +58,6 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Zscaler
-version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -112,7 +108,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
    * バッチサイズ: `16`
    * API URL: `https://http-intake.logs.datadoghq.com/v1/input?ddsource=zscaler`
    * HTTP ヘッダー:
-      * Key: `Content-Type`; Value: `application/json`
+      * キー: `Content-Type`、値: `application/json`
       * キー: `DD-API-KEY`、値: `<YOUR_DATADOG_API_KEY>`
 4. **Formatting** で、以下の値を入力または選択します。
    * ログタイプ: `Firewall logs`

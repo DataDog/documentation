@@ -21,8 +21,8 @@ assets:
     source_type_id: 10277
     source_type_name: Netnology SD-WAN
   monitors:
-    High Latency Monitor: assets/monitors/high-latency-monitor.json
-    Packet Loss Monitor: assets/monitors/packet-loss-monitor.json
+    Link latency is high: assets/monitors/high-latency-monitor.json
+    Packet loss percentage is high: assets/monitors/packet-loss-monitor.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Netnology
@@ -31,7 +31,7 @@ author:
 categories:
 - ネットワーク
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true

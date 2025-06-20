@@ -5,6 +5,7 @@ assets:
   dashboards:
     MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
     MongoDB-Atlas-Vector-Search-Overview: assets/dashboards/MongoDB-Atlas-Vector-Search-Overview_dashboard.json
+    MongoDB-dbStats-collStats-Dashboard: assets/dashboards/MongoDB-Atlas-dbStats-collStats_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -19,20 +20,20 @@ assets:
     source_type_id: 230
     source_type_name: MongoDB Atlas
   monitors:
-    '[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}}': assets/monitors/high_cpu.json
-    '[MongoDB Atlas] Efficiency of queries is degrading': assets/monitors/query_efficiency.json
-    '[MongoDB Atlas] Memory usage is higher than average on host: {{host.name}}': assets/monitors/memory.json
-    '[MongoDB Atlas] Read Latency is higher than average for host: {{host.name}}': assets/monitors/read_latency.json
-    '[MongoDB Atlas] Write Latency is higher than average for host: {{host.name}}': assets/monitors/write_latency.json
+    CPU usage is higher than expected: assets/monitors/high_cpu.json
+    Memory usage is higher than normal: assets/monitors/memory.json
+    Query efficiency is degrading: assets/monitors/query_efficiency.json
+    Read latency is higher than expected: assets/monitors/read_latency.json
+    Write latency is higher than expected: assets/monitors/write_latency.json
 author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
+  homepage: https://www.mongodb.com
+  name: MongoDB
+  sales_email: field@mongodb.com
+  support_email: frank.sun@mongodb.com
 categories:
 - ai/ml
 - モニター
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md
 display_on_public_website: true

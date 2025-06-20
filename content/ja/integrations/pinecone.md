@@ -18,7 +18,7 @@ assets:
     source_type_id: 10363
     source_type_name: Pinecone
   monitors:
-    '[Pinecone] Index approaching maximum capacity': assets/monitors/index_fullness.json
+    Index is approaching limit: assets/monitors/index_fullness.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +28,7 @@ categories:
 - メトリクス
 - data stores
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

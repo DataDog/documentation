@@ -4,7 +4,10 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:100%;" >}}
+
+<div class="alert alert-info">
+If you are using Amazon RDS with the <a href="https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard">RDS integration</a> enabled, Datadog automatically receives the <code>dbclusteridentifier</code> tag from AWS. When this tag is present, a <strong>Group my RDS clusters</strong> toggle appears, grouping related RDS instances into clusters based on the identifier. No additional setup or manual tagging is required.</div>
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
@@ -18,7 +21,7 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Schema](#schema)                               | {{< X >}} |            |           |           |
+| [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
 | [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
@@ -47,10 +50,6 @@ Where supported, the **Top Queries** tab includes a **Stored Procedures** sectio
 
 ## Metrics
 
-<div class="alert alert-info">
-This feature is in beta.
-</div>
-
 On the **Metrics** tab of the host details panel, you can view and filter metrics for system health, query activity, blocking operations, function performance, and other key areas.
 
 {{< img src="database_monitoring/db-list-metrics.png" alt="The Metrics tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
@@ -62,10 +61,6 @@ The **Active Connections** tab of the host details panel displays the live queri
 {{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Schema
-
-<div class="alert alert-info">
-This feature is in beta.
-</div>
 
 Use the **Schema** tab to explore database structures, tables, columns, data types, existing foreign keys, and indexing strategies for every database on a host.
 

@@ -22,7 +22,7 @@ title: スクリーンボード API
 * **`board_title`** [必須]:
     ダッシュボードの名前。
 * **`description`** [オプション、デフォルト = **None**]:
-    A description of the dashboard's content.
+    ダッシュボードの内容の説明。
 * **`widgets`** [必須]:
     ウィジェット定義のリスト。ウィジェット定義を取得するには、ウィジェット構成 UI で JSON タブを使用します。
 * **`template_variables`** [オプション、デフォルト = **None**]:

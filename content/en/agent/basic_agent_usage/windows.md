@@ -58,14 +58,17 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 
 1. Open PowerShell with **Administrator** privileges.
 2. Run the following command to install the Datadog Agent:
-    ```powershell
-    Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
-    ```
+    {{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="<DATADOG_SITE>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
+[4]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
@@ -135,16 +138,19 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 2. Run the following command to install the Datadog Agent:
 
 **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
-  ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
-  ```
+  {{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
 [5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
-[6]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
+[6]: https://windows-agent.datadoghq.com/installers_v2.json
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -191,7 +197,7 @@ Each of the following configuration options can be added as a property to the co
 | `PROXY_USER`                                | String  | (If using a proxy) sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | String  | (If using a proxy) sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
-| [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Cloud Network Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
 
 **Note:**
 Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][13] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade normally.
@@ -200,7 +206,7 @@ If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a mo
 
 #### Installation log files
 
-You can find Agent installation log files at `%TEMP%\MSI*.LOG`.
+Set the `/log <FILENAME>` msiexec option to configure an installation log file. If this option is not set, msiexec writes the log to `%TEMP%\MSI*.LOG` by default.
 
 #### Validation
 
@@ -214,7 +220,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 	- Agent versions <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
 	- Agent versions >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
+* Commands can be run from the **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Command-line options are below:
 
 | Command         | Description                                                                      |
@@ -392,10 +398,10 @@ After configuration is complete, [restart the Agent][11].
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/configuration/proxy/
-[5]: /network_monitoring/performance
+[5]: /network_monitoring/cloud_network_monitoring
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
-[8]: https://app.datadoghq.com/monitors#create/integration
+[8]: https://app.datadoghq.com/monitors/create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/configuration/agent-commands/#restart-the-agent

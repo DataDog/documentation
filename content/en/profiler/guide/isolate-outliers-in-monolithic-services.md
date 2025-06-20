@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][3] (or [WithCustomProfilerLabelKeys v1][2]) option when starting the profiler:
 
 ```go
 profiler.Start(
@@ -123,6 +123,7 @@ Then, open CPU or goroutine profiles for your service and select the `customer_n
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

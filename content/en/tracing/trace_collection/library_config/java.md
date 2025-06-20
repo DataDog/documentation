@@ -58,7 +58,8 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
-When `false` tracing agent is disabled.
+When `false` tracing agent is disabled.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -96,13 +97,17 @@ The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` 
 **Default**: `10`<br>
 Timeout in seconds for network interactions with the Datadog Agent.
 
+`dd.trace.client-ip.enabled`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans. Automatically enabled when `dd.appsec.enabled=true`.
+
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
 **Default**: `null`<br>
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][4] UI.
+Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Software Catalog][4] UI.
 
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -135,7 +140,8 @@ A list of method annotations to treat as `@Trace`.
 : **Environment Variable**: `DD_TRACE_METHODS`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
-List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
+List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls.
+`dd.trace.methods` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][22] product instead.
 
 `dd.trace.classes.exclude`
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
@@ -179,6 +185,18 @@ A regex to redact sensitive data from incoming requests' query string reported i
 **Default**: `true`<br>
 By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
 
+`dd.trace.span.tags`
+: **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br> 
+**Default**: `none`<br>
+**Example**: `tag1:value1,tag2:value2`<br>
+A list of default tags to be added to every span.
+
+`dd.trace.jmx.tags`
+: **Environment Variable**: `DD_TRACE_JMX_TAGS`<br>
+**Default**: `none`<br>
+**Example**: `tag1:value1,tag2:value2`<br>
+A list of span tags to be added to every jmx metric.
+
 `dd.trace.startup.logs`
 : **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
 **Default**: `true`<br>
@@ -204,6 +222,21 @@ When set to `true` query string parameters and fragment get added to web server 
 **Default**: `true`<br>
 When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
+`dd.trace.http.server.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP request paths to custom resource names. Provide a comma‑separated list of `pattern:resource_name` pairs:<br>
+&nbsp;&nbsp;&nbsp;&ndash; `pattern`: An [Ant‑style path pattern][20] that must match the value of the `http.path_group` span tag.<br>
+&nbsp;&nbsp;&nbsp;&ndash; `resource_name`: The custom resource name to assign if the pattern matches.<br>
+If `*` is used as the `resource_name` for a matching pattern, the original, unnormalized request path combined with the HTTP method is used as the resource name. For example, given the rule `/test/**:*`, a `GET` request for `/test/some/path` results in the resource name `GET /test/some/path`.<br>
+Mappings are evaluated in order of priority, and the first matching rule applies. Unmatched request paths use the default normalization behavior.<br>
+**Example**: Using `-Ddd.trace.http.server.path-resource-name-mapping=/admin/*.jsp:/admin-page,/admin/user/**:/admin/user` yields:<br>
+Request path | Resource path
+------------ | -------------
+`/admin/index.jsp` | `/admin-page`
+`/admin/user/12345/delete` | `/admin/user`
+`/user/12345` | `/user/?`
+
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
@@ -218,6 +251,34 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
+
+`dd.trace.cloud.payload.tagging.services`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES`<br>
+**Default**: `ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis`<br>
+**Example**: `S3,Sso`<br>
+To enable [AWS payload tagging][18] for additional services, use this setting.
+
+`dd.trace.cloud.request.payload.tagging`
+: **Environment Variable**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `$.Metadata.UserId,$.phoneNumber`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][18] for requests.
+
+`dd.trace.cloud.response.payload.tagging`
+: **Environment Variable**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `$.Metadata.Credentials.*`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][18] for responses.
+
+`dd.trace.cloud.payload.tagging.max-depth`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`<br>
+**Default**: `10`<br>
+An integer representing the maximum depth of an AWS SDK request/response payload to use for [AWS payload tagging][18].
+
+`dd.trace.cloud.payload.tagging.max-tags`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS`<br>
+**Default**: `758`<br>
+An integer representing the maximum number of tags to extract per a span to be used for [AWS payload tagging][18].
 
 ### Agent
 
@@ -249,6 +310,14 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
+### AAP
+
+`dd.appsec.enabled`
+: **Environment Variable**: `DD_APPSEC_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, enables Datadog App and API Protection Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+For more information, see [Enabling AAP for Java][19].
+
 ### Errors
 
 `dd.http.client.tag.query-string`
@@ -266,13 +335,23 @@ A range of errors can be accepted. By default 4xx errors are reported as errors 
 **Default**: `500-599`<br>
 A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
 
+`dd.grpc.client.error.statuses`
+: **Environment Variable**: `DD_GRPC_CLIENT_ERROR_STATUSES`<br>
+**Default**: `1-16`<br>
+A range of errors can be accepted. By default, gRPC status codes 1 to 16 are reported as errors for gRPC clients. This configuration overrides that. Ex. `dd.grpc.client.error.statuses=1-4,7-10`
+
+`dd.grpc.server.error.statuses`
+: **Environment Variable**: `DD_GRPC_SERVER_ERROR_STATUSES`<br>
+**Default**: `2-16`<br>
+A range of errors can be accepted. By default, gRPC status codes 2 to 16 are reported as errors for gRPC servers. This configuration overrides that. Ex. `dd.grpc.server.error.statuses=2-4,7-10`
+
 ### Logs
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
 Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
+Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Software Catalog][4] UI.
 
 ### Trace context propagation
 
@@ -322,7 +401,7 @@ Additional metrics configuration file for JMX metrics collection. The Java Agent
 
 `dd.jmxfetch.check-period`
 : **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
+**Default**: `15000`<br>
 How often to send JMX metrics (in ms).
 
 `dd.jmxfetch.refresh-beans-period`
@@ -369,6 +448,32 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
+`dd.trace.cassandra.keyspace.statement.extraction.enabled`
+: **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
+**Default**: `false`<br>
+By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
+
+`dd.trace.websocket.messages.enabled`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_ENABLED` <br>
+**Default**: `false`<br>
+Enables tracing sent and received websocket messages (text and binary) and connection close events.
+
+`dd.trace.websocket.messages.inherit.sampling`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING` <br>
+**Default**: `true`<br>
+By default, websocket messages preserve the same sampling as the span captured during the handshake. This ensures that, if a handshake span has been sampled, all the messages in its session will also be sampled. To disable that behavior and sample each websocket message independently, set this configuration to `false`.
+
+`dd.trace.websocket.messages.separate.traces`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_MESSAGES_SEPARATE_TRACES` <br>
+**Default**: `true`<br>
+By default, each received message generates a new trace. The handshake is linked to it as a span link. Setting this parameter to `false` causes all the spans captured during the session to be in the same trace.
+
+`dd.trace.websocket.tag.session.id`
+: **Environment Variable**: `DD_TRACE_WEBSOCKET_TAG_SESSION_ID` <br>
+**Default**: `false`<br>
+When set to `true`, the websocket spans have the tag `websocket.session.id` containing the session ID when available.
+
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
@@ -377,6 +482,13 @@ When set to `true`, the query string parameters are added to Elasticsearch and O
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+
+### UDS
+
+`dd.jdk.socket.enabled`
+: **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
+**Default**: `false`<br>
+Enable native JDK support for unix domain sockets.
 
 ### Examples
 
@@ -535,3 +647,8 @@ Deprecated since version 1.9.0
 [15]: /tracing/trace_collection/trace_context_propagation/
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
+[18]: /tracing/guide/aws_payload_tagging/?code-lang=java
+[19]: /security/application_security/setup/threat_detection/java/
+[20]: https://ant.apache.org/manual/dirtasks.html#patterns
+[21]: /tracing/trace_collection/library_config/#traces
+[22]: /profiler/

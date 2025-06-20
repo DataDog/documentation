@@ -22,10 +22,6 @@ title: Controla tus despliegues de acciones de GitHub con monitores de Datadog
 
 ## Información general
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 Datadog es socio de integración para [Reglas de protección de despliegue de acciones de GitHub][10], que te ayuda a garantizar la entrega de aplicaciones de alta calidad a los clientes finales. Puedes imponer puertas de calidad en tus flujos de trabajo de despliegue de acciones de GitHub mediante monitores de Datadog.
 
 Estas funciones están disponibles para todos los clientes de Datadog en GitHub Enterprise Cloud, y no requieren el uso de CI Visibility.

@@ -29,7 +29,7 @@ draft: false
 git_integration_title: プロセス
 integration_id: システム
 integration_title: プロセス
-integration_version: 3.4.0
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: プロセス
@@ -61,7 +61,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
 プロセスチェックを使用して、以下のことができます。
 - 任意のホスト上で実行されている特定プロセスのリソース使用状況メトリクスを収集できます。たとえば、CPU、メモリ、I/O、スレッド数などです。
@@ -111,6 +111,7 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 - `system.processes.mem.page_faults.children_minor_faults`
 - `system.processes.mem.page_faults.major_faults`
 - `system.processes.mem.page_faults.children_major_faults`
+- `system.processes.mem.real`
 
 **注**: Windows でページフォールトメトリクスを収集するには、[WMI チェック][7]を使用します。
 

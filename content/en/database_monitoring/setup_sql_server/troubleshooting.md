@@ -126,7 +126,6 @@ This is described in more detail [in the Microsoft documentation][7]
 2. If your SQL Server instance does not require encryption to connect (`rds.force_ssl=0` on AWS), then update the connection string to include `Use Encryption for Data=False;`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
@@ -137,7 +136,6 @@ This is described in more detail [in the Microsoft documentation][7]
 3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. After installing the driver, update the `adoprovider` to `MSOLEDBSQL`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"
@@ -270,7 +268,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```
@@ -319,6 +317,16 @@ The `user` tag is available for Query Activity events and Database Load metrics.
 ### Why are there so many "CREATE PROCEDURE" queries?
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
+
+### SQL Server Agent Jobs are not being collected with error "The SELECT permission was denied on the object 'sysjobs'"
+
+The SQL Server Agent Jobs check requires the `SELECT` permission on the `msdb` database. If you are seeing the error `The SELECT permission was denied on the object 'sysjobs'`, you should grant the `SELECT` permission to the user that the Agent is using to connect to the SQL Server instance.
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
 
 ## Known limitations
 

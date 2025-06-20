@@ -43,7 +43,7 @@ Dashboards provide real-time insights into the performance and health of systems
 
 {{< whatsnext desc="Dashboard features:">}}
     {{< nextlink href="/dashboards/configure" >}}Configure: Overview of the configuration options for dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/configure" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
@@ -58,13 +58,9 @@ Dashboards provide real-time insights into the performance and health of systems
 
 ## Get started
 
-{{< whatsnext desc="See the following resources:" >}}
-   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
-{{< /whatsnext >}}
-
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard: 
+1. Click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu.
+2. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -76,6 +72,12 @@ Timeboards
 
 Screenboards
 : Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real time or represent fixed points in the past.
+
+{{< whatsnext desc="See the following resources:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Refresh rate
 
@@ -108,6 +110,8 @@ View your dashboards in a mobile-friendly format with the Datadog Mobile App, av
 ## Further Reading
 
 {{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explore timeseries, query value, top list, table, distribution, and pie chart widgets. Learn how to configure the widgets and develop an understanding of when each widget type should be utilized. {{< /learning-center-callout >}}
+
+{{< learning-center-callout header="Try Creating Table, List, SLO, and Architecture Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}} Explore table, list, SLO, and architecture widgets. Learn how to track the metrics and performance of a web application and discover how to present important data. {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

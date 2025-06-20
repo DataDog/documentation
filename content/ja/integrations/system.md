@@ -5,7 +5,7 @@ aliases:
 categories:
 - os & system
 - configuration & deployment
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
 description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。
@@ -24,7 +24,7 @@ supported_os:
 updated_for_agent: 5.8.5
 ---
 
-## Overview
+## 概要
 
 ベースシステムから CPU、IO、負荷、メモリ、スワップ、アップタイムなどに関するメトリクスを取得します。以下のチェックもシステムに関連しています。
 

@@ -29,7 +29,7 @@ The monitor takes the values in the evaluation window and calculates the average
 
 You want a monitor to send a notification when the average over the past 10 minutes goes over 30. What state is the monitor in at minute 3:10?
 
-$$(\10+15+12+8+11+14+13+25+37+45+50\)/10 = 24$$
+$$(\10+15+12+8+11+14+13+25+37+45+50\)/11 = 22$$
 
 ##### Answer
 
@@ -65,7 +65,7 @@ You want a monitor to alert if the minimum metric value is above 10 at any point
 
 ##### Answer
 
-**ALERT** state, the value at 3:01 (15) is above 10.
+**OK** state, the value at 3:00 (10) and 3:03 (8) is NOT above 10.
 
 ## Sum
 
@@ -83,7 +83,7 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 ## Visualizing aggregators
 
-You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The aggregation methods below use the the same metric. You can see how each method affects the way the metric is aggregated in a timeseries.
+You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The aggregation methods below use the same metric. You can see how each method affects the way the metric is aggregated in a timeseries.
 
 | Aggregation | Resulting graph | 
 | ---  | ----------- | 

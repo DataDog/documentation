@@ -16,7 +16,7 @@ further_reading:
   text: サーバーレスモニタリングについて
 - link: /tests/developer_workflows/
   tag: ドキュメント
-  text: Test Visibility について
+  text: Test Optimization について
 - link: /code_analysis/
   tag: ドキュメント
   text: Code Analysis について
@@ -171,6 +171,9 @@ Docker コンテナを使用している場合、Docker を使用する、Datado
 
 <div class="alert alert-info">.NET クライアントライブラリのバージョン 2.24.1 以降が必要です。</div>
 
+まず、`.pdb` ファイルが .NET アセンブリ (`.dll` または `.exe`) と同じフォルダにデプロイされていることを確認してください。
+その後、特定のデプロイメントモデルに応じて、残りの手順に従ってください。
+
 #### コンテナ
 
 Docker コンテナを使用しえいる場合、Docker を使用する、Microsoft SourceLink を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 3 つのオプションがあります。
@@ -216,9 +219,16 @@ Docker コンテナを使用しえいる場合、Docker を使用する、Micros
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">NodeJS クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
+<div class="alert alert-info">
+Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。
+</br>
+</br>
+TypeScript アプリケーションでコードリンクやスニペットを表示するには、以下のオプションを付けて Node アプリケーションを実行する必要があります。
+</br>
+<a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### コンテナ
 
@@ -290,6 +300,8 @@ Docker コンテナを使用している場合、Docker を使用する、また
 
 <div class="alert alert-info">Java クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
 
+#### コンテナ
+
 Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
 
 ##### オプション 1: Docker
@@ -321,32 +333,34 @@ Docker コンテナを使用している場合、Docker を使用する、また
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+<div class="alert alert-info">PHP クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
+#### コンテナ
 
-##### Option 1: Docker
+Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
+
+##### オプション 1: Docker
 
 {{% sci-docker %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### オプション 2: `DD_GIT_*` 環境変数
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+ホストを使用している場合、`DD_GIT_*` 環境変数でアプリケーションを構成します。
 
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Build inside a Docker container
+### Docker コンテナ内でのビルド
 
-If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access Git information:
+ビルドプロセスが Docker コンテナ内の CI で実行される場合は、ビルドが Git 情報にアクセスできるように以下の手順を実行します。
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
+1. 次のテキストを `.dockerignore` ファイルに追加します。これにより、ビルドプロセスが `.git` フォルダのサブセットにアクセスできるようになり、git のコミットハッシュとリポジトリの URL を特定できるようになります。
 
    ```
    !.git/HEAD
@@ -354,40 +368,40 @@ If your build process is executed in CI within a Docker container, perform the f
    !.git/refs
    ```
 
-2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
+2. 以下のコードを `Dockerfile` に追加してください。実際のビルドが実行される前に配置されていることを確認してください。
 
    ```
    COPY .git ./.git
    ```
 
-### Configure telemetry tagging
+### テレメトリータギングの構成
 
-For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
+サポートされていない言語の場合、`git.commit.sha` タグと `git.repository_url` タグを使用してデータを特定のコミットにリンクします。`git.repository_url` タグにプロトコルが含まれないことを確認してください。例えば、リポジトリの URL が `https://github.com/example/repo` の場合、`git.repository_url` タグの値は `github.com/example/repo` となります。
 
-## Synchronize your repository metadata
+## リポジトリのメタデータを同期
 
-To link your telemetry with source code, your repository metadata must be synchronized to Datadog. Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
+テレメトリーとソースコードをリンクさせるには、リポジトリのメタデータを Datadog と同期させる必要があります。Datadog はリポジトリ内のファイルの実際の内容は保存せず、Git のコミットオブジェクトとツリーオブジェクトのみを保存します。
 
-### Git providers
+### Git プロバイダー
 
-The source code integration supports the following Git providers:
+ソースコードインテグレーションは、以下の Git プロバイダーをサポートしています。
 
-| Provider | Context Links Support | Code Snippets Support |
+| プロバイダー | Context Links Support | Code Snippets Support |
 |---|---|---|
-| GitHub SaaS (github.com) | Yes | Yes |
-| GitHub Enterprise Server | Yes | Yes |
-| GitLab SaaS (gitlab.com) | Yes | Yes |
-| GitLab self-managed | Yes | No |
-| Bitbucket | Yes | No |
-| Azure DevOps Services | Yes | No |
-| Azure DevOps Server | Yes | No |
+| GitHub SaaS (github.com) | はい | はい |
+| GitHub Enterprise Server | はい | はい |
+| GitLab SaaS (gitlab.com) | はい | はい |
+| GitLab self-managed | はい | いいえ |
+| Bitbucket | はい | いいえ |
+| Azure DevOps サービス | はい | いいえ |
+| Azure DevOps Server | はい | いいえ |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
+Datadog の [GitHub インテグレーション][101]を [GitHub インテグレーションタイル][102]にインストールして、リポジトリのメタデータを Datadog が自動的に同期できるようにします。インテグレーションタイルで権限を指定する場合、少なくとも **Contents** の **Read** 権限を選択してください。
 
-Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**Application Security Monitoring**][107].
+GitHub インテグレーションを設定することで、[**Error Tracking**][103]、[**Continuous Profiler**][104]、[**Serverless Monitoring**][105]、[**CI Visibility**][106]、[**Application Security Monitoring**][107] でインラインコードスニペットを確認することもできます。
 
 [101]: https://docs.datadoghq.com/ja/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
@@ -401,27 +415,30 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 {{% tab "GitLab" %}}
 
 <div class="alert alert-warning">
-Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+セルフマネージド GitLab インスタンスからのリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][2] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
 
 Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
 このコマンドは、Datadog と同期する必要があるコミットごとに実行します。
 
-If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
+[gitlab.com][1] を使用している場合、これにより [**Error Tracking**][3]、[**Continuous Profiler**][4]、[**Serverless Monitoring**][5]、[**CI Visibility**][6]、および [**Application Security Monitoring**][7] でインラインコードスニペットを確認することができます。
 
-### Validation
+### 検証
 
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+データが収集されていることを確認するために、CI パイプラインで `datadog-ci git-metadata upload` を実行します。
 
-You can expect to see the following output:
+以下のような出力が期待できます。
 
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://gitlab.com
@@ -433,49 +450,52 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 [7]: /ja/security/application_security/
 
 {{% /tab %}}
-{{% tab "Other Git Providers" %}}
+{{% tab "その他の Git プロバイダー" %}}
 
 <div class="alert alert-warning">
-Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+セルフホストインスタンスまたはプライベート URL 上のリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][1] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
 
-When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
-Run this command for every commit that you need to be synchronized with Datadog.
+このコマンドは、Datadog と同期する必要があるコミットごとに実行します。
 
-### Validation
+### 検証
 
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+データが収集されていることを確認するために、CI パイプラインで `datadog-ci git-metadata upload` を実行します。
 
-You can expect to see the following output:
+以下のような出力が期待できます。
 
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
-## Usage
+## 使用方法
 
-### Links to Git providers
+### Git プロバイダーへのリンク
 
 {{< tabs >}}
-{{% tab "Error Tracking" %}}
-You can see links from stack frames to their source repository in [Error Tracking][1].
+{{% tab "エラー追跡" %}}
+[エラー追跡][1]でスタックフレームからソースリポジトリへのリンクを見ることができます。
 
-1. Navigate to [**APM** > **Error Tracking**][2].
-2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. [**APM** > **Error Tracking**][2] の順に移動します。
+2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
+3. **Latest Event** の下で、フレームの右側にある **View** ボタンをクリックするか、**View file**、**View Git blame**、**View commit** を選択すると、ソースコード管理ツールにリダイレクトされます。
 
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="Error Tracking のエラースタックトレースの右側に表示される、3 つのオプション (ファイルの表示、注釈の表示、コミットの表示) を備えたリポジトリの表示ボタンと、スタックトレース内のインラインコードスニペット" style="width:100%;">}}
 
-If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace.
+GitHub インテグレーションを使用している場合、または GitLab SaaS インスタンス (gitlab.com) でリポジトリをホストしている場合は、スタックフレームの **Connect to preview** をクリックします。スタックトレースでインラインコードスニペットを直接見ることができます。
 
 [1]: /ja/tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
@@ -483,50 +503,50 @@ If you're using the GitHub integration, or if you're hosting your repositories o
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames in the [Continuous Profiler][1].
+[Continuous Profiler][1] では、プロファイルフレームのソースコードプレビューを見ることができます。
 
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview.
+1. [**APM** > **Profile Search**][2] の順に移動します。
+2. フレームグラフのメソッドにカーソルを合わせます。
+3. 必要であれば、`Opt` または `Alt` を押してプレビューを有効にします。
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
+{{< img src="integration/guide/source_code_integration/profiler-source-code-preview.png" alt="Continuous Profiler のソースコードプレビュー" style="width:100%;">}}
 
-You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
+プロファイルフレームからソースリポジトリへのリンクも表示できます。これは、行、メソッド、ファイルごとに分割されたプロファイルでサポートされています。
 
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
+1. [**APM** > **Profile Search**][2] の順に移動します。
+2. フレームグラフのメソッドにカーソルを合わせます。右側に **More actions** というラベルのついたケバブアイコンが表示されます。
+3. *More actions** > **View in repo** をクリックし、トレースをソースコードリポジトリで開きます。
 
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Continuous Profiler から GitHub へのリンク" style="width:100%;">}}
 
 [1]: /ja/profiler/
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
-You can see links from errors in your Lambda functions' associated stack traces to their source repository in **Serverless Monitoring**.
+Lambda 関数の関連するスタックトレースのエラーからソースリポジトリへのリンクを **Serverless Monitoring** で確認できます。
 
-1. Navigate to [**Infrastructure** > **Serverless**][101] and click on the **AWS** tab.
-2. Click on a Lambda function and click the **Open Trace** button for an invocation with an associated stack trace.
-3. Click **View Code** to open the error in its source code repository.
+1. [**Infrastructure** > **Serverless**][101] に移動し、**AWS** タブをクリックします。
+2. Lambda 関数をクリックし、関連するスタックトレースを持つ呼び出しの **Open Trace** ボタンをクリックします。
+3. **View Code** をクリックして、ソースコードリポジトリでエラーを開きます。
 
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the Lambda function's stack trace.
+GitHub インテグレーションを使用している場合、エラーフレームで **Connect to preview** をクリックします。Lambda 関数のスタックトレースでインラインコードスニペットを直接見ることができます。
 
-{{< img src="integrations/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
+{{< img src="integration/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Serverless Monitoring から GitHub へのリンク" video="true" >}}
 
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Visibility**.
+失敗したテスト実行からソースリポジトリへのリンクは、**Test Optimization** で確認できます。
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
-2. Click the **View on GitHub** button to open the test in its source code repository.
+1. [**Software Delivery** > **Test Optimization** > **Test Runs**][101] に移動し、失敗したテスト実行を選択します。
+2. **View on GitHub** ボタンをクリックして、テストをソースコードリポジトリで開きます。
 
-{{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
+{{< img src="integration/guide/source_code_integration/test_run_blurred.png" alt="CI Visibility Explorer から GitHub へのリンク" style="width:100%;">}}
 
-For more information, see [Enhancing Developer Workflows with Datadog][102].
+詳細は [Datadog で開発者のワークフローを強化する][102]を参照してください。
 
 [101]: https://app.datadoghq.com/ci/test-runs
 [102]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
@@ -534,14 +554,14 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 {{% /tab %}}
 {{% tab "Code Analysis" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Analysis**.
+失敗した Static Analysis と Software Composition Analysis のスキャンからソースリポジトリへのリンクは、**Code Analysis** で確認できます。
 
-1. Navigate to [**Software Delivery** > **Code Analysis**][101] and select a repository.
-2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
+1. [**Software Delivery** > **Code Analysis**][101] に移動し、リポジトリを選択します。
+2. **Code Vulnerabilities** または **Code Quality** ビューで、コードの脆弱性または違反をクリックします。**Details** セクションで、**View Code** ボタンをクリックして、フラグが付けられたコードをソースコードリポジトリで開きます。
 
-{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Analysis Code Vulnerabilities view" style="width:100%;">}}
+{{< img src="integration/guide/source_code_integration/code-analysis-scan.png" alt="Code Analysis Code Vulnerabilities ビューから GitHub へのリンク" style="width:100%;">}}
 
-For more information, see the [Code Analysis documentation][102].
+詳細については、[Code Analysis のドキュメント][102]を参照してください。
 
 [101]: https://app.datadoghq.com/ci/code-analysis
 [102]: /ja/code_analysis/
@@ -549,22 +569,22 @@ For more information, see the [Code Analysis documentation][102].
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}
 
-You can see links from errors in your security signals' associated stack traces to their source repository in **Application Security Monitoring**.
+セキュリティシグナルの関連するスタックトレースのエラーからソースリポジトリへのリンクは、**Application Security Monitoring** で確認できます。
 
-1. Navigate to [**Security** > **Application Security**][101] and select a security signal.
-2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
-3. Click **View Code** to open the error in its source code repository.
+1. [**Security** > **Application Security**][101] に移動し、セキュリティシグナルを選択します。
+2. **Related Signals** タブの **Traces** セクションまでスクロールダウンし、関連するスタックトレースをクリックします。
+3. **View Code** をクリックして、ソースコードリポジトリでエラーを開きます。
 
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace.
+GitHub インテグレーションを使用している場合、エラーフレームで **Connect to preview** をクリックします。インラインコードスニペットをセキュリティシグナルのスタックトレースで直接見ることができます。
 
-{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from Application Security Monitoring" style="width:100%;">}}
+{{< img src="integration/guide/source_code_integration/asm-signal-trace-blur.png" alt="Application Security Monitoring から GitHub へのリンク" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/security/appsec
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

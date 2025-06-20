@@ -28,7 +28,7 @@ title: Amazon ECS
 Amazon ECS は、Docker コンテナに対応する、拡張性とパフォーマンスに優れたコンテナオーケストレーションサービスです。Datadog Agent を使用すると、クラスター内のすべての EC2 インスタンスの ECS コンテナおよびタスクを監視できます。
 
 <div class="alert alert-info">
-If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
+<strong>Fargate 上の ECS</strong> を監視したい場合は、<a href="/integrations/ecs_fargate/">AWS Fargate 上の Amazon ECS</a>を参照してください。
 </div>
 
 ## セットアップ
@@ -45,7 +45,7 @@ ECS コンテナおよびタスクを監視するには、ECS クラスター内
 
 ### ECS タスク定義の作成
 
-This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9].
+この [ECS タスク定義][30]は、必要な構成で Datadog Agent コンテナを起動します。Agent の構成を変更する必要がある場合、このタスク定義を更新し、デーモンサービスを再デプロイします。このタスク定義は、AWS Management Console または [AWS CLI][9] を使用して構成することができます。
 
 以下のサンプルは、コアインフラストラクチャーを監視するための最小限の構成です。しかし、様々な機能を有効にした追加のタスク定義のサンプルが [Agent の追加機能の設定](#setup-additional-agent-features)のセクションで提供されていますので、それらを代わりに使用することができます。
 
@@ -53,14 +53,14 @@ This [ECS task definition][30] launches the Datadog Agent container with the nec
 
 1. Linux コンテナの場合、[datadog-Agent-ecs.json][20] をダウンロードします。
     - Amazon Linux 1 (AL1、旧 Amazon Linux AMI) 使用している場合は、[datadog-agent-ecs1.json][21] を使用します。
-    - If you are using Windows, use [datadog-agent-ecs-win.json][22]
+    - Windows を使用している場合は、[datadog-agent-ecs-win.json][22] を使用します。
 
    <div class="alert alert-info">
    These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
    </div>
 2. ベースとなるタスク定義ファイルを編集します。
     - `<YOUR_DATADOG_API_KEY>` をアカウントの [Datadog API キー][14]に置き換えて、`DD_API_KEY` 環境変数を設定します。または、[AWS Secrets Manager に保管されたシークレットの ARN を指定][16]することもできます。
-    - Set the `DD_SITE` environment variable to your [Datadog site][13]. Your site is: {{< region-param key="dd_site" code="true" >}}
+    - ご利用の [Datadog サイト][13]を `DD_SITE` 環境変数に設定します。サイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
 
       <div class="alert alert-info">
       If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
@@ -262,7 +262,49 @@ Amazon Linux 1 (AL1、旧 Amazon Linux AMI) 使用している場合は、[datad
    "family": "datadog-agent-task"
  }
  ```
+#### ネットワークパス
 
+<div class="alert alert-info">Datadog Network Performance Monitoring の Network Path はプレビュー中です。登録をご希望の場合は、Datadog の担当者にお問い合わせください。</div>
+
+1. ECS クラスターで [Network Path][31] を有効にするには、`datadog-agent-sysprobe-ecs.json` ファイルに以下の環境変数を追加して、`system-probe` の traceroute モジュールを有効にします。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. 個別のパスを監視するには、[追加の Agent 機能を設定](#set-up-additional-agent-features)するための手順に従ってください：
+
+   これらのファイルは、ECS クラスター内のコンテナに関するコアメトリクスを収集するための基本構成を持つ Agent コンテナをデプロイします。Agent は、コンテナ上で発見された Docker ラベルに基づいて Agent インテグレーションを実行することも可能です。
+
+3. エンドポイントを手動で指定することなく、ネットワークトラフィックパスを監視し、Agent が実際のネットワークトラフィックに基づいてネットワークパスを自動的に発見および監視できるようにするには、`datadog-agent-sysprobe-ecs.json` に以下の追加の環境変数を追加します。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. オプションとして、ワーカーの数 (デフォルトは 4) を構成するには、`datadog-agent-sysprobe-ecs.json` ファイル内の以下の環境変数を調整します。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## AWSVPC モード
 
 Agent バージョン 6.10 以降は、ホストインスタンスのセキュリティグループが関連するポート上の適用可能なコンテナに到達できるよう、セキュリティグループが設定されている場合には、適用可能なコンテナに `awsvpc` モードが対応しています。
@@ -278,13 +320,15 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 
 行政機関のサイトで Datadog にデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナ ポートを開いて、[サポートされている機能][1]が適切に通信を行えるようにします。
 
+**注**: サイドカーコンテナが適切なネットワーク設定と IAM 権限で構成されていることも確認する必要があります。
+
 ```json
  {
    "containerDefinitions": [
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.4",
+            "image": "datadog/fips-proxy:1.1.5",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -433,3 +477,4 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /ja/network_monitoring/network_path

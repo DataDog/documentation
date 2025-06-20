@@ -42,7 +42,7 @@ Una única métrica OTLP puede asignarse a varias métricas de Datadog con un su
 
 
 {{< tabs >}}
-{{% tab "Sum" (Suma) %}}
+{{% tab "Suma" %}}
 
 Una suma OTLP representa una suma de las mediciones notificadas a lo largo de un periodo de tiempo. Por ejemplo, una suma puede utilizarse para registrar el número total de conexiones realizadas a una base de datos o el número total de solicitudes a un endpoint. Las sumas tienen dos características que influyen en la asignación:
 
@@ -56,14 +56,14 @@ La asignación por defecto es la siguiente:
 
 [1]: /es/dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
-{{% tab "Gauge" (Indicador) %}}
+{{% tab "Indicador" %}}
 
 Un indicador OTLP representa un valor muestreado en un momento dado. Sólo se incluye en las métricas OTLP el último valor de un periodo de tiempo determinado.
 
 Los indicadores OTLP se asignan a indicadores Datadog, ya que no proporcionan una semántica de agregación. Los puntos de datos de indicador, tanto enteros como de coma flotante, se asignan a números de coma flotante en el formato Datadog. 
 
 {{% /tab %}}
-{{% tab "Histogram" (Histograma) %}}
+{{% tab "Histograma" %}}
 
 Un histograma OTLP representa la distribución estadística de un conjunto de valores en un periodo de tiempo determinada, almacenando ciertas métricas de agregación como la suma o el recuento de la población junto con una serie de recuentos de buckets. Los histogramas tienen una característica que influye en la asignación:
 
@@ -105,7 +105,7 @@ El Datadog Agent y el exportadores Datadog del recopilador OpenTelemetry permite
 [1]: /es/metrics/distributions
 [2]: /es/dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
-{{% tab "Summary" (Resumen) %}}
+{{% tab "Resumen" %}}
 
 Un Resumen OTLP es un tipo heredado que transmite información cuantílica sobre una población durante un periodo de tiempo. Los tipos de resumen OTLP no son generados por los SDK de OpenTelemetry, pero pueden ser generados por otros componentes para la compatibilidad con versiones anteriores.
 
@@ -135,7 +135,7 @@ Puedes añadir todos los atributos de recursos como etiquetas utilizando la marc
 ### Ejemplo
 
 {{< tabs >}}
-{{% tab "Sum" (Suma) %}}
+{{% tab "Suma" %}}
 
 Supongamos que estás utilizando un instrumento de recuento OpenTelemetry desde una sola aplicación, que, por defecto, exporta métricas de tipo suma **monotónica** acumulativa. La siguiente tabla resume el comportamiento de Datadog:
 
@@ -154,7 +154,7 @@ Supón que estás utilizando un instrumento de recuento OpenTelemetry desde una 
 | #3                | [-1]                 | 16             | 16                        | INDICADOR               |
 
 {{% /tab %}}
-{{% tab "Gauge" (Indicador) %}}
+{{% tab "Indicador" %}}
 
 Supón que estás utilizando un instrumento indicador OpenTelemetry, `temperature`, desde una sola aplicación.
 La siguiente tabla resume el comportamiento de Datadog:
@@ -166,7 +166,7 @@ La siguiente tabla resume el comportamiento de Datadog:
 | #3                | 70               | 70               | 70                        | INDICADOR               |
 
 {{% /tab %}}
-{{% tab "Histogram" (Histograma) %}}
+{{% tab "Histograma" %}}
 
 Supón que estás utilizando un instrumento de histograma OpenTelemetry, `request.response_time.histogram`, desde dos servidores web: `webserver:web_1` y `webserver:web_2`. Supón que en un periodo de recopilación determinado, `webserver:web_1` informa la métrica con los valores `[1,1,1,2,2,2,3,3]` y que `webserver:web_2` informa la misma métrica con los valores `[1,1,2]`. Durante este periodo de recopilación, las cinco agregaciones siguientes representan la distribución estadística global de todos los valores recopilados de ambos servidores web:
 
@@ -193,7 +193,7 @@ Alternativamente, si estás utilizando el modo `counters`, la marca `send_aggreg
 
 [1]: /es/metrics/distributions
 {{% /tab %}}
-{{% tab "Summary" (Resumen) %}}
+{{% tab "Resumen" %}}
 
 Supón que estás enviando una métrica de resumen OTLP heredada, `request.response_time.summary`, desde un servidor web. Supón que en un periodo de recopilación determinado, el servidor web informa la métrica con los valores `[1,1,1,2,2,2,3,3]`. Las siguientes métricas serán informadas, si los cuantiles mínimo, máximo y medio están activados:
 

@@ -16,6 +16,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
   tag: 블로그
   text: DNS 확인을 사용하여 클라우드 및 외부 엔드포인트 모니터링
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: DNS 모니터링
 ---
 
@@ -35,7 +38,7 @@ DNS 모니터링은 서버 측 및 클라이언트 측 DNS 문제를 식별하�
 
 ## 설정
 
-DNS 모니터링을 사용하기 전에 [네트워크 성능 모니터링 설정][1]을(를) 완료하세요. 또한 최신 버전의 에이전트를 사용하고 있는지 확인하세요 (Linux OS의 경우 에이전트 v7.23 이상, Windows Server의 경우 v7.28 이상). 설치가 완료되면 네트워크 성능 모니터링 제품에서 **DNS** 탭에 액세스할 수 있습니다.
+DNS 모니터링을 사용하기 전에 [클라우드 네트워크 모니터링 설정][1]을 완료하세요. 또한 최신 버전의 에이전트를 사용하고 있는지 확인하세요 (Linux OS의 경우 에이전트 v7.23 이상, Windows Server의 경우 v7.28 이상). 설치가 완료되면 클라우드 네트워크 모니터링 제품에서 **DNS** 탭에 액세스할 수 있습니다.
 
 대신 네트워크 장치 모니터링을 찾으시나요? [NDM 설정 지침][2]을 참조하세요.
 
@@ -110,7 +113,7 @@ DNS 메트릭은 그래프와 관련 테이블을 통해 표시됩니다.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ko/network_monitoring/performance/
+[1]: /ko/network_monitoring/cloud_network_monitoring/
 [2]: /ko/network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /ko/network_monitoring/performance/network_analytics#table
-[4]: /ko/network_monitoring/performance/network_analytics/#recommended-queries
+[3]: /ko/network_monitoring/cloud_network_monitoring/network_analytics#table
+[4]: /ko/network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries

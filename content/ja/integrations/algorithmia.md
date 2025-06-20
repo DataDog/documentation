@@ -18,16 +18,16 @@ assets:
     source_type_id: 10128
     source_type_name: Algorithmia
   monitors:
-    Algorithmia: assets/monitors/algorithm_duration.json
+    Algorithm is taking too long to execute: assets/monitors/algorithm_duration.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Algorithmia
   sales_email: support@algorithmia.io
   support_email: support@algorithmia.io
 categories:
-- メトリクス
+- モニター
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
 display_on_public_website: true

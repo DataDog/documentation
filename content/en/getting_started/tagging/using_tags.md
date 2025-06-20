@@ -26,9 +26,9 @@ When including or excluding multiple tags:
 
 ## Events
 
-The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:service:coffee-house` to search for the tag `service:coffee-house`.
+The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:(service:coffee-house)` to search for the tag `service:coffee-house`.
 
-To search multiple tags inclusively, use parentheses and separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
+To search multiple tags inclusively, separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 
@@ -332,12 +332,12 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 The [CI Visibility Explorer][101] displays your test runs run in a CI pipeline.
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Search and Manage CI Tests][102].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Test Optimization Explorer Search Syntax][102].
 
 {{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /tests/search/
+[102]: /tests/explorer/search_syntax
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
@@ -353,6 +353,12 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## DORA Metrics
+
+The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
+
+{{< img src="/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:80%;">}}
 
 ## Developers
 
@@ -411,3 +417,5 @@ See this list for links to respective sections:
 [30]: /monitors/manage/#monitor-tags
 [31]: /monitors/downtimes/
 [32]: /getting_started/tagging/assigning_tags?tab=monitors
+[33]: https://app.datadoghq.com/ci/dora
+[34]: /dora_metrics/#create-custom-dashboards

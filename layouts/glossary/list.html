@@ -4,7 +4,8 @@
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
     {{ $products := slice }}
-
+    {{ $lang := .Site.Language.Lang }}
+    
     <div 
     class="glossary-main" 
     x-data="{
@@ -83,7 +84,7 @@
                             {{ if $valid_core_product }}
                                 {{ $products = union $products (slice $valid_core_product.name) }}
                                 {{ $valid_core_products_array = $valid_core_products_array | append . }}
-                            {{ else }}
+                            {{else if (eq $lang "en") }}
                                 {{ warnf "Ignoring invalid core_product tag %q" . }}
                                 {{ warnf "in %q" $dot.File.Path }}
                             {{ end }}

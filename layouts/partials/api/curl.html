@@ -133,6 +133,9 @@
             {{- if eq $authSchema.in "header" -}}
                 {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
+            {{- else if eq $authSchema.scheme "bearer" -}}
+                {{ " \\" }}
+<span class="o">-H</span> <span class="s1">"Authorization: Bearer <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
             {{- end -}}
         {{- end -}}
     {{- end -}}

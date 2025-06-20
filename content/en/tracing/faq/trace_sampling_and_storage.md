@@ -1,6 +1,5 @@
 ---
 title: Trace Sampling and Storage
-is_beta: true
 aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/
@@ -9,8 +8,8 @@ aliases:
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+  text: "Learn how to set up APM tracing with your application"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -191,6 +190,8 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 Manually keep a trace:
 
 ```Go
@@ -199,8 +200,8 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -224,8 +225,8 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

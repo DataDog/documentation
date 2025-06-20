@@ -18,8 +18,8 @@ assets:
     source_type_id: 262
     source_type_name: Google Cloud APIs
   monitors:
-    '[GCP] Number of instances per VPC network is approaching quota limit for {{network_id.name}} in {{project_id.name}}': assets/monitors/compute_instance_vpc_quota.json
-    '[GCP] Service Quota utilization is high for {{quota_metric.name}} in {{project_id.name}}': assets/monitors/serviceruntime_rate_quota.json
+    Instances per VPC approaching limit: assets/monitors/compute_instance_vpc_quota.json
+    Service Quota utilization is high: assets/monitors/serviceruntime_rate_quota.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,7 +29,7 @@ categories:
 - google cloud
 - モニター
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

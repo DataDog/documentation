@@ -154,7 +154,7 @@ agents:
 
 #### Insecure ports
 
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration.
 
 #### Secure ports
 
@@ -317,18 +317,61 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][1]. To configure the check, add the following annotations to the `default/kubernetes` service:
+Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks.
+
+### Prerequisites
+- An EKS Cluster running on Kubernetes version >= 1.28
+- Deploy the Agent using one of:
+  - Helm chart version >= `3.90.1`
+  - Datadog Operator >= `v1.13.0`
+- Enable the Datadog [Cluster Agent][6]
+
+Add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
-  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
-  ad.datadoghq.com/endpoints.init_configs: '[{}]'
-  ad.datadoghq.com/endpoints.instances:
-    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
+  ad.datadoghq.com/endpoints.checks: |-
+    {
+      "kube_apiserver_metrics": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/metrics",
+            "bearer_token_auth": "true"
+          }
+        ]
+      }
+    }
+  ad.datadoghq.com/service.checks: |-
+    {
+      "kube_controller_manager": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      },
+      "kube_scheduler": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      }
+    }
 ```
 
-Other control plane components are not exposed in EKS and cannot be monitored.
-
+**Notes:**
+- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group.
+- The addition of `"extra_headers":{"accept":"*/*"}` prevents `HTTP 406` errors when querying the EKS metrics API.
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
@@ -359,9 +402,9 @@ The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the s
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ```
-
 ### Etcd
 
+{{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h4" %}}
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
 ```shell
@@ -425,7 +468,6 @@ clusterChecksRunner:
 
 {{< /tabs >}}
 
-
 Then, annotate the service running in front of Etcd:
 
 ```shell
@@ -438,6 +480,88 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 ```
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
+
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
+
+```shell
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
+```
+
+These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
+
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
+
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterChecksRunner:
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /etc/etcd-certs
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
+      volumes:
+        - name: etcd-certs
+          secret:
+            secretName: etcd-metric-client
+        - name: disable-etcd-autoconf
+          emptyDir: {}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - name: etcd-certs
+      secret:
+        secretName: etcd-metric-client
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+Then, annotate the service running in front of Etcd:
+
+```shell
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.init_configs=[{}]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "tls_ca_cert": "/etc/etcd-certs/etcd-client-ca.crt", "tls_cert": "/etc/etcd-certs/etcd-client.crt",
+      "tls_private_key": "/etc/etcd-certs/etcd-client.key"}]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
+```
+
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
+
+{{% /collapse-content %}}
 
 
 ### Controller Manager
@@ -954,5 +1078,6 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
+[9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
+[11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html

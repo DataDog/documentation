@@ -29,9 +29,9 @@ assets:
     source_type_name: crest_data_systems_dell_emc_isilon
   logs: {}
   monitors:
-    '[crest_data_systems_dell_emc_isilon] CPU Usage for each Node of Cluster': assets/monitors/cds_cpu_usage_for_each_node_and_cluster.json
-    '[crest_data_systems_dell_emc_isilon] Disk Usage for each Node of Cluster': assets/monitors/cds_disk_usage_for_each_node_and_cluster.json
-    '[crest_data_systems_dell_emc_isilon] Memory Usage for each Node of Cluster': assets/monitors/cds_memory_usage_for_each_node_and_cluster.json
+    CPU usage is high: assets/monitors/cds_cpu_usage_for_each_node_and_cluster.json
+    Disk usage is high: assets/monitors/cds_disk_usage_for_each_node_and_cluster.json
+    Memory usage is high: assets/monitors/cds_memory_usage_for_each_node_and_cluster.json
 author:
   homepage: https://www.crestdata.ai
   name: Crest Data Systems
@@ -42,7 +42,7 @@ categories:
 - キャッシュ
 - data stores
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -102,7 +102,7 @@ tile:
   - caption: Dell EMC Isilon - モニター概要
     image_url: images/cds-dell-emc-isilon-monitors-summary.png
     media_type: image
-  - caption: Dell EMC Isilon NFS Export Stats
+  - caption: Dell EMC Isilon NFS エクスポート統計
     image_url: images/cds-dell-emc-isilon-nfs-export-stats.png
     media_type: image
   overview: README.md#Overview
@@ -158,4 +158,4 @@ tile:
 [10]: mailto:datadog.integrations@crestdata.ai
 [11]: mailto:datadog-sales@crestdata.ai
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

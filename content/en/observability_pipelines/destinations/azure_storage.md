@@ -9,7 +9,7 @@ The Azure Storage destination is available for the [Archive Logs template][1]. U
 
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
-You need to have Datadog's [Google Cloud Platform integration][3] installed to set up Datadog Log Archives.
+You need to have Datadog's [Azure integration][3] installed to set up Datadog Log Archives.
 
 {{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
 
@@ -23,6 +23,17 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][4] for more information.
+
+| Max Events     | Max Bytes       | Timeout (seconds)   |
+|----------------| ----------------| --------------------|
+| None           | 100,000,000     | 900                 |
+
 [1]: /observability_pipelines/archive_logs/
 [2]: /logs/log_configuration/archives/
-[3]: /integrations/google_cloud_platform/#setup
+[3]: /integrations/azure/#setup
+[4]: /observability_pipelines/destinations/#event-batching

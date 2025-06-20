@@ -45,13 +45,12 @@ Consulta cómo [archivar tus logs con Pipelines de observabilidad][4] si deseas 
 {{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La delegación de roles de AWS no es compatible con el sitio Datadog for Government. Deben utilizarse claves de acceso.</div>
+<div class="alert alert-warning"><em>La configuración de archivos S3 mediante la delegación de roles tiene actualmente una disponibilidad limitada. Ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a> para solicitar esta función en tu cuenta Datadog for Government</em>.</div>
 {{< /site-region >}}
 
 Si aún no está configurada, configura [la integración de AWS][1] para la cuenta de AWS que contiene tu bucket de S3.
-
-* En el caso general, se trata de crear un rol que Datadog pueda utilizar para integrarse con AWS S3.
-* Específicamente para las cuentas AWS GovCloud o China, utiliza claves de acceso como alternativa a la delegación de roles.
+   * En el caso general, se trata de crear un rol que Datadog pueda utilizar para integrarse con AWS S3.
+   * En el caso específico de las cuentas de AWS China, utiliza claves de acceso como alternativa a la delegación de roles.
 
 [1]: /es/integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
@@ -201,6 +200,7 @@ Ve a la página de [Reenvío de log][6] y selecciona **Add a new archive** (Aña
 * Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden completar este paso y el siguiente.
 * Para archivar logs en Azure Blob Storage es necesario registrarse en la aplicación. Consulta las instrucciones [en la página de integración de Azure][7], y establece el "sitio" en la parte derecha de la página de documentación en "US". Los Registros de aplicación creados con fines de archivado solo necesitan el rol "Storage Blob Data Contributor". Si tu bucket de almacenamiento se encuentra en una suscripción que está siendo supervisada a través de un recurso de Datadog, se mostrará una advertencia acerca de que el Registro de aplicación es redundante. Puedes ignorar esta advertencia.
 * Si tu bucket restringe el acceso de red a las IP especificadas, añade las IP de los webhooks de {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
+* Para el sitio **US1-FED**, puedes configurar Datadog para enviar logs a un destino fuera del entorno Datadog GovCloud. Datadog no se hace responsable de ningún log que abandone el entorno Datadog GovCloud. Además, Datatdog no se hace responsable de ninguna obligación o requisito que puedas tener en relación con FedRAMP, DoD Impact Levels, ITAR, conformidad de las exportaciones, residencia de datos o normativas similares aplicables a estos Logs una vez que abandonen el entorno Datadog GovCloud.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -230,8 +230,8 @@ Introduce el nombre de tu bucket. **Opcional**: introduce un directorio de prefi
 
 {{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Configura tu información de cuenta de almacenamiento de Azure en Datadog" style="width:75%;">}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Configuración avanzada
 
@@ -276,8 +276,8 @@ Para los archivos con un tamaño máximo de escaneado definido, todos los usuari
 
 No se admiten reglas de cortafuegos.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 {{< /site-region >}}
 #### Clase de almacenamiento
@@ -293,11 +293,13 @@ La [recuperación][2] solo admite las siguientes clases de almacenamiento:
 * S3 Standard-IA
 * S3 One Zone-IA
 * Recuperación instantánea de S3 Glacier
+* S3 Intelligent-Tiering, sólo si [los niveles opcionales de acceso asíncrono a los archivos][3] están ambos desactivados.
 
 Si deseas recuperar a partir de archivos de otra clase de almacenamiento, primero debes moverlos a una de las clases de almacenamiento admitidas mencionadas anteriormente.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /es/logs/archives/rehydrating/
+[3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -309,6 +311,8 @@ El archivado y la [recuperación][1] solo admiten los siguientes niveles de acce
 Si deseas recuperar a partir de archivos de otro nivel de acceso, primero debes moverlos a uno de los niveles admitidos mencionados anteriormente.
 
 [1]: /es/logs/archives/rehydrating/
+Accede a dashboards preconfigurados
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -392,8 +396,9 @@ Para cualquier cambio en las claves de KSM existentes, ponte en contacto con el 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 [3]: /es/help/
-{{% /tab %}}
+{{< partial name="whats-next/whats-next.html" >}}
 
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validación
@@ -443,9 +448,9 @@ Dentro del archivo JSON comprimido, el contenido de cada evento tiene el siguien
 }
 ```
 
-## Lectura adicional
+## Configurar tests de API y tests de API multupaso
 
-{{< partial name="whats-next/whats-next.html" >}}
+Grabar pruebas de aplicaciones móviles
 
 <br>
 *Logging without Limits es una marca registrada de Datadog, Inc.

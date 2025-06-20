@@ -11,122 +11,92 @@ further_reading:
 
 Use the Observability Pipelines Worker to send your processed logs to different destinations.
 
-Select and set up your destinations when you [set up a pipeline][2]. This is step 4 in the pipeline setup process:
+Select and set up your destinations when you [set up a pipeline][1]. This is step 4 in the pipeline setup process:
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][2].
 1. Select a template.
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up your processors.
 1. Install the Observability Pipelines Worker.
 
-{{< whatsnext desc="The available Observability Pipelines destinations are:" >}}
-    {{< nextlink href="observability_pipelines/destinations/#amazon-opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#datadog-log-management" >}}Datadog Log Management{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#google-chronicle" >}}Google Chronicle{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#rsyslog-or-syslog-ng" >}}Rsyslog or Syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#splunk-http-event-collector-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/#sumo-logic-hosted-collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}}
+## Template syntax
 
-## Amazon OpenSearch
+Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
 
-Set up the Amazon OpenSearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
 
-### Set up the destination
+The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+| Destination       | Fields that support template syntax | Behavior when the field cannot be resolved                                                                                 |
+|-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Amazon S3         | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
+| Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
+| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
+| Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
 
-### Set the environment variables
+#### Example
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
 
-## Datadog Log Management
+{{< img src="observability_pipelines/amazon_s3_prefix.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
 
-### Set up the destination
+### Syntax
 
-{{% observability_pipelines/destination_settings/datadog %}}
+#### Event fields
 
-### Set the environment variables
+Use `{{ <field_name> }}` to access individual log event fields. For example:
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+```
+{{ application_id }}
+```
 
-## Elasticsearch
+#### Strftime specifiers
 
-Set up the Elasticsearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+Use [strftime specifiers][3] for the date and time. For example:
 
-### Set up the destination
+```
+year=%Y/month=%m/day=%d
+```
 
-{{% observability_pipelines/destination_settings/elasticsearch %}}
+#### Escape characters
 
-### Set the environment variables
+Prefix a character with `\` to escape the character. This example escapes the event field syntax:
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
+```
+\{{ field_name }}
+```
 
-## Google Chronicle
+This example escapes the strftime specifiers:
 
-Set up the Google Chronicle destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+```
+year=\%Y/month=\%m/day=\%d/
+```
 
-### Set up the destination
+## Event batching
 
-{{% observability_pipelines/destination_settings/chronicle %}}
+Observability Pipelines destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
 
-### Set the environment variables
+- Maximum number of events
+- Maximum number of bytes
+- Timeout (seconds)
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+For example, if a destination's parameters are:
 
-## OpenSearch
+- Maximum number of events = 2
+- Maximum number of bytes = 100,000
+- Timeout (seconds) = 5
 
-Set up the OpenSearch destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
+And the destination receives 1 event in a 5-second window, it flushes the batch at the 5-second timeout.
 
-### Set up the destination
+If the destination receives 3 events within 2 seconds, it flushes a batch with 2 events and then flushes a second batch with the remaining event after 5 seconds. If the destination receives 1 event that is more than 100,000 bytes, it flushes this batch with the 1 event.
 
-{{% observability_pipelines/destination_settings/opensearch %}}
+{{% observability_pipelines/destination_batching %}}
 
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
-
-## Rsyslog or Syslog-ng
-
-Set up the Rsyslog or Syslog-ng destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-{{% observability_pipelines/destination_settings/syslog %}}
-
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
-
-## Splunk HTTP Event Collector (HEC)
-
-Set up the Splunk HEC destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-{{% observability_pipelines/destination_settings/splunk_hec %}}
-
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
-
-## Sumo Logic Hosted Collector
-
-Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][2]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-{{% observability_pipelines/destination_settings/sumo_logic %}}
-
-### Set the environment variables
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
-
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers

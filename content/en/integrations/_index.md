@@ -12,6 +12,8 @@ aliases:
     - /integrations/shoreline_license/
     - /integrations/shoreline_software_license/
 description: Gather data from all of your systems, apps, & services
+algolia:
+    tags: ['integration', 'integration setup']
 cascade:
 - _target:
     path: /integrations/akamai_datastream_2
@@ -134,6 +136,31 @@ cascade:
     lang: en
   aliases:
     - /integrations/snowflake/
+- _target:
+    path: /integrations/redpeaks_sap_netweaver
+    lang: en
+  aliases:
+    - /integrations/agentil_software_sap_netweaver/
+- _target:
+    path: /integrations/redpeaks_sap_businessobjects
+    lang: en
+  aliases:
+    - /integrations/agentil_software_sap_businessobjects/
+- _target:
+    path: /integrations/redpeaks_services_5_days
+    lang: en
+  aliases:
+    - /integrations/agentil_software_services_5_days/
+- _target:
+    path: /integrations/redpeaks_sap_hana
+    lang: en
+  aliases:
+    - /integrations/agentil_software_sap_hana/
+- _target:
+    path: /integrations/azure_virtual_network
+    lang: en
+  aliases:
+    - /integrations/azure_virtual_networks
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

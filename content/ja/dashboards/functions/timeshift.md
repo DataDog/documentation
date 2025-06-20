@@ -8,7 +8,7 @@ further_reading:
 title: タイムシフト
 ---
 
-ここでは、`<TIMEPERIOD>_before()` という形式の関数について説明します。これらの関数は、対応する期間の値をグラフに表示します。この値自体に大きな意味はありませんが、現在値と組み合わせることで、アプリケーションのパフォーマンスについて有益なインサイトを得られることがあります。
+以下に、データをタイムシフトさせる一連の関数を示します。これらは対応する期間の値をグラフに表示し、それ単体ではあまり価値がない場合もありますが、現在の値と組み合わせることでアプリケーションのパフォーマンスに関する有益な知見を得られます。
 
 ## タイムシフト
 
@@ -22,6 +22,23 @@ title: タイムシフト
 timeshift(avg:system.load.1{*}, -1209600)
 ```
 
+## カレンダーシフト
+
+
+| 関数           | 説明                                                                                   | 例                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | メトリクスの現在のタイムスタンプから前の日、週、または月の値をグラフ化します。 | `calendar_shift(<METRIC_NAME>{*}, "<TIME_SHIFT_STRING>", "<TIME_ZONE_CODE>")` |
+
+`calendar_shift()` 関数にアクセスするには、**Add function** ボタンをクリックし、**Timeshift > Month before** を選択します。カレンダーシフトを用いることで、同一メトリクスを同等の期間で比較できます。以下は、クラウドコストメトリクス `aws.cost.net.amortized` について、2 週間前の calendar_shift() 値と現在値を比較した例です。
+
+{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="2 週間前と現在の `aws.cost.net.amortized ` メトリクス値を比較するために使用される calendar_shift() 関数の例" style="width:80%;" >}}
+
+有効な `TIME_SHIFT_STRING` の値は、負の整数の後に日を表す「d」、週を表す「w」、または月を表す「mo」を付けたものです。
+例: `-1d`、`-7d`、`-1mo`、`-30d`、`-4w`
+
+有効な `TIME_ZONE_CODE` の値は、特定の都市に対応する IANA タイムゾーンコード、または `UTC` です。
+例: `UTC`、`America/New_York`、`Europe/Paris`、`Asia/Tokyo`
+
 ## 1 時間前
 
 | 関数        | 説明                                                            | 例                         |
@@ -34,6 +51,8 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## 1 日前
 
+<div class="alert alert-danger">"The day before" 機能は非推奨です。代わりに "-1d" の calendar shift をご利用ください。</div>
+
 | 関数       | 説明                                                          | 例                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
 | `day_before()` | メトリクスの現在のタイムスタンプより 1 日前の値をグラフ化します。 | `day_before(<METRIC_NAME>{*})` |
@@ -43,6 +62,8 @@ timeshift(avg:system.load.1{*}, -1209600)
 {{< img src="dashboards/functions/timeshift/simple_day_before_example.png" alt="day before の例" style="width:80%;">}}
 
 ## 1 週前
+
+<div class="alert alert-danger">"The week before" 機能は非推奨です。代わりに "-7d" の calendar shift をご利用ください。</div>
 
 | 関数        | 説明                                                                    | 例                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -54,6 +75,8 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## 1 か月前
 
+<div class="alert alert-danger">"The month before" 機能は非推奨です。ユースケースに応じて "-1mo"、"-30d"、または "-4w" の calendar shift をご利用ください。</div>
+
 | 関数         | 説明                                                                                | 例                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
 | `month_before()` | メトリクスの現在のタイムスタンプより 1 か月 (28 日/4 週間) 前の値をグラフ化します。 | `month_before(<METRIC_NAME>{*})` |
@@ -62,18 +85,6 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="month before の例" style="width:80%;">}}
 
-
-## カレンダーシフト
-
-<div class="alert alert-info">カレンダーシフト機能は、<em>プライベート</em>ダッシュボードのクラウドコストデータソースでのみ利用可能です。</div>
-
-| 関数           | 説明                                                                                   | 例                            |
-|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
-| `calendar_shift()` | メトリクスの現在のタイムスタンプから前の日、週、または月の値をグラフ化します。 | `calendar_shift(<METRIC_NAME>{*})` |
-
-calendar_shift() 関数にアクセスするには、**Add function** ボタンをクリックし、**Timeshift &gt; Month before** を選択します。カレンダーシフトを使用すると、同じメトリクスを同等の期間で比較できます。以下は、2 週間前の calendar_shift() の値と現在の値を比較したクラウドコストメトリクス `aws.cost.net.amortized` の例です。
-
-{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="2 週間前と現在の `aws.cost.net.amortized ` メトリクス値を比較するために使用される calendar_shift() 関数の例" style="width:80%;" >}}
 
 ## その他の関数
 

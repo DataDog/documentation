@@ -37,7 +37,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_on_public_website: true
@@ -45,7 +45,7 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 3.3.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: php_fpm

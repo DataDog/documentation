@@ -1,16 +1,20 @@
 ---
+further_reading:
+- link: account_management/multi_organization/
+  tag: 설명서
+  text: 다중 조직 계정 관리
 title: 조직 간 전환하기
 ---
 
-여러 Datadog 조직에 소속된 경우(즉, 멀티-org 계정을 사용하는 경우), 내비게이션 바 왼쪽 하단의 org switcher를 이용해 조직 간에 토글할 수 있습니다. 또, **Personal Settings**의 **Organizations** 탭을 사용하면 모든 조직을 확인하고 조직 간에 전환할 수 있습니다.
+여러 Datadog 조직에 소속된 경우 내비게이션 바 왼쪽 하단의 Org switcher를 이용해 조직 간에 토글할 수 있습니다. 또, **Personal Settings**의 [**Organizations** 페이지][1] 탭에서 모든 조직을 확인하고 조직 간에 전환할 수 있습니다.
 
-{{< img src="account_management/org_switching.png" alt="조직을 전환하는 방법 두 가지" style="width:70%;" >}}
+{{< img src="account_management/org_switching_062024.png" alt="조직을 전환하는 두 가지 방법" style="width:90%;" >}}
 
 보안을 위해 전환하는 각 조직에 대해 유효한 세션이 있어야 합니다. 활성 세션이 없는 경우 사용자 이름과 비밀번호 또는 SAML로 인증하라는 메시지가 표시됩니다.
 
 1. **다중 인증 방법**: SAML과 사용자 이름/비밀번호 인증 모두를 사용하는 경우, 둘 중 조직에서 요구하는 유형을 사용해 로그인해야 합니다. 한 가지 인증으로 로그인하면 전체에 액세스할 수 있습니다.
 
-2. **SAML 전용**: 조직에서 [SAML만을 사용하도록 설정][1]한 경우, SAML로 인증해야 합니다. 또, 조직을 전환할 때마다 다시 인증해야 합니다. IdP에서 세션을 유지하므로, 대개 리다이렉트되는 경우가 많습니다.
+2. **SAML 전용**: 조직에서 [SAML전용][2]을 설정한 경우, SAML로 인증해야 합니다. 또, 조직을 전환할 때마다 다시 인증해야 합니다. IdP에서 세션을 유지하므로, 대개 리다이렉트되는 경우가 많습니다.
 
 ## 멀티-org 계정 사용자의 비밀번호 재설정
 
@@ -18,7 +22,7 @@ title: 조직 간 전환하기
 
 **참조**: 동일한 비밀번호를 두 번 사용할 수는 없습니다.
 
-## 문제 해결
+## 트러블슈팅
 
 문제가 발생해 로그인할 수 없다면 다음을 참조하세요.
 
@@ -28,7 +32,12 @@ title: 조직 간 전환하기
 
 3. 이 계정에 사용자 이름과 비밀번호, SAML 또는 Google OAuth가 필요한지 팀 관리자에게 확인하여 올바른 방법을 사용하고 있는지 확인하세요.
 
-위의 문제 해결 단계가 실패하면 [Datadog 지원팀][2]에 문의하여 그동안 어떤 시도가 있었는지, 그리고 어떤 지원이 필요한지에 대해 알려주시기 바랍니다.
+위의 문제 해결 단계가 실패하면 [Datadog 지원 팀][3]에 문의하여 그동안 어떤 방법을 시도했는지, 그리고 어떤 지원이 필요한지에 대해 알려주시기 바랍니다.
 
-[1]: /ko/account_management/saml/#saml-strict
-[2]: /ko/help/
+## 참고 자료
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/personal-settings/organizations
+[2]: /ko/account_management/saml/#saml-strict
+[3]: /ko/help/

@@ -1,5 +1,4 @@
 ---
-kind: Guía
 title: Aviso de obsolescencia del TLS para versiones anteriores a la v1.2
 ---
 

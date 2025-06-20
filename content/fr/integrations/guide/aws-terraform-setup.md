@@ -67,6 +67,11 @@ L'utilisation de [Terraform][1] vous permet de créer le rôle IAM Datadog, le d
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
    }
 
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+   }
+
    resource "datadog_integration_aws" "sandbox" {
       account_id  = "<AWS_ACCOUNT_ID>"
       role_name   = "DatadogAWSIntegrationRole"

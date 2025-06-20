@@ -18,8 +18,8 @@ title: Agent ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Windows guides:" >}}
-    {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
-    {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
+    {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Windows 用 Datadog Agent Manager{{< /nextlink >}}
+    {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent ユーザー{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud infrastructure guides:" >}}
@@ -38,6 +38,7 @@ title: Agent ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent のバージョン管理ガイド:" >}}
+    {{< nextlink href="agent/guide/upgrade" >}}Agent 7 へのアップグレード{{< /nextlink >}}
     {{< nextlink href="agent/guide/version_differences" >}}Agent バージョンの違い{{< /nextlink >}}
     {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog Agent のマイナーバージョン間のアップグレード{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python のバージョン管理: Datadog Agent v6 で Python 3 を使用する{{< /nextlink >}}

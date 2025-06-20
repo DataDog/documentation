@@ -35,7 +35,7 @@ categories:
 - セキュリティ
 - ネットワーク
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -113,10 +113,10 @@ pfSense はオープンソースでカスタマイズされた FreeBSD のディ
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: datadog.integrations@crestdata.ai
-- Sales Email: datadog-sales@crestdata.ai
+- サポートメール: datadog.integrations@crestdata.ai
+- 営業メール: datadog-sales@crestdata.ai
 - Web サイト: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][11]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][11]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
@@ -130,4 +130,4 @@ pfSense はオープンソースでカスタマイズされた FreeBSD のディ
 [10]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [11]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-pfsense" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-pfsense" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

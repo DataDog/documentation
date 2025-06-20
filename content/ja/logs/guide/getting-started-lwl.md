@@ -24,7 +24,7 @@ title: Logging Without Limits™ ガイド
 
 クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without Limits™][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
 
-This guide identifies key components of Logging Without LimitsTM such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-to-track-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitor your KPIs over time.
+このガイドでは、ログエクスポローラーを構造化し KPI をモニターするのに役立つ、Logging Without Limits™ の主要な機能、 [パターン](#2-大量のログパターンを識別)、[除外フィルター](#3-除外フィルターログパターンを作成)、[ログベースのカスタムメトリクス](#4-除外されたログを追跡するメトリクスを作成)、 [モニター](#異常検知モニターを作成)を紹介します。
 
 ## 1. 最多ログのサービスステータスを特定
 
@@ -55,7 +55,7 @@ This guide identifies key components of Logging Without LimitsTM such as [Patter
 
 パターンビューは、ノイズの多いパターンを特定しフィルタリングする際に役立ちます。パターンに一致するログ数を、サービスとステータスに分けて表示します。一番上のパターンをクリックすると、ステータスに関連するイベントの詳細なログが表示されます。コンテキストパネルには、最もノイズの多いステータスパターンに関する情報が表示されます。
 
-## 3. Create a log pattern exclusion filter
+## 3. 除外フィルターログパターンを作成
 
 パターンのコンテキストパネルには、ログパターンのすべてのインスタンス（イベント）が一覧表示され、選択したパターンに基づいたカスタム検索クエリが作成されます。除外フィルターでこのクエリを使用して、インデックスからこれらのログを削除します。
 
@@ -118,7 +118,7 @@ This guide identifies key components of Logging Without LimitsTM such as [Patter
 
 Logging Without Limits™ の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

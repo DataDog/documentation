@@ -11,10 +11,6 @@ further_reading:
 title: トレースメトリクス
 ---
 
-<div class="alert alert-info">
-<a href="/opentelemetry/guide/service_entry_spans_mapping/">OpenTelemetry セマンティック規約からサービスエントリーのスパンへのマッピング</a>は現在公開ベータ版で、OpenTelemetry スパンから生成されるトレースメトリクスの改良を含みます。
-</div>
-
 ## 概要
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="OpenTelemetry の APM メトリクス" style="width:100%;" >}}
@@ -62,7 +58,7 @@ service:
 
 Datadog Exporter を用いた実際に動作する構成の完全な例については、[`trace-metrics.yaml`][3] を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

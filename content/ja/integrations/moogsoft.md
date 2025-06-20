@@ -27,11 +27,11 @@ author:
   vendor_id: moogsoft
 categories:
 - 自動化
-- インシデント
-- マーケットプレイス
+- logs-restriction-queries-update-a-restriction-query
+- marketplace
 - notifications
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,7 +48,7 @@ pricing:
 - billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.moogsoft
-  product_id: cloud
+  product_id: クラウド
   short_description: イベント/メトリクスのボリュームに応じた価格帯の設定
   tag: コア
   unit_label: Moogsoft イベントまたは 500 Moogsoft メトリクス
@@ -124,4 +124,4 @@ Moogsoft サポート ([https://support.moogsoft.com][1]) までお問い合わ�
 [1]: https://support.moogsoft.com
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

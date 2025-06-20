@@ -11,6 +11,9 @@ further_reading:
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
   tag: Documentation
   text: AWS Fargate profile
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview

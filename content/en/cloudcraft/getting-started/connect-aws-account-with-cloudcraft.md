@@ -8,6 +8,8 @@ Connecting your AWS accounts to Cloudcraft allows you to visualize your infrastr
 
 This article walks you through connecting your AWS account to Cloudcraft.
 
+<div class="alert alert-info">Datadog users can bypass this process by connecting their Datadog account to Cloudcraft. For more information, see <a href="https://docs.datadoghq.com/cloudcraft/getting-started/datadog-integration/" title="Datadog Integration">Datadog Integration</a>.</div>
+
 ## Requirements
 
 - A Cloudcraft user with the [Owner or Administrator role][1].

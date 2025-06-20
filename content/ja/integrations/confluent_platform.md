@@ -19,8 +19,8 @@ assets:
     source_type_id: 10091
     source_type_name: Confluent Platform
   monitors:
-    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
-    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
+    Topic partition is not used: assets/monitors/unused_partition.json
+    Unclean leader election detected: assets/monitors/unclean_leader_election.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.10.2
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: confluent_platform
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
+  - 製品::Data Streams Monitoring
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
   media: []

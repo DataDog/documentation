@@ -14,7 +14,7 @@ widget_type: alert_graph
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="경고 그래프" >}}
 
-이 위젯은 메트릭, 이상치, 아웃라이어, 예측, APM, 통합과 같은 기본 예약된 쿼리 경고 모니터에서 지원됩니다.
+이 위젯은 메트릭, 이상치, 아웃라이어, 예측, APM 메트릭, 통합과 같은 기본 예약된 쿼리 경고 모니터에서 지원됩니다.
 
 ## 설정
 

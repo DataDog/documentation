@@ -35,13 +35,13 @@ To ensure your credentials are securely stored and obfuscated across the applica
 The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, and click log in. You can then go on and [start recording subsequent steps][1].
 At test execution, the browser test systematically executes the first login steps before going through the rest of the journey.
 
-{{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
+{{< img src="synthetics/guide/app_that_requires_login/login_test_2.mp4" video="true" alt="Demo of recording a login">}}
 
 By default, the iframe/pop-up of the recorder uses your own browser. If you start the recording already logged into your application, the iframe/pop-up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
 
 To record your steps without logging out of your application, use the recorder's incognito mode.
 
-{{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
+{{< img src="synthetics/guide/app_that_requires_login/incognito_2.mp4" video="true" alt="Demo of recording a login in incognito">}}
 
 Opening a pop-up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop-up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 

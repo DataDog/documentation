@@ -49,9 +49,8 @@
                   {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($section_header | anchorize) "_" $i "_" $order) -}}
                   {{- $hugo_context.Scratch.Add "algoliaindex" (
                       dict "objectID" $object_id
+                      "id" $object_id
                       "title" $title
-                      "order" $order
-                      "tags" ($page.Params.algolia.tags | default slice)
                       "section_header" $section_header
                       "content" $c
                       "type" $page.Type
@@ -62,6 +61,8 @@
                       "category" $category
                       "subcategory" $subcategory
                       "rank" $rank
+                      "order" $order
+                      "tags" ($page.Params.algolia.tags | default slice)
                   ) -}}
               {{- end -}}
           {{- end -}}

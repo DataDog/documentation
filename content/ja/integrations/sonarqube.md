@@ -22,7 +22,7 @@ assets:
     source_type_id: 10132
     source_type_name: SonarQube
   monitors:
-    SonarQube vulnerabilities: assets/monitors/vulnerabilities.json
+    Sonarqube has vulnerabilities: assets/monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
 author:
@@ -34,7 +34,7 @@ categories:
 - 自動化
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 3.2.2
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: sonarqube
@@ -295,7 +295,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 **デフォルト値**: `10`
 
 `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
 **デフォルト値**: 空のマップ
 
 `exclude`
@@ -405,7 +405,7 @@ SonarQube には、イベントは含まれません。
 [1]: https://www.sonarqube.org
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
-[4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
+[4]: https://docs.sonarqube.org/latest/server-upgrade-and-maintenance/monitoring/instance/#exposed-jmx-mbeans
 [5]: https://docs.sonarsource.com/sonarqube/latest/instance-administration/monitoring/instance/#how-do-i-activate-jmx
 [6]: https://docs.datadoghq.com/ja/integrations/java/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

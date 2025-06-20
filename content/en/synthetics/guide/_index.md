@@ -15,6 +15,7 @@ cascade:
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a one-time passcode from an email body using Synthetic Browser Tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
@@ -40,6 +41,7 @@ cascade:
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the Chrome extension for your browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Run tests on applications using a shadow DOM{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Create HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/canvas-content-javascript/" >}}Asserting canvas content with JavaScript{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations:" >}}

@@ -27,10 +27,10 @@ assets:
   logs:
     source: rapdev_redhat_satellite
   monitors:
-    Foreman Task Failure: assets/monitors/foreman_task_failure.json
-    HTTP 5xx Errors: assets/monitors/5xx_errors.json
-    Job Invocation Failure: assets/monitors/job_invocation_failure.json
-    OpenMetrics Connection: assets/monitors/openmetrics_connection.json
+    RedHat Satellite Foreman Task Failed: assets/monitors/foreman_task_failure.json
+    RedHat Satellite HTTP has 5xx Errors: assets/monitors/5xx_errors.json
+    RedHat Satellite Job has failed: assets/monitors/job_invocation_failure.json
+    RedHat Satellite Prometheus Connection Failing: assets/monitors/openmetrics_connection.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -43,7 +43,7 @@ categories:
 - 構成とデプロイ
 - ログの収集
 - モニター
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -139,4 +139,4 @@ RedHat Satellite アプリケーションの監視を始めやすいように、
 [8]: https://www.rapdev.io/#Get-in-touch
 [9]: mailto:sales@rapdev.io
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-redhat-satellite" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-redhat-satellite" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

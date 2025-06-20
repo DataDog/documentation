@@ -1,5 +1,5 @@
 import configDocs from './config/config-docs';
-import { updateMainContentAnchors, gtag, chromeHashFix } from './helpers/helpers';
+import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { bodyClassContains } from './helpers/helpers';
 import { DOMReady } from './helpers/documentReady';
 import { initializeIntegrations } from './components/integrations';
@@ -7,8 +7,9 @@ import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import { loadPage } from './components/async-loading';
-import { loadInstantSearch } from './components/algolia';
+import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
+import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -81,7 +82,7 @@ const doOnLoad = () => {
         });
     }
 
-    // Load algolia instant search for the first time
+    // Load instant search for the first time
     loadInstantSearch((asyncLoad = false));
 
     if (!bodyClassContains('api')) {
@@ -122,8 +123,11 @@ const doOnLoad = () => {
 
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
-    } else {
-        chromeHashFix();
+    }
+
+    // Only initialize the expression language evaluator if the page contains an expression evaluator.
+    if (document.querySelector('.expression-evaluator')) {
+        new ExpressionLanguageEvaluator();
     }
 };
 
@@ -133,7 +137,7 @@ function getVisibleParentPath(ancestralEl, path){
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
 
-    let el = document.querySelector(`${ancestralEl} [data-path="${path}"][data-skip="false"]`)
+    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
     // account for preview branch name in url
     let endIdx = env === 'preview' ? 6 : 4
 
@@ -154,8 +158,9 @@ function hasParentLi(el) {
             }
 
             // Add open class to li if the li has a child ul
+            const isNonMainSideNav = document.querySelector('.side .sidenav-api, .side .sidenav-partners');
             if (el.closest('li') && el.closest('li').querySelectorAll('ul').length !== 0) {
-                el.closest('li').classList.add('open');
+                el.closest('li').classList.add(isNonMainSideNav ? 'active' : 'open');
             }
 
             if (el.closest('.sub-menu') && el.closest('.sub-menu').previousElementSibling) {
@@ -346,6 +351,11 @@ function navClickEventHandler(event) {
     }
 }
 
+/**
+ * Determines if the link should be loaded via AJAX
+ * @param {object} element 
+ * @returns boolean
+ */
 function loadViaAjax(element) {
     let hasClassLoad = false;
     let parentHasClassOpen = false;

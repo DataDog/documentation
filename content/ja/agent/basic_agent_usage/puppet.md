@@ -17,7 +17,7 @@ Datadog Puppet モジュールは Linux および Windows をサポートし、P
 puppet module install datadog-datadog_agent
 ```
 
-#### Upgrading
+#### アップグレード
 
 - デフォルトでは、Datadog Agent v7.x がインストールされます。以前のバージョンの Agent を使用するには、設定 `agent_major_version` を変更します。
 - `agent5_enable` は `agent_major_version` に置き換えられたため使用されなくなりました。
@@ -305,7 +305,7 @@ class { "datadog_agent":
 | `non_local_traffic`                     | 他のノードがこのノードを介してトラフィックをリレーできるようにします。                                                                                                                                      |
 | `apm_enabled`                           | APM Agent を有効にするブール値（デフォルトは false）。                                                                                                                                           |
 | `process_enabled`                       | プロセス Agent を有効にするブール値（デフォルトは false）。                                                                                                                                       |
-| `scrub_args`                            | A boolean to enable the process cmdline scrubbing (defaults to true).                                                                                                                            |
+| `scrub_args`                            | プロセスのコマンドラインスクラビングを有効にするブール値（デフォルトは true）。                                                                                                                            |
 | `custom_sensitive_words`                | スクラビング機能で使用されるデフォルトのものを超える単語を追加するための配列（デフォルトは `[]`）。                                                                                             |
 | `logs_enabled`                          | ログ Agent を有効にするブール値（デフォルトは false）。                                                                                                                                          |
 | `windows_npm_install`                   | Windows NPM ドライバーのインストールを有効にするためのブール値 (デフォルトは false)。                                                                                                                     |

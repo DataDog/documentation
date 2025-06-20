@@ -23,9 +23,9 @@ assets:
     source_type_id: 64
     source_type_name: Kafka
   monitors:
-    '[Kafka] High produce latency on broker': assets/monitors/broker_produce_latency.json
-    '[Kafka] High producer request rate': assets/monitors/kafka_high_producer_request_rate.json
-    '[Kafka] Offline partition': assets/monitors/kafka_offline_partition.json
+    Partition is offline: assets/monitors/kafka_offline_partition.json
+    Produce latency is high: assets/monitors/broker_produce_latency.json
+    Produce request rate is high: assets/monitors/kafka_high_producer_request_rate.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     kafka_patterns: assets/saved_views/kafka_patterns.json
@@ -39,7 +39,7 @@ author:
 categories:
 - log collection
 - message queues
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
 display_on_public_website: true
@@ -47,7 +47,7 @@ draft: false
 git_integration_title: kafka
 integration_id: kafka
 integration_title: Kafka Broker
-integration_version: 2.16.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: kafka
@@ -68,6 +68,7 @@ tile:
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
   - Offering::Integration
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
   media: []
@@ -79,7 +80,7 @@ tile:
     url: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
-  - resource_type: other
+  - resource_type: その他
     url: https://www.datadoghq.com/knowledge-center/apache-kafka/
   support: README.md#Support
   title: Kafka Broker
@@ -94,15 +95,15 @@ tile:
 
 収集した Kafka ブローカーのメトリクスを表示し、Kafka クラスターの健全性とパフォーマンスを 360 度リアルタイムで確認できます。このインテグレーションにより、Kafka デプロイメントからメトリクスとログを収集し、Kafka スタックのパフォーマンスに関するテレメトリーデータの可視化やアラートの発行が可能です。
 
-ストリーミングデータパイプラインのトポロジーを可視化し、ボトルネックの根本原因を特定することが有益な場合は、[Data Streams Monitoring][2] の詳細をご覧ください。
-
 **注**:
-- このチェックでは、インスタンスごとに 350 メトリクスの制限があります。返されたメトリクスの数は、Agent のステータス出力に表示されます。以下の構成を編集して、関心のあるメトリクスを指定します。収集するメトリクスのカスタマイズの詳細については、[JMX チェックのドキュメント][3]を参照してください。
+- このチェックでは、インスタンスごとに 350 メトリクスの制限があります。返されたメトリクスの数は、Agent のステータス出力に表示されます。以下の構成を編集して、関心のあるメトリクスを指定します。収集するメトリクスのカスタマイズの詳細については、[JMX チェックのドキュメント][2]を参照してください。
 - このインテグレーションに付属するサンプル構成は、Kafka バージョン 0.8.2 以降でのみ動作します。
-それ以前のバージョンを使用している場合は、[Agent v5.2.x リリースサンプルファイル][4]を参照してください。
-- Kafka コンシューマーメトリクスを収集する方法については、[kafka_consumer チェック][5]を参照してください。
+それ以前のバージョンを使用している場合は、[Agent v5.2.x リリースサンプルファイル][3]を参照してください。
+- Kafka コンシューマーメトリクスを収集する方法については、[kafka_consumer チェック][4]を参照してください。
 
-## Setup
+Kafka インテグレーションを強化する手段として、[Data Streams Monitoring][5] の利用を検討してください。このソリューションではパイプラインを可視化し、ラグ (遅延) を追跡できるため、ボトルネックの特定と解消に役立ちます。
+
+## セットアップ
 
 ### インストール
 
@@ -257,12 +258,10 @@ Kafka チェックには、イベントは含まれません。
 
 ## 概要
 
-この Agent インテグレーションは、Kafka コンシューマーからメッセージオフセットのメトリクスを収集します。このチェックでは、Kafka ブローカーからハイウォーターオフセットを取得し、Kafka (または旧式のコンシューマーの場合は Zookeeper) に保存されているコンシューマーオフセットを取得し、コンシューマーラグ (ブローカーオフセットとコンシューマーオフセットの差) を計算します。
+この Agent インテグレーションは、Kafka コンシューマーからメッセージオフセットのメトリクスを収集します。このチェックでは、Kafka ブローカーからハイウォーターオフセットを取得し、Kafka (旧式のコンシューマーの場合は Zookeeper) に保存されているコンシューマーオフセットを取得して、ブローカーオフセットとコンシューマーオフセットの差であるコンシューマーラグを計算します。
 
-ストリーミングデータパイプラインのトポロジーを可視化し、ボトルネックの根本原因を特定することが有益な場合は、[Data Streams Monitoring][2] の詳細をご覧ください。
-
-**注:**
-- このインテグレーションでは、コンシューマーオフセットがブローカーオフセットの前にチェックされることが保証されます。最悪の場合、コンシューマーラグが少し過大評価されることがあります。これらのオフセットを逆の順序でチェックすると、コンシューマーラグが負の値になるまで過小評価される可能性があり、これは通常メッセージがスキップされていることを示す深刻なシナリオです。
+**注:** 
+- このインテグレーションでは、ブローカーオフセットより先にコンシューマーオフセットをチェックするよう保証されています。そのため最悪の場合でも、コンシューマーラグがわずかに過大評価される程度で済みます。これらのオフセットを逆の順序でチェックすると、コンシューマーラグが負の値になるまで過小評価される可能性があり、これは通常メッセージがスキップされていることを示す深刻なシナリオです。
 - Kafka ブローカーや Java ベースのコンシューマー/プロデューサーから JMX メトリクスを収集したい場合は、[Kafka Broker インテグレーション][17]を参照してください。
 
 
@@ -384,10 +383,10 @@ sudo service datadog-agent restart
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka/images/kafka_dashboard.png
-[2]: https://www.datadoghq.com/product/data-streams-monitoring/
-[3]: https://docs.datadoghq.com/ja/integrations/java/
-[4]: https://raw.githubusercontent.com/DataDog/dd-agent/5.2.1/conf.d/kafka.yaml.example
-[5]: https://docs.datadoghq.com/ja/integrations/kafka/?tab=host#kafka-consumer-integration
+[2]: https://docs.datadoghq.com/ja/integrations/java/
+[3]: https://raw.githubusercontent.com/DataDog/dd-agent/5.2.1/conf.d/kafka.yaml.example
+[4]: https://docs.datadoghq.com/ja/integrations/kafka/?tab=host#kafka-consumer-integration
+[5]: https://docs.datadoghq.com/ja/data_streams/
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://github.com/DataDog/jmxfetch
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_msk/#pagetitle

@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /ko/guides/logs/
 - /ko/en/logs
@@ -42,8 +45,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: 블로그
   text: 네트워크 및 보안 분석을 위해 DNS 로그 모니터링
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: 아키텍처 센터
+  text: Datadog를 통한 로그 관리 인덱싱 전략 가이드
 title: 로그 관리
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  초급 또는 중급 활성화 세션에 참가해 Datadog  Log Management를 사용해 로그, 메트릭, 트레이스를 하나로 통합해 보는 방법을 알아보세요. 이를 통해 로그 데이터 분석에 풍성한 컨텍스트를 얻을 수 있습니다.
+{{< /learning-center-callout >}}
 
 ## 개요
 
@@ -69,7 +79,7 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 일단 로그를 수집하면, 프로세스 파이프라인과 프로세서로 모든 로그를 보강 및 처리하고 인덱스를 활용하여 로그 관리 예산을 제어합니다. 또한 수집한 로그로 메트릭을 생성하거나 [로그 설정 옵션][5]으로 스토리지에 최적화된 아카이브 내에서 해당 로그를 관리합니다.
 
-## 연결
+## Connect
 
 {{< img src="/logs/connect.png" alt="로그를 메트릭 또는 트레이스와 연결하기" style="width:80%;">}}
 
@@ -81,6 +91,8 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 ## 탐색
 
 [로그 탐색기][1]로 수집한 로그 탐색을 시작합니다.
+
+**팁**: Datadog 글로벌 검색에서 로그 탐색기를 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 누르고 `logs`를 검색하세요.
 
 {{< img src="/logs/explore.png" alt="수집한 로그 탐색" style="width:80%;">}}
 
@@ -97,7 +109,7 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*제한 없는 로깅은 Datadog, Inc.의 상표입니다.
+*Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/explorer/
 [2]: /ko/security/cloud_siem/

@@ -31,9 +31,11 @@ further_reading:
 
 Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes by using the Datadog Agent and the [OpenMetrics][1] or [Prometheus][2] integrations. By default, all metrics retrieved by the generic Prometheus check are considered custom metrics.
 
-Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports the Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section.
 
 This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints. For an explanation of how Prometheus and OpenMetrics metrics map to Datadog metrics, see the [Mapping Prometheus Metrics to Datadog Metrics][6] guide.
+
+**Note**: Datadog recommends using the OpenMetrics check since it is more efficient and fully supports the Prometheus text format. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
 ## Setup
 
@@ -55,7 +57,7 @@ Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying 
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "openmetrics": {
           "init_config": {},
@@ -71,7 +73,7 @@ metadata:
 
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 ```
 
 {{% /tab %}}
@@ -82,11 +84,11 @@ spec:
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
+    ad.datadoghq.com/<CONTAINER_NAME>.check_names: |
       ["openmetrics"]
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
+    ad.datadoghq.com/<CONTAINER_NAME>.init_configs: |
       [{}]
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
+    ad.datadoghq.com/<CONTAINER_NAME>.instances: |
       [
         {
           "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
@@ -96,7 +98,7 @@ metadata:
       ]
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 ```
 
 {{% /tab %}}
@@ -106,7 +108,7 @@ With the following configuration placeholder values:
 
 | Placeholder                              | Description                                                                                        |
 |------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `<CONTAINER_IDENTIFIER>`                 | The identifier used in the `annotations` must match the container `name` exposing the metrics. |
+| `<CONTAINER_NAME>`                 | Matches the name of the container that exposes the metrics. |
 | `<PROMETHEUS_ENDPOINT>`                  | URL path for the metrics served by the container, in Prometheus format.                            |
 | `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                               |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                 |
@@ -119,9 +121,11 @@ The `metrics` configuration is a list of metrics to retrieve as custom metrics. 
 
 For a full list of available parameters for instances, including `namespace` and `metrics`, see the [sample configuration openmetrics.d/conf.yaml][9].
 
+**Note**: The check limits itself to 2000 metric by default. Specify the optional `max_returned_metrics` parameter to modify this limit.
+
 ## Getting started
 
-### Simple metric collection
+### Simple metric collection (OpenMetrics Check)
 
 1. [Launch the Datadog Agent][10].
 
@@ -130,7 +134,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent version 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-   
+
    ```yaml
      # (...)
     spec:
@@ -198,13 +202,17 @@ For a full list of available parameters for instances, including `namespace` and
     kubectl create -f prometheus.yaml
     ```
 
-3. Go into your [Metric summary][12] page to see the metrics collected from this example pod. This configuration will collect the metric `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
+3. Go into your [Fleet Automation][16] page and filter for the `openmetrics` integration to view detailed information about the status of your checks.
+
+4. Go into your [Metric summary][12] page to see the metrics collected from this example pod. This configuration will collect the metric `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
 
     {{< img src="integrations/guide/prometheus_kubernetes/openmetrics_v2_collected_metric_kubernetes.png" alt="Prometheus metric collected kubernetes">}}
 
-## Metric collection with Prometheus annotations
+## Metric collection with Prometheus annotations (Prometheus Check)
 
 With Prometheus Autodiscovery, the Datadog Agent is able to detect native Prometheus annotations (for example: `prometheus.io/scrape`, `prometheus.io/path`, `prometheus.io/port`) and schedule OpenMetrics checks automatically to collect Prometheus metrics in Kubernetes.
+
+**Note**: Datadog recommends using the OpenMetrics check since it is more efficient and fully supports the Prometheus text format. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
 ### Requirements
 
@@ -299,7 +307,7 @@ This configuration generates a check that collects all metrics exposed using the
 
 #### Advanced configuration
 
-You can further configure metric collection (beyond native Prometheus annotations) with the `additionalConfigs` field. 
+You can further configure metric collection (beyond native Prometheus annotations) with the `additionalConfigs` field.
 
 ##### Additional OpenMetrics check configurations
 
@@ -307,12 +315,12 @@ Use `additionalConfigs.configurations` to define additional OpenMetrics check co
 
 ##### Custom Autodiscovery rules
 
-Use `additionalConfigs.autodiscovery` to define custom Autodiscovery rules. These rules can be based on container names, Kubernetes annotations, or both. 
+Use `additionalConfigs.autodiscovery` to define custom Autodiscovery rules. These rules can be based on container names, Kubernetes annotations, or both.
 
 `additionalConfigs.autodiscovery.kubernetes_container_names`
 : A list of container names to target, in regular expression format.
 
-`additionalConfigs.autodiscovery.kubernetes_annotations` 
+`additionalConfigs.autodiscovery.kubernetes_annotations`
 : Two maps (`include` and `exclude`) of annotations to define discovery rules.
 
   Default:
@@ -348,7 +356,7 @@ spec:
     prometheusScrape:
       enabled: true
       enableServiceEndpoints: true
-      additionalConfigs:
+      additionalConfigs: |-
         - autodiscovery:
             kubernetes_container_names:
               - my-app
@@ -426,3 +434,4 @@ Official integrations have their own dedicated directories. There's a default in
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/common/types/prometheus.go#L57-L123
+[16]: https://app.datadoghq.com/fleet?query=integration:openmetrics

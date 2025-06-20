@@ -22,6 +22,7 @@ Amazon CloudWatch メトリクスストリームと Amazon Data Firehose を使�
    - オプションで、ストリーミングするためのネームスペースまたはメトリクスの限定されたセットを指定します。
 2. メトリクスストリームを作成すると、Datadog はストリーミングされたメトリクスの受信をすぐに開始し、追加の構成を必要とせずにそれらを Datadog サイトに表示します。
 
+<div class="alert alert-danger">AWS インテグレーションタイルで構成されたネームスペースフィルタリングは、CloudWatch メトリクスストリームには<b>適用されません</b>。詳細は以下をご覧ください。</div>
 
 ### メトリクスストリーミングと API ポーリングの比較 {#streaming-vs-polling}
 
@@ -42,7 +43,7 @@ AWS アカウントやリージョン、あるいは特定のネームスペー�
 
 メトリクスをストリーミングするための Datadog からの追加料金はありません。
 
-AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Amazon Data Firehose に送信されたデータボリュームに基づいて課金します。そのため、ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があります。このため、Datadog は、より低いレイテンシーが最も必要な AWS メトリクス、サービス、リージョン、アカウントにメトリクスストリームを使用し、それ以外ではポーリングを使用することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][1]を参照してください。
+AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数および Amazon Data Firehose に送信されたデータ量に基づいて課金します。そのため、ストリーミングしている特定のメトリクスに関して CloudWatch コストが増加する可能性があります。このため、Datadog は、より低いレイテンシーが必要な AWS メトリクス、サービス、リージョン、およびアカウントにメトリクスストリームを使用し、それ以外にはポーリングを使用することを推奨します。詳細については、[Amazon CloudWatch の価格設定][2]を参照してください。
 
 ストリーム内の EC2 または Lambda メトリクスは、請求対象のホストと Lambda 呼び出しの数を増やす可能性があります (EC2 の場合、これらのホストと関数が AWS インテグレーションまたは Datadog Agent でまだ監視されていない場合)。
 
@@ -74,7 +75,7 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 5. オプションのパラメータを入力します。
    - **FilterMethod**: メトリクスストリーミングに含めるネームスペースのリストを含めるか除外します。
    - **First/Second/Third Namespace**: 含めるまたは除外するネームスペースを指定します。注: ネームスペースの値は、AWS のドキュメントのネームスペース列の値と正確に一致する必要があります。例: AWS/EC2。
-6. Check the acknowledgment box that states, "I acknowledge that AWS CloudFormation might create IAM resources with custom names."
+6. "I acknowledge that AWS CloudFormation might create IAM resources with custom names." (AWS CloudFormation がカスタム名で IAM リソースを作成する可能性があることを認めます) という確認ボックスをオンにします。
 7. **Create Stack** をクリックします。
 
 ### 結果
@@ -90,37 +91,38 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 {{% /tab %}}
 {{% tab "AWS コンソール" %}}
 
-AWS Console を使用してメトリクスストリームをセットアップするには、各 AWS リージョンに対して [CloudWatch メトリクスストリーム][2]を作成します。
+AWS Console を使用してメトリクスストリームをセットアップするには、各 AWS リージョンに対して [CloudWatch メトリクスストリーム][1]を作成します。
 
-**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
+**注**: Datadog へのメトリクスストリーミングは現在、OpenTelemetry v0.7 出力フォーマットのみをサポートしています。
 
 1. **Quick AWS Partner Setup** を選択し、ドロップダウンメニューから AWS パートナーの宛先として **Datadog** を選択します。
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch メトリクスストリームのクイックパートナセットアップ" responsive="true" style="width:60%;">}}
-2. メトリクスをストリーミングする Datadog サイトを選択し、[Datadog API キー][1]を入力します。
-3. すべての CloudWatch メトリクスをストリーミングするか、特定のネームスペースのみをストリーミングするかを選択します。また、特定のメトリクスを除外するオプションもあります。モニタリングアカウントの場合は、[クロスアカウントストリーミング][5]を有効にすることもできます。
+2. メトリクスをストリーミングする Datadog サイトを選択し、[Datadog API キー][2]を入力します。
+3. すべての CloudWatch メトリクスをストリーミングするか、特定のネームスペースのみをストリーミングするかを選択します。また、特定のメトリクスを除外するオプションもあります。モニタリングアカウントの場合は、[クロスアカウントストリーミング][3]を有効にすることもできます。
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-namespace-filter.png" alt="Cloudwatch メトリクスストリーム" responsive="true" style="width:60%;">}}
-4. **Add additional statistics** では、Datadog に送信する AWS のパーセンタイルメトリクスを含みます。Datadog がポーリングでサポートするパーセンタイルメトリクスの一覧は、[CloudFormation テンプレート][3]を参照してください。
+4. **Add additional statistics** では、Datadog に送信する AWS のパーセンタイルメトリクスを含みます。Datadog がポーリングでサポートするパーセンタイルメトリクスの一覧は、[CloudFormation テンプレート][4]を参照してください。
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="パーセンタイル" responsive="true" style="width:60%;">}}
 5. メトリクスストリームに名前を付けます。
 6. **Create metric stream** をクリックします。
 
 ### 結果
 
-Metric Stream リソースが正常に作成されたことを確認したら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][4]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で有効化したリージョンが有効になっていることを確認します。
+Metric Stream リソースが正常に作成されたことを確認したら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][5]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で有効化したリージョンが有効になっていることを確認します。
 
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="AWS インテグレーションページの Metric Collection タブの CloudWatch Metric Streams セクションで、1 つのリージョンがアクティブになっている状態" responsive="true" style="width:60%;">}}
+
 **注**: CloudWatch API のポーリングをすでに有効にしている場合、ストリーミングへの移行により、ストリーミングしている特定のメトリクスが Datadog で二重にカウントされる短い期間 (最大 5 分) が発生する可能性があります。これは、Datadog のクローラーが実行されて CloudWatch メトリクスを送信するタイミングと、Datadog がこれらのメトリクスのストリーミングを開始したことを認識してクローラーをオフにするタイミングが異なるためです。
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
-[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
-[4]: https://app.datadoghq.com/integrations/amazon-web-services
-[5]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/#cross-account-metric-streaming
+[1]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/#cross-account-metric-streaming
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
+[5]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
 
 ### クロスアカウントメトリクスストリーミング
-AWS リージョン内の複数の AWS アカウントにまたがる単一のメトリクストリームにメトリクスを含めるには、クロスアカウントメトリクストリーミングを使用します。これにより、共通の宛先のメトリクスを収集するために必要なストリームの数を減らすことができます。これを行うには、モニタリングアカウントに[ソースアカウントを接続][5]し、AWS モニタリングアカウントで Datadog へのクロスアカウントストリーミングを有効にします。
+AWS リージョン内の複数の AWS アカウントにまたがる単一のメトリクストリームにメトリクスを含めるには、クロスアカウントメトリクストリーミングを使用します。これにより、共通の宛先にメトリクスを収集するために必要なストリームの数を減らすことができます。これを行うには、モニタリングアカウントに[ソースアカウントを接続][4]し、AWS モニタリングアカウントで Datadog へのクロスアカウントストリーミングを有効にします。
 
 この機能を正しく動作させるには、モニタリングアカウントに以下の権限が必要です。
    * oam:ListSinks
@@ -128,28 +130,29 @@ AWS リージョン内の複数の AWS アカウントにまたがる単一の�
 
 **注:** ストリーミングされたメトリクスのカスタムタグやその他のメタデータを収集するには、ソースアカウントを Datadog とインテグレーションしてください。
 
-### Disable metric streaming
+### メトリクスストリーミングを無効にする
 
 特定の AWS アカウントとリージョンに対してメトリクスストリーミングを完全に無効にするには、AWS メトリクスストリームとその関連リソースを削除する必要があります。Datadog のメトリクスの損失を防ぐために、これらの削除手順に注意深く従うことが重要です。
 
-If you set streaming up with [CloudFormation](?tab=cloudformation#installation):
+[CloudFormation](?tab=cloudformation#installation) でストリーミングを設定した場合:
 1. セットアップ時に作成されたスタックを削除します。
 
 [AWS コンソール](?tab=awsconsole#installation)からストリーミングを設定した場合:
 1. 配信ストリームにリンクしている CloudWatch Metric Stream を削除します。
 2. ストリームに関連付けられた S3 および Firehose IAM ロールを含め、ストリームのセットアップ中に作成されたすべてのリソースを削除します。
 
-Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
+リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][5]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** に無効にしたリージョンが表示されていないことを確認します。
 
 ## トラブルシューティング
 
-Metric Streams や関連リソースのセットアップで遭遇する問題を解決するには、[AWS のトラブルシューティング][5]をご覧ください。
+Metric Streams や関連リソースのセットアップで遭遇する問題を解決するには、[AWS のトラブルシューティング][6]をご覧ください。
 
 ## その他の参考資料
  {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://aws.amazon.com/cloudwatch/pricing/
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
-[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
+[1]: /ja/integrations/guide/cloud-metric-delay/
+[2]: https://aws.amazon.com/cloudwatch/pricing/
+[3]: /ja/integrations/amazon_web_services/?tab=roledelegation#setup
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
+[5]: https://app.datadoghq.com/integrations/amazon-web-services
+[6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html

@@ -69,6 +69,26 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 
 ## Get deobfuscated stack traces
 
+### Use Datadog Expo Configuration
+
+Starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
+
+Add it to your `metro.config.js` to allow for accurate symbolication of stacktraces on Datadog:
+
+```js
+// const { getDefaultConfig } = require("expo/metro-config");
+const { getDatadogExpoConfig } = require("@datadog/mobile-react-native/metro");
+// const config = getDefaultConfig(__dirname);
+const config = getDatadogExpoConfig(__dirname);
+module.exports = config;
+```
+
+### Use the `datadog-ci react-native inject-debug-id` command
+
+As an alternative to the Expo Configuration, starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
+
+Usage instructions are available on the [command documentation page][5].
+
 ### Add git repository data to your mapping files on Expo Application Services (EAS)
 
 If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
@@ -80,15 +100,13 @@ If you are using EAS to build your Expo application, set `cli.requireCommit` to 
     }
 }
 ```
+### List uploaded source maps
+
+See the [RUM Debug Symbols][4] page to view all uploaded symbols.
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ## Test your implementation
 
@@ -108,7 +126,7 @@ To test your implementation:
 3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
 4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
 
-To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
 Install it with yarn or npm then re-install your pods:
 
@@ -127,7 +145,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
 ```
 
 ## Additional configuration options
@@ -158,7 +176,7 @@ If you want to disable **all file uploads**, remove `expo-datadog` from the list
 
 ### Using Expo with Datadog and Sentry
 
-Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the sourcemap. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
+Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
 To use both plugins, make sure to add the `expo-datadog` plugin first in order in your `app.json` file:
 
@@ -177,4 +195,6 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/#usage
+[4]: https://app.datadoghq.com/source-code/setup/rum
+[5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
