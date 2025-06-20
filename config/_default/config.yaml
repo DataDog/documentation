@@ -204,6 +204,7 @@ outputFormats:
         mediaType: 'text/markdown'
         notAlternative: true
         permalinkable: true
+        path: 'llm'
 
 outputs:
     home:
