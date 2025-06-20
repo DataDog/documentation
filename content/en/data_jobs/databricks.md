@@ -4,6 +4,9 @@ further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Jobs Monitoring'
+    - link: "https://www.datadoghq.com/blog/databricks-serverless-jobs-datadog/"
+      tag: "Blog"
+      text: "Detect issues and optimize spend with Databricks serverless job monitoring"
 ---
 
 [Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Apache Spark and Databricks jobs.
