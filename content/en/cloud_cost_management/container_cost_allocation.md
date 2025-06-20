@@ -48,6 +48,8 @@ The following table presents the list of collected features and the minimal Agen
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
+**Note**: GPU Container Cost Allocation currently only supports pod requests in the format `nvidia.com/gpu`.
+
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
@@ -73,6 +75,8 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
+**Note**: GPU Container Cost Allocation currently only supports pod requests in the format `nvidia.com/gpu`.
+
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
@@ -93,6 +97,8 @@ The following table presents the list of collected features and the minimal Agen
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
+
+**Note**: GPU Container Cost Allocation currently only supports pod requests in the format `nvidia.com/gpu`.
 
 **Note**: [GKE Autopilot][105] is only supported as an Agentless Kubernetes setup that is subject to [limitations](#agentless-kubernetes-costs).
 
