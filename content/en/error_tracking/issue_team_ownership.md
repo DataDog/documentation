@@ -23,7 +23,7 @@ Issue Team Ownership requires Source Code Integration and a properly configured 
 ### Configure Source Code Integration
 
 - Ensure [Source Code Integration][1] is enabled and setup.
-- Install [the GitHub integration][2]. Make sure all requested permission is granted for the GitHub integration.
+- Install [the GitHub integration][2]. Make sure all requested permissions are granted for the GitHub integration.
 
 ### Set up CODEOWNERS file
 
