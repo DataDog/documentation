@@ -30,10 +30,8 @@ Issue Team Ownership requires Source Code Integration and a properly configured 
 
 ### Configure Source Code Integration
 
-- Ensure Source Code Integration is enabled and connected to your GitHub repository.
-- Double check every requested permission is granted for the GitHub integration.
-
-For detailed setup instructions, see [Source Code Integration][1].
+- Ensure [Source Code Integration][1] is enabled and setup.
+- Install [the GitHub integration][3]. Make sure all requested permission is granted for the GitHub integration.
 
 ### Set up CODEOWNERS file
 
@@ -85,3 +83,4 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 
 [1]: /integrations/guide/source-code-integration
 [2]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[3]: /integrations/github/
