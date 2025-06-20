@@ -24,10 +24,6 @@ title: Mejorar los flujos de trabajo de los desarrolladores con Datadog
 
 ## Información general
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 [Test Optimization][5] se integra con otros productos de Datadog orientados a desarrolladores, así como con socios externos como GitHub, para agilizar los flujos de trabajo de los desarrolladores con funciones que incluyen la posibilidad de:
 
 - [Activar resúmenes de tests en los comentarios de las solicitudes de extracción de GitHub](#test-summaries-in-github-pull-requests)

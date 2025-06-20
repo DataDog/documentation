@@ -4,11 +4,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
+- link: "https://www.datadoghq.com/blog/introducing-cloudcraft/"
+  tag: "Blog"
+  text: "Create rich, up-to-date visualizations of your AWS infrastructure with Cloudcraft in Datadog"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

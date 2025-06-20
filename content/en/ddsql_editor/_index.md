@@ -9,6 +9,9 @@ further_reading:
 - link: "/ddsql_reference/ddsql_preview"
   tag: "Documentation"
   text: "DDSQL Reference (Preview)"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
 ## Overview
