@@ -148,7 +148,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    Enter one or more request patterns to block from loading while the test is run.
 
-   Enter one request pattern per line using the [match pattern format][1]. Wildcards (e.g., `*://*.example.com/*`) are supported.
+   Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
 
    Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/actions).
 
