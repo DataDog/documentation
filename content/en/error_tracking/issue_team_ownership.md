@@ -14,8 +14,6 @@ further_reading:
 
 Issue Team Ownership automatically assigns issues to teams by linking error stack traces to Git `CODEOWNERS` files. This feature streamlines issue resolution by connecting errors to the appropriate teams based on code ownership, making it easier to identify which team should handle specific problems.
 
-When an issue occurs, Error Tracking analyzes the stack trace and matches it against your repository's `CODEOWNERS` file to determine which team owns the affected code. The issue is then automatically assigned to the corresponding Datadog team.
-
 ## Setup
 
 Issue Team Ownership requires Source Code Integration and a properly configured `CODEOWNERS` file. Follow these steps to enable the feature:
