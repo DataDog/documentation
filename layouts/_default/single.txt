@@ -1,5 +1,5 @@
 {{ .Title }}
-{{ strings.Repeat "=" (len .Title) }}
+{{ strings.Repeat (len .Title) "=" }}
 
 {{ .Content | plainify }}
 
