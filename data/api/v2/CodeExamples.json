@@ -721,6 +721,11 @@
     },
     {
       "group": "logs_custom_destinations",
+      "suffix": "_1735989579",
+      "description": "Create a Microsoft Sentinel custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
       "suffix": "_1288180912",
       "description": "Create a Splunk custom destination returns \"OK\" response"
     },
