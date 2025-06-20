@@ -25,124 +25,30 @@
 {{/* Only process if content contains relevant HTML tags - performance optimization */}}
 {{ if findRE `<(?:img|a|h[1-6]|pre|code|blockquote|table|[uo]l|li|strong|b|em|i|p|div)\b` $content 1 }}
 
-  {{/* Step 1: Pre-process to add spacing markers around block elements */}}
-  {{ $content = $content | replaceRE `(?i)(<h[1-6][^>]*?>)` "\n\n§HEADING_START§$1" }}
-  {{ $content = $content | replaceRE `(?i)(</h[1-6]>)` "$1§HEADING_END§\n\n" }}
-  {{ $content = $content | replaceRE `(?i)(<table[^>]*?>)` "\n\n§TABLE_START§$1" }}
-  {{ $content = $content | replaceRE `(?i)(</table>)` "$1§TABLE_END§\n\n" }}
-  {{ $content = $content | replaceRE `(?i)(<[uo]l[^>]*?>)` "\n\n§LIST_START§$1" }}
-  {{ $content = $content | replaceRE `(?i)(<\/[uo]l>)` "$1§LIST_END§\n\n" }}
-  {{ $content = $content | replaceRE `(?i)(<blockquote[^>]*?>)` "\n\n§QUOTE_START§$1" }}
-  {{ $content = $content | replaceRE `(?i)(</blockquote>)` "$1§QUOTE_END§\n\n" }}
-
-  {{/* Step 2: Handle paragraphs with better spacing */}}
-  {{ if findRE `<p\b` $content 1 }}
-    {{ $content = $content | replaceRE `(?is)<p[^>]*?>\s*` "\n\n" }}
-    {{ $content = $content | replaceRE `(?is)\s*</p>` "\n\n" }}
-  {{ end }}
-
-  {{/* Step 3: Handle images - convert to markdown format with proper escaping */}}
+  {{/* Step 1: Handle images first - convert to markdown format */}}
   {{ if findRE `<img\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![$1]($2)" }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?>` "![$2]($1)" }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![]($1)" }}
   {{ end }}
 
-  {{/* Step 4: Handle links - simplified pattern that works with Go regex */}}
+  {{/* Step 2: Handle links */}}
   {{ if findRE `<a\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<a[^>]*?\shref\s*=\s*["']([^"']*?)["'][^>]*?>(.*?)</a>` "[$2]($1)" }}
   {{ end }}
 
-  {{/* Step 5: Handle code blocks before inline code to avoid conflicts */}}
+  {{/* Step 3: Handle code blocks before inline code */}}
   {{ if findRE `<pre\b` $content 1 }}
     {{ $content = $content | replaceRE `(?is)<pre[^>]*?><code[^>]*?>(.*?)</code></pre>` "\n\n```\n$1\n```\n\n" }}
     {{ $content = $content | replaceRE `(?is)<pre[^>]*?>(.*?)</pre>` "\n\n```\n$1\n```\n\n" }}
   {{ end }}
 
-  {{/* Step 6: Handle inline code after blocks */}}
+  {{/* Step 4: Handle inline code */}}
   {{ if findRE `<code\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<code[^>]*?>(.*?)</code>` "`$1`" }}
   {{ end }}
 
-  {{/* Step 7: Convert headings with enhanced spacing */}}
-  {{ if findRE `<h[1-6]\b` $content 1 }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h1[^>]*?>(.*?)</h1>§HEADING_END§` "\n\n# $1\n========================\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h2[^>]*?>(.*?)</h2>§HEADING_END§` "\n\n## $1\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h3[^>]*?>(.*?)</h3>§HEADING_END§` "\n\n### $1\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h4[^>]*?>(.*?)</h4>§HEADING_END§` "\n\n#### $1\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h5[^>]*?>(.*?)</h5>§HEADING_END§` "\n\n##### $1\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§HEADING_START§<h6[^>]*?>(.*?)</h6>§HEADING_END§` "\n\n###### $1\n\n" }}
-  {{ end }}
-
-  {{/* Step 8: Handle tables with improved processing */}}
-  {{ if findRE `<table\b` $content 1 }}
-    {{/* Remove table spacing markers and process table content */}}
-    {{ $content = $content | replaceRE `(?is)§TABLE_START§<table[^>]*?>(.*?)</table>§TABLE_END§` "\n\n§TABLE§$1§/TABLE§\n\n" }}
-
-    {{/* Process table structure */}}
-    {{ $content = $content | replaceRE `(?is)<thead[^>]*?>(.*?)</thead>` "§THEAD§$1§/THEAD§" }}
-    {{ $content = $content | replaceRE `(?is)<tbody[^>]*?>(.*?)</tbody>` "§TBODY§$1§/TBODY§" }}
-    {{ $content = $content | replaceRE `(?is)<tfoot[^>]*?>(.*?)</tfoot>` "§TFOOT§$1§/TFOOT§" }}
-
-    {{/* Convert table rows */}}
-    {{ $content = $content | replaceRE `(?is)<tr[^>]*?>(.*?)</tr>` "§TR§$1§/TR§\n" }}
-
-    {{/* Convert table cells */}}
-    {{ $content = $content | replaceRE `(?is)<th[^>]*?>(.*?)</th>` "§TH§$1§/TH§" }}
-    {{ $content = $content | replaceRE `(?is)<td[^>]*?>(.*?)</td>` "§TD§$1§/TD§" }}
-
-    {{/* Convert to markdown table format */}}
-    {{ $content = $content | replaceRE `(?s)§TABLE§(.*?)§/TABLE§` "$1" }}
-    {{ $content = $content | replaceRE `(?s)§THEAD§(.*?)§/THEAD§` "$1§HEADER_SEPARATOR§" }}
-    {{ $content = $content | replaceRE `(?s)§TBODY§(.*?)§/TBODY§` "$1" }}
-    {{ $content = $content | replaceRE `(?s)§TFOOT§(.*?)§/TFOOT§` "$1" }}
-
-    {{/* Process table rows and cells */}}
-    {{ $content = $content | replaceRE `§TR§(.+?)§/TR§` "| $1 |\n" }}
-    {{ $content = $content | replaceRE `§TH§([^§]*)§/TH§` "$1 |" }}
-    {{ $content = $content | replaceRE `§TD§([^§]*)§/TD§` "$1 |" }}
-
-    {{/* Add header separator after first row */}}
-    {{ $content = $content | replaceRE `(\|[^|\n]*\|)\n§HEADER_SEPARATOR§` "$1\n| --- | --- | --- | --- | --- |\n" }}
-    {{ $content = $content | replaceRE `§HEADER_SEPARATOR§` "" }}
-
-    {{/* Clean up extra separators and fix table formatting */}}
-    {{ $content = $content | replaceRE `\|\s+\|` "| |" }}
-    {{ $content = $content | replaceRE `\|\s*$` "|" }}
-  {{ end }}
-
-  {{/* Step 9: Handle blockquotes */}}
-  {{ if findRE `<blockquote\b` $content 1 }}
-    {{ $content = $content | replaceRE `(?is)§QUOTE_START§<blockquote[^>]*?>(.*?)</blockquote>§QUOTE_END§` "\n\n> $1\n\n" }}
-  {{ end }}
-
-  {{/* Step 10: Handle lists with enhanced spacing and nesting support */}}
-  {{ if findRE `<[uo]l\b` $content 1 }}
-    {{/* Process list markers */}}
-    {{ $content = $content | replaceRE `(?is)§LIST_START§<ul[^>]*?>(.*?)</ul>§LIST_END§` "\n\n§UL§$1§/UL§\n\n" }}
-    {{ $content = $content | replaceRE `(?is)§LIST_START§<ol[^>]*?>(.*?)</ol>§LIST_END§` "\n\n§OL§$1§/OL§\n\n" }}
-
-    {{/* Handle nested lists */}}
-    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>(.*?)</ul>` "§UL_NESTED§$1§/UL_NESTED§" }}
-    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>(.*?)</ol>` "§OL_NESTED§$1§/OL_NESTED§" }}
-
-    {{/* Process list items */}}
-    {{ $content = $content | replaceRE `(?is)<li[^>]*?>(.*?)</li>` "§LI§$1§/LI§\n" }}
-
-    {{/* Convert to markdown format */}}
-    {{ $content = $content | replaceRE `(?s)§UL§(.*?)§/UL§` "$1" }}
-    {{ $content = $content | replaceRE `(?s)§OL§(.*?)§/OL§` "$1" }}
-    {{ $content = $content | replaceRE `(?s)§UL_NESTED§(.*?)§/UL_NESTED§` "\n$1" }}
-    {{ $content = $content | replaceRE `(?s)§OL_NESTED§(.*?)§/OL_NESTED§` "\n$1" }}
-
-    {{/* Convert list items to markdown */}}
-    {{ $content = $content | replaceRE `§LI§([^§]*)§/LI§` "- $1\n" }}
-
-    {{/* Clean up list formatting */}}
-    {{ $content = $content | replaceRE `- \n` "- \n" }}
-  {{ end }}
-
-  {{/* Step 11: Handle emphasis and strong formatting */}}
+  {{/* Step 5: Handle emphasis and strong formatting */}}
   {{ if or (findRE `<(?:strong|b)\b` $content 1) (findRE `<(?:em|i)\b` $content 1) }}
     {{ $content = $content | replaceRE `(?is)<strong[^>]*?>(.*?)</strong>` "**$1**" }}
     {{ $content = $content | replaceRE `(?is)<b[^>]*?>(.*?)</b>` "**$1**" }}
@@ -150,32 +56,86 @@
     {{ $content = $content | replaceRE `(?is)<i[^>]*?>(.*?)</i>` "*$1*" }}
   {{ end }}
 
-  {{/* Step 12: Handle divs and other containers */}}
-  {{ $content = $content | replaceRE `(?is)<div[^>]*?>(.*?)</div>` "$1" }}
-  {{ $content = $content | replaceRE `(?is)<span[^>]*?>(.*?)</span>` "$1" }}
+  {{/* Step 6: Handle headings with guaranteed spacing */}}
+  {{ if findRE `<h[1-6]\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<h1[^>]*?>(.*?)</h1>` "\n\n\n# $1\n========================\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h2[^>]*?>(.*?)</h2>` "\n\n\n## $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h3[^>]*?>(.*?)</h3>` "\n\n\n### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h4[^>]*?>(.*?)</h4>` "\n\n#### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h5[^>]*?>(.*?)</h5>` "\n\n##### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h6[^>]*?>(.*?)</h6>` "\n\n###### $1\n\n" }}
+  {{ end }}
+
+  {{/* Step 7: Handle tables with a simpler approach */}}
+  {{ if findRE `<table\b` $content 1 }}
+    {{/* First, add newlines around tables */}}
+    {{ $content = $content | replaceRE `(?is)<table[^>]*?>` "\n\n<table>" }}
+    {{ $content = $content | replaceRE `(?is)</table>` "</table>\n\n" }}
+
+    {{/* Remove table structure tags but keep content */}}
+    {{ $content = $content | replaceRE `(?is)</?thead[^>]*?>` "" }}
+    {{ $content = $content | replaceRE `(?is)</?tbody[^>]*?>` "" }}
+    {{ $content = $content | replaceRE `(?is)</?tfoot[^>]*?>` "" }}
+
+    {{/* Convert table rows to lines */}}
+    {{ $content = $content | replaceRE `(?is)<tr[^>]*?>\s*` "| " }}
+    {{ $content = $content | replaceRE `(?is)\s*</tr>` " |\n" }}
+
+    {{/* Convert table cells */}}
+    {{ $content = $content | replaceRE `(?is)<th[^>]*?>(.*?)</th>` "$1 | " }}
+    {{ $content = $content | replaceRE `(?is)<td[^>]*?>(.*?)</td>` "$1 | " }}
+
+    {{/* Remove the table tags */}}
+    {{ $content = $content | replaceRE `(?is)</?table[^>]*?>` "" }}
+
+    {{/* Add markdown table header separator after first row */}}
+    {{ $content = $content | replaceRE `(\|[^|\n]*\|)\n(\|[^|\n]*\|)` "$1\n| --- | --- | --- | --- | --- |\n$2" }}
+
+    {{/* Clean up extra spaces in table cells */}}
+    {{ $content = $content | replaceRE `\|\s+` "| " }}
+    {{ $content = $content | replaceRE `\s+\|` " |" }}
+  {{ end }}
+
+  {{/* Step 8: Handle blockquotes */}}
+  {{ if findRE `<blockquote\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<blockquote[^>]*?>(.*?)</blockquote>` "\n\n> $1\n\n" }}
+  {{ end }}
+
+  {{/* Step 9: Handle lists - simplified approach */}}
+  {{ if findRE `<[uo]l\b` $content 1 }}
+    {{/* Add spacing around lists */}}
+    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>` "\n\n" }}
+    {{ $content = $content | replaceRE `(?is)</ul>` "\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>` "\n\n" }}
+    {{ $content = $content | replaceRE `(?is)</ol>` "\n\n" }}
+
+    {{/* Convert list items */}}
+    {{ $content = $content | replaceRE `(?is)<li[^>]*?>(.*?)</li>` "- $1\n" }}
+  {{ end }}
+
+  {{/* Step 10: Handle paragraphs with proper spacing */}}
+  {{ if findRE `<p\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<p[^>]*?>(.*?)</p>` "\n\n$1\n\n" }}
+  {{ end }}
+
+  {{/* Step 11: Remove remaining div and span tags */}}
+  {{ $content = $content | replaceRE `(?is)</?div[^>]*?>` "" }}
+  {{ $content = $content | replaceRE `(?is)</?span[^>]*?>` "" }}
 
 {{ end }}
 
-{{/* Use Hugo's built-in plainify to handle remaining HTML and entities */}}
-{{ $content = $content | plainify }}
+{{/* Use Hugo's built-in htmlUnescape to handle remaining HTML and entities */}}
+{{ $content = $content | htmlUnescape }}
 
-{{/* Enhanced whitespace cleanup - preserve readability while removing excess */}}
-{{ $content = $content | replaceRE `\n{4,}` "\n\n\n" }}      {{/* Limit max consecutive newlines to 3 */}}
-{{ $content = $content | replaceRE `[ \t]+\n` "\n" }}        {{/* Remove trailing spaces */}}
-{{ $content = $content | replaceRE `\n[ \t]+` "\n" }}        {{/* Remove leading spaces on new lines */}}
-{{ $content = $content | replaceRE `^\s+` "" }}              {{/* Remove leading whitespace from start */}}
-{{ $content = $content | replaceRE `\s+$` "" }}              {{/* Remove trailing whitespace from end */}}
+{{/* Final cleanup - normalize whitespace but preserve structure */}}
+{{ $content = $content | replaceRE `[ \t]+` " " }}               {{/* Normalize spaces */}}
+{{ $content = $content | replaceRE `[ \t]*\n[ \t]*` "\n" }}      {{/* Clean line breaks */}}
+{{ $content = $content | replaceRE `\n{4,}` "\n\n\n" }}         {{/* Limit consecutive newlines */}}
+{{ $content = $content | replaceRE `^\s+` "" }}                 {{/* Remove leading whitespace */}}
+{{ $content = $content | replaceRE `\s+$` "" }}                 {{/* Remove trailing whitespace */}}
 
-{{/* Fix specific spacing issues */}}
-{{ $content = $content | replaceRE `\n\n\n+` "\n\n" }}       {{/* Normalize double spacing after cleanup */}}
-{{ $content = $content | replaceRE `([.!?])\n([A-Z])` "$1\n\n$2" }} {{/* Add spacing between sentences and new paragraphs */}}
-
-{{/* Fix table formatting issues */}}
-{{ $content = $content | replaceRE `\|\s*\n\s*\|` "|\n|" }}  {{/* Clean up table row breaks */}}
-{{ $content = $content | replaceRE `\|\s+([^|\n]*?)\s+\|` "| $1 |" }} {{/* Normalize table cell spacing */}}
-
-{{/* Clean up any remaining markers */}}
-{{ $content = $content | replaceRE `§[^§]*§` "" }}
+{{/* Final spacing normalization */}}
+{{ $content = $content | replaceRE `\n\n\n+` "\n\n" }}          {{/* Normalize to double spacing max */}}
 
 {{/* Return the processed content */}}
 {{ return $content }}
