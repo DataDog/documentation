@@ -3,8 +3,6 @@ title: Issue Team Ownership
 description: Learn about Issue Team Ownership in Error Tracking.
 ---
 
-# Issue Team Ownership
-
 ## Overview
 Issue Team Ownership helps teams quickly identify which issues are relevant to them by automatically assigning issues linking error stack traces to Git `CODEOWNERS` files. This feature streamlines issue resolution by linking errors to the appropriate teams, making it easier to find problems caused by your team's code.
 
