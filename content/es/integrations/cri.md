@@ -48,11 +48,11 @@ tile:
   - Categoría::Kubernetes
   - Sistema operativo compatible::Linux
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CRI
 ---
 

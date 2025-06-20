@@ -187,7 +187,7 @@ Azure Deployment Manager は、テンプレートで指定されている正規�
 
 `overall_status: OK` が見つかった場合は、チェックは正常と見なされます。ステータスが `Warn`、`No Data`、または `Alert` の場合、チェックは異常と見なされ、Azure Deployment Manager はデプロイを中止します。
 
-## 収集されるデータ
+## 収集データ
 
 ### メトリクス
 
