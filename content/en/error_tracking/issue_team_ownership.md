@@ -20,18 +20,12 @@ When an issue occurs, Error Tracking analyzes the stack trace and matches it aga
 
 Issue Team Ownership requires Source Code Integration and a properly configured `CODEOWNERS` file. Follow these steps to enable the feature:
 
-### Prerequisites
-
-- Source Code Integration must be enabled and connected to GitHub
-- All requested permissions must be granted for the GitHub integration
-- Your repository must contain a valid `CODEOWNERS` file
-
-**Note**: Issue Team Ownership currently supports GitHub only.
+***Note**: Issue Team Ownership currently supports GitHub only.*
 
 ### Configure Source Code Integration
 
 - Ensure [Source Code Integration][1] is enabled and setup.
-- Install [the GitHub integration][3]. Make sure all requested permission is granted for the GitHub integration.
+- Install [the GitHub integration][2]. Make sure all requested permission is granted for the GitHub integration.
 
 ### Set up CODEOWNERS file
 
@@ -41,7 +35,7 @@ Place a valid `CODEOWNERS` file in one of the following locations in your reposi
 - `CODEOWNERS` (root directory)
 - `docs/CODEOWNERS`
 
-The `CODEOWNERS` file defines ownership of files and directories in your codebase using [GitHub's CODEOWNERS format][2].
+The `CODEOWNERS` file defines ownership of files and directories in your codebase using [GitHub's CODEOWNERS format][3].
 
 ### Link GitHub teams to Datadog teams
 
@@ -82,5 +76,5 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/guide/source-code-integration
-[2]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-[3]: /integrations/github/
+[2]: /integrations/github/
+[3]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
