@@ -38,12 +38,12 @@ The Python App and API Protection Client library follows a [versioning policy][3
 
 Two release branches are supported:
 
-{{< partial name="api_security/python/supported_versions.html" >}}
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 
 And the library supports the following runtimes:
 
-{{< partial name="api_security/python/supported_runtimes.html" >}}
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 ### Web framework compatibility
 
