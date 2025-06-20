@@ -31,9 +31,9 @@
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![]($1)" }}
   {{ end }}
 
-  {{/* Step 2: Handle links - comprehensive pattern with proper escaping */}}
+  {{/* Step 2: Handle links - simplified pattern that works with Go regex */}}
   {{ if findRE `<a\b` $content 1 }}
-    {{ $content = $content | replaceRE `(?i)<a[^>]*?\shref\s*=\s*["']([^"']*?)["'][^>]*?>((?:[^<]|<(?!/a>))*?)</a>` "[$2]($1)" }}
+    {{ $content = $content | replaceRE `(?i)<a[^>]*?\shref\s*=\s*["']([^"']*?)["'][^>]*?>(.*?)</a>` "[$2]($1)" }}
   {{ end }}
 
   {{/* Step 3: Handle code blocks before inline code to avoid conflicts */}}
@@ -66,8 +66,10 @@
     {{ $content = $content | replaceRE `(?is)<th[^>]*?>(.*?)</th>` " $1 |" }}
     {{ $content = $content | replaceRE `(?is)<td[^>]*?>(.*?)</td>` " $1 |" }}
 
-    {{/* Add dynamic table header separators - creates proper markdown table format */}}
-    {{ $content = $content | replaceRE `(\|[^|\n]+(?:\|[^|\n]+)*\|)\n(\|[^|\n]+(?:\|[^|\n]+)*\|)` (print "$1\n" (replaceRE `[^|]` "-" "$1" | replaceRE `\|` "|" ) "\n$2" ) }}
+    {{/* Add basic table header separators - simpler approach for Go regex compatibility */}}
+    {{ $content = $content | replaceRE `(\|[^|\n]+\|)\n(\|[^|\n]+\|)` "$1\n|---|---|\n$2" }}
+    {{ $content = $content | replaceRE `(\|[^|\n]+\|[^|\n]+\|)\n(\|[^|\n]+\|[^|\n]+\|)` "$1\n|---|---|---|\n$2" }}
+    {{ $content = $content | replaceRE `(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)\n(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)` "$1\n|---|---|---|---|\n$2" }}
   {{ end }}
 
   {{/* Step 7: Handle blockquotes */}}
