@@ -48,7 +48,7 @@ The following table presents the list of collected features and the minimal Agen
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
-**Note**: GPU Container Cost Allocation currently only supports pod requests in the format `nvidia.com/gpu`.
+**Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
