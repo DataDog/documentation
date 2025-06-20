@@ -18,7 +18,7 @@ Auto Assign uses [suspect commits][1] to identify developers who may have introd
 
 ## Setup
 
-Auto Assign is automatically enabled when the setup requirements are met. Once configured, issues are automatically assigned to developers based on suspect commit analysis.
+Once configured and enabled, issues are automatically assigned to developers based on suspect commit analysis.
 
 ### Configure Source Code Integration
 
