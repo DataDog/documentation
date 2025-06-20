@@ -113,7 +113,7 @@ ALTER EVENT SESSION datadog_query_completions ON SERVER STATE = START;
 GO
 ```
 
-The datadog_query_errors XE session captures SQL errors (severity ≥ 11) and query timeouts (attention events), allowing Datadog to surface query failures and interruptions.
+The datadog_query_errors XE session captures SQL errors ([severity ≥ 11][2]) and query timeouts ([attention events][3]), allowing Datadog to surface query failures and interruptions.
 ```sql
 -- 2. Errors and Attentions (grouped)
 IF EXISTS (
@@ -284,6 +284,7 @@ GO
 
 
 2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
+See the [sample conf.yaml.example][5] for all available configuration options.
 ```yaml
   xe_collection:
     query_completions:
@@ -291,7 +292,7 @@ GO
     query_errors:
       enabled: true
 ```
-In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`.
+In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default."
 ```yaml
   collect_raw_query_statement:
     enabled: true
@@ -312,7 +313,7 @@ You can customize the Extended Events sessions to better fit your specific needs
 
 **Memory Allocation**
 - Default is `MAX_MEMORY = 2048 KB`.
-- Don't exceed 2048 KB as larger values may cause data loss due to SQL Server internal limitations
+- Don't exceed 2048 KB as larger values may cause data loss [due to SQL Server internal limitations][4]
 - For high-volume servers, consider keeping this at maximum (2048 KB)
 - For lower traffic servers, 1024 KB may be sufficient
 
@@ -358,4 +359,8 @@ GO
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /database_monitoring/setup_sql_server/
-[2]: https://techcommunity.microsoft.com/blog/sqlserversupport/you-may-not-see-the-data-you-expect-in-extended-event-ring-buffer-targets8230-/315838
+[2]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
+[3]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
+[4]: https://techcommunity.microsoft.com/blog/sqlserversupport/you-may-not-see-the-data-you-expect-in-extended-event-ring-buffer-targets8230-/315838
+[5]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
+
