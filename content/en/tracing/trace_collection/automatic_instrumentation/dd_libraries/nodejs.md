@@ -185,6 +185,8 @@ esbuild.build({
 })
 ```
 
+**Note**: You'll still need to initialize the tracer using `tracer.init()` within the entry point of your bundle. The plugin does not automatically initialize the tracer. The `--require` flag for initializing also won't work since your app will probably be deployed without a `node_modules/` directory.
+
 #### Bundling with Next.js
 
 If you are using Next.js or another framework relying on webpack to bundle your application, add a declaration
