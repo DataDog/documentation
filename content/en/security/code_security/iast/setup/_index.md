@@ -750,9 +750,9 @@ Datastore tracing provides:
 The following code security capabilities are supported in the Python library, for the specified tracer version:
 
 | Code Security capability                    | Minimum Python tracer version |
-| ------------------------------------------- | ----------------------------- |
+| ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.9.3)               |
+| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
@@ -776,11 +776,7 @@ Two release branches are supported:
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+{{< partial name="api_security/python/supported_runtimes.html" >}}
 
 
 #### Web framework compatibility
