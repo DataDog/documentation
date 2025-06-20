@@ -15,15 +15,15 @@ further_reading:
 ---
 
 ## Overview
-Datadog recommends you update your Datadog Agent with every [minor and patch][6] release. This guide walks you through how to roll out a new Agent version across your hosts in just a few clicks.
+Datadog recommends you update your Datadog Agent with every [minor and patch][6] release. This guide walks you through how to roll out a new Agent version across your hosts in a few clicks.
 
 
 ## Upgrade between minor versions of the Agent
-### Upgrade remotely with Fleet Automation
+### Upgrade remotely with fleet automation
 
-Fleet Automation allows you to upgrade Datadog Agents across Linux and Windows, and non-containerized environments remotely. In just a few clicks you can deploy the latest Agent release, keeping your fleet current with new features and security patches. To get setup, follow the [Fleet Automation Agent Upgrade guide][7].
+Fleet Automation allows you to upgrade Datadog Agents across Linux and Windows, and non-containerized environments remotely. In a few clicks you can deploy the latest Agent release, keeping your fleet current with new features and security patches. To get setup, follow the [Fleet Automation Agent Upgrade guide][7].
 
-### Upgrade via script or configuration management tooling
+### Upgrade with script or configuration management tooling
 Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script. 
 
 
@@ -139,7 +139,7 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your custom check from Python 2 to Python 3.
+**Note:** The upgrade process does not automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your custom check from Python 2 to Python 3.
 
 ## Further Reading
 
