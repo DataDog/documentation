@@ -370,7 +370,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 ### Automatically track views
 
-#### With UIKit
+You can automatically track views with UIKit and SwiftUI.
+
+{{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
@@ -476,17 +478,16 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. It is recommended to keep its implementation fast and single-threaded.
+**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
+{{% /collapse-content %}}
 
-#### With SwiftUI
+{{% collapse-content title="SwiftUI" level="h4" expanded=true id="auto-track-views-swiftui" %}}
 
-Similarly to UIKit, to automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
-
-<div class="alert alert-info"><p>Note: This feature is experimental and may change in future releases.</p></div>
+To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
 
 The mechanism to extract a SwiftUI view name relies on reflection. As a result, view names may not always be meaningful. If a meaningful name cannot be extracted, a generic name such as `AutoTracked_HostingController_Fallback` or `AutoTracked_NavigationStackController_Fallback` is used.
 
-You can use the default predicate, `DefaultSwiftUIRUMViewsPredicate`, or provide your own implementation conforming to the `SwiftUIRUMViewsPredicate` protocol to customize or filter view names.
+You can use the default predicate (`DefaultSwiftUIRUMViewsPredicate`) or provide your own implementation of the `SwiftUIRUMViewsPredicate` protocol to customize or filter view names.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -535,35 +536,34 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Recommendations and notes:**
-- It is recommended to enable UIKit view tracking as well, even if your app is built entirely with SwiftUI.
+**Notes:**
+- Datadog recommends enabling UIKit view tracking as well, even if your app is built entirely with SwiftUI.
 - Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to ensure they are tracked.
-- If you use both automatic and manual tracking, you may see duplicate events. To avoid this, either rely on a single instrumentation method or use a custom predicate to filter out duplicates.
+- If you use both automatic and manual tracking, you may see duplicate events. To avoid this, rely on a single instrumentation method or use a custom predicate to filter out duplicates.
+{{% /collapse-content %}}
 
 ### Automatically track user actions
 
-#### With UIKit
+#### UIKit
 
 To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
 
-#### With SwiftUI
+#### SwiftUI
 
 To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
 
-<div class="alert alert-info"><p>Note: This feature is experimental and may change in future releases.</p></div>
-
-**Recommendations and notes:**
-- It is recommended to enable UIKit action tracking as well, even if your app is built entirely with SwiftUI. Many interactive components are implemented using UIKit.
+**Notes:**
+- Datadog recommends enabling UIKit action tracking as well even for pure SwiftUI apps as many interactive components are UIKit under the hood.
 - On tvOS, only press interactions on the remote are tracked. Only a UIKit predicate is needed for this. If you have a pure SwiftUI app but want to track remote presses on tvOS, you should also enable UIKit instrumentation.
 - The implementation differs between iOS 18+ and iOS 17 and below:
   - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
   - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). Actions are reported as `SwiftUI_Unidentified_Element`.
-- You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17-) if you only want reliable iOS 18+ tracking:
+- You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// Use the default predicate by disabling iOS 17- detection
+// Use the default predicate by disabling iOS 17 and below detection
 let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: false)
 
 // Use your own predicate
@@ -577,7 +577,7 @@ class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-// Use the default predicate by disabling iOS 17- detection
+// Use the default predicate by disabling iOS 17 and below detection
 DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
 
 // Use your own predicate
@@ -598,7 +598,9 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Action Reporting by iOS Version
+#### Action reporting by iOS version
+
+The table below shows how iOS 17 and iOS 18 report different user interactions.
 
 | **Component**    | **iOS 18 reported name**                          | **iOS 17 reported name**             |
 |------------------|---------------------------------------------------|--------------------------------------|
@@ -606,6 +608,7 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 | NavigationLink   | NavigationLink                                    | SwiftUI_Unidentified_Element         |
 | Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
+{{% /collapse-content %}}
 
 ### Automatically track network requests
 
