@@ -15021,9 +15021,6 @@ components:
           description: Username to use for the basic authentication.
           example: my_username
           type: string
-      required:
-      - password
-      - username
       type: object
     SyntheticsBasicAuthWebType:
       default: web
