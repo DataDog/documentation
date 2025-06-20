@@ -13,42 +13,48 @@
   - Preserves markdown structure (headings, lists, tables, etc.)
   - Converts images to markdown format with alt text
   - Maintains link formatting
-  - Handles nested lists with basic indentation
+  - Handles nested lists with proper spacing and indentation
   - Dynamic table column detection for proper markdown tables
   - Case-insensitive tag matching
   - Multiline content support
+  - Enhanced spacing for better readability
 */}}
 
 {{ $content := . }}
 
 {{/* Only process if content contains relevant HTML tags - performance optimization */}}
-{{ if findRE `<(?:img|a|h[1-6]|pre|code|blockquote|table|[uo]l|li|strong|b|em|i)\b` $content 1 }}
+{{ if findRE `<(?:img|a|h[1-6]|pre|code|blockquote|table|[uo]l|li|strong|b|em|i|p|div)\b` $content 1 }}
 
-  {{/* Step 1: Handle images first - convert to markdown format with proper escaping */}}
+  {{/* Step 1: Handle paragraphs first to establish proper structure */}}
+  {{ if findRE `<p\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<p[^>]*?>(.*?)</p>` "$1\n\n" }}
+  {{ end }}
+
+  {{/* Step 2: Handle images - convert to markdown format with proper escaping */}}
   {{ if findRE `<img\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![$1]($2)" }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?>` "![$2]($1)" }}
     {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![]($1)" }}
   {{ end }}
 
-  {{/* Step 2: Handle links - simplified pattern that works with Go regex */}}
+  {{/* Step 3: Handle links - simplified pattern that works with Go regex */}}
   {{ if findRE `<a\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<a[^>]*?\shref\s*=\s*["']([^"']*?)["'][^>]*?>(.*?)</a>` "[$2]($1)" }}
   {{ end }}
 
-  {{/* Step 3: Handle code blocks before inline code to avoid conflicts */}}
+  {{/* Step 4: Handle code blocks before inline code to avoid conflicts */}}
   {{ if findRE `<pre\b` $content 1 }}
     {{ $content = $content | replaceRE `(?is)<pre[^>]*?><code[^>]*?>(.*?)</code></pre>` "\n\n```\n$1\n```\n\n" }}
   {{ end }}
 
-  {{/* Step 4: Handle inline code after blocks */}}
+  {{/* Step 5: Handle inline code after blocks */}}
   {{ if findRE `<code\b` $content 1 }}
     {{ $content = $content | replaceRE `(?i)<code[^>]*?>(.*?)</code>` "`$1`" }}
   {{ end }}
 
-  {{/* Step 5: Convert headings with proper spacing */}}
+  {{/* Step 6: Convert headings with enhanced spacing */}}
   {{ if findRE `<h[1-6]\b` $content 1 }}
-    {{ $content = $content | replaceRE `(?is)<h1[^>]*?>(.*?)</h1>` "\n\n# $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h1[^>]*?>(.*?)</h1>` "\n\n# $1\n========================\n\n" }}
     {{ $content = $content | replaceRE `(?is)<h2[^>]*?>(.*?)</h2>` "\n\n## $1\n\n" }}
     {{ $content = $content | replaceRE `(?is)<h3[^>]*?>(.*?)</h3>` "\n\n### $1\n\n" }}
     {{ $content = $content | replaceRE `(?is)<h4[^>]*?>(.*?)</h4>` "\n\n#### $1\n\n" }}
@@ -56,7 +62,7 @@
     {{ $content = $content | replaceRE `(?is)<h6[^>]*?>(.*?)</h6>` "\n\n###### $1\n\n" }}
   {{ end }}
 
-  {{/* Step 6: Handle tables with dynamic column detection */}}
+  {{/* Step 7: Handle tables with dynamic column detection */}}
   {{ if findRE `<table\b` $content 1 }}
     {{/* First, extract table content and process structure */}}
     {{ $content = $content | replaceRE `(?is)<table[^>]*?>(.*?)</table>` "\n\n$1\n\n" }}
@@ -66,30 +72,36 @@
     {{ $content = $content | replaceRE `(?is)<th[^>]*?>(.*?)</th>` " $1 |" }}
     {{ $content = $content | replaceRE `(?is)<td[^>]*?>(.*?)</td>` " $1 |" }}
 
-    {{/* Add basic table header separators - simpler approach for Go regex compatibility */}}
+    {{/* Add basic table header separators - enhanced for better detection */}}
     {{ $content = $content | replaceRE `(\|[^|\n]+\|)\n(\|[^|\n]+\|)` "$1\n|---|---|\n$2" }}
     {{ $content = $content | replaceRE `(\|[^|\n]+\|[^|\n]+\|)\n(\|[^|\n]+\|[^|\n]+\|)` "$1\n|---|---|---|\n$2" }}
     {{ $content = $content | replaceRE `(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)\n(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)` "$1\n|---|---|---|---|\n$2" }}
+    {{ $content = $content | replaceRE `(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)\n(\|[^|\n]+\|[^|\n]+\|[^|\n]+\|[^|\n]+\|)` "$1\n|---|---|---|---|---|\n$2" }}
   {{ end }}
 
-  {{/* Step 7: Handle blockquotes */}}
+  {{/* Step 8: Handle blockquotes */}}
   {{ if findRE `<blockquote\b` $content 1 }}
     {{ $content = $content | replaceRE `(?is)<blockquote[^>]*?>(.*?)</blockquote>` "\n\n> $1\n\n" }}
   {{ end }}
 
-  {{/* Step 8: Handle lists with basic nesting support */}}
+  {{/* Step 9: Handle lists with enhanced spacing and nesting support */}}
   {{ if findRE `<[uo]l\b` $content 1 }}
-    {{/* Convert nested lists to indented format - basic support */}}
-    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>\s*<li[^>]*?>(.*?)</li>\s*<ul[^>]*?>(.*?)</ul>\s*</ul>` "\n- $1\n  $2\n" }}
-    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>\s*<li[^>]*?>(.*?)</li>\s*<ol[^>]*?>(.*?)</ol>\s*</ol>` "\n1. $1\n   $2\n" }}
+    {{/* First, handle div containers that might wrap lists */}}
+    {{ $content = $content | replaceRE `(?is)<div[^>]*?>(.*?)</div>` "$1" }}
 
-    {{/* Handle regular lists */}}
-    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>(.*?)</ul>` "\n$1\n" }}
-    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>(.*?)</ol>` "\n$1\n" }}
-    {{ $content = $content | replaceRE `(?is)<li[^>]*?>(.*?)</li>` "- $1\n" }}
+    {{/* Handle nested lists with proper indentation */}}
+    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>\s*<li[^>]*?>(.*?)<ul[^>]*?>(.*?)</ul>\s*</li>\s*</ul>` "\n- $1\n  $2\n" }}
+    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>\s*<li[^>]*?>(.*?)<ol[^>]*?>(.*?)</ol>\s*</li>\s*</ol>` "\n1. $1\n   $2\n" }}
+
+    {{/* Handle regular lists with enhanced spacing */}}
+    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>(.*?)</ul>` "\n\n$1\n" }}
+    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>(.*?)</ol>` "\n\n$1\n" }}
+
+    {{/* Handle list items with better spacing - process multi-line content */}}
+    {{ $content = $content | replaceRE `(?is)<li[^>]*?>(.*?)</li>` "- $1\n\n" }}
   {{ end }}
 
-  {{/* Step 9: Handle emphasis and strong formatting */}}
+  {{/* Step 10: Handle emphasis and strong formatting */}}
   {{ if or (findRE `<(?:strong|b)\b` $content 1) (findRE `<(?:em|i)\b` $content 1) }}
     {{ $content = $content | replaceRE `(?is)<strong[^>]*?>(.*?)</strong>` "**$1**" }}
     {{ $content = $content | replaceRE `(?is)<b[^>]*?>(.*?)</b>` "**$1**" }}
@@ -102,12 +114,16 @@
 {{/* Final step: Use Hugo's built-in plainify to handle remaining HTML and entities */}}
 {{ $content = $content | plainify }}
 
-{{/* Clean up excessive whitespace while preserving intentional spacing */}}
-{{ $content = $content | replaceRE `\n{4,}` "\n\n\n" }}
-{{ $content = $content | replaceRE `[ \t]+\n` "\n" }}
-{{ $content = $content | replaceRE `\n[ \t]+` "\n" }}
-{{ $content = $content | replaceRE `^\s+` "" }}
-{{ $content = $content | replaceRE `\s+$` "" }}
+{{/* Enhanced whitespace cleanup - preserve readability while removing excess */}}
+{{ $content = $content | replaceRE `\n{5,}` "\n\n\n" }}  {{/* Limit max consecutive newlines to 3 */}}
+{{ $content = $content | replaceRE `[ \t]+\n` "\n" }}      {{/* Remove trailing spaces */}}
+{{ $content = $content | replaceRE `\n[ \t]+` "\n" }}      {{/* Remove leading spaces on new lines */}}
+{{ $content = $content | replaceRE `^\s+` "" }}            {{/* Remove leading whitespace from start */}}
+{{ $content = $content | replaceRE `\s+$` "" }}            {{/* Remove trailing whitespace from end */}}
+
+{{/* Fix specific spacing issues */}}
+{{ $content = $content | replaceRE `\n\n\n+` "\n\n" }}     {{/* Normalize double spacing after cleanup */}}
+{{ $content = $content | replaceRE `([.!?])\n([A-Z])` "$1\n\n$2" }} {{/* Add spacing between sentences and new paragraphs */}}
 
 {{/* Return the processed content */}}
 {{ return $content }}

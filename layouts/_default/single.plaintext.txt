@@ -6,10 +6,32 @@ URL: {{ .Permalink }}
 {{ if not $lastmod }}{{ $lastmod = .Date }}{{ end }}
 {{ if not $lastmod }}{{ $lastmod = .PublishDate }}{{ end }}
 Last Modified: {{ $lastmod.Format (.Site.Params.plaintext_date_format | default "2006-01-02 15:04:05") }}
+{{ if .Section }}Section: {{ .Section }}{{ end }}
 {{ if .Params.tags }}Tags: {{ delimit .Params.tags ", " }}{{ end }}
 {{ if .Params.aliases }}Aliases: {{ delimit .Params.aliases ", " }}{{ end }}
+{{ if .Parent }}Parent: {{ .Parent.Title }} ({{ .Parent.RelPermalink }}){{ end }}
+
+{{ if .Summary }}
+SUMMARY
+=======
+
+{{ .Summary | plainify }}
+
+{{ end }}
+CONTENT
+=======
 
 {{ partial "plaintext-content.html" .Content }}
 
+{{ if .Pages }}
+CHILD PAGES
+===========
+
+{{ range .Pages -}}
+- {{ .Title }} ({{ .RelPermalink }})
+  {{ if .Summary }}Summary: {{ .Summary | plainify | truncate 100 }}{{ end }}
+
+{{ end }}
+{{ end }}
 ---
 Generated for LLM consumption from Datadog Documentation

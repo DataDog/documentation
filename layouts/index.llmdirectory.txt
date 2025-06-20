@@ -7,6 +7,11 @@ Site URL: {{ .Site.BaseURL }}
 Generated: {{ now.Format "2006-01-02 15:04:05" }}
 Total Pages: {{ len .Site.AllPages }}
 
+OVERVIEW
+========
+
+This directory provides comprehensive access to Datadog's documentation in a format optimized for LLM consumption. All pages are available in plain text format alongside their HTML versions to facilitate easier processing and understanding.
+
 NAVIGATION STRUCTURE
 =====================
 
@@ -15,42 +20,90 @@ NAVIGATION STRUCTURE
 - {{ .Name }} ({{ .URL }})
 {{ end }}
 
-{{ end }}TOP-LEVEL SECTIONS
+{{ end }}
+
+TOP-LEVEL SECTIONS
 ==================
 
-{{ range where .Site.Pages "Kind" "section" }}{{ if eq .Parent .Site.Home }}- {{ .Title }} ({{ .RelPermalink }})
-  Description: {{ .Summary | plainify | truncate 100 }}
-  Total Subsections: {{ len .Sections }}
-  Total Pages: {{ len .Pages }}
+{{ range where .Site.Pages "Kind" "section" }}{{ if eq .Parent .Site.Home }}
+**{{ .Title }}** ({{ .RelPermalink }})
+- Description: {{ .Summary | plainify | truncate 150 }}
+- Total Subsections: {{ len .Sections }}
+- Total Pages: {{ len .Pages }}
+{{ if .Params.tags }}- Tags: {{ delimit .Params.tags ", " }}{{ end }}
 
-{{ end }}{{ end }}RECENT UPDATES
+{{ end }}{{ end }}
+
+RECENT UPDATES
 ==============
 
-{{ range first 10 (.Site.RegularPages.ByLastmod.Reverse) }}- {{ .Title }} ({{ .RelPermalink }})
-  Updated: {{ .Lastmod.Format "2006-01-02" }}
-  Section: {{ .Section }}
+{{ range first 15 (.Site.RegularPages.ByLastmod.Reverse) }}
+- **{{ .Title }}** ({{ .RelPermalink }})
+  - Updated: {{ .Lastmod.Format "2006-01-02" }}
+  - Section: {{ .Section }}
+  - Summary: {{ .Summary | plainify | truncate 100 }}
 
 {{ end }}
+
+CONTENT STATISTICS
+==================
+
+- Total Regular Pages: {{ len .Site.RegularPages }}
+- Total Sections: {{ len (where .Site.Pages "Kind" "section") }}
+- Languages Available: {{ len .Site.Languages }}
+- Last Site Update: {{ .Site.LastChange.Format "2006-01-02 15:04:05" }}
 
 HOW TO USE THIS DIRECTORY
 ==========================
 
-1. All documentation pages have corresponding .txt versions for LLM consumption
+**For LLMs and Automated Processing:**
+
+1. **Plain Text Access**: All documentation pages have corresponding .txt versions
    - Add .txt to any page URL to get the plain text version
    - Example: /getting_started/ becomes /getting_started/index.txt
 
-2. Navigation structure:
-   - This file (llms.txt) provides the main directory
-   - Section pages list their child pages
-   - Individual pages contain the full content in plain text
+2. **Navigation Structure**:
+   - This file (llms.txt) provides the main directory and overview
+   - Section pages list their child pages with descriptions
+   - Individual pages contain the full content in clean plain text format
 
-3. Content format:
-   - Title with underline
-   - Metadata (URL, last modified, tags, aliases)
-   - Clean plain text content
+3. **Content Format Standards**:
+   - Title with underline separator
+   - Structured metadata (URL, last modified, tags, aliases)
+   - Clean plain text content with preserved formatting
+   - Hierarchical structure with proper spacing
    - Footer indicating LLM optimization
 
-For more information, visit: {{ .Site.BaseURL }}
+4. **Content Types Available**:
+   - Getting Started guides and tutorials
+   - Product documentation and feature guides
+   - API references and technical specifications
+   - Integration guides and setup instructions
+   - Troubleshooting and FAQ content
+
+**For Developers and Integrators:**
+
+- All content follows consistent formatting standards
+- Metadata is structured and machine-readable
+- Cross-references and links are preserved in markdown format
+- Content is regularly updated and timestamped
+
+LANGUAGE SUPPORT
+================
+
+{{ range .Site.Languages }}
+- {{ .LanguageName }} ({{ .Lang }}){{ if eq .Lang $.Site.Language.Lang }} - Primary{{ end }}
+{{ end }}
+
+ACCESS INFORMATION
+==================
+
+- Base URL: {{ .Site.BaseURL }}
+- Content Delivery: Static files with CDN optimization
+- Update Frequency: Continuous integration with source updates
+- API Documentation: Available at {{ .Site.BaseURL }}api/
+
+For more information and HTML versions, visit: {{ .Site.BaseURL }}
 
 ---
 Generated for LLM consumption from Datadog Documentation

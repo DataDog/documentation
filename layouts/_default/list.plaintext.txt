@@ -6,14 +6,49 @@ URL: {{ .Permalink }}
 {{ if not $lastmod }}{{ $lastmod = .Date }}{{ end }}
 {{ if not $lastmod }}{{ $lastmod = .PublishDate }}{{ end }}
 Last Modified: {{ $lastmod.Format (.Site.Params.plaintext_date_format | default "2006-01-02 15:04:05") }}
-Section: {{ .Section }}
+{{ if .Section }}Section: {{ .Section }}{{ end }}
+{{ if .Parent }}Parent: {{ .Parent.Title }} ({{ .Parent.RelPermalink }}){{ end }}
+{{ if .Params.tags }}Tags: {{ delimit .Params.tags ", " }}{{ end }}
 
+{{ if .Summary }}
+OVERVIEW
+========
+
+{{ .Summary | plainify }}
+
+{{ end }}
 {{ if .Content }}
+DESCRIPTION
+===========
+
 {{ partial "plaintext-content.html" .Content }}
 
-{{ end }}{{ if .Pages }}Child Pages:
+{{ end }}{{ if .Pages }}
+CHILD PAGES
+===========
+
+{{ if .Sections }}**Subsections:**
+{{ range .Sections -}}
+- **{{ .Title }}** ({{ .RelPermalink }})
+  {{ if .Summary }}Description: {{ .Summary | plainify | truncate 120 }}{{ end }}
+  {{ if .Pages }}Pages: {{ len .Pages }}{{ end }}
+
+{{ end }}
+
+{{ end }}{{ if .RegularPages }}**Pages in this section:**
+{{ range .RegularPages -}}
+- {{ .Title }} ({{ .RelPermalink }})
+  {{ if .Summary }}Summary: {{ .Summary | plainify | truncate 100 }}{{ end }}
+  {{ if .Lastmod }}Updated: {{ .Lastmod.Format "2006-01-02" }}{{ end }}
+
+{{ end }}
+{{ end }}{{ end }}
+
+{{ if and .Pages (not .Sections) (not .RegularPages) }}**All Pages:**
 {{ range .Pages -}}
 - {{ .Title }} ({{ .RelPermalink }})
+  {{ if .Summary }}Summary: {{ .Summary | plainify | truncate 100 }}{{ end }}
+
 {{ end }}
 {{ end }}
 ---
