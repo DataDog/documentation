@@ -54,7 +54,7 @@ Issue Team Ownership is enabled by default for all services once the setup requi
 
 {{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:100%;" >}}
 
-## Leverage team ownership information
+## Leverage team ownership
 
 Team ownership information appears on the issue details panel when available:
 
