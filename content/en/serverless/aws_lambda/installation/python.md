@@ -311,8 +311,8 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{% tab "SST v3" %}}
 
-- [Apply the Datadog wrapper in your function code][1]
-- Update your function configuration in `sst.config.ts`:
+To configure Datadog using SST v3, follow these steps:
+
   ```ts
   const app = new sst.aws.Function("MyApp", {
     handler: "lambda_function.lambda_handler",
@@ -330,17 +330,22 @@ module "lambda-datadog" {
     ],
   });
   ```
-  1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
-      - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python" >}}.
-  2. Fill in the environment variable placeholders:
-      - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
-      - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
-      - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
-      - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][2] is selected on this page).
-      - Replace `<VERSION>` with the version number of the Lambda function
 
-[1]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-[2]: /getting_started/site/
+  1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
+  
+     - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python" >}}.
+
+  2. Fill in the environment variable placeholders:
+     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+     - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+     - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page).
+     - Replace `<VERSION>` with the version number of the Lambda function
+
+  3. [Apply the Datadog wrapper in your function code][2]
+
+[1]: /getting_started/site/
+[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 
 {{% /tab %}}
 {{% tab "Custom" %}}
