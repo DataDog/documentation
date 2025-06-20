@@ -1,0 +1,284 @@
+---
+title: Datadog Disater Recovery
+private: true
+further_reading:
+- link: "agent/remote_config/?tab=configurationyamlfile"
+  tag: "Documentation"
+  text: "Remote Configuration"
+- link: "/getting_started/site/"
+  tag: "Documentation"
+  text: "Getting Started with Datadog Sites"
+---
+
+{{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" >}}
+Datadog Disaster Recovery is in Preview, but you can request access! Use this form to submit your request.
+{{< /callout >}}
+
+## Overview 
+Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals.
+
+DDR also allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events but to also meet your business and regulatory compliance needs.
+
+
+## Prerequisites 
+Datadog Agents versions **7.54 or above** is required for Datadog Disaster Recovery. 
+
+#### Supported telemetry types and products
+The Agent-based failover description provided on this page supports failover of metrics, traces, and logs telemetry types. It also supports Datadog Infrastructure Monitoring, APM, and Logs products.
+
+<div class="alert alert-info">
+Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the [Disaster Recovery team](mailto:disaster-recovery@datadoghq.com) to learn about upcoming capabilities and your specific needs if they are not covered above.
+</div>
+
+
+## Setup 
+To enable Datadog Disaster Recovery, follow the relevant steps for when:
+
+1. [you are ready to configure Datadog Disaster Recovery](#when-you-are-ready-to-configure-datadog-disaster-recovery)
+2. [Datadog confirms your new organization as your secondary failover organization](#when-datadog-confirms-your-new-organization-as-your-secondary-failover-organization)
+3. [you have linked the DDR org to your primary org](#when-you-have-linked-the-ddr-org-to-your-primary-org)
+4. [you are ready to test the failover process](#when-you-are-ready-to-test-the-failover-process)
+
+#### when you are ready to configure Datadog Disaster Recovery: 
+{{% collapse-content title=" 1. Create your secondary Datadog organization" level="h5" %}}
+Identify which site your primary organization is on by matching your Datadog website URL to the [`SITE URL`][4] in the table. Then, select a secondary site for your DDR organization.
+
+{{< img src="getting_started/site/site.png" alt="The site URL in your browser tab" style="width:40%" >}}
+
+| Site    | Site URL                    | Site Parameter      | Location |
+|---------|-----------------------------|---------------------|----------|
+| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
+| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
+| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
+| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
+
+For example, if you are hosted in [US1](https://app.datadoghq.com), you may choose to select another Datadog site to ensure observability continuity in the event of a regional disaster. All Datadog sites are geographically separated.
+
+Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) to help you select the secondary Datadog site and configure your new organization to be your secondary failover organization.
+
+If you're also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the secondary org. 
+
+Datadog does not use cloud providers to receive telemetry data while the secondary site is passive.
+
+**Note**: Datadog can set this up for you if you'd prefer. 
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 2. Contact Datadog to share your new organization" level="h5" %}}
+Share your organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure your new organization to be your secondary failover organization.<br><br>
+**Note**: This organization appears in your Datadog billing hierarchy, but all usage and cost associated is _not_  billed during the private beta.
+{{% /collapse-content %}} <br>
+
+
+
+#### when Datadog confirms your new organization as your secondary failover organization
+{{% collapse-content title=" 3. Confirm the public IDs of your orgs" level="h5" %}}
+After the Datadog team has completed the configuration of the designated orgs, Datadog will share with you the public IDs of the primary org and the DDR org. You can verify these IDs using the cURL commands from the Datadog [public API endpoint][8]:  
+
+``` shell
+# Run this command to verify the Public ID for your primary site replacing the `<DD-SITE-PARAMETER>` with the correct value. 
+curl -X GET "https://api.<DD-SITE-PARAMETER>/api/v1/org/<PUBLIC-ID>" \
+-H "Accept: application/json" \
+-H "DD-API-KEY: ${PRIMARY_DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${PRIMARY_DD_APP_KEY}"
+
+# Run this command to verify the Public ID for your DDR site replacing the `<DD-SITE-PARAMETER>` with the correct value
+curl -X GET "https://api.<DD-SITE-PARAMETER>/api/v1/org/<PUBLIC-ID>" \
+-H "Accept: application/json" \
+-H "DD-API-KEY: ${DDR_DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DDR_DD_APP_KEY}"
+
+```
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 4. Link the DDR org to the primary org" level="h5" %}}
+After the Datadog team has completed the configuration of the designated orgs and you have confirmed the public IDs for your orgs, you can now link them. For security reasons, Datadog is unable to link the orgs on your behalf. 
+
+To link your primary and DDR orgs, run these commands:
+
+```shell
+export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
+export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
+export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
+
+export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
+export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
+export USER_EMAIL=<USER_EMAIL>
+export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
+
+curl -v -H "Content-Type: application/json" -H 
+"dd-api-key:${PRIMARY_DD_API_KEY}" -H 
+"dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
+```
+{{% /collapse-content %}} <br>
+
+
+
+#### when you have linked the DDR org to your primary org
+{{% collapse-content title=" 5. Create your Datadog API and App key for syncing" level="h5" %}}
+At the secondary Datadog site, create a set of `API key` **and** `App key`. You will use these keys in _steps 7_ to copy dashboards and monitors between Datadog sites. 
+
+<div class="alert alert-info">
+For your Agents, Datadog can copy API key signatures to the secondary backup account for you to prevent you from maintaining another set of API keys for your Agent. Contact your [Customer Success Manager](mailto:success@datadoghq.com) for any questions regarding this.
+</div>
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 6. Configure Single Sign On for the Datadog App" level="h5" %}}
+Go to your [Organization Settings][1] to configure SAML or Google Login for your users. 
+
+**Single Sign On (SSO) is highly recommended** to enable all your users to be able to seamlessly login to your Disater Recovery organization during an outage. 
+
+You must invite your users to your Disaster Recovery organization and give them appropriate roles and permissions. Alternatively, to streamline this operation you can use [Just-in-Time provisioning with SAML][2].
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 7. Set up Resources syncing and scheduler" level="h5" %}}
+Datadog provides a tool called [Datadog sync-cli][3] to copy your dashboards, monitors and other configurations from your primary organization to your secondary organization. You can determine the frequency and timing of syncing based on your business requirements. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. We recommend performing this operation on a daily basis. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
+
+Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your secondary org. Resources copied to the secondary organization can be edited, but any new syncing will override changes that differ from the source in the primary organization.
+
+Each item can be added to the sync scope using the sync-cli configuration available in the documentation. Here's an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
+
+```shell 
+destination_api_url="https://api.us5.datadoghq.com"
+destination_api_key="<US5_API_KEY>"
+destination_app_key="<US5_APP_KEY>"
+source_api_key="<EU_API_KEY>"
+source_app_key="<EU_APP_KEY>"
+source_api_url="https://api.datadoghq.eu"
+filter=["Type=Dashboards;Name=title","Type=Monitors;Name=tags;Value=sync:true"]
+
+# Make sure to increase the retry timeout to cope with the rate limit
+http_client_retry_timeout=600
+```
+
+Here's an example of a Sync-cli commands for syncing log configurations:
+
+```shell
+datadog-sync import –config config –resources users,roles,logs_pipelines,logs_pipelines_order,logs_indexes,logs_indexes_order,logs_metrics,logs_restriction_queries
+
+# remember to set the –cleanup=Force option
+datadog-sync sync –config config –resources users,roles,logs_pipelines,logs_pipelines_order,logs_indexes,logs_indexes_order,logs_metrics,logs_restriction_queries –cleanup=Force
+```
+
+<div class="alert alert-warning"> <strong>Sync-cli Limitation </strong><br><br>
+
+**Log Standard Attributes:** Sync-cli is regularly being updated with new resources. Currently, syncing Log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your secondary org. You can refer to the Datadog [standard attribute documentation][6] for support.
+</div>
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 8. Verify availability at the secondary site" level="h5" %}}
+Verify that your secondary org is accessible and that your Dashboards and Monitors are copied from your primary org to your secondary org.
+{{% /collapse-content %}}
+
+
+{{% collapse-content title=" 9. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
+[Remote configuration (RC)][7] is a Datadog capability that allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. Remote Configuration is strongly recommended for a more seamless failover control. Alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
+
+Remote configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
+{{% /collapse-content %}}
+
+{{% collapse-content title=" 10. Update your Datadog Agent version and configuration" level="h5" %}}
+Update your Datadog Agents to version **7.54 or higher**. This version comes with a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured secondary Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic disaster recovery exercises/drills. 
+
+After updating your Agent, configure your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
+
+```shell
+multi_region_failover:
+  enabled: true
+  failover_metrics: false
+  failover_logs: false
+  failover_traces: false
+  site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  api_key: <DDR_SITE_API_KEY>
+```
+
+Setting the **enabled** field to `true` enables the Agent to ship Agent metadata to the secondary Datadog site so you can view Agents and your Infra Hosts in the secondary site. Note that while you can see your Agents and Infra Hosts at the secondary site, you will not receive telemetry until DDR failover is activated.
+
+During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. 
+
+Your Datadog contact will work with you on scheduling dedicated time windows for failover testing to measure performance and Recovery Time Objective(RTO).
+{{% /collapse-content %}} <br>
+
+
+#### when you are ready to test the failover process
+{{% collapse-content title=" 11. Activate and test DDR failover" level="h5" %}}
+There are several methods that can be used for activating/testing the DDR failover. 
+
+**Agent in non-containerized environments**
+
+For Agent deployments in non-containerized environments, use the below Agent CLI commands:
+
+```shell
+agent config set multi_region_failover.failover_metrics true
+agent config set multi_region_failover.failover_logs true
+agent config set multi_region_failover.failover_traces true
+```
+
+**Agent in containerized environments**
+
+If you are running the Agent in a containerized environment like Kubernetes, the Agent command-line tool can still be used, but it needs to be invoked on the container running the Agent. 
+
+Below is an example of using `kubectl` to fail over metrics and logs for a Datadog Agent pod deployed via either the official Helm chart or Datadog Operator. The `<POD_NAME>` should be replaced with the name of the Agent pod:
+
+```shell
+kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_metrics true
+kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_logs true
+kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_traces true
+```
+
+Alternatively, you can specify the below settings in the main Agent configuration file (`datadog.yaml`) and restart the Datadog Agent for the changes to apply:
+
+```shell
+multi_region_failover:
+  enabled: true
+  failover_metrics: true
+  failover_logs: true
+  failover_traces: true
+  site: NEW_ORG_SITE
+  api_key: NEW_SITE_API_KEY
+```
+
+Similar changes can also be made with either the official Helm chart or Datadog Operator if specifying a custom configuration, otherwise the settings can be passed as environment variables:
+
+```shell
+DD_MULTI_REGION_FAILOVER_ENABLED=true
+DD_MULTI_REGION_FAILOVER_METRICS=true
+DD_MULTI_REGION_FAILOVER_LOGS=true
+DD_MULTI_REGION_FAILOVER_TRACES=true
+DD_MULTI_REGION_FAILOVER_SITE=ADD_NEW_ORG_SITE
+DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
+```
+
+**Cloud integrations failover**
+
+1. Integrations must be configured in both Primary and Secondary organizations.
+
+2. Integrations only run in one Datacenter at a time. Keep in mind that:
+  - Integrations normally run only in the Primary data center.
+  - During an integration failover, integrations will run only in the Secondary data center.
+  - During testing, integration telemetry will be spread over both organizations.
+  - Cancelling a failover returns integrations to running in the Primary data center.
+
+3. Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the secondary region.
+
+
+{{% /collapse-content %}}<br>
+
+
+
+## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/users
+[2]: /account_management/saml/#just-in-time-jit-provisioning
+[3]: https://github.com/DataDog/datadog-sync-cli
+[4]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[5]: https://github.com/DataDog/datadog-sync-cli/blob/main/README.md 
+[6]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview
+[7]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile
+[8]: https://docs.datadoghq.com/api/latest/organizations/#get-organization-information 
