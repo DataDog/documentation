@@ -31,6 +31,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-flex-compute-usage/"
   tag: "Blog"
   text: "Monitor and optimize your Flex Logs compute usage"
+- link: "https://www.datadoghq.com/blog/flex-logs/"
+  tag: "Blog"
+  text: "Store and analyze high-volume logs efficiently with Flex Logs"
 ---
 
 ## Overview
