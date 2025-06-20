@@ -42,7 +42,7 @@ Datadog's Internal Developer Portal (IDP) helps you unify software metadata, liv
 - [Engineering Reports][4]: Visualize quality, reliability, and compliance metrics across your stack.
 - [Overview Pages][5]: Give developers and teams a personalized view of their entities, issues, and action items.
 
-Whether you're starting from scratch or integrating with existing systems like Backstage or ServiceNow, this guide will help you get started with IDP.
+Whether you're starting from scratch or integrating with existing systems like Backstage or ServiceNow, use this guide to get started with IDP.
 
 
 ## Prerequisites
@@ -51,7 +51,7 @@ If you have not already, create a [Datadog account][6].
 
 ## Step 1: Populate Software Catalog 
 
-IDP starts with a real-time [Software Catalog][1], which inventories the key building blocks of your software architecture. In Datadog, these are called entities—they can represent individual services, APIs, or grouped Systems.
+IDP starts with [Software Catalog][1], a real-time inventory of your software architecture's key building blocks. In Datadog, these are called entities—they can represent individual services, APIs, or grouped Systems.
 
 You can add entities from:
 
@@ -59,13 +59,13 @@ You can add entities from:
 - [Manual definitions][8]: Created through the [Datadog app][9] or imported via tools like Terraform, Datadog APIs, or the GitHub integration
 - [Third-party systems][10]: Through integrations with ServiceNow and Backstage
 
-While a basic definition registers an entity, you can enrich entity definitions with metadata to provide context like:
+Start with a basic definition to register the entity, then enrich it with metadata to add ownership and operational context, including:
 - Ownership info and team contacts
 - Documentation, dashboards, runbooks
 - Deployment pipelines and config links
 - Production readiness data through unified service tagging
 
-The following example represents an entity definition for a `shopping-cart` service from an e-commerce application. It includes metadata about the service's owning team, languages used, runbook link, and code repository.
+The following example defines a `system` entity representing an application composed of multiple services. It includes metadata such as display name, ownership, contacts, related documentation, integrations, and associated service components.
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: v3
@@ -83,6 +83,14 @@ apiVersion: v3
         provider: gdoc
         url: https://google.drive/shopping-cart-architecture
         type: doc
+      - name: shopping-cart Wiki
+        provider: wiki
+        url: https://wiki/shopping-cart
+        type: doc
+      - name: shopping-cart source code
+        provider: github
+        url: http://github/shopping-cart
+        type: repo
     contacts:
       - name: Support Slack
         type: slack
@@ -115,11 +123,10 @@ Datadog Scorecards include 10 out-of-the-box rules across observability practice
 
 In addition to using default rules, you can define custom rules to reflect your internal standards:
 
-You can also define custom rules:
 1. Go to the [Scorecards page][13] and click Create Rule.
 1. Specify the rule name, the scorecard it belongs to, a description, and the owning team.
 1. Send an outcome of `pass`, `fail`, or `skip` for each entity in one of the following ways:
-   - Manually through the Datadog app
+   - Manually through the Datadog UI
    - Programmatically through the Scorecards API
    - Automatically, using [Workflow Automation][14] to post outcomes on a schedule
 1. View an overview of outcomes on the [Scorecards page][13].
@@ -128,12 +135,12 @@ Learn more about scorecard configuration and custom rules in the [Scorecards doc
 
 ## Step 3: Use Self-Service Actions
 
-Self-Service Actions let engineers run repeatable tasks through a UI or API. For example, use Self-Service Actions to:
+Self-Service Actions let you run repeatable tasks through a UI or API. For example, use Self-Service Actions to:
 - [Create an S3 bucket with Terraform][16]
 - [Scaffold a new project in GitHub][17]
 - [Manage Kubernetes deployments][18]
 
-Actions can be backed by automation systems like Terraform, GitHub Actions, or internal scripts. There are over 1000+ pre-built integrations with tools across source code management (e.g. Github, Gitlab), ticketing and incident management (e.g. Jira, ServiceNow, Pagerduty), chat (e.g. Slack & Microsoft Teams), cloud providers (e.g. AWS, GCP, Azure), and more. You can connect with any additional endpoints, including private resources, leveraging HTTP requests and private action runners.
+Actions can be backed by automation systems like Terraform, GitHub Actions, or internal scripts. Self Service Actions offer over 1000+ pre-built integrations with tools across source code management (for example, GitHub and GitLab), ticketing and incident management (for example, Jira, ServiceNow, and PagerDuty), chat (for example, Slack and Microsoft Teams), cloud providers (for example, AWS, GCP, and Azure), and more. You can connect with any additional endpoints, including private resources, leveraging HTTP requests and private action runners.
 
 Get started by exploring the Self-Service Actions [Blueprint Library][19] in Datadog for example apps that you can customize for your use case. 
 
@@ -186,4 +193,4 @@ For setup and customization tips, read the [Overview Pages documentation][22].
 [19]: https://app.datadoghq.com/software/self-service-actions
 [20]: https://app.datadoghq.com/idp/reports
 [21]: https://app.datadoghq.com/idp/overview/developer
-[22]: https://docs.datadoghq.com/internal_developer_portal/overview_pages/
+[22]: /internal_developer_portal/overview_pages/
