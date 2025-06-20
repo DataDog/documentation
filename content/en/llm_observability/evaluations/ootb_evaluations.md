@@ -114,7 +114,7 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ### Estimated token usage
 
-You can easily monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
+You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
