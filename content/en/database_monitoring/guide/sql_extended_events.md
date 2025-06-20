@@ -113,7 +113,8 @@ ALTER EVENT SESSION datadog_query_completions ON SERVER STATE = START;
 GO
 ```
 
-The datadog_query_errors XE session captures SQL errors ([severity ≥ 11][2]) and query timeouts ([attention events][3]), allowing Datadog to surface query failures and interruptions.
+The datadog_query_errors XE session captures SQL errors [of severity ≥ 11][2] and query timeouts, [called attention events][3], allowing Datadog to surface query failures and interruptions.
+
 ```sql
 -- 2. Errors and Attentions (grouped)
 IF EXISTS (
