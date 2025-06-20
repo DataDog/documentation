@@ -608,7 +608,6 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 | NavigationLink   | NavigationLink                                    | SwiftUI_Unidentified_Element         |
 | Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
-{{% /collapse-content %}}
 
 ### Automatically track network requests
 
