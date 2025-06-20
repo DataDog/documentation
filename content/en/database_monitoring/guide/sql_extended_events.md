@@ -113,7 +113,7 @@ ALTER EVENT SESSION datadog_query_completions ON SERVER STATE = START;
 GO
 ```
 
-The datadog_query_errors XE session captures SQL errors of severity ≥ 11 (https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities) and query timeouts, called attention events (https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class), allowing Datadog to surface query failures and interruptions.
+The datadog_query_errors XE session captures SQL errors of [severity ≥ 11](https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities) and query timeouts, called [attention events](https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class), allowing Datadog to surface query failures and interruptions.
 
 ```sql
 -- 2. Errors and Attentions (grouped)
