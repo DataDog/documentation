@@ -95,7 +95,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -175,7 +175,7 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 
 #### AWS ECS
 
@@ -211,7 +211,7 @@ If you need additional assistance, contact [Datadog support][5].
 [4]: /security/code_security/iast/setup/
 [5]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -287,7 +287,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -380,7 +380,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Finishing setup
 
@@ -517,7 +517,7 @@ Versions 22 and above are supported as in Preview.
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: /security/code_security/software_composition_analysis/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -612,7 +612,7 @@ These are supported on the following architectures:
 [3]: /agent/remote_config/#enabling-remote-configuration
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -741,7 +741,7 @@ Datastore tracing provides:
 [44]: https://www.npmjs.com/package/apollo-server-core
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -772,10 +772,7 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level         |
-|------------|---------------------- |
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability  |
+{{< partial name="api_security/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
@@ -821,4 +818,4 @@ The Python library supports the [database API specifications][4] and supports al
 [4]: https://peps.python.org/pep-0249/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
