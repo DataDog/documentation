@@ -20,15 +20,10 @@ Auto Assign uses [suspect commits][1] to identify developers who may have introd
 
 Auto Assign is automatically enabled when the setup requirements are met. Once configured, issues are automatically assigned to developers based on suspect commit analysis.
 
-### Enable Source Code Integration
+### Configure Source Code Integration
 
-Auto Assign requires [Source Code Integration][2]. To enable Source Code Integration:
-
-1. On the [**Integrations** page][4] in Datadog, choose **Link Source Code** in the top navbar.
-2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
-
-### Install the GitHub integration
-Install [the GitHub integration][3], enabling read permissions for pull requests and contents.
+- Ensure [Source Code Integration][2] is enabled and setup.
+- Install [the GitHub integration][3]. Make sure all requested permission is granted for the GitHub integration.
 
 ### Ensure email consistency
 Developers must use the same email address in both Git and their Datadog account. This email matching is essential for Auto Assign to correctly identify and assign issues to the right users.
@@ -62,6 +57,6 @@ You can view assigned developers directly within each issue in Datadog. If neede
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /error_tracking/suspect_commits/
-[2]: /integrations/guide/source-code-integration
+[2]: /integrations/guide/source-code-integration/
 [3]: /integrations/github/
 [4]: https://app.datadoghq.com/integrations
