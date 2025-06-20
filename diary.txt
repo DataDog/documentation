@@ -254,3 +254,17 @@ The fix involved modifying the `Makefile`'s `llm-docs` target to run the require
 4. The external `build_site` command then runs, with the files already present in the `public` directory.
 
 This change removes the broken dependency and makes the build process more resilient.
+
+### 10. Hugo Template Hotfix
+Following the CI fix, the build pipeline began failing again, this time with Hugo warnings and a `file not found` error.
+- `WARN found no layout file for "llmdocs"`: Hugo was unable to find the templates for the `LLMDocs` output format.
+- `cp: cannot stat 'public/llm/index.md': No such file or directory`: Because the templates were not found, Hugo did not generate any output, causing the copy command to fail.
+
+The root cause was a mismatch between the output format name defined in `config/_default/config.yaml` (`LLMDocs`) and the template filenames. Hugo lowercases the format name when looking for templates (e.g., `index.llmdocs.md`). The templates were originally named with a `.llm.md` suffix.
+
+The fix involved renaming the three layout files to match Hugo's lookup rules:
+- `layouts/_default/single.llm.md` -> `layouts/_default/single.llmdocs.md`
+- `layouts/_default/list.llm.md` -> `layouts/_default/list.llmdocs.md`
+- `layouts/index.llm.md` -> `layouts/index.llmdocs.md`
+
+This correction allows Hugo to find the templates and generate the documentation as expected.
