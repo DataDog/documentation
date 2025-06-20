@@ -38,7 +38,7 @@
 
 ### Using AlwaysOn
 
-For AlwaysOn users, the Agent should be installed on each replica server and connected directly to each replica. The full set of AlwaysOn telemetry will be collected from each individual replica, in addition to host-based telemetry (CPU, disk, memory etc.) for each server.
+For AlwaysOn users, the Agent should be installed on each replica server and connected directly to each replica. The full set of AlwaysOn telemetry is collected from each individual replica, in addition to host-based telemetry (CPU, disk, memory, and so on) for each server.
 
 ```yaml
 instances:
