@@ -2,11 +2,14 @@
 {{ strings.Repeat (len .Title) "=" }}
 
 URL: {{ .Permalink }}
-Last Modified: {{ .Lastmod.Format "2006-01-02 15:04:05" }}
+{{ $lastmod := .Lastmod }}
+{{ if not $lastmod }}{{ $lastmod = .Date }}{{ end }}
+{{ if not $lastmod }}{{ $lastmod = .PublishDate }}{{ end }}
+Last Modified: {{ $lastmod.Format (.Site.Params.plaintext_date_format | default "2006-01-02 15:04:05") }}
 {{ if .Params.tags }}Tags: {{ delimit .Params.tags ", " }}{{ end }}
 {{ if .Params.aliases }}Aliases: {{ delimit .Params.aliases ", " }}{{ end }}
 
-{{ .Content | plainify }}
+{{ partial "plaintext-content.html" .Content }}
 
 ---
 Generated for LLM consumption from Datadog Documentation

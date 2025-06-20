@@ -2,10 +2,14 @@
 {{ strings.Repeat (len .Title) "=" }}
 
 URL: {{ .Permalink }}
-Last Modified: {{ .Lastmod.Format "2006-01-02 15:04:05" }}
+{{ $lastmod := .Lastmod }}
+{{ if not $lastmod }}{{ $lastmod = .Date }}{{ end }}
+{{ if not $lastmod }}{{ $lastmod = .PublishDate }}{{ end }}
+Last Modified: {{ $lastmod.Format (.Site.Params.plaintext_date_format | default "2006-01-02 15:04:05") }}
 Section: {{ .Section }}
 
-{{ if .Content }}{{ .Content | plainify }}
+{{ if .Content }}
+{{ partial "plaintext-content.html" .Content }}
 
 {{ end }}{{ if .Pages }}Child Pages:
 {{ range .Pages -}}

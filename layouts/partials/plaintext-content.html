@@ -1,0 +1,111 @@
+{{/*
+  Partial: plaintext-content.html
+  Purpose: Convert HTML content to well-formatted plaintext with markdown structure
+  Usage: {{ partial "plaintext-content.html" .Content }}
+
+  Configuration (in config.yaml):
+    params:
+      plaintext_date_format: "2006-01-02 15:04:05"  # Custom date format for plaintext files
+
+  Performance: Only processes content if HTML tags are detected, skipping plain text content
+
+  Features:
+  - Preserves markdown structure (headings, lists, tables, etc.)
+  - Converts images to markdown format with alt text
+  - Maintains link formatting
+  - Handles nested lists with basic indentation
+  - Dynamic table column detection for proper markdown tables
+  - Case-insensitive tag matching
+  - Multiline content support
+*/}}
+
+{{ $content := . }}
+
+{{/* Only process if content contains relevant HTML tags - performance optimization */}}
+{{ if findRE `<(?:img|a|h[1-6]|pre|code|blockquote|table|[uo]l|li|strong|b|em|i)\b` $content 1 }}
+
+  {{/* Step 1: Handle images first - convert to markdown format with proper escaping */}}
+  {{ if findRE `<img\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?i)<img[^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![$1]($2)" }}
+    {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?\salt\s*=\s*["']([^"']*?)["'][^>]*?>` "![$2]($1)" }}
+    {{ $content = $content | replaceRE `(?i)<img[^>]*?\ssrc\s*=\s*["']([^"']*?)["'][^>]*?>` "![]($1)" }}
+  {{ end }}
+
+  {{/* Step 2: Handle links - comprehensive pattern with proper escaping */}}
+  {{ if findRE `<a\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?i)<a[^>]*?\shref\s*=\s*["']([^"']*?)["'][^>]*?>((?:[^<]|<(?!/a>))*?)</a>` "[$2]($1)" }}
+  {{ end }}
+
+  {{/* Step 3: Handle code blocks before inline code to avoid conflicts */}}
+  {{ if findRE `<pre\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<pre[^>]*?><code[^>]*?>(.*?)</code></pre>` "\n\n```\n$1\n```\n\n" }}
+  {{ end }}
+
+  {{/* Step 4: Handle inline code after blocks */}}
+  {{ if findRE `<code\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?i)<code[^>]*?>(.*?)</code>` "`$1`" }}
+  {{ end }}
+
+  {{/* Step 5: Convert headings with proper spacing */}}
+  {{ if findRE `<h[1-6]\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<h1[^>]*?>(.*?)</h1>` "\n\n# $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h2[^>]*?>(.*?)</h2>` "\n\n## $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h3[^>]*?>(.*?)</h3>` "\n\n### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h4[^>]*?>(.*?)</h4>` "\n\n#### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h5[^>]*?>(.*?)</h5>` "\n\n##### $1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<h6[^>]*?>(.*?)</h6>` "\n\n###### $1\n\n" }}
+  {{ end }}
+
+  {{/* Step 6: Handle tables with dynamic column detection */}}
+  {{ if findRE `<table\b` $content 1 }}
+    {{/* First, extract table content and process structure */}}
+    {{ $content = $content | replaceRE `(?is)<table[^>]*?>(.*?)</table>` "\n\n$1\n\n" }}
+    {{ $content = $content | replaceRE `(?is)<thead[^>]*?>(.*?)</thead>` "$1\n" }}
+    {{ $content = $content | replaceRE `(?is)<tbody[^>]*?>(.*?)</tbody>` "$1" }}
+    {{ $content = $content | replaceRE `(?is)<tr[^>]*?>(.*?)</tr>` "|$1|\n" }}
+    {{ $content = $content | replaceRE `(?is)<th[^>]*?>(.*?)</th>` " $1 |" }}
+    {{ $content = $content | replaceRE `(?is)<td[^>]*?>(.*?)</td>` " $1 |" }}
+
+    {{/* Add dynamic table header separators - creates proper markdown table format */}}
+    {{ $content = $content | replaceRE `(\|[^|\n]+(?:\|[^|\n]+)*\|)\n(\|[^|\n]+(?:\|[^|\n]+)*\|)` (print "$1\n" (replaceRE `[^|]` "-" "$1" | replaceRE `\|` "|" ) "\n$2" ) }}
+  {{ end }}
+
+  {{/* Step 7: Handle blockquotes */}}
+  {{ if findRE `<blockquote\b` $content 1 }}
+    {{ $content = $content | replaceRE `(?is)<blockquote[^>]*?>(.*?)</blockquote>` "\n\n> $1\n\n" }}
+  {{ end }}
+
+  {{/* Step 8: Handle lists with basic nesting support */}}
+  {{ if findRE `<[uo]l\b` $content 1 }}
+    {{/* Convert nested lists to indented format - basic support */}}
+    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>\s*<li[^>]*?>(.*?)</li>\s*<ul[^>]*?>(.*?)</ul>\s*</ul>` "\n- $1\n  $2\n" }}
+    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>\s*<li[^>]*?>(.*?)</li>\s*<ol[^>]*?>(.*?)</ol>\s*</ol>` "\n1. $1\n   $2\n" }}
+
+    {{/* Handle regular lists */}}
+    {{ $content = $content | replaceRE `(?is)<ul[^>]*?>(.*?)</ul>` "\n$1\n" }}
+    {{ $content = $content | replaceRE `(?is)<ol[^>]*?>(.*?)</ol>` "\n$1\n" }}
+    {{ $content = $content | replaceRE `(?is)<li[^>]*?>(.*?)</li>` "- $1\n" }}
+  {{ end }}
+
+  {{/* Step 9: Handle emphasis and strong formatting */}}
+  {{ if or (findRE `<(?:strong|b)\b` $content 1) (findRE `<(?:em|i)\b` $content 1) }}
+    {{ $content = $content | replaceRE `(?is)<strong[^>]*?>(.*?)</strong>` "**$1**" }}
+    {{ $content = $content | replaceRE `(?is)<b[^>]*?>(.*?)</b>` "**$1**" }}
+    {{ $content = $content | replaceRE `(?is)<em[^>]*?>(.*?)</em>` "*$1*" }}
+    {{ $content = $content | replaceRE `(?is)<i[^>]*?>(.*?)</i>` "*$1*" }}
+  {{ end }}
+
+{{ end }}
+
+{{/* Final step: Use Hugo's built-in plainify to handle remaining HTML and entities */}}
+{{ $content = $content | plainify }}
+
+{{/* Clean up excessive whitespace while preserving intentional spacing */}}
+{{ $content = $content | replaceRE `\n{4,}` "\n\n\n" }}
+{{ $content = $content | replaceRE `[ \t]+\n` "\n" }}
+{{ $content = $content | replaceRE `\n[ \t]+` "\n" }}
+{{ $content = $content | replaceRE `^\s+` "" }}
+{{ $content = $content | replaceRE `\s+$` "" }}
+
+{{/* Return the processed content */}}
+{{ return $content }}

@@ -1,7 +1,7 @@
 {{ .Title }}
 {{ strings.Repeat (len .Title) "=" }}
 
-{{ .Content | plainify }}
+{{ partial "plaintext-content.html" .Content }}
 
 ---
 {{ .Permalink }}
