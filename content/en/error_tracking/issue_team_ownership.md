@@ -12,62 +12,40 @@ further_reading:
 
 ## Overview
 
-Issue Team Ownership automatically assigns issues to teams by linking error stack traces to Git `CODEOWNERS` files. This feature streamlines issue resolution by connecting errors to the appropriate teams based on code ownership, making it easier to identify which team should handle specific problems.
-
-## Setup
-
-Issue Team Ownership requires Source Code Integration and a properly configured `CODEOWNERS` file. Follow these steps to enable the feature:
-
-***Note**: Issue Team Ownership currently supports GitHub only.*
-
-### Configure Source Code Integration
-
-- Ensure [Source Code Integration][1] is enabled and setup.
-- Install [the GitHub integration][2]. Make sure all requested permissions are granted for the GitHub integration.
-
-### Set up CODEOWNERS file
-
-Place a valid `CODEOWNERS` file in one of the following locations in your repository:
-
-- `.github/CODEOWNERS`
-- `CODEOWNERS` (root directory)
-- `docs/CODEOWNERS`
-
-The `CODEOWNERS` file defines ownership of files and directories in your codebase using [GitHub's CODEOWNERS format][3].
-
-### Link GitHub teams to Datadog teams
-
-1. In Datadog, navigate to **Teams**.
-2. Select your team and go to **Settings**.
-3. Click **GitHub Connection**.
-4. Map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
-
-{{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
-
-Once configured, issues are automatically attributed to the relevant teams based on stack traces and the `CODEOWNERS` file.
-
-## Configuration
-
-Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the Error Tracking settings page.
-
-{{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:100%;" >}}
+Issue Team Ownership automatically assigns issues to teams by linking error stack traces to your Git `CODEOWNERS` files. This feature streamlines issue resolution by connecting errors to the appropriate teams, making it easier to identify which team should handle specific problems with team-based filtering, and accurate ownership mapping.
 
 ## Leverage team ownership
 
 Team ownership information appears on the issue details panel when available:
 
-{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:90%;" >}}
+{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
 
 You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer. Use the team filter to view only issues assigned to specific teams, making it easier to focus on issues relevant to your team.
 
-{{< img src="error_tracking/ownership-sidebar.png" alt="Team ownership information on sidebar" style="width:90%;" >}}
+{{< img src="error_tracking/ownership-sidebar.png" alt="Team ownership information on sidebar" style="width:80%;" >}}
 
-## Benefits
+## Setup
 
-- **Faster issue resolution**: Quickly identify which team is responsible for an issue
-- **Improved visibility**: Teams can easily filter and view issues that belong to them
-- **Automated assignment**: Reduces manual triage by automatically routing issues to the right teams
-- **Accurate ownership**: Leverages existing `CODEOWNERS` files to ensure consistent ownership mapping
+### Configure Source Code Integration
+
+Ensure [Source Code Integration][1] is setup and install [the GitHub integration][2]. Make sure all requested permissions are granted for the GitHub integration.
+
+### Set up CODEOWNERS file
+Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
+
+### Link GitHub teams to Datadog teams
+
+In Datadog, go to **Teams** > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
+
+{{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
+
+***Note**: Issue Team Ownership currently supports GitHub only.*
+
+## Configuration
+
+Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the Error Tracking settings page.
+
+{{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:80%;" >}}
 
 ## Further Reading
 
