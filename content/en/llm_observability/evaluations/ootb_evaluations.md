@@ -27,7 +27,7 @@ LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM 
 
 ## Connect your LLM provider account
 
-Configure the LLM provider you would like to use for bring-your-own-key evaluations. You only have to complete this step once.
+Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
 
 {{< tabs >}}
 {{% tab "OpenAI" %}}
@@ -111,6 +111,8 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
+
+You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
 
 ### Estimated token usage
 
@@ -289,4 +291,5 @@ This check ensures that sensitive information is handled appropriately and secur
 [4]: /security/sensitive_data_scanner/
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+[7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage
 
