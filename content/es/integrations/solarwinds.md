@@ -28,7 +28,7 @@ Obtén alertas de SolarWinds Orion para agregar y clasificar tus alertas en una 
 
 Esta integración funciona al suscribir Datadog a todas tus notificaciones de alerta de SolarWinds.
 
-## Configurar
+## Configuración
 
 ### Crear acciones desencadenantes
 
