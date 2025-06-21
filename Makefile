@@ -218,6 +218,7 @@ JS_PATH := local/bin/js
 TRANSLATIONS_PATH := $(PY_PATH)/translations
 BUILD_SCRIPTS_PATH := $(PY_PATH)/build
 
+
 .PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
 
 # Save specific config files
@@ -284,6 +285,7 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 		exit 1; \
 	fi;
 	@tmp_dir=$$(mktemp -d) && \
+	echo "TEMP DIR IS: $${tmp_dir}" && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo "Moving files to python directory..." && \
