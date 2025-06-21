@@ -330,7 +330,7 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.12",
+            "image": "datadog/fips-proxy:1.1.13",
             "portMappings": [
                 {
                     "containerPort": 9803,
