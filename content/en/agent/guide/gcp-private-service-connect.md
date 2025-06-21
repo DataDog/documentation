@@ -9,7 +9,7 @@ further_reading:
       text: 'Connect to Datadog over AWS PrivateLink'
 ---
 
-{{% site-region region="us,us3,gov,ap1" %}}
+{{% site-region region="us,us3,gov,ap1,ap2" %}}
 <div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 

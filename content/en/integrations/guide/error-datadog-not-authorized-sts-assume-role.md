@@ -43,6 +43,7 @@ Check the following points for the AWS account mentioned in the error:
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
@@ -71,6 +72,37 @@ Check the following points for the AWS account mentioned in the error:
 {{< /code-block >}}
 
 [2]: https://ap1.datadoghq.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
+
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below:
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::412381753143:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
+
+[2]: https://ap2.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
 

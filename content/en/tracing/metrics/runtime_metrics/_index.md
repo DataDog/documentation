@@ -143,7 +143,7 @@ When running the Agent in containerized environments, additional configuration i
 
 <br>
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 3. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the correct Datadog location.
 

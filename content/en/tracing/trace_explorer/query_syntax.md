@@ -151,7 +151,7 @@ To delete a saved search, click on the bin icon under the Trace search dropdown 
 
 ### Search for services and entities 
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 To search for a service, use the `service` attribute. To search for another [entity type][20] (for example, a database, a queue, or a third-party provider), rely on other [peer attributes][21] which Datadog uses to describe dependencies that are not instrumented with APM. For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`
 
 **Note**: The span's `service` tag represents the service **emitting** the span if you migrated to the [global service naming][22] by setting `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
@@ -171,7 +171,7 @@ The time range allows you to display traces within a given time period. Quickly 
 
 The Span table is the list of spans that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ### The service column
 
 By default, the service column shows the `service` reserved attribute from the span.
