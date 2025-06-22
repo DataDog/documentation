@@ -46,7 +46,7 @@ tile:
   classifier_tags:
   - Categoría::Contenedores
   - Categoría::Kubernetes
-  - Sistema operativo compatible::Linux
+  - Supported OS::Linux
   - Offering::Integration
   configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI con Datadog

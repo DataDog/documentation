@@ -43,8 +43,8 @@ short_description: Monitorizar y analizar los resultados de tests de rendimiento
   NeoLoad
 supported_os:
 - linux
-- Windows
-- macOS
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
