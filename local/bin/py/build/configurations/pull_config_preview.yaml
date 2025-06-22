@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: jack.davenport/eks-fargate-revamp
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
