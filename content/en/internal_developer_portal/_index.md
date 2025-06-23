@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadog-manages-internal-deployments/"
   tag: "Blog"
   text: "How Datadog's Infrastructure team manages internal deployments using the Service Catalog and CI/CD Visibility"
+- link: "https://www.datadoghq.com/blog/internal-developer-portal/"
+  tag: "Blog"
+  text: "Ship software quickly and confidently with Datadog IDP"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Join the preview for Datadog's Internal Developer Portal!" >}}
