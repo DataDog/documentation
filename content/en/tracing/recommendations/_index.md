@@ -24,6 +24,9 @@ further_reading:
   - link: "/database_monitoring/recommendations/"
     tag: "Documentation"
     text: "DBM Recommendations"
+  - link: "https://www.datadoghq.com/blog/proactive-app-recommendations/"
+    tag: "Blog"
+    text: "Improve performance and reliability with Proactive App Recommendations"
 
 multifiltersearch:
   # "id" must match the corresponding key in the "data" object

@@ -16,10 +16,6 @@ further_reading:
 title: Instrumentación de tests Swift con RUM
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Asegúrate de que [Test Optimization][3] ya está configurado para Swift.

@@ -425,6 +425,13 @@
       "description": "Update a downtime returns \"OK\" response"
     }
   ],
+  "CreateEvent": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Post an event returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
@@ -711,6 +718,11 @@
       "group": "logs_custom_destinations",
       "suffix": "_1091442807",
       "description": "Create a Custom Header HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1735989579",
+      "description": "Create a Microsoft Sentinel custom destination returns \"OK\" response"
     },
     {
       "group": "logs_custom_destinations",

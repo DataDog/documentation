@@ -82,8 +82,8 @@ Contacts defined
 Code repos defined
 : Identifying code repositories enables your engineers to perform an initial investigation into an issue without having to contact the service's owning team. This improves collaboration and helps your engineers increase their overall understanding of integration points.
 
-Any docs defined
-: In the Software Catalog Other Links section, specify additional links to resources such as runbooks, dashboards, or other internal documentation. This helps with initial investigations and provides quick access to emergency remediation runbooks for outages and incidents.
+Docs defined
+: Linking documentation in the Software Catalog provides engineers with access to service-specific knowledge, such as architecture overviews, API references, and operational guides. This promotes better cross-team collaboration, accelerates onboarding, and deepens overall understanding of how services work and interact.
 
 ## How scores are calculated
 

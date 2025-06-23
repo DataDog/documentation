@@ -1,5 +1,12 @@
 ---
 title: Agent Monitoring
+further_reading:
+  - link: "https://www.datadoghq.com/blog/openai-agents-llm-observability/"
+    tag: "Blog"
+    text: "Monitor your OpenAI agents with Datadog LLM Observability"
+  - link: "https://www.datadoghq.com/blog/monitor-ai-agents/"
+    tag: "Blog"
+    text: "Monitor, troubleshoot, and improve AI agents with Datadog"
 ---
 
 ## Overview
@@ -16,6 +23,10 @@ For your agentic applications, LLM Observability allows you to:
 {{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
 LLM Observability's Graph-based Visualization for Agentic Systems is in Preview.
 {{< /callout >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/auto_instrumentation?tab=python#openai-agents
 [2]: /llm_observability/setup/auto_instrumentation?tab=python#langgraph
