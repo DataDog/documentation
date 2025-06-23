@@ -7,6 +7,8 @@ further_reading:
   text: "Learn more about the Rollup function"
 ---
 
+{{< jqmath-vanilla >}}
+
 ## Overview
 
 Visualizations in data analysis often rely on aggregation functions to summarize data over time. One common challenge arises when the rollup function and distinct or unique cardinality measures interact with each other, leading to unexpected results when visualizing data.
@@ -15,18 +17,13 @@ By aligning expectations with the nature of rollup results and employing clear q
 
 ## Understanding cardinality in timeseries
 
-### Unique versus distinct users
+Consider a scenario where you track users visiting a website. Each day for seven days, you observe 100 users, leading you to assume a total of 700 users. However, the actual number of **unique** users over the week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, inflating the total when compared to a single, longer rollup timeframe.
 
-When analyzing user data, it's important to understand the difference between unique and distinct users:
-
-- **Unique Users**: The total number of different people who visit your website, counted only once regardless of how many times they visit.
-- **Distinct Users**: The number of different users who appear in each time window, which can vary based on the size of the window.
-
-Consider a scenario where you track distinct users visiting a website. Each day for seven days, you observe 100 unique users, leading you to assume a total of 700 users. However, the actual number of distinct users over the week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, inflating the total when compared to a single, longer rollup timeframe.
+This counterintuitive result is due to cardinality, which refers to how unique elements in a dataset are counted. The cardinality for each time bucket can be complex. When analyzing users, consider the question: "How many *unique* users visited the site each day this week?" If a user visits on two separate days, they count as unique for each day.
 
 ### How rollup affects averages
 
-The rollup function also significantly impacts how averages are calculated and displayed in visualizations:
+The [rollup function][1] also significantly impacts how averages are calculated and displayed in visualizations:
 
 - **Smoothing effect**:
    - Shorter time periods (5-minute rollups) show more detailed spikes and variations.
@@ -35,8 +32,6 @@ The rollup function also significantly impacts how averages are calculated and d
 - **Average calculations**:
    - In shorter time periods, averages might be lower because Datadog only catches users in that exact moment.
    - In longer time periods, averages might be higher because Datadog catches more instances of users using different devices.
-
-This counterintuitive result is due to cardinality, which refers to how unique elements in a dataset are counted. The cardinality for each time bucket can be complex. When analyzing unique users, consider the question: "How many unique users were there each day this week?" If a user visits on two separate days, they count as unique for each day.
 
 ## Example: How rollup affects unique user counts
 
@@ -68,15 +63,9 @@ The following graph looks at 5-minute versus 30-minute rollups for mobile distin
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-This occurs because when a user appears multiple times during a rollup window, they appear once in the denominator but multiple times in the numerator. In this case, a user may be using both mobile and desktop. The following graph shows two offset graphs for a single user. The bottom graph indicates whether the user appeared on mobile during the 30-second or 5-minute interval, while the top graph indicates whether the user appeared at all.
+This occurs because when a user appears multiple times during a rollup window, they appear once in the denominator but multiple times in the numerator.
 
-Since the user appeared during most minutes, but only occasionally on mobile, they appear more often on mobile in longer time frames.
-
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/single_user_multiple_timescales.png" alt="Single user activity across multiple timescales" style="width:100%;" >}}
-
-{{% collapse-content title="Configuration" level="h4" expanded=false %}}
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/single_user_multiple_timescales_config.png" alt="Configuration for single user multiple timescales" style="width:100%;" >}}
-{{% /collapse-content %}}
+$$\text"cardinality:@usr.name[@type:session @device.type:Mobile]" / \text"cardinality:@usr.name[@type:session]" * 100\$$
 
 Another way to understand this is that when a user appears multiple times in a window, each appearance represents an opportunity to appear in the numerator. In a longer time frame, each user will appear more times, creating more opportunities to (in this case) view the page on mobile.
 
@@ -92,3 +81,4 @@ Similarly, a 1-hour rollup might show you 10-20% of users checking on mobile dur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /dashboards/functions/rollup/
