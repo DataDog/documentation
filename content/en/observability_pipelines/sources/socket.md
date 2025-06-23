@@ -3,7 +3,7 @@ title: Socket Source
 disable_toc: false
 ---
 
-Use Observability Pipelines’ Socket source to send logs to the Worker over a socket connection (TCP or UDP). Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP). Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 

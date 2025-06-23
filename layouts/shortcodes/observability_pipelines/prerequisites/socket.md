@@ -1,1 +1,1 @@
-REUSE INSTRUCTIONS
+If your forwarders are globally configured to enable SSL, you need the appropriate TLS certificates and the password you used to create your private key.

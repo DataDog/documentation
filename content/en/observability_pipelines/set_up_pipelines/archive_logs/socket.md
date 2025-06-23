@@ -312,7 +312,8 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. TKTK
+1. Enter the socket address and port, such as `0.0.0.0:9000`. This is the address and port the Observability Pipelines Worker listens on for incoming logs. The socket address must include a port.
+1. If you enabled TLS, enter the TLS passphrase.
 1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
