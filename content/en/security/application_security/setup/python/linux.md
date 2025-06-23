@@ -130,6 +130,7 @@ Update your ECS task definition JSON file by adding the following in the environ
 ```
 
 {{% /tab %}}
+{{< /tabs >}}
 
 {{% appsec-verify-setup %}}
 
