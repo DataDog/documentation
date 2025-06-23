@@ -1,5 +1,8 @@
 ---
 title: Python App and API Protection Compatibility
+code_lang: python
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -12,79 +15,83 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+## App and API Protection capabilities support
 
-{{< partial name="api_security/python/overview.html" >}}
+The following App and API Protection capabilities are supported in the Python library, for the specified tracer version:
 
-This page provides compatibility information for Python App and API Protection (AAP).
+{{< partial name="api_security/python/capabilities.html" >}}
 
-## Supported Python Versions
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
-- Python 3.6+
-- Python 3.7+
-- Python 3.8+
-- Python 3.9+
-- Python 3.10+
-- Python 3.11+
-- Python 3.12+
+### Supported deployment types
 
-## Supported Frameworks
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate | {{< X >}}                |
+| AWS Lambda  | {{< X >}}                |
 
-### Web Frameworks
-- Django 2.0+
-- Flask 1.0+
-- FastAPI 0.68+
-- Pyramid 1.9+
-- Bottle 0.12+
-- CherryPy 18.0+
-- Falcon 3.0+
-- Sanic 21.0+
 
-### ASGI Frameworks
-- Starlette 0.20+
-- Uvicorn 0.15+
-- Hypercorn 0.14+
+## Language and framework compatibility
 
-### WSGI Servers
-- Gunicorn 20.0+
-- uWSGI 2.0+
-- Waitress 2.0+
+### Supported Python versions
 
-## Supported Libraries
+The Python App and API Protection Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
 
-### Database Libraries
-- SQLAlchemy 1.3+
-- psycopg2 2.8+
-- pymongo 3.9+
-- redis 3.5+
-- mysql-connector-python 8.0+
+Two release branches are supported:
 
-### HTTP Libraries
-- requests 2.22+
-- urllib3 1.25+
-- aiohttp 3.6+
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
-### Task Queues
-- Celery 4.4+
-- RQ 1.8+
+And the library supports the following runtimes:
 
-## Datadog Library Requirements
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
-- ddtrace >= 1.2.2
+### Web framework compatibility
 
-## Operating System Support
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
 
-- Linux (Ubuntu, CentOS, RHEL, etc.)
-- macOS 10.14+
-- Windows 10+
+### Supported frameworks
 
-## Container Support
+| Framework | Versions   | Threat Detection supported? | Threat Protection supported? |
+|-----------|------------|-----------------------------|------------------------------|
+| Django    | 2.2        | {{< X >}}                   | {{< X >}}                    |
+| FastAPI   | 0.86       | {{< X >}}                   | {{< X >}}                    |
+| Flask     | 1.1        | {{< X >}}                   | {{< X >}}                    |
 
-- Docker
-- Kubernetes
-- Amazon ECS
-- AWS Fargate
 
-## Further Reading
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-{{< partial name="whats-next/whats-next.html" >}} 
+### Data store compatibility
+
+
+**Datastore tracing provides:**
+
+- timing request to response
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
+
+##### App and API Protection Capability Notes
+
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+-
+The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework        | Framework Versions     |
+|------------------|------------------------|
+| Django           | 1.11, 2.2, 3.2, >= 4.0 |
+
+[1]: /tracing/trace_collection/compatibility/python/
+[2]: /agent/remote_config/#enabling-remote-configuration
+[3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
+[4]: https://peps.python.org/pep-0249/

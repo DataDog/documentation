@@ -1,5 +1,8 @@
 ---
 title: Setup App and API Protection for Python on Linux
+code_lang: linux
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -12,33 +15,65 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+{{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="api_security/python/overview.html" >}}
+{{< partial name="app_and_api_protection/python/overview.html" >}}
 
 This guide explains how to set up App and API Protection (AAP) for Python applications running on Linux systems. The setup involves:
 1. Installing the Datadog Python library
 2. Configuring your Python application
 3. Enabling AAP monitoring
 
-## Prerequisites
+{{% appsec-getstarted %}}
+
+## Operating System Prerequisites
 
 - Linux system (Ubuntu, CentOS, RHEL, etc.)
-- Python application
-- Datadog Agent installed
 - Python 3.6 or higher
 
 ## Setup
 
-### 1. Update your Datadog Python library package
 
-Update your `ddtrace` package to at least version 1.2.2:
+### 1. Install the Datadog Agent
+
+Install the Datadog Agent in your Fargate task definition:
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:latest",
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_API_KEY>"
+        },
+        {
+          "name": "DD_APM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 2. Update your Datadog Python library package
+
+**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
 
 ```shell
 pip install --upgrade ddtrace
 ```
 
-### 2. Enable AAP when starting your application
+To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
+
+### 3. Enable AAP when starting your application
 
 Set the environment variable and use `ddtrace-run`:
 
@@ -46,62 +81,56 @@ Set the environment variable and use `ddtrace-run`:
 export DD_APPSEC_ENABLED=true
 ddtrace-run python app.py
 ```
+You can also use one of the following methods, depending on where your application runs:
+{{< tabs >}}
+{{% tab "Docker CLI" %}}
 
-### 3. Configure service identification
+Update your configuration container for APM by adding the following argument in your `docker run` command:
 
-Set the following environment variables for proper service identification:
-
-```bash
-export DD_SERVICE=your-service-name
-export DD_ENV=your-environment
+```shell
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-### 4. Using systemd service (optional)
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
 
-If you're using systemd to manage your application, create a service file:
+Add the following environment variable value to your container Dockerfile:
 
-```ini
-[Unit]
-Description=Your Python App with AAP
-After=network.target
-
-[Service]
-Type=simple
-User=your-user
-Environment=DD_APPSEC_ENABLED=true
-Environment=DD_SERVICE=your-service-name
-Environment=DD_ENV=your-environment
-ExecStart=/usr/local/bin/ddtrace-run /usr/bin/python3 /path/to/your/app.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+```Dockerfile
+ENV DD_APPSEC_ENABLED=true
 ```
 
-Save this as `/etc/systemd/system/your-app.service` and enable it:
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable your-app
-sudo systemctl start your-app
+Update your configuration YAML file container for APM and add the `DD_APPSEC_ENABLED` environment variable:
+
+```yaml
+spec:
+ template:
+   spec:
+     containers:
+       - name: <CONTAINER_NAME>
+         image: <CONTAINER_IMAGE>/<TAG>
+         env:
+           - name: DD_APPSEC_ENABLED
+             value: "true"
+```
+{{% /tab %}}
+{{% tab "Amazon ECS" %}}
+Update your ECS task definition JSON file by adding the following in the environment section:
+```json
+"environment": [
+ ...,
+ {
+   "name": "DD_APPSEC_ENABLED",
+   "value": "true"
+ }
+]
 ```
 
-## Verify setup
+{{% /tab %}}
 
-To verify that AAP is working correctly:
+{{% appsec-verify-setup %}}
 
-1. Start your application with the environment variables set
-2. Send some traffic to your application
-3. Check the [Application Signals Explorer][1] in Datadog
-4. Look for security signals and vulnerabilities
-
-## Troubleshooting
-
-If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/security/appsec
-[2]: /security/application_security/setup/python/troubleshooting 
+[1]: /security/application_security/setup/compatibility/python/

@@ -1,5 +1,8 @@
 ---
 title: Setup App and API Protection for Python on Kubernetes
+code_lang: kubernetes
+type: multi-code-lang
+code_lang_weight: 20
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -12,33 +15,67 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+{{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="api_security/python/overview.html" >}}
+{{< partial name="app_and_api_protection/python/overview.html" >}}
 
 This guide explains how to set up App and API Protection (AAP) for Python applications running on Kubernetes. The setup involves:
-1. Installing the Datadog Python library
-2. Configuring your Python application
-3. Enabling AAP monitoring
+1. Installing the Datadog Agent
+2. Installing the Datadog Python library
+3. Configuring your Python application
+4. Enabling AAP monitoring
 
-## Prerequisites
+{{% appsec-getstarted %}}
+
+## Operating System Prerequisites
 
 - Kubernetes cluster
-- Python application
-- Datadog Agent installed
 - kubectl configured
 
 ## Setup
 
-### 1. Update your Datadog Python library package
+### 1. Install the Datadog Agent
 
-Update your `ddtrace` package to at least version 1.2.2:
+Install the Datadog Agent using Helm:
+
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm install datadog -f values.yaml datadog/datadog
+```
+
+Create a `values.yaml` file with the following configuration:
+
+```yaml
+datadog:
+  apiKey: <YOUR_API_KEY>
+  appKey: <YOUR_APP_KEY>
+  site: <YOUR_DD_SITE>
+  apm:
+    portEnabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  processAgent:
+    enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
+```
+
+### 2. Update your Datadog Python library package
+
+**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
 
 ```shell
 pip install --upgrade ddtrace
 ```
 
-### 2. Enable AAP in your Kubernetes deployment
+To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
+
+### 3. Enable AAP in your Kubernetes deployment
 
 Add the `DD_APPSEC_ENABLED` environment variable to your deployment YAML:
 
@@ -62,7 +99,7 @@ spec:
               value: "your-environment"
 ```
 
-### 3. Start your application with ddtrace-run
+### 4. Start your application with ddtrace-run
 
 Use `ddtrace-run` to start your Python application. Update your container's command:
 
@@ -77,36 +114,6 @@ containers:
         value: "true"
 ```
 
-### 4. Alternative: Using init containers
+{{% appsec-verify-setup %}}
 
-You can also use an init container to install the ddtrace package:
-
-```yaml
-initContainers:
-  - name: install-ddtrace
-    image: python:3.9
-    command: ["pip", "install", "--upgrade", "ddtrace"]
-    volumeMounts:
-      - name: app-volume
-        mountPath: /app
-```
-
-## Verify setup
-
-To verify that AAP is working correctly:
-
-1. Deploy your application to Kubernetes
-2. Send some traffic to your application
-3. Check the [Application Signals Explorer][1] in Datadog
-4. Look for security signals and vulnerabilities
-
-## Troubleshooting
-
-If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/security/appsec
-[2]: /security/application_security/setup/python/troubleshooting 
+[1]: /security/application_security/setup/compatibility/python/

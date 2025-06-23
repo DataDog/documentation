@@ -12,9 +12,9 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+{{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="api_security/python/overview.html" >}}
+{{< partial name="app_and_api_protection/python/overview.html" >}}
 
 This guide helps you troubleshoot common issues with Python App and API Protection (AAP).
 
@@ -81,7 +81,7 @@ ddtrace-run python app.py
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /security/application_security/setup/compatibility/python/

@@ -1,5 +1,8 @@
 ---
 title: Setup App and API Protection for Python on macOS
+code_lang: macos
+type: multi-code-lang
+code_lang_weight: 40
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -12,33 +15,52 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+{{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="api_security/python/overview.html" >}}
+{{< partial name="app_and_api_protection/python/overview.html" >}}
 
 This guide explains how to set up App and API Protection (AAP) for Python applications running on macOS. The setup involves:
 1. Installing the Datadog Python library
 2. Configuring your Python application
 3. Enabling AAP monitoring
+4. Configure service identification
 
-## Prerequisites
+{{% appsec-getstarted %}}
 
-- macOS system
-- Python application
-- Datadog Agent installed
+## Operating System Prerequisites
+
+- macOS operating system
+- Homebrew (recommended for Agent installation)
+- Administrator privileges for some configuration steps
 - Python 3.6 or higher
 
 ## Setup
 
-### 1. Update your Datadog Python library package
+### 1. Install the Datadog Agent
 
-Update your `ddtrace` package to at least version 1.2.2:
+#### Using Homebrew (recommended)
+
+```bash
+brew install datadog/datadog/datadog-agent
+```
+
+#### Manual installation
+
+1. Download the macOS installer from the [Datadog Agent installation page][2]
+2. Open the downloaded `.dmg` file
+3. Follow the installation wizard
+
+### 2. Update your Datadog Python library package
+
+**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
 
 ```shell
 pip install --upgrade ddtrace
 ```
 
-### 2. Enable AAP when starting your application
+To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
+
+### 3. Enable AAP when starting your application
 
 Set the environment variable and use `ddtrace-run`:
 
@@ -47,7 +69,7 @@ export DD_APPSEC_ENABLED=true
 ddtrace-run python app.py
 ```
 
-### 3. Configure service identification
+### 4. Configure service identification
 
 Set the following environment variables for proper service identification:
 
@@ -56,7 +78,7 @@ export DD_SERVICE=your-service-name
 export DD_ENV=your-environment
 ```
 
-### 4. Using launchd service (optional)
+#### 4.1. Using launchd service (optional)
 
 If you're using launchd to manage your application, create a plist file:
 
@@ -96,7 +118,7 @@ Save this as `~/Library/LaunchAgents/com.yourcompany.yourapp.plist` and load it:
 launchctl load ~/Library/LaunchAgents/com.yourcompany.yourapp.plist
 ```
 
-### 5. Using Homebrew services (optional)
+#### 4.2. Using Homebrew services (optional)
 
 If you installed Python via Homebrew, you can also use Homebrew services:
 
@@ -104,22 +126,6 @@ If you installed Python via Homebrew, you can also use Homebrew services:
 brew services start your-app
 ```
 
-## Verify setup
+{{% appsec-verify-setup %}}
 
-To verify that AAP is working correctly:
-
-1. Start your application with the environment variables set
-2. Send some traffic to your application
-3. Check the [Application Signals Explorer][1] in Datadog
-4. Look for security signals and vulnerabilities
-
-## Troubleshooting
-
-If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/security/appsec
-[2]: /security/application_security/setup/python/troubleshooting 
+[1]: /security/application_security/setup/compatibility/python/

@@ -1,0 +1,4 @@
+<div class="alert alert-info">
+  <p>For faster setup with automatic instrumentation, consider using Single Step APM Instrumentation, which automatically installs the Datadog SDK with no additional configuration required. See <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=java">Single Step APM Instrumentation</a> for setup instructions.</p>
+  <p>Once SSI is set up, you can enable App and API Protection by going to your APM service in the Datadog app → Service Configuration section → Enable Application Security Monitoring.</p>
+</div>

@@ -1,5 +1,8 @@
 ---
 title: Setup App and API Protection for Python on Docker
+code_lang: docker
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"
@@ -12,32 +15,46 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="api_security/callout.html" >}}
+{{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="api_security/python/overview.html" >}}
+{{< partial name="app_and_api_protection/python/overview.html" >}}
 
 This guide explains how to set up App and API Protection (AAP) for Python applications running in Docker containers. The setup involves:
-1. Installing the Datadog Python library
-2. Configuring your Python application
-3. Enabling AAP monitoring
+1. Installing the Datadog Agent
+2. Installing the Datadog Python library
+3. Configuring your Python application
+4. Enabling AAP monitoring
 
-## Prerequisites
-
-- Docker environment
-- Python application
-- Datadog Agent installed
+{{% appsec-getstarted %}}
 
 ## Setup
 
-### 1. Update your Datadog Python library package
+## 1. Install and run the Datadog Agent
 
-Update your `ddtrace` package to at least version 1.2.2:
+If you haven't already, install the Datadog Agent on your host or as a container. For containerized installation:
+
+```bash
+docker run -d --name datadog-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e DD_API_KEY=<YOUR_API_KEY> \
+  -e DD_APM_ENABLED=true \
+  -e DD_APM_NON_LOCAL_TRAFFIC=true \
+  datadog/agent:latest
+```
+
+### 2. Update your Datadog Python library package
+
+**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
 
 ```shell
 pip install --upgrade ddtrace
 ```
 
-### 2. Enable AAP in your Docker container
+To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
+
+### 3. Enable AAP in your Docker container
 
 You can enable AAP using one of the following methods:
 
@@ -70,7 +87,7 @@ services:
       - DD_APPSEC_ENABLED=true
 ```
 
-### 3. Start your application with ddtrace-run
+### 4. Start your application with ddtrace-run
 
 Use `ddtrace-run` to start your Python application:
 
@@ -78,30 +95,6 @@ Use `ddtrace-run` to start your Python application:
 ddtrace-run python app.py
 ```
 
-### 4. Configure service identification
+{{% appsec-verify-setup %}}
 
-Set the following environment variables for proper service identification:
-
-```bash
-DD_SERVICE=your-service-name
-DD_ENV=your-environment
-```
-
-## Verify setup
-
-To verify that AAP is working correctly:
-
-1. Send some traffic to your application
-2. Check the [Application Signals Explorer][1] in Datadog
-3. Look for security signals and vulnerabilities
-
-## Troubleshooting
-
-If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/security/appsec
-[2]: /security/application_security/setup/python/troubleshooting 
+[1]: /security/application_security/setup/compatibility/python/
