@@ -159,6 +159,21 @@ ALTER EVENT SESSION datadog_query_errors ON SERVER STATE = START;
 GO
 ```
 
+2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
+See the [sample conf.yaml.example][2] for all available configuration options.
+```yaml
+  xe_collection:
+    query_completions:
+      enabled: true
+    query_errors:
+      enabled: true
+```
+In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default.
+```yaml
+  collect_raw_query_statement:
+    enabled: true
+```
+
 {{% /tab %}}
 
 {{% tab "Azure DB" %}}
@@ -280,10 +295,6 @@ WITH (
 ALTER EVENT SESSION datadog_query_errors ON DATABASE STATE = START;
 GO
 ```
-{{% /tab %}}
-
-{{< /tabs >}}
-
 
 2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
 See the [sample conf.yaml.example][2] for all available configuration options.
@@ -294,11 +305,14 @@ See the [sample conf.yaml.example][2] for all available configuration options.
     query_errors:
       enabled: true
 ```
-In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default."
+In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default.
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Optional: Tuning for your environment
 
