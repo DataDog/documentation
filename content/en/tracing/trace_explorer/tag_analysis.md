@@ -8,6 +8,9 @@ further_reading:
 - link: '/tracing/trace_explorer/trace_groups/'
   tag: 'Documentation'
   text: 'Trace Groups'
+- link: 'https://www.datadoghq.com/blog/tag-analysis/'
+  tag: 'Blog'
+  text: "Find what's driving errors and latency with Tag Analysis"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/tag-analysis/" header="Request access to the Preview!" >}}

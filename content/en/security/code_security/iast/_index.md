@@ -2,7 +2,11 @@
 title: Runtime Code Analysis (IAST)
 disable_toc: false
 aliases:
-- /security/application_security/code_security/
+  - /security/application_security/code_security/
+further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-code-security/"
+    tag: "Blog"
+    text: "Protect the life cycle of your application code and libraries with Datadog Code Security"
 ---
 
 ## Overview
@@ -109,6 +113,9 @@ If you need additional help, contact [Datadog support][11].
 ## Disable Code Security
 For information on disabling IAST, see [Disabling Code Security][12].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
 [2]: /security/code_security/iast/setup/java/

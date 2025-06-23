@@ -3,10 +3,6 @@ title: Configure the LLM Observability SDK
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}). </div>
-{{< /site-region >}}
-
 For information about configuration options for LLM Observability SDKs, choose your language:
 
 {{< partial name="llmobs/llmobs-compatibility.html" >}}

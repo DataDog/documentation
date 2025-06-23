@@ -2,9 +2,12 @@
 title: Recommendations
 description: View recommendations to proactively address issues in your system
 further_reading:
-- link: "https://www.datadoghq.com/blog/database-monitoring-index-recommendations/"
-  tag: "blog"
-  text: "A deep dive into Database Monitoring index recommendations"
+  - link: "https://www.datadoghq.com/blog/database-monitoring-index-recommendations/"
+    tag: "blog"
+    text: "A deep dive into Database Monitoring index recommendations"
+  - link: "https://www.datadoghq.com/blog/database-monitoring-query-regressions/"
+    tag: "Blog"
+    text: "Detect and investigate query regressions with Datadog Database Monitoring"
 ---
 
 Database Monitoring (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.

@@ -8,6 +8,9 @@ further_reading:
 - link: "observability_pipelines/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
+- link: "https://www.datadoghq.com/blog/migrate-historical-logs/"
+  tag: "Blog"
+  text: "Migrate historical logs from Splunk and Elasticsearch using Observability Pipelines"
 ---
 
 ## Overview

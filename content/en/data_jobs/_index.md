@@ -1,10 +1,12 @@
 ---
 title: Data Jobs Monitoring
 further_reading:
-    - link: '/data_streams'
-      tag: 'Documentation'
-      text: 'Data Streams Monitoring'
-
+  - link: '/data_streams'
+    tag: 'Documentation'
+    text: 'Data Streams Monitoring'
+  - link: "https://www.datadoghq.com/blog/data-observability/"
+    tag: "Blog"
+    text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 ---
 
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}

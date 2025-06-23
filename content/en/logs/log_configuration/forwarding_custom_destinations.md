@@ -13,6 +13,9 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Forward logs directly from your environment with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/microsoft-sentinel-logs/"
+  tag: "Blog"
+  text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
 ---
 
 {{% site-region region="gov" %}}

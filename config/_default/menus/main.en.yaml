@@ -130,64 +130,64 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1204
       parent: getting_started_integrations
+    - name: Internal Developer Portal
+      identifier: getting_started_internal_developer_portal
+      url: getting_started/internal_developer_portal/
+      parent: getting_started
+      weight: 13
     - name: Logs
       identifier: getting_started_logs
       url: getting_started/logs/
       parent: getting_started
-      weight: 13
+      weight: 14
     - name: Monitors
       identifier: getting_started_monitors
       url: getting_started/monitors/
       parent: getting_started
-      weight: 14
+      weight: 15
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
       url: getting_started/opentelemetry/
       parent: getting_started
-      weight: 15
+      weight: 16
     - name: Profiler
       identifier: getting_started_profiler
       url: getting_started/profiler/
       parent: getting_started
-      weight: 16
+      weight: 17
     - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
-      weight: 17
+      weight: 18
     - name: Security
       identifier: getting_started_security
       url: getting_started/security/
       parent: getting_started
-      weight: 18
+      weight: 19
     - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
-      weight: 1801
+      weight: 1901
     - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
-      weight: 1802
+      weight: 1902
     - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
-      weight: 1803
+      weight: 1903
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
-      weight: 1804
+      weight: 1904
     - name: Serverless for AWS Lambda
       identifier: getting_started_serverless
       url: getting_started/serverless/
-      parent: getting_started
-      weight: 19
-    - name: Software Catalog
-      identifier: getting_started_software_catalog
-      url: getting_started/software_catalog/
       parent: getting_started
       weight: 20
     - name: Software Delivery

@@ -1,5 +1,9 @@
 ---
 title: Visualize relationships with Security Graph
+further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-security-graph/"
+    tag: "Blog"
+    text: "Visualize cloud security relationships with Datadog Security Graph"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/security-graph" header="Join the Preview!">}}
@@ -46,3 +50,7 @@ As you modify the query, Security Graph automatically updates to show relevant r
   - View more details about the resource.
   - View security findings associated with the resource.
 - When you're viewing resources in a table, you can click a resource to view additional information in the side panel.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

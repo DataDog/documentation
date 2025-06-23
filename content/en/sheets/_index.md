@@ -4,6 +4,9 @@ further_reading:
 - link: "/sheets/functions_operators"
   tag: "Documentation"
   text: "Functions and Operators"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
 ## Overview

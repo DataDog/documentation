@@ -11,6 +11,9 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
 ---
 
 ## Overview

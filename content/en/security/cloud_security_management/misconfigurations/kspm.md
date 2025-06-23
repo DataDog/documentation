@@ -58,7 +58,7 @@ To view the security posture score for your Kubernetes deployments, navigate to 
 
 Click a framework to view a detailed report that gives you insight into how you score against the framework's requirements and rules. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
 
-{{< img src="security/csm/kubernetes_posture_score_2.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
+{{< img src="security/csm/kubernetes_posture_score_3.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
 
 ## Create your own Kubernetes detection rules
 

@@ -24,14 +24,17 @@ further_reading:
 
 [Azure App Service][1] hosts web applications, REST APIs, and mobile backends.
 
-Datadog provides the following monitoring capabilities for all Azure App Service resource types:
+To get started with monitoring Azure App Service, install the Azure integration for metrics and logs, and Azure App Service instrumentation for APM and custom metrics.
 
-- Azure Monitor [metrics][2] for web apps, using the [Azure integration][3].
-- The [Azure App Service View][4] in Datadog, where you can quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
-- Submit custom metrics through the API.
-- Submit [resource logs][5] through [Event Hub][6].
+### Azure Integration
 
-Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
+The [Azure integration][3] provides [enriched metrics][2] and resource metadata for Azure App Service, and are required for the [Azure App Service View][4] in Datadog. Follow the [Azure integration setup instructions][6] to install the Azure integration.
+
+Additionally, [set up Azure log forwarding][5] to automatically collect and send Azure App Service resource and application logs to Datadog.
+
+### Azure App Service Instrumentation
+
+To monitor Azure App Service workloads with APM and custom metrics, install instrumentation on your Azure App Service workloads. This instrumentation is available for both Windows and Linux App Services, and supports the following runtimes on Basic, Standard, and Premium plans:
 
 | OS | Runtime |Documentation| 
 |----|---------|-----|
@@ -60,9 +63,9 @@ Capabilities:
 [1]: https://learn.microsoft.com/en-us/azure/app-service/overview
 [2]: /integrations/azure_app_services/#metrics
 [3]: /integrations/azure/
-[4]: https://app.datadoghq.com/functions?search=&cloud=azure&entity_view=app_service_plan
-[5]: /integrations/azure/#log-collection
-[6]: https://learn.microsoft.com/azure/event-hubs/
+[4]: https://app.datadoghq.com/serverless/azure/app-service-plan
+[5]: /logs/guide/azure-logging-guide/
+[6]: /integrations/azure/#setup
 [7]: /serverless/azure_app_services/azure_app_services_windows?tab=net#setup
 [8]: /serverless/azure_app_services/azure_app_services_windows?tab=java#setup
 [9]: /serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython

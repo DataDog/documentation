@@ -378,6 +378,8 @@ RUM.enable(
     applicationID: "<rum application id>",
     uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
     uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    swiftUIViewsPredicate: DefaultSwiftUIRUMViewsPredicate(),
+    swiftUIActionsPredicate: DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: true),
     urlSessionTracking: RUM.Configuration.URLSessionTracking()
   )
 )
@@ -390,6 +392,8 @@ RUM.enable(
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
 configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
+configuration.swiftUIViewsPredicate = [DDDefaultSwiftUIRUMViewsPredicate new];
+configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:YES];
 [configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
 
 [DDRUM enableWith:configuration];

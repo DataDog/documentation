@@ -7,6 +7,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/on-call-paging/'
   tag: 'Blog'
   text: 'How to create an effective paging strategy'
+- link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
+  tag: "Blog"
+  text: "Unify remediation and communication with Datadog Incident Response"
 cascade:
     algolia:
         rank: 70

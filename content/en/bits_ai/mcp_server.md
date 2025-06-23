@@ -10,6 +10,12 @@ further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
+- link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
+  tag: "Blog"
+  text: "Debug live production issues with the Datadog Cursor extension"
+- link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
+  tag: "Blog"
+  text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}

@@ -24,6 +24,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
+    - link: "https://www.datadoghq.com/blog/data-observability/"
+      tag: "Blog"
+      text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 cascade:
     algolia:
         rank: 70

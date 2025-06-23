@@ -12,6 +12,9 @@ further_reading:
 - link: "software_catalog/scorecards/"
   tag: "Documentation"
   text: "Datadog Scorecards"
+- link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
+  tag: "Documentation"
+  text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}

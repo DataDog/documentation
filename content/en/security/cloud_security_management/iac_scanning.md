@@ -4,6 +4,9 @@ further_reading:
   - link: "/security/cloud_security_management/setup/iac_scanning"
     tag: "Documentation"
     text: "Setting up IaC Scanning"
+  - link: "https://www.datadoghq.com/blog/iac-scanning-tools/"
+    tag: "Blog"
+    text: "Building on open source IaC scanning tools with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}

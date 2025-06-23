@@ -6,10 +6,6 @@ further_reading:
   text: "On-Call Documentation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog On-Call.
 
 1. Install the [Datadog mobile app][1].
@@ -123,7 +119,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to **Account** > **Settings** > **Notifications**.
+1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
 2. Under **Phone & SMS**, enable **Automatic Contact Card Sync**. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 

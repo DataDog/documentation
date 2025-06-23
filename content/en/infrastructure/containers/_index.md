@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
   tag: "Blog"
   text: "Practical tips for rightsizing your Kubernetes workloads"
+- link: "https://www.datadoghq.com/blog/kubernetes-active-remediation-ai/"
+  tag: "Blog"
+  text: "Accelerate Kubernetes issue resolution with AI-powered guided remediation"
 ---
 
 In Datadog, the [Containers][1] page provides real-time visibility into all containers across your environment.
