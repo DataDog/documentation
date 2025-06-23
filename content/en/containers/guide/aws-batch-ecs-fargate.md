@@ -37,7 +37,7 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
         5. Add another environment variable using the **Key** `ECS_FARGATE` and the value `true`. Click **Add** to add the container.
         6. Add another environment variable using the **Key** `DD_SITE` and the value {{< region-param key="dd_site" code="true" >}}. This defaults to `datadoghq.com` if you don't set it.
     7. Add your other application containers to the job definition.
-    8. To enable log collection for your application containers with Datadog, AWS Batch also supports [Fluentbit with Firelens][4].
+    8. AWS Batch supports [Fluentbit and Firelens][4]. To enable log collection for your application containers with Datadog:
        1. Create a separate log router container in the job definition.
        2. Configure the image `amazon/aws-for-fluent-bit:stable"` for the container.
        3. In the Firelens Configuration section:
@@ -61,7 +61,7 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
 
    **Note**: The environment variable `ECS_FARGATE` is already set to `"true"`.
 3. Add your other application containers to the job definition.
-4. To enable log collection for your application containers with Datadog, AWS Batch also supports [Fluentbit with Firelens][4].
+4. AWS Batch supports [Fluentbit and Firelens][4]. To enable log collection for your application containers with Datadog:
    - In the JSON file, add an additional `log_router` container with the following in the `containers` section:
      ```json
       {
@@ -87,7 +87,7 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
       }
      ```
    - In your application containers, add the relevant `logConfiguration` options similar to Step 2 of the [ECS Fargate FluentBit and Firelens section][5]
-6. Execute the following command to register the job definition:
+5. Execute the following command to register the job definition:
 
    ```bash
    aws batch register-job-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-aws-batch-ecs-fargate.json
