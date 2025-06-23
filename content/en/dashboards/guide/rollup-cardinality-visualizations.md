@@ -15,7 +15,7 @@ By aligning expectations with the nature of rollup results and employing clear q
 
 ## Understanding cardinality in timeseries
 
-### Unique vs Distinct Users
+### Unique versus distinct users
 
 When analyzing user data, it's important to understand the difference between unique and distinct users:
 
@@ -24,18 +24,17 @@ When analyzing user data, it's important to understand the difference between un
 
 Consider a scenario where you track distinct users visiting a website. Each day for seven days, you observe 100 unique users, leading you to assume a total of 700 users. However, the actual number of distinct users over the week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, inflating the total when compared to a single, longer rollup timeframe.
 
-### How Rollup Affects Averages
+### How rollup affects averages
 
 The rollup function also significantly impacts how averages are calculated and displayed in visualizations:
 
-1. **Smoothing Effect**:
-   - Longer time periods (30-minute rollups) create smoother graphs.
+- **Smoothing effect**:
    - Shorter time periods (5-minute rollups) show more detailed spikes and variations.
+   - Longer time periods (30-minute rollups) create smoother graphs.
 
-2. **Average Calculations**:
-   - In shorter time periods, averages might be lower as we only catch users in that exact moment.
-   - In longer time periods, averages might be higher as we catch more instances of users using different devices.
-   - This isn't a bug, it's a natural result of how users interact with your service over time.
+- **Average calculations**:
+   - In shorter time periods, averages might be lower because Datadog only catches users in that exact moment.
+   - In longer time periods, averages might be higher because Datadog catches more instances of users using different devices.
 
 This counterintuitive result is due to cardinality, which refers to how unique elements in a dataset are counted. The cardinality for each time bucket can be complex. When analyzing unique users, consider the question: "How many unique users were there each day this week?" If a user visits on two separate days, they count as unique for each day.
 
@@ -43,27 +42,27 @@ This counterintuitive result is due to cardinality, which refers to how unique e
 
 Visualizations display the sum of values over different intervals, which can create confusion when comparing totals across time periods. For example, a graph might show different totals for the same metric when viewed at different time scales (like 5-minute versus 30-minute intervals). This difference occurs because users can be counted multiple times in shorter time windows, but only once in longer time windows.
 
-This walkthrough demonstrates how rollup functions and cardinality interact in practice. Consider a website that tracks user sessions on mobile and desktop.
+This section walks through an example that demonstrates how rollup functions and cardinality interact in practice. Consider a website that tracks user sessions on mobile and desktop.
 
 When you take an average of sessions on mobile and roll it up every 30 minutes, you get a smoothed version of the graph. This smoothing effect is a natural result of the rollup function, making the visualization easier to interpret for longer-term trends.
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/avg_sessions_rollup_30m.png" alt="Average of sessions on mobile rolled up every 30 minutes" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/avg_sessions_rollup_30m.png" alt="Line chart displaying percentage of total sessions on mobile rolled up every 5 minutes (blue line) compared to 30 minutes (purple line). The blue line is spiky. The purple line is smooth and overlaps with the blue line." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/avg_sessions_rollup_30min_config.png" alt="Configuration for average sessions rollup" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-However, when you group by users, the two graphs don't overlap: the 30-minute graph is significantly higher than the 5-minute graph. This might look like a bug at first glance, but it's actually showing us how users interact with the service over different time periods.
+However, when you group by users, the two graphs don't overlap: the 30-minute graph is significantly higher than the 5-minute graph. This might look like a bug at first glance, but it's actually showing how users interact with the service over different time periods.
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/users_mobile_rollup_5_30min.png" alt="Users mobile rollup comparison between 5 and 30 minute intervals" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/users_mobile_rollup_5_30min.png" alt="Line graph displaying percentage of users on mobile rolled up every 5 minutes (blue line) compared to 30 minutes (purple line). The smooth purple line is higher than the spiky blue line." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/user_mobile_rollup_5_30min_config.png" alt="Configuration for users mobile rollup comparison" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-Looking at the individual graphs, you'll see the numbers align in the following way. The 30-minute rollups are, of course, larger than the 5-minute rollups. When you scale them down by a factor of 0.75, the total number of distinct users roughly aligns with the 5-minute rollup, while the number of mobile distinct users is significantly higher. Why?
+The following graph looks at 5-minute versus 30-minute rollups for mobile distinct users and total distinct users. Because the 30-minute rollups are naturally larger than the 5-minute rollups, this graph displays the 30-minute rollups scaled down by a factor of 0.75. For total distinct users, the 5-minute and 30-minute rollups roughly align. However, for mobile distinct users, the 30-minute rollup is significantly higher than the 5-minute rollup. Why?
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled.png" alt="Scaled rollup comparison showing distinct users" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled.png" alt="Line graph showing four lines: total distinct users (5-minute rollup), total distinct users (30-minute rollup), mobile distinct users (5-minute rollup), mobile distinct users (30-minute rollup)." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
