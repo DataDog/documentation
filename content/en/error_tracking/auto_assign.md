@@ -36,12 +36,15 @@ When an error occurs, Auto Assign:
 
 ## Managing assignments
 
-### Configuration
-Navigate to the Error Tracking configuration section in Datadog to manage Auto Assign settings. You can enable or disable Auto Assign globally for your entire organization, or configure it on a per-service basis for more granular control.
-
-### Assignment management
 You can view assigned developers directly within each issue in Datadog. If needed, manual reassignment is always possible to override the automatic assignment.
 
+{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+
+# Configuration
+
+Navigate to the Error Tracking configuration section in Datadog to manage Auto Assign settings. You can enable or disable Auto Assign globally for your entire organization, or configure it on a per-service basis for more granular control.
+
+{{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:80%;" >}}
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
