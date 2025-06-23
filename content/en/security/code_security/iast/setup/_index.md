@@ -772,11 +772,25 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-{{< partial name="trace_collection/python/supported_versions.html" >}}
+| Release    | Support level                              | Minimum Datadog Agent |
+|------------|--------------------------------------------|-----------------------|
+| `>=3.0,<4` | General Availability   7.28                |
+| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
+|    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
 
-{{< partial name="trace_collection/python/supported_runtimes.html" >}}
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
+|---------|-----------------------|---------|-----------------|----------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
+| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
 
 
 #### Web framework compatibility
