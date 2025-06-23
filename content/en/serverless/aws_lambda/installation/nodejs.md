@@ -343,15 +343,15 @@ To configure Datadog using SST v3, follow these steps:
       DD_SITE: "<DATADOG_SITE>",
     },
     layers: [
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}",
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}",
+      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
+      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}`,
     ],
   });
   ```
 
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
 
-     - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}. 
+     - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
   
   2. Add `dd-trace` and `datadog-lambda-js` to the `nodejs.install` list
 

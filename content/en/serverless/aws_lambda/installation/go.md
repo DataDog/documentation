@@ -152,15 +152,12 @@ To configure Datadog using SST v3, follow these steps:
       DD_SITE: "<DATADOG_SITE>",
     },
     layers: [
-      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}",
+      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
     ],
   });
   ```
-  1. Configure the Datadog Lambda Extension layer
 
-     - Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`.
-
-  2. Fill in the environment variable placeholders:
+  Fill in the environment variable placeholders:
 
      - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
      - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
