@@ -47,7 +47,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ## Verify that the Agent is sending events to Cloud Security
 
-To verify that the Agent is sending events to Cloud Security, go to [Cloud Security Overview][8] and view the **Security Inbox** and **All Findings** sections.
+To verify that the Agent is sending events to Cloud Security, go to the [Agent Events Explorer][8] and search for `@agent.rule_id:ruleset_loaded`. For more information, see [Investigate Agent Events][12].
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
@@ -56,7 +56,8 @@ To verify that the Agent is sending events to Cloud Security, go to [Cloud Secur
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
-[8]: https://app.datadoghq.com/security/csm
+[8]: https://app.datadoghq.com/security/workload-protection/agent-events
 [9]: /security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
+[12]: /security/workload_protection/investigate_agent_events
