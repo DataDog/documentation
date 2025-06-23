@@ -77,7 +77,7 @@ To remove a Datadog application key, navigate to [**Organization Settings** > **
 
 ## Key propagation delay and validation
 
-Datadog’s API and application keys follow an eventual consistency model. Due to the distributed nature of our systems, updates to keys—such as creation and revocation may take a few seconds to fully propagate across our infrastructure.
+Datadog’s API and application keys follow an eventual consistency model. Due to the distributed nature of Datadog's systems, updates to keys, such as creation and revocation, may take a few seconds to fully propagate across the infrastructure.
 
 As a result:
 
