@@ -267,6 +267,7 @@ unsupported_sites:
   fips-proxy: [us,us3,us5,eu,ap1]
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
+  iac_security: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
   network_path: [gov]
