@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-View-based ownership helps you filter event data to the views your team owns. You can control this filtering with a toggle on the Summary, Optimization, and Session Explorer pages. 
+View-based ownership lets you see only the RUM metrics and events for the parts of your application that your team is responsible for. After you've set up view ownership, every RUM event from those parts is **tagged** with your team's name. You can turn this filter on or off using the **My Teams** toggle on the Summary, Optimization, and Session Explorer pages.
 
 {{< img src="/real_user_monitoring/guide/ownership/ownership-sessions-explorer.png" alt="View of Sessions Explorer, where you can filter user sessions based on the teams assigned in Team Ownership, making it easy to find replays relevant to your team." >}}
 
@@ -28,6 +28,8 @@ To configure team ownership for your application's views:
 After you associate a view with a team, Datadog automatically attributes new event data to that team.
 
 {{< img src="/real_user_monitoring/guide/ownership/ownership-application-management.png" alt="View of the Team Ownership page, where you can assign different pages of your application to specific teams." >}}
+
+<div class="alert alert-info">If you change a team and view mapping, any past metrics or events are not retroactively tagged with the new team.</div>
 
 ## Further Reading
 
