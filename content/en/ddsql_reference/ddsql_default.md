@@ -29,6 +29,9 @@ SQL in [Analysis cells][1] allows you to analyze and manipulate data. This docum
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
+- [JSON functions](#json-functions)
+- [Tags](tags)
+
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
@@ -440,6 +443,13 @@ This table provides an overview of the supprted window functions. For comprehens
 | `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
+## JSON functions and operators
+
+| Name | Return type | Description |
+|------|-------------|-------------|
+| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+
 ## Tags
 
 DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
@@ -460,12 +470,6 @@ SELECT *
 FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
-### JSON functions and operators
-
-| Name | Return type | Description |
-|------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
-| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
 
 ## Further reading
 
