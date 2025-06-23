@@ -5,9 +5,9 @@ further_reading:
   - link: '/error_tracking/suspect_commits/'
     tag: 'Documentation'
     text: 'Suspect Commits'
-  - link: '/error_tracking/issue_states/'
+  - link: '/error_tracking/issue_team_ownership/'
     tag: 'Documentation'
-    text: 'Issue States in Error Tracking'
+    text: 'Issue Team Ownership'
 ---
 
 ## Overview
