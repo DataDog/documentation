@@ -10590,6 +10590,7 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
+      - $ref: '#/components/schemas/CustomDestinationForwardDestinationMicrosoftSentinel'
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -10674,6 +10675,49 @@ components:
       type: string
       x-enum-varnames:
       - HTTP
+    CustomDestinationForwardDestinationMicrosoftSentinel:
+      description: The Microsoft Sentinel destination.
+      properties:
+        client_id:
+          description: Client ID from the Datadog Azure integration.
+          example: 9a2f4d83-2b5e-429e-a35a-2b3c4182db71
+          type: string
+        data_collection_endpoint:
+          description: Azure data collection endpoint.
+          example: https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com
+          type: string
+        data_collection_rule_id:
+          description: Azure data collection rule ID.
+          example: dcr-000a00a000a00000a000000aa000a0aa
+          type: string
+        stream_name:
+          description: Azure stream name.
+          example: Custom-MyTable
+          type: string
+          writeOnly: true
+        tenant_id:
+          description: Tenant ID from the Datadog Azure integration.
+          example: f3c9a8a1-4c2e-4d2e-b911-9f3c28c3c8b2
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationForwardDestinationMicrosoftSentinelType'
+      required:
+      - type
+      - tenant_id
+      - client_id
+      - data_collection_endpoint
+      - data_collection_rule_id
+      - stream_name
+      type: object
+    CustomDestinationForwardDestinationMicrosoftSentinelType:
+      default: microsoft_sentinel
+      description: Type of the Microsoft Sentinel destination.
+      enum:
+      - microsoft_sentinel
+      example: microsoft_sentinel
+      type: string
+      x-enum-varnames:
+      - MICROSOFT_SENTINEL
     CustomDestinationForwardDestinationSplunk:
       description: The Splunk HTTP Event Collector (HEC) destination.
       properties:
@@ -10849,6 +10893,7 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
+      - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationMicrosoftSentinel'
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -10933,6 +10978,49 @@ components:
       type: string
       x-enum-varnames:
       - HTTP
+    CustomDestinationResponseForwardDestinationMicrosoftSentinel:
+      description: The Microsoft Sentinel destination.
+      properties:
+        client_id:
+          description: Client ID from the Datadog Azure integration.
+          example: 9a2f4d83-2b5e-429e-a35a-2b3c4182db71
+          type: string
+        data_collection_endpoint:
+          description: Azure data collection endpoint.
+          example: https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com
+          type: string
+        data_collection_rule_id:
+          description: Azure data collection rule ID.
+          example: dcr-000a00a000a00000a000000aa000a0aa
+          type: string
+        stream_name:
+          description: Azure stream name.
+          example: Custom-MyTable
+          type: string
+          writeOnly: true
+        tenant_id:
+          description: Tenant ID from the Datadog Azure integration.
+          example: f3c9a8a1-4c2e-4d2e-b911-9f3c28c3c8b2
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationMicrosoftSentinelType'
+      required:
+      - type
+      - tenant_id
+      - client_id
+      - data_collection_endpoint
+      - data_collection_rule_id
+      - stream_name
+      type: object
+    CustomDestinationResponseForwardDestinationMicrosoftSentinelType:
+      default: microsoft_sentinel
+      description: Type of the Microsoft Sentinel destination.
+      enum:
+      - microsoft_sentinel
+      example: microsoft_sentinel
+      type: string
+      x-enum-varnames:
+      - MICROSOFT_SENTINEL
     CustomDestinationResponseForwardDestinationSplunk:
       description: The Splunk HTTP Event Collector (HEC) destination.
       properties:
