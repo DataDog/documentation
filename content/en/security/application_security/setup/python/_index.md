@@ -45,7 +45,7 @@ further_reading:
 
 ### AWS
 {{< appsec-integrations >}}
-{{< appsec-integration name="AWS Fargate" avatar="amazon-ecs" link="../aws/fargate/python" >}}
+{{< appsec-integration name="AWS Fargate" avatar="amazon-ecs" link="./aws_fargate" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
