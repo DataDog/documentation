@@ -109,6 +109,7 @@ To prevent displaying a large number of irrelevant changes, updates affecting on
 * metadata.resourceVersion
 * metadata.managedFields
 * metadata.generation
+* metadata.annotations["kubernetes.io/config.seen"]
 * status
 
 {{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}

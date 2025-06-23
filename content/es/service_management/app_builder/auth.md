@@ -1,11 +1,8 @@
 ---
 description: Acceso y autenticación para App builder
 title: Acceso y autenticación
+site_support_id: actions
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
 App Builder de Datadog está en fase beta privada. Rellena el formulario para solicitar acceso.

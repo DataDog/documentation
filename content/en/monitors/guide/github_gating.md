@@ -16,13 +16,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
     tag: "Blog"
     text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+site_support_id: ci_visibility
 ---
 
 ## Overview
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 Datadog is an integration partner for [GitHub Actions Deployment Protection Rules][10], which helps you ensure the delivery of high-quality applications to end customers. You can enforce quality gates on your GitHub Actions deployment workflows using Datadog monitors. 
 

@@ -25,6 +25,9 @@ Supported MySQL versions
 Supported Agent versions
 : 7.36.1+
 
+RAM Requirement
+: Datadog Database Monitoring requires at least 16 GB of RAM on the SQL instance to function properly.
+
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).

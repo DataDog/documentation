@@ -21,7 +21,7 @@ You can create two types of budgets:
 
 To create a basic budget:
 
-1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2] or [Terraform][3].
 1. Click the **Create a New Budget** button.
 1. Click **Basic** to a basic budget.
 1. You can either add budget information by **uploading a CSV** using the provided template in the UI, or **enter your budget directly** using the details below.
@@ -106,3 +106,4 @@ To delete a budget, click the trash icon on the Budgets page.
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cost_budget
