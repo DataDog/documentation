@@ -113,7 +113,14 @@ LLMObs.enable(
 
 See the [AWS Lambda Quickstart Guide][15] to quickly integrate LLM Observability into your Lambda functions.
 
-#### Application naming guidelines
+### Working with proxy services
+
+In order to prevent duplicate LLM spans from being submitted to LLM Observability when using a proxy service, configure the instrumented proxy urls setting via the `DD_LLMOBS_INSTRUMENTED_PROXY_URLS` environment variable or by using the `instrumented_proxy_urls` in-code setup option.
+
+Note that this should only be used when a client's LLM request is routed to a proxy service and both the client and the proxy have auto-instrumentation enabled.
+
+
+### Application naming guidelines
 
 Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
 
