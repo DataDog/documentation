@@ -21,18 +21,21 @@ Datadog recommends you update your Datadog Agent with every [minor and patch][6]
 ## Upgrade between minor versions of the Agent
 ### Upgrade remotely with Fleet Automation
 
-Fleet Automation allows you to upgrade Datadog Agents across non-containerized Linux and Windows environments remotely. In a few clicks you can deploy the latest Agent release, keeping your fleet current with new features and security patches. To get setup, follow the [Fleet Automation Agent Upgrade guide][7].
+[Fleet Automation](/agent/fleet_automation/remote_management) enables you to centrally manage your fleet of Datadog Agents. Fleet Automation includes [Remote Agent Management][2], which allows you to remotely upgrade Agents across non-containerized Linux and Windows environments.
+
+To upgrade your Agents with Fleet Automation:
+	1. Enable [Remote Configuration](/agent/remote_config/).
+	2. Enable [Remote Agent Management][3].
+	3. [Upgrade your Datadog Agents][7].
 
 ### Upgrade with script or configuration management tooling
 Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script. 
 
 
-## Upgrade between minor versions of the Agent
-
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-To upgrade between minor versions of the Agent is to use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
+To upgrade between minor versions of the Agent, use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
 
 Upgrading to a given Agent minor version:
 
@@ -54,7 +57,7 @@ URL to download a specific Agent minor version
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-To upgrade between minor version of the Agent is to use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
+To upgrade between minor version of the Agent, use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
 
 Upgrading to a given Agent minor version:
 
@@ -69,13 +72,12 @@ Upgrading to the latest Agent minor version:
 
 
 ## Upgrade between major versions of the Agent
-### Upgrade to Datadog Agent 7 
 
 <div class="alert alert-info">
-Agent 7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">Check if your custom checks are Python 3 compatible</a> before upgrading to Agent 7.
+Agent 7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">Verify if your custom checks are Python 3 compatible</a> before upgrading to Agent 7.
 </div>
 
-### From Agent 6
+### Upgrade from Agent 6 to Agent 7
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -110,7 +112,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 {{% /tab %}}
 {{< /tabs >}}
 
-### From Agent 5
+### Upgrade from Agent 5 to Agent 7
 
 {{< tabs >}}
 {{% tab "Linux" %}}
