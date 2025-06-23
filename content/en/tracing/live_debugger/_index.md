@@ -82,6 +82,8 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 ## Using Live Debugger
 
+<div class="alert alert-info">Try using Live Debugger from your JetBrains IDE! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
+
 ### Creating and using a Debug Session
 
 Debug Sessions let you inspect your code at runtime with auto-expiring logpoints. To create and use a Debug Session:
