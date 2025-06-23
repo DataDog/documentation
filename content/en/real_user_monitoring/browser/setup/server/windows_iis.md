@@ -59,7 +59,7 @@ To update your RUM Application:
 
 ## Manual configuration
 
-The log level can be configured in the IIS `applicationHost.config` file
+You can configure the log level in the IIS `applicationHost.config` file:
 
 ```
 <configuration>
@@ -69,10 +69,10 @@ The log level can be configured in the IIS `applicationHost.config` file
 </configuration>
 ```
 
- The possible values are
-- **debug**
-- **info** (default)
-- **error**
+ The possible `logLevel` values are:
+- `debug`
+- `info` (default)
+- `error`
 
 ## Troubleshooting
 
