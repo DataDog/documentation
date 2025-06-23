@@ -464,8 +464,8 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 
 | Name | Return type | Description |
 |------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in JSON as text, defined by the path. Its behavior is equivalent to the [postgres function with the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
-| json_extract_path(text json, text path…) | json | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object in as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
 
 ## Further reading
 
@@ -473,3 +473,4 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
+[3]: https://www.postgresql.org/docs/current/functions-json.html
