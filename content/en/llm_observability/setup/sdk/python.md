@@ -59,6 +59,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
+`DD_LLMOBS_INSTRUMENTED_PROXY_URLS`
+: optional - _string_
+<br />A comma-separated set of URLs for your application's instrumented proxy services. This prevents duplicate LLM spans from being sent to LLM Observability from both the client and server.
+
 ### In-code setup
 
 Enable LLM Observability programatically through the `LLMObs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
@@ -100,6 +104,10 @@ LLMObs.enable(
 `service`
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
+
+`instrumented_proxy_urls`
+: optional - _set[str]_
+<br />The set of URLs for your application's instrumented proxy services. If not provided, this defaults to the value of `DD_LLMOBS_INSTRUMENTED_PROXY_URLS`.
 
 ### AWS Lambda setup
 

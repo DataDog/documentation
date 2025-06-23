@@ -57,19 +57,6 @@ LLMObs.enable(integrations_enabled=False, ...)
 patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True, litellm=True)
 ```
 
-## Working with proxy services
-
-If you are routing LLM requests to a proxy server that is also instrumented with LLMObs, consider setting the URL for your proxy with the
-`DD_LLMOBS_INSTRUMENTED_PROXY_URLS` environment variable or by configuring LLMObs with the `instrumented_proxy_urls` option.
-
-```
-from ddtrace.llmobs import LLMObs
-
-LLMObs.enable(instrumented_proxy_urls=("http://localhost:4000"), ...)
-```
-
-This prevents duplicate LLM spans from being submitted to LLMObs from both the client and server.
-
 ## OpenAI
 
 The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][1] completion and chat completion endpoints to OpenAI and Azure OpenAI.
