@@ -19,7 +19,7 @@ Datadog recommends you update your Datadog Agent with every [minor and patch][6]
 
 
 ## Upgrade between minor versions of the Agent
-### Upgrade remotely with fleet automation
+### Upgrade remotely with Fleet Automation
 
 Fleet Automation allows you to upgrade Datadog Agents across non-containerized Linux and Windows environments remotely. In a few clicks you can deploy the latest Agent release, keeping your fleet current with new features and security patches. To get setup, follow the [Fleet Automation Agent Upgrade guide][7].
 
