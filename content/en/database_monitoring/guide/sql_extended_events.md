@@ -13,20 +13,19 @@ further_reading:
   text: "Troubleshooting Database Monitoring"
 ---
 
-This feature enables collection of deobfuscated queries and query error events from your SQL Server instances using Extended Events (XE). It provides clear insights into:
+This feature collects deobfuscated queries and query error events from your SQL Server instances using Extended Events (XE). It provides visibility into:
 - Metrics and behavior of SQL queries with deobfuscated parameter values
-- What query errors or timeouts occurred
+- Errors and timeouts that occurred during execution
 
-This is useful for:
+This data is useful for:
 - Performance analysis
 - Debugging app behavior
 - Auditing unexpected errors or timeouts
 
-**Note:** The setup instructions below configure the required event sessions and Agent settings to capture deobfuscated query and error event data. However, this data is not yet visible in Datadog, as support for surfacing this data is still under development.
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][1] before following the steps in this guide.
+You must configure Database Monitoring for your [SQL Server][1] before continuing with this guide.
 
 
 Supported databases
@@ -40,14 +39,13 @@ Supported Agent versions
 
 ## Setup
 {{< tabs >}}
-{{% tab "All deployment types except Azure DB" %}}
+{{% tab "Non-Azure SQL Server" %}}
 
-1. In the SQL Server database instance, create the following Extended Events (XE) sessions. You can run these sessions on any database in the instance.
+1. In your SQL Server instance, create the following Extended Events (XE) sessions. These sessions can be created on any database within the instance.
 
-The datadog_query_completions XE session captures long-running SQL queries (over 1 second) from RPC calls, SQL batches, and stored procedures.
+The `datadog_query_completions` XE session captures long-running SQL queries (over 1 second) from RPC calls, SQL batches, and stored procedures.
 ```sql
--- 1. Query completions (grouped)
--- Includes RPC completions, batch completions, and stored procedure completions
+-- Query completions: RPC, batch, and stored procedure events
 IF EXISTS (
     SELECT * FROM sys.server_event_sessions WHERE name = 'datadog_query_completions'
 )
@@ -114,10 +112,10 @@ ALTER EVENT SESSION datadog_query_completions ON SERVER STATE = START;
 GO
 ```
 
-The datadog_query_errors XE session captures SQL errors of [severity ≥ 11](https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities) and query timeouts, called [attention events](https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class), allowing Datadog to surface query failures and interruptions.
+The datadog_query_errors XE session captures SQL errors of [severity ≥ 11][1] and query timeouts (also known as [attention events][2]), enabling Datadog to report query failures and timeouts.
 
 ```sql
--- 2. Errors and Attentions (grouped)
+-- Errors and timeouts: SQL errors and attention events
 IF EXISTS (
     SELECT * FROM sys.server_event_sessions WHERE name = 'datadog_query_errors'
 )
@@ -159,8 +157,8 @@ ALTER EVENT SESSION datadog_query_errors ON SERVER STATE = START;
 GO
 ```
 
-2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
-See the [sample conf.yaml.example][2] for all available configuration options.
+2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
+See the [sample conf.yaml.example][3] for all available configuration options.
 ```yaml
   xe_collection:
     query_completions:
@@ -168,23 +166,27 @@ See the [sample conf.yaml.example][2] for all available configuration options.
     query_errors:
       enabled: true
 ```
-In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default.
+To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
 
+[1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
+[2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 {{% /tab %}}
 
 {{% tab "Azure DB" %}}
 
-1. In the SQL Server database, create the following Extended Events (XE) sessions:
+1. In your Azure SQL Server Database, create the following Extended Events (XE) sessions:
 
-The datadog_query_completions XE session captures long-running SQL queries (over 1 second) from RPC calls, SQL batches, and stored procedures.
+The `datadog_query_completions` XE session captures long-running SQL queries (over 1 second) from RPC calls, SQL batches, and stored procedures.
 
 ```sql
--- 1. Query completions (grouped)
--- Includes RPC completions, batch completions, and stored procedure completions
+-- Query completions: RPC, batch, and stored procedure events
 IF EXISTS (
     SELECT * FROM sys.database_event_sessions WHERE name = 'datadog_query_completions'
 )
@@ -251,10 +253,10 @@ ALTER EVENT SESSION datadog_query_completions ON DATABASE STATE = START;
 GO
 ```
 
-The datadog_query_errors XE session captures SQL errors of [severity ≥ 11](https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities) and query timeouts, called [attention events](https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class), allowing Datadog to surface query failures and interruptions.
+The datadog_query_errors XE session captures SQL errors of [severity ≥ 11][1] and query timeouts (also known as [attention events][2]), enabling Datadog to report query failures and timeouts.
 
 ```sql
--- 2. Errors and Attentions (grouped)
+-- Errors and timeouts: SQL errors and attention events
 IF EXISTS (
     SELECT * FROM sys.database_event_sessions WHERE name = 'datadog_query_errors'
 )
@@ -296,8 +298,8 @@ ALTER EVENT SESSION datadog_query_errors ON DATABASE STATE = START;
 GO
 ```
 
-2. In the Datadog Agent, enable xe_collection in `sqlserver.d/conf.yaml`.
-See the [sample conf.yaml.example][2] for all available configuration options.
+2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
+See the [sample conf.yaml.example][3] for all available configuration options.
 ```yaml
   xe_collection:
     query_completions:
@@ -305,36 +307,42 @@ See the [sample conf.yaml.example][2] for all available configuration options.
     query_errors:
       enabled: true
 ```
-In order to collect deobfuscated versions of query_completion and query_error events, enable collect_raw_query_statement in `sqlserver.d/conf.yaml`. Please note, raw query statements and execution plans may contain sensitive information (e.g., passwords) or personally identifiable information in query text. Enabling this option will allow the collection and ingestion of raw query statements and execution plans into Datadog, which can then become viewable in query samples or explain plans. This option is disabled by default.
+To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
+[1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
+[2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Optional: Tuning for your environment
+## Tuning extended events for your environment (optional)
 
 You can customize the Extended Events sessions to better fit your specific needs:
 
-**[Query Duration Threshold](#query-duration-threshold)**
-- Default is `duration > 1000000` (1 second). Adjust this value to capture:
-  - More queries: Lower the threshold (e.g., `duration > 500000` for 500ms)
-  - Fewer queries: Increase the threshold (e.g., `duration > 5000000` for 5 seconds)
-- **Important**: Setting thresholds too low can result in:
-  - Excessive event collection affecting server performance
-  - Event loss due to buffer overflow
-  - Incomplete data as Datadog only collects the most recent 1000 events per collection interval
+### Query duration threshold {#query-duration-threshold}
+The default query duration threshold is `duration > 1000000` (1 second). Adjust this value to control how many queries are captured:
 
-**Memory Allocation**
-- Default is `MAX_MEMORY = 2048 KB`.
-- Don't exceed 2048 KB as larger values may cause data loss [due to SQL Server internal limitations][3]
-- For high-volume servers, consider keeping this at maximum (2048 KB)
-- For lower traffic servers, 1024 KB may be sufficient
+- **Capture more queries**: Lower the threshold (for example, `duration > 500000` for 500 ms)
+- **Capture fewer queries**: Raise the threshold (for example, `duration > 5000000` for 5 seconds)
+<div class="alert alert-warning">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
 
-**[Event Filtering](#event-filtering)**
-- Add additional filters to the WHERE clause to reduce event volume:
+### Memory allocation
+- The default value is `MAX_MEMORY = 2048 KB`.
+- Do not exceed 2048 KB, as higher values may cause data loss due to [SQL Server internal limitations][3].
+- For high-volume servers, keeping this at a maximum of 2048 KB is recommended.
+- For lower-traffic servers, a setting of 1024 KB may be sufficient.
+
+### Event filtering {#event-filtering}
+
+To reduce event volume, you can add filters to the `WHERE` clause. For example:
+
   ```sql
   WHERE (
       sql_text <> '' AND
@@ -344,14 +352,14 @@ You can customize the Extended Events sessions to better fit your specific needs
       -- OR --
       username <> 'ReportUser' -- Exclude specific users
   )
-  ```
 
-**Performance Considerations**
-- Extended Events are designed to be lightweight but still have some overhead
-- If you observe performance issues, consider:
-  - [Increasing duration thresholds](#query-duration-threshold)
-  - [Adding more specific filters](#event-filtering)
-  - Disabling one or both sessions during peak load periods by running:
+### Performance considerations
+
+Extended Events are designed to be lightweight, but they can introduce some overhead. If you notice performance issues, consider doing the following:
+
+- [Increase the query duration threshold](#query-duration-threshold) to limit captured queries.
+- [Add more specific filters](#event-filtering) to reduce event volume.
+- Disable one or both sessions during peak load periods by running:
 ```sql
 IF EXISTS (
     SELECT * FROM sys.server_event_sessions WHERE name = 'datadog_query_completions'
@@ -363,12 +371,13 @@ IF EXISTS (
 )
     DROP EVENT SESSION datadog_query_errors ON SERVER;
 GO
-```
 
-**Azure-Specific Considerations**
-- In Azure SQL Database, resources are more constrained
-- [Consider using more restrictive filtering if you're on lower-tier service levels](#event-filtering)
-- For elastic pools, monitor performance impact across all databases
+### Azure-specific considerations
+
+Azure SQL Database environments typically have more constrained resources. To minimize performance impact:
+
+- [Use more restrictive filters](#event-filtering) if you're on a lower-tier service level.
+- If you're using elastic pools, monitor for performance impact across all databases.
 
 ## Further reading
 
