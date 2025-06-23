@@ -13,8 +13,4 @@ Use Observability Pipelines’ Socket source to send logs to the Worker over a s
 
 {{% observability_pipelines/source_settings/socket %}}
 
-##  Send logs to the Observability Pipelines Worker over a socket connection
-
-{{% observability_pipelines/log_source_configuration/socket %}}
-
 [1]: /observability_pipelines/set_up_pipelines/

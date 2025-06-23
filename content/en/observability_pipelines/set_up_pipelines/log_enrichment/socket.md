@@ -12,7 +12,6 @@ Send logs over a socket connection to the Observability Pipelines Worker so you 
 This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-socket)
 
 ## Prerequisites
 
@@ -380,9 +379,5 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker over Socket
-
-{{% observability_pipelines/log_source_configuration/socket %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

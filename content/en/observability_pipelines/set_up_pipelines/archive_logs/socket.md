@@ -1,5 +1,5 @@
 ---
-title: Archive Logs for the Socket Source (TCP or UDP) 
+title: Archive Logs for the Socket Source (TCP or UDP)
 disable_toc: false
 ---
 
@@ -13,7 +13,6 @@ This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -432,10 +431,6 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker
-
-{{% observability_pipelines/log_source_configuration/socket %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup
