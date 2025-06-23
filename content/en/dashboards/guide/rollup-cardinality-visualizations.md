@@ -41,26 +41,26 @@ This section walks through an example that demonstrates how rollup functions and
 
 When you take an average of sessions on mobile and roll it up every 30 minutes, you get a smoothed version of the graph. This smoothing effect is a natural result of the rollup function, making the visualization easier to interpret for longer-term trends.
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/avg_sessions_rollup_30m.png" alt="Line chart displaying percentage of total sessions on mobile rolled up every 5 minutes (blue line) compared to 30 minutes (purple line). The blue line is spiky. The purple line is smooth and overlaps with the blue line." style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_total_mobile_sessions.png" alt="Line chart displaying percentage of total sessions on mobile rolled up every 5 minutes (purple line) compared to 30 minutes (pink line). The purple line is spiky. The pink line is smooth and overlaps with the blue line." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/avg_sessions_rollup_30min_config.png" alt="Configuration for average sessions rollup" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_total_mobile_sessions_config.png" alt="Configuration showing the query settings for percentage of total mobile sessions with rollup function applied" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 However, when you group by users, the two graphs don't overlap: the 30-minute graph is significantly higher than the 5-minute graph. This might look like a bug at first glance, but it's actually showing how users interact with the service over different time periods.
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/users_mobile_rollup_5_30min.png" alt="Line graph displaying percentage of users on mobile rolled up every 5 minutes (blue line) compared to 30 minutes (purple line). The smooth purple line is higher than the spiky blue line." style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_unique_users_mobile.png" alt="Line graph displaying percentage of unique users on mobile rolled up every 5 minutes (purple line) compared to 30 minutes (pink line). The smooth pink line is higher than the spiky purple line." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/user_mobile_rollup_5_30min_config.png" alt="Configuration for users mobile rollup comparison" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_unique_users_mobile_config.png" alt="Configuration showing the query settings for percentage of unique users on mobile with 5min and 30 min rollup function applied" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 The following graph looks at 5-minute versus 30-minute rollups for mobile distinct users and total distinct users. Because the 30-minute rollups are naturally larger than the 5-minute rollups, this graph displays the 30-minute rollups scaled down by a factor of 0.75. For total distinct users, the 5-minute and 30-minute rollups roughly align. However, for mobile distinct users, the 30-minute rollup is significantly higher than the 5-minute rollup. Why?
 
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled.png" alt="Line graph showing four lines: total distinct users (5-minute rollup), total distinct users (30-minute rollup), mobile distinct users (5-minute rollup), mobile distinct users (30-minute rollup)." style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/count_total_mobile_users.png" alt="Line graph showing four lines: total distinct users (5-minute rollup), total distinct users (30-minute rollup), mobile distinct users (5-minute rollup), mobile distinct users (30-minute rollup)." style="width:100%;" >}}
 
 {{% collapse-content title="Configuration" level="h4" expanded=false %}}
-{{< img src="/dashboards/guide/rollup-cardinality-visualizations/total_users_scaled_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
+{{< img src="/dashboards/guide/rollup-cardinality-visualizations/count_total_mobile_users_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 This occurs because when a user appears multiple times during a rollup window, they appear once in the denominator but multiple times in the numerator.
