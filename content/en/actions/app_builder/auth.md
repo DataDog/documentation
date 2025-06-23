@@ -19,7 +19,7 @@ Actions can be authenticated in the following ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-By default, viewers of a published app do not need access to the app’s connections. Instead, actions use the identity of the app’s author. This simplifies sharing and improves security by preventing apps from performing sensitive operations using the identity of arbitrary viewers.
+By default, viewers of a published app do not need access to the app's connections. Instead, actions use the identity of the app's author. This simplifies sharing and improves security by preventing apps from performing sensitive operations using the identity of arbitrary viewers.
 For more information on configuring credentials, see [Connections][2]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][3].
 
 ## App permissions
