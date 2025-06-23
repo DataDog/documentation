@@ -1,5 +1,6 @@
 ---
 title: Configuring Deobfuscated Query Event and Query Error Capture on SQL Server
+private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
