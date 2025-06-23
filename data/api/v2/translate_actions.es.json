@@ -1,6 +1,6 @@
 {
   "CreateActionConnection": {
-    "description": "Crear una nueva conexión de acción",
+    "description": "Crear una nueva Action Connection",
     "summary": "Crear una nueva conexión de acción",
     "request_description": "",
     "request_schema_description": "Solicitud utilizada para crear una conexión de acción."
@@ -10,7 +10,7 @@
     "summary": "Eliminar una conexión de acción existente"
   },
   "GetActionConnection": {
-    "description": "Obtener una conexión de acción existente",
+    "description": "Obtener una Action Connection existente",
     "summary": "Obtener una conexión de acción existente"
   },
   "UpdateActionConnection": {
@@ -648,9 +648,9 @@
     "summary": "Ver una lista de eventos"
   },
   "CreateEvent": {
-    "description": "Este endpoint permite publicar eventos.\n\n✅ **Sólo los eventos con la categoría `change` o `alert`** tienen disponibilidad general. Para los eventos de cambio, consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de eventos, utiliza el endpoint V1 o ponte en contacto con el [soporte](https://www.datadoghq.com/support/).\n\n❌ Aún no se admiten notificaciones para los eventos enviados a este endpoint. Utiliza el endpoint V1 para la funcionalidad de notificación.\n\n❌ Este endpoint no está disponible para el sitio del Gobierno (US1-FED). Ponte en contacto con tu representante de cuenta para obtener más información.",
+    "description": "Este endpoint te permite publicar eventos.\n\n✅ **Sólo los eventos con la categoría `change`** tienen disponibilidad general. Consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para obtener más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de evento, utiliza el endpoint V1.",
     "summary": "Publicar un evento",
-    "request_description": "Carga útil de la solicitud de creación de evento.",
+    "request_description": "Objeto de solicitud de evento",
     "request_schema_description": "Carga útil para crear un evento."
   },
   "SearchEvents": {
