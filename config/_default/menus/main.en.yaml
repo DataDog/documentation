@@ -2273,7 +2273,7 @@ menu:
       url: error_tracking/backend
       parent: error_tracking
       identifier: error_tracking_backend
-      weight: 10
+      weight: 12
     - name: Getting Started
       url: error_tracking/backend/getting_started
       parent: error_tracking_backend
@@ -2313,17 +2313,17 @@ menu:
       url: error_tracking/manage_data_collection
       parent: error_tracking
       identifier: error_tracking_manage_data
-      weight: 11
+      weight: 13
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 12
+      weight: 14
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 13
+      weight: 15
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
