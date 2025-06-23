@@ -59,4 +59,5 @@ cascade:
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts" >}}Add a minimum request threshold for error rate alerts{{< /nextlink >}}
 {{< /whatsnext >}}
