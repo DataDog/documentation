@@ -75,7 +75,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 
 To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][4] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
-## Key propagation delay and validation
+## Key propagation delay and eventual consistency
 
 Datadog’s API and application keys follow an eventual consistency model. Due to the distributed nature of Datadog's systems, updates to keys, such as creation and revocation, may take a few seconds to fully propagate.
 
