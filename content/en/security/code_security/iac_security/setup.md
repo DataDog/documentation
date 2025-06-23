@@ -39,8 +39,8 @@ After setting up the GitHub integration, enable IaC Security for your repositori
 1. Under **Where do you want the scans to run?**, select **Datadog**.
 1. In the GitHub account you want to configure, click **Select repositories**, or click **Edit** if Code Security features are already enabled.
 1. To enable IaC Security, choose one of the following options:
-    - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the on position.
-    - To enable it for a specific repository, toggle the **IaC** switch for that repository to the on position.
+    - To enable it for all repositories, toggle **Enable Infrastructure as Code Scanning (IaC)** to the ON position.
+    - To enable it for a specific repository, toggle the **IaC** switch for that repository to the ON position.
 
 ## Further reading
 
