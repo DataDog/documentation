@@ -68,7 +68,7 @@ from ddtrace.llmobs import LLMObs
 LLMObs.enable(instrumented_proxy_urls=("http://localhost:4000"), ...)
 ```
 
-This will prevent duplicate LLM spans from being submitted to LLMObs from both the client and server.
+This prevents duplicate LLM spans from being submitted to LLMObs from both the client and server.
 
 ## OpenAI
 
