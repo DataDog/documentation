@@ -68,6 +68,10 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
+{{< site-region region="ap2,gov" >}}
+**Important:** Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.
+{{< /site-region >}}
+
 **Notes:**
 
 - Application key names cannot be blank.
