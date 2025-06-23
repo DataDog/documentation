@@ -59,6 +59,8 @@ To update your RUM Application:
 
 ## Manual configuration
 
+### Log Level
+
 You can configure the log level in the IIS `applicationHost.config` file:
 
 ```
@@ -73,6 +75,19 @@ You can configure the log level in the IIS `applicationHost.config` file:
 - `debug`
 - `info` (default)
 - `error`
+
+### Allowed tracing URLs
+
+To connect RUM sessions and APM traces you can configure `allowedTracingUrls` in the site's `web.config` file with comma-separated fixed URLs in the `datadogRum` section. Regular expressions and Javascript functions are unsupported. See [more information about trace correlation][1].
+
+```
+<datadogRum>
+  ...
+  <option name="allowedTracingUrls" value="https://api.example.com,https://other.example.com" />
+</datadogRum>
+```
+
+[1]: https://docs.datadoghq.com/tracing/other_telemetry/rum
 
 ## Troubleshooting
 
