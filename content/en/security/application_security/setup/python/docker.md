@@ -19,7 +19,7 @@ further_reading:
 
 {{< partial name="app_and_api_protection/python/overview.html" >}}
 
-This guide explains how to set up App and API Protection (AAP) for Python applications running in Docker containers. The setup involves:
+This guide explains how to set up **App and API Protection (AAP)** for **Python** applications running in **Docker containers**. The setup involves:
 1. Installing the Datadog Agent
 2. Installing the Datadog Python library
 3. Configuring your Python application
@@ -29,7 +29,7 @@ This guide explains how to set up App and API Protection (AAP) for Python applic
 
 ## Setup
 
-## 1. Install and run the Datadog Agent
+### 1. Install and run the Datadog Agent
 
 If you haven't already, install the Datadog Agent on your host or as a container. For containerized installation:
 
