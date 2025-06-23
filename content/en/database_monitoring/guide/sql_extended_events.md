@@ -168,11 +168,12 @@ See the [sample conf.yaml.example][3] for all available configuration options.
 ```
 To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
+
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
@@ -309,11 +310,13 @@ See the [sample conf.yaml.example][3] for all available configuration options.
 ```
 To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
+
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -360,6 +363,7 @@ Extended Events are designed to be lightweight, but they can introduce some over
 - [Increase the query duration threshold](#query-duration-threshold) to limit captured queries.
 - [Add more specific filters](#event-filtering) to reduce event volume.
 - Disable one or both sessions during peak load periods by running:
+
 ```sql
 IF EXISTS (
     SELECT * FROM sys.server_event_sessions WHERE name = 'datadog_query_completions'
@@ -371,6 +375,7 @@ IF EXISTS (
 )
     DROP EVENT SESSION datadog_query_errors ON SERVER;
 GO
+```
 
 ### Azure-specific considerations
 
