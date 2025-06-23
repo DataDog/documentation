@@ -22,7 +22,7 @@ The following integrations are supported for High Availability:
 
 | Category                | Supported Integrations       |
 |-------------------------|------------------------------|
-| **Database Monitoring**  | [PostgreSQL][15], [MySQL][16], [MongoDB][17], [Oracle][18], [SQLServer][19] |
+| **Database Monitoring**  | [PostgreSQL][15], [MySQL][16], [MongoDB][17], [Oracle][18], [SQL Server][19] |
 | **Network Monitoring**   | [SNMP][1], [Network Path][2], [HTTP Check][3] |
 | **Vendor-Specific**      | [Cisco ACI][4], [Cisco SD-WAN][5]|
 
