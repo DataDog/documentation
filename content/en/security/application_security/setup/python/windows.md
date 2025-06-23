@@ -1,5 +1,8 @@
 ---
 title: Setup App and API Protection for Python on Windows
+code_lang: windows
+type: multi-code-lang
+code_lang_weight: 50
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"

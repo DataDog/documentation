@@ -19,7 +19,7 @@ further_reading:
 
 The following App and API Protection capabilities are supported in the Python library, for the specified tracer version:
 
-{{< partial name="api_security/python/capabilities.html" >}}
+{{< partial name="app_and_api_protection/python/capabilities.html" >}}
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
