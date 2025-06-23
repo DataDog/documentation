@@ -39,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/shared-responsibility-model/"
     tag: "Blog"
     text: "Simplifying the shared responsibility model: How to meet your cloud security obligations"
+  - link: "https://www.datadoghq.com/blog/detect-bedrock-misconfigurations-cloud-security"
+    tag: "Blog"
+    text: "Detect Amazon Bedrock misconfigurations with Datadog Cloud Security"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -96,7 +99,7 @@ Use the [Security Graph][17] to model your cloud environment as a relationship g
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
 
-{{< img src="infrastructure/resource_catalog/resource_catalog_infra_2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
+{{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 

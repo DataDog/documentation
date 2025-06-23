@@ -13,10 +13,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.

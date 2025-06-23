@@ -60,7 +60,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: .maskSensitiveInputs,
   imagePrivacyLevel: imagePrivacyLevel,
   touchPrivacyLevel: touchPrivacyLevel
@@ -80,7 +80,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
 }
 
@@ -107,7 +107,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: .maskAllInputs,
   imagePrivacyLevel: imagePrivacyLevel,
   touchPrivacyLevel: touchPrivacyLevel
@@ -127,7 +127,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL_INPUTS,
 }
 
@@ -154,7 +154,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: .maskAll,
   imagePrivacyLevel: imagePrivacyLevel,
   touchPrivacyLevel: touchPrivacyLevel
@@ -174,7 +174,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL,
 }
 
@@ -207,7 +207,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: textAndInputPrivacyLevel,
   imagePrivacyLevel: .maskAll,
   touchPrivacyLevel: touchPrivacyLevel
@@ -227,7 +227,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   imagePrivacyLevel: ImagePrivacyLevel.MASK_ALL,
 }
 
@@ -270,7 +270,7 @@ SessionReplay.enable(sessionReplayConfig)
 
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: textAndInputPrivacyLevel,
   imagePrivacyLevel: .maskNonBundledOnly,
   touchPrivacyLevel: touchPrivacyLevel
@@ -290,7 +290,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   imagePrivacyLevel: ImagePrivacyLevel.MASK_NON_BUNDLED_ONLY,
 }
 
@@ -317,7 +317,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: textAndInputPrivacyLevel,
   imagePrivacyLevel: .maskNone,
   touchPrivacyLevel: touchPrivacyLevel
@@ -337,7 +337,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
 }
 
@@ -350,7 +350,7 @@ SessionReplay.enable(config)
 By default, the `hide` setting is enabled for all touches. With this setting enabled, all touches on screen are hidden.
 
 #### Hide all touches
-With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting. 
+With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting.
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -367,7 +367,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: textAndInputPrivacyLevel,
   imagePrivacyLevel: imagePrivacyLevel,
   touchPrivacyLevel: .hide
@@ -387,7 +387,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   touchPrivacyLevel: TouchPrivacyLevel.HIDE,
 }
 
@@ -414,7 +414,7 @@ SessionReplay.enable(sessionReplayConfig)
 {% if equals($platform, "ios") %}
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 let sessionReplayConfig = SessionReplay.Configuration(
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   textAndInputPrivacyLevel: textAndInputPrivacyLevel,
   imagePrivacyLevel: imagePrivacyLevel,
   touchPrivacyLevel: .show
@@ -434,7 +434,7 @@ import {
 } from "@datadog/mobile-react-native-session-replay";
 
 const config: SessionReplayConfiguration = {
-  replaySampleRate: sampleRate, 
+  replaySampleRate: sampleRate,
   touchPrivacyLevel: TouchPrivacyLevel.SHOW,
 }
 
@@ -449,7 +449,7 @@ The sections above describe the global masking levels that apply to the entire a
 
 To ensure overrides are recognized properly, they should be applied as early as possible in the view lifecycle. This prevents scenarios where Session Replay might process a view before applying the overrides.
 
-Privacy overrides affect views and their descendants. This means that even if an override is applied to a view where it might have no immediate effect (for example, applying an image override to a text input), the override still applies to all child views. 
+Privacy overrides affect views and their descendants. This means that even if an override is applied to a view where it might have no immediate effect (for example, applying an image override to a text input), the override still applies to all child views.
 
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
 
@@ -467,13 +467,24 @@ Privacy overrides are not supported in SwiftUI.
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on a view instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
+To override text and input privacy in Android classic view, use `setSessionReplayTextAndInputPrivacy` on a view instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
 
 ```kotlin {% filename="application.kt" collapsible=true %}
 // Set a text and input override on your view
 myView.setSessionReplayTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
 // Remove a text and input override from your view
 myView.setSessionReplayTextAndInputPrivacy(null)
+```
+
+To override text and input privacy in Jetpack Compose, use `Modifier.sessionReplayTextAndInputPrivacy` on the modifier of a composable and pass a value from the `TextAndInputPrivacy` enum.
+
+```kotlin {% filename="application.kt" collapsible=true %}
+// Set a text and input override on your view
+Text(modifier = Modifier
+    .padding(16.dp)
+    .sessionReplayTextAndInputPrivacy(textAndInputPrivacy = TextAndInputPrivacy.MASK_SENSITIVE_INPUTS),
+  text = "Datadog"
+)
 ```
 {% /if %}
 <!-- end Android -->
@@ -495,13 +506,25 @@ myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-To override image privacy, use `setSessionReplayImagePrivacy` on a view instance and pass a value from the `ImagePrivacy` enum. Passing `null` removes the override.
+To override image privacy in Android classic view, use `setSessionReplayImagePrivacy` on a view instance and pass a value from the `ImagePrivacy` enum. Passing `null` removes the override.
 
 ```kotlin {% filename="application.kt" collapsible=true %}
 // Set an image override on your view
 myView.setSessionReplayImagePrivacy(ImagePrivacy.MASK_ALL)
 // Remove an image override from your view
 myView.setSessionReplayImagePrivacy(null)
+```
+
+To override image privacy in Jetpack Compose, use `Modifier.sessionReplayImagePrivacy` on the modifier of a composable and pass a value from the `ImagePrivacy` enum.
+
+```kotlin {% filename="application.kt" collapsible=true %}
+// Set a image privacy override on your image
+Image(modifier = Modifier
+  .padding(16.dp)
+  .sessionReplayImagePrivacy(imagePrivacy = ImagePrivacy.MASK_ALL),
+  painter = painterResource(id = R.drawable.ic_datadog),
+  contentDescription = null
+)
 ```
 {% /if %}
 <!-- end Android -->
@@ -523,13 +546,24 @@ myView.dd.sessionReplayOverrides.imagePrivacy = nil
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-To override touch privacy, use `setSessionReplayTouchPrivacy` on a view instance and pass a value from the `TouchPrivacy` enum. Passing `null` removes the override.
+To override touch privacy in Android classic view, use `setSessionReplayTouchPrivacy` on a view instance and pass a value from the `TouchPrivacy` enum. Passing `null` removes the override.
 
 ```kotlin {% filename="application.kt" collapsible=true %}
 // Set a touch override on your view
 view.setSessionReplayTouchPrivacy(TouchPrivacy.HIDE)
 // Remove a touch override from your view
 view.setSessionReplayTouchPrivacy(null)
+```
+
+To override touch privacy in Jetpack Compose, use `Modifier.sessionReplayTouchPrivacy` on the modifier of a composable and pass a value from the `TouchPrivacy` enum.
+
+```kotlin {% filename="application.kt" collapsible=true %}
+// Set a touch privacy override on your view
+Column(modifier = Modifier
+  .padding(16.dp)
+  .sessionReplayTouchPrivacy(touchPrivacy = TouchPrivacy.HIDE)){
+  // Content
+}
 ```
 {% /if %}
 <!-- end Android -->
@@ -564,6 +598,16 @@ Use `setSessionReplayHidden(hide = true)` to hide the element. Setting `hide` to
 myView.setSessionReplayHidden(hide = true)
 // Remove the override from the view
 myView.setSessionReplayHidden(hide = false)
+```
+
+Use `Modifier.sessionReplayHide` to hide the element in Jetpack Compose.
+```kotlin {% filename="application.kt" collapsible=true %}
+// Mark a Column as hidden
+Column(modifier = Modifier
+  .padding(16.dp)
+  .sessionReplayHide(hide = true)){
+  // Content
+}
 ```
 {% /if %}
 <!-- end Android -->
@@ -614,7 +658,7 @@ Each of these components behaves like a regular React Native View, meaning they 
 ---
 - `SessionReplayView.Privacy`
 - Adds support for customizing text, image, and touch privacy settings for its children.
-- 
+-
     - `textAndInputPrivacy?`: [TextAndInputPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L43)
     - `imagePrivacy?`: [ImagePrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L15)
     - `touchPrivacy?`: [TouchPrivacyLevel](https://github.com/DataDog/dd-sdk-reactnative/blob/develop/packages/react-native-session-replay/src/SessionReplay.ts#L32)
@@ -622,7 +666,7 @@ Each of these components behaves like a regular React Native View, meaning they 
 ---
 - `SessionReplayView.MaskAll`
 - Applies the most restrictive privacy settings (`MaskAll` or platform equivalent) to all children.
-- 
+-
     - `showTouch?`: `boolean`
 ---
 - `SessionReplayView.MaskNone`
@@ -1016,7 +1060,7 @@ The following chart shows how we apply different image masking strategies:
 {% table %}
 - Type
 - Mask None
-- 
+-
   {% if equals($platform, "android") %}Mask Large Only{% /if %}
   {% if equals($platform, "ios") %}Mask Non Bundled Only{% /if %}
   {% if equals($platform, "react_native") %}Mark Large Only (Android) / Mask Non Bundled Only (iOS){% /if %}
