@@ -7,10 +7,6 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  View-Based Ownership is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 View-based ownership helps you filter event data to the views your team owns. You can control this filtering with a toggle on the Summary, Optimization, and Session Explorer pages. 
