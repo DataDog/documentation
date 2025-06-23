@@ -6487,16 +6487,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up IaC Scanning
-      url: security/cloud_security_management/setup/iac_scanning
-      parent: csm_setup
-      identifier: csm_setup_iac_scanning
-      weight: 104
-    - name: Set Up IaC Exclusions
-      url: security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions
-      parent: csm_setup_iac_scanning
-      identifier: csm_setup_iac_scanning_exclusions
-      weight: 10000
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -6648,11 +6638,6 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
-    - name: IaC Scanning
-      url: security/cloud_security_management/iac_scanning
-      parent: csm
-      identifier: csm_iac_scanning
-      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
@@ -6946,11 +6931,26 @@ menu:
       url: /security/code_security/iast/security_controls/
       parent: sec_iast
       weight: 2
+    - name: Infrastructure as Code (IaC) Security
+      identifier: code_security_iac_security
+      url: /security/code_security/iac_security/
+      parent: code_security
+      weight: 5
+    - name: Setup
+      identifier: code_security_iac_security_setup
+      url: /security/code_security/iac_security/setup/
+      parent: code_security_iac_security
+      weight: 100000
+    - name: Exclusions
+      identifier: code_security_iac_security_exclusions
+      url: /security/code_security/iac_security/exclusions/
+      parent: code_security_iac_security
+      weight: 100001
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 5
+      weight: 6
     - name: GitHub Pull Requests
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/github_pull_requests/
@@ -6970,12 +6970,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 7
+      weight: 8
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
