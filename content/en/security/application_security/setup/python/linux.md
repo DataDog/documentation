@@ -133,4 +133,8 @@ Update your ECS task definition JSON file by adding the following in the environ
 
 {{% appsec-verify-setup %}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/application_security/setup/compatibility/python/

@@ -10,9 +10,5 @@ To verify that AAP is working correctly:
 
 If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][102].
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [101]: /security/appsec
 [102]: /security/application_security/setup/python/troubleshooting

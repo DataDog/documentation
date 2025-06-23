@@ -97,4 +97,8 @@ ddtrace-run python app.py
 
 {{% appsec-verify-setup %}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/application_security/setup/compatibility/python/
