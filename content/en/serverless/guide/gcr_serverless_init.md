@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run with serverless-init
+title: Google Cloud Run In-Process
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
