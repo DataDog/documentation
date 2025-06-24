@@ -327,6 +327,20 @@
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
   },
+  "ListCatalogKind": {
+    "description": "Get a list of entity kinds from Software Catalog.",
+    "summary": "Get a list of entity kinds"
+  },
+  "UpsertCatalogKind": {
+    "description": "Create or update kinds in Software Catalog.",
+    "summary": "Create or update kinds",
+    "request_description": "Kind YAML or JSON.",
+    "request_schema_description": "Create or update kind request."
+  },
+  "DeleteCatalogKind": {
+    "description": "Delete a single kind in Software Catalog.",
+    "summary": "Delete a single kind"
+  },
   "ListCatalogRelation": {
     "description": "Get a list of entity relations from Software Catalog.",
     "summary": "Get a list of entity relations"
@@ -583,6 +597,12 @@
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
   },
+  "CreateDORAFailure": {
+    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send a failure event for DORA Metrics",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA failure event."
+  },
   "ListDORAFailures": {
     "description": "Use this API endpoint to get a list of failure events.",
     "summary": "Get a list of failure events",
@@ -594,10 +614,10 @@
     "summary": "Get a failure event"
   },
   "CreateDORAIncident": {
-    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send an incident event for DORA Metrics",
     "request_description": "",
-    "request_schema_description": "Request to create a DORA incident event."
+    "request_schema_description": "Request to create a DORA failure event."
   },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
@@ -1409,6 +1429,10 @@
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
     "summary": "Get the schedule on-call user"
   },
+  "GetTeamOnCallUsers": {
+    "description": "Get a team's on-call users at a given time",
+    "summary": "Get team on-call users"
+  },
   "GetOnCallTeamRoutingRules": {
     "description": "Get a team's On-Call routing rules",
     "summary": "Get On-Call team routing rules"
@@ -1438,7 +1462,7 @@
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "MuteFindings": {
@@ -1630,7 +1654,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -2316,6 +2340,20 @@
     "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
+  },
+  "ListMemberTeams": {
+    "description": "Get all member teams.",
+    "summary": "Get all member teams"
+  },
+  "AddMemberTeam": {
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "summary": "Add a member team",
+    "request_description": "",
+    "request_schema_description": "Request to add a member team to super team's hierarchy"
+  },
+  "RemoveMemberTeam": {
+    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "summary": "Remove a member team"
   },
   "DeleteTeam": {
     "description": "Remove a team using the team's `id`.",

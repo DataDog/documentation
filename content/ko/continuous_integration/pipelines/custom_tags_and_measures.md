@@ -12,10 +12,6 @@ further_reading:
 title: 파이프라인 트레이스에 커스텀 태그 및 측정값 추가
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 커스텀 태그 및 측정 명령을 사용하여 [CI Pipeline Visibility][11]의 파이프라인 트레이스에 사용자 정의 텍스트 및 숫자 태그를 추가합니다. [`datadog-ci` NPM 패키지][1]를 사용하여 파이프라인 트레이스 또는 작업 스팬에 측정값을 추가하는 것 외에도 커스텀 태그를 추가할 수 있습니다. 이러한 커스텀 태그 및 측정값에서 패싯(문자열 값 태그) 또는 측정값(숫자 값 태그)을 생성할 수 있습니다.

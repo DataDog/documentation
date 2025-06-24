@@ -44,26 +44,26 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Supported OS::Linux
+  - Categoría::Contenedores
+  - Categoría::Kubernetes
+  - Sistema operativo compatible::Linux
   - Offering::Integration
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Seguimiento de todas tus métricas de CRI con Datadog
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: CRI
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-core -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
 
 Este check monitoriza la interfaz de tiempo de ejecución de un contenedor
 
-## Configuración
+## Configurar
 
 ### Instalación
 

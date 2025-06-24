@@ -54,7 +54,7 @@ See the respective documentation for your cloud provider:
 
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click **Configure** on a provider to collect cost data.
 
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Databricks" %}}
@@ -216,7 +216,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 
 {{% tab "OpenAI" %}}
 
-1. [Create an API key][101] in your account settings in OpenAI.
+1. Create a [project API key][101] or [admin API key][103] in your account settings in OpenAI. Make sure the key has read access to the Usage and Management API scopes.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
 3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
 4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
@@ -226,8 +226,9 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
 
-[101]: https://platform.openai.com/docs/quickstart/account-setup
+[101]: https://platform.openai.com/docs/api-reference/project-api-keys
 [102]: https://app.datadoghq.com/integrations/openai
+[103]: https://platform.openai.com/docs/api-reference/admin-api-keys
 
 {{% /tab %}}
 {{% tab "Fastly" %}}
@@ -257,6 +258,22 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/twilio
+
+{{% /tab %}}
+{{% tab "GitHub" %}}
+
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
+2. Navigate to the Datadog [GitHub Costs tile][108].
+3. Click **Add New**.
+4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
+5. Click the checkmark button to save this account.
+
+Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/github_setup.png" alt="Integrate with GitHub to collect cost data." style="width:100%" >}}
+
+[108]: https://app.datadoghq.com/integrations/github-costs
+[109]: https://github.com/settings/tokens
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -407,6 +424,25 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `usage_unit` | The units in which usage is measured, such as minutes for calls or messages for SMS. |
 
 [101]: https://www.twilio.com/docs/usage/api/usage-record#usage-categories
+
+{{% /tab %}}
+
+
+{{% tab "GitHub" %}}
+
+**Note**: The GitHub cost integration estimates costs based on list prices and usage data, and includes discount values when available. It does not account for any negotiated rates.
+
+
+| Tag Name | Tag Description |
+|---|---|
+| `enterprise_name` | Alphanumeric string identifying the GitHub enterprise account. |
+| `charge_description` | The description of the charge. |
+| `product` | The product of usage, for example "actions" or "storage". |
+| `organization_name` | The GitHub organization. |
+| `repository_name` | The GitHub repository. |
+| `billing_currency` | The billing currency, for example "USD". |
+| `discount` | If the cost item is a discount. |
+
 
 {{% /tab %}}
 {{< /tabs >}}

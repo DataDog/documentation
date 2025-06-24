@@ -36,6 +36,7 @@ static-analysis.datadog.yml                             @DataDog/WebOps-Platform
 translate.yaml                                          @DataDog/WebOps-Platform
 yarn.lock                                               @DataDog/WebOps-Platform
 .yarnrc.yml                                             @DataDog/WebOps-Platform
+repository.datadog.yml                                  @Datadog/WebOps-Platform
 
 # Scoped Docs/WebOps
 .github/                                                      @DataDog/WebOps-Platform

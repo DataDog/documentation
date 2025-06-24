@@ -124,7 +124,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}},"_authentication_token":"b6c9ec89cdff687d29c0ee54923c52f57c9e102a"}'
+-d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}}}'
 ```
 
 옵션으로 다운타임에 `message`를 추가하여 동료에게 다운타임 생성 이유와 목적을 알릴 수 있습니다. 플레이스홀더 값  `<DATADOG_SITE>`을  Datadog 계정의 사이트 파라미터로 교체하려면 [Datadog 사이트][1] 문서를 참조하세요. `start` 및 `end` 파라미터를 원하는 일정에 맞게 변경합니다.
