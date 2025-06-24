@@ -21,12 +21,12 @@ Datadog recommends you update your Datadog Agent with every [minor and patch][6]
 ## Upgrade between minor versions of the Agent
 ### Upgrade remotely with Fleet Automation
 
-[Fleet Automation](/agent/fleet_automation/remote_management) enables you to centrally manage your fleet of Datadog Agents. Fleet Automation includes [Remote Agent Management][2], which allows you to remotely upgrade Agents across non-containerized Linux and Windows environments.
+[Fleet Automation](/agent/fleet_automation/) enables you to centrally manage your fleet of Datadog Agents. Fleet Automation includes [Remote Agent Management][2], which allows you to remotely upgrade Agents across non-containerized Linux and Windows environments.
 
 To upgrade your Agents with Fleet Automation:
-	1. Enable [Remote Configuration](/agent/remote_config/).
-	2. Enable [Remote Agent Management][3].
-	3. [Upgrade your Datadog Agents][7].
+1. Enable [Remote Configuration](/agent/remote_config/).
+2. Enable [Remote Agent Management][3].
+3. [Upgrade your Datadog Agents][7].
 
 ### Upgrade with script or configuration management tooling
 Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script. 
@@ -153,4 +153,4 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [6]: https://github.com/DataDog/datadog-agent/releases?page=1
-[7]: https://docs.datadoghq.com/agent/fleet_automation/remote_management/#upgrade-your-agents
+[7]: agent/fleet_automation/remote_management/#upgrade-your-agents
