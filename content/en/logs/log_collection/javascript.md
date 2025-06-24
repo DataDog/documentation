@@ -17,7 +17,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
 
-**Notes**:
+**Notes**: 
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
 
 ## Setup
