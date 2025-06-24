@@ -40,7 +40,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 - **Enabled By Default**: Yes
 - **Library Version**: 0.29.0+
-- **Support Level**: GA
 - **Runtimes**: Java 8+
 
 <div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
@@ -60,7 +59,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 0.44.0+
-  - **Support Level**: GA
   - **Runtimes**: All supported Ruby versions
 
 
@@ -72,7 +70,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 1.18.0+
-  - **Support Level**: GA
   - **Runtimes**: All supported Go versions
 
 {{% /tab %}}
@@ -81,7 +78,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 3.0.0+
-  - **Support Level**: GA
   - **Runtimes**: All supported Node.js versions
 
 {{% /tab %}}
@@ -90,7 +86,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
   - **Enabled By Default**: No
   - **Library Version**: 1.23.0+
-  - **Support Level**: GA
   - **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
 #### Permissions for Internet Information Services (IIS)
