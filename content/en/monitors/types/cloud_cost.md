@@ -119,7 +119,7 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 - **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
 - **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
 - **Edit** a monitor to update the monitor's settings or configuration.
-- **Clone** a monitor to create a copy of an existing monitor by choosing Actions > Clone.
+- **Clone** a monitor to create a copy of an existing monitor by choosing **Actions > Clone**.
 - **Delete** a monitor to permanently remove a monitor you no longer need.
 
 ## Further Reading
