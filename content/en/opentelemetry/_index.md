@@ -112,7 +112,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the Datadog Agent with DDOT Collector
 
-{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Existing Datadog users or teams requiring Agent-based features such as:
 
