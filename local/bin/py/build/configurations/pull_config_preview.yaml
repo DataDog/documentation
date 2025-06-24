@@ -628,8 +628,8 @@
             globs:
             - documentation/rules/**/**/*.md
             options:
-              dest_dir: '/security/cloud_security_management/iac_scanning/iac_scanning_rules/'
-              path_to_remove: 'documentation/rules'
+              dest_dir: '/security/code_security/iac_security/iac_security_rules/'
+              path_to_remove: 'documentation/'
               front_matters:
                 dependencies: ["https://github.com/DataDog/kics/blob/4a03fdb28eaa41cb1735b9eaa34afb911579088a/documentation/frontmatter.yaml"]
                 title: DataDog IaC Kics Rules
