@@ -4,6 +4,7 @@ aliases:
   - /agent/faq/upgrade-between-agent-minor-versions
   - /agent/guide/upgrade-between-agent-minor-versions
   - /agent/versions/upgrade_between_agent_minor_versions/
+  - /agent/guide/upgrade_between_minor_versions/
   - /agent/guide/upgrade
 further_reading:
   - link: "/agent/troubleshooting/"
