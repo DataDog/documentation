@@ -12,7 +12,11 @@ further_reading:
 
 ## Overview
 
-Issue Team Ownership automatically assigns issues to teams by linking error stack traces to your Git `CODEOWNERS` files. This feature streamlines issue resolution by connecting errors to the appropriate teams, making it easier to identify which team should handle specific problems with team-based filtering, and accurate ownership mapping.
+Issue Team Ownership automates your triaging work by assigning issues to the right teams. Your team owns an issue if it is either:
+- code owner of the top level stack-frame of the issue according to Github `CODEOWNERS`.
+- owner of the service where the issue happens.
+
+***Note**: Stack frames linking to third-party files are not taken into account. Only the top level stack frame related to a file present in your repository is considered.*
 
 ## Leverage team ownership
 
@@ -20,7 +24,7 @@ Team ownership information appears on the issue details panel when available:
 
 {{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
 
-You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer. Use the team filter to view only issues assigned to specific teams, making it easier to focus on issues relevant to your team.
+You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
 
 {{< img src="error_tracking/ownership-sidebar.png" alt="Team ownership information on sidebar" style="width:80%;" >}}
 
@@ -39,7 +43,7 @@ In Datadog, go to **Teams** > Select your team > **Settings** > **GitHub Connect
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
-***Note**: Issue Team Ownership currently supports GitHub only.*
+***Note**: Issue Team Ownership only supports GitHub.*
 
 ## Configuration
 
