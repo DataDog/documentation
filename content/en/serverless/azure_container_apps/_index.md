@@ -178,6 +178,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 | `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure subscription ID. |
 | `DD_AZURE_RESOURCE_GROUP` | **Required**. Your Azure resource group. |
 | `DD_API_KEY` | **Required**. Your [Datadog API key][3]. |
+| 'DD_SITE`  | Your Datadog Site: `{{< region-param key="dd_site" code="true" >}}`
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
 | `DD_VERSION` | How you want to tag your version. |
