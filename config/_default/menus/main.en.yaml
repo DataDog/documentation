@@ -3325,6 +3325,7 @@ menu:
       weight: 6
     - name: Google Cloud
       url: serverless/google_cloud
+      parent: serverless
       identifier: serverless_gcp
       weight: 7
     - name: Google Cloud Run
