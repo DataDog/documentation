@@ -15021,9 +15021,6 @@ components:
           description: Username to use for the basic authentication.
           example: my_username
           type: string
-      required:
-      - password
-      - username
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -24511,6 +24508,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -38925,6 +38923,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -39032,6 +39031,7 @@ servers:
       - us3.datadoghq.com
       - us5.datadoghq.com
       - ap1.datadoghq.com
+      - ap2.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
