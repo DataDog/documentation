@@ -30,7 +30,7 @@ SQL in [Analysis cells][1] allows you to analyze and manipulate data. This docum
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions)
-- [Tags](tags)
+- [Tags](#tags)
 
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
