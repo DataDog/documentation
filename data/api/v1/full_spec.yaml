@@ -4334,6 +4334,7 @@ components:
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - product_analytics_session_usage
       - rum_browser_mobile_sessions_usage
       - rum_replay_sessions_usage
       - sca_fargate_usage
@@ -4408,6 +4409,7 @@ components:
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - SCA_FARGATE_USAGE
@@ -8296,6 +8298,8 @@ components:
       - logs_indexed_3day_percentage
       - logs_indexed_1day_usage
       - logs_indexed_1day_percentage
+      - product_analytics_session_usage
+      - product_analytics_session_percentage
       - rum_replay_sessions_usage
       - rum_replay_sessions_percentage
       - rum_browser_mobile_sessions_usage
@@ -8439,6 +8443,8 @@ components:
       - LOGS_INDEXED_3DAY_PERCENTAGE
       - LOGS_INDEXED_1DAY_USAGE
       - LOGS_INDEXED_1DAY_PERCENTAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
+      - PRODUCT_ANALYTICS_SESSION_PERCENTAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_PERCENTAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
@@ -8921,6 +8927,14 @@ components:
           type: number
         online_archive_usage:
           description: The online archive usage by tag(s).
+          format: double
+          type: number
+        product_analytics_session_percentage:
+          description: The percentage of Product Analytics session usage by tag(s).
+          format: double
+          type: number
+        product_analytics_session_usage:
+          description: The total Product Analytics session usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
@@ -20263,7 +20277,7 @@ components:
           type: integer
         apm_devsecops_host_top99p:
           description: Shows the 99th percentile of all APM DevSecOps hosts over all
-            hours in the current date for the given org.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg:
@@ -20349,67 +20363,67 @@ components:
           type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
-            in the current month for all organizations.
+            in the current date for all organizations.
           format: int64
           type: integer
         ci_test_indexed_spans_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
-            the current month for all organizations.
+            the current date for all organizations.
           format: int64
           type: integer
         ci_visibility_itr_committers_hwm:
           description: Shows the high-water mark of all CI visibility intelligent
-            test runner committers over all hours in the current month for all organizations.
+            test runner committers over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm:
           description: Shows the high-water mark of all CI visibility pipeline committers
-            over all hours in the current month for all organizations.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_visibility_test_committers_hwm:
           description: Shows the high-water mark of all CI visibility test committers
-            over all hours in the current month for all organizations.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         cloud_cost_management_aws_host_count_avg:
-          description: Host count average of Cloud Cost Management for AWS for the
-            given date and given organization.
+          description: Host count average for Cloud Cost Management for AWS for the
+            given date for all organizations.
           format: int64
           type: integer
         cloud_cost_management_azure_host_count_avg:
-          description: Host count average of Cloud Cost Management for Azure for the
-            given date and given organization.
+          description: Host count average for Cloud Cost Management for Azure for
+            the given date for all organizations.
           format: int64
           type: integer
         cloud_cost_management_gcp_host_count_avg:
-          description: Host count average of Cloud Cost Management for GCP for the
-            given date and given organization.
+          description: Host count average for Cloud Cost Management for GCP for the
+            given date for all organizations.
           format: int64
           type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for all cloud providers
-            for the given date and given organization.
+          description: Host count average for Cloud Cost Management for all cloud
+            providers for the given date for all organizations.
           format: int64
           type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
-            events over all hours in the current date for the given org.
+            events over all hours in the current date for all organizations.
           format: int64
           type: integer
         code_analysis_sa_committers_hwm:
           description: Shows the high-water mark of all Static Analysis committers
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         code_analysis_sca_committers_hwm:
           description: Shows the high-water mark of all static Software Composition
-            Analysis committers over all hours in the current date for the given org.
+            Analysis committers over all hours in the current date for all organizations.
           format: int64
           type: integer
         code_security_host_top99p:
           description: Shows the 99th percentile of all Code Security hosts over all
-            hours in the current date for the given org.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         container_avg:
@@ -20429,59 +20443,56 @@ components:
           type: integer
         csm_container_enterprise_compliance_count_sum:
           description: Shows the sum of all Cloud Security Management Enterprise compliance
-            containers over all hours in the current date for the given org.
+            containers over all hours in the current date for all organizations.
           format: int64
           type: integer
         csm_container_enterprise_cws_count_sum:
           description: Shows the sum of all Cloud Security Management Enterprise Cloud
-            Workload Security containers over all hours in the current date for the
-            given org.
+            Workload Security containers over all hours in the current date for all
+            organizations.
           format: int64
           type: integer
         csm_container_enterprise_total_count_sum:
           description: Shows the sum of all Cloud Security Management Enterprise containers
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_aas_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise Azure app services hosts over all hours in the current date
-            for the given org.
+            for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_aws_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise AWS hosts over all hours in the current date for the given
-            org.
+            Enterprise AWS hosts over all hours on the current date for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_azure_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise Azure hosts over all hours in the current date for the given
-            org.
+            Enterprise Azure hosts over all hours on the current date for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_compliance_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise compliance hosts over all hours in the current date for the
-            given org.
+            Enterprise compliance hosts over all hours on the current date for all
+            organizations.
           format: int64
           type: integer
         csm_host_enterprise_cws_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise Cloud Workload Security hosts over all hours in the current
-            date for the given org.
+            Enterprise Cloud Workload Security hosts over all hours on the current
+            date for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_gcp_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise GCP hosts over all hours in the current date for the given
-            org.
+            Enterprise GCP hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_total_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise hosts over all hours in the current date for the given org.
+            Enterprise hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_aas_host_top99p:
@@ -20542,7 +20553,7 @@ components:
           type: integer
         data_jobs_monitoring_host_hr_sum:
           description: Shows the sum of all Data Jobs Monitoring hosts over all hours
-            in the current date for the given org.
+            in the current date for all organizations.
           format: int64
           type: integer
         date:
@@ -20561,89 +20572,89 @@ components:
           type: integer
         eph_infra_host_agent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts with the
-            Datadog Agent over all hours in the current date for the given org.
+            Datadog Agent over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_alibaba_sum:
           description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_aws_sum:
           description: Shows the sum of all ephemeral infrastructure hosts on AWS
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_azure_sum:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_ent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_gcp_sum:
           description: Shows the sum of all ephemeral infrastructure hosts on GCP
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_heroku_sum:
           description: Shows the sum of all ephemeral infrastructure hosts on Heroku
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_only_aas_sum:
           description: Shows the sum of all ephemeral infrastructure hosts with only
-            Azure App Services over all hours in the current date for the given org.
+            Azure App Services over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_only_vsphere_sum:
           description: Shows the sum of all ephemeral infrastructure hosts with only
-            vSphere over all hours in the current date for the given org.
+            vSphere over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_opentelemetry_apm_sum:
           description: Shows the sum of all ephemeral APM hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
-            date for the given org.
+            date for all organizations.
           format: int64
           type: integer
         eph_infra_host_opentelemetry_sum:
           description: Shows the sum of all ephemeral hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
-            date for the given org.
+            date for all organizations.
           format: int64
           type: integer
         eph_infra_host_pro_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
-            Plus over all hours in the current date for the given org.
+            Plus over all hours in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
           description: Shows the sum of all Error Tracking APM error events over all
-            hours in the current date for the given org.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
-            in the current date for the given org.
+            in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
-            the current date for the given org.
+            the current date for all organizations.
           format: int64
           type: integer
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
-            hours in the current date for the given org.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_container_profiler_profiling_fargate_avg:
@@ -20668,43 +20679,42 @@ components:
           type: integer
         flex_logs_compute_large_avg:
           description: Shows the average number of Flex Logs Compute Large Instances
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_compute_medium_avg:
           description: Shows the average number of Flex Logs Compute Medium Instances
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_compute_xsmall_avg:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_starter_avg:
           description: Shows the average number of Flex Logs Starter Instances over
-            all hours in the current date for the given org.
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_starter_storage_index_avg:
           description: Shows the average number of Flex Logs Starter Storage Index
-            Instances over all hours in the current date for the given org.
+            Instances over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_logs_starter_storage_retention_adjustment_avg:
           description: Shows the average number of Flex Logs Starter Storage Retention
-            Adjustment Instances over all hours in the current date for the given
-            org.
+            Adjustment Instances over all hours in the current date for all organizations.
           format: int64
           type: integer
         flex_stored_logs_avg:
           description: Shows the average of all Flex Stored Logs over all hours in
-            the current date for the given org.
+            the current date for all organizations.
           format: int64
           type: integer
         forwarding_events_bytes_sum:
@@ -20809,7 +20819,7 @@ components:
           type: integer
         ndm_netflow_events_sum:
           description: Shows the sum of all Network Device Monitoring NetFlow events
-            over all hours in the current date for the given org.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
@@ -20827,17 +20837,17 @@ components:
           type: integer
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
-            hours in the current date for the given org.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         oci_host_sum:
           description: Shows the sum of all Oracle Cloud Infrastructure hosts over
-            all hours in the current date for the given org.
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         oci_host_top99p:
           description: Shows the 99th percentile of all Oracle Cloud Infrastructure
-            hosts over all hours in the current date for the given org.
+            hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -20862,6 +20872,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        product_analytics_sum:
+          description: Sum of all product analytics sessions over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
         profiling_aas_count_top99p:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current date for all organizations.
@@ -20874,7 +20889,7 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations
+            legacy sessions over all hours in the current date for all organizations
             (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
@@ -21019,13 +21034,12 @@ components:
           type: integer
         sca_fargate_count_avg:
           description: Shows the average of all Software Composition Analysis Fargate
-            tasks over all hours in the current date for the given org.
+            tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         sca_fargate_count_hwm:
           description: Shows the sum of the high-water marks of all Software Composition
-            Analysis Fargate tasks over all hours in the current date for the given
-            org.
+            Analysis Fargate tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -21039,8 +21053,9 @@ components:
           format: int64
           type: integer
         sds_logs_scanned_bytes_sum:
-          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
-            Data Scanner over all hours in the current month for all organizations.
+          description: Shows the sum of all bytes scanned by the Sensitive Data Scanner
+            for logs usage across all organizations over all hours on the current
+            date.
           format: int64
           type: integer
         sds_rum_scanned_bytes_sum:
@@ -21049,29 +21064,28 @@ components:
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
-          description: Shows the sum of all bytes scanned across all usage types by
-            the Sensitive Data Scanner over all hours in the current month for all
-            organizations.
+          description: Shows the sum of all bytes scanned by the Sensitive Data Scanner
+            across all usage types over all hours of the current date for all organizations.
           format: int64
           type: integer
         serverless_apps_azure_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure for the
+            given date for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg:
-          description: Shows the average of the number of Serverless Apps for Google
-            Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Google Cloud
+            for the given date for all organizations.
           format: int64
           type: integer
         serverless_apps_total_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            and Google Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure and Google
+            Cloud for the given date for all organizations.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over
-            all hours in the current date for the given org.
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -21106,7 +21120,7 @@ components:
           type: integer
         universal_service_monitoring_host_top99p:
           description: Shows the 99th percentile of all universal service management
-            hosts over all hours in the current date for the given org.
+            hosts over all hours on the current date for all organizations.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -21116,7 +21130,7 @@ components:
           type: integer
         vuln_management_host_count_top99p:
           description: Shows the 99th percentile of all Application Vulnerability
-            Management hosts over all hours in the current date for the given org.
+            Management hosts over all hours on the current date for all organizations.
           format: int64
           type: integer
         workflow_executions_usage_sum:
@@ -21748,6 +21762,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for the given org.
+          format: int64
+          type: integer
+        product_analytics_sum:
+          description: Shows the sum of all product analytics sessions over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         profiling_aas_count_top99p:
@@ -22662,6 +22681,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             month for all organizations.
+          format: int64
+          type: integer
+        product_analytics_agg_sum:
+          description: Sum of all product analytics sessions for all hours in the
+            current month for all organizations.
           format: int64
           type: integer
         profiling_aas_count_top99p_sum:
