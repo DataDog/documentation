@@ -23,10 +23,6 @@ further_reading:
 
 {{< product-availability >}}
 
-<div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
-</div>
-
 ## Overview
 
 SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
@@ -444,9 +440,37 @@ This table provides an overview of the supprted window functions. For comprehens
 | `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
+## Tags
+
+DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+
+```sql
+SELECT instance_type, count(instance_type)
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
+GROUP BY instance_type
+```
+
+Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+
+You can also compare tag values as strings or entire tag sets:
+
+```sql
+SELECT *
+FROM k8s.daemonsets da INNER JOIN k8s.deployments de
+ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
+```
+### JSON functions and operators
+
+| Name | Return type | Description |
+|------|-------------|-------------|
+| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
+[3]: https://www.postgresql.org/docs/current/functions-json.html

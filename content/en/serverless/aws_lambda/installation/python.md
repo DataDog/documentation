@@ -30,6 +30,8 @@ algolia:
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
+To use remote instrumentation, see See [Remote instrumentation for AWS Lambda][11].
+
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
@@ -262,7 +264,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.1.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -272,8 +274,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_python_layer_version = 104
+  datadog_extension_layer_version = 81
+  datadog_python_layer_version = 110
 
   # aws_lambda_function arguments
 }
@@ -298,8 +300,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Python Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_python_layer_version = 104
+  datadog_extension_layer_version = 81
+  datadog_python_layer_version = 110
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -513,3 +515,4 @@ def get_message():
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[11]: /serverless/aws_lambda/remote_instrumentation

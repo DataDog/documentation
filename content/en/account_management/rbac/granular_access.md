@@ -26,11 +26,12 @@ Use the different principals to control access patterns in your organization and
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [RUM apps][19]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][6]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 
@@ -56,3 +57,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [16]: /actions/datastore/
 [17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
 [18]: /actions/private_actions
+[19]: /real_user_monitoring
