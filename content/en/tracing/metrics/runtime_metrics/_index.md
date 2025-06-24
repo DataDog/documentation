@@ -154,7 +154,7 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
 : **Default**: `true` for Java, `false` for Node.js, Ruby and Python. Does not exist for .NET and Go, the `runtime_id` is always reported <br>
-**Description**: Enables enhanced runtime metrics, providing a `runtime_id` tag along with every metric. The `runtime_id` represents the application's process identifier and allows you to directly correlate runtime metrics with individual running applications. To enable in Python, it needs the additional 
+**Description**: Enables enhanced runtime metrics, providing a `runtime_id` tag along with every metric. The `runtime_id` represents the application's process identifier and allows you to directly correlate runtime metrics with individual running applications. 
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
