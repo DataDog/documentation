@@ -94,7 +94,7 @@ For instructions on using mirrored or air-gapped repositories, see:
 
 ### Downgrading Agents
 
-If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#downgrading-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
+If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Further reading
 
