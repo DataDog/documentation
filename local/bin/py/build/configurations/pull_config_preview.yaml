@@ -620,3 +620,16 @@
               front_matters:
                 dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
                 title: (Legacy) Ruby Compatibility Requirements
+
+      - repo_name: kics
+        contents:
+          - action: pull-and-push-folder
+            branch: benjamin.chouraqui/write-script-to-generate-markdown-files
+            globs:
+            - documentation/rules/**/**/*.md
+            options:
+              dest_dir: '/security/cloud_security_management/iac_scanning/iac_scanning_rules/'
+              path_to_remove: 'documentation/rules'
+              front_matters:
+                dependencies: ["https://github.com/DataDog/kics/blob/4a03fdb28eaa41cb1735b9eaa34afb911579088a/documentation/frontmatter.yaml"]
+                title: DataDog IaC Kics Rules
