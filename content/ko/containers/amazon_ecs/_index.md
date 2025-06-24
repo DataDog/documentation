@@ -46,12 +46,6 @@ ECS 컨테이너 및 작업을 모니터링하려면 Datadog 에이전트를 ECS
 
 **참조:** ECS 및 도커(Docker)와 함께  Datadog의 [자동탐지][7]를 실행하면 환경에서 실행 중인 작업을 자동으로 탐지하고 모니터링할 수 있습니다.
 
-{{% site-region region="gov" %}}
-#### FIPS 준수
-
-FIPS 준수를 위한 설정 단계는 다릅니다. 자세한 내용은 [FIPS 준수 문서][32]를 참조하세요.
-{{% /site-region %}}
-
 ### ECS 작업 정의 생성
 
 이 [ECS 작업 정의][30]는 필요한 구성으로 Datadog Agent  컨테이너를 시작합니다. Agent 구성을 수정해야 하는 경우 이 작업 정의를 업데이트하고 데몬 서비스를 다시 배포합니다. AWS Management Console 또는 [AWS CLI][9]를 사용하여 이 작업 정의를 설정할 수 있습니다.
@@ -324,7 +318,6 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 #### 정부용 Datadog FIPS 프록시 환경
 
 <div class="alert alert-warning">
-이 기능은 <a href="/agent/configuration/fips-compliance/">Datadog FIPS Agent</a>로 대체되었습니다.
 이 기능은 리눅스에서만 사용할 수 있습니다.
 </div>
 
@@ -488,4 +481,3 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /ko/network_monitoring/network_path
-[32]: /agent/configuration/fips-compliance/
