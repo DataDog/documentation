@@ -39,7 +39,7 @@ To create a Cloud Cost monitor in Datadog, navigate to [**Cloud Cost > Analyze >
 
 Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **Cloud Cost**][3], the main navigation, the [Cloud Cost Explorer][5], or through [Terraform][2].
 
-{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-create.png" alt="The Create Monitor button on the Cost Monitor page" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-create-new.png" alt="The Create Monitor button on the Cost Monitor page" style="width:100%;" >}}
 
 ### Select a cost monitor type
 
@@ -114,7 +114,7 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 
 ## Other actions you can take
 
-{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-more-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-other-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
 
 - **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
 - **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
