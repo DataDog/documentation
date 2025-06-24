@@ -41,7 +41,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Enabled By Default**: Yes
 - **Library Version**: 0.29.0+
 - **Support Level**: GA
-- **Generates runtime-id granularity**: Yes
 - **Runtimes**: Java 8+
 
 <div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
@@ -53,7 +52,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 0.30.0+
   - **Support Level**: Preview
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Python versions
 
 {{% /tab %}}
@@ -63,7 +61,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 0.44.0+
   - **Support Level**: GA
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Ruby versions
 
 
@@ -76,7 +73,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 1.18.0+
   - **Support Level**: GA
-  - **Generates runtime-id granularity**: Yes
   - **Runtimes**: All supported Go versions
 
 {{% /tab %}}
@@ -86,7 +82,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 3.0.0+
   - **Support Level**: GA
-  - **Generates runtime-id granularity**: No
   - **Runtimes**: All supported Node.js versions
 
 {{% /tab %}}
@@ -96,7 +91,6 @@ Runtime metrics are available for several programming languages and runtimes, wi
   - **Enabled By Default**: No
   - **Library Version**: 1.23.0+
   - **Support Level**: GA
-  - **Generates runtime-id granularity**: Yes
   - **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
 #### Permissions for Internet Information Services (IIS)
@@ -164,7 +158,7 @@ Use the following environment variables to configure runtime metrics in your app
 **Description**: Enables the collection of runtime metrics. Metrics are sent to the Datadog agent, as configured for the instrumented application.
 
 `DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
-: **Default**: `true` for Java, `false` for NodeJs, Ruby and Python. Does not exist for .NET and Go, runtime-id is always reported <br>
+: **Default**: `true` for Java, `false` for Node.js, Ruby and Python. Does not exist for .NET and Go, runtime-id is always reported <br>
 **Description**: Enables enhanced runtime metrics, providing a `runtime_id` tag along with every metric. The `runtime_id` represents the application's process identifier and allows you to directly correlate runtime metrics with individual running applications.
 
 `DD_AGENT_HOST`
