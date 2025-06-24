@@ -25,7 +25,7 @@ author:
   support_email: support@tricentis.com
 categories:
 - notifications
-- テスト
+- testing
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
