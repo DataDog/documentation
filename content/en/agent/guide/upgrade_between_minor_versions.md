@@ -29,46 +29,7 @@ To upgrade your Agents with Fleet Automation:
 3. [Upgrade your Datadog Agents][7].
 
 ### Upgrade with script or configuration management tooling
-Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script. 
-
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-To upgrade between minor versions of the Agent, use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
-
-Upgrading to a given Agent minor version:
-
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
-
-Upgrading to the latest Agent minor version:
-
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-Download and install the specific version's installation package.
-
-URL to download a specific Agent minor version
-
-: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
-
-{{% /tab %}}
-{{% tab "MacOS" %}}
-
-To upgrade between minor version of the Agent, use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
-
-Upgrading to a given Agent minor version:
-
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
-
-Upgrading to the latest Agent minor version:
-
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
-
-{{% /tab %}}
-{{< /tabs >}}
+Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script.
 
 
 ## Upgrade between major versions of the Agent
