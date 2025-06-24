@@ -107,7 +107,7 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 [1]: /agent/guide/python-3/
 [2]: /agent/fleet_automation/remote_management
 [3]: /agent/fleet_automation/remote_management/#setup
-[4]: https://app.datadoghq.com/fleet/agent-upgrades
+[4]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [6]: https://github.com/DataDog/datadog-agent/releases?page=1
 [7]: /agent/fleet_automation/remote_management/#upgrade-your-agents
