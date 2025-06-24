@@ -586,7 +586,7 @@
     "request_schema_description": "Pipelines and processors operate on incoming logs,\nparsing and transforming them into structured attributes for easier querying.\n\n**Note**: These endpoints are only available for admin users.\nMake sure to use an application key created by an admin."
   },
   "ListActiveMetrics": {
-    "description": "Get the list of actively reporting metrics from a given time until now.",
+    "description": "Get the list of actively reporting metrics from a given time until now.\nThe tag service resets daily at midnight UTC. This endpoint returns only\nmetrics that have reported since the last reset, even if the `from`\nparameter specifies an earlier time.",
     "summary": "Get active metrics list"
   },
   "GetMetricMetadata": {
