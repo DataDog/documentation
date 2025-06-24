@@ -26,7 +26,7 @@ To enable Remote Agent Management:
 
    {{< img src="/agent/fleet_automation/remote-agent-management-toggle.png" alt="Enable the Remote Agent Management toggle." style="width:100%;" >}}
 
-1. Use the generated Agent installation command to upgrade your Agent.
+1. Use the generated Agent installation command to upgrade your Agent to version 7.66+.
 
 <div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
