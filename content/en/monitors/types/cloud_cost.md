@@ -25,19 +25,23 @@ further_reading:
 ## Overview
 Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause. 
 
+- Instantly view all your cost monitors and filter or search by team, service, tag, provider, or alert status.
+- See a summary of how many monitors are set up, which are alerting,and what areas of cloud spend are tracked.
+- Create new cost monitors using templates and quickly take action on monitors that need attention.
+
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up.
 
-Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, because Cloud Cost data is not guaranteed to be available until 48 hours after usage. For example, a monitor with a lookback of 7 days being evaluated on January 15 examines cost data from January 6 through January 13.
+Cloud Cost monitors are evaluated with a 48-hour delayed evaluation window, because Cloud Cost data is not guaranteed to be available until 48 hours after usage. For example, a monitor with a lookback of 7 days being evaluated on January 15 examines cost data from January 6 through January 13.
 
-## Monitor creation
+## Create a monitor
 
-To create a Cloud Cost monitor in Datadog, you can set up via [Terraform][5], from the main navigation, [**Monitors** --> **New Monitor** --> **Cloud Cost**][4], or from the [Cloud Cost Explorer][2]. 
+To create a Cloud Cost monitor in Datadog, navigate to [**Cloud Cost > Analyze > Cost Monitors** ][4] and click **+ New Cost Monitor**.
 
-Optionally, click the **+ Create Monitor** button in the cost Explorer side panel.
+Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **Cloud Cost**][3], the main navigation, the [Cloud Cost Explorer][5], or through [Terraform][2], .
 
-{{< img src="/monitors/monitor_types/cloud_cost/explorer_new.png" alt="The Create Monitor button on a cost report side panel in the Cloud Cost Explorer" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-create.png" alt="The Create Monitor button on the Cost Monitor page" style="width:100%;" >}}
 
-## Select a cost monitor type
+### Select a cost monitor type
 
 You can select from the following monitor types.
 
@@ -49,6 +53,15 @@ You can select from the following monitor types.
 | Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5%. |
 
 {{% /tab %}}
+
+{{% tab "Anomalies" %}}
+
+| Cost Type | Description | Usage Examples |
+| ---  | ----------- | ----------- |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+
+{{% /tab %}}
+
 {{% tab "Threshold" %}}
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
@@ -61,25 +74,18 @@ You can select from the following monitor types.
 | Cost Forecast | Set alerts based on forecasted costs exceeding a threshold by the end of the current month. | Alert daily if the forecasted cost for this month is projected to exceed $500. |
 
 {{% /tab %}}
-{{% tab "Anomalies" %}}
-
-| Cost Type | Description | Usage Examples |
-| ---  | ----------- | ----------- |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
-
-{{% /tab %}}
 {{< /tabs >}}
 
-## Specify which costs to track
+### Specify which cost to track
 
 Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics.
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
-| Select the cost metric                 | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
+| Select the cost metric            | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
 | Define the `filter by`            | No       | Everything           | `aws_product:s3`    |
 | Group by                          | No       | Everything           | `aws_availability_zone` |
-| Add observability metric | No      | `system.cpu.user` | `aws.s3.all_requests` |
+| Add observability metric          | No       | `system.cpu.user`    | `aws.s3.all_requests` |
 
 Use the editor to define the cost types or exports.
 
@@ -87,7 +93,7 @@ Use the editor to define the cost types or exports.
 
 For more information, see the [Cloud Cost Management documentation][1].
 
-## Set alert conditions
+### Set alert conditions
 
 {{< tabs >}}
 {{% tab "Changes" %}}
@@ -97,6 +103,16 @@ If you are using the **Cost Changes** monitor type, you can trigger an alert whe
 If you are using the **Percentage Change**, you can filter out changes that are below a certain dollar threshold. For example, the monitor alerts when there is a cost change above 5% for any change that is above $500.
 
 {{% /tab %}}
+
+{{% tab "Anomalies" %}}
+
+If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service.
+
+The `agile` [anomaly algorithm][101] is used with two bounds and monthly seasonality.
+
+[101]: /dashboards/functions/algorithms/
+{{% /tab %}}
+
 {{% tab "Threshold" %}}
 
 If you are using the **Cost Threshold** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.
@@ -107,28 +123,37 @@ If you are using the **Cost Threshold** monitor type, you can trigger an alert w
 If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, `below or equal to`, `equal to`, or `not equal to` a threshold.
 
 {{% /tab %}}
-{{% tab "Anomalies" %}}
-
-If you are using the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost deviates from historical data by being `above`, `below`, or `above or below` a threshold for any provider and service.
-
-The `agile` [anomaly algorithm][101] is used with two bounds and monthly seasonality.
-
-[101]: /dashboards/functions/algorithms/
-{{% /tab %}}
 {{< /tabs >}}
 
 <br>
 
-## Configure notifications and automations
+### Configure notifications and automations
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
+
+### Define permissions and audit notifications
+
+Choose which teams, roles, users, or service accounts are allowed to **view** or **edit** the monitor. By default, all members of your organization have access.
+
+You can also turn on **Audit Notifications** to alert the monitor creator and recipients whenever the monitor is changed.
+
+## Other actions you can take
+
+{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-more-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
+
+- **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
+- **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
+- **Edit** a monitor to update the monitor's settings or configuration.
+- **Clone** a monitor to create a copy of an existing monitor by choosing Actions > Clone.
+- **Delete** a monitor to permanently remove a monitor you no longer need.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: https://app.datadoghq.com/cost/explorer
-[3]: /monitors/notify/
-[4]: https://app.datadoghq.com/monitors/create/cost
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[3]: https://app.datadoghq.com/monitors/create/cost
+[4]: https://app.datadoghq.com/cost/analyze/monitors
+[5]: https://app.datadoghq.com/cost/explorer
+[6]: /monitors/notify/
