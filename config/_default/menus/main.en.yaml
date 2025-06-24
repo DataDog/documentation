@@ -3329,7 +3329,7 @@ menu:
       identifier: serverless_gcp
       weight: 7
     - name: Google Cloud Run
-      url: serverless/google_cloud_run
+      url: serverless/google_cloud/google_cloud_run
       parent: serverless_gcp
       weight: 701
     - name: Google Cloud Run In-Process
