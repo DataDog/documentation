@@ -4,7 +4,7 @@ code_lang: ddsql_preview
 type: multi-code-lang
 code_lang_weight: 2
 products: 
-- name: DDSQL Editor
+- name: DDSQL Editor (Preview)
   url: /ddsql_editor/
   icon: ddsql
 further_reading:
@@ -14,10 +14,6 @@ further_reading:
 ---
 
 {{< product-availability >}}
-
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in Preview.
-{{< /callout >}}
 
 {{< whatsnext desc="DDSQL (Preview) References:" >}}
     {{< nextlink href="ddsql_reference/ddsql_preview/functions" >}}Functions{{< /nextlink >}}

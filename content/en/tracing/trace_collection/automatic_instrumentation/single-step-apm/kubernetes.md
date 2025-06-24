@@ -196,12 +196,13 @@ This configuration enables APM for all pods except those that have either of the
        enabled: true
        targets:
          - name: "default-target"
-           matchExpressions:
-             - key: app
-               operator: NotIn
-               values:
-               - app1
-               - app2
+           podSelector:
+               matchExpressions:
+                 - key: app
+                   operator: NotIn
+                   values:
+                   - app1
+                   - app2
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -345,9 +346,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: "3.2.0"
-            python: "1.20.6"
-            js: "4.17.0"
+            dotnet: "x.x.x"
+            python: "x.x.x"
+            js: "x.x.x"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -362,9 +363,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: "3.2.0"
-            python: "1.20.6"
-            js: "4.17.0"
+            dotnet: "x.x.x"
+            python: "x.x.x"
+            js: "x.x.x"
 {{< /highlight >}}
 
 {{< /collapse-content >}}

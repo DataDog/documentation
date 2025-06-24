@@ -119,7 +119,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to **Account** > **Settings** > **Notifications**.
+1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
 2. Under **Phone & SMS**, enable **Automatic Contact Card Sync**. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 

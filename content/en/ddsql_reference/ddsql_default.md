@@ -5,21 +5,23 @@ aliases:
 code_lang: ddsql_default
 type: multi-code-lang
 code_lang_weight: 1
-products: 
+products:
 - name: Log Workspaces
   url: /logs/workspaces/
   icon: logs
+- name: DDSQL Editor
+  url: /ddsql_editor/
+  icon: ddsql
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
   text: "Learn more about Log Workspaces"
+- link: "/ddsql_editor/"
+  tag: "Documentation"
+  text: "Learn more about DDSQL Editor"
 ---
 
 {{< product-availability >}}
-
-<div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. For the <strong>DDSQL Editor</strong>, see the <a href="/ddsql_reference/ddsql_preview">DDSQL (Preview) documentation</a>.
-</div>
 
 ## Overview
 
@@ -27,6 +29,9 @@ SQL in [Analysis cells][1] allows you to analyze and manipulate data. This docum
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
+- [JSON functions](#json-functions-and-operators)
+- [Tags](#tags)
+
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
@@ -36,25 +41,25 @@ The following SQL syntax is supported:
 
 | Syntax        | Description                                                                                  | Example                                                                                                  |
 |---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `SELECT (DISTINCT)`<br>DISTINCT: Optional | Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.       | {{< code-block lang="sql" >}}SELECT DISTINCT customer_id 
+| `SELECT (DISTINCT)`<br>DISTINCT: Optional | Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.       | {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
 FROM orders {{< /code-block >}} |
-| `JOIN`        | Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.  | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name 
-FROM orders 
-JOIN customers 
+| `JOIN`        | Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.  | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+FROM orders
+JOIN customers
 ON orders.customer_id = customers.customer_id {{< /code-block >}} |
-| `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
-FROM sales 
+| `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+FROM sales
 GROUP BY product_id {{< /code-block >}} |
-| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name 
+| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
 FROM employees {{< /code-block >}} |
-| `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT * 
-FROM employees 
+| `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT *
+FROM employees
 WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
-| `CASE`        | Provides conditional logic to return different values based on specified conditions.         | {{< code-block lang="sql" >}}SELECT order_id, 
-  CASE 
-    WHEN quantity > 10 THEN 'Bulk Order' 
-    ELSE 'Standard Order' 
-  END AS order_type 
+| `CASE`        | Provides conditional logic to return different values based on specified conditions.         | {{< code-block lang="sql" >}}SELECT order_id,
+  CASE
+    WHEN quantity > 10 THEN 'Bulk Order'
+    ELSE 'Standard Order'
+  END AS order_type
 FROM orders {{< /code-block >}} |
 | `WINDOW` | Performs a calculation across a set of table rows that are related to the current row.                 | {{< code-block lang="sql" >}}SELECT
   timestamp,
@@ -63,25 +68,25 @@ FROM orders {{< /code-block >}} |
   AVG(cpu_usage_percent) OVER (PARTITION BY service_name ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_cpu
 FROM
   cpu_usage_data {{< /code-block >}} |
-| `IS NULL` / `IS NOT NULL`   | Checks if a value is null or not null.                                         | {{< code-block lang="sql" >}}SELECT * 
-FROM orders 
+| `IS NULL` / `IS NOT NULL`   | Checks if a value is null or not null.                                         | {{< code-block lang="sql" >}}SELECT *
+FROM orders
 WHERE delivery_date IS NULL {{< /code-block >}}        |
-| `LIMIT`    | Specifies the maximum number of records to return.                                               | {{< code-block lang="sql" >}}SELECT * 
-FROM customers 
+| `LIMIT`    | Specifies the maximum number of records to return.                                               | {{< code-block lang="sql" >}}SELECT *
+FROM customers
 LIMIT 10 {{< /code-block >}}                         |
-| `ORDER BY`  | Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.  | {{< code-block lang="sql" >}}SELECT * 
-FROM sales 
+| `ORDER BY`  | Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.  | {{< code-block lang="sql" >}}SELECT *
+FROM sales
 ORDER BY sale_date DESC {{< /code-block >}}              |
-| `HAVING`    | Filters records that meet a specified condition after grouping.                               | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
-FROM sales 
-GROUP BY product_id 
+| `HAVING`    | Filters records that meet a specified condition after grouping.                               | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+FROM sales
+GROUP BY product_id
 HAVING SUM(quantity) > 10 {{< /code-block >}} |
-| `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT * 
-FROM orders 
+| `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT *
+FROM orders
 WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
-| `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name 
+| `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name
 FROM employees {{< /code-block >}}                |
-| Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
+| Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
 FROM products {{< /code-block >}} |
 | `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
@@ -126,82 +131,82 @@ The following SQL functions are supported. For Window function, see the separate
 
 ### `MIN`
 {{< code-block lang="sql" >}}
-SELECT MIN(response_time) AS min_response_time 
-FROM logs 
-WHERE status_code = 200 
-{{< /code-block >}} 
+SELECT MIN(response_time) AS min_response_time
+FROM logs
+WHERE status_code = 200
+{{< /code-block >}}
 
 ### `MAX`
 {{< code-block lang="sql" >}}
-SELECT MAX(response_time) AS max_response_time 
-FROM logs 
-WHERE status_code = 200 
-{{< /code-block >}} 
+SELECT MAX(response_time) AS max_response_time
+FROM logs
+WHERE status_code = 200
+{{< /code-block >}}
 
-### `COUNT`      
-{{< code-block lang="sql" >}}SELECT COUNT(request_id) AS total_requests 
-FROM logs 
-WHERE status_code = 200 {{< /code-block >}} 
+### `COUNT`
+{{< code-block lang="sql" >}}SELECT COUNT(request_id) AS total_requests
+FROM logs
+WHERE status_code = 200 {{< /code-block >}}
 
-### `SUM`        
-{{< code-block lang="sql" >}}SELECT SUM(bytes_transferred) AS total_bytes 
-FROM logs 
-GROUP BY service_name 
-{{< /code-block >}} 
+### `SUM`
+{{< code-block lang="sql" >}}SELECT SUM(bytes_transferred) AS total_bytes
+FROM logs
+GROUP BY service_name
+{{< /code-block >}}
 
-### `AVG`        
-{{< code-block lang="sql" >}}SELECT AVG(response_time) 
-AS avg_response_time 
-FROM logs 
-WHERE status_code = 200 
-GROUP BY service_name 
-{{< /code-block >}} 
+### `AVG`
+{{< code-block lang="sql" >}}SELECT AVG(response_time)
+AS avg_response_time
+FROM logs
+WHERE status_code = 200
+GROUP BY service_name
+{{< /code-block >}}
 
 ### `CEIL`
 {{< code-block lang="sql" >}}
-SELECT CEIL(price) AS rounded_price 
-FROM products 
+SELECT CEIL(price) AS rounded_price
+FROM products
 {{< /code-block >}}
 
-### `FLOOR`      
+### `FLOOR`
 {{< code-block lang="sql" >}}
-SELECT FLOOR(price) AS floored_price 
-FROM products 
-{{< /code-block >}} 
+SELECT FLOOR(price) AS floored_price
+FROM products
+{{< /code-block >}}
 
-### `ROUND`      
+### `ROUND`
 {{< code-block lang="sql" >}}
-SELECT ROUND(price) AS rounded_price 
-FROM products 
-{{< /code-block >}} 
+SELECT ROUND(price) AS rounded_price
+FROM products
+{{< /code-block >}}
 
-### `LOWER`   
+### `LOWER`
 {{< code-block lang="sql" >}}
-SELECT LOWER(customer_name) AS lowercase_name 
-FROM customers 
-{{< /code-block >}} 
+SELECT LOWER(customer_name) AS lowercase_name
+FROM customers
+{{< /code-block >}}
 
-### `UPPER`  
+### `UPPER`
 {{< code-block lang="sql" >}}
-SELECT UPPER(customer_name) AS uppercase_name 
-FROM customers 
-{{< /code-block >}} 
+SELECT UPPER(customer_name) AS uppercase_name
+FROM customers
+{{< /code-block >}}
 
-### `ABS`        
+### `ABS`
 {{< code-block lang="sql" >}}
-SELECT ABS(balance) AS absolute_balance 
-FROM accounts 
-{{< /code-block >}} 
+SELECT ABS(balance) AS absolute_balance
+FROM accounts
+{{< /code-block >}}
 
-### `COALESCE`  
+### `COALESCE`
 {{< code-block lang="sql" >}}
-SELECT COALESCE(phone_number, email) AS contact_info 
-FROM users 
-{{< /code-block >}} 
+SELECT COALESCE(phone_number, email) AS contact_info
+FROM users
+{{< /code-block >}}
 
-### `CAST`  
+### `CAST`
 
-Supported cast target types: 
+Supported cast target types:
 - `BIGINT`
 - `DECIMAL`
 - `TIMESTAMP`
@@ -213,23 +218,23 @@ SELECT
   'Order-' || CAST(order_id AS VARCHAR) AS order_label
 FROM
   orders
-{{< /code-block >}} 
+{{< /code-block >}}
 
-### `LENGTH`  
+### `LENGTH`
 {{< code-block lang="sql" >}}
 SELECT
   customer_name,
   LENGTH(customer_name) AS name_length
 FROM
   customers
-{{< /code-block >}} 
+{{< /code-block >}}
 
-### `INTERVAL`  
+### `INTERVAL`
 {{< code-block lang="sql" >}}
 SELECT
   TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date,
   INTERVAL '1 MILLISECOND 2 SECONDS 3 MINUTES 4 HOURS 5 DAYS'
-{{< /code-block >}} 
+{{< /code-block >}}
 
 ### `TRIM`
 {{< code-block lang="sql" >}}
@@ -269,7 +274,7 @@ SELECT
 
 ### `EXTRACT`
 
-Supported extraction units: 
+Supported extraction units:
 | Literal           | Input Type               | Description                                  |
 | ------------------| ------------------------ | -------------------------------------------- |
 | `day`             | `timestamp` / `interval` | day of the month                             |
@@ -294,7 +299,7 @@ FROM
 
 ### `TO_TIMESTAMP`
 
-Supported patterns for date/time formatting: 
+Supported patterns for date/time formatting:
 | Pattern     | Description                          |
 | ----------- | ------------------------------------ |
 | `YYYY`      | year (4 digits)                      |
@@ -319,7 +324,7 @@ SELECT
 
 ### `TO_CHAR`
 
-Supported patterns for date/time formatting: 
+Supported patterns for date/time formatting:
 | Pattern     | Description                          |
 | ----------- | ------------------------------------ |
 | `YYYY`      | year (4 digits)                      |
@@ -346,7 +351,7 @@ FROM
 
 ### `DATE_TRUNC`
 
-Supported truncations: 
+Supported truncations:
 - `milliseconds`
 - `seconds` / `second`
 - `minutes` / `minute`
@@ -355,7 +360,7 @@ Supported truncations:
 - `weeks` / `week `
 - `months` / `month`
 - `quarters` / `quarter`
-- `years` / `year` 
+- `years` / `year`
 
 {{< code-block lang="sql" >}}
 SELECT
@@ -392,34 +397,34 @@ FROM
 
 ### `STRING_TO_ARRAY`
 {{< code-block lang="sql" >}}
-SELECT 
+SELECT
   STRING_TO_ARRAY('a,b,c,d,e,f', ',')
 {{< /code-block >}}
 
 ### `ARRAY_AGG`
 {{< code-block lang="sql" >}}
-SELECT 
+SELECT
   sender,
-  ARRAY_AGG(subject) subjects, 
-  ARRAY_AGG(ALL subject) all_subjects, 
+  ARRAY_AGG(subject) subjects,
+  ARRAY_AGG(ALL subject) all_subjects,
   ARRAY_AGG(DISTINCT subject) distinct_subjects
-FROM 
+FROM
   emails
-GROUP BY 
+GROUP BY
   sender
 {{< /code-block >}}
 
 ### `UNNEST`
 {{< code-block lang="sql" >}}
-SELECT 
+SELECT
   sender,
-  recipient 
-FROM 
+  recipient
+FROM
   emails,
   UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ## Window functions
 
@@ -438,9 +443,38 @@ This table provides an overview of the supprted window functions. For comprehens
 | `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
+## JSON functions and operators
+
+| Name | Return type | Description |
+|------|-------------|-------------|
+| json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+
+## Tags
+
+DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+
+```sql
+SELECT instance_type, count(instance_type)
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
+GROUP BY instance_type
+```
+
+Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+
+You can also compare tag values as strings or entire tag sets:
+
+```sql
+SELECT *
+FROM k8s.daemonsets da INNER JOIN k8s.deployments de
+ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
+[3]: https://www.postgresql.org/docs/current/functions-json.html

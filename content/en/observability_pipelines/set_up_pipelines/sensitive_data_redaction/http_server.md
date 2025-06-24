@@ -39,7 +39,7 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
-<!-- {{% tab "Amazon Security Lake" %}}
+{{% tab "Amazon Security Lake" %}}
 
 ##### Prerequisites
 
@@ -49,7 +49,7 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
-{{% /tab %}} -->
+{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -153,6 +153,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Custom Processor" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
 {{% tab "Dedupe" %}}
@@ -271,11 +276,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
-<!-- {{% tab "Amazon Security Lake" %}}
+{{% tab "Amazon Security Lake" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
-{{% /tab %}} -->
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}

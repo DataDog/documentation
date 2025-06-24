@@ -12,5 +12,6 @@
     "thresholds": {
       "critical": 1
     }
-  }
+  },
+  "draft_status": "draft"
 }
