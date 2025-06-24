@@ -183,7 +183,7 @@ The `reference_table_file` Asset Type displays import/upload events and the `ref
 
 ### Change Events
 
-Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file.
+Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. (Uploading a local file does not generate a change event.) While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file.
 
 Events contain information about the success status, path, and table name of the import. If an error occurs, information about the error type is provided.
 

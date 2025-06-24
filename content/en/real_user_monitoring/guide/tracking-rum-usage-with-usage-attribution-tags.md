@@ -61,10 +61,6 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][5]
 
 ## Enforce tags to be set at the org level
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Enforced RUM Usage Attribution is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
-{{< /callout >}}
-
 Enforce usage attribution tags on RUM applications to track their contribution to your Datadog bill. This setting can be applied without having to instrument or re-instrument your application. When this setting is active, tags must be set when creating or updating RUM applications in Datadog.
 
 **Note**: When attribution tags are set at both the data level (in the events collected by the SDK) and application level, Datadog uses the information set at the application level.

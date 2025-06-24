@@ -26,7 +26,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -48,7 +48,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -70,7 +70,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -92,7 +92,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -114,7 +114,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -136,7 +136,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -178,6 +178,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 | `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure subscription ID. |
 | `DD_AZURE_RESOURCE_GROUP` | **Required**. Your Azure resource group. |
 | `DD_API_KEY` | **Required**. Your [Datadog API key][3]. |
+| `DD_SITE`  | Your Datadog site: `{{< region-param key="dd_site" code="true" >}}`
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
 | `DD_VERSION` | How you want to tag your version. |

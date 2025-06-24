@@ -39,9 +39,8 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
-    {{< nextlink href="agent/guide/upgrade" >}}Upgrade to Agent 7{{< /nextlink >}}
     {{< nextlink href="agent/guide/version_differences" >}}Agent Version differences{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Upgrade Between Minor Versions of the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade_agent_fleet_automation" >}} Upgrade your Datadog Agent {{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python version management: Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
 {{< /whatsnext >}}

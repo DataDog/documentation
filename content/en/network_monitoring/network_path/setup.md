@@ -11,10 +11,6 @@ further_reading:
   text: "Learn more about the Path View in Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
@@ -180,6 +176,18 @@ instances:
   - hostname: api.datadoghq.eu # endpoint hostname or IP
     protocol: TCP
     port: 443 # optional port number, default is 80
+```
+
+**Note**: In Windows Client OS environments, raw packets are not supported. To work around this, ensure the protocol is TCP, and use `syn_socket` tcp_method (Agent `v7.67+` is required). For example:
+
+```yaml
+init_config:
+  min_collection_interval: 60 # in seconds, default 60 seconds
+instances:
+  - hostname: api.datadoghq.eu # endpoint hostname or IP
+    protocol: TCP
+    port: 443 # optional port number, default is 80
+    tcp_method: syn_socket
 ```
 
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
