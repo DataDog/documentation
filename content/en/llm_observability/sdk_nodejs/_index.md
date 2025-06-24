@@ -1,11 +1,9 @@
 ---
 title: LLM Observability Node.js SDK Reference
-code_lang: nodejs
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
     - /tracing/llm_observability/sdk/nodejs
     - /llm_observability/sdk/nodejs
+    - /llm_observability/setup/sdk/nodejs
 ---
 
 ## Overview
@@ -703,6 +701,6 @@ tracer.use('http', false) // disable the http integration
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
 [4]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
-[5]: /llm_observability/setup/auto_instrumentation/?tab=nodejs
+[5]: /llm_observability/sdk_nodejs/auto_instrumentation
 [6]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
 [7]: /llm_observability/quickstart?tab=nodejs#trace-an-llm-application-in-aws-lambda

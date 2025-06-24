@@ -4564,81 +4564,101 @@ menu:
       identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Quickstart
-      url: llm_observability/quickstart/
-      parent: llm_obs
-      identifier: llm_obs_quickstart
-      weight: 1
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
+      weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_obs
+      identifier: llm_obs_quickstart
       weight: 2
     - name: Setup
       url: llm_observability/setup/
       parent: llm_obs
       identifier: llm_obs_setup
       weight: 3
-    - name: SDK
-      url: llm_observability/setup/sdk/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_sdk
-      weight: 301
+    - name: Python SDK
+      url: llm_observability/sdk_python
+      parent: llm_obs
+      identifier: llm_obs_python
+      weight: 4
     - name: Auto Instrumentation
-      url: llm_observability/setup/auto_instrumentation
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_auto_instrumentation
-      weight: 302
+      url: llm_observability/sdk_python/auto_instrumentation
+      parent: llm_obs_python
+      identifier: llm_obs_setup_auto_instrumentation_python
+      weight: 401
+    - name: Node.js SDK
+      url: llm_observability/sdk_nodejs
+      parent: llm_obs
+      identifier: llm_obs_nodejs
+      weight: 5
+    - name: Auto Instrumentation
+      url: llm_observability/sdk_nodejs/auto_instrumentation
+      parent: llm_obs_nodejs
+      identifier: llm_obs_setup_auto_instrumentation_nodejs
+      weight: 501
     - name: API
       url: llm_observability/setup/api/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_api
-      weight: 303
+      parent: llm_obs
+      identifier: llm_obs_api
+      weight: 6
+    - name: Monitoring
+      url: llm_observability/monitoring
+      parent: llm_obs
+      identifier: llm_obs_monitoring
+      weight: 7
+    - name: Connect with APM
+      url: llm_observability/monitoring/llm_observability_and_apm
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_apm
+      weight: 701
+    - name: Cluster Map
+      url: llm_observability/monitoring/cluster_map/
+      parent: llm_obs_monitoring
+      identifier: llm_obs_cluster_map
+      weight: 702
+    - name: Agent Monitoring
+      url: llm_observability/monitoring/agent_monitoring
+      parent: llm_obs_monitoring
+      identifier: llm_obs_agent_monitoring
+      weight: 703
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
       identifier: llm_obs_evaluations
-      weight: 4
-    - name: Out-of-the-Box Evaluations
+      weight: 8
+    - name: Out-of-the-Box 
       url: llm_observability/evaluations/ootb_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
-      weight: 401
-    - name: Submit Custom Evaluations
-      url: llm_observability/evaluations/submit_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
-      weight: 402
-    - name: Ragas Evaluations
+      weight: 801
+    - name: Ragas 
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ragas_evaluations
-      weight: 403
-    - name: NeMo Evaluations
+      weight: 802
+    - name: NeMo 
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 404
-    - name: Cluster Map
-      url: llm_observability/cluster_map/
-      parent: llm_obs
-      identifier: llm_obs_cluster_map
-      weight: 5
-    - name: Agent Monitoring
-      url: llm_observability/agent_monitoring
-      parent: llm_obs
-      identifier: llm_obs_agent_monitoring
-      weight: 6
+      weight: 803
+    - name: Custom 
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_evaluations
+      weight: 804
     - name: Experiments
       url: llm_observability/experiments_preview
       parent: llm_obs
       identifier: llm_obs_experiments
-      weight: 7
+      weight: 9
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 10
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

@@ -1,11 +1,9 @@
 ---
 title: LLM Observability Python SDK Reference
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
     - /tracing/llm_observability/sdk/python
     - /llm_observability/sdk/python
+    - /llm_observability/setup/sdk/python
 ---
 
 ## Overview

@@ -1,6 +1,8 @@
 --- 
 title: Trace Cluster Map
 description: Identify your LLM application's drifts by viewing its Cluster Map.
+aliases:
+  - "/llm_observability/cluster_map"
 further_reading: 
 - link: "/llm_observability/" 
   tag: "Documentation" 
