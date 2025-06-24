@@ -48,7 +48,7 @@ Supported products (Agent 7.65.0 and above):
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
-- Datadog DDOT Collector[1]
+- Datadog [DDOT Collector][1]
 
 [1]: /opentelemetry/setup/ddot_collector
 
@@ -56,12 +56,18 @@ The Datadog FIPS Agent does **not** support the following:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
+<div class="alert alert-warning">
+The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+</div>
 - A non-containerized Linux host.
 - Your Linux OS must be in FIPS-compliant mode. See your OS vendor's documentation on what steps are required to meet this requirement.
 - FIPS-compliant storage backing the host file system.
 {{% /tab %}}
 
 {{% tab "Windows" %}}
+<div class="alert alert-warning">
+The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+</div>
 - A non-containerized Windows host.
 - Windows must be in [FIPS-compliant mode][1].
 - FIPS-compliant storage backing the host file system.
@@ -70,11 +76,17 @@ The Datadog FIPS Agent does **not** support the following:
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
+<div class="alert alert-warning">
+The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+</div>
 Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 {{% /tab %}}
 
 {{% tab "AWS ECS" %}}
+<div class="alert alert-warning">
+The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+</div>
 Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 - Configure AWS compute services (EC2 or Fargate) in FIPS mode
@@ -82,6 +94,9 @@ Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, t
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
+<div class="alert alert-warning">
+The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+</div>
 Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 - Configure EKS worker nodes in FIPS mode
