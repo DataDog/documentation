@@ -13,7 +13,7 @@ further_reading:
 ## Overview
 
 Issue Team Ownership automates your triaging work by assigning issues to the right teams. Your team owns an issue if it is either:
-- code owner of the top level stack-frame of the issue according to Github `CODEOWNERS`.
+- code owner of the top level stack-frame of the issue according to GitHub `CODEOWNERS`.
 - owner of the service where the issue happens.
 
 ***Note**: Stack frames linking to third-party files are not taken into account. Only the top level stack frame related to a file present in your repository is considered.*
