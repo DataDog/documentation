@@ -29,14 +29,6 @@ Cloud Cost Monitors help you proactively identify cost changes, and understand i
 - See a summary of how many monitors are set up, which are alerting, and what areas of cloud spend are tracked.
 - Create new cost monitors using templates and take action on monitors that need attention.
 
-Below are the four monitor types and their primary use case.
-| Monitor Type | Purpose |
-|--------------|---------------------------------------------------|
-| Changes      | Detect daily, weekly, or monthly cost changes.     |
-| Anomalies    | Identify unusual or unexpected cost patterns.      |
-| Threshold    | Alert when costs exceed a set value.               |
-| Forecast     | Alert if forecasted costs will exceed your budget. |
-
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up.
 
 Cloud Cost monitors use a 48-hour delayed evaluation window, since cost data may not be available until 48 hours after usage. For example, a 7-day lookback evaluated on January 15 examines cost data from January 6 to January 13.
@@ -51,38 +43,13 @@ Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **C
 
 ### Select a cost monitor type
 
-You can select from the following monitor types.
-
-{{< tabs >}}
-{{% tab "Changes" %}}
-
-| Cost Type | Description | Usage Examples |
-| ---  | ----------- | ----------- |
-| Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5%. |
-
-{{% /tab %}}
-
-{{% tab "Anomalies" %}}
-
-| Cost Type | Description | Usage Examples |
-| ---  | ----------- | ----------- |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
-
-{{% /tab %}}
-
-{{% tab "Threshold" %}}
-| Cost Type | Description | Usage Examples |
-| ---  | ----------- | ----------- |
-| Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000. |
-
-{{% /tab %}}
-{{% tab "Forecast" %}}
-| Cost Type | Description | Usage Examples |
-| ---  | ----------- | ----------- |
-| Cost Forecast | Set alerts based on forecasted costs exceeding a threshold by the end of the current month. | Alert daily if the forecasted cost for this month is projected to exceed $500. |
-
-{{% /tab %}}
-{{< /tabs >}}
+You can select from the following monitor types:
+| Monitor Type | Purpose | Example |
+|--------------|----------|-----------------------------------------|
+| Changes      | Detect daily, weekly, or monthly cost changes.  | Alert when the difference between today's cost and the week before is over 5%. |
+| Anomalies    | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Threshold    | Alert when costs exceed a set value. | Set alerts when today's total cost exceeds $10,000.              |
+| Forecast     | Alert if forecasted costs will exceed your budget. | Alert daily if the forecasted cost for this month is projected to exceed $500. |
 
 ### Specify which cost to track
 
@@ -97,7 +64,7 @@ Any cost type or metric reporting to Datadog is available for monitors. You can 
 
 Use the editor to define the cost types or exports.
 
-{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/cloud_cost/cost-monitors-specify-cost.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
 
 For more information, see the [Cloud Cost Management documentation][1].
 
