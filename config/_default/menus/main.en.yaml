@@ -3341,7 +3341,7 @@ menu:
       parent: serverless_gcp
       weight: 703
     - name: Google Cloud Run Functions (1st generation)
-      url: serverless/google_cloud_run/functions_gen1
+      url: serverless/google_cloud/google_cloud_run_functions_1st_gen
       parent: serverless_gcp
       weight: 704
     - name: Glossary
