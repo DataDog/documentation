@@ -24061,6 +24061,281 @@ components:
           description: The monitor type.
           type: string
       type: object
+    MonitorUserTemplate:
+      additionalProperties: {}
+      description: A monitor user template object.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        modified:
+          $ref: '#/components/schemas/MonitorUserTemplateModified'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+        versions:
+          description: All versions of the monitor user template.
+          items:
+            $ref: '#/components/schemas/SimpleMonitorUserTemplate'
+          type: array
+      type: object
+    MonitorUserTemplateCreateData:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    MonitorUserTemplateCreateRequest:
+      description: Request for creating a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateCreateData'
+      required:
+      - data
+      type: object
+    MonitorUserTemplateCreateResponse:
+      description: Response for creating a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseData'
+      type: object
+    MonitorUserTemplateCreated:
+      description: The created timestamp of the template.
+      example: '2024-01-02T03:04:23.274966+00:00'
+      format: date-time
+      readOnly: true
+      type: string
+    MonitorUserTemplateDescription:
+      description: A brief description of the monitor user template.
+      example: This is a template for monitoring user activity.
+      nullable: true
+      type: string
+    MonitorUserTemplateId:
+      description: The unique identifier.
+      example: 00000000-0000-1234-0000-000000000000
+      type: string
+    MonitorUserTemplateListResponse:
+      description: Response for retrieving all monitor user templates.
+      properties:
+        data:
+          description: An array of monitor user templates.
+          items:
+            $ref: '#/components/schemas/MonitorUserTemplateResponseData'
+          type: array
+      type: object
+    MonitorUserTemplateModified:
+      description: The last modified timestamp. When the template version was created.
+      example: '2024-02-02T03:04:23.274966+00:00'
+      format: date-time
+      readOnly: true
+      type: string
+    MonitorUserTemplateRequestAttributes:
+      additionalProperties: false
+      description: Attributes for a monitor user template.
+      properties:
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+      required:
+      - title
+      - monitor_definition
+      - tags
+      type: object
+    MonitorUserTemplateResourceType:
+      default: monitor-user-template
+      description: Monitor user template resource type.
+      enum:
+      - monitor-user-template
+      example: monitor-user-template
+      type: string
+      x-enum-varnames:
+      - MONITOR_USER_TEMPLATE
+    MonitorUserTemplateResponse:
+      description: Response for retrieving a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseDataWithVersions'
+      type: object
+    MonitorUserTemplateResponseAttributes:
+      additionalProperties: {}
+      description: Attributes for a monitor user template.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        modified:
+          $ref: '#/components/schemas/MonitorUserTemplateModified'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+      type: object
+    MonitorUserTemplateResponseData:
+      description: Monitor user template list response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      type: object
+    MonitorUserTemplateResponseDataWithVersions:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplate'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      type: object
+    MonitorUserTemplateTags:
+      description: The definition of `MonitorUserTemplateTags` object.
+      example:
+      - product:Our Custom App
+      - integration:Azure
+      items:
+        description: 'Tags associated with the monitor user template. Must be key
+          value. Only ''product'' and ''integration'' keys are
+
+          allowed. The value is the name of the category to display the template under.
+          Integrations can be filtered out in the UI.
+
+          (Review note: This modeling of ''categories'' is subject to change.)'
+        example: us-east1
+        minLength: 1
+        type: string
+        uniqueItems: true
+      type: array
+    MonitorUserTemplateTemplateVariables:
+      description: The definition of `MonitorUserTemplateTemplateVariables` object.
+      items:
+        $ref: '#/components/schemas/MonitorUserTemplateTemplateVariablesItems'
+      type: array
+    MonitorUserTemplateTemplateVariablesItems:
+      additionalProperties: false
+      description: List of objects representing template variables on the monitor
+        which can have selectable values.
+      properties:
+        available_values:
+          description: Available values for the variable.
+          example:
+          - value1
+          - value2
+          items:
+            minLength: 1
+            type: string
+            uniqueItems: true
+          type: array
+        defaults:
+          description: Default values of the template variable.
+          example:
+          - defaultValue
+          items:
+            minLength: 0
+            type: string
+            uniqueItems: true
+          type: array
+        name:
+          description: The name of the template variable.
+          example: regionName
+          type: string
+        tag_key:
+          description: The tag key associated with the variable. This works the same
+            as dashboard template variables.
+          example: datacenter
+          type: string
+      required:
+      - name
+      type: object
+    MonitorUserTemplateTitle:
+      description: The title of the monitor user template.
+      example: Postgres CPU Monitor
+      type: string
+    MonitorUserTemplateUpdateData:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateRequestAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MonitorUserTemplateUpdateRequest:
+      description: Request for creating a new monitor user template version.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateUpdateData'
+      required:
+      - data
+      type: object
+    MonitorUserTemplateVersion:
+      description: The version of the monitor user template.
+      example: 0
+      format: int64
+      nullable: true
+      readOnly: true
+      type: integer
     MonthlyCostAttributionAttributes:
       description: Cost Attribution by Tag for a given organization.
       properties:
@@ -37499,6 +37774,38 @@ components:
       description: The definition of `ShiftIncluded` object.
       oneOf:
       - $ref: '#/components/schemas/ScheduleUser'
+    SimpleMonitorUserTemplate:
+      description: A simplified version of a monitor user template.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        id:
+          description: The unique identifier. The initial version will match the template
+            ID.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+      type: object
     SingleAggregatedConnectionResponseArray:
       description: List of aggregated connections.
       example:
@@ -54792,6 +55099,308 @@ paths:
         - monitor_config_policy_write
       x-undo:
         type: idempotent
+  /api/v2/monitor/template:
+    get:
+      description: Retrieve all monitor user templates.
+      operationId: ListMonitorUserTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateListResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor user templates
+      tags:
+      - Monitors
+      x-menu-order: 20
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new monitor user template.
+      operationId: CreateMonitorUserTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Create a monitor user template
+      tags:
+      - Monitors
+      x-given:
+        monitor_user_template:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-user-template\",\n    \"attributes\":
+              {\n      \"description\": \"It's a threshold\",\n      \"title\": \"api
+              spec given template {{ unique_lower }}\",\n      \"monitor_definition\":
+              {\n        \"message\": \"cats\",\n        \"name\": \"High Error Rate
+              on service\",\n        \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0}
+              > 100\",\n        \"type\": \"query alert\"\n      },\n      \"template_variables\":
+              [{\"name\": \"scope\", \"available_values\": [], \"defaults\": [\"cats\"]}],\n
+              \     \"tags\": [\"category:test\"]\n    }\n  }\n}"
+          step: there is a valid "monitor_user_template" in the system
+      x-menu-order: 21
+      x-undo:
+        operationId: DeleteMonitorUserTemplate
+        parameters:
+        - name: template_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/validate:
+    post:
+      description: Validate the structure and content of a monitor user template.
+      operationId: ValidateMonitorUserTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateCreateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Validate a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 24
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/{template_id}:
+    delete:
+      description: Delete an existing monitor user template by its ID.
+      operationId: DeleteMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Delete a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 23
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve a monitor user template by its ID.
+      operationId: GetMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      - description: Whether to include all versions of the template in the response
+          in the versions field.
+        example: false
+        in: query
+        name: with_all_versions
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 19
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Creates a new version of an existing monitor user template.
+      operationId: UpdateMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Update a monitor user template to a new version
+      tags:
+      - Monitors
+      x-menu-order: 22
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/{template_id}/validate:
+    post:
+      description: Validate the structure and content of an existing monitor user
+        template being updated to a new version.
+      operationId: ValidateExistingMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Validate an existing monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 25
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/monitor/{monitor_id}/downtime_matches:
     get:
       description: Get all active downtimes for the specified monitor.
