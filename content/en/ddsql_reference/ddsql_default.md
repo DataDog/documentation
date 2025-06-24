@@ -29,7 +29,7 @@ SQL in [Analysis cells][1] allows you to analyze and manipulate data. This docum
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
-- [JSON functions](#json-functions)
+- [JSON functions](#json-functions-and-operators)
 - [Tags](#tags)
 
 
