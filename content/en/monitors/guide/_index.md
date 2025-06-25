@@ -40,6 +40,7 @@ cascade:
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template variable evaluation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Downtimes:" >}}
@@ -59,4 +60,6 @@ cascade:
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export monitor alerts to CSV{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}
