@@ -49,7 +49,7 @@ In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your tea
 
 ## Configuration
 
-Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the Error Tracking settings page.
+Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the [Error Tracking settings page](https://app.datadoghq.com/error-tracking/settings/issues/ownership).
 
 {{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:80%;" >}}
 
