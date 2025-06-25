@@ -3,9 +3,6 @@ title: DDSQL Editor
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:
-- link: "/ddsql_editor/guide/ddsql_use_cases"
-  tag: "Guide"
-  text: "Common queries and use cases"
 - link: "ddsql_reference/ddsql_default"
   tag: "Documentation"
   text: "DDSQL Reference"
