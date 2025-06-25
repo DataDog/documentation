@@ -2118,6 +2118,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
       weight: 402
+    - name: DORA Metrics
+      url: internal_developer_portal/eng_reports/dora_metrics
+      parent: idp_eng_reports
+      identifier: eng_reports_dora_metrics
+      weight: 403
     - name: Overview Pages
       url: internal_developer_portal/overview_pages
       parent: internal_developer_portal

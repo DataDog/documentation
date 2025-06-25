@@ -17,12 +17,12 @@ further_reading:
 ## Overview
 
 The DORA Metrics report includes an organization-wide view of software development velocity and stability metrics, including historical trends. With this report, you can:
-- View a breakdown of DORA metrics by service, team, or env.
+- View a breakdown of DORA metrics by service, team, or environment.
 - Explore historical info and understand which services and teams are performing best vs. underperforming.
-- Filter information based on service, team, repository id, env, and other tags.
+- Filter information based on service, team, repository id, environment, and other tags.
 - Leverage monthly Datadog recommendations to improve your organization's software delivery performance.
 
-Access the DORA Metrics report by searching for "Engineering Reports" (or clicking on the "Overview" tab in IDP) and selecting "DORA Metrics" in the left-hand menu. 
+Access the DORA Metrics report by searching for "Engineering Reports" (or clicking on the **Overview** tab in IDP) and selecting **DORA Metrics** in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/dora-metrics-report.png" alt="Default view of the Scorecards Performance report, with the Performance by Scorecard sub-section visible" style="width:100%;" >}} 
 
@@ -34,8 +34,8 @@ By default, the Scorecards Performance report breaks down data by service, which
 
 You can update your DORA Metrics report view in the following ways:
 
-- **Switch the aggregation between "Service", "Team", or "Env"**: View your organization's DORA metrics by service/team/env groupings to identify top- and bottom-performing areas. 
-- **Add filters to scope the data**: Filter by service, team, repository id, env, and other tags.
+- **Switch the aggregation grouping: View your organization's DORA metrics grouped by **Service**, **Team**, or **Env** to identify top- and bottom-performing areas. 
+- **Add filters to scope the data**: Filter by service, team, repository id, environment, and other tags.
 
 ### Schedule reports
 
@@ -45,7 +45,7 @@ To schedule reports, click on **Schedule Report** in the top right corner (or **
 
 ### Customize your report
 
-On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the DORA Metrics report. The dashboard reflects the "service" aggregated view. 
+On the upper right corner of the report, click the three-dot menu and select **Clone as a Dashboard** to create a dashboard with content from the DORA Metrics report. The dashboard reflects the "service" aggregated view. 
 
 To customize the dashboard, you can:
 - Change the time frame for widgets showing historical trends

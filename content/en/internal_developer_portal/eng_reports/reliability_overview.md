@@ -24,7 +24,7 @@ The Reliability Overview report supports aggregated views of SLOs and Incidents 
 - Use a summary score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 - Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
 
-Access the Reliability Overview report by searching for "Engineering Reports" (or clicking on the "Overview" tab in IDP) and selecting "Reliability Overview" in the left-hand menu. 
+Access the Reliability Overview report by searching for "Engineering Reports" (or clicking on the**Overview** tab in IDP) and selecting **Reliability Overview** in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/reliability-overview-landing2.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
 
@@ -51,7 +51,7 @@ To schedule reports, click on **Schedule Report** in the top right corner (or **
 
 ### Customize your report
 
-On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. 
+On the upper right corner of the report, click the three-dot menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. 
 
 To customize the dashboard, you can:
 - Update the SLO Summary table to group by any tag you have added to your SLOs (for example, you can create a view grouped by "user journey")
