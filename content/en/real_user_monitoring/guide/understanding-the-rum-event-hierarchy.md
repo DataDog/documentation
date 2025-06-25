@@ -65,7 +65,7 @@ This example displays a query that searches within the errors event to view all 
 ### Resources
 Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
 
-#### Sample search: A list of all images loaded on the `/cart` view filtered by image size
+#### Sample search: A list of all images loaded on the `/demo` view filtered by image size
 
 In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes are listed.
 
