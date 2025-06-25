@@ -11,7 +11,14 @@ further_reading:
 - link: "/logs/explorer/advanced_search#filter-logs-based-on-reference-tables"
   tag: "Documentation"
   text: "Filter logs based on Reference Tables"
-- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
+- link: "/sheets/#lookup"
+  tag: "Documentation"
+  text: "Sheets lookup"
+- link: "/service_management/events/pipelines_and_processors/lookup_processor/"
+  tag: "Documentation"
+  text: "Lookup processor for Events"
+- link: "/cloud_cost_management/tag_pipelines/
+#map-multiple-tags"
   tag: "Documentation"
   text: "Use Reference Tables to add multiple tags to cost data"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
@@ -27,6 +34,12 @@ further_reading:
 Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata.
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+
+## Data sources
+
+Datadog supports the following data sources, including integrations and manual CSV upload:
+
+{{< partial name="reference_tables/ref-tables-integrations.html" >}}
 
 ## Validation rules
 
@@ -201,6 +214,14 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 - You can have up to 100 reference tables per organization
 
 Reach out to [support][5] if you have a use case that exceeds these limits.
+
+## Automatic update frequency
+
+Reference Tables can be updated automatically, depending on the data source:
+
+- **Cloud file storage** (Amazon S3, Azure Storage, Google Cloud Storage): Every 5 minutes
+- **SaaS integrations**: Every hour
+- **Manual CSV uploads**: Automatic updates are not supported
 
 ## Permissions
 
