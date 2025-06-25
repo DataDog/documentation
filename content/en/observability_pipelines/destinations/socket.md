@@ -7,7 +7,7 @@ Use Observability Pipelines' Socket destination to send logs to a socket endpoin
 
 ## Setup
 
-Set up the Socket destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Socket destination and its environment variables when you [set up a pipeline][1]. The following information is configured in the pipelines UI.
 
 ### Set up the destination
 

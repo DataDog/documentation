@@ -5,13 +5,13 @@ disable_toc: false
 
 ## Overview
 
-Send logs over a socket connection to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Send logs over a socket connection to the Observability Pipelines Worker, then process and route them to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
-This document walks you through the following:
-1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+This document covers:
+1. [Prerequisites](#prerequisites) for setting up Observability Pipelines
+1. [How to set up Observability Pipelines](#set-up-observability-pipelines)
 
 ## Prerequisites
 
