@@ -16,7 +16,7 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 - code owner of the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
 - owner of the service where the issue happens.
 
-**Note**: Stack frames linking to third-party files are not taken into account. Only the top-level stack frame related to a file present in your repository is considered.
+**Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 
 ## Leverage team ownership
 
@@ -41,7 +41,7 @@ Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNE
 
 ### Link GitHub teams to Datadog teams
 
-In Datadog, go to **Teams** > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
+In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
@@ -49,7 +49,7 @@ In Datadog, go to **Teams** > Select your team > **Settings** > **GitHub Connect
 
 ## Configuration
 
-Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the Error Tracking settings page.
+Issue Team Ownership is enabled by default for all services once the setup requirements are met. You can control this feature at both global and service levels through the [Error Tracking settings page](https://app.datadoghq.com/error-tracking/settings/issues/ownership).
 
 {{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:80%;" >}}
 

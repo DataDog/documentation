@@ -648,9 +648,9 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.\n\n❌ This endpoint is not available for the Government (US1-FED) site. Contact your account representative for more information.",
+    "description": "This endpoint allows you to post events.\n\n✅ **Only events with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, please use the V1 endpoint.",
     "summary": "Post an event",
-    "request_description": "Event creation request payload.",
+    "request_description": "Event request object",
     "request_schema_description": "Payload for creating an event."
   },
   "SearchEvents": {
@@ -1336,6 +1336,42 @@
     "summary": "Edit a monitor configuration policy",
     "request_description": "Description of the update.",
     "request_schema_description": "Request for editing a monitor configuration policy."
+  },
+  "ListMonitorUserTemplates": {
+    "description": "Retrieve all monitor user templates.",
+    "summary": "Get all monitor user templates"
+  },
+  "CreateMonitorUserTemplate": {
+    "description": "Create a new monitor user template.",
+    "summary": "Create a monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a monitor user template."
+  },
+  "ValidateMonitorUserTemplate": {
+    "description": "Validate the structure and content of a monitor user template.",
+    "summary": "Validate a monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a monitor user template."
+  },
+  "DeleteMonitorUserTemplate": {
+    "description": "Delete an existing monitor user template by its ID.",
+    "summary": "Delete a monitor user template"
+  },
+  "GetMonitorUserTemplate": {
+    "description": "Retrieve a monitor user template by its ID.",
+    "summary": "Get a monitor user template"
+  },
+  "UpdateMonitorUserTemplate": {
+    "description": "Creates a new version of an existing monitor user template.",
+    "summary": "Update a monitor user template to a new version",
+    "request_description": "",
+    "request_schema_description": "Request for creating a new monitor user template version."
+  },
+  "ValidateExistingMonitorUserTemplate": {
+    "description": "Validate the structure and content of an existing monitor user template being updated to a new version.",
+    "summary": "Validate an existing monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a new monitor user template version."
   },
   "ListMonitorDowntimes": {
     "description": "Get all active downtimes for the specified monitor.",

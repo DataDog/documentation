@@ -46,7 +46,7 @@ For detailed insights and remediation help, click the **Remediation** tab. In th
 
 Click **View Suggested Policy** to view a suggested downsized policy based on the actual usage.
 
-{{< img src="security/identity_risks/downsized_policy.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
+{{< img src="security/identity_risks/downsized_policy_2.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
 
 To remediate the identity risk, click **Fix in AWS** to update the resource in AWS IAM console. To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Issues][2] for more information.
 

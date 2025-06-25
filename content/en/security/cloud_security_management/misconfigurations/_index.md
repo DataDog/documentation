@@ -27,7 +27,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_4.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
