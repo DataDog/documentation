@@ -67,7 +67,7 @@ Resources are collected from views and include external requests from your appli
 
 #### Sample search: A list of all images loaded on the `/demo` view filtered by image size
 
-In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes are listed.
+In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the `/demo` view and were larger or equal to 1000 kilobytes are listed.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources-1.png" alt="Sample search of all images loaded on the homepage view that were 1000 kilobytes or greater." style="width:90%;">}}
 
@@ -96,7 +96,7 @@ In this example, **Vitals** is selected from the event type dropdown and the che
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-4.png" alt="Example of no data appearing after writing a query." style="width:90%;">}}
 
-If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
+If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **sessions**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears-1.png" alt="Example of updating a query by using the view and time frame selectors." style="width:90%;">}}
 
