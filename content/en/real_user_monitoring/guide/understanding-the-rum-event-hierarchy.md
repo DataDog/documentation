@@ -58,7 +58,7 @@ Errors can be viewed in both RUM and Error Tracking. Source and custom errors ar
 
 #### Sample search: List of all crashes that occurred on a page in the application
 
-This example displays a query that searches within the errors event to view all crashes that occurred on the "HomeViewController" page for a particular application.
+This example displays a query that searches within the errors event to view all crashes that occurred on the "home decor" page for a particular application.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-home-decor.png" alt="Sample search of all crashes that occurred on a page." style="width:90%;">}}
 
