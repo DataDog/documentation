@@ -32,7 +32,9 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 
 ### Configure Source Code Integration
 
-Ensure [Source Code Integration][1] is setup and install [the GitHub integration][2]. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
+1. Ensure [Source Code Integration][1] is setup.
+2. Install [the GitHub integration][2].
+3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 
 ### Set up a CODEOWNERS file
 Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
