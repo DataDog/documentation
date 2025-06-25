@@ -28,7 +28,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 {{< tabs >}}
-{{% tab "Use a Personal Access Token (Current)" %}}
+{{% tab "Use a Personal Access Token" %}}
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, set the **Lifetime (days)** value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click **Generate**. Take note of your token.
@@ -54,9 +54,9 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 {{% /tab %}}
 
-{{% tab "Use a Service Principal for OAuth (New)" %}}
+{{% tab "Use a Service Principal for OAuth (Preview)" %}}
 
-<div class="alert alert-warning">Workspaces that have already been integrated using a Personal Access Token will continue to work and may switch to using OAuth at any time. However, new workspaces being integrated must use OAuth as their authentication method. Workspaces using OAuth may not switch back to using Personal Access Tokens.</div>
+<div class="alert alert-warning">New workspaces being integrated must use OAuth as their authentication method. Workspaces that have already been integrated using a Personal Access Token will continue to work and may switch to using OAuth at any time. Workspaces using OAuth may not switch back to using Personal Access Tokens.</div>
 
 1. In your Databricks account, click on **User Management** in the menu on the left. Click **Add service principal** under the "Service principals" tab.
 1. Under the "Credentials & secrets" tab, click **Generate secret**. Set the **Lifetime (days)** value to the maximum allowed (730 days), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the top right corner.
