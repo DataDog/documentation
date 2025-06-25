@@ -11072,19 +11072,24 @@ components:
       example: {}
       properties:
         aggr:
+          deprecated: true
           description: Query aggregator function.
           type: string
         expression:
+          deprecated: true
           description: Query expression.
           type: string
         metric:
+          deprecated: true
           description: Query metric used.
           type: string
         query_index:
+          deprecated: true
           description: Query index from original combined query.
           format: int64
           type: integer
         scope:
+          deprecated: true
           description: Query scope.
           type: string
         unit:
