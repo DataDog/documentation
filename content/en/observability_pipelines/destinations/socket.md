@@ -24,4 +24,3 @@ Set up the Socket destination and its environment variables when you [set up a p
 The Socket destination does not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/destinations/#event-batching
