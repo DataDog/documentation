@@ -17537,6 +17537,10 @@ components:
           items:
             $ref: '#/components/schemas/IncidentTimelineCellCreateAttributes'
           type: array
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
         notification_handles:
           description: Notification handles that will be notified of the incident
             at creation.
@@ -17944,6 +17948,10 @@ components:
           description: A unique identifier that represents an incident type.
           example: 00000000-0000-0000-0000-000000000000
           type: string
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
         modified:
           description: Timestamp when the incident was last modified.
           format: date-time
