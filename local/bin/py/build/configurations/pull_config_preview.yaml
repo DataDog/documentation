@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs11155/workspace-updates
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
