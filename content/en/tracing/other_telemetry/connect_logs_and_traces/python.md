@@ -32,6 +32,7 @@ To correlate your [traces][1] with your logs, complete the following steps:
 
   1. [Activate automatic instrumentation](#step-1---activate-automatic-instrumentation).
   2. [Include required attributes from the log record](#step-2---include-required-attributes).
+  3. [Configure log collection](#step-3---configure-log-collection).
 
 #### Step 1 - Activate automatic instrumentation
 
@@ -77,6 +78,10 @@ def hello():
 
 hello()
 ```
+
+#### Step 3 - Configure log collection
+
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][2] for the specified files to tail is set to `source: python` so log pipelines can parse the log files. If the `source` is set to a value other than `python`, you may need to add a [trace remapper][3] to the appropriate log processing pipeline for the correlation to work correctly.
 
 To learn more about logs injection, read the [ddtrace documentation][6].
 
