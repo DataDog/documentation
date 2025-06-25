@@ -487,8 +487,8 @@ When set to `true`, the websocket spans have the tag `websocket.session.id` cont
 
 `dd.jdk.socket.enabled`
 : **Environment Variable**: `DD_JDK_SOCKET_ENABLED` <br>
-**Default**: `false`<br>
-Enable native JDK support for unix domain sockets.
+**Default**: `true`<br>
+Enable native JDK support for Unix Domain Sockets.
 
 ### Examples
 

@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
     text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+  - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
+    tag: "Blog"
+    text: "Unify remediation and communication with Datadog Incident Response"
 ---
 
 

@@ -2,6 +2,10 @@
 title: Experiments
 description: Using LLM Observability Experiments feature
 private: true
+further_reading:
+  - link: "https://www.datadoghq.com/blog/llm-experiments/"
+    tag: "Blog"
+    text: "Create and monitor LLM experiments with Datadog"
 ---
 
 {{< callout >}}
@@ -915,6 +919,9 @@ Handle the ingestion of experiment spans or respective evaluation metrics.
 
 {{% /collapse-content %}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
