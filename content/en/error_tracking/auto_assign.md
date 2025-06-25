@@ -24,7 +24,7 @@ Once configured and enabled, issues are automatically assigned to developers bas
 
 1. Ensure [Source Code Integration][2] is enabled and set up.
 2. Install [the GitHub integration][3].
-3. Make sure all requested permissions are granted for the GitHub integration.
+3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 **Note**: You must use the same email address in both Git and your Datadog account.
 
 ## How it works
