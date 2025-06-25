@@ -13,10 +13,10 @@ further_reading:
 ## Overview
 
 Issue Team Ownership automates your triaging work by assigning issues to the right teams. Your team owns an issue if it is either:
-- code owner of the top level stack-frame of the issue according to GitHub `CODEOWNERS`.
+- code owner of the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
 - owner of the service where the issue happens.
 
-***Note**: Stack frames linking to third-party files are not taken into account. Only the top level stack frame related to a file present in your repository is considered.*
+**Note**: Stack frames linking to third-party files are not taken into account. Only the top-level stack frame related to a file present in your repository is considered.
 
 ## Leverage team ownership
 
@@ -32,9 +32,11 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 
 ### Configure Source Code Integration
 
-Ensure [Source Code Integration][1] is setup and install [the GitHub integration][2]. Make sure all requested permissions are granted for the GitHub integration.
+1. Ensure [Source Code Integration][1] is setup.
+2. Install [the GitHub integration][2].
+3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 
-### Set up CODEOWNERS file
+### Set up a CODEOWNERS file
 Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
 
 ### Link GitHub teams to Datadog teams
@@ -43,7 +45,7 @@ In Datadog, go to **Teams** > Select your team > **Settings** > **GitHub Connect
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
-***Note**: Issue Team Ownership only supports GitHub.*
+**Note**: Issue Team Ownership only supports GitHub.
 
 ## Configuration
 
