@@ -2453,7 +2453,7 @@ Allow capture of [untrusted events][18], for example in automated UI tests.
 `allowedTrackingOrigins`
 : Optional<br/>
 **Type**: Array<br/>
-List of origins where the SDK is allowed to run when used in a browser extension context.
+List of origins where the SDK is allowed to run.
 
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
