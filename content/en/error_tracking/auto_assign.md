@@ -26,7 +26,7 @@ Once configured and enabled, issues are automatically assigned to developers bas
 2. Install [the GitHub integration][3].
 3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 
-**Note**: You must use the same email address in both Git and your Datadog account, and OAuth in GitHub from Datadog (by loading a stacktrace code snippet).
+**Note**: You must link your Datadog to your GitHub account for Auto Assign to work (by loading a stack trace code snippet).
 
 ## How it works
 
