@@ -57,9 +57,9 @@ Any cost type or metric reporting to Datadog is available for monitors. You can 
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
-| Select the cost metric            | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
-| Define the `filter by`            | No       | Everything           | `aws_product:s3`    |
-| Group by                          | No       | Everything           | `aws_availability_zone` |
+| Select the cost metric            | Yes      | All providers | `azure.cost.actual` |
+| Define the `filter by`            | No       | Nothing           | `aws_product:s3`    |
+| Group by                          | No       | Nothing           | `aws_availability_zone` |
 | Add observability metric          | No       | `system.cpu.user`    | `aws.s3.all_requests` |
 
 Use the editor to define the cost types or exports.
