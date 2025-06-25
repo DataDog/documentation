@@ -428,7 +428,7 @@ FROM
 
 ## Window functions
 
-This table provides an overview of the supprted window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
+This table provides an overview of the supported window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
 
 | Function                | Return Type       | Description                                                            |
 |-------------------------|-------------------|------------------------------------------------------------------------|
