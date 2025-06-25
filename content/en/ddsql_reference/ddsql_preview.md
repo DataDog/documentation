@@ -1,9 +1,7 @@
 ---
 title: DDSQL (Preview)
-code_lang: ddsql_preview
-type: multi-code-lang
-code_lang_weight: 2
-products: 
+private: true
+products:
 - name: DDSQL Editor (Preview)
   url: /ddsql_editor/
   icon: ddsql
