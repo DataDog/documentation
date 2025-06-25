@@ -447,10 +447,20 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
-
 ## Historical Metrics Ingestion billing
 
-Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
+Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. 
+
+For example, if you a metric has 3000 (unique tag-value combinations) at one given hour in June. Your bi
+
+Scenario 1: you send 3000 metrics (unique tag-value combinations) at one given hour of June.
+That's (3000 / 730) * $5 / 100 :done:
+Scenario 2: you send 1500 metrics (unique tag-value combinations) on-time and 1500 late points at one given hour of June.
+That is still (3000 / 730) * $5 / 100 :done:
+
+
+
+For more information, see the [Custom Metrics billing][3] documentation.
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 
