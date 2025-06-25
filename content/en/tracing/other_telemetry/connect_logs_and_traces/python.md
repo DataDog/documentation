@@ -81,7 +81,7 @@ hello()
 
 #### Step 3 - Configure log collection
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][2] for the specified files to tail is set to `source: python` so log pipelines can parse the log files. If the `source` is set to a value other than `python`, you may need to add a [trace remapper][3] to the appropriate log processing pipeline for the correlation to work correctly.
+Ensure that files being tailed by the Datadog Agent have [Logs Agent configuration][2] with `source: python` so log pipelines can parse incoming logs. If `source` is set to a value other than `python`, you may need to add a [trace remapper][3] to the appropriate log processing pipeline for the correlation to work correctly.
 
 To learn more about logs injection, read the [ddtrace documentation][6].
 
