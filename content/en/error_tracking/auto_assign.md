@@ -44,7 +44,7 @@ You can view assigned developers directly within each issue in Datadog. If neede
 
 # Configuration
 
-Navigate to the Error Tracking configuration section in Datadog to manage Auto Assign settings. You can enable or disable Auto Assign globally for your entire organization, or configure it on a per-service basis for more granular control.
+Navigate to the [Error Tracking settings page](https://app.datadoghq.com/error-tracking/settings/issues/ownership) in Datadog to manage Auto Assign settings. You can enable or disable Auto Assign globally for your entire organization, or configure it on a per-service basis for more granular control.
 
 {{< img src="error_tracking/ownership-config.png" alt="Issue Team Ownership configuration settings" style="width:80%;" >}}
 ## Further Reading
