@@ -1801,7 +1801,7 @@
     "description": "Update a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
     "summary": "Update a RUM retention filter",
     "request_description": "New definition of the RUM retention filter.",
-    "request_schema_description": "The RUM retention filter body to update."
+    "request_schema_description": "The RUM retention filter body to update"
   },
   "DeleteRUMApplication": {
     "description": "Delete an existing RUM application in your organization.",
