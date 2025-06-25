@@ -60,6 +60,8 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 1. In your Databricks account, click on **User Management** in the menu on the left. Click **Add service principal** under the "Service principals" tab.
 1. Under the "Credentials & secrets" tab, click **Generate secret**. Set the **Lifetime (days)** value to the maximum allowed (730 days), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the top right corner.
+  {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:100%;" >}}
+  {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:100%;" >}}
 1. Click on **Workspaces** in the menu on the left. Click on the name of your workspace. Under the "Permissions" tab, click **Add permissions**. Search for the service principal you created and give it the **Admin** permission.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
