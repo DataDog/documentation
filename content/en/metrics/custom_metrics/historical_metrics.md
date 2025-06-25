@@ -451,7 +451,7 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 
 Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. 
 
-For example, if you a metric has 3000 (unique tag-value combinations) at one given hour in June. Your bi
+For example, if you a metric has 3000 (unique tag-value combinations) at one given hour in June. Your bill
 
 Scenario 1: you send 3000 metrics (unique tag-value combinations) at one given hour of June.
 That's (3000 / 730) * $5 / 100 :done:
