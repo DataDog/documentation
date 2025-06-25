@@ -32,7 +32,7 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 
 ### Configure Source Code Integration
 
-1. Ensure [Source Code Integration][1] is setup.
+1. Ensure [Source Code Integration][1] is set up.
 2. Install [the GitHub integration][2].
 3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 
