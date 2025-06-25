@@ -34,7 +34,7 @@ By default, the Scorecards Performance report breaks down data by service, which
 
 You can update your DORA Metrics report view in the following ways:
 
-- **Switch the aggregation grouping: View your organization's DORA metrics grouped by **Service**, **Team**, or **Env** to identify top- and bottom-performing areas. 
+- **Switch the aggregation grouping**: View your organization's DORA metrics grouped by **Service**, **Team**, or **Env** to identify top- and bottom-performing areas. 
 - **Add filters to scope the data**: Filter by service, team, repository id, environment, and other tags.
 
 ### Schedule reports
