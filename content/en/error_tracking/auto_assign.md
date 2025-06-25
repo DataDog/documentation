@@ -14,7 +14,7 @@ further_reading:
 
 Auto Assign automates triaging by assigning issues to the author of their [suspect commit][1].
 
-This feature enables faster issue resolution by automatically assigning issues to developers most familiar with the relevant code, while reducing manual triage work. Developers are immediately notified when issues arise from their code.
+This feature enables faster issue resolution by automatically assigning issues to developers most familiar with the relevant code, while reducing manual triage work. You are immediately notified when issues arise from your code.
 
 ## Setup
 
@@ -22,16 +22,17 @@ Once configured and enabled, issues are automatically assigned to developers bas
 
 ### Configure Source Code Integration
 
-- Ensure [Source Code Integration][2] is enabled and setup.
-- Install [the GitHub integration][3]. Make sure all requested permission is granted for the GitHub integration.
-- Developers must use the same email address in both Git and their Datadog account.
+1. Ensure [Source Code Integration][2] is enabled and set up.
+2. Install [the GitHub integration][3].
+3. Make sure all requested permissions are granted for the GitHub integration.
+**Note**: You must use the same email address in both Git and your Datadog account.
 
 ## How it works
 
 When an error occurs, Auto Assign:
 
-1. Analyzes the stack trace to identify a suspect commit
-2. Finds the author of this commit
+1. Analyzes the stack trace to identify a suspect commit.
+2. Finds the author of this commit.
 3. Assigns the issue to that developer and sends a notification.
 
 ## Managing assignments
