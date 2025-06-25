@@ -1,0 +1,18 @@
+{{ $link := .Get 0 }}
+{{ if not $link }}
+{{ errorf "No page title specified" }}
+{{ end }}
+
+{{ $hash := .Get 1 }}
+
+{{ $page := site.GetPage $link }}
+{{ if not $page }}
+{{ printf "Error in link shortcode at content/%s. No page found at %s." $.Page.File $link }}
+{{ end }}
+<div class="jump">
+  <a href="{{ $link }}{{ with $hash }}#{{ . }}{{ end }}">
+        <span class="dark:text-gray-300 text-gray-700 tracking-tight text-base">
+          {{ $page.Title }}
+        </span>
+  </a>
+</div>
