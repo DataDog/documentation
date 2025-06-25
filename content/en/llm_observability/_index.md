@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/vllm-integration/"
   tag: "Blog"
   text: "Optimize LLM application performance with Datadog's vLLM integration"
+- link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
+  tag: "Blog"
+  text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
 ## Overview

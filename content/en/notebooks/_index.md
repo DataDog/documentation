@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
   tag: "blog"
   text: "Transform and enrich your logs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
 ## Overview

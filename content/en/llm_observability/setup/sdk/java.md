@@ -3,10 +3,6 @@ title: LLM Observability Java SDK Reference
 private: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< callout btn_hidden="true" header="Join the Preview!">}}
 The LLM Observability SDK for Java is in Preview.
 {{< /callout >}}
@@ -369,7 +365,7 @@ The `setTags()` member method of the `LLMObsSpan` interface accepts the followin
 
 `tags`
 : required - `Map<String, Object>`
-<br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span’s context (session, environment, system, versioning, etc.).
+<br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span's context (session, environment, system, versioning, etc.).
 
 #### Add a single tag
 

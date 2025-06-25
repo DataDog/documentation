@@ -16,7 +16,7 @@ further_reading:
   tag: "Documentation"
   text: "DORA Metrics"
 - link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
-  tag: "Documentation"
+  tag: "Blog"
   text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
 ---
 

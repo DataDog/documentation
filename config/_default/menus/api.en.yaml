@@ -1755,6 +1755,97 @@ menu:
       url: /api/latest/monitors/
       identifier: monitors
       generated: true
+    - name: Validate an existing monitor user template
+      url: '#validate-an-existing-monitor-user-template'
+      identifier: monitors-validate-an-existing-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateExistingMonitorUserTemplate
+        unstable:
+          - v2
+        order: 25
+    - name: Update a monitor user template to a new version
+      url: '#update-a-monitor-user-template-to-a-new-version'
+      identifier: monitors-update-a-monitor-user-template-to-a-new-version
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 22
+    - name: Get a monitor user template
+      url: '#get-a-monitor-user-template'
+      identifier: monitors-get-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorUserTemplate
+        unstable:
+          - v2
+        order: 19
+    - name: Delete a monitor user template
+      url: '#delete-a-monitor-user-template'
+      identifier: monitors-delete-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorUserTemplate
+        unstable:
+          - v2
+        order: 23
+    - name: Validate a monitor user template
+      url: '#validate-a-monitor-user-template'
+      identifier: monitors-validate-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 24
+    - name: Create a monitor user template
+      url: '#create-a-monitor-user-template'
+      identifier: monitors-create-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 21
+    - name: Get all monitor user templates
+      url: '#get-all-monitor-user-templates'
+      identifier: monitors-get-all-monitor-user-templates
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMonitorUserTemplates
+        unstable:
+          - v2
+        order: 20
     - name: Edit a monitor configuration policy
       url: '#edit-a-monitor-configuration-policy'
       identifier: monitors-edit-a-monitor-configuration-policy
@@ -9151,7 +9242,7 @@ menu:
         operationids:
           - GetUserMemberships
         unstable: []
-        order: 1
+        order: 19
     - name: Update permission setting for team
       url: '#update-permission-setting-for-team'
       identifier: teams-update-permission-setting-for-team
@@ -9320,6 +9411,45 @@ menu:
           - DeleteTeam
         unstable: []
         order: 5
+    - name: Remove a member team
+      url: '#remove-a-member-team'
+      identifier: teams-remove-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveMemberTeam
+        unstable:
+          - v2
+        order: 22
+    - name: Add a member team
+      url: '#add-a-member-team'
+      identifier: teams-add-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddMemberTeam
+        unstable:
+          - v2
+        order: 20
+    - name: Get all member teams
+      url: '#get-all-member-teams'
+      identifier: teams-get-all-member-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMemberTeams
+        unstable:
+          - v2
+        order: 21
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

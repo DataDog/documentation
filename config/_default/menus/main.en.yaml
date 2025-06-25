@@ -130,64 +130,64 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1204
       parent: getting_started_integrations
+    - name: Internal Developer Portal
+      identifier: getting_started_internal_developer_portal
+      url: getting_started/internal_developer_portal/
+      parent: getting_started
+      weight: 13
     - name: Logs
       identifier: getting_started_logs
       url: getting_started/logs/
       parent: getting_started
-      weight: 13
+      weight: 14
     - name: Monitors
       identifier: getting_started_monitors
       url: getting_started/monitors/
       parent: getting_started
-      weight: 14
+      weight: 15
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
       url: getting_started/opentelemetry/
       parent: getting_started
-      weight: 15
+      weight: 16
     - name: Profiler
       identifier: getting_started_profiler
       url: getting_started/profiler/
       parent: getting_started
-      weight: 16
+      weight: 17
     - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
-      weight: 17
+      weight: 18
     - name: Security
       identifier: getting_started_security
       url: getting_started/security/
       parent: getting_started
-      weight: 18
+      weight: 19
     - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
-      weight: 1801
+      weight: 1901
     - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
-      weight: 1802
+      weight: 1902
     - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
-      weight: 1803
+      weight: 1903
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
-      weight: 1804
+      weight: 1904
     - name: Serverless for AWS Lambda
       identifier: getting_started_serverless
       url: getting_started/serverless/
-      parent: getting_started
-      weight: 19
-    - name: Software Catalog
-      identifier: getting_started_software_catalog
-      url: getting_started/software_catalog/
       parent: getting_started
       weight: 20
     - name: Software Delivery
@@ -5851,71 +5851,76 @@ menu:
       url: observability_pipelines/destinations/amazon_s3/
       parent: observability_pipelines_destinations
       weight: 1002
+    - name: Amazon Security Lake
+      identifier: observability_pipelines_destinations_amazon_security_lake
+      url: observability_pipelines/destinations/amazon_security_lake/
+      parent: observability_pipelines_destinations
+      weight: 1003
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
-      weight: 1003
+      weight: 1004
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
-      weight: 1004
+      weight: 1005
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 1005
+      weight: 1006
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 1006
+      weight: 1007
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 1007
+      weight: 1008
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 1008
+      weight: 1009
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 1009
+      weight: 1010
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 1010
+      weight: 1011
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 1011
+      weight: 1012
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 1012
+      weight: 1013
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 1013
+      weight: 1014
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 1014
+      weight: 1015
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 1015
+      weight: 1016
     - name: Environment Variables
       url: observability_pipelines/environment_variables/
       parent: observability_pipelines
@@ -6487,16 +6492,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up IaC Scanning
-      url: security/cloud_security_management/setup/iac_scanning
-      parent: csm_setup
-      identifier: csm_setup_iac_scanning
-      weight: 104
-    - name: Set Up IaC Exclusions
-      url: security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions
-      parent: csm_setup_iac_scanning
-      identifier: csm_setup_iac_scanning_exclusions
-      weight: 10000
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -6648,11 +6643,6 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
-    - name: IaC Scanning
-      url: security/cloud_security_management/iac_scanning
-      parent: csm
-      identifier: csm_iac_scanning
-      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
@@ -6946,11 +6936,26 @@ menu:
       url: /security/code_security/iast/security_controls/
       parent: sec_iast
       weight: 2
+    - name: Infrastructure as Code (IaC) Security
+      identifier: code_security_iac_security
+      url: /security/code_security/iac_security/
+      parent: code_security
+      weight: 5
+    - name: Setup
+      identifier: code_security_iac_security_setup
+      url: /security/code_security/iac_security/setup/
+      parent: code_security_iac_security
+      weight: 100000
+    - name: Exclusions
+      identifier: code_security_iac_security_exclusions
+      url: /security/code_security/iac_security/exclusions/
+      parent: code_security_iac_security
+      weight: 100001
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 5
+      weight: 6
     - name: GitHub Pull Requests
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/github_pull_requests/
@@ -6970,12 +6975,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 7
+      weight: 8
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
@@ -7187,11 +7192,16 @@ menu:
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
       weight: 6203
+    - name: Export Test Runs
+      url: synthetics/explore/results_explorer/export
+      parent: synthetics_results_explorer
+      identifier: synthetics_results_explorer_export_test_runs
+      weight: 6204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 6204
+      weight: 6205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
