@@ -58,9 +58,9 @@ Errors can be viewed in both RUM and Error Tracking. Source and custom errors ar
 
 #### Sample search: List of all crashes that occurred on a page in the application
 
-This example displays a query that searches within the errors event to view all crashes that occurred on the "cart" page for a particular application.
+This example displays a query that searches within the errors event to view all crashes that occurred on the "home decor" page for a particular application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-errors.png" alt="Sample search of all crashes that occurred on a page." style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-home-decor.png" alt="Sample search of all crashes that occurred on a page." style="width:90%;">}}
 
 ### Resources
 Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
