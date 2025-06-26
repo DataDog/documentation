@@ -283,6 +283,7 @@ unsupported_sites:
   scorecards: [gov]
   self_service_actions: [gov]
   snmp_profile_manager: [gov]
+  status_pages: [gov]
   synthetics_email_validation: [gov]
   synthetics_safari: [gov]
   test_optimization: [gov]
