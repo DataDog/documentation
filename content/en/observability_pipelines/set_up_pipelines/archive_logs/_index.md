@@ -3,6 +3,10 @@ title: Archive Logs to Datadog Archives
 disable_toc: false
 aliases:
     - /observability_pipelines/archive_logs/
+further_reading:
+- link: "/observability_pipelines/set_up_pipelines/"
+  tag: "Documentation"
+  text: "Set up a pipeline"
 ---
 
 ## Overview
@@ -15,8 +19,9 @@ Use Observability Pipelines to route ingested logs to a cloud storage solution (
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
-Select a source to get started:
+## Further reading
 
+<<<<<<< Updated upstream
 - [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
@@ -31,6 +36,9 @@ Select a source to get started:
 - [Socket (TCP or UDP)][14]
 - [Sumo Logic Hosted Collector][9]
 - [rsylsog or syslog-ng][10]
+=======
+{{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> Stashed changes
 
 [1]: /observability_pipelines/archive_logs/datadog_agent
 [2]: /observability_pipelines/archive_logs/fluent

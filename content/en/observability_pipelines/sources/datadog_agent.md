@@ -11,7 +11,13 @@ Use Observability Pipelines' Datadog Agent source to receive logs from the Datad
 
 ## Set up the source in the pipeline UI
 
+Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+
 {{% observability_pipelines/source_settings/datadog_agent %}}
+
+## Environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 

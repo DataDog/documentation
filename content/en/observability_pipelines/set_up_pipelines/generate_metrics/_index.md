@@ -1,6 +1,10 @@
 ---
 title: Generate Metrics
 disable_toc: false
+further_reading:
+- link: "/observability_pipelines/set_up_pipelines/"
+  tag: "Documentation"
+  text: "Set up a pipeline"
 ---
 
 ## Overview
@@ -15,22 +19,9 @@ Some log sources, such as firewalls and network appliances, generate a large vol
 
 {{% observability_pipelines/use_case_images/generate_metrics %}}
 
-Select a source to get started:
+## Further reading
 
-- [Amazon Data Firehose][12]
-- [Amazon S3][11]
-- [Datadog Agent][1]
-- [Fluentd or Fluent Bit][2]
-- [Google Pub/Sub][3]
-- [HTTP Client][4]
-- [HTTP Server][5]
-- [Kafka][13]
-- [Logstash][6]
-- [Socket][14]
-- [Splunk HTTP Event Collector (HEC)][7]
-- [Splunk Heavy or Universal Forwarders (TCP)][8]
-- [Sumo Logic Hosted Collector][9]
-- [rsyslog or syslog-ng][10]
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/set_up_pipelines/generate_metrics/datadog_agent
 [2]: /observability_pipelines/set_up_pipelines/generate_metrics/fluent

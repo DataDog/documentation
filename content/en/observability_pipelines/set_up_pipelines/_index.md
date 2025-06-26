@@ -27,37 +27,39 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 {{< tabs >}}
 {{% tab "Pipeline UI" %}}
 
-Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
+Set up your pipelines and its sources, processors, and destinations in the Observability Pipelines UI.
 
 1. Navigate to [Observability Pipelines][13].
 1. Select a template.
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
+    - [Archive Logs][4]
+    - [Dual Ship Logs][5]
+    - [Generate Metrics][6]
+    - [Log Enrichment][7]
+    - [Log Volume Control][8]
+    - [Sensitive Data Redaction][9]
+    - [Split Logs][10]
+1. Select and set up your [source][1].
+1. Select and set up your [destinations][2].
+1. Set up your [processors][3].
+1. If you want to add another set of processors and destinations, click the plus sign (+) to the left of the processors to add another set of processors and destinations to the source.
+    - To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
+1. If you want to add another set of destinations to a processor group, click the plus sign (+) to the left of the destinations for that processor group.
+    - To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete destination**. If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed. If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
 1. [Install the Observability Pipelines Worker][12].
 1. Enable monitors for your pipeline.
-
-For detailed setup instructions, select a template-specific documentation and then select your source from that page:
-  - [Log volume control][4]
-  - [Dual ship logs][5]
-  - [Split logs][6]
-  - [Archive logs to Datadog Archives][7]
-  - [Sensitive data redaction][8]
-  - [Log Enrichment][9]
-  - [Generate Metrics][10]
 
 After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
 
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/set_up_pipelines/log_volume_control/
-[5]: /observability_pipelines/set_up_pipelines/dual_ship_logs/
-[6]: /observability_pipelines/set_up_pipelines/split_logs/
-[7]: /observability_pipelines/set_up_pipelines/archive_logs/
-[8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/
-[9]: /observability_pipelines/set_up_pipelines/log_enrichment/
-[10]: /observability_pipelines/set_up_pipelines/generate_metrics/
+[4]: /observability_pipelines/use_cases/#archive-logs
+[5]: /observability_pipelines/use_cases/#dual-ship-logs
+[6]: /observability_pipelines/use_cases/#generate-metrics
+[7]: /observability_pipelines/use_cases/#log-enrichment
+[8]: /observability_pipelines/use_cases/#log-volume-control
+[9]: /observability_pipelines/use_cases/#sensitive-data-redaction
+[10]: /observability_pipelines/use_cases/#split-logs
 [11]: /observability_pipelines/update_existing_pipelines/
 [12]: /observability_pipelines/install_the_worker/
 [13]: https://app.datadoghq.com/observability-pipelines
@@ -67,9 +69,9 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 
 <div class="alert alert-warning">Creating pipelines using the Datadog API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
-You can use Datadog API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+You can use Observability Pipelines API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
-Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
+**Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [2]: /observability_pipelines/install_the_worker/

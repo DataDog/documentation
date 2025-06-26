@@ -15,6 +15,12 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/sumo_logic %}}
 
+## Environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
+
+## Send logs to the Observability Pipelines Worker over Sumo Logic
+
 {{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: /observability_pipelines/set_up_pipelines/

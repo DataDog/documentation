@@ -7,6 +7,9 @@ further_reading:
 - link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
   tag: "documentation"
   text: "Strategies for Reducing Log Volume"
+- link: "/observability_pipelines/set_up_pipelines/"
+  tag: "Documentation"
+  text: "Set up a pipeline"
 ---
 
 ## Overview
@@ -21,22 +24,9 @@ As your infrastructure and applications grow, so does your log volume and the co
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
-Select a log source to get started:
+## Further reading
 
-- [Amazon Data Firehose][12]
-- [Amazon S3][11]
-- [Datadog Agent][1]
-- [Fluentd or Fluent Bit][2]
-- [Google Pub/Sub][3]
-- [HTTP Client][4]
-- [HTTP Server][5]
-- [Kafka][13]
-- [Logstash][6]
-- [Splunk HTTP Event Collector (HEC)][7]
-- [Splunk Heavy or Universal Forwarders (TCP)][8]
-- [Socket (TCP or UDP)][14]
-- [Sumo Logic Hosted Collector][9]
-- [rsyslog or syslog-ng][10]
+{{< partial name="whats-next/whats-next.html" >}}
 
 ## Further reading
 

@@ -3,6 +3,10 @@ title: Dual Ship Logs
 disable_toc: false
 aliases:
     - /observability_pipelines/dual_ship_logs/
+further_reading:
+- link: "/observability_pipelines/set_up_pipelines/"
+  tag: "Documentation"
+  text: "Set up a pipeline"
 ---
 
 ## Overview
@@ -11,8 +15,9 @@ As your infrastructure and your organization scales, so does your log volume, th
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
-Select a source to get started:
+## Further reading
 
+<<<<<<< Updated upstream
 - [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
@@ -27,6 +32,9 @@ Select a source to get started:
 - [Socket (TCP or UDP)][14]
 - [Sumo Logic Hosted Collector][9]
 - [rsyslog or syslog-ng][10]
+=======
+{{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> Stashed changes
 
 [1]: /observability_pipelines/dual_ship_logs/datadog_agent
 [2]: /observability_pipelines/dual_ship_logs/fluent
