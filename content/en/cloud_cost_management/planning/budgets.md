@@ -1,6 +1,8 @@
 ---
 title: Budgets
 description: After starting to ingest costs in Cloud Cost Management, set up budgets and visualize how you're tracking against them.
+aliases:
+- /cloud_cost_management/budgets
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
