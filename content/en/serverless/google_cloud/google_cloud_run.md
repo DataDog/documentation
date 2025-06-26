@@ -14,7 +14,7 @@ further_reading:
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/guide/gcr_serverless_init">Instrument Google Cloud Run with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/google_cloud/google_cloud_run_in_process">Instrument Google Cloud Run with serverless-init</a>.</div>
 
 ## Setup
 
@@ -872,5 +872,5 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/guide/gcr_serverless_init
+[14]: /serverless/google_cloud/google_cloud_run_in_process
 [15]: https://cloud.google.com/run/docs/configuring/services/labels
