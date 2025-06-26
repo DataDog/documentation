@@ -273,7 +273,9 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 ##### Cloud integrations failover
 
-Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
+Failing over cloud integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
+
+Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you have any questions.
 
 {{% /collapse-content %}}<br>
 
