@@ -139,6 +139,13 @@ components:
       required: true
       schema:
         type: string
+    ApplicationKeyId:
+      description: The ID of the app key
+      in: path
+      name: app_key_id
+      required: true
+      schema:
+        type: string
     ApplicationKeyIncludeParameter:
       description: Resource path for related resources to include in the response.
         Only `owned_by` is supported.
@@ -2485,6 +2492,27 @@ components:
       type: string
       x-enum-varnames:
       - DEPLOYMENT
+    AppKeyRegistrationData:
+      description: Data related to the app key registration.
+      properties:
+        id:
+          description: The app key registration identifier
+          format: uuid
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/AppKeyRegistrationDataType'
+      required:
+      - type
+      type: object
+    AppKeyRegistrationDataType:
+      description: The definition of `AppKeyRegistrationDataType` object.
+      enum:
+      - app_key_registration
+      example: app_key_registration
+      type: string
+      x-enum-varnames:
+      - APP_KEY_REGISTRATION
     AppMeta:
       description: Metadata of an app.
       properties:
@@ -16269,6 +16297,12 @@ components:
         data:
           $ref: '#/components/schemas/ActionConnectionData'
       type: object
+    GetAppKeyRegistrationResponse:
+      description: The response object after getting an app key registration.
+      properties:
+        data:
+          $ref: '#/components/schemas/AppKeyRegistrationData'
+      type: object
     GetAppResponse:
       description: The full app definition response object.
       properties:
@@ -20045,6 +20079,32 @@ components:
         total_count:
           description: Total number of items.
           example: 35
+          format: int64
+          type: integer
+      type: object
+    ListAppKeyRegistrationsResponse:
+      description: A paginated list of app key registrations.
+      properties:
+        data:
+          description: An array of app key registrations.
+          items:
+            $ref: '#/components/schemas/AppKeyRegistrationData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListAppKeyRegistrationsResponseMeta'
+      type: object
+    ListAppKeyRegistrationsResponseMeta:
+      description: The definition of `ListAppKeyRegistrationsResponseMeta` object.
+      properties:
+        total:
+          description: The total number of app key registrations.
+          example: 1
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of app key registrations that match the specified
+            filters.
+          example: 1
           format: int64
           type: integer
       type: object
@@ -30277,6 +30337,12 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RegisterAppKeyResponse:
+      description: The response object after creating an app key registration.
+      properties:
+        data:
+          $ref: '#/components/schemas/AppKeyRegistrationData'
+      type: object
     RelationAttributes:
       description: Relation attributes.
       properties:
@@ -42585,9 +42651,197 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/actions/app_key_registrations:
+    get:
+      description: List App Key Registrations
+      operationId: ListAppKeyRegistrations
+      parameters:
+      - description: The number of App Key Registrations to return per page.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The page number to return.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppKeyRegistrationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: List App Key Registrations
+      tags:
+      - Action Connection
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+      x-undo:
+        type: safe
+  /api/v2/actions/app_key_registrations/{app_key_id}:
+    delete:
+      description: Unregister an App Key
+      operationId: UnregisterAppKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Unregister an App Key
+      tags:
+      - Action Connection
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - user_app_keys
+        - service_account_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an existing App Key Registration
+      operationId: GetAppKeyRegistration
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppKeyRegistrationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Get an existing App Key Registration
+      tags:
+      - Action Connection
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+      x-undo:
+        type: safe
+    put:
+      description: Register a new App Key
+      operationId: RegisterAppKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAppKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Register a new App Key
+      tags:
+      - Action Connection
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - user_app_keys
+        - service_account_write
+      x-undo:
+        type: idempotent
   /api/v2/actions/connections:
     post:
-      description: Create a new Action Connection
+      description: Create a new Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateActionConnection
       requestBody:
         content:
@@ -42643,7 +42897,8 @@ paths:
         type: unsafe
   /api/v2/actions/connections/{connection_id}:
     delete:
-      description: Delete an existing Action Connection
+      description: Delete an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -42679,7 +42934,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get an existing Action Connection
+      description: Get an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -42721,7 +42977,8 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: Update an existing Action Connection
+      description: Update an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -43902,6 +44159,7 @@ paths:
   /api/v2/app-builder/apps:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
+        This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteApps
       requestBody:
         content:
@@ -43949,7 +44207,8 @@ paths:
     get:
       description: List all apps, with optional filters and sorting. This endpoint
         is paginated. Only basic app information such as the app ID, name, and description
-        is returned by this endpoint.
+        is returned by this endpoint. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: ListApps
       parameters:
       - description: The number of apps to return per page.
@@ -44058,7 +44317,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a new app, returning the app ID.
+      description: Create a new app, returning the app ID. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateApp
       requestBody:
         content:
@@ -44122,7 +44382,8 @@ paths:
         type: unsafe
   /api/v2/app-builder/apps/{app_id}:
     delete:
-      description: Delete a single app.
+      description: Delete a single app. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteApp
       parameters:
       - description: The ID of the app to delete.
@@ -44177,7 +44438,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get the full definition of an app.
+      description: Get the full definition of an app. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetApp
       parameters:
       - description: The ID of the app to retrieve.
@@ -44243,6 +44505,7 @@ paths:
         type: safe
     patch:
       description: Update an existing app. This creates a new version of the app.
+        This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateApp
       parameters:
       - description: The ID of the app to update.
@@ -44297,7 +44560,8 @@ paths:
       description: Unpublish an app, removing the live version of the app. Unpublishing
         creates a new instance of a `deployment` object on the app, with a nil `app_version_id`
         (`00000000-0000-0000-0000-000000000000`). The app can still be updated and
-        published again in the future.
+        published again in the future. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UnpublishApp
       parameters:
       - description: The ID of the app to unpublish.
@@ -44348,7 +44612,8 @@ paths:
     post:
       description: Publish an app for use by other users. To ensure the app is accessible
         to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/)
-        on the app if a policy does not yet exist.
+        on the app if a policy does not yet exist. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: PublishApp
       parameters:
       - description: The ID of the app to publish.
@@ -67996,7 +68261,7 @@ paths:
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
-        an application key scoped with the `workflows_write` permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateWorkflow
       requestBody:
         content:
@@ -68057,8 +68322,8 @@ paths:
         type: unsafe
   /api/v2/workflows/{workflow_id}:
     delete:
-      description: Delete a workflow by ID. This API requires an application key scoped
-        with the `workflows_write` permission.
+      description: Delete a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68094,8 +68359,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get a workflow by ID.  This API requires an application key scoped
-        with the `workflows_read` permission.
+      description: Get a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68141,8 +68406,8 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: Update a workflow by ID. This API requires an application key scoped
-        with the `workflows_write` permission.
+      description: Update a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68195,8 +68460,8 @@ paths:
         type: idempotent
   /api/v2/workflows/{workflow_id}/instances:
     get:
-      description: List all instances of a given workflow. This API requires an application
-        key scoped with the workflows_read permission.
+      description: List all instances of a given workflow. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: ListWorkflowInstances
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68231,8 +68496,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Execute the given workflow. This API requires an application key
-        scoped with the workflows_run permission.
+      description: Execute the given workflow. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68274,7 +68539,7 @@ paths:
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
     get:
       description: Get a specific execution of a given workflow. This API requires
-        an application key scoped with the workflows_read permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -68312,7 +68577,7 @@ paths:
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
     put:
       description: Cancels a specific execution of a given workflow. This API requires
-        an application key scoped with the workflows_run permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CancelWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
