@@ -23,7 +23,7 @@ Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2
 1. [Triggers][3], which define _when_ to send a notification.
 2. [Templates][4], which define _what_ to send in a notification.
 
-## Minimal Setup
+## Minimal setup
 
 The setup below uses the [Webhook notification service][5] of Argo CD to send notifications to Datadog.
 
@@ -151,7 +151,7 @@ After you have subscribed your Argo CD application by adding the annotations abo
 
 The [Recommended Setup](#recommended-setup) section below contains recommended actions to improve the monitoring reported in CD Visibility.
 
-## Recommended Setup
+## Recommended setup
 
 ### Change duration to wait for resources health
 The duration reported in deployment events matches the sync duration in Argo CD. However, the sync duration generally represents the time spent by Argo CD to sync the Git repository state and the Kubernetes cluster state.
