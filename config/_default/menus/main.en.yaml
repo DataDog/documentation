@@ -2118,6 +2118,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
       weight: 402
+    - name: DORA Metrics
+      url: internal_developer_portal/eng_reports/dora_metrics
+      parent: idp_eng_reports
+      identifier: eng_reports_dora_metrics
+      weight: 403
     - name: Overview Pages
       url: internal_developer_portal/overview_pages
       parent: internal_developer_portal
@@ -2204,11 +2209,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 9
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
@@ -2219,16 +2219,26 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
+    - name: Issue Correlation
+      url: error_tracking/issue_correlation
+      parent: error_tracking
+      identifier: error_tracking_issue_correlation
+      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 7
-    - name: Track Browser and Mobile Errors
-      url: error_tracking/frontend
-      parent: error_tracking
-      identifier: error_tracking_frontend
       weight: 8
+    - name: Auto Assign
+      url: error_tracking/auto_assign
+      parent: error_tracking
+      identifier: error_tracking_auto_assign
+      weight: 9
+    - name: Issue Team Ownership
+      url: error_tracking/issue_team_ownership
+      parent: error_tracking
+      identifier: error_tracking_issue_team_ownership
+      weight: 10
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2259,11 +2269,16 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
       weight: 105
+    - name: Track Browser and Mobile Errors
+      url: error_tracking/frontend
+      parent: error_tracking
+      identifier: error_tracking_frontend
+      weight: 11
     - name: Track Backend Errors
       url: error_tracking/backend
       parent: error_tracking
       identifier: error_tracking_backend
-      weight: 10
+      weight: 12
     - name: Getting Started
       url: error_tracking/backend/getting_started
       parent: error_tracking_backend
@@ -2303,17 +2318,17 @@ menu:
       url: error_tracking/manage_data_collection
       parent: error_tracking
       identifier: error_tracking_manage_data
-      weight: 11
+      weight: 13
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 12
+      weight: 14
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 13
+      weight: 15
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
