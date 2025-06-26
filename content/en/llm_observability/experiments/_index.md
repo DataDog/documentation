@@ -195,7 +195,7 @@ Dataset.push(new_version: boolean = None)
 
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
-| `new_version` | boolean | If `True`, creates a new version of the dataset in Datadog, otherwise it modifies it in place. Defaults to `True`.|
+| `new_version` | Boolean | If `True`, creates a new version of the dataset in Datadog, otherwise it modifies it in place. Defaults to `True`.|
 
 **Example**
 
@@ -667,8 +667,8 @@ List all dataset records, sorted by creation date. The most recently-created rec
 | ---- | ---- | ---- |
 | `id` | string | Unique record ID. |
 | `dataset_id` | string | Unique dataset ID. |
-| `input` | any (string, number, boolean, object, array) | Data that serves as the starting point for an experiment. |
-| `expected_output` | any (string, number, boolean, object, array) | Expected output |
+| `input` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
 | `metadata` | json | Arbitrary user-defined metadata. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
@@ -689,8 +689,8 @@ Appends records for a given dataset.
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `input` (_required_) | any (string, number, boolean, object, array) | Data that serves as the starting point for an experiment. |
-| `expected_output` | any (string, number, boolean, object, array) | Expected output |
+| `input` (_required_) | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
 | `metadata` | json | Arbitrary user-defined metadata. |
 
 **Response**
@@ -709,8 +709,8 @@ Partially update a dataset record object. Specify the fields to update in the pa
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `input` | any (string, number, boolean, object, array) | Data that serves as the starting point for an experiment. |
-| `expected_output` | any (string, number, boolean, object, array) | Expected output |
+| `input` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
 | `metadata` | json | Arbitrary user-defined metadata. |
 
 **Response**
@@ -719,8 +719,8 @@ Partially update a dataset record object. Specify the fields to update in the pa
 | ---- | ---- | ---- |
 | `id` | string | Unique record ID. |
 | `dataset_id` | string | Unique dataset ID. |
-| `input` | any (string, number, boolean, object, array) | Data that serves as the starting point for an experiment. |
-| `expected_output` | any (string, number, boolean, object, array) | Expected output |
+| `input` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
 | `metadata` | json | Arbitrary user-defined metadata. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
@@ -890,9 +890,9 @@ Handle the ingestion of experiment spans or respective evaluation metrics.
 | Field | Type | Description |
 | ---- | ---- | ---- |
 | `error` | [Error](#object-error) | Captures errors. |
-| `input` (_required_) | any (string, number, boolean, object, array) | Input value to an operation. |
-| `output` (_required_) | any (string, number, boolean, object, array) | Output value to an operation. |
-| `expected_output` | any (string, number, boolean, object, array) | Expected output value. |
+| `input` (_required_) | any (string, number, Boolean, object, array) | Input value to an operation. |
+| `output` (_required_) | any (string, number, Boolean, object, array) | Output value to an operation. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output value. |
 | `metadata` | json | Arbitrary user-defined metadata. |
 
 #### Object: EvalMetric
