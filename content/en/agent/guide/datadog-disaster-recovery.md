@@ -36,7 +36,7 @@ The Agent-based failover description provided on this page supports failover of 
 <div class="alert alert-info">
 Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the <a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery team</a> to learn about upcoming capabilities and your specific needs if they are not covered above.
 </div>
-
+<br>
 
 ## Setup 
 To enable Datadog Disaster Recovery:
