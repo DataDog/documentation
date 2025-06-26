@@ -43,7 +43,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
 
-**Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
+To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
 
 ## SDK domains
 
@@ -61,7 +61,7 @@ For example, to see the documentation for the Datadog for Government site, selec
 
 ## Access the Datadog for Government site
 
-The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
 [1]: https://www.datadoghq.com/security/
 {{% /site-region %}}
