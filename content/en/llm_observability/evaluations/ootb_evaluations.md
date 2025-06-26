@@ -246,6 +246,16 @@ This check helps understand the overall mood of the conversation, gauge user sat
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
+#### Conversation Completeness
+
+This check evaluates whether your LLM chatbot can successfully carry out a full conversation by effectively meeting the user's needs from start to finish. This conversational measure serves as a proxy for gauging user satisfaction over the course of a conversation and is especially valuable for LLM chatbot applications.
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+|---|---|---|
+| Evaluated on Conversation | Evaluated using LLM | Conversation Completeness assesses whether all user intentions within a conversation were successfully resolved. The evaluation identifies resolved and unresolved intentions, providing a completeness score based on the ratio of unresolved to total intentions. |
+
+For optimal evaluation accuracy, it is preferable to send a tag when the conversation is finished and configure the evaluation to run only on conversations with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A conversation is considered incomplete if more than 50% of identified intentions remain unresolved.
+
 ### Security and Safety evaluations
 
 #### Toxicity
