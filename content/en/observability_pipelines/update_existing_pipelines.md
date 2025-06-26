@@ -69,6 +69,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
@@ -149,6 +154,11 @@ On the Worker installation page:
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/socket %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
