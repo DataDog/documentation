@@ -225,8 +225,8 @@ Reach out to [support][5] if you have a use case that exceeds these limits.
 Reference Tables can be updated automatically, depending on the data source:
 
 - **Cloud file storage** (Amazon S3, Azure Storage, Google Cloud Storage): Every 5 minutes
-- **SaaS integrations**: Every hour
-- **Manual CSV uploads**: Automatic updates are not supported
+- **Integrations**: Every hour
+- **CSV manual uploads**: Automatic updates are not supported
 
 ## Permissions
 
