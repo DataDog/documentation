@@ -17,6 +17,7 @@ Datadog Disaster Recovery is in Preview, but you can request access! Use this fo
 ## Overview 
 Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals.
 
+
 DDR also allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events, but to also meet your business and regulatory compliance needs.
 
 
@@ -71,7 +72,8 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 {{% collapse-content title=" 2. Confirm the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
 
 #### Confirm the public IDs (optional)
-After the Datadog team has completed the configuration of the designated orgs and shared their public IDs, use the cURL commands from the Datadog [public API endpoint][8] to verify the public IDs of the primary and DDR org. 
+
+After the Datadog team has completed the configuration of the designated orgs, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
 
 #### Link the DDR org to the primary org
@@ -192,7 +194,7 @@ Your Datadog customer success manager will work with you on scheduling dedicated
 {{% /collapse-content %}} <br>
 
 
-#### Test the failover process
+### Test the failover process
 {{% collapse-content title=" 8. Activate and test DDR failover" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
