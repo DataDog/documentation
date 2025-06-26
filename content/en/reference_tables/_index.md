@@ -17,6 +17,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
+- link: 'https://www.datadoghq.com/blog/reference-tables/'
+  tag: 'Blog'
+  text: 'Enrich your existing Datadog telemetry with custom metadata using Reference Tables'
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/'
   tag: 'Blog'
   text: 'Add more context to Cloud SIEM detections and investigations with Datadog Reference Tables'
@@ -27,6 +30,12 @@ further_reading:
 Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata.
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+
+For example, you can:
+
+- **Enrich logs and security data for faster investigations:** Correlate logs, traces, and security events with up-to-date business context—such as customer names, account owners, threat intelligence, or error code descriptions—to accelerate troubleshooting and analysis.
+- **Segment users and resources for targeted analytics and cost management:** Group users, customers, or cloud resources into meaningful segments (like user tiers, teams, or business units) for deeper product analytics and precise cost attribution using tools like Tag Pipelines.
+- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Log Workspaces to perform complex queries, aggregations, and build custom reports without technical expertise.
 
 ## Validation rules
 
