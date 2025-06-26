@@ -156,7 +156,7 @@ If the source code patterns for a service are defined in both a link and an exte
 
 #### Use service file path patterns to track the whole repository
 
-If you wish to detect changes in the whole repository, it is also possible through the appropiate use of file path patterns. In the example below, `"**"` is used. 
+If you wish to detect changes in the whole repository, it is possible through the appropiate use of file path patterns. In the example below, `"**"` is used. 
 
 **Example (schema version v2.2):**
 
@@ -167,9 +167,9 @@ extensions:
       - "**"
 ```
 
-In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes within the root directory path.
+In this case, Code Changes Detection for deployments of the `shopist` service will consider all the commits in the repository's Git history.
 
-<div class="alert alert-warning">When using the `**` path pattern, make sure it is escaped with quotes since the special character `*` is reserved for referring to anchors</div>
+<div class="alert alert-warning">If the pattern consists solely of or starts with <code>**</code>, it should be enclosed in quotes, since the * character is reserved for referencing YAML anchors.</div>
 
 
 ## Further Reading
