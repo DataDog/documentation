@@ -219,7 +219,7 @@ Dataset.as_dataframe(multiindex: bool = True) -> pd.DataFrame
 
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
-| `multiindex` | boolean | If `True`, expands nested dictionaries into [MultiIndex][6] columns. Defaults to `True`. |
+| `multiindex` | Boolean | If `True`, expands nested dictionaries into [MultiIndex][6] columns. Defaults to `True`. |
 
 **Returns**
 
@@ -272,7 +272,7 @@ Experiment.run(jobs: int = 10, raise_errors: bool = False, sample_size: int = No
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
 | `jobs` | int | Number of worker threads used to run the task concurrently. Defaults to 10. |
-| `raise_errors` | boolean | If `True`, stops execution as soon as the first exception from the task is raised.<br/><br/>If `False`, every exception is handled, and the experiment runs continually until finished. |
+| `raise_errors` | Boolean | If `True`, stops execution as soon as the first exception from the task is raised.<br/><br/>If `False`, every exception is handled, and the experiment runs continually until finished. |
 | `sample_size` | int | Number of rows used for the experiment. You can use `sample_size` with `raise_errors` to test before you run a long experiment. |
 
 **Returns**
@@ -300,7 +300,7 @@ Experiment.run_evaluations(evaluators: Optional[List[Callable]] = None, raise_er
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
 | `evaluators` | function[] | List of functions decorated with `@evaluator` that run against all outputs in the results. |
-| `raise_errors` | boolean | If `True`, stops execution as soon as the first exception from the task is raised.<br/><br/>If `False`, every exception is handled, and the experiment runs continually until finished. |
+| `raise_errors` | Boolean | If `True`, stops execution as soon as the first exception from the task is raised.<br/><br/>If `False`, every exception is handled, and the experiment runs continually until finished. |
 
 **Returns**
 
@@ -320,7 +320,7 @@ ExperimentResults.as_dataframe(multiindex: bool = True) -> pd.DataFrame
 
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
-| `multiindex` | boolean | If `True`, expands nested dictionaries into [MultiIndex][6] columns. Defaults to `True`.  |
+| `multiindex` | Boolean | If `True`, expands nested dictionaries into [MultiIndex][6] columns. Defaults to `True`.  |
 
 **Returns**
 
