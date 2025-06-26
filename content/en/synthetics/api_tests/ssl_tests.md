@@ -48,7 +48,7 @@ You may create a test using one of the following options:
    1. Add **Advanced Options** (optional) to your test:
       * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
       * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
-      * **Fail on incomplete certificate chain**: Disables AIA fetching so the test fails if an intermediate certificate is not present in the chain.
+      * **Fail on incomplete certificate chain**: Disables AIA fetching so the test fails if an intermediate certificate is not present in the chain provided by the server.
       * **Timeout**: Specify the amount of time in seconds before the test times out.
       * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
       * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
