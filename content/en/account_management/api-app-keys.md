@@ -89,7 +89,7 @@ As a result:
 - To validate whether an API key is active and usable, call the [/api/v1/validate][18] endpoint.
 - To verify that an application key is active, use the `/api/v2/validate_keys` endpoint with the appropriate key pair.
 
-Attempting to use a newly created key before it is fully propagated may result in temporary authentication errors such as 403 Forbidden.
+Attempting to use a newly created key before it is fully propagated may result in temporary authentication errors such as 403 Forbidden or 401 Unauthorized.
 
 ## Scope application keys
 
