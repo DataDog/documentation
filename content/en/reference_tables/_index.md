@@ -40,7 +40,7 @@ Reference Tables allow you to combine custom metadata with information already i
 Datadog supports the following data sources, including integrations and manual CSV upload:
 
 {{< tabs >}}
-{{% tab "Cloud object storage" %}}
+{{% tab "Cloud storage" %}}
 
 {{% collapse-content title="Manual upload" level="h4" expanded=true id="manual-upload" %}}
 
@@ -50,8 +50,7 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
-{{% /collapse-content %}} 
-
+{{% /collapse-content %}}
 
 {{% collapse-content title="Amazon S3" level="h4" expanded=true id="amazon-s3" %}}
 
@@ -150,7 +149,7 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "SaaS/data platforms" %}}
+{{% tab "Integrations" %}}
 
 {{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
 
