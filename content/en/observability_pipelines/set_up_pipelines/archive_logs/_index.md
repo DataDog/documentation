@@ -21,24 +21,7 @@ Use Observability Pipelines to route ingested logs to a cloud storage solution (
 
 ## Further reading
 
-<<<<<<< Updated upstream
-- [Amazon Data Firehose][12]
-- [Amazon S3][11]
-- [Datadog Agent][1]
-- [Fluentd or Fluent Bit][2]
-- [Google Pub/Sub][3]
-- [HTTP Client][4]
-- [HTTP Server][5]
-- [Kafka][13]
-- [Logstash][6]
-- [Splunk HTTP Event Collector (HEC)][7]
-- [Splunk Heavy or Universal Forwarders (TCP)][8]
-- [Socket (TCP or UDP)][14]
-- [Sumo Logic Hosted Collector][9]
-- [rsylsog or syslog-ng][10]
-=======
 {{< partial name="whats-next/whats-next.html" >}}
->>>>>>> Stashed changes
 
 [1]: /observability_pipelines/archive_logs/datadog_agent
 [2]: /observability_pipelines/archive_logs/fluent
