@@ -102,6 +102,7 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    macos: macOS
     windows: Windows
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
