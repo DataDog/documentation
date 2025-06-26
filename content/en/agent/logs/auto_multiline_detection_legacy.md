@@ -166,7 +166,7 @@ logs_config:
 ### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
-If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][3].
+If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. Then restart the Datadog Agent to apply the new threshold value for newly ingested logs. To find the current threshold value, run the [Agent `status` command][3].
 
 ```yaml
 logs_config:
