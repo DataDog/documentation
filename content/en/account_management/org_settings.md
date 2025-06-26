@@ -141,7 +141,7 @@ The session duration can be configured within the following limits:
 - **Minimum duration:** 1 hour
 - **Maximum duration:** 12 hours
 {{% /site-region %}}
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 - **Minimum duration:** 1 hour
 - **Maximum duration:** 720 hours (30 days)
 {{% /site-region %}}

@@ -254,7 +254,7 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 [Configure the layers][8] for your Lambda function using the ARN in the following format.
 
 ```
-# For us,us3,us5,eu, and ap1 regions
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions

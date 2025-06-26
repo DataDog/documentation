@@ -202,7 +202,7 @@ Add the following snippet during RUM configuration:
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `useSite(DatadogSite)` 
-: Switches target data to EU, US1, US3, US5, US1_FED, and AP1 sites.
+: Switches target data to EU, US1, US3, US5, US1_FED, AP1, and AP2 sites.
 
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
 : Defines the individual batch size for requests sent to Datadog.

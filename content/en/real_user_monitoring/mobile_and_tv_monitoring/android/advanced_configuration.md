@@ -270,7 +270,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 : Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 `useSite(DatadogSite)` 
-: Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+: Switches target data to EU1, US1, US3, US5, US1_FED, AP1 and AP2 sites.
 
 `setFirstPartyHostsWithHeaderType`
 : Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.

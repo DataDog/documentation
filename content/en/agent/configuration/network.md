@@ -79,7 +79,7 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -160,6 +160,16 @@ Other: See [logs endpoints][202]
 {{% site-region region="ap1" %}}
 [Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+Other: See [logs endpoints][202]
+
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+[Logs][200] & [HIPAA logs][201]
+: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
 Other: See [logs endpoints][202]
 
 [200]: /logs/
@@ -277,7 +287,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |

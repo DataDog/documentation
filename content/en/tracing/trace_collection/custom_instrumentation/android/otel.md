@@ -273,6 +273,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                    clientToken = <CLIENT_TOKEN>,
+                    env = <ENV_NAME>,
+                    variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.AP2)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.AP2)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be GDPR compliant, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values [see Tracking Consent][6]:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data

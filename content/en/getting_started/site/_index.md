@@ -41,6 +41,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
+| AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
 
 **Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
 
