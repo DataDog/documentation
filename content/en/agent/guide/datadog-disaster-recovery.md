@@ -15,8 +15,7 @@ Datadog Disaster Recovery is in Preview, but you can request access! Use this fo
 {{< /callout >}}
 
 ## Overview 
-Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site in typically under two hours, enabling you to meet your critical observability availability goals.
-
+Datadog Disaster Recovery (DDR) provides you with observability continuity during events that may impact a cloud service provider region or Datadog services running within a cloud provider region. Using DDR, you can recover live observability at an alternate, functional Datadog site, enabling you to meet your critical observability availability goals.
 
 DDR also allows you to periodically conduct disaster recovery drills to not only test your ability to recover from outage events, but to also meet your business and regulatory compliance needs.
 
@@ -25,7 +24,14 @@ DDR also allows you to periodically conduct disaster recovery drills to not only
 Datadog Agent version **7.54 or above** is required for Datadog Disaster Recovery. 
 
 ### Supported telemetry types and products
-The Agent-based failover description provided on this page supports failover of metrics, traces, and logs telemetry types. It also supports Datadog Infrastructure Monitoring, APM, and Logs products.
+The Agent-based failover description provided on this page supports failover of the following telemetry types and products:
+
+|Supported telemetry |Supported products       |
+|--------------------|-------------------------|
+|Metrics             |Infrastructure Monitoring|
+|Traces              |APM                      |
+|Logs                |Logs                     |
+
 
 <div class="alert alert-info">
 Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the <a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery team</a> to learn about upcoming capabilities and your specific needs if they are not covered above.
@@ -68,10 +74,10 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 
-### Confirm and link your organization
-{{% collapse-content title=" 2. Confirm the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
+### Retrieve the public IDs and link your organization
+{{% collapse-content title=" 2. Retrieve the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
 
-#### Confirm the public IDs (optional)
+#### Retrieve the public IDs
 
 After the Datadog team has completed the configuration of the designated orgs, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
@@ -115,8 +121,21 @@ Go to your [Organization Settings][1] to configure [SAML][9] or Google Login for
 
 **Datadog recommends using Single Sign On (SSO)** to enable all your users to seamlessly login to your Disaster Recovery organization during an outage.
 
-You must invite your users to your Disaster Recovery organization and give them appropriate roles and permissions. Alternatively, to streamline this operation, you can use [Just-in-Time provisioning with SAML][2].
+You must invite each of your users to your Disaster Recovery organization and give them appropriate roles and permissions. Alternatively, to streamline this operation, you can use [Just-in-Time provisioning with SAML][2].
 {{% /collapse-content %}}
+
+
+{{% collapse-content title=" 5. Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
+
+Your cloud integrations must be configured in both Primary and DDR organizations. Because these integrations only run in one Datacenter at a time, **the integrations must run only in the Primary data center.**
+
+During testing, integration telemetry will be spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
+
+During an integration failover, integrations will run only in the DDR data center.
+
+
+{{% /collapse-content %}}
+
 
 
 {{% collapse-content title=" 5. Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
@@ -251,14 +270,9 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% tab "Cloud integrations failover" %}}
 
-For Cloud integration failover:  
-1. Integrations must be configured in both Primary and DDR organizations.
-2. Integrations only run in one Datacenter at a time. Keep in mind that:
-  - Integrations normally run only in the Primary data center.
-  - During an integration failover, integrations will run only in the DDR data center.
-  - During testing, integration telemetry will be spread over both organizations.
-  - Cancelling a failover returns integrations to running in the Primary data center.
-3. Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
+##### Cloud integrations failover
+
+Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
 
 {{% /tab %}}
 {{< /tabs >}}
