@@ -138,7 +138,7 @@ During an integration failover, integrations will run only in the DDR data cente
 
 
 
-{{% collapse-content title=" 5. Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
+{{% collapse-content title=" 6. Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
 Datadog provides a tool called [datadog sync-cli][3] to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
 Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your DDR org. Resources copied to the DDR organization can be edited, but any new syncing overrides changes that differ from the source in the primary organization.
@@ -179,7 +179,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 
-{{% collapse-content title=" 6. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
+{{% collapse-content title=" 7. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
 [Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
 
 Remote Configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
@@ -188,7 +188,7 @@ Remote Configuration is strongly recommended for a more seamless failover contro
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=" 7. Update your Datadog Agent configuration" level="h5" %}}
+{{% collapse-content title=" 8. Update your Datadog Agent configuration" level="h5" %}}
 This step requires that you are on the Agent version **7.54 or higher**. 
 
 Agent **v7.54+** has a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured DDR Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic disaster recovery exercises/drills. 
@@ -214,13 +214,11 @@ Your Datadog customer success manager will work with you on scheduling dedicated
 
 
 ### Test the failover process
-{{% collapse-content title=" 8. Activate and test DDR failover" level="h5" %}}
+{{% collapse-content title=" 9. Activate and test DDR failover in Agent-based environments" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
 {{< tabs >}}
 {{% tab "Agent in non-containerized environments" %}}
-
-##### Agent in non-containerized environments
 
 For Agent deployments in non-containerized environments, use the below Agent CLI commands:
 
@@ -232,7 +230,6 @@ agent config set multi_region_failover.failover_traces true
 {{% /tab %}}
 
 {{% tab "Agent in containerized environments" %}}
-##### Agent in containerized environments
 
 If you are running the Agent in a containerized environment like Kubernetes, the Agent command-line tool can still be used, but it needs to be invoked on the container running the Agent. 
 
@@ -268,18 +265,17 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 ```
 {{% /tab %}}
 
-{{% tab "Cloud integrations failover" %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title=" 10. Activate and test DDR failover in cloud integrations" level="h5" %}}
 
 ##### Cloud integrations failover
 
 Failing over integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
 
-{{% /tab %}}
-{{< /tabs >}}
-
 {{% /collapse-content %}}<br>
-
-
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
