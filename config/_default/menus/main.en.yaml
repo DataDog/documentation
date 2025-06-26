@@ -4579,27 +4579,17 @@ menu:
       parent: llm_obs
       identifier: llm_obs_setup
       weight: 3
-    - name: Python SDK
-      url: llm_observability/sdk_python
+    - name: LLM Obs SDK
+      url: llm_observability/sdk
       parent: llm_obs
-      identifier: llm_obs_python
+      identifier: llm_obs_sdk
       weight: 4
     - name: Auto Instrumentation
-      url: llm_observability/sdk_python/auto_instrumentation
-      parent: llm_obs_python
-      identifier: llm_obs_setup_auto_instrumentation_python
+      url: llm_observability/sdk/auto_instrumentation
+      parent: llm_obs_sdk
+      identifier: llm_obs_setup_auto_instrumentation
       weight: 401
-    - name: Node.js SDK
-      url: llm_observability/sdk_nodejs
-      parent: llm_obs
-      identifier: llm_obs_nodejs
-      weight: 5
-    - name: Auto Instrumentation
-      url: llm_observability/sdk_nodejs/auto_instrumentation
-      parent: llm_obs_nodejs
-      identifier: llm_obs_setup_auto_instrumentation_nodejs
-      weight: 501
-    - name: API
+    - name: LLM Obs API
       url: llm_observability/setup/api/
       parent: llm_obs
       identifier: llm_obs_api
