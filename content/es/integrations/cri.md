@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - rastreo
-- Kubernetes
+- kubernetes
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
@@ -44,9 +44,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
+  - Categoría::Contenedores
   - Categoría::Kubernetes
-  - Supported OS::Linux
+  - Sistema operativo compatible::Linux
   - Offering::Integration
   configuration: README.md#Configuración
   description: Seguimiento de todas tus métricas de CRI con Datadog
@@ -56,14 +56,14 @@ tile:
   title: CRI
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
 
 Este check monitoriza la interfaz de tiempo de ejecución de un contenedor
 
-## Configuración
+## Configurar
 
 ### Instalación
 

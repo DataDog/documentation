@@ -12,10 +12,6 @@ further_reading:
   text: "Build Workflows"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 This page describes rate limits and throttles that apply to Workflow Automation.
 
 ## Account-level limits
