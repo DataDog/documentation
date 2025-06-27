@@ -207,7 +207,7 @@ Here is an example on how you can run the command when generating the image that
 ```
 
 
-This command correlates images from deployment resources. When Datadog receives a deployment, if multiple images are present and more than one of the images is correlated, Datadog takes the image that contains the service name.
+This command correlates images from deployment resources. When Datadog receives a deployment, if multiple images are present and more than one of the images is correlated, Datadog takes the image that contains the service name. The correlation only works for deployment resources.
 
 
 
