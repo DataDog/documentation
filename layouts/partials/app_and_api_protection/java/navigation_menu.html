@@ -1,0 +1,65 @@
+{{ $showSingleStep := .showSingleStep | default true }}
+<div class="navigation-menu">
+  <div class="nav-container">
+    {{ if $showSingleStep }}
+    <h4>You have the possibility of enabling App and API Protection through <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm" class="single-step-link">Single Step Instrumentation</a></b></h4>
+    <h3>Otherwise, you can also enable it :</h3>
+    {{ else }}
+    <h3>Enable App and API Protection:</h3>
+    {{ end }}
+    <ul class="nav-list">
+        <ul>
+          <li><a href="#automatically-enabling-app-and-api-protection-through-remote-configuration">Automatically Through Remote Configuration</a></li>
+          <li><a href="#manually-enabling-app-and-api-protection-monitoring">Manually</a></li>
+        </ul>
+    </ul>
+  </div>
+</div>
+
+<style>
+.navigation-menu {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.nav-container h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li {
+  margin-bottom: 8px;
+}
+
+.nav-list ul {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.nav-list a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-list a:hover {
+  text-decoration: underline;
+  color: #004499;
+}
+
+.single-step-link {
+  text-decoration: underline !important;
+}
+</style>
