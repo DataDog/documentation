@@ -11,7 +11,13 @@ further_reading:
 
 ## Overview
 
-When you create a pipeline in the Observability Pipelines UI, select one of the out-the-box templates to build and deploy pipelines based on your use case. The templates are built for the following use cases:
+When you create a pipeline in the Observability Pipelines UI, select one of the out-the-box templates to build and deploy pipelines based on your use case.
+
+{{< img src="observability_pipelines/templates_20241003.png" alt="The Observability Pipelines UI showing the seven templates" style="width:100%;" >}}
+
+## Templates
+
+The templates are built for the following use cases:
 
 ### Archive Logs
 

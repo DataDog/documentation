@@ -85,7 +85,7 @@ Build pipelines with out-of-the-box templates for the following [use cases][6]:
 
 ### Build pipelines in the Observability Pipelines UI
 
-{{% observability_pipelines/use_case_images/generate_metrics %}}
+{{< img src="observability_pipelines/dual_ship_pipeline.png" alt="Pipeline with one source connect to two processor groups and two destinations" style="width:100%;" >}}
 
 Build your pipelines in the Observability Pipelines UI. After you select one of the out-the-box templates, the onboarding workflow walks you through setting up your source, processors, and destinations. The installation page provides instructions on how to install the Worker in your environment (Docker, Kubernetes, Linux, or CloudFormation).
 

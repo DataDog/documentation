@@ -22,6 +22,8 @@ further_reading:
 
 In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud storage provider and another specified destination.
 
+{{< img src="observability_pipelines/archive_log_pipeline.png" alt="Pipeline with one source connect to two processor groups and two destinations" style="width:100%;" >}}
+
 ## Set up a pipeline
 
 {{< tabs >}}
@@ -41,10 +43,14 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 1. Select and set up your [source][1].
 1. Select and set up your [destinations][2].
 1. Set up your [processors][3].
-1. If you want to add another set of processors and destinations, click the plus sign (+) to the left of the processors to add another set of processors and destinations to the source.
+1. If you want to add another set of processors and destinations, click the plus sign (**+**) to the left of the processors to add another set of processors and destinations to the source.
     - To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
-1. If you want to add another set of destinations to a processor group, click the plus sign (+) to the left of the destinations for that processor group.
+1. If you want to add an additional destination to a processor group, click the plus sign (**+**) to the left of the existing destination for that processor group.
     - To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete destination**. If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed. If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
+    - **Notes**:
+      - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
+      - You can add a total of three destinations for a pipeline.
+      - A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
 1. [Install the Observability Pipelines Worker][12].
 1. Enable monitors for your pipeline.
 
