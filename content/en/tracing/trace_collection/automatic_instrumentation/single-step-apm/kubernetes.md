@@ -492,6 +492,131 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 {{% /tab %}}
 {{< /tabs >}}
 
+## Best practices
+
+To have granular control on where APM is activated and minimize overhead, consider the following best practices.
+
+{{% collapse-content title="Opt in with labels for APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+
+| Mode    | Behavior    | When to use |
+| ---  | ----------- | ----------- |
+| Default | All supported processes across the cluster receive an APM SDK. | Quick prototypes or tiny clusters with uniform applications. |
+| Opt-in | Explicitly list the namespaces/pods to be instrumented and leverage [workload selection][4] to only instrument those specific namespaces/pods. | Production clusters, staged roll‑outs, cost‑sensitive environments. |
+
+#### Opt-in workflow examples
+
+Decide which namespaces or pods require tracing first. Create or reuse meaningful Kubernetes labels (e.g. `datadoghq.com/apm-instrumentation: "enabled"`).
+
+Example of controlling pods to be instrumented:
+- `enabled: true` turns SSI on for the whole cluster.
+- `podSelector` - means nothing is injected until a pod carries the label `datadoghq.com/apm-instrumentation: "enabled"`.
+
+Example Helm config:
+```
+# Enable Single Step Instrumentation in “opt-in” mode
+features:
+  apm:
+    instrumentation:
+      enabled: true
+      # Everything under `targets:` is *optional* and only runs when the
+      # workload carries the opt-in label below.
+      targets:
+        - name: apm-instrumented #Just the name of the target block. Has no affect
+          podSelector:
+            matchLabels:
+              datadoghq.com/apm-instrumentation: "enabled"
+```
+
+Example deployment:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkout-api
+  labels:
+    app: checkout-api
+    datadoghq.com/apm-instrumentation: "enabled"   # ← opt-in label (cluster-wide)
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: checkout-api
+  template:
+    metadata:
+      labels:
+        app: checkout-api
+        datadoghq.com/apm-instrumentation: "enabled"   # ← must be on *template* too
+        # Unified Service Tags (recommended)
+        tags.datadoghq.com/service: "checkout-api"
+        tags.datadoghq.com/env:     "prod"
+        tags.datadoghq.com/version: "2025-06-10"
+    spec:
+      containers:
+        - name: api
+          image: my-registry/checkout:latest
+          ports:
+            - containerPort: 8080
+```
+
+**Example of controlling namespaces to be instrumented:**
+
+If every workload in a namespace should be instrumented, label the namespace once:
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: payments
+  labels:
+    datadoghq.com/apm-instrumentation: "enabled"
+```
+
+Adjust the Helm values target to a namespace selector:
+```
+targets:
+  - name: payments-ns
+    namespaceSelector:
+      matchNames: ["payments"]
+```
+
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Control APM SDKs" level="h3" expanded=false id="id-for-anchoring" %}}
+
+Controlling which APM language SDKs and versions are loaded is key. This minimizes init-containers, reduces image sizes, and allows for controlled tracer upgrades for compliance.
+
+Use the ddTraceVersions value to control APM SDKs and their versions. 
+
+Example: Only need the Java APM SDK in a namespace since only Java applications are running in the namespace.
+
+```
+targets:
+  - name: login-service
+    namespaceSelector:
+      matchNames: ["login-service"]
+    ddTraceVersions:
+      java: "1.48.2"    # pin version
+```
+
+Default
+
+```
+# features.apm.instrumentation enabled elsewhere
+targets:
+  - name: default-target          # tag any pod *without* an override
+    ddTraceVersions:
+      java:   "1"   # stay on latest v1.x
+      python: "3"   # stay on latest v3.x
+      js:     "5"   # NodeJS
+      php:    "1"
+      dotnet: "3"
+```
+
+{{% /collapse-content %}}
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -499,6 +624,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/glossary/#instrumentation
+[4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 
