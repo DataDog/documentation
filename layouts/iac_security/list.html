@@ -232,21 +232,25 @@
                             {{ $filter_info := (printf "%s,%s,%s,%s" .Params.meta.cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.cloud_provider) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
-                            class="rule d-flex justify-content-between border p-1 position-relative"
+                            class="rule container justify-content-between border p-1 position-relative"
                             data-info="{{ $rule_info }}"
                             data-name="{{ .Title }}"
                             x-cloak x-show.important="shouldShowRule($el)"
                             >
-                                <div class="rule-name-container d-flex align-items-center">
-                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $rule_cloud_provider "variant" "avatar") }}
-                                    {{ if $int_logo }}
-                                    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
-                                    {{ end }}
-                                    <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <span class="d-none d-md-block">{{ $rule_id }}</span>
-                                    <div class="ruleset-header__arrow fw-semibold ms-1">></div>
+                                <div class="row">
+                                    <div class="rule-name-container col-8 d-flex align-items-center">
+                                        {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $rule_cloud_provider "variant" "avatar") }}
+                                        {{ if $int_logo }}
+                                        <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                        {{ end }}
+                                        <a href="{{.Permalink}}" class="stretched-link">{{.Params.meta.display_name}}</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{.Permalink}}" class="stretched-link d-flex justify-content-end" data-bs-toggle="tooltip" title="{{ $rule_id }}">
+                                            <span class="d-none d-md-block text-truncate">{{ $rule_id }}</span>
+                                            <div class="ruleset-header__arrow fw-semibold ms-1">></div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             
