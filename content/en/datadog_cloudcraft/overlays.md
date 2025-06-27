@@ -73,12 +73,12 @@ The observability overlay tracks coverage for the following products:
 
 The security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays security findings detected by Cloud Security, helping you:
 
-- Identify security issues directly in infrastructure diagrams.
+- Identify security issues directly in infrastructure diagrams
 - Analyze findings in context, so you can prioritize remediation:
   - Misconfigurations
   - Identity risks
   - Sensitive data (S3 buckets only)
-- Assess your security posture before deploying applications.
+- Assess your security posture before deploying applications
 
 This view is ideal for mapping attack surfaces during penetration tests or security audits. To keep the diagram focused, components like EBS volumes and NAT Gateways are excluded. 
 

@@ -2330,6 +2330,11 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
+    - name: Feature Flags
+      url: change_tracking/feature_flags/
+      parent: change_tracking
+      identifier: change_tracking_feature_flags
+      weight: 1
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2926,7 +2931,7 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
-    - name: Autoscaling
+    - name: Kubernetes Autoscaling
       url: containers/monitoring/autoscaling
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_autoscaling
@@ -5881,10 +5886,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
-    - name: Tags Processor
-      url: observability_pipelines/processors/tags_processor
+    - name: Tags
+      url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags_processor
+      identifier: observability_pipelines_processors_tags
       weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle
