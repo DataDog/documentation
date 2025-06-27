@@ -42,7 +42,7 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 To enable Datadog Disaster Recovery:
 
 1. [Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
-2. [Confirm and link your organization](#confirm-and-link-your-organization)
+2. [Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
 3. [Configure your DDR organization](#configure-your-ddr-organization)
 4. [Test the failover process](#test-the-failover-process)
 
@@ -62,7 +62,7 @@ If you're also sending telemetry to Datadog using cloud provider integrations, y
 Datadog does not use cloud providers to receive telemetry data while the DDR site is passive.
 
 #### Share the DDR org with your Customer Success Manager
-Share your organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure your new organization to be your DDR failover organization. 
+Share your DDR organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure it to be your DDR failover organization. 
 
 Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need help to select the DDR Datadog site and configure your new organization to be your DDR failover organization.
 
@@ -108,7 +108,7 @@ curl -v -H "Content-Type: application/json" -H
 
 ### Configure your DDR organization
 {{% collapse-content title=" 3. Create your Datadog API and App key for syncing" level="h5" %}}
-In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful in [steps 5][id="using-sync-cli-tool"] to copy dashboards and monitors between Datadog sites. 
+In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful in [steps 6][id="using-sync-cli-tool"] to copy dashboards and monitors between Datadog sites. 
 
 <div class="alert alert-info">
 Datadog can help copy the API key signatures for your Agents to the DDR back-up account. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> for any questions regarding this.
@@ -139,7 +139,9 @@ During an integration failover, integrations will run only in the DDR data cente
 
 
 {{% collapse-content title=" 6. Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
-Datadog provides a tool called [datadog sync-cli][3] to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
+Datadog provides a tool called [datadog sync-cli][3] to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
+
+Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
 Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your DDR org. Resources copied to the DDR organization can be edited, but any new syncing overrides changes that differ from the source in the primary organization.
 
@@ -231,7 +233,15 @@ agent config set multi_region_failover.failover_traces true
 
 {{% tab "Agent in containerized environments" %}}
 
-If you are running the Agent in a containerized environment like Kubernetes, the Agent command-line tool can still be used, but it needs to be invoked on the container running the Agent. 
+If you are running the Agent in a containerized environment like Kubernetes, the Agent command-line tool can still be used, but it needs to be invoked on the container running the Agent. You can make changes using one of the following depending on your needs: 
+
+- [kubectl](#using-kubectl)
+- [Agent configuration file (`datadog.yaml`)](#using-the-agent-configuration-file)
+- [Helm chart or Datadog Operator](#using-the-helm-chart-or-datadog-operator)
+
+<br>
+
+ ##### Using kubectl
 
 Below is an example of using `kubectl` to fail over metrics and logs for a Datadog Agent pod deployed via either the official Helm chart or Datadog Operator. The `<POD_NAME>` should be replaced with the name of the Agent pod:
 
@@ -240,7 +250,9 @@ kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failo
 kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_logs true
 kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_traces true
 ```
+<br>
 
+ ##### Using the Agent configuration file
 Alternatively, you can specify the below settings in the main Agent configuration file (`datadog.yaml`) and restart the Datadog Agent for the changes to apply:
 
 ```shell
@@ -252,6 +264,9 @@ multi_region_failover:
   site: NEW_ORG_SITE
   api_key: NEW_SITE_API_KEY
 ```
+<br>
+
+ ##### Using the Helm chart or Datadog Operator
 
 You can make similar changes with either the official Helm chart or Datadog Operator if you need to specify a custom configuration. Otherwise, you can pass the settings as environment variables:
 
