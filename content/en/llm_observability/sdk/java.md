@@ -1,5 +1,7 @@
 ---
 title: LLM Observability Java SDK Reference
+aliases:
+    - /llm_observability/setup/sdk/java
 private: true
 ---
 
