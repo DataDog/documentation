@@ -29,7 +29,7 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
-Check out this [interactive walk through][17] of our custom metrics governance tools. 
+Check out this [interactive walk through][17] of Datadog's custom metrics governance tools. 
 
 ## Prerequisites
 

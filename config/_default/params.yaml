@@ -130,8 +130,6 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
-    ddsql_preview: "DDSQL (Preview)"
-    ddsql_default: "DDSQL"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -286,4 +284,5 @@ unsupported_sites:
   test_optimization: [gov]
   universal_service_monitoring: [gov]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,gov]
+  workflow-automation: [gov]
   workflows: [gov]

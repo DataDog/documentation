@@ -439,11 +439,6 @@ menu:
       url: agent/logs/log_transport
       parent: agent_logs
       weight: 503
-    - name: Multi-Line Detection (Legacy)
-      identifier: multi_line_detection_legacy
-      url: agent/logs/auto_multiline_detection_legacy
-      parent: agent_logs
-      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
@@ -2118,6 +2113,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
       weight: 402
+    - name: DORA Metrics
+      url: internal_developer_portal/eng_reports/dora_metrics
+      parent: idp_eng_reports
+      identifier: eng_reports_dora_metrics
+      weight: 403
     - name: Overview Pages
       url: internal_developer_portal/overview_pages
       parent: internal_developer_portal
