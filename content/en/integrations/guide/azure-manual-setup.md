@@ -47,7 +47,7 @@ Your Microsoft Entra ID user needs the following permissions:
 
 ##### Permission to assign `Monitoring Reader` permissions
 
-This permission is included in all of the [Azure built-in roles in the Privileged category][14]. If you want to create a custom role, the required permission is `Microsoft.Authorization/roleAssignments/write`.
+This permission is included in all of the [Azure built-in roles in the Privileged category][14]. If you want to use a custom role, the required permission is `Microsoft.Authorization/roleAssignments/write`.
 
 ##### Permission to add and grant consent for Graph API permissions
 
