@@ -31,9 +31,9 @@ For further context, the following could be considered a wireframe:
 
 ### Recording algorithm
 
-Wireframes are constructed during the process of traverseing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. In the below example, the iOS app screen is built with 78 native _views_, but it can be broken into 19 wireframes:
+Wireframes are constructed during the process of traverseing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. In the below example, the Shopist app screen is built with 78 native _views_, but it can be broken into 25 wireframes:
 
-{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-1.png" alt="An example of how the iOS app screen contains 78 native views, but is made up of 19 wireframes." style="width:30%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/recording-algorithm-2.png" alt="An example of how the Shopist app screen contains 78 native views, but is made up of 25 wireframes." style="width:70%;">}}
 
 These wireframes are recorded while **preserving their rendering order** (back-to-front) and **using absolute positioning** (in screen coordinates). There is no "tree structure", nor child-parent relationship between wireframes, therefore making the structure "flat".
 
@@ -41,23 +41,23 @@ These wireframes are recorded while **preserving their rendering order** (back-t
 
 To display the Replay of a single frame on Datadog, the Session Replay player iterates through all wireframes and renders one another into the viewport using geometry information (x, y, width, height) from each one. **It respects wireframes rendering order**, so that succeeding ones overdraw existing portions of the viewport.
 
-For instance, the screenshot displayed above is reconstructed in 19 passes:
+For instance, the screenshot displayed above is reconstructed in 25 passes:
 
 | Iteration | 1 | 2 | 3 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-1.png" alt="An example of a 'geometry' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-1.png" alt="An example of a 'geometry' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
 
 The first wireframe dictates the viewport size, enabling the Session Replay player to properly represent the device's screen size and orientation (landscape / portrait).
 
-| Iteration | 4 | 5-9 | 10-12 |
+| Iteration | 4 | 5-11 | 12-13 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-4.png" alt="An example of a 'geometry', 'image, and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-5-9-1.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-10-12.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'geometry', 'image, and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
 
 Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance semi-transparent elements).
 
-| Iteration | 13-19 | Final result |
+| Iteration | 14-25 | Final result |
 |-----------|-------|--------------|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-13-19.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/how-it-works-iteration-final-result.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-7.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-final.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} |
 
 ### Full and incremental snapshots
 
