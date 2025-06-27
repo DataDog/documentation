@@ -2,9 +2,9 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/internal-developer-portal/"
-  tag: "Blog"
-  text: "Ship software quickly and confidently with Datadog IDP"
+- link: "'getting_started/internal_developer_portal/"
+  tag: "Documentation"
+  text: "Getting Started with Internal Developer Portal"
 - link: "https://www.datadoghq.com/blog/software-catalog"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
@@ -32,8 +32,7 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 - [Self-Service Actions][2] and [Scorecards][3] translate platform policies into one-click tasks, ensuring every change meets observability, security, and production criteria. 
 - Built-in [Engineering Reports][4] give platform engineers and leaders real-time visibility into software quality, standards adoption, and developer experience, making it easy to identify gaps and drive data-backed decisions.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
-{{< /callout >}}
+If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
 ## Common use cases
 
@@ -61,3 +60,4 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 [2]: /internal_developer_portal/self_service_actions
 [3]: /internal_developer_portal/scorecards
 [4]: /internal_developer_portal/eng_reports
+[5]: /getting_started/internal_developer_portal/
