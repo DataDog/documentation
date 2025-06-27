@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayAppendNoPreserve",
+  "processors": [
+    {
+      "type": "array-processor",
+      "is_enabled": true,
+      "name": "append_ip_and_remove_source",
+      "operation": {
+        "type": "append",
+        "source": "network.client.ip",
+        "target": "sourceIps",
+        "preserve_source": false
+      }
+    }
+  ],
+  "tags": []
+}

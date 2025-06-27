@@ -1,0 +1,21 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArraySelect",
+  "processors": [
+    {
+      "type": "array-processor",
+      "is_enabled": true,
+      "name": "extract_referrer",
+      "operation": {
+        "type": "select",
+        "source": "httpRequest.headers",
+        "target": "referrer",
+        "filter": "name:Referrer",
+        "value_to_extract": "value"
+      }
+    }
+  ],
+  "tags": []
+}
