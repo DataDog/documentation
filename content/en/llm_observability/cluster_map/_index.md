@@ -10,10 +10,6 @@ further_reading:
   text: "Learn about LLM Observability Key Terms and Concepts"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information. 
@@ -48,5 +44,5 @@ Select a topic cluster from the list to examine how inputs or outputs about spec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/clusters
-[2]: /llm_observability/configuration/#enter-a-topic
+[2]: /llm_observability/evaluations/ootb_evaluations/#enter-a-topic
 [3]: /llm_observability/terms/#evaluations

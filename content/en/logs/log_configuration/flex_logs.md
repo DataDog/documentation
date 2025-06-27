@@ -28,6 +28,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
   tag: "blog"
   text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/monitor-flex-compute-usage/"
+  tag: "Blog"
+  text: "Monitor and optimize your Flex Logs compute usage"
+- link: "https://www.datadoghq.com/blog/flex-logs/"
+  tag: "Blog"
+  text: "Store and analyze high-volume logs efficiently with Flex Logs"
 ---
 
 ## Overview
@@ -130,7 +136,7 @@ To disable Flex Logs:
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. 
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click **Save**.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 

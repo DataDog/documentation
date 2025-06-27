@@ -13,10 +13,6 @@ further_reading:
   text: "Troubleshooting RAG-based LLM applications"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This guide explains how you can use both LLM Observability and APM to link LLM Observability and APM [spans][6] in Datadog. 

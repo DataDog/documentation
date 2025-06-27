@@ -7,24 +7,22 @@ aliases:
   - /security/guide/how-appsec-works/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
-Datadog App and API Protection provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
+Datadog App and API Protection (AAP) provides observability into application and API-level attacks that aim to exploit vulnerabilities and abuse app business logic, and observability into any bad actors targeting your systems. AAP performs actions such as the following:
 
-- **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
-- **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
-- **Security signals**: Automatically generates security signals when attacks or business logic abuses are detected, focusing on meaningful threats rather than individual attempts.
-- **Notification Options**: Offers notifications through Slack, email, or PagerDuty based on security signal settings.
-- **Embedded security**: Integrated within the application, providing better threat identification and classification by accessing trace data.
-- **Enhanced WAF functionality**: Functions like a Web Application Firewall (WAF) but with additional application context, improving accuracy and reducing false positives.
+- Detects and monitors application and API-level attacks
+- Flags traces containing attack attempts using APM data
+- Highlights exposed services in security views (Software Catalog, Service Page, Traces)
+- Identifies bad actors by collecting client IPs and user info
+- Provides automatic threat pattern updates and security signals
+- Supports built-in protection and attack qualification
+- Offers visibility into API threats and attack details
+- Helps identify and respond to vulnerabilities like Log4Shell
 
 ### Identify services exposed to application attacks
 
-Datadog App and API Protection [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
+Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Software Catalog][2], [Service Page][3], [Traces][4]).
 
@@ -130,15 +128,14 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [8]: /security/application_security/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
 [10]: /tracing/configure_data_security/?tab=http
-[11]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
+[11]: /security/application_security/policies/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /security/cloud_siem/
-[17]: /security/application_security/threats/library_configuration/#data-security-considerations
-[25]: /security/application_security/how-it-works/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[17]: /security/application_security/policies/library_configuration/#data-security-considerations
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
-[29]: https://docs.datadoghq.com/security/code_security/
+[29]: /security/code_security/

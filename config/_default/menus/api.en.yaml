@@ -1755,6 +1755,97 @@ menu:
       url: /api/latest/monitors/
       identifier: monitors
       generated: true
+    - name: Validate an existing monitor user template
+      url: '#validate-an-existing-monitor-user-template'
+      identifier: monitors-validate-an-existing-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateExistingMonitorUserTemplate
+        unstable:
+          - v2
+        order: 25
+    - name: Update a monitor user template to a new version
+      url: '#update-a-monitor-user-template-to-a-new-version'
+      identifier: monitors-update-a-monitor-user-template-to-a-new-version
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 22
+    - name: Get a monitor user template
+      url: '#get-a-monitor-user-template'
+      identifier: monitors-get-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorUserTemplate
+        unstable:
+          - v2
+        order: 19
+    - name: Delete a monitor user template
+      url: '#delete-a-monitor-user-template'
+      identifier: monitors-delete-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorUserTemplate
+        unstable:
+          - v2
+        order: 23
+    - name: Validate a monitor user template
+      url: '#validate-a-monitor-user-template'
+      identifier: monitors-validate-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 24
+    - name: Create a monitor user template
+      url: '#create-a-monitor-user-template'
+      identifier: monitors-create-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 21
+    - name: Get all monitor user templates
+      url: '#get-all-monitor-user-templates'
+      identifier: monitors-get-all-monitor-user-templates
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMonitorUserTemplates
+        unstable:
+          - v2
+        order: 20
     - name: Edit a monitor configuration policy
       url: '#edit-a-monitor-configuration-policy'
       identifier: monitors-edit-a-monitor-configuration-policy
@@ -2863,6 +2954,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update resource filters
+      url: '#update-resource-filters'
+      identifier: security-monitoring-update-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateResourceEvaluationFilters
+        unstable: []
+        order: 27
+    - name: List resource filters
+      url: '#list-resource-filters'
+      identifier: security-monitoring-list-resource-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetResourceEvaluationFilters
+        unstable: []
+        order: 26
     - name: Update a custom framework
       url: '#update-a-custom-framework'
       identifier: security-monitoring-update-a-custom-framework
@@ -4860,6 +4975,54 @@ menu:
           - CreateActionConnection
         unstable: []
         order: 2
+    - name: Register a new App Key
+      url: '#register-a-new-app-key'
+      identifier: action-connection-register-a-new-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterAppKey
+        unstable: []
+        order: 5
+    - name: Get an existing App Key Registration
+      url: '#get-an-existing-app-key-registration'
+      identifier: action-connection-get-an-existing-app-key-registration
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAppKeyRegistration
+        unstable: []
+        order: 8
+    - name: Unregister an App Key
+      url: '#unregister-an-app-key'
+      identifier: action-connection-unregister-an-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnregisterAppKey
+        unstable: []
+        order: 7
+    - name: List App Key Registrations
+      url: '#list-app-key-registrations'
+      identifier: action-connection-list-app-key-registrations
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppKeyRegistrations
+        unstable: []
+        order: 6
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
@@ -6239,9 +6402,68 @@ menu:
           - v2
         operationids:
           - CreateDORAIncident
-        unstable:
+        unstable: []
+        order: 2
+    - name: Get a failure event
+      url: '#get-a-failure-event'
+      identifier: dora-metrics-get-a-failure-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
           - v2
+        operationids:
+          - GetDORAFailure
+        unstable: []
+        order: 6
+    - name: Get a list of failure events
+      url: '#get-a-list-of-failure-events'
+      identifier: dora-metrics-get-a-list-of-failure-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORAFailures
+        unstable: []
         order: 4
+    - name: Send a failure event for DORA Metrics
+      url: '#send-a-failure-event-for-dora-metrics'
+      identifier: dora-metrics-send-a-failure-event-for-dora-metrics
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDORAFailure
+        unstable: []
+        order: 2
+    - name: Get a deployment event
+      url: '#get-a-deployment-event'
+      identifier: dora-metrics-get-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORADeployment
+        unstable: []
+        order: 5
+    - name: Get a list of deployment events
+      url: '#get-a-list-of-deployment-events'
+      identifier: dora-metrics-get-a-list-of-deployment-events
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORADeployments
+        unstable: []
+        order: 3
     - name: Send a deployment event for DORA Metrics
       url: '#send-a-deployment-event-for-dora-metrics'
       identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
@@ -6252,9 +6474,8 @@ menu:
           - v2
         operationids:
           - CreateDORADeployment
-        unstable:
-          - v2
-        order: 4
+        unstable: []
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -7612,7 +7833,7 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
-    - name: Set on-call team routing rules
+    - name: Set On-Call team routing rules
       url: '#set-on-call-team-routing-rules'
       identifier: on-call-set-on-call-team-routing-rules
       parent: on-call
@@ -7624,7 +7845,7 @@ menu:
           - SetOnCallTeamRoutingRules
         unstable: []
         order: 10
-    - name: Get on-call team routing rules
+    - name: Get On-Call team routing rules
       url: '#get-on-call-team-routing-rules'
       identifier: on-call-get-on-call-team-routing-rules
       parent: on-call
@@ -7636,6 +7857,18 @@ menu:
           - GetOnCallTeamRoutingRules
         unstable: []
         order: 9
+    - name: Get team on-call users
+      url: '#get-team-on-call-users'
+      identifier: on-call-get-team-on-call-users
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamOnCallUsers
+        unstable: []
+        order: 12
     - name: Get the schedule on-call user
       url: '#get-the-schedule-on-call-user'
       identifier: on-call-get-the-schedule-on-call-user
@@ -7648,7 +7881,7 @@ menu:
           - GetScheduleOnCallUser
         unstable: []
         order: 11
-    - name: Update on-call schedule
+    - name: Update On-Call schedule
       url: '#update-on-call-schedule'
       identifier: on-call-update-on-call-schedule
       parent: on-call
@@ -7660,7 +7893,7 @@ menu:
           - UpdateOnCallSchedule
         unstable: []
         order: 4
-    - name: Get on-call schedule
+    - name: Get On-Call schedule
       url: '#get-on-call-schedule'
       identifier: on-call-get-on-call-schedule
       parent: on-call
@@ -7672,7 +7905,7 @@ menu:
           - GetOnCallSchedule
         unstable: []
         order: 2
-    - name: Delete on-call schedule
+    - name: Delete On-Call schedule
       url: '#delete-on-call-schedule'
       identifier: on-call-delete-on-call-schedule
       parent: on-call
@@ -7684,7 +7917,7 @@ menu:
           - DeleteOnCallSchedule
         unstable: []
         order: 3
-    - name: Create on-call schedule
+    - name: Create On-Call schedule
       url: '#create-on-call-schedule'
       identifier: on-call-create-on-call-schedule
       parent: on-call
@@ -7696,7 +7929,7 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
-    - name: Update on-call escalation policy
+    - name: Update On-Call escalation policy
       url: '#update-on-call-escalation-policy'
       identifier: on-call-update-on-call-escalation-policy
       parent: on-call
@@ -7708,7 +7941,7 @@ menu:
           - UpdateOnCallEscalationPolicy
         unstable: []
         order: 6
-    - name: Get on-call escalation policy
+    - name: Get On-Call escalation policy
       url: '#get-on-call-escalation-policy'
       identifier: on-call-get-on-call-escalation-policy
       parent: on-call
@@ -7720,7 +7953,7 @@ menu:
           - GetOnCallEscalationPolicy
         unstable: []
         order: 7
-    - name: Delete on-call escalation policy
+    - name: Delete On-Call escalation policy
       url: '#delete-on-call-escalation-policy'
       identifier: on-call-delete-on-call-escalation-policy
       parent: on-call
@@ -7732,7 +7965,7 @@ menu:
           - DeleteOnCallEscalationPolicy
         unstable: []
         order: 8
-    - name: Create on-call escalation policy
+    - name: Create On-Call escalation policy
       url: '#create-on-call-escalation-policy'
       identifier: on-call-create-on-call-escalation-policy
       parent: on-call
@@ -8854,6 +9087,54 @@ menu:
       url: /api/latest/software-catalog/
       identifier: software-catalog
       generated: true
+    - name: Get a list of entity relations
+      url: '#get-a-list-of-entity-relations'
+      identifier: software-catalog-get-a-list-of-entity-relations
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogRelation
+        unstable: []
+        order: 3
+    - name: Delete a single kind
+      url: '#delete-a-single-kind'
+      identifier: software-catalog-delete-a-single-kind
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogKind
+        unstable: []
+        order: 6
+    - name: Create or update kinds
+      url: '#create-or-update-kinds'
+      identifier: software-catalog-create-or-update-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogKind
+        unstable: []
+        order: 5
+    - name: Get a list of entity kinds
+      url: '#get-a-list-of-entity-kinds'
+      identifier: software-catalog-get-a-list-of-entity-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogKind
+        unstable: []
+        order: 4
     - name: Delete a single entity
       url: '#delete-a-single-entity'
       identifier: software-catalog-delete-a-single-entity
@@ -9009,7 +9290,7 @@ menu:
         operationids:
           - GetUserMemberships
         unstable: []
-        order: 1
+        order: 19
     - name: Update permission setting for team
       url: '#update-permission-setting-for-team'
       identifier: teams-update-permission-setting-for-team
@@ -9178,6 +9459,45 @@ menu:
           - DeleteTeam
         unstable: []
         order: 5
+    - name: Remove a member team
+      url: '#remove-a-member-team'
+      identifier: teams-remove-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveMemberTeam
+        unstable:
+          - v2
+        order: 22
+    - name: Add a member team
+      url: '#add-a-member-team'
+      identifier: teams-add-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddMemberTeam
+        unstable:
+          - v2
+        order: 20
+    - name: Get all member teams
+      url: '#get-all-member-teams'
+      identifier: teams-get-all-member-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMemberTeams
+        unstable:
+          - v2
+        order: 21
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

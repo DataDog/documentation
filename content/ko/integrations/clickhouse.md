@@ -24,10 +24,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 캐싱(caching)
-- 데이터 저장
+- 캐싱
+- 데이터 저장소
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 5.0.0
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: clickhouse
@@ -43,18 +43,18 @@ public_title: ClickHouse
 short_description: ClickHouse 클러스터의 서비스 상태 및 성능을 모니터링하세요.
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::캐싱(Caching)
-  - 카테고리::데이터 저장
-  - 카테고리::로그 수집
-  - 지원 OS::Linux
-  - 지원 OS::Windows
-  - 지원 OS::macOS
-  - 제공::통합
+  - Category::Caching
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: ClickHouse 클러스터의 서비스 상태 및 성능을 모니터링하세요.
   media: []
@@ -72,30 +72,30 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
 ClickHouse 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다. 서버에 추가 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 #### 메트릭 수집
 
 1. ClickHouse 성능 데이터 수집을 시작하려면 에이전트 구성 디렉터리 루트의 `conf.d/` 폴더에서 `clickhouse.d/conf.yaml` 파일을 편집합니다. 사용할 수 있는 구성 옵션 전체를 보려면 [clickhouse.d/conf.yaml 샘플][1]을 참고하세요.
 
-2. [Agent를 재시작합니다][2].
+2. [에이전트를 재시작합니다][2].
 
 ##### 로그 수집
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
@@ -113,16 +113,16 @@ ClickHouse 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다. 서
 
     `path`, `service` 파라미터 값을 변경하고 환경에 맞게 설정합니다. 사용 가능한 모든 설정 옵션은 [clickhouse.d/conf.yaml 샘플][1]을 참조하세요.
 
-3. [Agent를 재시작합니다][2].
+3. [에이전트를 재시작합니다][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/datadog_checks/clickhouse/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 #### 메트릭 수집
 
