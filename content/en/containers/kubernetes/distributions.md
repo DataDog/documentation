@@ -141,7 +141,11 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 
 The AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
 
-However, AKS has changed how they structure their certificates relative to the [June 17th 2025 release][13], which is rolled out for East US and UK South. You can read more about this [in the Azure documentation here][14]. If your AKS cluster is in any of those aformentioned regions you are upgrading your existing AKS cluster nodes from 1.27+ to a higher version or the node image `202501.12.0` to a newer image, make the following changes to the agent configuration:
+However, AKS has changed how they structure their certificates relative to the [June 17th 2025 release][13], which is rolled out for East US and UK South. You can read more about this [in the Azure documentation here][14]. If your AKS cluster is located in one of the aforementioned regions and you are upgrading either:
+  - Your AKS node pool from version 1.27 or later to a newer version.
+  - The node image from `202501.12.0` to a more recent version.
+
+Make the following changes to the agent configuration:
   - Change the `hostCAPath` to `/var/lib/kubelet/pki/kubelet-server-current.pem`.
   - Optionally, you can remove the `spec.nodeName` configuration entirely since this new certificate path does not require changing the Kubelet host to `spec.nodeName` anymore.
 
