@@ -15,7 +15,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/sumo_logic %}}
 
-## Environment variables
+## Set the environment variables
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
 
