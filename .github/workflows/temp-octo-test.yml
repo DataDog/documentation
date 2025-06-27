@@ -1,0 +1,27 @@
+name: Push demo
+on: [push]
+
+jobs:
+  read-other-repo:
+    name: read contents of another repo
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Needed to federate tokens.
+    steps:
+      # <TESTING> Only for debugging, remove after testing
+      - name: Debug OIDC Claims
+        uses: github/actions-oidc-debugger@main
+        with:
+          audience: "octo-debugger"
+      # </TESTING>
+      - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
+        id: octo-sts
+        with:
+          scope: DataDog
+          policy: documentation.read-org-members 
+      - name: Use GH token
+        run: |
+          gh auth status
+          gh api orgs/DataDog/teams/documentation/members
+        env:
+          GH_TOKEN: ${{ steps.octo-sts.outputs.token }}
