@@ -45,9 +45,9 @@ Your Microsoft Entra ID user needs the following permissions:
 - `Users can register applications` has been set to `Yes`
 - The user has the [Application Developer][17] role
 
-##### Permission to assign `Monitoring Reader` permissions
+##### Permission to assign roles within your subscriptions
 
-This permission is included in all of the [Azure built-in roles in the Privileged category][14]. If you want to use a custom role, the required permission is `Microsoft.Authorization/roleAssignments/write`.
+You must have one of the [Azure built-in roles in the Privileged category][14], or a custom role including the `Microsoft.Authorization/roleAssignments/write` action, in each of the subscriptions you wish to connect.
 
 ##### Permission to add and grant consent for Graph API permissions
 
@@ -55,7 +55,7 @@ The [Privileged Role Administrator role][15] contains the required permissions.
 
 #### In Datadog
 
-The Datadog `Admin` role, or any other role with the `azure_configurations_manage` permission.
+The `Datadog Admin Role`, or any other role with the `azure_configurations_manage` permission.
 
 {{% /collapse-content %}} 
 
