@@ -37,7 +37,13 @@ Some log sources, such as firewalls and network appliances, generate a large vol
 
 - **Filter**: Add a query to send only a subset of logs based on your conditions.
 - **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources or add custom parsing rules.
-- **Generate metrics**: Generate metrics for your logs or a subset of them. See [Metrics types](#metrics-types) for the types of metrics you can generate.
+- **Generate metrics**: Generate metrics for your logs or a subset of them. You can generate these types of metrics for your logs.
+  | Metric type  | Description                                                                                                                                     | Example                                                                                             |
+  | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+  | COUNT        | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased.                | You want to count the number of logs with `status:error`.                                         |
+  | GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
+  | DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
+
 
 ### Log Enrichment
 
