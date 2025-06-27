@@ -1,4 +1,4 @@
-name: Push demo
+name: Octo STS Test
 on: [push]
 
 jobs:
