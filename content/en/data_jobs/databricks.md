@@ -263,7 +263,7 @@ For scheduled jobs that run on job clusters, the init script installs the Datado
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
-If some jobs are not visible, visit the [Configuration][9] page to understand why. The page lists all of your Databricks jobs that have not yet been configured with the Agent on their clusters, along with next steps to complete a successful configuration.
+If some jobs are not visible, navigate to the [Configuration][9] page to understand why. This page lists all your Databricks jobs not yet configured with the Agent on their clusters, along with guidance for completing setup.
 
 ## Troubleshooting
 
