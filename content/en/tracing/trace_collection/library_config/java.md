@@ -210,7 +210,7 @@ When `true`, debug mode for the Datadog Java Tracer is enabled.
 `datadog.slf4j.simpleLogger.jsonEnabled`
 : **Environment Variable**: Not available<br>
 **Default**: `false`<br>
-When `true`, logs of the Datadog Java tracer are written in JSON. Available for versions 1.48.0+.
+When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.
 
 `dd.trace.servlet.principal.enabled`
 : **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
