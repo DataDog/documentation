@@ -1,5 +1,5 @@
 ---
-title: "Service Check Submission: Agent Check"
+title: "Service Check Submission: Custom Agent Check"
 further_reading:
 - link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
