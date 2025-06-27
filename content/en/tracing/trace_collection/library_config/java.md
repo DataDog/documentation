@@ -584,7 +584,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 Example with system property and debug app mode:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddd.trace.debug=true -jar path/to/application.jar
 ```
 
 Debug app logs show that `Tracing is disabled, not installing instrumentations.`
