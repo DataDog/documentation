@@ -5876,10 +5876,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
-    - name: Tags Processor
-      url: observability_pipelines/processors/tags_processor
+    - name: Tags
+      url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags_processor
+      identifier: observability_pipelines_processors_tags
       weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle

@@ -1,5 +1,7 @@
 ---
-title: Tags Processor
+title: Tags
+aliases:
+- /observability_pipelines/processors/tags_processor/
 disable_toc: false
 ---
 
