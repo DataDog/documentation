@@ -1,5 +1,9 @@
 name: Octo STS Test
-on: [push]
+on:
+    pull_request:
+        branches:
+          - master
+        types: ["review_requested", "synchronize", "opened", "reopened"]
 
 jobs:
   read-other-repo:
