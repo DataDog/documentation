@@ -309,7 +309,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Test Optimization events
 | Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| [Test Optimization settings][34]     | A user modified or deleted the settings of a repository.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
+| [Test Optimization settings][34]     | A user modified or deleted the settings of a repository or a service.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
+| [Test Optimization default settings][34]     | A user modified or deleted the default settings.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_default_settings (@action:modified OR @action:deleted)`            |
 
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
