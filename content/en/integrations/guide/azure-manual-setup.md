@@ -47,7 +47,7 @@ Your Microsoft Entra ID user needs the following permissions:
 
 ##### Permission to assign `Monitoring Reader` permissions
 
-The `Microsoft.Authorization/roleAssignments/write` permission is required, scoped to any subscriptions or management groups to monitor. This permission is part of the [Role Based Access Control Administrator role][14].
+This permission is included in all of the [Azure built-in roles in the Privileged category][14]. If you want to create a custom role, the required permission is `Microsoft.Authorization/roleAssignments/write`.
 
 ##### Permission to add and grant consent for Graph API permissions
 
@@ -55,7 +55,7 @@ The [Privileged Role Administrator role][15] contains the required permissions.
 
 #### In Datadog
 
-A Datadog [Application key][16] with at least the `azure_configurations_manage` permission.
+The Datadog `Admin` role, or any other role with the `azure_configurations_manage` permission.
 
 {{% /collapse-content %}} 
 
@@ -349,7 +349,6 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
-[14]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged#role-based-access-control-administrator
+[14]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged
 [15]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
-[16]: /account_management/api-app-keys/#application-keys
 [17]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer
