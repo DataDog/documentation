@@ -15,31 +15,32 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 ## How the Session Replay recorder works
 
-The Session Replay recorder is part of the RUM Mobile SDK. While [Browser Session Replay][1] relies on snapshots of the browser's DOM and CSS, mobile apps don't have HTML, DOM, or CSS, so the recorder instead turns the native view hierarchy into a sequence of flat "wireframes", and takes incremental snapshots of the relevant wireframes.
+The Session Replay recorder is built into the RUM Mobile SDK. Unlike web browsers, mobile apps don't use HTML or CSS. Instead, the recorder takes a "snapshot" of your app's screen by breaking it into simple rectangles called "wireframes." It then keeps track of changes by only updating the wireframes that have changed, making the process efficient and fast.
 
 ### Wireframe concept
 
-A _wireframe_ describes individual rectangular areas in the mobile app screen. It is an abstract type, which means it doesn't always correspond 1:1 to a native view, or live inside the views hierarchy.
+A _wireframe_ is like a digital sticky note that marks a specific area of your app's screen—such as a button, image, or background. Each wireframe is a rectangle that helps the recorder keep track of what's on the screen.
 
-For further context, the following could be considered a wireframe:
-
-- A label displaying text is considered a "text" wireframe. It uses a rectangle (x, y, width, height) to define its position.
-- The application's background view is considered a "geometry" wireframe stretched across the entire app window. In most cases, it can be described as a basic rectangle of a single color.
-- Any other container view in the app with an opaque background is a "geometry" wireframe.
-- An image or icon displayed in the app is an "image" wireframe with a defined position and sometimes style (such as opacity or alpha).
-- A map view hierarchy consisting of dozens of views (for rendering shapes and annotations) can be merged into a single "image" wireframe.
+**Examples of wireframes:**
+- A text label becomes a "text" wireframe, defined by its position and size.
+- The app's background is a "geometry" wireframe—a rectangle that covers the whole screen.
+- Any container with a solid background is also a "geometry" wireframe.
+- Images or icons are "image" wireframes, which can include style details like transparency.
+- Even complex elements, like a map with many parts, can be combined into a single "image" wireframe.
 
 ### Recording algorithm
 
-Wireframes are constructed during the process of traverseing the app's view-tree in a bottom-up (or generally "back-to-front") order and determining visible elements. In the below example, the Shopist app screen is built with 78 native _views_, but it can be broken into 25 wireframes:
+The recorder scans your app's screen from the background to the front, looking for all the visible parts. It creates a wireframe for each one. For example, a screen with 78 different elements can be simplified into just 25 wireframes:
 
 {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/recording-algorithm-2.png" alt="An example of how the Shopist app screen contains 78 native views, but is made up of 25 wireframes." style="width:70%;">}}
 
-These wireframes are recorded while **preserving their rendering order** (back-to-front) and **using absolute positioning** (in screen coordinates). There is no "tree structure", nor child-parent relationship between wireframes, therefore making the structure "flat".
+Wireframes are recorded in the order they appear on the screen (from back to front) and are placed using exact screen positions. There's no complicated tree structure—just a simple, flat list of rectangles.
 
 ### Rendering algorithm
 
-To display the Replay of a single frame on Datadog, the Session Replay player iterates through all wireframes and renders one another into the viewport using geometry information (x, y, width, height) from each one. **It respects wireframes rendering order**, so that succeeding ones overdraw existing portions of the viewport.
+When you watch a replay, Datadog's player rebuilds the screen by drawing each wireframe in order. It uses the position and size of each rectangle to put everything in the right place. The first wireframe sets the screen size and orientation (portrait or landscape).
+
+Each new wireframe is drawn on top of the previous ones, like stacking transparent sheets. This lets the player show things like overlapping or semi-transparent elements correctly.
 
 For instance, the screenshot displayed above is reconstructed in 25 passes:
 
@@ -51,9 +52,9 @@ The first wireframe dictates the viewport size, enabling the Session Replay play
 
 | Iteration | 4 | 5-11 | 12-13 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'geometry', 'image, and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'geometry', 'image', and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
 
-Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance semi-transparent elements).
+Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance, semi-transparent elements).
 
 | Iteration | 14-25 | Final result |
 |-----------|-------|--------------|
@@ -61,15 +62,22 @@ Because wireframes are sorted in back-to-front order, it overdraws the existing 
 
 ### Full and incremental snapshots
 
-To tie Mobile Session Replay back to its [Browser counterpart][1], the sequence of all visible wireframes is considered a full snapshot. But to avoid re-recording the entire screen when only incremental changes occur in the UI, the mobile SDK tags each wireframe with a unique identifier and sends incremental snapshots to Datadog. Since native views are objects, they can be identified by reference.
+A "full snapshot" is like taking a picture of the entire screen, with all its wireframes. But to save time and data, the recorder usually sends "incremental snapshots", which are updates that include only the wireframes that have changed.
+
+Each wireframe has a unique ID (like a name tag), so the recorder knows exactly which ones to update. For example:
+- If a wireframe moves, only its new position and ID are sent.
+- If a wireframe disappears, the update says which ID was removed.
+- If only the content changes (like new text), the update includes the new content and the wireframe's ID.
 
 Below are examples of how incremental records are based on sending updates to only impacted wireframes.
 
 | Example | Description |
 |---------|-------------|
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-1.mp4" alt="An example of how an incremental record." video="true" >}} | If a wireframe position changes, but its content and appearance isn't altered, the incremental snapshot only needs to include new positions for impacted wireframes and their `uuids`. This might correspond to a "slow scrolling" scenario or any other scenario where only a portion of the screen is moved. |
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-2.mp4" alt="An example of how an incremental record." video="true" >}} | If a wireframe disappears from the screen, an incremental snapshot may only include information on removed `uuids`. Alternatively, it could always include information on remaining `uuids`. |
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-3.mp4" alt="An example of how an incremental record." video="true" >}} | If only the content of a wireframe changes, an incremental update only includes new content and the `uuid` of altered wireframes. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-change-position.mp4" alt="A snapshot a wireframe position changing but the content and appearance is not altered." video="true" >}} | If a wireframe position changes, but its content and appearance isn't altered, the incremental snapshot only needs to include new positions for impacted wireframes and their `UUIDs`. This might correspond to a "slow scrolling" scenario or any other scenario where only a portion of the screen is moved. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-wireframe-disappears.mp4" alt="An example of a wireframe disappearing from the screen." video="true" >}} | If a wireframe disappears from the screen, an incremental snapshot may only include information on removed `UUIDs`. Alternatively, it could always include information about the remaining `UUIDs`. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-content-only.mp4" alt="An example of only the content of a wireframe changing." video="true" >}} | If only the content of a wireframe changes, an incremental update only includes new content and the `UUID` of altered wireframes. |
+
+In summary, the Session Replay recorder breaks your app's screen into simple rectangles called wireframes. It only tracks and sends updates for the parts that change, making replays efficient and accurate.
 
 ## Setup
 
