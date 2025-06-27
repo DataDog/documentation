@@ -24,7 +24,6 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigate obfuscated stack traces with RUM debug symbols{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/retention_filter_best_practices" >}}Retention filter best practices{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/ownership" >}}View-based ownership{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
