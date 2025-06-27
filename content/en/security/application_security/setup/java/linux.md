@@ -39,7 +39,7 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ## 2. Enabling App and API Protection monitoring
 
-{{< partial name="app_and_api_protection/java/navigation_menu.html" >}}
+{{ partial "app_and_api_protection/java/navigation_menu.html" (dict "showSingleStep" true) }}
 {{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring

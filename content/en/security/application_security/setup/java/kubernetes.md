@@ -22,8 +22,6 @@ You can enable App and API Protection for Java services with the following setup
 3. Otherwise, keep reading for manual instructions
 {{< /callout >}}
 
-{{< partial name="app_and_api_protection/java/navigation_menu.html" >}}
-
 {{% app_and_api_protection_java_overview %}}
 
 ## Prerequisites
@@ -40,7 +38,7 @@ You can enable App and API Protection for Java services with the following setup
 Install the Datadog Agent by following the [setup instructions for Kubernetes](/agent/?tab=cloud_and_container).
 
 ## 2. Enabling App and API Protection monitoring
-{{< partial name="app_and_api_protection/java/navigation_menu.html" >}}
+{{ partial "app_and_api_protection/java/navigation_menu.html" (dict "showSingleStep" true) }}
 {{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring
