@@ -111,18 +111,18 @@
       #     - "*/README.md"
       #     - "*/datadog_checks/*/__about__.py"
 
-      # - repo_name: integrations-internal-core
-      #   contents:
+      - repo_name: integrations-internal-core
+        contents:
 
-      #   - action: integrations
-      #     branch: main
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/assets/metrics/metric-spec.yaml"
-      #     - "*/README.md"
-      #     - "*/datadog_checks/*/__about__.py"
+        - action: integrations
+          branch: docs11283/fix-ec2-metrics
+          globs:
+          - "*/metadata.csv"
+          - "*/manifest.json"
+          - "*/assets/service_checks.json"
+          - "*/assets/metrics/metric-spec.yaml"
+          - "*/README.md"
+          - "*/datadog_checks/*/__about__.py"
 
       # - repo_name: marketplace
       #   contents:
