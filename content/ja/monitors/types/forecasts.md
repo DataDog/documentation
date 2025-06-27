@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスの参照
 title: 予測値モニター
@@ -103,7 +103,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 ### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
+**Configure notifications and automations** セクション (通知と自動化の構成) の詳細な手順については、[通知][8]のページをご覧ください。
 
 ## API
 
@@ -118,7 +118,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 ```
 
 * `aggregator`: 予測値が閾値を下回ったらアラートをトリガーするようにする場合は、`min` を使用します。予測値が閾値を上回ったらアラートをトリガーするようにするには、`max` を使用します。
-* `query_window`: A timeframe, for example: `next_4h` or `next_7d`.
+* `query_window`: タイムフレーム。例: `next_4h` または `next_7d`。
 * `metric_query`: 標準の Datadog メトリクスクエリ (例: `min:system.disk.free{service:database,device:/data}by{host}`)
 * `algorithm`: `linear` または `seasonal`
 * `deviations`: 1 と等しい、または 1 より大きい数。このパラメーターは、信頼限界のサイズを制御し、モニターの秘密度を調整できます。
@@ -138,7 +138,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/forecast
+[1]: https://app.datadoghq.com/monitors/create/forecast
 [2]: /ja/monitors/types/metric/#define-the-metric
 [3]: /ja/monitors/guide/recovery-thresholds/
 [4]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -147,5 +147,5 @@ For detailed instructions on the **Configure notifications and automations** sec
 [7]: /ja/monitors/types/metric/#data-window
 [8]: /ja/monitors/notify/
 [9]: /ja/api/v1/monitors/#create-a-monitor
-[10]: /ja/monitors/manage/status/#settings
+[10]: /ja/monitors/status/#settings
 [11]: /ja/api/v1/monitors/

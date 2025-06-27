@@ -26,7 +26,7 @@ title: どのインテグレーションで Jmxfetch が使われていますか
 * [SonarQube][15]
 * [Tomcat][16]
 
-**Note**: These integrations do **not** run by default. Each integration must be configured to run on a host.
+**注**: これらのインテグレーションはデフォルトでは実行**されません**。各インテグレーションをホスト上で実行するように設定する必要があります。
 
 ## コミュニティのインテグレーション
 
@@ -45,7 +45,7 @@ title: どのインテグレーションで Jmxfetch が使われていますか
 * [hbase_master][28]
 * [neutrona][29]
 
-**Note**: These integrations do **not** run by default. Each integration must be installed and configured to run on a host.
+**注**: これらのインテグレーションはデフォルトでは実行**されません**。各インテグレーションをインストールして、ホスト上で実行できるように設定する必要があります。
 
 ## カスタムチェック
 

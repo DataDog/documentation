@@ -1,0 +1,3 @@
+- Dirección rsyslog o syslog-ng:
+    - El Worker de Observability Pipelines escucha esta dirección de socket para recibir logs del Syslog Forwarder. Por ejemplo, `0.0.0.0:9997`.
+    - Almacenado en la variable de entorno ` DD_OP_SOURCE_SYSLOG_ADDRESS`.

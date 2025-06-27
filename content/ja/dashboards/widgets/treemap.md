@@ -13,7 +13,7 @@ title: ツリーマップウィジェット
 widget_type: ツリーマップ
 ---
 
-The treemap widget allows you to display proportions of one or more datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
+ツリーマップ ウィジェットを使用すると、1 つ以上のデータセットの比率を表示できます。このウィジェットは、単一のデータセットに対応する比率を表示することも、複数のデータセットをネストされた比率で表示することもできます。
 
 {{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="リアルユーザーモニタリング (RUM) データセットから得られたユニークなページビューを、国とブラウザレベルで表示したツリーマップウィジェットです。外側のグループ (色で区別) は、ユーザーの国を示しています。">}}
 
@@ -48,7 +48,7 @@ The treemap widget allows you to display proportions of one or more datasets. Th
 
 {{< img src="dashboards/widgets/treemap/context_menu_dropdown.png" alt="カテゴリーにカーソルを合わせると、ドロップダウンボタンが表示されます">}}
 
-### Full-screen
+### 全画面
 
 ツリーマップウィジェットを全画面表示すると、標準の[全画面表示オプション][5]のセットが表示されます。
 

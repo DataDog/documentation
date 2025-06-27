@@ -46,13 +46,13 @@ tile:
   classifier_tags:
   - Categoría::Contenedores
   - Categoría::Kubernetes
-  - Sistema operativo compatible::Linux
+  - Supported OS::Linux
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CRI
 ---
 
@@ -63,7 +63,7 @@ tile:
 
 Este check monitoriza la interfaz de tiempo de ejecución de un contenedor
 
-## Configurar
+## Configuración
 
 ### Instalación
 
