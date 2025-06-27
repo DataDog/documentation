@@ -19714,12 +19714,6 @@ components:
     JobDefinitionFromRule:
       description: Definition of a historical job based on a security monitoring rule.
       properties:
-        caseIndex:
-          description: Index of the rule case applied by the job.
-          example: 0
-          format: int32
-          maximum: 9
-          type: integer
         from:
           description: Starting time of data analyzed by the job.
           example: 1729843470000
@@ -19750,7 +19744,6 @@ components:
       - from
       - to
       - index
-      - caseIndex
       type: object
     KindAttributes:
       description: Kind attributes.
