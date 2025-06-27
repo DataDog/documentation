@@ -18,6 +18,12 @@ further_reading:
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+  This feature is not available for the Datadog for Government (US1-FED) site.  
+</div>
+{{< /site-region >}}
+
 Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
 
 ## How it works
