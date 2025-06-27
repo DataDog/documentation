@@ -504,7 +504,7 @@ Enable native JDK support for Unix Domain Sockets.
 
 #### `dd.service.mapping`
 
-**Example with system property**:
+Example with system property:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
@@ -513,8 +513,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 {{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" >}}
 
 #### `dd.tags`
-
-**Setting a global env for spans and JMX metrics**:
+Setting a global env for spans and JMX metrics:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
@@ -524,7 +523,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 
 #### `dd.trace.span.tags`
 
-**Example with adding project:test to every span**:
+Example with adding project:test to every span:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
@@ -534,7 +533,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.jmx.tags`
 
-**Setting custom.type:2 on a JMX metric**:
+Setting custom.type:2 on a JMX metric:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
@@ -544,7 +543,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.methods`
 
-**Example with system property**:
+Example with system property:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
@@ -582,7 +581,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.enabled`
 
-**Example with system property and debug app mode**:
+Example with system property and debug app mode:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar path/to/application.jar
