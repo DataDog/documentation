@@ -139,6 +139,13 @@ components:
       required: true
       schema:
         type: string
+    ApplicationKeyId:
+      description: The ID of the app key
+      in: path
+      name: app_key_id
+      required: true
+      schema:
+        type: string
     ApplicationKeyIncludeParameter:
       description: Resource path for related resources to include in the response.
         Only `owned_by` is supported.
@@ -2254,6 +2261,97 @@ components:
       - id
       - base_severity
       type: object
+    AlertEventCustomAttributes:
+      additionalProperties: false
+      description: Alert event attributes.
+      properties:
+        custom:
+          $ref: '#/components/schemas/AlertEventCustomAttributesCustom'
+        links:
+          $ref: '#/components/schemas/AlertEventCustomAttributesLinks'
+        priority:
+          $ref: '#/components/schemas/AlertEventCustomAttributesPriority'
+        status:
+          $ref: '#/components/schemas/AlertEventCustomAttributesStatus'
+      required:
+      - status
+      type: object
+    AlertEventCustomAttributesCustom:
+      additionalProperties: {}
+      description: Free form JSON object for arbitrary data. Supports up to 100 properties
+        per object and a maximum nesting depth of 10 levels.
+      example: {}
+      type: object
+    AlertEventCustomAttributesLinks:
+      description: The links related to the event. Maximum of 20 links allowed.
+      items:
+        $ref: '#/components/schemas/AlertEventCustomAttributesLinksItems'
+      maxItems: 20
+      minItems: 1
+      type: array
+    AlertEventCustomAttributesLinksItems:
+      additionalProperties: false
+      description: A link.
+      properties:
+        category:
+          $ref: '#/components/schemas/AlertEventCustomAttributesLinksItemsCategory'
+        title:
+          description: The display text of the link. Limited to 300 characters.
+          example: Runbook Link
+          maxLength: 300
+          minLength: 1
+          type: string
+        url:
+          description: The URL of the link. Limited to 2048 characters.
+          example: https://app.datadoghq.com/runbook
+          maxLength: 2048
+          minLength: 1
+          type: string
+      required:
+      - url
+      - category
+      type: object
+    AlertEventCustomAttributesLinksItemsCategory:
+      description: The category of the link.
+      enum:
+      - runbook
+      - documentation
+      - dashboard
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+      - DOCUMENTATION
+      - DASHBOARD
+    AlertEventCustomAttributesPriority:
+      default: '5'
+      description: The priority of the alert.
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      example: '5'
+      type: string
+      x-enum-varnames:
+      - PRIORITY_ONE
+      - PRIORITY_TWO
+      - PRIORITY_THREE
+      - PRIORITY_FOUR
+      - PRIORITY_FIVE
+    AlertEventCustomAttributesStatus:
+      description: The status of the alert.
+      enum:
+      - warn
+      - error
+      - ok
+      example: warn
+      type: string
+      x-enum-varnames:
+      - WARN
+      - ERROR
+      - OK
     Annotation:
       description: A list of annotations used in the workflow. These are like sticky
         notes for your workflow!
@@ -2394,6 +2492,27 @@ components:
       type: string
       x-enum-varnames:
       - DEPLOYMENT
+    AppKeyRegistrationData:
+      description: Data related to the app key registration.
+      properties:
+        id:
+          description: The app key registration identifier
+          format: uuid
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/AppKeyRegistrationDataType'
+      required:
+      - type
+      type: object
+    AppKeyRegistrationDataType:
+      description: The definition of `AppKeyRegistrationDataType` object.
+      enum:
+      - app_key_registration
+      example: app_key_registration
+      type: string
+      x-enum-varnames:
+      - APP_KEY_REGISTRATION
     AppMeta:
       description: Metadata of an app.
       properties:
@@ -6974,14 +7093,16 @@ components:
           type: integer
       type: object
     ChangeEventCustomAttributes:
-      description: Object representing custom change event attributes.
+      additionalProperties: false
+      description: Change event attributes.
       properties:
         author:
           $ref: '#/components/schemas/ChangeEventCustomAttributesAuthor'
         change_metadata:
           additionalProperties: {}
-          description: Free form object with information related to the `change` event.
-            Can be arbitrarily nested and contain any valid JSON.
+          description: Free form JSON object with information related to the `change`
+            event. Supports up to 100 properties per object and a maximum nesting
+            depth of 10 levels.
           example:
             dd:
               team: datadog_team
@@ -6996,17 +7117,19 @@ components:
           description: 'A list of resources impacted by this change. It is recommended
             to provide an impacted resource to display
 
-            the change event at the right location. Only resources of type `service`
-            are supported.'
+            the change event at the correct location. Only resources of type `service`
+            are supported. Maximum of 100 impacted resources allowed.'
           example:
           - name: payments_api
             type: service
           items:
             $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItems'
+          maxItems: 100
           type: array
         new_value:
           additionalProperties: {}
-          description: Free form object to track new value of the changed resource.
+          description: Free form JSON object representing the new state of the changed
+            resource.
           example:
             enabled: true
             percentage: 50%
@@ -7015,7 +7138,8 @@ components:
           type: object
         prev_value:
           additionalProperties: {}
-          description: Free form object to track previous value of the changed resource.
+          description: Free form JSON object representing the previous state of the
+            changed resource.
           example:
             enabled: true
             percentage: 10%
@@ -7026,13 +7150,16 @@ components:
       - changed_resource
       type: object
     ChangeEventCustomAttributesAuthor:
-      description: Object representing the entity which made the change. Optional
-        field but if provided should include `type` and `name`.
+      additionalProperties: false
+      description: The entity that made the change. Optional, if provided it must
+        include `type` and `name`.
       properties:
         name:
-          description: Author's name. Limited to 128 characters.
-          example: datadog@datadog.com
+          description: The name of the user or system that made the change. Limited
+            to 128 characters.
+          example: example@datadog.com
           maxLength: 128
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/ChangeEventCustomAttributesAuthorType'
@@ -7055,11 +7182,14 @@ components:
       - API
       - AUTOMATION
     ChangeEventCustomAttributesChangedResource:
-      description: Object representing a uniquely identified resource.
+      additionalProperties: false
+      description: A uniquely identified resource.
       properties:
         name:
-          description: Resource's name.
+          description: The name of the resource that was changed. Limited to 128 characters.
           example: fallback_payments_test
+          maxLength: 128
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResourceType'
@@ -7068,7 +7198,7 @@ components:
       - name
       type: object
     ChangeEventCustomAttributesChangedResourceType:
-      description: Resource's type.
+      description: The type of the resource that was changed.
       enum:
       - feature_flag
       - configuration
@@ -7078,12 +7208,14 @@ components:
       - FEATURE_FLAG
       - CONFIGURATION
     ChangeEventCustomAttributesImpactedResourcesItems:
-      description: Object representing a uniquely identified resource. Only the resource
-        type `service` is supported.
+      additionalProperties: false
+      description: Object representing a uniquely identified resource.
       properties:
         name:
-          description: Resource's name.
+          description: The name of the impacted resource. Limited to 128 characters.
           example: payments_api
+          maxLength: 128
+          minLength: 1
           type: string
         type:
           $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItemsType'
@@ -7092,7 +7224,7 @@ components:
       - name
       type: object
     ChangeEventCustomAttributesImpactedResourcesItemsType:
-      description: Resource's type.
+      description: The type of the impacted resource.
       enum:
       - service
       example: service
@@ -14559,28 +14691,33 @@ components:
           type: string
       type: object
     EventCategory:
-      description: Event category to identify the type of event. Only the value `change`
-        is supported. Support for other categories are coming. please reach out to
-        datadog support if you're interested.
+      description: Event category identifying the type of event.
       enum:
       - change
+      - alert
       example: change
       type: string
       x-enum-varnames:
       - CHANGE
+      - ALERT
     EventCreateRequest:
-      description: Object representing an event creation request.
+      description: An event object.
       properties:
         attributes:
           $ref: '#/components/schemas/EventPayload'
         type:
           $ref: '#/components/schemas/EventCreateRequestType'
+      required:
+      - type
+      - attributes
       type: object
     EventCreateRequestPayload:
       description: Payload for creating an event.
       properties:
         data:
           $ref: '#/components/schemas/EventCreateRequest'
+      required:
+      - data
       type: object
     EventCreateRequestType:
       description: Entity type.
@@ -14591,24 +14728,23 @@ components:
       x-enum-varnames:
       - EVENT
     EventCreateResponse:
-      description: Object containing an event response.
+      description: Event object.
       properties:
         attributes:
           $ref: '#/components/schemas/EventCreateResponseAttributes'
         type:
-          description: Event type
+          description: Entity type.
           example: event
           type: string
       type: object
     EventCreateResponseAttributes:
-      description: JSON object containing all events attributes and their associated
-        values.
+      description: Event attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/EventCreateResponseAttributesAttributes'
       type: object
     EventCreateResponseAttributesAttributes:
-      description: JSON object of attributes from your events.
+      description: JSON object for category-specific attributes.
       properties:
         evt:
           $ref: '#/components/schemas/EventCreateResponseAttributesAttributesEvt'
@@ -14617,41 +14753,71 @@ components:
       description: JSON object of event system attributes.
       properties:
         id:
-          description: Event id
+          deprecated: true
+          description: Event identifier. This field is deprecated and will be removed
+            in a future version. Use the `uid` field instead.
+          type: string
+        uid:
+          description: A unique identifier for the event. You can use this identifier
+            to query or reference the event.
           type: string
       type: object
     EventCreateResponsePayload:
-      description: Response containing information about created event.
+      description: Event creation response.
       properties:
         data:
           $ref: '#/components/schemas/EventCreateResponse'
+        links:
+          $ref: '#/components/schemas/EventCreateResponsePayloadLinks'
+      type: object
+    EventCreateResponsePayloadLinks:
+      description: Links to the event.
+      properties:
+        self:
+          description: The URL of the event. This link is only functional when using
+            the default subdomain.
+          type: string
       type: object
     EventPayload:
+      additionalProperties: false
       description: Event attributes.
       properties:
         aggregation_key:
-          description: An arbitrary string to use for aggregation when correlating
-            events. Limited to 100 characters.
+          description: A string used for aggregation when [correlating](https://docs.datadoghq.com/service_management/events/correlation/)
+            events. If you specify a key, events are deduplicated to alerts based
+            on this key. Limited to 100 characters.
+          example: aggregation_key_123
           maxLength: 100
+          minLength: 1
           type: string
         attributes:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
+        integration_id:
+          $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
-          description: The body of the event. Limited to 4000 characters.
+          description: Free formed text associated with the event. It's suggested
+            to use `data.attributes.attributes.custom` for well-structured attributes.
+            Limited to 4000 characters.
           example: payment_processed feature flag has been enabled
           maxLength: 4000
+          minLength: 1
           type: string
         tags:
-          description: 'A list of tags to apply to the event.
+          description: 'A list of tags associated with the event. Maximum of 100 tags
+            allowed.
 
             Refer to [Tags docs](https://docs.datadoghq.com/getting_started/tagging/).'
           example:
-          - env:test
+          - env:api_client_test
           items:
             description: A tag.
+            maxLength: 200
+            minLength: 1
             type: string
+          maxItems: 100
+          minItems: 1
           type: array
         timestamp:
           description: 'Timestamp when the event occurred. Must follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
@@ -14663,9 +14829,10 @@ components:
             18 hours.'
           type: string
         title:
-          description: The event title. Limited to 500 characters.
+          description: The title of the event. Limited to 500 characters.
           example: payment_processed feature flag updated
           maxLength: 500
+          minLength: 1
           type: string
       required:
       - title
@@ -14673,10 +14840,19 @@ components:
       - attributes
       type: object
     EventPayloadAttributes:
-      description: JSON object for custom attributes. Schema are different per each
-        event category.
+      description: JSON object for category-specific attributes. Schema is different
+        per event category.
       oneOf:
       - $ref: '#/components/schemas/ChangeEventCustomAttributes'
+      - $ref: '#/components/schemas/AlertEventCustomAttributes'
+    EventPayloadIntegrationId:
+      description: Integration ID sourced from integration manifests.
+      enum:
+      - custom-events
+      example: custom-events
+      type: string
+      x-enum-varnames:
+      - CUSTOM_EVENTS
     EventPriority:
       description: The priority of the event's monitor. For example, `normal` or `low`.
       enum:
@@ -16121,6 +16297,12 @@ components:
         data:
           $ref: '#/components/schemas/ActionConnectionData'
       type: object
+    GetAppKeyRegistrationResponse:
+      description: The response object after getting an app key registration.
+      properties:
+        data:
+          $ref: '#/components/schemas/AppKeyRegistrationData'
+      type: object
     GetAppResponse:
       description: The full app definition response object.
       properties:
@@ -17389,6 +17571,10 @@ components:
           items:
             $ref: '#/components/schemas/IncidentTimelineCellCreateAttributes'
           type: array
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
         notification_handles:
           description: Notification handles that will be notified of the incident
             at creation.
@@ -17796,6 +17982,10 @@ components:
           description: A unique identifier that represents an incident type.
           example: 00000000-0000-0000-0000-000000000000
           type: string
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
         modified:
           description: Timestamp when the incident was last modified.
           format: date-time
@@ -19524,12 +19714,6 @@ components:
     JobDefinitionFromRule:
       description: Definition of a historical job based on a security monitoring rule.
       properties:
-        caseIndex:
-          description: Index of the rule case applied by the job.
-          example: 0
-          format: int32
-          maximum: 9
-          type: integer
         from:
           description: Starting time of data analyzed by the job.
           example: 1729843470000
@@ -19560,7 +19744,6 @@ components:
       - from
       - to
       - index
-      - caseIndex
       type: object
     KindAttributes:
       description: Kind attributes.
@@ -19889,6 +20072,32 @@ components:
         total_count:
           description: Total number of items.
           example: 35
+          format: int64
+          type: integer
+      type: object
+    ListAppKeyRegistrationsResponse:
+      description: A paginated list of app key registrations.
+      properties:
+        data:
+          description: An array of app key registrations.
+          items:
+            $ref: '#/components/schemas/AppKeyRegistrationData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListAppKeyRegistrationsResponseMeta'
+      type: object
+    ListAppKeyRegistrationsResponseMeta:
+      description: The definition of `ListAppKeyRegistrationsResponseMeta` object.
+      properties:
+        total:
+          description: The total number of app key registrations.
+          example: 1
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of app key registrations that match the specified
+            filters.
+          example: 1
           format: int64
           type: integer
       type: object
@@ -24061,6 +24270,281 @@ components:
           description: The monitor type.
           type: string
       type: object
+    MonitorUserTemplate:
+      additionalProperties: {}
+      description: A monitor user template object.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        modified:
+          $ref: '#/components/schemas/MonitorUserTemplateModified'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+        versions:
+          description: All versions of the monitor user template.
+          items:
+            $ref: '#/components/schemas/SimpleMonitorUserTemplate'
+          type: array
+      type: object
+    MonitorUserTemplateCreateData:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    MonitorUserTemplateCreateRequest:
+      description: Request for creating a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateCreateData'
+      required:
+      - data
+      type: object
+    MonitorUserTemplateCreateResponse:
+      description: Response for creating a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseData'
+      type: object
+    MonitorUserTemplateCreated:
+      description: The created timestamp of the template.
+      example: '2024-01-02T03:04:23.274966+00:00'
+      format: date-time
+      readOnly: true
+      type: string
+    MonitorUserTemplateDescription:
+      description: A brief description of the monitor user template.
+      example: This is a template for monitoring user activity.
+      nullable: true
+      type: string
+    MonitorUserTemplateId:
+      description: The unique identifier.
+      example: 00000000-0000-1234-0000-000000000000
+      type: string
+    MonitorUserTemplateListResponse:
+      description: Response for retrieving all monitor user templates.
+      properties:
+        data:
+          description: An array of monitor user templates.
+          items:
+            $ref: '#/components/schemas/MonitorUserTemplateResponseData'
+          type: array
+      type: object
+    MonitorUserTemplateModified:
+      description: The last modified timestamp. When the template version was created.
+      example: '2024-02-02T03:04:23.274966+00:00'
+      format: date-time
+      readOnly: true
+      type: string
+    MonitorUserTemplateRequestAttributes:
+      additionalProperties: false
+      description: Attributes for a monitor user template.
+      properties:
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+      required:
+      - title
+      - monitor_definition
+      - tags
+      type: object
+    MonitorUserTemplateResourceType:
+      default: monitor-user-template
+      description: Monitor user template resource type.
+      enum:
+      - monitor-user-template
+      example: monitor-user-template
+      type: string
+      x-enum-varnames:
+      - MONITOR_USER_TEMPLATE
+    MonitorUserTemplateResponse:
+      description: Response for retrieving a monitor user template.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseDataWithVersions'
+      type: object
+    MonitorUserTemplateResponseAttributes:
+      additionalProperties: {}
+      description: Attributes for a monitor user template.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        modified:
+          $ref: '#/components/schemas/MonitorUserTemplateModified'
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+      type: object
+    MonitorUserTemplateResponseData:
+      description: Monitor user template list response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateResponseAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      type: object
+    MonitorUserTemplateResponseDataWithVersions:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplate'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      type: object
+    MonitorUserTemplateTags:
+      description: The definition of `MonitorUserTemplateTags` object.
+      example:
+      - product:Our Custom App
+      - integration:Azure
+      items:
+        description: 'Tags associated with the monitor user template. Must be key
+          value. Only ''product'' and ''integration'' keys are
+
+          allowed. The value is the name of the category to display the template under.
+          Integrations can be filtered out in the UI.
+
+          (Review note: This modeling of ''categories'' is subject to change.)'
+        example: us-east1
+        minLength: 1
+        type: string
+        uniqueItems: true
+      type: array
+    MonitorUserTemplateTemplateVariables:
+      description: The definition of `MonitorUserTemplateTemplateVariables` object.
+      items:
+        $ref: '#/components/schemas/MonitorUserTemplateTemplateVariablesItems'
+      type: array
+    MonitorUserTemplateTemplateVariablesItems:
+      additionalProperties: false
+      description: List of objects representing template variables on the monitor
+        which can have selectable values.
+      properties:
+        available_values:
+          description: Available values for the variable.
+          example:
+          - value1
+          - value2
+          items:
+            minLength: 1
+            type: string
+            uniqueItems: true
+          type: array
+        defaults:
+          description: Default values of the template variable.
+          example:
+          - defaultValue
+          items:
+            minLength: 0
+            type: string
+            uniqueItems: true
+          type: array
+        name:
+          description: The name of the template variable.
+          example: regionName
+          type: string
+        tag_key:
+          description: The tag key associated with the variable. This works the same
+            as dashboard template variables.
+          example: datacenter
+          type: string
+      required:
+      - name
+      type: object
+    MonitorUserTemplateTitle:
+      description: The title of the monitor user template.
+      example: Postgres CPU Monitor
+      type: string
+    MonitorUserTemplateUpdateData:
+      description: Monitor user template data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorUserTemplateRequestAttributes'
+        id:
+          $ref: '#/components/schemas/MonitorUserTemplateId'
+        type:
+          $ref: '#/components/schemas/MonitorUserTemplateResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MonitorUserTemplateUpdateRequest:
+      description: Request for creating a new monitor user template version.
+      properties:
+        data:
+          $ref: '#/components/schemas/MonitorUserTemplateUpdateData'
+      required:
+      - data
+      type: object
+    MonitorUserTemplateVersion:
+      description: The version of the monitor user template.
+      example: 0
+      format: int64
+      nullable: true
+      readOnly: true
+      type: integer
     MonthlyCostAttributionAttributes:
       description: Cost Attribution by Tag for a given organization.
       properties:
@@ -29846,6 +30330,12 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RegisterAppKeyResponse:
+      description: The response object after creating an app key registration.
+      properties:
+        data:
+          $ref: '#/components/schemas/AppKeyRegistrationData'
+      type: object
     RelationAttributes:
       description: Relation attributes.
       properties:
@@ -37499,6 +37989,38 @@ components:
       description: The definition of `ShiftIncluded` object.
       oneOf:
       - $ref: '#/components/schemas/ScheduleUser'
+    SimpleMonitorUserTemplate:
+      description: A simplified version of a monitor user template.
+      properties:
+        created:
+          $ref: '#/components/schemas/MonitorUserTemplateCreated'
+        description:
+          $ref: '#/components/schemas/MonitorUserTemplateDescription'
+        id:
+          description: The unique identifier. The initial version will match the template
+            ID.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        monitor_definition:
+          additionalProperties: {}
+          description: A valid monitor definition in the same format as the [V1 Monitor
+            API](https://docs.datadoghq.com/api/latest/monitors/#create-a-monitor).
+          example:
+            message: You may need to add web hosts if this is consistently high.
+            name: Bytes received on host0
+            query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+            type: query alert
+          type: object
+          x-ignore-duplicate-object: true
+        tags:
+          $ref: '#/components/schemas/MonitorUserTemplateTags'
+        template_variables:
+          $ref: '#/components/schemas/MonitorUserTemplateTemplateVariables'
+        title:
+          $ref: '#/components/schemas/MonitorUserTemplateTitle'
+        version:
+          $ref: '#/components/schemas/MonitorUserTemplateVersion'
+      type: object
     SingleAggregatedConnectionResponseArray:
       description: List of aggregated connections.
       example:
@@ -42122,9 +42644,197 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/actions/app_key_registrations:
+    get:
+      description: List App Key Registrations
+      operationId: ListAppKeyRegistrations
+      parameters:
+      - description: The number of App Key Registrations to return per page.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The page number to return.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppKeyRegistrationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: List App Key Registrations
+      tags:
+      - Action Connection
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+      x-undo:
+        type: safe
+  /api/v2/actions/app_key_registrations/{app_key_id}:
+    delete:
+      description: Unregister an App Key
+      operationId: UnregisterAppKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Unregister an App Key
+      tags:
+      - Action Connection
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - user_app_keys
+        - service_account_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an existing App Key Registration
+      operationId: GetAppKeyRegistration
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppKeyRegistrationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Get an existing App Key Registration
+      tags:
+      - Action Connection
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+      x-undo:
+        type: safe
+    put:
+      description: Register a new App Key
+      operationId: RegisterAppKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAppKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Register a new App Key
+      tags:
+      - Action Connection
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+        - user_app_keys
+        - service_account_write
+      x-undo:
+        type: idempotent
   /api/v2/actions/connections:
     post:
-      description: Create a new Action Connection
+      description: Create a new Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateActionConnection
       requestBody:
         content:
@@ -42180,7 +42890,8 @@ paths:
         type: unsafe
   /api/v2/actions/connections/{connection_id}:
     delete:
-      description: Delete an existing Action Connection
+      description: Delete an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -42216,7 +42927,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get an existing Action Connection
+      description: Get an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -42258,7 +42970,8 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: Update an existing Action Connection
+      description: Update an existing Action Connection. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -43439,6 +44152,7 @@ paths:
   /api/v2/app-builder/apps:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
+        This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteApps
       requestBody:
         content:
@@ -43486,7 +44200,8 @@ paths:
     get:
       description: List all apps, with optional filters and sorting. This endpoint
         is paginated. Only basic app information such as the app ID, name, and description
-        is returned by this endpoint.
+        is returned by this endpoint. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: ListApps
       parameters:
       - description: The number of apps to return per page.
@@ -43595,7 +44310,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a new app, returning the app ID.
+      description: Create a new app, returning the app ID. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateApp
       requestBody:
         content:
@@ -43659,7 +44375,8 @@ paths:
         type: unsafe
   /api/v2/app-builder/apps/{app_id}:
     delete:
-      description: Delete a single app.
+      description: Delete a single app. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteApp
       parameters:
       - description: The ID of the app to delete.
@@ -43714,7 +44431,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get the full definition of an app.
+      description: Get the full definition of an app. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetApp
       parameters:
       - description: The ID of the app to retrieve.
@@ -43780,6 +44498,7 @@ paths:
         type: safe
     patch:
       description: Update an existing app. This creates a new version of the app.
+        This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateApp
       parameters:
       - description: The ID of the app to update.
@@ -43834,7 +44553,8 @@ paths:
       description: Unpublish an app, removing the live version of the app. Unpublishing
         creates a new instance of a `deployment` object on the app, with a nil `app_version_id`
         (`00000000-0000-0000-0000-000000000000`). The app can still be updated and
-        published again in the future.
+        published again in the future. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UnpublishApp
       parameters:
       - description: The ID of the app to unpublish.
@@ -43885,7 +44605,8 @@ paths:
     post:
       description: Publish an app for use by other users. To ensure the app is accessible
         to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/)
-        on the app if a policy does not yet exist.
+        on the app if a policy does not yet exist. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: PublishApp
       parameters:
       - description: The ID of the app to publish.
@@ -48335,10 +49056,15 @@ paths:
       x-undo:
         type: safe
     post:
-      description: "This endpoint allows you to post events.\n\n\u2705 **Only events
-        with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking)
+      description: "This endpoint allows you to publish events.\n\n\u2705 **Only events
+        with the `change` or `alert` category** are in General Availability. For change
+        events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
-        please use the V1 endpoint."
+        use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
+        Notifications are not yet supported for events sent to this endpoint. Use
+        the V1 endpoint for notification functionality.\n\n\u274C This endpoint is
+        not available for the Government (US1-FED) site. Contact your account representative
+        for more information."
       operationId: CreateEvent
       requestBody:
         content:
@@ -48348,9 +49074,10 @@ paths:
                 value:
                   data:
                     attributes:
+                      aggregation_key: aggregation_key_123
                       attributes:
                         author:
-                          name: datadog@datadog.com
+                          name: example@datadog.com
                           type: user
                         change_metadata:
                           dd:
@@ -48376,17 +49103,19 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
+                      integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:
-                      - env:test
+                      - env:api_client_test
+                      timestamp: '2020-01-01T01:30:15.010000Z'
                       title: payment_processed feature flag updated
                     type: event
             schema:
               $ref: '#/components/schemas/EventCreateRequestPayload'
-        description: Event request object
+        description: Event creation request payload.
         required: true
       responses:
-        '200':
+        '202':
           content:
             application/json:
               schema:
@@ -48409,13 +49138,45 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - ap1.datadoghq.com
+            - datadoghq.eu
+            - ddog-gov.com
+          subdomain:
+            default: event-management-intake
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: event-management-intake.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: event-management-intake
+            description: The subdomain where the API is deployed.
       summary: Post an event
       tags:
       - Events
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-undo:
-        type: unsafe
+        type: safe
     x-merge-override:
       get: false
       post: false
@@ -54792,6 +55553,308 @@ paths:
         - monitor_config_policy_write
       x-undo:
         type: idempotent
+  /api/v2/monitor/template:
+    get:
+      description: Retrieve all monitor user templates.
+      operationId: ListMonitorUserTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateListResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all monitor user templates
+      tags:
+      - Monitors
+      x-menu-order: 20
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new monitor user template.
+      operationId: CreateMonitorUserTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Create a monitor user template
+      tags:
+      - Monitors
+      x-given:
+        monitor_user_template:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"monitor-user-template\",\n    \"attributes\":
+              {\n      \"description\": \"It's a threshold\",\n      \"title\": \"api
+              spec given template {{ unique_lower }}\",\n      \"monitor_definition\":
+              {\n        \"message\": \"cats\",\n        \"name\": \"High Error Rate
+              on service\",\n        \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0}
+              > 100\",\n        \"type\": \"query alert\"\n      },\n      \"template_variables\":
+              [{\"name\": \"scope\", \"available_values\": [], \"defaults\": [\"cats\"]}],\n
+              \     \"tags\": [\"category:test\"]\n    }\n  }\n}"
+          step: there is a valid "monitor_user_template" in the system
+      x-menu-order: 21
+      x-undo:
+        operationId: DeleteMonitorUserTemplate
+        parameters:
+        - name: template_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/validate:
+    post:
+      description: Validate the structure and content of a monitor user template.
+      operationId: ValidateMonitorUserTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateCreateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Validate a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 24
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/{template_id}:
+    delete:
+      description: Delete an existing monitor user template by its ID.
+      operationId: DeleteMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Delete a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 23
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve a monitor user template by its ID.
+      operationId: GetMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      - description: Whether to include all versions of the template in the response
+          in the versions field.
+        example: false
+        in: query
+        name: with_all_versions
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 19
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Creates a new version of an existing monitor user template.
+      operationId: UpdateMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorUserTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Update a monitor user template to a new version
+      tags:
+      - Monitors
+      x-menu-order: 22
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/monitor/template/{template_id}/validate:
+    post:
+      description: Validate the structure and content of an existing monitor user
+        template being updated to a new version.
+      operationId: ValidateExistingMonitorUserTemplate
+      parameters:
+      - description: ID of the monitor user template.
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorUserTemplateUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitor_config_policy_write
+      summary: Validate an existing monitor user template
+      tags:
+      - Monitors
+      x-menu-order: 25
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/monitor/{monitor_id}/downtime_matches:
     get:
       description: Get all active downtimes for the specified monitor.
@@ -67191,7 +68254,7 @@ paths:
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
-        an application key scoped with the `workflows_write` permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateWorkflow
       requestBody:
         content:
@@ -67252,8 +68315,8 @@ paths:
         type: unsafe
   /api/v2/workflows/{workflow_id}:
     delete:
-      description: Delete a workflow by ID. This API requires an application key scoped
-        with the `workflows_write` permission.
+      description: Delete a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: DeleteWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67289,8 +68352,8 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get a workflow by ID.  This API requires an application key scoped
-        with the `workflows_read` permission.
+      description: Get a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67336,8 +68399,8 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: Update a workflow by ID. This API requires an application key scoped
-        with the `workflows_write` permission.
+      description: Update a workflow by ID. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: UpdateWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67390,8 +68453,8 @@ paths:
         type: idempotent
   /api/v2/workflows/{workflow_id}/instances:
     get:
-      description: List all instances of a given workflow. This API requires an application
-        key scoped with the workflows_read permission.
+      description: List all instances of a given workflow. This API requires a [registered
+        application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: ListWorkflowInstances
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67426,8 +68489,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Execute the given workflow. This API requires an application key
-        scoped with the workflows_run permission.
+      description: Execute the given workflow. This API requires a [registered application
+        key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CreateWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67469,7 +68532,7 @@ paths:
   /api/v2/workflows/{workflow_id}/instances/{instance_id}:
     get:
       description: Get a specific execution of a given workflow. This API requires
-        an application key scoped with the workflows_read permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: GetWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -67507,7 +68570,7 @@ paths:
   /api/v2/workflows/{workflow_id}/instances/{instance_id}/cancel:
     put:
       description: Cancels a specific execution of a given workflow. This API requires
-        an application key scoped with the workflows_run permission.
+        a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
       operationId: CancelWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'

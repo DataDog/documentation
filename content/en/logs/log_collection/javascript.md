@@ -368,6 +368,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
 | `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
 | `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | Keep sending logs after the session expires.
+| `allowedTrackingOrigins`   | Array                                                                     | No       |                 | List of origins where the SDK is allowed to run. |
 
 
 Options that must have a matching configuration when using the `RUM` SDK:

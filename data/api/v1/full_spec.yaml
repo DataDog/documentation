@@ -11072,19 +11072,24 @@ components:
       example: {}
       properties:
         aggr:
+          deprecated: true
           description: Query aggregator function.
           type: string
         expression:
+          deprecated: true
           description: Query expression.
           type: string
         metric:
+          deprecated: true
           description: Query metric used.
           type: string
         query_index:
+          deprecated: true
           description: Query index from original combined query.
           format: int64
           type: integer
         scope:
+          deprecated: true
           description: Query scope.
           type: string
         unit:
@@ -17438,8 +17443,8 @@ components:
           description: DNS server to use for DNS tests.
           type: string
         dnsServerPort:
+          $ref: '#/components/schemas/SyntheticsTestRequestDNSServerPort'
           description: DNS server port to use for DNS tests.
-          type: string
         files:
           description: Files to be used as part of the request in the test. Only valid
             if `bodyType` is `multipart/form-data`.
@@ -17593,6 +17598,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestDNSServerPort:
+      description: DNS server port to use for DNS tests.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalDNSServerPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariableDNSServerPort'
+    SyntheticsTestRequestNumericalDNSServerPort:
+      description: Integer DNS server port number to use when performing the test.
+      format: int64
+      type: integer
     SyntheticsTestRequestNumericalPort:
       description: Integer Port number to use when performing the test.
       format: int64
@@ -17614,6 +17628,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariableDNSServerPort:
+      description: String DNS server port number to use when performing the test.
+        Supports templated variables.
+      type: string
     SyntheticsTestRequestVariablePort:
       description: String Port number to use when performing the test. Supports templated
         variables.

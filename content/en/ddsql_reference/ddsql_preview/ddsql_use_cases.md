@@ -1,5 +1,6 @@
 ---
 title: DDSQL (Preview) Common Queries and Use Cases
+private: true
 aliases:
 - /dashboards/guide/ddsql_use_cases
 - /ddsql_editor/guide/ddsql_use_cases
