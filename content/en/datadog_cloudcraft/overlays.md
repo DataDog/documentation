@@ -92,7 +92,7 @@ You can click on any resource that has findings to open a side panel with more d
 
 #### Investigate sensitive data
 
-You can view sensitive data matches for your S3 buckets. Click a resource that has matches to learn more about the sensitive data matches for that bucket. Then, hover over a filename and click the **Inspect in AWS** button that appears to address it.
+You can view sensitive data matches for your S3 buckets. Click a resource with matches to learn more about the bucket's sensitive data matches. Then, hover over a filename and click its **Inspect in AWS** button.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_sensitive_data.png" alt="Security overlay in Cloudcraft with the sensitive data filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Inspect in AWS button on the side panel." style="width:100%;" >}}
 
