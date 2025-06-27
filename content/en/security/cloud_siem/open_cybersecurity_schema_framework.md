@@ -5,6 +5,9 @@ further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
+- link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
+  tag: "Blog"
+  text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
 ---
 
 ## Overview
@@ -101,6 +104,10 @@ To view OCSF data in logs:
 1. Enter a search for your logs.
 1. Click on a log.
 1. In the side panel, scroll down to the \`ocsf\` JSON attributes to see the OCSF data.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/ocsf/ocsf-schema/blob/4a8ad2fa4a1908f1cad2cbf331a1b49efd5001c2/dictionary.json
 [2]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#categories

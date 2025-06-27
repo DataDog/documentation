@@ -439,11 +439,6 @@ menu:
       url: agent/logs/log_transport
       parent: agent_logs
       weight: 503
-    - name: Multi-Line Detection (Legacy)
-      identifier: multi_line_detection_legacy
-      url: agent/logs/auto_multiline_detection_legacy
-      parent: agent_logs
-      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
