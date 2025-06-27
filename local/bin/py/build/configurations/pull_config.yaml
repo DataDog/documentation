@@ -624,7 +624,7 @@
       - repo_name: kics
         contents:
           - action: pull-and-push-folder
-            branch: benjamin.chouraqui/write-script-to-generate-markdown-files
+            branch: main
             globs:
             - documentation/rules/**/**/*.md
             options:
