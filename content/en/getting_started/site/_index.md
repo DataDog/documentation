@@ -57,18 +57,14 @@ Different Datadog sites may support different functionalities depending on the i
 
 For example, to see the documentation for the Datadog for Government site, select **US1-FED**.
 
-{{% site-region region="gov" %}}
-
 ## Access the Datadog for Government site
 
 The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
-
-[1]: https://www.datadoghq.com/security/
-{{% /site-region %}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
