@@ -4,7 +4,6 @@ import os
 from os.path import isdir
 import git
 import argparse
-import requests
 
 def filter_out_dots(array):
     for dir in array:
