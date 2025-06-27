@@ -16,6 +16,7 @@ The following permissions included in the policy document use wild cards such as
     "Statement": [
         {
             "Action": [
+                "account:GetAccountInformation",
                 "apigateway:GET",
                 "aoss:BatchGetCollection",
                 "aoss:ListCollections",
