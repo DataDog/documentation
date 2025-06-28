@@ -49,7 +49,7 @@ Live Debugger provides:
 
 1. All [Dynamic Instrumentation prerequisites][16] are met.
 1. You have [created a logs index][19] to store debugging information.
-    - Note: It is NOT required to have logs collection enabled on the DD agent to create a logs index or use Live Debugger in general.
+    - Note: It is NOT required to have logs collection enabled on the Datadog Agent to create a logs index or use Live Debugger in general.
 1. (Recommended) You have enabled [Source Code Integration][20] to view and select specific code locations when adding logpoints.
 
 ### Setup Live Debugger
