@@ -23,10 +23,6 @@ further_reading:
 title: CI Pipeline Visibility en Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [Pipeline Visibility][1] ofrece una visión del estado de tu CI mostrando importantes métricas y resultados de tus pipelines. Te ayuda a solucionar problemas de fallos de pipelines, abordar cuellos de botella de rendimiento y realizar un seguimiento del rendimiento y la fiabilidad de CI a lo largo del tiempo.
