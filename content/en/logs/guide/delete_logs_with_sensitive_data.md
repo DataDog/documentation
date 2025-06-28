@@ -43,8 +43,6 @@ To delete an entire index:
 1. Click the **Delete** icon on the right side of the index you want to delete.
 1. Click **Confirm** to delete the index.
 
-**Note**: The index shows as a pending deletion until the logs age out, after which the index is fully deleted and removed from the UI.
-
 ## Redact sensitive data with Sensitive Data Scanner
 
 Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.

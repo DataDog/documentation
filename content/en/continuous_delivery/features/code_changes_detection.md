@@ -10,10 +10,6 @@ further_reading:
   text: "Learn how to query and visualize deployments"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
 CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
@@ -113,6 +109,8 @@ To correctly understand the code changes that a deployment has introduced, only 
 This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
 If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
+
+If your repository contains a single service and you want all directories to be considered for code changes, you may skip this step. If you deploy two or more services from a repository, specifying the source code path patterns is required.
 
 **Example (schema version v2.2):**
 

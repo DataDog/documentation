@@ -44,6 +44,7 @@ further_reading:
 - [Security Notification events](#security-notification-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Service Level Objectives](#service-level-objectives-slo-events)
+- [Sheets](#sheets-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
 - [Reference Tables](#reference-table-events)
 - [Workflows](#workflow-events)
@@ -277,6 +278,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [SLO][86]           | A user creates, modifies, or deletes an SLO and the previous and new values for the SLO.| `@evt.name:SLO @asset.type:slo`            |
 | [SLO correction][87]| A user creates, modifies, or deletes an SLO correction and the previous and new values for the SLO correction. | `@evt.name:SLO @asset.type:slo_correction` |
 
+### Sheets events
+
+| Name               | Description of audit event                                         | Query in audit explorer                                                                         |
+|--------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| [Spreadsheet][169] | A user creates, modifies, deletes, or accesses a spreadsheet.      | `@evt.name:Sheets @asset.type:spreadsheet @action:(created OR modified OR deleted OR accessed)` |
+| [Table][170]       | A user creates, modifies, or deletes a table within a spreadsheet. | `@evt.name:Sheets @asset.type:table @action:(created OR modified OR deleted)`                   |
+| [Pivot][171]       | A user creates, modifies, or deletes a pivot within a spreadsheet. | `@evt.name:Sheets @asset.type:pivot @action:(created OR modified OR deleted)`                   |
 
 ### Synthetic Monitoring events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
@@ -301,7 +309,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Test Optimization events
 | Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| [Test Optimization settings][34]     | A user modified or deleted the settings of a repository.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
+| [Test Optimization settings][172]     | A user modified or deleted the settings of a repository or a service.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
+| [Test Optimization default settings][173]     | A user modified or deleted the default settings.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_default_settings (@action:modified OR @action:deleted)`            |
 
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
@@ -562,3 +571,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [166]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20API%20Key%20Updated%22
 [167]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Succeeded%22
 [168]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40metadata.event_name%3A%22Agent%20Upgrade%20Failed%22
+[169]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ASheets%20%40asset.type%3Aspreadsheet%20%40action%3A%28created%20OR%20modified%20OR%20deleted%20OR%20accessed%29
+[170]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ASheets%20%40asset.type%3Atable%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29
+[171]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ASheets%20%40asset.type%3Apivot%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29
+[172]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Test%20Optimization%22%20%40asset.type%3Atest_optimization_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
+[173]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Test%20Optimization%22%20%40asset.type%3Atest_optimization_default_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29

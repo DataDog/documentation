@@ -2,9 +2,6 @@
 description: Dépannage de la solution Database Monitoring
 title: Dépannage de la solution Database Monitoring pour MySQL
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 Cette page décrit les problèmes courants liés à la configuration et à l'utilisation de la solution Database Monitoring avec MySQL et explique comment les résoudre. Datadog recommande de rester sur la dernière version stable de l'Agent et de suivre les dernières [instructions de configuration][1], car elles peuvent changer en fonction des versions de l'Agent.
 

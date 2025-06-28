@@ -20,10 +20,6 @@ is_beta: true
 title: Event Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Event Management no es compatible con este sitio.</div>
-{{< /site-region >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="¿Qué es Event Management?" style="width:100%;" >}}
 
 ## Información general

@@ -3,10 +3,6 @@ title: LLM Observability Java SDK Reference
 private: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< callout btn_hidden="true" header="Join the Preview!">}}
 The LLM Observability SDK for Java is in Preview.
 {{< /callout >}}
@@ -21,7 +17,7 @@ You can install and configure tracing of various operations such as workflows, t
 
 ### Prerequisites
 
-1. Download the `dd-trace-java` JAR.
+1. Download the [`dd-trace-java` JAR][5].
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][1]).
 
@@ -369,7 +365,7 @@ The `setTags()` member method of the `LLMObsSpan` interface accepts the followin
 
 `tags`
 : required - `Map<String, Object>`
-<br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span’s context (session, environment, system, versioning, etc.).
+<br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span's context (session, environment, system, versioning, etc.).
 
 #### Add a single tag
 
@@ -546,3 +542,5 @@ public class MyJavaClass {
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
 [4]: /llm_observability/setup/auto_instrumentation/?tab=java
+[5]: https://s3.us-east-1.amazonaws.com/dd-trace-java-builds/llmobs-java-sdk-integration/dd-java-agent.jar
+

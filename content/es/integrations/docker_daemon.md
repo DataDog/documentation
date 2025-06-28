@@ -2,6 +2,8 @@
 app_id: Docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
+  dashboards:
+    docker: assets/dashboards/docker_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -79,7 +81,7 @@ tile:
   title: Docker Daemon
 ---
 
-<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 **Nota**: El check de Docker Daemon todavía se mantiene, pero solo funciona con el **Agent v5**.
@@ -234,7 +236,7 @@ La integración de Docker produce los siguientes eventos:
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con [soporte técnico de Datadog][22].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][22].
 
 ## Referencias adicionales
 
@@ -244,7 +246,7 @@ La integración de Docker produce los siguientes eventos:
 * [Cómo monitorizar métricas de recursos de Docker][26]
 * [Cómo recopilar métricas de Docker][27]
 * [8 Datos sorprendentes sobre la adopción de Real Docker ][28]
-* [Monitorizar Docker en AWS ECS][29]
+* [Monitorización de Docker en Amazon ECS][29]
 * [Adaptar Datadog a Docker][30]
 * [Monitorizar Docker con Datadog][31]
 
