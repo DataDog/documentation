@@ -37,7 +37,7 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
         5. Add another environment variable using the **Key** `ECS_FARGATE` and the value `true`. Click **Add** to add the container.
         6. Add another environment variable using the **Key** `DD_SITE` and the value {{< region-param key="dd_site" code="true" >}}. This defaults to `datadoghq.com` if you don't set it.
     7. Add your other application containers to the job definition.
-    8. AWS Batch supports [Fluentbit and Firelens][4]. To enable log collection for your application containers with Datadog:
+    8. AWS Batch supports [Fluent Bit and Firelens][3]. To enable log collection for your application containers with Datadog:
        1. Create a separate log router container in the job definition.
        2. Configure the image `amazon/aws-for-fluent-bit:stable"` for the container.
        3. In the Firelens Configuration section:
@@ -45,11 +45,13 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
           - Configure the **Options** to include `enable-ecs-log-metadata` set to `true` to the **Name** and **Value** respectively
        4. For your application containers, in the Log Configuration section:
           - Configure the **Log Driver** to `awsfirelens`
-          - Configure the **Options** to include the following  **Name** and **Value** similar to Step 2 of the [ECS Fargate FluentBit and Firelens section][5]
+          - Configure the **Options** to include the following  **Name** and **Value** similar to Step 2 of the [ECS Fargate Fluent Bit and Firelens section][4]
     10. Click **Create job definition** to create the job definition.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
+[4]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
@@ -57,11 +59,11 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
 1. Download [datadog-agent-aws-batch-ecs-fargate.json][1]. 
 
    **Note**: If you are using Internet Explorer, this may download as a gzip file, which contains the JSON file mentioned below.
-2. Update the JSON with a `JOB_DEFINITION_NAME`, your [Datadog API Key][41], and the appropriate `DD_SITE` ({{< region-param key="dd_site" code="true" >}}).
+2. Update the JSON with a `JOB_DEFINITION_NAME`, your [Datadog API Key][2], and the appropriate `DD_SITE` ({{< region-param key="dd_site" code="true" >}}).
 
    **Note**: The environment variable `ECS_FARGATE` is already set to `"true"`.
 3. Add your other application containers to the job definition.
-4. AWS Batch supports [Fluentbit and Firelens][4]. To enable log collection for your application containers with Datadog:
+4. AWS Batch supports [Fluent Bit and Firelens][3]. To enable log collection for your application containers with Datadog:
    - In the JSON file, add an additional `log_router` container with the following in the `containers` section:
      ```json
       {
@@ -86,7 +88,7 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
           ]
       }
      ```
-   - In your application containers, add the relevant `logConfiguration` options similar to Step 2 of the [ECS Fargate FluentBit and Firelens section][5]
+   - In your application containers, add the relevant `logConfiguration` options similar to Step 2 of the [ECS Fargate Fluent Bit and Firelens section][4]
 5. Execute the following command to register the job definition:
 
    ```bash
@@ -94,6 +96,9 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
    ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-aws-batch-ecs-fargate.json
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
+[4]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -113,8 +118,6 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
 [1]: https://aws.amazon.com/console
 [2]: https://docs.aws.amazon.com/batch/latest/userguide/create-compute-environment.html
 [3]: https://docs.aws.amazon.com/batch/latest/userguide/create-job-queue-fargate.html
-[4]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
-[5]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
