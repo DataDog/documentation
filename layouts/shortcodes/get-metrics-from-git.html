@@ -2,13 +2,20 @@
 {{- $processing_key := printf "processing_%s" $int_name -}}
 {{- if not ($.Scratch.Get $processing_key) -}}
   {{- $.Scratch.Set $processing_key true -}}
-  {{- with .Site.GetPage (print "/integrations/" $int_name ".md") -}}
+  {{- $page := .Site.GetPage (print "/integrations/" $int_name ".md") -}}
+  {{- if not $page -}}
+    {{ errorf "Integration page for '%s' not found in get-metrics-from-git shortcode." $int_name }}
+  {{- else -}}
     {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
-    {{- $matches := findRE $pattern .RawContent 1 -}}
-    {{- range $matches -}}
+    {{- $matches := findRE $pattern $page.RawContent 1 -}}
+    {{- if not $matches -}}
+      {{ errorf "No ### Metrics section found in '%s' integration documentation (get-metrics-from-git shortcode)." $int_name }}
+    {{- else -}}
+      {{- range $matches -}}
         {{- $content := strings.TrimPrefix "### Metrics\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
         {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
         {{- $content | markdownify -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
   {{- $.Scratch.Delete $processing_key -}}
