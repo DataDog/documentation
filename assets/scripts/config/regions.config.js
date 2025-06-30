@@ -486,7 +486,7 @@ export default {
     us5: 'intake.profile.us5.datadoghq.com',
     eu: 'intake.profile.datadoghq.eu',
     ap1: 'intake.profile.ap1.datadoghq.com',
-    ap2: 'cyan.profile.ap2.datadoghq.com',
+    ap2: 'cyan.intake.ap2.datadoghq.com',
     gov: 'intake.profile.ddog-gov.com'
   },
   traces_endpoint: {
