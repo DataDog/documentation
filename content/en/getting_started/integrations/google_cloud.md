@@ -40,7 +40,7 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 1) Create a [Datadog account][1]
 2) Set up a [Service Account][2] in any of your Google Cloud projects
 3) Review these Google Cloud Prerequisites:
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
 {{% /site-region %}}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
