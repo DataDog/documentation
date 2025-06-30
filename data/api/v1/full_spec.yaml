@@ -1550,6 +1550,13 @@ components:
           example: host
           nullable: true
           type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          example: group
+          nullable: true
+          type: string
       required:
       - name
       type: object
@@ -12685,6 +12692,12 @@ components:
         prefix:
           description: The tag/attribute key associated with the template variable.
           type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          nullable: true
+          type: string
         visible_tags:
           description: List of visible tag values on the shared dashboard.
           items:
@@ -16410,6 +16423,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.

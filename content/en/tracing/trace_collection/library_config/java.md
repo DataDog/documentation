@@ -186,7 +186,7 @@ A regex to redact sensitive data from incoming requests' query string reported i
 By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
 
 `dd.trace.span.tags`
-: **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br> 
+: **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br>
 **Default**: `none`<br>
 **Example**: `tag1:value1,tag2:value2`<br>
 A list of default tags to be added to every span.
@@ -201,6 +201,16 @@ A list of span tags to be added to every jmx metric.
 : **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
 **Default**: `true`<br>
 When `false`, informational startup logging is disabled. Available for versions 0.64+.
+
+`dd.trace.debug`
+: **Environment Variable**: `DD_TRACE_DEBUG`<br>
+**Default**: `false`<br>
+When `true`, debug mode for the Datadog Java Tracer is enabled.
+
+`datadog.slf4j.simpleLogger.jsonEnabled`
+: **Environment Variable**: Not available<br>
+**Default**: `false`<br>
+When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.
 
 `dd.trace.servlet.principal.enabled`
 : **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
@@ -494,7 +504,7 @@ Enable native JDK support for Unix Domain Sockets.
 
 #### `dd.service.mapping`
 
-**Example with system property**:
+Example with system property:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
@@ -503,8 +513,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 {{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" >}}
 
 #### `dd.tags`
-
-**Setting a global env for spans and JMX metrics**:
+Setting a global env for spans and JMX metrics:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
@@ -514,7 +523,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 
 #### `dd.trace.span.tags`
 
-**Example with adding project:test to every span**:
+Example with adding project:test to every span:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
@@ -524,7 +533,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.jmx.tags`
 
-**Setting custom.type:2 on a JMX metric**:
+Setting custom.type:2 on a JMX metric:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
@@ -534,7 +543,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.methods`
 
-**Example with system property**:
+Example with system property:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
@@ -572,10 +581,10 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 
 #### `dd.trace.enabled`
 
-**Example with system property and debug app mode**:
+Example with system property and debug app mode:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddd.trace.debug=true -jar path/to/application.jar
 ```
 
 Debug app logs show that `Tracing is disabled, not installing instrumentations.`

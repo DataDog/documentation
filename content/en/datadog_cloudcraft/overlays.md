@@ -71,17 +71,17 @@ The observability overlay tracks coverage for the following products:
 
 ### Security
 
-The security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays misconfigurations detected by Cloud Security, helping you:
+The security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays security findings detected by Cloud Security, helping you:
 
 - Identify security issues directly in infrastructure diagrams.
-- Analyze misconfigurations in context to prioritize remediation.
+- Analyze misconfigurations and identity risks in context, so you can prioritize remediation.
 - Assess your security posture before deploying applications.
 
-You can click on any any resource with findings to open a side panel with more details, allowing deeper investigation without leaving the diagram.
+You can click on any resource with findings to open a side panel with more details, allowing deeper investigation without leaving the diagram.
 
 This view is ideal for mapping attack surfaces during penetration tests or security audits. To keep the diagram focused, components like EBS volumes and NAT Gateways are excluded. 
 
-By default, the security overlay shows Critical, High, and Medium misconfigurations, which you can filter at the bottom of the screen.
+By default, the security overlay shows Critical, High, and Medium severity misconfigurations or identity risks, which you can filter at the bottom of the screen.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_with_ccm_2.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
