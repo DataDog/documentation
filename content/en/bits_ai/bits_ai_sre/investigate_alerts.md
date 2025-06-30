@@ -21,7 +21,7 @@ There are a few ways to enable Bits for automated investigations:
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform. 
 
-A investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate limited to avoid unnecessary investigations and protect your budget.
+An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate limited to avoid unnecessary investigations and protect your budget.
 
 ### Manually start an investigation
 
