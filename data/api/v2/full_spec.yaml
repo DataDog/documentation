@@ -54997,6 +54997,17 @@ paths:
       operationId: ListVolumesByMetricName
       parameters:
       - $ref: '#/components/parameters/MetricName'
+      - description: 'The number of seconds of look back (from now).
+
+          Default value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum
+          value is 2,630,000 (1 month).'
+        example: 7200
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
