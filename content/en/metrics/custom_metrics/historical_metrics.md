@@ -458,10 +458,6 @@ The following example assumes:
 
 $(3000 / 730) ⋅ (5 / 100) = \\$0.21$
 
-If the same metric has 1500 unique tag-value combinations that are on-time and 1500 late tag value combinations at one given hour of a 730-hour month, the custom metric cost is:
-
-`(3000 / 730) * ($5/100) = $0.21`
-
 For more information, see the [Custom Metrics billing][3] documentation.
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
