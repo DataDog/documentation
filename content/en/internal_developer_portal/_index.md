@@ -34,6 +34,9 @@ Datadog's Internal Developer Portal (IDP) unifies live telemetry, metadata, and 
 
 If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
+{{< /callout >}}
+
 ## Common use cases
 
 {{< whatsnext desc=" " >}}
@@ -51,6 +54,16 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
     {{< nextlink href="/internal_developer_portal/self_service_actions" >}}Accelerate releases through Self-Service Actions{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports" >}}Track reliability and scorecard compliance with Engineering Reports{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Working with teams
+
+IDP uses [Teams](https://docs.datadoghq.com/account_management/teams/) to define service ownership, apply platform policies, and report on engineering standards. 
+
+If your organization uses GitHub as the source of truth for team structure, join the preview for GitHub Integration for Teams to automatically sync GitHub teams with Datadog.
+
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
+{{< /callout >}}
+
 
 ## Further reading
 
