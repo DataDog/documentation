@@ -77,7 +77,7 @@ Datadog also proposes a list of monitors depending on your service type:
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Monitors are attached to an APM service if `service:<SERVICE_NAME>` is tagged in the metadata, included in the monitor query, or if the query is grouped-by service. You can also tag any Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
