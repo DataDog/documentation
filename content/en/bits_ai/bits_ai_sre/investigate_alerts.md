@@ -60,15 +60,12 @@ Bits can send investigation results to several destinations. By default, results
   - **Full investigation results** are available on the [Bits AI Investigations][2] page.
   - **A summary of the results** is available on the status page for the monitor.
 
-Additionally, if you have already configured `@slack`, `@oncall`, or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
+Additionally, if you have already configured `@slack` or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][7] is installed in your workspace.
 1. Go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace.
 1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
-{{% /collapse-content %}}
-{{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
-In the **Configure notifications and automations** section, add the @oncall-{team} handle.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle.
