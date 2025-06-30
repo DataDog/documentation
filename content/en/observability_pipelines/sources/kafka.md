@@ -69,8 +69,8 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 ### Set Up Diagnostic Settings
 
 1. Configure Azure resources (for example, VMs, App Services) or subscription-level activity logs to stream logs to the Event Hub.
-1. Navigate to the resource.
-1. Navigate to **Monitoring** > **Diagnostic settings** and click **+ Add diagnostic setting**.
+1. Navigate to the resource and then to **Monitoring** > **Diagnostic settings**.
+1. Click **+ Add diagnostic setting**.
 1. Select log categories you want (for example, AuditLogs, SignInLogs for Microsoft Entra ID).
 1. In **Destination details**:
     1. Check the **Stream to an event hub** box.
@@ -92,7 +92,7 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 1. Append the Kafka port `:9093` to form the Bootstrap Servers value: `<NAMESPACE>.servicebus.windows.net:9093`.
     - For example, if your namespace is `myeventhubns`, the Bootstrap Servers is `myeventhubns.servicebus.windows.net:9093`.
 
-### Set Up Authentication
+#### Set Up Authentication
 
 1. Azure Event Hubs uses SASL_SSL with the PLAIN mechanism for Kafka authentication.
 1. The connection string is formatted for Observability Pipelines:
@@ -100,6 +100,29 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
     Username: $ConnectionString
     Password: Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>
     ```
+
+### Set up the Kafka source for Azure Event Hub logs
+
+#### Set up the Kafka source in the pipeline UI
+
+1.  **Bootstrap Servers**: Enter `\<NAMESPACE\>.servicebus.windows.net:9093` (for example, myeventhubns.servicebus.windows.net:9093).
+1.  **Topics**: Enter `datadog-topic`.
+1.  **Group ID**: Specify or create a unique consumer group (for example, `datadog-consumer-group`).
+1.  **Security Protocol**: Select `SASL_SSL`.
+1.  **SASL Mechanism**: Select `PLAIN`.
+1.  **Username**: Enter "$ConnectionString".
+1.  **Password**: Enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
+1.  Enable TLS.
+1.  Download the certificate from [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html) and save it to `/var/lib/observability-pipelines-worker/config/cert.pem`.
+1.  For the certificate path in the application, enter `/cert.pem`.
+
+#### Observability Pipelines environment file configuration
+
+In the OP environment file (`/etc/default/observability-pipelines-worker`), add the following connection variables:
+
+-   `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$ConnectionString"`
+-   `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
+-   `DD_OP_SOURCE_KAFKA_SASL_PASSWORD=<Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>>`
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master

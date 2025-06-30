@@ -41,27 +41,27 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 1. In the Azure Portal, go to Event Hubs > Create.
 1. Fill in Project Details (subscription, resource group) and Instance Details (namespace name, region, select Standard, Premium, or Dedicated tier).
-1. Ensure the region matches your Azure resources (e.g., westus).
+1. Ensure the region matches your Azure resources (for example, westus).
 1. Review and create the namespace.
 1. Note: The Kafka endpoint is automatically enabled for Standard and higher tiers.
 
 ### Create an Event Hub (Kafka Topic)
 
 1. Inside the namespace, select Event Hubs > + Event Hub.
-1. Enter a name (e.g., datadog-topic) and configure settings (e.g., 4 partitions, 7-day retention).
+1. Enter a name (for example, datadog-topic) and configure settings (for example, 4 partitions, 7-day retention).
 1. This Event Hub acts as a Kafka topic.
 
 ### Configure Shared Access Policy
 
 1. In the Event Hub, go to Settings > Shared access policies > + Add.
-1. Create a policy (e.g., DatadogKafkaPolicy) with Listen, Send, and Manage permissions.
+1. Create a policy (for example, DatadogKafkaPolicy) with Listen, Send, and Manage permissions.
 1. Copy the Connection string-primary key for Kafka authentication.
 
 ### Set Up Diagnostic Settings
 
-1. Configure Azure resources (e.g., VMs, App Services) or subscription-level activity logs to stream logs to the Event Hub.
+1. Configure Azure resources (for example, VMs, App Services) or subscription-level activity logs to stream logs to the Event Hub.
 1. Navigate to the resource > Monitoring > Diagnostic settings > Add diagnostic setting.
-1. Select log categories (e.g., AuditLogs, SignInLogs for Microsoft Entra ID).
+1. Select log categories (for example, AuditLogs, SignInLogs for Microsoft Entra ID).
 1. Check Stream to an event hub, select the namespace and Event Hub (datadog-topic).
 1. Save the settings.
 1. For activity logs, go to Microsoft Entra ID > Monitoring > Audit logs > Export Data Settings, and stream to the Event Hub.
@@ -73,7 +73,7 @@ Azure Event Hubs exposes a Kafka endpoint at NAMESPACE.servicebus.windows.net:90
 
 ### Retrieve Kafka Connection Details
 
-1. In the Azure Portal, navigate to your Event Hubs Namespace (e.g., myeventhubns).
+1. In the Azure Portal, navigate to your Event Hubs Namespace (for example, myeventhubns).
 1. On the Overview page, under the Essentials section, locate the Host name or Fully Qualified Domain Name (FQDN). It will be in the format: <NAMESPACE>.servicebus.windows.net (e.g., myeventhubns.servicebus.windows.net).
 1. Append the Kafka port :9093 to form the Bootstrap Servers value: <NAMESPACE>.servicebus.windows.net:9093.
 1. Example: If your namespace is myeventhubns, the Bootstrap Servers is myeventhubns.servicebus.windows.net:9093.
