@@ -16410,6 +16410,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.

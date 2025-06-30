@@ -405,7 +405,7 @@ Learn more about [peer tags and inferred entities][4].
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
 
-First, define the kinds you want to use with [this API][3]. Only entities of the kinds you've explicitly setup are accepted. In the example below, a user is declaring a library with links, tags, and owning teams.
+First, define the kinds you want to use with [this API][1]. Only entities of the kinds you've explicitly setup are accepted. In the example below, a user is declaring a library with links, tags, and owning teams.
 
 Example YAML:
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
@@ -445,13 +445,14 @@ Example YAML:
         type: operator
   {{< /code-block >}}
 
+[1]: /api/latest/software-catalog/#create-or-update-kinds
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
 [1]: /internal_developer_portal/software_catalog/entity_model
 [2]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-[3]: /api/latest/software-catalog/#create-or-update-kinds
 
 
 ## Further reading

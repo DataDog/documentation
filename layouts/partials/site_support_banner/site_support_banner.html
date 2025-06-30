@@ -13,7 +13,10 @@
 {{ $unsupported_product := dict }}
 {{ if $site_support_id }}
     {{ if index $unsupported_sites $site_support_id }}
-        {{ $unsupported_product = index $unsupported_sites $site_support_id }}  
+        {{ $unsupported_product = index $unsupported_sites $site_support_id }}
+    {{ else }}
+        {{/* "Error if the site_support_id is not found in the unsupported_sites map" */}}
+        {{ errorf "site_support_id '%s' at '%s' not found in unsupported_sites. If the site_support_id is correct, add it to the params.yaml file." $site_support_id $dot.Page.Path }}
     {{ end }}
 {{ else }}
     {{ range $product_paths }}

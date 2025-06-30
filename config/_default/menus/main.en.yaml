@@ -439,11 +439,6 @@ menu:
       url: agent/logs/log_transport
       parent: agent_logs
       weight: 503
-    - name: Multi-Line Detection (Legacy)
-      identifier: multi_line_detection_legacy
-      url: agent/logs/auto_multiline_detection_legacy
-      parent: agent_logs
-      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
@@ -2335,6 +2330,11 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
+    - name: Feature Flags
+      url: change_tracking/feature_flags/
+      parent: change_tracking
+      identifier: change_tracking_feature_flags
+      weight: 1
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2931,7 +2931,7 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
-    - name: Autoscaling
+    - name: Kubernetes Autoscaling
       url: containers/monitoring/autoscaling
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_autoscaling
@@ -3538,46 +3538,51 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
       weight: 104
-    - name: Databricks
-      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_databricks
-      weight: 101
-    - name: Confluent Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 102
-    - name: MongoDB
-      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 103
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
-      weight: 104
-    - name: Elastic Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      weight: 101
+    - name: Databricks
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 105
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 102
     - name: OpenAI
       url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 103
+    - name: GitHub
+      url: cloud_cost_management/setup/saas_costs/?tab=github#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_github
+      weight: 104
+    - name: Confluent Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 105
+    - name: MongoDB
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 106
+    - name: Elastic Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_elasticcloud
+      weight: 107
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 107
+      weight: 108
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 108
+      weight: 109
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -5881,10 +5886,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
-    - name: Tags Processor
-      url: observability_pipelines/processors/tags_processor
+    - name: Tags
+      url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags_processor
+      identifier: observability_pipelines_processors_tags
       weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle
