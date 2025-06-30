@@ -93,9 +93,11 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 ### Set Up Authentication
 
 1. Azure Event Hubs uses SASL_SSL with the PLAIN mechanism for Kafka authentication.
-1. The connection string will be formatted for Observability Pipelines:
-   - Username: $ConnectionString
-   - Password: Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>
+1. The connection string is formatted for Observability Pipelines:
+    ```
+    Username: $ConnectionString
+    Password: Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>
+    ```
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
