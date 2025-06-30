@@ -19,10 +19,6 @@ further_reading:
 title: CI Pipeline Visibility dans Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 La solution [Pipeline Visibility][1] vous permet d'étudier la santé de votre CI grâce à une interface axée sur vos pipelines. Elle présente les principales métriques et les résultats clés de vos pipelines. Cette solution simplifie le diagnostic des échecs de pipeline, vous aide à supprimer les goulots d'étranglement limitant vos performances et contribue à surveiller l'évolution des performances et la fiabilité de votre CI.

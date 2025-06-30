@@ -44,24 +44,24 @@ short_description: Monitorizar y analizar los resultados de tests de rendimiento
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Notifications
-  - Category::Testing
+  - Categoría::Tests
   - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  configuration: README.md#Configuración
   description: Monitorizar y analizar los resultados de tests de rendimiento de NeoLoad
   media:
   - caption: Dashboard de tests de rendimiento de NeoLoad
     image_url: images/neoload-dashboard.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: NeoLoad
 ---
 
@@ -77,7 +77,7 @@ Con la integración NeoLoad puedes realizar un seguimiento de las métricas de l
 - Correlacionar el rendimiento de la aplicación con las métricas de los tests de carga en NeoLoad.
 - Analizar y visualizar métricas de NeoLoad en Datadog, como el rendimiento, los errores y el rendimiento, utilizando el dashboard predefinido o el [Explorador de métricas][2].
 
-## Configuración
+## Configurar
 
 ### Configuración
 

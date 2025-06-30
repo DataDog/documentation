@@ -1550,6 +1550,13 @@ components:
           example: host
           nullable: true
           type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          example: group
+          nullable: true
+          type: string
       required:
       - name
       type: object
@@ -6849,6 +6856,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -6941,6 +6950,28 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorDraftStatus:
+      default: published
+      description: 'Indicates whether the monitor is in a draft or published state.
+
+
+        `draft`: The monitor appears as Draft and does not send notifications.
+
+        `published`: The monitor is active and evaluates conditions and notify as
+        configured.
+
+
+        This field is in preview. The draft value is only available to customers with
+        the feature enabled.
+
+        '
+      enum:
+      - draft
+      - published
+      type: string
+      x-enum-varnames:
+      - DRAFT
+      - PUBLISHED
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -7394,7 +7425,7 @@ components:
             For example, a query grouped by `cluster` and `namespace` cannot notify
             on `region`.
 
-            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
+            Setting `notify_by` to `["*"]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
@@ -8024,6 +8055,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        draft_status:
+          $ref: '#/components/schemas/MonitorDraftStatus'
         id:
           description: ID of this monitor.
           format: int64
@@ -11046,19 +11079,24 @@ components:
       example: {}
       properties:
         aggr:
+          deprecated: true
           description: Query aggregator function.
           type: string
         expression:
+          deprecated: true
           description: Query expression.
           type: string
         metric:
+          deprecated: true
           description: Query metric used.
           type: string
         query_index:
+          deprecated: true
           description: Query index from original combined query.
           format: int64
           type: integer
         scope:
+          deprecated: true
           description: Query scope.
           type: string
         unit:
@@ -12653,6 +12691,12 @@ components:
           type: string
         prefix:
           description: The tag/attribute key associated with the template variable.
+          type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          nullable: true
           type: string
         visible_tags:
           description: List of visible tag values on the shared dashboard.
@@ -14317,11 +14361,23 @@ components:
       enum:
       - http
       - grpc
+      - ssl
+      - dns
+      - tcp
+      - udp
+      - icmp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
       - HTTP
       - GRPC
+      - SSL
+      - DNS
+      - TCP
+      - UDP
+      - ICMP
+      - WEBSOCKET
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -14457,8 +14513,8 @@ components:
         operator:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         type:
           $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
       required:
@@ -14514,6 +14570,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
       type: object
     SyntheticsAssertionJSONSchemaMetaSchema:
@@ -14621,8 +14678,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: Value used by the operator.
-          example: 123456
         timingsScope:
           $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
@@ -14632,6 +14689,20 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTargetValue:
+      description: Value used by the operator in assertions. Can be either a number
+        or string.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
+      - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
+    SyntheticsAssertionTargetValueNumber:
+      description: Numeric value used by the operator in assertions.
+      format: double
+      type: number
+    SyntheticsAssertionTargetValueString:
+      description: String value used by the operator in assertions. Supports templated
+        variables.
+      type: string
     SyntheticsAssertionTimingsScope:
       description: Timings scope for response time assertions.
       enum:
@@ -14716,6 +14787,7 @@ components:
           description: The specific operator to use on the path.
           type: string
         targetValue:
+          $ref: '#/components/schemas/SyntheticsAssertionTargetValue'
           description: The path target value to compare to.
         xPath:
           description: The X path to assert.
@@ -14967,9 +15039,6 @@ components:
           description: Username to use for the basic authentication.
           example: my_username
           type: string
-      required:
-      - password
-      - username
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -16354,6 +16423,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
@@ -17372,6 +17442,9 @@ components:
             example: ''
             type: string
           type: array
+        checkCertificateRevocation:
+          description: Check for certificate revocation.
+          type: boolean
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
@@ -17384,16 +17457,24 @@ components:
           description: DNS server to use for DNS tests.
           type: string
         dnsServerPort:
+          $ref: '#/components/schemas/SyntheticsTestRequestDNSServerPort'
           description: DNS server port to use for DNS tests.
-          type: string
         files:
-          description: Files to be used as part of the request in the test.
+          description: Files to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
           items:
             $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
           type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
+        form:
+          additionalProperties:
+            description: A single form entry.
+            type: string
+          description: Form to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
+          type: object
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -17401,6 +17482,9 @@ components:
           type: string
         httpVersion:
           $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
+        isMessageBase64Encoded:
+          description: Whether the message is base64 encoded.
+          type: boolean
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -17528,6 +17612,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestDNSServerPort:
+      description: DNS server port to use for DNS tests.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalDNSServerPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariableDNSServerPort'
+    SyntheticsTestRequestNumericalDNSServerPort:
+      description: Integer DNS server port number to use when performing the test.
+      format: int64
+      type: integer
     SyntheticsTestRequestNumericalPort:
       description: Integer Port number to use when performing the test.
       format: int64
@@ -17549,6 +17642,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariableDNSServerPort:
+      description: String DNS server port number to use when performing the test.
+        Supports templated variables.
+      type: string
     SyntheticsTestRequestVariablePort:
       description: String Port number to use when performing the test. Supports templated
         variables.
@@ -24285,6 +24382,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -24442,6 +24540,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -27028,7 +27127,10 @@ paths:
         type: safe
   /api/v1/graph/snapshot:
     get:
-      description: 'Take graph snapshots.
+      description: 'Take graph snapshots. Snapshots are PNG images generated by rendering
+        a specified widget in a web page and capturing it once the data is available.
+        The image is then uploaded to cloud storage.
+
 
         **Note**: When a snapshot is created, there is some delay before it is available.'
       operationId: GetGraphSnapshot
@@ -38853,6 +38955,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -38960,6 +39063,7 @@ servers:
       - us3.datadoghq.com
       - us5.datadoghq.com
       - ap1.datadoghq.com
+      - ap2.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

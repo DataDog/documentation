@@ -16,10 +16,6 @@ further_reading:
 title: App Builder
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では App Builder はサポートされていません。</div>
-{{< /site-region >}}
-
 Datadog App Builder は、使いやすいドラッグアンドドロップのインターフェイスと JavaScript サポート機能の内蔵により、社内ツールの開発を効率化するローコードアプリケーション構築プラットフォームです。App Builder は AWS や GitHub などの一般的なサービスと統合するため、データを活用し、外部 API やデータストアとシームレスに接続することができます。Datadog の既存の機能と統合することで、App Builder は、予防措置を講じたり、進行中のインシデントに対応したりするための集中管理されたコンテキストを提供します。これはすべて、トラブルシューティングで使用するのと同じビュー内で実行できます。
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="App Builder のアプリ" style="width:100%;" >}}
