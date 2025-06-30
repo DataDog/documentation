@@ -50,8 +50,9 @@ The Datadog FIPS Agent does **not** support the following:
 
 ## Prerequisites
 <div class="alert alert-warning">
-The following prerequisites are only a rough guideline of the additional controls required for the compliance of the deployed system. Based on the nature of data being processed, the compliance level being targeted, the deployment environments, as well as many other factors, the compliance needs are likely to be unique in most circumstances. Because of this, it is the customer's responsibility to evaluate their needs and ensure overall system compliance.
+The following prerequisites are a rough guideline of the additional controls required for the compliance of the deployed system. The compliance needs are likely to be unique in most circumstances. It is therefore the customer's responsibility to evaluate their needs and ensure overall system compliance.
 </div>
+The following are generally requirement for each platform, your system may require additional controls:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -69,19 +70,16 @@ The following prerequisites are only a rough guideline of the additional control
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
-Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 {{% /tab %}}
 
 {{% tab "AWS ECS" %}}
-Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 - Configure AWS compute services (EC2 or Fargate) in FIPS mode
 - Use FIPS-compliant storage for your ECS tasks
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
-Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, the following requirements:
 - Use a FIPS-compliant region (for example, AWS GovCloud)
 - Configure EKS worker nodes in FIPS mode
 - Use FIPS-compliant storage for your EKS worker nodes
@@ -91,7 +89,7 @@ Ensure your AWS setup is FIPS compliant. This includes, but is not limited to, t
 
 In addition to the Operating System (OS) requirements above:
 - You must have access to a FIPS-compliant Datadog environment (US1-FED).
-- The FIPS Agent is only available on Agent versions 7.65.0 and above.
+- The Agent version must be 7.65.0 and above to access the FIPS Agent
 
 ## Installation
 
@@ -159,14 +157,14 @@ For AWS Lambda FIPS compliance, follow the instructions in the [AWS Lambda FIPS 
 {{% tab "AWS ECS" %}}
 
 When following the [ECS installation instructions](/containers/amazon_ecs/), make sure to use these FIPS-specific configuration values for your Task Definition:
-- Set `image` (in `containerDefinitions` object) to `public.ecr.aws/datadog/agent:7-fips`
+- Set `image` in the `containerDefinitions` object to `public.ecr.aws/datadog/agent:7-fips`  
 - Set `DD_SITE` environment variable to `ddog-gov.com`
 
 {{% /tab %}}
 
 {{% tab "AWS EKS" %}}
 
-When following the [Datadog Agent installation on Kubernetes](/containers/kubernetes/installation/) instructions, make sure to include these FIPS-specific configuration values depending on your chosen installation method (in `datadog-agent.yaml` file):
+When following the [Datadog Agent installation on Kubernetes](/containers/kubernetes/installation/) instructions, make sure to include these FIPS-specific configuration values in the `datadog-agent.yaml` file depending on your chosen installation method:
 
 For the Datadog Operator:
 ```yaml

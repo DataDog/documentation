@@ -49,6 +49,8 @@ The following instructions assume that you have configured an EC2 cluster. See t
 ## FIPS Compliance
 
 Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.
+
+[32]: /agent/configuration/fips-compliance/
 {{% /site-region %}}
 
 ### Create an ECS task definition
@@ -353,4 +355,3 @@ Need help? Contact [Datadog support][11].
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
-[32]: /agent/configuration/fips-compliance/
