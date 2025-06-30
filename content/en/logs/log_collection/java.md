@@ -241,6 +241,7 @@ writer.field.dd.env        = {context: dd.env}
 {{< /tabs >}}
 
 #### Inject trace IDs into your logs
+<div class="alert alert-info">Starting in Datadog Agent version 0.74.0, the Java tracer automatically injects trace correlation identifiers into JSON formatted logs. For earlier versions, enable automatic injection in the Java tracer by adding <code>dd.logs.injection=true</code> as a system property, or through the environment variable <code>DD_LOGS_INJECTION=true</code>. Full configuration details can be found on the Java tracer configuration page.</div>
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
 
