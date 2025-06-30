@@ -3,7 +3,7 @@ title: Investigate Alerts
 ---
 
 ## Get started with alert investigations
-You can configure Bits to automatically investigate whenever a monitor fires an alert or manually kick off an investigation as needed.
+You can configure Bits to automatically investigate when a monitor triggers an alert, or you can manually start an investigation as needed.
 
 ### Enable Bits on monitors for automated investigations
 
@@ -36,19 +36,19 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
  
 ### Monitor requirements for Bits AI SRE
 
-Today, Bits is able to run investigations on monitors that fulfill all three of the following requirements:
-1. **Monitor Type**
-   1. The monitor is a metric, logs, APM (`query_alert` type only), anomaly, forecast, integration, or outlier monitor.
-1. **Service scope**
-   1. The monitor query must be filtered by a service or
-   2. The monitor query must be grouped by a service or
-   3. The monitor must be tagged with a service tag
-1. **Telemetry links**
-   1. For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
-    - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not supported at this time. 
-    - A logs query 
-    - A trace query 
-    - A Datadog notebook with helpful widgets  
+Bits is able to run investigations on monitors that fulfill all three of the following requirements:
+1. **Monitor Type**: The monitor must be a metric, logs, APM (`query_alert` type only), anomaly, forecast, integration, or outlier monitor.
+
+2. **Service scope**: The monitor must have one of the following:
+   - A monitor query filtered by a service
+   - A monitor query grouped by a service  
+   - A service tag on the monitor
+
+3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
+   - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not supported.
+   - A logs query
+   - A trace query
+   - A Datadog notebook with helpful widgets
 
 Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors. 
 
@@ -79,9 +79,9 @@ In the **Configure notifications and automations** section, add the `@case-{proj
 Investigations happen in two phases:
 
 1. **Initial context gathering**
-   1. Bits begins by identifying any Datadog links that you have added to the monitor's message and uses them as entry points into the investigation.
-   1. It also automatically queries your Datadog environment to gather additional context about what's happening around the alert.
-   1. If you have previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
+   - Bits begins by identifying any Datadog links that you have added to the monitor's message and uses them as entry points into the investigation.
+   - It also automatically queries your Datadog environment to gather additional context about what's happening around the alert.
+   - If you have previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
 1. **Root cause hypothesis generation and testing**
    - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
       - Metrics
