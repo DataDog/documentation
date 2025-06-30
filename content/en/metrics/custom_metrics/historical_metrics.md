@@ -446,7 +446,7 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 | Metric Delayed by:   | Ingestion Latency                         |
 |----------------------|-------------------------------------------|
 | 1-12 hours           | Near Real-Time Ingestion (1 hour maximum) |
-| 12 hours - 30 days   | Up to 14 hour latency                     |
+| 12 hours - 30 days   | Up to 14 hours latency                    |
 | Over 30 days         | Over 14 hours latency                     |
 
 ## Historical Metrics Ingestion billing
