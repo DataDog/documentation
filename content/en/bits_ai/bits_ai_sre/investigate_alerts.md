@@ -34,7 +34,7 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 - **Option 3: Slack**
   - Under a monitor notification in Slack, mention `@Datadog Investigate this alert`.
  
-### Monitor Requirements for Bits AI SRE
+### Monitor requirements for Bits AI SRE
 
 Today, Bits is able to run investigations on monitors that fulfill all three of the following requirements:
 1. **Monitor Type**
@@ -45,12 +45,12 @@ Today, Bits is able to run investigations on monitors that fulfill all three of 
    3. The monitor must be tagged with a service tag
 1. **Telemetry links**
    1. For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
-    - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not currently supported. 
+    - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not supported at this time. 
     - A logs query 
     - A trace query 
     - A Datadog notebook with helpful widgets  
 
-Think of the first page you'd visit in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors. 
+Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors. 
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
