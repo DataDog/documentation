@@ -6,7 +6,8 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. [Create a Logs Analytics Workspace][10165] in the workspace if you haven't already.
 1. In the Logs Analytics Workspace, navigate to **Settings** > **Tables**.
     1. Click **+ Create**.
-    1. Define a custom table (for example, `Custom-MyLogs_CL`). **Note**: The table name must start with `Custom-`. `CL` is automatically appended to the end of the table name. You need the table name to set up the Observability Pipelines Microsoft Sentinel destination.
+    1. Define a custom table (for example, `Custom-MyLogs_CL`).
+        - **Notes**:<br>- The table name must start with `Custom-`. `CL` is automatically appended to the end of the table name. You need the table name to set up the Observability Pipelines Microsoft Sentinel destination.<br>- You can also use an Azure Table instead of a custom table.
     1. Select **New Custom Log (DCR-based)**.
     1. Click **Create a new data collection rule** and select the DCE you create earlier.
     1. Click **Next**.
@@ -23,16 +24,15 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
     1. Click **Create**.
     1. On the overview page, click **Client credentials: Add a certificate or secret**.
     1. Click **New client secret**.
-    1. Enter a name for the secret and click **Add**.
-    1. Take note of the **Tenant ID**, **Client ID**, and **Client Secret**. You need this information when you [set up the Observability Pipelines Microsoft Sentinel destination](#set-up-the-
-    destination-in-observability-pipelines).
+    1. Enter a name for the secret and click **Add**. **Note**: Make sure to take note of the client secret, which gets obfuscated after 10 minutes.
+    1. Also take note of the **Tenant ID** and **Client ID**. You need this information, along with the client secret, when you [set up the Observability Pipelines Microsoft Sentinel destination](#set-up-the-destination-in-observability-pipelines).
 1. In Azure Portal's [Data Collection Rules][10166] page, search for and select the DCR you created earlier.
     1. Click **Access Control (IAM)** in the left nav.
     1. Click **Add** and select **Add role assignment**.
     1. Add the **Monitoring Metrics Publisher** role.
     1. On the Members page, select **User, group, or service principal**.
     1. Click **Select Members** and search for the application you created in the app registration step.
-    1. Click **Review + Assign**.
+    1. Click **Review + Assign**. **Note**: It can take up to 10 minutes for the IAM change to take effect.
 
 The table below summarizes the Azure and Microsoft Sentinel information you need when you [set up the Observability Pipelines Microsoft Sentinel destination](#set-up-the-destination-in-observability-pipelines):
 
