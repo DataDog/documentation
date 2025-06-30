@@ -28,7 +28,7 @@ further_reading:
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
-{{% site-region region="us,ap1" %}}
+{{% site-region region="us,ap1,ap2" %}}
 
 ## Overview
 
