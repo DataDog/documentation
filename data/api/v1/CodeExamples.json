@@ -383,6 +383,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1751391372",
+      "description": "Create a new dashboard with template variable type field returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_41622531",
       "description": "Create a new dashboard with timeseries widget and formula style attributes"
     },
@@ -452,6 +457,11 @@
       "group": "dashboards",
       "suffix": "",
       "description": "Create a shared dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1668947073",
+      "description": "Create a shared dashboard with a group template variable returns \"OK\" response"
     }
   ],
   "DeleteDashboards": [
@@ -492,6 +502,11 @@
       "group": "dashboards",
       "suffix": "",
       "description": "Update a shared dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1708268778",
+      "description": "Update a shared dashboard with selectable_template_vars returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [

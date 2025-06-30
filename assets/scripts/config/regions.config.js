@@ -1,12 +1,13 @@
 export default {
-    allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'gov'],
+    allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'],
     dd_datacenter: {
         us: 'US1',
         us3: 'US3',
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
-        gov: 'US1-FED'
+        gov: 'US1-FED',
+        ap2: 'AP2'
     },
     dd_site: {
         us: 'datadoghq.com',
@@ -14,6 +15,7 @@ export default {
         us5: 'us5.datadoghq.com',
         eu: 'datadoghq.eu',
         ap1: 'ap1.datadoghq.com',
+        ap2: 'ap2.datadoghq.com',
         gov: 'ddog-gov.com'
     },
     dd_full_site: {
@@ -22,6 +24,7 @@ export default {
         us5: 'us5.datadoghq.com',
         eu: 'app.datadoghq.eu',
         ap1: 'ap1.datadoghq.com',
+        ap2: 'ap2.datadoghq.com',
         gov: 'app.ddog-gov.com'
     },
     dd_api: {
@@ -30,6 +33,7 @@ export default {
       us5: 'https://api.us5.datadoghq.com',
       eu: 'https://api.datadoghq.eu',
       ap1: 'https://api.ap1.datadoghq.com',
+      ap2: 'https://api.ap2.datadoghq.com',
       gov: 'https://api.ddog-gov.com'
     },
     dd_site_name: {
@@ -38,6 +42,7 @@ export default {
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
+        ap2: 'AP2',
         gov: 'US1-FED'
     },
     tcp_endpoint: {
@@ -45,6 +50,7 @@ export default {
         us5: 'The US5 TCP endpoint is not supported.',
         eu: 'agent-intake.logs.datadoghq.eu',
         ap1: 'The AP1 endpoint is not supported.',
+        ap2: 'The AP2 endpoint is not supported.',
         gov: 'The GOV TCP endpoint is not supported.'
     },
     tcp_endpoint_port: {
@@ -52,6 +58,7 @@ export default {
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '1883',
         ap1: 'The AP1 endpoint is not supported.',
+        ap2: 'The AP2 endpoint is not supported.',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     tcp_endpoint_port_ssl: {
@@ -59,6 +66,7 @@ export default {
         us5: 'The US5 TCP endpoint port is not supported.',
         eu: '443',
         ap1: 'The AP1 endpoint is not supported.',
+        ap2: 'The AP2 endpoint is not supported.',
         gov: 'The GOV TCP endpoint port is not supported.'
     },
     web_integrations_endpoint: {
@@ -67,6 +75,7 @@ export default {
         us5: 'intake.logs.datadoghq.com',
         eu: 'tcp-intake.logs.datadoghq.eu',
         ap1: 'intake.logs.ap1.datadoghq.com',
+        ap2: 'intake.logs.ap2.datadoghq.com',
         gov: 'The GOV web integrations endpoint port is not supported.'
     },
     web_integrations_port: {
@@ -75,6 +84,7 @@ export default {
         us5: '10516',
         eu: '443',
         ap1: '443',
+        ap2: '443',
         gov: 'The GOV web integrations endpoint port is not supported.'
     },
     web_integrations_unencrypted_port: {
@@ -83,6 +93,7 @@ export default {
       us5: '10514',
       eu: '1883',
       ap1: '10514',
+      ap2: '10514',
       gov: 'The GOV web integrations endpoint port is not supported.'
     },
     agent_http_endpoint: {
@@ -91,6 +102,7 @@ export default {
       us5: 'agent-http-intake.logs.us5.datadoghq.com',
       eu: 'agent-http-intake.logs.datadoghq.eu',
       ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
+      ap2: 'agent-http-intake.logs.ap2.datadoghq.com',
       gov: 'agent-http-intake.logs.ddog-gov.com'
     },
     agent_http_port: {
@@ -99,6 +111,7 @@ export default {
       us5: '443',
       eu: '443',
       ap1: '443',
+      ap2: '443',
       gov: '443'
     },
     http_endpoint: {
@@ -107,6 +120,7 @@ export default {
       us5: 'http-intake.logs.us5.datadoghq.com',
       eu: 'http-intake.logs.datadoghq.eu',
       ap1: 'http-intake.logs.ap1.datadoghq.com',
+      ap2: 'http-intake.logs.ap2.datadoghq.com',
       gov: 'http-intake.logs.ddog-gov.com'
     },
 
@@ -116,6 +130,7 @@ export default {
       us5: 'https://http-intake.logs.us5.datadoghq.com',
       eu: 'https://http-intake.logs.datadoghq.eu',
       ap1: 'https://http-intake.logs.ap1.datadoghq.com',
+      ap2: 'https://http-intake.logs.ap2.datadoghq.com',
       gov: 'https://http-intake.logs.ddog-gov.com'
     },
     http_port: {
@@ -124,6 +139,7 @@ export default {
       us5: '443',
       eu: '443',
       ap1: '443',
+      ap2: '443',
       gov: '443'
     },
     lambda_endpoint: {
@@ -132,6 +148,7 @@ export default {
       us5: 'lambda endpoint not supported',
       eu: 'lambda-intake.logs.datadoghq.eu',
       ap1: 'The AP1 lambda endpoint is not supported.',
+      ap2: 'The AP2 lambda endpoint is not supported.',
       gov: 'The GOV lambda endpoint is not supported.'
     },
     lambda_port: {
@@ -140,6 +157,7 @@ export default {
       us5: 'The US5 lambda endpoint port is not supported.',
       eu: '443',
       ap1: 'The AP1 lambda endpoint port is not supported.',
+      ap2: 'The AP2 lambda endpoint port is not supported.',
       gov: 'The GOV lambda endpoint port is not supported.'
     },
     lambda_http_endpoint: {
@@ -148,6 +166,7 @@ export default {
       us5: 'lambda-http-intake.logs.us5.datadoghq.com',
       eu: 'lambda-http-intake.logs.datadoghq.eu',
       ap1: 'lambda-http-intake.logs.ap1.datadoghq.com',
+      ap2: 'lambda-http-intake.logs.ap2.datadoghq.com',
       gov: 'lambda-http-intake.logs.ddog-gov.com'
     },
     lambda_http_port: {
@@ -156,6 +175,7 @@ export default {
       us5: '443',
       eu: '443',
       ap1: '443',
+      ap2: '443',
       gov: '443'
     },
     functions_endpoint: {
@@ -164,6 +184,7 @@ export default {
       us5: 'The US5 functions endpoint is not supported.',
       eu: 'The EU functions endpoint is not supported.',
       ap1: 'The AP1 functions endpoint is not supported.',
+      ap2: 'The AP2 functions endpoint is not supported.',
       gov: 'The GOV functions endpoint is not supported.'
     },
     functions_port: {
@@ -171,7 +192,8 @@ export default {
       us3: 'The US3 functions endpoint port is not supported.',
       us5: 'The US5 functions endpoint port is not supported.',
       eu: 'The EU functions endpoint port is not supported.',
-      ap1: 'The AP1 functions endpoint is not supported.',
+      ap1: 'The AP1 functions endpoint port is not supported.',
+      ap2: 'The AP2 functions endpoint port is not supported.',
       gov: 'The GOV functions endpoint port is not supported.'
     },
     browser_sdk_endpoint_domain: {
@@ -188,6 +210,7 @@ export default {
       us5: 'N/A',
       eu: 'N/A',
       ap1: 'ap-northeast-1',
+      ap2: 'ap-southeast-2',
       gov: 'N/A'
     },
     aws_private_link_cross_region: {
@@ -196,6 +219,7 @@ export default {
       us5: 'N/A',
       eu: 'N/A',
       ap1: 'Asia Pacific (Tokyo) (ap-northeast-1)',
+      ap2: 'Asia Pacific (Sydney) (ap-southeast-2)',
       gov: 'N/A'
     },
     aws_private_link_api_service_name: {
@@ -284,25 +308,32 @@ export default {
       us5: 'http://ip-ranges.us5.datadoghq.com',
       eu: 'http://ip-ranges.datadoghq.eu',
       ap1: 'http://ip-ranges.ap1.datadoghq.com',
+      ap2: 'http://ip-ranges.ap2.datadoghq.com',
       gov: 'http://ip-ranges.ddog-gov.com'
     },
     otlp_trace_endpoint: {
      us: 'https://trace.agent.datadoghq.com/api/v0.2/traces',
      us3: 'https://trace.agent.us3.datadoghq.com/api/v0.2/traces',
      us5: 'https://trace.agent.us5.datadoghq.com/api/v0.2/traces',
-     eu: 'https://trace.agent.datadoghq.eu/api/v0.2/traces'
+     eu: 'https://trace.agent.datadoghq.eu/api/v0.2/traces',
+     ap1: 'Datadog OTLP traces intake endpoint is not supported for AP1',
+     ap2: 'Datadog OTLP traces intake endpoint is not supported for AP2'
     },
     otlp_metrics_endpoint: {
      us: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
      us3: 'https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics',
      us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
-     eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics'
+     eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics',
+     ap1: 'Datadog OTLP metrics intake endpoint is not supported for AP1',
+     ap2: 'Datadog OTLP metrics intake endpoint is not supported for AP2'
     },
     otlp_logs_endpoint: {
      us: 'https://http-intake.logs.datadoghq.com/api/v2/logs',
      us3: 'https://http-intake.logs.us3.datadoghq.com/api/v2/logs',
      us5: 'https://http-intake.logs.us5.datadoghq.com/api/v2/logs',
-     eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs'
+     eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs',
+     ap1: 'Datadog OTLP logs intake endpoint is not supported for AP1',
+     ap2: 'Datadog OTLP logs intake endpoint is not supported for AP2'
     },
     custom_costs_endpoint: {
       us: 'api.datadoghq.com/api/v2/cost/custom_costs',
@@ -310,6 +341,7 @@ export default {
       us5: 'api.us5.datadoghq.com/api/v2/cost/custom_costs',
       eu: 'api.datadoghq.eu/api/v2/cost/custom_costs.',
       ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
+      ap2: 'api.ap2.datadoghq.com/api/v2/cost/custom_costs',
       gov: 'The custom costs endpoint for GOV is not supported.'
     },
     ip_ranges_url_webhooks: {
@@ -318,6 +350,7 @@ export default {
       us5: 'http://ip-ranges.us5.datadoghq.com/webhooks.json',
       eu: 'http://ip-ranges.datadoghq.eu/webhooks.json',
       ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
+      ap2: 'http://ip-ranges.ap2.datadoghq.com/webhooks.json',
       gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
     },
     ip_ranges_url_api: {
@@ -326,6 +359,7 @@ export default {
      us5: 'http://ip-ranges.us5.datadoghq.com/api.json',
      eu: 'http://ip-ranges.datadoghq.eu/api.json',
      ap1: 'http://ip-ranges.ap1.datadoghq.com/api.json',
+     ap2: 'http://ip-ranges.ap2.datadoghq.com/api.json',
      gov: 'http://ip-ranges.ddog-gov.com/api.json'
    },
     vercel_setup: {
@@ -334,6 +368,7 @@ export default {
      us5: 'http://us5.datadoghq.com/setup/vercel',
      eu: 'http://app.datadoghq.eu/setup/vercel',
      ap1: 'http://ap1.datadoghq.com/setup/vercel',
+     ap2: 'http://ap2.datadoghq.com/setup/vercel',
      gov: 'http://app.ddog-gov.com/setup/vercel'
  }
 };

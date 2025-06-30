@@ -85,7 +85,7 @@ For an overview of your Cloud Security and App and API Protection findings, sort
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/findings_page.png" alt="Cloud Security Findings page" width="100%">}}
+{{< img src="security/csm/findings_page_1.png" alt="Cloud Security Findings page" width="100%">}}
 
 ## Investigate resources
 
@@ -99,7 +99,7 @@ Use the [Security Graph][17] to model your cloud environment as a relationship g
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
 
-{{< img src="infrastructure/resource_catalog/resource_catalog_infra_2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
+{{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 
