@@ -228,7 +228,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_containers_service_name: {
@@ -237,7 +236,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_logs_agent_service_name: {
@@ -246,7 +244,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_logs_user_service_name: {
@@ -255,7 +252,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_metrics_service_name: {
@@ -264,7 +260,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_process_service_name: {
@@ -273,7 +268,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_profiling_service_name: {
@@ -282,7 +276,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_traces_service_name: {
@@ -291,7 +284,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_dbm_service_name: {
@@ -300,7 +292,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     aws_private_link_remote_config_service_name: {
@@ -309,7 +300,6 @@ export default {
       us5: 'The private link service for US5 is not supported.',
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
-      ap2: 'TODO',
       gov: 'The private link service for GOV is not supported.'
     },
     ip_ranges_url: {
