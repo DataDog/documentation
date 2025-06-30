@@ -23,8 +23,6 @@ You can also add the tag to your desired monitors using the Datadog API or Terra
 
 A investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate limited to avoid unnecessary investigations and protect your budget.
 
-<div class="alert alert-info">Currently, Bits only supports metric, logs, APM (`query_alert` type), anomaly, forecast, integration, and outlier monitors for investigations. See [Monitor Requirements for Bits AI SRE](#monitor-requirements-for-bits-ai-sre)</div>
-
 ### Manually start an investigation
 
 Alternatively, you can manually invoke Bits on an individual monitor event. 
@@ -34,15 +32,17 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI**.
 - **Option 3: Slack**
-  - Under a monitor notification in Slack, type, `@Datadog Investigate this alert`.
+  - Under a monitor notification in Slack, mention `@Datadog Investigate this alert`.
  
 ### Monitor Requirements for Bits AI SRE
 
 Today, Bits is able to run investigations on monitors that fulfill all three of the following requirements:
 1. **Monitor Type**
-   1. The monitor is a metric, logs, APM (`query_alert` type), anomaly, forecast, integration, and outlier monitor.
+   1. The monitor is a metric, logs, APM (`query_alert` type only), anomaly, forecast, integration, or outlier monitor.
 1. **Service scope**
-   1. The monitor query must be filtered by a service or grouped by a service. Or the monitor must be tagged with a service tag.
+   1. The monitor query must be filtered by a service or
+   2. The monitor query must be grouped by a service or
+   3. The monitor must be tagged with a service tag
 1. **Telemetry links**
    1. For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
     - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not currently supported. 
@@ -80,7 +80,7 @@ Investigations happen in two phases:
 
 1. **Initial context gathering**
    1. Bits begins by identifying any Datadog links that you've added to the monitor's message and uses them as entry points into the investigation.
-   1. It also automatically queries your Datadog environment to gather context and understand what's happening around the alert.
+   1. It also automatically queries your Datadog environment to gather additional context about what's happening around the alert.
    1. If you’ve previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
 1. **Root cause hypothesis generation and testing**
    - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
