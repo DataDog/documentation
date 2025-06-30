@@ -140,30 +140,30 @@ module "lambda-datadog" {
 
 To configure Datadog using SST v3, follow these steps:
 
-  ```ts
-  const app = new sst.aws.Function("MyApp", {
-    handler: "./src",
-    runtime: "go",
-    environment: {
-      DD_ENV: "<ENVIRONMENT>",
-      DD_SERVICE: "<SERVICE_NAME>",
-      DD_VERSION: "<VERSION>",
-      DATADOG_API_KEY_SECRET_ARN: "<DATADOG_API_KEY_SECRET_ARN>",
-      DD_SITE: "<DATADOG_SITE>",
-    },
-    layers: [
-      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
-    ],
-  });
-  ```
+```ts
+const app = new sst.aws.Function("MyApp", {
+  handler: "./src",
+  runtime: "go",
+  environment: {
+    DD_ENV: "<ENVIRONMENT>",
+    DD_SERVICE: "<SERVICE_NAME>",
+    DD_VERSION: "<VERSION>",
+    DATADOG_API_KEY_SECRET_ARN: "<DATADOG_API_KEY_SECRET_ARN>",
+    DD_SITE: "<DATADOG_SITE>",
+  },
+  layers: [
+    $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
+  ],
+});
+```
 
-  Fill in the environment variable placeholders:
+Fill in the environment variable placeholders:
 
-     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
-     - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
-     - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
-     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page).
-     - Replace `<VERSION>` with the version number of the Lambda function
+  - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+  - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+  - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+  - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page).
+  - Replace `<VERSION>` with the version number of the Lambda function
 
 [1]: /getting_started/site/
 
