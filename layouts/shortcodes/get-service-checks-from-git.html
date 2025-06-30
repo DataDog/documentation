@@ -1,43 +1,15 @@
-{{ $params := .Params }}
-
-{{ $integration_name := .Page.Params.git_integration_title }}
-
-{{ if (.Get 0 ) }}
-
-  {{ $.Scratch.Set "integration" (.Get 0) }}
-
-{{ else }}
-
-  {{ $.Scratch.Set "integration" $integration_name }}
-
-{{ end }}
-
-{{ $integration := $.Scratch.Get "integration" }}
-
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.service_checks) }}
-
-  <!-- get lang specific data file -->
-  {{ $.Scratch.Set "data" "" }}
-  {{ if ne $.Page.Lang "en"}}
-      {{ if (fileExists (print "data/service_checks/" $integration "." $.Page.Lang ".json")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks (print $integration "." $.Page.Lang)) }}
-      {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
-      {{ end }}
-  {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
-  {{ end }}
-  {{ $data := ($.Scratch.Get "data") }}
-
-  {{ range $data }}
-
-    <p>
-      <strong>{{ .check }}</strong><br>
-      {{ .description | markdownify }}<br>
-      {{ with .statuses }}<i>Statuses: {{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}</i>{{ end }}
-    </p>
-
-  {{ end }}
-
-
-{{ end }}
+{{- $int_name := (.Get 0 ) -}}
+{{- $processing_key := printf "processing_%s" $int_name -}}
+{{- if not ($.Scratch.Get $processing_key) -}}
+  {{- $.Scratch.Set $processing_key true -}}
+  {{- with .Site.GetPage (print "/integrations/" $int_name ".md") -}}
+    {{- $pattern := `(?s)### Service Checks\n(.*?)(#{2,3}\s)` -}}
+    {{- $matches := findRE $pattern .RawContent 1 -}}
+    {{- range $matches -}}
+        {{- $content := strings.TrimPrefix "### Service Checks\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
+        {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
+        {{- $content | markdownify -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $.Scratch.Delete $processing_key -}}
+{{- end -}}
