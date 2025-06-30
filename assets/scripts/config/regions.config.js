@@ -111,7 +111,7 @@ export default {
     us5: 'agent-http-intake.logs.us5.datadoghq.com',
     eu: 'agent-http-intake.logs.datadoghq.eu',
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
-    ap2: 'gold.intake.ap1.datadoghq.com',
+    ap2: 'gold.intake.ap2.datadoghq.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
   agent_http_port: {
@@ -432,7 +432,7 @@ export default {
     us5: 'metrics.agent.us5.datadoghq.com',
     eu: 'metrics.agent.datadoghq.eu',
     ap1: 'metrics.agent.ap1.datadoghq.com',
-    ap2: 'brown.intake.ap2.datadoghq.com',
+    ap2: 'beige.intake.ap2.datadoghq.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
   containers_endpoint: {
@@ -450,7 +450,7 @@ export default {
     us5: 'orchestrator.us5.datadoghq.com',
     eu: 'orchestrator.datadoghq.eu',
     ap1: 'orchestrator.ap1.datadoghq.com',
-    ap2: 'linen.intake.ap1.datadoghq.com',
+    ap2: 'linen.intake.ap2.datadoghq.com',
     gov: 'orchestrator.ddog-gov.com'
   },
   process_endpoint: {
@@ -468,7 +468,7 @@ export default {
     us5: 'process.us5.datadoghq.com',
     eu: 'process.datadoghq.eu',
     ap1: 'process.ap1.datadoghq.com',
-    ap2: 'bisque.intake.ap1.datadoghq.com',
+    ap2: 'bisque.intake.ap2.datadoghq.com',
     gov: 'process.ddog-gov.com'
   },
   profiling_endpoint: {
@@ -504,7 +504,7 @@ export default {
     us5: 'trace.agent.us5.datadoghq.com',
     eu: 'trace.agent.datadoghq.eu',
     ap1: 'trace.agent.ap1.datadoghq.com',
-    ap2: 'lime.intake.ap1.datadoghq.com',
+    ap2: 'lime.intake.ap2.datadoghq.com',
     gov: 'trace.agent.ddog-gov.com'
   },
   dbm_endpoint: {
@@ -522,7 +522,7 @@ export default {
     us5: 'dbm-metrics-intake.us5.datadoghq.com',
     eu: 'dbm-metrics-intake.datadoghq.eu',
     ap1: 'dbm-metrics-intake.ap1.datadoghq.com',
-    ap2: 'white.intake.ap1.datadoghq.com',
+    ap2: 'white.intake.ap2.datadoghq.com',
     gov: 'dbm-metrics-intake.ddog-gov.com'
   },
   remote_config_endpoint: {
