@@ -21,7 +21,7 @@ There are a few ways to enable Bits for automated investigations:
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform. 
 
-An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate limited to avoid unnecessary investigations and protect your budget.
+An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
 ### Manually start an investigation
 
@@ -32,7 +32,7 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI**.
 - **Option 3: Slack**
-  - Under a monitor notification in Slack, mention `@Datadog Investigate this alert`.
+  - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
  
 ### Monitor requirements for Bits AI SRE
 
@@ -79,9 +79,9 @@ In the **Configure notifications and automations** section, add the `@case-{proj
 Investigations happen in two phases:
 
 1. **Initial context gathering**
-   1. Bits begins by identifying any Datadog links that you've added to the monitor's message and uses them as entry points into the investigation.
+   1. Bits begins by identifying any Datadog links that you have added to the monitor's message and uses them as entry points into the investigation.
    1. It also automatically queries your Datadog environment to gather additional context about what's happening around the alert.
-   1. If you’ve previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
+   1. If you have previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
 1. **Root cause hypothesis generation and testing**
    - Using the gathered context, Bits performs a more thorough investigation by building multiple root cause hypotheses and testing them in parallel. Today, Bits is able to query:
       - Metrics
@@ -115,7 +115,6 @@ Reviewing Bits' findings not only validates their accuracy, but also helps Bits 
 You can guide Bits' learning by:
 - **Improving a step**: Share a link to a better query Bits should have made. 
 - **Remembering a step**: Tell Bits to remember any helpful queries it generated. This instructs Bits to prioritize running these queries the next time the same monitor fires. 
-aZ
 ### After the investigation
 At the end of an investigation, let Bits know if the conclusion it made was correct or not. If it was inaccurate, provide Bits with the correct root cause so that it can learn from the discrepancy.
 
