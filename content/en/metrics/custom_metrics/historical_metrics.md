@@ -460,10 +460,12 @@ The following example assumes:
 
 $(3000 / 720) ⋅ (5 / 100) = \\$0.21$
 
-Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4]. For more information, see the [Custom Metrics billing][3] documentation.
+Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
 
+For more information, see the [Custom Metrics billing][3] documentation.
+ 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
