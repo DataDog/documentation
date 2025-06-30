@@ -116,7 +116,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
 1. Click **Done**.
 
 ##### Uninstall Agentless Scanning
@@ -190,7 +190,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations**, and then expand the **AWS** or **Azure** section.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
 1. Click **Done**.
 
 ##### Uninstall with Terraform
@@ -271,7 +271,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
 1. Click **Done**.
 
 ##### Uninstall with CloudFormation
@@ -317,7 +317,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
 1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
+1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
 1. Click **Done**.
 
 ##### Uninstall with Azure Resource Manager
