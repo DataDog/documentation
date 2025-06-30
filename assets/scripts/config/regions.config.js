@@ -24,7 +24,7 @@ export default {
         us5: 'us5.datadoghq.com',
         eu: 'app.datadoghq.eu',
         ap1: 'ap1.datadoghq.com',
-        ap1: 'ap2.datadoghq.com',
+        ap2: 'ap2.datadoghq.com',
         gov: 'app.ddog-gov.com'
     },
     dd_api: {
