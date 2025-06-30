@@ -54,7 +54,7 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 
 ## Working with teams
 
-IDP uses [Teams](https://docs.datadoghq.com/account_management/teams/) to define service ownership, apply platform policies, and report on engineering standards. 
+IDP uses [Teams][6] to define service ownership, apply platform policies, and report on engineering standards. 
 
 If your organization uses GitHub as the source of truth for team structure, join the preview for GitHub Integration for Teams to automatically sync GitHub teams with Datadog.
 
@@ -71,3 +71,4 @@ If your organization uses GitHub as the source of truth for team structure, join
 [3]: /internal_developer_portal/scorecards
 [4]: /internal_developer_portal/eng_reports
 [5]: /getting_started/internal_developer_portal/
+[6]: /account_management/teams/
