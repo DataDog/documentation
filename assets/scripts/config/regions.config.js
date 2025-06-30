@@ -138,7 +138,7 @@ export default {
     us5: 'http-intake.logs.us5.datadoghq.com',
     eu: 'http-intake.logs.datadoghq.eu',
     ap1: 'http-intake.logs.ap1.datadoghq.com',
-    ap2: 'gold.intake.ap1.datadoghq.com',
+    ap2: 'gold.intake.ap2.datadoghq.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
   http_endpoint_full: {
@@ -414,7 +414,7 @@ export default {
     us5: 'api.us5.datadoghq.com',
     eu: 'api.datadoghq.eu',
     ap1: 'api.ap1.datadoghq.com',
-    ap2: 'orchid.intake.ap1.datadoghq.com',
+    ap2: 'orchid.intake.ap2.datadoghq.com',
     gov: 'api.ddog-gov.com'
   },
   metrics_endpoint: {
@@ -540,7 +540,7 @@ export default {
     us5: 'config.us5.datadoghq.com',
     eu: 'config.datadoghq.eu',
     ap1: 'config.ap1.datadoghq.com',
-    ap2: 'violet.intake.ap1.datadoghq.com',
+    ap2: 'violet.intake.ap2.datadoghq.com',
     gov: 'config.ddog-gov.com'
   }
 };
