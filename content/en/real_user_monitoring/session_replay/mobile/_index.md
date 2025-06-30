@@ -19,7 +19,7 @@ The Session Replay recorder is built into the RUM Mobile SDK. Unlike web browser
 
 ### Wireframe concept
 
-A _wireframe_ is like a digital sticky note that marks a specific area of your app's screen—such as a button, image, or background. Each wireframe is a rectangle that helps the recorder keep track of what's on the screen.
+A _wireframe_ is like a digital sticky note that marks a specific area of your app's screen, such as a button, image, or background. Each wireframe is a rectangle that helps the recorder keep track of what's on the screen.
 
 **Examples of wireframes:**
 - A text label becomes a "text" wireframe, defined by its position and size.
@@ -32,9 +32,9 @@ A _wireframe_ is like a digital sticky note that marks a specific area of your a
 
 The recorder scans your app's screen from the background to the front, looking for all the visible parts. It creates a wireframe for each one. For example, a screen with 78 different elements can be simplified into just 25 wireframes:
 
-{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/recording-algorithm-2.png" alt="An example of how the Shopist app screen contains 78 native views, but is made up of 25 wireframes." style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/how-it-works/recording-algorithm-3.png" alt="An example of how the Shopist app screen contains 78 native views, but is made up of 25 wireframes." style="width:70%;">}}
 
-Wireframes are recorded in the order they appear on the screen (from back to front) and are placed using exact screen positions. There's no complicated tree structure—just a simple, flat list of rectangles.
+Wireframes are recorded in the order they appear on the screen (from back to front) and are placed using exact screen positions. There's no complicated tree structure, just a simple, flat list of rectangles.
 
 ### Rendering algorithm
 
@@ -46,19 +46,19 @@ For instance, the screenshot displayed above is reconstructed in 25 passes:
 
 | Iteration | 1 | 2 | 3 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-1.png" alt="An example of a 'shape' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-1-1.png" alt="An example of a 'shape' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-2-1.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-3-1.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
 
 The first wireframe dictates the viewport size, enabling the Session Replay player to properly represent the device's screen size and orientation (landscape / portrait).
 
 | Iteration | 4 | 5-11 | 12-13 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'shape', 'image', and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4-1.png" alt="An example of a 'shape', 'image', and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5-1.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6-1.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} |
 
-Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance, semi-transparent elements).
+Because wireframes are sorted in back-to-front order, the player redraws the existing portions of the frame, which is desirable because it supports several UI patterns (such as semi-transparent elements).
 
 | Iteration | 14-25 | Final result |
 |-----------|-------|--------------|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-7.png" alt="An example of a 'shape' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-final.png" alt="An example of a 'shape' and 'image' wireframe." style="width:50%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-7-1.png" alt="An example of a 'shape' and 'image' wireframe." style="width:60%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-final-1.png" alt="An example of a 'shape' and 'image' wireframe." style="width:60%;">}} |
 
 ### Full and incremental snapshots
 
@@ -69,32 +69,32 @@ Each wireframe has a unique ID (like a name tag), so the recorder knows exactly 
 - If a wireframe disappears, the update says which ID was removed.
 - If only the content changes (like new text), the update includes the new content and the wireframe's ID.
 
-Below are examples of how incremental records are based on sending updates to only impacted wireframes.
+Below are examples showing how incremental snapshots only send updates for impacted wireframes.
 
 | Example | Description |
 |---------|-------------|
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-change-position.mp4" alt="A snapshot a wireframe position changing but the content and appearance is not altered." video="true" >}} | If a wireframe position changes, but its content and appearance isn't altered, the incremental snapshot only needs to include new positions for impacted wireframes and their `UUIDs`. This might correspond to a "slow scrolling" scenario or any other scenario where only a portion of the screen is moved. |
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-wireframe-disappears.mp4" alt="An example of a wireframe disappearing from the screen." video="true" >}} | If a wireframe disappears from the screen, an incremental snapshot may only include information on removed `UUIDs`. Alternatively, it could always include information about the remaining `UUIDs`. |
-| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-content-only.mp4" alt="An example of only the content of a wireframe changing." video="true" >}} | If only the content of a wireframe changes, an incremental update only includes new content and the `UUID` of altered wireframes. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-snapshots-change-position.mp4" alt="A snapshot a wireframe position changing but the content and appearance is not altered." video="true" >}} | If a wireframe position changes, but its content and appearance aren't altered, the incremental snapshot only needs to include new positions for impacted wireframes and their `UUIDs`. This might correspond to a "slow scrolling" scenario or any other scenario where only a portion of the screen is moved. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-wireframe-disappears.mp4" alt="An example of a wireframe disappearing from the screen." video="true" >}} | If a wireframe disappears from the screen, an incremental snapshot may only include information on removed `UUIDs`. Alternatively, the snapshot could always include information about the remaining `UUIDs`. |
+| {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/incremental-content-only.mp4" alt="An example of only the content of a wireframe changing." video="true" >}} | If only the content of a wireframe changes, an incremental update includes only the new content and the `UUID` of the altered wireframe. |
 
 In summary, the Session Replay recorder breaks your app's screen into simple rectangles called wireframes. It only tracks and sends updates for the parts that change, making replays efficient and accurate.
 
 ## Setup
 
-Learn how to [Setup and Configure Mobile Session Replay][2].
+Learn how to [set up and configure Mobile Session Replay][2].
 ## Privacy options
 
 See [Privacy Options][3].
 
 ## How Mobile Session Replay impacts app performance
 
-See [How Mobile Session Replay Impacts App Performance][4].
+See [how Mobile Session Replay impacts app performance][4].
 
 ## Troubleshooting
 
-Learn how to [Troubleshoot Mobile Session Replay][5].
+Learn how to [troubleshoot Mobile Session Replay][5].
 
-<div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but it is not supported for smart TVs or wearables.</div>
+<div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but not for smart TVs or wearables.</div>
 
 ## Further reading
 
