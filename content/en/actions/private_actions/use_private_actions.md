@@ -37,7 +37,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
-- Network access to Datadog https://{{< region-param key=dd_site >}}, https://config.{{< region-param key=dd_site >}}
+- Network access to Datadog: https://{{< region-param key=dd_site >}}, https://config.{{< region-param key=dd_site >}}
 - Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
