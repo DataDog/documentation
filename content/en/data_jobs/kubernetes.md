@@ -40,7 +40,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
-   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][4].
+   Replace `<DATADOG_API_KEY>` with your [Datadog API key][4].
 1. Create a file, `datadog-agent.yaml`, that contains the following configuration:
 
    ```yaml
@@ -95,7 +95,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
-   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
+   Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
 1. Create a file, `datadog-values.yaml`, that contains the following configuration:
    ```yaml
    datadog:
