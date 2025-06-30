@@ -4619,22 +4619,22 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 8
-    - name: Out-of-the-Box 
+    - name: Out-of-the-Box
       url: llm_observability/evaluations/ootb_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
       weight: 801
-    - name: Ragas 
+    - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ragas_evaluations
       weight: 802
-    - name: NeMo 
+    - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 803
-    - name: Custom 
+    - name: Custom
       url: llm_observability/evaluations/submit_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_evaluations

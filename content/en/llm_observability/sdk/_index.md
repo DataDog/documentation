@@ -65,7 +65,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"`  and specifying the required environment variables.
+Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
 
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 
