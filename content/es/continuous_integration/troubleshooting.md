@@ -12,10 +12,6 @@ further_reading:
 title: Solucionar problemas de CI Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para ayudarte a solucionar problemas con CI Visibility. Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][2].

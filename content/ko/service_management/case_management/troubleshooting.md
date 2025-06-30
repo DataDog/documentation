@@ -2,12 +2,6 @@
 title: 트러블슈팅
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management는 {{< region-param key=dd_datacenter code="true" >}} 사이트에서 사용할 수 없습니다.
-</div>
-{{% /site-region %}}
-
 ## 개요
 
 본 지침에서는 케이스 관리에서 타사 통합 문제를 해결할 수 있도록 도와드립니다. 계속해서 문제가 발생하면 [Datadog 지원][1]으로 문의하여 추가 지원을 받으세요.

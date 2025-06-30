@@ -564,5 +564,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [16]: /api/latest/software-catalog/#create-or-update-entities
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
 [18]: http://json-schema.org/
-[19]: https://www.schemastore.org/json/
+[19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json

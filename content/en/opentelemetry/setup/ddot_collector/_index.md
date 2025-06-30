@@ -24,7 +24,7 @@ The Datadog distribution of OpenTelemetry (DDOT) Collector is an open source sol
 - Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring, including [Datadog Fleet Automation][9] support for the DDOT Collector (see [Key benefits](#key-benefits))
 - [Custom Datadog components](#custom-datadog-components) designed to deliver the best onboarding experience
 
-{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 ## Key benefits
 

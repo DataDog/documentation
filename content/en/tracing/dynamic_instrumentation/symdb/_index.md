@@ -8,10 +8,8 @@ further_reading:
   - link: /dynamic_instrumentation/
     tag: Documentation
     text: Learn more about Dynamic Instrumentation
+site_support_id: autocomplete_search
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Autocomplete and search are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
 Autocomplete and search are in Preview for Python and .NET.

@@ -44,6 +44,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
   tag: "blog"
   text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/archive-search/"
+  tag: "Blog"
+  text: "Search your historical logs more efficiently with Datadog Archive Search"
 ---
 
 {{< site-region region="gov" >}}

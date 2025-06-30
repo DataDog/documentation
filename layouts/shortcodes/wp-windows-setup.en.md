@@ -58,7 +58,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Verify that the Agent is sending events to Workload Protection
 
-When you enable Workload Protection on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Workload Protection on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, go to the [Agent Events Explorer][12] in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 Another method to verify that the Agent is sending events to Workload Protection is to manually trigger a Windows security signal.
 
@@ -97,3 +97,4 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [9]: /security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
+[12]: https://app.datadoghq.com/security/workload-protection/agent-events
