@@ -432,7 +432,7 @@ export default {
     us5: 'metrics.agent.us5.datadoghq.com',
     eu: 'metrics.agent.datadoghq.eu',
     ap1: 'metrics.agent.ap1.datadoghq.com',
-    ap2: 'beige.intake.ap1.datadoghq.com',
+    ap2: 'brown.intake.ap2.datadoghq.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
   containers_endpoint: {
