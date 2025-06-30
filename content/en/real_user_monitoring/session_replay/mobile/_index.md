@@ -23,8 +23,8 @@ A _wireframe_ is like a digital sticky note that marks a specific area of your a
 
 **Examples of wireframes:**
 - A text label becomes a "text" wireframe, defined by its position and size.
-- The app's background is a "geometry" wireframe—a rectangle that covers the whole screen.
-- Any container with a solid background is also a "geometry" wireframe.
+- The app's background is a "shape" wireframe—a rectangle that covers the whole screen.
+- Any container with a solid background is also a "shape" wireframe.
 - Images or icons are "image" wireframes, which can include style details like transparency.
 - Even complex elements, like a map with many parts, can be combined into a single "image" wireframe.
 
@@ -46,19 +46,19 @@ For instance, the screenshot displayed above is reconstructed in 25 passes:
 
 | Iteration | 1 | 2 | 3 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-1.png" alt="An example of a 'geometry' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-1.png" alt="An example of a 'shape' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-2.png" alt="An example of an 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-3.png" alt="An example of a 'text' wireframe." style="width:100%;">}} |
 
 The first wireframe dictates the viewport size, enabling the Session Replay player to properly represent the device's screen size and orientation (landscape / portrait).
 
 | Iteration | 4 | 5-11 | 12-13 |
 |-----------|---|---|---|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'geometry', 'image', and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:100%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-4.png" alt="An example of a 'shape', 'image', and 'text' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-5.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-6.png" alt="An example of a 'shape' and 'image' wireframe." style="width:100%;">}} |
 
 Because wireframes are sorted in back-to-front order, it overdraws the existing portion of the frame, which is a desirable behavior, as it helps support several UI patterns (for instance, semi-transparent elements).
 
 | Iteration | 14-25 | Final result |
 |-----------|-------|--------------|
-| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-7.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-final.png" alt="An example of a 'geometry' and 'image' wireframe." style="width:50%;">}} |
+| Viewport | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-7.png" alt="An example of a 'shape' and 'image' wireframe." style="width:50%;">}} | {{< img src="real_user_monitoring/session_replay/mobile/how-it-works/iteration-final.png" alt="An example of a 'shape' and 'image' wireframe." style="width:50%;">}} |
 
 ### Full and incremental snapshots
 
