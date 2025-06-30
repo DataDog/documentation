@@ -439,11 +439,6 @@ menu:
       url: agent/logs/log_transport
       parent: agent_logs
       weight: 503
-    - name: Multi-Line Detection (Legacy)
-      identifier: multi_line_detection_legacy
-      url: agent/logs/auto_multiline_detection_legacy
-      parent: agent_logs
-      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
@@ -2118,6 +2113,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
       weight: 402
+    - name: DORA Metrics
+      url: internal_developer_portal/eng_reports/dora_metrics
+      parent: idp_eng_reports
+      identifier: eng_reports_dora_metrics
+      weight: 403
     - name: Overview Pages
       url: internal_developer_portal/overview_pages
       parent: internal_developer_portal
@@ -2204,11 +2204,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 9
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
@@ -2219,16 +2214,26 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
+    - name: Issue Correlation
+      url: error_tracking/issue_correlation
+      parent: error_tracking
+      identifier: error_tracking_issue_correlation
+      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 7
-    - name: Track Browser and Mobile Errors
-      url: error_tracking/frontend
-      parent: error_tracking
-      identifier: error_tracking_frontend
       weight: 8
+    - name: Auto Assign
+      url: error_tracking/auto_assign
+      parent: error_tracking
+      identifier: error_tracking_auto_assign
+      weight: 9
+    - name: Issue Team Ownership
+      url: error_tracking/issue_team_ownership
+      parent: error_tracking
+      identifier: error_tracking_issue_team_ownership
+      weight: 10
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2259,11 +2264,16 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
       weight: 105
+    - name: Track Browser and Mobile Errors
+      url: error_tracking/frontend
+      parent: error_tracking
+      identifier: error_tracking_frontend
+      weight: 11
     - name: Track Backend Errors
       url: error_tracking/backend
       parent: error_tracking
       identifier: error_tracking_backend
-      weight: 10
+      weight: 12
     - name: Getting Started
       url: error_tracking/backend/getting_started
       parent: error_tracking_backend
@@ -2303,23 +2313,28 @@ menu:
       url: error_tracking/manage_data_collection
       parent: error_tracking
       identifier: error_tracking_manage_data
-      weight: 11
+      weight: 13
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 12
+      weight: 14
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 13
+      weight: 15
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
+    - name: Feature Flags
+      url: change_tracking/feature_flags/
+      parent: change_tracking
+      identifier: change_tracking_feature_flags
+      weight: 1
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2916,7 +2931,7 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
-    - name: Autoscaling
+    - name: Kubernetes Autoscaling
       url: containers/monitoring/autoscaling
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_autoscaling
@@ -3523,46 +3538,51 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
       weight: 104
-    - name: Databricks
-      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_databricks
-      weight: 101
-    - name: Confluent Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 102
-    - name: MongoDB
-      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 103
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
-      weight: 104
-    - name: Elastic Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      weight: 101
+    - name: Databricks
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 105
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 102
     - name: OpenAI
       url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 103
+    - name: GitHub
+      url: cloud_cost_management/setup/saas_costs/?tab=github#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_github
+      weight: 104
+    - name: Confluent Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 105
+    - name: MongoDB
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 106
+    - name: Elastic Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_elasticcloud
+      weight: 107
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 107
+      weight: 108
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 108
+      weight: 109
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -5866,10 +5886,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
-    - name: Tags Processor
-      url: observability_pipelines/processors/tags_processor
+    - name: Tags
+      url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags_processor
+      identifier: observability_pipelines_processors_tags
       weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle

@@ -9,10 +9,6 @@ further_reading:
   text: "Monitor Settings"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/monitor-notification-rules/" >}}
-Monitor Notification Rules are in Preview.
-{{< /beta-callout >}}
-
 ## Overview
 
 Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
