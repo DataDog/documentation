@@ -7,11 +7,10 @@ further_reading:
 - link: "/monitors/settings/"
   tag: "Documentation"
   text: "Monitor Settings"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
-
-{{< beta-callout url="https://www.datadoghq.com/product-preview/monitor-notification-rules/" >}}
-Monitor Notification Rules are in Preview.
-{{< /beta-callout >}}
 
 ## Overview
 
