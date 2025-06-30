@@ -4556,9 +4556,9 @@ menu:
       identifier: data_streams_pipeline_lineage
       parent: data_streams
       weight: 4
-    - name: Guide
-      url: data_streams/guide
-      identifier: data_streams_guide
+    - name: Metrics and Tags
+      url: data_streams/metrics_and_tags
+      identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
     - name: Data Jobs Monitoring

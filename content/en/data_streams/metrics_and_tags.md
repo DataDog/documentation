@@ -1,5 +1,6 @@
 ---
 title: Metrics and Tags
+identifier: data_streams_metrics_and_tags
 ---
 
 This document discusses the following Data Streams Monitoring metrics and their tags:
@@ -7,6 +8,7 @@ This document discusses the following Data Streams Monitoring metrics and their 
 - `data_streams.latency`
 - `data_streams.kafka.lag_seconds`
 - `data_streams.kafka.lag_messages`
+- `data_streams.sqs.dead_letter_queue.messages`
 
 ### data_streams.latency
 
@@ -29,7 +31,7 @@ This metric measures latency between two points in the pipeline. The value can r
 `start`
 : The name of the node where Data Streams Monitoring first detects the payload. This node can be a service (the original producer) or a queue (the original producer is not known to Data Streams Monitoring).
   <br/><br/>
-  When the `pathway_type` tag is set to `full` (end-to-end latency), `start` always refers to the start of the pipeline. 
+  When the `pathway_type` tag is set to `full` (end-to-end latency), `start` always refers to the start of the pipeline.
   <br/><br/>
   For example:
   <br/>
@@ -130,3 +132,23 @@ This metric represents the lag (in offsets) between the last produce and consume
 
 `consumer_group`
 : The Kafka consumer group.
+
+
+### data_streams.sqs.dead_letter_queue.messages
+
+This metric represents the number of a messages in a sqs queues dead letter queue. The purpose here is to be able to measure the number of dead lettered messages for a given queue.
+
+`arn`
+: The ARN (Amazon Resource Name) of the queue
+
+`aws_account`
+: The AWS Account number of the queue (and dead letter queue)
+
+`dlq`
+: The ARN of the dead letter queue that messages are being sent to
+
+`queue`
+: The name of the queue
+
+`region`
+: The AWS region of the queue (and dead letter queue)
