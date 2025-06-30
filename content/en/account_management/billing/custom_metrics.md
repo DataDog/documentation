@@ -15,6 +15,8 @@ algolia:
 
 ## Overview
 
+{{< jqmath-vanilla >}}
+
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [custom metrics and standard integrations][14].
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
