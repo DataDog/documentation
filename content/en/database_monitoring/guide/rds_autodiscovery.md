@@ -19,10 +19,10 @@ Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infr
 
 With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which instances to apply each check to.
 
-## Enabling Autodiscovery for Aurora clusters
+## Enabling Autodiscovery for RDS clusters
 
 1. [Grant AWS permissions](#grant-aws-permissions)
-2. [Configure Aurora tags](#configure-aurora-tags)
+2. [Configure RDS tags](#configure-rds-tags)
 3. [Configure the Datadog Agent](#configure-the-datadog-agent)
 4. [Create a configuration template](#create-a-configuration-template)
 
@@ -121,14 +121,16 @@ The Datadog Agent supports configuration templates for the Postgres and MySQL in
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-First, add an `ad_identifier` for RDS-managed Postgres to your configuration template (`postgres.d/conf_aws_rds.yaml`) file:
+1. Add an `ad_identifier` for RDS-managed Postgres to your configuration template (`postgres.d/conf_aws_rds.yaml`) file:
 
-```yaml
-ad_identifiers:
-  - _dbm_postgres
-```
+   ```yaml
+   ad_identifiers:
+     - _dbm_postgres
+   ```
 
-Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+2. Define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+
+#### Example template
 
 The following example configuration template is applied to every instance discovered:
 
@@ -150,6 +152,8 @@ instances:
 ```
 
 In this example, the template variables `%%host%%`, `%%port%%`, and `%%extra_region%%` are dynamically populated with information from the RDS instance.
+
+#### IAM authentication
 
 To use [IAM authentication][2] to connect to your RDS instance, use the following template:
 
@@ -178,14 +182,16 @@ The template variable `%%extra_managed_authentication_enabled%%` resolves to `tr
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-First, add an `ad_identifier` for Aurora-managed MySQL to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
+1. Add an `ad_identifier` for Aurora-managed MySQL to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
-```yaml
-ad_identifiers:
-  - _dbm_mysql
-```
+   ```yaml
+   ad_identifiers:
+     - _dbm_mysql
+   ```
 
-Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+2. Define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+
+#### Example template
 
 The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
