@@ -1,8 +1,15 @@
 {{- $int_name := (.Get 0 ) -}}
-{{- with .Site.GetPage (print "/integrations/" $int_name ".md") -}}
-  {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
-  {{- $matches := findRE $pattern .RawContent 1 -}}
-  {{- range $matches -}}
-      {{- strings.TrimPrefix "### Metrics\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) | markdownify -}}
+{{- $processing_key := printf "processing_%s" $int_name -}}
+{{- if not ($.Scratch.Get $processing_key) -}}
+  {{- $.Scratch.Set $processing_key true -}}
+  {{- with .Site.GetPage (print "/integrations/" $int_name ".md") -}}
+    {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
+    {{- $matches := findRE $pattern .RawContent 1 -}}
+    {{- range $matches -}}
+        {{- $content := strings.TrimPrefix "### Metrics\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
+        {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
+        {{- $content | markdownify -}}
+    {{- end -}}
   {{- end -}}
+  {{- $.Scratch.Delete $processing_key -}}
 {{- end -}}
