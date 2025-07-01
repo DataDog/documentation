@@ -20,7 +20,7 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 ## How it works
 
-A session is stored as soon as a retention filter matches one of its constituting events based on the pre-defined query, and samples it in based on the configured retention rate.
+A session is stored as soon as a retention filter matches one of its constituting events based on the predefined query, and samples it in based on the configured retention rate.
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-2.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:80%" >}}
 
