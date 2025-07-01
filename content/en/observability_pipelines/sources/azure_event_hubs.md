@@ -40,7 +40,7 @@ After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka so
 1. Enter a policy name (for example, `DatadogKafkaPolicy`).
 1. Select the **Manage** checkbox, which should automatically select the **Send** and **Listen** checkboxes.
 1. Click **Create**.
-1. Copy the **Connection string-primary key** for Kafka authentication.
+1. Copy the **Primary connection string** to use for Kafka authentication.
 
 ### Set up diagnostic settings
 
@@ -75,7 +75,7 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 1. Azure Event Hubs uses SASL_SSL with the PLAIN mechanism for Kafka authentication.
 1. The connection string is formatted for Observability Pipelines:
     ```
-    Username: $ConnectionString
+    Username: $$ConnectionString
     Password: Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>
     ```
 
@@ -94,8 +94,8 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 1. After you set up your destinations and processors, click **Next: Install**.
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the environment variables for your Kafka source:
-    1.  For **Kafka Bootstrap Servers**, enter `\<NAMESPACE\>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
-    1.  For **Kafka SASL Username**, enter `$ConnectionString`.
+    1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
+    1.  For **Kafka SASL Username**, enter `$$ConnectionString`.
     1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
     1. Enter your Kafka TLS passphrase.
 1. Enter the environment variables for your destinations, if applicable.
@@ -105,6 +105,6 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 
 In the Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`), add the following connection variables:
 
--   `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$ConnectionString"`
+-   `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$$ConnectionString"`
 -   `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
 -   `DD_OP_SOURCE_KAFKA_SASL_PASSWORD=<Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>>`
