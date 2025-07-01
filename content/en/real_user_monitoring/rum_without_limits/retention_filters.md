@@ -44,7 +44,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
 
-**Note**: Though our mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by our browser SDK will be kept by default.
+**Note**: Though our mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by our browser SDK are kept by default.
 
 
 ## Creating a retention filter
