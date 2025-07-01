@@ -37,6 +37,7 @@ const getLanguageParam = () => {
     langParam = "";
   }
 
+  langParam = "";
   return langParam;
 };
 
