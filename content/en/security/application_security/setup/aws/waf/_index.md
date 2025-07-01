@@ -47,8 +47,8 @@ Multiple web ACLs can be set up in the same or in different AWS accounts. In thi
 
 Ensure the AWS role attached to the [Connection][3] has the following permissions:
 
-    * `GetIPSet`
-    * `UpdateIPSet`
+ - `GetIPSet`
+ - `UpdateIPSet`
 
 {{< tabs >}}
 {{% tab "Setup with Terraform" %}}
