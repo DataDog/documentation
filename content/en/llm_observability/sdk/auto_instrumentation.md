@@ -3,13 +3,11 @@ title: Auto Instrumentation
 aliases:
     - /tracing/llm_observability/auto_instrumentation
     - /llm_observability/auto_instrumentation
+    - /llm_observability/setup/auto_instrumentation
 further_reading:
     - link: '/llm_observability/setup/sdk/python'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Python'
-    - link: '/llm_observability/setup/sdk/nodejs'
-      tag: 'Documentation'
-      text: 'Learn about the LLM Observability SDK for Node.js'
 ---
 
 <div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the LLM Observability offering.</div>

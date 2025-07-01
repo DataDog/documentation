@@ -1,5 +1,7 @@
 ---
 title: Agent Monitoring
+aliases:
+  - /llm_observability/agent_monitoring
 further_reading:
   - link: "https://www.datadoghq.com/blog/openai-agents-llm-observability/"
     tag: "Blog"
