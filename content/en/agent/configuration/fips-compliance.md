@@ -19,7 +19,9 @@ algolia:
 
 ## Overview
 
-The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions. The FIPS Agent also includes [limited support for integrations][3] that need to collect observability data that is external to the host.
+The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions. 
+
+The FIPS Agent also includes [limited support for integrations][3] that need to collect observability data that is external to the host.
 
 **It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
 
