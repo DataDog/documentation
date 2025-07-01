@@ -725,7 +725,7 @@ struct PaymentView: View {
 
 ### Combining privacy settings in SwiftUI
 
-You can combine multiple privacy settings in a single `SessionReplayPrivacyView` to apply different privacy configurations to your content. Datadog recommends **combining multiple privacy options in a single view rather than nesting multiple `SessionReplayPrivacyView` instances**, because each view adds a native layer to the view hierarchy.
+Combine multiple privacy settings in one `SessionReplayPrivacyView` for different configurations. Datadog recommends **combining options in a single view rather than nesting multiple instances** to avoid adding unnecessary view layers.
 
 ```swift {% filename="ContentView.swift" collapsible=true %}
 struct UserProfileView: View {
