@@ -355,6 +355,7 @@ To reduce event volume, you can add filters to the `WHERE` clause. For example:
       -- OR --
       username <> 'ReportUser' -- Exclude specific users
   )
+  ```
 
 ### Performance considerations
 

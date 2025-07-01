@@ -86,7 +86,7 @@ Once the Datadog resource is set up in your Azure account, configure log collect
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
 {{< /site-region >}}
 
-{{< site-region region="us,us5,eu,ap1,gov" >}}
+{{< site-region region="us,us5,eu,ap1,gov,ap2" >}}
 
 <div class="alert alert-info">The Azure Native integration is only available for organizations on Datadog's US3 site. If you're using a different <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>, see the standard <a href="https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/" target="_blank">Azure Programmatic Management guide</a>. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
 

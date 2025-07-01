@@ -7620,7 +7620,7 @@ __metadata:
     eslint-plugin-react-hooks: ^2.5.1
     eslint-plugin-standard: ^4.1.0
     fancy-log: ^1.3.3
-    geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
+    geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
     hugo-bin: 0.123.0
     instantsearch.js: ^4.74.1
     jest: ^25.5.4
@@ -9366,10 +9366,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz":
-  version: 1.0.1
-  resolution: "geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
-  checksum: 85c4c20ded085cdc515c72e77a291d2f456402e76e6acb58b373ee8be1bf7c4430e780881c6157a1687299d29e10fcfd95f6b3972cb934a9f42c3be7e40af40e
+"geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz":
+  version: 1.0.2
+  resolution: "geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
+  checksum: 95a0d22e57f0dbbab3de2bca2f0ac3971faf90e2b67b5d7d3cd796026e90e30aa7b88776ec9715760bc88e53af2865e921eb96b030d5be0996eed99c8105a62c
   languageName: node
   linkType: hard
 

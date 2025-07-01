@@ -1550,6 +1550,13 @@ components:
           example: host
           nullable: true
           type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          example: group
+          nullable: true
+          type: string
       required:
       - name
       type: object
@@ -11072,19 +11079,24 @@ components:
       example: {}
       properties:
         aggr:
+          deprecated: true
           description: Query aggregator function.
           type: string
         expression:
+          deprecated: true
           description: Query expression.
           type: string
         metric:
+          deprecated: true
           description: Query metric used.
           type: string
         query_index:
+          deprecated: true
           description: Query index from original combined query.
           format: int64
           type: integer
         scope:
+          deprecated: true
           description: Query scope.
           type: string
         unit:
@@ -12679,6 +12691,12 @@ components:
           type: string
         prefix:
           description: The tag/attribute key associated with the template variable.
+          type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          nullable: true
           type: string
         visible_tags:
           description: List of visible tag values on the shared dashboard.
@@ -16405,6 +16423,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
@@ -17438,8 +17457,8 @@ components:
           description: DNS server to use for DNS tests.
           type: string
         dnsServerPort:
+          $ref: '#/components/schemas/SyntheticsTestRequestDNSServerPort'
           description: DNS server port to use for DNS tests.
-          type: string
         files:
           description: Files to be used as part of the request in the test. Only valid
             if `bodyType` is `multipart/form-data`.
@@ -17593,6 +17612,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestDNSServerPort:
+      description: DNS server port to use for DNS tests.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalDNSServerPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariableDNSServerPort'
+    SyntheticsTestRequestNumericalDNSServerPort:
+      description: Integer DNS server port number to use when performing the test.
+      format: int64
+      type: integer
     SyntheticsTestRequestNumericalPort:
       description: Integer Port number to use when performing the test.
       format: int64
@@ -17614,6 +17642,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariableDNSServerPort:
+      description: String DNS server port number to use when performing the test.
+        Supports templated variables.
+      type: string
     SyntheticsTestRequestVariablePort:
       description: String Port number to use when performing the test. Supports templated
         variables.
@@ -24508,6 +24540,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -38922,6 +38955,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -39029,6 +39063,7 @@ servers:
       - us3.datadoghq.com
       - us5.datadoghq.com
       - ap1.datadoghq.com
+      - ap2.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
