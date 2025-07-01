@@ -78,9 +78,9 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? |
 |-----------|----------|-----------------------------|------------------------------|
-| express   | >=4      | {{< X >}}                   | {{< X >}}                    |
-| fastify   | >=2      | {{< X >}}                   | {{< X >}}                    |
-| nextjs    | >=11.1   | {{< X >}}                   |                              |
+| express   | `>=4`      | {{< X >}}                   | {{< X >}}                    |
+| fastify   | `>=2`      | {{< X >}}                   | {{< X >}}                    |
+| nextjs    | `>=11.1`   | {{< X >}}                   |                              |
 
 
 
