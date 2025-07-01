@@ -16,6 +16,9 @@ further_reading:
   - link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
     tag: "Documentation"
     text: "AWS Integration and CloudWatch FAQ"
+  - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+    tag: "Blog"
+    text: "How we've created a successful FinOps practice at Datadog"
 
 
 multifiltersearch:
