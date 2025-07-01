@@ -265,6 +265,7 @@ unsupported_sites:
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
+  dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
