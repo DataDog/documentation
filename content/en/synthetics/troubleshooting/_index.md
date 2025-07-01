@@ -224,7 +224,9 @@ To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host.
 
 ### My security policy requires private location containers to run with a read-only root file system
 
-Private location containers require read-write access to specific folders and files in order to function correctly. If the container is run with a read-only root file system, the container will fail to start up properly due to several critical operations that depend on write access. During startup, the container attempts to set Linux capabilities on certain binaries. This is necessary because, as part of the private location build process, certain metadata bits are stripped from the binaries for security reasons. By default, this would restrict them to be executable only by the `root` user. However, since private locations run as the `dog` user, the necessary permissions are reapplied to allow execution. When the root file system is read-only these updates will fail, resulting in errors when the container starts up.
+Private location containers require read-write access to specific folders and files to function correctly. If the container is run with a read-only root file system, it will fail to start up properly due to several critical operations that depend on write access. 
+
+During startup, the container attempts to set Linux capabilities on certain binaries. This is necessary because, during the private location build process, metadata bits are stripped from the binaries for security reasons. By default, this restricts execution to the `root` user. Since private locations run as the `dog` user, the container reapplies the necessary permissions to allow execution. On a read-only root file system, these updates fail, resulting in errors when the container starts up.
 
 ### My private location containers sometimes get killed `OOM`
 
