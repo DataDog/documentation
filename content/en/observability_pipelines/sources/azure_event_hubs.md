@@ -13,7 +13,7 @@ This document walks through how to send Azure Event Hubs logs to Observability P
 - [Set up diagnostic settings](#set-up-diagnostic-settings)
 - [Configure Kafka-compatible connection for the event hub](#configure-kafka-compatible-connection-for-the-event-hub)
 
-After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka source](#set-up-a-pipeline-with-the-kafka-source).
+After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka source](#set-up-a-pipeline-with-the-kafka-source) to send Azure Event Hubs logs to Observability Pipelines.
 
 ## Set up Azure Event Hubs for the Kafka source
 
