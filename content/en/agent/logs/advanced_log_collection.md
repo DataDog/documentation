@@ -274,7 +274,7 @@ spec:
 
 | Parameter           | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
-| `exclude_truncated` | When present, if a log is truncated, it is excluded and not sent to Datadog. |
+| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
 
 For example, to **filter out** truncated logs:
 
