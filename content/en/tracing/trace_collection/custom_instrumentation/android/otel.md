@@ -273,6 +273,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                    clientToken = <CLIENT_TOKEN>,
+                    env = <ENV_NAME>,
+                    variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.AP2)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.AP2)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be GDPR compliant, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values [see Tracking Consent][6]:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
@@ -334,8 +371,8 @@ GlobalOpenTelemetry.set(object : OpenTelemetry {
         return ContextPropagators.noop()
     }
 })
-// and later on if you want to access the tracer provider
-val tracerProvider = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
+// and later on if you want to access the tracer
+val tracer = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -354,9 +391,9 @@ GlobalOpenTelemetry.set(new OpenTelemetry() {
     public ContextPropagators getPropagators() {
         return ContextPropagators.noop();
     }
-};
-// and later on if you want to access the tracer provider
-final TracerProvider tracerProvider = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
+});
+// and later on if you want to access the tracer
+final Tracer tracer = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -532,7 +569,7 @@ final Request:request = new Request.Builder()
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [11]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [12]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[13]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[13]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [14]: /account_management/api-app-keys/#client-tokens
 [15]: /account_management/api-app-keys/#api-keys
 [16]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance

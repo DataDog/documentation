@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management on Kubernetes
+title: Setting up Cloud Security on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight.
@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -35,12 +35,6 @@ Use the following instructions to enable Misconfigurations, Threat Detection, an
       name: datadog
     spec:
       features:
-        remoteConfiguration:
-          enabled: true
-        # Enables Threat Detection
-        cws:
-          enabled: true
-        # Enables Misconfigurations
         cspm:
           enabled: true
           hostBenchmarks:
@@ -74,12 +68,7 @@ Use the following instructions to enable Misconfigurations, Threat Detection, an
     ```yaml
     # datadog-values.yaml file
     datadog:
-      remoteConfiguration:
-        enabled: true
       securityAgent:
-        # Enables Threat Detection
-        runtime:
-          enabled: true
         # Enables Misconfigurations
         compliance:
           enabled: true
@@ -123,19 +112,20 @@ Add the following settings to the `env` section of `security-agent` and `system-
         [...]
           - name: agent
             [...]
-            env:
-              - name: DD_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
           - name: system-probe
             [...]
             env:
-              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                value: "true"
-              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
               - name: DD_COMPLIANCE_CONFIG_ENABLED
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                value: "true"
+              - name: DD_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_ENABLED
+                value: "true"
+              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+                value: "true"
+              - name: DD_SBOM_HOST_ENABLED
                 value: "true"
               - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
                 value: "true"

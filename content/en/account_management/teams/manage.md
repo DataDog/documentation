@@ -45,6 +45,7 @@ From the settings dialog, use the menu to customize the following team settings:
 - Page layout
 - Permissions
 - Notifications
+- GitHub connection
 
 ## Team membership
 
@@ -59,10 +60,6 @@ Under the team's settings, specify which users can modify the team membership. T
 Users with the `user_access_manage` permission can set default rules on who can add or remove members, or edit team details. Set default rules with the **Default Settings** button on the team directory page. Override these policies for an individual team on the team details panel.
 
 ## Manage teams through an identity provider
-
-{{< callout url="/help/" header="false" >}}
-The Managed Teams feature is turned off by default. Request access by contacting support.
-{{< /callout >}}
 
 When you set up a managed team, you configure the following properties of the team externally through an identity provider integration:
  - Team name

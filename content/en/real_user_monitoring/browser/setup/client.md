@@ -1,11 +1,7 @@
 ---
 title: Browser Monitoring Client-Side Instrumentation
-code_lang: client
-type: multi-code-lang
-code_lang_weight: 1
 aliases:
   - /real_user_monitoring/setup
-  - /real_user_monitoring/browser/setup
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -23,14 +19,9 @@ After your applications have been manually instrumented, you can begin managing 
 
 The Browser SDK supports all modern desktop and mobile browsers. For more information, see the [Browser Support][3] table.
 
-
 ## Setup
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Auto-Instrumentation Preview!">}}
-You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
-{{< /callout >}}
-
-To set up Browser Monitoring, create an application in Datadog:
+To set up Browser Monitoring manually, create an application in Datadog:
 
 {{< tabs >}}
 {{% tab "RUM" %}}
@@ -58,7 +49,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 [6]: /real_user_monitoring/session_replay/browser/privacy_options/
 [7]: /real_user_monitoring/platform/dashboards/
 [8]: https://app.datadoghq.com/rum/sessions
-[9]: /real_user_monitoring/platform/connect_rum_and_traces/
+[9]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [10]: /integrations/content_security_policy_logs/
 
 {{% /tab %}}
@@ -86,8 +77,8 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Server-side (Auto-instrumentation)
-: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][1].
+Server-side (Auto-Instrumentation)
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in Preview. Learn more about the auto-instrumentation method [here][1].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
@@ -98,7 +89,7 @@ CDN async
 CDN sync
 : This method is recommended for collecting all RUM events. The RUM Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
 
-[1]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
+[1]: /real_user_monitoring/browser/setup/server
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -328,6 +319,32 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script>
@@ -481,6 +498,35 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -674,6 +720,35 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+   window.DD_RUM.startSessionReplayRecording();
+  })
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script>
@@ -839,6 +914,35 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackInteractions: true,
+    });
+   window.DD_RUM.startSessionReplayRecording();
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1028,6 +1132,33 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      premiumSampleRate: 100, // if not included, the default is 100
+      trackInteractions: true,
+    });
+   window.DD_RUM.startSessionReplayRecording();
+  })
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script>
@@ -1183,6 +1314,33 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      replaySampleRate: 100, // if not included, the default is 100
+      trackInteractions: true,
+    });
+  window.DD_RUM.startSessionReplayRecording();
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1388,6 +1546,27 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-rum.js" type="text/javascript"></script>
@@ -1512,6 +1691,30 @@ Add the generated code snippet to the head tag (in front of any other script tag
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1676,6 +1879,31 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
@@ -1806,9 +2034,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 {{</ site-region>}}
-{{< site-region region="ap1" >}}
+{{< site-region region="ap2" >}}
 ```html
-<script src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js" type="text/javascript"></script>
+<script src="https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js" type="text/javascript"></script>
 <script>
   window.DD_RUM &&
     window.DD_RUM.init({
@@ -1816,7 +2044,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       applicationId: '<APPLICATION_ID>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
-      site: 'ap1.datadoghq.com',
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1982,6 +2210,29 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      premiumSampleRate: 100, // if not included, the default is 100
+      trackInteractions: true,
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
+</script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
@@ -2113,6 +2364,29 @@ Add the generated code snippet to the head tag (in front of any other script tag
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      replaySampleRate: 100, // if not included, the default is 100
+      trackInteractions: true,
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap2/v4/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap2.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -2412,7 +2686,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][13].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][13].
 
 `allowedTracingUrls`
 : Optional<br/>
@@ -2459,6 +2733,12 @@ Store global context and user context in `localStorage` to preserve them along t
 **Default**: `false`<br/>
 Allow capture of [untrusted events][18], for example in automated UI tests.
 
+`allowedTrackingOrigins`
+: Optional<br/>
+**Type**: Array<br/>
+List of origins where the SDK is allowed to run.
+
+
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
 `sessionPersistence`
@@ -2504,7 +2784,7 @@ Use `sessionPersistence` instead.
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
 [12]: /real_user_monitoring/session_replay/browser/#usage
 [13]: /real_user_monitoring/guide/proxy-rum-data/
-[14]: /real_user_monitoring/platform/connect_rum_and_traces/
+[14]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [15]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [16]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [17]: /real_user_monitoring/browser/advanced_configuration/#contexts-life-cycle
@@ -2602,7 +2882,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][8].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][8].
 
 `excludedActivityUrls`
 : Optional<br/>

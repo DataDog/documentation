@@ -128,4 +128,4 @@ Coverage Advisor は Datadog アカウントの重要な AWS CloudWatch メト�
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/trek10-coverage-advisor" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/trek10-coverage-advisor" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

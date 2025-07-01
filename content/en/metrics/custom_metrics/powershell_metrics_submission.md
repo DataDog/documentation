@@ -18,41 +18,90 @@ Datadog can collect metrics from the Agent as well as from the API independently
 This method doesn't require you to have the Agent installed on the system running the PowerShell script. You have to explicitly pass your [API key][1] as well as an application key when making the POST request.
 
 ```powershell
-# Tested on Windows Server 2012 R2 w/ PSVersion 4.0
+# This script sends a custom metric to Datadog v2 API from PowerShell.
+# Tested on Windows 10 Pro (version 10.0.1945) with PSVersion 5.1 (Build 19041, Revision 5486)
 
-function unixTime() {
-  Return (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+function Send-DatadogMetric {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$MetricName,
+
+        [Parameter(Mandatory=$true)]
+        [int]$MetricValue,
+
+        [Parameter(Mandatory=$false)]
+        [string[]]$Tags = @()
+    )
+
+    # ==================================
+    # 1) Set Datadog API keys (v2)
+    # ================================== 
+    # - $url: The API endpoint for sending metric data to Datadog.
+    #   By default, it is set to the US1 data center. If you are 
+    #   operating in a different region, update this URL accordingly:
+    #     * EU:         https://api.datadoghq.eu/api/v2/series
+    #     * US3:        https://api.us3.datadoghq.com/api/v2/series
+    #     * US5:        https://api.us5.datadoghq.com/api/v2/series
+    #     * AP1:        https://api.ap1.datadoghq.com/api/v2/series
+    #     * AP2:        https://api.ap2.datadoghq.com/api/v2/series
+    #     * US1-FED:    https://api.ddog-gov.com/api/v2/series
+    $api_key = "<DATADOG_API_KEY>"          #provide your valid api key
+    $app_key = "<DATADOG_APPLICATION_KEY>"  #provide your valid app key
+    $url     = "https://api.datadoghq.com/api/v2/series" # Default endpoint for US1; update based on your Datadog data center
+
+    # ==================================
+    # 2) Request headers
+    # ==================================
+    $headers = @{
+        "DD-API-KEY"         = $api_key
+        "DD-APPLICATION-KEY" = $app_key
+        "Content-Type"       = "application/json"
+    }
+
+    # ==================================
+    # 3) Build JSON payload for v2
+    # ==================================
+    # Current time in epoch seconds
+    $currentTime = [int](Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+
+
+    # The body for the /api/v2/series endpoint
+    $body = @{
+        "series" = @(
+            @{
+                "metric" = $MetricName
+                "points" = @(
+                    @{
+                        "timestamp" = $currentTime
+                        "value"     = $MetricValue
+                    }
+                )
+                "type"  = 1                 # (1) count, (2) rate, (3) gauge
+                "tags"  = $Tags             # optional parameter should be an array of tags
+            }
+        )
+    }
+
+    # Convert hash to JSON
+    $jsonBody = $body | ConvertTo-Json -Depth 5 -Compress
+
+    # ==================================
+    # 4) Send the POST request
+    # ==================================
+    $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $jsonBody
+
+    Write-Host "Datadog response: $($response | ConvertTo-Json -Depth 5)"
 }
 
-function postMetric($metric,$tags) {
-  $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME #optional parameter .
 
-  # Construct JSON
-  $points = ,@($currenttime, $metric.amount)
-  $post_obj = [pscustomobject]@{"series" = ,@{"metric" = $metric.name;
-      "points" = $points;
-      "type" = "gauge";
-      "host" = $host_name;
-      "tags" = $tags}}
-  $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
-  # POST to DD API
-  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
-}
-
-# Datadog account, API information and optional parameters
-$app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
-$api_key = "<DATADOG_API_KEY>" #provide your valid api key
-$url_base = "https://app.datadoghq.com/"
-$url_signature = "api/v2/series"
-$url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
-$tags = "[env:test]" #optional parameter
-
-# Select what to send to Datadog. In this example, the number of handles opened by process "mmc" is being sent
-$metric_ns = "ps1." # your desired metric namespace
-$temp = Get-Process mmc
-$metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}
-postMetric($metric)($tags) # pass your metric as a parameter to postMetric()
+# ----------------------------
+# Example Usage:
+# ----------------------------
+# This sends a custom count metric called "my.custom.metric" with a value of 42
+# and adds "env:test" + "version:1.0" + host as tags.
+Send-DatadogMetric -MetricName "my.custom.metric" `
+                   -MetricValue 42 `
+                   -Tags @("env:test","version:1.0", "host:$env:COMPUTERNAME")
 ```
 
 ## Submitting metrics with PowerShell with DogStatsD

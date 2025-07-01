@@ -103,6 +103,30 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'ap2.datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -245,6 +269,25 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap2.datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -363,11 +406,12 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs. It applies only to logs collected via the Browser Logs SDK and is independent of RUM data.                                                                                    |
 | `trackingConsent`          | `"granted"` or `"not-granted"`                                            | No       | `"granted"`     | Set the initial user tracking consent state. See [User Tracking Consent][15].                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
-| `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
+| `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: `https://www.proxy.com/path`), see the full [proxy setup guide][6] for more information.                                                                        |
 | `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
 | `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
 | `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
 | `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | Keep sending logs after the session expires.
+| `allowedTrackingOrigins`   | Array                                                                     | No       |                 | List of origins where the SDK is allowed to run. |
 
 
 Options that must have a matching configuration when using the `RUM` SDK:
@@ -587,7 +631,18 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
+The `beforeSend` callback function can be invoked with two arguments: the `log` event and `context`. This function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties. The context contains additional information related to the event, but not necessarily included in the event. You can typically use this information to [enrich][18] your event or [discard][19] it.
+
+```javascript
+function beforeSend(log, context)
+```
+
+The potential `context` values are:
+
+| Value | Data Type | Use Case |
+|-------|---------|------------|
+| `isAborted` | Boolean | For network log events, this property tells you whether the failing request was aborted by the application, in which case you might not want to send this event because it may be intentionally aborted. |
+| `handlingStack` | String | A stack trace of where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
 
 To redact email addresses from your web application URLs:
 
@@ -1268,3 +1323,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
 [16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management
+[17]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[18]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[19]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

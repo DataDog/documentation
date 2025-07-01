@@ -21,6 +21,8 @@ In some cases, you would like to know when one of your tags disappears from some
 
 Your alert triggers if the tag stops reporting.
 
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/

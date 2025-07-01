@@ -2,7 +2,11 @@
 title: Runtime Code Analysis (IAST)
 disable_toc: false
 aliases:
-- /security/application_security/code_security/
+  - /security/application_security/code_security/
+further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-code-security/"
+    tag: "Blog"
+    text: "Protect the life cycle of your application code and libraries with Datadog Code Security"
 ---
 
 ## Overview
@@ -13,42 +17,51 @@ IAST enables Datadog to identify vulnerabilities using legitimate application tr
 
 For a list of supported services, see the [Library Compatibility Requirements][5]. IAST detection rules support the following languages:
 
-| Severity | Detection Rule                        | Java  | .NET  | Node.js | Python |
-| -------- | ------------------------------------- | ----- | ----- | ------- |--------|
-| Critical | NoSQL Injection                       | FALSE | TRUE  | TRUE    | FALSE  |
-| Critical | SQL Injection                         | TRUE  | TRUE  | TRUE    | TRUE   |
-| Critical | Server-Side Request Forgery (SSRF)    | TRUE  | TRUE  | TRUE    | TRUE   |
-| Critical | Code Injection                        | FALSE | FALSE | TRUE    | FALSE  |
-| Critical | Command Injection                     | TRUE  | TRUE  | TRUE    | TRUE   |
-| High     | LDAP Injection                        | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | Hardcoded Secrets                     | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | Hardcoded Passwords                   | FALSE | FALSE | TRUE    | FALSE  |
-| High     | Path Traversal                        | TRUE  | TRUE  | TRUE    | TRUE   |
-| High     | Trust Boundary Violation              | TRUE  | TRUE  | FALSE   | FALSE  |
-| High     | Cross-Site Scripting (XSS)            | TRUE  | TRUE  | FALSE   | FALSE  |
-| High     | Untrusted Deserialization             | TRUE  | FALSE | FALSE   | FALSE  |
-| High     | Unvalidated Redirect                  | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | XPath Injection                       | TRUE  | TRUE  | FALSE   | FALSE  |
-| High     | Header Injection                      | TRUE  | TRUE  | TRUE    | TRUE   |
-| High     | Directory Listing Leak                | TRUE  | FALSE | FALSE   | FALSE  |
-| High     | Default HTML Escape Invalid           | TRUE  | FALSE | FALSE   | FALSE  |
-| High     | Verb Tampering                        | TRUE  | FALSE | FALSE   | FALSE  |
-| Medium   | No SameSite Cookie                    | TRUE  | TRUE  | TRUE    | TRUE   |
-| Medium   | Insecure Cookie                       | TRUE  | TRUE  | TRUE    | TRUE   |
-| Medium   | No HttpOnly Cookie                    | TRUE  | TRUE  | TRUE    | TRUE   |
-| Medium   | Weak Hashing                          | TRUE  | TRUE  | TRUE    | TRUE   |
-| Medium   | Weak Cipher                           | TRUE  | TRUE  | TRUE    | TRUE   |
-| Medium   | Stacktrace Leak                       | TRUE  | TRUE  | FALSE   | FALSE  |
-| Medium   | Reflection Injection                  | TRUE  | TRUE  | FALSE   | FALSE  |
-| Medium   | Insecure Authentication Protocol      | TRUE  | TRUE  | FALSE   | FALSE  |
-| Medium   | Hardcoded Key                         | FALSE | TRUE  | FALSE   | FALSE  |
-| Medium   | Insecure JSP Layout                   | TRUE  | FALSE | FALSE   | FALSE  |
-| Low      | HSTS Header Missing                   | TRUE  | TRUE  | TRUE    | FALSE  |
-| Low      | X-Content-Type-Options Header Missing | TRUE  | TRUE  | TRUE    | FALSE  |
-| Low      | Weak Randomness                       | TRUE  | TRUE  | TRUE    | TRUE   |
-| Low      | Admin Console Active                  | TRUE  | FALSE | FALSE   | FALSE  |
-| Low      | Session Timeout                       | TRUE  | FALSE | FALSE   | FALSE  |
-| Low      | Session Rewriting                     | TRUE  | FALSE | FALSE   | FALSE  |
+| Severity | Detection Rule                        | Code                        | Java | .NET | Node.js | Python |
+|----------|---------------------------------------|-----------------------------|------|------|---------|--------|
+| Critical | NoSQL Injection                       | NOSQL_MONGODB_INJECTION     | FALSE | TRUE | TRUE | FALSE |
+| Critical | SQL Injection                         | SQL_INJECTION               | TRUE | TRUE | TRUE | TRUE |
+| Critical | Server-Side Request Forgery (SSRF)    | SSRF                        | TRUE | TRUE | TRUE | TRUE |
+| Critical | Code Injection                        | CODE_INJECTION              | FALSE | FALSE | TRUE | FALSE |
+| Critical | Command Injection                     | COMMAND_INJECTION           | TRUE | TRUE | TRUE | TRUE |
+| High | LDAP Injection                        | LDAP_INJECTION              | TRUE | TRUE | TRUE | FALSE |
+| High | Email HTML Injection | EMAIL_HTML_INJECTION                            | TRUE  | TRUE  | TRUE    | FALSE  |
+| High | Hardcoded Secrets                     | HARDCODED_SECRET            | TRUE | TRUE | TRUE | FALSE |
+| High | Hardcoded Passwords                   | HARDCODED_PASSWORD          | FALSE | FALSE | TRUE | FALSE |
+| High | Path Traversal                        | PATH_TRAVERSAL              | TRUE | TRUE | TRUE | TRUE |
+| High | Trust Boundary Violation              | TRUST_BOUNDARY_VIOLATION    | TRUE | TRUE | FALSE | FALSE |
+| High | Cross-Site Scripting (XSS)            | XSS                         | TRUE | TRUE | FALSE | FALSE |
+| High | Untrusted Deserialization             | UNTRUSTED_DESERIALIZATION   | TRUE | FALSE | FALSE | FALSE |
+| High | Unvalidated Redirect                  | UNVALIDATED_REDIRECT        | TRUE | TRUE | TRUE | FALSE |
+| High | XPath Injection                       | XPATH_INJECTION             | TRUE | TRUE | FALSE | FALSE |
+| High | Header Injection                      | HEADER_INJECTION            | TRUE | TRUE | TRUE | TRUE |
+| High | Directory Listing Leak                | DIRECTORY_LISTING_LEAK      | TRUE | FALSE | FALSE | FALSE |
+| High | Default HTML Escape Invalid           | DEFAULT_HTML_ESCAPE_INVALID | TRUE | FALSE | FALSE | FALSE |
+| High | Verb Tampering                        | VERB_TAMPERING              | TRUE | FALSE | FALSE | FALSE |
+| Medium | No SameSite Cookie                    | NO_SAMESITE_COOKIE          | TRUE | TRUE | TRUE | TRUE |
+| Medium | Insecure Cookie                       | INSECURE_COOKIE             | TRUE | TRUE | TRUE | TRUE |
+| Medium | No HttpOnly Cookie                    | NO_HTTPONLY_COOKIE          | TRUE | TRUE | TRUE | TRUE |
+| Medium | Weak Hashing                          | WEAK_HASH                   | TRUE | TRUE | TRUE | TRUE |
+| Medium | Weak Cipher                           | WEAK_CIPHER                 | TRUE | TRUE | TRUE | TRUE |
+| Medium | Stacktrace Leak                       | STACKTRACE_LEAK             | TRUE | TRUE | FALSE | FALSE |
+| Medium | Reflection Injection                  | REFLECTION_INJECTION        | TRUE | TRUE | FALSE | FALSE |
+| Medium | Insecure Authentication Protocol      | INSECURE_AUTH_PROTOCOL      | TRUE | TRUE | FALSE | FALSE |
+| Medium | Hardcoded Key                         | HARDCODED_KEY               | FALSE | TRUE | FALSE | FALSE |
+| Medium | Insecure JSP Layout                   | INSECURE_JSP_LAYOUT         | TRUE | FALSE | FALSE | FALSE |
+| Low | HSTS Header Missing                   | HSTS_HEADER_MISSING         | TRUE | TRUE | TRUE | FALSE |
+| Low | X-Content-Type-Options Header Missing | XCONTENTTYPE_HEADER_MISSING | TRUE | TRUE | TRUE | FALSE |
+| Low | Weak Randomness                       | WEAK_RANDOMNESS             | TRUE | TRUE | TRUE | TRUE |
+| Low | Admin Console Active                  | ADMIN_CONSOLE_ACTIVE        | TRUE | FALSE | FALSE | FALSE |
+| Low | Session Timeout                       | SESSION_TIMEOUT             | TRUE | FALSE | FALSE | FALSE |
+| Low | Session Rewriting                     | SESSION_REWRITING           | TRUE | FALSE | FALSE | FALSE |
+
+## How IAST detects vulnerabilities
+Datadog Runtime Code Analysis (IAST) utilizes the same tracing libraries as Datadog APM, enabling it to monitor live application traffic and detect code-level vulnerabilities in real time. It follows this process:
+
+- **Tracking data sources:**: IAST observes data entering your application from external sources such as request URLs, bodies, or headers. These inputs are tagged and monitored throughout their lifecycle.
+- **Analyzing data flow**: The Datadog tracing library tracks how the input data moves through the application—even if it's transformed, split, or combined. This allows IAST to understand if and how the original input reaches sensitive parts of the code.
+- **Identifying vulnerable points**: IAST detects code locations where user-controlled inputs are used in potentially insecure ways—for example, in SQL queries, dynamic code execution, or HTML rendering.
+- **Confirming the vulnerability**: A vulnerability is only reported when IAST can confirm that tainted input reaches a vulnerable point in the code. This approach minimizes false positives and ensures that findings are actionable.
 
 ## Explore and manage code vulnerabilities
 
@@ -71,7 +84,7 @@ The risk score is tailored to the specific runtime context, including factors su
 
 {{< img src="/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
 
-## Remediate a code vulnerability 
+## Remediate a code vulnerability
 
 Datadog Code Security automatically provides the information teams need to identify where a vulnerability is in an application, from the affected filename down to the exact method and line number.
 
@@ -100,6 +113,9 @@ If you need additional help, contact [Datadog support][11].
 ## Disable Code Security
 For information on disabling IAST, see [Disabling Code Security][12].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
 [2]: /security/code_security/iast/setup/java/

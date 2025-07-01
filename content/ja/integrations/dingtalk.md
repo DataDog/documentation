@@ -1,6 +1,6 @@
 ---
 categories:
-- collaboration
+- コラボレーション
 - notifications
 custom_kind: integration
 dependencies: []
@@ -46,7 +46,7 @@ Datadog と DingTalk グループを統合するには、以下の手順に従�
 
 インテグレーションをインストールまたは更新したら、DingTalk グループ名で [`@-notification` 機能][2]を使用できるようになります。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 
@@ -56,7 +56,7 @@ DingTalk インテグレーションは、メトリクスを提供しません�
 
 DingTalk インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 DingTalk インテグレーションには、サービスのチェック機能は含まれません。
 

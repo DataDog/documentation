@@ -19,10 +19,6 @@ title: Tests Java
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">
   Si vous utilisez Jenkins comme fournisseur de CI, vous pouvez vous servir de la <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">configuration via l'interface</a> afin d'activer Test Visibility pour vos tâches et pipelines.
 </div>

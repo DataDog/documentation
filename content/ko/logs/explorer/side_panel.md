@@ -12,6 +12,9 @@ further_reading:
 - link: /logs/guide/correlate-logs-with-metrics
   tag: 설명서
   text: 로그와 인프라스트럭처 메트릭 연결하기
+- link: /logs/explorer/calculated_fields/expression_language
+  tag: 설명서
+  text: 계산된 필드 표현식 언어 알아보기
 title: 로그 사이드패널
 ---
 
@@ -64,12 +67,11 @@ Datadog은 다음 일반 사이드 패널 레이아웃에 따라 개별 로그 �
 
 - 로그 테이블에서 열 추가 또는 제거
 - 검색 요청에 특정 값(포함 또는 제외)을 추가
-
-{{< img src="logs/explorer/side_panel/context.jpg" alt="사이드 패널 컨텍스트" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="사이드 패널 컨텍스트" style="width:50%;">}}
-
+  {{< img src="logs/explorer/side_panel/context.jpg" alt="사이드 패널 컨텍스트" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="사이드 패널 컨텍스트" style="width:50%;">}}
 - 속성에서 패싯 또는 측정값을 생성 또는 편집합니다. [로그 패싯][12]을 참조하세요.
+  {{< img src="logs/explorer/side_panel/facets.mp4" alt="사이드 패널 패싯" video=true style="width:100%;">}}
+- 속성에서 계산된 필드를 작성하거나 편집합니다. [계산된 필드][14]를 참조하세요.
 
-{{< img src="logs/explorer/side_panel/facets.mp4" alt="사이드 패널 패싯" video=true style="width:100%;">}}
 
 ## 로그 공유
 
@@ -95,3 +97,4 @@ Datadog은 다음 일반 사이드 패널 레이아웃에 따라 개별 로그 �
 [11]: /ko/tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /ko/logs/explorer/facets/#overview
 [13]: /ko/integrations/#cat-notification
+[14]: /ko/logs/explorer/calculated_fields/

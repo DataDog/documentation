@@ -22,10 +22,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 For a list of supported runtimes and platforms, see [.NET Framework Compatibility][18] and [.NET/.NET Core Compatiblity][19].
@@ -44,18 +40,19 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
+
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
-<div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 {{% ci-agentless %}}
-
 {{% /tab %}}
+
 {{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Installing the .NET tracer CLI
