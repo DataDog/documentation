@@ -116,7 +116,7 @@ In addition to the Operating System (OS) requirements above:
       systemctl daemon-reload
       systemctl restart 'datadog-agent*'
       ```
-1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
+3. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
 {{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
 
