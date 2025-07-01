@@ -94,9 +94,9 @@ See [more Android examples][1].
 
 The Trace SDK is independent from RUM, so you can track business processes or flows that span multiple screens or views. For example, you can measure how long it takes users to complete a checkout flow, or how long a background sync takes, regardless of RUM session sampling. These business spans appear in the APM UI and can be used for custom metrics and dashboards.
 
-### Manual span instrumentation example
+## Manual span instrumentation
 
-Here's how to create a manual span in your mobile app using the Trace SDK:
+Here's an example of how to create a manual span in your mobile app using the Trace SDK:
 
 {{< tabs >}}
 {{% tab "iOS" %}}
