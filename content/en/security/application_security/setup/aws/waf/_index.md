@@ -21,29 +21,34 @@ further_reading:
 App and API Protection integrates with AWS Web Application Firewall (WAF) by:
 
 1. Converting logs to traces to gain visibility into monitored and blocked requests
-2. Blocking IP addresses with AWS WAF IPsets.
+2. Blocking IP addresses with AWS WAF IPsets
 
-Both can be setup independently but it is recommended to first setup the conversion of logs to traces in order to inspect the AWS WAF actions.
+Both can be set up independently, but it is recommended to first set up the conversion of logs to traces in order to inspect the AWS WAF actions.
 
 ## Prerequisites
 
- - The [Amazon Web Services integration](/integrations/amazon-web-services/) is setup.
- - Metrics and Logs collection are enabled on the [AWS WAF integration](/integrations/amazon_waf/). 
- - A [Connection](/actions/connections/) is created with the AWS account hosting the AWS WAF used for blocking.
+ - The [Amazon Web Services integration][1] is setup.
+ - Metrics, and Logs collection are enabled on the [AWS WAF integration][2]. 
+ - A [Connection][3] is created with the AWS account hosting the AWS WAF used for blocking.
 
 ## Convert AWS WAF logs to traces
 
-First, **enable** the conversion of logs to traces on the [Settings page](https://app.datadoghq.com/security/configuration/asm/setup). 
+First, **enable** the conversion of logs to traces on the [Settings page][4]. 
 
-Then, make sure the web ACLs table contains request metrics as well as logs and traces.
+Then, ensure the web ACLs table contains request metrics as well as logs and traces.
 
-Security traces are reported in the [AAP Traces Explorer](https://app.datadoghq.com/security/appsec/traces?query=service%3Aaws.waf) with service name `aws.waf`.
+Security traces are reported in the [AAP Traces Explorer][5] with service name `aws.waf`.
 
 ## Block with AWS WAF IPsets 
 
 To block attackers, Datadog needs to manage a dedicated IPset. This IPset must be referenced by the web ACL with a rule in blocking mode.
 
-Multiple web ACLs can be setup in the same or in different AWS accounts. In this case, a [Connection](/actions/connections/) must be created per AWS account.
+Multiple web ACLs can be set up in the same or in different AWS accounts. In this case, a [Connection][3] must be created per AWS account.
+
+Ensure the AWS role attached to the [Connection][3] has the following permissions:
+
+    * `GetIPSet`
+    * `UpdateIPSet`
 
 {{< tabs >}}
 {{% tab "Setup with Terraform" %}}
@@ -103,9 +108,14 @@ Multiple web ACLs can be setup in the same or in different AWS accounts. In this
 
 2. Run `terraform apply` to create/update the WAF resources.
 
-3. Once the web ACL is configured, make sure the AWS role attached to the connection have the following permissions:
-    * `GetIPSet`
-    * `UpdateIPSet`
-
 {{% /tab %}}
 {{< /tabs >}}
+
+Finally, once setup is complete, click **Block New Attackers** on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
+
+[1]: /integrations/amazon-web-services/
+[2]: /integrations/amazon_waf/
+[3]: /actions/connections/
+[4]: https://app.datadoghq.com/security/configuration/asm/setup
+[5]: https://app.datadoghq.com/security/appsec/traces?query=service%3Aaws.waf
+[6]: https://app.datadoghq.com/security/appsec/denylist
