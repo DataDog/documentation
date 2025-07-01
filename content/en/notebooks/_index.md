@@ -127,7 +127,7 @@ Notebooks automatically generate a table of contents from any headers or graphs 
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using `/image` or via the **Add Cell** menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
+You can add images to your notebook using `/image` or the **Add Cell** menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
 
 <!-- TODO Add updated image from new notebooks -->
 
