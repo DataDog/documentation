@@ -64,7 +64,7 @@ Amazon SageMaker から S3 バケットまたは CloudWatch のいずれかに�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-sagemaker" >}}
+{{< get-metrics-from-git "amazon_sagemaker" >}}
 
 
 ### イベント

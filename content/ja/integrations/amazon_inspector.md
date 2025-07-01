@@ -59,7 +59,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-inspector" >}}
+{{< get-metrics-from-git "amazon_inspector" >}}
 
 
 ### イベント

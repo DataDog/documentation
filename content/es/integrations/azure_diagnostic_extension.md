@@ -45,7 +45,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][5].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure-diagnostic-extension" >}}
+{{< get-metrics-from-git "azure_diagnostic_extension" >}}
 
 
 ### Eventos

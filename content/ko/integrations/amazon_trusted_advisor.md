@@ -67,7 +67,7 @@ AWS Trusted Advisor를 설정하여 S3 버킷 또는 클라우드와치(CloudWat
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-trusted-advisor" >}}
+{{< get-metrics-from-git "amazon_trusted_advisor" >}}
 
 
 ### 이벤트

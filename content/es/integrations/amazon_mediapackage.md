@@ -58,7 +58,7 @@ Configura AWS Elemental MediaPackage para enviar logs a un bucket de S3 o a Clou
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-mediapackage" >}}
+{{< get-metrics-from-git "amazon_mediapackage" >}}
 
 
 ### Eventos

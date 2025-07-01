@@ -295,7 +295,7 @@ MySQL, MariaDB 및 Postgres 로그를 Amazon 클라우드와치(CloudWatch)로 �
 [데이터베이스 엔진에서 수집된 메트릭][1] 외에도 다음 RDS 메트릭을 수신합니다.
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-rds" >}}
+{{< get-metrics-from-git "amazon_rds" >}}
 
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.

@@ -47,7 +47,7 @@ AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-elasticbeanstalk" >}}
+{{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

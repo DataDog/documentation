@@ -44,7 +44,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 자세한 내용은 [Kubernetes 상태 메트릭 코어][6] 통합에 대한 설명서를 참조하세요. 이 검사에는 Datadog Cluster Agent v1.12 이상이 필요합니다.
 
-{{< get-metrics-from-git "kubernetes-state-core" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### 쿠버네티스 상태
 
@@ -76,7 +76,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 자세한 내용은 [Kubernetes 메트릭 서버][4] 통합 설명서를 참조하세요.
 
-{{< get-metrics-from-git "kube-metrics-server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes 스케줄러
 
@@ -132,7 +132,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 자세한 내용은 [Kubernetes 메트릭 서버][4] 통합 설명서를 참조하세요.
 
-{{< get-service-checks-from-git "kube-metrics-server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes 스케줄러
 

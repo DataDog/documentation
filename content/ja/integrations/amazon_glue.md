@@ -58,7 +58,7 @@ AWS Glue から S3 バケットまたは CloudWatch のいずれかにログを�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-glue" >}}
+{{< get-metrics-from-git "amazon_glue" >}}
 
 
 ### イベント

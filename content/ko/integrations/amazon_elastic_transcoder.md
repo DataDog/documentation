@@ -58,7 +58,7 @@ Amazon Elastic Transcoder를 설정해 S3 버킷이나 클라우드와치(CloudW
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-elastic-transcoder" >}}
+{{< get-metrics-from-git "amazon_elastic_transcoder" >}}
 
 
 ### 이벤트

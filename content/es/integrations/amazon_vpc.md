@@ -98,7 +98,7 @@ Para obtener más información sobre la recopilación de logs de servicios AWS, 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-vpc" >}}
+{{< get-metrics-from-git "amazon_vpc" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas (tags) que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.

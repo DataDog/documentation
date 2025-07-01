@@ -124,7 +124,7 @@ Lancez la [sous-commande status de l'Agent][10] et cherchez `mapr` dans la secti
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "mapr" >}}
+{{< get-metrics-from-git "mapr_cluster" >}}
 
 
 ### Événements
@@ -132,7 +132,7 @@ Lancez la [sous-commande status de l'Agent][10] et cherchez `mapr` dans la secti
 Le check MapR n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "mapr" >}}
+{{< get-service-checks-from-git "mapr_cluster" >}}
 
 
 ## Dépannage

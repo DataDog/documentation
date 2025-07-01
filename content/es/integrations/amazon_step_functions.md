@@ -82,7 +82,7 @@ Para recopilar trazas de tus AWS Step Functions a través de AWS X-Ray:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-step-functions" >}}
+{{< get-metrics-from-git "amazon_step_functions" >}}
 
 
 ### Eventos

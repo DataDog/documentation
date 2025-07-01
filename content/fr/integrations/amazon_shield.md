@@ -57,7 +57,7 @@ Configurez Amazon Shield de façon à ce que ses logs soient envoyés vers un co
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-shield" >}}
+{{< get-metrics-from-git "amazon_shield" >}}
 
 
 ### Événements

@@ -61,7 +61,7 @@ Configurez Amazon SWF de façon à ce que ses logs soient envoyés vers un compa
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-swf" >}}
+{{< get-metrics-from-git "amazon_swf" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

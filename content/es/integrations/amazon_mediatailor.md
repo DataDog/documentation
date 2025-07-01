@@ -58,7 +58,7 @@ Configura AWS Elemental MediaTailor para enviar logs ya sea a un bucket de S3 o 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-mediatailor" >}}
+{{< get-metrics-from-git "amazon_mediatailor" >}}
 
 
 ### Eventos

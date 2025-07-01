@@ -293,7 +293,7 @@ Accédez ensuite à la [section Log de Datadog][6] pour explorer vos logs.
 Outre les [métriques recueillies depuis les moteurs de base de données][1], vous recevez également les métriques RDS suivantes :
 
 ### Métriques
-{{< get-metrics-from-git "amazon-rds" >}}
+{{< get-metrics-from-git "amazon_rds" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

@@ -38,7 +38,7 @@ Azure Data Explorer からメトリクスを取得すると、以下のことが
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "azure-data-explorer" >}}
+{{< get-metrics-from-git "azure_data_explorer" >}}
 
 
 ### イベント

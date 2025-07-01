@@ -68,7 +68,7 @@ Amazon FSx est intégré à AWS CloudTrail, qui surveille chaque action FSx ef
 Activez l'[intégration CloudTrail][9] de Datadog pour surveiller tous les appels d'API FSx dans votre compte AWS.
 
 ### Métriques
-{{< get-metrics-from-git "amazon-fsx" >}}
+{{< get-metrics-from-git "amazon_fsx" >}}
 
 
 ### Événements

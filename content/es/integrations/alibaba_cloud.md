@@ -99,7 +99,7 @@ En tu cuenta de Alibaba Cloud:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "alibaba-cloud" >}}
+{{< get-metrics-from-git "alibaba_cloud" >}}
 
 
 ### Eventos

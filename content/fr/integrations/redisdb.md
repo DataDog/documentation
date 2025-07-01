@@ -360,7 +360,7 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "redis" >}}
+{{< get-metrics-from-git "redisdb" >}}
 
 
 ### Événements

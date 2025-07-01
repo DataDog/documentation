@@ -45,7 +45,7 @@ Datadog Azure インテグレーションは、Azure Diagnostic Extension から
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-diagnostic-extension" >}}
+{{< get-metrics-from-git "azure_diagnostic_extension" >}}
 
 
 ### イベント

@@ -65,7 +65,7 @@ Configurez Amazon EBS de façon à ce que ses logs soient envoyés vers un comp
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-ebs" >}}
+{{< get-metrics-from-git "amazon_ebs" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

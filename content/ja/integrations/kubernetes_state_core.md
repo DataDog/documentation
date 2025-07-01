@@ -241,7 +241,7 @@ datadog:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kubernetes-state-core" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 **注**: Kubernetes オブジェクトに [Datadog Standard labels][3] を設定すると、`env`、`service`、`version` タグを取得できます。

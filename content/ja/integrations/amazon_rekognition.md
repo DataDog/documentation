@@ -58,7 +58,7 @@ Amazon Rekognition から S3 バケットまたは CloudWatch のいずれかに
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-rekognition" >}}
+{{< get-metrics-from-git "amazon_rekognition" >}}
 
 
 ### イベント

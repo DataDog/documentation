@@ -57,7 +57,7 @@ Configurez Amazon Glue de façon à ce que ses logs soient envoyés vers un com
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-glue" >}}
+{{< get-metrics-from-git "amazon_glue" >}}
 
 
 ### Événements

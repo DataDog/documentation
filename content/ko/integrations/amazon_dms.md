@@ -59,7 +59,7 @@ AWS DMS(Database Migration Service)를 설정해 S3 버킷 또는 클라우드�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-dms" >}}
+{{< get-metrics-from-git "amazon_dms" >}}
 
 
 ### 이벤트

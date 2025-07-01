@@ -59,7 +59,7 @@ Amazon Inspector를 설정해 로그를 S3 버킷 또는 클라우드와치(Clou
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-inspector" >}}
+{{< get-metrics-from-git "amazon_inspector" >}}
 
 
 ### 이벤트

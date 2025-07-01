@@ -59,7 +59,7 @@ AWS Database Migration Service から S3 バケットまたは CloudWatch のい
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-dms" >}}
+{{< get-metrics-from-git "amazon_dms" >}}
 
 
 ### イベント

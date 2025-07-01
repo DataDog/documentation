@@ -57,7 +57,7 @@ Configurez Amazon Rekognition de façon à ce que ses logs soient envoyés vers 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-rekognition" >}}
+{{< get-metrics-from-git "amazon_rekognition" >}}
 
 
 ### Événements

@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Firewall からメト
 ## 収集されるデータ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-firewall" >}}
+{{< get-metrics-from-git "azure_firewall" >}}
 
 
 ### イベント

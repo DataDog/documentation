@@ -58,7 +58,7 @@ Configura Amazon Lex para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-lex" >}}
+{{< get-metrics-from-git "amazon_lex" >}}
 
 
 ### Eventos

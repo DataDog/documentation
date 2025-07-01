@@ -62,7 +62,7 @@ AWS KMS から S3 バケットまたは CloudWatch のいずれかにログを�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-kms" >}}
+{{< get-metrics-from-git "amazon_kms" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

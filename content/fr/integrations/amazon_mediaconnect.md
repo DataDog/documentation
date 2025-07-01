@@ -57,7 +57,7 @@ Configurez Amazon Elemental MediaConnect de façon à ce que ses logs soient env
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-mediaconnect" >}}
+{{< get-metrics-from-git "amazon_mediaconnect" >}}
 
 
 ### Événements

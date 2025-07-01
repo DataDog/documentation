@@ -59,7 +59,7 @@ Configura Amazon Neptune para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-neptune" >}}
+{{< get-metrics-from-git "amazon_neptune" >}}
 
 
 ### Eventos

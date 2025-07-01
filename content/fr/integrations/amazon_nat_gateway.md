@@ -57,7 +57,7 @@ Configurez Amazon NAT Gateway de façon à ce que ses logs soient envoyés vers 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-nat-gateway" >}}
+{{< get-metrics-from-git "amazon_nat_gateway" >}}
 
 
 ### Événements

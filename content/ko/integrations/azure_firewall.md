@@ -37,7 +37,7 @@ Datadog Azure 통합을 사용해 Firewall 메트릭을 수집할 수 있습니�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure-firewall" >}}
+{{< get-metrics-from-git "azure_firewall" >}}
 
 
 ### 이벤트

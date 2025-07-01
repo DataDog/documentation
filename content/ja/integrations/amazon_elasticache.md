@@ -107,7 +107,7 @@ instances:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-elasticache" >}}
+{{< get-metrics-from-git "amazon_elasticache" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

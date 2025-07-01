@@ -88,7 +88,7 @@ Le check System Core est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 
 ### Métriques
 
-{{< get-metrics-from-git "system-core" >}}
+{{< get-metrics-from-git "system_core" >}}
 
 Selon la plateforme, le check peut recueillir d'autres métriques de temps processeur, p. ex. `system.core.interrupt` sous Windows, `system.core.iowait` sous Linux, etc.
 
@@ -124,7 +124,7 @@ Le check System Swap est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'a
 
 ### Métriques
 
-{{< get-metrics-from-git "system-swap" >}}
+{{< get-metrics-from-git "system_swap" >}}
 
 ### Événements
 

@@ -44,7 +44,7 @@ title: 収集された Kubernetes データ
 
 詳細については、[Kubernetes state metrics core][6] インテグレーションのドキュメントを参照してください。このチェックには、Datadog Cluster Agent v1.12 またはそれ以降が必要です。
 
-{{< get-metrics-from-git "kubernetes-state-core" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes State
 
@@ -76,7 +76,7 @@ title: 収集された Kubernetes データ
 
 詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kube-metrics-server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes scheduler
 
@@ -132,7 +132,7 @@ title: 収集された Kubernetes データ
 
 詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
-{{< get-service-checks-from-git "kube-metrics-server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes scheduler
 

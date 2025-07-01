@@ -99,7 +99,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-route53" >}}
+{{< get-metrics-from-git "amazon_route53" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

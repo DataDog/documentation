@@ -58,7 +58,7 @@ AWS Elemental MediaPackage から S3 バケットまたは CloudWatch のいず�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-mediapackage" >}}
+{{< get-metrics-from-git "amazon_mediapackage" >}}
 
 
 ### イベント

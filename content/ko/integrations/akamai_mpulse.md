@@ -69,7 +69,7 @@ Akamai mPulse 통합에는 `apiKey`와 `apiToken`이 필요합니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "akamai-mpulse" >}}
+{{< get-metrics-from-git "akamai_mpulse" >}}
 
 
 ### 이벤트

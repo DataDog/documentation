@@ -61,7 +61,7 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
 ## 収集されるデータ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-documentdb" >}}
+{{< get-metrics-from-git "amazon_documentdb" >}}
 
 
 AWS から取得される各メトリクスには、dbinstanceidentifier、dbclusteridentifier など、AWS コンソールに表示されるタグと同じタグが割り当てられます。

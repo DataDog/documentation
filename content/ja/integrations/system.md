@@ -93,7 +93,7 @@ System チェックには、サービスのチェック機能は含まれませ�
 
 #### Metrics
 
-{{< get-metrics-from-git "system-core" >}}
+{{< get-metrics-from-git "system_core" >}}
 
 プラットフォームによっては、このチェックは他の CPU 時間メトリクスも収集します。たとえば、Windows では `system.core.interrupt` が、Linux では `system.core.iowait` が収集されます。
 
@@ -103,7 +103,7 @@ System コアチェックには、イベントは含まれません。
 
 #### サービスチェック
 
-{{< get-service-checks-from-git "system-core" >}}
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System スワップ
 
@@ -129,7 +129,7 @@ System コアチェックには、イベントは含まれません。
 
 #### Metrics
 
-{{< get-metrics-from-git "system-swap" >}}
+{{< get-metrics-from-git "system_swap" >}}
 
 #### イベント
 

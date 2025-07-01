@@ -58,7 +58,7 @@ AWS Shield から S3 バケットまたは CloudWatch のいずれかにログ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-shield" >}}
+{{< get-metrics-from-git "amazon_shield" >}}
 
 
 ### イベント

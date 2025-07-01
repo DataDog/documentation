@@ -61,7 +61,7 @@ Amazon DocumentDB는 MongoDB 워크로드를 지원하는 빠르고 확장 가�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-documentdb" >}}
+{{< get-metrics-from-git "amazon_documentdb" >}}
 
 
 AWS에서 검색된 각 메트릭에는 dbinstanceidentifier, dbclusteridentifier 등을 포함하되 이에 국한되지 않고 AWS 콘솔에 표시되는 동일한 태그가 할당됩니다.

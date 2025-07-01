@@ -58,7 +58,7 @@ Amazon Lex から S3 バケットまたは CloudWatch のいずれかにログ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-lex" >}}
+{{< get-metrics-from-git "amazon_lex" >}}
 
 
 ### イベント

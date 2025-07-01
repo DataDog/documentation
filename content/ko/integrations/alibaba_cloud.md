@@ -99,7 +99,7 @@ Alibaba Cloud Account에서 다음을 실행하세요.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "alibaba-cloud" >}}
+{{< get-metrics-from-git "alibaba_cloud" >}}
 
 
 ### 이벤트

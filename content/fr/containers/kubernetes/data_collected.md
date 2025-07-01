@@ -44,7 +44,7 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6]. Ce check nécessite la version 1.12 ou une version ultérieure de l'Agent de cluster Datadog.
 
-{{< get-metrics-from-git "kubernetes-state-core" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes state
 
@@ -76,7 +76,7 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-metrics-from-git "kube-metrics-server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes Scheduler
 
@@ -132,7 +132,7 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-service-checks-from-git "kube-metrics-server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes Scheduler
 

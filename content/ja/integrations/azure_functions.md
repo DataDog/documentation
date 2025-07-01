@@ -40,7 +40,7 @@ Azure Functions からメトリクスを取得すると、以下のことがで�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-functions" >}}
+{{< get-metrics-from-git "azure_functions" >}}
 
 
 ### イベント

@@ -58,7 +58,7 @@ Configura Amazon Translate para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-translate" >}}
+{{< get-metrics-from-git "amazon_translate" >}}
 
 
 ### Eventos

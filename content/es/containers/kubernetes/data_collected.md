@@ -44,7 +44,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración de las [métricas de estado de Kubernetes Core][6]. Este check requiere el Datadog Cluster Agent v1.12 o posterior.
 
-{{< get-metrics-from-git "kubernetes-state-core" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Estado de Kubernetes
 
@@ -76,7 +76,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-metrics-from-git "kube-metrics-server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Programador Kubernetes
 
@@ -132,7 +132,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-service-checks-from-git "kube-metrics-server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Programador Kubernetes
 

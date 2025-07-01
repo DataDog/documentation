@@ -42,7 +42,7 @@ Amazon Kinesis Data Analytics は、Apache Flink を使用して、ストリー�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-kinesis-data-analytics" >}}
+{{< get-metrics-from-git "amazon_kinesis_data_analytics" >}}
 
 
 ### イベント

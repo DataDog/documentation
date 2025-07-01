@@ -47,7 +47,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon We
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "amazon-elasticbeanstalk" >}}
+{{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

@@ -93,7 +93,7 @@ updated_for_agent: 5.8.5
 
 #### 메트릭
 
-{{< get-metrics-from-git "system-core" >}}
+{{< get-metrics-from-git "system_core" >}}
 
 플랫폼에 따라 점검에서 CPU 시간 메트릭 외 Windows `system.core.interrupt`와 Linux `system.core.iowait` 등과 같은 다른 메트릭을 수집할 수 있습니다.
 
@@ -103,7 +103,7 @@ updated_for_agent: 5.8.5
 
 #### 서비스 검사
 
-{{< get-service-checks-from-git "system-core" >}}
+{{< get-service-checks-from-git "system_core" >}}
 
 ## 시스템 스왑
 
@@ -129,7 +129,7 @@ updated_for_agent: 5.8.5
 
 #### 메트릭
 
-{{< get-metrics-from-git "system-swap" >}}
+{{< get-metrics-from-git "system_swap" >}}
 
 #### 이벤트
 

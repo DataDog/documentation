@@ -93,7 +93,7 @@ The system core check is included in the [Datadog Agent][4] package. No addition
 
 #### Metrics
 
-{{< get-metrics-from-git "system-core" >}}
+{{< get-metrics-from-git "system_core" >}}
 
 Depending on the platform, the check may collect other CPU time metrics, such as `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
@@ -103,7 +103,7 @@ The System Core check does not include any events.
 
 #### Service checks
 
-{{< get-service-checks-from-git "system-core" >}}
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System Swap
 
@@ -129,7 +129,7 @@ The system swap check is included in the [Datadog Agent][4] package. No addition
 
 #### Metrics
 
-{{< get-metrics-from-git "system-swap" >}}
+{{< get-metrics-from-git "system_swap" >}}
 
 #### Events
 

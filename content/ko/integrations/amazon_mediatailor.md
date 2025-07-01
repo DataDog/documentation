@@ -58,7 +58,7 @@ S3 버킷이나 CloudWatch로 로그를 전송하도록 AWS Elemental MediaTailo
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-mediatailor" >}}
+{{< get-metrics-from-git "amazon_mediatailor" >}}
 
 
 ### 이벤트

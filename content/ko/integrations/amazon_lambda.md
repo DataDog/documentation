@@ -74,7 +74,7 @@ AWS 람다는 이벤트에 대응하기 위한 코드를 실행하고 자동으�
 AWS에서 검색한 각 메트릭에는 AWS 콘솔에 표시하는 동일한 태그가 할당되어 있습니다. 함수 이름, 보안-그룹 등을 포함하나 이에 제한되지 않습니다.
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-lambda" >}}
+{{< get-metrics-from-git "amazon_lambda" >}}
 
 
 ### 이벤트

@@ -104,7 +104,7 @@ Datadog のモニターをゲートとして使用し、Azure Pipelines での�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-devops" >}}
+{{< get-metrics-from-git "azure_devops" >}}
 
 
 ### イベント

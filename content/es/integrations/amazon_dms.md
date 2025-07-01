@@ -59,7 +59,7 @@ Configura AWS Database Migration Service para enviar logs a un bucket de S3 o a 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-dms" >}}
+{{< get-metrics-from-git "amazon_dms" >}}
 
 
 ### Eventos

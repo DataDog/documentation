@@ -59,7 +59,7 @@ Amazon GameLift から S3 バケットまたは CloudWatch のいずれかにロ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-gamelift" >}}
+{{< get-metrics-from-git "amazon_gamelift" >}}
 
 
 ### イベント

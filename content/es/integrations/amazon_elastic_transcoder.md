@@ -58,7 +58,7 @@ Configura Amazon Elastic Transcoder para enviar logs a un bucket de S3 o a Cloud
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-elastic-transcoder" >}}
+{{< get-metrics-from-git "amazon_elastic_transcoder" >}}
 
 
 ### Eventos

@@ -80,7 +80,7 @@ Une fois l'installation terminée, vous pouvez consulter l'ensemble de vos fonct
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de la fonction et les groupes de sécurité.
 
 ### Métriques
-{{< get-metrics-from-git "amazon-lambda" >}}
+{{< get-metrics-from-git "amazon_lambda" >}}
 
 
 ### Événements

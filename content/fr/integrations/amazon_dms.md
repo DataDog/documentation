@@ -59,7 +59,7 @@ Configurez AWS Database Migration Service de façon à ce que ses logs soient en
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-dms" >}}
+{{< get-metrics-from-git "amazon_dms" >}}
 
 
 ### Événements

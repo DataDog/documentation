@@ -42,7 +42,7 @@ Datadog에서 모든 ECR 메트릭을 보려면 이 통합을 활성화하세요
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon-ecr" >}}
+{{< get-metrics-from-git "amazon_ecr" >}}
 
 
 ### 이벤트

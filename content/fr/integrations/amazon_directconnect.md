@@ -65,7 +65,7 @@ Configurez AWS Direct Connect de façon à ce que ses logs soient envoyés vers 
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "amazon-directconnect" >}}
+{{< get-metrics-from-git "amazon_directconnect" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

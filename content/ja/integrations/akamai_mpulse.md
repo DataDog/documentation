@@ -68,7 +68,7 @@ Akamai mPulse インテグレーションを構成するには、`apiKey` と `a
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "akamai-mpulse" >}}
+{{< get-metrics-from-git "akamai_mpulse" >}}
 
 
 ### イベント

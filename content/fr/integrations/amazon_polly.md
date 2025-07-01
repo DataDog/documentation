@@ -57,7 +57,7 @@ Configurez Amazon Polly de façon à ce que ses logs soient envoyés vers un com
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon-polly" >}}
+{{< get-metrics-from-git "amazon_polly" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

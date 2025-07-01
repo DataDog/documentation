@@ -58,7 +58,7 @@ AWS Elemental MediaConnect から S3 バケットまたは CloudWatch のいず�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-mediaconnect" >}}
+{{< get-metrics-from-git "amazon_mediaconnect" >}}
 
 
 ### イベント

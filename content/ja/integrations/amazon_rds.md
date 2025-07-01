@@ -294,7 +294,7 @@ MySQL、MariaDB、および Postgres のログを Amazon CloudWatch に転送す
 [データベースエンジンから収集されたメトリクス][1]のほかに、以下の RDS メトリクスも受信します。
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-rds" >}}
+{{< get-metrics-from-git "amazon_rds" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
