@@ -54,7 +54,7 @@ The Datadog FIPS Agent does **not** support the following:
 
 ## Prerequisites
 <div class="alert alert-warning">
-The following prerequisites are a rough guideline of the additional controls required for the compliance of the deployed system. The compliance needs are likely to be unique in most circumstances. It is therefore the customer's responsibility to evaluate their needs and ensure overall system compliance.
+This is not an exhaustive list. These requirements are a baseline only. You are responsible for evaluating your environment and implementing any additional controls needed to achieve full FIPS compliance.
 </div>
 The following baseline controls apply to each platform. Your system may require additional controls:
 
