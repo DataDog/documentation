@@ -96,9 +96,156 @@ tracer.configure(
 )
 ```
 
-### Upgrading to v1
+### Upgrading to v3
+# **Migration Guide: Upgrading from dd-trace-py v2 to v3**
 
-If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [release notes][5] in the library documentation for full details.
+We are happy to announce the release of v3.0.0 of ddtrace. This release drops support for Python 3.7 and many previously-deprecated parts of the library interface.
+
+The 2.x release line enters Maintenance Mode with the release of 3.0.0, meaning that it will only receive bugfix changes on its last few minor releases, and 2.21 will be the last 2.x minor version. See the [versioning policy](https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#releases) for support level definitions.
+
+---
+
+## **Summary of Significant Changes**
+
+* Removed support for Python 3.7 from the library
+
+### **CI Visibility**
+
+* The new pytest plugin is now the default.  
+* Module, suite, and test names are now parsed from `item.nodeid`.  
+* Test names now include the class name (`TestClass::test_method`) for class-based tests.  
+* Test skipping is now done at the suite level.  
+* The `DD_PYTEST_USE_NEW_PLUGIN_BETA` environment variable is no longer used.
+
+### **LLM Observability**
+
+* Removed support for `DD_LLMOBS_APP_NAME`.  
+* The `parameters` argument in `LLMObs.annotate()` has been removed. Use `metadata` instead.  
+* Dropped support for OpenAI 0.x and Langchain v0.0.x.
+
+### **Tracing**
+
+* Removed all deprecated interfaces from integrations.  
+* `DD_TRACE_PROPAGATION_STYLE=b3 single header` is no longer supported. Use `b3` instead.  
+* Dropped support for multiple Tracer instances. The global tracer instance `ddtrace.tracer` must be used.  
+* Removed deprecated parameters from `Tracer.configure(...)`.  
+* Dropped support for several deprecated tracing configurations. See “Environment Variables” section below for details.
+
+## **Recommended Pre-Upgrade Steps**
+
+Before upgrading to v3, check for deprecation warnings in your application using the latest v2 release (**2.21.0**):
+
+### **Detect Deprecation Warnings in Tests**
+
+Enable warnings as errors in `pytest`:
+
+```
+pytest -W "error::ddtrace.DDTraceDeprecationWarning" tests.py
+```
+
+### **Detect Deprecation Warnings in Applications**
+
+Set the following environment variable to enable all deprecation warnings:
+
+```
+PYTHONWARNINGS=all python app.py
+```
+
+### **Environment Variables**
+
+The following environment variables have been removed or replaced in v3. Use the table below to update your configuration:
+
+| v2 | Removed in v3  | Replaced/Changed in v3 |
+| :---- | :---- | :---- |
+| **LLM Observability** |  |  |
+| `DD_LLMOBS_APP_NAME` |  | Use `DD_LLMOBS_ML_APP` instead |
+| `_DD_LLMOBS_EVALUATOR_SAMPLING_RULES` |  | Use `DD_LLMOBS_EVALUATOR_SAMPLING_RULES ` instead |
+| `_DD_LLMOBS_EVALUATORS ` |  | Use `DD_LLMOBS_EVALUATORS ` instead |
+| **Tracing** |  |  |
+| `DD_ANALYTICS_ENABLED` | No replacement, this setting is now a no-op. Datadog Analytics is no longer supported. See the [ingestion controls documentation](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=python) for more detail.|  |
+| `DD_HTTP_CLIENT_TAG_QUERY_STRING` |  | Use `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`. |
+| `DD_TRACE_ANALYTICS_ENABLED` | No replacement, this setting is now a no-op. Datadog Analytics is no longer supported. See the [ingestion controls documentation](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=python) for more detail. |  |
+| `DD_TRACE_METHODS` (using `[]` notation) |  | Must use `:` notation instead, For example: `mod.submod:method1,method2;mod.submod:Class.method1`. ([docs](https://ddtrace.readthedocs.io/en/stable/configuration.html?highlight=dd_trace_methods#DD_TRACE_METHODS)) |
+| `DD_TRACE_PROPAGATION_STYLE=”b3 single header”` |  | Use `DD_TRACE_PROPAGATION_STYLE=b3` for identical behavior |
+| `DD_TRACE_SAMPLE_RATE` |  | Use `DD_TRACE_SAMPLING_RULES` ([docs](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=python#in-tracing-libraries-user-defined-rules)). |
+| `DD_TRACE_SPAN_AGGREGATOR_RLOCK` | No replacement (feature removed). Config variable is now a no-op. |  |
+| **CI Visibility** |  |  |
+| `DD_PYTEST_USE_NEW_PLUGIN_BETA` | No replacement (new pytest plugin is not in beta anymore). |  |
+
+Use the following patterns to identify the deprecated environment variables in a code base:
+
+```
+git grep -P -e "DD_LLMOBS_APP_NAME" \
+  -e "_DD_LLMOBS_EVALUATOR_SAMPLING_RULES" \
+  -e "_DD_LLMOBS_EVALUATORS" \
+  -e "DD_TRACE_PROPAGATION_STYLE=.*b3 single header" \
+  -e "DD_TRACE_SAMPLE_RATE" \
+  -e "DD_TRACE_API_VERSION=v0.3" \
+  -e "DD_ANALYTICS_ENABLED" \
+  -e "DD_TRACE_ANALYTICS_ENABLED" \
+  -e "DD_HTTP_CLIENT_TAG_QUERY_STRING" \
+  -e "DD_TRACE_SPAN_AGGREGATOR_RLOCK" \
+  -e "DD_TRACE_METHODS=.*\[\]"
+```
+
+Replace deprecated settings with the recommended alternatives where applicable.
+
+**NOTE**: The changes to environment variables apply only to the configuration of the dd-trace-py library and not the Datadog Agent.
+
+### **Legacy Interfaces**
+
+The following methods and module attributes have been removed or changed. Unless noted, removal means that the functionality pointed to by the removed interface has been disabled.
+
+| v2 | v3 |
+| :---- | :---- |
+| **Tracing** |  |
+| `Tracer.configure( enabled=foo, hostname=foo, port=foo, uds_path=foo, https=foo, sampler=foo, wrap_executor=foo, priority_sampling=foo, settings=foo, dogstatsd_url=foo, writer=foo, partial_flush_enabled=foo, partial_flush_min_spans=foo, api_version=foo )` | `Tracer.configure()` |
+| `ddtrace.opentracer.tracer.Tracer()._dd_tracer` | `ddtrace.tracer` |
+| `ddtrace.tracer.sampler.rules[].choose_matcher(lambda: True)` | `ddtrace.tracer.sampler.rules[].choose_matcher(“foo”)` Callables and regex patterns are no longer allowed as arguments to `choose_matcher` |
+| `Span.sampled` | `Span.context.sampling_priority > 0` |
+| **LLM Observability** |  |
+| `LLMObs.annotate(parameters=foo)` | `LLMObs.annotate(metadata=foo)` |
+
+### **Python 3.13 Support**
+
+Much of the library’s functionality has been compatible with Python 3.13 since version 2.20. Some pieces of functionality do not yet work with Python 3.13. Here’s what does not work under Python 3.13 as of dd-trace-py 3.0. 'Not tested' indicates that while the feature may be compatible with Python 3.13, its functionality has not been verified, as it is not included in our automated test coverage.
+
+* `dd-trace-py` doesn’t work on Windows with Python 3.13  
+* Appsec Threat Detection is not tested against Django, Flask, or FastAPI with 3.13  
+* Automatic Service Naming is not tested with 3.13  
+* The following products are not tested with 3.13:  
+  * Code Coverage  
+  * Appsec IAST  
+  * Data Streams Monitoring  
+  * CI Visibility  
+  * Continuous Profiling  
+* The following integrations are not tested with 3.13:  
+  * `anthropic`
+  * `consul`
+  * `freezegun`
+  * `gevent`
+  * `google_generativeai`
+  * `gunicorn`
+  * `langchain`  
+  * `mysqlclient`  
+  * `opentracing`  
+  * `psycopg`  
+  * `psycopg2`  
+  * `pymysql`  
+  * `pytest` 
+  * `pytest-bdd`  
+  * `pytest-benchmark`  
+  * `sanic`  
+  * `selenium`  
+  * `sqlite3`  
+  * `starlette`  
+  * `tornado`  
+  * `vertexai`
+
+---
+
+By following these guidelines, you can transition to dd-trace-py v3 gradually, ensuring minimal disruption to your services while taking advantage of the latest features and improvements. Happy migrating!
+
 
 ## Further reading
 
