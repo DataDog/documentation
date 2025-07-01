@@ -25,7 +25,7 @@ After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka so
 1. Ensure the region matches your Azure resources (for example, `westus`).
 1. Click **Review + create**.
 
-**Note**: The Kafka endpoint is automatically enabled for Standard and higher tiers.
+**Note**: The Kafka endpoint is automatically enabled for standard and higher tiers.
 
 ### Create an event hub (Kafka topic)
 
@@ -97,7 +97,8 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
     1.  For **Kafka Bootstrap Servers**, enter `\<NAMESPACE\>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
     1.  For **Kafka SASL Username**, enter `$ConnectionString`.
     1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
-    1. Enter your Kafka TLS passphrase and environment variables for your destinations.
+    1. Enter your Kafka TLS passphrase.
+1. Enter the environment variables for your destinations, if applicable.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 
 #### Configure the Observability Pipelines environment file
