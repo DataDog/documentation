@@ -1,8 +1,6 @@
 ---
-title: Add a minimum request threshold for error rate alerts
+title: Add a Minimum Request Threshold for Error Rate Alerts
 disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
 - link: "/metrics/nested_queries"
   tag: "Documentation"
@@ -13,21 +11,21 @@ further_reading:
 
 ## Overview
 
-Monitors keep track of the health of your systems, ensuring that any alerts are sent in real-time. When tracking relative changes or percentages, you might only need an alert when traffic is high enough. To address this use case, you can add [boolean threshold remapping functions][1] in metrics nested queries to establish a minimum threshold.
+When monitoring error rates or other percentage-based metrics, low traffic periods can trigger false alarms. For example, a single error out of two requests shows as a 50% error rate, which might exceed your threshold despite representing minimal impact.
 
-This ensures that alerts are only triggered when a meaningful number of occurrences are detected, reducing false alarms and making your monitoring system more efficient.
+This guide shows you how to add a minimum request threshold to your monitors using boolean threshold remapping functions. By setting a minimum number of requests required before evaluating your error rate, you can reduce noise from low-traffic periods and focus on alerts that represent meaningful issues.
 
 ## Example walkthrough
 
 You have two metrics that measure APM span requests:
-- `trace.rack.request.errors`
-- `trace.rack.request`
+- `trace.rack.request.errors` (query a)
+- `trace.rack.request` (query b)
 
 With these two metrics you can calculate the error rate percentage:
 
 $$\text"Error Rate" =  \text"trace.rack.request.errors" / \text"trace.rack.request"$$
 
-You want to monitor the error rate, but only if there are at least 15 entries. In the monitor query configuration, take the the error rate and set a minimum threshold on query b (`is_greater(b,15)`).
+You want to monitor the error rate, but only if there are at least 15 entries. In the monitor query configuration, take the error rate and set a minimum threshold on query b (`is_greater(b,15)`).
 
 ```((a/b)*100)*is_greater(b,15)```
 
