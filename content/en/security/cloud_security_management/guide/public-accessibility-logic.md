@@ -38,7 +38,7 @@ For more information on AWS network reachability, see the [AWS documentation][34
 
 An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if **either** of the following conditions are met:
 
-#### Public by Bucket Policy
+#### Public by bucket policy
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
