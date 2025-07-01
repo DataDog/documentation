@@ -118,7 +118,7 @@ In addition to the Operating System (OS) requirements above:
       ```
 1. Run the `datadog-agent status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
-   {{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
+{{< img src="/agent/fips-linux.png" alt="Agent status command output with FIPS Mode enabled - Linux" style="width:100%;" >}}
 
 [1]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 {{% /tab %}}
