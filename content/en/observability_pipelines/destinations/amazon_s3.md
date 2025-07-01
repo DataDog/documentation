@@ -9,7 +9,7 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 
 ## Configure Log Archives
 
-This step is only required if you want to send logs to Amazon S3 in Datadog-rehydratable format for [archiving][1] and [rehydration][2] and you don't already have a Datadog Log Archive configured for Observability Pipelines. If you already have a Datadog Log Archive configured or just want to send your logs directly to Amazon S3, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+This step is only required if you want to send logs to Amazon S3 in Datadog-rehydratable format for [archiving][1] and [rehydration][2], and you don't already have a Datadog Log Archive configured for Observability Pipelines. If you already have a Datadog Log Archive configured or just want to send your logs directly to Amazon S3, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 You need to have Datadog's [AWS integration][3] installed to set up Datadog Log Archives.
 
