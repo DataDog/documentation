@@ -2,12 +2,13 @@
 {{- $processing_key := printf "processing_%s" $int_name -}}
 {{- if not ($.Scratch.Get $processing_key) -}}
   {{- $.Scratch.Set $processing_key true -}}
-  {{- $page := .Site.GetPage (print "/integrations/" $int_name ".md") -}}
-  {{- if not $page -}}
-    {{ errorf "Integration page for '%s' not found in get-metrics-from-git shortcode." $int_name }}
+  {{- $filePath := printf "_vendor/github.com/DataDog/websites-sources/content/en/integrations/%s.md" $int_name -}}
+  {{- if not (fileExists $filePath) -}}
+    {{ errorf "Integration file for '%s' not found at %s (get-metrics-from-git shortcode)." $int_name $filePath }}
   {{- else -}}
+    {{- $fileContent := readFile $filePath -}}
     {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
-    {{- $matches := findRE $pattern $page.RawContent 1 -}}
+    {{- $matches := findRE $pattern $fileContent 1 -}}
     {{- if not $matches -}}
       {{ errorf "No ### Metrics section found in '%s' integration documentation (get-metrics-from-git shortcode)." $int_name }}
     {{- else -}}

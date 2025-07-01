@@ -152,6 +152,7 @@ update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
+	node_modules/hugo-bin/vendor/hugo mod vendor github.com/DataDog/websites-sources
 	cat go.mod
 #######################################################################################################################
 # API Code Examples
