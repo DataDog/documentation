@@ -789,7 +789,7 @@ struct UserProfileView: View {
 }
 ```
 
-**Performance Note**: Each `SessionReplayPrivacyView` introduces an additional native view layer. For optimal performance, prefer combining privacy settings rather than nesting multiple privacy views when possible.
+**Note**: Each `SessionReplayPrivacyView` introduces an additional native view layer. For optimal performance, prefer combining privacy settings instead of nesting multiple privacy views when possible.
 {% /if %}
 <!-- end iOS -->
 
