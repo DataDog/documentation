@@ -245,6 +245,7 @@ $ datadog-sync sync \
 > 2024-03-14 14:56:00,797 - INFO - Finished sync: 1 successes, 0 errors
 ```
 
+
 ### Filter the data collected
 By default all resources are imported and synced. You can use the filtering option to specify what resources are migrated. Filtering is done on two levels:
 - [top resources level filtering](#top-resources-level-filtering) (`--resources` filter option)
@@ -268,32 +269,35 @@ The filter option `--filter` accepts a string made up of `key=value` pairs separ
 ```shell
 --filter 'Type=<resource>;Name=<attribute_name>;Value=<attribute_value>;Operator=<operator>'
 ```
+<div class="alert alert-info">
 
 ##### SubString and ExactMatch Deprecation
 
 In future releases the `SubString` and `ExactMatch` Operator will be removed in favor of the `Value` key. This is because the `Value` key supports regex so both of these scenarios are covered by just writing the appropriate regex.  Below is an example:
 
-Let's take the scenario where you would like to filter for monitors that have the `filter test` in the `name` attribute:
+For example, if you would like to filter for monitors that have the `filter test` in the `name` attribute:
 
-| Operator        | Command                                                                       |
-| ----------------| ---------------------------------------------------------------------- |
-| `SubString`     | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=SubString'`     |
-| Using `Value`   | `--filter 'Type=monitors;Name=name;Value=.*filter test.*`                     |
-| `ExactMatch`    | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=ExactMatch'`    |
-| Using `Value`   | `--filter 'Type=monitors;Name=name;Value=^filter test$`                       |
+| Operator           | Command                                                                       |
+| -------------------| ------------------------------------------------------------------------------|
+| `SubString`        | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=SubString'`     |
+| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=.*filter test.*`                     |
+| `ExactMatch` <br>    | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=ExactMatch'`    |
+| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=^filter test$`                       |
+
+</div>
 
 ### Available keys
 
-**Type** `required`
+Type `REQUIRED`
 : Resource such as Monitors, Dashboards, and more.
 
-`Name` [required]
+Name `REQUIRED`
 : Attribute key to filter on. This can be any attribute represented in dot notation such as `attributes.user_count`.
 
-`Value` [required]
+Value `REQUIRED`
 : Regex to filter attribute value by. Note: special regex characters need to be escaped if filtering by raw string.
 
-`Operator`
+Operator
 : All invalid operator's default to ExactMatch. Available operators are:
 : - `Not`: Match not equal to Value.
 : - `SubString` (_Deprecated_): Sub string matching. This operator will be removed in future releases. See SubString and ExactMatch Deprecation section.
@@ -302,19 +306,52 @@ Let's take the scenario where you would like to filter for monitors that have th
 By default, if multiple filters are passed for the same resource, OR logic is applied to the filters. This behavior can be adjusted using the `--filter-operator` option.
 
 
+## Additional configurations 
+### Using custom configuration instead of options 
+You can use a custom configuration text file in place of using `options`. This is an example config file for a `US1` source URL and `EU` destination URL:
+
+```shell
+destination_api_url="https://api.datadoghq.eu"
+destination_api_key="<API_KEY>"
+destination_app_key="<APP_KEY>"
+source_api_key="<API_KEY>"
+source_app_key="<APP_KEY>"
+source_api_url="https://api.datadoghq.com"
+filter=["Type=Dashboards;Name=title;Value=Test screenboard", "Type=Monitors;Name=tags;Value=sync:true"]
+```
+
+Then, run: 
+
+```shell
+datadog-sync import --config config
+```
+
+### Using the cleanup flag to sync changes from the source destination
+The tool's `sync` command provides a cleanup flag (`--cleanup`). Passing the cleanup flag will delete resources from the destination organization which have been removed from the source organization. The resources to be deleted are determined based on the difference between the [state files](#) of source and destination organization.
+
+For example, `ResourceA` and `ResourceB` are imported and synced, followed by deleting `ResourceA` from the source organization. Running the `import` command will update the source organizations state file to only include `ResourceB`. The following `sync --cleanup=Force` command will now delete `ResourceA` from the destination organization.
 
 
+### Verify your Datadog disaster recovery (DDR) status 
 
+By default all commands check the Datadog Disaster Recovery (DDR) status of both the source and destination organizations before running. This behavior is controlled by the boolean flag `--verify-ddr-status` or the environment variable `DD_VERIFY_DDR_STATUS`. 
+
+
+### State files [Avoid data duplication while keeping data seperation]
+
+By default, a `resources` directory is generated in the current working directory of the user. This directory contains `json` mapping of resources between the source and destination organization. To avoid duplication and loss of mapping, this directory should be retained between tool usage. To override these directories use the `--source-resources-path` and `--destination-resource-path`.
+
+When running againts multiple destination organizations, a seperate working directory should be used to ensure seperation of data. 
 
 ## Best practices
-
-Many Datadog resources are interdependent. For example, some Datadog resource can reference `roles` and `dashboards`, which includes widgets that may use Monitors or Synthetics data. The datadog-sync tool syncs these resources in order to ensure dependencies are not broken.
+### Resource subsets must be migrated with their dependencies
+Many Datadog resources are interdependent. For example, some Datadog resource can reference `roles` and `dashboards`, which includes widgets that may use monitors or synthetics data. The datadog-sync tool syncs these resources in order to ensure dependencies are not broken.
 
 If importing/syncing subset of resources, users should ensure that dependent resources are imported and synced as well.
 
 See [Supported resources](#supported-resources) section below for potential resource dependencies.
 
-{{% collapse-content title="Potential resources dependencies" level="h5" expanded=true id="id-for-resources" %}}
+{{% collapse-content title="List of potential resources dependencies" level="h5" expanded=true id="id-for-resources" %}}
 
 | Resource                               | Dependencies                                                     |
 |----------------------------------------|------------------------------------------------------------------|
