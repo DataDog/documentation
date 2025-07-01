@@ -2,13 +2,12 @@
 {{- $processing_key := printf "processing_%s" $int_name -}}
 {{- if not ($.Scratch.Get $processing_key) -}}
   {{- $.Scratch.Set $processing_key true -}}
-  {{- $filePath := printf "_vendor/github.com/DataDog/websites-sources/content/en/integrations/%s.md" $int_name -}}
-  {{- if not (fileExists $filePath) -}}
-    {{ errorf "Integration file for '%s' not found at %s (get-service-checks-from-git shortcode)." $int_name $filePath }}
+  {{- $page := .Site.GetPage (print "/integrations/" $int_name ".md") -}}
+  {{- if not $page -}}
+    {{ errorf "Integration page for '%s' not found in get-service-checks-from-git shortcode." $int_name }}
   {{- else -}}
-    {{- $fileContent := readFile $filePath -}}
     {{- $pattern := `(?s)### Service Checks\n(.*?)(#{2,3}\s)` -}}
-    {{- $matches := findRE $pattern $fileContent 1 -}}
+    {{- $matches := findRE $pattern $page.RawContent 1 -}}
     {{- if not $matches -}}
       {{ errorf "No ### Service Checks section found in '%s' integration documentation (get-service-checks-from-git shortcode)." $int_name }}
     {{- else -}}

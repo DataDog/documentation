@@ -58,7 +58,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 ### 쿠버네티스 프록시
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Kubernetes API 서버
 
@@ -85,7 +85,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-## 이벤트 
+## 이벤트
 
 - Backoff
 - Conflict
@@ -159,7 +159,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 : 노드의 디스크가 부족한지 여부입니다. 태그: `node` `condition` `status`.
 
 `kubernetes_state.node.disk_pressure`
-: 노드에 디스크 압력이 가해지고 있는지 여부입니다. 태그: `node` `condition` `status`. 
+: 노드에 디스크 압력이 가해지고 있는지 여부입니다. 태그: `node` `condition` `status`.
 
 `kubernetes_state.node.network_unavailable`
 : 노드 네트워크를 사용할 수 없는지 여부입니다. 태그: `node` `condition` `status`.

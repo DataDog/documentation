@@ -58,7 +58,7 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 ### Proxy Kubernetes
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Serveur d'API kubernetes
 

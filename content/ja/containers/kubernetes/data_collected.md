@@ -58,7 +58,7 @@ title: 収集された Kubernetes データ
 
 ### Kubernetes プロキシ
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Kubernetes API server
 

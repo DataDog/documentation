@@ -60,7 +60,7 @@ For more information, see the documentation for the [Kubernetes state metrics co
 
 ### Kubernetes proxy
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Kubernetes API server
 

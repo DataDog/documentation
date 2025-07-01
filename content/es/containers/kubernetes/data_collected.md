@@ -24,7 +24,7 @@ further_reading:
 title: Datos de Kubernetes recopilados
 ---
 
-Esta página enumera los datos recopilados por el Datadog Agent cuando se despliega en un clúster de Kubernetes. 
+Esta página enumera los datos recopilados por el Datadog Agent cuando se despliega en un clúster de Kubernetes.
 
 El conjunto de métricas recopiladas puede variar en función de la versión de Kubernetes utilizada.
 
@@ -58,7 +58,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 ### Proxy Kubernetes
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Servidor API Kubernetes
 
