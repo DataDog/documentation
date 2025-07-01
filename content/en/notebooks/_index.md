@@ -42,7 +42,7 @@ In the [Template Gallery][2], see ready-to-use templates which you can create ne
 
 ## Editing a notebook
 
-Notebooks offer a rich text editing experience that makes it easy to create and collaborate on content. You can freely type and format text using familiar toolbar options and keyboard shortcuts—such as bold, italic, headers, lists, and more—directly in the editor.
+Notebooks offer a rich text editing experience to create and collaborate on content. You can freely type and format text using familiar toolbar options and keyboard shortcuts—such as bold, italic, headers, lists, and more—directly in the editor.
 
 For users who prefer shortcuts, Notebooks also supports Markdown syntax. For example, typing `#` followed by a space creates a header, and using triple backticks (<code>```</code>) starts a code block.
 
