@@ -771,7 +771,7 @@ struct UserProfileView: View {
                 .padding()
             }
             
-            // For completely different privacy requirements, use separate views
+            // For completely different privacy requirements, use separate `SessionReplayPrivacyView` instances
             SessionReplayPrivacyView(hide: true) {
                 VStack(spacing: 16) {
                     Text("Credit Card Information")
