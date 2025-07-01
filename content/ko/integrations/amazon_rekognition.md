@@ -58,7 +58,7 @@ Amazon Rekognition을 설정해 S3 버킷 또는 클라우드와치(CloudWatch)�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_rekognition" >}}
+{{< get-metrics-from-git "amazon-rekognition" >}}
 
 
 ### 이벤트

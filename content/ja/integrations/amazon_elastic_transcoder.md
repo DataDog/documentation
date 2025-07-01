@@ -58,7 +58,7 @@ Amazon Elastic Transcoder から S3 バケットまたは CloudWatch のいず�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_elastic_transcoder" >}}
+{{< get-metrics-from-git "amazon-elastic-transcoder" >}}
 
 
 ### イベント

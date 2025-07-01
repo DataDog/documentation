@@ -44,7 +44,7 @@ Amazon Kinesis 데이터 분석으로 Apache Flink를 사용해 스트리밍 데
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_kinesis_data_analytics" >}}
+{{< get-metrics-from-git "amazon-kinesis-data-analytics" >}}
 
 
 ### 이벤트

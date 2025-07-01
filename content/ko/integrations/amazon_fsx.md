@@ -70,7 +70,7 @@ Amazon FSx는 사용자, 역할, AWS 서비스별로 모든 FSx 작업을 모두
 Datadog의 [CloudTrail 통합][9]을 활성화해 AWS 계정에서 모든 FSx API 호출을 모니터링하세요.
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_fsx" >}}
+{{< get-metrics-from-git "amazon-fsx" >}}
 
 
 ### 이벤트

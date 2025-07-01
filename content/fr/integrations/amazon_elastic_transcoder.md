@@ -57,7 +57,7 @@ Configurez Amazon Elastic Transcoder de façon à ce que ses logs soient envoy
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_elastic_transcoder" >}}
+{{< get-metrics-from-git "amazon-elastic-transcoder" >}}
 
 
 ### Événements

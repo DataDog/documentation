@@ -46,7 +46,7 @@ Amazon EC2 Spot 인스턴스를 사용하면 AWS 클라우드에서 사용되지
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_ec2_spot" >}}
+{{< get-metrics-from-git "amazon-ec2-spot" >}}
 
 
 ### 이벤트

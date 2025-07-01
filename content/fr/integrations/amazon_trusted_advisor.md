@@ -67,7 +67,7 @@ Configurez AWS Trusted Advisor de façon à ce que ses logs soient envoyés ve
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_trusted_advisor" >}}
+{{< get-metrics-from-git "amazon-trusted-advisor" >}}
 
 
 ### Événements

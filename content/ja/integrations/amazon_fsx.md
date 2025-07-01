@@ -70,7 +70,7 @@ Amazon FSx は、ユーザー、ロール、または AWS サービスにより�
 Datadogの [CloudTrail インテグレーション][9]を有効にすると、AWS アカウントのすべての FSx API 呼び出しを追跡できます。
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_fsx" >}}
+{{< get-metrics-from-git "amazon-fsx" >}}
 
 
 ### イベント

@@ -42,7 +42,7 @@ Amazon Elastic Container Registry (Amazon ECR) は、開発者が Docker コン�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_ecr" >}}
+{{< get-metrics-from-git "amazon-ecr" >}}
 
 
 ### イベント

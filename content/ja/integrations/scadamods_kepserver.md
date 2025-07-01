@@ -100,7 +100,7 @@ Scadamods Kepserver インテグレーションは、チャンネル、デバイ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "scadamods_kepserver" >}}
+{{< get-metrics-from-git "scadamods-kepserver" >}}
 
 
 ### イベント

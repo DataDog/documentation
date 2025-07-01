@@ -59,7 +59,7 @@ Configura AWS VPN para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_vpn" >}}
+{{< get-metrics-from-git "amazon-vpn" >}}
 
 
 ### Eventos

@@ -99,7 +99,7 @@ AWS 서비스 로그 수집에 대한 자세한 내용은 , [Datadog 람다 함�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_route53" >}}
+{{< get-metrics-from-git "amazon-route53" >}}
 
 
 AWS로부터 받은 호스트 이름, 보안 그룹 및 그 외의 모든 메트릭은 AWS 콘솔에 표시되는 태그와 동일한 태그에 배정됩니다.

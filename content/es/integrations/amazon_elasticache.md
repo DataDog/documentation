@@ -107,7 +107,7 @@ A continuación se muestra un ejemplo de configuración de un gráfico para comb
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_elasticache" >}}
+{{< get-metrics-from-git "amazon-elasticache" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.

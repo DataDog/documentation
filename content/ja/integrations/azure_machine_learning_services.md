@@ -43,7 +43,7 @@ Azure Machine Learning からメトリクスを取得すると、以下のこと
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "azure_machine_learning_services" >}}
+{{< get-metrics-from-git "azure-machine-learning-services" >}}
 
 
 ### イベント

@@ -99,7 +99,7 @@ Alibaba Cloud のアカウントで
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "alibaba_cloud" >}}
+{{< get-metrics-from-git "alibaba-cloud" >}}
 
 
 ### イベント

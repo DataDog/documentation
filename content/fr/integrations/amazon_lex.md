@@ -57,7 +57,7 @@ Configurez Amazon Lex de façon à ce que ses logs soient envoyés vers un compa
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_lex" >}}
+{{< get-metrics-from-git "amazon-lex" >}}
 
 
 ### Événements

@@ -68,7 +68,7 @@ Pour activer le tracing distribué sur vos AWS Step Functions :
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_step_functions" >}}
+{{< get-metrics-from-git "amazon-step-functions" >}}
 
 
 ### Événements

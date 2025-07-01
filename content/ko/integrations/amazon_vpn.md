@@ -59,7 +59,7 @@ AWS VPN을 설정하여 S3 버킷 또는 클라우드와치(CloudWatch)에 로�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_vpn" >}}
+{{< get-metrics-from-git "amazon-vpn" >}}
 
 
 ### 이벤트

@@ -104,7 +104,7 @@ Datadog 모니터를 Azure 파이프라인에서 [릴리스 배포 컨트롤][6]
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_devops" >}}
+{{< get-metrics-from-git "azure-devops" >}}
 
 
 ### 이벤트

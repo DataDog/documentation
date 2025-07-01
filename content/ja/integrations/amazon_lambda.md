@@ -74,7 +74,7 @@ AWS Lambda は、イベントに応答してコードを実行し、そのコー
 AWS から取得される各メトリクスには、関数名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_lambda" >}}
+{{< get-metrics-from-git "amazon-lambda" >}}
 
 
 ### イベント

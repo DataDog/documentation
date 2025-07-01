@@ -93,7 +93,7 @@ Pour afficher le code source, consultez le [référentiel de l'extension Monitor
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_devops" >}}
+{{< get-metrics-from-git "azure-devops" >}}
 
 
 ### Événements

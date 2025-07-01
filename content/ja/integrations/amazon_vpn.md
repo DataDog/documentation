@@ -59,7 +59,7 @@ AWS VPN から S3 バケットまたは CloudWatch のいずれかにログを�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_vpn" >}}
+{{< get-metrics-from-git "amazon-vpn" >}}
 
 
 ### イベント

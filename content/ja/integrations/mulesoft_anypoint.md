@@ -185,7 +185,7 @@ Datadog APM トレースを備えた Mule 4 用の Datadog コネクタを使え
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mulesoft_anypoint" >}}
+{{< get-metrics-from-git "mulesoft-anypoint" >}}
 
 
 ### サービスチェック

@@ -10,7 +10,7 @@ title: Docker の収集データ
 
 Docker コンテナにデプロイされた Agent が収集するメトリクス:
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### イベント
 

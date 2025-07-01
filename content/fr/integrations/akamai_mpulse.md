@@ -69,7 +69,7 @@ Consultez la [documentation Akamai sur les tokens d'API][5], puis :
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "akamai_mpulse" >}}
+{{< get-metrics-from-git "akamai-mpulse" >}}
 
 
 ### Aide

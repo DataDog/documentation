@@ -58,7 +58,7 @@ Configura Amazon Rekognition para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_rekognition" >}}
+{{< get-metrics-from-git "amazon-rekognition" >}}
 
 
 ### Eventos

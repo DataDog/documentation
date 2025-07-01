@@ -71,7 +71,7 @@ AWS Firehose 콘솔에서 Amazon Data Firehose 전송 스트림을 설정하거�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_kinesis" >}}
+{{< get-metrics-from-git "amazon-kinesis" >}}
 
 
 AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않고 AWS 콘솔에 표시되는 동일한 태그가 할당됩니다.

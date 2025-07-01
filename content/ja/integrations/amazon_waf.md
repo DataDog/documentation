@@ -82,7 +82,7 @@ WAF/WAFV2 ログが収集され、指定された S3 バケットに送信され
 ## データ収集
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_waf" >}}
+{{< get-metrics-from-git "amazon-waf" >}}
 
 
 **注**: WAF の CloudWatch メトリクス API の履歴形式により、`aws.waf.*` と `waf.*` の両メトリクスが報告されます。

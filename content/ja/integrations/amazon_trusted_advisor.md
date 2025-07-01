@@ -67,7 +67,7 @@ AWS Trusted Advisor から S3 バケットまたは CloudWatch のいずれか�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_trusted_advisor" >}}
+{{< get-metrics-from-git "amazon-trusted-advisor" >}}
 
 
 ### イベント

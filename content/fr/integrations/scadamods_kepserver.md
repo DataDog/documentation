@@ -97,7 +97,7 @@ L'intégration Scadamods Kepserver permet de surveiller les modifications apport
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "scadamods_kepserver" >}}
+{{< get-metrics-from-git "scadamods-kepserver" >}}
 
 
 ### Événements

@@ -65,7 +65,7 @@ AWS Direct Connect を構成して、ログを S3 バケットか CloudWatch の
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_directconnect" >}}
+{{< get-metrics-from-git "amazon-directconnect" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

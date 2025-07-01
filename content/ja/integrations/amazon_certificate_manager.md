@@ -83,7 +83,7 @@ AWS Certificate Manager を使用すると、SSL/TLS 証明書をプロビジョ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_certificate_manager" >}}
+{{< get-metrics-from-git "amazon-certificate-manager" >}}
 
 
 ### イベント

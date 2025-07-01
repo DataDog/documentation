@@ -67,7 +67,7 @@ Les logs WAF sont recueillis et envoyés vers un compartiment S3.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_waf" >}}
+{{< get-metrics-from-git "amazon-waf" >}}
 
 
 **Remarque** : Datadog recueille les métriques `aws.waf.*` et `waf.*` pour permettre la compatibilité avec l'ancien format des API de métriques CloudWatch pour WAF.

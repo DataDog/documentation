@@ -82,7 +82,7 @@ AWS X-Ray を利用して AWS Step Functions のトレースを収集するに�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_step_functions" >}}
+{{< get-metrics-from-git "amazon-step-functions" >}}
 
 
 ### イベント

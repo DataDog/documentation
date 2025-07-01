@@ -40,7 +40,7 @@ Azure Functions는 복잡한 오케스트레이션 문제도 해결할 수 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_functions" >}}
+{{< get-metrics-from-git "azure-functions" >}}
 
 
 ### 이벤트

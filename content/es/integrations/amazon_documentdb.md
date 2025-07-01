@@ -61,7 +61,7 @@ Configura Amazon DocumentDB para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_documentdb" >}}
+{{< get-metrics-from-git "amazon-documentdb" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas (tags) que aparece en la consola de AWS, incluyendo dbinstanceidentifier, dbclusteridentifier, entre otras.

@@ -185,7 +185,7 @@ Además, correlaciona los logs generados en una transacción en una única traza
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mulesoft_anypoint" >}}
+{{< get-metrics-from-git "mulesoft-anypoint" >}}
 
 
 ### Checks de servicio

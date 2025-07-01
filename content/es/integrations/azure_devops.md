@@ -104,7 +104,7 @@ Para ver el código fuente, consulta el [Informe de la extensión de puerta de M
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_devops" >}}
+{{< get-metrics-from-git "azure-devops" >}}
 
 
 ### Eventos

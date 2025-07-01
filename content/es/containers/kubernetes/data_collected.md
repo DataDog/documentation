@@ -44,7 +44,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración de las [métricas de estado de Kubernetes Core][6]. Este check requiere el Datadog Cluster Agent v1.12 o posterior.
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kubernetes-state-core" >}}
 
 ### Estado de Kubernetes
 
@@ -54,7 +54,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 ### DNS Kubernetes
 
-{{< get-metrics-from-git "kube_dns" >}}
+{{< get-metrics-from-git "kube-dns" >}}
 
 ### Proxy Kubernetes
 
@@ -64,25 +64,25 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [servidor API Kubernetes][3].
 
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 ### Administrador de controladores Kubernetes
 
 Para obtener más información, consulta la documentación de la integración del [administrador de controladores Kubernetes][2].
 
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 ### Servidor de métricas Kubernetes
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
 ### Programador Kubernetes
 
 Para obtener más información, consulta la documentación de la integración del [programador Kubernetes][5].
 
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ## Events (Eventos)
@@ -126,19 +126,19 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [administrador de controladores Kubernetes][2].
 
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 ### Servidor de métricas Kubernetes
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
 ### Programador Kubernetes
 
 Para obtener más información, consulta la documentación de la integración del [programador Kubernetes][5].
 
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 ### Métricas de estado de Kubernetes Core
 

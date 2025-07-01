@@ -46,7 +46,7 @@ For more information, see the documentation for the [Kubelet][1] integration.
 
 For more information, see the documentation for the [Kubernetes state metrics core][6] integration. This check requires Datadog Cluster Agent v1.12 or later.
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kubernetes-state-core" >}}
 
 ### Kubernetes state
 

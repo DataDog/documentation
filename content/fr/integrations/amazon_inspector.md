@@ -56,7 +56,7 @@ Configurez Amazon Inspector de façon à ce que ses logs soient envoyés vers un
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_inspector" >}}
+{{< get-metrics-from-git "amazon-inspector" >}}
 
 
 ### Événements

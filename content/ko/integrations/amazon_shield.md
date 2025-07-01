@@ -58,7 +58,7 @@ AWS Shield를 설정해 S3 버킷 또는 클라우드와치(CloudWatch) 중 하�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_shield" >}}
+{{< get-metrics-from-git "amazon-shield" >}}
 
 
 ### 이벤트

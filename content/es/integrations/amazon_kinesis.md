@@ -71,7 +71,7 @@ Sin embargo, si generas logs en un bucket de S3, utiliza la función AWS Lambda 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_kinesis" >}}
+{{< get-metrics-from-git "amazon-kinesis" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen el nombre del host y los grupos de seguridad, entre otras cosas.

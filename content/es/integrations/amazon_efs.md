@@ -78,7 +78,7 @@ Configura Amazon EFS para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_efs" >}}
+{{< get-metrics-from-git "amazon-efs" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen el nombre del host y los grupos de seguridad, entre otras cosas.

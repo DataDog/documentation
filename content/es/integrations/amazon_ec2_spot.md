@@ -46,7 +46,7 @@ Utiliza el [Datadog Agent][5] u otro remitente de logs como [Rsyslog][6] para en
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_ec2_spot" >}}
+{{< get-metrics-from-git "amazon-ec2-spot" >}}
 
 
 ### Eventos

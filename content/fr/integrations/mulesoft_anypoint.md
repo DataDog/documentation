@@ -177,7 +177,7 @@ Besoin d'aide ? Contactez [support_ddp@ioconnectservices.com][9].
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "mulesoft_anypoint" >}}
+{{< get-metrics-from-git "mulesoft-anypoint" >}}
 
 
 ### Checks de service

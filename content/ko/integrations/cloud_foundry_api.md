@@ -86,7 +86,7 @@ Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cloud_foundry_api" >}}
+{{< get-metrics-from-git "cloud-foundry-api" >}}
 
 
 ### 이벤트
@@ -94,7 +94,7 @@ Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니�
 Cloud Foundry API 통합으로 설정한 감사 이벤트를 수집합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cloud_foundry_api" >}}
+{{< get-service-checks-from-git "cloud-foundry-api" >}}
 
 
 ## 트러블슈팅

@@ -43,7 +43,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_kinesis_data_analytics" >}}
+{{< get-metrics-from-git "amazon-kinesis-data-analytics" >}}
 
 
 ### Événements

@@ -58,7 +58,7 @@ AWS Elemental MediaConnect를 설정해 S3 버킷이나 클라우드와치(Cloud
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_mediaconnect" >}}
+{{< get-metrics-from-git "amazon-mediaconnect" >}}
 
 
 ### 이벤트

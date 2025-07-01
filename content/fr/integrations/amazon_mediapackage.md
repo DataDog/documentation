@@ -57,7 +57,7 @@ Configurez Amazon Elemental MediaPackage de façon à ce que ses logs soient env
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_mediapackage" >}}
+{{< get-metrics-from-git "amazon-mediapackage" >}}
 
 
 ### Événements

@@ -59,7 +59,7 @@ Configurez AWS VPN de façon à ce que ses logs soient envoyés vers un compart
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_vpn" >}}
+{{< get-metrics-from-git "amazon-vpn" >}}
 
 
 ### Événements

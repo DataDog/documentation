@@ -100,7 +100,7 @@ Para obtener más información sobre la recopilación de logs de servicios AWS, 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_route53" >}}
+{{< get-metrics-from-git "amazon-route53" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen el nombre del host y los grupos de seguridad, entre otras cosas.

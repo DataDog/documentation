@@ -120,7 +120,7 @@ Datadog sólo puede recopilar hasta las últimas 12 horas de eventos históricos
 La integración Akamai no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "akamai_application_security" >}}
+{{< get-service-checks-from-git "akamai-application-security" >}}
 
 
 ## Solucionar problemas

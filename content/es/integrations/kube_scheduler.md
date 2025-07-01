@@ -107,7 +107,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### Eventos
@@ -115,7 +115,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 El Programador Kube no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 
 ## Solucionar problemas

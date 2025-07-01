@@ -39,7 +39,7 @@ Datadog Azure 통합을 사용하여 Azure ExpressRoute에서 메트릭을 수�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_express_route" >}}
+{{< get-metrics-from-git "azure-express-route" >}}
 
 
 ### 이벤트

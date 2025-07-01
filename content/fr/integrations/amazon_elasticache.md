@@ -106,7 +106,7 @@ Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consist
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_elasticache" >}}
+{{< get-metrics-from-git "amazon-elasticache" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

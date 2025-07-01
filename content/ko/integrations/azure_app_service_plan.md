@@ -38,7 +38,7 @@ Datadog Azure 통합을 사용하여 Azure App Service Plan에서 메트릭을 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_app_service_plan" >}}
+{{< get-metrics-from-git "azure-app-service-plan" >}}
 
 
 ### 이벤트

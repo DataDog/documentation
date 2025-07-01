@@ -96,7 +96,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## データ収集
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_vpc" >}}
+{{< get-metrics-from-git "amazon-vpc" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Event Grid か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_event_grid" >}}
+{{< get-metrics-from-git "azure-event-grid" >}}
 
 
 ### イベント

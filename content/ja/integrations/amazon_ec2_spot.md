@@ -46,7 +46,7 @@ Amazon EC2 スポットインスタンスを使用すると、AWS クラウド�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_ec2_spot" >}}
+{{< get-metrics-from-git "amazon-ec2-spot" >}}
 
 
 ### イベント

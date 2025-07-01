@@ -68,7 +68,7 @@ Consulta la [documentación de Akamai sobre el token de API][5] y a continuació
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "akamai_mpulse" >}}
+{{< get-metrics-from-git "akamai-mpulse" >}}
 
 
 ### Eventos

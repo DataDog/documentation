@@ -62,7 +62,7 @@ Amazon Data Firehose から S3 バケットまたは CloudWatch のいずれか�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_firehose" >}}
+{{< get-metrics-from-git "amazon-firehose" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

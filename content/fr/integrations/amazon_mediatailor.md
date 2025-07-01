@@ -57,7 +57,7 @@ Configurez Amazon MediaTailor de façon à ce que ses logs soient envoyés vers 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_mediatailor" >}}
+{{< get-metrics-from-git "amazon-mediatailor" >}}
 
 
 ### Événements

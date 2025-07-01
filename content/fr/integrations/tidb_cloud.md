@@ -55,7 +55,7 @@ Consultez les [préférences TiDB Cloud][3] afin de configurer l'intégration D
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "tidb_cloud" >}}
+{{< get-metrics-from-git "tidb-cloud" >}}
 
 
 ### Checks de service

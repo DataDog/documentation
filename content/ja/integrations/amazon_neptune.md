@@ -59,7 +59,7 @@ Amazon Neptune から S3 バケットまたは CloudWatch のいずれかにロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_neptune" >}}
+{{< get-metrics-from-git "amazon-neptune" >}}
 
 
 ### イベント

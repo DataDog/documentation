@@ -98,7 +98,7 @@ Pour en savoir plus sur les logs d'audit, consultez la documentation GitHub rela
 
 L'intégration GitHub collecte les métriques relatives aux alertes d'analyse du code et des secrets. Ces métriques fournissent un aperçu de l'état des alertes de l'organisation en les classant par état, référentiel et type de secret. Elles permettent également d'obtenir des informations à long terme sur les tendances des alertes et leur processus général. 
 
-{{< get-metrics-from-git "github_telemetry" >}}
+{{< get-metrics-from-git "github-telemetry" >}}
 
 Pour commencer à collecter ces métriques, sélectionnez les autorisations appropriées pour accorder l'accès en lecture lors de l'installation de l'application. Pour désactiver la collecte des métriques d'analyse du code et des secrets, recherchez l'organisation correspondante dans l'onglet **Telemetery** du carré d'intégration, cliquez sur le bouton des sections concernées, puis sur **Update Account**.
 

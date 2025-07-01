@@ -45,7 +45,7 @@ Datadog Azure 통합이 Azure Diagnostic Extension에서 메트릭을 수집할 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_diagnostic_extension" >}}
+{{< get-metrics-from-git "azure-diagnostic-extension" >}}
 
 
 ### 이벤트

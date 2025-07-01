@@ -82,7 +82,7 @@ WAF/WAFV2 로그를 수집하고 지정한 S3 버킷으로 전송합니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_waf" >}}
+{{< get-metrics-from-git "amazon-waf" >}}
 
 
 **참고**: WAF용 클라우드와치(CloudWatch) 메트릭 API의 과거 데이터 형식 때문에 `aws.waf.*` 및 `waf.*` 메트릭 모두 보고됩니다.

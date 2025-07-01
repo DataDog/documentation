@@ -59,7 +59,7 @@ Amazon GameLift를 설정하여 S3 버킷 또는 클라우드와치(CloudWatch) 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_gamelift" >}}
+{{< get-metrics-from-git "amazon-gamelift" >}}
 
 
 ### 이벤트

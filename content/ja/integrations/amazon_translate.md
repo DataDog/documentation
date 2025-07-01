@@ -58,7 +58,7 @@ Amazon Translate から S3 バケットまたは CloudWatch のいずれかに�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_translate" >}}
+{{< get-metrics-from-git "amazon-translate" >}}
 
 
 ### イベント

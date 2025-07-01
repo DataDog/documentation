@@ -62,7 +62,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "api_cloud_foundry" >}}
+{{< get-metrics-from-git "api-cloud-foundry" >}}
 
 
 ### Événements

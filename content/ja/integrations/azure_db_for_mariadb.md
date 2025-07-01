@@ -71,7 +71,7 @@ Azure Database for MariaDB からメトリクスを取得すると、以下の�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_db_for_mariadb" >}}
+{{< get-metrics-from-git "azure-db-for-mariadb" >}}
 
 
 ### イベント

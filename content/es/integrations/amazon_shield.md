@@ -58,7 +58,7 @@ Configura AWS Shield para enviar logs ya sea a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_shield" >}}
+{{< get-metrics-from-git "amazon-shield" >}}
 
 
 ### Eventos
