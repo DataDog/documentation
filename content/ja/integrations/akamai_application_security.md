@@ -117,7 +117,7 @@ Akamai のインテグレーションは、Akamai アカウントのセキュリ
 Akamai インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "akamai-application-security" >}}
+{{< get-service-checks-from-git "akamai" >}}
 
 
 ## トラブルシューティング
