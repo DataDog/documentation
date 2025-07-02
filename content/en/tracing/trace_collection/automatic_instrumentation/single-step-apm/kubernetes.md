@@ -494,102 +494,78 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 ## Best practices
 
-To have granular control on where APM is activated and minimize overhead, consider the following best practices.
+After you enable SSI, all supported processes in the cluster are automatically instrumented and begin producing traces within minutes.
 
-{{% collapse-content title="Opt in with labels for APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+To control where APM is activated and reduce overhead, consider the following best practices.
 
+{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+
+#### Default vs. opt-in instrumentation
 | Mode    | Behavior    | When to use |
 | ---  | ----------- | ----------- |
-| Default | All supported processes across the cluster receive an APM SDK. | Quick prototypes or tiny clusters with uniform applications. |
-| Opt-in | Explicitly list the namespaces/pods to be instrumented and leverage [workload selection][4] to only instrument those specific namespaces/pods. | Production clusters, staged roll‑outs, cost‑sensitive environments. |
+| Default | All supported processes in the cluster are instrumented. | Small clusters or quick prototypes. |
+| Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
 
-#### Opt-in workflow examples
+#### Example: Enable instrumentation for specific pods
 
-Decide which namespaces or pods require tracing first. Create or reuse meaningful Kubernetes labels (e.g. `datadoghq.com/apm-instrumentation: "enabled"`).
+1. Add a meaningful label (for example, `datadoghq.com/apm-instrumentation: "enabled"`) to both the deployment metadata and the pod template. 
+  
+   ```
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: checkout-api
+     labels:
+       app: checkout-api
+       datadoghq.com/apm-instrumentation: "enabled"   # opt-in label (cluster-wide)
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: checkout-api
+     template:
+       metadata:
+         labels:
+           app: checkout-api
+           datadoghq.com/apm-instrumentation: "enabled"   # opt-in label must be on *template*, too
+           # Unified Service Tags (recommended)
+           tags.datadoghq.com/service: "checkout-api"
+           tags.datadoghq.com/env:     "prod"
+           tags.datadoghq.com/version: "2025-06-10"
+       spec:
+         containers:
+           - name: api
+             image: my-registry/checkout:latest
+             ports:
+               - containerPort: 8080
+   ```  
+   
+2. In your Datadog Agent Helm config, enable SSI and use `podSelector` to inject only into pods with the matching opt-in label.
 
-Example of controlling pods to be instrumented:
-- `enabled: true` turns SSI on for the whole cluster.
-- `podSelector` - means nothing is injected until a pod carries the label `datadoghq.com/apm-instrumentation: "enabled"`.
+   ```
+     apm:
+       instrumentation:
+         enabled: true
+         targets:
+           - name: apm-instrumented 
+             podSelector:
+               matchLabels:
+                 datadoghq.com/apm-instrumentation: "enabled"
+   ```
 
-Example Helm config:
-```
-# Enable Single Step Instrumentation in “opt-in” mode
-features:
-  apm:
-    instrumentation:
-      enabled: true
-      # Everything under `targets:` is *optional* and only runs when the
-      # workload carries the opt-in label below.
-      targets:
-        - name: apm-instrumented #Just the name of the target block. Has no affect
-          podSelector:
-            matchLabels:
-              datadoghq.com/apm-instrumentation: "enabled"
-```
-
-Example deployment:
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: checkout-api
-  labels:
-    app: checkout-api
-    datadoghq.com/apm-instrumentation: "enabled"   # ← opt-in label (cluster-wide)
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: checkout-api
-  template:
-    metadata:
-      labels:
-        app: checkout-api
-        datadoghq.com/apm-instrumentation: "enabled"   # ← must be on *template* too
-        # Unified Service Tags (recommended)
-        tags.datadoghq.com/service: "checkout-api"
-        tags.datadoghq.com/env:     "prod"
-        tags.datadoghq.com/version: "2025-06-10"
-    spec:
-      containers:
-        - name: api
-          image: my-registry/checkout:latest
-          ports:
-            - containerPort: 8080
-```
-
-**Example of controlling namespaces to be instrumented:**
-
-If every workload in a namespace should be instrumented, label the namespace once:
-
-```
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: payments
-  labels:
-    datadoghq.com/apm-instrumentation: "enabled"
-```
-
-Adjust the Helm values target to a namespace selector:
-```
-targets:
-  - name: payments-ns
-    namespaceSelector:
-      matchNames: ["payments"]
-```
-
+See [workload selection][4] for additional examples.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Control APM SDKs" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Control which APM SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
 
-Controlling which APM language SDKs and versions are loaded is key. This minimizes init-containers, reduces image sizes, and allows for controlled tracer upgrades for compliance.
+Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the APM SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
 
-Use the ddTraceVersions value to control APM SDKs and their versions. 
+#### Example: Specify a Java APM SDK for a namespace
 
-Example: Only need the Java APM SDK in a namespace since only Java applications are running in the namespace.
+Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK at version 1.48.2.
+
 
 ```
 targets:
@@ -600,10 +576,11 @@ targets:
       java: "1.48.2"    # pin version
 ```
 
-Default
+#### Default configuration
+
+If a pod doesn't match any `ddTraceVersions` rule, the default target applies.
 
 ```
-# features.apm.instrumentation enabled elsewhere
 targets:
   - name: default-target          # tag any pod *without* an override
     ddTraceVersions:
