@@ -16,7 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md'
 display_name: "API Cloud\_Foundry"
-draft: false
+draft: true
 git_integration_title: api_cloud_foundry
 guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: api-cloud-foundry
