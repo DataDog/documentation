@@ -139,16 +139,16 @@ This metric represents the lag (in offsets) between the last produce and consume
 This metric represents the number of a messages in an SQS dead-letter queue. It is used to to measure the number of dead-lettered messages for a given queue.
 
 `arn`
-: The ARN (Amazon Resource Name) of the queue
+: The ARN (Amazon Resource Name) of the queue.
 
 `aws_account`
-: The AWS Account number of the queue (and dead letter queue)
+: The AWS Account number of the queue (and dead-letter queue).
 
 `dlq`
-: The ARN of the dead letter queue that messages are being sent to
+: The ARN of the dead letter queue that messages are being sent to.
 
 `queue`
-: The name of the queue
+: The name of the queue.
 
 `region`
-: The AWS region of the queue (and dead letter queue)
+: The AWS region of the queue (and dead-letter queue).
