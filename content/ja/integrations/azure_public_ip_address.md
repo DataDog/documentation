@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure パブリック
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-public-ip-address" >}}
+{{ get-metrics-from-git "azure-publicipaddress" }}
 
 
 ### イベント

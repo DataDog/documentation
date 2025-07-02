@@ -70,7 +70,7 @@ Datadog Azure インテグレーションを使用して Azure Kubernetes Servic
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-container-service" >}}
+{{ get-metrics-from-git "azure-containerservice" }}
 
 
 ### イベント

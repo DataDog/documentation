@@ -39,7 +39,7 @@ Datadog Azure 통합을 사용하여 Azure File Storage에서 메트릭을 수�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure-file-storage" >}}
+{{ get-metrics-from-git "azure-filestorage" }}
 
 
 ### 이벤트
