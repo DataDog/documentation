@@ -1,7 +1,5 @@
 {{- $int_name := (.Get 0 ) -}}
-{{- $processing_key := printf "processing_%s" $int_name -}}
-{{- if not ($.Scratch.Get $processing_key) -}}
-  {{- $.Scratch.Set $processing_key true -}}
+{{- if $int_name -}}
   <!-- if the page is a draft we can skip -->
   {{- if not .Page.Draft -}}
     <!-- if non english page load from english integration -->
@@ -27,5 +25,4 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
-  {{- $.Scratch.Delete $processing_key -}}
 {{- end -}}
