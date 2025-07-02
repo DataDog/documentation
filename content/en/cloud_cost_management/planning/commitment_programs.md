@@ -56,7 +56,7 @@ Costs overview summarizes your spending on commitment programs, helping you unde
 
 {{< img src="cloud_cost/planning/commitments-rds-costs-overview.png" alt="Bar chart of RDS costs from March 1 to March 31, grouped by cost type, region, and instance family, with a highlighted total of $20.55k." style="width:100%;" >}}
 
-- **Show RI fee:** Toggle the display of RI fees to see direct costs associated with your reserved capacity, making it easier to distinguish between on-demand and commitment-based spending.
+- **Show RI fee:** Toggle the display of RI fees to change reserved capacity to commitments making it easier to distinguish between on-demand and commitment-based spending.
 - **Group By options:** Organize and analyze your costs by cost type, region, instance family, or database engine. Identify which regions or services are driving the most spend, compare costs, and pinpoint areas for additional commitments or strategy adjustments.
 - **Total commitment spend:** View how much you are spending on reserved capacity versus on-demand, helping you assess the effectiveness of your commitment strategy.
 - **Savings breakdown:** See the savings achieved through commitment programs compared to on-demand pricing.
