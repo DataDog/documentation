@@ -94,36 +94,6 @@ See [more Android examples][1].
 
 The Trace SDK is independent from RUM, so you can track business processes or flows that span multiple screens or views. For example, you can measure how long it takes users to complete a checkout flow, or how long a background sync takes, regardless of RUM session sampling. These business spans appear in the APM UI and can be used for custom metrics and dashboards.
 
-## Manual span instrumentation
-
-Here's an example of how to create a manual span in your mobile app using the Trace SDK:
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-```swift
-let span = tracer.startSpan(operationName: "<span_name>")
-// ... code to measure ...
-span.finish()
-```
-See [more iOS examples][1].
-
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ios?tab=swiftpackagemanagerspm
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-```kotlin
-val span = tracer.buildSpan("<span_name>").start()
-// ... code to measure ...
-span.finish()
-```
-See [more Android examples][1].
-
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/?tab=kotlin
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Sampling
 
 Sampling in native mobile tracing controls which spans and traces appear in the Datadog UI, helping you balance visibility with data volume. All spans you instrument in your app are recorded and sent to Datadog, but only a subset that are based on your sampling rates and are displayed for analysis.
