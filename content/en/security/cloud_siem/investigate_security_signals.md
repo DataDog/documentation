@@ -105,7 +105,7 @@ Workflows are a set of actions that are relevant to the platform, such as AWS Cl
 - **Tags you added manually**<br>
 You can customize which workflows are prioritized by manually adding tags to both Blueprint-derived and custom workflows.To ensure correct contextual matching, these tags should match those found on the signal, the logs that generated the alert, or the detection rule itself.
 - **Tagging strategy**<br>
-To ensure a workflow appears for a given signal, the workflow must include tags similar to those of the signal. A common signal tag is the signal's source or service. For example, signals from AWS resources are typically tagged with `source:cloudtrail`. By tagging a workflow with `source:cloudtrail`, the workflow is associated withsignals related to AWS activity.<br>
+To ensure a workflow appears for a given signal, the workflow must include tags similar to those of the signal. A common signal tag is the signal's source or service. For example, signals from AWS resources are typically tagged with `source:cloudtrail`. By tagging a workflow with `source:cloudtrail`, the workflow is associated with signals related to AWS activity.<br>
 If you want a Workflow to be suggested for a specific detection rule, tag the Workflow with that detection rule ID (for example, `ruleId:abc-123-xyz`).
 
 When a signal is created:
