@@ -211,7 +211,7 @@ El comando [`import`][18] convierte el antiguo `docker_daemon.yaml` en el nuevo 
 
 ## Datos recopilados
 ### Métricas
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### Eventos
@@ -229,7 +229,7 @@ La integración de Docker produce los siguientes eventos:
 * Actualización
 
 ### Checks de servicio
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **Nota**: Para utilizar `docker.exit`, añade `collect_exit_codes: true` en tu [archivo Docker YAML][21] y reinicia el Agent.

@@ -207,7 +207,7 @@ Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine 
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### イベント
@@ -225,7 +225,7 @@ Docker インテグレーションは以下のイベントを生成します。
 * Update
 
 ### サービスチェック
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_codes: true` を追加し、Agent を再起動します。
