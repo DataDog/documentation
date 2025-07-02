@@ -21,7 +21,7 @@ The templates are built for the following use cases:
 
 ### Archive Logs
 
-Use the Archive Logs template to store logs in a cloud storage solution (Amazon S3, Google Cloud Storage, or Azure Storage). The archived logs are stored in a Datadog-rehydratable format, so that they can be rehydrated in Datadog as needed. This is useful when:
+Use the Archive Logs template to store logs in a cloud storage solution (Amazon S3, Google Cloud Storage, or Azure Storage). The archived logs are stored in a Datadog-rehydratable format so that they can be rehydrated in Datadog as needed. This is useful when:
 
 - You have a high volume of noisy logs, but might need to index them in Datadog Log Management ad hoc for an investigation.
 - You are migrating to Datadog Log Management and want to have historical logs after completing the migration.
