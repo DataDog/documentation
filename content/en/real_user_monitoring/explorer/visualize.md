@@ -101,7 +101,7 @@ To build a funnel, choose your starting view or action and click on the plus ico
 
 ### Suggested next steps
 
-When you have a starting point in mind, but aren't sure what your users did next, click the search input box where it says "Search for View or Action Name" to view suggested next steps. This input box automatically loads the top  most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+When you have a starting point in mind, but aren't sure what your users did next, click the search input box where it says "Search for View or Action Name" to view suggested next steps. This input box automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps-1.png" alt="Build a funnel" style="width:90%;" >}}
 
