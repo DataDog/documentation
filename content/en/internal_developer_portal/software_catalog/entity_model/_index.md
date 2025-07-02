@@ -46,6 +46,11 @@ further_reading:
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+
+{{< /site-region >}}
+
 ## Overview
 
 Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 

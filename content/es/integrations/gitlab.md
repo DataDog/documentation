@@ -243,7 +243,7 @@ El elemento `allowed_metrics` de la sección `init_config` permite especificar l
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### Recopilación de logs

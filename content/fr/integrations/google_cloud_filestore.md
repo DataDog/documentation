@@ -48,7 +48,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Filestore
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_filestore" >}}
+{{< get-metrics-from-git "google-cloud-filestore" >}}
 
 
 ### Événements

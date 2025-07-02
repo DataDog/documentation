@@ -193,7 +193,7 @@ Timeline view is currently not supported for Full Host profiling
 
 [1]: /tracing/send_traces/#configure-your-environment
 [2]: /tracing/glossary/#services
-[3]: https://app.datadoghq.com/profiling/search?viz=timeseries
+[3]: https://app.datadoghq.com/profiling/explorer?viz=timeseries
 [4]: /profiler/profile_types/
 [5]: /dashboards/widgets/profiling_flame_graph
 [6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view

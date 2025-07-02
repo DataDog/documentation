@@ -73,7 +73,7 @@ Si aún no lo ha hecho, configure [Microsoft Azure integración][1]. No se requi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_cosmosdb" >}}
+{{< get-metrics-from-git "azure-cosmosdb" >}}
 
 
 ### Eventos
