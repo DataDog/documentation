@@ -411,7 +411,7 @@ Datadog의 기본 CloudWatch 크롤러가 메트릭을 10분에 한 번씩 폴�
 
 다음 중 하나를 사용하여 Fargate 로그를 모니터링할 수 있습니다.
 - Datadog의 Fluent Bit 출력 플러그인 기반 AWS FireLens 통합을 사용해 로그를 직접 Datadog에 전송합니다.
-- `awslogs` 로그 드라이버를 사용하여 로그를 CloudWatch 로그 그룹에 저장한 다음, 람다 함수를 사용하여 로그를  Datadog에 라우팅합니다. 
+- `awslogs` 로그 드라이버를 사용하여 로그를 CloudWatch 로그 그룹에 저장한 다음, 람다 함수를 사용하여 로그를  Datadog에 라우팅합니다.
 
 Datadog는 Fargate 작업에서 Fluent Bit를 직접 설정할 수 있으므로 AWS FireLens를 사용할 것을 권장합니다.
 
@@ -893,7 +893,7 @@ ECS를 기준으로 프로세스 필터링하려면 `AWS Fargate` 컨테이너 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "ecs_fargate" >}}
+{{< get-metrics-from-git "aws-fargate" >}}
 
 
 ### 이벤트
@@ -901,7 +901,7 @@ ECS를 기준으로 프로세스 필터링하려면 `AWS Fargate` 컨테이너 �
 ECS Fargate 점검에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "ecs_fargate" >}}
+{{< get-service-checks-from-git "aws-fargate" >}}
 
 
 ## 트러블슈팅

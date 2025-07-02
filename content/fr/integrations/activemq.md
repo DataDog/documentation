@@ -283,7 +283,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "activemq_xml" >}}
+{{< get-metrics-from-git "activemq-xml" >}}
 
 
 ### Événements

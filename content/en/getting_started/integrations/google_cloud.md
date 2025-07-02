@@ -73,7 +73,9 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 
 By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
 
-Reach out to [Datadog support][19] to enable this feature.
+To enable this feature:
+1. Ensure that the Datadog service account has the [Service Usage Consumer][63] role at the desired scope (folder or organization).
+2. Click the **Enable Per Project Quota** toggle in the **Projects** tab of the [Google Cloud integration page][11].
 
 ### Organization-level metric collection
 
