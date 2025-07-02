@@ -311,6 +311,43 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = <CLIENT_TOKEN>,
+                env = <ENV_NAME>,
+                variant = <APP_VARIANT_NAME>
+            )
+            .useSite(DatadogSite.AP2)
+            .build()
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                        .useSite(DatadogSite.AP2)
+                        .build();
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][9].
@@ -404,6 +441,7 @@ To initialize an interceptor for tracking network events:
        .build()
    ```
    {{% /tab %}}
+
    {{% tab "Java" %}}
    ```java
    Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
@@ -417,30 +455,31 @@ To initialize an interceptor for tracking network events:
    {{% /tab %}}
    {{< /tabs >}}
 
-   - To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
-     - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
-   - To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][15]:
+4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
+   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+      
+5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][15]:
 
-     {{< tabs >}}
-     {{% tab "Kotlin" %}}
-     ```kotlin
-     val okHttpClient = OkHttpClient.Builder()
-         .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-         .build()
-     ```
-     {{% /tab %}}
-     {{% tab "Java" %}}
-     ```java
-     OkHttpClient okHttpClient = new OkHttpClient.Builder()
-         .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-         .build();
-     ```
-     {{% /tab %}}
-     {{< /tabs >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val okHttpClient = OkHttpClient.Builder()
+       .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build()
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-   **Notes**:
-   - To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
-   - If you use multiple interceptors, add `DatadogInterceptor` first.
+**Notes**:
+- To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
+- If you use multiple interceptors, add `DatadogInterceptor` first.
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][14] for third-party providers and network requests.
 
@@ -484,7 +523,6 @@ val closeable: Closeable = ...
 closeable.useMonitored {
     // Your code here
 }
-
 ```
 
 ### Track local assets as resources

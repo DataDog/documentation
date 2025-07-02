@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
+- link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+  tag: "Blog"
+  text: "How we've created a successful FinOps practice at Datadog"
 ---
 
 ## Overview

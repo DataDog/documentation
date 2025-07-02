@@ -129,14 +129,14 @@ Agent `v7.61+` is required.
 
 **Note**: Windows only supports TCP traceroutes.
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
    ```
    traceroute:
      enabled: true
    ```
 
-2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file:
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `%ProgramData%\Datadog\conf.d\network_path.d\conf.yaml` file:
 
    ```yaml
    init_config:
