@@ -1928,8 +1928,7 @@ menu:
           - v2
         operationids:
           - UpdateMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 17
     - name: Get a monitor notification rule
       url: '#get-a-monitor-notification-rule'
@@ -1941,8 +1940,7 @@ menu:
           - v2
         operationids:
           - GetMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Delete a monitor notification rule
       url: '#delete-a-monitor-notification-rule'
@@ -1954,8 +1952,7 @@ menu:
           - v2
         operationids:
           - DeleteMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 18
     - name: Create a monitor notification rule
       url: '#create-a-monitor-notification-rule'
@@ -1967,8 +1964,7 @@ menu:
           - v2
         operationids:
           - CreateMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 16
     - name: Get all monitor notification rules
       url: '#get-all-monitor-notification-rules'
@@ -1980,8 +1976,7 @@ menu:
           - v2
         operationids:
           - GetMonitorNotificationRules
-        unstable:
-          - v2
+        unstable: []
         order: 15
     - name: Unmute all monitors
       url: '#unmute-all-monitors'

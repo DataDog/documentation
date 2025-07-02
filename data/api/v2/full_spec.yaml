@@ -55537,9 +55537,6 @@ paths:
         - monitors_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Creates a monitor notification rule.
       operationId: CreateMonitorNotificationRule
@@ -55600,9 +55597,6 @@ paths:
         - name: rule_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/monitor/notification_rule/{rule_id}:
     delete:
       description: Deletes a monitor notification rule by `rule_id`.
@@ -55646,9 +55640,6 @@ paths:
         - monitor_config_policy_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Returns a monitor notification rule by `rule_id`.
       operationId: GetMonitorNotificationRule
@@ -55705,9 +55696,6 @@ paths:
         - monitors_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
       description: Updates a monitor notification rule by `rule_id`.
       operationId: UpdateMonitorNotificationRule
@@ -55768,9 +55756,6 @@ paths:
         - monitor_config_policy_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/monitor/policy:
     get:
       description: Get all monitor configuration policies.
