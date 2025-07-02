@@ -36,7 +36,7 @@ Docker Agent は以下のイベントを生成します。
 ## コンテナインテグレーション
 
 ### メトリクス
-{{< get-metrics-from-git "コンテナ" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ## Containerd インテグレーション
 
