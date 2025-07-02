@@ -55,7 +55,7 @@ Para obtener instrucciones detalladas, consulta la [documentación principal sob
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_event_hub" >}}
+{{< get-metrics-from-git "azure-event-hub" >}}
 
 
 ### Eventos

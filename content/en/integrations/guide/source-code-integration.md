@@ -518,7 +518,7 @@ You can also see links from profile frames to their source repository. This is s
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 

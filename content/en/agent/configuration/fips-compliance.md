@@ -136,6 +136,7 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 - While the Datadog images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
 - If you rebuild, reconfigure, or modify the Datadog FIPS Agent to fit your deployment or testing needs, you might end up with a technically working setup, but Datadog cannot guarantee FIPS compliance if the Datadog FIPS Agent is not used exactly as explained in the documentation.
 - If you did not follow the installation steps listed above exactly as documented, Datadog cannot guarantee FIPS compliance.
+- Some Linux distros with `urllib3 ≤ 1.26.20` may fail FIPS encryption due to non-compliant libraries. Check with your Linux vendor to ensure FIPS-compliant encryption support.
 
 ## Further reading
 
