@@ -289,4 +289,3 @@ This check ensures that sensitive information is handled appropriately and secur
 [6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
 [7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage
 [8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
-
