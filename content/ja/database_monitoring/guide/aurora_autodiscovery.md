@@ -9,12 +9,12 @@ title: Amazon Aurora DB クラスターに対する Database Monitoring の構�
 対応データベース
 : Postgres、MySQL
 
-Supported Agent versions
-: 7.53.0+
+対応 Agent バージョン
+: 7.53.0 以上
 
 ## 概要
 
-Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints (for example, `postgres.d/conf.yaml`). This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
+Datadog の [Autodiscovery][4] を使用すると、動的なインフラストラクチャーでモニタリングを設定できます。この機能を使用すると、個々のデータベース ホスト エンドポイント (例: `postgres.d/conf.yaml`) を列挙せずに Aurora クラスターをモニタリングできます。特に、接続性やワークロードの変化に応じて Aurora Replica の数を動的に調整する [Aurora Auto Scaling][6] を利用するクラスターで役立ちます。Autodiscovery は、プライマリおよびレプリカのエンドポイント インスタンスを自動的に検出してモニタリングします。
 
 オートディスカバリーと Database Monitoring を使用すると、Postgres または MySQL チェックの構成テンプレートを定義し、各チェックを適用するクラスターを指定できます。
 
@@ -162,6 +162,7 @@ instances:
 
 インスタンスが IAM 認証を使用している場合、テンプレート変数 `%%extra_managed_authentication_enabled%%` は `true` に解決されます。
 
+[2]: /ja/database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -210,7 +211,6 @@ instances:
 | %%extra_managed_authentication_enabled%% | クラスターで IAM 認証が有効かどうか。<br/>これは Postgres でマネージド認証を使用するかどうかを決定するために使用されます。 |
 
 [1]: /ja/database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /ja/database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /ja/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /ja/containers/docker/integrations/?tab=dockeradv2

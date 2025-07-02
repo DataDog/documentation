@@ -111,7 +111,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 [1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
 
 You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
