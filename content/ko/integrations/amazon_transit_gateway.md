@@ -61,7 +61,7 @@ Datadog에서 모든 Transit Gateway 메트릭을 보려면 이 통합을 활성
 Transit Gateway 흐름 로그는 S3 버킷 또는 CloudWatch 로그 그룹으로 전송될 수 있습니다.
 
 1. AWS 콘솔에서 모니터링하려는 Transit Gateway로 이동합니다.
-2. **Flow logs** 탭으로 이동합니다. 
+2. **Flow logs** 탭으로 이동합니다.
 3. **Create flow log**를 클릭합니다.
 4. 로그를 보낼 S3 버킷 또는 CloudWatch 로그 그룹을 선택합니다.
 
@@ -73,7 +73,7 @@ Transit Gateway 흐름 로그는 S3 버킷 또는 CloudWatch 로그 그룹으로
 2. AWS 계정에서 Datadog Forwarder Lambda 함수로 이동합니다. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
 3. **S3** 또는 **CloudWatch Logs** 트리거를 선택하여 트리거를 설정합니다.
 4. Transit Gateway 로그가 포함된 S3 버킷 또는 CloudWatch 로그 그룹을 선택합니다.
-5. S3의 경우 이벤트 유형은 `All object create events`로 둡니다. 
+5. S3의 경우 이벤트 유형은 `All object create events`로 둡니다.
 6. **Add**를 클릭해 Lambda에 트리거를 추가합니다.
 
 몇 분 후에 Transit Gateway 흐름 로그가 [Log Explorer][6]에 나타납니다.
