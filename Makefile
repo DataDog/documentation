@@ -68,7 +68,7 @@ build-cdocs:
 	@node ./local/bin/js/cdocs-build.js;
 
 # build .mdoc.md files, then watch for changes
-watch-cdocs: 
+watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
