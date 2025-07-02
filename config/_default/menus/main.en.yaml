@@ -2330,6 +2330,11 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
+    - name: Feature Flags
+      url: change_tracking/feature_flags/
+      parent: change_tracking
+      identifier: change_tracking_feature_flags
+      weight: 1
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2926,7 +2931,7 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 104
-    - name: Autoscaling
+    - name: Kubernetes Autoscaling
       url: containers/monitoring/autoscaling
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_autoscaling
@@ -3533,46 +3538,51 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
       weight: 104
-    - name: Databricks
-      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_databricks
-      weight: 101
-    - name: Confluent Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 102
-    - name: MongoDB
-      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
-      parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 103
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
-      weight: 104
-    - name: Elastic Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      weight: 101
+    - name: Databricks
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
-      identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 105
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 102
     - name: OpenAI
       url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 103
+    - name: GitHub
+      url: cloud_cost_management/setup/saas_costs/?tab=github#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_github
+      weight: 104
+    - name: Confluent Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 105
+    - name: MongoDB
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 106
+    - name: Elastic Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_elasticcloud
+      weight: 107
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 107
+      weight: 108
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 108
+      weight: 109
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -4574,81 +4584,91 @@ menu:
       identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Quickstart
-      url: llm_observability/quickstart/
-      parent: llm_obs
-      identifier: llm_obs_quickstart
-      weight: 1
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
+      weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_obs
+      identifier: llm_obs_quickstart
       weight: 2
     - name: Setup
       url: llm_observability/setup/
       parent: llm_obs
       identifier: llm_obs_setup
       weight: 3
-    - name: SDK
-      url: llm_observability/setup/sdk/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_sdk
-      weight: 301
+    - name: LLM Obs SDK
+      url: llm_observability/sdk
+      parent: llm_obs
+      identifier: llm_obs_sdk
+      weight: 4
     - name: Auto Instrumentation
-      url: llm_observability/setup/auto_instrumentation
-      parent: llm_obs_setup
+      url: llm_observability/sdk/auto_instrumentation
+      parent: llm_obs_sdk
       identifier: llm_obs_setup_auto_instrumentation
-      weight: 302
-    - name: API
+      weight: 401
+    - name: LLM Obs API
       url: llm_observability/setup/api/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_api
-      weight: 303
+      parent: llm_obs
+      identifier: llm_obs_api
+      weight: 6
+    - name: Monitoring
+      url: llm_observability/monitoring
+      parent: llm_obs
+      identifier: llm_obs_monitoring
+      weight: 7
+    - name: Connect with APM
+      url: llm_observability/monitoring/llm_observability_and_apm
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_apm
+      weight: 701
+    - name: Cluster Map
+      url: llm_observability/monitoring/cluster_map/
+      parent: llm_obs_monitoring
+      identifier: llm_obs_cluster_map
+      weight: 702
+    - name: Agent Monitoring
+      url: llm_observability/monitoring/agent_monitoring
+      parent: llm_obs_monitoring
+      identifier: llm_obs_agent_monitoring
+      weight: 703
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
       identifier: llm_obs_evaluations
-      weight: 4
-    - name: Out-of-the-Box Evaluations
+      weight: 8
+    - name: Out-of-the-Box
       url: llm_observability/evaluations/ootb_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
-      weight: 401
-    - name: Submit Custom Evaluations
-      url: llm_observability/evaluations/submit_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
-      weight: 402
-    - name: Ragas Evaluations
+      weight: 801
+    - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ragas_evaluations
-      weight: 403
-    - name: NeMo Evaluations
+      weight: 802
+    - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 404
-    - name: Cluster Map
-      url: llm_observability/cluster_map/
-      parent: llm_obs
-      identifier: llm_obs_cluster_map
-      weight: 5
-    - name: Agent Monitoring
-      url: llm_observability/agent_monitoring
-      parent: llm_obs
-      identifier: llm_obs_agent_monitoring
-      weight: 6
+      weight: 803
+    - name: Custom
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_evaluations
+      weight: 804
     - name: Experiments
       url: llm_observability/experiments_preview
       parent: llm_obs
       identifier: llm_obs_experiments
-      weight: 7
+      weight: 9
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 10
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5876,10 +5896,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 917
-    - name: Tags Processor
-      url: observability_pipelines/processors/tags_processor
+    - name: Tags
+      url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags_processor
+      identifier: observability_pipelines_processors_tags
       weight: 918
     - name: Throttle
       url: observability_pipelines/processors/throttle

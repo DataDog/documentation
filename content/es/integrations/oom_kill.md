@@ -161,7 +161,7 @@ spec:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oom_kill" >}}
+{{< get-metrics-from-git "oom-kill" >}}
 
 
 ### Checks de servicios

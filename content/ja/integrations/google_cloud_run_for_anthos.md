@@ -74,7 +74,7 @@ Google Cloud Run のログは Google Cloud Logging で収集し、Cloud Pub/Sub 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
+{{< get-metrics-from-git "google-cloud-run-for-anthos" >}}
 
 
 ### イベント

@@ -94,7 +94,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### Eventos
@@ -102,7 +102,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 La integración de cert_manager no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## Solucionar problemas

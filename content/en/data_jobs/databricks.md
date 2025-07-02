@@ -263,6 +263,8 @@ For scheduled jobs that run on job clusters, the init script installs the Datado
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
+If some jobs are not visible, navigate to the [Configuration][9] page to understand why. This page lists all your Databricks jobs not yet configured with the Agent on their clusters, along with guidance for completing setup.
+
 ## Troubleshooting
 
 {{% djm-install-troubleshooting %}}
@@ -330,6 +332,7 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: https://docs.databricks.com/api/workspace/jobs/submit
+[9]: https://app.datadoghq.com/data-jobs/configuration
 [12]: https://docs.databricks.com/en/security/network/front-end/index.html
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
