@@ -458,13 +458,13 @@ multifiltersearch:
       cloud_provider: GCP
       resource_type: CloudSQL Instance
       recommendation_type: Purchase CUD for Cloud SQL
-      recommendation_description: CloudSQL instances that would benefit from committed use discounts.
+      recommendation_description: CloudSQL instances that benefit from committed use discounts.
       recommendation_prerequisites: ""
     - category: Rate optimization
       cloud_provider: GCP
       resource_type: Cloud Run Job
       recommendation_type: Purchase Flexible CUD for Cloud Run Job
-      recommendation_description: Cloud Run Jobs that would benefit from flexible committed use discounts.
+      recommendation_description: Cloud Run Jobs that benefit from flexible committed use discounts.
       recommendation_prerequisites: ""
     - category: Rate optimization
       cloud_provider: GCP
@@ -483,6 +483,23 @@ multifiltersearch:
       resource_type: Compute Global Address
       recommendation_type: Delete Unused Compute Global IP Address
       recommendation_description: Unused compute global IP address can be deleted.
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Disk
+      recommendation_type: Delete Unattached Compute Disk
+      recommendation_description: Compute disks that are unattached and can be deleted.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Disk
+      recommendation_type: Delete Unused Compute Disk
+      recommendation_description: Compute disks that are unused and can be deleted.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Storage Bucket
+      recommendation_type: Delete Non-Current Cloud Storage objects
+      recommendation_description: Cloud Storage buckets that benefit from lifecycle rules to automatically delete non-current object versions.
       recommendation_prerequisites: ""
 ---
 
