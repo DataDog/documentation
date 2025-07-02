@@ -136,7 +136,7 @@ This metric represents the lag (in offsets) between the last produce and consume
 
 ### data_streams.sqs.dead_letter_queue.messages
 
-This metric represents the number of a messages in a sqs queues dead letter queue. The purpose here is to be able to measure the number of dead lettered messages for a given queue.
+This metric represents the number of a messages in an SQS dead-letter queue. It is used to to measure the number of dead-lettered messages for a given queue.
 
 `arn`
 : The ARN (Amazon Resource Name) of the queue
