@@ -56,10 +56,10 @@ See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
 ### Measuring SQS Dead Letter Queues
 With Data Streams Monitoring you can measure monitor when messages enter the dead letter queue for any of your queues and remediate the issue from Datadog.
 
-In order to measure the number of dead letter queued messages for a given queue, your AWS integration requires the following permissions:
-* sqs:ListQueues
-* sqs:GetQueueAttributes
-* tag:GetResources
+To measure the number of messages in a DLQ, ensure your AWS integration has the following permissions:
+- `sqs:ListQueues`
+- `sqs:GetQueueAttributes`
+- `tag:GetResources`
 
 [1]: /agent
 [2]: /data_streams/setup/language/java
