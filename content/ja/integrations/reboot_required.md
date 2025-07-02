@@ -105,7 +105,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Reboot Require
 reboot_required チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "reboot_required" >}}
+{{< get-service-checks-from-git "reboot-required" >}}
 
 
 ## トラブルシューティング

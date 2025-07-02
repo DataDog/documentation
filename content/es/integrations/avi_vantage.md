@@ -98,7 +98,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "avi_vantage" >}}
+{{< get-metrics-from-git "avi-vantage" >}}
 
 
 ### Eventos

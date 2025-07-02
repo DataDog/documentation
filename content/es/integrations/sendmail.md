@@ -46,11 +46,11 @@ tile:
   - Category::Network
   - Supported OS::Linux
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Integración de Sendmail para monitorizar colas de correos
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Sendmail
 ---
 

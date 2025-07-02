@@ -30,6 +30,12 @@ Threat Intelligence is reputation information that helps responders make informe
 
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
+## Bring your own threat intelligence
+
+Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+
+For more information, see the [Bring Your Own Threat Intelligence][3] guide.
+
 ## Threat Intelligence Lifecycle
 
 Datadog collects threat intelligence across the following entity types. Each entity type has unique characteristics and a useful timeframe. This timeframe, or lifecycle, requires consideration when assessing the importance of a threat intelligence match on your data.
@@ -115,3 +121,5 @@ Sources, categories, and intents are available as facets and filters on relevant
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/security/detection_rules/
+[2]: /integrations/guide/reference-tables
+[3]: /security/guide/byoti_guide
