@@ -27323,7 +27323,10 @@ paths:
 
         Retention is 7 days.
 
-        Results are paginated with a max of 1000 results at a time.'
+        Results are paginated with a max of 1000 results at a time.
+
+        **Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id`
+        in the response.'
       operationId: ListHosts
       parameters:
       - description: String to filter search results.
