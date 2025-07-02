@@ -6,6 +6,6 @@ WHITE="\033[1m"
 
 # If the current branch is master, abort the commit
 if [ "$branch" = "master" ]; then
-  echo "${YELLOW}You're trying to commit to master. Use a feature branch instead.${ENDCOLOR}"
+  echo "${YELLOW}You're trying to push to master. Use a feature branch instead.${ENDCOLOR}"
   exit 1
 fi
