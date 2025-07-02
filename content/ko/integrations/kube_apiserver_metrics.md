@@ -194,7 +194,7 @@ spec:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 
 ### 서비스 점검

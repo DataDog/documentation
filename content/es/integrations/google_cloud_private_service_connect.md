@@ -79,7 +79,7 @@ Datadog también ofrece la funcionalidad de Private Service Connect que te permi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_private_service_connect" >}}
+{{< get-metrics-from-git "google-cloud-private-service-connect" >}}
 
 
 ### Checks de servicio

@@ -176,7 +176,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cisco_aci" >}}
+{{< get-metrics-from-git "cisco-aci" >}}
 
 
 ### 이벤트
@@ -184,7 +184,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 Cisco ACI 점검은 이벤트로 테넌트 오류를 전송합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cisco_aci" >}}
+{{< get-service-checks-from-git "cisco-aci" >}}
 
 
 ## 트러블슈팅

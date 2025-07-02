@@ -42,7 +42,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_athena" >}}
+{{< get-metrics-from-git "amazon-athena" >}}
 
 
 ### Eventos
