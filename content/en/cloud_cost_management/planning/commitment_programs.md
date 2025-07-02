@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Cloud providers offer commitment-based discount programs, such as {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance type for a one- or three-year term." >}} and {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}, to help you save on predictable usage. Datadog's Commitment Programs feature helps you monitor, optimize, and maximize the value of these discounts across your cloud environments.
+Cloud providers offer commitment-based discount programs, such as {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance configuration for a one- or three-year term." >}} and {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}, to help you save on predictable usage. Datadog's Commitment Programs feature helps you monitor, optimize, and maximize the value of these discounts across your cloud environments.
 
 With Commitment Programs, you can:
 - Track and address unused or underused commitments
