@@ -232,6 +232,13 @@ datadog:
       - containerPort: "4318" # default port for OpenTelemetry HTTP receiver
         hostPort: "4318"
         name: otel-http
+
+agents:
+  ...
+  otelAgent:
+    env: 
+      - name: DD_OTELCOLLECTOR_ENABLED
+        value: "true"
 {{< /code-block >}}
 
 Set the `hostPort` to expose the container port to the external network. This enables configuring the OTLP exporter to point to the IP address of the node where the Datadog Agent is assigned.
