@@ -46,7 +46,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 <div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the `GPT-4o mini` model for evaluations. The selected model has to support [**structured output**][8].
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the `GPT-4o mini` model for evaluations. The selected model version has to support [**structured output**][8].
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
