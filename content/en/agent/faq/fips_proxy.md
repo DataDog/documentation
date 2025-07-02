@@ -190,7 +190,7 @@ The `use_https` option is set to `false` because the Agent uses HTTP to communic
 {{% tab "Amazon ECS" %}}
 To install the FIPS proxy on Amazon ECS, follow the [Datadog Agent ECS Integrations guide](/containers/amazon_ecs/#fips-proxy-for-govcloud-environments). 
 
-Ensure you add the `fips-proxy` sidecar container to your ECS task definition. Also, open the required container ports (9803–9818) to enable communication for all [supported features](#supported-platforms-and-limitations).
+Ensure you add the `fips-proxy` sidecar container to your ECS task definition and open the required container ports (9803–9818) to enable communication for all [supported features](#supported-platforms-and-limitations).
 
 **Note**: You must also ensure that the sidecar container is configured with applicable network settings and IAM permissions.
 
