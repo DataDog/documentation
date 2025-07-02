@@ -51,7 +51,7 @@ categories:
 - 네트워크
 dependencies: []
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: mulesoft_anypoint
 integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
