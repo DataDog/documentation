@@ -54,9 +54,13 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 
 ## Working with teams
 
-IDP uses [Teams][6] to define service ownership, apply platform policies, and report on engineering standards. 
+Use [Datadog Teams][6] to enable team-based features in IDP:
 
-If your organization uses GitHub as the source of truth for team structure, join the preview for GitHub Integration for Teams to automatically sync GitHub teams with Datadog.
+- Track your teams in Datadog and automatically sync with external sources of truth like GitHub
+- Assign teams as owners of services and other entities
+- Filter views in the Software Catalog, Scorecards, and Engineering Reports by team
+
+If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
 {{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
 {{< /callout >}}
