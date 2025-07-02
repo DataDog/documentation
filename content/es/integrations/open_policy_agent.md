@@ -179,7 +179,7 @@ Una vez creadas las facetas, genera las métrica necesarias para que el dashboar
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "open_policy_agent" >}}
+{{< get-metrics-from-git "open-policy-agent" >}}
 
 
 ### Eventos
@@ -187,7 +187,7 @@ Una vez creadas las facetas, genera las métrica necesarias para que el dashboar
 open_policy_agent no incluye ningún evento.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "open_policy_agent" >}}
+{{< get-service-checks-from-git "open-policy-agent" >}}
 
 
 ## Solucionar problemas

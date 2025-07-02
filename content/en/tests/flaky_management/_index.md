@@ -40,7 +40,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
 | **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm a fix and automatically apply this status, instead of manually changing it. |
 
-<div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
+<div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
 ## Investigate a flaky test
 
@@ -68,17 +68,16 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 ## Compatibility
 
-Flaky Test Management features have minimum version requirements for each programming language. The table below outlines the minimum versions needed to quarantine, disable, and attempt to fix flaky tests:
+To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language   | Quarantine & Disable | Attempt to fix   |
-| ---------- | -------------------- | ---------------- |
-| .NET       | 3.13.0+              | 3.17.0+          |
-| Go         | 1.73.0+              | Not available    |
-| Java       | 1.48.0+              | 1.50.0+          |
-| JavaScript | 5.44.0+              | 5.52.0+          |
-| Python     | 3.3.0+               | 3.8.0+           |
-| Ruby       | 1.13.0+              | 1.17.0+          |
-
+| Language        | Quarantine & Disable | Attempt to fix   |
+| --------------- | -------------------- | ---------------- |
+| [.NET][4]       | 3.13.0+              | 3.17.0+          |
+| [Go][5]         | 1.73.0+              | Not available    |
+| [Java][6]       | 1.48.0+              | 1.50.0+          |
+| [JavaScript][7] | 5.44.0+              | 5.52.0+          |
+| [Python][8]     | 3.3.0+               | 3.8.0+           |
+| [Ruby][9]       | 1.13.0+              | 1.17.0+          |
 
 ## Further reading
 
@@ -87,3 +86,9 @@ Flaky Test Management features have minimum version requirements for each progra
 [1]: https://app.datadoghq.com/ci/test/flaky
 [2]: /tests/explorer
 [3]: /service_management/case_management
+[4]: /tests/setup/dotnet/
+[5]: /tests/setup/go/
+[6]: /tests/setup/java/
+[7]: /tests/setup/javascript/
+[8]: /tests/setup/python/
+[9]: /tests/setup/ruby/

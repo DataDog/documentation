@@ -52,7 +52,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Dataproc de Google Cloud Lo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_dataproc" >}}
+{{< get-metrics-from-git "google-cloud-dataproc" >}}
 
 
 ### Eventos
