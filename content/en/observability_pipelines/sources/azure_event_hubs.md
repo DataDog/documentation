@@ -101,9 +101,9 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 1. Enter the environment variables for your destinations, if applicable.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 
-#### Configure the Observability Pipelines environment file
+#### Check your Observability Pipelines environment file
 
-In the Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`), add the following connection variables:
+If you run into issues after installing the Worker, check your Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
 
 -   `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$$ConnectionString"`
 -   `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
