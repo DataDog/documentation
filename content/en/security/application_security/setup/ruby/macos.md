@@ -1,6 +1,6 @@
 ---
 title: Set up App and API Protection for Ruby on macOS
-code_lang: ruby
+code_lang: macos
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:

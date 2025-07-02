@@ -1,8 +1,5 @@
 ---
 title: Enabling AAP for Ruby
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
   - /security_platform/application_security/getting_started/ruby
   - /security/application_security/getting_started/ruby

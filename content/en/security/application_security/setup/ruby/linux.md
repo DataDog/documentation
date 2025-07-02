@@ -1,6 +1,6 @@
 ---
 title: Set up App and API Protection for Ruby on Linux
-code_lang: ruby
+code_lang: linux
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:

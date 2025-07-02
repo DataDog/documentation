@@ -1,6 +1,6 @@
 ---
 title: Set up App and API Protection for Ruby in Docker
-code_lang: ruby
+code_lang: docker
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
