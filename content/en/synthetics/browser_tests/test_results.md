@@ -112,7 +112,7 @@ You can filter resources by type and search by name in the search bar. The maxim
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
 
 Relative Time 
-: The time point when resource began to load during the test step.
+: The point in time when the resource began to load during the test step.
 
 CDN
 : The CDN provider that served the resource. Hover over a CDN provider's icon to see the raw cache status.  
