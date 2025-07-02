@@ -3661,6 +3661,18 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Search Synthetic tests
+      url: '#search-synthetic-tests'
+      identifier: synthetics-search-synthetic-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - SearchTests
+        unstable: []
+        order: 34
     - name: Edit a Mobile test
       url: '#edit-a-mobile-test'
       identifier: synthetics-edit-a-mobile-test

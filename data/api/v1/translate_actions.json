@@ -935,6 +935,10 @@
     "request_description": "New test details to be saved.",
     "request_schema_description": "Object containing details about a Synthetic mobile test."
   },
+  "SearchTests": {
+    "description": "Search for Synthetic tests and Test Suites.",
+    "summary": "Search Synthetic tests"
+  },
   "TriggerTests": {
     "description": "Trigger a set of Synthetic tests.",
     "summary": "Trigger Synthetic tests",
