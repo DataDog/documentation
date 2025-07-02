@@ -26,7 +26,7 @@ custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
@@ -70,7 +70,7 @@ tile:
 
 ### 설치
 
-Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다. 
+Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다.
 서버에 추가 설치할 필요가 없습니다.
 
 ### 구성

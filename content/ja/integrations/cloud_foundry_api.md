@@ -26,7 +26,7 @@ custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
