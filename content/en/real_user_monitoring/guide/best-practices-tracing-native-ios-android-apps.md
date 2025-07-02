@@ -25,13 +25,15 @@ Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your
 
 ## Native mobile tracing
 
-Native mobile tracing allows you to manually instrument spans in your iOS or Android app code, giving you precise control over what operations are measured. Unlike backend APM tracers, which automatically collect spans, mobile tracing requires you to start and stop spans around the specific actions you want to monitor. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences and backend interactions.
+Native mobile tracing allows you to manually instrument spans in your iOS or Android app code, giving you precise control over what operations are measured.
+
+Unlike backend APM tracers, which automatically collect spans, mobile tracing requires you to start and stop spans around the specific actions you want to monitor. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences and backend interactions.
 
 With Datadog's [Trace SDK for iOS][1] and [Trace SDK for Android][2], you can capture detailed performance data directly from your mobile applications. If you prefer, you can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation. These tools help you understand app performance, trace requests across services, and optimize both frontend and backend monitoring.
 
 ## Use cases
 
-### Distributed tracing: frontend-to-backend
+### Wrap a frontend-to-backend distributed trace under a native span
 
 You can create distributed traces that span from your mobile frontend to your backend services. This is possible with or without RUM. For example, you can wrap one or more frontend-to-backend traces under a manually created span using the Trace SDK.
 
