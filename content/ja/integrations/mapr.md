@@ -143,7 +143,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mapr_cluster" >}}
+{{< get-metrics-from-git "mapr" >}}
 
 
 ### イベント

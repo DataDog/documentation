@@ -143,7 +143,7 @@ MapR은 로그에 FluentD를 사용합니다. [FluentD Datadog 플러그인][10]
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mapr_cluster" >}}
+{{< get-metrics-from-git "mapr" >}}
 
 
 ### 이벤트
@@ -151,7 +151,7 @@ MapR은 로그에 FluentD를 사용합니다. [FluentD Datadog 플러그인][10]
 MapR 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "mapr_cluster" >}}
+{{< get-service-checks-from-git "mapr" >}}
 
 
 ## 트러블슈팅

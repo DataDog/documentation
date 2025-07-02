@@ -143,7 +143,7 @@ Ejecuta el [subcomando de estado del Agent][11] y busca `mapr` en la sección Ch
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mapr_cluster" >}}
+{{< get-metrics-from-git "mapr" >}}
 
 
 ### Eventos
@@ -151,7 +151,7 @@ Ejecuta el [subcomando de estado del Agent][11] y busca `mapr` en la sección Ch
 El check de MapR no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "mapr_cluster" >}}
+{{< get-service-checks-from-git "mapr" >}}
 
 
 ## Solucionar problemas
