@@ -1,6 +1,7 @@
 ---
 title: Metrics and Tags
-identifier: data_streams_metrics_and_tags
+aliases:
+  - "/data_streams/metrics_and_tags"
 ---
 
 This document discusses the following Data Streams Monitoring metrics and their tags:
