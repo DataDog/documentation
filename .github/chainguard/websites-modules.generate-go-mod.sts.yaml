@@ -1,13 +1,13 @@
 issuer: https://token.actions.githubusercontent.com
 
-subject_pattern: "project_path:DataDog/websites-modules:ref_type:branch:ref:(master|[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+)"
+subject: "repo:DataDog/websites-modules:pull_request"
 
 permissions:
   contents: write
   pull_requests: write
 
 claim_pattern:
-  project_path: "DataDog/websites-modules"
+  repository: "DataDog/websites-modules"
   ref_type: "branch"
   # job_workflow_ref: DataDog/websites-modules/.github/workflows/workflow_automation.yml@refs/heads/main
   event_name: "pull_request"
