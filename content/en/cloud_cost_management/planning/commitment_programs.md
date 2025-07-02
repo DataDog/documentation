@@ -132,24 +132,6 @@ The columns displayed in Commitments Explorer vary depending on the product (for
 2. Analyze usage patterns to confirm they are predictable.
 3. Purchase new commitments to cover the consistent usage and reduce costs.
 
-### Optimize commitment strategy across multiple accounts
-
-**Scenario**: You manage multiple cloud accounts and want to ensure all are benefiting from commitment programs.
-
-**How to use commitment programs**:
-1. Use filters to compare KPIs across different accounts.
-2. Identify accounts with low coverage or utilization.
-3. Adjust your purchasing strategy to allocate commitments where they have the most impact.
-
-### Analyze savings breakdown
-
-**Scenario**: You want to report on the financial impact of your commitment programs to stakeholders.
-
-**How to use commitment programs**: 
-1. In the **Costs Overview**, view the savings breakdown compared to on-demand pricing.
-2. Group costs by service, region, or account to highlight where the most savings are achieved.
-3. Export or screenshot the data for use in reports or presentations.
-
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
