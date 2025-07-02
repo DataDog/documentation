@@ -53,9 +53,10 @@ Configure Datadog library in `config/initializers/datadog.rb`:
 
 ```ruby
 Datadog.configure do |c|
+  c.service = 'your_service_name'
+
   c.tracing.enabled = true
   c.appsec.enabled = true
-  c.service = 'your_service_name'
 end
 ```
 
@@ -68,8 +69,6 @@ Set environment variables for your application. Add these to your deployment con
 export DD_APPSEC_ENABLED=true
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
-
-bin/rails s
 ```
 
 {{% /tab %}}
@@ -85,9 +84,10 @@ Configure Datadog library in `config/initializers/datadog.rb`:
 
 ```ruby
 Datadog.configure do |c|
+  c.service = 'your_service_name'
+
   c.tracing.enabled = false
   c.appsec.enabled = true
-  c.service = 'your_service_name'
 end
 ```
 

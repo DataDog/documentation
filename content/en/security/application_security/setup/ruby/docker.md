@@ -1,5 +1,5 @@
 ---
-title: Set up App and API Protection for Ruby on macOS
+title: Set up App and API Protection for Ruby in Docker
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
@@ -15,20 +15,20 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{% app-and-api-protection-ruby-setup-options platform="linux" %}}
+
 {{% app-and-api-protection-ruby-overview %}}
 
 ## Prerequisites
 
-- macOS operating system
-- Ruby application
-- Homebrew (recommended for Agent installation)
-- Administrator privileges for some configuration steps
+- Docker installed on your host
+- Ruby application containerized with Docker
 - Your Datadog API key
 - Datadog Ruby tracing library (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 
-Install the Datadog Agent by following the [setup instructions for macOS](/agent/?tab=macOS).
+Install the Datadog Agent by following the [setup instructions for Docker](/agent/?tab=cloud_and_container).
 
 ## 2. Enabling App and API Protection monitoring
 
@@ -36,12 +36,6 @@ Add the `datadog` gem to your Gemfile:
 
 ```ruby
 gem 'datadog', '~> 2.0'
-```
-
-Install the gem:
-
-```bash
-bundle install
 ```
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
@@ -53,6 +47,7 @@ Configure Datadog library in `config/initializers/datadog.rb`:
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
+  c.agent.host = 'your_agent_host'
 
   c.tracing.enabled = true
   c.appsec.enabled = true
@@ -62,12 +57,14 @@ end
 {{% /tab %}}
 {{% tab "Environment Variables" %}}
 
-Set environment variables for your application. Add these to your deployment configuration or shell environment:
+Add the following environment variables to your Dockerfile:
 
-```bash
-export DD_APPSEC_ENABLED=true
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
+```dockerfile
+# Set environment variables
+ENV DD_APPSEC_ENABLED=true
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_AGENT_HOST=<YOUR_AGENT_HOST>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 {{% /tab %}}
@@ -84,6 +81,7 @@ Configure Datadog library in `config/initializers/datadog.rb`:
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
+  c.agent.host = 'your_agent_host'
 
   c.tracing.enabled = false
   c.appsec.enabled = true
@@ -91,24 +89,27 @@ end
 ```
 
 {{% /tab %}}
-{{% tab "Environment Variables" %}}
+{{% tab "Environment variables" %}}
 
-Set environment variables for your application:
+Add the following environment variables to your Dockerfile:
 
-```bash
-export DD_APPSEC_ENABLED=true
-export DD_APM_TRACING_ENABLED=false
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
+```dockerfile
+ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_AGENT_HOST=<YOUR_AGENT_HOST>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
 
-## 3: Run Your Application
+## 3. Run your application
 
-Start your application with above settings.
+Build your image and then run your container.
+
+When running your container, make sure to connect it to the same Docker network as the Datadog Agent and set the correct agent host in your application.
 
 ## 4. Verify setup
 
