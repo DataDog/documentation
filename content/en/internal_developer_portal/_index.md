@@ -58,7 +58,7 @@ Use [Datadog Teams][6] to enable team-based features in IDP:
 
 - Track your teams in Datadog and automatically sync with external sources of truth like GitHub
 - Assign teams as owners of services and other entities
-- Filter views in the Software Catalog, Scorecards, and Engineering Reports by team
+- Filter views by team throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
 If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
