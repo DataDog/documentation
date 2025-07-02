@@ -52,7 +52,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 1. Select **Connect** on the Azure OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your Azure OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
-   - Provide the Resource Name, Deployment ID, and API version to complete integration.
+   - Provide the Resource Name, Deployment ID, and API version to complete integration. The model referred to by the API version should [support structured output][8].
 
 {{< img src="llm_observability/configuration/azure-openai-tile.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
 
@@ -288,4 +288,5 @@ This check ensures that sensitive information is handled appropriately and secur
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
 [7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage
+[8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
 
