@@ -3,10 +3,6 @@ title: Sensitive Data Redaction
 disable_toc: false
 aliases:
     - /observability_pipelines/sensitive_data_redaction/
-further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
-  tag: "Documentation"
-  text: "Set up a pipeline"
 ---
 
 ## Overview
@@ -17,9 +13,22 @@ Use the Observability Pipelines Worker to identify, tag, and optionally redact o
 
 {{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
-## Further reading
+Select a log source to get started:
 
-{{< partial name="whats-next/whats-next.html" >}}
+- [Amazon Data Firehose][12]
+- [Amazon S3][11]
+- [Datadog Agent][1]
+- [Fluentd or Fluent Bit][2]
+- [Google Pub/Sub][3]
+- [HTTP Client][4]
+- [HTTP Server][5]
+- [Kafka][13]
+- [Logstash][6]
+- [Splunk HTTP Event Collector (HEC)][7]
+- [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Socket (TCP or UDP)][14]
+- [Sumo Logic Hosted Collector][9]
+- [rsyslog or syslog-ng][10]
 
 [1]: /observability_pipelines/sensitive_data_redaction/datadog_agent
 [2]: /observability_pipelines/sensitive_data_redaction/fluent
