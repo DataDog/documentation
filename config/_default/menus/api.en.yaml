@@ -22,6 +22,18 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: Get AWS integration IAM permissions
+      url: '#get-aws-integration-iam-permissions'
+      identifier: aws-integration-get-aws-integration-iam-permissions
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSIntegrationIAMPermissions
+        unstable: []
+        order: 6
     - name: List available namespaces
       url: '#list-available-namespaces'
       identifier: aws-integration-list-available-namespaces

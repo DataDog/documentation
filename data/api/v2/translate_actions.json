@@ -837,6 +837,10 @@
     "description": "Generate a new external ID for AWS role-based authentication.",
     "summary": "Generate a new external ID"
   },
+  "GetAWSIntegrationIAMPermissions": {
+    "description": "Get all AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration IAM permissions"
+  },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",
     "summary": "Get list of AWS log ready services"
