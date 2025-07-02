@@ -5,6 +5,7 @@ aliases:
     - /llm_observability/sdk/python
     - /llm_observability/setup/sdk/python
     - /llm_observability/setup/sdk/nodejs
+    - /llm_observability/setup/sdk
 ---
 
 ## Overview
