@@ -1,5 +1,5 @@
 ---
-title: IaC Rules
+title: Infrastucture as Code Rules
 description: View rules for multiple languages for Static Code Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
