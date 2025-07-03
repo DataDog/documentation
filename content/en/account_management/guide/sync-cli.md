@@ -72,7 +72,7 @@ Before you begin, confirm that both the **resource** you are migrating and the *
 {{% /collapse-content %}} 
 
 {{% collapse-content title="List of source and destination API URLs" level="h5" expanded=true id="id-for-resources" %}}
-These are the Available URL's for the source and destination API URLs when syncing your organization:
+These are the supported URL's for the source and destination API URLs when syncing your organization:
 
 | Site    | Site URL                    | Site Parameter      | Location |
 |---------|-----------------------------|---------------------|----------|
@@ -85,6 +85,7 @@ These are the Available URL's for the source and destination API URLs when synci
 
 
 For all available regions, see [Getting Started with Datadog Sites][1].
+
 [1]: https://docs.datadoghq.com/getting_started/site/
 {{% /collapse-content %}} 
 
