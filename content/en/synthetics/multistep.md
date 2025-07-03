@@ -202,7 +202,7 @@ To use an existing API test as a subtest, click **Subtest** and select an API te
 
 To convert steps from your current API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. 
 
-{{< img src="synthetics/multistep_tests/subtest.png" alt="Add a subtest in a Multistep API test" >}}
+{{< img src="synthetics/multistep_tests/subtest.png" alt="Add a subtest in a Multistep API test" width="60%" >}}
 
 In order to override variables from subtests in Multistep API tests, ensure the variables created at the Multistep API test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it. 
 
