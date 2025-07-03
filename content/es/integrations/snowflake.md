@@ -174,7 +174,7 @@ El check de Snowflake está incluido en el paquete del [Datadog Agent][2].
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -346,7 +346,7 @@ Si deseas recopilar métricas de otros grupos de métricas, consulta <a href="ht
 </div>
 
 ### Métricas
-{{< get-metrics-from-git "snowflake" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### Eventos
@@ -354,7 +354,7 @@ Si deseas recopilar métricas de otros grupos de métricas, consulta <a href="ht
 Snowflake no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "snowflake" >}}
+{{< get-service-checks-from-git "snowflake-web" >}}
 
 
 ## Solucionar problemas

@@ -1563,6 +1563,54 @@ components:
       - type
       - credentials
       type: object
+    AWSIntegrationIamPermissionsResponse:
+      description: AWS Integration IAM Permissions response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponseData'
+      required:
+      - data
+      type: object
+    AWSIntegrationIamPermissionsResponseAttributes:
+      description: AWS Integration IAM Permissions response attributes.
+      properties:
+        permissions:
+          description: List of AWS IAM permissions required for the integration.
+          example:
+          - account:GetContactInformation
+          - amplify:ListApps
+          - amplify:ListArtifacts
+          - amplify:ListBackendEnvironments
+          - amplify:ListBranches
+          items:
+            example: account:GetContactInformation
+            type: string
+          type: array
+      required:
+      - permissions
+      type: object
+    AWSIntegrationIamPermissionsResponseData:
+      description: AWS Integration IAM Permissions response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponseAttributes'
+        id:
+          default: permissions
+          description: The `AWSIntegrationIamPermissionsResponseData` `id`.
+          example: permissions
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponseDataType'
+      type: object
+    AWSIntegrationIamPermissionsResponseDataType:
+      default: permissions
+      description: The `AWSIntegrationIamPermissionsResponseData` `type`.
+      enum:
+      - permissions
+      example: permissions
+      type: string
+      x-enum-varnames:
+      - PERMISSIONS
     AWSIntegrationType:
       description: The definition of `AWSIntegrationType` object.
       enum:
@@ -50942,6 +50990,25 @@ paths:
       x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/iam_permissions:
+    get:
+      description: Get all AWS IAM permissions required for the AWS integration.
+      operationId: GetAWSIntegrationIAMPermissions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSIntegrationIamPermissionsResponse'
+          description: AWS IAM Permissions object
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS integration IAM permissions
+      tags:
+      - AWS Integration
+      x-menu-order: 6
+      x-undo:
+        type: safe
   /api/v2/integration/aws/logs/services:
     get:
       description: Get a list of AWS services that can send logs to Datadog.

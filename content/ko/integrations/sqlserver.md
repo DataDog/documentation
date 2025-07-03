@@ -94,7 +94,7 @@ SQL Server 통합은 SQL Server 인스턴스의 성능을 추적하며, 사용�
 
 쿼리 성능 및 데이터베이스 상태를 더욱 정밀하게 모니터링하려면 [Database Monitoring][2](DBM)을 활성화하세요. Datadog DBM은 표준 통합 외에도 쿼리 수준 메트릭, 실시간 및 과거 쿼리 스냅샷, 대기 이벤트 분석, 데이터베이스 부하, 쿼리 실행 계획, 차단 쿼리 인사이트를 제공합니다.
 
-SQL Server 2012, 2014, 2016, 2017, 2019, 2022가 지원됩니다. 
+SQL Server 2012, 2014, 2016, 2017, 2019, 2022가 지원됩니다.
 
 ## 설정
 
@@ -129,7 +129,7 @@ SQL Server 점검에서 지원되는 SQL Server 버전은 Database Monitoring에
    데이터베이스당 파일 크기 메트릭을 수집하려면 다음을 실행하여 생성한 사용자(`datadog`)가 데이터베이스에 대한 [연결 권한 액세스][6]를 가지고 있는지 확인하세요.
 
    ```SQL
-       GRANT CONNECT ANY DATABASE to datadog; 
+       GRANT CONNECT ANY DATABASE to datadog;
    ```
 
 2. (AlwaysOn 및 `sys.master_files` 메트릭에 필요) AlwaysOn 및 `sys.master_files` 메트릭을 수집하려면 다음 추가 권한을 부여하세요.
@@ -156,11 +156,11 @@ SQL Server 점검에서 지원되는 SQL Server 버전은 Database Monitoring에
      - host: "<SQL_HOST>,<SQL_PORT>"
        username: datadog
        password: "<YOUR_PASSWORD>"
-       connector: adodbapi 
+       connector: adodbapi
        adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and previous
    ```
 
-    포트 autodiscovery를 사용한다면 `SQL_PORT`에 `0`을 입력하세요. [예시 점검 구성][2]에서 커스텀 쿼리로 자체 메트릭을 생성하는 방법을 포함한 전체 옵션 정보를 확인해 보세요. 
+    포트 autodiscovery를 사용한다면 `SQL_PORT`에 `0`을 입력하세요. [예시 점검 구성][2]에서 커스텀 쿼리로 자체 메트릭을 생성하는 방법을 포함한 전체 옵션 정보를 확인해 보세요.
 
     SQL Server 설정에 따라 [지원되는 드라이버][3]를 사용하세요.
 
@@ -252,7 +252,7 @@ Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "sqlserver" >}}
+{{< get-metrics-from-git "sql-server" >}}
 
 
 대부분의 메트릭은 SQL Server의 `sys.dm_os_performance_counters` 테이블에서 제공됩니다.
@@ -262,7 +262,7 @@ Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 �
 SQL Server 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "sqlserver" >}}
+{{< get-service-checks-from-git "sql-server" >}}
 
 
 ## 트러블슈팅
