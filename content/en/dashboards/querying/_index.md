@@ -199,6 +199,10 @@ min(status:error, status:warn)
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
+#### Exponentiation
+
+
+
 ### Create an alias
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
