@@ -14,86 +14,129 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+{{% app_and_api_protection_python_overview %}}
 
-{{< partial name="app_and_api_protection/callout.html" >}}
+## Prerequisites
 
-{{< partial name="app_and_api_protection/python/overview.html" >}}
-
-This guide explains how to set up App and API Protection (AAP) for Python applications running on Windows. The setup involves:
-1. Installing the Datadog Python library
-2. Configuring your Python application
-3. Enabling AAP monitoring
-4. Configure service identification
-
-{{% appsec-getstarted %}}
-
-## Operating System Prerequisites
-
-- Windows system
+- Windows operating system
+- Python application
 - Administrator privileges for some configuration steps
-- Python 3.6 or higher
+- Your Datadog API key
+- Datadog Python tracing library (see version requirements [here][1])
 
-## Setup
+## 1. Installing the Datadog Agent
 
-### 1. Install the Datadog Agent
+Install the Datadog Agent by following the [setup instructions for Windows](/agent/?tab=Windows).
 
-If you haven't already, install the Datadog Agent on your Windows host. You can download the installer from the [Datadog Agent installation page](https://docs.datadoghq.com/agent/basic_agent_usage/windows/).
+## 2. Enabling App and API Protection monitoring
 
-### 2. Update your Datadog Python library package
+{{% app_and_api_protection_python_navigation_menu %}}
+{{% appsec-remote-config-activation %}}
 
-**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
+### Manually enabling App and API Protection monitoring
 
-```shell
-pip install --upgrade ddtrace
+Install the Datadog Python tracing library:
+
+```powershell
+pip install ddtrace[security]
 ```
 
-To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
 
-### 3. Enable AAP when starting your application
-
-Set the environment variable and use `ddtrace-run`:
-
-```cmd
-set DD_APPSEC_ENABLED=true
-ddtrace-run python app.py
-```
-
-### 4. Configure service identification
-
-Set the following environment variables for proper service identification:
-
-```cmd
-set DD_SERVICE=your-service-name
-set DD_ENV=your-environment
-```
-
-#### 4.1. Using Windows Service (optional)
-
-If you're using Windows Services to manage your application, you can create a batch file:
-
-```batch
-@echo off
-set DD_APPSEC_ENABLED=true
-set DD_SERVICE=your-service-name
-set DD_ENV=your-environment
-ddtrace-run python C:\path\to\your\app.py
-```
-
-#### 4.2. Using PowerShell (alternative)
-
-You can also use PowerShell to set environment variables:
+Set the required environment variables and start your Python application:
 
 ```powershell
 $env:DD_APPSEC_ENABLED="true"
-$env:DD_SERVICE="your-service-name"
-$env:DD_ENV="your-environment"
+$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
+$env:DD_ENV="<YOUR_ENVIRONMENT>"
+
 ddtrace-run python app.py
 ```
 
-{{% appsec-verify-setup %}}
+{{% /tab %}}
+{{% tab "Using code" %}}
+
+Set the required environment variables and start your Python application:
+
+```powershell
+$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
+$env:DD_ENV="<YOUR_ENVIRONMENT>"
+
+python app.py
+```
+
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable APM tracing and App and API Protection
+patch_all()
+config.appsec.enabled = True
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
+
+Set the required environment variables and start your Python application:
+
+```powershell
+$env:DD_APPSEC_ENABLED="true"
+$env:DD_APM_TRACING_ENABLED="false"
+$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
+$env:DD_ENV="<YOUR_ENVIRONMENT>"
+
+ddtrace-run python app.py
+```
+
+{{% /tab %}}
+{{% tab "Using code" %}}
+
+Set the required environment variables and start your Python application:
+
+```powershell
+$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
+$env:DD_ENV="<YOUR_ENVIRONMENT>"
+
+python app.py
+```
+
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable App and API Protection but disable APM tracing
+patch_all()
+config.appsec.enabled = True
+config.tracing.enabled = False
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+## 3. Run your application
+
+Start your Python application with the configured settings.
+
+{{% app_and_api_protection_verify_setup %}}
+
+## Troubleshooting
+
+If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/compatibility/python/
+[1]: /security/application_security/setup/python/compatibility
+[2]: /security/application_security/setup/python/troubleshooting

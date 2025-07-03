@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Python on Docker
+title: Setup App and API Protection for Python in Docker
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10
@@ -14,91 +14,153 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+{{% app_and_api_protection_python_setup_options platform="docker" %}}
 
-{{< partial name="app_and_api_protection/callout.html" >}}
+{{% app_and_api_protection_python_overview %}}
 
-{{< partial name="app_and_api_protection/python/overview.html" >}}
+## Prerequisites
 
-This guide explains how to set up **App and API Protection (AAP)** for **Python** applications running in **Docker containers**. The setup involves:
-1. Installing the Datadog Agent
-2. Installing the Datadog Python library
-3. Configuring your Python application
-4. Enabling AAP monitoring
+- Docker installed on your host
+- Python application containerized with Docker
+- Your Datadog API key
+- Datadog Python tracing library (see version requirements [here][1])
 
-{{% appsec-getstarted %}}
+## 1. Installing the Datadog Agent
 
-## Setup
+Install the Datadog Agent by following the [setup instructions for Docker](/agent/?tab=cloud_and_container).
 
-### 1. Install and run the Datadog Agent
+## 2. Enabling App and API Protection monitoring
 
-If you haven't already, install the Datadog Agent on your host or as a container. For containerized installation:
+{{% app_and_api_protection_python_navigation_menu %}}
+{{% appsec-remote-config-activation %}}
 
-```bash
-docker run -d --name datadog-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -e DD_API_KEY=<YOUR_API_KEY> \
-  -e DD_APM_ENABLED=true \
-  -e DD_APM_NON_LOCAL_TRAFFIC=true \
-  datadog/agent:latest
-```
+### Manually enabling App and API Protection monitoring
 
-### 2. Update your Datadog Python library package
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
 
-**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
-
-```shell
-pip install --upgrade ddtrace
-```
-
-To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
-
-### 3. Enable AAP in your Docker container
-
-You can enable AAP using one of the following methods:
-
-#### Option A: Docker CLI
-
-Add the environment variable to your `docker run` command:
-
-```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
-```
-
-#### Option B: Dockerfile
-
-Add the environment variable to your Dockerfile:
+Add the following environment variables to your Dockerfile:
 
 ```dockerfile
+# Install the Datadog Python tracing library
+RUN pip install ddtrace[security]
+
+# Set environment variables
 ENV DD_APPSEC_ENABLED=true
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
+
+# Use ddtrace-run to start your application
+CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-#### Option C: Docker Compose
+{{% /tab %}}
+{{% tab "Using code" %}}
 
-Add the environment variable to your `docker-compose.yml`:
+Install the Datadog Python tracing library and modify your application code:
 
-```yaml
-version: '3'
-services:
-  app:
-    image: your-python-app
-    environment:
-      - DD_APPSEC_ENABLED=true
+```dockerfile
+# Install the Datadog Python tracing library
+RUN pip install ddtrace[security]
+
+# Set environment variables
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
+
+# Standard Python command
+CMD ["python", "app.py"]
 ```
 
-### 4. Start your application with ddtrace-run
+Add the following to your application code:
 
-Use `ddtrace-run` to start your Python application:
+```python
+from ddtrace import patch_all, config
+
+# Enable APM tracing and App and API Protection
+patch_all()
+config.appsec.enabled = True
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
+
+Add the following environment variables to your Dockerfile:
+
+```dockerfile
+# Install the Datadog Python tracing library
+RUN pip install ddtrace[security]
+
+# Set environment variables
+ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
+
+# Use ddtrace-run to start your application
+CMD ["ddtrace-run", "python", "app.py"]
+```
+
+{{% /tab %}}
+{{% tab "Using code" %}}
+
+Install the Datadog Python tracing library and modify your application code:
+
+```dockerfile
+# Install the Datadog Python tracing library
+RUN pip install ddtrace[security]
+
+# Set environment variables
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
+
+# Standard Python command
+CMD ["python", "app.py"]
+```
+
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable App and API Protection but disable APM tracing
+patch_all()
+config.appsec.enabled = True
+config.tracing.enabled = False
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+## 3. Run your application
+Build your image and then run your container.
+
+When running your container, make sure to:
+1. Connect it to the same Docker network as the Datadog Agent
+2. Set the required environment variables
 
 ```bash
-ddtrace-run python app.py
+docker run -d \
+  --name your-python-app \
+  your-python-app-image
 ```
 
-{{% appsec-verify-setup %}}
+{{% app_and_api_protection_verify_setup %}}
+
+## Troubleshooting
+
+If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/compatibility/python/
+[1]: /security/application_security/setup/python/compatibility
+[2]: /security/application_security/setup/python/troubleshooting

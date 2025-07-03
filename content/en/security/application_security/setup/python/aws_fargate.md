@@ -1,4 +1,7 @@
- ---
+---
+code_lang: aws-fargate
+type: multi-code-lang
+code_lang_weight: 60
 title: Setup App and API Protection for Python on AWS Fargate
 further_reading:
 - link: "/security/application_security/how-it-works/"
@@ -12,26 +15,17 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< partial name="app_and_api_protection/callout.html" >}}
+{{% app_and_api_protection_python_overview %}}
 
-{{< partial name="app_and_api_protection/python/overview.html" >}}
-
-This guide explains how to set up App and API Protection (AAP) for Python applications running on Kubernetes. The setup involves:
-1. Installing the Datadog Agent
-2. Installing the Datadog Python library
-3. Configuring your Python application
-4. Enabling AAP monitoring
-
-{{% appsec-getstarted %}}
-
-## AWS Prerequisites
+## Prerequisites
 
 - AWS Fargate environment
+- Python application containerized with Docker
 - AWS CLI configured with appropriate permissions
+- Your Datadog API key
+- Datadog Python tracing library (see version requirements [here][1])
 
-## Setup
-
-### 1. Install the Datadog Agent
+## 1. Installing the Datadog Agent
 
 Install the Datadog Agent in your Fargate task definition:
 
@@ -60,38 +54,24 @@ Install the Datadog Agent in your Fargate task definition:
 }
 ```
 
-## Library setup
+## 2. Enabling App and API Protection monitoring
 
-To enable AAP capabilities, you need the Datadog Python tracing library (version 0.94.0 or higher) installed in your application environment.
+{{% app_and_api_protection_python_navigation_menu %}}
 
-### Download the library
+{{% appsec-remote-config-activation %}}
 
-Add the following to your application's Dockerfile:
+### Manually enabling App and API Protection monitoring
+Install the Datadog Python tracing library in your application environment:
 
 ```dockerfile
-ADD 'https://dtdg.co/latest-python-tracer' /dd-python-agent.jar
+RUN pip install ddtrace[security]
 ```
 
-### Verify compatibility
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
 
-To check that your service's language and framework versions are supported for AAP capabilities, see [Single Step Instrumentation Compatibility][2].
-
-## Service configuration
-
-### Standalone billing alternative
-
-If you want to use Application Security Management without APM tracing functionality, you can deploy with [Standalone App and API Protection][4]. This configuration reduces the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
-
-To enable standalone mode:
-1. Set `DD_APM_TRACING_ENABLED=false` environment variable
-2. Keep `DD_APPSEC_ENABLED=true` environment variable
-3. This configuration will minimize APM data while maintaining full security monitoring capabilities
-
-### Enabling AAP
-
-#### Run your application with AAP enabled
-
-Update your task definition to include the Python agent and AAP configuration:
+Update your task definition to include the Python agent and App and API Protection configuration:
 
 ```json
 {
@@ -114,38 +94,163 @@ Update your task definition to include the Python agent and AAP configuration:
         }
       ],
       "command": [
+        "ddtrace-run",
         "python",
-        "-pythonagent:/dd-python-agent.jar",
-        "-jar",
-        "/app.jar"
+        "app.py"
       ]
     }
   ]
 }
 ```
 
-**Important considerations:**
-- **File system requirements**: Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
-- **Service identification**: Always specify `DD_SERVICE` (or `-Ddd.service`) and `DD_ENV` (or `-Ddd.env`) for proper service identification in Datadog.
+{{% /tab %}}
+{{% tab "Using code" %}}
 
-## Verify setup
+Update your task definition and modify your application code:
 
-To verify that AAP is working correctly:
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "your-python-app",
+      "image": "your-python-app-image",
+      "environment": [
+        {
+          "name": "DD_SERVICE",
+          "value": "<YOUR_SERVICE_NAME>"
+        },
+        {
+          "name": "DD_ENV",
+          "value": "<YOUR_ENVIRONMENT>"
+        }
+      ],
+      "command": [
+        "python",
+        "app.py"
+      ]
+    }
+  ]
+}
+```
 
-1. Send some traffic to your application
-2. Check the [Application Signals Explorer][5] in Datadog
-3. Look for security signals and vulnerabilities
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable APM tracing and App and API Protection
+patch_all()
+config.appsec.enabled = True
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
+
+Update your task definition to include the Python agent and App and API Protection configuration with APM tracing disabled:
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "your-python-app",
+      "image": "your-python-app-image",
+      "environment": [
+        {
+          "name": "DD_APPSEC_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_TRACING_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "DD_SERVICE",
+          "value": "<YOUR_SERVICE_NAME>"
+        },
+        {
+          "name": "DD_ENV",
+          "value": "<YOUR_ENVIRONMENT>"
+        }
+      ],
+      "command": [
+        "ddtrace-run",
+        "python",
+        "app.py"
+      ]
+    }
+  ]
+}
+```
+
+{{% /tab %}}
+{{% tab "Using code" %}}
+
+Update your task definition and modify your application code:
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "your-python-app",
+      "image": "your-python-app-image",
+      "environment": [
+        {
+          "name": "DD_SERVICE",
+          "value": "<YOUR_SERVICE_NAME>"
+        },
+        {
+          "name": "DD_ENV",
+          "value": "<YOUR_ENVIRONMENT>"
+        }
+      ],
+      "command": [
+        "python",
+        "app.py"
+      ]
+    }
+  ]
+}
+```
+
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable App and API Protection but disable APM tracing
+patch_all()
+config.appsec.enabled = True
+config.tracing.enabled = False
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+## 3. Run your application
+
+Deploy your Fargate task with the updated configuration:
+
+```bash
+aws ecs register-task-definition --cli-input-json file://task-definition.json
+aws ecs run-task --cluster your-cluster --task-definition your-task-definition
+```
+
+{{% app_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][3].
+If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=awsfargate
-[2]: https://app.datadoghq.com/security/appsec
-[3]: /security/application_security/setup/environments/python/troubleshooting
-[4]: /security/application_security/setup/python/standalone
-[5]: https://app.datadoghq.com/security/appsec
+[1]: /security/application_security/setup/python/compatibility
+[2]: /security/application_security/setup/python/troubleshooting

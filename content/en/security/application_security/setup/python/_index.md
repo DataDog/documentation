@@ -1,8 +1,5 @@
 ---
-title: Enabling AAP for Python
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 0
+title: Enabling App and API Protection for Python
 aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
@@ -23,10 +20,9 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< partial name="app_and_api_protection/python/overview.html" >}}
+{{% app_and_api_protection_python_overview showSetup="false" %}}
 
 ## Environments
 
@@ -45,10 +41,10 @@ further_reading:
 
 ### AWS
 {{< appsec-integrations >}}
-{{< appsec-integration name="AWS Fargate" avatar="amazon-ecs" link="./aws_fargate" >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws_fargate" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
 
-- [Troubleshooting Guide](./python/troubleshooting)
-- [Compatibility Information](./python/compatibility)
+- [Troubleshooting Guide](python/troubleshooting)
+- [Compatibility Information](python/compatibility)

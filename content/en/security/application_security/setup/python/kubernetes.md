@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Python on Kubernetes
+title: Setup App and API Protection for Python in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 20
@@ -14,70 +14,41 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+{{% app_and_api_protection_python_setup_options platform="kubernetes" %}}
 
-{{< partial name="app_and_api_protection/callout.html" >}}
+{{% app_and_api_protection_python_overview %}}
 
-{{< partial name="app_and_api_protection/python/overview.html" >}}
-
-This guide explains how to set up App and API Protection (AAP) for Python applications running on Kubernetes. The setup involves:
-1. Installing the Datadog Agent
-2. Installing the Datadog Python library
-3. Configuring your Python application
-4. Enabling AAP monitoring
-
-{{% appsec-getstarted %}}
-
-## Operating System Prerequisites
+## Prerequisites
 
 - Kubernetes cluster
-- kubectl configured
+- Python application containerized with Docker
+- kubectl configured to access your cluster
+- Helm (recommended for Agent installation)
+- Your Datadog API key
+- Datadog Python tracing library (see version requirements [here][1])
 
-## Setup
+## 1. Installing the Datadog Agent
 
-### 1. Install the Datadog Agent
+Install the Datadog Agent by following the [setup instructions for Kubernetes](/agent/?tab=cloud_and_container).
 
-Install the Datadog Agent using Helm:
+## 2. Enabling App and API Protection monitoring
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
-helm install datadog -f values.yaml datadog/datadog
+{{% app_and_api_protection_python_navigation_menu %}}
+{{% appsec-remote-config-activation %}}
+
+### Manually enabling App and API Protection monitoring
+
+Install the Datadog Python tracing library using an init container or in your application's Dockerfile:
+
+```dockerfile
+RUN pip install ddtrace[security]
 ```
 
-Create a `values.yaml` file with the following configuration:
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
 
-```yaml
-datadog:
-  apiKey: <YOUR_API_KEY>
-  appKey: <YOUR_APP_KEY>
-  site: <YOUR_DD_SITE>
-  apm:
-    portEnabled: true
-  logs:
-    enabled: true
-    containerCollectAll: true
-  processAgent:
-    enabled: true
-  securityAgent:
-    compliance:
-      enabled: true
-    runtime:
-      enabled: true
-```
-
-### 2. Update your Datadog Python library package
-
-**Update your Datadog Python library package** to at least version 1.2.2. Run the following:
-
-```shell
-pip install --upgrade ddtrace
-```
-
-To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
-
-### 3. Enable AAP in your Kubernetes deployment
-
-Add the `DD_APPSEC_ENABLED` environment variable to your deployment YAML:
+Start your Python application with App and API Protection enabled using environment variables:
 
 ```yaml
 apiVersion: apps/v1
@@ -88,36 +59,142 @@ spec:
   template:
     spec:
       containers:
-        - name: app
-          image: your-python-app:latest
-          env:
-            - name: DD_APPSEC_ENABLED
-              value: "true"
-            - name: DD_SERVICE
-              value: "your-service-name"
-            - name: DD_ENV
-              value: "your-environment"
+      - name: your-python-app
+        image: your-python-app-image
+        env:
+        - name: DD_APPSEC_ENABLED
+          value: "true"
+        - name: DD_SERVICE
+          value: "<MY_SERVICE>"
+        - name: DD_ENV
+          value: "<MY_ENV>"
+        command: ["ddtrace-run", "python", "app.py"]
 ```
 
-### 4. Start your application with ddtrace-run
+{{% /tab %}}
+{{% tab "Using code" %}}
 
-Use `ddtrace-run` to start your Python application. Update your container's command:
+Start your Python application with App and API Protection enabled using code:
 
 ```yaml
-containers:
-  - name: app
-    image: your-python-app:latest
-    command: ["ddtrace-run"]
-    args: ["python", "app.py"]
-    env:
-      - name: DD_APPSEC_ENABLED
-        value: "true"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: your-python-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-python-app
+        image: your-python-app-image
+        env:
+        - name: DD_SERVICE
+          value: "<MY_SERVICE>"
+        - name: DD_ENV
+          value: "<MY_ENV>"
+        command: ["python", "app.py"]
 ```
 
-{{% appsec-verify-setup %}}
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable APM tracing and App and API Protection
+patch_all()
+config.appsec.enabled = True
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+{{< tabs >}}
+{{% tab "Using environment variables" %}}
+
+Start your Python application with App and API Protection enabled using environment variables:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: your-python-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-python-app
+        image: your-python-app-image
+        env:
+        - name: DD_APPSEC_ENABLED
+          value: "true"
+        - name: DD_APM_TRACING_ENABLED
+          value: "false"
+        - name: DD_SERVICE
+          value: "<MY_SERVICE>"
+        - name: DD_ENV
+          value: "<MY_ENV>"
+        command: ["ddtrace-run", "python", "app.py"]
+```
+
+{{% /tab %}}
+{{% tab "Using code" %}}
+
+Start your Python application with App and API Protection enabled using code:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: your-python-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-python-app
+        image: your-python-app-image
+        env:
+        - name: DD_SERVICE
+          value: "<MY_SERVICE>"
+        - name: DD_ENV
+          value: "<MY_ENV>"
+        command: ["python", "app.py"]
+```
+
+Add the following to your application code:
+
+```python
+from ddtrace import patch_all, config
+
+# Enable App and API Protection but disable APM tracing
+patch_all()
+config.appsec.enabled = True
+config.tracing.enabled = False
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+## 3. Run your application
+
+Apply your updated deployment:
+
+```bash
+kubectl apply -f your-deployment.yaml
+```
+
+{{% app_and_api_protection_verify_setup %}}
+
+## Troubleshooting
+
+If you encounter issues while setting up App and API Protection for your Python application, see the [Python App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/compatibility/python/
+[1]: /security/application_security/setup/python/compatibility
+[2]: /security/application_security/setup/python/troubleshooting
