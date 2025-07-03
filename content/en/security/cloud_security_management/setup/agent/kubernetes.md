@@ -95,44 +95,6 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{% /tab %}}
 
-{{% tab "DaemonSet" %}}
-
-Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
-
-```bash
-  # Source: datadog/templates/daemonset.yaml
-  apiVersion:app/1
-  kind: DaemonSet
-  [...]
-  spec:
-  [...]
-  spec:
-      [...]
-        containers:
-        [...]
-          - name: agent
-            [...]
-          - name: system-probe
-            [...]
-            env:
-              - name: DD_COMPLIANCE_CONFIG_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
-                value: "true"
-              - name: DD_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_HOST_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
-                value: "true"
-          [...]
-```
-
-{{% /tab %}}
 {{< /tabs >}}
 
 [1]: /security/cloud_security_management/misconfigurations/
