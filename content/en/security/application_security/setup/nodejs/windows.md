@@ -30,8 +30,8 @@ Install the Datadog Agent by following the [setup instructions for Windows](/age
 
 ## 2. Enabling App and API Protection monitoring
 
-{{% app_and_api_protection_navigation_menu %}}
-{{% appsec-remote-config-activation %}}
+{{% app_and_api_protection_nodejs_navigation_menu %}}
+{{% aap_and_api_protection_nodejs_remote_config_activation %}}
 
 ### Manually enabling App and API Protection monitoring
 
@@ -75,7 +75,7 @@ node --require dd-trace/init app.js
 
 Start your Node.js application with the configured settings.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap_and_api_protection_nodejs_verify_setup %}}
 
 ## Troubleshooting
 
@@ -86,4 +86,4 @@ If you encounter issues while setting up App and API Protection for your Node.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/setup/nodejs/compatibility
-[2]: /security/application_security/setup/nodejs/troubleshooting 
+[2]: /security/application_security/setup/nodejs/troubleshooting
