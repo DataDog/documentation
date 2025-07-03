@@ -42,16 +42,28 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 <div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Track evolution of flaky tests
+
+Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
+
+- `repository_id`
+- `branch`
+- `flaky_status`
+- `flaky_category`
+- `test_codeowners`
+
+The `branch` tag only exists when the test has flaked in the default branch of the repository during the last 30 days. This helps you discard flaky tests that only exhibited flakiness in feature branches and may not be relevant. You can configure the default branch of your repositories under [Repository Settings][2].
+
 ## Investigate a flaky test
 
 For more information about a specific flaky test, use these options in the actions menu at the end of each row:
 
 - **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
-- **View related test executions**: Open the [Test Optimization Explorer][2] populated with all of the test's recent runs.
+- **View related test executions**: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
 
 ## Create cases for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][3] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row. 
+For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 
@@ -59,7 +71,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 1. For the test you are fixing, click **Fix this test** in the Flaky Test Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
-1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`). 
+1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
    - Retries any tests you're attempting to fix 20 times.
    - Runs tests even if they are marked as `Disabled`.
@@ -72,23 +84,24 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 
 | Language        | Quarantine & Disable | Attempt to fix   |
 | --------------- | -------------------- | ---------------- |
-| [.NET][4]       | 3.13.0+              | 3.17.0+          |
-| [Go][5]         | 1.73.0+              | Not available    |
-| [Java][6]       | 1.48.0+              | 1.50.0+          |
-| [JavaScript][7] | 5.44.0+              | 5.52.0+          |
-| [Python][8]     | 3.3.0+               | 3.8.0+           |
-| [Ruby][9]       | 1.13.0+              | 1.17.0+          |
+| [.NET][5]       | 3.13.0+              | 3.17.0+          |
+| [Go][6]         | 1.73.0+              | Not available    |
+| [Java][7]       | 1.48.0+              | 1.50.0+          |
+| [JavaScript][8] | 5.44.0+              | 5.52.0+          |
+| [Python][9]     | 3.3.0+               | 3.8.0+           |
+| [Ruby][10]       | 1.13.0+              | 1.17.0+          |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test/flaky
-[2]: /tests/explorer
-[3]: /service_management/case_management
-[4]: /tests/setup/dotnet/
-[5]: /tests/setup/go/
-[6]: /tests/setup/java/
-[7]: /tests/setup/javascript/
-[8]: /tests/setup/python/
-[9]: /tests/setup/ruby/
+[2]: https://app.datadoghq.com/source-code/repositories
+[3]: /tests/explorer
+[4]: /service_management/case_management
+[5]: /tests/setup/dotnet/
+[6]: /tests/setup/go/
+[7]: /tests/setup/java/
+[8]: /tests/setup/javascript/
+[9]: /tests/setup/python/
+[10]: /tests/setup/ruby/
