@@ -56,7 +56,7 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 
 Use [Datadog Teams][6] to enable team-based features in IDP:
 
-- Track your teams in Datadog and automatically sync with external sources of truth like GitHub
+- Track your teams in Datadog and automatically sync with your external sources of truth
 - Assign teams as owners of services and other entities
 - Filter views by team throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
