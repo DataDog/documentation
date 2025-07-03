@@ -193,7 +193,7 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 The Datadog Agent supports Autodiscovery for all Aurora endpoints within a cluster.
 
 If you require different configurations for specific instances, or prefer to manually specify Aurora endpoints, follow the manual setup section below.
-Otherwise, we recommend using the [Autodiscovery setup instructions for Aurora DB clusters][9].
+Otherwise, Datadog recommends using the [Autodiscovery setup instructions for Aurora DB clusters][9].
 
 {{< tabs >}}
 {{% tab "Host" %}}
