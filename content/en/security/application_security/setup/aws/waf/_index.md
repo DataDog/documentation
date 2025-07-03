@@ -111,7 +111,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
 {{% /tab %}}
 {{< /tabs >}}
 
-Finally, once setup is complete, click **Block New Attackers** on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
+After setup is complete, click **Block New Attackers** on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
 
 [1]: /integrations/amazon-web-services/
 [2]: /integrations/amazon_waf/
