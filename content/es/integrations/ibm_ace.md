@@ -147,7 +147,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_ace" >}}
+{{< get-metrics-from-git "ibm-ace" >}}
 
 
 ### Eventos
@@ -155,7 +155,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 La integración de IBM ACE no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_ace" >}}
+{{< get-service-checks-from-git "ibm-ace" >}}
 
 
 ### Recopilación de logs

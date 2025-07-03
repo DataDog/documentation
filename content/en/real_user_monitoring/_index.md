@@ -121,6 +121,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+| AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
 ## Explore Datadog RUM
 
