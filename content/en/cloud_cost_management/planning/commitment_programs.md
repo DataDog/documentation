@@ -121,7 +121,7 @@ The columns displayed in Commitments Explorer vary depending on the product (for
 **Scenario**: Several Reserved Instances are set to expire next month, and you want to avoid unexpected on-demand charges.
 
 **How to use commitment programs**: 
-1. In the **Costs Overview**, review the list of commitments and their expiration dates.
+1. In the **Commitments Explorer**, review the list of commitments and their expiration dates.
 2. Use the filters to focus on soon-to-expire commitments.
 3. Plan renewals or replacements in advance to maintain coverage and maximize savings.
 
