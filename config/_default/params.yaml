@@ -10,61 +10,61 @@ imgix:
   png: "?fm=png&auto=format&lossless=1"
   gif: ""
 code_languages:
-  'py':
+  "py":
     extension: py
     name: python-legacy
     syntax: python
     command: python
     example_file: example.py
-  'pybeta':
+  "pybeta":
     extension: py
     name: python
     syntax: python
     command: python3
     example_file: example.py
-  'rb':
+  "rb":
     extension: rb
     name: ruby-legacy
     syntax: ruby
     command: rb
     example_file: example.rb
-  'rbbeta':
+  "rbbeta":
     extension: rbbeta
     name: ruby
     syntax: ruby
     command: rb
     example_file: example.rb
-  'sh':
+  "sh":
     extension: sh
     name: curl
     syntax: curl
-  'go':
+  "go":
     extension: go
     name: go
     syntax: go
     command: go run
     example_file: main.go
-  'java':
+  "java":
     extension: java
     name: java
     syntax: java
     command: java
     example_file: Example.java
-  'cs':
+  "cs":
     extension: cs
     name: csharp
     syntax: csharp
-  'php':
+  "php":
     extension: php
     name: php
     syntax: php
-  'ts':
+  "ts":
     extension: ts
     name: typescript
     syntax: typescript
     command: tsc
     example_file: example.ts
-  'rs':
+  "rs":
     extension: rs
     name: rust
     syntax: rust
@@ -72,66 +72,66 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    android: Android
-    ios: iOS
-    expo: Expo
-    flutter: Flutter
-    reactnative: React Native
-    codepush: CodePush
-    roku: Roku
-    unity: Unity
-    kotlin-multiplatform: Kotlin Multiplatform
-    swiftui: Swift UI
-    java: Java
-    cpp: 'C++'
-    php: PHP
-    nodejs: "Node.js"
-    NodeJS: "Node.js"
-    "Node.js": "Node.js"
-    python-legacy: Python [legacy]
-    python: Python
-    ruby-legacy: Ruby [legacy]
-    ruby: Ruby
-    go: Go
-    typescript: Typescript
-    ".NET": ".NET"
-    dotnet: ".NET"
-    dotnet-core: ".NET Core"
-    dotnet-framework: ".NET Framework"
-    curl: Curl
-    native: Native
-    other: Other
-    linux: Linux
-    macos: macOS
-    windows: Windows
-    aws-fargate: "AWS Fargate"
-    opentelemetry: OpenTelemetry
-    ddprof: "Rust/C/C++"
-    full_host: "Full Host"
-    serverless: "Serverless"
-    javascript: "JavaScript"
-    swift: "Swift"
-    junit_xml: "JUnit XML"
-    kubernetes: "Kubernetes"
-    docker: "Docker"
-    hosts: "Hosts"
-    ecs_ec2: "ECS EC2"
-    elixir: "Elixir"
-    rust: "Rust"
-    dd-api: "Datadog API"
-    otel: "OpenTelemetry API"
-    status_legacy: "Status Page (Legacy)"
-    status_page: "Status Page"
-    envoy: "Envoy"
-    httpd: "Apache HTTP Server"
-    istio: "Istio"
-    kong: "Kong"
-    nginx: "NGINX"
-    windows_iis: "Windows IIS"
-    apache: "Apache HTTP Server"
-    ibm: "IBM HTTP Server"
-    gcp-service-extensions: "GCP Service Extensions"
-    apigateway: "Amazon API Gateway"
+  android: Android
+  ios: iOS
+  expo: Expo
+  flutter: Flutter
+  reactnative: React Native
+  codepush: CodePush
+  roku: Roku
+  unity: Unity
+  kotlin-multiplatform: Kotlin Multiplatform
+  swiftui: Swift UI
+  java: Java
+  cpp: "C++"
+  php: PHP
+  nodejs: "Node.js"
+  NodeJS: "Node.js"
+  "Node.js": "Node.js"
+  python-legacy: Python [legacy]
+  python: Python
+  ruby-legacy: Ruby [legacy]
+  ruby: Ruby
+  go: Go
+  typescript: Typescript
+  ".NET": ".NET"
+  dotnet: ".NET"
+  dotnet-core: ".NET Core"
+  dotnet-framework: ".NET Framework"
+  curl: Curl
+  native: Native
+  other: Other
+  linux: Linux
+  macos: macOS
+  windows: Windows
+  aws-fargate: "AWS Fargate"
+  opentelemetry: OpenTelemetry
+  ddprof: "Rust/C/C++"
+  full_host: "Full Host"
+  serverless: "Serverless"
+  javascript: "JavaScript"
+  swift: "Swift"
+  junit_xml: "JUnit XML"
+  kubernetes: "Kubernetes"
+  docker: "Docker"
+  hosts: "Hosts"
+  ecs_ec2: "ECS EC2"
+  elixir: "Elixir"
+  rust: "Rust"
+  dd-api: "Datadog API"
+  otel: "OpenTelemetry API"
+  status_legacy: "Status Page (Legacy)"
+  status_page: "Status Page"
+  envoy: "Envoy"
+  httpd: "Apache HTTP Server"
+  istio: "Istio"
+  kong: "Kong"
+  nginx: "NGINX"
+  windows_iis: "Windows IIS"
+  apache: "Apache HTTP Server"
+  ibm: "IBM HTTP Server"
+  gcp-service-extensions: "GCP Service Extensions"
+  apigateway: "Amazon API Gateway"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -168,8 +168,7 @@ allowedRegions:
     value: eu
     weight: 20
     domain: datadoghq.eu
-    exact_domains:
-       "beige.oncall.datadoghq.eu"
+    exact_domains: "beige.oncall.datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
@@ -196,30 +195,30 @@ core_product:
     - name: apm
     - name: appsec
       requires_all_keyvals:
-        - 'core_product:security'
+        - "core_product:security"
     - name: ci-cd
     - name: cloud siem
       requires_all_keyvals:
-        - 'core_product:security'
+        - "core_product:security"
     - name: continuous profiler
     - name: continuous testing
       requires_all_keyvals:
-        - 'core_product:synthetic monitoring'
-        - 'core_product:digital experience monitoring'
-        - 'specific_interest:testing'
+        - "core_product:synthetic monitoring"
+        - "core_product:digital experience monitoring"
+        - "specific_interest:testing"
     - name: cloud security
       requires_all_keyvals:
-        - 'core_product:security'
+        - "core_product:security"
     - name: workload protection
       requires_all_keyvals:
-        - 'core_product:security'
+        - "core_product:security"
     - name: cspm
       requires_all_keyvals:
-        - 'specific_interest:compliance'
-        - 'core_product:security'
+        - "specific_interest:compliance"
+        - "core_product:security"
     - name: cwpp
       requires_all_keyvals:
-        - 'core_product:security'
+        - "core_product:security"
     - name: dashboards
     - name: database monitoring
     - name: datadog agent
@@ -228,14 +227,14 @@ core_product:
     - name: datadog mobile app
     - name: digital experience monitoring
       requires_one_keyval:
-        - 'core_product:real user monitoring'
-        - 'core_product:synthetic monitoring'
+        - "core_product:real user monitoring"
+        - "core_product:synthetic monitoring"
     - name: real user monitoring
       requires_all_keyvals:
-        - 'core_product:digital experience monitoring'
+        - "core_product:digital experience monitoring"
     - name: synthetic monitoring
       requires_all_keyvals:
-        - 'core_product:digital experience monitoring'
+        - "core_product:digital experience monitoring"
     - name: error tracking
     - name: incident management
     - name: infrastructure monitoring
@@ -253,16 +252,14 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
-  adobe_experience_manager: [us3,ap1,ap2]
+  adobe_experience_manager: [us3, ap1, ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
-  bits_ai: [gov]
-  bits_ai_sre: [gov, ap2]
-  case_management: [gov,ap1,ap2]
+  case_management: [gov, ap1, ap2]
   ci_visibility: [gov]
   code_security: [gov]
   continuous_delivery: [gov]
@@ -273,10 +270,9 @@ unsupported_sites:
   dora_metrics: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
-  events_from_sns_emails: [gov]
-  fips-compliance: [us,us3,us5,eu,ap1,ap2]
-  fips-integrations: [us,us3,us5,eu,ap1,ap2]
-  fips-proxy: [us,us3,us5,eu,ap1,ap2]
+  fips-compliance: [us, us3, us5, eu, ap1, ap2]
+  fips-integrations: [us, us3, us5, eu, ap1, ap2]
+  fips-proxy: [us, us3, us5, eu, ap1, ap2]
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
@@ -285,7 +281,7 @@ unsupported_sites:
   network_path: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
-  otlp_agentless: [gov,ap1,ap2]
+  otlp_agentless: [gov, ap1, ap2]
   overview_pages: [gov]
   quality_gates: [gov]
   remote_config: [gov]
@@ -301,6 +297,6 @@ unsupported_sites:
   synthetics_safari: [gov]
   test_optimization: [gov]
   universal_service_monitoring: [gov]
-  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
+  watchdog_faulty_service_deployment: [us3, us5, eu, ap1, ap2, gov]
   workflow-automation: [gov]
   workflows: [gov]
