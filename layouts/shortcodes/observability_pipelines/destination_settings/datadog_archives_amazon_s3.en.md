@@ -3,7 +3,7 @@
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][10051] if you want to route logs to different object keys based on specific fields in your logs.
-     - **Note**: Datadog recommends that you start your prefixes with directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+     - **Note**: Datadog recommends that you start your prefixes with the directory name and without a leading slash (`/`). For example, `app-logs/` and `service-logs/`.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
     - **Note**: Rehydration only supports the following [storage classes][10052]:
         - Standard
