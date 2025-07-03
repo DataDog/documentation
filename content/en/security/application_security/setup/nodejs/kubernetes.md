@@ -34,7 +34,7 @@ Install the Datadog Agent by following the [setup instructions for Kubernetes](/
 ## 2. Enabling App and API Protection monitoring
 
 {{% app_and_api_protection_nodejs_navigation_menu %}}
-{{% aap_and_api_protection_nodejs_remote_config_activation %}}
+{{% aap/aap_and_api_protection_nodejs_remote_config_activation %}}
 
 ### Manually enabling App and API Protection monitoring
 
@@ -118,7 +118,7 @@ Apply your updated deployment:
 kubectl apply -f your-deployment.yaml
 ```
 
-{{% aap_and_api_protection_nodejs_verify_setup %}}
+{{% aap/aap_and_api_protection_nodejs_verify_setup %}}
 
 ## Troubleshooting
 

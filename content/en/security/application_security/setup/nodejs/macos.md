@@ -32,7 +32,7 @@ Install the Datadog Agent by following the [setup instructions for macOS](/agent
 ## 2. Enabling App and API Protection monitoring
 
 {{% app_and_api_protection_nodejs_navigation_menu %}}
-{{% aap_and_api_protection_nodejs_remote_config_activation %}}
+{{% aap/aap_and_api_protection_nodejs_remote_config_activation %}}
 
 ### Manually enabling App and API Protection monitoring
 
@@ -67,7 +67,7 @@ DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false DD_SERVICE=<YOUR_SERVICE_NAM
 
 Start your Node.js application with the configured settings.
 
-{{% aap_and_api_protection_nodejs_verify_setup %}}
+{{% aap/aap_and_api_protection_nodejs_verify_setup %}}
 
 ## Troubleshooting
 
