@@ -99,8 +99,8 @@ module:
      - source: content/en/integrations
        target: content/integrations
        lang: en
-     - source: content/en/security/code_security/iac_security/iac_security_rules
-       target: content/security/code_security/iac_security/iac_security_rules
+     - source: content/en/security/code_security/iac_security/iac_rules
+       target: content/security/code_security/iac_security/iac_rules
        lang: en
      - source: data
        target: data
