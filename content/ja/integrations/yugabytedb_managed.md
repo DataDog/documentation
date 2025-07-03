@@ -134,7 +134,7 @@ Datadog にエクスポートされるメトリクスを無効にするには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "yugabytedb_managed" >}}
+{{< get-metrics-from-git "yugabytedb-managed" >}}
 
 
 ### サービスチェック

@@ -161,7 +161,7 @@ spec:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "oom_kill" >}}
+{{< get-metrics-from-git "oom-kill" >}}
 
 
 ### 서비스 점검

@@ -112,7 +112,7 @@ RiakCS 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있으므�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "riakcs" >}}
+{{< get-metrics-from-git "riak-cs" >}}
  메모리 통계를 포함한 대부분의 S3 API 메트릭을 포함합니다. 일부 메트릭이 제외되었습니다.
 
 - bucket*acl*(get|put)
@@ -131,7 +131,7 @@ RiakCS 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있으므�
 RiakCS 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "riakcs" >}}
+{{< get-service-checks-from-git "riak-cs" >}}
 
 
 ## 트러블슈팅

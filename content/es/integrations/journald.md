@@ -19,7 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/journald/README.md
 display_on_public_website: true
@@ -27,7 +27,7 @@ draft: false
 git_integration_title: journald
 integration_id: journald
 integration_title: journald
-integration_version: 1.2.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: journald
@@ -171,7 +171,7 @@ Ejemplo:
 
 ```yaml
 logs:
-    # Recopila todos los logs de unidad a nivel de sistema.
+    # Collect all system-level unit logs.
     - type: journald
       exclude_user_units:
           - '*'
