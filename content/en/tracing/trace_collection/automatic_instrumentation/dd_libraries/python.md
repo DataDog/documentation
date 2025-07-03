@@ -210,6 +210,12 @@ The following features may be compatible, but **have not been verified** with Py
 - **Integrations**: `anthropic`, `consul`, `freezegun`, `gevent`, `google_generativeai`, `gunicorn`, `langchain`, `mysqlclient`, `opentracing`, `psycopg`, `psycopg2`, `pymysql`, `pytest`, `pytest-bdd`, `pytest-benchmark`, `sanic`, `selenium`, `sqlite3`, `starlette`, `tornado`, `vertexai`.
 - **AppSec Threat Detection**: Not tested against Django, Flask, or FastAPI.
 
+#### Python 3.13 Compatibility
+
+Full support for Python 3.13 is in active development. While the core tracing library is compatible, some integrations may not be fully tested or supported in the latest version.
+
+For the most current compatibility details for a specific integration, see the library's [latest release notes][19].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -226,3 +232,4 @@ The following features may be compatible, but **have not been verified** with Py
 [16]: https://ddtrace.readthedocs.io/en/stable/configuration.html?highlight=dd_trace_methods#DD_TRACE_METHODS
 [17]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=python#in-tracing-libraries-user-defined-rules
 [18]: https://github.com/DataDog/dd-trace-py
+[19]: https://github.com/DataDog/dd-trace-py/releases
