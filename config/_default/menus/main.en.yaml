@@ -5146,11 +5146,6 @@ menu:
       identifier: observability_pipelines
       parent: log_management_heading
       weight: 10000
-    - name: Use Cases
-      url: observability_pipelines/use_cases/
-      parent: observability_pipelines
-      identifier: observability_pipelines_use_cases
-      weight: 1
     - name: Set Up Pipelines
       url: observability_pipelines/set_up_pipelines/
       parent: observability_pipelines
