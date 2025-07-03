@@ -198,7 +198,7 @@ To display your list of variables, type `{{` in your desired field.
 
 You can run existing API tests within Multistep API tests to reuse existing workflows up to two levels of nesting.
 
-To use an existing API test as a subtest, click **Subtest** and select an API test from the dropdown menu under the **From Existing Test** tab.
+To use an existing API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select an API test from the dropdown menu.
 
 To convert steps from your current API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. 
 
