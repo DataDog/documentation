@@ -21,7 +21,7 @@ further_reading:
 
 # Overview
 
-Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your mobile apps. This guide covers usage, key use cases, and sampling, with or without Datadog RUM.
+Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your mobile apps. This guide covers usage, key use cases, and sampling rates, with or without Datadog RUM.
 
 ## Native mobile tracing
 
