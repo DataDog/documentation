@@ -71,17 +71,17 @@ Before you begin, confirm that both the **resource** you are migrating and the *
 **Note:** `logs_custom_pipelines` resource has been deprecated in favor of `logs_pipelines` resource which supports both OOTB integration and custom pipelines. To migrate to the new resource, rename the existing state files from `logs_custom_pipelines.json` to `logs_pipelines.json` for both source and destination files.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="List of source and destination API URLs" level="h5" expanded=true id="id-for-resources" %}}
-These are the supported URL's for the source and destination API URLs when syncing your organization:
+{{% collapse-content title="List of supported API URLs" level="h5" expanded=true id="id-for-resources" %}}
+These are the supported URLs for the source and destination API URLs when syncing your organization:
 
-| Site    | Site URL                    | Site Parameter      | Location |
-|---------|-----------------------------|---------------------|----------|
-| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
-| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
-| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
-| US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
-| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
+| Site    | API URL                         | Site Parameter      | Location |
+|---------|---------------------------------|---------------------|----------|
+| US1     | `https://api.datadoghq.com`     | `datadoghq.com`     | US       |
+| US3     | `https://api.us3.datadoghq.com` | `us3.datadoghq.com` | US       |
+| US5     | `https://api.us5.datadoghq.com` | `us5.datadoghq.com` | US       |
+| EU1     | `https://api.datadoghq.eu`      | `datadoghq.eu`      | EU (Germany) |
+| US1-FED | `https://api.ddog-gov.com`      | `ddog-gov.com`      | US       |
+| AP1     | `https://api.ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan    |
 
 
 For all available regions, see [Getting Started with Datadog Sites][1].
@@ -214,7 +214,7 @@ The docker run command mounts a specified `<PATH_TO_WORKING_DIR>` working direct
 
 ### Example usage
 
-This example uses US1 as the source URL and the EU as the destination URL. Your source and destinations may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
+This example uses the **US1 site URL** as the source URL and the **EU site URL** as the destination URL. Your source and destinations may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
 
 ```shell
 # Import resources from parent organization and store them locally
