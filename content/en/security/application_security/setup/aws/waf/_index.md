@@ -43,7 +43,7 @@ Security traces are reported in the [AAP Traces Explorer][5] with service name `
 
 To block attackers, Datadog needs to manage a dedicated IPset. This IPset must be referenced by the web ACL with a rule in blocking mode.
 
-Multiple web ACLs can be set up in the same or in different AWS accounts. In this case, a [Connection][3] must be created per AWS account.
+Multiple web ACLs can be set up in the same or in different AWS accounts. A [Connection][3] must be created on every AWS account.
 
 Ensure the AWS role attached to the [Connection][3] has the following permissions:
 
