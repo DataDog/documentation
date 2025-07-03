@@ -206,7 +206,7 @@ To convert steps from your current API test into a subtest, click on the **Extra
 
 To override a subtest variable in a Multistep API test, define it in the parent test using the same name. A variable always uses the first value assigned to it.
 
-If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your Multistep API test, and is not executed individually.
+If you don't need to run a subtest independently, you can pause it. It still runs as part of the Multistep API test but is not executed on its own.
 
 ## Test failure
 
