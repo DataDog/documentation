@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
   tag: "Blog"
   text: "Best practices for tagging your monitors"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 ## Overview

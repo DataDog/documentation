@@ -513,6 +513,26 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
+  "ListCostGCPUsageCostConfigs": {
+    "description": "List the GCP Usage Cost configs.",
+    "summary": "List Cloud Cost Management GCP Usage Cost configs"
+  },
+  "CreateCostGCPUsageCostConfig": {
+    "description": "Create a Cloud Cost Management account for an GCP Usage Cost config.",
+    "summary": "Create Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config post request."
+  },
+  "DeleteCostGCPUsageCostConfig": {
+    "description": "Archive a Cloud Cost Management account.",
+    "summary": "Delete Cloud Cost Management GCP Usage Cost config"
+  },
+  "UpdateCostGCPUsageCostConfig": {
+    "description": "Update the status of an GCP Usage Cost config (active/archived).",
+    "summary": "Update Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config patch request."
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -816,6 +836,10 @@
   "CreateNewAWSExternalID": {
     "description": "Generate a new external ID for AWS role-based authentication.",
     "summary": "Generate a new external ID"
+  },
+  "GetAWSIntegrationIAMPermissions": {
+    "description": "Get all AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration IAM permissions"
   },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",
