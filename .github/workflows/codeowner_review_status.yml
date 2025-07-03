@@ -28,11 +28,17 @@ jobs:
         uses: github/actions-oidc-debugger@main
         with:
           audience: "octo-debugger"
-      # - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
-      #   id: octo-sts
-      #   with:
-      #     scope: DataDog
-      #     policy: documentation.read-org-members 
+      - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
+        id: octo-sts
+        with:
+          scope: DataDog
+          policy: documentation.read-org-members 
+        
+      - name: Validate STS Token
+        env:
+          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
+        run: |
+          gh api -H "Authorization: Bearer ${{ env.GITHUB_TOKEN }}" /orgs/DataDog/teams/documentation/members
 
       - name: Check Documentation Team Approval
         id: check_approvals
