@@ -74,7 +74,7 @@ tile:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_config" >}}
+{{< get-metrics-from-git "amazon-config" >}}
 
 
 ### イベント

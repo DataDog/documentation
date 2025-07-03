@@ -38,7 +38,7 @@ Datadog Azure 통합을 사용해 Azure Public IP Address 메트릭을 수집할
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_public_ip_address" >}}
+{{ get-metrics-from-git "azure-publicipaddress" }}
 
 
 ### 이벤트

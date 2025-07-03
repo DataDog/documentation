@@ -86,7 +86,7 @@ Una vez configurada la integración de [Oracle Cloud Infrastructure][2], asegúr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_postgresql" >}}
+{{< get-metrics-from-git "oci-postgresql" >}}
 
 
 ### Checks de servicio

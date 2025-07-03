@@ -32,7 +32,7 @@ Cette intégration est obsolète. Consultez plutôt la <a href="https://docs.dat
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "google_container_engine" >}}
+{{< get-metrics-from-git "google-container-engine" >}}
 
 
 ### Aide
