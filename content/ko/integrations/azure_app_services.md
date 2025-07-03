@@ -57,7 +57,7 @@ Azure App Service에서 실행되는 애플리케이션에 대해 Datadog APM �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_app_services" >}}
+{{< get-metrics-from-git "azure-app-services" >}}
 
 
 ### 이벤트

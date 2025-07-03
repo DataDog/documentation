@@ -66,7 +66,7 @@ If you haven't already, set up the [Microsoft Azure integration][1]. No addition
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_cognitive_services" >}}
+{{ get-metrics-from-git "azure-cognitiveservices" }}
 
 
 ### イベント

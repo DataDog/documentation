@@ -108,7 +108,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### イベント
@@ -116,7 +116,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Kube Scheduler には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 
 ## トラブルシューティング

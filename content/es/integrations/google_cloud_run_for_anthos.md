@@ -71,12 +71,12 @@ Utiliza el [Controlador de admisión de Datadog][8] para configurar rastreadores
 - Añade la etiqueta (label) `admission.datadoghq.com/enabled: "true"` a tu pod.
 - Configura el Controlador de admisión del Cluster Agent definiendo `mutateUnlabelled: true`.
 
-Para evitar que los pods reciban variables de entorno, añade la etiqueta `admission.datadoghq.com/enabled: "false"`. Esto funciona incluso si defines `mutateUnlabelled: true`. Para obtener más información, consulta la documentación del [Controlador de admisión de Datadog][8]. 
+Para evitar que los pods reciban variables de entorno, añade la etiqueta `admission.datadoghq.com/enabled: "false"`. Esto funciona incluso si defines `mutateUnlabelled: true`. Para obtener más información, consulta la documentación del [Controlador de admisión de Datadog][8].
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
+{{< get-metrics-from-git "google-cloud-run-for-anthos" >}}
 
 
 ### Eventos

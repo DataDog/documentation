@@ -142,7 +142,7 @@ Para incluir los prefijos IP de Datadog:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "elastic_cloud" >}}
+{{< get-metrics-from-git "elastic-cloud" >}}
 
 
 ### Logs

@@ -92,7 +92,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `riak_repl` en la secció
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "riak_repl" >}}
+{{< get-metrics-from-git "riak-repl" >}}
 
 
 ### Checks de servicio

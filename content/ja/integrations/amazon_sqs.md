@@ -107,7 +107,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_sqs" >}}
+{{< get-metrics-from-git "amazon-sqs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

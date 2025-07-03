@@ -13,7 +13,16 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
+  tag: "Blog"
+  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+  This feature is not available for the Datadog for Government (US1-FED) site.  
+</div>
+{{< /site-region >}}
 
 Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
 
@@ -29,7 +38,8 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 ### Compatibility
 
 - **Distributions**: This feature is compatible with all of Datadog's [supported Kubernetes distributions][5].
-- **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload before you use Datadog Kubernetes Autoscaling to optimize it. These workloads are identified in the application on your behalf.
+- **Workload autoscaling**: This feature is an alternative to Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA). Datadog recommends that you remove any HPAs or VPAs from a workload when enabling Datadog Kubernetes Autoscaling to optimize it. These workloads are identified in the application on your behalf.
+**Note:** You can experiment with Datadog Kubernetes Autoscaling while keeping your HPA and/or VPA by creating a `DatadogPodAutoscaler` with `mode: Preview` in the `applyPolicy` section.
 
 ### Requirements
 
@@ -48,7 +58,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. Ensure you are using Datadog Operator v1.8.0+. To upgrade your Datadog Operator:
+1. Ensure you are using Datadog Operator v1.16.0+. To upgrade your Datadog Operator:
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator 
@@ -59,9 +69,6 @@ helm upgrade datadog-operator datadog/datadog-operator
 ```yaml
 spec:
   features:
-    orchestratorExplorer:
-      customResources:
-      - datadoghq.com/v1alpha2/datadogpodautoscalers
     autoscaling:
       workload:
         enabled: true
@@ -69,22 +76,13 @@ spec:
       unbundleEvents: true
   override:
     clusterAgent:
-      image:
-        tag: 7.66.1
       env:
         - name: DD_AUTOSCALING_FAILOVER_ENABLED
           value: "true"
     nodeAgent:
-      image:
-        tag: 7.66.1 # or 7.66.1-jmx
       env:
         - name: DD_AUTOSCALING_FAILOVER_ENABLED
           value: "true"
-        - name: DD_AUTOSCALING_FAILOVER_METRICS
-          value: container.memory.usage container.cpu.usage
-    clusterChecksRunner:
-      image:
-        tag: 7.66.1 # or 7.66.1-jmx
 ```
 
 3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
@@ -124,8 +122,6 @@ datadog:
 {{< highlight yaml "hl_lines=5-6" >}}
 ...
 clusterAgent:
-  image:
-    tag: 7.66.1
   admissionController:
     enabled: true
 ...

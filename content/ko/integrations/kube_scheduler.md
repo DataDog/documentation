@@ -107,7 +107,7 @@ Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### 이벤트
@@ -115,7 +115,7 @@ Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있�
 Kube Scheduler는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 
 ## 트러블슈팅
