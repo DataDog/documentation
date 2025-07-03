@@ -194,6 +194,20 @@ To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in Multistep API tests" video="true" width="90%" >}}
 
+### Subtests
+
+You can run existing API tests within Multistep API tests to reuse existing workflows up to two levels of nesting.
+
+To use an existing API test as a subtest, click **Subtest** and select an API test from the dropdown menu under the **From Existing Test** tab.
+
+To convert steps from your current API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. 
+
+{{< img src="synthetics/multistep_tests/subtest.png" alt="Add a subtest in a Multistep API test" >}}
+
+In order to override variables from subtests in Multistep API tests, ensure the variables created at the Multistep API test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it. 
+
+If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually.
+
 ## Test failure
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
