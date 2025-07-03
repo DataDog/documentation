@@ -262,6 +262,7 @@ unsupported_sites:
   ci_visibility: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
+  correlation: [gov]
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
