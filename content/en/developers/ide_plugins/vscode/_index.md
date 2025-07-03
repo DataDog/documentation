@@ -35,11 +35,13 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Visual Studio Code (VS Code) brings Datadog to your code editor to accelerate your development. It can also be used in Cursor and other forks of VS Code.
+The Datadog extension for VS Code and Cursor brings Datadog to your code editor to accelerate your development.
 
 {{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 The extension includes these features:
+
+- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): (Cursor only) Connect Cursor's AI agent to production telemetry, tools, and contexts from Datadog.
 
 - [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
 
@@ -52,8 +54,6 @@ The extension includes these features:
 - [**Exception Replay**](#exception-replay): Debug your production code.
 
 - [**Fix in Chat**](?tab=cursor#fix-in-chat): (Cursor only) Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
-
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): (Cursor only) Connect Cursor's AI agent to production telemetry, tools, and contexts from Datadog.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
@@ -93,11 +93,13 @@ Install the extension either directly in the IDE, or from the web:
 
 In Cursor, the extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Enable the MCP Server to enhance Cursor's AI capabilities with your specific Datadog environment.
 
+1. Ensure you have an active version of [Node.js][4] installed on your local machine.
 1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP Tools** tab.
-2. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
+1. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: /bits_ai/mcp_server/
+[4]: https://nodejs.org/en/about/previous-releases
 {{% /tab %}}
 {{< /tabs >}}
 
