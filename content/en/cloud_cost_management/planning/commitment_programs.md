@@ -29,7 +29,7 @@ Use Commitment Programs to understand and optimize your cloud commitments.
 2. Use filters to focus on specific accounts, regions, or services.
 3. Gain insights into your KPIs, commitment costs, and renewal recommendations:
    - Review KPIs in the [Commitments Overview](#commitments-overview) section.
-   - Explore the [Costs Overview](#costs-overview) to analyze utilization, coverage, and expiring commitments.
+   - Explore the [Costs Overview](#costs-overview) to analyze utilization and coverage.
    - Check expiration dates and renewal recommendations in the [Commitments Explorer](#commitments-explorer).
 4. Take action based on these insights:
    - Adjust workloads to better use your commitments and avoid extra on-demand charges.
