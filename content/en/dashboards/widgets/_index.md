@@ -164,7 +164,7 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 <div class="alert alert-warning">Enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
 
-Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd>, or by selecting the share icon and choosing "Copy".
+Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, or by selecting the share icon and choosing "Copy".
 
 The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd> :
 
