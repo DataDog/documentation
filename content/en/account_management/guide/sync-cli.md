@@ -24,6 +24,8 @@ Datadog recommends syncing your accounts on a daily basis.
 
 <div class="alert alert-warning"> <strong>Note:</strong> The <code>datadog-sync-cli</code> tool is used to migrate resources across organizations, regardless of datacenter. It cannot, nor is it intended to, transfer any ingested data, such as logs, metrics etc. The source organization will not be modified, but the destination organization will have resources created and updated by the <code>sync</code> command.</div>
 
+<br>
+
 ## Supported resources and site URLs
 
 Before you begin, confirm that both the **resource** you are migrating and the **source/destination API URLs** you are using are supported by the `sync-cli` tool:
@@ -214,7 +216,7 @@ The docker run command mounts a specified `<PATH_TO_WORKING_DIR>` working direct
 
 ### Example usage
 
-This example uses the **US1 API URL** for the source and the **EU API URL** for the destination of this data migration. Your source and destination may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
+This example uses the `US1` API URL for the source and the `EU` API URL for the destination of this data migration. Your source and destination URLs may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
 
 ```shell
 # Import resources from parent organization and store them locally
@@ -247,50 +249,36 @@ $ datadog-sync sync \
 > ...
 > 2024-03-14 14:56:00,797 - INFO - Finished sync: 1 successes, 0 errors
 ```
+<br>
 
+## Filter the data collected
+By default all resources are imported and synced. You can use the filtering option to specify what resources are migrated. Filtering can be done on two levels:
+- [Top resources level  ](#top-resources-level-filtering) 
+- [Individual resource level ](#per-resource-level-filtering) 
 
-### Filter the data collected
-By default all resources are imported and synced. You can use the filtering option to specify what resources are migrated. Filtering is done on two levels:
-- [top resources level filtering](#top-resources-level-filtering) (`--resources` filter option)
-- [individual resource level filtering](#per-resource-level-filtering) (`--filter` filter option)
+### Top resources level filtering
+To perform actions on a specific top level resource, or subset of resources, use `--resources` option. For example, this command imports **ALL** dashboards and dashboard lists in your Datadog organization:
 
-#### Top resources level filtering
-By default all resources are imported, synced, etc. If you would like to perform actions on a specific top level resource, or subset of resources, use `--resources` option. 
+```shell
+datadog-sync import --resources="dashboard_lists,dashboards"
+```
 
-For example, the command `datadog-sync import --resources="dashboard_lists,dashboards"` will import ALL dashboards and dashboard lists in your Datadog organization.
-
-
-#### Individual resource level filtering
-Individual resources can be further filtered using the `--filter `flag. For example, the following command will import ALL dashboards and ONLY dashboard lists with the `name` attribute equal to `My custom list`:
+### Individual resource level filtering
+Individual resources can be further filtered using the `--filter ` flag. For example, the following command imports **ALL** dashboards and **ONLY** dashboard lists with the `name` attribute equal to `My custom list`:
 
 ```shell
 datadog-sync import --resources="dashboards,dashboard_lists" --filter='Type=dashboard_lists;Name=name;Value=My custom list'
 ```
 
-The filter option `--filter` accepts a string made up of `key=value` pairs separated by `;` as seen in the example here:
+The `--filter` option accepts a string of `key=value` pairs separated by `;` as seen in this example:
 
 ```shell
 --filter 'Type=<resource>;Name=<attribute_name>;Value=<attribute_value>;Operator=<operator>'
 ```
 <div class="alert alert-info">
 
-##### SubString and ExactMatch Deprecation
-
-In future releases the `SubString` and `ExactMatch` Operator will be removed in favor of the `Value` key. This is because the `Value` key supports regex so both of these scenarios are covered by just writing the appropriate regex.  Below is an example:
-
-For example, if you would like to filter for monitors that have the `filter test` in the `name` attribute:
-
-| Operator           | Command                                                                       |
-| -------------------| ------------------------------------------------------------------------------|
-| `SubString`        | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=SubString'`     |
-| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=.*filter test.*`                     |
-| `ExactMatch` <br>    | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=ExactMatch'`    |
-| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=^filter test$`                       |
-
-</div>
-
-### List of available keys
-
+#### List of available keys
+<!-- 
 Type `REQUIRED`
 : Resource such as Monitors, Dashboards, and more.
 
@@ -304,14 +292,40 @@ Operator
 : All invalid operator's default to ExactMatch. Available operators are:
 : - `Not`: Match not equal to Value.
 : - `SubString` (_Deprecated_): Sub string matching. This operator will be removed in future releases. See SubString and ExactMatch Deprecation section.
-: - `ExactMatch` (_Deprecated_): Exact string match. This operator will be removed in future releases. See SubString and ExactMatch Deprecation section.
+: - `ExactMatch` (_Deprecated_): Exact string match. This operator will be removed in future releases. See SubString and ExactMatch Deprecation section. -->
 
-By default, if multiple filters are passed for the same resource, OR logic is applied to the filters. This behavior can be adjusted using the `--filter-operator` option.
 
+| Keys                    | description                                                   |
+| ------------------------|---------------------------------------------------------------|
+|**Type** (required)      |Resource such as Monitors, Dashboards, and more.               |
+|**Name** (required)      |Attribute key to filter on. This can be any attribute represented in dot notation such as `attributes.user_count`.                                                 |
+|**Value** (required)     |Regex to filter attribute value by. Note: special regex characters need to be escaped if filtering by raw string.                                                    |
+|**Operator**             |All invalid operator's default to ExactMatch. Available operators are:<br> - `Not`: Match not equal to Value.<br> - `SubString` (_Deprecated_): Sub string matching. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.<br> - `ExactMatch` (_Deprecated_): Exact string match. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.                              |
+
+By default, if multiple filters are passed for the same resource, the **OR** logic is applied to the filters. This behavior can be adjusted using the `--filter-operator` option. (`DO WE HAVE AN EXAMPLE OF THIS USAGE`)
+
+
+
+
+#### SubString and ExactMatch Deprecation
+
+In future releases (`IN WHICH RELEASES IS THIS RELEASED?`) the `SubString` and `ExactMatch` Operator will be removed in favor of the `Value` key. This is because the `Value` key supports regex so both of these scenarios are covered by just writing the appropriate regex.
+
+This example shows the difference in syntax when using `Value` to filter for monitors that have `filter test` in the `name` attribute:
+
+| Operator           | Command                                                                       |
+| -------------------| ------------------------------------------------------------------------------|
+| `SubString`        | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=SubString'`     |
+| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=.*filter test.*`                     |
+| `ExactMatch`       | `--filter 'Type=monitors;Name=name;Value=filter test;Operator=ExactMatch'`    |
+| Using `Value`      | `--filter 'Type=monitors;Name=name;Value=^filter test$`                       |
+
+</div>
+<br>
 
 ## Additional configurations 
 ### Using custom configuration instead of options 
-You can use a custom configuration text file in place of using `options`. This is an example config file for a `US1` source URL and `EU` destination URL:
+You can use a custom configuration text file in place of using filtering options. This is an example config file for a `US1` source URL and `EU` destination URL:
 
 ```shell
 destination_api_url="https://api.datadoghq.eu"
@@ -330,9 +344,9 @@ datadog-sync import --config config
 ```
 
 ### Using the cleanup flag to sync changes from the source destination
-The tool's `sync` command provides a cleanup flag (`--cleanup`). Passing the cleanup flag will delete resources from the destination organization which have been removed from the source organization. The resources to be deleted are determined based on the difference between the [state files](#) of source and destination organization.
+The `sync` command provides a cleanup flag (`--cleanup`). Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of source and destination organizations.
 
-For example, `ResourceA` and `ResourceB` are imported and synced, followed by deleting `ResourceA` from the source organization. Running the `import` command will update the source organizations state file to only include `ResourceB`. The following `sync --cleanup=Force` command will now delete `ResourceA` from the destination organization.
+For example, let's take a `ResourceA` and `ResourceB` that are imported and synced. After a deletion of `ResourceA` from the source organization, running the `import` command updates the source organization's state file to only include `ResourceB`. Running the `sync --cleanup=Force` command deletes `ResourceA` from the destination organization.
 
 
 ### Verify your Datadog disaster recovery (DDR) status 
@@ -340,11 +354,13 @@ For example, `ResourceA` and `ResourceB` are imported and synced, followed by de
 By default all commands check the Datadog Disaster Recovery (DDR) status of both the source and destination organizations before running. This behavior is controlled by the boolean flag `--verify-ddr-status` or the environment variable `DD_VERIFY_DDR_STATUS`. 
 
 
-### State files [Avoid data duplication while keeping data seperation]
+### State files - how to avoid data duplication while keeping data seperation
 
 By default, a `resources` directory is generated in the current working directory of the user. This directory contains `json` mapping of resources between the source and destination organization. To avoid duplication and loss of mapping, this directory should be retained between tool usage. To override these directories use the `--source-resources-path` and `--destination-resource-path`.
 
 When running againts multiple destination organizations, a seperate working directory should be used to ensure seperation of data. 
+
+<br>
 
 ## Best practices
 ### Resource subsets must be migrated with their dependencies
