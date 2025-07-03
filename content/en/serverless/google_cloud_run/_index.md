@@ -239,8 +239,12 @@ Add the same value from `DD_SERVICE` to a `service` label on your Cloud Run Serv
 |-----------|-------------------------------------------------------------|
 | `service` | The name of your service matching the `DD_SERVICE` env var. |
 
-For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+For more information on how to add labels, see Google Cloud's [Configure labels for services][1] documentation.
 
+[1]: https://cloud.google.com/run/docs/configuring/services/labels
+
+{{% /tab %}}
+{{% tab "gcloud deploy" %}}
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
 To deploy your Cloud Run service with YAML service specification, use the following example configuration file.
@@ -698,8 +702,8 @@ import (
 
 
    "github.com/DataDog/datadog-go/v5/statsd"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 

@@ -31,6 +31,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/unit-economics-ccm/"
     tag: "Blog"
     text: "Monitor unit economics with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+    tag: "Blog"
+    text: "How we've created a successful FinOps practice at Datadog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

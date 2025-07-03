@@ -7,10 +7,6 @@ further_reading:
 title: Configurar reglas de la puerta calidad
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Para usar las puertas de calidad de Datadog, puedes definir una o más reglas en la página de [**Reglas de la puerta de calidad**][2] e integrarlas en tu pipeline de CI con el comando [`datadog-ci gate evaluate`][4].

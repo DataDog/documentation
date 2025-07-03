@@ -85,7 +85,7 @@ La integración Pingdom V3 actúa de forma similar a la [integración Pingdom en
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "pingdom_v3" >}}
+{{< get-metrics-from-git "pingdom-v3" >}}
 
 
 ### Eventos

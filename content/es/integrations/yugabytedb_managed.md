@@ -134,7 +134,7 @@ Para desactivar la exportación de métricas a Datadog:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "yugabytedb_managed" >}}
+{{< get-metrics-from-git "yugabytedb-managed" >}}
 
 
 ### Checks de servicio

@@ -10,10 +10,6 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/agent-upgrades/" btn_hidden="false" header="Try the Preview!">}}
-Upgrading Agents with Remote Management is in Preview. Use this form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. Remote Agent Management gives you access to:
@@ -30,15 +26,15 @@ To enable Remote Agent Management:
 
    {{< img src="/agent/fleet_automation/remote-agent-management-toggle.png" alt="Enable the Remote Agent Management toggle." style="width:100%;" >}}
 
-1. Use the generated Agent installation command to upgrade your Agent.
+1. Use the generated Agent installation command to upgrade your Agent to version 7.66+.
 
-   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.
+<div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
 ## Remotely upgrade your Agents
 ### Supported platforms
 
 - Linux VMs installed using the install script or Ansible Datadog Role
-- Windows VMs using the default installation method (gMSA or default `ddagentuser` account)
+- Windows VMs
 
 <div class="alert alert-info">Remotely upgrading Agents in containerized environments is not supported.</div>
 
@@ -46,10 +42,9 @@ To enable Remote Agent Management:
 
 * **User permissions**: Users must have the [Agent Upgrade][2] permission within Fleet Automation. The permission is enabled by default on the Datadog Admin role.
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+* **Windows Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
 
 ### Upgrade your Agents
-
-<div class="alert alert-warning">Remote Agent upgrades are in Preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
 
 To upgrade your Agents:
 1. [Enable Remote Agent Management](#setup).
@@ -59,7 +54,11 @@ To upgrade your Agents:
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
-1. Click **Upgrade Agents** to start the upgrade.
+
+1. Review the deployment plan and click **Upgrade Agents** to start the upgrade.
+
+   {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Review upgrade deployment plan" style="width:100%;" >}}
+
 1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
@@ -75,7 +74,7 @@ Linux:
 * `/etc/systemd/system`
 
 Windows:
-* `C:\ProgramData\Datadog Installer\packages`
+* `C:\ProgramData\Datadog\Installer\packages`
 * `C:\Program Files\Datadog\Datadog Agent`
 
 The Agent ensures that the appropriate permissions are set for these files. No configuration files are altered during the installation process.
@@ -96,7 +95,7 @@ For instructions on using mirrored or air-gapped repositories, see:
 
 ### Downgrading Agents
 
-If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#downgrading-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
+If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Further reading
 
@@ -112,3 +111,5 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#do
 [8]: https://docs.datadoghq.com/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: https://github.com/DataDog/agent-linux-install-script?tab=readme-ov-file#install-script-configuration-options
 [10]: https://app.datadoghq.com/fleet/deployments
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview
+[12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains

@@ -1,5 +1,8 @@
 ---
 title: Cross-Organization Visibility
+description: Share data and perform queries between different organizations in the same account.
+algolia:
+  tags: ["cross org", "cross-org", "cross organization"]
 ---
 
 {{< callout url="#" btn_hidden="true">}}
@@ -22,7 +25,12 @@ This document explains:
 
 ### Organization connection
 
-A _source_ organization exposes data to a _destination_ organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
+A _source_ organization exposes data to a _destination_ organization through an _organization connection_. A source organization can have multiple destinations, and a destination organization can have multiple sources.
+
+The following limitations apply to organization connections:
+- The source and destination organizations must be in the same [account][1]
+- The source and destination organizations must be in the same [site][11].
+- One organization can share with up to 5 other organizations.
 
 Note that once the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the destination organization's access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
 
@@ -30,7 +38,7 @@ After you set up an organization connection, the exposed data is still stored in
 
 ### Scope
 
-Cross-organization visibility supports Metrics telemetry in [Dashboard and Notebook widgets][2].
+Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2].
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 
@@ -38,7 +46,9 @@ All types of metrics are supported, including [custom metrics][3], [trace metric
 
 ### List connections
 
-To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections. Listing connections requires the _Org Connections Read_ permission.
+To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections.
+
+Listing connections requires the _Org Connections Read_ permission. Additionally, you can use [granular access control][12] to restrict access to individual connections according to team, role, or user.
 
 ### Create a connection
 
@@ -84,7 +94,7 @@ The following screenshot shows an example of a cross-organization formula query.
 ### In the API
 
 <div class="alert alert-info">
-The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. But a dashboard with widgets with cross-org queries may be Terraformed through proper JSON export.
+The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. However, you can manage a dashboard containing widgets with cross-org queries through Terraform by exporting the dashboard to JSON.
 </div>
 
 You can define cross-organization queries in the following endpoint:
@@ -147,3 +157,5 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [9]: /api/latest/organizations/#list-your-managed-organizations
 [10]: /dashboards/sharing/shared_dashboards/#public-shared-dashboards
+[11]: /getting_started/site
+[12]: /account_management/rbac/granular_access

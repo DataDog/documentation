@@ -76,6 +76,8 @@ Changing the sampling rate is only supported for server-side sampling, and can b
 
 During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
 
+**Note**: This behavior only applies to mobile applications using mobile RUM SDKs.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

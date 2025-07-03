@@ -15,7 +15,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -101,4 +101,4 @@ Firefly の統合ポリシーエンジンにより、危険な構成ミスやコ
 [2]: https://app.datadoghq.com/integrations/firefly
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/firefly-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/firefly-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
