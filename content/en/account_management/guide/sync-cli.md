@@ -190,25 +190,27 @@ Installing from source requires Python `v3.9+`
       -e DD_DESTINATION_API_URL=<DATADOG_API_URL> \
       datadog-sync:latest <command> <options>
    ```
-The docker run command mounts a specified <PATH_TO_WORKING_DIR> working directory to the container.
+The docker run command mounts a specified `<PATH_TO_WORKING_DIR>` working directory to the container.
 {{% /collapse-content %}} 
 
 <br>
 
 ## How to use the datadog-sync-cli tool
 
+<div class="alert alert-warning"> <strong>Note:</strong> The sync-cli tool uses the <code>resources</code> directory as the source of truth for determining what resources need to be created and modified. This directory should not be removed or corrupted.</div>
+
 ### Steps to sync your resources 
 
 1. Run the `import` command to read the specified resources from the source organization and store them locally into JSON files in the directory `resources/source`.
 
-2. Run the `sync` command which will use the stored files from previous `import` command to create/modify the resources on the destination organization. The pushed resources are saved in the directory resources/destination.
-   - (unless `--force-missing-dependencies` flag is passed)(`WHAT IS THIS REFERENCING?`)
+2. Run the `sync` command to use the stored files from the previous `import` command (unless the `--force-missing-dependencies` flag is passed) to create or modify the resources on the destination organization. The pushed resources are saved in the directory `resources/destination`.
+   - (`WHAT DOES THE --force-missing-dependencies DO IN THIS CASE?`)
 
-3. The migrate command will run an `import` followed immediately by a `sync`.
+3. The `migrate` command runs an `import` followed immediately by a `sync`.
 
-4. The reset command will delete resources at the destination; however, by default it backs up those resources first and fails if it cannot. You can (but probably shouldn't) skip the backup by using the --do-not-backup flag.
+4. The `reset` command deletes resources at the destination; however, by default it backs up those resources first and fails if it cannot back them up. 
+   - **NOT recommended:** The back-up step can be skipped using the `--do-not-backup` flag.
 
-<div class="alert alert-warning"> <strong>Note:</strong> <br>The sync-cli tool uses the <code>resources</code> directory as the source of truth for determining what resources need to be created and modified. This directory should not be removed or corrupted.</div>
 
 ### Example usage
 
