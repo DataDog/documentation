@@ -23,7 +23,7 @@ further_reading:
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{% app_and_api_protection_nodejs_overview showSetup="false" %}}
+{{% aap/aap_and_api_protection_nodejs_overview showSetup="false" %}}
 
 ## Environments
 

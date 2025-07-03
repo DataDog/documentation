@@ -15,7 +15,7 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{% app_and_api_protection_nodejs_overview %}}
+{{% aap/aap_and_api_protection_nodejs_overview %}}
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ Install the Datadog Agent in your Fargate task definition:
 
 ## 2. Enabling App and API Protection monitoring
 
-{{% app_and_api_protection_nodejs_navigation_menu %}}
+{{% aap/aap_and_api_protection_nodejs_navigation_menu %}}
 
 {{% aap/aap_and_api_protection_nodejs_remote_config_activation %}}
 
