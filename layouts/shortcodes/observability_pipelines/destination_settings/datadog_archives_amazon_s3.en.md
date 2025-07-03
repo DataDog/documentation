@@ -3,15 +3,15 @@
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][10051] if you want to route logs to different object keys based on specific fields in your logs.
-     - **Note**: Datadog recommends that you start your prefixes with the directory name and without a leading slash (`/`). For example, `app-logs/` and `service-logs/`.
-1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
+     - **Note**: Datadog recommends that you start your prefixes with directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu. If you are going to archive and rehydrate your logs:
     - **Note**: Rehydration only supports the following [storage classes][10052]:
         - Standard
         - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10053] are both disabled.
         - Standard-IA
         - One Zone-IA
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
-    - See [Destination and log archive setup example](#destination-and-log-archive-setup-example) for an example of the values entered when you configure Log Archive.
+    - See [Destination and log archive setup example](#destination-and-log-archive-setup-example) for how to configure your Log Archive based on your Amazon S3 destination setup.
 1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier][10054] for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
     1. Enter the ARN of the IAM role you want to assume.
     1. Optionally, enter the assumed role session name and external ID.
