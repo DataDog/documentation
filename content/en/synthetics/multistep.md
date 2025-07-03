@@ -196,7 +196,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ### Subtests
 
-You can run existing API tests within Multistep API tests to reuse existing workflows up to two levels of nesting.
+Multistep API tests support subtests, allowing you to reuse existing API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
 
 To use an existing API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select an API test from the dropdown menu.
 
