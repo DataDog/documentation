@@ -104,6 +104,7 @@ code_language_ids:
     linux: Linux
     macos: macOS
     windows: Windows
+    aws-fargate: "AWS Fargate"
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     full_host: "Full Host"
