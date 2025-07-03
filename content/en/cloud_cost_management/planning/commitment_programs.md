@@ -20,16 +20,18 @@ With Commitment Programs, you can:
 
 {{< img src="cloud_cost/planning/planning-commitments-overview.png" alt="Dashboard showing filters, KPIs (Effective Savings Rate, Absolute Savings, Coverage, Utilization), a cost-over-time bar chart, and a table of on-demand hot-spots by region, instance family, and database engine." style="width:100%;" >}}
 
-This page explains how to use the [Commitment Programs page][1] to understand and optimize your cloud commitments.
 
 ## Getting started
 
+Use Commitment Programs to understand and optimize your cloud commitments.
+
 1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in Cloud Cost Management.
-2. Review KPIs in the [Commitments Overview](#commitments-overview) section.
-3. Use filters to focus on specific accounts, regions, or services.
-4. Explore the [Costs Overview](#costs-overview) to analyze utilization, coverage, and expiring commitments.
-5. Check expiration dates and renewal recommendations in the [Commitments Explorer](#commitments-explorer).
-6. Take action based on these insights:
+2. Use filters to focus on specific accounts, regions, or services.
+3. Gain insights into your KPIs, commitment costs, and renewal recommendations:
+   - Review KPIs in the [Commitments Overview](#commitments-overview) section.
+   - Explore the [Costs Overview](#costs-overview) to analyze utilization, coverage, and expiring commitments.
+   - Check expiration dates and renewal recommendations in the [Commitments Explorer](#commitments-explorer).
+4. Take action based on these insights:
    - Adjust workloads to better use your commitments and avoid extra on-demand charges.
    - Update commitments by buying or changing them based on your usage data.
    - Plan renewals or retire commitments before they expire.
@@ -80,7 +82,7 @@ Commitments Explorer provides a detailed, interactive table of all your cloud co
 
 {{< img src="cloud_cost/planning/commitments-explorer-3.png" alt="Table of AWS RDS Reserved Instance commitments, highlighting the 'Columns' button, an expired commitment, and a commitment that is expiring soon." style="width:100%;" >}}
 
-- Customize the table view by showing or hiding columns like Start Date, Multi-AZ, and NFU # (where applicable) to focus on the information most relevant to your needs.
+- Customize the table view to show or hide columns so you can focus on the most relevant information.
 - The table highlights commitments that have recently expired or are expiring soon, helping you plan renewals and avoid paying on-demand prices.
 
 The columns displayed in Commitments Explorer vary depending on the product (for example, Amazon RDS or EC2) and the specific commitment program. Here are the available columns:
@@ -96,7 +98,7 @@ The columns displayed in Commitments Explorer vary depending on the product (for
 | End Date | Date when the Reserved Instance term ends. | All |
 | Instance # | Number of instances covered by the Reserved Instance. | All |
 | NFU # | Number of Normalization Factor Units (NFUs) covered, which standardizes instance sizes for comparison. | All |
-| Utilization | Percentage of the Reserved Instance that was used during the selected period. | All |
+| Utilization | Percentage of the Reserved Instance used during the selected period. | All |
 | DB Engine | Database engine used by the instance (such as PostgreSQL, MySQL, SQL Server). | Amazon RDS |
 | Multi-AZ | Indicates whether the Reserved Instance covers a multiple availability zone deployment (Yes/No). | Amazon RDS |
 | OS | Operating system of the instance (such as Linux or Windows). | Amazon EC2 |
@@ -123,7 +125,7 @@ The columns displayed in Commitments Explorer vary depending on the product (for
 2. Use the filters to focus on soon-to-expire commitments.
 3. Plan renewals or replacements in advance to maintain coverage and maximize savings.
 
-### Targeting high on-demand spend
+### Target high on-demand spend
 
 **Scenario**: Your cloud bill shows consistently high on-demand usage for a particular service or region.
 
