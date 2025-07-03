@@ -56,9 +56,9 @@ Install the Datadog Agent in your Fargate task definition:
 
 ## 2. Enabling App and API Protection monitoring
 
-{{% app_and_api_protection_navigation_menu %}}
+{{% app_and_api_protection_nodejs_navigation_menu %}}
 
-{{% appsec-remote-config-activation %}}
+{{% aap_and_api_protection_nodejs_remote_config_activation %}}
 
 ### Manually enabling App and API Protection monitoring
 
@@ -155,7 +155,7 @@ aws ecs register-task-definition --cli-input-json file://task-definition.json
 aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap_and_api_protection_nodejs_verify_setup %}}
 
 ## Troubleshooting
 
@@ -166,4 +166,4 @@ If you encounter issues while setting up App and API Protection for your Node.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/setup/nodejs/compatibility
-[2]: /security/application_security/setup/nodejs/troubleshooting 
+[2]: /security/application_security/setup/nodejs/troubleshooting
