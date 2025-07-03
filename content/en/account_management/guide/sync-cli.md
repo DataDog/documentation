@@ -346,7 +346,7 @@ datadog-sync import --config config
 ### Using the cleanup flag to sync changes from the source destination
 The `sync` command provides a `--cleanup` flag. Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of source and destination organizations.
 
-For example, let's take a `ResourceA` and `ResourceB` that are imported and synced. After a deletion of `ResourceA` from the source organization, running the `import` command updates the source organization's state file to only include `ResourceB`. Running the `sync --cleanup=Force` command deletes `ResourceA` from the destination organization.
+For example, let's take a *ResourceA* and *ResourceB* that are imported and synced. After a deletion of *ResourceA* from the source organization, running the `import` command updates the source organization's state file to only include *ResourceB* . Running the `sync --cleanup=Force` command deletes *ResourceA* from the destination organization.
 
 
 ### Verify your Datadog disaster recovery (DDR) status 
