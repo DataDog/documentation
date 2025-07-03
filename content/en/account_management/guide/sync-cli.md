@@ -214,7 +214,7 @@ The docker run command mounts a specified `<PATH_TO_WORKING_DIR>` working direct
 
 ### Example usage
 
-This example uses the **US1 site URL** as the source URL and the **EU site URL** as the destination URL. Your source and destinations may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
+This example uses the **US1 API URL** for the source and the **EU API URL** for the destination of this data migration. Your source and destination may be different. See the list of [supported source and destination API URLs](#supported-resources-and-site-urls) for more information. 
 
 ```shell
 # Import resources from parent organization and store them locally
@@ -237,7 +237,7 @@ $ datadog-sync diffs \
 > ...
 > 2024-03-14 14:51:15,379 - INFO - Finished diffs
 
-# Sync the resources to the child organization from locally stored files and save the output locally
+# Sync the resources to the destination organization from locally stored files and save the output locally
 $ datadog-sync sync \
     --destination-api-key="..." \
     --destination-app-key="..." \
