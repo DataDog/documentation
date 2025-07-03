@@ -302,7 +302,7 @@ Operator
 |**Value** (required)     |Regex to filter attribute value by. Note: special regex characters need to be escaped if filtering by raw string.                                                    |
 |**Operator**             |All invalid operator's default to ExactMatch. Available operators are:<br> - `Not`: Match not equal to Value.<br> - `SubString` (_Deprecated_): Sub string matching. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.<br> - `ExactMatch` (_Deprecated_): Exact string match. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.                              |
 
-By default, if multiple filters are passed for the same resource, the **OR** logic is applied to the filters. This behavior can be adjusted using the `--filter-operator` option. (`DO WE HAVE AN EXAMPLE OF THIS USAGE`)
+If multiple filters are passed for the same resource, the **OR** logic is applied to the filters by default. This behavior can be adjusted using the `--filter-operator` option. (`DO WE HAVE AN EXAMPLE OF THIS USAGE`)
 
 
 
@@ -344,7 +344,7 @@ datadog-sync import --config config
 ```
 
 ### Using the cleanup flag to sync changes from the source destination
-The `sync` command provides a cleanup flag (`--cleanup`). Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of source and destination organizations.
+The `sync` command provides a `--cleanup` flag. Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of source and destination organizations.
 
 For example, let's take a `ResourceA` and `ResourceB` that are imported and synced. After a deletion of `ResourceA` from the source organization, running the `import` command updates the source organization's state file to only include `ResourceB`. Running the `sync --cleanup=Force` command deletes `ResourceA` from the destination organization.
 
