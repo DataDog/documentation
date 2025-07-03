@@ -137,7 +137,7 @@ AWS CloudWatch アラームを Datadog イベントエクスプローラーに�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_web_services" >}}
+{{< get-metrics-from-git "amazon-web-services" >}}
 
 
 **注**: AWS カスタムメトリクスの収集を有効にしたり、Datadog がインテグレーションを提供していないサービスからのメトリクスを収集することも可能です。詳しくは、[AWS インテグレーションと CloudWatch の FAQ][22] をご参照ください。
@@ -194,7 +194,7 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [WorkSpaces][61]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
 
 ### サービスチェック
-{{< get-service-checks-from-git "amazon_web_services" >}}
+{{< get-service-checks-from-git "amazon-web-services" >}}
 
 
 ## トラブルシューティング

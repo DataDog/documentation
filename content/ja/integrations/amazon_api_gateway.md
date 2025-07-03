@@ -133,7 +133,7 @@ API Gateway ログを有効にするには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_api_gateway" >}}
+{{< get-metrics-from-git "amazon-api-gateway" >}}
 
 
 
