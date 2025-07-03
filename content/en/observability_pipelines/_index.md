@@ -69,11 +69,13 @@ The Observability Pipelines UI provides a control plane to manage your Observabi
 
 ## Explore Observability Pipelines
 
-### Build pipelines with out-of-the-box templates
+### Build pipelines in the Observability Pipelines UI
 
-{{< img src="observability_pipelines/templates_20241003.png" alt="The Observability Pipelines UI showing the six templates" style="width:100%;" >}}
+{{< img src="observability_pipelines/dual_ship_pipeline.png" alt="Pipeline with one source connect to two processor groups and two destinations" style="width:100%;" >}}
 
-Build pipelines with out-of-the-box templates for the following [use cases][6]:
+Build your pipelines in the Observability Pipelines UI. After you select one of the out-the-box templates, the onboarding workflow walks you through setting up your source, processors, and destinations. The installation page provides instructions on how to install the Worker in your environment (Docker, Kubernetes, Linux, or CloudFormation).
+
+The out-of-the-box templates are for the following use cases:
 
 - [Archive Logs][7]
 - [Dual Ship Logs][8]
@@ -82,12 +84,6 @@ Build pipelines with out-of-the-box templates for the following [use cases][6]:
 - [Log Volume Control][11]
 - [Sensitive Data Redaction][12]
 - [Split Logs][13]
-
-### Build pipelines in the Observability Pipelines UI
-
-{{< img src="observability_pipelines/dual_ship_pipeline.png" alt="Pipeline with one source connect to two processor groups and two destinations" style="width:100%;" >}}
-
-Build your pipelines in the Observability Pipelines UI. After you select one of the out-the-box templates, the onboarding workflow walks you through setting up your source, processors, and destinations. The installation page provides instructions on how to install the Worker in your environment (Docker, Kubernetes, Linux, or CloudFormation).
 
 ### Enable out-of-the-box monitors for your pipeline components
 
