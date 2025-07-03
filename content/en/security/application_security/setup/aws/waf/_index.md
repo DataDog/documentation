@@ -106,7 +106,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
    }
    ```
 
-2. Run `terraform apply` to create/update the WAF resources.
+2. Run `terraform apply` to create and update the WAF resources.
 
 {{% /tab %}}
 {{< /tabs >}}
