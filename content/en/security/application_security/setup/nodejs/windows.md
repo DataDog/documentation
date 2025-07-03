@@ -14,7 +14,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-{{% app_and_api_protection_nodejs_overview %}}
+{{% aap/aap_and_api_protection_nodejs_overview %}}
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Install the Datadog Agent by following the [setup instructions for Windows](/age
 
 ## 2. Enabling App and API Protection monitoring
 
-{{% app_and_api_protection_nodejs_navigation_menu %}}
+{{% aap/aap_and_api_protection_nodejs_navigation_menu %}}
 {{% aap/aap_and_api_protection_nodejs_remote_config_activation %}}
 
 ### Manually enabling App and API Protection monitoring
