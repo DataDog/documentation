@@ -26,7 +26,7 @@ Datadog recommends syncing your accounts on a daily basis.
 
 ## Supported resources and site URLs
 
-Before you begin, confirm if both the **resource** you are migrating and the **source/destination API URLs** you are using are supported for the `sync-cli` tool:
+Before you begin, confirm that both the **resource** you are migrating and the **source/destination API URLs** you are using are supported by the `sync-cli` tool:
 
 {{% collapse-content title="List of supported resources" level="h5" expanded=true id="id-for-resources" %}}
 
@@ -68,7 +68,7 @@ Before you begin, confirm if both the **resource** you are migrating and the **s
 | team_memberships                       | Sync Datadog team memberships.                            |
 | users                                  | Sync Datadog users.                                       |
 
-**Note:** `logs_custom_pipelines` resource has been deprecated in favor of `logs_pipelines` resource which supports both logs OOTB integration and custom pipelines. To migrate to the new resource, rename the existing state files from `logs_custom_pipelines.json` to `logs_pipelines.json` for both source and destination files.
+**Note:** `logs_custom_pipelines` resource has been deprecated in favor of `logs_pipelines` resource which supports both OOTB integration and custom pipelines. To migrate to the new resource, rename the existing state files from `logs_custom_pipelines.json` to `logs_pipelines.json` for both source and destination files.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="List of source and destination API URLs" level="h5" expanded=true id="id-for-resources" %}}
@@ -286,7 +286,7 @@ For example, if you would like to filter for monitors that have the `filter test
 
 </div>
 
-### Available keys
+### List of available keys
 
 Type `REQUIRED`
 : Resource such as Monitors, Dashboards, and more.
