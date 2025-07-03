@@ -130,7 +130,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 | `DD_SERVICE` | Your application's service name. | Defaults to the name field value in `package.json`. |
 | `DD_ENV` | Your application's environment name. | There is no default value for this field. |
 | `DD_SERVERLESS_LOG_PATH` | The Logpath the sidecar uses to collect logs. | Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log` |
-| `WEBSITES_ENABLE_APP_SERVICE_STORAGE` | `true` | Setting this environment variable to `true` allows the `/home/` mount to persist and share with the sidecar |
+| `WEBSITES_ENABLE_APP_SERVICE_STORAGE` | `true` | Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar. |
 
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
