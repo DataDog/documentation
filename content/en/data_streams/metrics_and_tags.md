@@ -1,7 +1,7 @@
 ---
 title: Metrics and Tags
 aliases:
-  - "/data_streams/metrics_and_tags"
+  - "/data_streams/guide/metrics-and-tags"
 ---
 
 This document discusses the following Data Streams Monitoring metrics and their tags:
