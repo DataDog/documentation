@@ -196,17 +196,19 @@ To display your list of variables, type `{{` in your desired field.
 
 ### Subtests
 
-Multistep API tests support subtests, allowing you to reuse existing API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
+Multistep API tests support subtests, allowing you to reuse existing Multistep API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
 
-To use an existing API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select an API test from the dropdown menu.
+To use an existing Multistep API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select a Multistep API test from the dropdown menu.
 
-To convert steps from your current API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. 
+To convert steps from your current Multistep API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**.
 
 {{< img src="synthetics/multistep_tests/subtest.png" alt="UI for adding a subtest to a Multistep API test" width="60%" >}}
 
 To override a subtest variable in a Multistep API test, define it in the parent test using the same name. A variable always uses the first value assigned to it.
 
 If you don't need to run a subtest independently, you can pause it. It still runs as part of the Multistep API test but is not executed on its own.
+
+**Note:** Only Multistep API tests can be added as subtests. Using [API tests][1] as subtests is not supported.
 
 ## Test failure
 
