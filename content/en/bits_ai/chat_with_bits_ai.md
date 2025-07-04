@@ -11,7 +11,7 @@ aliases:
 - /bits_ai/getting_started/
 ---
 
-{{< callout url="#" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Chat with Bits AI is in preview. Please reach out to your account manager if you have questions.
 {{< /callout >}}
 
