@@ -8,7 +8,7 @@ aliases:
 
 The following App and API Protection capabilities are supported in the Ruby library, for the specified tracer version:
 
-| App and API Protection capability                   | Minimum Java tracer version |
+| App and API Protection capability                   | Minimum Ruby tracer version |
 | -------------------------------------------------- | --------------------------- |
 | Threat Detection                                   | 1.9.0                      |
 | Threat Protection                                  | 1.11.0                      |
@@ -52,7 +52,6 @@ The Ruby tracer includes support for the following frameworks, data stores, and 
 
 ### Web frameworks
 
-- Rack
 - Rails
 - Sinatra
 - Grape
