@@ -11,6 +11,9 @@ aliases:
 - /bits_ai/getting_started/
 ---
 
+<div class="alert alert-info">Chat with Bits AI is currently in preview. Please reach out to your account manager if you have questions.</a></div>
+
+
 ## Chat in Datadog
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
