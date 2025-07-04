@@ -11,7 +11,9 @@ aliases:
 - /bits_ai/getting_started/
 ---
 
-<div class="alert alert-info">Chat with Bits AI is currently in preview. Please reach out to your account manager if you have questions.</a></div>
+{{< callout url="#" >}}
+Chat with Bits AI is in preview. Please reach out to your account manager if you have questions.
+{{< /callout >}}
 
 
 ## Chat in Datadog
