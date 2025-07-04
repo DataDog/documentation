@@ -39,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/shared-responsibility-model/"
     tag: "Blog"
     text: "Simplifying the shared responsibility model: How to meet your cloud security obligations"
+  - link: "https://www.datadoghq.com/blog/detect-bedrock-misconfigurations-cloud-security"
+    tag: "Blog"
+    text: "Detect Amazon Bedrock misconfigurations with Datadog Cloud Security"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -60,7 +63,11 @@ Cloud Security leverages both the Datadog Agent and Agentless. It includes a var
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-{{< img src="security/csm/csm_overview_3.png" alt="Cloud Security in Datadog" width="100%">}}
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The new Cloud Security Summary shown below is in Preview. To get started, contact your Customer Success representative.
+{{< /callout >}} 
+
+{{< img src="security/csm/csm_overview_4.png" alt="Cloud Security Summary in Datadog" width="100%">}}
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -78,7 +85,7 @@ For an overview of your Cloud Security and App and API Protection findings, sort
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/findings_page.png" alt="Cloud Security Findings page" width="100%">}}
+{{< img src="security/csm/findings_page_1.png" alt="Cloud Security Findings page" width="100%">}}
 
 ## Investigate resources
 
@@ -92,7 +99,7 @@ Use the [Security Graph][17] to model your cloud environment as a relationship g
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
 
-{{< img src="infrastructure/resource_catalog/resource_catalog_infra_2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
+{{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 

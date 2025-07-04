@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
+Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm or the Datadog Operator.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -37,6 +37,10 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [Docker][50]
 - [kubectl][5]
+
+{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 

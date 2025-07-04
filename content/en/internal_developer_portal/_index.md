@@ -2,6 +2,9 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/internal-developer-portal/"
+  tag: "Blog"
+  text: "Ship software quickly and confidently with Datadog IDP"
 - link: "https://www.datadoghq.com/blog/software-catalog"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
@@ -14,10 +17,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadog-manages-internal-deployments/"
   tag: "Blog"
   text: "How Datadog's Infrastructure team manages internal deployments using the Service Catalog and CI/CD Visibility"
+- link: "https://www.datadoghq.com/blog/internal-developer-portal/"
+  tag: "Blog"
+  text: "Ship software quickly and confidently with Datadog IDP"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Join the preview for Datadog's Internal Developer Portal!" >}}
-{{< /callout >}}
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
 

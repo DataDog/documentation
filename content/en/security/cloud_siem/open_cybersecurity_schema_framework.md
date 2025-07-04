@@ -1,10 +1,13 @@
 ---
-title: Open Cybersecurity Schema Framework (OCSF) in Datadog
+title: Open Cybersecurity Schema Framework (OCSF) Common Data Model in Datadog
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
+- link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
+  tag: "Blog"
+  text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
 ---
 
 ## Overview
@@ -62,9 +65,12 @@ You can optionally add extensions, such as new attributes, objects, categories, 
 
 The following Log Management integrations support out-of-the-box OCSF pipelines:
 
-- Okta
+- 1Password
+- Auth0
 - CloudTrail
 - GitHub
+- Microsoft 365
+- Okta
 
 ## View Security Pipelines \- OCSF
 
@@ -99,13 +105,17 @@ To view OCSF data in logs:
 1. Click on a log.
 1. In the side panel, scroll down to the \`ocsf\` JSON attributes to see the OCSF data.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://github.com/ocsf/ocsf-schema/blob/4a8ad2fa4a1908f1cad2cbf331a1b49efd5001c2/dictionary.json
-[2]: https://github.com/ocsf/ocsf-docs/blob/main/Understanding%20OCSF.md#categories
+[2]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#categories
 [3]: https://schema.ocsf.io/1.4.0/categories/iam?extensions=
-[4]: https://github.com/ocsf/ocsf-docs/blob/main/Understanding%20OCSF.md#event-classes
+[4]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#event-classes
 [5]: https://schema.ocsf.io/1.4.0/profiles
-[6]: https://github.com/ocsf/ocsf-docs/blob/main/Understanding%20OCSF.md#profiles
-[7]: https://github.com/ocsf/ocsf-docs/blob/main/Understanding%20OCSF.md#extensions
+[6]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#profiles
+[7]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#extensions
 [8]: /logs/log_configuration/pipelines/?tab=source#integration-pipelines
 [9]: https://app.datadoghq.com/logs/pipelines
 [10]: https://app.datadoghq.com/logs

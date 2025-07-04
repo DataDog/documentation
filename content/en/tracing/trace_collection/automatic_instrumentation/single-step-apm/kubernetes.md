@@ -346,9 +346,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: "3.2.0"
-            python: "1.20.6"
-            js: "4.17.0"
+            dotnet: "x.x.x"
+            python: "x.x.x"
+            js: "x.x.x"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -363,9 +363,9 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
        instrumentation:
          enabled: true
          libVersions: # Add any libraries and versions you want to set
-            dotnet: "3.2.0"
-            python: "1.20.6"
-            js: "4.17.0"
+            dotnet: "x.x.x"
+            python: "x.x.x"
+            js: "x.x.x"
 {{< /highlight >}}
 
 {{< /collapse-content >}}

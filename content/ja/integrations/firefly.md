@@ -8,9 +8,9 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- 自動化
-- クラウド
-- 構成 & デプロイ
+- automation
+- cloud
+- 構成とデプロイ
 - developer tools
 - notifications
 custom_kind: integration
@@ -91,7 +91,7 @@ Firefly の統合ポリシーエンジンにより、危険な構成ミスやコ
 4. API キーをコピーして、専用の行に貼り付けます。
 5. **Done** をクリックします。
 
-## Agent
+## サポート
 何か質問はありますか？メール [contact@gofirefly.io][1] またはアプリ内チャットをご利用ください。
 
 [1]: mailto:contact@gofirefly.io

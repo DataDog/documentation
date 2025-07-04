@@ -11,12 +11,6 @@ further_reading:
   text: "Setup Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
-
 ## Overview
 
 The List View of Network Path is the default view for exploring various paths. Group by sources such as `hostname` and `service`.

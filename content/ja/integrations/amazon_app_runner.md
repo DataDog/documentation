@@ -1,4 +1,26 @@
 ---
+app_id: amazon-app-runner
+app_uuid: ff109e6f-e212-4655-bebf-c8ee54d4f7b2
+assets:
+  dashboards:
+    aws_app_runner: assets/dashboards/aws_app_runner.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: aws.apprunner.active_instances
+      metadata_path: assets/metrics/metric-spec.yaml
+      prefix: aws.apprunner.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 322
+    source_type_name: Amazon App Runner
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - aws
 - クラウド
@@ -8,22 +30,41 @@ categories:
 custom_kind: インテグレーション
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
 draft: false
 git_integration_title: amazon_app_runner
 has_logo: true
-integration_id: ''
+integration_id: amazon-app-runner
 integration_title: AWS App Runner
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_app_runner
-public_title: Datadog-AWS App Runner Integration
-short_description: 主要な AWS App Runner メトリクスを追跡します。
+public_title: AWS App Runner
+short_description: Quick, easy, and cost-effective deployment from source code or
+  container images.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Category::Provisioning
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Quick, easy, and cost-effective deployment from source code or container
+    images.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AWS App Runner
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 AWS App Runner を使用すると、ソースコードまたはコンテナイメージから AWS にアプリケーションをデプロイできます。
@@ -64,7 +105,7 @@ AWS App Runner は、サービスとオペレーションのステータス変�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_app_runner" >}}
+{{< get-metrics-from-git "amazon-app-runner" >}}
 
 
 ### イベント
@@ -87,5 +128,5 @@ AWS App Runner  インテグレーションには、サービスのチェック�
 [6]: https://app.datadoghq.com/event/stream
 [7]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-partners.html#eb-api-destination-datadog
 [8]: https://docs.aws.amazon.com/apprunner/latest/dg/monitor-ev.html
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_app_runner/amazon_app_runner_metadata.csv
+[9]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_app_runner/assets/metrics/metric-spec.yaml
 [10]: https://docs.datadoghq.com/ja/help/

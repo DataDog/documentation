@@ -11,6 +11,7 @@ Code Security scans your first-party code and open source libraries used in your
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
+- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in Terraform files stored in your repositories
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
@@ -56,6 +57,4 @@ Secret Scanning identifies and validates leaked secrets in your codebase. [Reque
 [7]: /security/code_security/iast/setup/
 [8]: /security/code_security/secret_scanning/
 [9]: https://www.datadoghq.com/product-preview/secret-scanning/
-
-
-
+[10]: /security/code_security/iac_security

@@ -1,6 +1,9 @@
 ---
-null
-...
+further_reading:
+- link: /tracing/troubleshooting/connection_errors/
+  tag: Documentación
+  text: Solucionar problemas de errores de conexión de APM
+title: Logs de inicio de rastreador
 ---
 ## Logs de inicio
 
@@ -45,7 +48,7 @@ Los archivos de log se guardan por defecto en los siguientes directorios. Utiliz
 
 **Nota:** En Linux, debes crear el directorio de logs antes de activar el modo de depuración.
 
-Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `31`.
+Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `32`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contiene los logs de configuración.
 
@@ -250,8 +253,14 @@ Cuando se activan los logs de inicio, el rastreador emite información de config
 
 **Configuration:**
 
+El rastreador Ruby imprime una línea de configuración para cada producto (por ejemplo, Profiling, Core y Tracing).
+
 ```text
-W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER CONFIGURATION - {"date":"2020-07-08T21:14:25+00:00","os_name":"x86_64-pc-linux-gnu","version":"0.37.0","lang":"ruby","lang_version":"2.7.0","enabled":true,"agent_url":"http://ddagent:8126?timeout=1","debug":false,"analytics_enabled":false,"runtime_metrics_enabled":false,"vm":"ruby-2.7.0","partial_flushing_enabled":false,"priority_sampling_enabled":false,"health_metrics_enabled":false}
+I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+
+I, [2023-08-16T18:09:01.972767 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2023-08-16T18:09:01+00:00","os_name":"aarch64-unknown-linux-gnu","version":"1.13.0","lang":"ruby","lang_version":"3.0.6","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.0.6","health_metrics_enabled":false}
+
+I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - TRACING - {"enabled":true,"agent_url":"http://agent:8126?timeout=30","analytics_enabled":false,"sample_rate":null,"sampling_rules":null,"integrations_loaded":"active_model_serializers@,aws@","partial_flushing_enabled":false,"priority_sampling_enabled":false,"integration_active_model_serializers_analytics_enabled":"false","integration_active_model_serializers_analytics_sample_rate":"1.0","integration_active_model_serializers_enabled":"true","integration_active_model_serializers_service_name":"","integration_aws_analytics_enabled":"false","integration_aws_analytics_sample_rate":"1.0","integration_aws_enabled":"true","integration_aws_service_name":"aws","integration_aws_peer_service":""}
 ```
 
 **Diagnostics:**
@@ -267,14 +276,8 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 
 **Configuration:**
 
-El rastreador de Ruby imprime una línea de configuración para cada producto (es decir, Profiling, Core y Tracing).
-
 ```text
-I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-
-I, [2023-08-16T18:09:01.972767 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2023-08-16T18:09:01+00:00","os_name":"aarch64-unknown-linux-gnu","version":"1.13.0","lang":"ruby","lang_version":"3.0.6","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.0.6","health_metrics_enabled":false}
-
-I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - TRACING - {"enabled":true,"agent_url":"http://agent:8126?timeout=30","analytics_enabled":false,"sample_rate":null,"sampling_rules":null,"integrations_loaded":"active_model_serializers@,aws@","partial_flushing_enabled":false,"priority_sampling_enabled":false,"integration_active_model_serializers_analytics_enabled":"false","integration_active_model_serializers_analytics_sample_rate":"1.0","integration_active_model_serializers_enabled":"true","integration_active_model_serializers_service_name":"","integration_aws_analytics_enabled":"false","integration_aws_analytics_sample_rate":"1.0","integration_aws_enabled":"true","integration_aws_service_name":"aws","integration_aws_peer_service":""}
+{"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
 ```
 
 **Diagnostics:**
