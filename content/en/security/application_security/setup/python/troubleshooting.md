@@ -33,7 +33,7 @@ further_reading:
 
 1. **Check ddtrace installation**
    - Verify ddtrace is installed: `pip show ddtrace`
-   - Install with security extras: `pip install ddtrace[security]`
+   - Install with security extras: `pip install ddtrace`
 
 2. **Import errors**
    - Ensure all required dependencies are installed

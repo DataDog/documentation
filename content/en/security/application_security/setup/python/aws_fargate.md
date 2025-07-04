@@ -64,12 +64,10 @@ Install the Datadog Agent in your Fargate task definition:
 Install the Datadog Python tracing library in your application environment:
 
 ```dockerfile
-RUN pip install ddtrace[security]
+RUN pip install ddtrace
 ```
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Update your task definition to include the Python agent and App and API Protection configuration:
 
@@ -103,54 +101,10 @@ Update your task definition to include the Python agent and App and API Protecti
 }
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Update your task definition and modify your application code:
-
-```json
-{
-  "containerDefinitions": [
-    {
-      "name": "your-python-app",
-      "image": "your-python-app-image",
-      "environment": [
-        {
-          "name": "DD_SERVICE",
-          "value": "<YOUR_SERVICE_NAME>"
-        },
-        {
-          "name": "DD_ENV",
-          "value": "<YOUR_ENVIRONMENT>"
-        }
-      ],
-      "command": [
-        "python",
-        "app.py"
-      ]
-    }
-  ]
-}
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable APM tracing and App and API Protection
-patch_all()
-config.appsec.enabled = True
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Update your task definition to include the Python agent and App and API Protection configuration with APM tracing disabled:
 
@@ -188,49 +142,6 @@ Update your task definition to include the Python agent and App and API Protecti
 }
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Update your task definition and modify your application code:
-
-```json
-{
-  "containerDefinitions": [
-    {
-      "name": "your-python-app",
-      "image": "your-python-app-image",
-      "environment": [
-        {
-          "name": "DD_SERVICE",
-          "value": "<YOUR_SERVICE_NAME>"
-        },
-        {
-          "name": "DD_ENV",
-          "value": "<YOUR_ENVIRONMENT>"
-        }
-      ],
-      "command": [
-        "python",
-        "app.py"
-      ]
-    }
-  ]
-}
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable App and API Protection but disable APM tracing
-patch_all()
-config.appsec.enabled = True
-config.tracing.enabled = False
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 ## 3. Run your application

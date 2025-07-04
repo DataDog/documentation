@@ -37,14 +37,12 @@ Install the Datadog Agent by following the [setup instructions for Docker](/agen
 ### Manually enabling App and API Protection monitoring
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
 # Install the Datadog Python tracing library
-RUN pip install ddtrace[security]
+RUN pip install ddtrace
 
 # Set environment variables
 ENV DD_APPSEC_ENABLED=true
@@ -55,47 +53,16 @@ ENV DD_ENV=<YOUR_ENVIRONMENT>
 CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Install the Datadog Python tracing library and modify your application code:
-
-```dockerfile
-# Install the Datadog Python tracing library
-RUN pip install ddtrace[security]
-
-# Set environment variables
-ENV DD_SERVICE=<YOUR_SERVICE_NAME>
-ENV DD_ENV=<YOUR_ENVIRONMENT>
-
-# Standard Python command
-CMD ["python", "app.py"]
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable APM tracing and App and API Protection
-patch_all()
-config.appsec.enabled = True
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
 # Install the Datadog Python tracing library
-RUN pip install ddtrace[security]
+RUN pip install ddtrace
 
 # Set environment variables
 ENV DD_APPSEC_ENABLED=true
@@ -107,36 +74,6 @@ ENV DD_ENV=<YOUR_ENVIRONMENT>
 CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Install the Datadog Python tracing library and modify your application code:
-
-```dockerfile
-# Install the Datadog Python tracing library
-RUN pip install ddtrace[security]
-
-# Set environment variables
-ENV DD_SERVICE=<YOUR_SERVICE_NAME>
-ENV DD_ENV=<YOUR_ENVIRONMENT>
-
-# Standard Python command
-CMD ["python", "app.py"]
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable App and API Protection but disable APM tracing
-patch_all()
-config.appsec.enabled = True
-config.tracing.enabled = False
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 ## 3. Run your application

@@ -38,12 +38,10 @@ Install the Datadog Agent by following the [setup instructions for Windows](/age
 Install the Datadog Python tracing library:
 
 ```powershell
-pip install ddtrace[security]
+pip install ddtrace
 ```
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Set the required environment variables and start your Python application:
 
@@ -55,36 +53,10 @@ $env:DD_ENV="<YOUR_ENVIRONMENT>"
 ddtrace-run python app.py
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Set the required environment variables and start your Python application:
-
-```powershell
-$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
-$env:DD_ENV="<YOUR_ENVIRONMENT>"
-
-python app.py
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable APM tracing and App and API Protection
-patch_all()
-config.appsec.enabled = True
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-{{< tabs >}}
-{{% tab "Using environment variables" %}}
 
 Set the required environment variables and start your Python application:
 
@@ -97,31 +69,6 @@ $env:DD_ENV="<YOUR_ENVIRONMENT>"
 ddtrace-run python app.py
 ```
 
-{{% /tab %}}
-{{% tab "Using code" %}}
-
-Set the required environment variables and start your Python application:
-
-```powershell
-$env:DD_SERVICE="<YOUR_SERVICE_NAME>"
-$env:DD_ENV="<YOUR_ENVIRONMENT>"
-
-python app.py
-```
-
-Add the following to your application code:
-
-```python
-from ddtrace import patch_all, config
-
-# Enable App and API Protection but disable APM tracing
-patch_all()
-config.appsec.enabled = True
-config.tracing.enabled = False
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 {{% /collapse-content %}}
 
 ## 3. Run your application
