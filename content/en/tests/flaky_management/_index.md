@@ -52,7 +52,7 @@ Track the evolution of the number of flaky tests with the `test_optimization.tes
 - `flaky_category`
 - `test_codeowners`
 
-The `branch` tag only exists when the test has flaked in the default branch of the repository during the last 30 days. This helps you discard flaky tests that only exhibited flakiness in feature branches and may not be relevant. You can configure the default branch of your repositories under [Repository Settings][2].
+The `branch` tag only exists when the test has flaked in the default branch of the repository during the last 30 days. This helps you discard flaky tests that have only exhibited flakiness in feature branches, as these may not be relevant. You can configure the default branch of your repositories under [Repository Settings][2].
 
 ## Investigate a flaky test
 
