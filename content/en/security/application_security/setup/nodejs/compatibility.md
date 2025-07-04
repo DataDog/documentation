@@ -11,21 +11,21 @@ aliases:
 
 The following App and API Protection capabilities are supported in the Node.js library, for the specified tracer version:
 
-| App and API Protection capability        | Minimum Node.js tracer version                     |
-|----------------------------------------|----------------------------------------------------|
-| Threat Detection                       | 4.0.0                                              |
-| Threat Protection                      | 4.0.0                                              |
-| Customize response to blocked requests | 4.1.0                                              |
-| Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
-| API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
+| App and API Protection capability      | Minimum Node.js tracer version                   |
+|----------------------------------------|--------------------------------------------------|
+| Threat Detection                       | 4.0.0                                            |
+| Threat Protection                      | 4.0.0                                            |
+| Customize response to blocked requests | 4.1.0                                            |
+| Automatic user activity event tracking | 4.4.0                                            |
+| API Security                           | 4.30.0                                           |
 
 The minimum tracer version to get all supported App and API Protection capabilities for Node.js is 4.30.0.
-
 
 **Note**:
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
+
 | Type        | Threat Detection support |
 |-------------|--------------------------|
 | Docker      | {{< X >}}                |
@@ -33,6 +33,7 @@ The minimum tracer version to get all supported App and API Protection capabilit
 | Amazon ECS  | {{< X >}}                |
 | AWS Fargate | {{< X >}}                |
 | AWS Lambda  | {{< X >}}                |
+
 
 ## Language and framework compatibility
 
@@ -48,12 +49,9 @@ For the best level of support, always run the latest LTS release of Node.js, and
 
 For more information about Node.js release, see the [official Node.js documentation][4].
 
-
-
 ### Operating system support
 
 The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example App and API Protection capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
-
 
 | Operating System | Architectures | Minimum Versions                         |
 |------------------|---------------|------------------------------------------|
@@ -61,10 +59,6 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Linux (musl)     | arm64, x64    | Alpine 3.13                              |
 | macOS            | arm64, x64    | Catalina (10.15)                         |
 | Windows          | x64           | Windows 8.1, Windows Server 2012         |
-
-
-
-
 
 ### Web framework compatibility
 
@@ -74,22 +68,17 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### App and API Protection Capability Notes
 
-Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using `body-parser` library.
+Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using either the [`body-parser`][45] or [`multer`][46] libraries.
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? |
 |-----------|----------|-----------------------------|------------------------------|
-| express   | >=4      | {{< X >}}                   | {{< X >}}                    |
-| nextjs    | >=11.1   | {{< X >}}                   |                              |
-
-
-
-
+| express   | `>=4`      | {{< X >}}                   | {{< X >}}                    |
+| fastify   | `>=2`      | {{< X >}}                   | {{< X >}}                    |
+| nextjs    | `>=11.1`   | {{< X >}}                   |                              |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-
 ### Networking framework compatibility
-
 
 **Networking tracing provides:**
 
@@ -97,7 +86,6 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 - Request-based blocking
 
 ##### App and API Protection Capability Notes
-
 
 | Framework | Threat Detection supported? | Threat Protection supported? |
 |-----------|-----------------------------|------------------------------|
@@ -109,7 +97,6 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 
 ### Data store compatibility
 
-
 **Datastore tracing provides:**
 
 - Timing request to response
@@ -119,7 +106,6 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 ##### App and API Protection Capability Notes
 
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-
 
 | Framework                | Versions  | Threat Detection supported? | Threat Protection supported? |
 |--------------------------|-----------|-----------------------------|------------------------------|
@@ -141,7 +127,6 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 | [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |
 | [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |
 | [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    |
-
 
 ### User Authentication Frameworks compatibility
 
@@ -176,3 +161,5 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 [42]: https://github.com/sequelize/sequelize
 [43]: https://github.com/apollographql/apollo-server
 [44]: https://www.npmjs.com/package/apollo-server-core
+[45]: https://www.npmjs.com/package/body-parser
+[46]: https://www.npmjs.com/package/multer
