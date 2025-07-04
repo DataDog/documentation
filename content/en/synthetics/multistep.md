@@ -208,7 +208,7 @@ To override a subtest variable in a Multistep API test, define it in the parent 
 
 If you don't need to run a subtest independently, you can pause it. It still runs as part of the Multistep API test but is not executed on its own.
 
-**Note:** Only Multistep API tests can be added as subtests. [API tests][1] are not supported.
+**Note:** Only Multistep API tests can be added as subtests. Using [API tests][1] as subtests is not supported.
 
 ## Test failure
 
