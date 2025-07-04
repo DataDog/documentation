@@ -261,7 +261,7 @@ Configure a file appender in `log4j.xml`. For example:
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </layout>
   </appender>
 
@@ -283,7 +283,7 @@ Configure a file appender in `log4j2.xml`. For example:
 <Configuration>
   <Appenders>
     <File name="FILE" fileName="logs/app.log">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </File>
   </Appenders>
 
@@ -308,7 +308,7 @@ Configure a file appender in `logback.xml`. For example:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
