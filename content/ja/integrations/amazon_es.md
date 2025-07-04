@@ -92,7 +92,7 @@ Amazon OpenSearch Service から S3 バケットまたは CloudWatch のいず�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_es" >}}
+{{< get-metrics-from-git "amazon-es" >}}
 
 
 ### イベント

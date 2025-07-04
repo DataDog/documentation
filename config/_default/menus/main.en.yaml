@@ -3618,45 +3618,55 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
       weight: 4
+    - name: Planning
+      url: cloud_cost_management/planning
+      parent: cloud_cost
+      identifier: cloud_cost_planning
+      weight: 5
+    - name: Budgets
+      url: cloud_cost_management/planning/budgets
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_budgets
+      weight: 501
+    - name: Commitment Programs
+      url: cloud_cost_management/planning/commitment_programs
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_commitment_programs
+      weight: 502
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 5
+      weight: 6
     - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
-      weight: 6
+      weight: 7
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
-      weight: 7
+      weight: 8
     - name: Reports
       url: /cloud_cost_management/reports
       parent: cloud_cost
       identifier: cloud_cost_reports
-      weight: 8
+      weight: 9
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 9
+      weight: 10
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 901
+      weight: 1001
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 10
-    - name: Budgets
-      url: /cloud_cost_management/budgets
-      parent: cloud_cost
-      identifier: cloud_cost_budgets
       weight: 11
     - name: Anomalies
       url: /cloud_cost_management/anomalies
@@ -4584,81 +4594,91 @@ menu:
       identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Quickstart
-      url: llm_observability/quickstart/
-      parent: llm_obs
-      identifier: llm_obs_quickstart
-      weight: 1
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
+      weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_obs
+      identifier: llm_obs_quickstart
       weight: 2
     - name: Setup
       url: llm_observability/setup/
       parent: llm_obs
       identifier: llm_obs_setup
       weight: 3
-    - name: SDK
-      url: llm_observability/setup/sdk/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_sdk
-      weight: 301
+    - name: LLM Obs SDK
+      url: llm_observability/sdk
+      parent: llm_obs
+      identifier: llm_obs_sdk
+      weight: 4
     - name: Auto Instrumentation
-      url: llm_observability/setup/auto_instrumentation
-      parent: llm_obs_setup
+      url: llm_observability/sdk/auto_instrumentation
+      parent: llm_obs_sdk
       identifier: llm_obs_setup_auto_instrumentation
-      weight: 302
-    - name: API
+      weight: 401
+    - name: LLM Obs API
       url: llm_observability/setup/api/
-      parent: llm_obs_setup
-      identifier: llm_obs_setup_api
-      weight: 303
+      parent: llm_obs
+      identifier: llm_obs_api
+      weight: 6
+    - name: Monitoring
+      url: llm_observability/monitoring
+      parent: llm_obs
+      identifier: llm_obs_monitoring
+      weight: 7
+    - name: Connect with APM
+      url: llm_observability/monitoring/llm_observability_and_apm
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_apm
+      weight: 701
+    - name: Cluster Map
+      url: llm_observability/monitoring/cluster_map/
+      parent: llm_obs_monitoring
+      identifier: llm_obs_cluster_map
+      weight: 702
+    - name: Agent Monitoring
+      url: llm_observability/monitoring/agent_monitoring
+      parent: llm_obs_monitoring
+      identifier: llm_obs_agent_monitoring
+      weight: 703
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
       identifier: llm_obs_evaluations
-      weight: 4
-    - name: Out-of-the-Box Evaluations
+      weight: 8
+    - name: Out-of-the-Box
       url: llm_observability/evaluations/ootb_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ootb_evaluations
-      weight: 401
-    - name: Submit Custom Evaluations
-      url: llm_observability/evaluations/submit_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_submit_evaluations
-      weight: 402
-    - name: Ragas Evaluations
+      weight: 801
+    - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_ragas_evaluations
-      weight: 403
-    - name: NeMo Evaluations
+      weight: 802
+    - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 404
-    - name: Cluster Map
-      url: llm_observability/cluster_map/
-      parent: llm_obs
-      identifier: llm_obs_cluster_map
-      weight: 5
-    - name: Agent Monitoring
-      url: llm_observability/agent_monitoring
-      parent: llm_obs
-      identifier: llm_obs_agent_monitoring
-      weight: 6
+      weight: 803
+    - name: Custom
+      url: llm_observability/evaluations/submit_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_submit_evaluations
+      weight: 804
     - name: Experiments
       url: llm_observability/experiments_preview
       parent: llm_obs
       identifier: llm_obs_experiments
-      weight: 7
+      weight: 9
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 10
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

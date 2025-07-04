@@ -5270,6 +5270,143 @@ components:
       type: string
       x-enum-varnames:
       - ARITHMETIC_PROCESSOR
+    LogsArrayProcessor:
+      description: 'A processor for extracting, aggregating, or transforming values
+        from JSON arrays within your logs.
+
+        Supported operations are:
+
+        - Select value from matching element
+
+        - Compute array length
+
+        - Append a value to an array'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        operation:
+          $ref: '#/components/schemas/LogsArrayProcessorOperation'
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorType'
+      required:
+      - operation
+      - type
+      type: object
+    LogsArrayProcessorOperation:
+      description: Configuration of the array processor operation to perform.
+      oneOf:
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationAppend'
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationLength'
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationSelect'
+    LogsArrayProcessorOperationAppend:
+      description: Operation that appends a value to a target array attribute.
+      properties:
+        preserve_source:
+          default: true
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        source:
+          description: Attribute path containing the value to append.
+          example: network.client.ip
+          type: string
+        target:
+          description: Attribute path of the array to append to.
+          example: sourceIps
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationAppendType'
+      required:
+      - type
+      - source
+      - target
+      type: object
+    LogsArrayProcessorOperationAppendType:
+      description: Operation type.
+      enum:
+      - append
+      example: append
+      type: string
+      x-enum-varnames:
+      - APPEND
+    LogsArrayProcessorOperationLength:
+      description: Operation that computes the length of a `source` array and stores
+        the result in the `target` attribute.
+      properties:
+        source:
+          description: Attribute path of the array to measure.
+          example: tags
+          type: string
+        target:
+          description: Attribute that receives the computed length.
+          example: tagCount
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationLengthType'
+      required:
+      - type
+      - source
+      - target
+      type: object
+    LogsArrayProcessorOperationLengthType:
+      description: Operation type.
+      enum:
+      - length
+      example: length
+      type: string
+      x-enum-varnames:
+      - LENGTH
+    LogsArrayProcessorOperationSelect:
+      description: Operation that finds an object in a `source` array using a `filter`,
+        and then extracts a specific value into the `target` attribute.
+      properties:
+        filter:
+          description: Filter condition expressed as `key:value` used to find the
+            matching element.
+          example: name:Referrer
+          type: string
+        source:
+          description: Attribute path of the array to search into.
+          example: httpRequest.headers
+          type: string
+        target:
+          description: Attribute that receives the extracted value.
+          example: referrer
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationSelectType'
+        value_to_extract:
+          description: Key of the value to extract from the matching element.
+          example: value
+          type: string
+      required:
+      - type
+      - source
+      - target
+      - filter
+      - value_to_extract
+      type: object
+    LogsArrayProcessorOperationSelectType:
+      description: Operation type.
+      enum:
+      - select
+      example: select
+      type: string
+      x-enum-varnames:
+      - SELECT
+    LogsArrayProcessorType:
+      default: array-processor
+      description: Type of logs array processor.
+      enum:
+      - array-processor
+      example: array-processor
+      type: string
+      x-enum-varnames:
+      - ARRAY_PROCESSOR
     LogsAttributeRemapper:
       description: 'The remapper processor remaps any source attribute(s) or tag to
         another target attribute or tag.
@@ -6167,6 +6304,7 @@ components:
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
       - $ref: '#/components/schemas/LogsSpanRemapper'
+      - $ref: '#/components/schemas/LogsArrayProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -16972,6 +17110,7 @@ components:
       - assertRequests
       - click
       - extractFromJavascript
+      - extractFromEmailBody
       - extractVariable
       - goToEmailLink
       - goToUrl
@@ -17001,6 +17140,7 @@ components:
       - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
+      - EXTRACT_FROM_EMAIL_BODY
       - EXTRACT_VARIABLE
       - GO_TO_EMAIL_LINK
       - GO_TO_URL
@@ -27323,7 +27463,10 @@ paths:
 
         Retention is 7 days.
 
-        Results are paginated with a max of 1000 results at a time.'
+        Results are paginated with a max of 1000 results at a time.
+
+        **Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id`
+        in the response.'
       operationId: ListHosts
       parameters:
       - description: String to filter search results.
@@ -35176,6 +35319,89 @@ paths:
         - synthetics_write
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/search:
+    get:
+      description: Search for Synthetic tests and Test Suites.
+      operationId: SearchTests
+      parameters:
+      - description: If true, include the full configuration for each test in the
+          response.
+        in: query
+        name: include_full_config
+        required: false
+        schema:
+          type: boolean
+      - description: If true, returns suites instead of tests.
+        in: query
+        name: search_suites
+        required: false
+        schema:
+          type: boolean
+      - description: If true, return only facets instead of full test details.
+        in: query
+        name: facets_only
+        required: false
+        schema:
+          type: boolean
+      - description: The offset from which to start returning results.
+        in: query
+        name: start
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: The maximum number of results to return.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 50
+          format: int64
+          type: integer
+      - description: The sort order for the results (e.g., 'name,asc' or 'name,desc').
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name,asc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListTestsResponse'
+          description: OK - Returns the list of Synthetic tests matching the search.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Search Synthetic tests
+      tags:
+      - Synthetics
+      x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/trigger:
     post:
       description: Trigger a set of Synthetic tests.
@@ -39330,13 +39556,21 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: "Datadog Synthetic Monitoring uses simulated user requests and browser
-    rendering to help you ensure uptime,\nidentify regional issues, and track your
-    application performance. Synthetic tests come in\ntwo different flavors, [API
-    tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser
-    tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog\u2019s
-    API to\nmanage both test types programmatically.\n\nFor more information, see
-    the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+- description: 'Datadog Synthetic Monitoring uses simulated user requests and browser
+    rendering to help you ensure uptime,
+
+    identify regional issues, and track your application performance. Synthetic tests
+    come in
+
+    two different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)
+
+    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You
+    can use Datadog''s API to
+
+    manage both test types programmatically.
+
+
+    For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'
   name: Synthetics
 - description: 'The tag endpoint allows you to assign tags to hosts,
 

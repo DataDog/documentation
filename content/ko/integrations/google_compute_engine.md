@@ -77,7 +77,7 @@ Datadog는 GCE API의 호스트 상태에 따라 GCE 오토스케일링으로 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_compute_engine" >}}
+{{< get-metrics-from-git "google-compute-engine" >}}
 
 
 ### 이벤트

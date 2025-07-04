@@ -62,7 +62,7 @@ Pour créer des monitors de métrique prenant en charge la désactivation automa
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_vm" >}}
+{{< get-metrics-from-git "azure-vm" >}}
 
 
 ### Événements
