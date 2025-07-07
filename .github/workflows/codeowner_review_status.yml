@@ -32,7 +32,7 @@ jobs:
         
       - name: Validate STS Token
         env:
-          GH_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
+          GH_TOKEN: ${{ steps.octo-sts.outputs.token }}
         run: |
           gh api /orgs/DataDog/teams/documentation/members
 
