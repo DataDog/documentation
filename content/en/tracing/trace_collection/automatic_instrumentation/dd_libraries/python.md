@@ -148,13 +148,13 @@ git grep -P -e "DD_LLMOBS_APP_NAME" \
 
 | Deprecation                                     | Action Required                                                                                                                        |
 |-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_ANALYTICS_ENABLED`                          | Removed. This is now a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
+| `DD_ANALYTICS_ENABLED`                          | Removed. This is a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
 | `DD_HTTP_CLIENT_TAG_QUERY_STRING`               | Use `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING` instead.                                                                                   |
 | `DD_LLMOBS_APP_NAME`                            | Use `DD_LLMOBS_ML_APP` instead.                                                                                                        |
 | `_DD_LLMOBS_EVALUATOR_SAMPLING_RULES`           | Use `DD_LLMOBS_EVALUATOR_SAMPLING_RULES` instead (without the leading underscore).                                                     |
 | `_DD_LLMOBS_EVALUATORS`                         | Use `DD_LLMOBS_EVALUATORS` instead (without the leading underscore).                                                                   |
-| `DD_PYTEST_USE_NEW_PLUGIN_BETA`                 | Removed. The new pytest plugin is now the default and is no longer in beta.                                                            |
-| `DD_TRACE_ANALYTICS_ENABLED`                    | Removed. This is now a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
+| `DD_PYTEST_USE_NEW_PLUGIN_BETA`                 | Removed. The new pytest plugin is the default and is no longer in beta.                                                            |
+| `DD_TRACE_ANALYTICS_ENABLED`                    | Removed. This is a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
 | `DD_TRACE_METHODS` (using `[]` notation)        | You must use the `:` notation. For example: `mod.submod:method2;mod.submod:Class.method1`. See the [DD_TRACE_METHODS][16] for details. |
 | `DD_TRACE_PROPAGATION_STYLE="b3 single header"` | Use `DD_TRACE_PROPAGATION_STYLE=b3` for identical behavior.                                                                            |
 | `DD_TRACE_SAMPLE_RATE`                          | Use `DD_TRACE_SAMPLING_RULES` instead. See [User-Defined Rules][17] for details.            |
@@ -177,7 +177,7 @@ The following methods, attributes, and behaviors have been removed or changed.
 - `Span.sampled`: This attribute is removed. Use `span.context.sampling_priority > 0` to check if a span is sampled.
 - `ddtrace.opentracer`: The `_dd_tracer` attribute is removed. Use the global `ddtrace.tracer` instead.
 - `LLMObs.annotate()`: The `parameters` argument is removed. Use `metadata` instead.
-- `choose_matcher()`: Callables and regex patterns are no longer allowed as arguments to `ddtrace.tracer.sampler.rules[].choose_matcher`. You must now pass a string.
+- `choose_matcher()`: Callables and regex patterns are no longer allowed as arguments to `ddtrace.tracer.sampler.rules[].choose_matcher`. You must pass a string.
 
 ##### LLM Observability
 
@@ -185,14 +185,14 @@ The following methods, attributes, and behaviors have been removed or changed.
 
 ##### CI Visibility
 
-- The new pytest plugin is now the default.
-- Module, suite, and test names are now parsed from `item.nodeid`.
-- Test names for class-based tests now include the class name (for example, `TestClass::test_method`).
-- Test skipping is now performed at the suite level.
+- The new pytest plugin is the default.
+- Module, suite, and test names are parsed from `item.nodeid`.
+- Test names for class-based tests include the class name (for example, `TestClass::test_method`).
+- Test skipping is performed at the suite level.
 
 #### Step 3: Upgrade the library
 
-Once you have updated your code to address the breaking changes, you can upgrade to the latest v3 release.
+After you have updated your code to address the breaking changes, you can upgrade to the latest v3 release.
 
 ```sh
 pip install --upgrade ddtrace
