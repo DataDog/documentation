@@ -59,4 +59,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
 [18]: /actions/private_actions
 [19]: /real_user_monitoring
-[20]: /account_management/org_settings/cross_org_visibility/#list-connections
+[20]: /account_management/org_settings/cross_org_visibility/#permissions
