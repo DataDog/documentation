@@ -74,8 +74,8 @@ watch-cdocs:
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
-	@make dependencies
 	@make update_websites_sources_module
+	@make dependencies
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -153,6 +153,10 @@ update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
+	node_modules/hugo-bin/vendor/hugo mod vendor
+	cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/
+	rm -rf _vendor
+
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
