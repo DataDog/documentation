@@ -12,12 +12,12 @@ aliases:
 The following App and API Protection capabilities are supported in the Go library, for the specified tracer version:
 
 | App and API Protection capability                   | Minimum Go tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection| 1.47.0  |
-| API Security | 1.59.0 |
-| Threat Protection |  1.50.0   |
-| Customize response to blocked requests | 1.53.0 |
-| Automatic user activity event tracking | not supported |
+| -------------------------------- |---------------------------|
+| Threat Detection| 1.47.0                    |
+| API Security | 1.59.0                    |
+| Threat Protection | 1.50.0                    |
+| Customize response to blocked requests | 1.53.0                    |
+| Automatic user activity event tracking | 1.47.0                    |
 
 The minimum tracer version to get all supported App and API Protection capabilities for Go is 1.59.0.
 
@@ -65,15 +65,19 @@ Supported packages have changed between v1 and v2 of the Go tracer.
 
 | Framework         | Threat Detection supported? | Threat Protection supported? |
 |-------------------|-----------------------------|------------------------------|
-| [net/http][25]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
-| [Gin][20]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [net/http][25]    | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [Gin][20]         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | [Gorilla Mux][21] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [gRPC][23]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gRPC][23]        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | [echo v4][22]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
-| [chi][24] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [graphql-go][17] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [gqlgen][18] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [httprouter][27]  | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [chi][24]         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [graphql-go][17]  | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gqlgen][18]      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
+### Body Monitoring compatiblity
+
+TODO
 
 ### Networking framework compatibility
 
@@ -98,6 +102,7 @@ Supported packages have changed between v1 and v2 of the Go tracer.
 [24]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [25]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [26]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
+[27]: https://pkg.go.dev/github.com/julienschmidt/httprouter
 
 {{% /tab %}}
 {{% tab "v1" %}}
