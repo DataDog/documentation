@@ -2,10 +2,10 @@
 title: Remap Reserved Attributes
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/processors/remap/"
+- link: "observability_pipelines/processors/edit_fields/"
   tag: "Documentation"
   text: "Learn more about the Edit Fields processor"
-- link: "observability_pipelines/processors/custom_processors/"
+- link: "observability_pipelines/processors/custom_processor/"
   tag: "Documentation"
   text: "Learn more about the Custom Processor processor"
 ---
@@ -71,5 +71,9 @@ The following Custom Processor script sets the `status` field to the static valu
 In the below example image, the input shows `status` with the value `wrongstatus`. After processing the log with the script, the output shows `status` with `info` as assigned.
 
 {{< img src="observability_pipelines/guide/remap_attributes/custom_processor_statically_assign.png" alt="A custom processor showing an input the incorrect status value and the output showing the correct status" style="width:100%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
