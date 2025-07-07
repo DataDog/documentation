@@ -7052,6 +7052,11 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
       weight: 110
+    - name: Performance overhead
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/performance_overhead
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_performance_overhead
+      weight: 111
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
