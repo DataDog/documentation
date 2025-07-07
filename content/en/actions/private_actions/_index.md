@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/private-actions/"
   tag: "Blog"
   text: "Remediate Kubernetes incidents faster using private actions in your apps and workflows"
+- link: "https://www.datadoghq.com/blog/pm-app-automation/"
+  tag: "Blog"
+  text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 ---
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network using Docker or [Kubernetes][1] and pair the runner with a [connection][2].
