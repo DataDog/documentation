@@ -34,7 +34,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
         run: |
-          gh api -H "Authorization: Bearer ${{ env.GH_TOKEN }}" /orgs/DataDog/teams/documentation/members
+          gh api /orgs/DataDog/teams/documentation/members
 
       - name: Check Documentation Team Approval
         id: check_approvals
