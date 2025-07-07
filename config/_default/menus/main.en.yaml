@@ -8064,16 +8064,21 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
+    - name: Ownership of Views
+      url: real_user_monitoring/ownership_of_views/
+      parent: rum
+      identifier: rum_ownership_of_views
+      weight: 11
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 11
+      weight: 12
     - name: Data Security
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 12
+      weight: 13
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
