@@ -12,10 +12,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
  
 
 ## Overview
@@ -42,7 +38,7 @@ To stop recording, click **Stop Recording**.
 
 ## Manually added steps
 
-In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using the [element inspector](#element-inspector), [assertions](#assertion), and [interactions](#interactions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using the [element inspector](#element-inspector), [assertions](#assertion), and [interactions](#interaction)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
 
 ### Element Inspector
 
@@ -309,10 +305,20 @@ After adding the subtest to your mobile test, click the subtest to view another 
 
 {{< img src="mobile_app_testing/test_steps/subtest_preview_steps_click.png" alt="Selecting a subtest shows a preview of the steps" style="width:60%" >}}
 
+## Variables
 
-### Variables
-If your subtest contains variables, they are inherited by the test you import them into. 
+{{% synthetics-variables %}}
+
+**Note**: When you import a subtest into another test, any variables defined in the subtest are inherited by the main test.
 To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
+
+### Use global variables
+
+You can use the [global variables defined in **Settings**][4] in the **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To view a list of available variables, type `{{` in the desired field.
+
+Make sure to define the variables you want to use in the user journey before you start recording.
+
+You can inject available variables directly into the test steps while recording.
 
 ## Manage step order
 

@@ -134,7 +134,7 @@ Hay dos maneras de enviar alarmas de CloudWatch AWS al Explorador de eventos de 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_web_services" >}}
+{{< get-metrics-from-git "amazon-web-services" >}}
 
 
 **Nota**: Puedes habilitar la recopilación de métricas personalizadas de AWS, así como métricas de servicios para los que Datadog no tiene una integración. Consulta las [FAQ sobre la integración de AWS y CloudWatch][22] para obtener más información.
@@ -191,7 +191,7 @@ Las siguientes etiquetas se recopilan con la integración de AWS. **Nota**: Algu
 | [WorkSpaces][61]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
 ### Checks de servicio
-{{< get-service-checks-from-git "amazon_web_services" >}}
+{{< get-service-checks-from-git "amazon-web-services" >}}
 
 
 ## Solucionar problemas

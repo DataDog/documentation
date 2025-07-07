@@ -20,7 +20,7 @@ short_description: Envía alertas y gráficos de Datadog al grupo DingTalk de tu
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Aprovecha la integración con DingTalk para:
@@ -32,7 +32,7 @@ Aprovecha la integración con DingTalk para:
 
 La integración DingTalk se instala con el [cuadro de la integración DingTalk][1] de Datadog.
 
-## Configuración
+## Configurar
 
 Para integrar Datadog en un grupo DingTalk:
 
@@ -62,7 +62,7 @@ La integración DingTalk no no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog][3].
 
 [1]: https://app.datadoghq.com/integrations/dingtalk
 [2]: https://docs.datadoghq.com/es/monitors/notifications/#notification

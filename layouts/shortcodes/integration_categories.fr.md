@@ -12,7 +12,7 @@
 | Category::Configuration & Deployment | Des intégrations qui surveillent des plateformes qui peuvent configurer et déployer une infrastructure. |
 | Category::Containers | Des intégrations qui suivent les métriques, les logs, les événements et les traces à partir de conteneurs et de technologies de gestion des conteneurs. |
 | Category::Cost Management | Des intégrations qui permettent de suivre et de gérer les coûts de l'informatique dématérialisée. |
-| Category::Data Store | Des intégrations qui surveillent les solutions de stockage de données telles que les bases de données, les clusters, les lacs de données, etc. |
+| Category::Data Stores | Des intégrations qui surveillent les solutions de stockage de données telles que les bases de données, les clusters, les lacs de données, etc. |
 | Category::Developer Tools | Des intégrations pour les technologies que les développeurs utilisent afin de créer des applications telles que le contrôle de version, CI/CD, et infrastructure as code. |
 | Category::Event Management | Des intégrations qui envoient des événements à Datadog ou interrogent des événements pour les envoyer vers des plates-formes externes. |
 | Category::Google Cloud | Des intégrations qui envoient des données à partir de Google Cloud et de ses services connexes. |
@@ -29,7 +29,7 @@
 | Category::Metrics | Des intégrations qui soumettent et interrogent des métriques de Datadog.  |
 | Category::Mobile | Des intégrations qui surveillent les appareils et les applications mobiles. |
 | Category::Network | Des intégrations qui surveillent les réseaux et les périphériques réseau. |
-| Category::Notification | Des intégrations pour les technologies qui se concentrent sur les notifications, par exemple, la réponse aux incidents. |
+| Category::Notifications | Des intégrations pour les technologies qui se concentrent sur les notifications, par exemple, la réponse aux incidents. |
 | Category::Oracle | Des intégrations qui surveillent les technologies basées sur Oracle. |
 | Category::Orchestration | Des intégrations pour les technologies qui fournissent une orchestration pour les conteneurs et plus encore. |
 | Category::OS & System | Des intégrations qui surveillent les systèmes dʼexploitation ou dʼautres systèmes de bas niveau. |

@@ -311,13 +311,48 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = <CLIENT_TOKEN>,
+                env = <ENV_NAME>,
+                variant = <APP_VARIANT_NAME>
+            )
+            .useSite(DatadogSite.AP2)
+            .build()
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                        .useSite(DatadogSite.AP2)
+                        .build();
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][9].
 
 #### Sample session rates
-
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
 To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][8]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -376,7 +411,7 @@ To enable the Android SDK to start sending data:
 
 See [`ViewTrackingStrategy`][10] to enable automatic tracking of all your views (activities, fragments, and more).
 
-### Step 5 - Initialize the Interceptor to track network events
+### Step 5 - Initialize the interceptor to track network events
 
 To initialize an interceptor for tracking network events:
 
@@ -389,39 +424,62 @@ To initialize an interceptor for tracking network events:
     }
     ```
 
-3. To track your OkHttp requests as resources, add the provided [Interceptor][12]:
+3. To track your OkHttp requests as resources, add the provided [interceptor][12]:
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-val tracedHostsWithHeaderType = mapOf(
-    "example.com" to setOf(
-        TracingHeaderType.DATADOG,
-        TracingHeaderType.TRACECONTEXT),
-    "example.eu" to setOf(
-        TracingHeaderType.DATADOG,
-        TracingHeaderType.TRACECONTEXT))
-val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-    .build()
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
-Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
-tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
-tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
-OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-    .build();
-```
-{{% /tab %}}
-{{< /tabs >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val tracedHostsWithHeaderType = mapOf(
+       "example.com" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT),
+       "example.eu" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT))
+   val okHttpClient = OkHttpClient.Builder()
+       .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build()
+   ```
+   {{% /tab %}}
 
-This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+   {{% tab "Java" %}}
+   ```java
+   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+   Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+   tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+   tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
+   OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-**Note**: If you also use multiple Interceptors, add `DatadogInterceptor` first.
+4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
+   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+      
+5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][15]:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val okHttpClient = OkHttpClient.Builder()
+       .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build()
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+**Notes**:
+- To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
+- If you use multiple interceptors, add `DatadogInterceptor` first.
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][14] for third-party providers and network requests.
 
@@ -454,7 +512,7 @@ Each batch follows the intake specification. Batches are sent as soon as the net
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
-## Kotlin Extensions
+## Kotlin extensions
 
 ### `Closeable` extension
 
@@ -465,7 +523,6 @@ val closeable: Closeable = ...
 closeable.useMonitored {
     // Your code here
 }
-
 ```
 
 ### Track local assets as resources
@@ -497,6 +554,7 @@ val inputStream = context.getRawResAsRumResource(id)
 [9]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
 [11]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
-[12]: https://square.github.io/okhttp/interceptors/
+[12]: https://square.github.io/okhttp/features/interceptors/
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
 [14]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors

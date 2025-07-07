@@ -18,13 +18,11 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10125
     source_type_name: Azure IoT Edge
-  logs:
-    source: azure.iot_edge
   monitors:
-    Disk usage: assets/monitors/disk_usage.json
-    Edge Hub retries: assets/monitors/edgehub_retries.json
-    IoT Hub syncs: assets/monitors/iothub_syncs.json
-    Memory usage: assets/monitors/memory_usage.json
+    Device is running out of disk space: assets/monitors/disk_usage.json
+    Device is running out of memory: assets/monitors/memory_usage.json
+    Edge Hub operation retries is higher than usual: assets/monitors/edgehub_retries.json
+    Unsuccessful syncs are high: assets/monitors/iothub_syncs.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -35,6 +33,7 @@ categories:
 - iot
 - 로그 수집
 - 네트워크
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_on_public_website: true
@@ -42,16 +41,15 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 4.2.0
+integration_version: 6.1.0
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: azure_iot_edge
 public_title: Azure IoT Edge
 short_description: Azure IoT Edge 디바이스 및 모듈의 상태와 성능을 모니터링합니다.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -63,10 +61,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Azure IoT Edge 디바이스 및 모듈의 상태와 성능을 모니터링합니다.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/
   support: README.md#Support
   title: Azure IoT Edge
 ---
@@ -94,7 +96,7 @@ Azure IoT Edge 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니�
 
 ### 설정
 
-Agent가 커스텀 모듈로 실행되도록 IoT Edge 디바이스를 설정합니다. Azure IoT Edge용 커스텀 모듈 설치 및 작업에 대한 자세한 내용은 [Azure IoT Edge 모듈 배포][3]에 대한 Microsoft 설명서를 참조하세요.
+Agent가 커스텀 모듈로 실행되도록 IoT Edge 디바이스를 설정합니다. Azure IoT Edge용 커스텀 모듈 설치 및 작업에 대한 자세한 내용은 [Azure IoT Edge 모듈 배포][3]에 대한 Microsoft 설명서를 참조하세요.
 
 IoT Edge 메트릭 수집을 위해 IoT Edge 디바이스, 런타임 모듈 및  Datadog Agen를 설정하려면 아래 단계를 따르세요.
 
@@ -172,10 +174,10 @@ IoT Edge 메트릭 수집을 위해 IoT Edge 디바이스, 런타임 모듈 및 
 
 Agent가 디바이스에 배포되면 [Agent의 상태 하위 명령을 실행][7]하고 Checks 섹션에서 `azure_iot_edge`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### 이벤트
@@ -183,7 +185,7 @@ Agent가 디바이스에 배포되면 [Agent의 상태 하위 명령을 실행][
 Azure IoT Edge는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## 트러블슈팅

@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/awscodebuild/
 categories:
-- AWS
+- aws
 - クラウド
-- 構成 & デプロイ
+- 構成とデプロイ
 - ログの収集
 custom_kind: インテグレーション
 dependencies: []
@@ -47,7 +47,7 @@ Datadog AWS CodeBuild インテグレーションをインストールすると�
 
 2. [Datadog - AWS CodeBuild インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -66,7 +66,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_codebuild" >}}
+{{< get-metrics-from-git "amazon-codebuild" >}}
 
 
 ### イベント
@@ -79,7 +79,7 @@ AWS CodeBuild インテグレーションには、サービスのチェック機
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

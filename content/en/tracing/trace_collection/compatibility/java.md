@@ -53,11 +53,11 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
 
 Datadog does not officially support any early-access versions of Java.
 
-#### Java Tracer v0 (maintenance)
+#### Java Tracer v0
 
 | Java versions      | Operating Systems                                                               | Support level                     |
 |--------------------|---------------------------------------------------------------------------------|-----------------------------------|
-| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) |
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) ([End-of-life](#levels-of-support) on July 31, 2025) |
 | 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
@@ -88,29 +88,30 @@ Integrations in Preview are disabled by default but can be enabled individually:
 - error and stacktrace capturing
 - linking work created within a web request and Distributed Tracing
 
-| Server                  | Versions   | Support Type                                           | Instrumentation Names (used for configuration)           |
-|-------------------------|------------|--------------------------------------------------------|----------------------------------------------------------|
-| Akka-Http Server        | 10.0+      | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
-| Apache Pekko            | 1.0+       | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
-| Finatra Web             | 2.9+       | Fully Supported                                        | `finatra`                                                |
-| Grizzly                 | 2.0+       | Fully Supported                                        | `grizzly`                                                |
-| Grizzly-HTTP            | 2.3.20+    | Fully Supported                                        | `grizzly-filterchain`                                    |
-| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                      |
-| Jax-RS Annotations      | JSR311-API | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-12.x   | Fully Supported                                        | `jetty`                                                  |
-| Micronaut HTTP Server   | 2.x+       | Fully Supported                                        | `micronaut`                                              |
-| Mulesoft                | 4.5.0+     | Fully Supported                                        | `mule`                                                   |
-| Netty HTTP Server       | 3.8+       | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
-| Play                    | 2.3-2.8    | Fully Supported                                        | `play`, `play-action`                                    |
-| Ratpack                 | 1.5+       | Fully Supported                                        | `ratpack`                                                |
-| Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                        | `restlet-http`.                                          |
-| Spark Java              | 2.3+       | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5+       | Fully Supported                                        | `spring-web` or `spring-webflux`                         |
-| Spring Web (MVC)        | 4.0+       | Fully Supported                                        | `spring-web`                                             |
-| Spring WebFlux          | 5.0+       | Fully Supported                                        | `spring-webflux`                                         |
-| Tomcat                  | 5.5+       | Fully Supported                                        | `tomcat`                                                 |
-| Undertow                | 2.0+       | Fully Supported                                        | `undertow`                                               |
-| Vert.x                  | 3.4+       | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
+| Server                  | Versions     | Support Type                                           | Instrumentation Names (used for configuration)           |
+|-------------------------|--------------|--------------------------------------------------------|----------------------------------------------------------|
+| Akka-Http Server        | 10.0+        | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
+| Apache Pekko            | 1.0+         | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
+| Finatra Web             | 2.9+         | Fully Supported                                        | `finatra`                                                |
+| Grizzly                 | 2.0+         | Fully Supported                                        | `grizzly`                                                |
+| Grizzly-HTTP            | 2.3.20+      | Fully Supported                                        | `grizzly-filterchain`                                    |
+| Java Servlet Compatible | 2.3+, 3.0+   | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                      |
+| Jax-RS Annotations      | JSR311-API   | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
+| Jetty                   | 7.0-12.x     | Fully Supported                                        | `jetty`                                                  |
+| Micronaut HTTP Server   | 2.x+         | Fully Supported                                        | `micronaut`                                              |
+| Mulesoft                | 4.5.0+       | Fully Supported                                        | `mule`                                                   |
+| Netty HTTP Server       | 3.8+         | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
+| Play                    | 2.3-2.8      | Fully Supported                                        | `play`, `play-action`                                    |
+| Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                |
+| Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                          |
+| Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
+| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                         |
+| Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                             |
+| Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                         |
+| Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                 |
+| Undertow                | 2.0+         | Fully Supported                                        | `undertow`                                               |
+| Vert.x                  | 3.4 - 4.5.15 | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
+| Websocket (JSR356)      | 1.0+         | [Preview](#framework-integrations-disabled-by-default) | `websocket`                                              |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -127,13 +128,13 @@ The following instrumentations are disabled by default and can be enabled with t
 | Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
 | JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
 | JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                          |
-| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                            |
 | Mulesoft                     | `-Ddd.integration.mule.enabled=true`                                                                     |
 | Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                            |
 | Ning                         | `-Ddd.integration.ning.enabled=true`                                                                     |
 | Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                |
 | TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                    |
 | URL Connection               | `-Ddd.integration.urlconnection.enabled=true` </br> `-Ddd.integration.httpurlconnection.enabled=true`    |
+| Websocket                    | `-Ddd.trace.websocket.messages.enabled=true`                                                             |
 | ZIO                          | `-Ddd.integration.zio.experimental.enabled=true`                                                         |
 
 
@@ -213,9 +214,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                       |
 | Redisson                | 2.x-3.x  | Fully Supported | `redisson`, `redis`                                                                        |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                             |
-| Vert.x Cassandra Client | 3.9+		   | Fully Supported | `cassandra`																			                                                             |
-| Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                       |
-| Vert.x MySQL Client     | 3.9+     | Fully Supported | `vertx-sql-client`																		                                                       |
+| Vert.x Cassandra Client | 3.9-4.x  | Fully Supported | `cassandra`																			                                                             |
+| Vert.x Redis Client     | 3.9-4.x  | Fully Supported | `vertx-redis-client`                                                                       |
+| Vert.x MySQL Client     | 3.9-4.x  | Fully Supported | `vertx-sql-client`																		                                                       |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -256,6 +257,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
 | JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
 | JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Kotlin Coroutines   | 1.3+       | Fully Supported                                        | `kotlin_coroutine`                             |
 | Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
 | Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
 | RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |

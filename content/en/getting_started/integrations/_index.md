@@ -100,11 +100,24 @@ For example, setting `service` in your config file is the recommended [Agent set
 
 To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][27].
 
-By default, the metrics reported by integrations include tags autodiscovered from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags that refer to the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`:
+#### Per-check tag configuration
+You can customize tag behavior for individual checks, overriding the global Agent-level settings:
+
+1. **Disable Autodiscovery tags**
+    
+    By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
+
+1. **Set tag cardinality per integration check**
+    
+    You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
+
 ```yaml
 init_config:
-
+# Ignores tags coming from autodiscovery
 ignore_autodiscovery_tags: true
+
+# Override global tag cardinality setting
+check_tag_cardinality: low
 
 # Rest of the config here
 ```
@@ -123,12 +136,12 @@ If you set up [process collection][29], Datadog autodetects technologies running
 
 {{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of three status types:
+Each integration has one of four status types:
 
 - **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
 - **Installed**: This integration is installed and configured on a host.
 - **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
-- **No Data Received**: Integration metric has not been detected in the last 24 hours. 
+- **Missing Data**: Integration metrics have not been detected in the last 24 hours. 
 
 ## Security practices
 

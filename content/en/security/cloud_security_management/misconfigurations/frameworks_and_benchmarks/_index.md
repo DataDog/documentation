@@ -7,20 +7,20 @@ aliases:
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
-  text: "Getting started with CSM Misconfigurations"
+  text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
 ---
 
-CSM Misconfigurations comes with more than 1,300 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
+Cloud Security Misconfigurations comes with more than 1,300 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
 
 ## View your compliance posture
 
-View a high-level overview of your compliance posture for each framework on the CSM Misconfigurations [Compliance][20] page. Click a framework to see a [detailed report](#explore-compliance-framework-reports) that gives you insight into how your configuration scores against the framework's requirements and rules.
+View a high-level overview of your compliance posture for each framework on the Cloud Security Misconfigurations [Compliance][20] page. Click a framework to see a [detailed report](#explore-compliance-framework-reports) that gives you insight into how your configuration scores against the framework's requirements and rules.
 
 - **Star**: Pin a framework to the top of your table.
 - **Score**: The [posture score][3] for the rules in the given framework.
@@ -31,7 +31,7 @@ View a high-level overview of your compliance posture for each framework on the 
 - **Explore Resources**: A filtered view of the **Misconfigurations** page that shows resources with misconfigurations for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the compliance rules for each framework.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_3.png" alt="The compliance reports section of the CSM Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
 
 ## Explore compliance framework reports
 
@@ -43,7 +43,7 @@ Below the summary is a complete listing of all rules associated with the framewo
 
 Search for a rule name to filter the list, or group by requirement, control, severity, resource type, or resource category to organize the list. You can also click a table column header to sort by that column within the group.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_3.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_5.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Then, you can click a specific resource to get more details.
 

@@ -8,16 +8,16 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-The Cloud Security Management Misconfigurations (CSM Misconfigurations) [explorer][1] allows you to:
+The Cloud Security Misconfigurations [Findings page][1] allows you to:
 
 - Review the detailed configuration of a resource.
-- Review the compliance rules applied to your resources by CSM Misconfigurations.
+- Review the compliance rules applied to your resources by Cloud Security Misconfigurations.
 - Review tags for more context about who owns the resource and where it resides in your environment.
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource.
 - Use the time selector to explore your security configuration posture at any point in the past.
@@ -30,17 +30,15 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 ## Explore your cloud misconfigurations
 
-Misconfigurations are displayed on the [Misconfigurations explorer][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
+Misconfigurations are displayed on the [Misconfigurations Findings page][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. You can also group misconfigurations by resources or teams, so you can find the resources or teams that have the most failed misconfigurations, and prioritize your remediation efforts accordingly. Select a misconfiguration to view up to five resources that have been evaluated by the rule.
 
-{{< img src="security/csm/explorers_page.png" alt="CSM Misconfigurations explorer page" style="width:100%;">}}
+{{< img src="security/csm/findings_page_1.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
 
-Select a misconfiguration to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
+You can click **View All** to view a complete list of resources, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
 
-{{< img src="security/cspm/findings/finding-side-panel3.png" alt="A list of impacted resources in the side panel" style="width:65%;">}}
+{{< img src="security/cspm/misconfigurations_explorer_3.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
-Group findings by **Resources** and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
-
-{{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
+Additionally, you can group findings by **Resources** or **Teams** and select an associated misconfiguration to view additional information.
 
 ## Further reading
 
@@ -48,5 +46,5 @@ Group findings by **Resources** and select a resource to see the full list of co
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
-[3]: /security/threats/
+[3]: /security/workload_protection/
 [4]: /security/default_rules/cis-aws-1.5.0-2.1.5/

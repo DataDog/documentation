@@ -58,6 +58,8 @@ docker run -d --name datadog-agent \
            -e DD_ENABLE_PAYLOADS_SERIES=false \
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
            -e DD_ENABLE_PAYLOADS_SKETCHES=false \
+           -e DD_PROCESS_AGENT_ENABLED=false \
+           -e DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED=false \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \

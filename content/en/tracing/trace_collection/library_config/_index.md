@@ -76,9 +76,15 @@ The following configuration options behave consistently across the latest versio
 
 ### Traces
 
+`DD_APM_TRACING_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Description**: Enables or disables sending traces from the application, without impacting other library features such as profiling, Datadog App and API Protection (AAP), Data Streams Monitoring (DSM), and more.
+
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
+**Caveats**: Fully disables the library, including other library features, in Node.js, PHP, Ruby, .NET, and C++. Partially disables the library in Java and Python. Behaves identically to `DD_APM_TRACING_ENABLED` in Go.<br>
 **Description**: Enables or disables sending traces from the application.
 
 `DD_LOGS_INJECTION`
@@ -86,11 +92,6 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: Boolean (`true`/`false`) <br>
 **Caveats**: Not supported in C++ or Go. The default value in Ruby is `true`.<br>
 **Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
-
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `null` <br>
-**Supported Input**: A JSON string representing an array of sampling rules. Each rule must contain a `sample_rate` (float between 0 and 1) and can optionally include a `service` (string) and `name` (string) pattern to match. Example: `[{"sample_rate": 0.1, "service": "my-service", "name": "http.request"}]` <br>
-**Description**: Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used. For more information about how these configurations affect trace ingestion, see [Ingestion Mechanisms][4].
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
@@ -102,6 +103,48 @@ The following configuration options behave consistently across the latest versio
 : **Default**: `null` <br>
 **Supported Input**: A comma-separated string representing a list of case-insensitive HTTP headers, with an optional mapping to a custom tag name. Example: `User-Agent:my-user-agent,Content-Type`. <br>
 **Description**: Automatically apply specified HTTP headers as span tags. If a custom tag name is not specified, the tag key defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
+
+
+`DD_TRACE_SAMPLE_RATE`
+: **Default**: `-1`. If unset, the tracer defers to the Datadog Agent to control sample rate. <br>
+**Supported Input**: A number between 0.0 and 1.0, inclusive. <br>
+**Caveats**: This variable is deprecated in favor of `DD_TRACE_SAMPLING_RULES`, which provides more flexible and granular sampling control.  <br>
+**Description**: Controls the trace ingestion sample rate between the Datadog Agent and the backend. Must be a number between 0.0 and 1.0, where 1.0 means all traces are sent to the backend and 0.0 means none are sent. This is precise up to 6 digits, applies globally to all traces, and does not support per-service or per-operation targeting. 
+
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `null`. If unset or no rules match, the tracer defers to the Datadog Agent to dynamically adjust sample rate across traces.  <br>
+**Supported Input**: A JSON array of [user-defined rules][6]. <br>
+**Description**: Enables fine-grained control over trace ingestion, allowing you to target specific services, operations, resources, or tagged traces. Defined by a JSON array of objects, where each object must include a `sample_rate` between 0.0 and 1.0 (inclusive), and can optionally include fields such as `service`, `name`, `resource`, `tags`, and `max_per_second`. Objects are evaluated in the order listed; the first matching object determines the trace's sample rate. For more information, see [Ingestion Mechanisms][4]. <br>
+**Examples**: <br>
+  - Sample 20% of all traces: <br>
+
+    ```
+    [{"sample_rate": 0.2}]
+    ```
+
+  - Sample 10% of traces where the service name starts with `a` and the operation name is `b`, and 20% of all others: <br>
+
+    ```
+    [{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]
+    ```
+
+  - Sample 40% of traces with the resource name `HTTP GET`:
+
+    ```
+    [{"resource": "HTTP GET", "sample_rate": 0.4}]
+    ```
+
+  - Sample 100% of traces with the tag `tier=premium`:
+
+    ```
+    [{"tags": {"tier": "premium"}, "sample_rate": 1}]
+    ```
+
+  - Sample up to 50 traces per second at a 50% rate for the service `my-service` and operation name `http.request`:
+
+    ```
+    [{"service": "my-service", "name": "http.request", "sample_rate": 0.5, "max_per_second": 50}]
+    ```
 
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
@@ -135,7 +178,7 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
 **Supported Values**: `all`, `DD_TAGS` (Java, .NET), `DD_LOGS_INJECTION` (Java) <br>
 **Caveats**: Only supported in Java and .NET <br>
-**Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. Each feature must be explicitly listed to be enabled.
+**Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. You can enable all experimental features using the keyword `all`, or list individual features explicitly.
 
 ### Integrations
 
@@ -178,9 +221,30 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
+### Context propagation
+`DD_TRACE_BAGGAGE_MAX_ITEMS`
+: **Default**: `64` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of key-value pairs in the baggage header.
+
+`DD_TRACE_BAGGAGE_MAX_BYTES`
+: **Default**: `8192` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
+
+`DD_TRACE_BAGGAGE_TAG_KEYS`
+: **Default**: `user.id,session.id,account.id` <br>
+**Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
+**Caveats**: Not supported in Java, Ruby, Go, C++, and .NET <br>
+**Description**: A comma-separated list of baggage keys that are automatically applied as span tags to the local root span. For example, a baggage key `user.id` is tagged as `baggage.user.id` <br>
+This feature only applies to baggage extracted from incoming HTTP headers. Baggage set with the baggage API is not included.
+  - To tag all baggage items, set the value to `*`. Use this with caution to avoid exposing sensitive data in tags.
+  - To disable this feature, set the value to an empty string.
+
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /tracing/metrics/runtime_metrics/
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules

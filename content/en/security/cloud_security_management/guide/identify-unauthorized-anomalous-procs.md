@@ -2,7 +2,7 @@
 title: Identifying Unauthorized and Anomalous Processes
 disable_toc: false
 further_reading:
-- link: "security/threats/workload_security_rules/custom_rules"
+- link: "security/workload_protection/workload_security_rules/custom_rules"
   tag: "Documentation"
   text: "Creating Custom Detection Rules"
 ---
@@ -55,4 +55,4 @@ If you want to query for anomalies in a particular container image, you can use 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/workload_security_rules/custom_rules
+[1]: /security/workload_protection/workload_security_rules/custom_rules

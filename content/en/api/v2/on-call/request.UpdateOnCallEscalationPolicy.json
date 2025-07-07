@@ -1,7 +1,6 @@
 {
   "data": {
     "attributes": {
-      "description": "Example-On-Call",
       "name": "Example-On-Call-updated",
       "resolve_page_on_policy_end": false,
       "retries": 0,
@@ -12,14 +11,14 @@
           "id": "00000000-aba1-0000-0000-000000000000",
           "targets": [
             {
-              "id": "c1d4eb9e-8bb0-974d-85a5-a7dd9db46bee",
+              "id": "string",
               "type": "users"
             }
           ]
         }
       ]
     },
-    "id": "string",
+    "id": "ab000000-0000-0000-0000-000000000000",
     "relationships": {
       "teams": {
         "data": [

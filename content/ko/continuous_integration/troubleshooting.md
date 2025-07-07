@@ -12,10 +12,6 @@ further_reading:
 title: CI Visibility 트러블슈팅
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택하신 사이트({{<region-param key="dd_site_name">}})에서 현재 CIVisibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 이 페이지는 CI Visibility 문제 해결에 도움이 되는 정보를 제공합니다. 추가적인 도움이 필요하시면 [Datadog 지원팀][2]에 문의하세요.
@@ -215,6 +211,6 @@ Intelligent Test Runner는 코드 범위를 기반으로 테스트 영향 분석
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /ko/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /ko/continuous_integration/intelligent_test_runner/
 [13]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui

@@ -4,15 +4,19 @@ aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"
 further_reading:
-  - link: "/security/application_security/threats/threat-intelligence/"
+  - link: "/security/application_security/how-it-works/threat-intelligence/"
     tag: "documentation"
     text: "AAP Threat Intelligence"
+  - link: "/security/cloud_siem/threat_intelligence/"
+    tag: "documentation"
+    text: "Cloud SIEM Threat Intelligence"
+
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
 - name: Workload Protection
-  url: /security/threats/
+  url: /security/workload_protection/
   icon: cloud-security-management
 - name: App and API Protection
   url: /security/application_security/
@@ -25,6 +29,12 @@ products:
 Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises.
 
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
+
+## Bring your own threat intelligence
+
+Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+
+For more information, see the [Bring Your Own Threat Intelligence][3] guide.
 
 ## Threat Intelligence Lifecycle
 
@@ -86,7 +96,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | scanner | suspicious | IP addresses | Reputation for scanners | AAP and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | AAP and Cloud SIEM |
-| disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | AAP |
+| disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |
@@ -111,3 +121,5 @@ Sources, categories, and intents are available as facets and filters on relevant
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/security/detection_rules/
+[2]: /integrations/guide/reference-tables
+[3]: /security/guide/byoti_guide

@@ -11,10 +11,6 @@ further_reading:
     text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
@@ -28,6 +24,8 @@ Set up tracing in TeamCity to collect data about your pipeline executions, debug
 | [Partial retries][14] | Retry build triggers | View partially retried pipeline executions. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 The following TeamCity versions are supported:
 
@@ -41,12 +39,12 @@ To set up the integration:
 
 1. Download the [Datadog CI Integration plugin][5] on the TeamCity server by going to
 **Administration** -> **Plugins** -> **Browse Plugin Repository**.
-2. If you don't already have one, add a [TeamCity composite build][6] as the last build of the build chain. This build must have a dependency on the current last build of the chain and no other builds depending on it. 
+2. If you don't already have one, add a [TeamCity composite build][6] as the last build of the build chain. This build must have a dependency on the current last build of the chain and no other builds depending on it.
 
    Build chains that do not end with a composite build are ignored by the plugin. For example, consider an expected build chain where `Aggregating Results` is the last composite build:
-   
+
    {{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:100%;">}}
-   
+
    The final composite build must be properly configured in terms of version control settings, with the VCS Root attached and the [VCS Trigger][13] configured.
 
 3. The following configuration parameters need to be present for TeamCity projects:
@@ -55,8 +53,8 @@ To set up the integration:
    * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}
    * **datadog.ci.enabled**: `true` (`false` can be used to disable the plugin for a specific project).
 
-   These configuration parameters should not have type **Password** to ensure the plugin can read their values correctly. You can add them to either TeamCity subprojects or the [TeamCity Root Project][10]. When added to the Root project, they are propagated to all its subprojects. For example, to enable the plugin for all projects, add `datadog.ci.enabled` with the value `true` to the Root Project. 
-   
+   These configuration parameters should not have type **Password** to ensure the plugin can read their values correctly. You can add them to either TeamCity subprojects or the [TeamCity Root Project][10]. When added to the Root project, they are propagated to all its subprojects. For example, to enable the plugin for all projects, add `datadog.ci.enabled` with the value `true` to the Root Project.
+
    For more information on defining configuration parameters, see the [TeamCity Project Hierarchy documentation][9].
 
 4. To enable the plugin, click on **Enable uploaded plugins** in the **Administration** -> **Plugins** page.
@@ -67,7 +65,7 @@ Alternatively, restart the TeamCity server.
 ### Configure Git user information
 
 The plugin retrieves the Git author name and email based on the [TeamCity username style][7]. Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they
-provide information about the user email. 
+provide information about the user email.
 
 When one of the other username styles is used (**UserId** or **Author Name**), the plugin automatically generates an email for the user by appending `@Teamcity` to the username. For example, if the **UserId** username style is used and the Git author username is `john.doe`, the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11], and can be modified in the VCS Root settings.
 
@@ -109,3 +107,5 @@ Check these logs to get additional context on any issues with the plugin.
 [14]: /glossary/#partial-retry
 [15]: /glossary/#queue-time
 [16]: /glossary/#pipeline-failure
+[17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /glossary/#pipeline-execution-time

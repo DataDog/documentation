@@ -112,7 +112,7 @@ Para crear monitores de métricas que se puedan silenciar automáticamente, aseg
 Ante cualquier duda, ponte en contacto con el <a href="https://docs.datadoghq.com/help/" target="_blank">equipo de asistencia de Datadog</a>.</div>
 
 ### Métricas
-{{< get-metrics-from-git "azure_vm" >}}
+{{< get-metrics-from-git "azure-vm" >}}
 
 
 ### Eventos

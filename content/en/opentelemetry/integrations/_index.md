@@ -14,6 +14,16 @@ OpenTelemetry (OTel) integrations are components that enable the collection of o
 
 For a comprehensive list of all OpenTelemetry integrations, see the [OpenTelemetry Registry][1]. This registry provides information on receivers, exporters, and other components in the OpenTelemetry ecosystem.
 
+## Metric pricing
+
+Datadog collects metrics from supported OpenTelemetry receivers at no extra cost. These no-cost metrics are:
+- Defined in the `metadata.yaml` file for each receiver.
+- Listed in the [Metrics Mappings][14] table.
+
+For example, the [`dockerstatsreceiver`][15] `metadata.yaml` file lists metrics that you can collect at no extra cost.
+
+<div class="alert alert-warning">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
+
 ## Datadog-supported OpenTelemetry integrations
 
 Datadog supports the following OpenTelemetry integrations:
@@ -77,3 +87,5 @@ Monitor big data processing frameworks:
 [11]: /opentelemetry/integrations/mysql_metrics/
 [12]: /opentelemetry/integrations/kafka_metrics/
 [13]: /opentelemetry/integrations/spark_metrics/
+[14]: /opentelemetry/mapping/metrics_mapping/#metrics-mappings
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/metadata.yaml

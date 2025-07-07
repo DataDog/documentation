@@ -79,7 +79,7 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -167,6 +167,16 @@ Other: See [logs endpoints][202]
 [202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
+{{% site-region region="ap2" %}}
+[Logs][200] & [HIPAA logs][201]
+: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
+Other: See [logs endpoints][202]
+
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
+
 {{% site-region region="gov" %}}
 [Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
@@ -182,7 +192,7 @@ Other: See [logs endpoints][202]
 [202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
-All other Agent data
+[Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
@@ -277,7 +287,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
@@ -412,3 +422,6 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [23]: /llm_observability/
 [24]: /network_monitoring/cloud_network_monitoring/
 [25]: /universal_service_monitoring/
+[26]: /metrics/
+[27]: /developers/service_checks/
+[28]: /events/

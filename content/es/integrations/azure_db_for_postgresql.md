@@ -23,7 +23,7 @@ short_description: Rastrea las métricas principales de Azure DB for PostgreSQL.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Database for PostgreSQL proporciona una base de datos como servicio PostgreSQL comunitaria, totalmente gestionada y preparada para empresas.
@@ -42,20 +42,20 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_db_for_postgresql" >}}
+{{< get-metrics-from-git "azure-db-for-postgresql" >}}
 
 
 ### Eventos
 
 La integración Azure DB for PostgreSQL no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Azure DB for PostgreSQL no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_postgresql/azure_db_for_postgresql_metadata.csv

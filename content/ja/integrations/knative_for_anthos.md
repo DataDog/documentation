@@ -1,13 +1,13 @@
 ---
 categories:
-- cloud
-- 構成 & デプロイ
-- コンテナ
+- クラウド
+- 構成とデプロイ
+- incident-teams
 - google cloud
 - kubernetes
 - ログの収集
 - オーケストレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Knative for Anthos クラスターからメトリクスおよびログを収集し、Datadog で分析
 doc_link: https://docs.datadoghq.com/integrations/knative_for_anthos/
@@ -46,7 +46,7 @@ Workload Identity を有効にしていない場合、Knative メトリクスの
 
 セットアップの詳しい手順については、[Google Cloud Workload Identity][3] をご覧ください。
 
-### 収集データ
+### ログ収集
 
 Knative for Anthos は[サービスログ][4]を公開します。
 Knative のログは Google Cloud Logging で収集し、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信することができます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][5]。
@@ -78,7 +78,7 @@ Knative for Anthos インテグレーションには、サービスのチェッ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

@@ -121,7 +121,7 @@ public_title: SNMP 프로파일
 short_description: 자동탐지 장치 프로파일을 사용한 SNMP 장치 관측 가능성
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md

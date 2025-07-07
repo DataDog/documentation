@@ -9,11 +9,6 @@ further_reading:
   tag: "Blog"
   text: "Monitor cloud architecture and app dependencies with Datadog NPM"
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview 
 
@@ -25,13 +20,13 @@ To access the path view page, click into a path from the [List view][2]. On this
 
 Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details in [NDM][3] for the selected device.
 
-{{< img src="network_performance_monitoring/network_path/path_details.png" alt="Path view in Network path highlighting path details." style="width:50%;" >}}
+{{< img src="network_performance_monitoring/network_path/path_details.png" alt="Path view in Network path highlighting path details." style="width:30%;" >}}
 
 ## Legend
 
 The legend provides additional details about the status of each hop.
 
-{{< img src="network_performance_monitoring/network_path/legend.png" alt="Path view in Network path showing the legend." style="width:50%;" >}}
+{{< img src="network_performance_monitoring/network_path/legend.png" alt="Path view in Network path showing the legend." style="width:30%;" >}}
 
 Traversal count 
 : Number of `traceroutes` that have ran through the hop.
