@@ -36,9 +36,9 @@ jobs:
         
       - name: Validate STS Token
         env:
-          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
+          GH_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
         run: |
-          gh api -H "Authorization: Bearer ${{ env.GITHUB_TOKEN }}" /orgs/DataDog/teams/documentation/members
+          gh api -H /orgs/DataDog/teams/documentation/members
 
       - name: Check Documentation Team Approval
         id: check_approvals
