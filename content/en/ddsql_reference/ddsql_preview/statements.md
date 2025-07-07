@@ -1,5 +1,6 @@
 ---
 title: DDSQL Statements (Preview)
+private: true
 aliases:
 - /dashboards/ddsql_editor/reference/statements/
 - /ddsql_editor/reference/statements/

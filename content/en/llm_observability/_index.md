@@ -12,11 +12,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/vllm-integration/"
   tag: "Blog"
   text: "Optimize LLM application performance with Datadog's vLLM integration"
+- link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
+  tag: "Blog"
+  text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 

@@ -105,7 +105,7 @@ Para el Agent v7.21+/v6.21+, sigue las instrucciones siguientes para instalar el
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "nn_sdwan" >}}
+{{< get-metrics-from-git "nn-sdwan" >}}
 
 
 ### Eventos
@@ -113,7 +113,7 @@ Para el Agent v7.21+/v6.21+, sigue las instrucciones siguientes para instalar el
 La integración de Netnology Cisco SD-WAN no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "nn_sdwan" >}}
+{{< get-service-checks-from-git "nn-sdwan" >}}
 
 
 ## Solucionar problemas

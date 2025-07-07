@@ -15,11 +15,6 @@ further_reading:
   text: 'Getting started with Tags'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 DORA Metrics generates events that have associated fields and tags.
@@ -44,6 +39,16 @@ All events contain the following tags if any are available:
 **Note**: The `severity` tag is available for failure events when it is provided by the failure's data source.
 
 For more information about using tags, see [Getting Started with Tags][6].
+
+#### Custom tags
+
+In addition to the tags above, deployment and failure events can be enriched with custom tags to filter DORA Metrics. There are three potential sources for these tags:
+
+- Software Catalog: If a deployment or failure event is associated with services in Software Catalog, it is automatically enriched with the `language` tag and the [custom tags defined in the Service Definitions][13].
+- Incident Management: Failure events created from [Datadog Incident Management][14] are enriched with custom tags for any user-defined [Single Select or Multi Select property fields][15].
+- DORA Metrics API: Up to 100 user-provided custom tags can be added to both deployment and failure events in the [API][7].
+
+For more information about using custom tags in DORA Metrics, see [DORA Metrics Overview][16].
 
 ## DORA metrics
 
@@ -132,4 +137,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 [10]: /dora_metrics/setup/deployments/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
 [12]: /dora_metrics/deployments/#limitations
-
+[13]: https://www.datadoghq.com/blog/service-catalog-setup/
+[14]: https://app.datadoghq.com/incidents
+[15]: /service_management/incident_management/describe#attributes
+[16]: /dora_metrics/

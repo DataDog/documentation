@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
   tag: "Blog"
   text: "Monitor 1Password with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/content-anomaly-detection-cloud-siem/"
+  tag: "Blog"
+  text: "Detect anomalies beyond spikes and new values with Content Anomaly Detection in Cloud SIEM"
 ---
 
 ## Overview

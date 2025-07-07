@@ -248,7 +248,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_db2" >}}
+{{< get-metrics-from-git "ibm-db2" >}}
 
 
 ### Eventos
@@ -256,7 +256,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 - `ibm_db2.tablespace_state_change` se activa cada vez que cambia el estado de un espacio de tablas.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_db2" >}}
+{{< get-service-checks-from-git "ibm-db2" >}}
 
 
 ## Solucionar problemas

@@ -895,7 +895,7 @@ El Agent puede detectar de manera automática y adjuntar etiquetas a todos los d
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ecs_fargate" >}}
+{{< get-metrics-from-git "aws-fargate" >}}
 
 
 ### Eventos
@@ -903,7 +903,7 @@ El Agent puede detectar de manera automática y adjuntar etiquetas a todos los d
 El check de ECS Fargate no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ecs_fargate" >}}
+{{< get-service-checks-from-git "aws-fargate" >}}
 
 
 ## Solucionar problemas

@@ -297,13 +297,11 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 | 10.10 - 10.11 | <= 5.11.3 |||
 | 10.12 || <= 6.34.0 | <= 7.34.0 |
 | 10.13 || <= 6.38.2 | <= 7.38.2 |
-| >= 10.14 ||           | >= 7.39.0 |
+| >= 11.0 ||           | >= 7.39.0 |
 
 ## Apple ARM64
 
-| macOS version  | Agent 7 |
-|----------------|---------|
-| >= 11.0 | >= 7.39.0 |
+Supported through Rosetta.
 
 {{% /tab %}}
 

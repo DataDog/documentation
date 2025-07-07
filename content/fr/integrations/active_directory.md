@@ -100,7 +100,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### Événements

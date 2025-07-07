@@ -7,10 +7,6 @@ aliases:
   - /security/guide/how-appsec-works/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog App and API Protection (AAP) provides observability into application and API-level attacks that aim to exploit vulnerabilities and abuse app business logic, and observability into any bad actors targeting your systems. AAP performs actions such as the following:

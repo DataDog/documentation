@@ -12,12 +12,6 @@ list_section:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-Cloud Security Misconfigurations is not available in the selected site.
-</div>
-{{< /site-region >}}
-
 The following resource types are available within [Resource catalog][2] for filtering.
 See [custom rules in Cloud Security Misconfigurations][1] for more information.
 
