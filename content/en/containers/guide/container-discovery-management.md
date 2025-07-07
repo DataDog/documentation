@@ -118,7 +118,7 @@ You cannot mix cross-category inclusion/exclusion rules. For instance, if you wa
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
-DD_CONTAINER_INCLUDE = "image:^^docker.io/library/foo(@sha256)?:.*"
+DD_CONTAINER_INCLUDE = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
 Instead, use:
