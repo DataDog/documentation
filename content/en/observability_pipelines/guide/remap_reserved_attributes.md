@@ -56,7 +56,7 @@ The following Custom Processor script rewrites the `service` field and dynamical
 .service = {{.app_id}}
 ```
 
-In the below example image, the input shows `status` with the value `wrongstatus`. After processing the log with the script, the output shows `service` with the value of `streaming-service`, which is `app_id`'s value.
+In the below example image, the input shows `service` with the value `wrongstatus`. After processing the log with the script, the output shows `service` with the value of `streaming-service`, which is `app_id`'s value.
 
 {{< img src="observability_pipelines/guide/remap_attributes/custom_processor_dynamically_assign.png" alt="A custom processor showing an input the incorrect status value and the output showing the correct status" style="width:100%;" >}}
 
