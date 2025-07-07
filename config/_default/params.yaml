@@ -258,6 +258,7 @@ unsupported_sites:
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
+  bitsai: [us3,us5,eu,ap1,ap2,gov]
   case_management: [gov,ap1,ap2]
   ci_visibility: [gov]
   continuous_delivery: [gov]
