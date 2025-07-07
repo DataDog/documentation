@@ -71,7 +71,7 @@ Enable LLM Observability by running your application with `NODE_OPTIONS="--impor
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 
 ```shell
-DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 {{% /tab %}}
