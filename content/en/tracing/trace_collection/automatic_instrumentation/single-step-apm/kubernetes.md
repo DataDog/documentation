@@ -64,6 +64,8 @@ The file you need to configure depends on how you enabled Single Step Instrument
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
 - If you enabled SSI with Helm, edit `datadog-values.yaml`.
 
+**Note**: Targets are evaluated in order; the first match takes precedence. 
+
 #### Example configurations
 
 Review the following examples demonstrating how to select specific services:
@@ -146,7 +148,7 @@ This configuration does the following:
            ddTraceVersions:
              java: "default"
            ddTraceConfigs:   ## trace configs set for services in matching pods
-             - name: "DD_DSM_ENABLED"
+             - name: "DD_DATA_STREAMS_ENABLED"
                value: "true"
          - name: "user-request-router"
            podSelector:
