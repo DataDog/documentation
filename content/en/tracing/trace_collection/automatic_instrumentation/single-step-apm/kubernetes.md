@@ -564,7 +564,7 @@ Use `ddTraceVersions` in your Agent Helm config to control both the language and
 
 #### Example: Specify a Java APM SDK for a namespace
 
-Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK at version 1.48.2.
+Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK version 1.48.2.
 
 
 ```
