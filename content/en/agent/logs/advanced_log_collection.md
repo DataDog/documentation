@@ -638,8 +638,8 @@ If you are sending lots of multi-line logs, and you are unsure of their format o
 
 **2. What happens when a multi-line pattern doesn't match any logs?**
 
-All non-JSON log lines will be processed individually as separate log entries.
-All JSON-formatted log lines will be treated as a single line of logs, and only the first valid JSON format will enter the intake; the rest will be dropped.
+All non-JSON log lines are processed individually as separate log entries.
+All JSON-formatted log lines are treated as a single line of logs, and only the first valid JSON format enters the intake; the rest are dropped.
 
 **3. What happens when there are both global rules and integration-specific rules?**
 Integration-specific rules completely override global rules for the particular integration.
