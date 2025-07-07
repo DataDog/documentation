@@ -39,7 +39,7 @@ With Historical Metrics Ingestion enabled, if you submit multiple values with th
 
 You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
 
-**Note**: Historical Metrics Ingestion is not available for distribution metrics.
+**Note**: Historical Metrics Ingestion is not available for distribution metrics, or custom metrics generated from other Datadog data types (such as logs).
 
 ## Configuration
 
