@@ -633,8 +633,8 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 **1. When should I use manual multi-line rules vs. automatic multi-line detection?**
 
-If you know the format of your logs, you should use manual multi-line rules for more precise control. 
-If you are sending lots of multi-line logs and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
+If you know the format of your logs, you should use manual multi-line rules for precise control. 
+If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
 
 **2. What happens when a multi-line pattern doesn't match any logs?**
 
