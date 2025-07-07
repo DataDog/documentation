@@ -86,6 +86,7 @@ ENV DD_ENV=<YOUR_ENVIRONMENT>
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing configuration to false.
+
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 

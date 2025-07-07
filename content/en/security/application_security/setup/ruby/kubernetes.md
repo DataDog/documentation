@@ -34,6 +34,8 @@ Install the Datadog Agent by following the [setup instructions for Kubernetes](/
 
 ## 2. Enabling App and API Protection monitoring
 
+Install and configure the `datadog` gem in your Ruby application.
+
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -100,6 +102,7 @@ spec:
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing configuration to false.
+
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
