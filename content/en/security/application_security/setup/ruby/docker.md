@@ -114,7 +114,7 @@ end
 ```
 
 {{% /tab %}}
-{{% tab "Environment variables" %}}
+{{% tab "Auto-instrumentation and environment variables" %}}
 
 Add the `datadog` gem to your Gemfile and require auto-instrumentation:
 
