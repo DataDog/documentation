@@ -60,41 +60,9 @@ Once you've finished setup and are running the tracer with your application, you
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+The tracing library can be configured through environment variables. This is the recommended approach for setting the Agent host, port, and other settings.
 
-The connection for traces can also be configured in code:
-
-```python
-from ddtrace import tracer
-
-# Network sockets
-tracer.configure(
-    https=False,
-    hostname="custom-hostname",
-    port="1234",
-)
-
-# Unix domain socket configuration
-tracer.configure(
-    uds_path="/var/run/datadog/apm.socket",
-)
-```
-
-The connection for stats can also be configured in code:
-
-```python
-from ddtrace import tracer
-
-# Network socket
-tracer.configure(
-  dogstatsd_url="udp://localhost:8125",
-)
-
-# Unix domain socket configuration
-tracer.configure(
-  dogstatsd_url="unix:///var/run/datadog/dsd.socket",
-)
-```
+For a comprehensive list of configuration options, including Unified Service Tagging, see the [Library Configuration][3] documentation.
 
 ### Upgrading to v1
 
