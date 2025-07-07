@@ -28,7 +28,9 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 {{< tabs >}}
-{{% tab "Use a Personal Access Token" %}}
+{{% tab "Use a Personal Access Token (Legacy)" %}}
+
+<div class="alert alert-warning">This option is only available for workspaces created before July 7, 2025. New workspaces must authenticate using OAuth.</div>
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, set the **Lifetime (days)** value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click **Generate**. Take note of your token.
@@ -54,7 +56,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 {{% /tab %}}
 
-{{% tab "Use a Service Principal for OAuth (Preview)" %}}
+{{% tab "Use a Service Principal for OAuth" %}}
 
 <div class="alert alert-warning">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
