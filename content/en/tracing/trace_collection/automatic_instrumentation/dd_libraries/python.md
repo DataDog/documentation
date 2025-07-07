@@ -100,7 +100,7 @@ tracer.configure(
 
 Version 3.0.0 of `dd-trace-py` drops support for Python 3.7 and removes previously deprecated APIs. This guide provides steps to help you upgrade your application.
 
-With the release of `v3.0.0`, the `2.x` release line is now in maintenance mode. Only critical bug fixes will be backported. For more details, see the [versioning support policy][14].
+With the release of `v3.0.0`, the `2.x` release line is in maintenance mode. Only critical bug fixes should be backported. For more details, see the [versioning support policy][14].
 
 ### Step 1: Detect deprecations
 
