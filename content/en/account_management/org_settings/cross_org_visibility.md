@@ -153,8 +153,8 @@ Use [granular access controls][12] to limit the teams, roles, or users that can 
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
-1. Click on the padlock (**Permissions**) icon
-1. Select **Restrict Access**
+1. Click on the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
 1. Use the dropdown to select one or more teams, roles, or users that may edit the cross-organization connection.
 1. Click **Add**.
@@ -166,7 +166,7 @@ Use [granular access controls][12] to limit the teams, roles, or users that can 
 To restore general access to a cross-organization connection with restricted access, follow the steps below:
 
 1. In the cross-organization visibility page, hover over the cross-organization connection you would like to restore general access to. **Permissions** and **Delete** icons appear on the right.
-1. Click on the padlock (**Permissions**) icon
+1. Click on the padlock (**Permissions**) icon.
 1. Click **Restore Full Access**.
 1. Click **Save**.
 
