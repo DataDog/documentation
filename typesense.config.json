@@ -168,15 +168,15 @@
                 },
                 {
                     "id": "azure",
-                    "synonyms": ["microsoft azure", "azure"]
+                    "synonyms": ["microsoft azure", "azure", "azure integration"]
                 },
                 {
                     "id": "gcp",
-                    "synonyms": ["gcp", "google cloud platform"]
+                    "synonyms": ["gcp", "google cloud platform", "google cloud integration"]
                 },
                 {
                     "id": "aws",
-                    "synonyms": ["aws", "amazon web service"]
+                    "synonyms": ["aws", "amazon web service", "aws integration"]
                 },
                 {
                     "id": "rum",
