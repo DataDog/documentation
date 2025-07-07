@@ -48,9 +48,9 @@ You must be running Datadog Agent v7.41.1+ for App and API Protection features.
 
 ## Integrations
 
-The Ruby tracer includes support for the following frameworks, data stores, and libraries:
+The Ruby tracer includes support for the following frameworks, ORMs, and libraries:
 
-### Web frameworks
+### Web and API frameworks
 
 - Rails
 - Sinatra
@@ -60,9 +60,16 @@ The Ruby tracer includes support for the following frameworks, data stores, and 
 
 - ActiveRecord
 
+### HTTP clients
+
+- Faraday
+- Excon
+- RestClient
+
 ### Other
 
 - GraphQL
+- Rack
 
 For a complete list of supported integrations and their versions, see the [Ruby tracer documentation][3].
 
