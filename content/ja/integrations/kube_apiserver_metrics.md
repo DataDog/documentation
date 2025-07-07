@@ -187,7 +187,7 @@ spec:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 
 ### サービスチェック

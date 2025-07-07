@@ -78,7 +78,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_globalaccelerator" >}}
+{{< get-metrics-from-git "amazon-globalaccelerator" >}}
 
 
 ### Checks de servicio
