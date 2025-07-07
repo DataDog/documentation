@@ -33,6 +33,8 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ## 2. Enabling App and API Protection monitoring
 
+Install and configure the `datadog` gem in your Ruby application.
+
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 {{< tabs >}}
 {{% tab "Configuration file" %}}
