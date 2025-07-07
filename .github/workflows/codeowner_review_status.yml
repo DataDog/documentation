@@ -24,10 +24,6 @@ jobs:
       approval_status: ${{ steps.check_approvals.outputs.approval_status }}
       team_requested: ${{ steps.check_approvals.outputs.team_requested }}
     steps:
-      - name: Debug OIDC Claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: "octo-debugger"
       - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
         id: octo-sts
         with:
@@ -38,7 +34,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.octo-sts.outputs.sts_token }}
         run: |
-          gh api -H /orgs/DataDog/teams/documentation/members
+          gh api -H "Authorization: Bearer ${{ env.GH_TOKEN }}" /orgs/DataDog/teams/documentation/members
 
       - name: Check Documentation Team Approval
         id: check_approvals
