@@ -19,15 +19,22 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
+      id-token: write # Needed to federate tokens.
     outputs:
       approval_status: ${{ steps.check_approvals.outputs.approval_status }}
       team_requested: ${{ steps.check_approvals.outputs.team_requested }}
     steps:
+      - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
+        id: octo-sts
+        with:
+          scope: DataDog
+          policy: documentation.read-org-members 
+
       - name: Check Documentation Team Approval
         id: check_approvals
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
         env:
-          GITHUB_TOKEN: ${{ secrets.CODEOWNER_WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
         with:
           github-token: ${{ env.GITHUB_TOKEN }}
           script: |
