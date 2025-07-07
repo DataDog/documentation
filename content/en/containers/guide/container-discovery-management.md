@@ -22,7 +22,7 @@ In a containerized environment, you should deploy the Datadog Agent once per hos
 
 You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations. 
 
-When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. 
+When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. These filtering options do not affect log collection if `containerCollectAll` is not enabled.
 
 You can set exceptions in two ways:
 
@@ -32,6 +32,17 @@ You can set exceptions in two ways:
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
 ## Agent configuration
+
+Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+- container name (`name`)
+- container image name (`image`)
+- Kubernetes namespace (`kube_namespace`)
+
+<div class="alert alert-warning">
+
+The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
+
+</div>
 
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
@@ -47,12 +58,9 @@ In **Agent v7.20+**, use the following environment variables to exclude containe
 
 In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
 
-Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
-
-
 <div class="alert alert-info">
 
-Image name filters (`image`) are matched across full image name including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
+Image name filters (`image`) are matched across full image name, including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
 
 </div>
 
@@ -97,18 +105,20 @@ Alternatively, you can also use `image:.*` or `kube_namespace:.*`. Configuring `
 
 ### Inclusion and exclusion behavior
 
-Inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
+Generally, inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
 
+The only exception to this rule is pod exclusion annotations like `ad.datadoghq.com/exclude`. When an application has an exclusion annotation set to `true`, this takes precedence, and the container is excluded from being autodiscovered for monitoring. For example, having a condition that includes every container like `DD_CONTAINER_INCLUDE = "image:.*"` does not guarantee a container is included if it has an exclusion annotation set on it. See [Container Discovery Management - Pod exclude configuration](#pod-exclude-configuration) for more information.
+
 You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
-DD_CONTAINER_INCLUDE = "image:^^docker.io/library/foo(@sha256)?:.*"
+DD_CONTAINER_INCLUDE = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
 Instead, use:
@@ -244,6 +254,10 @@ In **Agent v7.45+** you can set annotations on your Kubernetes pods to control A
 | `ad.datadoghq.com/<CONTAINER_NAME>.exclude`         | Excludes the container with `<CONTAINER_NAME>` in the pod                        |
 | `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod    |
 | `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
+
+The `ad.datadoghq.com/exclude` annotation set on the application pod takes the highest priority. This means that even if a container matches inclusion through `DD_CONTAINER_INCLUDE`, the Agent still ignores monitoring for that container. The same applies for the respective filtering configurations specific for metrics and logs.
+
+When applying annotation-based exclusions, the Agent checks for all relevant exclusion annotations on the container. For example, when configuring logs for an NGINX container, the Agent will look for `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/nginx.exclude`, or `ad.datadoghq.com/nginx.logs_exclude` annotations to be `true` on the pod. The same applies for metrics.
 
 #### Exclude the entire pod:
 ```yaml

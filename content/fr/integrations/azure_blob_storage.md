@@ -1,55 +1,88 @@
 ---
+app_id: azure-blob-storage
+app_uuid: 57ef97b4-651a-432d-9dc5-f56a94449d75
+assets:
+  dashboards:
+    azure_blob_storage: assets/dashboards/azure_blob_storage.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.storage_storageaccounts_blobservices.blob_count
+      metadata_path: metadata.csv
+      prefix: azure.storage_storageaccounts_blobservices
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 226
+    source_type_name: Azure Blob Storage
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - data stores
+custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés de Stockage Blob Azure.
-doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_blob_storage
-has_logo: true
 integration_id: azure-blob-storage
-integration_title: Stockage Blob Microsoft Azure
+integration_title: Azure Blob Storage
 integration_version: ''
 is_public: true
-custom_kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_blob_storage
-public_title: Intégration Datadog/Stockage Blob Microsoft Azure
+public_title: Azure Blob Storage
 short_description: Surveillez des métriques clés de Stockage Blob Azure.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés de Stockage Blob Azure.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Blob Storage
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Section Overview
 
 Stockage Blob Azure est une solution de stockage d'objets conçue par Microsoft pour le cloud. Le stockage de blobs est optimisé pour d'importants volumes de données non structurées. Recueillez des métriques de Stockage Blob Azure pour :
 
 - Visualiser les performances de Stockage Blob
 - Corréler les performances de Stockage Blob avec vos applications
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_blob_storage" >}}
+### Métriques
+{{< get-metrics-from-git "azure-blob-storage" >}}
 
 
-### Aide
+### Événements
 
 L'intégration Stockage Blob Azure n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Stockage Blob Azure n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

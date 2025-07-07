@@ -23,10 +23,6 @@ further_reading:
 title: Mobile Application Testing 및 모니터링
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing은 이 사이트에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 Mobile Application Testing을 사용하면 실제 장치를 사용하여 Android 및 iOS 애플리케이션의 주요 비즈니스 흐름을 테스트하고 모니터링할 수 있습니다. 
@@ -121,7 +117,7 @@ Datadog은 실제 기기에서 이러한 테스트를 실행하여 주요 애플
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }

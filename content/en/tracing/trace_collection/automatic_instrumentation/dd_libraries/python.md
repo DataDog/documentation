@@ -60,41 +60,9 @@ Once you've finished setup and are running the tracer with your application, you
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+The tracing library can be configured through environment variables. This is the recommended approach for setting the Agent host, port, and other settings.
 
-The connection for traces can also be configured in code:
-
-```python
-from ddtrace import tracer
-
-# Network sockets
-tracer.configure(
-    https=False,
-    hostname="custom-hostname",
-    port="1234",
-)
-
-# Unix domain socket configuration
-tracer.configure(
-    uds_path="/var/run/datadog/apm.socket",
-)
-```
-
-The connection for stats can also be configured in code:
-
-```python
-from ddtrace import tracer
-
-# Network socket
-tracer.configure(
-  dogstatsd_url="udp://localhost:8125",
-)
-
-# Unix domain socket configuration
-tracer.configure(
-  dogstatsd_url="unix:///var/run/datadog/dsd.socket",
-)
-```
+For a comprehensive list of configuration options, including Unified Service Tagging, see the [Library Configuration][3] documentation.
 
 ### Upgrading to v1
 
@@ -108,6 +76,6 @@ If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [relea
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[5]: https://ddtrace.readthedocs.io/en/v1.0.0/release_notes.html
 [11]: /tracing/trace_collection/library_injection_local/
 [13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

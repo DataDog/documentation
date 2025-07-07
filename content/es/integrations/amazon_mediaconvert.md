@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.mediaconvert.hdoutput_duration
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.mediaconvert.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -94,7 +94,7 @@ Configura AWS Elemental MediaConvert para enviar logs a un bucket de S3 o a Clou
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_mediaconvert" >}}
+{{< get-metrics-from-git "amazon-mediaconvert" >}}
 
 
 ### Eventos
@@ -115,5 +115,5 @@ La integración de AWS Elemental MediaConvert no incluye ningún check de servic
 [4]: https://docs.datadoghq.com/es/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediaconvert/amazon_mediaconvert_metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_mediaconvert/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/es/help/

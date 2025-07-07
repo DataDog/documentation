@@ -10,10 +10,6 @@ further_reading:
 To use Datadog On-Call on your mobile device, install the <a href="/mobile#installing">Datadog mobile app</a>.
 </div>
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You must [configure your profile settings][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
 
 ## Configure your On-Call profile
@@ -35,7 +31,7 @@ Go to [My On-Call Profile][1] to configure your settings.
 To set up your mobile device, including how to **circumvent Do Not Disturb mode**, see [Set Up Your Mobile Device for Datadog On-Call][4].
 
 ### Notification preferences
-Notification preferences allow you to tailor how and when **you** are alerted for On-Call Pages based on the urgency of the situation. By configuring preferences for low urgency and high urgency, you can ensure that notifications are effective and unobtrusive, depending on the urgency of the Page. The urgency of a Page is determined within your [Processing Rules][5].
+Notification preferences allow you to tailor how and when **you** are alerted for On-Call Pages based on the urgency of the situation. By configuring preferences for low urgency and high urgency, you can ensure that notifications are effective and unobtrusive, depending on the urgency of the Page. The urgency of a Page is determined within your [Routing Rules][5].
 
 The system cycles through your configured notification preferences until you either acknowledge the Page, or the Page is escalated to the next on-call person as defined in the [Escalation Policy][6].
 
@@ -69,5 +65,5 @@ Under **Other Notifications**, you can opt to receive a **Shift reminder** befor
 [2]: /service_management/mobile/?tab=ios
 [3]: /mobile
 [4]: /service_management/on-call/guides/configure-mobile-device-for-on-call
-[5]: /service_management/on-call/processing_rules
+[5]: /service_management/on-call/routing_rules
 [6]: /service_management/on-call/escalation_policies

@@ -11,6 +11,10 @@ further_reading:
       text: 'Group Attribute Mapping'
 ---
 
+<div class="alert alert-info">
+SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+</div>
+
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
 
 For the capabilities and limitations of this feature, see [SCIM][1].
@@ -55,10 +59,6 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
 
 ## Configure automatic team provisioning
-
-{{< callout url="/help/" header="false" >}}
-The Managed Teams feature is turned off by default. Request access by contacting support.
-{{< /callout >}}
 
 With [Managed Teams][6], you control the core provisioning of a Datadog Team — its name, handle, and membership — through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
 

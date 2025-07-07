@@ -29,18 +29,20 @@
     }
 
     .hits-container,
-    #hits {
+    #hits,
+    #hits-partners {
         position: relative;
         z-index: unset;
     }
 
     .hits-container {
         padding-top: 20px;
+        inset-block-start: auto;
+        filter: none;
     }
 
-    #hits {
-        top: 0;
-        filter: none;
+    #hits,
+    #hits-partners {
         border-top: none;
     }
 

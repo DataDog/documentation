@@ -4,7 +4,7 @@ aliases:
 categories:
 - azure
 - nube
-- la red
+- network
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas principales de Azure ExpressRoute.
@@ -23,7 +23,7 @@ short_description: Rastrea las métricas principales de Azure ExpressRoute.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Utiliza el servicio Azure ExpressRoute para extender tus redes locales a la nube de Microsoft a través de una conexión privada facilitada por un proveedor de conectividad.
@@ -34,25 +34,25 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure E
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_express_route" >}}
+{{ get-metrics-from-git "azure-expressroute" }}
 
 
 ### Eventos
 
 La integración Azure ExpressRoute no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure ExpressRoute no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_express_route/azure_express_route_metadata.csv

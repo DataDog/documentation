@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
@@ -88,11 +88,11 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 さらに、Datadog-CRI-O インテグレーションは、CRI-O Golang バイナリ自体の CPU 使用率とメモリ使用量を収集します。
 
 ### メトリクス
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### サービスチェック
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## トラブルシューティング

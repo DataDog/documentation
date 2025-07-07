@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.billing.estimated_charges
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.billing
     service_checks:
       metadata_path: assets/service_checks.json
@@ -106,7 +106,7 @@ AWS 요금 메트릭은 4시간마다 사용할 수 있습니다. Datadog가 메
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_billing" >}}
+{{< get-metrics-from-git "amazon-billing" >}}
 
 
 ### 이벤트
@@ -127,5 +127,5 @@ AWS 빌링 및 비용 관리 통합은 서비스 점검을 포함하지 않습�
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_billing/metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_billing/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/ko/help/

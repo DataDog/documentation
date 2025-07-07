@@ -27,7 +27,7 @@ A partir del 30 de abril de 2025, Azure ya no es compatible con Node.js v18. Par
 Si anteriormente desplegaste con una plantilla ARM, puedes actualizar utilizando la plantilla con los mismos parámetros.
 </div>
 
-## Configuración 
+## Configuración
 
 {{< tabs >}}
 

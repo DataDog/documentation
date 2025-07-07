@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Relay のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_relay/
@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Azure Relay からメ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_relay" >}}
+{{< get-metrics-from-git "azure-relay" >}}
 
 
 ### イベント

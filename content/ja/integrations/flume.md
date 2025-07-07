@@ -22,7 +22,7 @@ author:
   sales_email: kealan.maas@datadoghq.com
   support_email: kealan.maas@datadoghq.com
 categories: []
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flume/README.md
 display_on_public_website: true
@@ -122,7 +122,7 @@ Flume には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 
 [1]: https://flume.apache.org/

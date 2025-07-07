@@ -20,7 +20,7 @@ title: チュートリアル - コンテナ内の Java アプリケーション�
 
 ## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container.
+このチュートリアルでは、コンテナーにインストールされたサンプル Java アプリケーションでトレーシングを有効にする手順を説明します。このシナリオでは、Datadog Agent もコンテナーにインストールされます。
 
 ホスト上のアプリケーションと Agent、コンテナ内のアプリケーションとホスト上の Agent、クラウドインフラストラクチャー上のアプリケーションと Agent、他の言語で書かれたアプリケーションなど、他のシナリオについては、その他の[トレース有効化のチュートリアル][1]を参照してください。
 
@@ -43,7 +43,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 このリポジトリには、Docker コンテナ内で実行できるようにあらかじめ構成されたマルチサービスの Java アプリケーションが含まれています。サンプルアプリは、データの追加や変更を行うための REST API を備えた基本的なノートアプリです。`docker-compose` の YAML ファイルは `docker` ディレクトリに配置されます。
 
-This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent.
+このチュートリアルでは、アプリケーションと Datadog Agent の両方のコンテナーをビルドする `all-docker-compose.yaml` ファイルを使用します。
 
 `notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
@@ -63,7 +63,7 @@ docker-compose -f all-docker-compose.yaml build notes
 docker-compose -f all-docker-compose.yaml up notes
 {{< /code-block >}}
 
-   You can verify that it's running by viewing the running containers with the `docker ps` command.
+   `docker ps` コマンドで実行中のコンテナーを確認することで、実行されていることを検証できます。
 
 3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、同じコンテナで実行されているメモリ内 H2 データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
 
@@ -211,7 +211,7 @@ Agent が動作しているかどうかは、ターミナルで連続出力を�
 
 しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 

@@ -1,6 +1,5 @@
 ---
 title: Best Practices for RUM Sampling
-
 description: Guide for RUM sampling.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -39,7 +38,7 @@ In terms of setting an ideal sampling rate, it depends on the amount of traffic 
 Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
 
 ### Changing the sampling rate in the Datadog RUM UI
-Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
+Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, contact [Datadog Support][8] to create a feature request.
 
 ### Adjusting sampling during live outages
 
@@ -50,6 +49,8 @@ If a bug or incident occurs, you can increase sampling to collect 100% of your b
 ### Accounting for mobile devices that go offline or crash
 
 RUM ensures availability of data when user devices are offline. In low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+**Note**: This behavior only applies to mobile applications using mobile RUM SDKs.
 
 ## Further Reading
 

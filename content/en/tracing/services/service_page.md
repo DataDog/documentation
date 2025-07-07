@@ -33,11 +33,11 @@ Selecting a service on the Software Catalog leads you to the detailed service pa
 
 Consult on this page:
 
-* [Service health](#service-health) (in Preview)
+* [Service health](#service-health)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -47,29 +47,26 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/product-preview/service-health/" >}}
-  Service health is in Preview. To request access, complete the form.
-{{< /callout >}}
+**Service health** provides a real-time summary of service status to help you identify services that need immediate attention.
 
-The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.
+Service health integrates multiple signals (monitors, incidents, and Watchdog Insights) into a single alert. See which services are in a critical state to detect and troubleshoot issues faster.
 
-Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts on the Service Page. 
+{{< img src="/tracing/services/service_page/service-health3.png" alt="Service health on the service page and service dependency map." style="width:100%;" >}}
 
-{{< img src="/tracing/services/service_page/service-health2.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+Service health is available in several places in Datadog:
 
-To access service health:
+1. [Software Catalog][23]
+2. Service pages
+3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies.
+4. Service pills
 
-1. Go to [APM > Software Catalog][23].
-2. Hover over a service and click **Full Page**.
-3. View the **Service Health** banner at the top of the page and the related alert badges in the vertical navigation. 
-
-The Service Health banner displays the status of your service as *Warning*, or *Alert* if at least one of the following conditions is met:
+Service health displays the status of your service as *Critical* or *Warning* if at least one of the following conditions is met:
 
 |   Status    |                         Condition                          |
 |-------------|------------------------------------------------------------|
-|  **Alert**  | **Monitors**: <br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
-| **Warning** | **Monitors**: <br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
-|   **No Alerts**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
+|  **Critical**  | **Monitors**: <br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is in an `ALERT` state and triggered within the `past 2 days`.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is ongoing.<br>- An APM latency/error rate alert is ongoing.  |
+| **Warning** | **Monitors**: <br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is in a `WARN` state and triggered within the `past 2 days`.<br><br>**Incidents**: <br>- An incident of any severity is stable .<br><br>**Watchdog Insights**: <br>- A log anomaly alert is ongoing. |                                                                                                                                                                                                   |
+|   **Ok**    |    No alerts from the critical or warning state are active.     |                                                                                                                                                                       ||
 
 ## Service monitor
 
@@ -80,7 +77,7 @@ Datadog also proposes a list of monitors depending on your service type:
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Monitors are attached to an APM service if `service:<SERVICE_NAME>` is tagged in the metadata, included in the monitor query, or if the query is grouped-by service. You can also tag any Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
@@ -116,7 +113,7 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ## Resources
 
-See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). 
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries).
 
 Below, there's a list of [resources][11] associated with your service. Note: If the resource represents an external interface of an HTTP service, the list displays endpoints instead.
 
@@ -141,7 +138,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
@@ -200,7 +197,7 @@ This tab has overview graphs that show which resources have the most issues and 
 {{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
-Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [App and API Protection][18].
 
 The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
@@ -243,6 +240,13 @@ Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 
 {{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
+### Memory Leaks
+If you set up the [Continuous Profiler][15] and the service is running in a containerized environment, the [Memory Leaks][24] tab becomes available.
+
+It guides you through a workflow for identifying potential memory leaks and shows the most actionable data.
+
+{{< img src="profiler/apm_service_page_memory_leaks.png" alt="Memory Leaks" style="width:90%;">}}
+
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
@@ -279,8 +283,9 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security/application_security/how-appsec-works/
+[18]: /security/application_security/how-it-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/
 [23]: https://app.datadoghq.com/services
+[24]: /profiler/guide/solve-memory-leaks/

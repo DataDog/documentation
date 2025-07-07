@@ -16,7 +16,7 @@ To begin **onboarding**:
 apm_config:
   apm_dd_url: <https://trace-pci.agent.datadoghq.com>
 ```
-4. All spans that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enalbed for PCI DSS compliance and are included with no additional charge.
+4. All spans that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enabled for PCI DSS compliance and are included with no additional charge. Note that Sensitive Data Scanner for PCI customers does not include the Summary page or estimated usage metric capabilities.
 
 To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).

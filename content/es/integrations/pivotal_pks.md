@@ -17,10 +17,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
+- rastreo
 - Kubernetes
 - recopilación de logs
-- la red
+- red
 - orquestación
 custom_kind: integración
 dependencies:
@@ -37,19 +37,19 @@ name: pivotal_pks
 public_title: Servicio de contenedor Pivotal
 short_description: Oferta Kubernetes de nivel empresarial de Pivotal.
 supported_os:
-- Linux
-- macOS
+- linux
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Contenedores
+  - Category::Containers
   - Categoría::Kubernetes
-  - Categoría::Recopilación de logs
-  - Categoría::Red
+  - Category::Log Collection
+  - Category::Network
   - Categoría::Orquestación
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Oferta Kubernetes de nivel empresarial de Pivotal.
   media: []
@@ -58,7 +58,7 @@ tile:
   title: Servicio de contenedor Pivotal
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -77,7 +77,7 @@ La monitorización PKS requiere que configures la integración Datadog para [Kub
 
 ### Recopilación de logs
 
-Disponible para la versión 6.0 o posteriores del Agent
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
 La configuración es exactamente la misma que para Kubernetes.
 Para empezar a recopilar logs de todos tus contenedores, utiliza las [variables de entorno][4] de tu Datadog Agent.

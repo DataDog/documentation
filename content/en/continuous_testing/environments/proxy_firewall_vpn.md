@@ -97,6 +97,37 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+ Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443 | `tunnel-ap2.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | `api.ap2.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+
+{{< /site-region >}}
+
+## Using the testing tunnel with multiple environments
+
+The testing tunnel can be configured to work with multiple environments, including `localhost`, by using the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. These fields allow you to substitute parts of the starting URL and resource URLs based on the provided regular expressions, enabling you to redirect requests to different environments during test execution.
+
+For example, you can reuse the test scheduled in production to run on your development environment with `startUrl` and `startUrlSubstitutionRegex`. You can also redirect requests for frontend assets to a local development environment while keeping the main page and API calls served by the production environment. This is useful for testing changes in isolation without needing to deploy the entire application.
+
+To use these options, specify the appropriate values in the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. The `startUrl` and `startUrlSubstitutionRegex` fields allow you to modify the starting URL, while the `resourceUrlSubstitutionRegexes` field allows you to modify the URLs of all subsequent resource requests.
+
+For `resourceUrlSubstitutionRegexes`, specify an array of strings, each containing two parts separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL, and the second is the expression to rewrite the URL.
+
+For example:
+
+```
+https://prod.my-app.com/assets/(.*)|http://localhost:3000/assets/$1
+```
+
+This regular expression captures the path of the resource URL and rewrites it to point to the local development environment. Given the URL `https://prod.my-app.com/assets/js/chunk-123.js`, it would rewrite it to `http://localhost:3000/assets/js/chunk-123.js`.
+
+This feature allows you to test specific parts of your application in different environments, including `localhost`, ensuring that changes are properly validated before being deployed to production.
+
+You can learn more about these options in [Testing Multiple Environments][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -104,3 +135,4 @@ Allow **Outbound connections** for the following Datadog endpoints:
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: /continuous_testing/cicd_integrations#use-the-cli
+[4]: /continuous_testing/environments/multiple_env

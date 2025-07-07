@@ -18,7 +18,7 @@ aliases:
 
 Select a source to get started:
 
-<!-- - [Amazon Data Firehose][12] -->
+- [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
@@ -29,6 +29,7 @@ Select a source to get started:
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Socket (TCP or UDP)][14]
 - [Sumo Logic Hosted Collector][9]
 - [rsyslog or syslog-ng][10]
 
@@ -45,3 +46,4 @@ Select a source to get started:
 [11]: /observability_pipelines/set_up_pipelines/log_enrichment/amazon_s3
 [12]: /observability_pipelines/set_up_pipelines/log_enrichment/amazon_data_firehose
 [13]: /observability_pipelines/set_up_pipelines/log_enrichment/kafka
+[14]: /observability_pipelines/set_up_pipelines/log_enrichment/socket
