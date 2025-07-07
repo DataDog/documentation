@@ -33,35 +33,52 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ## 2. Enabling App and API Protection monitoring
 
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 Add the `datadog` gem to your Gemfile:
 
 ```ruby
 gem 'datadog', '~> 2.0'
 ```
 
-Install the gem:
+Install dependencies:
 
 ```bash
 bundle install
 ```
 
-{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-Configure Datadog library in `config/initializers/datadog.rb`:
+Configure Datadog library by adding an initializer:
 
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
 
   c.tracing.enabled = true
+
+  # Tracing instrumentation for Rails has to be explicitly enabled
+  c.tracing.instrument :rails
+
   c.appsec.enabled = true
+  c.appsec.instrument :rails
 end
 ```
 
 {{% /tab %}}
-{{% tab "Environment Variables" %}}
+{{% tab "Auto-instrumentation and environment variables" %}}
+
+Add the `datadog` gem to your Gemfile and require auto-instrumentation:
+
+```ruby
+gem 'datadog', '~> 2.0', require: 'datadog/auto_instrument'
+```
+
+Install dependencies:
+
+```bash
+bundle install
+```
 
 Set environment variables for your application. Add these to your deployment configuration or shell environment:
 
@@ -76,25 +93,56 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing configuration to false.
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-Configure Datadog library in `config/initializers/datadog.rb`:
+Add the `datadog` gem to your Gemfile:
+
+```ruby
+gem 'datadog', '~> 2.0'
+```
+
+Install dependencies:
+
+```bash
+bundle install
+```
+
+Configure Datadog library by adding an initializer:
 
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
 
+  # Disable APM Tracing
   c.tracing.enabled = false
+
+  # Tracing instrumentation for Rails has to be explicitly enabled
+  c.tracing.instrument :rails
+
   c.appsec.enabled = true
+  c.appsec.instrument :rails
 end
 ```
 
 {{% /tab %}}
-{{% tab "Environment Variables" %}}
+{{% tab "Auto-instrumentation and environment Variables" %}}
 
-Set environment variables for your application:
+Add the `datadog` gem to your Gemfile and require auto-instrumentation:
+
+```ruby
+gem 'datadog', '~> 2.0', require: 'datadog/auto_instrument'
+```
+
+Install dependencies:
+
+```bash
+bundle install
+```
+
+Set environment variables for your application. Add these to your deployment configuration or shell environment:
 
 ```bash
 export DD_APPSEC_ENABLED=true
