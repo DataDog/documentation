@@ -102,7 +102,7 @@ Una vez configurada la integración de [Oracle Cloud Infrastructure][2], asegúr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_mysql_database" >}}
+{{< get-metrics-from-git "oci-mysql-database" >}}
 
 
 ### Checks de servicio

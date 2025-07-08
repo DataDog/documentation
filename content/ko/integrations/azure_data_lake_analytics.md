@@ -68,7 +68,7 @@ Datadog Azure 통합을 사용해 Data Lake Analytics 메트릭을 수집할 수
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_data_lake_analytics" >}}
+{{ get-metrics-from-git "azure-datalakeanalytics" }}
 
 
 ### 이벤트

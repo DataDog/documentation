@@ -371,7 +371,7 @@ Siguiendo estas prácticas recomendadas, puedes garantizar una integración efic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "snowflake_web" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### Eventos

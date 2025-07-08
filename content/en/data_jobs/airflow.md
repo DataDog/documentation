@@ -276,33 +276,19 @@ dbt_run = BashOperator(
 ```
 
 ### Link your Spark jobs with Airflow tasks
-You can troubleshoot Airflow tasks that run Spark jobs more efficiently by connecting the Spark job run info and telemetry with the respective Airflow task.
 
-**Prerequisites**: your Spark jobs are currently monitored through [Data Jobs Monitoring][2] and are submitted through [SparkSubmitOperator][5]s from your Airflow jobs.
+OpenLineage integration can automatically inject Airflow's parent job information (namespace, job name, run id) into Spark application properties. This creates a parent-child relationship between Airflow tasks and Spark jobs, enabling you to troubleshoot both systems in one place.
 
-To see the link between Airflow task and the Spark application it submitted, follow these steps:
+1. Make sure your Spark jobs are currently monitored through [Data Jobs Monitoring][2].
 
-1. Configure Airflow to turn off lazy loading of Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
+2. Enable automatic parent job information injection by setting the following configuration:
 
-   ```shell
-   export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False'
-   ```
+```shell
+AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
+```
 
-2. Update your Airflow job's DAG file by adding the following Spark configurations to your [SparkSubmitOperator][5] where you submit your Spark Application:
+This automatically injects parent job properties for all supported Spark Operators, like SparkSubmitOperator or LivyOperator. See the [Apache Airflow OpenLineage documentation][8] for the full list of supported operators. To disable for specific operators, set `openlineage_inject_parent_job_info=False` on the operator.
 
-   ```python
-     SparkSubmitOperator(
-       conf={
-         "spark.openlineage.parentJobNamespace": "{{ macros.OpenLineageProviderPlugin.lineage_job_namespace() }}",
-         "spark.openlineage.parentJobName": "{{ macros.OpenLineageProviderPlugin.lineage_job_name(task_instance) }}",
-         "spark.openlineage.parentRunId": "{{ macros.OpenLineageProviderPlugin.lineage_run_id(task_instance) }}",
-       },
-     )
-   ```
-
-   See [Lineage job & run macros][4] for the definitions of referenced macros.
-
-3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or Spark all in one place.
 
 ## Further Reading
 
@@ -315,3 +301,4 @@ To see the link between Airflow task and the Spark application it submitted, fol
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
+[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html#passing-parent-job-information-to-spark-jobs

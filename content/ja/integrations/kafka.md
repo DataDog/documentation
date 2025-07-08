@@ -319,7 +319,7 @@ Kafka コンシューマーが動作しているホスト上で Agent を実行�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kafka_consumer" >}}
+{{< get-metrics-from-git "kafka-consumer" >}}
 
 
 ### イベント
