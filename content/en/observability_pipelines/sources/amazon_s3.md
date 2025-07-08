@@ -15,6 +15,10 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/amazon_s3 %}}
 
+## Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
+
 ## AWS Authentication
 
 {{% observability_pipelines/aws_authentication/instructions %}}

@@ -17,6 +17,10 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/syslog %}}
 
+## Set the environment variables
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
+
 ## Send logs to the Observability Pipelines Worker over syslog
 
 {{% observability_pipelines/log_source_configuration/syslog %}}
