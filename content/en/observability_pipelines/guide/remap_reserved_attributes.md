@@ -14,15 +14,14 @@ further_reading:
 
 Observability Pipelines' processors enable you to add, edit, and remove log fields. Remapping attributes or rewriting values ensures your logs are processed and standardized properly. For the majority of processing use cases, use the Edit Fields processor to add, remap, or remove fields from your logs. For advanced use cases, use the Custom Processor to conditionally modify fields or rewrite a field's value.
 
-## About reserved attributes
+In Datadog, [reserved attributes][1] are log fields that are set aside for specific processing in the platform. Reserved attributes include ` host`, `source`, `status`, `service`, `trace_id`, and `message`. Reserved attributes are applied when routing logs to the following Observability Pipelines destinations:
 
-In Datadog, [reserved attributes][1] are log fields that are set aside for specific processing in the platform. Reserved attributes include ` host`, `source`, `status`, `service`, `trace_id`, and `message`. For Observability Pipelines, there are restrictions around how you can handle these attributes.
-
-Reserved attributes are applied when routing logs to the following destinations:
 - Datadog
 - Amazon S3 (for Log Archives)
 - Azure Blob Storage (for Log Archives)
 - Google Cloud Storage (for Log Archives)
+
+There are restrictions in Observability Pipelines on how you can modify reserved attributes. For example, reserved attributes cannot be renamed using the Rename Field processor, but must be remapped instead. This guide walks you through the steps to remap the value of reserved attributes.
 
 ## Remap the value of reserved attributes
 
