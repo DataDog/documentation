@@ -56,6 +56,16 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 
 {{% notifications-integrations %}}
 
+#### Create a webhook for security automation
+
+1. Navigate to the [Webhooks](https://app.datadoghq.com/integrations/webhooks) integration.
+1. Click **+ New** in the **Webhooks** section.
+1. Enter a name for the webhook.
+1. Enter the webhook URL.
+1. In the **Payload** section, select **Security Signal**.
+1. Copy the payload below and replace the payload example in the UI.
+1. Click **Save**.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
