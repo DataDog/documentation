@@ -8,9 +8,9 @@ aliases:
 
 The following App and API Protection capabilities are supported in the Ruby library, for the specified tracer version:
 
-| App and API Protection capability                   | Minimum Ruby tracer version |
+| App and API Protection capability                  | Minimum Ruby tracer version |
 | -------------------------------------------------- | --------------------------- |
-| Threat Detection                                   | 1.9.0                      |
+| Threat Detection                                   | 1.9.0                       |
 | Threat Protection                                  | 1.11.0                      |
 | Customize response to blocked requests             | 1.15.0                      |
 | Automatic user activity event tracking             | 1.14.0                      |
@@ -35,8 +35,8 @@ The minimum tracer version to get all supported App and API Protection capabilit
 
 The Datadog Ruby Tracing library is open source. View the [GitHub repository][2] for more information.
 
-- [MRI][2] versions 2.5 to 3.5
-- [JRuby][3] versions 9.2.21.0+ and 9.4
+- MRI versions 2.5 to 3.5
+- JRuby versions 9.2.21.0+ and 9.4
 
 These are supported on the following architectures:
 
@@ -70,8 +70,3 @@ The Ruby tracer includes support for the following frameworks, ORMs, and librari
 
 - GraphQL
 - Rack
-
-For a complete list of supported integrations and their versions, see the [Ruby tracer documentation][3].
-
-[2]: https://github.com/DataDog/dd-trace-rb
-[3]: /tracing/trace_collection/compatibility_requirements/ruby
