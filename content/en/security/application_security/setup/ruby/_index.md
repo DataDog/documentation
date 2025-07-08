@@ -46,5 +46,5 @@ further_reading:
 
 ## Additional Resources
 
-- [Troubleshooting Guide](./ruby/troubleshooting)
-- [Compatibility Information](./ruby/compatibility)
+- [Compatibility Information](/security/application_security/setup/ruby/compatibility)
+- [Troubleshooting Guide](/security/application_security/setup/ruby/troubleshooting)
