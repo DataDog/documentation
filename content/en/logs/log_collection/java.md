@@ -295,25 +295,6 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Inject trace IDs into your logs
-
-If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
-
-If you are _not_ correlating logs and traces, **remove** the MDC placeholders (`dd.trace_id` and `dd.span_id`) from the log patterns and/or configurations in the above examples.
-
-For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
-
-```json
-"dd.trace_id":{
-   "$resolver":"mdc",
-   "key":"dd.trace_id"
-},
-"dd.span_id":{
-   "$resolver":"mdc",
-   "key":"dd.span_id"
-}
-```
-
 ### Raw format
 
 {{< tabs >}}
@@ -411,7 +392,20 @@ writer.file     = log.txt
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
 
-If you are _not_ correlating logs and traces, you can remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the above configuration examples.
+If you are _not_ correlating logs and traces, remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the previous configuration examples.
+
+For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
+
+```json
+"dd.trace_id":{
+   "$resolver":"mdc",
+   "key":"dd.trace_id"
+},
+"dd.span_id":{
+   "$resolver":"mdc",
+   "key":"dd.span_id"
+}
+```
 
 
 ## Configure the Datadog Agent
