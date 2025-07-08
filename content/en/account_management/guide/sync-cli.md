@@ -11,8 +11,6 @@ further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "/account_management/billing/usage_details"
-  tag: "Documentation"
 ---
 
 ## Overview 
@@ -74,7 +72,7 @@ Before you begin, confirm that both the **resource** you are migrating and the *
 {{% /collapse-content %}} 
 
 {{% collapse-content title="List of supported API URLs" level="h5" expanded=true id="id-for-resources" %}}
-These are the supported URLs for the source and destination API URLs when syncing your organization:
+These are the supported URLs for the source and destination API URLs when syncing your organization: `IS AP2 SUPPORTED?` AND `HOW DOES IT WORK EXACTLY WITH THE GOV SITE SINCE DATA IS SPECIFIC TO THAT SITE?`
 
 | Site    | API URL                         | Site Parameter      | Location |
 |---------|---------------------------------|---------------------|----------|
@@ -99,7 +97,7 @@ The `datadog-sync-cli` tool can be installed from [source](#installing-from-sour
 
 
 {{% collapse-content title="Installing from source" level="h5" expanded=true id="id-for-anchoring" %}}
-Installing from source requires Python `v3.9+`
+Installing from source requires Python `v3.9 and above`
 
 
 1. Clone the project repo and CD into the directory 
@@ -116,7 +114,7 @@ Installing from source requires Python `v3.9+`
    pip install .
    ```
 
-3. Invoke the cli tool using 
+3. Invoke the CLI tool using `WHAT'S AN EXAMPLE TO ADD HERE FOR <command> <options>`
    ```shell
    datadog-sync <command> <options>
    ```
@@ -168,7 +166,7 @@ Installing from source requires Python `v3.9+`
 
 {{% collapse-content title="Installing using Docker" level="h5" expanded=true id="id-for-anchoring" %}}
 
-1. Clone the project repo and CD into the directory 
+1. Clone the project repo and **cd** into the directory 
 
    ```shell
    git clone https://github.com/DataDog/datadog-sync-cli.git 
@@ -181,7 +179,7 @@ Installing from source requires Python `v3.9+`
    docker build . -t datadog-sync
    ```
 
-3. Run the Docker image using entrypoint below:
+3. Run the Docker image using the entrypoint below:
    ```
     docker run --rm -v <PATH_TO_WORKING_DIR>:/datadog-sync:rw \
       -e DD_SOURCE_API_KEY=<DATADOG_API_KEY> \
@@ -192,14 +190,14 @@ Installing from source requires Python `v3.9+`
       -e DD_DESTINATION_API_URL=<DATADOG_API_URL> \
       datadog-sync:latest <command> <options>
    ```
-The docker run command mounts a specified `<PATH_TO_WORKING_DIR>` working directory to the container.
+The `docker run` command mounts a specified `<PATH_TO_WORKING_DIR>` working directory to the container.
 {{% /collapse-content %}} 
 
 <br>
 
 ## How to use the datadog-sync-cli tool
 
-<div class="alert alert-warning"> <strong>Note:</strong> The sync-cli tool uses the <code>resources</code> directory as the source of truth for determining what resources need to be created and modified. This directory should not be removed or corrupted.</div>
+<div class="alert alert-warning"> <strong>Note:</strong> The sync-cli tool uses the <code>resources</code> directory as the source of truth for determining what resources need to be created and modified. This directory <strong>should not be removed or corrupted</strong>.</div>
 
 ### Steps to sync your resources 
 
@@ -252,19 +250,19 @@ $ datadog-sync sync \
 <br>
 
 ## Filter the data collected
-By default all resources are imported and synced. You can use the filtering option to specify what resources are migrated. Filtering can be done on two levels:
+By default all resources are imported and synced. To specify what resources are migrated, use the filtering option. Filtering can be done on two levels:
 - [Top resources level  ](#top-resources-level-filtering) 
 - [Individual resource level ](#per-resource-level-filtering) 
 
 ### Top resources level filtering
-To perform actions on a specific top level resource, or subset of resources, use `--resources` option. For example, this command imports **ALL** dashboards and dashboard lists in your Datadog organization:
+To perform actions on a specific top level resource, or subset of resources, use `--resources` option. For example, this command imports **ALL** dashboards and **ALL** dashboard lists in your Datadog organization:
 
 ```shell
 datadog-sync import --resources="dashboard_lists,dashboards"
 ```
 
 ### Individual resource level filtering
-Individual resources can be further filtered using the `--filter ` flag. For example, the following command imports **ALL** dashboards and **ONLY** dashboard lists with the `name` attribute equal to `My custom list`:
+Individual resources can be further filtered using the `--filter ` flag. For example, the following command imports **ALL** dashboards and **ONLY** dashboard lists where the `name` attribute is equal to `My custom list`:
 
 ```shell
 datadog-sync import --resources="dashboards,dashboard_lists" --filter='Type=dashboard_lists;Name=name;Value=My custom list'
@@ -299,7 +297,7 @@ Operator
 | ------------------------|---------------------------------------------------------------|
 |**Type** (required)      |Resource such as Monitors, Dashboards, and more.               |
 |**Name** (required)      |Attribute key to filter on. This can be any attribute represented in dot notation such as `attributes.user_count`.                                                 |
-|**Value** (required)     |Regex to filter attribute value by. Note: special regex characters need to be escaped if filtering by raw string.                                                    |
+|**Value** (required)     |Regex to filter attribute value by. <br> Note: special regex characters need to be escaped if filtering by raw string.                                                    |
 |**Operator**             |All invalid operator's default to ExactMatch. Available operators are:<br> - `Not`: Match not equal to Value.<br> - `SubString` (_Deprecated_): Sub string matching. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.<br> - `ExactMatch` (_Deprecated_): Exact string match. This operator will be removed in future releases. See the [SubString and ExactMatch Deprecation](#substring-and-exactmatch-deprecation) section.                              |
 
 If multiple filters are passed for the same resource, the **OR** logic is applied to the filters by default. This behavior can be adjusted using the `--filter-operator` option. (`DO WE HAVE AN EXAMPLE OF THIS USAGE`)
@@ -309,7 +307,7 @@ If multiple filters are passed for the same resource, the **OR** logic is applie
 
 #### SubString and ExactMatch Deprecation
 
-In future releases (`IN WHICH RELEASES IS THIS RELEASED?`) the `SubString` and `ExactMatch` Operator will be removed in favor of the `Value` key. This is because the `Value` key supports regex so both of these scenarios are covered by just writing the appropriate regex.
+In future releases (`IN WHICH RELEASES IS THIS AVAILABLE?`) the `SubString` and `ExactMatch` Operator will be removed in favor of the `Value` key. This is because the `Value` key supports regex so both of these scenarios are covered by just writing the appropriate regex.
 
 This example shows the difference in syntax when using `Value` to filter for monitors that have `filter test` in the `name` attribute:
 
@@ -325,7 +323,7 @@ This example shows the difference in syntax when using `Value` to filter for mon
 
 ## Additional configurations 
 ### Using custom configuration instead of options 
-You can use a custom configuration text file in place of using filtering options. This is an example config file for a `US1` source URL and `EU` destination URL:
+You can use a custom configuration text file in place of using filtering options. This is an example config file for a `US1` source and `EU` destination:
 
 ```shell
 destination_api_url="https://api.datadoghq.eu"
@@ -344,9 +342,9 @@ datadog-sync import --config config
 ```
 
 ### Using the cleanup flag to sync changes from the source destination
-The `sync` command provides a `--cleanup` flag. Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of source and destination organizations.
+The `sync` command provides a `--cleanup` flag. Passing the cleanup flag ensures deleted resources from the source are also removed from the destination organization. The resources to be deleted are determined by the differences in the [state files](#state-files---avoid-data-duplication-while-keeping-data-seperation) of the source and destination organizations.
 
-For example, let's take a *ResourceA* and *ResourceB* that are imported and synced. After a deletion of *ResourceA* from the source organization, running the `import` command updates the source organization's state file to only include *ResourceB* . Running the `sync --cleanup=Force` command deletes *ResourceA* from the destination organization.
+For example, let's take a *ResourceA* and *ResourceB* that are imported and synced. After a deletion of *ResourceA* from the source organization, running the `import` command updates the source organization's state file to only include *ResourceB*. Running the `sync --cleanup=Force` command deletes *ResourceA* from the destination organization.
 
 
 ### Verify your Datadog disaster recovery (DDR) status 
@@ -356,7 +354,7 @@ By default all commands check the Datadog Disaster Recovery (DDR) status of both
 
 ### State files - how to avoid data duplication while keeping data seperation
 
-By default, a `resources` directory is generated in the current working directory of the user. This directory contains `json` mapping of resources between the source and destination organization. To avoid duplication and loss of mapping, this directory should be retained between tool usage. To override these directories use the `--source-resources-path` and `--destination-resource-path`.
+By default, a `resources` directory is generated in the current working directory of the user. This directory contains a `json` mapping of the resources between the source and destination organization. To avoid duplication and loss of mapping, this directory should be retained between tool usage. To override these directories use the `--source-resources-path` and `--destination-resource-path`.
 
 When running againts multiple destination organizations, a seperate working directory should be used to ensure seperation of data. 
 
@@ -364,11 +362,11 @@ When running againts multiple destination organizations, a seperate working dire
 
 ## Best practices
 ### Resource subsets must be migrated with their dependencies
-Many Datadog resources are interdependent. For example, some Datadog resource can reference `roles` and `dashboards`, which includes widgets that may use monitors or synthetics data. The datadog-sync tool syncs these resources in order to ensure dependencies are not broken.
+If importing or syncing subset of resources, users should ensure that dependent resources are imported and synced as well. This is because many Datadog resources are interdependent. 
 
-If importing/syncing subset of resources, users should ensure that dependent resources are imported and synced as well.
+For example, some Datadog resource can reference `roles` and `dashboards`, which includes widgets that may use monitors or synthetics data. The `datadog-sync-cli` tool syncs these resources in order to ensure dependencies are not broken.
 
-See [Supported resources](#supported-resources) section below for potential resource dependencies.
+See the list of resources dependencies below for potential resource dependencies.
 
 {{% collapse-content title="List of potential resources dependencies" level="h5" expanded=true id="id-for-resources" %}}
 
@@ -417,5 +415,3 @@ See [Supported resources](#supported-resources) section below for potential reso
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/getting_started/site/
-
-
