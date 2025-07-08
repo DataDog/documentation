@@ -127,7 +127,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
-    | `cloudtrail.ListTrails`                                     | List all Cloudtrail trails.                                                  |
+    | `cloudtrail:ListTrails`                                     | List all Cloudtrail trails.                                                  |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
