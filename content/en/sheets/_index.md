@@ -87,14 +87,12 @@ By default, all users have full access to spreadsheets.
 Use granular access controls to limit the [roles][10] that may edit a particular spreadsheet:
 1. While viewing a spreadsheet, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the spreadsheet.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
+2. Click **Add**. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the spreadsheet, the system requires you to include at least one role that you are a member of before saving.
+**Note:** To maintain your edit access to the spreadsheet, you must include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted spreadsheet. Complete the following steps:
 1. While viewing the spreadsheet, click on the cog in the upper right. The settings menu opens.
