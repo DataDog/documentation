@@ -41,6 +41,8 @@ ignores:
 sources:
 - src: "content/en/**/*.md"
   dst: "content/{lang}/**/*.md"
+- src: "content/en/**/*.ast.json"
+  dst: "content/{lang}/**/*.ast.json"
 - src: "data/api/**/translate_actions.json"
   dst: "data/api/**/translate_actions.{lang}.json"
 - src: "data/api/**/translate_tags.json"

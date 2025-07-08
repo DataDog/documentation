@@ -6,19 +6,15 @@ further_reading:
 title: Configurar tu dispositivo móvil para Datadog On-Call
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-Estar de guardia requiere de notificaciones fiables y oportunas para asegurarte de que puedes responder a los incidentes de forma eficaz. Esta guía recorre los pasos para configurar tu dispositivo móvil para obtener un rendimiento óptimo con Datadog On-Call.
+Estar de guardia requiere notificaciones fiables y puntuales para asegurar que puedas responder a las incidencias con eficacia. Esta guía te indica los pasos para configurar tu dispositivo móvil para un rendimiento óptimo con Datadog On-Call.
 
 1. Instala la [aplicación móvil de Datadog][1].
-2. [Configura notificaciones push](#set-up-push-notifications): activa tu dispositivo para recibir notificaciones desde la aplicación móvil de Datadog.
-3. [Modo silencio y No molestar](#circumvent-mute-and-do-not-disturb-mode): recibe notificaciones push, llamadas de voz y SMS, cuando tu dispositivo está en modo No molestar.
+2. [Configurar notificaciones push](#set-up-push-notifications): habilita tu dispositivo para recibir notificaciones desde la aplicación móvil de Datadog.
+3. [Evitar el modo silencio y No molestar](#circumvent-mute-and-do-not-disturb-mode): recibe notificaciones push, llamadas de voz y SMS mientras tu dispositivo está en modo No molestar.
 
-## Configurar notificaciones push 
+## Establecer notificaciones push
 <div class="alert alert-info">
-Cuando inicias sesión en la aplicación móvil de Datadog por primera vez, un flujo de incorporación se encarga de la configuración de notificaciones y permisos.
+Cuando accedes por primera vez a la aplicación móvil de Datadog, un flujo de integración se encarga de la configuración y los permisos de notificación.
 </div>
 
 Sin embargo, por defecto, la aplicación móvil no puede enviarte notificaciones. Para recibir notificaciones push:
@@ -123,7 +119,7 @@ Para mayor fiabilidad, Datadog utiliza un conjunto rotatorio de números de tel�
 
 {{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Anula tu modo No molestar del dispositivo de Android para SMS y llamadas de voz" style="width:100%;" >}}
 
-1. En la aplicación móvil de Datadog, ve a **Account** > **Settings** > **Notifications** (Cuenta > Configuración > Notificaciones).
+1. En la aplicación móvil de Datadog, ve a **Settings** > **On-Call** (Configuración > On-Call).
 
 2. En **Phone & SMS** (Teléfono y SMS), activa **Automatic Contact Card Sync** (Sincronización automática de tarjetas de contacto). Esto crea un contacto llamado "Datadog On-Call", que se actualiza regularmente con los últimos números de teléfono de Datadog.
 

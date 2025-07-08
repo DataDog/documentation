@@ -136,7 +136,7 @@ Se recomienda seguir la guía de instalación correspondiente a tu entorno:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "jfrog_platform_self_hosted" >}}
+{{< get-metrics-from-git "jfrog-platform" >}}
 
 
 ### Eventos

@@ -262,8 +262,10 @@ unsupported_sites:
   autocomplete_search: [gov]
   case_management: [gov,ap1,ap2]
   ci_visibility: [gov]
+  code_security: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
+  correlation: [gov] #Event management correlation
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
