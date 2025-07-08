@@ -44,6 +44,16 @@
         openedFilterForm: null,
         showEmptyResultsMsg: false,
         filteredRulesets: new Set(),
+        provider_aliases: {
+            // if logo name different than 'providers' name,
+            // map to appropriate integration logo name (e.g. csharp: 'net')
+            gcp: 'google-cloud-platform',
+            aws: 'amazon-web-services'
+        },
+        framework_aliases: {
+            // if logo name different than 'frameworks' name,
+            // map to appropriate integration logo name (e.g. csharp: 'net')
+        },
         resetFilteredRulesets () {
             // Empty filtered rulesets
 
@@ -122,7 +132,7 @@
 
             window.history.pushState(null,'', newURL || url.toString())
         },
-        updateWithURLParams (validClouds) {
+        updateWithURLParams (validClouds, validFrameworks) {
             // Updates x-data properties with url param values
             
             const validCloudsArr = validClouds.replaceAll(/[\[\]]/g, '').split(' ')
@@ -134,7 +144,7 @@
                 acc[cloud.toLowerCase()] = displayName
                 return acc
             }, {})
-            const frameworkAliasMap = validFrameworkArr.reduce((acc,l) => {
+            const frameworkAliasMap = validFrameworksArr.reduce((acc,l) => {
                 const [framework, displayName] = l.split(';')
                 acc[framework.toLowerCase()] = displayName
                 return acc
@@ -144,12 +154,12 @@
                 if (key === 'search'){
                     this.searchValue = value
                 } else if ((key === 'providers') && validCloudsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
-                    const logoName = this.providers[value.toLowerCase()] ?? value
+                    const logoName = this.provider_aliases[value.toLowerCase()] ?? value
                     const displayName = cloudAliasMap[value.toLowerCase()] ?? value
                     const cloudLookupName = cloudAliasMap[value.toLowerCase()] ? `,${value}`: ''
                     this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${cloudLookupName}`)
-                } else if ((key === 'frameworks') && validFrameworkArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
-                    const logoName = this.frameworks[value.toLowerCase()] ?? value
+                } else if ((key === 'frameworks') && validFrameworksArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
+                    const logoName = this.framework_aliases[value.toLowerCase()] ?? value
                     const displayName = frameworkAliasMap[value.toLowerCase()] ?? value
                     const frameworkLookupName = frameworkAliasMap[value.toLowerCase()] ? `,${value}`: ''
                     this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${frameworkLookupName}`)
@@ -219,7 +229,7 @@
             }
         }
     }"
-    x-init="updateWithURLParams('{{$valid_clouds}}')">
+    x-init="updateWithURLParams('{{$valid_clouds}}', '{{$valid_frameworks}}')">
         {{/*  DATA TABLE  */}}
         <div class="col-12 order-1">
             <div class="ps-0">
@@ -388,11 +398,11 @@
                                 {{ $cloud_lookup_name := . }}
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $cloud_lookup_name "variant" "avatar") }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
-                                {{ $value := $cloud_lookup_name}}
+                                {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
                                 <input 
                                 id="{{ $cloud_lookup_name | anchorize }}" 
                                 type="checkbox" 
-                                value='{{ $value }}' 
+                                value='{{ cond ($int_logo | not ) . $value }}' 
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ $cloud_lookup_name }}')"
