@@ -51,6 +51,9 @@ Configure Datadog library by adding an initializer:
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
+  c.env = Rails.env
+
+  c.agent.host = 'your_agent_host'
 
   c.tracing.enabled = true
 
@@ -117,6 +120,8 @@ Configure Datadog library by adding an initializer:
 ```ruby
 Datadog.configure do |c|
   c.service = 'your_service_name'
+  c.env = Rails.env
+
   c.agent.host = 'your_agent_host'
 
   # Disable APM Tracing
