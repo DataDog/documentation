@@ -106,7 +106,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_kafka" >}}
+{{< get-metrics-from-git "amazon-kafka" >}}
 
 
 ### Events

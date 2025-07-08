@@ -125,7 +125,7 @@ Kube_metrics_server 점검은 [Datadog Agent][2] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 ### 이벤트
@@ -133,7 +133,7 @@ Kube_metrics_server 점검은 [Datadog Agent][2] 패키지에 포함되어 있�
 Kube_metrics_server는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 
 ## 트러블슈팅

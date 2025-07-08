@@ -19,10 +19,6 @@ title: Configurar el rastreo en un pipeline de Azure
 Azure DevOps Server no ofrece una compatibilidad oficial.
 </div>
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [Azure Pipelines][1] es un servicio de integración y entrega continua que admite cualquier lenguaje, plataforma o nube.

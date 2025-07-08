@@ -81,7 +81,7 @@ Amazon Bedrock は、Amazon および先進的な AI スタートアップの[�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_bedrock" >}}
+{{< get-metrics-from-git "amazon-bedrock" >}}
 
 
 ### イベント

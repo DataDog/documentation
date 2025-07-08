@@ -27,7 +27,7 @@ This guide provides strategies for managing your RUM session volumes effectively
 
 ## Retention filter sequencing
 
-{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-2.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:80%" >}}
 
 Sequencing your retention filters properly ensures you store the RUM data you need. Based on the [retention filter logic][1], follow these best practices:
 
@@ -38,7 +38,7 @@ Sequencing your retention filters properly ensures you store the RUM data you ne
 ### Setting up filters
 - If unsure about your settings, start by arranging filters from highest to lowest retention rates.
 - Use more filters with a 100% rate, and limit filters with lower percentages.
-- Add a default "catch-all" retention filter at the end to capture any sessions not matched by previous filters.
+- Add a default "catch-all" retention filter at the end to capture any sessions not matched by previous filters. We recommend including `@session.is_active: false` in the query to ensure this retention filter only matches sessions that are complete and were not previously retained by another retention filter.
 
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.
@@ -57,7 +57,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. |
 | Sessions with a specific user | `@type:session user.id:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code.
-| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15, retention rate 100%` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
+| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
 | Sessions with a network error 4XX and 5XX | `@type:resource @resource.status_code:>=400` | Frontend applications often encounter issues with downstream services returning 4XX or 5XX status codes. Using this filter, you can capture all sessions with resource calls that result in error codes. |
 
 

@@ -81,7 +81,7 @@ AWS considère que la métrique `aws.billing.estimated_charges` représente la f
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_billing" >}}
+{{< get-metrics-from-git "amazon-billing" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

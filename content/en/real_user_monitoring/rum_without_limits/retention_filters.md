@@ -20,18 +20,21 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 ## How it works
 
-A session is stored when at least one retention filter matches one of its constituting events and retains the underlying session based on the configured retention rate.
+A session is stored as soon as a retention filter matches one of its constituting events based on the predefined query, and samples it in based on the configured retention rate.
 
-{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-2.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:80%" >}}
 
 The logical flow of retention filters is the following:
 
-- All RUM events are evaluated against each filter in sequence, starting with the first.
-- If an event matches a filter, a decision is made to retain or discard the session containing the event, and subsequent filters are not executed.
-- Retained sessions are saved and accessible in the Session Explorer and other RUM pages. New events coming from this session are automatically kept to ensure complete visibility.
-- If an event does not match any filters, or if it matches a filter but the decision is made not to retain the session based on the configured retention rate, future events from the same session will continue to be processed. As a result, the session may eventually be retained.
+- All RUM events are evaluated against each filter in sequence, starting with the first one received.
+- When an event `A` matches a filter, a decision is made based on the retention rate to either sample the entire session in, or wait for future events to be evaluated. In both cases, event `A` is not evaluated further against subsequent retention filters. This is why the **order of retention filters matters**.
+- Retained sessions are saved and accessible in the Session Explorer and other RUM pages. New events coming from this session do not go through the list of retention filters, but are automatically kept to ensure complete visibility.
 
-**Note**: Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time. Use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`.
+**Notes**:
+
+- If an event does not match any filters, or if it matches a filter but the decision is made not to retain the session based on the configured retention rate, future events from the same session will continue to be evaluated. As a result, the session may eventually be retained.
+- Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time, and all sessions start at zero. Either use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`, or ensure the Session and View objects that are mutable are complete before evaluating them against the retention filters, by adding `@session.is_active: false` or `@view.is_active: false`.
+- Our SDKs batch and compress events before sending them to Datadog, and failed uploads go back at the end of the queue on the device. Therefore, it could happen that event `B` is evaluated before event `A`, but all events are eventually evaluated against the list of retention filters to prevent gaps.
 
 ## How retention filters work with replays
 
@@ -40,6 +43,8 @@ You can manage session sampling with replays using retention filters. Whenever a
 Replays collected through the [force collection][1] mechanism are kept by the default retention filter, positioned first in the list (see below).
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
+
+**Note**: Though our mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by our browser SDK are kept by default.
 
 
 ## Creating a retention filter
