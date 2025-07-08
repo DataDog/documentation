@@ -61,6 +61,9 @@ Datadog.configure do |c|
   c.tracing.instrument :rails
 
   c.appsec.enabled = true
+  c.appsec.api_security.enabled = true
+
+  # Rails instrumentation is required for App and API Protection
   c.appsec.instrument :rails
 end
 ```
@@ -89,6 +92,8 @@ spec:
         image: your-app-image
         env:
         - name: DD_APPSEC_ENABLED
+          value: "true"
+        - name: DD_API_SECURITY_ENABLED
           value: "true"
         - name: DD_SERVICE
           value: "<MY_SERVICE>"
@@ -131,6 +136,9 @@ Datadog.configure do |c|
   c.tracing.instrument :rails
 
   c.appsec.enabled = true
+  c.appsec.api_security.enabled = true
+
+  # Rails instrumentation is required for App and API Protection
   c.appsec.instrument :rails
 end
 ```
@@ -159,6 +167,8 @@ spec:
         image: your-app-image
         env:
         - name: DD_APPSEC_ENABLED
+          value: "true"
+        - name: DD_API_SECURITY_ENABLED
           value: "true"
         - name: DD_APM_TRACING_ENABLED
           value: "false"

@@ -14,9 +14,9 @@ The following App and API Protection capabilities are supported in the Ruby libr
 | Threat Protection                                  | 1.11.0                      |
 | Customize response to blocked requests             | 1.15.0                      |
 | Automatic user activity event tracking             | 1.14.0                      |
-| API Security                                       | 2.18.0                      |
+| API Security                                       | 2.17.0                      |
 
-The minimum tracer version to get all supported App and API Protection capabilities for Ruby is 2.18.0.
+The minimum tracer version to get all supported App and API Protection capabilities for Ruby is 2.17.0.
 
 ### Supported deployment types
 
