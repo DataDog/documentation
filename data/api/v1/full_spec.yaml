@@ -11987,10 +11987,6 @@ components:
             description: A monitor tag.
             type: string
           type: array
-        name:
-          description: The name of the service level objective object.
-          example: Custom Metric SLO
-          type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
         sli_specification:
