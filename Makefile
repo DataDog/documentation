@@ -86,6 +86,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
+# We aren't generating placeholders locally so the order of dependencies and sources module doesn't matter
 start-preserve-build: dependencies
 	@make update_websites_sources_module
 	@make server
