@@ -1,11 +1,6 @@
 ---
-title: Infrastucture as Code Rules
-description: View rules for multiple languages for Static Code Analysis.
-aliases:
-- /continuous_integration/static_analysis/rules
-- /static_analysis/rules
-- /code_analysis/static_analysis_rules
-- /security/code_security/static_analysis_rules
+title: Infrastucture as Code (IaC) Rules
+description: View rules for multiple frameworks and providers for IaC analysis.
 is_beta: false
 type: iac_security
   
@@ -31,10 +26,14 @@ cascade:
       name: Datadog Code Security
       url: https://www.datadoghq.com/product/code-security/
 
+
 further_reading:
-  - link: "/security/code_security/"
+  - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
-    text: "Learn about Datadog Code Security"
+    text: "Set up IaC Security"
+  - link: "/security/code_security/iac_security/exclusions"
+    tag: "Documentation"
+    text: "Configure IaC Security Exclusions"
 ---
 
 {{% site-region region="gov" %}}

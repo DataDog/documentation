@@ -7036,7 +7036,7 @@ menu:
       url: /security/code_security/iac_security/exclusions/
       parent: code_security_iac_security
       weight: 100001
-    - name: Infrastructure as Code Rules
+    - name: Infrastructure as Code (IaC) Rules
       identifier: code_security_iac_security_rules
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security

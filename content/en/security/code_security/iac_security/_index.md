@@ -1,5 +1,5 @@
 ---
-title: Infrastructure as Code Security
+title: Infrastructure as Code (IaC) Security
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
