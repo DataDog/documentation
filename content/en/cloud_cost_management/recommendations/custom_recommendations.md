@@ -25,6 +25,8 @@ With custom recommendations, you can:
 - Configure multiple rules for any default recommendation
 - View the history and changes made to your configurations
 - Modify, restore, or delete previously set rules
+  
+<div class="alert alert-warning">In order to customize a recommendation, you must be assigned the **Cloud Cost Management - Cloud Cost Management Write** permission. </div>
 
 ## Customize a recommendation
 
