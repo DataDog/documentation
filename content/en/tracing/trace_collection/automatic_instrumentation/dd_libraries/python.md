@@ -126,7 +126,7 @@ PYTHONWARNINGS=all python app.py
 
 After identifying potential issues, review the following breaking changes. Update your code to be compatible with v3 before proceeding with the upgrade.
 
-#### Environment Variable Changes
+#### Environment variable changes
 
 The following environment variables have been removed or replaced. Update your configuration with the new variables where applicable.
 
