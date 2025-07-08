@@ -553,6 +553,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 - **Jira**: Jira issue creation is available in both the recommendation side panel and the "Active Recommendations" list. You can create a Jira issue by clicking "Create Jira issue" in the side panel or by selecting multiple recommendations in the "Active Recommendations" list. Created Jira issues are automatically tagged to indicate their connection to a cost recommendation and include a link back to the referenced recommendation.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
+- **Datadog Kubernetes Autoscaling**: For Downsize Kubernetes Deployment recommendations, enable "[Kubernetes Autoscaling] (https://docs.datadoghq.com/containers/monitoring/autoscaling/?tab=datadogoperator#how-it-works)" to continuously apply rightsizing recommendations.
 
 ## Recommendation and resource descriptions
 
