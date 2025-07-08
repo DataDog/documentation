@@ -16,7 +16,7 @@ Observability Pipelines' processors enable you to add, edit, and remove log fiel
 
 In Datadog, [reserved attributes][1] are log fields that are set aside for specific processing in the platform. Reserved attributes include ` host`, `source`, `status`, `service`, `trace_id`, and `message`. Reserved attributes are applied when routing logs to the following Observability Pipelines destinations:
 
-- Datadog
+- Datadog Logs
 - Amazon S3 (for Log Archives)
 - Azure Blob Storage (for Log Archives)
 - Google Cloud Storage (for Log Archives)
