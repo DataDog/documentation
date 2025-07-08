@@ -18,10 +18,9 @@ title: Troubleshooting Ruby App and API Protection
 #### When using auto-instrumentation
 
 - Ensure that `DD_APPSEC_ENABLED` is set to `true`
-- Check `DD_SERVICE` and `DD_ENV` are properly configured
 - Set `DD_AGENT_HOST` and `DD_AGENT_PORT` if agent is running on a different host or port
 - Check that `DD_SERVICE` and `DD_ENV` are properly configured
-- Verify `DD_APM_ENABLED=true` if using APM features
+- Verify `DD_APM_TRACING_ENABLED=true` if using APM features
 
 #### When using configuration file
 
