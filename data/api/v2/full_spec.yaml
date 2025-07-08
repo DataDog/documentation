@@ -756,7 +756,7 @@ components:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
         `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`.'
+        `connection`, `connection-group`, `rum-application`, `cross-org-connection`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -20142,7 +20142,7 @@ components:
       type: object
     LayerAttributesInterval:
       description: Defines how often the rotation repeats, using a combination of
-        days and optional seconds.
+        days and optional seconds. Should be at least 1 hour.
       properties:
         days:
           description: The number of days in each rotation cycle.
@@ -33816,7 +33816,7 @@ components:
             - effective_date: '2025-02-03T05:00:00Z'
               end_date: '2025-12-31T00:00:00Z'
               interval:
-                seconds: 300
+                seconds: 3600
               members:
               - user:
                   id: 00000000-aba1-0000-0000-000000000000
@@ -59361,6 +59361,8 @@ paths:
 
         - RUM Applications: `rum-application`
 
+        - Cross Org Connections: `cross-org-connection`
+
 
         #### Supported relations for resources
 
@@ -59402,7 +59404,9 @@ paths:
 
         Connection Groups           | `viewer`, `editor`
 
-        RUM Application             | `viewer`, `editor`'
+        RUM Application             | `viewer`, `editor`
+
+        Cross Org Connections       | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -67845,15 +67849,16 @@ paths:
           `fargate`, `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`,
           `ingested_spans`, `iot`,
 
-          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `network_monitoring`,
-          `observability_pipelines`,
+          `lambda_traced_invocations`, `llm_observability`, `logs`, `network_flows`,
+          `network_hosts`, `network_monitoring`,
 
-          `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
-          `sds`, `snmp`, `software_delivery`,
+          `observability_pipelines`, `online_archive`, `profiling`, `product_analytics`,
+          `rum`, `rum_browser_sessions`,
 
-          `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
-          `timeseries`, `vuln_management`,
+          `rum_mobile_sessions`, `sds`, `snmp`, `software_delivery`, `synthetics_api`,
+          `synthetics_browser`,
 
+          `synthetics_mobile`, `synthetics_parallel_testing`, `timeseries`, `vuln_management`
           and `workflow_executions`.
 
           The following product family has been **deprecated**: `audit_logs`.'

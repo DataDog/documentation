@@ -4566,9 +4566,9 @@ menu:
       identifier: data_streams_pipeline_lineage
       parent: data_streams
       weight: 4
-    - name: Guide
-      url: data_streams/guide
-      identifier: data_streams_guide
+    - name: Metrics and Tags
+      url: data_streams/metrics_and_tags
+      identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
     - name: Data Jobs Monitoring
@@ -8064,16 +8064,21 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
+    # - name: Ownership of Views
+    #   url: real_user_monitoring/ownership_of_views/
+    #   parent: rum
+    #   identifier: rum_ownership_of_views
+    #   weight: 11
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 11
+      weight: 12
     - name: Data Security
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 12
+      weight: 13
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
