@@ -153,9 +153,12 @@ update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
-	node_modules/hugo-bin/vendor/hugo mod vendor
-	cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/
-	rm -rf _vendor
+	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
+		echo "In ci, vendoring integrations pages for placeholder generation"; \
+		node_modules/hugo-bin/vendor/hugo mod vendor; \
+		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
+		rm -rf _vendor; \
+	fi
 
 #######################################################################################################################
 # API Code Examples
