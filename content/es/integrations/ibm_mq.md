@@ -323,7 +323,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_mq" >}}
+{{< get-metrics-from-git "ibm-mq" >}}
 
 
 ### Eventos
@@ -331,7 +331,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 IBM MQ no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_mq" >}}
+{{< get-service-checks-from-git "ibm-mq" >}}
 
 
 ## Solucionar problemas

@@ -12,10 +12,6 @@ further_reading:
 title: Solucionar problemas de CI Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para ayudarte a solucionar problemas con CI Visibility. Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][2].
@@ -64,7 +60,7 @@ Una ejecución de pipeline puede conservar el estado `Running` durante un máxim
 [6]: /es/tracing/troubleshooting/tracer_debug_logs
 [7]: /es/continuous_integration/tests/containers/
 [8]: /es/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[9]: https://app.datadoghq.com/ci/settings/repository
+[9]: https://app.datadoghq.com/source-code/repositories
 [10]: /es/tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui

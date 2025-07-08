@@ -7,14 +7,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
       text: 'Get granular LLM observability by instrumenting your LLM chains'
-    - link: '/llm_observability/submit_evaluations'
+    - link: '/llm_observability/evaluations'
       tag: 'Guide'
-      text: 'Submit Evaluations to LLM Observability'
+      text: 'Evaluation options for LLM Observability'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -196,16 +192,16 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 [2]: /llm_observability/setup/api
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/terms
-[5]: /llm_observability/setup/sdk/#installation
-[6]: /llm_observability/setup/sdk/#command-line-setup
-[7]: /llm_observability/setup/sdk/#in-code-setup
+[5]: /llm_observability/sdk#installation
+[6]: /llm_observability/sdk#command-line-setup
+[7]: /llm_observability/sdk#in-code-setup
 [8]: /llm_observability/quickstart
-[9]: /llm_observability/setup/sdk/#tracing-spans
+[9]: /llm_observability/sdk#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
-[11]: /llm_observability/setup/sdk/#annotating-a-span
-[12]: /llm_observability/setup/sdk/#annotating-a-span
-[13]: /llm_observability/setup/sdk/#tracking-user-sessions
-[14]: /llm_observability/setup/sdk/#tracing-multiple-applications
-[15]: /llm_observability/submit_evaluations
+[11]: /llm_observability/sdk#tracking-user-sessions
+[12]: /llm_observability/sdk#tracking-user-sessions
+[13]: /llm_observability/sdk#persisting-a-span-across-contexts
+[14]: /llm_observability/sdk#tracing-multiple-applications
+[15]: /llm_observability/evaluations/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability

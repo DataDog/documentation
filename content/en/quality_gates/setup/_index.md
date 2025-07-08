@@ -7,10 +7,6 @@ further_reading:
   text: "Learn about Quality Gates"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 To use Datadog Quality Gates, you can define one or more rules on the [**Quality Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].

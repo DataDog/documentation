@@ -49,7 +49,7 @@ Una vez hecho esto, exporta tus logs de Google Bigtable desde Google Cloud Loggi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_bigtable" >}}
+{{< get-metrics-from-git "google-cloud-bigtable" >}}
 
 
 ### Eventos

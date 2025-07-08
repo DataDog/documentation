@@ -22,7 +22,7 @@ aliases:
 
 | Technology     | Library                                                                                         | Minimal tracer version | Recommended tracer version |
 |----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
-| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (v3.7 is not fully supported)              | 1.9.0                  | 1.43.0 or later            |
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (Lag generation is not supported for v3.7)              | 1.9.0                  | 1.43.0 or later            |
 | RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 or later            |
 | Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 or later            |
 | Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 or later            |
@@ -113,9 +113,18 @@ Data Streams Monitoring propagates context through message headers. If you are u
 
 #### Self-hosted Kafka connectors
 
+_Requirements_: [`dd-trace-java` v1.44.0+][8]
+
 <div class="alert alert-info">This feature is in Preview.</div>
 
 Data Streams Monitoring can collect information from your self-hosted Kafka connectors. In Datadog, these connectors are shown as services connected to Kafka topics. Datadog collects throughput to and from all Kafka topics. Datadog does not collect connector status or sinks and sources from self-hosted Kafka connectors.
+
+##### Setup
+
+1. Ensure that the Datadog Agent is running on your Kafka Connect workers.
+2. Ensure that [`dd-trace-java`][6] is installed on your Kafka Connect workers.
+3. Modify your Java options to include `dd-trace-java` on your Kafka Connect worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
+
 
 ## Further reading
 

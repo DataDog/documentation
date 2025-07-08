@@ -13,10 +13,6 @@ algolia:
   tags: ['agent flare']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
-{{< /site-region >}}
-
 A flare allows you to send necessary troubleshooting information to the Datadog support team.
 
 This page covers:
@@ -32,11 +28,15 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 
 ## Send a flare from the Datadog site
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for this site.</div>
+{{< /site-region >}}
+
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
 
 ## Send a flare using the `flare` command
 
