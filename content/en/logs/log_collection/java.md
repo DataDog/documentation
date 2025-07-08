@@ -152,7 +152,7 @@ Log4j 2 includes a JSON layout.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Add the JSON layout template file (e.g. `MyLayout.json`) in the `src/main/resources` directory of your Java project. For example:
+2. Add the JSON layout template file (such as `MyLayout.json`) in the `src/main/resources` directory of your Java project. For example:
     ```json
     {
        "timestamp":{
