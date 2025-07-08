@@ -50,4 +50,4 @@ To set up the rename field processor:
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-[10220]: /observability_pipelines/processors/edit_fields
+[10220]: /observability_pipelines/guide/remap_reserved_attributes
