@@ -373,16 +373,18 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
                 cluster_check: true
                 init_config:
                 instances:
-                - host: <AWS_INSTANCE_ENDPOINT>
-                  port: 5432
-                  username: datadog
-                  password: 'ENC[datadog_user_database_password]'
-                  dbm: true
-                  aws:
-                    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
-                    region: <REGION>
-                  tags:
-                  - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+                  - host: <AZURE_INSTANCE_ENDPOINT>
+                    port: 5432
+                    username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
+                    password: 'ENC[datadog_user_database_password]'
+                    ssl: 'require'
+                    dbm: true
+                    azure:
+                      deployment_type: '<DEPLOYMENT_TYPE>'
+                      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+                    tags:
+                      - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
     ```
 
     **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:

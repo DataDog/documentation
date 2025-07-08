@@ -18,7 +18,7 @@ Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send o
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
-You might prefer this option if you're looking for a straightforward setup and want to send traces directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+You might prefer this option if you're looking for a straightforward setup and want to send telemetry directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
 - [OTLP logs intake endpoint][3]
 - [OTLP metrics intake endpoint][4]

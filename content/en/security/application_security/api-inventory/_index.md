@@ -14,7 +14,7 @@ further_reading:
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
+- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
 - **Findings**: Security findings found on this API.
@@ -26,7 +26,7 @@ Using the API Security Inventory you can:
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 - See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history.
 
-{{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}}
+<!-- {{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}} -->
 
 ## Configuration
 
@@ -119,10 +119,6 @@ Datadog reports the type of authentication when available in a header through th
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Vulnerabilities count
-
-Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -131,6 +127,6 @@ Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to t
 [2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[6]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
 [8]: /security/code_security/iast/

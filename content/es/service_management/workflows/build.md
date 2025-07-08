@@ -23,10 +23,6 @@ further_reading:
 title: Crear flujos de trabajo
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La automatización de los flujos de trabajo no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Puedes crear flujos de trabajo o editar los existentes desde la página [Workflow Automation][1]. La página muestra información sobre los flujos de trabajo existentes, como el propietario del flujo de trabajo, el tipo de activador, las fechas de la última modificación y ejecución de cada flujo de trabajo, y si el flujo de trabajo está publicado o no.
 - Pasa el cursor por encima de un flujo de trabajo para ver las opciones de eliminar, clonar o editar los permisos del flujo de trabajo.
 - Selecciona **My workflows** (Mis flujos de trabajo) si deseas ver solo los flujos de trabajo que creaste.

@@ -16,6 +16,9 @@ further_reading:
   - link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
     tag: "Documentation"
     text: "AWS Integration and CloudWatch FAQ"
+  - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+    tag: "Blog"
+    text: "How we've created a successful FinOps practice at Datadog"
 
 
 multifiltersearch:
@@ -285,6 +288,24 @@ multifiltersearch:
       recommendation_prerequisites: "[Datadog profiling agent](/profiler/enabling/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
+      resource_type: Kubernetes Deployment
+      recommendation_type: Downsize Kubernetes Deployments
+      recommendation_description: Containers are using only a fraction of their requested CPU or memory
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: Azure
+      resource_type: Kubernetes Deployment
+      recommendation_type: Downsize Kubernetes Deployments
+      recommendation_description: Containers are using only a fraction of their requested CPU or memory
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: GCP
+      resource_type: Kubernetes Deployment
+      recommendation_type: Downsize Kubernetes Deployments
+      recommendation_description: Containers are using only a fraction of their requested CPU or memory
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
       resource_type: EBS
       recommendation_type: Over-provisioned EBS Volume IOPS
       recommendation_description: EBS Volumes where the amount of IOPS exceeds what is being used.
@@ -437,13 +458,48 @@ multifiltersearch:
       cloud_provider: GCP
       resource_type: CloudSQL Instance
       recommendation_type: Purchase CUD for Cloud SQL
-      recommendation_description: CloudSQL instances that would benefit from committed use discounts.
+      recommendation_description: CloudSQL instances that benefit from committed use discounts.
       recommendation_prerequisites: ""
     - category: Rate optimization
       cloud_provider: GCP
       resource_type: Cloud Run Job
       recommendation_type: Purchase Flexible CUD for Cloud Run Job
-      recommendation_description: Cloud Run Jobs that would benefit from flexible committed use discounts.
+      recommendation_description: Cloud Run Jobs that benefit from flexible committed use discounts.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Storage Bucket
+      recommendation_type: Transition Cloud Storage Bucket to Autoclass
+      recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Address
+      recommendation_type: Delete Unused Compute IP Address
+      recommendation_description: Unused compute IP addresses can be deleted.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Global Address
+      recommendation_type: Delete Unused Compute Global IP Address
+      recommendation_description: Unused compute global IP addresses can be deleted.
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Disk
+      recommendation_type: Delete Unattached Compute Disk
+      recommendation_description: Compute disks that are unattached and can be deleted.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: Compute Disk
+      recommendation_type: Delete Unused Compute Disk
+      recommendation_description: Compute disks that are unused and can be deleted.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Storage Bucket
+      recommendation_type: Delete Non-Current Cloud Storage objects
+      recommendation_description: Cloud Storage buckets that benefit from lifecycle rules to automatically delete non-current object versions.
       recommendation_prerequisites: ""
 ---
 
@@ -459,7 +515,7 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
-You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page. 
+You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
 ## Recommendation categories
 
@@ -496,7 +552,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 
 - **Jira**: Jira issue creation is available in both the recommendation side panel and the "Active Recommendations" list. You can create a Jira issue by clicking "Create Jira issue" in the side panel or by selecting multiple recommendations in the "Active Recommendations" list. Created Jira issues are automatically tagged to indicate their connection to a cost recommendation and include a link back to the referenced recommendation.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
-- **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations. 
+- **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
 
 ## Recommendation and resource descriptions
 
@@ -507,7 +563,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/recommendations
-[2]: /cloud_cost_management/aws/#setup
+[2]: /cloud_cost_management/setup/aws/#setup
 [3]: /integrations/amazon_web_services/#resource-collection
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/

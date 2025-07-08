@@ -106,7 +106,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.

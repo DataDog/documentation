@@ -31,7 +31,7 @@ categories:
 - configuración y despliegue
 - herramientas de desarrollo
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -67,7 +67,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Submitted Data Type::Metrics
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Monitoriza tu cuenta de Terraform y las ejecuciones fallidas
   media:
   - caption: Ejecuciones de espacio de trabajo y organización de Terraform
@@ -79,10 +79,10 @@ tile:
   - caption: Agents y auditorías de permisos de Terraform
     image_url: images/3.jpg
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Terraform
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
 <!--  FUENTE https://github.com/DataDog/marketplace -->
@@ -114,4 +114,4 @@ Hecho con ❤️ en Boston
 [3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-terraform" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-terraform" target="_blank">adquiere esta aplicación en el Marketplace</a>.

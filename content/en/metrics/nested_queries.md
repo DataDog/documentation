@@ -4,6 +4,9 @@ further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
   text: "Dashboard Querying"
+- link: "https://www.datadoghq.com/blog/nested-queries/"
+  tag: "Blog"
+  text: "Discover powerful insights with nested metric queries"
 ---
 
 ## Overview
@@ -284,7 +287,7 @@ You can use nested queries functionality in our [public API for querying timeser
 [4]: /metrics/distributions/
 [5]: /metrics/#anatomy-of-a-metric-query
 [6]: /metrics/nested_queries/#multilayer-aggregation
-[7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
-[8]: /metrics/nested_queries/#higher-resolution-queries-over-historical-timeframes
+[7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-counts-rates-and-gauges
+[8]: /metrics/nested_queries/#higher-resolution-queries-over-historical-time-frames
 [9]: /metrics/distributions/
 [10]: /dashboards/functions/rollup/#moving-rollup
