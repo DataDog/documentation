@@ -2,7 +2,7 @@
 categories:
 - azure
 - nube
-- la red
+- network
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Data Explorer.
@@ -21,7 +21,7 @@ short_description: Rastrea las métricas clave de Azure Data Explorer.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Data Explorer es un servicio de análisis altamente escalable y seguro que te permite realizar una exploración exhaustiva de datos estructurados y no estructurados para obtener información al instante. Optimizado para consultas ad hoc, Azure Data Explorer permite la exploración de datos sin procesar, estructurados y semiestructurados, lo que permite obtener información rápidamente. Utiliza Datadog para monitorizar el rendimiento y la utilización de Azure Data Explorer en contexto con el resto de tus aplicaciones e infraestructura.
@@ -34,7 +34,7 @@ Obtén métricas de Azure Data Explorer para:
 ## Configuración
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 ### Métricas
@@ -44,11 +44,11 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ### Eventos
 La integración Azure Data Explorer no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 La integración Azure Data Explorer no incluye checks de servicios.
 
-## Resolución de problemas
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+## Solucionar problemas
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_explorer/azure_data_explorer_metadata.csv

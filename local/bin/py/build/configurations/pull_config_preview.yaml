@@ -1,33 +1,33 @@
 ---
 - data:
-    - org_name: jenkinsci
+    # - org_name: jenkinsci
 
-      repos:
-      - repo_name: datadog-plugin
+    #   repos:
+      # - repo_name: datadog-plugin
 
-        contents:
+      #   contents:
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - README.md
-          options:
-            dest_path: '/integrations/'
-            file_name: 'jenkins.md'
-            front_matters:
-              dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
-              public_title: Datadog-Jenkins Integration
-              custom_kind: integration
-              name: jenkins
-              is_public: true
-              integration_title: Jenkins
-              has_logo: true
-              git_integration_title: jenkins
-              description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              categories:
-                - "configuration & deployment"
-              doc_link: https://docs.datadoghq.com/integrations/jenkins/
+      #   - action: pull-and-push-file
+      #     branch: master
+      #     globs:
+      #     - README.md
+      #     options:
+      #       dest_path: '/integrations/'
+      #       file_name: 'jenkins.md'
+      #       front_matters:
+      #         dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
+      #         public_title: Datadog-Jenkins Integration
+      #         custom_kind: integration
+      #         name: jenkins
+      #         is_public: true
+      #         integration_title: Jenkins
+      #         has_logo: true
+      #         git_integration_title: jenkins
+      #         description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+      #         short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+      #         categories:
+      #           - "configuration & deployment"
+      #         doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
     - org_name: ansible-collections
 
@@ -74,74 +74,74 @@
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
           - networks/model/domain/azure_services.go
 
-      - repo_name: dogweb
+      # - repo_name: dogweb
 
-        contents:
+      #   contents:
 
-        - action: integrations
-          branch: prod
-          globs:
-          - integration/*/*_metadata.csv
-          - integration/*/manifest.json
-          - integration/*/service_checks.json
-          - integration/*/README.md
-          - integration/*/__init__.py
+      #   - action: integrations
+      #     branch: prod
+      #     globs:
+      #     - integration/*/*_metadata.csv
+      #     - integration/*/manifest.json
+      #     - integration/*/service_checks.json
+      #     - integration/*/README.md
+      #     - integration/*/__init__.py
 
-      - repo_name: integrations-core
-        contents:
+      # - repo_name: integrations-core
+      #   contents:
 
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      #   - action: integrations
+      #     branch: master
+      #     globs:
+      #     - "*/metadata.csv"
+      #     - "*/manifest.json"
+      #     - "*/assets/service_checks.json"
+      #     - "*/README.md"
+      #     - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: integrations-extras
-        contents:
+      # - repo_name: integrations-extras
+      #   contents:
 
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      #   - action: integrations
+      #     branch: master
+      #     globs:
+      #     - "*/metadata.csv"
+      #     - "*/manifest.json"
+      #     - "*/assets/service_checks.json"
+      #     - "*/README.md"
+      #     - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: integrations-internal-core
-        contents:
+      # - repo_name: integrations-internal-core
+      #   contents:
 
-        - action: integrations
-          branch: main
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/assets/metrics/metric-spec.yaml"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      #   - action: integrations
+      #     branch: main
+      #     globs:
+      #     - "*/metadata.csv"
+      #     - "*/manifest.json"
+      #     - "*/assets/service_checks.json"
+      #     - "*/assets/metrics/metric-spec.yaml"
+      #     - "*/README.md"
+      #     - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: marketplace
-        contents:
+      # - repo_name: marketplace
+      #   contents:
 
-        - action: marketplace-integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/images/*.png"
-          - "*/images/*.jpg"
-          - "*/images/*.jpeg"
-          - "*/images/*.svg"
-          options:
-            front_matters:
-              algolia:
-                subcategory: Marketplace Integrations
+      #   - action: marketplace-integrations
+      #     branch: master
+      #     globs:
+      #     - "*/metadata.csv"
+      #     - "*/manifest.json"
+      #     - "*/assets/service_checks.json"
+      #     - "*/README.md"
+      #     - "*/images/*.png"
+      #     - "*/images/*.jpg"
+      #     - "*/images/*.jpeg"
+      #     - "*/images/*.svg"
+      #     options:
+      #       front_matters:
+      #         algolia:
+      #           subcategory: Marketplace Integrations
 
 
       - repo_name: ansible-datadog
@@ -290,7 +290,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
@@ -505,7 +505,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.64.x
+          branch: 7.66.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -515,17 +515,6 @@
           options:
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
-
-      - repo_name: dd-source
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
-          options:
-            base_path: ""
-            dest_path: "/data/"
-            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:

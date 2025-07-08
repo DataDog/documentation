@@ -38,7 +38,9 @@ Webhook を使用して、以下のことができます。
 
 ## 使用方法
 
-Webhook を使用するには、Webhook をトリガーするメトリクスアラートのテキストに `@webhook-<WEBHOOK_NAME>` を追加します。これにより、以下の内容を JSON 形式で含む POST リクエストが、設定した URL に向けてトリガーされます。各リクエストのタイムアウトは 15 秒です。Datadog は、内部エラー (不正な形式の通知メッセージなど) が発生した場合、または Webhook エンドポイントから 5XX 応答を受け取った場合にのみ、再試行を発行します。失敗した接続は 5 回再試行されます。
+Webhook を使用するには、Webhook をトリガーするメトリクスアラートのテキストに `@webhook-<WEBHOOK_NAME>` を追加します。これにより、以下の内容を JSON 形式で含む POST リクエストが設定した URL に送信されます。
+
+Datadog は、内部エラー (不正な形式の通知メッセージなど) が発生した場合、または Webhook エンドポイントから 5XX 応答を受け取った場合にのみ再試行を行います。各リクエストのタイムアウトは 15 秒で、接続失敗時には最大 5 回まで再試行されます。
 
 **注**: カスタムヘッダーは JSON フォーマットである必要があります。
 
@@ -386,11 +388,11 @@ URL として使用する:
 | ---------  | ------------------- |
 | `ci_pipelines_alert` | CI パイプライン |
 | `ci_tests_alert` | CI テスト |
-| `composite_monitor` | コンポジット |
-| `error_tracking_alert` | Error Tracking |
+| `composite_monitor` | 複合 |
+| `error_tracking_alert` | エラー追跡 |
 | `event_alert` | V1 エンドポイントを使用したイベント |
 | `event_v2_alert` | V2 エンドポイントを持つイベント |
-| `log_alert` | Logs |
+| `log_alert` | ログ |
 | `monitor_slo_alert` | モニターベース SLO |
 | `metric_slo_alert` | メトリクスベース SLO |
 | `outlier_monitor` | 外れ値 |

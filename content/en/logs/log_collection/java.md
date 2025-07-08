@@ -261,7 +261,7 @@ Configure a file appender in `log4j.xml`. For example:
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </layout>
   </appender>
 
@@ -283,7 +283,7 @@ Configure a file appender in `log4j2.xml`. For example:
 <Configuration>
   <Appenders>
     <File name="FILE" fileName="logs/app.log">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </File>
   </Appenders>
 
@@ -308,7 +308,7 @@ Configure a file appender in `logback.xml`. For example:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -455,7 +455,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-{{< site-region region="us3,us5,ap1,gov" >}}
+{{< site-region region="us3,us5,ap1,ap2,gov" >}}
   <div class="alert alert-warning">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
 {{< /site-region >}}
 

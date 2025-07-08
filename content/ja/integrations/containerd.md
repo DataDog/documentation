@@ -21,9 +21,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
 display_on_public_website: true

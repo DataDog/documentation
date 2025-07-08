@@ -1,44 +1,43 @@
 ---
-title: Troubleshooting Application Security Management
+title: Troubleshooting App and API Protection
 aliases:
   - /security_platform/application_security/troubleshooting
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Management"
-- link: "/security/application_security/how-appsec-works/"
+  text: "Monitoring Threats with Datadog App and API Protection"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
-  text: "How Application Security Management Works in Datadog"
+  text: "How App and API Protection Works in Datadog"
 ---
-
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Application Security Management (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog App and API Protection (AAP), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
-## ASM rate limits
+## AAP rate limits
 
-ASM traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
+AAP traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
 
-## No security traces detected by ASM
+## No security traces detected by AAP
 
-There are a series of steps that must run successfully for threat information to appear in the ASM [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+There are a series of steps that must run successfully for threat information to appear in the AAP [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
 
-### Confirm ASM is enabled
+### Confirm AAP is enabled
 
-You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
+You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Send a test attack to your application
 
- To test your ASM setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script:
+ To test your AAP setup, trigger the [Security Scanner Detected][7] rule by running a file that contains the following curl script:
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
@@ -147,7 +146,7 @@ A few minutes after you enable your application and exercise it, and if it's suc
 
 ### Check if required tracer integrations are deactivated
 
-ASM relies on certain tracer integrations. If they are deactivated, ASM won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
+AAP relies on certain tracer integrations. If they are deactivated, AAP won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
 
 The required integrations vary by language.
 
@@ -176,7 +175,7 @@ For Java, if you are using any of the following technologies, the respective int
 
 For .NET, the ASP.NET integration is required.
 
-**Note:** If ASP.NET Core is disabled, ASM should still work with this framework.
+**Note:** If ASP.NET Core is disabled, AAP should still work with this framework.
 
 
 {{< /programming-lang >}}
@@ -189,13 +188,15 @@ There are no required integrations for PHP.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
+The following Go frameworks should be instrumented using the out-of-the-box APM integrations.
 
-- [gRPC][2] ([v2][8])
-- [net/http][3] ([v2][9])
-- [Gorilla Mux][4] ([v2][10])
-- [Echo][5] ([v2][11])
-- [Chi][6] ([v2][12])
+{{% tracing-go-v2 %}}
+
+- [gRPC][8] ([v1][2])
+- [net/http][9] ([v1][3])
+- [Gorilla Mux][10] ([v1][4])
+- [Echo][11] ([v1][5])
+- [Chi][12] ([v1][6])
 
 Please be sure to reference the docs appropriate for your version (v1.x or v2.x) of the Go Tracer. If your framework is not supported, [create a new issue][7] in the Go repository.
 
@@ -210,6 +211,7 @@ Please be sure to reference the docs appropriate for your version (v1.x or v2.x)
 [10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
 [12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5/v2
+[13]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
@@ -250,7 +252,7 @@ framework you're using, such as the Django or Flask integration.
 
 ### Check if spans are successfully transmitted to Datadog
 
-ASM data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
+AAP data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -295,7 +297,7 @@ The log files are available in the following directories:
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-For PHP, to start troubleshooting issues with the Datadog ASM extension, enable debug logs in the ASM extension's `.ini` file.
+For PHP, to start troubleshooting issues with the Datadog AAP extension, enable debug logs in the AAP extension's `.ini` file.
 
 The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following:
 
@@ -318,7 +320,7 @@ If the installation script is unable to find the correct PHP version, you can se
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
 ```
 ### Connection to helper failed
-If the ASM extension is unable to communicate with the helper process, the following warning occurs:
+If the AAP extension is unable to communicate with the helper process, the following warning occurs:
 
 ```
 PHP Warning:  Unknown: [ddappsec] Connection to helper failed and we are not going to attempt to launch it: dd_error
@@ -349,11 +351,11 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-#### Confirm ASM is enabled in the running application
+#### Confirm AAP is enabled in the running application
 
-[Tracer startup logs][1] show the tracer configuration and whether ASM is enabled or not. If `appsec` is `true`, then ASM is enabled and running.
+[Tracer startup logs][1] show the tracer configuration and whether AAP is enabled or not. If `appsec` is `true`, then AAP is enabled and running.
 
-For example, the following startup log shows that ASM is disabled:
+For example, the following startup log shows that AAP is disabled:
 
 ```
 2022/02/17 14:49:00 Datadog Tracer v1.36.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2022-02-17T14:49:00+01:00","os_name":"Linux (Unknown Distribution)","os_version":"5.13.0","version":"v1.36.0","lang":"Go","lang_version":"go1.17.1","env":"prod","service":"grpcserver","agent_url":"http://localhost:8126/v0.4/traces","debug":false,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","service_mappings":null,"tags":{"runtime-id":"69d99219-b68f-4718-9419-fa173a79351e"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"profiler_code_hotspots_enabled":false,"profiler_endpoints_enabled":false,"dd_version":"","architecture":"amd64","global_service":"","lambda_mode":"false","appsec":false,"agent_features":{"DropP0s":false,"Stats":false,"StatsdPort":0}}
@@ -361,9 +363,9 @@ For example, the following startup log shows that ASM is disabled:
 
 #### Enable debug logs
 
-Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM library will log to the standard error output.
+Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The AAP library will log to the standard error output.
 
-**Note:** ASM only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable ASM.
+**Note:** AAP only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable AAP.
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
@@ -371,19 +373,19 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM libr
 
 Use this [migration guide][1] to assess any breaking changes if you upgraded your Node.js library from 1.x to 2.x.
 
-If you don't see ASM threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
+If you don't see AAP threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
 
-1. Confirm the latest version of ASM is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
+1. Confirm the latest version of AAP is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
 
     a. If you don't see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
 
-    b. If `appsec_enabled` is `false`, then ASM was not enabled correctly. See [installation instructions][4].
+    b. If `appsec_enabled` is `false`, then AAP was not enabled correctly. See [installation instructions][4].
 
-    c. If `appsec_enabled` is not in the startup logs, the latest ASM version needs to be installed. See [installation instructions][4].
+    c. If `appsec_enabled` is not in the startup logs, the latest AAP version needs to be installed. See [installation instructions][4].
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard?
 
-    ASM relies on the tracer so if you don't see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+    AAP relies on the tracer so if you don't see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
@@ -407,9 +409,9 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][2] f
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-If you don't see ASM threat information in the [Trace and Signals Explorer][1] for your Python application, check that ASM is running and that your tracer is working.
+If you don't see AAP threat information in the [Trace and Signals Explorer][1] for your Python application, check that AAP is running and that your tracer is working.
 
-1. Set your application's log level to `DEBUG` to confirm that ASM is running:
+1. Set your application's log level to `DEBUG` to confirm that AAP is running:
 
    ```python
    import logging
@@ -422,11 +424,11 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][1] f
    DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
    ```
   
-   If this log is not present, ASM is not running.
+   If this log is not present, AAP is not running.
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard?
 
-   ASM relies on the tracer. If you don't see traces, then the tracer might not be working. See [APM Troubleshooting][2].
+   AAP relies on the tracer. If you don't see traces, then the tracer might not be working. See [APM Troubleshooting][2].
 
 
 [1]: https://app.datadoghq.com/security/appsec/
@@ -434,7 +436,7 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][1] f
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don't see ASM threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
+For Ruby, if you don't see AAP threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -445,9 +447,9 @@ end
 
 Debug logs are verbose but useful. If you open up a ticket with [Datadog support][1], forward the logs with your request.
 
-#### Is ASM correctly enabled?
+#### Is AAP correctly enabled?
 
-ASM has been correctly enabled if you see logs such as:
+AAP has been correctly enabled if you see logs such as:
 
 ```
 D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
@@ -456,13 +458,13 @@ D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 
 If you do not see those logs, check the following:
 
-- If the correct ASM environment variables are set for your application process.
+- If the correct AAP environment variables are set for your application process.
 - The latest gem version is installed.
 - The tracer is configured correctly and sending APM traces to your APM dashboard.
 
-#### Is ASM called for each HTTP request?
+#### Is AAP called for each HTTP request?
 
-To confirm that ASM is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
+To confirm that AAP is called for each HTTP request, trigger a [test attack](#send-a-test-attack-to-your-application) and look for these logs:
 
 ```
 D, [2022-01-19T21:25:50.579745 #341792] DEBUG -- ddtrace: [ddtrace] (/home/lloeki/src/github.com/DataDog/dd-trace-rb/lib/datadog/appsec/reactive/operation.rb:14:in `initialize') operation: rack.request initialize
@@ -477,7 +479,7 @@ If you don't see those logs, try the following:
 - Send another [test attack](#send-a-test-attack-to-your-application) using another user agent value in the curl command to see if the threat information is successfully sent.
 - Look in the application logs for the exact request you ran to confirm the request reached the application, and was not responded to by another upstream system.
 
-If the Rack integration was configured manually, sometimes a known issue prevents ASM from working. For example:
+If the Rack integration was configured manually, sometimes a known issue prevents AAP from working. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -488,9 +490,9 @@ Datadog.configure do |c|
 
 If `c.tracing.instrument :rack` is present, remove it to see if the check passes.
 
-#### Is ASM detecting HTTP request security threats?
+#### Is AAP detecting HTTP request security threats?
 
-To confirm that ASM is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
+To confirm that AAP is detecting security threats, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these logs:
 
 ```
 D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib/datadog/appsec/contrib/rack/reactive/request.rb:63:in `block in subscribe') WAF: #<struct Datadog::AppSec::WAF::Result action=:monitor, data=[{"rule"=>{"id"=>"ua0-600-10x", "name"=>"Nessus", "tags"=>{"type"=>"security_scanner", "category"=>"attack_attempt"}}, "rule_matches"=>[{"operator"=>"match_regex", "operator_value"=>"(?i)^Nessus(/|([ :]+SOAP))", "parameters"=>[{"address"=>"server.request.headers.no_cookies", "key_path"=>["user-agent"], "value"=>"Nessus SOAP", "highlight"=>["Nessus SOAP"]}]}]}], perf_data=nil, perf_total_runtime=20519>
@@ -498,7 +500,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don't see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value.
 
 #### Is the tracer sending traces with security data?
-ASM data is sent with APM traces. To confirm that ASM correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
+AAP data is sent with APM traces. To confirm that AAP correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -527,66 +529,66 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as security traces in the ASM [Trace and Signals Explorer][1].
+Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as security traces in the AAP [Trace and Signals Explorer][1].
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+### Confirm AAP is enabled
 
-## No vulnerabilities detected by Software Composition Analysis
-
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
-
-### Confirm ASM is enabled
-
-You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
+You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the App and API Protection product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Disabling threat management and protection
+## Disabling AAP
 
-To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable AAP, use one of the following methods.
 
-If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
-* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If threat management was activated using [Remote Configuration][16], do the following: 
-  1. Go to [Services][15] (**ASM** > **Catalog** > **Services**).
+### DD_APPSEC_ENABLED
+
+If the `DD_APPSEC_ENABLED=true` environment variable is set for your service, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+
+If your service is a PHP service, explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and if applicable, comment out the flag `datadog.appsec.enabled = On` from your `php.ini` configuration file. Then, restart your service. 
+
+### Remote Configuration
+
+If AAP was activated using [Remote Configuration][16], do the following: 
+  1. Go to [Services][15].
   2. Select **Threat Management in Monitoring Mode**.
   3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   4. Click on a service.
   5. In the service details, in **Threat Detection**, click **Deactivate**.
 
-<div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
 
-* To disable threat management on your services in bulk, do the following: 
+### Bulk disable
+
+To disable AAP on your services in bulk, do the following: 
   1. Go to [Services][15].
   2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   3. Select the check boxes for the services where you want to disable threat detection.
   4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
-## Disabling Code Security
-
-To disable [Code Security][13], remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
   
 ## Need more help?
 
-If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
+If you continue to have issues with AAP, contact [Datadog support][1] with the following information:
 
 - Confirmation that the [test attack](#send-a-test-attack-to-your-application) was successfully sent
 - Tracer [startup][8] or [debug][10] logs

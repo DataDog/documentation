@@ -92,7 +92,9 @@ For more information, see the [Secrets Management][14] documentation.
 
 {{< site-region region="gov" >}}
 
-Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. 
+
+To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -111,7 +113,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 [1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
 
 You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
@@ -132,6 +134,12 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 
 **Telemetry content:**
+
+To view the latest Telemetry content, run the following command:
+```bash
+agent diagnose show-metadata agent-telemetry
+```
+
 | Metadata ([source][1]) |
 | ---------------------- |
 | Machine id             |
@@ -140,39 +148,49 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | OS version             |
 | Agent version          |
 
-| Metrics ([source][2])                       | Description                                                                                       |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| checks.execution_time                       | Check's execution time in milliseconds                                                            |
-| pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                               |
-| pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
-| api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                  |
-| logs.decoded                                | Total number of decoded logs                                                                      |
-| logs.sender_latency                         | HTTP sender latency in milliseconds                                                               |
-| logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, such as after log rotation |
-| logs.dropped                                | Total number of logs dropped                                                                      |
-| logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
-| logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
-| logs.auto_multi_line_aggregator_flush       | Number of multiline logs aggregated by the Agent                                                  |
-| dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
-| dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
-| transactions.input_count                    | Incoming transaction count                                                                        |
-| transactions.requeued                       | Transaction requeue count                                                                         |
-| transactions.retries                        | Transaction retry count                                                                           |
-| point.sent                                  | Total number of sent metrics                                                                      |
-| point.dropped                               | Total number of dropped metrics                                                                   |
-| oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)         |
-| oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
-| oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                 |
-| oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
-| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                          |
-| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                               |
-| postgres.get_new_pg_stat_activity_ms        | Time to get `pg_stat_activity` in milliseconds                                                    |
-| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                  |
-| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                    |
-| postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
-| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                     |
-| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                     |
-| postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
+| Metrics ([source][2])                       | Description                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Checks**                                  |                                                                                                                        |
+| checks.execution_time                       | Check's execution time in milliseconds                                                                                 |
+| pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                                                    |
+| **Logs and metrics**                        |                                                                                                                        |
+| dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
+| dogstatsd.uds_packets_bytes                 | DogStatsD UDS packets bytes                                                                                            |
+| logs.auto_multi_line_aggregator_flush       | Number of multi-line logs aggregated by the Agent                                                                       |
+| logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, for example, after log rotation                 |
+| logs.bytes_sent                             | Total number of bytes sent before encoding, if applicable                                                              |
+| logs.decoded                                | Total number of decoded logs                                                                                           |
+| logs.dropped                                | Total number of logs dropped                                                                                           |
+| logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
+| logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
+| logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
+| point.dropped                               | Total number of dropped metrics                                                                                        |
+| point.sent                                  | Total number of sent metrics                                                                                           |
+| transactions.input_count                    | Incoming transaction count                                                                                             |
+| transactions.requeued                       | Transaction requeue count                                                                                              |
+| transactions.retries                        | Transaction retry count                                                                                                |
+| **Database**                                |                                                                                                                        |
+| oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)                              |
+| oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                                        |
+| oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                                      |
+| oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                                         |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                                          |
+| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                                               |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                                          |
+| postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                                        |
+| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                                                    |
+| postgres.get_new_pg_stat_activity_ms        | Time to get `pg_stat_activity` in milliseconds                                                                         |
+| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                                       |
+| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                                         |
+| postgres.get_active_connections_count       | Total rows fetched to get active connections                                                                           |
+| postgres.schema_tables_elapsed_ms           | Time to collect tables in Postgres schema                                                                              |
+| postgres.schema_tables_count                | Total tables in Postgres schema                                                                                        |
+| **API**                                     |                                                                                                                        |
+| api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
+| **Events**                                  |                                                                                                                        |
+| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled)       |
+| **Service Discovery**                       |                                                                                                                        |
+| service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

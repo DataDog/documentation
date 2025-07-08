@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. Once the Datadog Agent is installed on a host that has access to the network, the Agent can autodiscover network devices and collect metrics right out of the box.
+Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. After the Datadog Agent is installed on a host that has access to the network, the Agent can automatically detect network devices and collect metrics right out of the box.
 
 This guide covers configuring Network Device Monitoring on your hosts, enriching device tags, setting up and viewing device profiles, viewing data in NetFlow Monitoring, and validating data in the provided dashboards and Device Topology Map.
 
@@ -41,20 +41,19 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
-#### High Availability
+## Setup
+
+### High Availability
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog Agent High Availability in Network Device Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-
+<div class="alert alert-warning"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info"> Datadog Agent High Availability in Network Device Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
-
-High Availability (HA) in Network Device Monitoring allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
+High Availability (HA) support of the Datadog Agent in Network Device Monitoring allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
 
 You can configure active and standby Agents to function as an HA pair in NDM. If the active Agent goes down, the standby Agent takes over within 90 seconds, becoming the new active Agent. Additionally, you can designate a preferred active Agent, allowing NDM to automatically revert to it once it becomes available again. This feature allows for proactive Agent switching ahead of scheduled maintenance.
 
-## Setup
+For more information, see [High Availability support of the Datadog Agent][20].
 
 ### Configuration
 
@@ -68,7 +67,6 @@ To begin monitoring your network devices, enable SNMP monitoring using one of th
 
 [Ping][5]
 : Additionally, SNMP supports enabling ping on your devices.
-
 
 ### Enrich network devices with tags 
 
@@ -145,3 +143,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [17]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [19]: /network_monitoring/devices/troubleshooting
+[20]: /integrations/guide/high_availability

@@ -6,10 +6,6 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 In Datadog On-Call, schedules define the specific times when team members are available to respond to Pages. Schedules organize and manage the availability of team members across different timezones and shifts.
 
 ### Concepts

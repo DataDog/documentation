@@ -36,7 +36,7 @@ classifier_tags:
   - Offering::Integration
 dependencies: []
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: scadamods_kepserver
 integration_id: scadamods-kepserver
 integration_title: ScadaMods Kepserver
@@ -97,7 +97,7 @@ L'intégration Scadamods Kepserver permet de surveiller les modifications apport
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "scadamods_kepserver" >}}
+{{< get-metrics-from-git "scadamods-kepserver" >}}
 
 
 ### Événements
@@ -140,7 +140,7 @@ Logs : le check Kepserver enregistre le message d'erreur suivant dans les logs�
 
 Recommandations :
 - Vérifiez que les diagnostics système sont activés dans Kepserver.
-- Accédez à la page des propriétés du projet Kepserver et sélectionnez l'onglet OPC-UA. Vérifiez que l'option `Log diagnostics` est définie sur `Yes`. 
+- Accédez à la page des propriétés du projet Kepserver et sélectionnez l'onglet OPC-UA. Vérifiez que l'option `Log diagnostics` est définie sur `Yes`.
 
 
 

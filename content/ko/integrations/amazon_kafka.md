@@ -110,7 +110,7 @@ Amazon Managed Streaming for Apache Kafka(MSK)는 전체 관리형 서비스로,
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_kafka" >}}
+{{< get-metrics-from-git "amazon-kafka" >}}
 
 
 ### 이벤트

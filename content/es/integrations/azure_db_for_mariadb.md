@@ -40,18 +40,18 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_db_for_mariadb" >}}
+{{ get-metrics-from-git "azure-dbformariadb" }}
 
 
 ### Eventos
 
 La integración Azure Database for MariaDB no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Database for MariaDB no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

@@ -12,7 +12,6 @@ Code Security integrates with GitHub pull requests in two ways:
 - [Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Security comment on a pull request" style="width:90%;" >}}
 - [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Code Analysis (SAST).
-{{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}}
 
 To enable these features, ensure you have the required GitHub permissions (Read & Write) for your repository.
 
@@ -69,10 +68,11 @@ Configure PR comment settings globally for all repositories or tailor them indiv
 To configure PR comments for all repositories:
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
-1. In **Repository Settings**, click **Global PR Comment Configuration**. 
+1. In **Repository Settings**, click **Global PR Comment Configuration**.
 1. Configure the settings:
     - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
     - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
 1. Click **Save**.
 
@@ -83,6 +83,7 @@ To configure PR comments for a single repository:
 1. Configure the settings:
     - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
     - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
     - **Block all comments in this repository**: Enable this to disable all comments for this repository, overriding global settings.
 1. Click **Save Configuration**.

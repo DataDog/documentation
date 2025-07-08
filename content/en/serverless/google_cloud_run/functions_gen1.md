@@ -11,7 +11,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 ## Setup
 
-{{< programming-lang-wrapper langs="nodejs,python,java" >}}
+{{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
@@ -103,6 +103,44 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 [4]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot
 
 {{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+1. **Install dependencies**. Run the following commands:
+   ```shell
+   go get github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat
+   go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+   ```
+
+   Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `datadog-serverless-compat-go/datadogserverlesscompat` and `dd-trace-go.v1/ddtrace/trace` to ensure you have access to enhancements and bug fixes.
+
+   For more information, see [Tracing Go Applications][1] and [Datadog Severless Compatability Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
+
+
+2. **Start the Datadog serverless compatibility layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
+
+   ```go
+      import (
+          "github.com/DataDog/datadog-go/statsd"
+          "github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat"
+          "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      )
+      
+      func init() {
+         datadogserverlesscompat.Start()
+         tracer.Start(tracer.WithAgentAddr("127.0.0.1:8126"))
+         dogstatsdClient, _ = statsd.New("127.0.0.1:8125")
+         functions.HTTP("helloHTTP", helloHTTP)
+      }
+
+   ```
+
+3. (Optional) **Enable runtime metrics**. See [Go Runtime Metrics][2].
+
+4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[2]: /tracing/metrics/runtime_metrics/?tab=go
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 5. **Deploy your function**. Use `gcloud` or Google Console to deploy your 1st Gen Cloud Run Function:
@@ -122,12 +160,13 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Google Cloud integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Google Cloud. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
-   | Name | Value |
-   | ---- | ----- |
-   | `DD_ENV` | How you want to tag your env for [Unified Service Tagging][9]. For example, `prod`. |
-   | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].  |
-   | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9]. |
-   | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
+   | Name         | Value                                                                                                |
+   |--------------|------------------------------------------------------------------------------------------------------|
+   | `DD_ENV`     | How you want to tag your env for [Unified Service Tagging][9]. For example, `prod`.                  |
+   | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].                                   |
+   | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9].                                   |
+   | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                            |
+   | `DD_SITE`    | [Datadog site][13] - Set this tag if you are in a different site. **Default** is US1 `datadoghq.com` |
 
 8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
@@ -141,12 +180,14 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 ## Example Functions
 The following example contains a sample function with tracing and metrics set up.
 
-{{< programming-lang-wrapper langs="nodejs,python,java" >}}
+{{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
 // Example of a simple Cloud Run Function with traces and custom metrics
 // dd-trace must come before any other import. 
-const tracer = require('dd-trace').init();
+const tracer = require('dd-trace').init()
+
+require('@datadog/serverless-compat').start();
 
 const functions = require('@google-cloud/functions-framework');
 
@@ -154,9 +195,9 @@ function handler(req, res) {
    tracer.dogstatsd.increment('dd.function.sent', 1, {'runtime':'nodejs'});
    return res.send('Welcome to Datadog💜!');
 }
+const handlerWithTrace = tracer.wrap('example-span', handler)
 
 functions.http('httpexample',  handlerWithTrace)
-const handlerWithTrace = tracer.wrap('example-span', handler)
 
 module.exports = handlerWithTrace
 ```
@@ -272,6 +313,46 @@ You can also install the tracer using the following Maven dependency:
 </project>
 ```
 {{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+```go
+# Example of a simple Cloud Run Function with traces and custom metrics
+package cloud_function
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat"
+	_ "github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
+	"github.com/GoogleCloudPlatform/functions-framework-go/functions"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+var dogstatsdClient *statsd.Client
+
+func init() {
+	err := datadogserverlesscompat.Start()
+	log.Println("Starting datadog serverless compat: ", err)
+	tracer.Start(tracer.WithAgentAddr("127.0.0.1:8126"))
+	dogstatsdClient, _ = statsd.New("127.0.0.1:8125")
+	functions.HTTP("helloHTTP", helloHTTP)
+}
+
+// helloHTTP is an HTTP Cloud Function with a request parameter.
+func helloHTTP(w http.ResponseWriter, r *http.Request) {
+	span := tracer.StartSpan("TEST-SPAN")
+	defer span.Finish()
+ 
+	err := dogstatsdClient.Incr("nina.test.counter", []string{"runtime:go"}, 1)
+	if err != nil {
+		log.Println("Error incrementing dogstatsd counter: ", err)
+	}
+	fmt.Fprint(w, "Hello Datadog!")
+}
+```
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ## What's next?
@@ -317,3 +398,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
+[13]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site

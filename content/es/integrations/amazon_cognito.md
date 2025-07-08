@@ -42,7 +42,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 
 **Nota**: Advanced Security debe estar activado en AWS. Consulta la documentación de AWS para añadir [Advanced Security a un grupo de usuarios][4].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -63,18 +63,18 @@ Configura Amazon Cognito para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_cognito" >}}
+{{< get-metrics-from-git "amazon-cognito" >}}
 
 
 ### Eventos
 
 La integración de Amazon Cognito no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon Cognito no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
 

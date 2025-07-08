@@ -27,8 +27,8 @@ categories:
 - configuración y despliegue
 - herramientas de desarrollo
 - orquestación
-- aprovisionamiento
-custom_kind: integration
+- suministro
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_on_public_website: true
@@ -56,7 +56,7 @@ tile:
   - Categoría::Configuración y despliegue
   - Categoría::Herramientas de desarrollo
   - Categoría::Orquestación
-  - Categoría::Aprovisionamiento
+  - Categoría::Suministro
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
@@ -70,7 +70,7 @@ tile:
   title: Pulumi
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -120,7 +120,7 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 Pulumi no incluye métricas.
 
-### Checks de servicio
+### Checks de servicios
 
 Pulumi no incluye checks de servicio.
 
@@ -130,7 +130,7 @@ Pulumi no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 [1]: https://pulumi.com
 [2]: https://docs.datadoghq.com/es/integrations/amazon_web_services/?tab=roledelegation#aws-iam-permissions

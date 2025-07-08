@@ -35,36 +35,38 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 You may create a test using one of the following options:
 
-- **Create a test from a template**:
+### Create a test from a template
 
-    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
-    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+  1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+  2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
-- **Build a test from scratch**:
+### Build a test from scratch
     
-    1. Click the **+** template to start a new Browser Test from scratch.
-    1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
-    1. Add a **name**: The name of your browser test.
-    1. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+  1. Click the **+** template to start a new Browser Test from scratch.
+  1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+  1. Add a **name**: The name of your browser test.
+  1. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 
-       <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+  <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-   1. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+  5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
 
       - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
       - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
       - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
 
-   1. Select **managed and private locations**: Select from a list of locations around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.<br /><br>
+  6. Select **managed and private locations**: Select from a list of [locations](#locations) around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.
 
-      {{% managed-locations %}}
+     **Note**: You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
 
-      You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.<br /><br>
+  7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+  8. Click **Save & Edit Recording** to submit your Browser Test.
 
-   6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
-   7. Click **Save & Edit Recording** to submit your Browser Test.
+### Locations
+
+{{% managed-locations %}}
 
 ### Snippets
 
@@ -141,6 +143,17 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
    {{% /tab %}}
+
+   {{% tab "Blocked Requests" %}}
+
+   Enter one or more request patterns to block from loading while the test is run. Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
+
+   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/actions). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
+
+[1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
+
+   {{% /tab %}}
+
    {{< /tabs >}}
 
 {{% synthetics-variables %}}

@@ -119,7 +119,7 @@ El check de Exchange está incluido en el paquete del [Datadog Agent][1], por lo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "exchange_server" >}}
+{{< get-metrics-from-git "exchange-server" >}}
 
 
 ### Eventos

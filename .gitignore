@@ -5,6 +5,7 @@ data/service_checks/
 data/npm
 integrations_data
 .hugo_build.lock
+_vendor/
 
 # htmltest tmp files
 bin/htmltest
@@ -218,7 +219,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-.vscode
 
 # jetbrains
 .idea
@@ -282,6 +282,11 @@ local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/pull_config_preview.yaml
 !local/bin/py/build/configuration/pull_config.yaml
 !local/bin/py/build/configuration/integration_merge.yaml
+
+# CDOCS
+layouts/partials/markdoc-assets.html
+static/cdocs
+content/en/**/*.ast.json
 
 # Cursor editor configuration
 .cursor/
