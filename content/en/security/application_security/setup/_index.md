@@ -50,6 +50,7 @@ Learn how to enable App and API Protection on all the following supported platfo
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="./aws/lambda" >}}
+  {{< appsec-integration name="AWS WAF" avatar="amazon-waf" link="./aws/waf" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform (GCP)

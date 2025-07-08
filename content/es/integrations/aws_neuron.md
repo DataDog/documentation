@@ -146,7 +146,7 @@ A continuación, configura las Integraciones de logs como anotaciones de pod. Es
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "aws_neuron" >}}
+{{< get-metrics-from-git "aws-neuron" >}}
 
 
 ### Eventos
@@ -154,7 +154,7 @@ A continuación, configura las Integraciones de logs como anotaciones de pod. Es
 La integración AWS Neuron no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "aws_neuron" >}}
+{{< get-service-checks-from-git "aws-neuron" >}}
 
 
 ## Solucionar problemas

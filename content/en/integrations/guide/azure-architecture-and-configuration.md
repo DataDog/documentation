@@ -31,7 +31,7 @@ Enabling Datadog's Azure integration allows Datadog to:
 
 The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure Native version of the integration.
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### Standard Azure integration metric and data collection
 
@@ -135,7 +135,7 @@ The implications of restricting or omitting the Azure AD roles are:
 
 ## Azure log collection
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### Standard Azure integration log collection
 _Available in all Datadog Sites_
