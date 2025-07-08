@@ -75,6 +75,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
 
    - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
    - Destination bucket: Used to store inventory reports (one per AWS region, can be reused)
+
 6. Complete the inventory configuration. The inventory generation process will start within AWS within 24 hours of the first report.
 
 7. **Enable S3 Access Logs for prefix level request and latency metrics:** To get prefix-level access metrics including request counts, server side latency, and cold data identification for cost optimization, follow these additional steps:
@@ -90,6 +91,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
       - Set the target prefix to `access-logs/` to organize log files separately from inventory data
 
    3. **Set up the Lambda trigger**:
+
       **Option A: Automatic (Recommended)**
         - In the Datadog AWS integration page, navigate to the **[Log Collection][504]** tab
         - Enable automatic log collection for S3 by checking the S3 Access Logs checkbox
