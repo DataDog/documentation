@@ -26,9 +26,9 @@ With custom recommendations, you can:
 - View the history and changes made to your configurations
 - Modify, restore, or delete previously set rules
   
-<div class="alert alert-warning">To customize a recommendation, you must be assigned the **Cloud Cost Management - Cloud Cost Management Write** permission. </div>
-
 ## Customize a recommendation
+
+<div class="alert alert-warning">To customize a recommendation, you must be assigned the **Cloud Cost Management - Cloud Cost Management Write** permission. </div>
 
 <div class="alert alert-info">Customizations reflect within 24 hours, when recommendations are generated next.</div>
 
