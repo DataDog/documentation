@@ -52,7 +52,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
 | [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
-| [Network Firewall][57]             | [Enable Amazon Network Firewall logs][58]                                                                      | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
+| [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                      | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 
 
 ## Set up triggers
