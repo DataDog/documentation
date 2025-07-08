@@ -20142,7 +20142,7 @@ components:
       type: object
     LayerAttributesInterval:
       description: Defines how often the rotation repeats, using a combination of
-        days and optional seconds.
+        days and optional seconds. Should be at least 1 hour.
       properties:
         days:
           description: The number of days in each rotation cycle.
@@ -33816,7 +33816,7 @@ components:
             - effective_date: '2025-02-03T05:00:00Z'
               end_date: '2025-12-31T00:00:00Z'
               interval:
-                seconds: 300
+                seconds: 3600
               members:
               - user:
                   id: 00000000-aba1-0000-0000-000000000000
