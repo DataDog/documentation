@@ -160,6 +160,20 @@ You can store Autodiscovery templates as local files inside the mounted `/conf.d
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+   **docker-compose.yaml**
+   ```yaml
+   volumes:
+     [...]
+     - <PATH_TO_LOCAL_FOLDER>/conf.d:/conf.d
+   ```
+
+   **docker run**
+   ```shell
+   docker run -d --name datadog-agent \
+     [...]
+     -v <PATH_TO_LOCAL_FOLDER>/conf.d:/conf.d \
+   ```
+
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 You can source Autodiscovery templates from [Consul][1], [etcd][2], or [ZooKeeper][3]. You can configure your key-value store in the `datadog.yaml` configuration file (and subsequently mount this file inside the Agent container), or as environment variables in the Agent container.
