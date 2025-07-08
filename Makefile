@@ -74,8 +74,8 @@ watch-cdocs:
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
-	@make update_websites_sources_module
 	@make dependencies
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -86,7 +86,6 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
-# We aren't generating placeholders locally so the order of dependencies and sources module doesn't matter
 start-preserve-build: dependencies
 	@make update_websites_sources_module
 	@make server
@@ -117,7 +116,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs placeholders
+	make hugpython all-examples update_pre_build node_modules build-cdocs
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
