@@ -200,18 +200,6 @@ pip install --upgrade ddtrace
 
 #### Python 3.13 compatibility
 
-Full support for Python 3.13 is in active development. The following list details compatibility status as of `dd-trace-py` v3.0. For the most current information, see the  [dd-trace-py][18] repository.
-
-**Note**: `dd-trace-py` does not work on Windows with Python 3.13.
-
-The following features may be compatible, but **have not been verified** with Python 3.13:
-- **Products**: AppSec IAST, Code Coverage, Data Streams Monitoring, CI Visibility, Continuous Profiling.
-- **Features**: Automatic Service Naming.
-- **Integrations**: `anthropic`, `consul`, `freezegun`, `gevent`, `google_generativeai`, `gunicorn`, `langchain`, `mysqlclient`, `opentracing`, `psycopg`, `psycopg2`, `pymysql`, `pytest`, `pytest-bdd`, `pytest-benchmark`, `sanic`, `selenium`, `sqlite3`, `starlette`, `tornado`, `vertexai`.
-- **AppSec Threat Detection**: Not tested against Django, Flask, or FastAPI.
-
-#### Python 3.13 Compatibility
-
 Full support for Python 3.13 is in active development. While the core tracing library is compatible, some integrations may not be fully tested or supported in the latest version.
 
 For the most current compatibility details for a specific integration, see the library's [latest release notes][19].
