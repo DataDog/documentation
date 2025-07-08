@@ -15,7 +15,7 @@ title: Troubleshooting Ruby App and API Protection
 
 3. **Verify configuration or environment variables**
 
-  When using auto-instrumentation:
+#### When using auto-instrumentation
 
 - Ensure that `DD_APPSEC_ENABLED` is set to `true`
 - Check `DD_SERVICE` and `DD_ENV` are properly configured
@@ -23,7 +23,7 @@ title: Troubleshooting Ruby App and API Protection
 - Check that `DD_SERVICE` and `DD_ENV` are properly configured
 - Verify `DD_APM_ENABLED=true` if using APM features
 
-  When using configuration file:
+#### When using configuration file
 
 - Ensure that `c.appsec.enabled` is set to `true` in your configuration
 - Ensure that `c.tracing.instrument :rails` and `c.appsec.instrument :rails` is added to your configuration
