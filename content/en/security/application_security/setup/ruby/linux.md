@@ -64,6 +64,9 @@ Datadog.configure do |c|
   c.tracing.instrument :rails
 
   c.appsec.enabled = true
+  c.appsec.api_security.enabled = true
+
+  # Rails instrumentation is required for App and API Protection
   c.appsec.instrument :rails
 end
 ```
@@ -87,6 +90,7 @@ Set environment variables for your application. Add these to your deployment con
 
 ```bash
 export DD_APPSEC_ENABLED=true
+export DD_API_SECURITY_ENABLED=true
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 ```
@@ -128,6 +132,9 @@ Datadog.configure do |c|
   c.tracing.instrument :rails
 
   c.appsec.enabled = true
+  c.appsec.api_security.enabled = true
+
+  # Rails instrumentation is required for App and API Protection
   c.appsec.instrument :rails
 end
 ```
@@ -151,6 +158,7 @@ Set environment variables for your application. Add these to your deployment con
 
 ```bash
 export DD_APPSEC_ENABLED=true
+export DD_API_SECURITY_ENABLED=true
 export DD_APM_TRACING_ENABLED=false
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
