@@ -77,7 +77,7 @@ GCE インスタンスのシャットダウンが予期される場合にモニ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_compute_engine" >}}
+{{< get-metrics-from-git "google-compute-engine" >}}
 
 
 ### イベント

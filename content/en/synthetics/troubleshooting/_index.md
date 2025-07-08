@@ -222,6 +222,12 @@ Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.syntheti
 
 To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host. 
 
+### My security policy requires private location containers to run with a read-only root file system
+
+Private location containers require read-write access to specific folders and files to function correctly. If the container is run with a read-only root file system, it will fail to start up properly due to several critical operations that depend on write access. 
+
+During startup, the container attempts to set Linux capabilities on certain binaries. This is necessary because, during the private location build process, metadata bits are stripped from the binaries for security reasons. By default, this restricts execution to the `root` user. Since private locations run as the `dog` user, the container reapplies the necessary permissions to allow execution. On a read-only root file system, these updates fail, resulting in errors when the container starts up.
+
 ### My private location containers sometimes get killed `OOM`
 
 Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].

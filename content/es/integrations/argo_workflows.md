@@ -137,7 +137,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "argo_workflows" >}}
+{{< get-metrics-from-git "argo-workflows" >}}
 
 
 ### Eventos
@@ -145,7 +145,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 La integración Argo Workflows no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "argo_workflows" >}}
+{{< get-service-checks-from-git "argo-workflows" >}}
 
 
 ## Solucionar problemas

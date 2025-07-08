@@ -187,7 +187,7 @@ Estas configuraciones hacen que el Agent realice una solicitud al servicio `kube
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 
 ### Checks de servicio

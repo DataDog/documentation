@@ -122,6 +122,29 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -472,6 +495,30 @@ spec:
    ```
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 

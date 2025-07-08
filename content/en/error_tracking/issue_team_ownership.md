@@ -2,9 +2,9 @@
 title: Issue Team Ownership
 description: Automatically assign issues to teams based on Git CODEOWNERS files.
 further_reading:
-- link: '/error_tracking/suspect_commits/'
+- link: '/error_tracking/auto_assign/'
   tag: 'Documentation'
-  text: 'Suspect Commits'
+  text: 'Auto Assign'
 - link: '/error_tracking/suspected_causes/'
   tag: 'Documentation'
   text: 'Suspected Causes'

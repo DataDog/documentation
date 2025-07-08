@@ -54,7 +54,7 @@ Una vez hecho esto, exporta tus logs de Google Firebase desde Google Cloud Loggi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_firebase" >}}
+{{< get-metrics-from-git "google-cloud-firebase" >}}
 
 
 ### Eventos
