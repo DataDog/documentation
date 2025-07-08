@@ -24,10 +24,6 @@ algolia:
   tags: ['remote config', 'remote configuration']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Remote Configuration is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
@@ -70,8 +66,8 @@ App and API Protection (AAP)
 : - Protect: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
-: - Configuration at runtime (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
-: - Remotely set Agent sampling rate (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+: - Configuration at runtime (Preview): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+: - Remotely set Agent sampling rate (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 Dynamic Instrumentation
 : - Send critical metrics, traces, and logs from your live applications with no code changes.
