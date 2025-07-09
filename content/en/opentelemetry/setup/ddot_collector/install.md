@@ -35,7 +35,6 @@ Install and set up the following on your machine:
 - A Kubernetes cluster (v1.29+)
   - **Note**: EKS Fargate environments are not supported
 - [Helm (v3+)][54]
-- [Docker][50]
 - [kubectl][5]
 
 {{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
