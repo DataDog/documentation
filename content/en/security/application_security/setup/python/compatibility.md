@@ -1,10 +1,18 @@
 ---
-title: Python Compatibility Requirements
+title: Python App and API Protection Compatibility
 code_lang: python
 type: multi-code-lang
-code_lang_weight: 20
-aliases:
-  - /security/application_security/threats/setup/compatibility/python
+code_lang_weight: 10
+further_reading:
+  - link: "/security/application_security/how-it-works/"
+    tag: "Documentation"
+    text: "How App and API Protection Works"
+  - link: "/security/default_rules/?category=cat-application-security"
+    tag: "Documentation"
+    text: "OOTB App and API Protection Rules"
+  - link: "/security/application_security/troubleshooting"
+    tag: "Documentation"
+    text: "Troubleshooting App and API Protection"
 ---
 
 ## App and API Protection capabilities support
@@ -35,7 +43,6 @@ The Python App and API Protection Client library follows a [versioning policy][3
 Two release branches are supported:
 
 {{< partial name="trace_collection/python/supported_versions.html" >}}
-
 
 And the library supports the following runtimes:
 
