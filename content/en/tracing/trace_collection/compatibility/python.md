@@ -25,8 +25,8 @@ Support levels are defined by the following:
 | Level                | Policy |
 |----------------------|--------|
 | General Availability | Bug fixes are released on the most recent General Availability minor release line. New features are released periodically as minor version changes. Critical fixes are backported to the three most recent minor release lines. |
-| Maintenance          | The most recent Maintenance minor release line receives critical fixes. Major versions become end of life 6 months after the new major version is GA. |
-| End of Life (EOL)    | Receives no updates or support. |
+| Maintenance          | The most recent Maintenance minor release line receives critical fixes. Releases "x.y.z" go from GA to Maintenance 12 months after the "x.0.0" release. |
+| End of Life (EOL)    | Receives no updates or support. Releases "x.y.z" go from Maintenance to EOL 18 months after the "x.0.0" release. |
 
 The Python APM Client library supports the following Python runtimes:
 
