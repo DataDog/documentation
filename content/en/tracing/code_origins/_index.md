@@ -24,12 +24,6 @@ further_reading:
   text: "Learn how to add custom spans with Dynamic Instrumentation"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Code Origins is currently in Preview. To join the preview, follow the instructions below to enable the feature on your compatible services. 
-
-To submit questions, feedback, or requests related to Code Origins, <a href="https://docs.google.com/forms/d/e/1FAIpQLScyeRsF2GJjYdf9bUyeDjt8_9id-gvqiBU1SHR3ioDGe5eF3g/viewform?usp=header">fill out this form</a> with details. 
-{{< /beta-callout >}}
-
 ## Overview
 
 Code Origins captures the exact locations in your codebase where APM spans are created. When enabled on a compatible service, it automatically adds file path, line number, and function name to each [service entry span][12], making it easier to:
@@ -115,12 +109,11 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 - To search for all spans that include Code Origins, use the query `@_dd.code_origin.type:*` in the [APM Trace Explorer][1].
 
-### Code preview is not visible
+### Code preview is not visible or the file is not found
 
-- Ensure that all [Source Code Integration][7] setup requirements are met.
-- For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews do not work. See the Node.js [Source Code Integration][9] documentation for more details. 
-
-
+- Ensure all [Source Code Integration][7] setup requirements are met, including your `DD_GIT_*` environment variables are configured with the correct values.
+- For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
+- Code Origins is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
 
 ## Further Reading
 
@@ -138,3 +131,4 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [10]: https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps
 [11]: /tracing/live_debugger/
 [12]: /glossary/#service-entry-span
+[13]: https://www.datadoghq.com/support/

@@ -20,10 +20,6 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## Overview

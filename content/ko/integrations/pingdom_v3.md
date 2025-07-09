@@ -83,7 +83,7 @@ Pingdom V3 통합은 [Datadog Pingdom 통합(사용 중단)][1]과 비슷한 역
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "pingdom_v3" >}}
+{{< get-metrics-from-git "pingdom-v3" >}}
 
 
 ### 이벤트

@@ -11,6 +11,9 @@ further_reading:
     - link: '/getting_started/synthetics/'
       tag: 'Documentation'
       text: 'Getting Started with Synthetic Monitoring'
+    - link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
+      tag: "Blog"
+      text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
 ---
 
 ## Overview

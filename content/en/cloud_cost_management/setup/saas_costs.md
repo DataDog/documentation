@@ -54,58 +54,10 @@ See the respective documentation for your cloud provider:
 
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click **Configure** on a provider to collect cost data.
 
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}
 
 {{< tabs >}}
-{{% tab "Databricks" %}}
 
-1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
-2. Enter the workspace name, url, and access token corresponding to your Databricks account.
-3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
-4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-5. Click **Save Databricks Workspace**.
-
-Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
-
-{{< img src="cloud_cost/saas_costs/databricks_setup_1.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
-
-[101]: https://app.datadoghq.com/integrations/databricks
-
-{{% /tab %}}
-{{% tab "Confluent Cloud" %}}
-
-1. Create or acquire an API key with the [billing admin][102] role in Confluent Cloud.
-2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
-3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
-5. Click **Save**.
-
-Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
-
-If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
-
-{{< img src="cloud_cost/saas_costs/confluent_setup_1.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
-
-[101]: https://app.datadoghq.com/integrations/confluent-cloud
-[102]: https://docs.confluent.io/cloud/current/security/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
-[103]: https://docs.confluent.io/cloud/current/get-started/schema-registry.html#quick-start-for-schema-management-on-ccloud
-
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
-1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
-2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
-3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
-4. Click **Save**.
-
-Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
-
-{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
-
-[101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
-[102]: https://app.datadoghq.com/integrations/mongodb-cost-management
-
-{{% /tab %}}
 {{% tab "Snowflake" %}}
 
 1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
@@ -193,6 +145,92 @@ Notes:
 
 {{% /tab %}}
 
+{{% tab "Databricks" %}}
+
+1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
+2. Enter the workspace name, url, and access token corresponding to your Databricks account.
+3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
+4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
+5. Click **Save Databricks Workspace**.
+
+Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/databricks_setup_1.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
+
+[101]: https://app.datadoghq.com/integrations/databricks
+
+{{% /tab %}}
+
+
+{{% tab "OpenAI" %}}
+
+1. Create a [project API key][101] or [admin API key][103] in your account settings in OpenAI. Make sure the key has read access to the Usage and Management API scopes.
+2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
+3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
+4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
+5. Click **Save**.
+
+Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
+
+[101]: https://platform.openai.com/docs/api-reference/project-api-keys
+[102]: https://app.datadoghq.com/integrations/openai
+[103]: https://platform.openai.com/docs/api-reference/admin-api-keys
+
+{{% /tab %}}
+
+{{% tab "GitHub" %}}
+
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
+2. Navigate to the Datadog [GitHub Costs tile][108].
+3. Click **Add New**.
+4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
+5. Click the checkmark button to save this account.
+
+Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/github_setup.png" alt="Integrate with GitHub to collect cost data." style="width:100%" >}}
+
+[108]: https://app.datadoghq.com/integrations/github-costs
+[109]: https://github.com/settings/tokens
+
+{{% /tab %}}
+
+{{% tab "Confluent Cloud" %}}
+
+1. Create or acquire an API key with the [billing admin][102] role in Confluent Cloud.
+2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
+3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
+4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
+5. Click **Save**.
+
+Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
+
+{{< img src="cloud_cost/saas_costs/confluent_setup_1.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
+
+[101]: https://app.datadoghq.com/integrations/confluent-cloud
+[102]: https://docs.confluent.io/cloud/current/security/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
+[103]: https://docs.confluent.io/cloud/current/get-started/schema-registry.html#quick-start-for-schema-management-on-ccloud
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
+
+1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
+2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
+3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
+4. Click **Save**.
+
+Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
+
+[101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
+[102]: https://app.datadoghq.com/integrations/mongodb-cost-management
+
+{{% /tab %}}
 
 {{% tab "Elastic Cloud" %}}
 
@@ -214,22 +252,6 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 
 {{% /tab %}}
 
-{{% tab "OpenAI" %}}
-
-1. [Create an API key][101] in your account settings in OpenAI.
-2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
-3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
-4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
-5. Click **Save**.
-
-Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
-
-{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
-
-[101]: https://platform.openai.com/docs/quickstart/account-setup
-[102]: https://app.datadoghq.com/integrations/openai
-
-{{% /tab %}}
 {{% tab "Fastly" %}}
 
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
@@ -268,6 +290,30 @@ You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
 {{< tabs >}}
+{{% tab "Snowflake" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `account_locator` | Locator for the account where the usage was consumed. |
+| `account_name` | Name of the account where the usage was consumed. |
+| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization's capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
+| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
+| `charge_description` | A description of the cost type associated with distinct line items. Descriptions differ for each cost type, represented by the `servicename` tag. |
+| `contract_number` | Snowflake contract number for the organization. |
+| `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
+| `organization_name` | Name of the organization. |
+| `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
+| `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
+| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
+| `region` | Name of the region where the account is located. |
+| `service_level` | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
+| `servicename` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with an execution time of 100ms or greater. Does not indicate usage of serverless or cloud services compute.<br-> **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with execution time of 100ms or less, as well as idle warehouse time. Does not indicate usage of serverless or cloud services compute. |
+| `user_name` | Name of the user or service account associated with the query. |
+| `warehouse_id` | Identifier for the warehouse generating the cost. |
+| `warehouse_name` | Name of the warehouse associated with this usage. |
+| `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
+
+{{% /tab %}}
 {{% tab "Databricks" %}}
 
 **Note**: The Databricks cost integration calculates costs using list prices and usage data. It does not reflect any negotiated or discounted rates.
@@ -310,6 +356,35 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `workspace_id` | ID of the Workspace this usage was associated with. |
 
 {{% /tab %}}
+
+{{% tab "OpenAI" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `charge_description` | The name of the model whose costs are associated with the charge. |
+| `organization_id` | The unique identifier of the organization. |
+| `organization_name` | The name of the organization. |
+| `project_id` | The unique identifier of the project. |
+| `project_name` | The name of the project. |
+
+{{% /tab %}}
+
+{{% tab "GitHub" %}}
+
+**Note**: The GitHub cost integration estimates costs based on list prices and usage data, and includes discount values when available. It does not account for any negotiated rates.
+
+| Tag Name | Tag Description |
+|---|---|
+| `enterprise_name` | Alphanumeric string identifying the GitHub enterprise account. |
+| `charge_description` | The description of the charge. |
+| `product` | The product of usage, for example "actions" or "storage". |
+| `organization_name` | The GitHub organization. |
+| `repository_name` | The GitHub repository. |
+| `billing_currency` | The billing currency, for example "USD". |
+| `discount` | If the cost item is a discount. |
+
+{{% /tab %}}
+
 {{% tab "Confluent Cloud" %}}
 
 | Tag Name | Tag Description |
@@ -322,30 +397,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `resource_name` | The name of the Confluent resource. |
 
 {{% /tab %}}
-{{% tab "Snowflake" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `account_locator` | Locator for the account where the usage was consumed. |
-| `account_name` | Name of the account where the usage was consumed. |
-| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization's capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
-| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
-| `charge_description` | A description of the cost type associated with distinct line items. Descriptions differ for each cost type, represented by the `servicename` tag. |
-| `contract_number` | Snowflake contract number for the organization. |
-| `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
-| `organization_name` | Name of the organization. |
-| `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
-| `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
-| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
-| `region` | Name of the region where the account is located. |
-| `service_level` | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
-| `servicename` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with an execution time of 100ms or greater. Does not indicate usage of serverless or cloud services compute.<br-> **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with execution time of 100ms or less, as well as idle warehouse time. Does not indicate usage of serverless or cloud services compute. |
-| `user_name` | Name of the user or service account associated with the query. |
-| `warehouse_id` | Identifier for the warehouse generating the cost. |
-| `warehouse_name` | Name of the warehouse associated with this usage. |
-| `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
-
-{{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 | Tag Name | Tag Description |
 |---|---
@@ -369,17 +421,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `status` | State of the payment. |
 
 {{% /tab %}}
-{{% tab "OpenAI" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `charge_description` | The name of the model whose costs are associated with the charge. |
-| `organization_id` | The unique identifier of the organization. |
-| `organization_name` | The name of the organization. |
-| `project_id` | The unique identifier of the project. |
-| `project_name` | The name of the project. |
-
-{{% /tab %}}
 {{% tab "Fastly" %}}
 
 | Tag Name | Tag Description |

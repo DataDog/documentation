@@ -51,7 +51,7 @@ categories:
 - red
 dependencies: []
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: mulesoft_anypoint
 integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
@@ -185,7 +185,7 @@ Además, correlaciona los logs generados en una transacción en una única traza
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mulesoft_anypoint" >}}
+{{< get-metrics-from-git "mulesoft-anypoint" >}}
 
 
 ### Checks de servicio

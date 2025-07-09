@@ -55,7 +55,7 @@ Vous pouvez installer l'intégration MongoDB Atlas en vous connectant au portai
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "mongodb_atlas" >}}
+{{< get-metrics-from-git "mongodb-atlas" >}}
 
 
 ### Events

@@ -10,10 +10,6 @@ further_reading:
 Quality Gates is in Preview.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
