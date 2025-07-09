@@ -12,7 +12,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
     1. Click **Create a new data collection rule** and select the DCE you created earlier.
     1. Click **Next**.
     1. Upload a sample JSON Log. For this example, the following JSON is used for the **Schema and Transformation**, where  `TimeGenerated` is required:
-        ```
+        ```json
         {
             "TimeGenerated": "2024-07-22T11:47:51Z",
             "event": {}
