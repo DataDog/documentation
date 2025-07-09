@@ -1,6 +1,10 @@
 ---
 title: Custom Processor
 disable_toc: false
+further_reading:
+- link: "/observability_pipelines/guide/remap_reserved_attributes/"
+  tag: "documentation"
+  text: "Remap reserved attributes"
 ---
 
 {{< callout src="#" btn_hidden="true" >}}
@@ -31,3 +35,7 @@ The Custom Processor is in Preview. Reach out to your account manager to request
 {{< /whatsnext >}}
 
 {{< vrl-functions >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
