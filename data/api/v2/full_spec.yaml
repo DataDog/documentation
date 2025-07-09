@@ -10668,6 +10668,7 @@ components:
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
       - $ref: '#/components/schemas/CustomDestinationForwardDestinationMicrosoftSentinel'
+      - $ref: '#/components/schemas/CustomDestinationForwardDestinationGoogleSecurityOperations'
     CustomDestinationForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -10725,6 +10726,42 @@ components:
       type: string
       x-enum-varnames:
       - ELASTICSEARCH
+    CustomDestinationForwardDestinationGoogleSecurityOperations:
+      description: The Google Security Operations destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationGoogleSecurityOperationsDestinationAuth'
+        customer_id:
+          description: The customer ID of the Google Security Operations account.
+          example: 123-456-7890
+          type: string
+        namespace:
+          description: The namespace of the Google Security Operations account.
+          example: google-security-operations-namespace
+          type: string
+        regional_endpoint:
+          description: The `CustomDestinationForwardDestinationGoogleSecurityOperations`
+            `regional_endpoint`.
+          example: https://malachiteingestion-pa.googleapis.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationForwardDestinationGoogleSecurityOperationsType'
+      required:
+      - type
+      - customer_id
+      - regional_endpoint
+      - namespace
+      - auth
+      type: object
+    CustomDestinationForwardDestinationGoogleSecurityOperationsType:
+      default: google_security_operations
+      description: Type of the Google Security Operations destination.
+      enum:
+      - google_security_operations
+      example: google_security_operations
+      type: string
+      x-enum-varnames:
+      - GOOGLE_SECURITY_OPERATIONS
     CustomDestinationForwardDestinationHttp:
       description: The HTTP destination.
       properties:
@@ -10826,6 +10863,55 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+    CustomDestinationGoogleSecurityOperationsDestinationAuth:
+      description: Google Security Operations destination authentication.
+      properties:
+        client_email:
+          description: The Google Security Operations client email.
+          example: client@example.com
+          type: string
+        client_id:
+          description: The Google Security Operations client ID. This field is not
+            returned by the API.
+          example: def123456
+          type: string
+          writeOnly: true
+        private_key:
+          description: The Google Security Operations private key. This field is not
+            returned by the API.
+          example: '-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBK...\n-----END
+            PRIVATE KEY-----\n'
+          type: string
+          writeOnly: true
+        private_key_id:
+          description: The Google Security Operations private key ID. This field is
+            not returned by the API.
+          example: abc12345678
+          type: string
+          writeOnly: true
+        project_id:
+          description: Google Security Operations project ID.
+          example: gcp-project
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationGoogleSecurityOperationsDestinationAuthType'
+      required:
+      - type
+      - project_id
+      - private_key_id
+      - client_email
+      - client_id
+      - private_key
+      type: object
+    CustomDestinationGoogleSecurityOperationsDestinationAuthType:
+      default: gcp_private_key
+      description: Type of the Google Security Operations destination authentication.
+      enum:
+      - gcp_private_key
+      example: gcp_private_key
+      type: string
+      x-enum-varnames:
+      - GCP_PRIVATE_KEY
     CustomDestinationHttpDestinationAuth:
       description: Authentication method of the HTTP requests.
       oneOf:
@@ -10971,6 +11057,7 @@ components:
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
       - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationMicrosoftSentinel'
+      - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationGoogleSecurityOperations'
     CustomDestinationResponseForwardDestinationElasticsearch:
       description: The Elasticsearch destination.
       properties:
@@ -11028,6 +11115,42 @@ components:
       type: string
       x-enum-varnames:
       - ELASTICSEARCH
+    CustomDestinationResponseForwardDestinationGoogleSecurityOperations:
+      description: The Google Security Operations destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationResponseGoogleSecurityOperationsDestinationAuth'
+        customer_id:
+          description: The customer ID of the Google Security Operations account.
+          example: 123-456-7890
+          type: string
+        namespace:
+          description: The namespace of the Google Security Operations account.
+          example: google-security-operations-namespace
+          type: string
+        regional_endpoint:
+          description: The `CustomDestinationResponseForwardDestinationGoogleSecurityOperations`
+            `regional_endpoint`.
+          example: https://malachiteingestion-pa.googleapis.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationGoogleSecurityOperationsType'
+      required:
+      - type
+      - customer_id
+      - regional_endpoint
+      - namespace
+      - auth
+      type: object
+    CustomDestinationResponseForwardDestinationGoogleSecurityOperationsType:
+      default: google_security_operations
+      description: Type of the Google Security Operations destination.
+      enum:
+      - google_security_operations
+      example: google_security_operations
+      type: string
+      x-enum-varnames:
+      - GOOGLE_SECURITY_OPERATIONS
     CustomDestinationResponseForwardDestinationHttp:
       description: The HTTP destination.
       properties:
@@ -11122,6 +11245,33 @@ components:
       type: string
       x-enum-varnames:
       - SPLUNK_HEC
+    CustomDestinationResponseGoogleSecurityOperationsDestinationAuth:
+      description: Google Security Operations destination authentication.
+      properties:
+        client_email:
+          description: The Google Security Operations client email.
+          example: client@example.com
+          type: string
+        project_id:
+          description: Google Security Operations project ID.
+          example: gcp-project
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseGoogleSecurityOperationsDestinationAuthType'
+      required:
+      - type
+      - project_id
+      - client_email
+      type: object
+    CustomDestinationResponseGoogleSecurityOperationsDestinationAuthType:
+      default: gcp_private_key
+      description: Type of the Google Security Operations destination authentication.
+      enum:
+      - gcp_private_key
+      example: gcp_private_key
+      type: string
+      x-enum-varnames:
+      - GCP_PRIVATE_KEY
     CustomDestinationResponseHttpDestinationAuth:
       description: Authentication method of the HTTP requests.
       oneOf:
