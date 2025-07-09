@@ -27,7 +27,7 @@ categories:
 - security
 - 構成 & デプロイ
 - containers
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 4.1.2
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: cert_manager
@@ -94,7 +94,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### イベント
@@ -102,7 +102,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 cert_manager インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## トラブルシューティング

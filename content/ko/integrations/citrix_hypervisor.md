@@ -16,19 +16,18 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10198
     source_type_name: Citrix Hypervisor
-  logs:
-    source: citrix_hypervisor
   monitors:
-    Host CPU high: assets/monitors/host_cpu_high.json
-    VM CPU high: assets/monitors/vm_cpu_high.json
+    CPU load is high: assets/monitors/host_cpu_high.json
+    VM's CPU load is high: assets/monitors/vm_cpu_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- cloud
+- 클라우드
 - 로그 수집
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
 display_on_public_website: true
@@ -36,29 +35,32 @@ draft: false
 git_integration_title: citrix_hypervisor
 integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
-integration_version: 3.2.0
+integration_version: 5.1.1
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: citrix_hypervisor
 public_title: Citrix Hypervisor
 short_description: Citrix Hypervisor 호스트의 상태 및 성능을 모니터링합니다.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - "\b카테고리::클라우드"
+  - Category::Cloud
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Citrix Hypervisor 호스트의 상태 및 성능을 모니터링합니다.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-citrix-hypervisor-datadog/
   support: README.md#Support
   title: Citrix Hypervisor
 ---
@@ -72,7 +74,7 @@ tile:
 
 ## 설정
 
-호스트에서 실행 중인 에이전트의 경우 다음 지침에 따라 설치하고 구성하세요. 컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][2]에 다음 지침을 적용하는 방법이 안내되어 있습니다.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
@@ -94,7 +96,7 @@ Citrix Hypervisor 통합에는 서비스 모니터링을 위한 최소  [`read-o
 
 #### 로그 수집
 
-_에이전트 버전 > 6.0 이상 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. 로그 수집은 기본적으로 Datadog 에이전트에서 비활성화되어 있습니다. `datadog.yaml`에서 활성화하세요.
 
@@ -117,18 +119,18 @@ _에이전트 버전 > 6.0 이상 사용 가능_
 
 [에이전트 상태 하위 명령을 실행하고][7] 점검 섹션에서 `citrix_hypervisor`를 찾습니다. 
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "citrix_hypervisor" >}}
+{{< get-metrics-from-git "citrix-hypervisor" >}}
 
 
 ### 이벤트
 
 Citrix Hypervisor 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
-{{< get-service-checks-from-git "citrix_hypervisor" >}}
+### 서비스 점검
+{{< get-service-checks-from-git "citrix-hypervisor" >}}
 
 
 ## 트러블슈팅

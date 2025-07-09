@@ -52,17 +52,6 @@ const getCookieByName = (name) => {
     return value;
 };
 
-const chromeHashFix = () => {
-    const isChrome = /Chrome/.test(navigator.userAgent);
-    if (window.location.hash && isChrome) {
-        setTimeout(function () {
-            const hash = window.location.hash;
-            window.location.hash = '';
-            window.location.hash = hash;
-        }, 300);
-    }
-}
-
 const bodyClassContains = (string) => document.body.classList.contains(string);
 
-export { updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName, bodyClassContains, chromeHashFix };
+export { updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName, bodyClassContains };

@@ -17,10 +17,10 @@ further_reading:
   text: "Learn about Serverless Monitoring"
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
-- link: "/code_analysis/"
+  text: "Learn about Test Optimization"
+- link: "/security/code_security/"
   tag: "Documentation"
-  text: "Learn about Code Analysis"
+  text: "Learn about Code Security"
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
@@ -171,6 +171,9 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The .NET client library version 2.24.1 or later is required.</div>
 
+As a first step, ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
+Then, follow the rest of the instructions based on your specific deployment model:
+
 #### Containers
 
 If you are using Docker containers, you have three options: using Docker, using Microsoft SourceLink, or configuring your application with `DD_GIT_*` environment variables.
@@ -216,9 +219,14 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">The NodeJS client library version 3.21.0 or later is required.</div>
+<div class="alert alert-info">
+  The Node.js client library version 3.21.0 or later is required.
+  </br>
+  </br>
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code links and snippets will not work.
+</div>
 
 #### Containers
 
@@ -290,6 +298,8 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 
 <div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
 
+#### Containers
+
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
@@ -322,6 +332,8 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% tab "PHP" %}}
 
 <div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+
+#### Containers
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
@@ -377,7 +389,7 @@ The source code integration supports the following Git providers:
 | GitHub SaaS (github.com) | Yes | Yes |
 | GitHub Enterprise Server | Yes | Yes |
 | GitLab SaaS (gitlab.com) | Yes | Yes |
-| GitLab self-managed | Yes | No |
+| GitLab self-managed | Yes | Yes (closed Preview) |
 | Bitbucket | Yes | No |
 | Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
@@ -387,7 +399,7 @@ The source code integration supports the following Git providers:
 
 Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
-Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**Application Security Monitoring**][107].
+Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**App and API Protection Monitoring**][107].
 
 [101]: https://docs.datadoghq.com/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
@@ -401,16 +413,16 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 {{% tab "GitLab" %}}
 
 <div class="alert alert-warning">
-Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
+To link telemetry with your source code, either install the GitLab integration (which requires joining the closed Preview above) or upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
 Run this command for every commit that you need to be synchronized with Datadog.
 
-If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
+If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**App and API Protection Monitoring**][7].
 
 ### Validation
 
@@ -421,7 +433,10 @@ You can expect to see the following output:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://gitlab.com
@@ -439,7 +454,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -454,7 +469,10 @@ You can expect to see the following output:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
@@ -500,7 +518,7 @@ You can also see links from profile frames to their source repository. This is s
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
@@ -517,11 +535,11 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Visibility**.
+You can see links from failed test runs to their source repository in **Test Optimization**.
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
 2. Click the **View on GitHub** button to open the test in its source code repository.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
@@ -532,34 +550,58 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
-{{% tab "Code Analysis" %}}
+{{% tab "Code Security" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Analysis**.
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
-1. Navigate to [**Software Delivery** > **Code Analysis**][101] and select a repository.
+1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
 2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
 
-{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Analysis Code Vulnerabilities view" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
-For more information, see the [Code Analysis documentation][102].
+For more information, see the [Code Security documentation][102].
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /code_analysis/
+[102]: /security/code_security/
 
 {{% /tab %}}
-{{% tab "Application Security Monitoring" %}}
+{{% tab "App and API Protection Monitoring" %}}
 
-You can see links from errors in your security signals' associated stack traces to their source repository in **Application Security Monitoring**.
+You can see links from errors in your security signals' associated stack traces to their source repository in **App and API Protection Monitoring**.
 
-1. Navigate to [**Security** > **Application Security**][101] and select a security signal.
+1. Navigate to [**Security** > **App and API Protection**][101] and select a security signal.
 2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
 3. Click **View Code** to open the error in its source code repository.
 
 If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace.
 
-{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from Application Security Monitoring" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/security/appsec
+
+{{% /tab %}}
+{{% tab "Dynamic Instrumentation" %}}
+
+You can see full source code files in [**Dynamic Instrumentation**][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+
+#### Create new instrumentation
+
+1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
+2. Select **Create New Instrumentation** and choose a service to instrument.
+3. Search for and select a source code filename or method.
+
+#### View or edit instrumentation
+
+1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
+2. Select an existing instrumentation from the list, then click **View Events**.
+3. Select the instrumentation card to view its location in the source code.
+
+{{< img src="integrations/guide/source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
+
+For more information, see the [Dynamic Instrumentation documentation][102].
+
+[101]: https://app.datadoghq.com/dynamic-instrumentation/events
+[102]: /dynamic_instrumentation/
 
 {{% /tab %}}
 {{< /tabs >}}

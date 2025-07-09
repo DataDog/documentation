@@ -23,7 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,15 +35,15 @@ is_public: true
 manifest_version: 2.0.0
 name: dyn
 public_title: Dyn
-short_description: 'Monitor your zones: QPS and updates.'
+short_description: 'ゾーンを監視: QPS と更新。'
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Network
+  - Category::ネットワーク
   - Offering::Integration
   configuration: README.md#Setup
-  description: 'Monitor your zones: QPS and updates.'
+  description: 'ゾーンを監視: QPS と更新。'
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -51,7 +51,7 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn Overview" popup="true">}}
+{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn 概要" popup="true">}}
 
 ## 概要
 
@@ -71,7 +71,7 @@ Oracle Cloud Infrastructure は 2016 年に Dyn を買収し、Dyn の製品と�
 
 Dyn で `datadog` 読み取り専用ユーザーをまだ作成していない場合は、[Dyn にログイン][1]し、以下の手順を実行します。
 
-1. ユーザー名とパスワードを選択します。
+1. ユーザー名とパスワードを選択します。 
    {{< img src="integrations/dyn/create_dyn_user.png" alt="dyn ユーザーを作成" style="width:75%;" popup="true">}}
 
 2. **READONLY** ユーザーグループを選択します。

@@ -1,0 +1,1 @@
+Enter the socket destination address, such as `92.12.333.224:5000` or `https://somehost:5000`. The address must include a port.

@@ -7,7 +7,7 @@ import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
-import { loadInstantSearch } from './algolia';
+import { loadInstantSearch } from './instantsearch';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -85,10 +85,13 @@ function loadPage(newUrl) {
                 hitsContainer.classList.add("hits-container", "d-none");
                 const hits = document.createElement("div");
                 hits.setAttribute("id", "hits");
+                const hitsPartners = document.createElement("div");
+                hitsPartners.setAttribute("id", "hits-partners");
 
                 searchBoxContainer.append(searchBox);
                 searchBoxContainer.append(hitsContainer);
                 hitsContainer.append(hits);
+                hitsContainer.append(hitsPartners);
 
                 if(sidenavSearchbarMount) {
                   sidenavSearchbarMount.append(searchBoxContainer);

@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - rbac
 aliases:
 - /ja/guides/rbac
 - /ja/account_management/rbac/role_api

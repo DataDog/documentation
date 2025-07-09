@@ -2,7 +2,7 @@
 aliases:
 - /ja/network_performance_monitoring/devices/data/
 disable_toc: true
-title: 収集対象の NDM データ
+title: SNMP メトリクスリファレンス
 ---
 
 ## イベント

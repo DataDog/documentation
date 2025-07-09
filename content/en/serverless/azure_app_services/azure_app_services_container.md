@@ -1,5 +1,7 @@
 ---
 title: Instrument Azure App Service - Linux Containers
+aliases:
+  - /serverless/guide/azure_app_service_linux_sidecar
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -9,146 +11,494 @@ further_reading:
   text: "Azure App Service Environment"
 ---
 
-## Overview
-
-<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/guide/azure_app_service_linux_sidecar">Instrument Azure App Service - Sidecar Pattern</a>.</div>
-
-This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
-
-- Fully distributed APM tracing using automatic instrumentation.
-- Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
-- Support for manual APM instrumentation to customize spans.
-- `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][1].
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+This document assumes that your application is set up for sidecars according to Azure's [Configure a sidecar container for custom container in Azure App Service][1] tutorial.
 
-## Instrument your application
+If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Container with `serverless-init`][2].
 
-### Dockerfile
+## Setup
 
-Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+### Application
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ---- | ---- | ---- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+{{< tabs >}}
+{{% tab "Node.js" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-js` library. See [Tracing Node.js applications][101] for instructions.
 
-Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][102].
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
-* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
 
-{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
-{{< programming-lang lang="nodejs" >}}
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-{{% svl-init-nodejs %}}
+To set up logging in your application, see [Node.js Log Collection][103]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][104].
 
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
+[101]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
+[102]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs#code-examples
+[103]: /logs/log_collection/nodejs/?tab=winston30
+[104]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+{{% /tab %}}
+{{% tab "Python" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-py` library. See [Tracing Python applications][201] for instructions.
 
-{{% svl-init-python %}}
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][202].
 
-{{< /programming-lang >}}
-{{< programming-lang lang="java" >}}
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
 
-{{% svl-init-java %}}
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
+To set up logging in your application, see [Node.js Log Collection][203]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][204].
 
-{{% svl-init-go %}}
+[201]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[202]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python#code-examples
+[203]: /logs/log_collection/python/
+[204]: /tracing/other_telemetry/connect_logs_and_traces/python
+{{% /tab %}}
+{{% tab "Java" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-java` library. See [Tracing Java applications][301] for instructions.
 
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][302].
 
-{{% svl-init-dotnet %}}
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
 
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-{{% svl-init-ruby %}}
+To set up logging in your application, see [Node.js Log Collection][303]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][304].
 
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
+[301]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#getting-started
+[302]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java#code-examples
+[303]: /logs/log_collection/java/?tab=winston30
+[304]: /tracing/other_telemetry/connect_logs_and_traces/java
+{{% /tab %}}
+{{% tab ".NET" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-dotnet` library.
 
-{{% svl-init-php %}}
+1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog tracer within your application container.
+   {{< code-block lang="dockerfile" >}}
+   RUN mkdir -p /datadog/tracer
+   RUN mkdir -p /home/LogFiles/dotnet
 
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+   {{< /code-block >}}
 
-### 2. Configure your application
+2. Build the image and push it to your preferred container registry.
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
-- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
+**Full example Dockerfile**
 
-For more environment variables and their function, see [Additional Configurations](#additional-configurations).
+{{< highlight dockerfile "hl_lines=22-27" >}}
+# Stage 1: Build the application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
 
-### 3. Results
+# Copy the project file and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+# Copy the remaining source code
+COPY . .
 
-## Deployment
+# Build the application
+RUN dotnet publish -c Release -o out
 
-{{% aas-workflow-linux %}}
+# Stage 2: Create a runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
 
-## Additional configurations
+# Copy the build output from stage 1
+COPY --from=build /app/out ./
 
-- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+# Datadog specific
+RUN mkdir -p /datadog/tracer
+RUN mkdir -p /home/LogFiles/dotnet
 
-- **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+# Set the entry point for the application
+ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
+{{< /highlight >}}
 
-- **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
+For more information, see [Tracing .NET Applications][401].
 
-Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][402].
 
-### Environment Variables
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
 
-| Variable | Description |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
-| `DD_SITE` | [Datadog site][4] - **Required** |
-| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
-| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
-| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
-| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
-| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
-| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-## Troubleshooting
+To set up logging in your application, see [C# Log Collection][403]. To set up trace log correlation, see [Correlating .NET Logs and Traces][404].
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+[401]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[402]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=dotnet#code-examples
+[403]: /logs/log_collection/csharp
+[404]: /tracing/other_telemetry/connect_logs_and_traces/dotnet
 
-{{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
+{{% /tab %}}
+{{% tab "Go" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-go` library. See [Tracing Go applications][501] for instructions.
 
-Share the content of the **Log stream** with [Datadog Support][14].
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][502].
 
-## Further reading
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
 
-{{< partial name="whats-next/whats-next.html" >}}
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
+
+To set up logging in your application, see [Node.js Log Collection][503]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][504].
+
+[501]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[502]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
+[503]: /logs/log_collection/go/
+[504]: /tracing/other_telemetry/connect_logs_and_traces/go
+{{% /tab %}}
+{{% tab "PHP" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-php` library. See [Tracing PHP applications][601] for instructions.
+
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][602].
+
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
+
+To set up logging in your application, see [Node.js Log Collection][603]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][604].
+
+[601]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/#getting-started
+[602]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
+[603]: /logs/log_collection/php/
+[604]: /tracing/other_telemetry/connect_logs_and_traces/php
+{{% /tab %}}
+{{< /tabs >}}
+
+### Instrumentation
+
+Instrumentation is done using a sidecar container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
+
+{{< tabs >}}
+{{% tab "Automated" %}}
+
+#### Using the Datadog CLI
+
+First, install the [Datadog CLI][601] and [Azure CLI][602].
+
+Login to your Azure account using the Azure CLI:
+
+{{< code-block lang="shell" >}}
+az login
+{{< /code-block >}}
+
+Then, run the following command to set up the sidecar container:
+
+{{< code-block lang="shell" >}}
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+{{< /code-block >}}
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+
+Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
 
-[1]: /integrations/azure/#log-collection
-[2]: /tracing/trace_collection/library_config
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[4]: /getting_started/site/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /account_management/api-app-keys/
-[7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
-[8]: /metrics/distributions/
-[9]: /metrics/#time-and-space-aggregation
-[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
-[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
-[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
-[13]: /tracing/other_telemetry/connect_logs_and_traces/php
-[14]: /tracing/other_telemetry/connect_logs_and_traces/python
-[15]: /tracing/other_telemetry/connect_logs_and_traces/go
-[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+#### Sidecar container
+
+1. In the Azure Portal, go to **Deployment Center** and select **Add**.
+2. In the **Edit container** form, provide the following:
+   - **Image source**: Docker Hub or other registries
+   - **Image type**: Public
+   - **Registry server URL**: `index.docker.io`
+   - **Image and tag**: `datadog/serverless-init:latest`
+   - **Port**: 8126
+3. Select **Apply**.
+
+#### Application settings
+
+In your **App settings** in Azure, set the following environment variables on both your main container and the sidecar container. Alternatively, set these variables on your main container and enable the **Allow access to all app settings** option.
+
+{{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
+
+- `DD_API_KEY`: Your [Datadog API key][701]
+- `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
+- `DD_ENV`: How you want to tag your env. For example, `prod`
+- `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
+- `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+
+   <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
+
+<details open>
+<summary>
+<h4>For .NET applications: Additional required environment variables</h4>
+</summary>
+
+If you are setting up monitoring for a .NET application, configure the following **required** environment variables.
+
+| Variable name | Value |
+| ------------- | ----- |
+| `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
+| `DD_TRACE_LOG_DIRECTORY` | `/home/LogFiles/dotnet` |
+| `CORECLR_ENABLE_PROFILING` | `1` |
+| `CORECLR_PROFILER` | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
+| `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |
+</details>
+
+[701]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
+
+## Example application
+The following example contains a single app with tracing, metrics, and logs set up.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+
+```js
+const tracer = require('dd-trace').init({
+ logInjection: true,
+});
+const express = require("express");
+const app = express();
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+ level: 'info',
+ exitOnError: false,
+ format: format.json(),
+ transports: [new transports.File({ filename: `/home/LogFiles/app-${process.env.COMPUTERNAME}.log`}),
+  ],
+});
+
+app.get("/", (_, res) => {
+ logger.info("Welcome!");
+ res.sendStatus(200);
+});
+
+app.get("/hello", (_, res) => {
+ logger.info("Hello!");
+ metricPrefix = "nodejs-azure-sidecar";
+ // Send three unique metrics, just so we're testing more than one single metric
+ metricsToSend = ["sample_metric_1", "sample_metric_2", "sample_metric_3"];
+ metricsToSend.forEach((metric) => {
+   for (let i = 0; i < 20; i++) {
+     tracer.dogstatsd.distribution(`${metricPrefix}.${metric}`, 1);
+   }
+ });
+ res.status(200).json({ msg: "Sending metrics to Datadog" });
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port);
+```
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+from flask import Flask, Response
+from datadog import initialize, statsd
+import os
+import ddtrace
+import logging
+
+ddtrace.patch(logging=True)
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+         '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+         '- %(message)s')
+logging.basicConfig(filename=f'/home/LogFiles/app-{os.getenv(COMPUTERNAME)}.log', format=FORMAT)
+log = logging.getLogger(__name__)
+log.level = logging.INFO
+
+options = {
+   'statsd_host':'127.0.0.1',
+   'statsd_port':8125
+}
+
+initialize(**options)
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+   statsd.increment('page.views')
+   log.info('Hello Datadog!!')
+   return Response('💜 Hello Datadog!! 💜', status=200, mimetype='application/json')
+
+app.run(host="0.0.0.0", port=8080)
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+package com.example.springboot;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+@RestController
+public class HelloController {
+   private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").port(8125).build();
+   private static final Log logger = LogFactory.getLog(HelloController.class);
+   @GetMapping("/")
+   public String index() {
+       Statsd.incrementCounter("page.views");
+       logger.info("Hello Azure!");
+       return "💜 Hello Azure! 💜";
+   }
+
+}
+
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+package main
+
+import (
+   "fmt"
+   "log"
+   "net/http"
+   "os"
+   "path/filepath"
+   "github.com/DataDog/datadog-go/v5/statsd"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+const logDir = "/home/LogFiles"
+
+var logFile *os.File
+var logCounter int
+var dogstatsdClient *statsd.Client
+
+func handler(w http.ResponseWriter, r *http.Request) {
+   log.Println("Hello Datadog!")
+   span := tracer.StartSpan("maincontainer", tracer.ResourceName("/handler"))
+   defer span.Finish()
+   logCounter++
+   writeLogsToFile(fmt.Sprintf("received request %d", logCounter), span.Context())
+   dogstatsdClient.Incr("request.count", []string{}, 1)
+   fmt.Fprintf(w, "💜 Hello Datadog! 💜")
+}
+
+func writeLogsToFile(log_msg string, context ddtrace.SpanContext) {
+   span := tracer.StartSpan(
+       "writeLogToFile",
+       tracer.ResourceName("/writeLogsToFile"),
+       tracer.ChildOf(context))
+   defer span.Finish()
+   _, err := logFile.WriteString(log_msg + "\n")
+   if err != nil {
+       log.Println("Error writing to log file:", err)
+   }
+}
+
+func main() {
+   log.Print("Main container started...")
+
+   err := os.MkdirAll(logDir, 0755)
+   if err != nil {
+       panic(err)
+   }
+
+   logFilePath := filepath.Join(logDir, fmt.Sprintf("app-%s.log", os.Getenv("COMPUTERNAME")))
+   log.Println("Saving logs in ", logFilePath)
+   logFileLocal, err := os.OpenFile(logFilePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+   if err != nil {
+       panic(err)
+   }
+   defer logFileLocal.Close()
+
+   logFile = logFileLocal
+
+   dogstatsdClient, err = statsd.New("localhost:8125")
+   if err != nil {
+       panic(err)
+   }
+   defer dogstatsdClient.Close()
+
+   tracer.Start()
+   defer tracer.Stop()
+
+   http.HandleFunc("/", handler)
+   log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+```
+{{% /tab %}}
+{{% tab "PHP" %}}
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\JsonFormatter;
+
+$statsd = new DogStatsd(
+   array('host' => '127.0.0.1',
+         'port' => 8125,
+    )
+ );
+
+$log = new logger('datadog');
+$formatter = new JsonFormatter();
+
+$stream = new StreamHandler('/home/LogFiles/app-'.getenv("COMPUTERNAME").'.log', Logger::DEBUG);
+$stream->setFormatter($formatter);
+
+$log->pushHandler($stream);
+
+$log->pushProcessor(function ($record) {
+ $record['message'] .= sprintf(
+     ' [dd.trace_id=%s dd.span_id=%s]',
+     \DDTrace\logs_correlation_trace_id(),
+     \dd_trace_peek_span_id()
+ );
+ return $record;
+});
+
+$log->info("Hello Datadog!");
+echo '💜 Hello Datadog! 💜';
+
+$log->info("sending a metric");
+$statsd->increment('page.views', 1, array('environment'=>'dev'));
+
+?>
+
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+[1]: https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar
+[2]: /serverless/guide/azure_app_service_linux_containers_serverless_init

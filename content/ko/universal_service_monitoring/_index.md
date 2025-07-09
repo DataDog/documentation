@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/universal_service_monitoring/
+- /ko/tracing/universal_service_monitoring/
 cascade:
   algolia:
     rank: 70
@@ -25,10 +25,6 @@ further_reading:
   text: 서비스 맵에 대해 더 알아보기
 title: 유니버설 서비스 모니터링
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에서는 유니버설 서비스 모니터링이 지원되지 않습니다.</div>
-{{< /site-region >}}
 
 ## 개요
 

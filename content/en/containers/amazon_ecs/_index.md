@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: "blog"
   text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
+  tag: "Architecture Center"
+  text: "Using Datadog with ECS Fargate"
 algolia:
   tags: ['ecs']
 ---
@@ -41,6 +44,14 @@ The following instructions assume that you have configured an EC2 cluster. See t
 3. (Optional) [Set up additional Datadog Agent features][29]
 
 **Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
+
+{{% site-region region="gov" %}}
+## FIPS Compliance
+
+Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.
+
+[32]: /agent/configuration/fips-compliance/
+{{% /site-region %}}
 
 ### Create an ECS task definition
 
@@ -199,7 +210,7 @@ To collect Live Process information for all your containers and send it to Datad
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### Cloud Network Monitoring
 
 <div class="alert alert-warning">
 This feature is only available for Linux.
@@ -261,143 +272,54 @@ If you already have a task definition, update your file to include the following
    "family": "datadog-agent-task"
  }
  ```
+#### Network Path
 
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
+
+1. To enable [Network Path][31] on your ECS clusters, enable the `system-probe` traceroute module by adding the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. To monitor individual paths, follow the instructions here to [set up additional Agent features](#set-up-additional-agent-features):
+
+   These files deploy an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. The Agent can also run Agent integrations based on Docker Labels discovered on your containers.
+
+3. To monitor network traffic paths and allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually, add the following additional environment variables to your `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. Optionally, to configure number of workers (default is 4) adjust the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## AWSVPC mode
 
 For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instance's security group to reach the applicative containers on relevant ports.
 
 You can run the Agent in `awsvpc` mode, but Datadog does not recommend this because it may be difficult to retrieve the ENI IP to reach the Agent for DogStatsD metrics and APM traces. Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
-
-{{% site-region region="gov" %}}
-#### FIPS proxy for Datadog for Government environments
-
-<div class="alert alert-warning">
-This feature is only available for Linux.
-</div>
-
-To send data to the Datadog for Government site, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features][1].
-
-```json
- {
-   "containerDefinitions": [
-     (...)
-          {
-            "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.5",
-            "portMappings": [
-                {
-                    "containerPort": 9803,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9804,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9805,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9806,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9807,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9808,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9809,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9810,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9811,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9812,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9813,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9814,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9815,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9816,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9817,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9818,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": true,
-            "environment": [
-                {
-                    "name": "DD_FIPS_PORT_RANGE_START",
-                    "value": "9803"
-                },
-                {
-                    "name": "DD_FIPS_LOCAL_ADDRESS",
-                    "value": "127.0.0.1"
-                }
-            ]
-        }
-   ],
-   "family": "datadog-agent-task"
-}
-```
-
-You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
-
-```json
-{
-    "containerDefinitions": [
-        {
-            "name": "datadog-agent",
-            "image": "public.ecr.aws/datadog/agent:latest",
-            (...)
-            "environment": [
-              (...)
-                {
-                    "name": "DD_FIPS_ENABLED",
-                    "value": "true"
-                },
-                {
-                    "name": "DD_FIPS_PORT_RANGE_START",
-                    "value": "9803"
-                },
-                {
-                    "name": "DD_FIPS_HTTPS",
-                    "value": "false"
-                },
-             ],
-        },
-    ],
-   "family": "datadog-agent-task"
-}
-```
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
-{{% /site-region %}}
 
 ## Troubleshooting
 
@@ -432,3 +354,4 @@ Need help? Contact [Datadog support][11].
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /network_monitoring/network_path

@@ -1,12 +1,12 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
 - ログの収集
 - ネットワーク
-- トレーシング
+- tracing
 creates_events: false
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh
@@ -38,7 +38,7 @@ supported_os:
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-[AWS App Mesh][1] is a service mesh that provides application-level networking to your micro services running on Amazon ECS Fargate or Amazon EKS clusters.
+[AWS App Mesh][1] は、Amazon ECS Fargate または Amazon EKS クラスター上で稼働するマイクロサービスに対して、アプリケーションレベルのネットワーキングを提供するサービスメッシュです。
 
 
 ## セットアップ
@@ -92,7 +92,7 @@ supported_os:
                 path: envoy.yaml
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 
@@ -112,15 +112,15 @@ supported_os:
 
 namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) をデプロイします。オプションでこれを使用し、以下のように appmesh-injector をデプロイします。
 
-    ```shell
-      helm upgrade -i appmesh-controller eks/appmesh-controller \
-      --namespace appmesh-system \
-      --set sidecar.logLevel=debug \
-      --set tracing.enabled=true \
-      --set tracing.provider=datadog \
-      --set tracing.address=ref:status.hostIP \
-      --set tracing.port=8126
-    ```
+```shell
+  helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set sidecar.logLevel=debug \
+  --set tracing.enabled=true \
+  --set tracing.provider=datadog \
+  --set tracing.address=ref:status.hostIP \
+  --set tracing.port=8126
+```
 
 
 または、[EKS を使用した App Mesh][2] ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
@@ -147,7 +147,7 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
             },
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 
@@ -193,7 +193,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
             },
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 

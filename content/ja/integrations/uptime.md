@@ -26,7 +26,7 @@ categories:
 - event management
 - os & system
 - testing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_on_public_website: true
@@ -69,10 +69,16 @@ tile:
 
 ## 概要
 
-アプリからイベントとメトリクスをリアルタイムに取得して、以下のことができます。
+Uptime.com は、Web アプリケーションや API に対してリアルタイムアラートと詳細なパフォーマンス分析を提供する、包括的な Web サイトモニタリングサービスです。
 
-- ダウンタイムや中断を追跡および通知できます。
-- Synthetic リクエストの応答時間メトリクスを視覚化できます。
+Uptime.com と Datadog を連携させることで、Uptime.com のモニタリングを Datadog プラットフォームと組み合わせ、モニタリング機能を強化できます。主な機能は以下のとおりです。
+
+- Uptime.com のアラートは、自動的に Datadog 上で対応するイベントを生成します。
+- Datadog のイベントは、低い優先度を割り当てたり、追跡のためにコメントを残したりできます。
+- 応答時間のチェックは、Datadog のメトリクスとして追跡されます。
+- メトリクスは 1 分間隔のチェックで得られる 5 つのデータポイントを基に、5 分ごとに更新されます。
+
+この連携により、パフォーマンスの問題を事前に発見・解決し、ダウンタイムを最小限に抑えながら、サイト全体の信頼性を向上させることができます。
 
 ![Uptime.com のグラフ][1]
 

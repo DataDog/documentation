@@ -3,8 +3,9 @@ aliases:
 - /ko/integrations/azure_filestorage
 categories:
 - azure
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
+custom_kind: 통합
 dependencies: []
 description: 주요 Azure File Storage 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
@@ -15,7 +16,6 @@ integration_id: azure-filestorage
 integration_title: Microsoft Azure File Storage
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_file_storage
 public_title: Datadog-Microsoft Azure File Storage 통합
@@ -36,17 +36,17 @@ Datadog Azure 통합을 사용하여 Azure File Storage에서 메트릭을 수�
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_file_storage" >}}
+{{ get-metrics-from-git "azure-filestorage" }}
 
 
 ### 이벤트
 
 Azure File Storage 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure File Storage 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

@@ -1,16 +1,16 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
 further_reading:
-- link: "security/threats/workload_security_rules"
+- link: "security/workload_protection/workload_security_rules"
   tag: "Documentation"
-  text: "CSM Threats Detection Rules"
+  text: "Workload Protection Detection Rules"
 ---
 
 <div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
-<div class="alert alert-info">CSM Threats Active Protection is in beta.</div>
+<div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 
-This topic explains how to use the CSM Threats **Active Protection** feature to block crypto mining threats automatically. 
+This topic explains how to use the Workload Protection **Active Protection** feature to block crypto mining threats automatically. 
 
 By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
 
@@ -22,6 +22,14 @@ Active Protection streamlines threat detection and targeted response, resulting 
 - DevOps decides which applications and resources are resilient enough to withstand targeted protection.
 
 The end result is crypto mining threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
+
+## RBAC for Active Protection
+
+Here are some important [role and permissions][11] to use for custom rules and Active Protection RBAC:
+
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the Active Protection feature. 
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 ## Protection options
 
@@ -71,7 +79,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to CSM [Agent Configuration][2] rules.
+1. Go to Cloud Security [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}
@@ -137,4 +145,4 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
-[4]: /security/threats/workload_security_rules
+[4]: /security/workload_protection/workload_security_rules

@@ -297,7 +297,7 @@ Para instalar una versión específica del Windows Agent, consulta la [lista de 
 | 10.10 - 10.11 | <= 5.11.3 |||
 | 10.12 || <= 6.34.0 | <= 7.34.0 |
 | 10.13 || <= 6.38.2 | <= 7.38.2 |
-| >= 10.14 ||           | >= 7.39.0 |
+| >= 11.0 ||           | >= 7.39.0 |
 
 ## ARM64 de Apple
 
@@ -341,6 +341,7 @@ Las versiones 6 y 7 del Agent son compatibles con las siguientes versiones de [A
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
+- 7.3 TL3 SP0
 
 
 [1]: /es/agent/basic_agent_usage/aix/

@@ -18,9 +18,11 @@ further_reading:
 
 ### Metrics
 
-Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent for Amazon ECS:
+Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances.
 
-{{< get-metrics-from-git "amazon_ecs" >}}
+The following table lists metrics collected by the Agent or API crawler for Amazon ECS:
+
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 Metrics collected by the Agent when deployed in a Docker container also include the same metrics collected by the Docker integration. See the [Docker integration metrics][1] for a complete list of metrics.
 

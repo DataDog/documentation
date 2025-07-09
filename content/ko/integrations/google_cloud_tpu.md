@@ -1,28 +1,85 @@
 ---
+app_id: google-cloud-tpu
+app_uuid: c20f781b-e1d0-438e-b33d-0bc4bb4c6d0a
+assets:
+  dashboards:
+    google-cloud-tpu-overview: assets/dashboards/google_cloud_tpu_overview.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gcp.tpu.cpu.utilization
+      - gcp.tpu.memory.usage
+      - gcp.tpu.network.received_bytes_count
+      - gcp.tpu.network.sent_bytes_count
+      - gcp.tpu.accelerator.duty_cycle
+      - gcp.tpu.instance.uptime_total
+      - gcp.gke.node.accelerator.tensorcore_utilization
+      - gcp.gke.node.accelerator.duty_cycle
+      - gcp.gke.node.accelerator.memory_used
+      - gcp.gke.node.accelerator.memory_total
+      - gcp.gke.node.accelerator.memory_bandwidth_utilization
+      - gcp.gke.container.accelerator.tensorcore_utilization
+      - gcp.gke.container.accelerator.duty_cycle
+      - gcp.gke.container.accelerator.memory_used
+      - gcp.gke.container.accelerator.memory_total
+      - gcp.gke.container.accelerator.memory_bandwidth_utilization
+      metadata_path: metadata.csv
+      prefix: gcp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 275
+    source_type_name: Google Cloud TPU
+  monitors:
+    Container Duty Cycle Low Percentage: assets/monitors/tpu_container_low_duty_cycle_percentage.json
+    Container Memory Bandwidth Low Utilization: assets/monitors/tpu_container_memory_bandwidth_under_utilization.json
+    Container Tensorcore Utilization Low Utilization: assets/monitors/tpu_container_tensorcore_under_utilization.json
+    Node Duty Cycle Low Percentage: assets/monitors/tpu_node_low_duty_cycle_percentage.json
+    Node Memory Bandwidth Low Utilization: assets/monitors/tpu_node_memory_bandwidth_under_utilization.json
+    Node Tensorcore Utilization Low Utilization: assets/monitors/tpu_node_tensorcore_under_utilization.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
+- 메트릭
 - google cloud
 - 로그 수집
 - ai/ml
 custom_kind: 통합
 dependencies: []
-description: 주요 Google Cloud TPU 메트릭을 추적합니다.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_tpu/
+display_on_public_website: true
 draft: false
 git_integration_title: google_cloud_tpu
-has_logo: true
 integration_id: google-cloud-tpu
 integration_title: Google Cloud TPU
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_tpu
-public_title: Datadog-Google Cloud TPU 통합
-short_description: 주요 Google Cloud TPU 메트릭을 추적합니다.
-version: '1.0'
+public_title: Google Cloud TPU
+short_description: ML 모델 개발을 위한 확장 가능하고 사용자 친화적인 클라우드 리소스를 통한 Tensor 프로세싱 유닛의 이점.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category::AI/ML
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: ML 모델 개발을 위한 확장 가능하고 사용자 친화적인 클라우드 리소스를 통한 Tensor 프로세싱 유닛의 이점.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud TPU
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud TPU 프로덕트는 최첨단 ML 모델을 실행하는 모든 ML 연구자, ML 엔지니어, 개발자, 데이터 사이언티스트가 확장 가능하며 사용하기 쉬운 클라우드 컴퓨팅 리소스를 통해 텐서 프로세싱 유닛(TPU)의 이점을 활용할 수 있도록 도와드립니다.
@@ -33,7 +90,7 @@ Datadog Google Cloud Platform 통합을 사용하여 Google Cloud TPU에서 메�
 
 ### 설치
 
-아직 설치하지 않았다면 먼저 [Google 클라우드 플랫폼 통합][1]을 설정합니다. 그 외 다른 설치가 필요하지 않습니다.
+Google Cloud TPU를 사용하려면 [Google Cloud 플랫폼 통합][1]을 설정하기만 하면 됩니다.
 
 ### 로그 수집
 
@@ -49,7 +106,7 @@ Google Cloud TPU 로그는 Google Cloud Logging으로 수집하여 클라우드 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_tpu" >}}
+{{< get-metrics-from-git "google-cloud-tpu" >}}
 
 
 ### 이벤트

@@ -5,6 +5,7 @@ aliases:
 - /fr/continuous_integration/integrate_tests/
 - /fr/continuous_integration/tests/
 cascade:
+  site_support_id: test_optimization
   algolia:
     rank: 70
     tags:
@@ -24,7 +25,7 @@ further_reading:
   text: Surveiller vos pipelines CI et vos tests avec Datadog CI Visibility
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: Blog
-  text: Dépannage de tests de bout en bout avec CI Visibility et RUM
+  text: Dépannage de tests de bout en bout avec CI Visibility et RUM
 - link: /monitors/types/ci/
   tag: Documentation
   text: En savoir plus sur les monitors de test CI
@@ -36,13 +37,9 @@ further_reading:
   text: Découvrez comment instrumenter vos tests Browser avec RUM
 - link: /tests/troubleshooting/
   tag: Documentation
-  text: Découvrez comment dépanner Test Visibility
-title: Test Visibility dans Datadog
+  text: Découvrez comment dépanner Test Visibility
+title: Test Visibility dans Datadog
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Test Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Section Overview
 
@@ -73,7 +70,7 @@ En plus des tests, Test Visibility offre une visibilité sur l'ensemble de la p
 | {{< ci-details title="Informations CI et git" >}}Collecte automatique des métadonnées des environnements git et CI, comme le fournisseur de CI, le SHA du commit git ou l'URL du pipeline.{{< /ci-details >}}                                       | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Importation des métadonnées Git" >}}L'importation automatique des informations sur l'arborescence git utilisées pour Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Intelligent Test Runner *" >}}Permet d'activer Intelligent Test Runner, qui ignore les tests de façon intelligente en fonction de la couverture du code et des métadonnées git.{{< /ci-details >}}                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Prise en charge de la couverture du code" >}}Permet de rapporter le total des métriques de couverture du code.{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |           | {{< X >}} |   {{< X >}} (manuel)   |
+| {{< ci-details title="Prise en charge de la couverture du code" >}}Permet de rapporter le total des métriques de couverture du code.{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |   {{< X >}} (manuel)   |
 | {{< ci-details title="Prise en charge des tests de benchmarks" >}}Détection automatique des statistiques relatives aux performances pour les tests de benchmarks.{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
 | {{< ci-details title="Paramétrage des tests" >}}Détection automatique des tests paramétrés.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Détection en amont des irrégularités *" >}}Relancez automatiquement des nouveaux tests pour détecter les irrégularités.{{< /ci-details >}}                                                                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} |           |                        |

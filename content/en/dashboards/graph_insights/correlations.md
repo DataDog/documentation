@@ -16,6 +16,12 @@ further_reading:
 - link: "/watchdog/"
   tag: "Documentation"
   text: "Watchdog"
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
+- link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
 ---
 
 ## Overview

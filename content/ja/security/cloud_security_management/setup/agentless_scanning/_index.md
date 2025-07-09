@@ -1,157 +1,94 @@
 ---
-title: Setting up Agentless Scanning for Cloud Security Management
+further_reading:
+- link: /security/cloud_security_management/setup
+  tag: ドキュメント
+  text: Cloud Security Management の設定
+- link: /security/cloud_security_management/agentless_scanning
+  tag: ドキュメント
+  text: Cloud Security Management Agentless Scanning
+title: Agentless Scanning の有効化
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management 向けの Agentless Scanning はサポートされていません。</div>
 {{< /site-region >}}
 
-エージェントレススキャンは、Datadog Agent をインストールすることなく、AWS ホスト、実行中のコンテナ、Lambda 関数、Amazon Machine Images (AMI) 内に存在する脆弱性を視覚化します。
+Agentless Scanning を使用すると、Datadog Agent をインストールする必要なくクラウドインフラに存在する脆弱性を可視化できます。Agentless Scanning の機能と仕組みについて詳しくは、[Agentless Scanning][12] のドキュメントを参照してください。
 
+## 前提条件
 
-{{% csm-agentless-prereqs %}}
+Agentless Scanning をセットアップする前に、以下の前提条件が満たされていることを確認してください。
 
-## デプロイ方法
+- **Remote Configuration**: [Remote Configuration][3] が必要です。これは Datadog がスキャン対象のクラウドリソースなどの情報を Agentless スキャナーへ送信するために必須となります。
+- **クラウドの権限**: Agentless Scanning インスタンスがホスト、コンテナ、および関数をスキャンするためには特定の権限が必要です。これらの権限はインストールプロセスの一部として自動的に適用されます。<br><br>
+{{< collapse-content title="AWS ホストおよびコンテナのスキャン権限" level="h5" >}}
+<ul>
+<li><code>ec2:DescribeVolumes</code></li>
+<li><code>ec2:CreateTags</code></li>
+<li><code>ec2:CreateSnapshot</code></li>
+<li><code>ec2:DeleteSnapshot</code></li>
+<li><code>ec2:DescribeSnapshots</code></li>
+<li><code>ec2:DescribeSnapshotAttribute</code></li>
+<li><code>ebs:ListSnapshotBlocks</code></li>
+<li><code>ebs:ListChangedBlocks</code></li>
+<li><code>ebs:GetSnapshotBlock</code></li>
+</ul>
+{{< /collapse-content >}}
 
-エージェントレススキャナを環境にデプロイするには、クロスアカウントスキャンまたは同一アカウントスキャンの 2 つの方法が推奨されます。
+{{< collapse-content title="AWS Lambda のスキャン権限" level="h5" >}}
+<ul><li><code>lambda:GetFunction</code></li></ul>
+{{< /collapse-content >}}
 
-**注**: エージェントレススキャンを使用する場合、クラウド環境でスキャナを実行するための追加コストが発生します。12 時間ごとに確実にスキャンを行いながらコストを最適化するために、Datadog では Terraform をデフォルトテンプレートとしてエージェントレススキャンをセットアップすることを推奨しています。
+{{< collapse-content title="Azure ホストのスキャン権限" level="h5" >}}
+<ul>
+<li><code>Microsoft.Compute/virtualMachines/read</code></li>
+<li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
+<li><code>Microsoft.Compute/virtualMachineScaleSets/read</code></li>
+<li><code>Microsoft.Compute/virtualMachineScaleSets/instanceView/read</code></li>
+<li><code>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read</code></li>
+<li><code>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/instanceView/read</code></li>
+<li><code>Microsoft.Compute/disks/read</code></li>
+<li><code>Microsoft.Compute/disks/beginGetAccess/action</code></li>
+<li><code>Microsoft.Compute/disks/endGetAccess/action</code></li>
+</ul>
+{{< /collapse-content >}}
 
-スキャナコストの見積もりについては、[Datadog カスタマーサクセスマネージャー][8]までお問い合わせください。
+## セットアップ
 
-{{< tabs >}}
-{{% tab "クロスアカウントスキャン" %}}
+<div class="alert alert-warning">Agentless スキャナーを実行すると追加のコストが発生します。コストを最適化しつつ、12 時間ごとのスキャンを確実に行うために、Datadog ではデフォルトのテンプレートとして <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Terraform を用いた Agentless Scanning のセットアップ</a>を推奨しています。</div>
 
-クロスアカウントスキャンでは、エージェントレススキャナは単一のクラウドアカウント内の複数のリージョンにデプロイされます。デプロイされたエージェントレススキャナは、実際にコストがかかるクロスリージョンスキャンを実行せずに、複数のアカウントに対する可視性を付与されます。
+Agentless Scanning を有効にするには、以下のいずれかのワークフローを使用してください。
 
-250 ホスト以上の大規模アカウントの場合、これが最も費用対効果の高いオプションです。クロスリージョンスキャンを回避し、エージェントレススキャナの管理の摩擦を軽減するためです。エージェントレススキャナ専用のアカウントを作成するか、既存のアカウントを選択できます。エージェントレススキャナが配置されているアカウントもスキャンできます。
+### クイックスタート
 
-次の図は、中央のクラウドアカウントにデプロイされた場合のエージェントレススキャンの動作を示しています。
-
-
-{{< img src="/security/agentless_scanning/agentless_advanced_2.png" alt="中央のクラウドアカウントにデプロイされているエージェントレススキャナを示すエージェントレススキャンの図" width="90%" >}}
-
-{{% /tab %}}
-{{% tab "同一アカウントスキャン" %}}
-
-同一アカウントスキャンでは、アカウントごとに 1 つのエージェントレススキャナがデプロイされます。この方法は、各エージェントレススキャナがアカウントごとにクロスリージョンスキャンを実行する必要があるため、より多くのコストが発生する可能性がありますが、クロスアカウント権限を付与したくない場合、Datadog はこのオプションを推奨しています。
-
-以下の図は、各クラウドアカウント内でデプロイされた場合のエージェントレススキャンの動作を示しています。
-
-{{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="各クラウドアカウントにデプロイされているエージェントレススキャナを示すエージェントレススキャンの図" width="90%" >}}
-
-[3]: https://app.datadoghq.com/security/csm/vm
-[4]: /ja/agent/remote_config/?tab=configurationyamlfile#setup
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-**注**: 実際にスキャンされたデータはインフラストラクチャー内に残り、収集されたパッケージのリストと、収集されたホスト (ホスト名/EC2 インスタンス) に関連する情報のみが Datadog に報告されます。
-
-## インストール
-
-クラウド環境にエージェントレススキャンをインストールして構成するには、Terraform を使って手動で行う方法と、AWS インテグレーションで CloudFormation テンプレートを使う方法があります。
+新規ユーザー向けに設計された[クイックスタートワークフロー][5]では、Cloud Security Management の効率的なセットアッププロセスが提供され、AWS リソースの即時モニタリングを可能にします。このワークフローでは AWS CloudFormation を使用して構成を自動化します。
 
 ### Terraform
 
-{{< tabs >}}
-{{% tab "エージェントレススキャン (新しい AWS アカウント) " %}}
+[Terraform Datadog Agentless Scanner module][6] を使用すると、Datadog Agentless Scanner をインストールするためのシンプルで再利用可能な設定を行うことができます。詳細については、[Terraform を使用した Agentless Scanning のセットアップ][7]を参照してください。
 
-1. AWS クラウドアカウントを Cloud Security Management に追加するためのセットアップ手順に従ってください。
-1. [Cloud Security Management Setup][1] ページで、**Cloud accounts > AWS** をクリックします。
-1. エージェントレススキャナをデプロイする AWS アカウントの **Edit scanning** ボタンをクリックします。
-1. **Enable Resource Scanning** は既に有効になっているはずです。**Agentless scanning** セクションで監視したいクラウドリソースのスキャンを有効にします。
-1. [Terraform][4] のセットアップの指示に従ってください。
-1. テンプレートが正常に実行されたことを確認したら、**Done** をクリックしてスキャンを開始します。
+### AWS CloudFormation
 
-{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="リソーススキャンのトグルオプションを表示するエージェントレススキャンのセットアップページ" width="90%" >}}
+AWS CloudFormation テンプレートを使用して、CloudFormation スタックを作成します。このテンプレートには、Agentless Scanner をデプロイおよび管理するために必要な IAM 権限が含まれています。詳細については、[AWS CloudFormation を使用した Agentless Scanning のセットアップ][11]を参照してください。
 
+### Azure Resource Manager
 
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: /ja/security/cloud_security_management/setup/csm_enterprise/cloud_accounts/?tab=aws
-[4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+Azure Resource Manager テンプレートを使用して、Agentless Scanner をデプロイします。このテンプレートには、Agentless Scanner をデプロイおよび管理するために必要なロール定義が含まれています。詳細については、[Azure Resource Manager を使用した Agentless Scanning のセットアップ][13]を参照してください。
 
-{{% /tab %}}
+## その他の参考資料
 
-{{% tab "エージェントレススキャン (既存の AWS アカウント) " %}}
+{{< partial name="whats-next/whats-next.html" >}}
 
-1. [Cloud Security Management Setup][1] ページで、**Cloud accounts > AWS** をクリックします。
-1. エージェントレススキャナをデプロイする AWS アカウントの **Edit scanning** ボタンをクリックします。
-1. **Enable Resource Scanning** は既に有効になっているはずです。**Agentless Scanning** セクションで監視したいクラウドリソースのスキャンを有効にします。
-1. [Terraform][4] のセットアップの指示に従ってください。
-1. テンプレートが正常に実行されたことを確認したら、**Done** をクリックしてスキャンを開始します。
-
-{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="リソーススキャンのトグルオプションを表示するエージェントレススキャンのセットアップページ" width="90%" >}}
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
-
-
-{{% /tab %}}
-{{< /tabs >}} </br>
-
-### AWS インテグレーション
-
-{{< tabs >}}
-{{% tab "エージェントレススキャン (新しい AWS アカウント) " %}}
-
-1. [Amazon Web Services][1] インテグレーションをセットアップし、リソース収集に必要な[権限][2]を追加してください。
-
-   新しい AWS アカウントを追加すると、以下の画面が表示されます。
-
-{{< img src="/security/agentless_scanning/agentless_scanning_aws_2.png" alt="1 つの AWS アカウントを選択した状態で、新しい AWS アカウントを追加するためのエージェントレススキャンのセットアップページ" width="90%" >}}
-</br>
-
-1. **Cloud Security Management** で **Yes** をクリックし、**Agentless scanning** セクションで監視したいクラウドリソースのスキャンを有効にします。
-1. リモート構成に構成済みの API キーを選択します。リモート構成が有効になっていない API キーを入力すると、選択時に自動的に有効になります。
-1. **Launch CloudFormation Template** をクリックします。テンプレートにはエージェントレススキャナのデプロイと管理に必要なすべての[権限][3]が含まれており、スキャンを受信するにはテンプレートが正常に実行される必要があります。
-
-[1]: /ja/integrations/amazon_web_services/
-[2]: /ja/integrations/amazon_web_services/?tab=roledelegation#resource-collection
-[3]: /ja/security/cloud_security_management/setup/agentless_scanning/?tab=agentlessscanningnewawsaccount#permissions
-
-{{% /tab %}}
-
-{{% tab "エージェントレススキャン (既存の AWS アカウント) " %}}
-
-1. [Cloud Security Management Setup][1] ページで、**Cloud accounts > AWS** をクリックします。
-1. エージェントレススキャナをデプロイする AWS アカウントの **Edit scanning** ボタンをクリックします。
-1. **Enable Resource Scanning** は既に有効になっているはずです。**Agentless scanning** セクションで監視したいクラウドリソースのスキャンを有効にします。
-1. AWS コンソールに移動し、[このテンプレート][2]を使用して新しい CloudFormation Stack を作成し、それを実行します。
-1. テンプレートが正常に実行されたことを確認したら、**Done** をクリックしてスキャンを開始します。
-
-{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="リソーススキャンのトグルオプションを表示するエージェントレススキャンのセットアップページ" width="90%" >}}
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/cloudformation/main.yaml
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## リソースの除外
-
-AWS ホスト、コンテナ、Lambda 関数 (該当する場合) に、`DatadogAgentlessScanner:false` タグを設定して、スキャンから除外します。このタグをリソースに追加するには、[AWS ドキュメント][3]に従ってください。
-
-## エージェントレススキャンの無効化
-
-AWS アカウントでエージェントレススキャンを無効にするには、各クラウドリソースのスキャンを無効にします。
-1. [Cloud Security Management Setup][10] ページで、**Cloud accounts > AWS** をクリックします。
-1. エージェントレススキャナをデプロイした AWS アカウントの **Edit scanning** ボタンをクリックします。
-1. **Agentless Scanning** セクションで、監視を停止したいクラウドリソースのスキャンを無効にします。
-1. **Done** をクリックします。
-
-### CloudFormation によるアンインストール
-
-AWS コンソールにアクセスし、エージェントレススキャン用に作成した CloudFormation スタックを削除します。
-
-### Terraform でのアンインストール
-
-[Terraform][9] のアンインストールの手順に従ってください。
-
-[1]: /ja/security/vulnerabilities
-[3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
-[4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
+[1]: /ja/security/cloud_security_management/agentless_scanning
+[2]: /ja/integrations/amazon_web_services/
+[3]: /ja/agent/remote_config/?tab=configurationyamlfile#setup
+[4]: https://app.datadoghq.com/security/csm/intro
+[5]: /ja/security/cloud_security_management/setup/agentless_scanning/quick_start
+[6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
+[7]: /ja/security/cloud_security_management/setup/agentless_scanning/terraform
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
+[11]: /ja/security/cloud_security_management/setup/agentless_scanning/cloudformation
+[12]: /ja/security/cloud_security_management/agentless_scanning
+[13]: /ja/security/cloud_security_management/setup/agentless_scanning/azure_resource_manager

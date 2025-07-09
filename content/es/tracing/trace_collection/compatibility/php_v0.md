@@ -14,7 +14,7 @@ title: Requisitos de compatibilidad de PHC (heredado)
 La biblioteca de PHP Datadog Trace es de código abierto - consulta el [repositorio GitHub][1] para obtener más información.
 
 Datadog APM para PHP se basa en dependencias definidas en versiones específicas del sistema operativo host, el tiempo de ejecución de PHP,
-determinadas <txprotected>bibliotecas</txprotected> de PHP y el Datadog Agent o API.
+determinadas bibliotecas de PHP y el Datadog Agent o API.
 Cuando estas versiones dejan de tener soporte técnico de sus encargados de mantenimiento, Datadog APM para PHP limita su soporte técnico a estas también.
 
 #### Niveles de soporte técnico
@@ -84,7 +84,7 @@ Por defecto, Datadog **soporta todos los marcos web de PHP** desde el primer mom
 
 La instrumentación al nivel del marco incluye el rastreo de métodos internos y el etiquetado de marcos específicos.
 
-El rastreo web genérico incluye un tramo (span) `web.request` para rastrear la latencia y los errores que se originan en la llamada, además de tramos para las <txprotected>bibliotecas</txprotected> con soporte técnico - por ejemplo: base de datos y clientes HTTP.
+El rastreo web genérico incluye un tramo (span) `web.request` para rastrear la latencia y los errores que se originan en la llamada, además de tramos para las bibliotecas con soporte técnico - por ejemplo: base de datos y clientes HTTP.
 
 En la siguiente tabla se enumeran algunos de los marcos y versiones que Datadog rastrea con éxito.
 
@@ -126,7 +126,7 @@ El rastreo del CLI SAPI está desactivado por defecto. Para habilitar el rastreo
 | Laravel Artisan | 5.x, 8.x, 9.x, 10.x | Totalmente compatible |
 | Symfony CLI     | 4.x, 5.x, 6.x       | Totalmente compatible |
 
-Para solicitar soporte técnico para <txprotected>bibliotecas</txprotected>CLI adicionales, ponte en contacto con nuestro magnífico [equipo de soporte][3].
+Para solicitar soporte técnico para bibliotecasCLI adicionales, ponte en contacto con nuestro magnífico [equipo de soporte][3].
 
 #### Compatibilidad de almacenes de datos
 
@@ -156,7 +156,7 @@ Para solicitar soporte técnico para almacenes de datos adicionales, ponte en co
 | Guzzle                                                    | 5.x, 6.x, 7.x         | Totalmente compatible |
 
 
-Para solicitar soporte técnico para <txprotected>bibliotecas</txprotected>adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][3].
+Para solicitar soporte técnico para bibliotecasadicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][3].
 
 #### Stacks tecnológicos de llamadas en profundidad en PHP 5
 
@@ -174,7 +174,7 @@ Si la aplicación invoca `pcntl_unshare(CLONE_NEWUSER);` y el rastreador está i
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: https://www.datadoghq.com/support/

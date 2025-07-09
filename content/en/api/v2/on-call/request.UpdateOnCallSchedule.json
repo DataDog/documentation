@@ -1,0 +1,47 @@
+{
+  "data": {
+    "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+    "attributes": {
+      "layers": [
+        {
+          "id": "00000000-0000-0000-0000-000000000001",
+          "effective_date": "2021-11-01T11:11:11+00:00",
+          "end_date": "2021-11-21T11:11:11+00:00",
+          "interval": {
+            "seconds": 3600
+          },
+          "members": [
+            {
+              "user": {
+                "id": "string"
+              }
+            }
+          ],
+          "name": "Layer 1",
+          "restrictions": [
+            {
+              "end_day": "friday",
+              "end_time": "17:00:00",
+              "start_day": "monday",
+              "start_time": "09:00:00"
+            }
+          ],
+          "rotation_start": "2021-11-06T11:11:11+00:00"
+        }
+      ],
+      "name": "Example-On-Call",
+      "time_zone": "America/New_York"
+    },
+    "relationships": {
+      "teams": {
+        "data": [
+          {
+            "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
+            "type": "teams"
+          }
+        ]
+      }
+    },
+    "type": "schedules"
+  }
+}

@@ -33,7 +33,7 @@ draft: false
 git_integration_title: btrfs
 integration_id: btrfs
 integration_title: Btrfs
-integration_version: 2.4.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: btrfs

@@ -32,7 +32,7 @@ categories:
 - orchestration
 - notifications
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_on_public_website: true
@@ -221,7 +221,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "zk" >}}
+{{< get-metrics-from-git "zookeeper" >}}
 
 
 #### 非推奨メトリクス
@@ -236,7 +236,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ZooKeeper チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "zk" >}}
+{{< get-service-checks-from-git "zookeeper" >}}
 
 
 ## トラブルシューティング

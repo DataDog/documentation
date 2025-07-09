@@ -12,10 +12,6 @@ further_reading:
     text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags). 
@@ -64,7 +60,7 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 To install the standalone binary on Windows, run:
 
 ```shell
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -76,15 +72,15 @@ Tags can be added to the pipeline span or to the job span.
 To do this, run the `tag` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tag1>] [--tags <tag2>] ...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the tag `team` to the pipeline span.
+The following example adds `team` and `service` tags to the pipeline span.
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend --tags service:processor
 ```
 
 The following example adds the tag `go.version` to the span for the current job:
@@ -102,15 +98,15 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 To add numerical tags to the pipeline span or the job span, run the `measure` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measure1>] [--measures <measure2>]...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the measure `error_rate` to the pipeline span:
+The following example adds `error_rate` and `size` measures to the pipeline span:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56"
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56" --measures "size:2327"
 ```
 
 The following example adds a measure `binary.size` to the span for the currently running job:
@@ -150,6 +146,12 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci tag ...
     ```
+   
+## Limitations
+
+- The maximum amount of tags that can be added to a pipeline or job is 100.
+- The maximum amount of measures that can be added to a pipeline or job is 100.
+- The maximum length of a tag or measure is 300 characters (key + value).
 
 ## Further reading
 

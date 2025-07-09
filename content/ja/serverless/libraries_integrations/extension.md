@@ -45,7 +45,7 @@ Datadog サイトから遠く離れた地域にデプロイされた Lambda 関�
 
 ## 寄稿
 
-If you find an issue with this package and have a fix, please feel free to open a pull request following the [procedures](https://github.com/DataDog/datadog-agent/blob/main/docs/public/guidelines/contributing.md).
+このパッケージに問題が見つかり、修正方法が分かる場合は、[手順](https://github.com/DataDog/datadog-agent/blob/main/docs/public/guidelines/contributing.md)に従ってプルリクエストを開いてください。
 
 ## テスト
 

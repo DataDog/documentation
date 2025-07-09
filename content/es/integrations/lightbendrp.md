@@ -1,7 +1,7 @@
 ---
 categories:
 - cloud
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de actores y eventos de dispatcher para aplicaciones basadas
   en Akka

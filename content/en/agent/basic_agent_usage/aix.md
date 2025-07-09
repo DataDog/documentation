@@ -9,7 +9,7 @@ further_reading:
   text: "Configure inbound ports"
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
-  text: "Monitor AIX with the Datadog Unix Agent"
+  text: "Monitor AIX with the Datadog UNIX Agent"
 algolia:
   tags: ['uninstall', 'uninstalling']
 ---
@@ -20,11 +20,12 @@ The Datadog UNIX Agent is being developed for specific system architectures, and
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
-**Note:** The Datadog Unix Agent supports PowerPC 8 or greater and the following versions of AIX:
+**Note:** The Datadog UNIX Agent supports PowerPC 8 or greater and the following versions of AIX:
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
+* AIX 7.3 TL3 SP0+
 
 ## Installation
 
@@ -79,7 +80,7 @@ Occasionally a proxy configuration must be specified depending on your network s
 
 ## Integrations
 
-The Unix Agent collects system metrics for:
+The UNIX Agent collects system metrics for:
 
 * cpu
 * filesystem
@@ -98,9 +99,9 @@ Additionally, the following integrations can be enabled to collect further metri
 
 Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
 
-**Note**: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available. Log Management is also not available with the Unix Agent.
+**Note**: Some of the available metrics differ between the integrations for the UNIX Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the UNIX Agent, the Live Process Monitoring and Cloud Network Monitoring capabilities aren't available. Log Management is also not available with the UNIX Agent.
 
-<div class="alert alert-info">The Unix Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
+<div class="alert alert-info">The UNIX Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
 
 ## Running DogStatsD
 

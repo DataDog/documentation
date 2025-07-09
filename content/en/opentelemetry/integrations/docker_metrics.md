@@ -94,10 +94,67 @@ receivers:
 
 {{< /tabs >}}
 
+## Correlate traces with container metrics
+
+To correlate traces with container metrics, both telemetry types must share common resource attributes. These attributes provide the necessary context for correlation.
+
+1. Configure [Unified Service Tagging][9] attributes.
+2. Configure the following attributes on both your traces and metrics:
+
+| Attribute                                | Value                                                          | Description                                                                                                                                                               |
+|------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container.id` (**Required**)            | The Docker container ID.                                       | Uniquely identifies the container. Essential for correlating spans with container metrics. Without this attribute on traces, container metric views are not shown in APM. |
+| `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Used as the display name in Datadog.                                                                                                                                      |
+| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.
+
+### Traces
+
+To populate these resource attributes on **traces**:
+
+- You can use a `resourcedetectionprocessor` in your Collector config:
+   ```yaml
+   processors:
+      resourcedetection:
+         detectors: ["env", "container", "k8s"]
+   service:
+      pipelines:
+         traces:
+            processors: [resourcedetection]
+
+   ```
+
+- You can add a container resource detector in your application code.  
+   For example, using Go:
+   ```go
+   // resource.WithContainer() adds container.id attribute to the trace's resource
+   res, err := resource.New(
+       ctx,
+       resource.WithContainer(),                    
+       resource.WithFromEnv(),
+       semconv.ServiceNameKey.String("calendar"),   
+   )
+   ```
+
+   See the complete example in [opentelemetry-examples][8].
+   
+### Metrics  
+   
+To populate these resource attributes on **metrics**, the `docker_stats` receiver automatically detects and adds these attributes on container metrics it emits.
+
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][2] for information about collected container metrics.
+The Docker Stats receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts for use in the following views:
 
+- [Containers Overview default dashboard][6]
+- [APM Trace view][7] with container metrics
+
+Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
+
+The following table shows the Datadog container metric names that correspond to OpenTelemetry container metric names:
+
+{{< mapping-table resource="dockerstats.csv">}}
+
+See [OpenTelemetry Metrics Mapping][2] for more information.
 
 ## Full example configuration
 
@@ -130,5 +187,11 @@ Value: 0.170933
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
-[2]: /opentelemetry/guide/metrics_mapping/#container-metrics
+[2]: /opentelemetry/guide/metrics_mapping/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
+[4]: /universal_service_monitoring/setup/
+[5]: /opentelemetry/guide/semantic_mapping/
+[6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
+[7]: /tracing/trace_explorer/trace_view/
+[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
+[9]: /opentelemetry/mapping/semantic_mapping#unified-service-tagging

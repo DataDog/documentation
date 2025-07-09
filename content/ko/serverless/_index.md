@@ -34,6 +34,10 @@ title: 서버리스
 
 <div class="alert alert-info"><a href="https://chat.datadoghq.com/">Datadog Slack 커뮤니티</a>의 <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> 채널에서 토론에 참여해 보세요.</div>
 
+{{< learning-center-callout header="활성화 웨비나 세션에 참가힉;" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+서버리스 모니터링을 사용해 팀 작업을 유연하게 만들고, 최소한의 비용으로 수익을 창출하는 애플리케이션을 구축하는 데 집중하는 방법을 알아보세요.
+{{< /learning-center-callout >}}
+
 [Datadog 서버리스 모니터링][1]은 서버리스 컴퓨팅의 실시간 메트릭, 로그, 트레이스는 물론 완전 관리형 API, 대기열, 스트림, 데이터 저장소를 통합하여 서버리스 애플리케이션을 구동하는 모든 관리형 서비스에 대한 완벽한 가시성을 제공합니다.
 
 Datadog에서는 [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), [Google Cloud Run](#google-cloud-run)을 모니터링할 수 있는 솔루션을 제공합니다.
@@ -50,7 +54,7 @@ Datadog Lambda Extension이나 Datadog Forwarder Lambda를 사용해 로그와 �
 
 [디플로이먼트 추적][6]을 사용하면 서버리스 코드, 설정, 디플로이먼트 변경 사항을 함수의 메트릭, 트레이스, 로그와 연결할 수 있어 변경 사항이 애플리케이션 상태와 성능에 미치는 영향을 실시간으로 확인할 수 있습니다.
 
-### AWS Step Functions (공개 베타)
+### AWS 단계 함수
 
 AWS Step Functions는 개발자가 AWS에서 다단계 애플리케이션 워크플로를 생성하고 관리할 수 있게 해주는 서버리스 오케스트레이션 서비스입니다.
 
@@ -80,13 +84,13 @@ Azure 앱 서비스용 Datadog 확장을 사용하여 Azure 웹 앱 추적할 �
 
 Azure 컨테이너 앱은 컨테이너 기반 애플리케이션을 배포하고 확장하기 위한 완전 관리형 서버리스 플랫폼입니다. Datadog은 [Azure 통합][9]을 통해 컨테이너 앱에 대한 모니터링 및 로그 수집을 제공합니다.
 
-또 Datadog에서는 [컨테이너 앱 애플리케이션을 계측][10]하는 솔루션을 베타로 제공합니다. 추적, 커스텀 메트릭, 직접 로그 수집이 가능한 전용 에이전트를 지원합니다.
+또 Datadog에서는 [컨테이너 앱 애플리케이션을 계측][10]하는 솔루션을 평가판으로 제공합니다. 추적, 커스텀 메트릭, 직접 로그 수집이 가능한 전용 에이전트를 지원합니다.
 
 ### Google Cloud Run
 
 Google Cloud Run은 소규모의 단일 목적 함수를 만들 수 있는 경량 이벤트 기반 비동기 컴퓨팅 솔루션입니다. Google 클라우드 플랫폼에서 실행 중인 서버리스 함수를 모니터링하려면 [Google 클라우드 플랫폼 통합][11]을 활성화하세요.
 
-또 Datadog에서는 [Cloud Run 애플리케이션을 계측][12]하는 솔루션을 공용 베타로 제공합니다. 추적, 커스텀 메트릭, 직접 로그 수집이 가능한 전용 에이전트를 지원합니다.
+또 Datadog에서는 [Cloud Run 애플리케이션을 계측][12]하는 솔루션을 평가판으로 제공합니다. 추적, 커스텀 메트릭, 직접 로그 수집이 가능한 전용 에이전트를 지원합니다.
 
 ## 참고 자료
 

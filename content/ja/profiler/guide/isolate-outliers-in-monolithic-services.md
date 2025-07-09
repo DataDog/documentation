@@ -41,7 +41,7 @@ title: モノリシックサービスで外れ値を隔離する
 
 `GET /store_history` が呼び出されるたびに CPU 使用率が上昇する原因を特定するため、スパイクが発生している時点での、このエンドポイントのプロファイリングフレームグラフを調べます。`GET /store_history` で CPU 使用率の上昇が見られる時間範囲を選択し、プロファイリングページのスコープをその時間範囲に設定します。次に、Flame Graph 表示に切り替えて、その時点で CPU を利用しているメソッドを確認します。
 
-{{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph-2.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph-2.png" alt="画像の説明" style="width:100%;" >}}
 
 `GET /store_history` エンドポイントで CPU をより多く使用する理由をより良く理解するには、前の画像でハイライトされたテーブルを参照してください。該当のエンドポイントが、上から 2 番目に表示されています。その行を選択し、フレームグラフのフォーカスを `GET /store_history` エンドポイントによって引き起こされる CPU 使用率に合わせます。
 
@@ -55,7 +55,7 @@ CPU 使用時間が多いメソッドに、急上昇時と通常使用時で違�
 
 このビューには **A** 、**B** と書かれた 2 つのグラフが表示され、それぞれ `GET /store_history` 呼び出し 1 回あたりの CPU 使用率の時間範囲を表します。**A** のタイムセレクターを調整して、呼び出し 1 回あたりの CPU 使用率が低い期間に合わせます。
 
-{{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs-2.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs-2.png" alt="画像の説明" style="width:100%;" >}}
 
 この比較により、通常の CPU 使用率の時 (タイムフレーム **A**) には使用されておらず、急上昇発生時 (タイムフレーム **B**) に CPU 使用率に寄与している各種メソッドが明らかになります。前の画像で示されているとおり、`Product.loadAssets(int)` が急上昇を引き起こしています。
 
@@ -69,12 +69,12 @@ CPU 使用時間が多いメソッドに、急上昇時と通常使用時で違�
 
 APM の `Trace operation` 属性を使えば、選択したエンドポイントのトレースと同じ細かさでフレームグラフの絞り込みとグループ化が可能です。これは、スレッドやメソッドの細かい粒度と、エンドポイント全体の大まかな粒度との間で、適切なバランスとなっています。オペレーションを分離するには、**CPU time by** ドロップダウンから `Trace Operation` を選択します。
 
-{{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation-2.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation-2.png" alt="画像の説明" style="width:100%;" >}}
 
 前の画像では、`ModelTraining` オペレーションが `GET /train` エンドポイントでの主要な用途よりも多くの CPU 時間を使用していることが分かりますので、それが他のどこかで使われているはずです。それがどこで使用されているかを特定するため、オペレーション名をクリックしてください。この例では、`ModelTraining` は `POST /update_model` によっても使用されています。
 
 
-## Isolate your own business logic
+## 独自のビジネスロジックを分離する
 
 エンドポイントとオペレーションの分離は、デフォルトでプロファイルに利用可能ですが、異なるロジックを分離したい場合もあるでしょう。例えば、もしモノリスが特定の顧客に対して敏感な場合、プロファイルにカスタムフィルターを追加することができます。
 
@@ -82,44 +82,44 @@ APM の `Trace operation` 属性を使えば、選択したエンドポイント
 {{< programming-lang lang="java">}}
 
 
-Set a context value for the customer name like so:
+以下のように、顧客名のコンテキスト値を設定します。
 
 ```java
 try (var scope = Profiling.get().newScope()) {
-   scope.setContextValue("customer_name", <the customer name value>);
-   <logic goes here>
+scope.setContextValue("customer_name", <顧客名の値>);
+<ロジックがここに入ります>
 }
 ```
 
-To specify which label keys you want to use for filtering, set the `profiling.context.attributes` configuration with one of the following:
-* Environment variable: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
-* System setting: `-Ddd.profiling.context.attributes=customer_name`
+フィルタリングに使用したいラベルキーを指定するには、`profiling.context.attributes` 構成を以下のいずれかで設定します。
+* 環境変数: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
+* システム設定: `-Ddd.profiling.context.attributes=customer_name`
 
-If you have multiple context keys, use a comma-separated string for the configuration (for example,`-Ddd.profiling.context.attributes=customer_name,customer_group`).
+複数のコンテキストキーがある場合、構成にはカンマ区切りの文字列を使用します (例: `-Ddd.profiling.context.attributes=customer_name,customer_group`)。
 
-Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+その後、サービスの CPU、Exceptions、または Wall Time プロファイルを開き、`CPU time by` ドロップダウンで興味のある `customer_name` の値を選択します。
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go">}}
 
-The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels][1] like so:
+Go プロファイラーは、バージョン v1.60.0 以降でビジネスロジックのためのカスタムアノテーションをサポートしています。アノテーションを追加するには、以下のように[プロファイラーラベル][1]を使用します。
 
-```go
-pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
-  /* customer-specific logic here */
+"```go
+pprof.Do(ctx, pprof.Labels("customer_name", <値>), func(context.Context) {
+/* 顧客固有のロジックがここに入ります */
 })
-```
+```"
 
-To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
+フィルタリングに使用したいラベルキーを指定するには、プロファイラーを起動するときに [WithCustomProfilerLabelKeys][2] オプションを追加します。
 
-```go
+"```go
 profiler.Start(
-  profiler.WithCustomProfilerLabelKeys("customer_name"),
-  /* other options */
+profiler.WithCustomProfilerLabelKeys("customer_name"),
+/* 他のオプション */
 )
-```
+```"
 
-Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+その後、サービスの CPU またはゴルーチンのプロファイルを開き、`CPU time by` ドロップダウンで興味のある `customer_name` の値を選択します。
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys

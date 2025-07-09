@@ -102,6 +102,13 @@
                                     .key {
                                         margin-left: 80px;
                                     }
+                                    &.hasChildData {
+                                      .isNested {
+                                          .key {
+                                              margin-left: 100px;
+                                          }
+                                      }
+                                    }
                                 }
                             }
                         }

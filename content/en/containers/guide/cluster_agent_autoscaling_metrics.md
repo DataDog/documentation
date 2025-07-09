@@ -280,8 +280,6 @@ Once your Cluster Agent has been set up and `DatadogMetric` created, update your
 #### Example HPAs with DatadogMetric
 An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`.
 
-Using `apiVersion: autoscaling/v2`:
-
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -304,28 +302,7 @@ spec:
         value: 9
 ```
 
-Using `apiVersion: autoscaling/v2beta1`:
-
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: datadogmetric@nginx-demo:nginx-requests
-      targetValue: 9
-```
-
-In these manifests:
+In this manifest:
 - The HPA is configured to autoscale the deployment called `nginx`.
 - The maximum number of replicas created is `3`, and the minimum is `1`.
 - The HPA relies on the `DatadogMetric` `nginx-requests` in the `nginx-demo` namespace.
@@ -349,7 +326,7 @@ spec:
 ```
 
 ### Example HPAs without DatadogMetric
-An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric using `apiVersion: autoscaling/v2`:
+An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -373,30 +350,7 @@ spec:
         value: 9
 ```
 
-The following is the same HPA manifest as above using `apiVersion: autoscaling/v2beta1`:
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: nginx.net.request_per_s
-      metricSelector:
-        matchLabels:
-            kube_container_name: nginx
-      targetValue: 9
-```
-
-In these manifests:
+In this manifest:
 
 - The HPA is configured to autoscale the deployment called `nginx`.
 - The maximum number of replicas created is `3`, and the minimum is `1`.
@@ -413,6 +367,13 @@ When you set `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` but 
 The Datadog Cluster Agent automatically creates `DatadogMetric` resources in its own namespace (their name starts with `dcaautogen-`) to accommodate this, allowing a smooth transition to `DatadogMetric`.
 
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource is cleaned up by the Datadog Cluster Agent after a few hours.
+
+Optionally, you can disable this behavior by setting `DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` to `false` like:
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
 
 ## Cluster Agent querying
 The Cluster Agent performs the queries for the `DatadogMetric` objects every 30 seconds. The Cluster Agent also batches the metric queries performed into groups of 35. Therefore, 35 `DatadogMetric` queries are included in a single request to the Datadog metrics API.
@@ -502,8 +463,6 @@ Whereas `AverageValue` looks like:
         type: AverageValue
         averageValue: <METRIC_VALUE>
 ```
-
-For `apiVersion: autoscaling/v2beta1` the respective options are `targetValue` and `targetAverageValue`.
 
 ## Further Reading
 

@@ -91,7 +91,21 @@ receivers:
 
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][2] for information about collected host metrics.
+Host Metrics are collected by the [host metrics receiver][4]. For information about setting up the receiver, see [OpenTelemetry Collector Datadog Exporter][5].
+
+The metrics, mapped to Datadog metrics, are used in the following views:
+- [Infrastructure Host Map][6]
+- [Infrastructure List][7]
+- [Host default dashboards][8]
+- [APM Trace view Host info][9]
+
+**Note**: To correlate trace and host metrics, configure [Universal Service Monitoring attributes][10] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances. 
+
+The following table shows which Datadog host metric names are associated with corresponding OpenTelemetry host metric names, and, if applicable, what math is applied to the OTel host metric to transform it to Datadog units during the mapping.
+
+{{< mapping-table resource="host.csv">}}
+
+See [OpenTelemetry Metrics Mapping][2] for more information.
 
 
 ## Full example configuration
@@ -148,3 +162,12 @@ Value: 1153183744
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /opentelemetry/guide/metrics_mapping/#host-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[5]: /opentelemetry/otel_collector_datadog_exporter/
+[6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
+[7]: https://app.datadoghq.com/infrastructure
+[8]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[9]: /tracing/trace_explorer/trace_view/?tab=hostinfo
+[10]: /universal_service_monitoring/setup/
+
+

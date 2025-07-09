@@ -1,6 +1,6 @@
 ---
-title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your iOS and tvOS application with OpenTelemetry API to send traces to Datadog.'
+title: iOS and tvOS Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your iOS and tvOS application with the OpenTelemetry API to send traces to Datadog.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/ios/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
@@ -201,6 +201,27 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 To be GDPR compliant, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
 
@@ -322,7 +343,7 @@ spanWithLinks.end()
 [3]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [9]: /account_management/api-app-keys/#client-tokens
 [10]: /account_management/api-app-keys/#api-keys
 [11]: /account_management/api-app-keys/#client-tokens

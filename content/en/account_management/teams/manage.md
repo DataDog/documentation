@@ -45,6 +45,7 @@ From the settings dialog, use the menu to customize the following team settings:
 - Page layout
 - Permissions
 - Notifications
+- GitHub connection
 
 ## Team membership
 
@@ -57,6 +58,19 @@ Under the team's settings, specify which users can modify the team membership. T
 - Anyone in the organization
 
 Users with the `user_access_manage` permission can set default rules on who can add or remove members, or edit team details. Set default rules with the **Default Settings** button on the team directory page. Override these policies for an individual team on the team details panel.
+
+## Manage teams through an identity provider
+
+When you set up a managed team, you configure the following properties of the team externally through an identity provider integration:
+ - Team name
+ - Team handle
+ - Team membership (synchronized from the corresponding identity provider group)
+
+To ensure that managed teams stay consistent with their configuration in your identity provider, you must make changes to managed properties in the identity provider, not through the Datadog site or API.
+
+Datadog supports Okta and other SCIM-compliant identity providers for managed teams.
+
+For more information on the capabilities of managed teams and how to set them up, see [SCIM][3].
 
 ## SAML attribute mapping
 
@@ -72,3 +86,4 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
+[3]: /account_management/scim/

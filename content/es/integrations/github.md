@@ -93,9 +93,9 @@ Si has concedido permisos de lectura para problemas y solicitudes pull a tu GitH
 
 ### Logs de auditoría
 
-Los logs de auditoría abarcan todas las actividades y eventos de una organización de GitHub. Tras la instalación de una aplicación, permite que los permisos de **administración de la organización** tengan acceso de lectura. Esto permite que la aplicación comience a recopilar el flujo de auditoría de GitHub como logs en nombre de la organización de GitHub.
+**Requisito**: Se requiere una cuenta de GitHub Enterprise para recopilar logs de auditoría.
 
-**Nota**: Se requiere una cuenta de GitHub Enterprise para recopilar logs de auditoría.
+Los logs de auditoría abarcan todas las actividades y eventos de una organización de GitHub. Tras la instalación de una aplicación, permite que los permisos de **administración de la organización** tengan acceso de lectura. Esto permite que la aplicación comience a recopilar el flujo de auditoría de GitHub como logs en nombre de la organización de GitHub.
 
 Sigue las instrucciones en la [Configuración de la transmisión a Datadog][8] en la documentación de GitHub para reenviar tus logs de auditoría a Datadog. A fin de obtener más información sobre los logs de auditoría, consulta la documentación de GitHub para [Acciones de log de auditoría][9].
 
@@ -104,8 +104,6 @@ Sigue las instrucciones en la [Configuración de la transmisión a Datadog][8] e
 ### Métricas
 
 La integración de GitHub recopila métricas de alertas de escaneo de código y de secretos. Estas métricas proporcionan información general sobre el estado de alerta de la organización al categorizar su estado, repositorio y tipo de secreto. También proporcionan información a largo plazo sobre las tendencias de alerta y su progreso general.
-
-{{< get-metrics-from-git "github_telemetry" >}}
 
 A fin de empezar a recopilar estas métricas, selecciona los permisos correspondientes para el acceso de lectura al instalar la aplicación. Para inhabilitar las métricas de escaneo de código o de secretos, busca la organización correspondiente en la pestaña **Telemetery** (Telemetría) en el cuadro de integración, haz clic en el botón de alternancia de las secciones respectivas y haz clic en **Update Account** (Actualizar cuenta).
 
@@ -134,7 +132,7 @@ Sigue estas instrucciones para configurar webhooks en GitHub y Datadog, lo que p
    | [Solicitudes pull][39] | Se admiten las siguientes acciones: <br><br>- [`assigned`][40]<br>- [`unassigned`][41]<br>- [`labeled`][42]<br>- [`unlabeled`][43]<br>- [`opened`][44]<br>- [`edited`][45]<br>- [`closed`][46]<br>- [`reopened`][47]<br>- [`synchronize`][48]<br>- [`converted_to_draft`][49]<br>- [`locked`][50]<br>- [`unlocked`][51]<br>- [`enqueued`][52]<br>- [`dequeued`][53]<br>- [`milestoned`][54]<br>- [`demilestoned`][55]<br>- [`ready_for_review`][56]<br>- [`review_requested`][57]<br>- [`review_request_removed`][58]<br>- [`auto_merge_enabled`][59]<br>- [`auto_merge_disabled`][60]  |
    | [Pushes][61] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
    | [Repositorios][62] | Se admiten las siguientes acciones: <br><br>- [`archived`][63]<br>- [`created`][64]<br>- [`deleted`][65]<br>- [`edited`][66]<br>- [`privatized`][67]<br>- [`publicized`][68]<br>- [`renamed`][69]<br>- [`transferred`][70]<br>- [`unarchived`][71]                                                                                                                                                                                                                                                                                                                                      |
-   | [Seguridad y análisis][72] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | [Aviso de seguridad][72] | |
    | [Adiciones del equipo][73] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 7. Selecciona **Active** (Activo) para recibir detalles del evento cuando se active el enlace.
@@ -240,7 +238,7 @@ La integración de GitHub no incluye checks de servicio.
 [69]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=renamed#repository
 [70]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=transferred#repository
 [71]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unarchived#repository
-[72]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_and_analysis
+[72]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_advisory
 [73]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#team_add
 [74]: https://app.datadoghq.com/event/explorer/
 [75]: https://docs.datadoghq.com/es/events/explorer/

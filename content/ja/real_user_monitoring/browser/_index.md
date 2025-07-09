@@ -24,11 +24,16 @@ Datadog RUM Browser SDK を使用すると、次のことも可能です。
 - フラストレーションシグナルを用いてユーザーのペインポイントを表面化させる
 - エラーの原因をコード行まで特定し、解決する
 
-{{< img src="real_user_monitoring/browser/rum-browser-overview.png" alt="RUM パフォーマンスサマリーダッシュボード" style="width:100%;">}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM パフォーマンスサマリーダッシュボード" style="width:100%;">}}
+
+ユーザーデータを安全に保つ責任は、Datadog と RUM SDK を活用する開発者の間で共有されます。[責任の共有][1]の詳細はこちらをご覧ください。
 
 ## はじめに
 
-RUM Browser SDK を使い始めるには、[JavaScript RUM アプリケーションの作成][1]の手順に従ってください。
+{{< whatsnext desc="RUM Browser SDK を利用開始するには、アプリケーションの提供方法に応じて RUM アプリケーションを作成する手順に従ってください。" >}}
+{{< nextlink href="/real_user_monitoring/browser/setup/client">}}<u>クライアント側</u>: ブラウザベースの各 Web アプリケーションにインスツルメンテーションを行い、その後アプリケーションをデプロイして、追跡したい初期化パラメーターを設定します。また、RUM が収集するデータやコンテキストをより細かく管理するために、高度な構成オプションも利用できます。{{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/browser/setup/server">}}<u>サーバー側 (自動インスツルメンテーション)</u>: Web サーバーまたはプロキシを介して配信されるウェブアプリケーションの HTML レスポンス内に、RUM SDK の JavaScript スクリプトレットを挿入します。{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ここから、特定のニーズに応じて RUM Browser SDK が収集する[データとコンテキスト][2]を変更することができます。[高度な構成][3]でデフォルト設定をオーバーライドする方法をご覧ください。
 
@@ -36,6 +41,6 @@ RUM Browser SDK を使い始めるには、[JavaScript RUM アプリケーショ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/setup/#setup
+[1]: /ja/data_security/real_user_monitoring/#shared-responsibility
 [2]: /ja/real_user_monitoring/browser/data_collected/
 [3]: /ja/real_user_monitoring/browser/advanced_configuration/

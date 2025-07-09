@@ -11,11 +11,12 @@ further_reading:
 algolia:
   tags: ["event correlation", "event grouping", "correlation pattern"]
 ---
+
 ## Overview
 
-Event Correlation groups events based on their relationships or on user-defined configurations to reduce the number of notifications and issues identified from the environment. Use correlation and cases to: 
-* Reduce alert fatigue 
-* Reduce the number of tickets and notifications you receive 
+Event Correlation groups events based on their relationships or on user-defined configurations to reduce the number of notifications and issues identified from the environment. Use correlation and cases to:
+* Reduce alert fatigue
+* Reduce the number of tickets and notifications you receive
 * Have all affected teams to be aware of a single issue instead of working in silos
 
 {{< whatsnext desc="Get Started:">}}

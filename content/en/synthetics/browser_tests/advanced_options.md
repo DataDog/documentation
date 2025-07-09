@@ -47,11 +47,11 @@ To use a specific identifier (for example, to click on the `nth` element in a dr
 
 {{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
-5. Once you have defined an element, click **Test** to highlight the element in the recording to the right.
+5. Once you have defined an element, click **Highlight** to highlight the element in the recording to the right.
 
 By default, the **If user specified locator fails, fail test** checkbox is selected. This means that if the defined locator fails, the test is considered a failure.
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Test Highlighted Element" video=true >}}
+{{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="Test Highlighted Element" video=true >}}
 
 You can decide to fall back on the regular browser test algorithm by clearing the **If user specified locator fails, fail test** box.
 
@@ -76,7 +76,14 @@ In some cases, such as in the event of a pop-up, you may want to make some steps
 
 Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
 
-{{< img src="synthetics/browser_tests/advanced_options/success_exit.png" alt="Exit on success" style="width:50%">}}
+{{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="Exit on success" style="width:50%">}}
+
+## Always run this step
+
+Configure this option to run this step even if the previous steps have failed. This can be useful for clean-up tasks when you want subsequent steps to proceed.
+
+{{< img src="synthetics/browser_tests/advanced_options/always_run_step.png" alt="Always run step even if previous steps have failed" style="width:50%">}}
+
 
 ## Prevent screenshot capture
 

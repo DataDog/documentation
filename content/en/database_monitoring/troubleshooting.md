@@ -12,6 +12,7 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 * [Troubleshooting Oracle Setup][8]
 * [Troubleshooting Postgres Setup][3]
 * [Troubleshooting SQL Server Setup][4]
+* [Troubleshooting MongoDB Setup][9]
 
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
@@ -33,21 +34,21 @@ If you think that your setup is correct, but you're not seeing data in your DBM 
 1. Test TCP connectivity on DBM collection endpoints:
 
 ```
-telnet dbm-metrics-intake.datadoghq.com 443
-telnet dbquery-intake.datadoghq.com 443
+telnet dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}} 443
+telnet dbquery-intake.{{< region-param key="dd_site" code="true" >}} 443
 ```
 
-2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
-These commands should fail with HTTP code `403: Forbidden`. 
+2. Test posting an empty payload with an invalid API key on both DBM endpoints.
+These commands should fail with HTTP code `403: Forbidden`.
 
 ```
-curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \
 -d "[{}]"
 
-curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbquery-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \
@@ -70,3 +71,5 @@ If you are still experiencing problems, contact [Datadog Support][5] for help.
 [5]: /help/
 [7]: /agent/configuration/proxy/?tab=linux
 [8]: /database_monitoring/setup_oracle/troubleshooting/
+[9]: /database_monitoring/setup_mongodb/troubleshooting/
+

@@ -48,7 +48,7 @@ Google Cloud Tasks のログは Google Cloud Logging で収集され、Cloud Pub
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_tasks" >}}
+{{< get-metrics-from-git "google-cloud-tasks" >}}
 
 
 ### イベント

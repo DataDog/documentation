@@ -26,9 +26,9 @@ Datadog 에이전트 및 OpenTelemetry 컬렉터 Datadog 내보내기는 OpenTel
 
 이러한 OTLP 메트릭 유형은 Datadog 메트릭 유형에 매핑됩니다:
 
-- 개수
-- 게이지
-- 배포
+- 개수(COUNT)
+- GAUGE
+- DISTRIBUTION
 
 단일 OTLP 메트릭은 각 의미를 나타내는 접미사를 동반한 여러 Datadog 메트릭에 매핑될 수 있습니다. 
 
@@ -46,7 +46,7 @@ Datadog 에이전트 및 OpenTelemetry 컬렉터 Datadog 내보내기는 OpenTel
 
 OTLP Sum은 시간 창에서 보고된 측정의 합계를 나타냅니다. 예를 들어, Sum을 사용하여 데이터베이스에 대한 총 연결 수 또는 엔드포인트에 대한 총 요청 수를 추적할 수 있습니다. Sum에는 매핑에 영향을 미치는 두 가지 기능이 있습니다:
 
-- *애그리게이션 일시성*, 누적 또는 델타일 수 있습니다. 델타 메트릭은 시간 창에서 겹치지 않는 반면, 누적 메트릭은 고정된 시작 시점의 시간 창을 나타냅니다.
+- *집계 일시성*, 누적 또는 델타일 수 있습니다. 델타 메트릭은 시간 창에서 겹치지 않는 반면, 누적 메트릭은 고정된 시작 시점의 시간 창을 나타냅니다.
 - *단조성*. 단조 합계는 감소하지 않으며 기본 개수에 추가만 지원합니다.
 
 기본 매핑은 다음과 같습니다:
@@ -70,10 +70,10 @@ OTLP 히스토그램은 일련의 버킷 수와 함께 모집단 합계 또는 �
 - *집계 일시성*, 누적 또는 델타일 수 있습니다. 델타 메트릭은 시간 창에서 겹치지 않는 반면, 누적 메트릭은 고정된 시작 시점의 시간 창을 나타냅니다.
 
 기본 매핑은 다음과 같습니다:
-1. 델타 히스토그램은 Datadog 분포로 보고됩니다. [분포에 대해 자세히 알아보기][1]를 통해 사용 가능한 집계에 대해 더 알아보세요.
-2. 누적 히스토그램의 경우, 연속 포인트 사이의 델타가 계산되어 분포로 Datadog에 보고됩니다. 개별 집계에서 [`cumsum` 산술 함수][2]를 사용하여 OTLP 페이로드의 값을 복구할 수 있습니다.
+1. 델타 히스토그램은 Datadog 분포로 보고됩니다. [분포에 대해 자세히 알아보기][1]에서 사용 가능한 집계에 대해 더 알아보세요. 카운트가 0인 히스토그램은 삭제됩니다.
+2. 누적 히스토그램의 경우, 연속 포인트 사이의 델타가 계산되어 분포로 Datadog에 보고됩니다. 카운트가 0인 델타는 보고되지 않습니다. 개별 집계에서 [`cumsum` 산술 함수][2]를 사용하여 OTLP 페이로드의 값을 복구할 수 있습니다.
 
-**참고**: OTLP의 히스토그램 메트릭은 분포 메트릭에 매핑됩니다. OTLP가 이 데이터를 전송하는 방식 때문에 최대, 최소 및 백분위수 집계는 정확한 계산이 아닌 근사치입니다.
+**참고**: OTLP의 히스토그램 메트릭은 분포 메트릭에 기본으로 매핑됩니다. OTLP가 이 데이터를 전송하는 방식 때문에 최대, 최소(기존 OTLP 데이터에서 사용 불가한 경우) 및 백분위수 집계는 정확한 계산값이 아닌 근사치입니다.
 
 Datadog 에이전트 및 OpenTelemetry 컬렉터 Datadog 내보내기를 사용하면 `histogram` 하위 섹션에서 히스토그램 내보내기를 변경할 수 있습니다.
 - `mode`가 `counters`로 설정된 경,우 다음 메트릭이 생성됩니다:
@@ -132,28 +132,6 @@ Datadog 에이전트 및 OpenTelemetry 컬렉터 atadog 내보내기는 데이�
 
 `resource_attributes_as_tags` 플래그를 사용하여 모든 리소스 속성을 태그로 추가할 수 있습니다.
 
-### 호스트 이름 해결
-
-OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니다. OTLP 페이로드에 알려진 호스트 이름 속성이 있는 경우, Datadog은 이러한 규칙을 따르고 해당 값을 호스트 이름으로 사용하려고 시도합니다. 시맨틱 규칙은 다음 순서로 고려됩니다:
-
-1. 존재하는 이중 태깅을 방지하기 위한 `host` 속성입니다.
-1. `datadog.host.name`, Datadog 관련 호스트 이름 규칙
-1. `cloud.provider` 시맨틱 규칙을 기반으로 하는 클라우드 공급자 관련 규칙
-1. `k8s.node.name` 및 `k8s.cluster.name` 시맨틱 규칙의 쿠버네티스(Kubernetes) 관련 규칙
-1. `host.id`, 고유한 호스트 ID
-1. `host.name`, 시스템 호스트이름 
-
-다음 호스트 이름은 유효하지 않은 것으로 간주되어 폐기됩니다:
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
-
-유효한 호스트 이름이 없는 경우, Datadog은 페이로드에 시스템 수준 호스트 이름을 할당합니다.
-원격 호스트에서 데이터를 보내는 경우, 정확한 호스트 이름 확인을 하도록 ['리소스 감지' 프로세서][1]를 파이프라인에추가하세요. 
-
 ### 예시
 
 {{< tabs >}}
@@ -161,19 +139,19 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 
 기본적으로 누적 **단조** 합계 유형의 메트릭을 내보내는 단일 애플리케이션에서 OpenTelemetry Counter 계측을 사용한다고 가정합니다. 다음 표에는 Datadog 동작이 요약되어 있습니다:
 
-| 컬렉션 기간 | 개수 값    | OTLP 합계 값 | Datadog에 보고된 값 | Datadog 인앱 유형 | 참고                                          |
+| 수집 기간 | 카운터 값    | OTLP 합계 값 | Datadog에 보고된 값 | Datadog 인앱 유형 | 참고                                          |
 |-------------------|-------------------|----------------|---------------------------| ------------------- |------------------------------------------------|
-| #1                | [1,1,1,2,2,2,3,3] | 15             | 없음                      |  개수              | 첫 번째 컬렉션 값은 보고되지 않습니다. |
-| #2                | [3,4,1,2]         | 25             | 10                        |  개수(COUNT)              | 값의 차이가 보고됩니다.     |
-| #3                | []                | 25             | 0                         |  개수(COUNT)              | 이 기간 동안 새로운 값이 보고되지 않았습니다.    |
+| #1                | [1,1,1,2,2,2,3,3] | 15             | 없음                      |  개수(COUNT)              | 첫 수집 기간 값은 보고되지 않습니다. |
+| #2                | [3,4,1,2]         | 25             | 10                        |  개수(COUNT)              | 값 간의 차이값이 보고됩니다.     |
+| #3                | []                | 25             | 0                         |  개수(COUNT)              | 해당 기간 동안 새로운 값은 보고되지 않았습니다.    |
 
 기본적으로 누적 합계 유형의 메트릭을 내보내는 단일 애플리케이션에서 OpenTelemetry UpDownCounter 계측을 사용하고 있다고 가정합니다. 다음 표에는 Datadog 동작이 요약되어 있습니다:
 
-| 컬렉션 기간 | UpDownCounter 값 | OTLP 합계 값 | Datadog에 보고된 값 | Datadog 인앱 유형 |
+| 수집 기간 | UpDownCounter 값 | OTLP 합계 값 | Datadog에 보고된 값 | Datadog 인앱 유형 |
 |-------------------|----------------------|----------------|---------------------------| ------------------- |
-| #1                | [1,1,1,2,2,2,3,3]    | 15             | 15                        | 게이지(GAUGE)               |
-| #2                | [3,-4,1,2]           | 17             | 17                        | 게이지(GAUGE)               |
-| #3                | [-1]                 | 16             | 16                        | 게이지(GAUGE)               |
+| #1                | [1,1,1,2,2,2,3,3]    | 15             | 15                        | GAUGE               |
+| #2                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
+| #3                | [-1]                 | 16             | 16                        | GAUGE               |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -181,11 +159,11 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 단일 애플리케이션에서 OpenTelemetry 게이지 계측, `temperature`을 사용하고 있다고 가정합니다.
 다음 표에는 Datadog 동작이 요약되어 있습니다:
 
-| 컬렉션 기간 | 게이지 계측 | OTLP 게이지 값 | Datadog에 보고된 값 | Datadog 인앱 유형 |
+| 수집 기간 | 게이지 계측 | OTLP 게이지 값 | Datadog에 보고된 값 | Datadog 인앱 유형 |
 |-------------------|------------------|------------------|---------------------------| ------------------- |
-| #1                | 71.5             | 71.5             | 71.5                      | 게이지(GAUGE)               |
-| #2                | 72               | 72               | 72                        | 게이지(GAUGE)               |
-| #3                | 70               | 70               | 70                        | 게이지               |
+| #1                | 71.5             | 71.5             | 71.5                      | GAUGE               |
+| #2                | 72               | 72               | 72                        | GAUGE               |
+| #3                | 70               | 70               | 70                        | GAUGE               |
 
 {{% /tab %}}
 {{% tab "Histogram" %}}
@@ -194,10 +172,10 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 
 | 메트릭 이름                                | 값  | Datadog 인앱 유형 |
 | ------------------------------------------ | ------ | ------------------- |
-| `avg:request.response_time.distribution`   | `1.73` | 게이지(GAUGE)               |
+| `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | 개수(COUNT)               |
-| `max:request.response_time.distribution`   | `3`    | 게이지(GAUGE)               |
-| `min:request.response_time.distribution`   | `1`    | 게이지(GAUGE)               |
+| `max:request.response_time.distribution`   | `3`    | GAUGE               |
+| `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | 개수(COUNT)               |
 
 추가 집계를 설정하는 방법을 이해하려면 [분포에 대해 자세히 알아보세요][1].
@@ -208,10 +186,10 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | n/a                                 | 개수(COUNT)               |
 | `request.response_time.distribution.sum`    | `15`   | n/a                                 | 개수(COUNT)               |
-| `request.response_time.distribution.max`    | `3`    | n/a                                 | 게이지               |
-| `request.response_time.distribution.min `   | `1`    | n/a                                 | 게이지               |
-| `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | 게이지(GAUGE)               |
-| `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | 게이지(GAUGE)               |
+| `request.response_time.distribution.max`    | `3`    | n/a                                 | GAUGE               |
+| `request.response_time.distribution.min `   | `1`    | n/a                                 | GAUGE               |
+| `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
+| `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
 [1]: /ko/metrics/distributions
 {{% /tab %}}
@@ -223,9 +201,9 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 | --------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`    | `8`    | n/a                                 | 개수(COUNT)               |
 | `request.response_time.distribution.sum`      | `15`   | n/a                                 | 개수(COUNT)               |
-| `request.response_time.distribution.quantile` | `1`    | `quantile:0`                        | 게이지               |
-| `request.response_time.distribution.quantile` | `2`    | `quantile:0.5`                      | 게이지(GAUGE)               |
-| `request.response_time.distribution.quantile` | `3`    | `quantile:1.0`                      | 게이지(GAUGE)               |
+| `request.response_time.distribution.quantile` | `1`    | `quantile:0`                        | GAUGE               |
+| `request.response_time.distribution.quantile` | `2`    | `quantile:0.5`                      | GAUGE               |
+| `request.response_time.distribution.quantile` | `3`    | `quantile:1.0`                      | GAUGE               |
 
 
 {{% /tab %}}
@@ -236,6 +214,6 @@ OpenTelemetry는 호스트 이름과 관련된 시맨틱 규칙을 정의합니�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /ko/opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /ko/opentelemetry/guide/otlp_delta_temporality/

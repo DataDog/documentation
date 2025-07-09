@@ -48,7 +48,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/datadog-agent/datadog.yaml`
 
-Configuration files for [Integrations][2]:
+[インテグレーション][2]用コンフィギュレーションファイルの場所
 
 * `/etc/datadog-agent/conf.d/`
 

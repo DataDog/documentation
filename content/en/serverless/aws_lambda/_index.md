@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
   tag: "Blog"
   text: "Understand serverless function performance with Cold Start Tracing"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
@@ -83,7 +86,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< whatsnext desc=" ">}}
     {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Enable Datadog's Continuous Profiler to find the exact line of code in your Lambda function that is causing bottlenecks.{{< /nextlink >}}
-    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u>: Use Application Security Management (ASM) to manage threats to your functions.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u>: Use App and API Protection (AAP) to manage threats to your functions.{{< /nextlink >}}
     {{< nextlink href="/serverless/deployment_tracking" >}}<u>Deployment Tracking</u>: Track deployments to see when a new version of code or a configuration change causes a regression.{{< /nextlink >}}
 {{< /whatsnext >}}
 

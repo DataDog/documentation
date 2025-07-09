@@ -7,14 +7,10 @@ further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
     text: "Learn how to monitor your CI pipelines"
-  - link: "/continuous_integration/intelligent_test_runner"
+  - link: "/tests/test_impact_analysis"
     tag: "Documentation"
-    text: "Learn about the Intelligent Test Runner"
+    text: "Learn about Test Impact Analyzer"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -42,15 +38,19 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 [User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters` in CI Visibility. However, this information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
 
-### Limitations on running pipelines
+## Limitations on running pipelines
 
-#### Delivery of webhook events is not guaranteed by CI providers
+### Delivery of webhook events is not guaranteed by CI providers
 
 Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
-#### Maximum duration for a pipeline execution
+### Maximum duration for a pipeline execution
 
 A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
+
+## Limitations on finished jobs from pipelines
+
+Job data has a three-day limit to be processed after completion. If a pipeline includes jobs that finish more than three days before the pipeline is received, those jobs are not processed and do not appear in CI Visibility.
 
 ## Further reading
 
@@ -64,8 +64,8 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 [6]: /tracing/troubleshooting/tracer_debug_logs
 [7]: /continuous_integration/tests/containers/
 [8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /continuous_integration/intelligent_test_runner/
+[9]: https://app.datadoghq.com/source-code/repositories
+[10]: /tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event

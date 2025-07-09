@@ -14,6 +14,8 @@ assets:
       check: jboss.jdbc_connections.count
       metadata_path: metadata.csv
       prefix: jboss.
+    process_signatures:
+    - java jboss-modules.jar
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10060
@@ -25,7 +27,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -33,7 +35,7 @@ draft: false
 git_integration_title: jboss_wildfly
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
-integration_version: 2.2.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: jboss_wildfly
@@ -154,7 +156,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "jboss_wildfly" >}}
+{{< get-metrics-from-git "jboss-wildfly" >}}
 
 
 ### イベント
@@ -162,7 +164,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "jboss_wildfly" >}}
+{{< get-service-checks-from-git "jboss-wildfly" >}}
 
 
 ### JMXFetch によるメトリクス収集

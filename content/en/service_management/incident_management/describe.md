@@ -20,16 +20,12 @@ No matter where you [declare an incident][1], it’s important to describe it as
 
 When you declare an incident, an incident modal comes up. This modal has several core elements:
 
-{{< img src="/service_management/incidents/describe/declare_incident_make_private.png" alt="Incident Declaration Modal" style="width:80%;">}}
-
 | Incident elements  | Description |
 | ------------------ | ----------- |
 | Title              | (Required) Give your incident a descriptive title. |
 | Severity Level     | (Required) Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN. <br> **Note**: You can customize the description of each severity level to fit the requirements of your organization.|
 | Incident Commander | (Required) This person is assigned as the leader of the incident investigation. |
 | Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][2]. Members of the assigned team are automatically invited to the Slack channels. |
-| Notifications      | Specify a user, Slack channel, or external email to send notifications of this incident to.  |
-| Notes & Links      | You can customize the description of each severity level to fit the requirements of your organization. Include links to graphs, monitors, or security signals for additional awareness. |
 
 ## Incident details
 
@@ -100,7 +96,7 @@ Configure incident notifications to share incident updates with all stakeholders
 
 [1]: /service_management/incident_management/declare
 [2]: /account_management/teams/
-[3]: /service_management/incident_management/incident_settings/#responder-types
+[3]: /service_management/incident_management/incident_settings/responder-types
 [4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: /service_management/incident_management/notification

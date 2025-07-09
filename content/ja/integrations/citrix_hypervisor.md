@@ -17,8 +17,8 @@ assets:
     source_type_id: 10198
     source_type_name: Citrix Hypervisor
   monitors:
-    Host CPU high: assets/monitors/host_cpu_high.json
-    VM CPU high: assets/monitors/vm_cpu_high.json
+    CPU load is high: assets/monitors/host_cpu_high.json
+    VM's CPU load is high: assets/monitors/vm_cpu_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,7 +27,7 @@ author:
 categories:
 - cloud
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: citrix_hypervisor
 integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
-integration_version: 3.2.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: citrix_hypervisor
@@ -79,7 +79,7 @@ tile:
 ### インストール
 
 Citrix Hypervisor チェックは、[Datadog Agent][3] のパッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+サーバーに追加でインストールする必要はありません。 
 Citrix Hypervisor を監視する推奨方法は、各ハイパーバイザーに 1 つの Datadog Agent をインストールすることです。
 
 #### Datadog ユーザー
@@ -122,7 +122,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "citrix_hypervisor" >}}
+{{< get-metrics-from-git "citrix-hypervisor" >}}
 
 
 ### イベント
@@ -130,7 +130,7 @@ _Agent バージョン 6.0 以降で利用可能_
 Citrix Hypervisor インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "citrix_hypervisor" >}}
+{{< get-service-checks-from-git "citrix-hypervisor" >}}
 
 
 ## トラブルシューティング

@@ -86,7 +86,7 @@ tile:
     image_url: images/thumbnail_mainstorconcept_ziris.PNG
     media_type: vídeo
     vimeo_id: 630489680
-  - caption: Mapa de <txprotected>servicios</txprotected> con tramos (spans) creado
+  - caption: Mapa de servicios con tramos (spans) creado
       por z/IRIS
     image_url: images/datadog-service-map-with-spans-created-by-ziris.png
     media_type: imagen
@@ -102,7 +102,7 @@ tile:
   - caption: z/IRIS se integra con Datadog
     image_url: images/ziris-otel-integration-with-datadog.png
     media_type: imagen
-  - caption: Página de <txprotected>servicios</txprotected> de CICS
+  - caption: Página de servicios de CICS
     image_url: images/datadog-annotated-cics-service-page.png
     media_type: imagen
   overview: README.md#Overview
@@ -117,7 +117,7 @@ tile:
 
 Impulsa sus prácticas de observabilidad empresarial con trazas (traces) y métricas adicionales desde tus aplicaciones de mainframe de backend y aprovecha las siguientes ventajas con [z/IRIS][1]:
 
-* Visualiza las relaciones entre <txprotected>servicios</txprotected> y aplicaciones alojadas en la nube o servidores y mainframe.
+* Visualiza las relaciones entre servicios y aplicaciones alojadas en la nube o servidores y mainframe.
 * Descubre cómo contribuyen las aplicaciones de mainframe a la experiencia del usuario final.
 * Reduce el tiempo medio de restauración (MTTR) aprovechando [Datadog Watchdog][23] para detectar automáticamente anomalías en aplicaciones z/OS que afectan a los servicios de negocio digital.
 * Mejora drásticamente la comunicación entre los equipos de aplicaciones y los administradores de plataformas mainframe mediante el uso de dashboards e interfaces compartibles para facilitar el análisis de incidencias entre plataformas.
@@ -127,7 +127,7 @@ z/IRIS envía telemetría (trazas (traces) y métricas) desde transacciones y ap
 
  Una vez activado:
 
- * El Datadog [Mapa de <txprotected>servicios</txprotected>][24] muestra la integración con <txprotected>servicios</txprotected> z/OS como CICS, MQ y Db2.
+ * El Datadog [Mapa de servicios][24] muestra la integración con servicios z/OS como CICS, MQ y Db2.
  * La tasa de llamadas, la tasa de errores y la latencia son indicadores de rendimiento habilitados para servicios de mainframe.
  * Los gráficos de llama y las listas de tramos (spans) visualizan el flujo de solicitudes hacia las aplicaciones mainframe.
  * Las páginas de trazas contienen mensajes de error de los sistemas z/OS cuando procede.
@@ -152,9 +152,9 @@ Para obtener información más detallada sobre las posibilidades de integración
 
 ### Rastreo distribuido
 
-Un tramo (span) representa una unidad de trabajo o proceso. Los tramos (spans) son los bloques de creación para las trazas (traces) distribuidas que representan cuando se activa una solicitud y cómo las solicitudes fluyeron a través de aplicaciones y <txprotected>servicios</txprotected>.
+Un tramo (span) representa una unidad de trabajo o proceso. Los tramos (spans) son los bloques de creación para las trazas (traces) distribuidas que representan cuando se activa una solicitud y cómo las solicitudes fluyeron a través de aplicaciones y servicios.
 
-z/IRIS amplía trazas (traces) en Datadog con tramos (spans) que representan procesos y transacciones de aplicaciones de mainframe IBM Z. La ampliación de trazas (traces) proporciona a los usuarios nuevos conocimientos sobre la manera en que las aplicaciones de la nube y del servidor consumen <txprotected>servicios</txprotected> en mainframe. Los indicadores de rendimiento, como la tasa de errores, la tasa de llamadas y la latencia de las solicitudes, para aplicaciones basadas en mainframe están habilitados para que pueda identificar el estado de la integración del mainframe.
+z/IRIS amplía trazas (traces) en Datadog con tramos (spans) que representan procesos y transacciones de aplicaciones de mainframe IBM Z. La ampliación de trazas (traces) proporciona a los usuarios nuevos conocimientos sobre la manera en que las aplicaciones de la nube y del servidor consumen servicios en mainframe. Los indicadores de rendimiento, como la tasa de errores, la tasa de llamadas y la latencia de las solicitudes, para aplicaciones basadas en mainframe están habilitados para que pueda identificar el estado de la integración del mainframe.
 
 #### Tramos (spans)
 
@@ -233,7 +233,7 @@ A continuación se muestra un lista completo de todas las etiquetas (tags) cread
 | zos.cics.connection.type                          | Tipo de conexión CICS                          |
 | zos.cics.ipconn_name                              | Nombre conexión IP de CICS                              |
 | zos.cics.net.peer.name                            | Nombre del par de red CICS                            |
-| zos.cics.nodejs_application_name                  | Nombre de la aplicación CICS NodeJS                  |
+| zos.cics.nodejs_application_name                  | Nombre de la aplicación CICS Node.js                  |
 | zos.cics.pipeline_name                            | Nombre del canal CICS                            |
 | zos.cics.region_name                              | Nombre de la región CICS                              |
 | zos.cics.session.id                               | ID de sesión CICS                               |
