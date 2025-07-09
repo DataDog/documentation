@@ -30,6 +30,7 @@ IgnoreDirs:
   - es
   - security/default_rules
 IgnoreURLs:
+  - "/favicon.ico"
   - "/resources/*"
   - "/?api/(v1|v2)/*"
   - play.google.com
