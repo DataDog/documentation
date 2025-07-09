@@ -33,8 +33,9 @@ You can set these attributes in your application's environment variables, SDK, o
 
 Set the `OTEL_RESOURCE_ATTRIBUTES` environment variable with your service's information:
 
-```bash
-export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment.name=production,service.version=1.2.3"
+```sh
+export OTEL_SERVICE_NAME="my-service"
+export OTEL_RESOURCE_ATTRIBUTES="deployment.environment.name=production,service.version=1.2.3"
 ```
 
 {{% /tab %}}
@@ -59,17 +60,22 @@ tracer_provider = TracerProvider(resource=resource)
 {{% /tab %}}
 {{% tab "Collector" %}}
 
-Use the transform processor in your Collector configuration to set the resource attributes on your telemetry data:
+Use the `resource` processor in your Collector configuration to set the resource attributes on your telemetry data:
 
 ```yaml
 processors:
-  transform:
-    trace_statements:
-      - context: resource
-        statements:
-          - set(attributes["service.name"], "my-service")
-          - set(attributes["deployment.environment.name"], "production")
-          - set(attributes["service.version"], "1.2.3")
+  resource:
+    attributes:
+      - key: service.name
+        value: "my-service"
+        action: upsert
+      - key: deployment.environment.name
+        value: "production"
+        action: upsert
+      - key: service.version
+        value: "1.2.3"
+        action: upsert
+...
 ```
 
 {{% /tab %}}
