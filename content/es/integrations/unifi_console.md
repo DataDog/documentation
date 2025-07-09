@@ -91,7 +91,7 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "unifi_console" >}}
+{{< get-metrics-from-git "unifi-console" >}}
 
 
 ### Eventos
@@ -99,7 +99,7 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
 La integración de la consola Unifi no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "unifi_console" >}}
+{{< get-service-checks-from-git "unifi-console" >}}
 
 
 

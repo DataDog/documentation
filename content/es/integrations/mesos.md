@@ -91,7 +91,7 @@ En Datadog, busca `mesos.cluster` en el explorador de métricas.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mesos_master" >}}
+{{< get-metrics-from-git "mesos-master" >}}
 
 
 ### Eventos
@@ -99,7 +99,7 @@ En Datadog, busca `mesos.cluster` en el explorador de métricas.
 El check de Mesos-master no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "mesos_master" >}}
+{{< get-service-checks-from-git "mesos-master" >}}
 
 
 ## Solucionar problemas
@@ -262,7 +262,7 @@ Si no estás utilizando DC/OS, entonces el Datadog-Agent está en el lista de ap
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mesos_slave" >}}
+{{< get-metrics-from-git "mesos" >}}
 
 
 ### Eventos
@@ -270,7 +270,7 @@ Si no estás utilizando DC/OS, entonces el Datadog-Agent está en el lista de ap
 El check de Mesos-slave no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "mesos_slave" >}}
+{{< get-service-checks-from-git "mesos" >}}
 
 
 ## Solucionar problemas

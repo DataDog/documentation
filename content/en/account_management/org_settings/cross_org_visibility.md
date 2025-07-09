@@ -48,11 +48,9 @@ All types of metrics are supported, including [custom metrics][3], [trace metric
 
 To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections.
 
-Listing connections requires the _Org Connections Read_ permission. Additionally, you can use [granular access control][12] to restrict access to individual connections according to team, role, or user.
-
 ### Create a connection
 
-Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization. Creating connections requires the _Org Connections Write_ permission.
+Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
@@ -61,7 +59,7 @@ Creating a cross-organization connection allows you to query metrics from the so
 
 ### Delete a connection
 
-Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics. Deleting connections requires the _Org Connections Write_ permission.
+Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the connection you wish to delete. A trash can (**Delete**) icon appears on the right.
@@ -146,6 +144,31 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 - This parameter is optional. If omitted, the query runs on the organization on which the widget is defined.
 - Use the organization identifier, which you can recover from the [Organizations endpoint][9], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.
+
+## Permissions
+By default, only users attached to roles with the _Org Connection Read_ permission can see the list of cross-organization connections. Users attached to roles with the _Org Connection Write_ permission can create and delete cross-organization connections. 
+
+### Granular access controls
+Use [granular access controls][12] to limit the teams, roles, or users that can edit or query a cross-organization connection:
+
+1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
+1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
+1. Click on the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more teams, roles, or users that may edit the cross-organization connection.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**.
+
+**Note**: To maintain your edit access to the cross-organization connection, the system requires you to include at least one role or team that you are a member of before saving.
+
+To restore general access to a cross-organization connection with restricted access, follow the steps below:
+
+1. In the cross-organization visibility page, hover over the cross-organization connection you would like to restore general access to. **Permissions** and **Delete** icons appear on the right.
+1. Click on the padlock (**Permissions**) icon.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 [1]: /account_management/multi_organization/
 [2]: /dashboards/widgets

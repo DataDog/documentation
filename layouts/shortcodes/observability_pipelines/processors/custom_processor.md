@@ -12,6 +12,8 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 
 See [Custom functions][10191] for the full list of available functions.
 
+See [Remap Reserved Attributes][10193] on how to use the Custom Processor to manually and dynamically remap attributes.
+
 To set up this processor:
 
 - If you have not created any functions yet, click **Add custom processor** and follow the instructions in [Add a function](#add-a-function) to create a function.
@@ -28,3 +30,4 @@ To set up this processor:
 
 [10191]: /observability_pipelines/processors/custom_processor#custom-functions
 [10192]: /observability_pipelines/guide/get_started_with_the_custom_processor
+[10193]: /observability_pipelines/guide/remap_reserved_attributes

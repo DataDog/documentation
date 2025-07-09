@@ -44,7 +44,8 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 |--------------------|----------------|-----------------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet メトリクスの非推奨化           |
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | ダイナミックサービスアカウントトークンをサポート |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | 動的サービス アカウント トークンをサポート |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | `v1` API グループをサポート               |
 
 {{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>セットアップ</u>: Kubernetes クラスターで Datadog Cluster Agent をセットアップします。{{< /nextlink >}}
@@ -55,6 +56,9 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent のトラブルシューティング</u>: Datadog Cluster Agent のトラブルシューティング情報を検索できます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Cluster Agent の監視
+Datadog Agent には Cluster Agent を自動的に監視するインテグレーションが含まれています。このインテグレーションは、Cluster Agent と同じノード上にある通常の Datadog Agent Pod で実行されます。Cluster Agent 内では実行されません。詳細は [Datadog Cluster Agent インテグレーション ドキュメント][4] を参照してください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,3 +66,4 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 [1]: /ja/containers/guide/cluster_agent_autoscaling_metrics
 [2]: https://hub.docker.com/r/datadog/cluster-agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[4]: https://docs.datadoghq.com/ja/integrations/datadog_cluster_agent/

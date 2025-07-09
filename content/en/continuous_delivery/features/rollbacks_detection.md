@@ -43,10 +43,16 @@ Rollback detection works for deployments that have all of the following:
 For CI-based providers, Datadog uses the `--revision` parameter that you pass to the `datadog ci` command. This parameter should contain the version identifier for your deployment (such as a commit SHA, image tag, or version number).
 
 ### Version for Argo CD
-For Argo CD deployments, Datadog uses the `revision` value to detect rollbacks. Note that when using Argo CD's revert functionality, a new revision is created, which means Datadog won't detect it as a rollback. To properly track rollbacks in Datadog with Argo CD, you need to redeploy using an older revision.
+For Argo CD deployments, Datadog uses the version from correlated images to detect rollbacks. Datadog identifies the "main" image from your deployment and extracts the version tag from it.
+
+To enable rollback detection for Argo CD deployments, you need to correlate your images with commits using the [`datadog-ci deployment correlate-image` command][2] as explained in the [Argo CD monitoring documentation][3].
+
+When images are properly correlated, Datadog populates a version tag from the image metadata, which is then used for rollback detection.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployments/executions
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[3]: /continuous_delivery/deployments/argocd#correlate-deployments-with-ci-pipelines
