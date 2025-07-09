@@ -2,7 +2,7 @@
 code_lang: aws-fargate
 type: multi-code-lang
 code_lang_weight: 60
-title: Setup App and API Protection for Java on AWS Fargate
+title: Set up App and API Protection for Java on AWS Fargate
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"

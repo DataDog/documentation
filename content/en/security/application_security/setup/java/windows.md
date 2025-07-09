@@ -26,7 +26,7 @@ further_reading:
 
 ## 1. Installing the Datadog Agent
 
-Install the Datadog Agent by following the [setup instructions for Windows](/agent/?tab=Windows).
+Install the Datadog Agent by following the [setup instructions for Windows][3].
 
 ## 2. Enabling App and API Protection monitoring
 
@@ -112,3 +112,4 @@ If you encounter issues while setting up App and API Protection for your Java ap
 
 [1]: /security/application_security/setup/java/compatibility
 [2]: /security/application_security/setup/java/troubleshooting
+[3]: /agent/?tab=Windows

@@ -45,5 +45,8 @@ further_reading:
 
 ## Additional Resources
 
-- [Troubleshooting Guide](java/troubleshooting)
-- [Compatibility Information](java/compatibility)
+- [Troubleshooting Guide][1]
+- [Compatibility Information][2]
+
+[1]: /security/application_security/setup/java/troubleshooting
+[2]: /security/application_security/setup/java/compatibility
