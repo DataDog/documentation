@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Java in Kubernetes
+title: Set up App and API Protection for Java in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 20

@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection on Linux
+title: Set up App and API Protection on Linux
 disable_sidebar: true
 further_reading:
 - link: "/security/application_security/"
@@ -19,7 +19,7 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
-Learn how to setup App and API Protection (AAP) on your Docker containers by selecting the programming language your containerized service is written with.
+Learn how to set up App and API Protection (AAP) on your Docker containers by selecting the containerized service's programming language.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>

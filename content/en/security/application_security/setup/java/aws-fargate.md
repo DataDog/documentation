@@ -23,7 +23,7 @@ further_reading:
 - Java application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Java tracing library (see version requirements [here][1])
+- Datadog Java tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
