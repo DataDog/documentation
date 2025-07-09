@@ -214,7 +214,7 @@ Check for any rules blocking UDP traffic on your configured ports. For example:`
    Add a net bind capability to the Agent binary, which allows the Agent to bind to reserved ports:
 
    ```
-   sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
+   sudo setcap 'CAP_NET_BIND_SERVICE=+ep' /opt/datadog-packages/datadog-agent/stable/bin/agent/agent
    ```
 
 ### Traps incorrectly formatted
