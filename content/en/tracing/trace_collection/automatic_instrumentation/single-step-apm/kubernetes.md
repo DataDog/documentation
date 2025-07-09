@@ -64,6 +64,8 @@ The file you need to configure depends on how you enabled Single Step Instrument
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
 - If you enabled SSI with Helm, edit `datadog-values.yaml`.
 
+**Note**: Targets are evaluated in order; the first match takes precedence. 
+
 #### Example configurations
 
 Review the following examples demonstrating how to select specific services:
@@ -146,7 +148,7 @@ This configuration does the following:
            ddTraceVersions:
              java: "default"
            ddTraceConfigs:   ## trace configs set for services in matching pods
-             - name: "DD_DSM_ENABLED"
+             - name: "DD_DATA_STREAMS_ENABLED"
                value: "true"
          - name: "user-request-router"
            podSelector:
@@ -492,6 +494,108 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 {{% /tab %}}
 {{< /tabs >}}
 
+## Best practices
+
+After you enable SSI, all supported processes in the cluster are automatically instrumented and begin producing traces within minutes.
+
+To control where APM is activated and reduce overhead, consider the following best practices.
+
+{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+
+#### Default vs. opt-in instrumentation
+| Mode    | Behavior    | When to use |
+| ---  | ----------- | ----------- |
+| Default | All supported processes in the cluster are instrumented. | Small clusters or quick prototypes. |
+| Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
+
+#### Example: Enable instrumentation for specific pods
+
+1. Add a meaningful label (for example, `datadoghq.com/apm-instrumentation: "enabled"`) to both the deployment metadata and the pod template. 
+  
+   ```
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: checkout-api
+     labels:
+       app: checkout-api
+       datadoghq.com/apm-instrumentation: "enabled"   # opt-in label (cluster-wide)
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: checkout-api
+     template:
+       metadata:
+         labels:
+           app: checkout-api
+           datadoghq.com/apm-instrumentation: "enabled"   # opt-in label must be on *template*, too
+           # Unified Service Tags (recommended)
+           tags.datadoghq.com/service: "checkout-api"
+           tags.datadoghq.com/env:     "prod"
+           tags.datadoghq.com/version: "2025-06-10"
+       spec:
+         containers:
+           - name: api
+             image: my-registry/checkout:latest
+             ports:
+               - containerPort: 8080
+   ```  
+   
+2. In your Datadog Agent Helm config, enable SSI and use `podSelector` to inject only into pods with the matching opt-in label.
+
+   ```
+     apm:
+       instrumentation:
+         enabled: true
+         targets:
+           - name: apm-instrumented 
+             podSelector:
+               matchLabels:
+                 datadoghq.com/apm-instrumentation: "enabled"
+   ```
+
+See [workload selection][4] for additional examples.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Control which APM SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
+
+Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the APM SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
+
+#### Example: Specify a Java APM SDK for a namespace
+
+Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK version 1.48.2.
+
+
+```
+targets:
+  - name: login-service
+    namespaceSelector:
+      matchNames: ["login-service"]
+    ddTraceVersions:
+      java: "1.48.2"    # pin version
+```
+
+#### Default configuration
+
+If a pod doesn't match any `ddTraceVersions` rule, the default target applies.
+
+```
+targets:
+  - name: default-target          # tag any pod *without* an override
+    ddTraceVersions:
+      java:   "1"   # stay on latest v1.x
+      python: "3"   # stay on latest v3.x
+      js:     "5"   # NodeJS
+      php:    "1"
+      dotnet: "3"
+```
+
+{{% /collapse-content %}}
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -499,6 +603,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/glossary/#instrumentation
+[4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 

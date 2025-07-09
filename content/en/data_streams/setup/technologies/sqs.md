@@ -53,6 +53,14 @@ See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
 
 {{% data_streams/monitoring-sqs-pipelines %}}
 
+### Measuring SQS Dead Letter Queues
+Data Streams Monitoring allows you to track messages as they arrive in a dead-letter queue (DLQ). When a message is dead-lettered, you can use Datadog to investigate and resolve the underlying issue.
+
+To measure the number of messages in a DLQ, ensure your AWS integration has the following permissions:
+- `sqs:ListQueues`
+- `sqs:GetQueueAttributes`
+- `tag:GetResources`
+
 [1]: /agent
 [2]: /data_streams/setup/language/java
 [3]: /data_streams/setup/language/nodejs
