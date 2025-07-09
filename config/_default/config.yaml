@@ -3,6 +3,7 @@ metadataformat: "yaml"
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
+enableRobotsTXT: true
 
 # don't publish cdocs source files
 ignoreFiles: ["\\.mdoc\\.md$"]
@@ -197,11 +198,6 @@ outputFormats:
     notAlternative: true
   Redirects:
     baseName: "redirects"
-    isPlainText: true
-    mediaType: "text/plain"
-    notAlternative: true
-  Robots:
-    baseName: "robots"
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
