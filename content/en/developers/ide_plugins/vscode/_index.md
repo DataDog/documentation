@@ -61,7 +61,7 @@ The extension includes these features:
 
 - **Datadog account**: Most features require a Datadog account.  
   - New to Datadog? [Learn more][3] about Datadog's monitoring and security tools and sign up for a free trial.  
-  - If your organization uses a custom sub-domain such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting.
+  - If your organization uses a custom sub-domain such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting in the IDE.
 
 - **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
 
