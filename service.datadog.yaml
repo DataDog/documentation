@@ -1,8 +1,9 @@
 apiVersion: v3
-kind: service
+kind: system
 metadata:
   name: docs
-  displayName: Documentation Site
+  owner: Documentation
+  displayName: Documentation site
   tags:
     - team:documentation
     - support-team:webops-platform
@@ -13,9 +14,9 @@ metadata:
     - name: Support Slack
       type: slack
       contact: https://dd.enterprise.slack.com/archives/C0DESMBQU
-  owner: documentation
 spec:
-  type: browser
+  components:
+    - service:docs
 
 datadog:
   codeLocations:
