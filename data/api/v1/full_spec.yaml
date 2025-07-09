@@ -4321,6 +4321,7 @@ components:
       - ingested_spans_bytes_usage
       - invocations_usage
       - lambda_traced_invocations_usage
+      - llm_observability_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
       - logs_indexed_1day_usage
@@ -4335,14 +4336,20 @@ components:
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - npm_host_usage
+      - network_device_wireless_usage
       - obs_pipeline_bytes_usage
       - obs_pipelines_vcpu_usage
       - online_archive_usage
+      - product_analytics_session_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - published_app
       - rum_browser_mobile_sessions_usage
+      - rum_ingested_usage
+      - rum_investigate_usage
       - rum_replay_sessions_usage
+      - rum_session_replay_add_on_usage
       - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
@@ -4395,6 +4402,7 @@ components:
       - INGESTED_SPANS_BYTES_USAGE
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LLM_OBSERVABILITY_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
       - LOGS_INDEXED_1DAY_USAGE
@@ -4408,15 +4416,21 @@ components:
       - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
       - MOBILE_APP_TESTING_USAGE
       - NDM_NETFLOW_USAGE
+      - NETWORK_DEVICE_WIRELESS_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_VCPU_USAGE
       - ONLINE_ARCHIVE_USAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - PUBLISHED_APP_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_INGESTED_USAGE
+      - RUM_INVESTIGATE_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - RUM_SESSION_REPLAY_ADD_ON_USAGE
       - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
@@ -8381,10 +8395,14 @@ components:
       - invocations_percentage
       - lambda_traced_invocations_usage
       - lambda_traced_invocations_percentage
+      - llm_observability_usage
+      - llm_observability_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - ndm_netflow_percentage
+      - network_device_wireless_usage
+      - network_device_wireless_percentage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -8393,12 +8411,16 @@ components:
       - obs_pipelines_vcpu_percentage
       - online_archive_usage
       - online_archive_percentage
+      - product_analytics_session_usage
+      - product_analytics_session_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
       - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
+      - published_app_usage
+      - published_app_percentage
       - serverless_apps_usage
       - serverless_apps_percentage
       - snmp_usage
@@ -8441,8 +8463,14 @@ components:
       - logs_indexed_3day_percentage
       - logs_indexed_1day_usage
       - logs_indexed_1day_percentage
+      - rum_ingested_usage
+      - rum_ingested_percentage
+      - rum_investigate_usage
+      - rum_investigate_percentage
       - rum_replay_sessions_usage
       - rum_replay_sessions_percentage
+      - rum_session_replay_add_on_usage
+      - rum_session_replay_add_on_percentage
       - rum_browser_mobile_sessions_usage
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
@@ -8524,10 +8552,14 @@ components:
       - INVOCATIONS_PERCENTAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
+      - LLM_OBSERVABILITY_USAGE
+      - LLM_OBSERVABILITY_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
       - NDM_NETFLOW_PERCENTAGE
+      - NETWORK_DEVICE_WIRELESS_USAGE
+      - NETWORK_DEVICE_WIRELESS_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -8536,12 +8568,16 @@ components:
       - OBS_PIPELINES_VCPU_PERCENTAGE
       - ONLINE_ARCHIVE_USAGE
       - ONLINE_ARCHIVE_PERCENTAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
+      - PRODUCT_ANALYTICS_SESSION_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
+      - PUBLISHED_APP_USAGE
+      - PUBLISHED_APP_PERCENTAGE
       - SERVERLESS_APPS_USAGE
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
@@ -8584,8 +8620,14 @@ components:
       - LOGS_INDEXED_3DAY_PERCENTAGE
       - LOGS_INDEXED_1DAY_USAGE
       - LOGS_INDEXED_1DAY_PERCENTAGE
+      - RUM_INGESTED_USAGE
+      - RUM_INGESTED_PERCENTAGE
+      - RUM_INVESTIGATE_USAGE
+      - RUM_INVESTIGATE_PERCENTAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_PERCENTAGE
+      - RUM_SESSION_REPLAY_ADD_ON_USAGE
+      - RUM_SESSION_REPLAY_ADD_ON_PERCENTAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
@@ -8921,6 +8963,14 @@ components:
           description: The Serverless APM usage by tag(s).
           format: double
           type: number
+        llm_observability_percentage:
+          description: The percentage of LLM Observability usage by tag(s).
+          format: double
+          type: number
+        llm_observability_usage:
+          description: The LLM Observability usage by tag(s).
+          format: double
+          type: number
         logs_indexed_15day_percentage:
           description: The percentage of Indexed Logs (15-day Retention) usage by
             tag(s).
@@ -9035,6 +9085,14 @@ components:
           description: The Network Device Monitoring NetFlow usage by tag(s).
           format: double
           type: number
+        network_device_wireless_percentage:
+          description: The percentage of network device wireless usage by tag(s).
+          format: double
+          type: number
+        network_device_wireless_usage:
+          description: The network device wireless usage by tag(s).
+          format: double
+          type: number
         npm_host_percentage:
           description: The percentage of network host usage by tag(s).
           format: double
@@ -9068,6 +9126,14 @@ components:
           description: The online archive usage by tag(s).
           format: double
           type: number
+        product_analytics_session_percentage:
+          description: The percentage of Product Analytics session usage by tag(s).
+          format: double
+          type: number
+        product_analytics_session_usage:
+          description: The Product Analytics session usage by tag(s).
+          format: double
+          type: number
         profiled_container_percentage:
           description: The percentage of profiled container usage by tag(s).
           format: double
@@ -9092,6 +9158,14 @@ components:
           description: The profiled hosts usage by tag(s).
           format: double
           type: number
+        published_app_percentage:
+          description: The percentage of published application usage by tag(s).
+          format: double
+          type: number
+        published_app_usage:
+          description: The published application usage by tag(s).
+          format: double
+          type: number
         rum_browser_mobile_sessions_percentage:
           description: The percentage of RUM Browser and Mobile usage by tag(s).
           format: double
@@ -9100,12 +9174,36 @@ components:
           description: The total RUM Browser and Mobile usage by tag(s).
           format: double
           type: number
+        rum_ingested_percentage:
+          description: The percentage of RUM Ingested usage by tag(s).
+          format: double
+          type: number
+        rum_ingested_usage:
+          description: The total RUM Ingested usage by tag(s).
+          format: double
+          type: number
+        rum_investigate_percentage:
+          description: The percentage of RUM Investigate usage by tag(s).
+          format: double
+          type: number
+        rum_investigate_usage:
+          description: The total RUM Investigate usage by tag(s).
+          format: double
+          type: number
         rum_replay_sessions_percentage:
           description: The percentage of RUM Session Replay usage by tag(s).
           format: double
           type: number
         rum_replay_sessions_usage:
           description: The total RUM Session Replay usage by tag(s).
+          format: double
+          type: number
+        rum_session_replay_add_on_percentage:
+          description: The percentage of RUM Session Replay Add-On usage by tag(s).
+          format: double
+          type: number
+        rum_session_replay_add_on_usage:
+          description: The total RUM Session Replay Add-On usage by tag(s).
           format: double
           type: number
         sca_fargate_percentage:
@@ -20924,6 +21022,16 @@ components:
             in the current date all organizations.
           format: int64
           type: integer
+        llm_observability_min_spend_sum:
+          description: Sum of all LLM observability minimum spend over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_sum:
+          description: Sum of all LLM observability sessions over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
@@ -20991,6 +21099,11 @@ components:
             2024).
           format: int64
           type: integer
+        network_device_wireless_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -21034,6 +21147,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        product_analytics_sum:
+          description: Sum of all product analytics sessions over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
         profiling_aas_count_top99p:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current date for all organizations.
@@ -21042,6 +21160,11 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        published_app_hwm:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -21066,6 +21189,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_sum:
+          description: Sum of all RUM indexed sessions over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        rum_ingested_sessions_sum:
+          description: Sum of all RUM ingested sessions over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         rum_lite_session_count_sum:
@@ -21175,6 +21308,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current date for all organizations (To be deprecated on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_sum:
+          description: Sum of all RUM session replay add-on sessions over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -21817,6 +21955,16 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        llm_observability_min_spend_sum:
+          description: Shows the sum of all LLM Observability minimum spend over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_sum:
+          description: Shows the sum of all LLM observability sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
@@ -21884,6 +22032,11 @@ components:
             the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        network_device_wireless_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -21922,6 +22075,11 @@ components:
             date for the given org.
           format: int64
           type: integer
+        product_analytics_sum:
+          description: Shows the sum of all product analytics sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         profiling_aas_count_top99p:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current date for all organizations.
@@ -21935,6 +22093,11 @@ components:
         public_id:
           description: The organization public id.
           type: string
+        published_app_hwm:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         region:
           description: The region of the organization.
           type: string
@@ -21960,6 +22123,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_sum:
+          description: Shows the sum of all RUM indexed sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        rum_ingested_sessions_sum:
+          description: Shows the sum of all RUM ingested sessions over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         rum_lite_session_count_sum:
@@ -22069,6 +22242,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current date for the given org (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_sum:
+          description: Shows the sum of all RUM session replay add-on sessions over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -22728,6 +22906,16 @@ components:
             1, 2020).
           format: int64
           type: integer
+        llm_observability_agg_sum:
+          description: Sum of all LLM observability sessions for all hours in the
+            current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_min_spend_agg_sum:
+          description: Minimum spend for LLM observability sessions for all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
@@ -22798,6 +22986,11 @@ components:
             2024).
           format: int64
           type: integer
+        network_device_wireless_top99p_sum:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -22836,6 +23029,11 @@ components:
             month for all organizations.
           format: int64
           type: integer
+        product_analytics_agg_sum:
+          description: Sum of all product analytics sessions for all hours in the
+            current month for all organizations.
+          format: int64
+          type: integer
         profiling_aas_count_top99p_sum:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current month for all organizations.
@@ -22849,6 +23047,11 @@ components:
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current month for all organizations.
+          format: int64
+          type: integer
+        published_app_hwm_sum:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
@@ -22886,6 +23089,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_agg_sum:
+          description: Sum of all RUM indexed sessions for all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        rum_ingested_sessions_agg_sum:
+          description: Sum of all RUM ingested sessions for all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         rum_lite_session_count_agg_sum:
@@ -22995,6 +23208,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current month for all organizations (To be deprecated on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_agg_sum:
+          description: Sum of all RUM session replay add-on sessions for all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
