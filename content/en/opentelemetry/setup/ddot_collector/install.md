@@ -33,7 +33,7 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
-  - **Note**: EKS Fargate environments are not supported
+  - **Note**: EKS Fargate and GKE Autopilot environments are not supported
 - [Helm (v3+)][54]
 - [kubectl][5]
 
