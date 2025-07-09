@@ -29,6 +29,7 @@ IgnoreDirs:
   - ko
   - es
   - security/default_rules
+  - resources
 IgnoreURLs:
   - "/?api/(v1|v2)/*"
   - play.google.com
