@@ -1,0 +1,22 @@
+apiVersion: v3
+kind: service
+metadata:
+  name: docs
+  displayName: Documentation Site
+  tags:
+    - team:webops-platform
+    - team:documentation
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team-documentation@datadoghq.com
+    - name: Support Slack
+      type: slack
+      contact: https://dd.enterprise.slack.com/archives/C0DESMBQU
+  owner: documentation
+spec:
+  type: browser
+
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/datadog/documentation.git
