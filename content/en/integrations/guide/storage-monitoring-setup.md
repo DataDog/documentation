@@ -82,12 +82,12 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
 
    1. **Set up the Datadog Lambda Forwarder** (if not already configured):
       - Follow the [Datadog Forwarder installation instructions][503] to deploy the Datadog Lambda function in your AWS account
-      - This Lambda function will collect and forward your S3 access logs to Datadog
+      - This Lambda function collects and forwards your S3 access logs to Datadog
 
    2. **Configure S3 Access Logs** for each source bucket:
       - Go to your S3 bucket properties in the AWS Console
       - Navigate to **Server access logging**
-      - Enable logging and specify your destination bucket (same bucket as inventory destination for simplicity)
+      - Enable logging and specify your destination bucket (for simplicity, you can use the destination bucket for your inventory files)
       - Set the target prefix to `access-logs/` to organize log files separately from inventory data
 
    3. **Set up the Lambda trigger**:
@@ -95,7 +95,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
       **Option A: Automatic (Recommended)**
         - In the Datadog AWS integration page, navigate to the **[Log Collection][504]** tab
         - Enable automatic log collection for S3 by checking the S3 Access Logs checkbox
-        - Datadog will [automatically configure triggers][505] on your Forwarder Lambda function for S3 access logs
+        - Datadog [automatically configures triggers][505] on your Forwarder Lambda function for S3 access logs
 
        **Option B: Manual**
         - In the AWS console, go to your Datadog Forwarder Lambda function
@@ -105,7 +105,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
         - Set the prefix to `access-logs/` (matching your access log prefix)
 
 
-8. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
+8. Return to **Infrastructure > Storage Monitoring** to see any new buckets.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
 [502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
