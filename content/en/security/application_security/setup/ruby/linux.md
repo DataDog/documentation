@@ -177,8 +177,8 @@ Start your application with above settings.
 To verify that App and API Protection is working correctly:
 
 1. Send some traffic to your application
-2. Check the [Application Signals Explorer](https://app.datadoghq.com/security/appsec) in Datadog
-3. Look for security signals and vulnerabilities
+2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog
+3. Find your service and check that App and API protection is enabled in the Coverage column
 
 ## Troubleshooting
 
