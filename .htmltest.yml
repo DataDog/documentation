@@ -32,6 +32,7 @@ IgnoreDirs:
 IgnoreURLs:
   - "/favicon.ico"
   - "/resources/*"
+  - "/config/*"
   - "/?api/(v1|v2)/*"
   - play.google.com
   - "[linkedin|twitter|instagram].com"
