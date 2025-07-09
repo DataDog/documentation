@@ -13,10 +13,6 @@ further_reading:
   text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Out-of-the-box evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
@@ -27,7 +23,7 @@ LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM 
 
 ## Connect your LLM provider account
 
-Configure the LLM provider you would like to use for bring-your-own-key evaluations. You only have to complete this step once.
+Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
 
 {{< tabs >}}
 {{% tab "OpenAI" %}}
@@ -50,7 +46,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 <div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the `GPT-4o mini` model for evaluations.
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
@@ -61,6 +57,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{< img src="llm_observability/configuration/azure-openai-tile.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
+[8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
@@ -114,7 +111,9 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ### Estimated token usage
 
-LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
+You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
 
 - `ml_obs.estimated_usage.llm.input.tokens`
@@ -289,4 +288,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [4]: /security/sensitive_data_scanner/
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
-
+[7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage

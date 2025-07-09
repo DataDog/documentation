@@ -72,7 +72,7 @@ Lancez la [sous-commande status de l'Agent][7] et cherchez `redis_sentinel` dans
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "redis_sentinel" >}}
+{{< get-metrics-from-git "redis-sentinel" >}}
 
 
 ### Événements
@@ -80,7 +80,7 @@ Lancez la [sous-commande status de l'Agent][7] et cherchez `redis_sentinel` dans
 Le check Redis Sentinel n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "redis_sentinel" >}}
+{{< get-service-checks-from-git "redis-sentinel" >}}
 
 
 ## Dépannage

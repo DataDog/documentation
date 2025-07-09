@@ -29,21 +29,21 @@ public_title: Firefly
 short_description: Actualiza tu nube
 supported_os:
 - linux
-- windows
+- Windows
 - macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
+  - Categoría::Automatización
   - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Developer Tools
+  - Categoría::Configuración y despliegue
+  - Categoría::Herramientas de desarrollo
   - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Actualiza tu nube
   media:
   - caption: Inventario completo en la nube
@@ -58,8 +58,8 @@ tile:
   - caption: Detectar y corregir infracciones de política
     image_url: images/FF-insights.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Firefly
 ---
 

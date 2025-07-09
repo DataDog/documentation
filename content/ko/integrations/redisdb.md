@@ -443,7 +443,7 @@ Agent 컨테이너의 필수 환경 변수:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "redisdb" >}}
+{{< get-metrics-from-git "redis" >}}
 
 
 ### 이벤트
@@ -451,7 +451,7 @@ Agent 컨테이너의 필수 환경 변수:
 Redis 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "redisdb" >}}
+{{< get-service-checks-from-git "redis" >}}
 
 
 ## 트러블슈팅

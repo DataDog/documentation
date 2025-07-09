@@ -39,7 +39,7 @@ Azure では、サブスクリプションリソースに対して事前に構�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### イベント
