@@ -82,7 +82,7 @@ Your nodes have this feature enabled if they have the label `kubernetes.azure.co
 kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
 ```
 
-If all your nodes show `cluster` do not provide any specific `kubelet` configuration as the Agent will connect automatically. If your nodes do not have this feature enabled use the [Kubelet configurations without certificate rotation](#without-kubernetes-certificate-rotation).
+If all your nodes show `cluster` do not provide any specific `kubelet` configuration as the Agent successfully connects by default. If your nodes do not have this feature enabled use the [Kubelet configurations without certificate rotation](#without-kubelet-serving-certificate-rotation).
 **Note:** This configuration should be removed once certificate rotation is enabled in your cluster.
 
 Lastly, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
@@ -137,7 +137,7 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 {{< /tabs >}}
 
-### Without Kubernetes certificate rotation
+### Without Kubelet serving certificate rotation
 
 **Note:** When upgrading your AKS cluster you may see the [certificate rotation][13] feature enabled for you automatically which can negatively impact your Datadog Agent if you are using the below configuration to reference the certificate `/etc/kubernetes/certs/kubeletserver.crt`. This certificate file is removed once this feature enabled. Which can cause:
 
@@ -145,6 +145,8 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 - In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
 
 In these cases remove the kubelet configurations and return to the defaults as seen above. Alternatively [connecting to the kubelet without TLS Verification](#without-tls-verification) is still supported on all AKS versions.
+
+When this feature is not enabled you can provide the Datadog Agent an updated kubelet configuration to allow it to properly connect.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
