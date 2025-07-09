@@ -106,7 +106,7 @@ Then, run the following command to set up the sidecar container:
 {{< code-block lang="shell" >}}
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 {{< /code-block >}}
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.

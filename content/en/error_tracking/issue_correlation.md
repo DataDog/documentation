@@ -9,7 +9,7 @@ further_reading:
   tag: 'Documentation'
   text: 'Issue States in Error Tracking'
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/error-tracking-issue-correlation/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://www.datadoghq.com/product-preview/error-tracking-issue-correlation/">}}
 Issue Correlation with Error Tracking is currently in Preview, but you can easily request access! Use this form to submit your request. Once approved, you can automatically map related issues across services, helping you trace problems to their true origin.
 {{< /callout >}} 
 ## Overview 
