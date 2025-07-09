@@ -27,7 +27,6 @@ To complete this guide, you need the following:
 **Datadog account**:
 1. [Create a Datadog account][1] if you don't have one.
 1. Find or create your [Datadog API key][2].
-1. Find or create your [Datadog application key][3].
 
 **Software**:
 Install and set up the following on your machine:
@@ -77,16 +76,15 @@ helm repo update
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set up Datadog API and application keys
+### Set up Datadog API key
 
-1. Get the Datadog [API][2] and [application keys][3].
-1. Store the keys as a Kubernetes secret:
+1. Get the Datadog [API key][2].
+1. Store the API key as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
-     --from-literal api-key=<DD_API_KEY> \
-     --from-literal app-key=<DD_APP_KEY>
+     --from-literal api-key=<DD_API_KEY>
    ```
-   Replace `<DD_API_KEY>` and `<DD_APP_KEY>` with your actual Datadog API and application keys.
+   Replace `<DD_API_KEY>` with your actual Datadog API key.
 
 ### Configure the Datadog Agent
 
@@ -109,9 +107,6 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
          apiSecret:
            secretName: datadog-secret
            keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
 {{< /code-block >}}
 
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
@@ -166,13 +161,12 @@ touch datadog-values.yaml
 
 <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
 
-2. Configure the Datadog API and application key secrets:
+2. Configure the Datadog API key secret:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
 {{< /code-block >}}
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
@@ -264,7 +258,6 @@ agents:
 datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
 
   otelCollector:
     enabled: true
@@ -390,9 +383,6 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
 
   # Enable Features
   features:
@@ -565,9 +555,6 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
 
   # Enable Features
   features:
