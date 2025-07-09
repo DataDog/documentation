@@ -3,7 +3,7 @@ title: React Native Crash Reporting and Error Tracking
 type: multi-code-lang
 code_lang: reactnative
 code_lang_weight: 60
-disable_toc: true
+disable_toc: false
 ---
 
 ## Overview
@@ -308,16 +308,55 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
+<div class="alert alert-info">
+
+#### Sample session rates
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][17] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
 
 
+#### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the React Native SDK requires the tracking consent value at initialization.
+
+The `trackingConsent` setting can be one of the following values: 
+
+1. `.PENDING`: The React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
+
+2. `.GRANTED`: The React Native SDK starts collecting the data and sends it to Datadog.
+
+3. `.NOTGRANTED`: The RUM iReact NativeOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+
+To change the tracking consent value after the React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The React Native SDK changes its behavior according to the new value.
+
+For example, if the current tracking consent is `.PENDING`:
+
+- If you change the value to `.GRANTED`, the React Native SDK sends all current and future data to Datadog;
+
+- If you change the value to `.NOTGRANTED`, the React Native SDK wipes all current data and does not collect future data.
+
+</div>
+
+### User interactions tracking
+
+If user interactions tracking is enabled as in the code example above, the Datadog React Native SDK traverses up the hierarchy of components starting from the component that received a tap, looking for `dd-action-name` property. Once found, it is used as a name for the action reported.
+
+Alternatively, you can use the `accessibilityLabel` element property to give the tap action a name; otherwise, the element type is reported. You can check the sample app for usage examples.
 
 
+## Track background events
 
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
 
+You can track events such as crashes and network requests when your application is in the background (for example, when no active view is available).
 
+Add the following snippet during initialization in your Datadog configuration:
 
-
+```javascript
+configuration.trackBackgroundEvents = true;
+```
 
 
 
@@ -413,3 +452,5 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 [14]: https://app.datadoghq.com/rum/error-tracking
 [15]: https://app.datadoghq.com/error-tracking/settings/setup/client/
 [16]: /account_management/api-app-keys/#client-tokens
+[17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
+
