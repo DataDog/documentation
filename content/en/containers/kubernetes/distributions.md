@@ -74,7 +74,18 @@ spec:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has set up the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
+Your AKS cluster may need a specific configuration to enable the Datadog Agent to connect to the Kubelet depending on its version. If your cluster has [kubelet serving certificate rotation][13] enabled, you do **not** need to provide any special configuration. This feature is enabled in Kubernetes clusters 1.27 and above on node pools updated after July 2025.
+
+Your nodes have this feature enabled if they have the label `kubernetes.azure.com/kubelet-serving-ca=cluster`. Verify if all of your nodes have this label by running:
+
+```shell
+kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
+```
+
+If all your nodes show `cluster` do not provide any specific `kubelet` configuration as the Agent will connect automatically. If your nodes do not have this feature enabled use the [Kubelet configurations without certificate rotation](#without-kubernetes-certificate-rotation).
+**Note:** This configuration should be removed once certificate rotation is enabled in your cluster.
+
+Lastly, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -93,12 +104,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    kubelet:
-      host:
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
-      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   override:
     clusterAgent:
       containers:
@@ -121,6 +126,66 @@ datadog:
   clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
+
+providers:
+  aks:
+    enabled: true
+```
+
+The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Without Kubernetes certificate rotation
+
+**Note:** When upgrading your AKS cluster you may see the [certificate rotation][13] feature enabled for you automatically which can negatively impact your Datadog Agent if you are using the below configuration to reference the certificate `/etc/kubernetes/certs/kubeletserver.crt`. This certificate file is removed once this feature enabled. Which can cause:
+
+- In Datadog Operator: The Agent container shuts down in `Error` as it cannot connect to the Kubelet and it logs `Error while getting hostname, exiting: unable to reliably determine the host name`
+- In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
+
+In these cases remove the kubelet configurations and return to the defaults as seen above. Alternatively [connecting to the kubelet without TLS Verification](#without-tls-verification) is still supported on all AKS versions.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    kubelet:
+      host:
+        fieldRef:
+          fieldPath: spec.nodeName
+      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  clusterName: <CLUSTER_NAME>
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
   kubelet:
     host:
       valueFrom:
@@ -132,14 +197,10 @@ providers:
   aks:
     enabled: true
 ```
-
-The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
-
 {{% /tab %}}
-
 {{< /tabs >}}
 
-The AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
+In these AKS node versions, the AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
 
 ### Without TLS verification
 
@@ -607,3 +668,4 @@ agents:
 [10]: https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods
 [11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes
 [12]: https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port
+[13]: https://learn.microsoft.com/en-us/azure/aks/certificate-rotation#kubelet-serving-certificate-rotation
