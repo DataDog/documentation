@@ -43,7 +43,7 @@ Los comandos CLI en esta página son para el tiempo de ejecución del Docker. Su
 ## Instalación
 
 {{< tabs >}}
-{{% tab "Container Installation" (Instalación del contenedor) %}}
+{{% tab "Container Installation" %}}
 
 Para ejecutar un [contenedor de Docker][1] que integra el Datadog Agent para monitorizar tu host, utiliza el siguiente comando para el sistema operativo que estés utilizando:
 
@@ -135,7 +135,7 @@ environment:
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 {{% /tab %}}
-{{% tab "Host Agent" (Agent de host) %}}
+{{% tab "Host Agent" %}}
 
 1. Install the [latest version of the Agent][1] on your host.
 2. La recopilación de logs está _desactivada_ por defecto en el Datadog Agent. Para activarla, añade las siguientes líneas en tu archivo de configuración `datadog.yaml`:
@@ -157,7 +157,7 @@ environment:
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
 [3]: /es/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Host Agent with Custom Logging" (Agent de host con gestión personalizada de logs) %}}
+{{% tab "Host Agent with Custom Logging" %}}
 
 1. Install the [latest version of the Agent][1] on your host.
 2. Sigue la [documentación de recopilación de logs personalizada][2] para supervisar logs en archivos.
@@ -203,7 +203,7 @@ Es posible que el nombre corto de imagen del contenedor no coincida con el nombr
 Dependiendo del tipo de archivo, Autodiscovery espera que las etiquetas sigan este formato:
 
 {{< tabs >}}
-{{% tab "Dockerfile" (Archivo Docker) %}}
+{{% tab "Dockerfile" %}}
 
 Añade la siguiente `LABEL` a tu archivo Docker:
 
@@ -222,7 +222,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "Run Command" (Ejecutar comando) %}}
+{{% tab "Run Command" %}}
 
 Añade la siguiente etiqueta como un comando de ejecución:
 
@@ -240,7 +240,7 @@ Donde `<LOG_CONFIG>` es la configuración de la recopilación de logs que encont
 ### Ejemplos
 
 {{< tabs >}}
-{{% tab "NGINX Dockerfile" (Archivo Docker NGINX) %}}
+{{% tab "NGINX Dockerfile" %}}
 
 El siguiente archivo de Docker activa la integración con logs NGINX en el contenedor correspondiente (el valor de `service` se puede cambiar):
 
@@ -258,7 +258,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
 {{% /tab %}}
-{{% tab "Java multi-line logs" (Logs de múltiples líneas Java) %}}
+{{% tab "Java multi-line logs" %}}
 
 Para logs de múltiples líneas como las trazas de stack, el Agent cuenta con [reglas de procesamiento de múltiples líneas][1] para agregar líneas a un único log.
 
@@ -283,7 +283,7 @@ Consulta la [documentación de las reglas de procesamiento de múltiples líneas
 
 [1]: /es/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 {{% /tab %}}
-{{% tab "From file" (Desde archivo) %}}
+{{% tab "From file" %}}
 
 El Agent v7.25.0/v6.25.0 o posteriores puede recopilar logs de un archivo directamente basándose en una etiqueta de Autodiscovery de un contenedor. Para recopilar estos logs, utiliza la etiqueta `com.datadoghq.ad.logs` en tus contenedores (como se muestra a continuación) para recopilar `/logs/app/prod.log`:
 
