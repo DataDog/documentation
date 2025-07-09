@@ -340,7 +340,7 @@ For example, if the current tracking consent is `.PENDING`:
 
 ### User interactions tracking
 
-If user interactions tracking is enabled as in the code example above, the Datadog React Native SDK traverses up the hierarchy of components starting from the component that received a tap, looking for `dd-action-name` property. Once found, it is used as a name for the action reported.
+If user interactions tracking is enabled, the Datadog React Native SDK traverses up the hierarchy of components starting from the component that received a tap, looking for `dd-action-name` property. Once found, it is used as a name for the action reported.
 
 Alternatively, you can use the `accessibilityLabel` element property to give the tap action a name; otherwise, the element type is reported. You can check the sample app for usage examples.
 
@@ -352,21 +352,45 @@ Alternatively, you can use the `accessibilityLabel` element property to give the
 
 You can track events such as crashes and network requests when your application is in the background (for example, when no active view is available).
 
-Add the following snippet during initialization in your Datadog configuration:
+Add the following snippet during initialization in your Datadog configuration to track background events:
 
 ```javascript
 configuration.trackBackgroundEvents = true;
 ```
 
 
+## Sending data when device is offline
+
+The React Native SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native SDK does not use too much disk space.
 
 
 
+## Get deobfuscated stack traces
+In order to symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
 
 
+{{% collapse-content title="Use debug symbols to deobfuscate your stack traces " level="h5" %}}
 
+Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
+For React Native applications, the matching of stack traces and source maps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
+In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
+
+-   JavaScript source maps for your iOS JavaScript bundle
+-   JavaScript source maps for your Android JavaScript bundle
+-   dSYMs for your iOS native code
+-   Proguard mapping files if you have enabled code obfuscation for your Android native code
+
+To set your project up to send the symbolication files automatically, run `npx datadog-react-native-wizard`.
+
+See the wizard [official documentation][18] for options.
+
+{{% /collapse-content %}}
 
 
 
@@ -453,4 +477,6 @@ configuration.trackBackgroundEvents = true;
 [15]: https://app.datadoghq.com/error-tracking/settings/setup/client/
 [16]: /account_management/api-app-keys/#client-tokens
 [17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
+[18]: https://github.com/DataDog/datadog-react-native-wizard
+
 
