@@ -124,7 +124,7 @@ For detailed setup instructions, see [Host Metrics][2] documentation.
 
 ##### Ensure consistent host and container tagging
 
-For correlation to work, the `host.name` (or `container.id`) attribute on your traces must match the corresponding attribute on the metrics collected by the `hostmetrics` receiver. When running the OpenTelemetry Collector as an agent on the host, it typically discovers this information automatically.
+For correlation to work, the `host.name` (or `container.id`) attribute on your traces must match the corresponding attribute on the metrics collected by the `hostmetrics` receiver.
 
 ### Traces and logs
 
