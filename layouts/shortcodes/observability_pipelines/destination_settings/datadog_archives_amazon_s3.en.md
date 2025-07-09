@@ -11,17 +11,18 @@
         - Standard-IA
         - One Zone-IA
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
-    - See [Destination and log archive setup example](#destination-and-log-archive-setup-example) for how to configure your Log Archive based on your Amazon S3 destination setup.
+    - See [Example destination and log archive setup](#example-destination-and-log-archive-setup) for how to configure your Log Archive based on your Amazon S3 destination setup.
 1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier][10054] for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
     1. Enter the ARN of the IAM role you want to assume.
     1. Optionally, enter the assumed role session name and external ID.
     - **Note:** The [user or role you created earlier][10054] must have permission to assume this role so that the Worker can authenticate with AWS.
 
-#### Destination and log archive setup example
+#### Example destination and log archive setup
 
 If you enter the following values for your Amazon S3 destination:
 - S3 Bucket Name: `test-op-bucket`
 - Prefix to apply to all object keys: `op-logs`
+- Storage class for the created objects: `Standard`
 
 <figure class="text-center">
 <img src="{{ .Site.Params.img_url}}images/observability_pipelines/setup/amazon_s3_destination.png" alt="The Amazon S3 destination setup with the example values" width="40%">
@@ -31,6 +32,7 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 
 - S3 bucket: `test-op-bucket`
 - Path: `op-logs`
+- Storage class: `Standard`
 
 <figure class="text-center">
 <img src="{{ .Site.Params.img_url}}images/observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" width="70%">
