@@ -201,9 +201,9 @@ min(status:error, status:warn)
 
 #### Exponentiation
 
-You can now use the `pow()` function ro raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
+You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
 
-Here is an example of how to forecase user growth by applying an exponential growth factor to a prior time window:
+Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
 
 ```text
 users.sessions{*} * pow(1.1, timeshift(-1))
@@ -215,7 +215,7 @@ Here is an example of how to surface anomalies by amplifying value using exponen
 pow(ping{region:*}, 2)
 ```
 
-To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only currently only available on metrics.
+To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
 
 ### Create an alias
 
