@@ -200,6 +200,11 @@ outputFormats:
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
+  Robots:
+    baseName: "robots"
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
 
 timeout: "90s"
 
