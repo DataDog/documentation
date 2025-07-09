@@ -1,0 +1,30 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": false,
+      "forward_tags": false,
+      "forward_tags_restriction_list": [
+        "datacenter",
+        "host"
+      ],
+      "forward_tags_restriction_list_type": "ALLOW_LIST",
+      "forwarder_destination": {
+        "type": "google_security_operations",
+        "customer_id": "123-456-7890",
+        "regional_endpoint": "https://malachiteingestion-pa.googleapis.com",
+        "namespace": "google-security-operations-namespace",
+        "auth": {
+          "type": "gcp_private_key",
+          "project_id": "gcp-project",
+          "private_key_id": "abc12345678",
+          "client_email": "client@example.com",
+          "client_id": "def123456",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBK...\n-----END PRIVATE KEY-----\n"
+        }
+      },
+      "name": "Nginx logs",
+      "query": "source:nginx"
+    },
+    "type": "custom_destination"
+  }
+}
