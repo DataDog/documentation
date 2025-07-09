@@ -34,9 +34,6 @@ Datadog CSI driver shifts the hostpath volume from the user application to the C
 
 Datadog CSI driver can be installed using the public helm chart.
 
-{{< tabs >}}
-
-{{% tab "Helm" %}}
 <div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a>.</div>
 
 <br />
@@ -60,9 +57,6 @@ CSI driver needs to run with privileged security context in order to mount volum
    ```shell
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Datadog CSI Volumes
 
