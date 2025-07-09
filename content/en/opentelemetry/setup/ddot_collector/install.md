@@ -171,20 +171,7 @@ datadog:
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-3. Use the Datadog Agent image tag with embedded DDOT Collector:
-
-{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-...
-{{< /code-block >}}
-
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
-
-4. Enable the OpenTelemetry Collector and configure the essential ports:
+3. Enable the OpenTelemetry Collector and configure the essential ports:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -213,7 +200,7 @@ If you don't want to expose the port, you can use the Agent service instead:
           value: 'grpc'
       ```
 
-5. (Optional) Enable additional Datadog features:
+4. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -234,7 +221,7 @@ datadog:
 
 When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
-6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+5. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 
 <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
 
@@ -249,12 +236,6 @@ datadog:
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-
 datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret

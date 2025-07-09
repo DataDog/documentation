@@ -184,16 +184,6 @@ datadog:
    {{< /code-block >}}
    Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-1. Use the Datadog Agent image tag with embedded DDOT Collector::
-   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-...
-   {{< /code-block >}}
-
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
