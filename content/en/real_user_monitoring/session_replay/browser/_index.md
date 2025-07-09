@@ -131,8 +131,8 @@ Learn more about the [Session Replay for Mobile][5].
 [4]: /real_user_monitoring/browser/
 [5]: /real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: https://docs.datadoghq.com/account_management/audit_trail/
-[8]: https://docs.datadoghq.com/notebooks/
+[7]: /account_management/audit_trail/
+[8]: /notebooks/
 [9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[10]: https://docs.datadoghq.com/real_user_monitoring/session_replay/playlists
-[11]: https://docs.datadoghq.com/real_user_monitoring/session_replay/browser/#retention
+[10]: /real_user_monitoring/session_replay/playlists
+[11]: /real_user_monitoring/session_replay/browser/#retention
