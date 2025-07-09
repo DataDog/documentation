@@ -562,7 +562,7 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 
 [1]: /agent/configuration/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
-[3]: /dogstream/
+[3]: /agent/guide/dogstream/
 [4]: /integrations/go-metro/
 [5]: /agent/configuration/agent-log-files/
 [6]: /agent/configuration/agent-commands/
