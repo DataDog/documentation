@@ -105,7 +105,7 @@ Refer to the below diagram to understand what data is retained with extended ret
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
-**Note**: In order to preserve any [15-month session replays][11] after enabling _Extended Retention_ on individual session replays, add them to [Playlists][10]. This ensures that the session replays can be found after the associated RUM sessions have expired.
+**Note**: To preserve any [15-month session replays][11] after enabling _Extended Retention_ on individual session replays, add them to [Playlists][10]. This ensures that the session replays can be found after the associated RUM sessions have expired.
 
 ## Playback history
 
