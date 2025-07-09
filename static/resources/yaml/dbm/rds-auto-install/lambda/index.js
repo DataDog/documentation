@@ -13,6 +13,10 @@ exports.handler = async (event, context) => {
   let message;
   try {
     let dbId;
+    if (event.Records[0]?.body.startsWith("This is a message to notify")) {
+      // Setting up the SNS event subscription fires this message
+      return { Status: "SUCCESS" };
+    }
     message = JSON.parse(event.Records[0]?.body);
     if (message.RequestType) {
       // CloudFormation event
@@ -29,6 +33,11 @@ exports.handler = async (event, context) => {
     };
     const rdsCommand = new DescribeDBInstancesCommand(rdsInput);
     const rdsResponse = await rdsClient.send(rdsCommand);
+    const tags = rdsResponse.DBInstances[0].TagList;
+    if (!tags?.find(t=> t.Key === "datadoghq.com/install-dbm" && t.Value === "true")) {
+      // This is not a DBM install, so we can exit
+      return { Status: "SUCCESS" };
+    }
     const secretArn = rdsResponse.DBInstances[0].MasterUserSecret.SecretArn;
 
     const dbSecret = await getSecret(secretArn);
@@ -113,6 +122,7 @@ SECURITY DEFINER;
     );
   } catch (err) {
     console.error(err);
+    console.error(event)
     throw err;
   } finally {
     if (client) {

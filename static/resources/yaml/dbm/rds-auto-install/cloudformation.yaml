@@ -163,9 +163,9 @@ Resources:
               Action:
                 - rds:DescribeDBInstances
               Resource: "*"
-              # Condition:
-              #   StringEquals:
-              #     "aws:ResourceTag/datadoghq.com/install-dbm": "true"
+              Condition:
+                StringEquals:
+                  "aws:ResourceTag/datadoghq.com/install-dbm": "true"
       # Allow access to the RDS instances and master secrets
       - PolicyName: "AllowSecrets"
         PolicyDocument:
@@ -179,6 +179,7 @@ Resources:
               Condition:
                 StringEquals:
                   "aws:ResourceTag/aws:secretsmanager:owningService": "rds"
+                  "aws:ResourceTag/datadoghq.com/install-dbm": "true"
 
   LambdaSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"

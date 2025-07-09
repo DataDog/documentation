@@ -180,6 +180,9 @@ Resources:
       DBSubnetGroupName: !Ref SubnetGroup
       VPCSecurityGroups:
         - !GetAtt RDSSecurityGroup.GroupId
+      Tags:
+        - Key: "datadoghq.com/scrape"
+          Value: "true"
   RDSSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     DeletionPolicy: Delete
