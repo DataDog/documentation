@@ -9,6 +9,10 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 <div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st Gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your cloud run function to Gen 2 for more features and Datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
+<div class="alert alert-warning">
+<strong>Migrating to 2nd Gen Functions?</strong> We recommend using <a href="/serverless/google_cloud_run/functions">2nd Gen Cloud Run Functions</a> which offer improved performance, better scaling, and better monitoring with Datadog.
+</div>
+
 ## Setup
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
