@@ -5,6 +5,8 @@ disable_toc: false
 
 Use Observability Pipelines' Kafka source to receive logs from your Kafka topics. Select and set up this source when you [set up a pipeline][1]. The Kafka source uses [librdkafka][2].
 
+You can also [send Azure Event Hub logs to Observability Pipelines using the Kafka source](/observability_pipelines/sources/azure_event_hub/#send-azure-event-hub-logs-to-observability-pipelines-using-the-kafka-source).
+
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/kafka %}}
