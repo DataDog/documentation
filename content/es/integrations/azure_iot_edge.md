@@ -179,7 +179,7 @@ Una vez que Agent se haya implementado en el dispositivo, [ejecuta el subcomando
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### Eventos
@@ -187,7 +187,7 @@ Una vez que Agent se haya implementado en el dispositivo, [ejecuta el subcomando
 Azure IoT Edge no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## Solucionar problemas

@@ -105,7 +105,7 @@ AWS App Runner envoie des événements de changement de statut des services et
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_app_runner" >}}
+{{< get-metrics-from-git "amazon-app-runner" >}}
 
 
 ### Événements

@@ -132,7 +132,7 @@ stats_over_http.so
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "traffic_server" >}}
+{{< get-metrics-from-git "traffic-server" >}}
 
 
 ### ログ収集
@@ -167,7 +167,7 @@ _Agent バージョン 6.0 以降で利用可能_
 Traffic Server インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "traffic_server" >}}
+{{< get-service-checks-from-git "traffic-server" >}}
 
 
 ## トラブルシューティング

@@ -51,7 +51,7 @@ categories:
 - 네트워크
 dependencies: []
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: mulesoft_anypoint
 integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
@@ -185,7 +185,7 @@ Datadog 애플리케이션 성능 모니터링(APM) 추적과 함께 Mule 4용 D
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mulesoft_anypoint" >}}
+{{< get-metrics-from-git "mulesoft-anypoint" >}}
 
 
 ### 서비스 점검

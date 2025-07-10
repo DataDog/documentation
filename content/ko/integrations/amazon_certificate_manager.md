@@ -79,7 +79,7 @@ Datadog에서 모든 Certificate Manager 메트릭을 보려면 이 통합을 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_certificate_manager" >}}
+{{< get-metrics-from-git "amazon-certificate-manager" >}}
 
 
 ### 이벤트
