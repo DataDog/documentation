@@ -19,7 +19,7 @@ The Datadog Agent can automatically assign tags to metrics, traces, and logs emi
 
 ## Out-of-the-box tags
 
-The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1]. [Tag Cardinality][4] are added preingestion and can impact billing as different cardinality settings impact the number of emitted metrics.
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1]. [Tag Cardinality][4] is added before ingestion and can impact billing, as different cardinality settings impact the number of emitted metrics.
 
 <div style="overflow-x: auto;">
 
