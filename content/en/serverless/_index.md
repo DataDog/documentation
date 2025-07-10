@@ -107,6 +107,6 @@ Datadog also provides a solution, now in Preview, for [instrumenting your Cloud 
 [9]: /integrations/azure/#log-collection
 [10]: /serverless/azure_container_apps
 [11]: /integrations/google_cloud_platform/
-[12]: /serverless/google_cloud/google_cloud_run
+[12]: /serverless/google_cloud_run
 [13]: /integrations/amazon_step_functions
 [14]: /serverless/step_functions/installation

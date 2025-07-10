@@ -3338,25 +3338,25 @@ menu:
       parent: serverless
       identifier: serverless_azure_functions
       weight: 6
-    - name: Google Cloud
-      url: serverless/google_cloud
-      parent: serverless
-      identifier: serverless_gcp
-      weight: 7
     - name: Google Cloud Run
-      url: serverless/google_cloud/google_cloud_run
+      url: serverless/google_cloud_run
+      parent: serverless
+      identifier: serverless_gcr
+      weight: 7
+    - name: Containers (Sidecar)
+      url: serverless/google_cloud_run/containers
       parent: serverless_gcp
       weight: 701
-    - name: Google Cloud Run In-Process
-      url: serverless/google_cloud/google_cloud_run_in_process
+    - name: Containers (In-Process)
+      url: serverless/google_cloud_run/containers-in-process
       parent: serverless_gcp
       weight: 702
-    - name: Google Cloud Run Functions
-      url: serverless/google_cloud/google_cloud_run_functions
+    - name: Functions
+      url: serverless/google_cloud_run/functions
       parent: serverless_gcp
       weight: 703
-    - name: Google Cloud Run Functions (1st generation)
-      url: serverless/google_cloud/google_cloud_run_functions_1st_gen
+    - name: Functions (1st generation)
+      url: serverless/google_cloud/functions_1st_gen
       parent: serverless_gcp
       weight: 704
     - name: Glossary

@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run Functions
+title: Cloud Run Functions
 further_reading:
 
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'

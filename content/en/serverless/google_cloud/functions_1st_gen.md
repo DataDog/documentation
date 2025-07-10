@@ -1,5 +1,5 @@
 ---
-title: Legacy Google Cloud Run Functions Gen 1
+title: Legacy Cloud Run Functions Gen 1
 ---
 
 ## Overview

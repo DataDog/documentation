@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run
+title: Cloud Run Containers
 further_reading:
 - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
   tag: 'Blog'
