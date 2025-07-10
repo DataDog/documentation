@@ -9,4 +9,4 @@ Google Cloud Run is a fully managed compute platform that lets you run stateless
 
 ## Choose your workload
 
-{{< partial name="serverless/getting-started-languages.html" >}}
+{{< partial name="serverless/google-cloud-run-workloads.html" >}}
