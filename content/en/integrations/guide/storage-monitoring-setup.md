@@ -39,8 +39,9 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
    1. **Allow Datadog to read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
       - `s3:GetObject`
       - `s3:ListBucket`
+      - `s3:PutInventoryConfiguration`
 
-      Scope these read-only permissions to only the destination buckets containing your S3 inventory files.
+      Scope these permissions to only the destination buckets containing your S3 inventory files.
 
    1. **Allow source buckets to write to destination buckets.** The destination buckets must include a policy that allows the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details.
 
