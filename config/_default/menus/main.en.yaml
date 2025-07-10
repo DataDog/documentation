@@ -3949,25 +3949,30 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
+    - name: Trace Queries
+      url: tracing/trace_explorer/trace_queries/
+      parent: trace_explorer
+      weight: 603
     - name: Span Tags and Attributes
       url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
       identifier: span_attributes
-      weight: 603
+      weight: 604
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
       parent: trace_explorer
       identifier: visualize_spans
-      weight: 604
+      weight: 605
     - name: Trace View
       identifier: tracing_trace_explorer_trace_view
       url: tracing/trace_explorer/trace_view/
       parent: trace_explorer
-      weight: 605
-    - name: Trace Queries
-      url: tracing/trace_explorer/trace_queries/
-      parent: trace_explorer
       weight: 606
+    - name: Tag Analysis
+      identifier: tracing_tag_analysis
+      url: tracing/trace_explorer/tag_analysis/
+      parent: trace_explorer
+      weight: 607
     - name: Recommendations
       url: tracing/recommendations/
       parent: tracing
