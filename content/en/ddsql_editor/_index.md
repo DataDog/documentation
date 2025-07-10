@@ -11,6 +11,10 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
+{{< callout url= "[https://forms.gle/ikXdH1dyxQCoSiRV7](https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/)" >}}
+Querying Logs and Metrics via DDSQL is in Preview. Use this form to request access.
+{{< /callout >}} 
+
 ## Overview
 
 With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
@@ -34,7 +38,7 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-## Explore your infrastructure data
+## Explore your telemetry
 
 View and filter the list of tables and fields in the schema side panel:
 
