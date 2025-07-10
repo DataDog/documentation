@@ -14,19 +14,19 @@ To configure Live Messages, identify an appropriate agent to connect to your Kaf
 
 If you self-host Kafka, set up Live Messages on your Kafka broker’s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
-### Step-by-Step Guide
+### Step-by-step guide
 
 Perform all steps below on the same agent:
 
-#### 1. Verify Agent Version
+#### 1. Verify agent version
 
 Ensure your agent is running version `7.69.0` or newer.
 
-#### 2. Enable [Remote Configuration][2]
+#### 2. Enable [remote configuration][2]
 
 Confirm Remote Configuration is enabled for your agent, which is typically active by default. You can verify this on the [Fleet Automation][3] page.
 
-#### 3. Configure Kafka Consumer Integration
+#### 3. Configure Kafka consumer integration
 
 Create or update the Kafka consumer configuration file at `[agent config directory]/kafka_consumer.d/conf.yaml` with the following example:
 
@@ -44,18 +44,18 @@ Ensure you correctly tag your clusters to facilitate filtering and identificatio
 
 For more comprehensive instructions and advanced configuration options, see the [Kafka consumer integration documentation][4].
 
-#### 4. Verify Setup
+#### 4. Verify setup
 
 Check your agent logs for entries containing `kafka_consumer` to confirm the integration is active.
 
 Also, verify Datadog is receiving data by examining the metric `kafka.broker_offset` in the metrics explorer, filtering by your configured topics.
 
 
-## Required Permission: "Data Streams Monitoring Capture Messages"
+## Required permission: "Data Streams Monitoring Capture Messages"
 
 You must have the `Data Streams Monitoring Capture Messages` permission enabled. You can verify or enable this permission by modifying an existing role or creating a new one on the [Roles][1] page.
 
-If you don't have permission to modify roles, you will have to ask an admin.
+If you don't have sufficient permissions to modify roles, please contact your organization's administrator to request access.
 
 ### Usage
 
