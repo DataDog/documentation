@@ -28,8 +28,13 @@ Each live call route includes the following core attributes:
 
 ### Routing Types
 
+Live call routing supports two distinct routing types to match your team's workflow:
+
 #### Voicemail Routing
 When you configure voicemail routing, callers leave detailed voice messages that the system converts into Pages, triggering the paging process for your designated On-Call team. This works well when you need detailed context about incidents or when callers may not be familiar with your escalation procedures.
+
+#### Direct Call Routing
+When you configure direct call routing, the system attempts to establish a direct phone connection between the caller and the on-call responder. The system traverses your escalation policy, calling each responder in sequence until someone answers. When a responder picks up, the caller is immediately connected to speak directly with them. This provides real-time communication for urgent incidents that require immediate discussion and coordination.
 
 ### Keypad Options
 
@@ -39,17 +44,22 @@ Each keypad option connects to specific On-Call teams, triggering the paging pro
 
 ## Call Handling and Escalation
 
-When a caller selects a keypad option, the system identifies the on-call responder(s) for the selected team and calls their configured phone number. Understanding how the system handles various scenarios helps you configure your teams for optimal incident response.
+When a caller selects a keypad option, the system identifies the on-call responder(s) for the selected team and handles the call according to your configured routing type:
+
+- **Direct Call Routing**: The system calls responders in your escalation policy sequence, attempting to establish a direct connection between the caller and the first available responder.
+- **Voicemail Routing**: The system immediately routes the caller to voicemail, then converts the voice message into a Page for the designated team.
+
+Understanding how the system handles various scenarios helps you configure your teams for optimal incident response.
 
 ### Responder Requirements
 
-For live call routing to work effectively, ensure your on-call responders have valid phone numbers configured in their profiles. Responders without phone numbers are automatically skipped during escalation. 
+For **direct call routing** to work effectively, ensure your on-call responders have valid phone numbers configured in their profiles. Responders without phone numbers are automatically skipped during escalation. 
 
-**Important**: Configure responder phones to ring for at least 4-6 rings before voicemail activates. If a responder's personal voicemail picks up immediately, the system treats this as an answered call, connecting the caller to personal voicemail instead of continuing escalation.
+**Important for direct call routing**: Configure responder phones to ring for at least 4-6 rings before voicemail activates. If a responder's personal voicemail picks up immediately, the system treats this as an answered call, connecting the caller to personal voicemail instead of continuing escalation or connecting them to the intended responder.
 
 ### Escalation Logic
 
-The system handles escalation intelligently based on responder availability:
+For **direct call routing**, the system handles escalation intelligently based on responder availability:
 
 - **Multiple responders at the same level**: The system rings all responders simultaneously. The first to pick up receives the call, and others stop ringing immediately.
 - **Call rejection**: When a responder actively rejects a call, the system immediately escalates to the next responder without waiting for the escalation timeout.
@@ -57,9 +67,13 @@ The system handles escalation intelligently based on responder availability:
 - **Single-level policies**: If your escalation policy has only one level and that responder is unreachable, the system routes to voicemail after the escalation timer expires.
 - **No valid phone numbers**: If no responders in the entire escalation policy have valid phone numbers, the call immediately routes to voicemail.
 
+For **voicemail routing**, the system bypasses the escalation policy entirely and routes calls directly to voicemail, then triggers the paging process for the designated team.
+
 ### Team Structure Recommendations
 
-Design escalation policies with multiple levels to ensure coverage, and configure multiple responders at critical escalation levels for redundancy. This prevents calls from going directly to voicemail when single responders are unavailable.
+For **direct call routing**, design escalation policies with multiple levels to ensure coverage, and configure multiple responders at critical escalation levels for redundancy. This prevents calls from going directly to voicemail when single responders are unavailable.
+
+For **voicemail routing**, focus on configuring appropriate notification preferences for your team members to ensure they receive and respond to Pages promptly.
 
 ## Testing and Validation
 
