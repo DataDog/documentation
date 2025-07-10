@@ -2,7 +2,7 @@
 title: Live Messages (v2)
 ---
 
-Live Messages allows you to view messages from specific offsets within Kafka. Inspecting these live messages can be crucial when troubleshooting issues related to specific services or data streams.
+Live Messages allows you to view messages at specific offsets within Kafka. Inspecting these live messages can be crucial when troubleshooting issues related to specific services or data streams.
 
 (Insert Screenshot here)
 
@@ -10,9 +10,9 @@ Live Messages allows you to view messages from specific offsets within Kafka. In
 
 To configure Live Messages, identify an appropriate agent to connect to your Kafka cluster and enable the Kafka consumer integration.
 
-### Selecting an Agent
+### Any Datadog agent having access to Kafka can be used for setup
 
-If you self-host Kafka, set up Live Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, set up Live Messages on your Kafka broker’s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 ### Step-by-step guide
 
@@ -24,7 +24,7 @@ Ensure your agent is running version `7.69.0` or newer.
 
 #### 2. Enable [remote configuration][2]
 
-Confirm Remote Configuration is enabled for your agent, which is typically active by default. You can verify this on the [Fleet Automation][3] page.
+Ensure Remote Configuration is enabled for your agent. It is typically enabled by default, and you can confirm this on the [Fleet Automation page][3]. Additionally, verify that Remote Configuration is enabled at the organization level by visiting the [Remote Configuration settings page][4].
 
 #### 3. Configure Kafka consumer integration
 
@@ -42,7 +42,7 @@ instances:
 
 Ensure you correctly tag your clusters to facilitate filtering and identification.
 
-For more comprehensive instructions and advanced configuration options, see the [Kafka consumer integration documentation][4].
+For more comprehensive instructions and advanced configuration options, see the [Kafka consumer integration documentation][5].
 
 #### 4. Verify setup
 
@@ -79,4 +79,5 @@ If you don't have sufficient permissions to modify roles, contact your organizat
 [1]: https://app.datadoghq.com/organization-settings/roles
 [2]: /agent/remote_config
 [3]: https://app.datadoghq.com/fleet
-[4]: /integrations/kafka-consumer/?tab=host#setup
+[4]: https://app.datadoghq.com/organization-settings/remote-config
+[5]: /integrations/kafka-consumer/?tab=host#setup
