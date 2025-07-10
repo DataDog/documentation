@@ -12,7 +12,7 @@ To configure Live Messages, identify an appropriate agent to connect to your Kaf
 
 ### Selecting an Agent
 
-If you self-host Kafka, set up Live Messages on your Kafka broker’s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, set up Live Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 ### Step-by-step guide
 
@@ -55,7 +55,7 @@ Also, verify Datadog is receiving data by examining the metric `kafka.broker_off
 
 You must have the `Data Streams Monitoring Capture Messages` permission enabled. You can verify or enable this permission by modifying an existing role or creating a new one on the [Roles][1] page.
 
-If you don't have sufficient permissions to modify roles, please contact your organization's administrator to request access.
+If you don't have sufficient permissions to modify roles, contact your organization's administrator to request access.
 
 ### Usage
 
