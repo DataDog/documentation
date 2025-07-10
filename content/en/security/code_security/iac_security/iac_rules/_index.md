@@ -1,7 +1,5 @@
 ---
-title: Infrastucture as Code (IaC) Rules
-description: View rules for multiple frameworks and providers for IaC analysis.
-is_beta: false
+title: IaC Security Rules
 type: iac_security
 
 further_reading:
@@ -13,14 +11,6 @@ further_reading:
     text: "Configure IaC Security Exclusions"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
+[Infrastructure as Code (IaC) Security][1] identifies misconfigurations and security risks in infrastructure-as-code files before deployment, helping ensure that cloud environments remain secure and compliant.
 
-## Overview
-
-Datadog IaC Scan helps detect misconfigurations and security risks in infrastructure-as-code files before deployment, ensuring cloud environments remain secure and compliant. For more information, see the [Setup documentation][1].
-
-[1]: /security/code_security/iac_security/setup/
+[1]: /security/code_security/iac_security/
