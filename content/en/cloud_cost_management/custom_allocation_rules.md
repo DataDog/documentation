@@ -92,11 +92,11 @@ For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {u
 
 To create a rule for this allocation, you could:
 
-- Define the costs to allocate (source): **PostGreSQL costs** (`azure_product_family:dbforpostgresql`).
+- Define the costs to allocate (source): **Database costs** (`aws_product:rds`).
 - Choose the allocation method: **Dynamic by metric**
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
-- Define the metric query used to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
+- Choose the data source: **Database Queries**.
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **Service** (`trace.caller.service`).
+- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **Host** (`host:shopist.us-east-1.rds.amazonaws.com`).
 - Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
@@ -118,9 +118,6 @@ You can select multiple values for your destination tag. For instance, if you se
 Apply a filter across the entire allocation rule. Filters help you target the allocation rule to the relevant subset of your cloud spend.
 
 _Example: Only apply cost allocation where environment is production._
-
-- **Proportional by spend**: Let's say you allocate shared costs to the team tag, proportional to how much each team spends. You can add a filter, creating a cost allocation that is proportional to how much team spends on `aws_product` is `ec2`.
-- **Dynamic by metric**: Let's say you allocate shared PostgreSQL costs to the service tag, proportional to the query execution time of each service. You can add a filter, creating a cost allocation that only applies where `environment` is `production`.
 
 ### Step 5 - (optional) Apply a partition
 
