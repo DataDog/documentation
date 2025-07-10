@@ -393,20 +393,75 @@ See the wizard [official documentation][18] for options.
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Use Datadog Metro Configuration" level="h5" %}}
+
+Starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
+
+Add it to your `metro.config.js` to allow for accurate symbolication of stacktraces on Datadog:
+
+```js
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const {withDatadogMetroConfig} = require('@datadog/mobile-react-native/metro');
+
+// Your configuration
+const config = mergeConfig(getDefaultConfig(__dirname), {});
+
+module.exports = withDatadogMetroConfig(config);
+```
+{{% /collapse-content %}}
 
 
 
+{{% collapse-content title="Use the 'datadog-ci react-native inject-debug-id' command" level="h5" %}}
+
+As an alternative to the Metro Configuration, starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
+
+Usage instructions are available on the [command documentation page][19].
+
+### Passing options for your uploads
+
+#### Using the `datadog-sourcemaps.gradle` script
+
+To specify a different service name, add the following code to your `android/app/build.gradle` file, before the `apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"` line:
+
+```groovy
+project.ext.datadog = [
+    serviceName: "com.my.custom.service"
+]
+```
+{{% /collapse-content %}}
 
 
+{{% collapse-content title="Passing options for your uploads" level="h5" %}}
+
+#### Using the `datadog-sourcemaps.gradle` script
+
+To specify a different service name, add the following code to your `android/app/build.gradle` file, before the `apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"` line:
+
+```groovy
+project.ext.datadog = [
+    serviceName: "com.my.custom.service"
+]
+```
+
+#### Using the `datadog-ci react-native xcode` command
+
+Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][20].
+
+#### Specifying a custom release version
+
+Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your source maps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
+
+When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
+
+{{% /collapse-content %}}
 
 
+{{% collapse-content title="List uploaded source maps" level="h5" %}}
 
+See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
-
-
-
-
-
+{{% /collapse-content %}}
 
 
 
@@ -478,5 +533,8 @@ See the wizard [official documentation][18] for options.
 [16]: /account_management/api-app-keys/#client-tokens
 [17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
 [18]: https://github.com/DataDog/datadog-react-native-wizard
+[19]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
+[20]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+
 
 
