@@ -378,7 +378,7 @@ status:
 field#status.conditions.HorizontalAbleToScale.status:"False"
 ```
 
-**Result:** Returns CR2. Only `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned
+**Result:** Returns CR2. Only `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned.
 
 {{% /tab %}}
 {{< /tabs >}}
