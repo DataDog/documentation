@@ -4,19 +4,19 @@ description: Soluciones para los problemas de configuración de Database Monitor
 title: Solucionar problemas de configuración de DBM (Database Monitoring) para Postgres
 ---
 
-En esta página se detallan los problemas más comunes relacionados con la configuración y el uso de Database Monitoring con Postgres y se explica cómo resolverlos. Datadog recomienda utilizar la última versión estable del Agent y seguir la última [documentación de configuración][1], ya que puede cambiar según las versiones del Agent.
+En esta página se detallan los problemas más comunes relacionados con la configuración y el uso de Database Monitoring con Postgres y se explica cómo resolverlos. Datadog recomienda utilizar la última versión estable del Agent y consultar la última [documentación de configuración][1], ya que puede cambiar según las versiones del Agent.
 
 ## Diagnóstico de problemas comunes
 
-### Después de configurar Database Monitoring no se muestran más datos
+### No aparecen más datos después de configurar Database Monitoring
 
-Si no ves ningún dato después de seguir las [instrucciones de configuración][1] y configurar el Agent, lo más probable es que haya un problema con la configuración del Agent o con la clave de API. Asegúrate de que estás recibiendo datos del Agent, siguiendo la [guía para solucionar problemas][2].
+Si no ves ningún dato después de seguir las [instrucciones de configuración][1] y configurar el Agent, lo más probable es que haya un problema con la configuración del Agent o con la clave de API. Asegúrate de que estás recibiendo datos del Agent, consultando la [guía para solucionar problemas][2].
 
-Si recibes otros datos, como métricas del sistema, pero no los de Database Monitoring (como métricas de consultas y ejemplos de consultas), es probable que haya un problema con la configuración del Agent o de la base de datos. Asegúrate de que la configuración de tu Agent se parece al ejemplo de las [instrucciones de configuración][1], comprobando minuciosamente la localización de los archivos de configuración.
+Si recibes otros datos, como métricas del sistema, pero no los de Database Monitoring (como métricas de consultas y ejemplos de consultas), es probable que haya un problema con la configuración del Agent o de la base de datos. Asegúrate de que la configuración de tu Agent se parece al ejemplo en las [instrucciones de configuración][1], verificando cuidadosamente la localización de los archivos de configuración.
 
 Para depurar, comienza por ejecutar el [comando de estado del Agent][3] para recopilar información de depuración sobre los datos recopilados y enviados a Datadog.
 
-Comprueba la sección `Config Errors` para asegurarte de que el archivo de configuración es válido. Por ejemplo, lo siguiente indica que falta una instancia de configuración o que el archivo no es válido:
+Consulta la sección `Config Errors` para asegurarte de que el archivo de configuración es válido. Por ejemplo, lo siguiente indica que falta una instancia de configuración o que el archivo no es válido:
 
 ```
   Config Errors
@@ -66,12 +66,12 @@ Cuando compruebes que la configuración del Agent es correcta, [consulta los log
 También puedes realizar explícitamente un check ejecutando el comando CLI `check` en el Datadog Agent e inspeccionando el resultado en busca de errores:
 
 ```bash
-# Para instalaciones del Agent autoalojadas
+# For self-hosted installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# Para instalaciones del Agent basadas en contenedores
+# For container-based installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
@@ -106,10 +106,10 @@ A continuación, ejecuta este comando para verificar qué esquemas son visibles 
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-Si no ves el esquema `pg_stat_statements` en el `search_path` del usuario `datadog`, debes añadirlo al usuario `datadog`. Por ejemplo:
+Si no ves el esquema `pg_stat_statements` en el usuario `search_path` del usuario `datadog`, deberás añadirlo al usuario `datadog`. Por ejemplo (sustituye `<schema_with_pg_stat_statements>` por el esquema donde se encuentra `pg_stat_statements` ):
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### Faltan algunas consultas
@@ -122,10 +122,10 @@ Si tienes datos de algunas consultas, pero no ves una consulta en particular o u
 | La consulta no es una "consulta principal" lo que significa que la suma de su tiempo total de ejecución no se encuentra entre las 200 primeras consultas normalizadas en ningún momento del periodo de tiempo seleccionado. | La consulta puede estar agrupada en la fila "Otras consultas". Para obtener más información sobre qué consultas se rastrean, consulta los [datos recopilados][5]. El número de consultas principales rastreadas puede aumentarse poniéndose en contacto con el servicio de asistencia de Datadog. |
 | La consulta no es una consulta SELECT, INSERT, UPDATE o DELETE. | Las funciones que no son de utilidad no se rastrean por defecto. Para recopilarlas, configura el parámetro de Postgres `pg_stat_statements.track_utility` como `on`. Para obtener más información, consulta la [documentación de Postgres][6]. |
 | La consulta se ejecuta en una función o un procedimiento almacenado. | Para realizar un seguimiento de las consultas ejecutadas en funciones o procedimientos, define el parámetro de configuración `pg_stat_statements.track` como `on`. Para obtener más información, consulta la [documentación de Postgres][6]. |
-| El parámetro de configuración `pg_stat_statements.max` de Postgres puede ser demasiado bajo para tu carga de trabajo. | Si se ejecuta un gran número de consultas normalizadas en un corto periodo de tiempo (miles de consultas normalizadas únicas en 10 segundos), entonces es posible que el buffer en `pg_stat_statements` no pueda contener todas las consultas normalizadas. Aumentar este valor puede mejorar la cobertura de las consultas normalizadas rastreadas y reducir el impacto de la alta cancelación de SQL generada. **Nota**: Las consultas con nombres de columna desordenados o que utilizan matrices de longitud variable pueden aumentar significativamente la tasa de cancelación de consultas normalizadas. Por ejemplo `SELECT ARRAY[1,2]` y `SELECT ARRAY[1,2,3]` se rastrean como consultas separadas en `pg_stat_statements`. Para obtener más información sobre cómo ajustar este parámetro, consulta [Configuración avanzada][7]. |
-| La consulta sólo se ha ejecutado una vez desde el último reinicio del Agent. | Las métricas de consultas sólo se emiten después de haber sido ejecutadas al menos una vez en dos intervalos separados de diez segundos desde el reinicio del Agent. |
+| El parámetro de configuración `pg_stat_statements.max` de Postgres puede ser demasiado bajo para tu carga de trabajo. | Si se ejecutan un gran número de consultas normalizadas en un corto periodo de tiempo (miles de consultas normalizadas únicas en 10 segundos), entonces es posible que el buffer en `pg_stat_statements` no pueda contener todas las consultas normalizadas. Aumentar este valor puede mejorar la cobertura de las consultas normalizadas rastreadas y reducir el impacto de la alta cancelación de SQL generada. **Nota**: Las consultas con nombres de columna desordenados o que utilizan matrices de longitud variable pueden aumentar significativamente la tasa de cancelación de consultas normalizadas. Por ejemplo `SELECT ARRAY[1,2]` y `SELECT ARRAY[1,2,3]` se rastrean como consultas separadas en `pg_stat_statements`. Para obtener más información sobre cómo ajustar este parámetro, consulta [Configuración avanzada][7]. |
+| La consulta sólo se ejecutó una vez desde el último reinicio del Agent. | Las métricas de consultas sólo se emiten después de haber sido ejecutadas al menos una vez en dos intervalos separados de diez segundos desde el reinicio del Agent. |
 
-### Las muestras de consulta se truncan
+### Las muestras de consultas se truncan
 
 Es posible que las consultas más largas no muestren la totalidad de su texto SQL debido a la configuración de la base de datos. Es necesario realizar algunos ajustes para adaptarlas a tu carga de trabajo.
 
@@ -183,35 +183,35 @@ SECURITY DEFINER;
 Asegúrate de que el Agent ejecuta la versión 7.36.1 o posterior. Datadog recomienda actualizar periódicamente el Agent para aprovechar las nuevas funciones, las mejoras del rendimiento y las actualizaciones de seguridad.
 
 #### Las consultas se truncan
-Para obtener instrucciones sobre cómo aumentar el tamaño del texto de las muestras de consulta, consulta la sección sobre [muestras de consulta truncadas](#query-samples-are-truncated).
+Para obtener instrucciones sobre cómo aumentar el tamaño del texto de las muestras de consultas, consulta la sección sobre [muestras de consultas truncadas](#query-samples-are-truncated).
 
 #### Protocolo de consulta ampliado de Postgres
 
 Si un cliente utiliza el [protocolo de consulta ampliado][9] de Postgres o sentencias preparadas, el Datadog Agent no puede recopilar explain-plans debido a la separación de la consulta analizada y los parámetros de enlace sin procesar. A continuación se presentan algunas opciones para abordar este problema.
 
-En Postgres versión 12 o posterior, habilita la siguiente función beta en la [configuración de la integración Postgres][19].
+En la versión 12 o posterior de Postgres, el siguiente parámetro está activado por defecto en la [configuración de la integración Postgres][19], permitiendo al Agent recopilar planes de explicación:
 ```
 query_samples:
   explain_parameterized_queries: true
   ...
 ```
 
-Esta función no es compatible en las versiones anteriores a Postgres v12. Sin embargo, si tu cliente proporciona una opción para forzar el uso del protocolo de consulta simple, el Datadog Agent está habilitado para recopilar planes de ejecución.
+En versiones anteriores a Postgres v12, este parámetro **no** es compatible. Sin embargo, si tu cliente proporciona una opción para forzar el uso del protocolo de consulta simple, el Datadog Agent está habilitado para recopilar planes de ejecución.
 
 | Lenguaje | Cliente | Configuración para el protocolo de consulta simple|
 |----------|--------|----------------------------------------|
 | Go       | [pgx][10] | Configura `PreferSimpleProtocol` para cambiar al protocolo de consulta simple (consulta la [documentación de ConnConfig][11]). También puedes aplicar esto a cada consulta o llamada utilizando el indicador [QuerySimpleProtocol][24] como primer argumento en las llamadas `Query` o `Exec`.
 | Java     | [Cliente Postgres JDBC][12] | Configura `preferQueryMode = simple` para cambiar al protocolo de consulta simple (consulta la documentación PreferQueryMode][13]). |
-| Python   | [asyncpg][14]              | Utiliza el protocolo de consulta ampliado, que no puede deshabilitarse. Deshabilitar las sentencias preparadas no resuelve el problema. Para habilitar la recopilación de planes de ejecución, formatea las consultas SQL utilizando [psycopg sql][15] (o algún otro formateador SQL comparable que escape correctamente los valores de SQL), antes de pasarlas al cliente de la base de datos.                                                  |
-| Python   | [psycopg][16]             | `psycopg2` no utiliza el protocolo de consulta extendido, por lo que los planes de ejecución deberían recopilarse sin problemas. <br/> `psycopg3` utiliza el protocolo de consulta extendido por defecto y no puede deshabilitarse. Deshabilitar las sentencias preparadas no resuelve el problema. Para habilitar la recopilación de planes de ejecución, formatea las consultas SQL utilizando [psycopg sql][15], antes de pasarlas al cliente de la base de datos. |
-| Node     | [node-postgres][17]       | Utiliza el protocolo de consulta extendido y no puede deshabilitarse. Para permitir que el Datadog Agent recopile planes de ejecución, utiliza [pg-format][18] para dar formato a las consultas SQL, antes de pasarlas a [node-postgres][17].|
+| Python   | [asyncpg][14]              | Utiliza el protocolo de consulta ampliado, que no puede deshabilitarse. Deshabilitar las sentencias preparadas no resuelve el problema. Para habilitar la recopilación de planes de ejecución, da un formato a las consultas SQL utilizando [psycopg sql][15] (o alguna otra función para formatos de SQL comparable que escape correctamente los valores de SQL), antes de pasarlas al cliente de la base de datos.                                                  |
+| Python   | [psycopg][16]             | `psycopg2` no utiliza el protocolo de consulta extendido, por lo que los planes de ejecución deberían recopilarse sin problemas. <br/> `psycopg3` utiliza el protocolo de consulta extendido por defecto y no puede deshabilitarse. Deshabilitar las sentencias preparadas no resuelve el problema. Para habilitar la recopilación de planes de ejecución, da un formato a las consultas SQL utilizando [psycopg sql][15], antes de pasarlas al cliente de la base de datos. |
+| Node     | [node-postgres][17]       | Utiliza el protocolo de consulta extendido y no puede deshabilitarse. Para permitir que el Datadog Agent recopile planes de ejecución, utiliza [pg-format][18] para dar un formato a las consultas SQL, antes de pasarlas a [node-postgres][17].|
 
 #### La consulta está en una base de datos ignorada por la configuración de la instancia del Agent 
 La consulta está en una base de datos ignorada por la configuración de la instancia del Agent `ignore_databases`. Las bases de datos predeterminadas, como las bases de datos `rdsadmin` y `azure_maintenance`, se ignoran en el parámetro `ignore_databases`. Las consultas en estas bases de datos no tienen muestras ni explain-plans. Comprueba el valor de este parámetro en la configuración de tu instancia y los valores predeterminados en el [archivo de configuración de ejemplo][19].
 
 **Nota:** La base de datos `postgres` también se ignora por defecto en las versiones del Agent anteriores a la v7.41.0.
 
-#### No se puede explicar la consulta
+#### No es posible explicar la consulta
 Algunas consultas, como BEGIN, COMMIT, SHOW, USE y ALTER, no pueden generar un explain-plan válido de la base de datos. Sólo las consultas SELECT, UPDATE, INSERT, DELETE y REPLACE admiten explain-plans.
 
 #### La consulta es relativamente infrecuente o se ejecuta rápidamente
@@ -233,7 +233,7 @@ ERROR:  could not open extension control file "<path>/share/postgresql/extension
 SQL State: 58P01
 ```
 
-Este error se produce cuando falta el paquete `postgresql-contrib` que incluye la extensión `pg_stat_statements`. La forma de instalar el paquete faltante varía en función de la distribución del host y de tu versión de Postgres. Por ejemplo, para instalar el paquete`contrib` en Ubuntu para Postgres 10, ejecuta:
+Este error se produce cuando falta el paquete `postgresql-contrib` que incluye la extensión `pg_stat_statements`. La forma de instalar el paquete faltante varía en función de la distribución del host y de tu versión de Postgres. Por ejemplo, para instalar el paquete `contrib` en Ubuntu para Postgres 10, ejecuta:
 
 ```
 sudo apt-get install postgresql-contrib-10
