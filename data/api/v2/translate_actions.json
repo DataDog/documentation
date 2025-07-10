@@ -1995,6 +1995,10 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "ListAssetsSBOMs": {
+    "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.\n",
+    "summary": "List assets SBOMs"
+  },
   "GetSBOM": {
     "description": "Get a single SBOM related to an asset by its type and name.\n",
     "summary": "Get SBOM"
