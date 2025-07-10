@@ -115,6 +115,8 @@ Complete the following steps to configure these three components.
 
     connectors:
       datadog/connector:
+        traces:
+          compute_stats_by_span_kind: true
 
     service:
       pipelines:
@@ -187,6 +189,8 @@ Complete the following steps to configure these three components.
 
         connectors:
           datadog/connector:
+            traces:
+              compute_stats_by_span_kind: true
 
         service:
           pipelines:
