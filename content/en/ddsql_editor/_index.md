@@ -48,6 +48,10 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
+For Logs and Metrics, use the query builder to help you generate table functions:
+
+{<img width="414" height="116" alt="image" src="https://github.com/user-attachments/assets/09dc368e-5483-413f-bfd5-5fc9bb8e89e2" />}
+
 ## Save and share queries
 
 Save useful queries for future reference or download the data as CSV.
