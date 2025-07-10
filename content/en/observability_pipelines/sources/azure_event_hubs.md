@@ -90,7 +90,7 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
     1.  Enable TLS.
         1.  Download the certificate from [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html) and save it to `/var/lib/observability-pipelines-worker/config/cert.pem`.
         1.  Enter `/cert.pem` in the **Certificate path** field.
-    {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:35%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
 1. Click **Next: Select Destination**.
 1. After you set up your destinations and processors, click **Next: Install**.
 1. Select your platform in the **Choose your installation platform** dropdown menu.
@@ -99,7 +99,7 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
     1.  For **Kafka SASL Username**, enter `$$ConnectionString`.
     1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
     1. Enter your Kafka TLS passphrase.
-    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:90%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:100%;" >}}
 1. Enter the environment variables for your destinations, if applicable.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 
