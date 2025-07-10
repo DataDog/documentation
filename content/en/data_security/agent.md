@@ -92,7 +92,9 @@ For more information, see the [Secrets Management][14] documentation.
 
 {{< site-region region="gov" >}}
 
-Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. 
+
+To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
