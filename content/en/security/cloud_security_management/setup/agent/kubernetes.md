@@ -35,20 +35,19 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
       name: datadog
     spec:
       features:
+        # Enables Misconfigurations
         cspm:
           enabled: true
           hostBenchmarks:
             enabled: true
-        # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
+
+        # Enables Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
+
           # Enables Container Vulnerability Management
-          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
-    
-            # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
-            # uncompressedLayersSupport: true
     
           # Enables Host Vulnerability Management
           host:
@@ -74,65 +73,22 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           enabled: true
           host_benchmarks:
             enabled: true
+
+      # Enables Software Bill of Materials (SBOM) collection
       sbom:
+        # Enables Container Vulnerability Management
         containerImage:
           enabled: true
-
-          # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
-          # uncompressedLayersSupport: true
 
         # Enables Host Vulnerability Management
         host:
           enabled: true
-
-        # Enables Container Vulnerability Management
-        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-        # containerImageCollection:
-        #   enabled: true
     ```
 
 2. Restart the Agent.
 
 {{% /tab %}}
 
-{{% tab "DaemonSet" %}}
-
-Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
-
-```bash
-  # Source: datadog/templates/daemonset.yaml
-  apiVersion:app/1
-  kind: DaemonSet
-  [...]
-  spec:
-  [...]
-  spec:
-      [...]
-        containers:
-        [...]
-          - name: agent
-            [...]
-          - name: system-probe
-            [...]
-            env:
-              - name: DD_COMPLIANCE_CONFIG_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
-                value: "true"
-              - name: DD_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_HOST_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
-                value: "true"
-          [...]
-```
-
-{{% /tab %}}
 {{< /tabs >}}
 
 [1]: /security/cloud_security_management/misconfigurations/

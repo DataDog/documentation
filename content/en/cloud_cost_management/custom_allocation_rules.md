@@ -5,6 +5,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
   text: "Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+  tag: "Blog"
+  text: "How we've created a successful FinOps practice at Datadog"
 ---
 
 ## Overview

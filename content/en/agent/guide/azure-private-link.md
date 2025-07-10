@@ -2,7 +2,7 @@
 title: Connect to Datadog over Azure Private Link
 ---
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 <div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 

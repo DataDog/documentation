@@ -32,7 +32,7 @@ version: '1.0'
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_container_engine" >}}
+{{< get-metrics-from-git "google-container-engine" >}}
 
 
 ### 이벤트

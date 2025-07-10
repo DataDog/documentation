@@ -22,8 +22,9 @@ The following integrations are supported for High Availability:
 
 | Category                | Supported Integrations       |
 |-------------------------|------------------------------|
-| **Network Monitoring**  | [SNMP][1], [Network Path][2], [HTTP Check][3] |
-| **Vendor-Specific**     | [Cisco ACI][4], [Cisco SD-WAN][5]|
+| **Database Monitoring**  | [PostgreSQL][15], [MySQL][16], [MongoDB][17], [Oracle][18], [SQL Server][19] |
+| **Network Monitoring**   | [SNMP][1], [Network Path][2], [HTTP Check][3] |
+| **Vendor-Specific**      | [Cisco ACI][4], [Cisco SD-WAN][5]|
 
 ## Prerequisites
 
@@ -61,7 +62,7 @@ The following integrations are supported for High Availability:
    - The installed integration runs only on the _active_ Agent.
    - If the active Agent or host fails (due to a crash or shutdown), the standby Agent automatically takes over, maintaining uninterrupted monitoring.
 
-### Define a preferred active Agent 
+### Define a preferred active Agent
 
 1. Go to [**Integrations > Fleet Automation > View Agents**][13].
 
@@ -127,4 +128,8 @@ The following integrations are supported for High Availability:
 [12]: /agent/remote_config/?tab=configurationyamlfile#setup
 [13]: https://app.datadoghq.com/fleet
 [14]: /account_management/rbac/permissions/#fleet-automation
-
+[15]: /database_monitoring/#postgres
+[16]: /database_monitoring/#mysql
+[17]: /database_monitoring/#mongodb
+[18]: /database_monitoring/#oracle
+[19]: /database_monitoring/#sql-server
