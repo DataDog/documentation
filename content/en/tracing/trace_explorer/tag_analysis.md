@@ -34,7 +34,7 @@ Use Tag Analysis to answer questions such as:
 
 You can initiate Tag Analysis from several locations:
 
-- **Trace Explorer Point Plot Viz**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against. The same visualisation can be found in [service][3] and [resource][4] pages.
+- **Trace Explorer Point Plot Visualization**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against. The same visualization can be found in [service][3] and [resource][4] pages.
 
 {{< img src="/tracing/trace_explorer/tag_analysis/point_plot_explorer.png" alt="Trace Explorer Point plot selection" style="width:80%;" >}}
 
