@@ -1,5 +1,5 @@
 ---
-title: Send Logs using Filebeat to Observability Pipelines
+title: Send Logs to Observability Pipelines with Filebeat
 disable_toc: false
 ---
 
