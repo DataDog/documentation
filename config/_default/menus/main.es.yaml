@@ -2226,10 +2226,10 @@ menu:
     parent: oncall
     url: service_management/on-call/teams/
     weight: 1
-  - identifier: oncall_pages
+  - identifier: oncall_triggering_pages
     name: Enviar una página
     parent: oncall
-    url: service_management/on-call/pages/
+    url: service_management/on-call/triggering_pages/
     weight: 2
   - identifier: oncall_routing_rules
     name: Procesamiento de reglas

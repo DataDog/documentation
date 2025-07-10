@@ -44,7 +44,7 @@ On-Call を開始するには、[オンコールチームを編成][1]し、通�
 
 {{< whatsnext desc="このセクションでは、次のトピックについて説明します。">}}
 {{< nextlink href="/service_management/on-call/teams">}}<u>チームを編成</u>: 新しいオンコールチームを作成し、既存の Datadog チームをオンコールに追加するか、PagerDuty または Opsgenie からチームをインポートします。{{< /nextlink >}}
-{{< nextlink href="/service_management/on-call/pages">}}<u>ページを送信</u>: チームに対して、モニター、インシデント、セキュリティシグナルなどを通じてページを送るか、Datadog、Slack、Microsoft Teams、または Datadog API を介して手動でページを送ります。 {{< /nextlink >}}
+{{< nextlink href="/service_management/on-call/triggering_pages">}}<u>ページを送信</u>: チームに対して、モニター、インシデント、セキュリティシグナルなどを通じてページを送るか、Datadog、Slack、Microsoft Teams、または Datadog API を介して手動でページを送ります。 {{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>エスカレーションポリシー</u>: 異なるスケジュールにページを送信するためのステップを定義します。 {{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/schedules">}}<u>スケジュール</u>: チームメンバーのオンコールローテーションのスケジュールを設定します。{{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/profile_settings">}}<u>プロファイル設定</u>: 連絡方法や通知の優先設定を構成し、タイムリーかつ効果的にページを受け取れるようにします。{{< /nextlink >}}

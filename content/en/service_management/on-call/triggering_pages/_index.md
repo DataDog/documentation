@@ -1,5 +1,5 @@
 ---
-title: Send a Page
+title: Triggering Pages
 further_reading:
 - link: '/service_management/on-call/'
   tag: 'Documentation'
@@ -60,3 +60,4 @@ Manually paging a Team from Slack always results in a `high` urgency Page.
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
+[3]: /service_management/on-call/triggering_pages/live-call-routing
