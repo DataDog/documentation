@@ -127,7 +127,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
    データベースごとにファイルサイズのメトリクスを収集するには、作成したユーザー (`datadog`) にデータベースへの[接続権限アクセス][6]があることを確認するために、以下を実行します。
 
    ```SQL
-       GRANT CONNECT ANY DATABASE to datadog; 
+       GRANT CONNECT ANY DATABASE to datadog;
    ```
 
 2. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
@@ -248,7 +248,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "sqlserver" >}}
+{{< get-metrics-from-git "sql-server" >}}
 
 
 これらのメトリクスのほとんどは、SQL Server の `sys.dm_os_performance_counters` テーブルにあります。
@@ -258,7 +258,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 SQL Server チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "sqlserver" >}}
+{{< get-service-checks-from-git "sql-server" >}}
 
 
 ## トラブルシューティング

@@ -33,7 +33,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 
 ## Données collectées
 ### Métriques
-{{< get-metrics-from-git "azure_sql_managed_instance" >}}
+{{< get-metrics-from-git "azure-sql-managed-instance" >}}
 
 
 ### Événements

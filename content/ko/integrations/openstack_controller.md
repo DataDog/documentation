@@ -143,7 +143,7 @@ OpenStack Controller 통합은 모든 컴퓨팅 노드와 이를 실행하는 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "openstack_controller" >}}
+{{< get-metrics-from-git "openstack-controller" >}}
 
 
 ### 이벤트
@@ -151,7 +151,7 @@ OpenStack Controller 통합은 모든 컴퓨팅 노드와 이를 실행하는 �
 OpenStack Controller는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "openstack_controller" >}}
+{{< get-service-checks-from-git "openstack-controller" >}}
 
 
 ## 트러블슈팅
