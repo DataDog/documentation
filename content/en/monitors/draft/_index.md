@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-Draft Monitors is in preview.
+Draft Monitors is in Preview.
 {{< /callout >}}
 
 ## Overview
