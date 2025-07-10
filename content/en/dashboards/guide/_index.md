@@ -12,40 +12,54 @@ cascade:
         subcategory: Graphing Guides
 ---
 
-{{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="dashboards/guide/maintain-relevant-dashboards" >}}Best practices for maintaining relevant dashboards{{< /nextlink >}} 
-    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/widget_colors" >}}Selecting the right colors for your graphs{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}Compatible semantic tags{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
+### Core Dashboard Concepts & Best Practices
+
+{{< whatsnext desc="Start here for foundational skills and broad strategies for effective dashboards." >}}
+    {{< nextlink href="dashboards/guide/maintain-relevant-dashboards" >}}Best practices for maintaining relevant dashboards{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/tv_mode" >}}Using TV mode for Dashboards{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Building & Customizing Visualizations
+
+{{< whatsnext desc="Create rich, usable dashboards with interactive features and meaningful visual styles." >}}
+    {{< nextlink href="dashboards/guide/widget_colors" >}}Selecting the right colors for your graphs{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unit-override" >}}Unit override{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}Dashboards API: Migrate from is_read_only by December 13, 2024{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Advanced Widgets, Data Sources & Techniques
+
+
+{{< whatsnext desc="Use advanced tools and techniques to power up your dashboards." >}}
+    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}Compatible semantic tags{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/slo_data_source" >}}Graph historical SLO data on Dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/wildcard_examples" >}}Wildcard Widget Examples{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
-    {{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/tv_mode" >}}Using TV mode for Dashboards
-    {{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/wildcard_examples" >}}Wildcard Widget Examples{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Functions:" >}}
-    {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/rollup-cardinality-visualizations" >}}Understanding rollup function and cardinality in visualizations{{< /nextlink >}}
+### Functions, Automation & Access Control
+
+{{< whatsnext desc="Learn how data is transformed and how to automate and secure your dashboard setup." >}}
+{{< nextlink href="dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
+{{< nextlink href="dashboards/guide/rollup-cardinality-visualizations" >}}Understanding rollup function and cardinality in visualizations{{< /nextlink >}}
+{{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Deprecated APIs:" >}}
+### API Changes & Deprecations
+
+{{< whatsnext desc="Be aware of migrations and deprecated dashboard APIs." >}}
+    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}Dashboards API: Migrate from is_read_only by December 13, 2024{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/screenboard-api-doc" >}}Screenboard API{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/timeboard-api-doc" >}}Timeboard API{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/dashboard-lists-api-v1-doc" >}}Dashboard Lists API (v1){{< /nextlink >}}
