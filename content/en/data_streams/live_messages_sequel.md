@@ -12,7 +12,7 @@ To configure Live Messages, identify an appropriate agent to connect to your Kaf
 
 ### Any Datadog agent having access to Kafka can be used for setup
 
-If you self-host Kafka, set up Live Messages on your Kafka broker’s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, set up Live Messages on your Kafka broker’='s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 ### Step-by-step guide
 
@@ -51,11 +51,18 @@ Check your agent logs for entries containing `kafka_consumer` to confirm the int
 Also, verify Datadog is receiving data by examining the metric `kafka.broker_offset` in the metrics explorer, filtering by your configured topics.
 
 
-## Required permission: "Data Streams Monitoring Capture Messages"
+## Required permissions
 
-You must have the `Data Streams Monitoring Capture Messages` permission enabled. You can verify or enable this permission by modifying an existing role or creating a new one on the [Roles][1] page.
+You must have the following permissions enabled:
 
-If you don't have sufficient permissions to modify roles, contact your organization's administrator to request access.
+* `Data Streams Monitoring Capture Messages`
+* `Logs Read Index Data`
+* `Logs Read Data`
+* `Logs Live Tail`
+
+You can verify your current permissions on your [Profile page][6].
+
+To enable permissions, edit an existing role or create a new one on the [Roles page][1]. If you don’t have adequate access to modify roles, contact your organization's administrator.
 
 ### Usage
 
@@ -81,3 +88,4 @@ If you don't have sufficient permissions to modify roles, contact your organizat
 [3]: https://app.datadoghq.com/fleet
 [4]: https://app.datadoghq.com/organization-settings/remote-config
 [5]: /integrations/kafka-consumer/?tab=host#setup
+[6]: https://app.datad0g.com/personal-settings/profile
