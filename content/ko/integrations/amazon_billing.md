@@ -106,7 +106,7 @@ AWS 요금 메트릭은 4시간마다 사용할 수 있습니다. Datadog가 메
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_billing" >}}
+{{< get-metrics-from-git "amazon-billing" >}}
 
 
 ### 이벤트

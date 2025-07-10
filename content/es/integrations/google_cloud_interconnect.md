@@ -49,7 +49,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Interconnect de Google Clou
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_interconnect" >}}
+{{< get-metrics-from-git "google-cloud-interconnect" >}}
 
 
 ### Eventos

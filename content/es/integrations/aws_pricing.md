@@ -97,7 +97,7 @@ Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucci
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "aws_pricing" >}}
+{{< get-metrics-from-git "aws-pricing" >}}
 
 
 ### Eventos
@@ -105,7 +105,7 @@ Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucci
 AWS Pricing no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "aws_pricing" >}}
+{{< get-service-checks-from-git "aws-pricing" >}}
 
 
 ## Solucionar problemas

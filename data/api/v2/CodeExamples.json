@@ -303,6 +303,13 @@
       "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
     }
   ],
+  "CreateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+    }
+  ],
   "UpdateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -315,6 +322,13 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -423,6 +437,13 @@
       "group": "downtimes",
       "suffix": "",
       "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
+  "CreateEvent": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Post an event returns \"OK\" response"
     }
   ],
   "SearchEvents": [
