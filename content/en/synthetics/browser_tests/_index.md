@@ -43,7 +43,7 @@ You may create a test using one of the following options:
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
-    
+
   1. Click the **+** template to start a new Browser Test from scratch.
   1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
   1. Add a **name**: The name of your browser test.
@@ -225,6 +225,78 @@ You can switch tabs in a browser test recording in order to perform an action on
 
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
+
+## Step Replay
+
+Step Replay lets you re-run one or more steps of your browser test directly from the Datadog Synthetics Chrome extension. This feature is designed to help you quickly set up the right state when adding or editing steps in the middle of a long test, without having to manually replay the entire journey from scratch.
+
+> The current version of the extension does not have Chrome’s debugger permission, as a result:
+> - Some advanced actions are not yet supported.
+> - Certain steps (like click or hover) may behave differently than in a full Synthetics test run.
+> - JavaScript-based assertions or extractions, keystroke simulations, and email interactions are currently unavailable.
+
+### How to use Step Replay
+
+You can replay steps in three ways:
+
+**Single Step Replay:** Re-execute a single step:
+Hover the step, click on the play button to replay only this step
+{{< img src="synthetics/browser_tests/recording__replay--replay-one-step.mp4" alt="Single Step Replay" video="true" height="400px" >}}
+
+**Replay All Steps:** Run the entire sequence of steps as currently defined in the recorder:
+Click on the replay all icon (⏩︎) on top of the step list to replay all steps
+{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
+
+**Replay Selected Steps:** Run a subset of steps you select in the step list:
+Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.
+{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
+
+### Fully Supported Steps
+
+These steps are fully supported in the current version of Step Replay, and behave consistently with the Synthetics platform:
+
+- Extract Variable
+- Go to URL
+- Refresh
+- Scroll
+- Select Option
+- Wait
+- Assert Checkbox State
+- Assert Current URL
+- Assert Element Attribute
+- Assert Element Content
+- Assert Element Present
+- Assert File Download
+- Assert Page Contains
+- Assert Page Lacks
+
+### Debugger Permissions & Upcoming Improvements
+
+Currently, the Step Replay feature runs without Chrome’s debugger permission. This means some advanced user actions are either not yet supported or may behave differently compared to full Synthetics test runs.
+
+An upcoming release of the Chrome extension will enable debugger permission, bringing Step Replay much closer to full feature compatibility with the Synthetics platform, providing:
+
+- **More accurate simulation of user behavior:** Complex interactions like keystrokes, dynamic page updates, and UI transitions will match the behavior observed in full test runs on the Synthetics platform.
+- **Support for advanced Step Types:** Steps previously unsupported or limited will become fully functional:
+  - Assert from JavaScript
+  - Extract from JavaScript
+  - Press Key
+  - Type Text
+- **Enhanced fidelity for click and hover:** These steps will behave identically to how they execute in the Synthetics platform.
+
+We’re actively working on this enhancement and expect to release it soon. Stay tuned for update notifications in the extension or Synthetics UI.
+
+### Step Types Not Yet Supported
+
+The following steps are currently not available in Step Replay, even with debugger permission. They may be added in future versions:
+
+- Assert Email
+- Assert Requests
+- Extract from Email Body
+- Go to Email Link
+- Upload Files
+- Assert Natural Language
+- Run API Test
 
 ## Permissions
 
