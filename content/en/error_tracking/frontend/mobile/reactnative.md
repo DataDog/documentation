@@ -560,8 +560,6 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 If using `datadog-react-native-wizard` did not succeed or if you don't want to upload your symbolication files automatically on each release, follow the next steps to symbolicate crash reports.
 
-<br>
-
 #### Upload JavaScript source maps on iOS builds
 
 First, you need to install `@datadog/datadog-ci` as a dev dependency to your project:
@@ -718,7 +716,6 @@ yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $
 ```
 {{% /collapse-content %}}
 
-<br>
 
 #### Upload JavaScript source maps on Android builds
 
@@ -791,7 +788,6 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 {{% /collapse-content %}}
 
-<br>
 
 #### Upload iOS dSYM files
 
@@ -801,7 +797,6 @@ For more information, see the [iOS Crash Reporting and Error Tracking documentat
 
 {{% /collapse-content %}}
 
-<br>
 
 #### Upload Android Proguard mapping files
 
@@ -857,42 +852,6 @@ Inside the loop, add the following snippet:
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
 {{% /collapse-content %}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
