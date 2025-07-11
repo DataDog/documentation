@@ -48,7 +48,7 @@ Google Cloud Dataproc 로그는 Google Cloud Logging으로 수집하여 클라�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_dataproc" >}}
+{{< get-metrics-from-git "google-cloud-dataproc" >}}
 
 
 ### 이벤트

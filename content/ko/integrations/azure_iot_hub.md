@@ -43,7 +43,7 @@ Azure Provisioning Service는 사람의 개입 없이 실시간 및 자동으로
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_iot_hub" >}}
+{{< get-metrics-from-git "azure-iot-hub" >}}
 
 
 ### 이벤트

@@ -27,7 +27,7 @@ custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: traefik
 integration_id: traefik
 integration_title: Traefik

@@ -11,10 +11,11 @@ title: Guías del Agent
 
 {{< whatsnext desc="Configuration guides:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Variables de entorno del Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Instalación del Agent en un servidor con una conectividad limitada a Internet{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Configurar Ansible utilizando un rol Datadog independiente{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Desinstalación del Agent{{< /nextlink >}}
+    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Instalar el Agent en un servidor con conectividad limitada a internet{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Configurar Ansible utilizando un rol independiente de Datadog{{< /nextlink >}}
+    {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}¿Cómo desinstalo el Agent?{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}Rotación de claves Linux 2024{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías de Windows:" >}}
@@ -38,10 +39,10 @@ title: Guías del Agent
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
-    {{< nextlink href="agent/guide/version_differences" >}}Diferencias entre versiones del Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Actualización entre versiones menores del Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Gestión de la versión de Python: Uso de Python v3 con el Datadog Agent v6{{< /nextlink >}}
-    {{< nextlink href="agent/guide/python-3" >}}Migración personalizada del check de Python v2 a v3{{< /nextlink >}}
+    {{< nextlink href="agent/guide/version_differences" >}}Diferencias de versiones del Agent{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade_agent_fleet_automation" >}} Actualiza tu Datadog Agent {{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Gestión de versiones de Python: Utilizar Python 3 con el Datadog Agent v6{{< /nextlink >}}
+    {{< nextlink href="agent/guide/python-3" >}}Migración de check personalizado de Python 2 a 3{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 6 guides:" >}}

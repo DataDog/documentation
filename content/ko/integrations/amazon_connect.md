@@ -58,7 +58,7 @@ Amazon Connect를 설정해 S3 버킷이나 클라우드와치(CloudWatch)로 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_connect" >}}
+{{< get-metrics-from-git "amazon-connect" >}}
 
 
 ### 이벤트
