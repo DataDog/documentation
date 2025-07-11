@@ -545,7 +545,7 @@ For each cloud account that you would like to receive recommendations for:
    - For Azure, this requires using the App Registration method to collect billing data.
 1. Enable [resource collection][3] for recommendations.
    - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
-   - For Azure, enable resource collection via the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
+   - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
