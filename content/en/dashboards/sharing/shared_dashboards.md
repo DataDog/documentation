@@ -25,7 +25,7 @@ further_reading:
 
 Shared dashboards in Datadog allow external users or those who prefer not to log in to view your dashboards. You can create multiple shared dashboards, each with its own set of configuration options.
 
-To share a dashboard, click on "Share" then Share dashboard" at the top right of the dashboard page. To view or edit existing shared dashboards, click "Share" then "Manage shared dashboards".
+To share a dashboard, click **Share** then **Share dashboard** at the top-right of the dashboard page. To view or edit existing shared dashboards, click **Share** then **Manage shared dashboards**.
 
 {{< img src="/dashboards/sharing/shared_dashboards/manage_shared_dashboards.png" alt="Example of an manage shared dashboards modal" style="width:90%;" >}}
 
