@@ -27,6 +27,8 @@ You can accomplish the following objectives:
 * Quantify feature adoption
 * Identify the steps that led to a specific browser error
 
+While there is no explicit cap on the total number of actions that can be collected by the RUM Browser SDK during a session, there are technical limitations on individual event sizes and the payload sent. For further details about limitations on actions, see [RUM Browser Troubleshooting documentation][8].
+
 ## Manage information being collected
 
 The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
@@ -121,3 +123,4 @@ For more information, see [Send Custom Actions][5].
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
 [6]: /data_security/real_user_monitoring/#mask-action-names
 [7]: /real_user_monitoring/browser/frustration_signals/
+[8]: /real_user_monitoring/browser/troubleshooting/
