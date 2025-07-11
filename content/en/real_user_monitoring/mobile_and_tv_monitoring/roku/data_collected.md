@@ -15,11 +15,11 @@ site_support_id: rum_roku
 
 ## Overview
 
-The RUM Roku SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM Roku SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
+There are additional [telemetry and attributes that are specific to a given event type](#event-specific-telemetry-and-attributes). For example, the telemetry `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
 
 | Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -97,13 +97,13 @@ You can enable [tracking user info][5] globally to collect and apply user attrib
 | `usr.email`    | string | Email of the user.      |
 
 
-## Event-specific metrics and attributes 
+## Event-specific telemetry and attributes 
 
-Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 
-### Session metrics
+### Session KPIs
 
-| Metric                    | Type        | Description                                         |
+| KPI                    | Type        | Description                                         |
 | ------------------------- | ----------- | --------------------------------------------------- |
 | `session.time_spent`      | number (ns) | Time spent on a session.                            |
 | `session.view.count`      | number      | Count of all views collected for this session.      |
@@ -126,12 +126,12 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.ip`                | string  | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8].                                |
 | `session.useragent`         | string  | System user agent info to interpret device info.                                                                                                                                                              |
 
-### View metrics
+### View telemetry
 
 RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
 
 
-| Metric                 | Type        | Description                                                                  |
+| Telemetry                 | Type        | Description                                                                  |
 | ---------------------- | ----------- | ---------------------------------------------------------------------------- |
 | `view.time_spent`      | number (ns) | Time spent on this view.                                                     |
 | `view.long_task.count` | number      | Count of all long tasks collected for this view.                             |
@@ -148,15 +148,15 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.url`     | string | Canonical name of the class corresponding to the event.   |
 | `view.name`    | string | Customizable name of the view corresponding to the event. |
 
-### Resource metrics
+### Resource telemetry
 
 
-| Metric                         | Type           | Description                                                                                                                                |
+| Telemetry                         | Type           | Description                                                                                                                                |
 | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `resource.duration`            | number (ns)    | Entire time spent loading the resource.                                                                                                    |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                             |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
-| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this telemetry does not appear (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                      |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
@@ -201,9 +201,9 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.domain` | string | The resource provider domain.                                                         |
 | `error.resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`). |
 
-### Action timing metrics
+### Action timing telemetry
 
-| Metric                   | Type        | Description                                        |
+| Telemetry                   | Type        | Description                                        |
 | ------------------------ | ----------- | -------------------------------------------------- |
 | `action.loading_time`    | number (ns) | The loading time of the action.                    |
 | `action.long_task.count` | number      | Count of all long tasks collected for this action. |
