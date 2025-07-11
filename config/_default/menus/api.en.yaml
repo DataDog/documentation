@@ -2909,6 +2909,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List assets SBOMs
+      url: '#list-assets-sboms'
+      identifier: security-monitoring-list-assets-sboms
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAssetsSBOMs
+        unstable:
+          - v2
+        order: 28
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
