@@ -1,18 +1,16 @@
 ---
-title: Live Messages (v2)
+title: Messages
 ---
 
-Live Messages allows you to view messages at specific offsets within Kafka. Inspecting these live messages can be crucial when troubleshooting issues related to specific services or data streams.
-
-(Insert Screenshot here)
+The Messages feature allows you to view messages at specific offsets within Kafka. Inspecting these messages can be crucial when troubleshooting issues related to specific services or data streams.
 
 ## Setup
-Before diving into detailed configuration steps, here's a quick overview of what's involved in setting up Live Messages:
+Before diving into detailed configuration steps, here's a quick overview of what's involved in setting up the Messages feature:
 
-| Step               | Description                                                                                                                                                        | Setup Guides              |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| Agent setup        | An agent needs Kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                                            | [Agent Setup][1]          |
-| Verify permissions | You'll need a few log access permissions which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog to use Live Messages | [Required Permissions][2] |
+| Step               | Description                                                                                                                                       | Setup Guides              |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| Agent setup        | An agent needs Kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                           | [Agent Setup][1]          |
+| Verify permissions | You'll need a few log access permissions which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
 
 
 ### Agent Setup
@@ -20,7 +18,7 @@ Before diving into detailed configuration steps, here's a quick overview of what
 #### Selecting an Agent
 Any Datadog agent having access to Kafka can be used for setup.
 
-If you self-host Kafka, set up Live Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, set up Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 #### Step-by-step guide
 
@@ -73,25 +71,6 @@ You must have the following permissions enabled:
 You can verify your current permissions on your [Profile page][7].
 
 To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
-
-## Usage
-
-(TBD)
-
-## Additional details
-
-### Message storage and access
-
-(TBD)
-
-### Sensitive information redaction
-
-(TBD)
-
-### SSL encryption on Kafka
-
-
-(TBD)
 
 [1]: #agent-setup
 [2]: #required-permissions
