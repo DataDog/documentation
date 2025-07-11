@@ -46,11 +46,17 @@ further_reading:
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+
+{{< /site-region >}}
+
 ## Overview
 
 Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 
 
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the latest version of Software Catalog." >}}
+{{< callout url="https://forms.gle/fwzarcSww6By7tn39" btn_hidden="true" header="false" >}}
+<a href="https://forms.gle/fwzarcSww6By7tn39">Share feedback</a> on new and upcoming Software Catalog features!
 {{< /callout >}}
 
 ## Supported versions
@@ -94,9 +100,9 @@ For detailed information about each version, including full schemas and example 
 - **Enhanced relationship mapping**: With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 - **Inheritance of system metadata**: Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
 - **Precise code location**: Add the mapping of your code location for your service. The `codeLocations` section in v3.0 specifies the locations of the code with the repository that contains the code and its associated `paths`. The `paths` attribute is a list of [globs][4] that should match paths in the repository.
-- **(In Preview) Custom entities**: Define custom entity types beyond Service, System, Datastore, Queue, and API. Scope scorecards and actions to specific entity types.
-- **(In Preview) Integrations**: Integrate with third-party tools to dynamically source information related to your components (for example, GitHub pull requests, PagerDuty incidents, and GitLab pipelines). Report on and write scorecard rules against any third-party source.
-- **(In Preview) Group by product or domain**: Organize components by product, enabling multiple layers of hierarchical grouping.
+- **Custom entities**: Define custom entity types beyond Service, System, Datastore, Queue, and API. Scope scorecards and actions to specific entity types.
+- **(Upcoming) Integrations**: Integrate with third-party tools to dynamically source information related to your components (for example, GitHub pull requests, PagerDuty incidents, and GitLab pipelines). Report on and write scorecard rules against any third-party source.
+- **(Upcoming) Group by product or domain**: Organize components by product, enabling multiple layers of hierarchical grouping.
 
 ### Schema structure
 
@@ -531,10 +537,11 @@ extensions:
       schedule: "* * * * *"
       env:
         - name: "staging"
-          ci_pipeline: "//domains/examples/apps/hello-joe/config/k8s:release-staging"
-          branch: "hello-joe/staging"
-          schedule: "* * * * 1"
+          ci_pipeline: "ci-tool://shopist/k8s/staging-deploy"
+          branch: "main"
+          schedule: "0 9 * * 1"
 {{< /code-block >}}
+
 
 ## Schema validation through IDE plugin 
 
@@ -563,5 +570,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [16]: /api/latest/software-catalog/#create-or-update-entities
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
 [18]: http://json-schema.org/
-[19]: https://www.schemastore.org/json/
+[19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json

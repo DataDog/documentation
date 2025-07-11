@@ -20,6 +20,9 @@ further_reading:
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"
+  - link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+    tag: "Blog"
+    text: "Route your monitor alerts with Datadog monitor notification rules"
 cascade:
     algolia:
         rank: 70

@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用すると、Azure ExpressRoute
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_express_route" >}}
+{{ get-metrics-from-git "azure-expressroute" }}
 
 
 ### イベント

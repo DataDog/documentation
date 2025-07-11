@@ -31,7 +31,7 @@ version: '1.0'
 
 Amazon DocumentDB es un servicio de base de datos de documentos rápida, escalable, de alta disponibilidad y totalmente gestionada que admite cargas de trabajo de MongoDB.
 
-## Configuración
+## Configurar
 
 ### Instalación
 

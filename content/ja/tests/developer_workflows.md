@@ -23,10 +23,6 @@ title: Datadog で開発者のワークフローを強化する
 
 ## 概要
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization は、現在選択されているサイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
-{{< /site-region >}}
-
 [Test Optimization][5] は、GitHub などの外部パートナーだけでなく、開発者向けの他の Datadog 製品とも連携し、以下のような機能を通して開発者のワークフローを効率化します。
 
 - [GitHub のプルリクエストコメントでテストサマリーを有効にする](#test-summaries-in-github-pull-requests)

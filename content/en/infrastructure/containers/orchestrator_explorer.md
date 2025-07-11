@@ -30,6 +30,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -47,6 +48,7 @@ For verification, ensure that the `orchestratorExplorer.enabled` parameter is se
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   # (...)
   processAgent:
     enabled: true
@@ -109,6 +111,7 @@ To prevent displaying a large number of irrelevant changes, updates affecting on
 * metadata.resourceVersion
 * metadata.managedFields
 * metadata.generation
+* metadata.annotations["kubernetes.io/config.seen"]
 * status
 
 {{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}

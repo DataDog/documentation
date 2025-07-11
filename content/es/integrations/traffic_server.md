@@ -132,7 +132,7 @@ Comenta la opción `metric_patterns` para recopilar todas las métricas disponib
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "traffic_server" >}}
+{{< get-metrics-from-git "traffic-server" >}}
 
 
 ### Recopilación de logs
@@ -167,7 +167,7 @@ _Disponible para versiones >6.0 del Agent_
 La integración de Traffic Server no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "traffic_server" >}}
+{{< get-service-checks-from-git "traffic-server" >}}
 
 
 ## Solucionar problemas
