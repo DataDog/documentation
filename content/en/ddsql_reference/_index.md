@@ -481,4 +481,4 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
 [3]: https://www.postgresql.org/docs/current/functions-json.html
-[4]: https://docs.datadoghq.com/ddsql_editor/
+[4]: /ddsql_editor/
