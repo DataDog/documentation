@@ -11,7 +11,7 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
-{{< callout url= "[https://forms.gle/ikXdH1dyxQCoSiRV7](https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/)" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics via DDSQL is in Preview. Use this form to request access.
 {{< /callout >}} 
 
