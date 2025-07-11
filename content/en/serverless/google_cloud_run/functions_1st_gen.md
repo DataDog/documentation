@@ -3,15 +3,14 @@ title: Legacy Cloud Run Functions Gen 1
 ---
 
 ## Overview
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatibility layer.
-
-This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support, see [2nd Gen Functions][8], and to collect additional metrics, install the [Google Cloud integration][6].
-
-<div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st Gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your cloud run function to Gen 2 for more features and Datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
 <div class="alert alert-warning">
 <strong>Migrating to 2nd Gen Functions?</strong> We recommend using <a href="/serverless/google_cloud_run/functions">2nd Gen Cloud Run Functions</a> which offer improved performance, better scaling, and better monitoring with Datadog.
 </div>
+
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatibility layer.
+
+<div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st Gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your cloud run function to Gen 2 for more features and Datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
 ## Setup
 
