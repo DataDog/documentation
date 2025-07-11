@@ -168,7 +168,7 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
 
 ###### Consultas personalizadas
 
-La integración de Elasticsearch te permite recopilar métricas personalizadas a través de consultas personalizadas mediante la opción de configuración `custom_queries`. 
+La integración de Elasticsearch te permite recopilar métricas personalizadas a través de consultas personalizadas mediante la opción de configuración `custom_queries`.
 
 **Nota:** Al ejecutar consultas personalizadas, usa una cuenta de solo lectura para asegurarte de que no cambie la instancia de Elasticsearch.
 
@@ -190,7 +190,7 @@ custom_queries:
    tags:
    - custom_tag:1
 ```
-La consulta personalizada se envía como una solicitud `GET`. Si usas un parámetro `payload` opcional, la solicitud se envía como una solicitud `POST`. 
+La consulta personalizada se envía como una solicitud `GET`. Si usas un parámetro `payload` opcional, la solicitud se envía como una solicitud `POST`.
 
 Los `value_path` pueden ser claves de cadena o índices de lista. Por ejemplo:
 ```json
@@ -531,7 +531,7 @@ De manera predeterminada, el Agent no envía todas las siguientes métricas. Par
 - `slm_stats` envía la métrica **elasticsearch.slm.\***
 
 ### Métricas
-{{< get-metrics-from-git "elastic" >}}
+{{< get-metrics-from-git "elasticsearch" >}}
 
 
 ### Eventos
@@ -539,7 +539,7 @@ De manera predeterminada, el Agent no envía todas las siguientes métricas. Par
 El check de Elasticsearch emite un evento a Datadog cada vez que cambia el estado general de tu clúster de Elasticsearch: rojo, amarillo o verde.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "elastic" >}}
+{{< get-service-checks-from-git "elasticsearch" >}}
 
 
 ## Solucionar problemas

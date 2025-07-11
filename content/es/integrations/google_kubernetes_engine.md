@@ -72,7 +72,7 @@ Una vez hecho esto, exporta tus logs de Google Kubernetes Engine desde Google Cl
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_kubernetes_engine" >}}
+{{< get-metrics-from-git "google-kubernetes-engine" >}}
 
 
 ### Eventos

@@ -52,7 +52,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Dataflow 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_dataflow" >}}
+{{< get-metrics-from-git "google-cloud-dataflow" >}}
 
 
 ### Événements

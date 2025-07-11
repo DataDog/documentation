@@ -4,10 +4,6 @@ aliases:
 title: (레거시) 고가용성 및 장애 복구
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines는 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">
 본 지침은 대규모 프로덕션 수준 배포용입니다.
 </div>

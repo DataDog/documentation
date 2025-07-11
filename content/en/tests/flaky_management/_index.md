@@ -17,10 +17,6 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/flaky-test-management/" >}}
-Flaky Test Management is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The [Flaky Test Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
@@ -40,18 +36,29 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
 | **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm a fix and automatically apply this status, instead of manually changing it. |
 
-<div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language. See <a href="#compatibility">Compatibility</a> for details.</div>
+<div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
+
+## Track evolution of flaky tests
+
+Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
+
+- `repository_id`
+- `branch`
+- `flaky_status`
+- `test_codeowners`
+
+The `branch` tag only exists when the test has flaked in the default branch of the repository during the last 30 days. This helps you discard flaky tests that have only exhibited flakiness in feature branches, as these may not be relevant. You can configure the default branch of your repositories under [Repository Settings][2].
 
 ## Investigate a flaky test
 
 For more information about a specific flaky test, use these options in the actions menu at the end of each row:
 
 - **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
-- **View related test executions**: Open the [Test Optimization Explorer][2] populated with all of the test's recent runs.
+- **View related test executions**: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
 
 ## Create cases for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][3] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row. 
+For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 
@@ -59,7 +66,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 1. For the test you are fixing, click **Fix this test** in the Flaky Test Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
-1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`). 
+1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
    - Retries any tests you're attempting to fix 20 times.
    - Runs tests even if they are marked as `Disabled`.
@@ -68,22 +75,28 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 ## Compatibility
 
-Flaky Test Management features have minimum version requirements for each programming language. The table below outlines the minimum versions needed to quarantine, disable, and attempt to fix flaky tests:
+To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language   | Quarantine & Disable | Attempt to fix   |
-| ---------- | -------------------- | ---------------- |
-| .NET       | 3.13.0+              | 3.17.0+          |
-| Go         | 1.73.0+              | Not available    |
-| Java       | 1.48.0+              | 1.50.0+          |
-| JavaScript | 5.44.0+              | 5.52.0+          |
-| Python     | 3.3.0+               | 3.8.0+           |
-| Ruby       | 1.13.0+              | 1.17.0+          |
-
+| Language        | Quarantine & Disable | Attempt to fix   |
+| --------------- | -------------------- | ---------------- |
+| [.NET][5]       | 3.13.0+              | 3.17.0+          |
+| [Go][6]         | 1.73.0+              | Not available    |
+| [Java][7]       | 1.48.0+              | 1.50.0+          |
+| [JavaScript][8] | 5.44.0+              | 5.52.0+          |
+| [Python][9]     | 3.3.0+               | 3.8.0+           |
+| [Ruby][10]       | 1.13.0+              | 1.17.0+          |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test/flaky
-[2]: /tests/explorer
-[3]: /service_management/case_management
+[2]: https://app.datadoghq.com/source-code/repositories
+[3]: /tests/explorer
+[4]: /service_management/case_management
+[5]: /tests/setup/dotnet/
+[6]: /tests/setup/go/
+[7]: /tests/setup/java/
+[8]: /tests/setup/javascript/
+[9]: /tests/setup/python/
+[10]: /tests/setup/ruby/

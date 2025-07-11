@@ -7,8 +7,8 @@ further_reading:
       text: 'Getting Started with Profiler'
 ---
 
-{{< callout url="" btn_hidden="true" header="Try the Full-Host Profiler Preview!">}}
-The Full-Host Profiler is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/full-host-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+Full Host is in Preview.
 {{< /callout >}}
 
 The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetry that sends profiling data to Datadog using the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments such as Docker and Kubernetes.
