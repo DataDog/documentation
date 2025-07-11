@@ -97,7 +97,7 @@ Critical push notifications are only available for On-Call. If you are setting u
 
 5. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
-6. On web, set up notifciation preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
+6. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
 
 7. Test the setup of your critical push notification by tapping **Test push notifications**.
 
@@ -107,6 +107,7 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 
 {{% /tab %}}
 {{< /tabs >}}
+
 ### Custom sounds for critical push
 For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention.
 
