@@ -477,6 +477,7 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][22], which can't be read by any other app installed on the device.
 {{% /collapse-content %}}
 
+<br>
 
 ## Test your implementation
 
@@ -526,6 +527,31 @@ const crashApp = () => {
     crashNativeMainThread('custom error message');
 };
 ```
+<br>
+
+## Limitations
+
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
+
+To compute the size of your source maps and bundle, run the following command:
+
+```shell
+npx react-native bundle \
+  --dev false \
+  --platform ios \
+  --entry-file index.js \
+  --bundle-output build/main.jsbundle \
+  --sourcemap-output build/main.jsbundle.map
+
+sourcemapsize=$(wc -c build/main.jsbundle.map | awk '{print $1}')
+bundlesize=$(wc -c build/main.jsbundle | awk '{print $1}')
+payloadsize=$(($sourcemapsize + $bundlesize))
+
+echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
+```
+
+If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
+
 
 <br>
 
