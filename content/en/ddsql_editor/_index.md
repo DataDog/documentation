@@ -40,6 +40,8 @@ GROUP BY instance_type
 
 ## Explore your telemetry
 
+<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.</div>
+
 View and filter the list of tables and fields in the schema side panel:
 
 {{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Side panel showing a list of available tables for querying in the DDSQL Editor" style="width:90%;" >}}
