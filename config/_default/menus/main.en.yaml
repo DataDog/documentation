@@ -7479,6 +7479,11 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703
+    - name: Correlate Profiling with RUM
+      url: real_user_monitoring/correlate_with_other_telemetry/profiling/
+      parent: rum_correlate_with_other_telemetry
+      identifier: rum_correlate_with_other_telemetry_profiling
+      weight: 704
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
