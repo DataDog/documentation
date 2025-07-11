@@ -58,7 +58,7 @@ For detailed instructions and advanced settings, review the [Kafka consumer inte
 ##### 4. Verify setup
 
 * Review agent logs for `kafka_consumer` entries to confirm successful integration.
-* Verify data ingestion by inspecting the `kafka.broker_offset` metric in Datadog’s Metrics Explorer, filtering by the relevant Kafka topics.
+* Verify data ingestion by inspecting the `kafka.broker_offset` metric in Datadog's Metrics Explorer, filtering by the relevant Kafka topics.
 
 
 ### Required permissions
@@ -72,7 +72,7 @@ You must have the following permissions enabled:
 
 You can verify your current permissions on your [Profile page][7].
 
-To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don’t have adequate access to modify roles, contact your organization's administrator.
+To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
 
 ## Usage
 
