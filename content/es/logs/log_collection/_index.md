@@ -365,7 +365,7 @@ Los atributos prescriben [facetas de logs][9], que se utilizan para filtrar y bu
 
 Para el registro de stack traces, existen atributos específicos que cuentan con una visualización de interfaz de usuario específica en tu aplicación de Datadog, como el nombre de registrador, el subproceso actual, el tipo de error y la propia stack trace.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Atributos de una stack trace analizada >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Atributos de una stack trace analizada" >}}
 
 Para activar estas funciones, utiliza los siguientes nombres de atributos:
 
