@@ -552,7 +552,6 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 
 If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
 
-
 <br>
 
 ## Additional configuration options
@@ -560,6 +559,8 @@ If a `build` directory does not already exist, create it first by running `mkdir
 ### Alternatives to `datadog-react-native-wizard` for symbolication
 
 If using `datadog-react-native-wizard` did not succeed or if you don't want to upload your symbolication files automatically on each release, follow the next steps to symbolicate crash reports.
+
+<br>
 
 #### Upload JavaScript source maps on iOS builds
 
@@ -715,8 +716,9 @@ export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
-
 {{% /collapse-content %}}
+
+<br>
 
 #### Upload JavaScript source maps on Android builds
 
@@ -789,6 +791,8 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 {{% /collapse-content %}}
 
+<br>
+
 #### Upload iOS dSYM files
 
 {{% collapse-content title="Manually on each build" level="h5" %}}
@@ -796,6 +800,8 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 For more information, see the [iOS Crash Reporting and Error Tracking documentation][23].
 
 {{% /collapse-content %}}
+
+<br>
 
 #### Upload Android Proguard mapping files
 
