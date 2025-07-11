@@ -7,51 +7,60 @@ Live Messages allows you to view messages at specific offsets within Kafka. Insp
 (Insert Screenshot here)
 
 ## Setup
+Before diving into detailed configuration steps, here's a quick overview of what's involved in setting up Live Messages:
 
-To configure Live Messages, identify an appropriate agent to connect to your Kafka cluster and enable the Kafka consumer integration.
+| Step               | Description                                                                                                                                                         | Setup Guides              |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| Agent setup        | An agent needs kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                                             | [Agent Setup][1]          |
+| Verify permissions | You'll need a few log access permissions which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog to use Live Messages  | [Required Permissions][2] |
 
-### Any Datadog agent having access to Kafka can be used for setup
 
-If you self-host Kafka, set up Live Messages on your Kafka broker’='s agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+### Agent Setup
 
-### Step-by-step guide
+#### Any Datadog agent having access to Kafka can be used for setup
 
-Perform all steps below on the same agent:
+If you self-host Kafka, set up Live Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
-#### 1. Verify agent version
+#### Step-by-step guide
 
-Ensure your agent is running version `7.69.0` or newer.
+Complete the following steps on the same Datadog agent:
 
-#### 2. Enable [remote configuration][2]
+##### 1. Verify agent version
 
-Ensure Remote Configuration is enabled for your agent. It is typically enabled by default, and you can confirm this on the [Fleet Automation page][3]. Additionally, verify that Remote Configuration is enabled at the organization level by visiting the [Remote Configuration settings page][4].
+Ensure your agent is running version `7.69.0` or later.
 
-#### 3. Configure Kafka consumer integration
+##### 2. Enable [remote configuration][3]
 
-Create or update the Kafka consumer configuration file at `[agent config directory]/kafka_consumer.d/conf.yaml` with the following example:
+Ensure Remote Configuration is enabled for your agent. It is typically enabled by default, and you can confirm this on the [Fleet Automation page][4]. Additionally, verify that Remote Configuration is enabled at the organization level by visiting the [Remote Configuration settings page][5].
 
+##### 3. Configure Kafka consumer integration
+Create or update the Kafka consumer configuration file at
+
+```
+[agent config directory]/kafka_consumer.d/conf.yaml
+```
+
+with the following example:
 ```yaml
 init_config:
 
 instances:
-  - kafka_connect_str: kafka:29092 (use your own kafka string)
+  - kafka_connect_str: kafka:29092 # Replace with your Kafka cluster address
     monitor_unlisted_consumer_groups: true
     tags:
       - env:staging
 ```
-
 Ensure you correctly tag your clusters to facilitate filtering and identification.
 
-For more comprehensive instructions and advanced configuration options, see the [Kafka consumer integration documentation][5].
+For detailed instructions and advanced settings, review the [Kafka consumer integration documentation][6].
 
-#### 4. Verify setup
+##### 4. Verify setup
 
-Check your agent logs for entries containing `kafka_consumer` to confirm the integration is active.
+* Review agent logs for `kafka_consumer` entries to confirm successful integration.
+* Verify data ingestion by inspecting the `kafka.broker_offset` metric in Datadog’s Metrics Explorer, filtering by the relevant Kafka topics.
 
-Also, verify Datadog is receiving data by examining the metric `kafka.broker_offset` in the metrics explorer, filtering by your configured topics.
 
-
-## Required permissions
+### Required permissions
 
 You must have the following permissions enabled:
 
@@ -60,32 +69,34 @@ You must have the following permissions enabled:
 * `Logs Read Data`
 * `Logs Live Tail`
 
-You can verify your current permissions on your [Profile page][6].
+You can verify your current permissions on your [Profile page][7].
 
-To enable permissions, edit an existing role or create a new one on the [Roles page][1]. If you don’t have adequate access to modify roles, contact your organization's administrator.
+To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don’t have adequate access to modify roles, contact your organization's administrator.
 
-### Usage
-
-(TBD)
-
-### Additional details
-
-#### Message storage and access
+## Usage
 
 (TBD)
 
-#### Sensitive information redaction
+## Additional details
+
+### Message storage and access
 
 (TBD)
 
-#### SSL encryption on Kafka
+### Sensitive information redaction
+
+(TBD)
+
+### SSL encryption on Kafka
 
 
 (TBD)
 
-[1]: https://app.datadoghq.com/organization-settings/roles
-[2]: /agent/remote_config
-[3]: https://app.datadoghq.com/fleet
-[4]: https://app.datadoghq.com/organization-settings/remote-config
-[5]: /integrations/kafka-consumer/?tab=host#setup
-[6]: https://app.datad0g.com/personal-settings/profile
+[1]: #agent-setup
+[2]: #required-permissions
+[3]: /agent/remote_config
+[4]: https://app.datadoghq.com/fleet
+[5]: https://app.datadoghq.com/organization-settings/remote-config
+[6]: /integrations/kafka-consumer/?tab=host#setup
+[7]: https://app.datad0g.com/personal-settings/profile
+[8]: https://app.datadoghq.com/organization-settings/roles
