@@ -29,7 +29,7 @@ To share a dashboard, click **Share** then **Share dashboard** at the top-right 
 
 {{< img src="/dashboards/sharing/shared_dashboards/manage_shared_dashboards.png" alt="Example of an manage shared dashboards modal" style="width:90%;" >}}
 
-All shared dashboards in the org and their public accesss settings are listed in the [Shared Dashboards page][2]. You can also add additional security configurations, such as disabling specific sharing types, or setting the Maximum Access Period for invitations in the [Public Sharing Settings page][3].
+All shared dashboards in the organization and their public access settings are listed on the [Shared Dashboards page][2]. You can also add additional security configurations, such as disabling specific sharing types, or setting the Maximum Access Period for invitations on the [Public Sharing Settings page][3].
 
 **Note**: When the shared dashboards feature is disabled, dashboards are no longer publicly accessible. However, their configurations remain viewable and editable. This feature operates independently of the `Active` or `Paused` status of individual dashboards, even `Active` shared dashboards become publicly inaccessible.
 
