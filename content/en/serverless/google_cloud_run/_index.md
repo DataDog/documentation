@@ -14,7 +14,7 @@ further_reading:
 
 Google Cloud Run is a fully managed compute platform that lets you run stateless containers and serverless functions with automatic scaling, built-in load balancing, and pay-only-for-what-you-use billing.
 
-To collect additional metrics, install the [Google Cloud integration][1].
+First, install the [Google Cloud integration][1]. Then, continue below to start monitoring your Cloud Run apps.
 
 [1]:/integrations/google_cloud_platform/
 
