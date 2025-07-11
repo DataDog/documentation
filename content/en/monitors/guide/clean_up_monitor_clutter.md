@@ -20,7 +20,7 @@ It also provides best practices to help maintain a clean monitoring environment,
 
 You must have the [Monitors Write permissions][10].
 
-### Use Cases Covered
+### Use cases
 
 This guide covers several key use cases for cleaning up monitor clutter:
 
@@ -32,21 +32,21 @@ This guide covers several key use cases for cleaning up monitor clutter:
 
 ## Muted for a long period of time
 
-Monitors serve as an early warning system for failures, security threats, and performance issues. However, having monitors muted for a long period of time defeats that purpose, long-term muting often signals that a monitor is obsolete, irrelevant, or too noisy to be useful. These should be reviewed and either re-enabled with proper tuning or retired to reduce clutter and eliminate dead weight from your alerting environment.
+Monitors serve as an early warning system for failures, security threats, and performance issues. However, having monitors muted for a long period of time defeats that purpose, long-term muting often signals that a monitor is obsolete, irrelevant, or too noisy to be useful. These should be reviewed and either re-enabled with proper tuning or retired to reduce clutter and eliminate stale monitors from your alerting environment.
 
-Clean up monitors that are not providing value and replace long term mutes with time bound schedules:
+Clean up monitors that are not providing value and replace long-term mutes with time-bound schedules:
 
 ### 1. Inspect the monitors
 
-Audit monitors that have been muted for a long period of time to understand which are actually needed or useful. Some monitors might be muted for a good reason and you want avoid deleting them.
+Audit monitors that have been muted for a long period of time to understand which are actually needed or useful. Some monitors might be muted for a good reason and you want to avoid deleting them.
 
-To see those monitors, navigate to the [Monitor Quality][1] page and find the list for monitors have been muted for more than 60 days. You can also find muted monitors on the [**Monitors List**][8] with the query `muted_elapsed:<number_of_days>d`.
+To see those monitors, navigate to the [Monitor Quality][1] page and find the list for monitors that have been muted for more than 60 days. You can also find muted monitors on the [**Monitors List**][8] with the query `muted_elapsed:<number_of_days>d`.
 
 After you have your list, you can either take action on each monitor from the Monitor Quality page or do a bulk deletion of monitors with steps 2 and 3.
 
 ### 2. Get the monitor ID list
 
-Get a list of your monitor IDs to programatically automate the changes. Start with the monitors that have been muted for over 60 days.
+Get a list of your monitor IDs to programmatically automate the changes. Start with the monitors that have been muted for over 60 days.
 
 The following CURL command fetches that information:
 
@@ -111,7 +111,7 @@ If you need to send different notifications depending on the tag value that trig
 
 Noisy monitors desensitize teams to real issues. Flapping (when a monitor frequently switches between alert and recovery states) often indicates unstable thresholds, missing evaluation delays, or underlying system volatility.
 
-To reduce noise, review the monitor's evaluation aggregation and the threshold configuration. Adjust the settings to stablize alert behavior, or delete the monitor if it no longer provides value.
+To reduce noise, review the monitor's evaluation aggregation and the threshold configuration. Adjust the settings to stabilize alert behavior, or delete the monitor if it no longer provides value.
 
 Here is how to get a list of monitors that are generating a high volume of alerts:
 
@@ -180,7 +180,7 @@ Composite monitors evaluate their state based on the logical combination of two 
 
 A missing constituent typically means that at least one of the original input monitors has been removed after the composite monitor was created. This causes the composite to be incomplete and potentially misleading in alerting behavior.
 
-**Datadog recommends** reviewing the composite monitors to either replace or restore missing constitutions, or delete the composite monitor. You can find the list of composite monitors with missing constituents on the [Monitor Quality][4] page.
+**Datadog recommends** reviewing the composite monitors to either replace or restore missing constituents, or delete the composite monitor. You can find the list of composite monitors with missing constituents on the [Monitor Quality][4] page.
 
 To programmatically get the list of monitors that are missing constituents:
 
