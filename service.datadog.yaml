@@ -45,7 +45,7 @@ metadata:
   displayName: Documentation site
   tags:
     - team:documentation
-    - support-team:webops-platform
+    - team:webops-platform
   contacts:
     - name: Documentation support Email
       type: email
