@@ -1,5 +1,5 @@
 ---
-title: Cloud Run Containers
+title: Google Cloud Run Containers
 further_reading:
 - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
   tag: 'Blog'
@@ -14,7 +14,7 @@ further_reading:
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/google_cloud/google_cloud_run_in_process">Instrument Google Cloud Run with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with the <code>in-process</code> approach, see <a href="/serverless/google_cloud_run/containers_in_process">Instrument Google Cloud Run In-Process</a>.</div>
 
 ## Setup
 
