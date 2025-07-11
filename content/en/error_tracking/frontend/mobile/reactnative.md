@@ -463,10 +463,19 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
 {{% /collapse-content %}}
 
+<br>
+
+## Data storage
+
+{{% collapse-content title="Android" level="h5" %}}
+
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][21], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
+{{% /collapse-content %}}
 
 
-
-
+{{% collapse-content title="iOS" level="h5" %}}
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][22], which can't be read by any other app installed on the device.
+{{% /collapse-content %}}
 
 
 
@@ -535,6 +544,8 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 [18]: https://github.com/DataDog/datadog-react-native-wizard
 [19]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
 [20]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[21]: https://source.android.com/security/app-sandbox
+[22]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 
 
 
