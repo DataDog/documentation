@@ -15,12 +15,12 @@ further_reading:
 ---
 ## Overview
 
-The Datadog Unity SDK for RUM generates events with associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in the RUM Explorer.
+The Datadog Unity SDK for RUM generates events with associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice KPI values (group by) in the RUM Explorer.
 
 Most Unity Monitoring data is collected by native Datadog iOS and Android SDKs for RUM, and is retained for the same periods of time.
 
-* For iOS event-specific metrics and attributes, see [RUM iOS Data Collected][1].
-* For Android event-specific metrics and attributes, see [RUM Android Data Collected][2].
+* For iOS event-specific telemetry and attributes, see [RUM iOS Data Collected][1].
+* For Android event-specific telemetry and attributes, see [RUM Android Data Collected][2].
 
 ## Further reading
 

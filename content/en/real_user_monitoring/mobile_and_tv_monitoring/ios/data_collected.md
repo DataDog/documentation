@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-The RUM iOS SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [telemetry and attributes that are specific to a given event type](#event-specific-telemetry-and-attributes). For example, the telemetry `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
 
 | Event Type | Retention | Description                         |
 |------------|-----------|-------------------------------------|
@@ -131,11 +131,11 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `usr.email`    | string | Email of the user.      |
 
 
-## Event-specific metrics and attributes
+## Event-specific telemetry and attributes
 
-### Session metrics
+### Session KPIs
 
-| Metric                    | Type        | Description                                         |
+| KPI                    | Type        | Description                                         |
 |---------------------------|-------------|-----------------------------------------------------|
 | `session.time_spent`      | number (ns) | Time spent on a session.                            |
 | `session.view.count`      | number      | Count of all views collected for this session.      |
@@ -161,11 +161,11 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `session.useragent`          | string | System user agent info to interpret device info.                            |
 
 
-### View metrics
+### View telemetry
 
 RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
 
-| Metric                | Type        | Description                                                                  |
+| Telemetry                | Type        | Description                                                                  |
 |-----------------------|-------------|------------------------------------------------------------------------------|
 | `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
@@ -185,9 +185,9 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. | 
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
 
-### Resource metrics
+### Resource telemetry
 
-| Metric                         | Type           | Description                                                                                     |
+| Telemetry                         | Type           | Description                                                                                     |
 |--------------------------------|----------------|-------------------------------------------------------------------------------------------------|
 | `resource.duration`            | number         | Entire time spent loading the resource.                                                         |
 | `resource.size`                | number (bytes) | Resource size.                                                                                  |
@@ -242,9 +242,9 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`). |
 
 
-### Action metrics
+### Action telemetry
 
-| Metric                  | Type        | Description                                   |
+| Telemetry                  | Type        | Description                                   |
 |-------------------------|-------------|-----------------------------------------------|
 | `action.loading_time`   | number (ns) | The loading time of the action.               |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
