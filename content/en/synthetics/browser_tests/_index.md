@@ -243,17 +243,17 @@ Step Replay lets you re-run one or more steps of your browser test directly from
 
 You can replay steps in three ways:
 
-**Single Step Replay:** Re-execute a single step:
-Hover the step, click on the play button to replay only this step
+<strong>1. Single Step Replay:</strong> Re-execute a single step:
 {{< img src="synthetics/browser_tests/recording__replay--replay-one-step.mp4" alt="Single Step Replay" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Hover the step, click on the play button to replay only this step</em></p>
 
-**Replay All Steps:** Run the entire sequence of steps as currently defined in the recorder:
-Click on the replay all icon (⏩︎) on top of the step list to replay all steps
+<strong>2. Replay All Steps:</strong> Run the entire sequence of steps as currently defined in the recorder:
 {{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the replay all icon (⏩︎) on top of the step list to replay all steps</em></p>
 
-**Replay Selected Steps:** Run a subset of steps you select in the step list:
-Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.
+<strong>3. Replay Selected Steps:</strong> Run a subset of steps you select in the step list:
 {{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
+<p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.</em></p>
 
 ### Fully Supported Steps
 
