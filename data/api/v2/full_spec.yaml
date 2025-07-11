@@ -59188,7 +59188,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     post:
       description: Create a new pipeline.
       operationId: CreatePipeline
@@ -59244,7 +59245,8 @@ paths:
         - name: pipeline_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
     post:
       description: 'Validates a pipeline configuration without creating or updating
@@ -59283,7 +59285,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
     delete:
       description: Delete a pipeline.
@@ -59328,7 +59331,8 @@ paths:
         - observability_pipelines_delete
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     get:
       description: Get a specific pipeline by its ID.
       operationId: GetPipeline
@@ -59364,7 +59368,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     put:
       description: Update a pipeline.
       operationId: UpdatePipeline
@@ -59408,7 +59413,8 @@ paths:
         - observability_pipelines_deploy
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
