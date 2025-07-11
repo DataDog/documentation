@@ -22,11 +22,12 @@ The following Python APM Client library release branches are supported:
 {{< partial name="trace_collection/python/supported_versions.html" >}}
 
 Support levels are defined by the following:
-| Level                | Policy |
-|----------------------|--------|
-| General Availability | Bug fixes are released on the most recent General Availability minor release line. New features are released periodically as minor version changes. Critical fixes are backported to the three most recent minor release lines. |
-| Maintenance          | The most recent Maintenance minor release line receives critical fixes. Major versions become end of life 6 months after the new major version is GA. |
-| End of Life (EOL)    | Receives no updates or support. |
+
+| Support Level | Support Provided | Lifecycle Timeline |
+| :--- | :--- | :--- |
+| **General Availability (GA)** | <li>New features and enhancements</li><li>All bug and security fixes (on the latest minor release)</li><li>Critical fixes backported (to the 3 most recent minor releases)</li> | A major version is in GA for **12 months** following its initial `x.0.0` release. |
+| **Maintenance** | <li>Critical security and bug fixes only</li> | A major version enters Maintenance **12 months** after its initial release and remains for **6 months**. |
+| **End of Life (EOL)** | <li>No updates or support</li> | A major version becomes EOL **18 months** after its initial `x.0.0` release. |  
 
 The Python APM Client library supports the following Python runtimes:
 
