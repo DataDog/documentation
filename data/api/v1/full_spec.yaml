@@ -4278,7 +4278,10 @@ components:
           type: array
       type: object
     HourlyUsageAttributionUsageType:
-      description: Supported products for hourly usage attribution requests.
+      description: 'Supported products for hourly usage attribution requests.
+
+        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
+        `estimated_ingested_spans_usage`.'
       enum:
       - api_usage
       - apm_fargate_usage
@@ -8642,7 +8645,10 @@ components:
       - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
-      description: Fields in Usage Summary by tag(s).
+      description: 'Fields in Usage Summary by tag(s).
+
+        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
+        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`.'
       properties:
         api_percentage:
           description: The percentage of synthetic API test usage by tag(s).
@@ -37338,7 +37344,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: Usage type to retrieve.
+      - description: 'Usage type to retrieve. The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_ingested_spans_usage`.'
         in: query
         name: usage_type
         required: true
@@ -37912,8 +37920,13 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: Comma-separated list of usage types to return, or `*` for all
+      - description: 'Comma-separated list of usage types to return, or `*` for all
           usage types.
+
+          The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
+          `estimated_ingested_spans_percentage`.'
         in: query
         name: fields
         required: true
@@ -37925,7 +37938,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageSortDirection'
-      - description: The field to sort by.
+      - description: 'The field to sort by.
+
+          The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
+          `estimated_ingested_spans_percentage`.'
         in: query
         name: sort_name
         required: false
