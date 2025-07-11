@@ -42,7 +42,7 @@ GROUP BY instance_type
 
 <div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.</div>
 
-View and filter the list of tables and fields in the schema side panel:
+View, filter, and built queries in the Data Explorer.
 
 {{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Side panel showing a list of available tables for querying in the DDSQL Editor" style="width:90%;" >}}
 
@@ -50,9 +50,7 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-For Logs and Metrics, use the query builder to help you generate table functions:
-
-{<img width="414" height="116" alt="image" src="https://github.com/user-attachments/assets/09dc368e-5483-413f-bfd5-5fc9bb8e89e2" />}
+For Logs and Metrics, use the query builder to help you generate table functions.
 
 ## Save and share queries
 
