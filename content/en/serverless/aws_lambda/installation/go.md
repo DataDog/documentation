@@ -27,7 +27,7 @@ aliases:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
-{{% tracing-go-v2 %}}
+**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions.
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -218,8 +218,8 @@ import (
   ddlambda "github.com/DataDog/datadog-lambda-go"
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
-  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
