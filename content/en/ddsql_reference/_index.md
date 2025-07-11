@@ -4,12 +4,15 @@ aliases:
 - /logs/workspaces/sql_reference
 - /ddsql_reference/ddsql_default
 products:
-- name: Log Workspaces
-  url: /logs/workspaces/
-  icon: logs
 - name: DDSQL Editor
   url: /ddsql_editor/
   icon: ddsql
+- name: Log Workspaces
+  url: /logs/workspaces/
+  icon: logs
+- name: Notebooks
+  url: /notebooks/
+  icon: notebook
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
@@ -23,9 +26,9 @@ further_reading:
 
 ## Overview
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
+DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
-SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
+This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
@@ -478,3 +481,4 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
 [3]: https://www.postgresql.org/docs/current/functions-json.html
+[4]: /ddsql_editor/

@@ -52,6 +52,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
 | [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
+| [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                      | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 
 
 ## Set up triggers
@@ -76,6 +77,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Cloudtrail Logs             | S3, Cloudwatch |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
+| Network Firewall Logs       | S3, CloudWatch |
 | Redshift Logs               | S3             |
 | S3 Access Logs              | S3             |
 | SSM Command Logs            | Cloudwatch     |
@@ -99,6 +101,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "lambda:InvokeFunction",
     "lambda:List*",
     "lambda:GetPolicy",
+    "network-firewall:DescribeLoggingConfiguration",
+    "network-firewall:ListFirewalls",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
     "s3:GetBucketLogging",
@@ -129,6 +133,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
+    | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall                                  |
+    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls                                                           |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
@@ -349,3 +355,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [54]: /integrations/amazon_step_functions/#send-logs-to-datadog
 [55]: /integrations/amazon_mwaa/
 [56]: /integrations/amazon_mwaa/#log-collection
+[57]: /integrations/amazon_network_firewall/
+[58]: /integrations/amazon_network_firewall/#log-collection
