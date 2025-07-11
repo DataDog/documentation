@@ -114,9 +114,9 @@ Using the Cloud Security severity scoring framework, the rule would be scored as
 - **Severity score**: Possible x Medium = Medium
   - The final severity score is "Medium". This is because a possible likelihood mixed with a Medium impact results in an overall score of Medium.
 
-## CVSS 3.1
+## CVSS 4.0
 
-Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 3.1 ([CVSS 3.1][5]) to determine a base score for a vulnerability. It then modifies the base score to take into account the following:
+Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 4.0 ([CVSS 4.0][5]) and falls back to older versions (3.1, 3.0, 2) in absence of 4.0 scoring to determine a base score for a vulnerability. It then modifies the base score to take into account the following:
 
 - Whether the underlying infrastructure is running and how wide-spread the impact is.
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
@@ -131,6 +131,6 @@ Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 
 [2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-instance-ec2-instances-and-autoscaling-groups-should-enforce-imdsv2/
 [3]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
 [4]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
-[5]: https://www.first.org/cvss/v3-1/
+[5]: https://www.first.org/cvss/v4-0/
 [6]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [7]: https://www.first.org/epss/

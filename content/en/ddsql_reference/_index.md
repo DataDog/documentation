@@ -4,12 +4,15 @@ aliases:
 - /logs/workspaces/sql_reference
 - /ddsql_reference/ddsql_default
 products:
-- name: Log Workspaces
-  url: /logs/workspaces/
-  icon: logs
 - name: DDSQL Editor
   url: /ddsql_editor/
   icon: ddsql
+- name: Log Workspaces
+  url: /logs/workspaces/
+  icon: logs
+- name: Notebooks
+  url: /notebooks/
+  icon: notebook
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"

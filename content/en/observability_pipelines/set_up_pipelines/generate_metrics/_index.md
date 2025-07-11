@@ -1,6 +1,9 @@
 ---
 title: Generate Metrics
 disable_toc: false
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

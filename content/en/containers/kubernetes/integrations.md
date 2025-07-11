@@ -122,6 +122,29 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
 
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -236,6 +259,7 @@ spec:
             logs:
               <LOGS_CONFIG>
 ```
+<div class="alert alert-info">When multiple deployed <code>DatadogAgent</code> CRDs use <code>configDataMap</code>, each CRD writes to a shared ConfigMap named <code>nodeagent-extra-confd</code>. This can cause configurations to override each other. </div>
 
 To monitor a [Cluster Check][1], add an override `extraConfd.configDataMap` to the `clusterAgent` component. You must also enable cluster checks by setting `features.clusterChecks.enabled: true`. 
 
@@ -472,6 +496,30 @@ spec:
    ```
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+
+   For Datadog Operator:
+   ```yaml
+   spec:
+     override:
+       nodeAgent:
+         volumes:
+           - hostPath:
+               path: <PATH_TO_LOCAL_FOLDER>/conf.d
+             name: confd 
+   ```
+
+   For Helm:
+   ```yaml
+   agents:
+     volumes:
+     - hostPath:
+         path: <PATH_TO_LOCAL_FOLDER>/conf.d
+       name: confd
+     volumeMounts:
+     - name: confd
+       mountPath: /conf.d
+   ```
+
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 

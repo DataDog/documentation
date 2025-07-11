@@ -30,6 +30,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -47,6 +48,7 @@ For verification, ensure that the `orchestratorExplorer.enabled` parameter is se
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   # (...)
   processAgent:
     enabled: true

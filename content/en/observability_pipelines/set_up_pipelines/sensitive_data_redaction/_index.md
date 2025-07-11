@@ -3,6 +3,9 @@ title: Sensitive Data Redaction
 disable_toc: false
 aliases:
     - /observability_pipelines/sensitive_data_redaction/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

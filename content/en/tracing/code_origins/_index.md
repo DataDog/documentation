@@ -24,12 +24,6 @@ further_reading:
   text: "Learn how to add custom spans with Dynamic Instrumentation"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Code Origins is currently in Preview. To join the preview, follow the instructions below to enable the feature on your compatible services. 
-
-To submit questions, feedback, or requests related to Code Origins, <a href="https://docs.google.com/forms/d/e/1FAIpQLScyeRsF2GJjYdf9bUyeDjt8_9id-gvqiBU1SHR3ioDGe5eF3g/viewform?usp=header">fill out this form</a> with details. 
-{{< /beta-callout >}}
-
 ## Overview
 
 Code Origins captures the exact locations in your codebase where APM spans are created. When enabled on a compatible service, it automatically adds file path, line number, and function name to each [service entry span][12], making it easier to:

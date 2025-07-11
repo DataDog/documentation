@@ -3,6 +3,9 @@ title: Dual Ship Logs
 disable_toc: false
 aliases:
     - /observability_pipelines/dual_ship_logs/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

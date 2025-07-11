@@ -11,9 +11,9 @@ further_reading:
 
 ## Overview
 
-Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data. 
+Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
 
-Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. 
+Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface.
 
 ## Create a table
 
@@ -70,13 +70,36 @@ After you have your pivot table, you can click **Show Graphs** and add up to six
 Create tables and analyze the data pulled from the following data sources:
 
 | Data Source          | Product page       |
-| -------------------- | -----------        | 
+| -------------------- | -----------        |
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Infrastructure Data (Preview) | [Infrastructure Data][6] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
 | Real User Monitoring | [RUM Explorer][8]  |
 | Reference Tables     | [Reference Tables][9] |
+
+## Configuring a spreadsheet
+
+### Permissions
+
+By default, all users have full access to spreadsheets.
+
+Use granular access controls to limit the [roles][10] that may edit a particular spreadsheet:
+1. While viewing a spreadsheet, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the spreadsheet.
+2. Click **Add**. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**.
+
+**Note:** To maintain your edit access to the spreadsheet, you must include at least one role that you are a member of before saving.
+
+You must have edit access to restore general access to a restricted spreadsheet. Complete the following steps:
+1. While viewing the spreadsheet, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
+
 
 ## Further reading
 
@@ -92,3 +115,4 @@ Create tables and analyze the data pulled from the following data sources:
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables
+[10]: /account_management/rbac/

@@ -3,6 +3,9 @@ title: Archive Logs to Datadog Archives
 disable_toc: false
 aliases:
     - /observability_pipelines/archive_logs/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview
