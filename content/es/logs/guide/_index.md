@@ -10,7 +10,7 @@ title: Guías de logs
 ---
 
 {{< whatsnext desc="Logging Without LimitsTM" >}}
-    {{< nextlink href="log/guide/access-your-loguear-data-programmatically" >}}Acceso programático a los datos de logs mediante la API de búsqueda de logs {< /nextlink >}}
+    {{< nextlink href="log/guide/access-your-loguear-data-programmatically" >}}Acceso programático a los datos de logs mediante la API de búsqueda de logs {{< /nextlink >}}
     {{< nextlink href="log/guide/getting-started-lwl" >}}Guía Logging Without LimitsTM{{< /nextlink >}}
     {{< nextlink href="tracing/other_telemetry/connect_logs_and_traces" >}}Correlacionar logs con trazas (traces){{< /nextlink >}}
     {{< nextlink href="log/guide/correlate-log-with-metrics" >}}Correlación de logs con métricas{{< /nextlink >}}
@@ -22,7 +22,7 @@ title: Guías de logs
 <br>
 
 {{< whatsnext desc="log Collection" >}}
-    {{< nextlink href="/agent/logs/advanced_log_collection" >}}Configuraciones avanzadas de recopilación de logs {< /nextlink >}}
+    {{< nextlink href="/agent/logs/advanced_log_collection" >}}Configuraciones avanzadas de recopilación de logs {{< /nextlink >}}
     {{< nextlink href="/logs/guide/reduce_data_transfer_fees" >}}Cómo enviar logs a Datadog reduciendo las tarifas de transferencia de datos{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Configuración de Datadog Lambda Forwarder{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Envía logs de servicios de AWS con la función Datadog Lambda{{< /nextlink >}}
@@ -34,14 +34,14 @@ title: Guías de logs
     {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Envío de logs de Azure a Datadog{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Reenvío automatizado de logs de Azure {{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-automated-logs-architecture/" >}}Arquitectura y configuración de reenvío automatizado de logs de Azure{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envío de logs de Azure con el recurso de Datadog {< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envío de logs de Azure con el recurso de Datadog {{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Enviar logs de Fluent Bit{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Recopilar logs de Google Cloud con la plantilla Datadog Dataflow{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Recopilar logs de Google Cloud con una suscripción Pub/Sub Push{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Recopilar logs de Heroku{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Guía de solución de problemas de recopilación de logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Guía de solución de problemas de recopilación de logs de Docker{{< /nextlink >}}
-    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Guía de solución de problemas de la recopilación de logs de Lambda {< /nextlink >}}
+    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Guía de solución de problemas de la recopilación de logs de Lambda {{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Configuración de permisos de archivo para la rotación de logs (Linux){{< /nextlink >}}
     {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Utiliza el Datadog Agent sólo para la recopilación de logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}Aumentar el número de logs de archivos recopilados por el Agent{{< /nextlink >}}
