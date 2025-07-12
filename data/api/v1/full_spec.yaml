@@ -17454,6 +17454,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
+        disableAiaIntermediateFetching:
+          description: For SSL test, whether or not the test should disable fetching
+            intermediate certificates from AIA.
+          type: boolean
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
@@ -17697,6 +17701,9 @@ components:
           description: A protobuf file that needs to be gzipped first then base64
             encoded.
           type: string
+        disableAiaIntermediateFetching:
+          description: Disable fetching intermediate certificates from AIA.
+          type: boolean
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
