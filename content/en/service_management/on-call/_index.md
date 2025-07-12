@@ -47,7 +47,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/pages">}}<u>Send a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/triggering_pages">}}<u>Trigger a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
