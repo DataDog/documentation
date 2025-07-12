@@ -300,6 +300,14 @@ components:
       required: true
       schema:
         type: string
+    DatasetID:
+      description: The ID of a defined dataset.
+      example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+      in: path
+      name: dataset_id
+      required: true
+      schema:
+        type: string
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -12042,6 +12050,85 @@ components:
       required:
       - databaseMonitoringTrigger
       type: object
+    Dataset:
+      description: Dataset object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DatasetAttributes'
+        id:
+          description: Unique identifier for the dataset.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          description: Resource type, always "dataset".
+          example: dataset
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    DatasetAttributes:
+      description: Dataset metadata and configuration(s).
+      properties:
+        created_at:
+          description: Timestamp when the dataset was created.
+          format: date-time
+          nullable: true
+          type: string
+        created_by:
+          description: Unique ID of the user who created the dataset.
+          format: uuid
+          type: string
+        name:
+          description: Name of the dataset.
+          example: Security Audit Dataset
+          type: string
+        principals:
+          description: List of access principals, formatted as `principal_type:id`.
+            Principal can be 'team' or 'role'.
+          example:
+          - role:86245fce-0a4e-11f0-92bd-da7ad0900002
+          items:
+            example: role:86245fce-0a4e-11f0-92bd-da7ad0900002
+            type: string
+          type: array
+        product_filters:
+          description: List of product-specific filters.
+          items:
+            $ref: '#/components/schemas/FiltersPerProduct'
+          type: array
+      required:
+      - name
+      - product_filters
+      - principals
+      type: object
+    DatasetCreateRequest:
+      description: Create request for a dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
+    DatasetResponseMulti:
+      description: Response containing a list of datasets.
+      properties:
+        data:
+          description: The list of datasets returned in response.
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+      required:
+      - data
+      type: object
+    DatasetResponseSingle:
+      description: Response containing a single dataset object.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -15746,6 +15833,38 @@ components:
           items:
             $ref: '#/components/schemas/FastlyServiceData'
           type: array
+      type: object
+    FiltersPerProduct:
+      description: Product-specific filters for the dataset.
+      properties:
+        filters:
+          description: 'Defines the list of tag-based filters used to restrict access
+            to telemetry data for a specific product.
+
+            These filters act as access control rules. Each filter must follow the
+            tag query syntax used by
+
+            Datadog (such as `@tag.key:value`), and only one tag or attribute may
+            be used to define the access strategy
+
+            per telemetry type.'
+          example:
+          - '@application.id:ABCD'
+          items:
+            example: '@application.id:ABCD'
+            type: string
+          type: array
+        product:
+          description: 'Name of the product the dataset is for. Possible values are
+            ''apm'', ''rum'', ''synthetics'',
+
+            ''metrics'', ''logs'', ''sd_repoinfo'', ''error_tracking'', ''cloud_cost'',
+            and ''ml_obs''.'
+          example: logs
+          type: string
+      required:
+      - product
+      - filters
       type: object
     Finding:
       description: A single finding without the message and resource configuration.
@@ -48876,6 +48995,151 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/datasets:
+    get:
+      description: Get all datasets that have been configured for an organization.
+      operationId: GetAllDatasets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseMulti'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all datasets
+      tags:
+      - Datasets
+      x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: safe
+    post:
+      description: Create a dataset with the configurations in the request.
+      operationId: CreateDataset
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: Test RUM Dataset
+                  principals:
+                  - role:23bacb30-1c59-11f0-a596-da7ad0900002
+                  product_filters:
+                  - filters:
+                    - '@application.id:application_123'
+                    product: rum
+                type: dataset
+            schema:
+              $ref: '#/components/schemas/DatasetCreateRequest'
+        description: Dataset payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create a dataset
+      tags:
+      - Datasets
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        operationId: DeleteDataset
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/datasets/{dataset_id}:
+    delete:
+      description: Deletes the dataset associated with the ID.
+      operationId: DeleteDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete a dataset
+      tags:
+      - Datasets
+      x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieves the dataset associated with the ID.
+      operationId: GetDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a single dataset by ID
+      tags:
+      - Datasets
+      x-menu-order: 2
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: safe
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -49643,7 +49907,7 @@ paths:
       x-undo:
         type: safe
     post:
-      description: "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n\u2705 **Only events
+      description: "This endpoint allows you to publish events.\n\n\u2705 **Only events
         with the `change` or `alert` category** are in General Availability. For change
         events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
@@ -69546,6 +69810,14 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: 'Data Access Controls in Datadog is a feature that allows administrators
+    and access managers to regulate
+
+    access to sensitive data. By defining Restricted Datasets, you can ensure that
+    only specific teams or roles can
+
+    view certain types of telemetry (for example, logs, traces, metrics, and RUM data).'
+  name: Datasets
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 
