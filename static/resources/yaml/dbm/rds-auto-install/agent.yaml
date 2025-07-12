@@ -1,0 +1,176 @@
+Parameters:
+  LatestAmiId:
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/al2023-ami-minimal-kernel-default-arm64'
+  Owner:
+    Type: String
+    Description: The owner of the CloudFormation stack.
+  ApiKeyStagingArn:
+    Type: String
+    Description: The API key for the staging environment.
+  ApiKeyDdstagingArn:
+    Type: String
+    Description: The API key for the ddstaging environment.
+  DbmPasswordArn:
+    Type: String
+    Description: The ARN of the secret containing the DBM password.
+
+Resources:
+  KeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: !Sub "${Owner}-key-pair"
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t4g.large
+      ImageId: !Ref LatestAmiId
+      Monitoring: true
+      BlockDeviceMappings: 
+      - DeviceName: /dev/xvda
+        Ebs: 
+          VolumeType: gp3
+          DeleteOnTermination: "true"
+          VolumeSize: "16"
+      KeyName: !Ref KeyPair
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          GroupSet:
+            - Fn::ImportValue:
+                !Sub 'vpc-${Owner}-agent-sg'
+          SubnetId:
+            Fn::ImportValue:
+              !Sub 'vpc-${Owner}-SubnetA'
+      IamInstanceProfile: !Ref InstanceProfile
+      # NB: UserData only runs once when the instance is created. If you make changes to UserData for an existing stack,
+      # you should delete the exsiting stack and then rerun `make agent`
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          if ! DD_STAGING_API_KEY=$(aws secretsmanager get-secret-value --secret-id ${ApiKeyStagingArn} --query SecretString --output text); then
+            echo "Error: DD_STAGING_API_KEY is not set. Exiting."
+            exit 1
+          fi
+          export DD_STAGING_API_KEY
+          if ! DD_DDSTAGING_API_KEY=$(aws secretsmanager get-secret-value --secret-id ${ApiKeyDdstagingArn} --query SecretString --output text); then
+            echo "Error: DD_DDSTAGING_API_KEY is not set. Exiting."
+            exit 1
+          fi
+          DD_API_KEY=$DD_DDSTAGING_API_KEY DD_REPO_URL=datad0g.com DD_AGENT_DIST_CHANNEL=nightly bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+          cat <<EOF > /etc/datadog-agent/datadog.yaml
+          api_key: $DD_DDSTAGING_API_KEY
+
+          additional_endpoints:
+            "https://app.datad0g.com":
+              - $DD_STAGING_API_KEY
+
+          tags:
+            - owner:${Owner}
+          database_monitoring:
+            autodiscovery:
+              rds:
+                enabled: true
+            activity:
+              use_v2_api: true
+              additional_endpoints:
+              - host: dbm-metrics-intake.datad0g.com
+                api_key: $DD_STAGING_API_KEY
+            metrics:
+              use_v2_api: true
+              additional_endpoints:
+              - host: dbm-metrics-intake.datad0g.com
+                api_key: $DD_STAGING_API_KEY
+            samples:
+              use_v2_api: true
+              additional_endpoints:
+              - host: dbm-metrics-intake.datad0g.com
+                api_key: $DD_STAGING_API_KEY
+          logs_config:
+            use_http: true
+            use_v2_api: true
+            additional_endpoints:
+            - host: http-intake.logs.datad0g.com
+              api_key: $DD_STAGING_API_KEY
+          EOF
+          if ! DD_DBM_PASSWORD=$(aws secretsmanager get-secret-value --secret-id ${DbmPasswordArn} --query SecretString --output text); then
+            echo "Error: DD_DBM_PASSWORD is not set. Exiting."
+            exit 1
+          fi
+          export DD_DBM_PASSWORD
+          cat <<EOF > /etc/datadog-agent/conf.d/postgres.d/aurora.yaml
+          ad_identifiers:
+            - _dbm_postgres
+
+          init_config:
+          instances:
+            - host: "%%host%%"
+              port: "%%port%%"
+              username: datadog
+              password: "$DD_DBM_PASSWORD"
+              ssl: require
+              dbm: true
+              aws:
+                instance_endpoint: "%%host%%"
+                region: "%%extra_region%%"
+              collect_schemas:
+                enabled: true
+                collection_interval: 60
+              collect_activity_metrics: true
+              collect_settings:
+                enabled: true
+              tags:
+              - "dbinstanceidentifier:%%extra_dbinstanceidentifier%%"
+              - "region:%%extra_region%%"
+              - team:database-monitoring
+              - owner:${Owner}
+          EOF
+
+          systemctl restart datadog-agent
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref InstanceRole
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: EC2InstancePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                - !Ref ApiKeyStagingArn
+                - !Ref ApiKeyDdstagingArn
+                - !Ref DbmPasswordArn
+        - PolicyName: AllowRDS
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - rds:DescribeDBInstances
+                  - rds:DescribeDBClusters
+                Resource: "*"
+
+Outputs:
+  InstanceId:
+    Description: The ID of the EC2 instance.
+    Value: !Ref EC2Instance
+  InstancePublicIp:
+    Description: The public IP address of the EC2 instance.
+    Value: !GetAtt EC2Instance.PublicIp
