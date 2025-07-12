@@ -92,6 +92,8 @@ Notebooks support commonly used rich text features like bold, italics, inline co
 | Feature    | Description                                                                |
 |------------|----------------------------------------------------------------------------|
 | `@Mention` | To mention another user, type `@` followed by their name or email address. |
+| `$TemplateVariable` | Type `$` followed by the name of your existing template variable. |
+| `/date` | Add a date chip by typing `/date`. You can edit the date or time in the popover whenever you click the chip. Also try out `/today` and `/now`! |
 
 ### Slash commands
 
