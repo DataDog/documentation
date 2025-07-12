@@ -19,41 +19,41 @@ title: Data Streams Monitoring for Kafka
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
       <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7)</td>
-      <td>1.9.0</td>
-      <td>1.43.0</td>
+      <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
     <tr>
       <td rowspan="2"><a href="/data_streams/go">Go</a></td>
       <td><a href="https://github.com/confluentinc/confluent-kafka-go">confluent-kafka-go</a></td>
-      <td>1.56.1</td>
-      <td>1.66.0 or later</td>
+      <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="https://github.com/Shopify/sarama">Sarama</a></td>
-      <td>1.56.1</td>
-      <td>1.66.0 or later</td>
+      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}</td>
     </tr>
     <tr>
       <td rowspan="2"><a href="/data_streams/nodejs">Node.js</a></td>
       <td><a href="https://www.npmjs.com/package/kafkajs">kafkajs</a></td>
-      <td>2.39.0 or 3.26.0 or 4.5.0</td>
-      <td>5.25.0 or later</td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="kafkajs" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="kafkajs" type="recommended" >}}</td>
     </tr>
     <tr><td><a href="https://github.com/confluentinc/confluent-kafka-javascript">confluent-kafka-javascript</a></td>
-    <td>5.52.0</td>
-    <td>5.52.0 or later</td>
+    <td>{{< dsm-tracer-version lang="nodejs" lib="confluent-kafka-javascript" type="minimal" >}}</td>
+    <td>{{< dsm-tracer-version lang="nodejs" lib="confluent-kafka-javascript" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/python">Python</a></td>
       <td><a href="https://pypi.org/project/confluent-kafka/">confluent-kafka</a></td>
-      <td>1.16.0</td>
-      <td>2.11.0 or later</td>
+      <td>{{< dsm-tracer-version lang="python" lib="confluent-kafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="python" lib="confluent-kafka" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/data_streams/dotnet">.NET</a></td>
       <td><a href="https://www.nuget.org/packages/Confluent.Kafka">Confluent.Kafka</a></td>
-      <td>2.28.0</td>
-      <td>2.41.0 or later</td>
+      <td>{{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="recommended" >}}</td>
     </tr>
   </tbody>
 </table>
