@@ -199,6 +199,24 @@ min(status:error, status:warn)
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
+#### Exponentiation
+
+You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
+
+Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
+
+```text
+users.sessions{*} * pow(1.1, timeshift(-1))
+```
+
+Here is an example of how to surface anomalies by amplifying value using exponentiation: 
+
+```text
+pow(ping{region:*}, 2)
+```
+
+To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
+
 ### Create an alias
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
