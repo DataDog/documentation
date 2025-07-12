@@ -42,7 +42,7 @@ Supported test frameworks:
 | Karate | >= 1.0.0 |
 | Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
-| Scala Weaver | >= 0.8.4 |
+| Scala Weaver | >= 0.8.4 (Only when using SBT as build system) |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
