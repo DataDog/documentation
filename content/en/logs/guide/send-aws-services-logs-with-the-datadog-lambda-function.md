@@ -84,7 +84,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Step Functions              | CloudWatch     |
 | Web Application Firewall    | S3, CloudWatch |
 
-**Note**: [Subscription filters][48] are not created automatically by the DatadogForwarder. Create them directly on a Log Group.
+**Note**: [Subscription filters][48] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][43] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
