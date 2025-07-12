@@ -6,7 +6,7 @@ further_reading:
       text: 'Collect traces, logs, and custom metrics from Container Apps services'
 ---
 
-<div class="alert alert-info">To instrument your Azure Container Apps applications with a sidecar, see <a href="/serverless/guide/azure_app_service_linux_containers_serverless_init">Instrument Azure Container Apps</a>.</div>
+<div class="alert alert-info">To instrument your Azure Container Apps applications with a sidecar, see <a href="/serverless/azure_container_apps">Azure Container Apps</a>.</div>
 
 ## Overview
 Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
