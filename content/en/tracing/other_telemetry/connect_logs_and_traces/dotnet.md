@@ -218,7 +218,7 @@ After configuring the correlation identifier injection, see [C# Log Collection][
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 ## Manual injection
 

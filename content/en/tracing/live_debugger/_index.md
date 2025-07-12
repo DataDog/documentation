@@ -146,7 +146,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [2]: /dynamic_instrumentation/expression-language/
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [4]: /agent/
-[5]: /agent/remote_config/
+[5]: /remote_configuration
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: https://github.com/DataDog/dd-trace-py
 [8]: https://github.com/DataDog/dd-trace-dotnet
