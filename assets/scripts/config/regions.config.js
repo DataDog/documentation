@@ -542,5 +542,14 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov: 'config.ddog-gov.com'
+  },
+  google_cloud_customer_identity: {
+    us: 'C0147pk0i',
+    us3: 'C0147pk0i',
+    us5: 'C0147pk0i',
+    eu: 'C0147pk0i',
+    ap1: 'C0147pk0i',
+    ap2: 'C0147pk0i',
+    gov: 'C03lf3ewa'
   }
 };
