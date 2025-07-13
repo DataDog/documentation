@@ -53,12 +53,23 @@ To further mitigate this risk, Datadog implements the following security measure
 - The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu images.
 - Access to the scanner instances is tightly controlled through the use of security groups. No inbound access to the scanner is allowed, further reducing the risk of compromising the instance.
 
-To scan Amazon S3 buckets, these permissions are required:
+These permissions are required to scan:
+
+{{< tabs >}}
+{{% tab "Amazon S3 buckets" %}}
 
 - `s3:GetObject`
 - `s3:ListBucket`
 - `kms:Decrypt`
 - `kms:GenerateDataKey`
+
+{{% /tab %}}
+{{% tab "RDS instances" %}}
+
+TKTK
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Deploy scanners
 
