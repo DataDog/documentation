@@ -29,50 +29,133 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see the installation instructions below or [follow the instructions in the app][1].
+This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see the installation instructions below or [follow the instructions in the app][1]`(recommended)`.
 
-## Install the Datadog Agent
+To facilitate the installing process, the UI allows for live customization of the install code to include Application Observability and and Agent Management. 
 
-### Requirements
+{{< img src="agent/basic_agent_usage/windows/windows-install-powershell-ui.mp4" alt="Windows powershell installation in the UI" video="true" >}}
 
-- **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][2].
+## Prerequisites
+- **Windows version**: Windows Server 2016 or later, or Windows 10 or later. See the Agent Supported Platforms documentation for [supported OS versions][200].
 - **Datadog account**: Ensure you have access to a Datadog account and have your Datadog API key.
 - **Administrator privileges**: Administrator access is required on the Windows machine.
 
+## Install the Datadog Agent
+Before you begin, select the [API key][500] you will be using for the installation. 
+
+<div class="alert alert-info"> The core and APM/trace components of the Windows Agent run under the <code>ddagentuser</code> account. The Live Processes component, if enabled, runs under the <code>LOCAL_SYSTEM</code> account. Learn more about the <a href="/agent/faq/windows-agent-ddagent-user/">Datadog Windows Agent User</a>.</div>
+ 
+
 {{< tabs >}}
-{{% tab "Standard installation" %}}
-
-The core and APM/trace components of the Windows Agent run under the `ddagentuser` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
-
-### Install with the GUI
-
-<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you choose to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory for the Datadog files.</div>
-
-1. Download the [Datadog Agent installer][4] to install the latest version of the Agent.
-2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5].
-
-When the install finishes, you are given the option to launch the Datadog Agent Manager.
-
-### Install with the command line
+{{% tab "Powershell [recommended] " %}}
 
 1. Open PowerShell with **Administrator** privileges.
-2. Run the following command to install the Datadog Agent:
-    {{< code-block lang="powershell" >}}
+
+2. Run the following command to install the Datadog Agent. Replace `<DATADOG_API_KEY>` and `<DATADOG_SITE>` with theirs values:
+
+{{< code-block lang="powershell" >}}
 $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="<DATADOG_SITE>"'
 if ($p.ExitCode -ne 0) {
   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
 {{< /code-block >}}
+<br>
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /agent/supported_platforms/?tab=windows
-[3]: /agent/faq/windows-agent-ddagent-user/
-[4]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
-[5]: https://app.datadoghq.com/organization-settings/api-keys
+#### Additional features
+
+You can customize your Agent install command to enable additional features during install. Make sure to  Replace `<DATADOG_API_KEY>`, `<DATADOG_SITE>` and `<VERSION>` with their values where listed.
+
+[Application Performance Monitoring (APM)][600]
+{{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="<DATADOG_SITE>" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:<VERSION>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}} 
+
+
+[Remote Agent Management][700]
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force;
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+$env:DD_API_KEY = '<DATADOG_API_KEY>';
+$env:DD_SITE = '<DATADOG_SITE>';
+$env:DD_REMOTE_UPDATES = 'true';
+$env:DD_AGENT_MAJOR_VERSION = '<VERSION>';
+$env:DD_AGENT_MINOR_VERSION = '<VERSION>';
+(New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/Install-Datadog.ps1', 'C:\Windows\SystemTemp\Install-Datadog.ps1');
+C:\Windows\SystemTemp\Install-Datadog.ps1
+
+``` 
+<br>
+
+[APM][600] and [Remote Agent Management][700]
+
+{{% collapse-content title=" APM + Remote Configuration Agent install command" level="h5" %}}
+
+ Replace `<DATADOG_API_KEY>`, `<DATADOG_SITE>` and `<VERSION>` with their values.
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force;
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+$env:DD_API_KEY = '<DATADOG_API_KEY>';
+$env:DD_SITE = '<DATADOG_SITE>';
+$env:DD_REMOTE_UPDATES = 'true';
+$env:DD_AGENT_MAJOR_VERSION = '<VERSION>';
+$env:DD_AGENT_MINOR_VERSION = '<VERSION>';
+$env:DD_APM_INSTRUMENTATION_ENABLED = "iis"
+$env:DD_APM_INSTRUMENTATION_LIBRARIES = "dotnet:<VERSION>"
+(New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/Install-Datadog.ps1', 'C:\Windows\SystemTemp\Install-Datadog.ps1');
+C:\Windows\SystemTemp\Install-Datadog.ps1
+```
+{{% /collapse-content %}}
+
+<br>
+
+**Note:** `.NET` Application processes running on IIS Webservers will be automatically instrumented once they're restarted.
+
+
+[500]: https://app.datadoghq.com/organization-settings/api-keys
+[600]: https://docs.datadoghq.com/tracing/trace_collection/
+[700]: /agent/fleet_automation/remote_management
+{{% /tab %}}
+
+<!-- ---------------------------------------- -->
+
+{{% tab "Installer" %}}
+
+<div class="alert alert-info"><strong>Note:</strong> The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you choose to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory for the Datadog files.</div>
+
+1. Download the [Datadog Agent installer][400] to install the latest version of the Agent.
+
+2. Run the installer as **an administrator** by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
+
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][500].
+
+
+When the install finishes, you are given the option to launch the Datadog Agent Manager.
+
+[400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[500]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+
+<!-- ---------------------------------------- -->
+{{% tab "Chocolatey" %}}
+
+1. Open PowerShell with **Administrator** privileges.
+
+2. Run this command to install the Agent. Replace `<DATADOG_API_KEY>`, `<DATADOG_SITE>` with their values.
+ 
+```shell
+choco install -ia='APIKEY=<DATADOG_API_KEY> SITE=<DATADOG_SITE>' datadog-agent
+```
 
 {{% /tab %}}
-{{% tab "Installation in Active Directory Domains" %}}
+
+
+<!-- ###################Active Directory Domains################### -->
+{{% tab "Active Directory Domains"%}}
 
 When deploying the Datadog Agent in an Active Directory environment, Datadog recommends using a Group Managed Service Account (gMSA).
 
@@ -151,11 +234,13 @@ if ($p.ExitCode -ne 0) {
 [4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview#software-requirements
 [5]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
 [6]: https://windows-agent.datadoghq.com/installers_v2.json
-
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
+<!-- ###################----END----Active Directory Domains################### -->
 
-#### Installation configuration options 
+<br>
+
+## Installation configuration options 
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
@@ -389,6 +474,8 @@ process_config:
 
 After configuration is complete, [restart the Agent][11].
 
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -408,3 +495,10 @@ After configuration is complete, [restart the Agent][11].
 [12]: http://127.0.0.1:5002
 [13]: /agent/guide/python-3/
 [14]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
+
+[100]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
+[200]: /agent/supported_platforms/?tab=windows
+[300]: /agent/faq/windows-agent-ddagent-user/
+[400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[500]: https://app.datadoghq.com/organization-settings/api-keys
+[600]: https://docs.datadoghq.com/tracing/trace_collection/
