@@ -80,7 +80,6 @@ To build and integrate the SDK successfully, run:
 ```
 carthage bootstrap --use-xcframeworks --no-use-binaries
 ```
-This command avoids inconsistencies that can occur when Carthage tries to resolve prebuilt binaries that don't exist.
 
 After building, link the following XCFrameworks in Xcode:
 ```
