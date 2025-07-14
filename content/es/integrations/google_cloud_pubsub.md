@@ -52,7 +52,7 @@
   - "Category::Colas de mensajes"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Una solución de middleware empresarial orientada a mensajes escalable, flexible y fiable en Google Cloud".
+  "description": "Una solución de middleware empresarial orientada a mensajes escalable, flexible y fiable en Google Cloud"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
