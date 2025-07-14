@@ -40,9 +40,9 @@ To monitor Azure App Service workloads with APM and custom metrics, install inst
 |----|---------|-----|
 |Windows|.NET|[Windows .NET setup][7]|
 |Windows|Java|[Windows Java setup][8]|
-|Windows|Node|[Windows Node setup][13]|
+|Windows|Node.js|[Windows Node.js setup][13]|
 |Linux|.NET|[Linux .NET setup][9]|
-|Linux|Node|[Linux Node setup][9]|
+|Linux|Node.js|[Linux Node.js setup][9]|
 |Linux|PHP|[Linux PHP setup][9]|
 |Linux|Java|[Linux Java setup][10]|
 |Linux|Python|[Linux Python setup][9]|
