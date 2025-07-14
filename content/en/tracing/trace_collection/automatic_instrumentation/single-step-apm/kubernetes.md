@@ -42,7 +42,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 When you run the one-line installation command, there are a few options to customize your experience:
 
-### Configure instrumentation for namespaces and pods
+### Target specific workloads
 
 By default, SSI instruments all services in all namespaces in your cluster. To refine which services are instrumented and how, use one of the following configuration methods, depending on your Agent version. 
 
