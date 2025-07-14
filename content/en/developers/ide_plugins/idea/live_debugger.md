@@ -18,7 +18,7 @@ The **Live Debugger** in the Datadog tool window shows the defined logpoints and
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-The panel has three sections: the first shows a tree of available logpoints, the second shows the status and events for the selected logpoint, and the last shows data for the selected logpoint event, if any.  These components are described in the sections below.
+The panel has three sections: the first shows a tree of available logpoints, the second shows the status and events for the selected logpoint, and the last shows data for the selected logpoint event, if any. These components are described in the sections below.
 
 ### Logpoints tree
 The Logpoints tree on the left-side of the panel shows the available logpoints, with several filter options provided:
@@ -27,7 +27,7 @@ The Logpoints tree on the left-side of the panel shows the available logpoints, 
 * *Only the current repositories* - show only logpoints for the repositories associated with the current project
 * *Only enabled logpoints* - show only logpoints that are enabled
 
-Select a logpoint to display its status and generated events, and to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it.  To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
+Select a logpoint to display its status and generated events, and to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
 ### Logpoint status and events
 The central panel displays status and event information for the selected logpoint. The list shows the most recently generated logpoint events, up to 50 from within the past 24 hours. Select an event to view the generated log message, the captured variables and the runtime stack-trace for the event.
