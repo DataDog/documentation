@@ -27,7 +27,7 @@ Shared dashboards in Datadog allow external users or those who prefer not to log
 
 To share a dashboard, click **Share** then **Share dashboard** at the top-right of the dashboard page. To view or edit existing shared dashboards, click **Share** then **Manage shared dashboards**.
 
-{{< img src="/dashboards/sharing/shared_dashboards/manage_shared_dashboards.png" alt="Example of an manage shared dashboards modal" style="width:90%;" >}}
+{{< img src="/dashboards/sharing/shared_dashboards/manage_modal.png" alt="Example of an manage shared dashboards modal" style="width:90%;" >}}
 
 All shared dashboards in the organization and their public access settings are listed on the [Shared Dashboards page][2]. You can also add additional security configurations, such as disabling specific sharing types, or setting the Maximum Access Period for invitations on the [Public Sharing Settings page][3].
 
@@ -169,7 +169,7 @@ You can temporarily pause or re-enable access to a shared dashboard from this me
 
 View all shared dashboards in your organization and your settings on the [Shared Dashboards][2] page. From this page, you can query, filter, and sort dashboards by share type, last accessed, sharer, and more. You can also find and claim any unowned shared dashboards.
 
-{{< img src="/dashboards/sharing/shared_dashboards/shared_dashboards_list.png" alt="Example of shared dashboards list page" style="width:90%;" >}}
+{{< img src="/dashboards/sharing/shared_dashboards/shared_search.png" alt="Example of shared dashboards list page" style="width:90%;" >}}
 
 ## Further reading
 
