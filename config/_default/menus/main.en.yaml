@@ -4604,36 +4604,31 @@ menu:
       identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Terms and Concepts
-      url: llm_observability/terms/
-      parent: llm_obs
-      identifier: llm_obs_terms
-      weight: 1
     - name: Quickstart
       url: llm_observability/quickstart/
       parent: llm_obs
       identifier: llm_obs_quickstart
       weight: 2
-    - name: Setup
-      url: llm_observability/setup/
+    - name: Application Instrumentation
+      url: llm_observability/instrumentation/
       parent: llm_obs
-      identifier: llm_obs_setup
+      identifier: llm_obs_instrumentation
       weight: 3
     - name: LLM Obs SDK
       url: llm_observability/sdk
       parent: llm_obs
       identifier: llm_obs_sdk
-      weight: 4
+      weight: 301
     - name: Auto Instrumentation
       url: llm_observability/sdk/auto_instrumentation
       parent: llm_obs_sdk
       identifier: llm_obs_setup_auto_instrumentation
-      weight: 401
+      weight: 302
     - name: LLM Obs API
       url: llm_observability/setup/api/
       parent: llm_obs
       identifier: llm_obs_api
-      weight: 6
+      weight: 303
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -4684,6 +4679,11 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 9
+    - name: Terms and Concepts
+      url: llm_observability/terms/
+      parent: llm_obs
+      identifier: llm_obs_terms
+      weight: 1
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
