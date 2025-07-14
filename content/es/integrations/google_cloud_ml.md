@@ -26,7 +26,7 @@
 - "ai/ml"
 "custom_kind": "integration"
 "dependencies": []
-"description": Realiza el seguimiento de las métricas clave de Google Cloud Machine Learning.
+"description": "Realiza el seguimiento de las métricas clave de Google Cloud Machine Learning."
 "display_on_public_website": true
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_ml/"
 "draft": false
@@ -43,7 +43,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_ml"
 "public_title": "Google Cloud ML"
-"short_description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño".
+"short_description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño."
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -54,7 +54,7 @@
   - "Category::IA/ML"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño".
+  "description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño."
   "media": []
   "overview": "README.md#Overview"
   "resources":
