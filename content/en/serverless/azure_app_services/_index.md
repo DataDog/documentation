@@ -66,9 +66,9 @@ Capabilities:
 [4]: https://app.datadoghq.com/serverless/azure/app-service-plan
 [5]: /logs/guide/azure-logging-guide/
 [6]: /integrations/azure/#setup
-[7]: /serverless/azure_app_services/azure_app_services_windows?tab=net#setup
+[7]: /serverless/azure_app_services/azure_app_services_windows/?tab=net
 [8]: /serverless/azure_app_services/azure_app_services_windows?tab=java#setup
-[9]: /serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
+[9]: /serverless/azure_app_services/azure_app_services_linux?tab=net
 [10]: /serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /developers/dogstatsd/
 [12]: /serverless/azure_app_services/azure_app_services_container
