@@ -6,14 +6,12 @@ title: Troubleshooting Ruby App and API Protection
 
 ### No security signals appearing
 
-1. **Verify Agent version**
-   - Ensure you're running Datadog Agent v7.41.1 or higher
-   - Check Agent status: `datadog-agent status`
-
-2. **Check Ruby tracer version**
-   - Confirm you're using Ruby tracer v1.9.0 or higher
-
-3. **Verify configuration or environment variables**
+1. Verify Agent version:
+   - Ensure you're running Datadog Agent v7.41.1 or higher.
+   - Check Agent status: `datadog-agent status`.
+2. Check Ruby tracer version:
+   - Confirm you're using Ruby tracer v1.9.0 or higher.
+3. Verify configuration or environment variables.
 
 #### When using auto-instrumentation
 
@@ -31,13 +29,13 @@ title: Troubleshooting Ruby App and API Protection
 
 ### Performance impact
 
-1. **High latency**
-   - Check Agent resource usage
-   - Verify network connectivity between Agent and Datadog
-   - Consider adjusting sampling rates
+1. High latency:
+   - Check Agent resource usage.
+   - Verify network connectivity between Agent and Datadog.
+   - Consider adjusting sampling rates.
 
-2. **High memory usage**
-   - Adjust Agent resource limits if needed
+2. High memory usage:
+   - Adjust Agent resource limits if needed.
 
 If you suspect performance issues with the Ruby tracer, please create an issue in the [Datadog Ruby tracer GitHub repository][4] with details about your environment and the issue you're facing.
 
@@ -45,9 +43,9 @@ If you suspect performance issues with the Ruby tracer, please create an issue i
 
 If you're still experiencing problems:
 
-1. Check the [Application Security Monitoring troubleshooting guide][1]
-2. Review the [Ruby tracer documentation][2]
-3. Contact [Datadog support][3]
+1. Check the [Application Security Monitoring troubleshooting guide][1].
+2. Review the [Ruby tracer documentation][2].
+3. Contact [Datadog support][3].
 
 [1]: /security/application_security/troubleshooting
 [2]: /tracing/trace_collection/compatibility/ruby

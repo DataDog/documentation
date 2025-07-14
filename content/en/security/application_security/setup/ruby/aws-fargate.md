@@ -2,7 +2,7 @@
 code_lang: aws-fargate
 type: multi-code-lang
 code_lang_weight: 60
-title: Setup App and API Protection for Ruby on AWS Fargate
+title: Set up App and API Protection for Ruby on AWS Fargate
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ further_reading:
 - Ruby application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Ruby tracing library (see version requirements [here][1])
+- Datadog Ruby tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -239,9 +239,9 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 To verify that App and API Protection is working correctly:
 
-1. Send some traffic to your application
-2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog
-3. Find your service and check that App and API protection is enabled in the Coverage column
+1. Send some traffic to your application.
+2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog.
+3. Find your service and check that App and API protection is enabled in the **Coverage** column.
 
 ## Troubleshooting
 

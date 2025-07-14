@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Ruby in Kubernetes
+title: Set up App and API Protection for Ruby in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 20
@@ -26,7 +26,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog Ruby tracing library (see version requirements [here][1])
+- Datadog Ruby tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -196,9 +196,9 @@ kubectl apply -f your-deployment.yaml
 
 To verify that App and API Protection is working correctly:
 
-1. Send some traffic to your application
-2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog
-3. Find your service and check that App and API protection is enabled in the Coverage column
+1. Send some traffic to your application.
+2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog.
+3. Find your service and check that App and API protection is enabled in the **Coverage** column.
 
 ## Troubleshooting
 

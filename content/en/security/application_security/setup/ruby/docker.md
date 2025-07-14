@@ -24,7 +24,7 @@ further_reading:
 - Docker installed on your host
 - Ruby application containerized with Docker
 - Your Datadog API key
-- Datadog Ruby tracing library (see version requirements [here][1])
+- Datadog Ruby tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -158,9 +158,9 @@ When running your container, make sure to connect it to the same Docker network 
 
 To verify that App and API Protection is working correctly:
 
-1. Send some traffic to your application
-2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog
-3. Find your service and check that App and API protection is enabled in the Coverage column
+1. Send some traffic to your application.
+2. Check the [App and API Protection Service Inventory](https://app.datadoghq.com/security/appsec/inventory/services) in Datadog.
+3. Find your service and check that App and API protection is enabled in the **Coverage** column.
 
 ## Troubleshooting
 
