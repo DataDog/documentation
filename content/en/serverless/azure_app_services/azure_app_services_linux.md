@@ -45,7 +45,13 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Add the `Datadog.Trace.Bundle` Nuget package to your project.
+Add the `Datadog.Trace.Bundle` Nuget package to your project. See https://www.nuget.org/packages/Datadog.Trace.Bundle.
+
+For example:
+
+```shell
+dotnet add package Datadog.Trace.Bundle --version 3.21.0
+```
 
 {{% /tab %}} 
 {{% tab "PHP" %}}
