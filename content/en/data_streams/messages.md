@@ -61,5 +61,5 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 [4]: https://app.datadoghq.com/fleet
 [5]: https://app.datadoghq.com/organization-settings/remote-config
 [6]: /integrations/kafka-consumer/?tab=host#setup
-[7]: https://app.datad0g.com/personal-settings/profile
+[7]: https://app.datadoghq.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
