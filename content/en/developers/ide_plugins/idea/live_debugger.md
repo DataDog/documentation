@@ -18,24 +18,24 @@ The **Live Debugger** in the Datadog tool window shows the defined logpoints and
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-The panel has three sections: the first shows a tree of available logpoints, the second shows the status and events for the selected logpoint, and the last shows data for the selected logpoint event, if any. These components are described in the sections below.
+The panel has three sections: the first shows the available logpoints, the second shows the status and events for the selected logpoint, and the last shows runtime data for the selected logpoint event, if any. These panels are described in the sections below.
 
 ### Logpoints tree
-The Logpoints tree on the left-side of the panel shows the available logpoints, with several filter options provided:
+The Logpoints tree on the left-side of the panel shows the available logpoints, with these filters:
 
-* *Only my logpoints* - show only logpoints created by the current user
-* *Only the current repositories* - show only logpoints for the repositories associated with the current project
-* *Only enabled logpoints* - show only logpoints that are enabled
+* `Only my logpoints` - show only logpoints created by the current user
+* `Only the current repositories` - show only logpoints for the repositories associated with the current project
+* `Only enabled logpoints` - show only logpoints that are enabled
 
-Select a logpoint to display its status and generated events, and to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
+Select a logpoint to display its status and recently generated events, and to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
 ### Logpoint status and events
-The central panel displays status and event information for the selected logpoint. The list shows the most recently generated logpoint events, up to 50 from within the past 24 hours. Select an event to view the generated log message, the captured variables and the runtime stack-trace for the event.
+The central panel displays status and recent event information for the selected logpoint. The list shows up to 50 events from within the past 24 hours. Select an event to view the generated log message, the captured variables and the runtime stacktrace for the event.
 
 At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore log events for a logpoint. 
 
 ### Logpoint event data
-The right-most panel displays data for the selected logpoint event, including captured variable information and the stacktrace for the event. This runtime context is invaluable for reasoning about the source code and diagnosing observed behavior.
+The right-most panel displays data for the selected logpoint event, including captured runtime variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
 
 The **Captures** tab shows a tree-view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint.
 
@@ -51,20 +51,22 @@ Click the icon to open the Datadog tool window and show the selected logpoint. R
 ## Managing logpoints
 
 ### Add a logpoint
-To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, a template for the log message you would like to have emitted at runtime, the variable capture depth, and an optional logpoint condition expression:
+To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, a template for the log message you would like to have emitted at runtime, the variable capture depth, and a logpoint condition expression (optional):
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
 Logpoints expire automatically after 48 hours. Logpoint events are rate-limited to 1 execution per second.
 
-The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. Log messages automatically pass through the Live Debugger [Sensitive Data Scanner][5]. 
+The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. 
 
-When a condition is defined, log events are generated only when the condition evaluates to true. 
+<div class="alert alert-info">Log messages automatically pass through the Dynamic Instrumentation [Sensitive Data Scanner][5].</div>
 
-The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values.
+When a condition is defined, log events are generated only when the condition evaluates to true. Use conditional logpoints to capture events for based on runtime state, for example a particular transaction or product identifier.
+
+The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more useful information.
 
 #### Local and remote versions
-Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if possible, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
+Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if it can be detected, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
 
 <div class="alert alert-info"><b>Tip</b>: Checking out this revision locally shows you the same code in your IDE that is running remotely, which simplifies the live debugging experience. However, this is not required as the Datadog plugin maps local line numbers for logpoints to remote line numbers based on Git commit information.</div>
 
@@ -79,6 +81,8 @@ You can update the log message and the (optional) logpoint condition. Changing t
 
 ### Delete a logpoint
 You can delete logpoints by right-clicking the icon in the gutter of the source editor, or the entry in the tool window, and selecting **Delete** from the context menu.
+
+Deleting a logpoint does not delete the events already generated by the logpoint.
 
 ### Enable and disable a logpoint
 You can enable or disable logpoints by right-clicking and selecting the appropriate context menu item. The icon changes to indicate the current state of the logpoint:
