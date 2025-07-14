@@ -7,7 +7,7 @@ The Messages feature allows you to view messages at specific offsets within Kafk
 ## Setup
 Before diving into detailed configuration steps, here's a quick overview of what's involved in setting up the Messages feature:
 
-| Step               | Description                                                                                                                                       | Setup Guides              |
+| Step               | Description                                                                                                                                       | Setup Guide              |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
 | Agent setup        | An agent needs Kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                           | [Agent Setup][1]          |
 | Verify permissions | You need a few log access permissions, which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
