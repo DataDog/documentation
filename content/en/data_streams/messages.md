@@ -28,6 +28,8 @@ Complete the following steps on the same Datadog agent:
 
 Ensure your agent is running version `7.69.0` or later.
 
+To check your agent version, run `datadog-agent version` on your host.
+
 ##### 2. Enable [remote configuration][3]
 
 Confirm that Remote Configuration is enabled for your agent (it is typically enabled by default). Verify this setting on the [Fleet Automation page][4] and also confirm it at the organizational level from the [Remote Configuration settings page][5].
