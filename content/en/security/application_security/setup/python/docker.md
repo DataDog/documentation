@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Python in Docker
+title: Set up App and API Protection for Python in Docker
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10
@@ -79,9 +79,9 @@ CMD ["ddtrace-run", "python", "app.py"]
 ## 3. Run your application
 Build your image and then run your container.
 
-When running your container, make sure to:
-1. Connect it to the same Docker network as the Datadog Agent
-2. Set the required environment variables
+When running your container, ensure you do the following:
+1. Connect the container to the same Docker network as the Datadog Agent.
+2. Set the required environment variables.
 
 ```bash
 docker run -d \

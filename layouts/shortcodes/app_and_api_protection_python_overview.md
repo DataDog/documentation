@@ -1,7 +1,7 @@
 {{ $showSetup := .Get "showSetup" | default "true" | eq "true" }}
 
 ## Overview
-App and API Protection works by leveraging the [Datadog Python library](https://github.com/DataDog/dd-trace-py/) to monitor and secure your Python service. The library integrates seamlessly with your existing application without requiring code changes.
+App and API Protection leverages the [Datadog Python library](https://github.com/DataDog/dd-trace-py/) to monitor and secure your Python service. The library integrates seamlessly with your existing application without requiring code changes.
 
 For detailed compatibility information, including supported Python versions, frameworks, and deployment environments, see [Python Compatibility Requirements](/security/application_security/setup/python/compatibility).
 
@@ -11,4 +11,4 @@ This guide explains how to set up App and API Protection (AAP) for Python applic
 2. <a href="#2-enabling-app-and-api-protection-monitoring">Enabling App and API Protection monitoring</a>
 3. <a href="#3-run-your-application">Running your Python application with the Datadog Agent</a>
 4. <a href="#4-verify-setup">Verifying the setup</a>
-{{ end }} 
+{{ end }}
