@@ -13,6 +13,8 @@ further_reading:
 - link: "continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn how to set up CD Visibility"
+algolia:
+  tags: ["cd gates"]
 ---
 
 {{< site-region region="gov" >}}
