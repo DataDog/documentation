@@ -7,6 +7,9 @@ further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
     text: Enable Runtime Metrics
+  - link: /tracing/guide/init_resource_calc/
+    tag: Documentation
+    text: Learn about init container resource usage
 ---
 
 ## Overview
