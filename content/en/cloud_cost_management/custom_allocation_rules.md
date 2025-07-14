@@ -94,7 +94,7 @@ To create a rule for this allocation, you could:
 
 - Define the costs to allocate (source): **Database costs** (`aws_product:rds`).
 - Choose the allocation method: **Dynamic by metric**
-- Choose the data source: **Database Queries**.
+- Choose the data source: **Database Queries**. Tip: Review available metrics and tags in the [Metrics Summary][4].
 - Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **Service** (`trace.caller.service`).
 - Refine the allocation by applying [filters](#step-4---optional-apply-filters): **Host** (`host:shopist.us-east-1.rds.amazonaws.com`).
 - Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
@@ -173,3 +173,4 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 [1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
+[4]: https://app.datadoghq.com/metric/summary
