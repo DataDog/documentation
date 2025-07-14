@@ -1,8 +1,8 @@
 ---
 description: Utiliza tests de monitorización Synthetic en tu navegador Safari.
 private: true
-title: Tests del navegador Safari
 site_support_id: synthetics_safari
+title: Tests del navegador Safari
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/safari-browser-testing/" >}}

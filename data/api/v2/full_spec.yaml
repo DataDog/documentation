@@ -300,6 +300,14 @@ components:
       required: true
       schema:
         type: string
+    DatasetID:
+      description: The ID of a defined dataset.
+      example: 0879ce27-29a1-481f-a12e-bc2a48ec9ae1
+      in: path
+      name: dataset_id
+      required: true
+      schema:
+        type: string
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -756,7 +764,8 @@ components:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
         `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`.'
+        `connection`, `connection-group`, `rum-application`, `cross-org-connection`,
+        `spreadsheet`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -3611,6 +3620,14 @@ components:
           $ref: '#/components/schemas/AssetOperatingSystem'
         risks:
           $ref: '#/components/schemas/AssetRisks'
+        teams:
+          description: List of teams that own the asset.
+          example:
+          - compute
+          items:
+            example: compute
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/AssetType'
         version:
@@ -12033,6 +12050,85 @@ components:
       required:
       - databaseMonitoringTrigger
       type: object
+    Dataset:
+      description: Dataset object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DatasetAttributes'
+        id:
+          description: Unique identifier for the dataset.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          description: Resource type, always "dataset".
+          example: dataset
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    DatasetAttributes:
+      description: Dataset metadata and configuration(s).
+      properties:
+        created_at:
+          description: Timestamp when the dataset was created.
+          format: date-time
+          nullable: true
+          type: string
+        created_by:
+          description: Unique ID of the user who created the dataset.
+          format: uuid
+          type: string
+        name:
+          description: Name of the dataset.
+          example: Security Audit Dataset
+          type: string
+        principals:
+          description: List of access principals, formatted as `principal_type:id`.
+            Principal can be 'team' or 'role'.
+          example:
+          - role:86245fce-0a4e-11f0-92bd-da7ad0900002
+          items:
+            example: role:86245fce-0a4e-11f0-92bd-da7ad0900002
+            type: string
+          type: array
+        product_filters:
+          description: List of product-specific filters.
+          items:
+            $ref: '#/components/schemas/FiltersPerProduct'
+          type: array
+      required:
+      - name
+      - product_filters
+      - principals
+      type: object
+    DatasetCreateRequest:
+      description: Create request for a dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
+    DatasetResponseMulti:
+      description: Response containing a list of datasets.
+      properties:
+        data:
+          description: The list of datasets returned in response.
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+      required:
+      - data
+      type: object
+    DatasetResponseSingle:
+      description: Response containing a single dataset object.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -15737,6 +15833,38 @@ components:
           items:
             $ref: '#/components/schemas/FastlyServiceData'
           type: array
+      type: object
+    FiltersPerProduct:
+      description: Product-specific filters for the dataset.
+      properties:
+        filters:
+          description: 'Defines the list of tag-based filters used to restrict access
+            to telemetry data for a specific product.
+
+            These filters act as access control rules. Each filter must follow the
+            tag query syntax used by
+
+            Datadog (such as `@tag.key:value`), and only one tag or attribute may
+            be used to define the access strategy
+
+            per telemetry type.'
+          example:
+          - '@application.id:ABCD'
+          items:
+            example: '@application.id:ABCD'
+            type: string
+          type: array
+        product:
+          description: 'Name of the product the dataset is for. Possible values are
+            ''apm'', ''rum'', ''synthetics'',
+
+            ''metrics'', ''logs'', ''sd_repoinfo'', ''error_tracking'', ''cloud_cost'',
+            and ''ml_obs''.'
+          example: logs
+          type: string
+      required:
+      - product
+      - filters
       type: object
     Finding:
       description: A single finding without the message and resource configuration.
@@ -20142,7 +20270,7 @@ components:
       type: object
     LayerAttributesInterval:
       description: Defines how often the rotation repeats, using a combination of
-        days and optional seconds.
+        days and optional seconds. Should be at least 1 hour.
       properties:
         days:
           description: The number of days in each rotation cycle.
@@ -20472,6 +20600,21 @@ components:
           description: The total number of apps that match the specified filters.
           format: int64
           type: integer
+      type: object
+    ListAssetsSBOMsResponse:
+      description: The expected response schema when listing assets SBOMs.
+      properties:
+        data:
+          description: List of assets SBOMs.
+          items:
+            $ref: '#/components/schemas/SBOM'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - data
       type: object
     ListDevicesResponse:
       description: List devices response.
@@ -33067,6 +33210,11 @@ components:
           items:
             $ref: '#/components/schemas/SBOMComponent'
           type: array
+        dependencies:
+          description: List of dependencies between components of the SBOM.
+          items:
+            $ref: '#/components/schemas/SBOMComponentDependency'
+          type: array
         metadata:
           $ref: '#/components/schemas/SBOMMetadata'
         serialNumber:
@@ -33090,6 +33238,7 @@ components:
       - metadata
       - serialNumber
       - version
+      - dependencies
       type: object
     SBOMComponent:
       description: Software or hardware component.
@@ -33099,16 +33248,28 @@ components:
             elsewhere in the BOM.
           example: pkg:golang/google.golang.org/grpc@1.68.1
           type: string
+        licenses:
+          description: The software licenses of the SBOM component.
+          items:
+            $ref: '#/components/schemas/SBOMComponentLicense'
+          type: array
         name:
           description: The name of the component. This will often be a shortened,
             single name of the component.
           example: google.golang.org/grpc
           type: string
+        properties:
+          description: The custom properties of the component of the SBOM.
+          items:
+            $ref: '#/components/schemas/SBOMComponentProperty'
+          type: array
         purl:
           description: Specifies the package-url (purl). The purl, if specified, MUST
             be valid and conform to the [specification](https://github.com/package-url/purl-spec).
           example: pkg:golang/google.golang.org/grpc@1.68.1
           type: string
+        supplier:
+          $ref: '#/components/schemas/SBOMComponentSupplier'
         type:
           $ref: '#/components/schemas/SBOMComponentType'
         version:
@@ -33119,6 +33280,89 @@ components:
       - type
       - name
       - version
+      - supplier
+      type: object
+    SBOMComponentDependency:
+      description: The dependencies of a component of the SBOM.
+      properties:
+        dependsOn:
+          description: The components that are dependencies of the ref component.
+          items:
+            example: pkg:golang/google.golang.org/grpc@1.68.1
+            type: string
+          required:
+          - ref
+          - dependsOn
+          type: array
+        ref:
+          description: The identifier for the related component.
+          example: Repository|github.com/datadog/datadog-agent
+          type: string
+      type: object
+    SBOMComponentLicense:
+      description: The software license of the component of the SBOM.
+      properties:
+        license:
+          $ref: '#/components/schemas/SBOMComponentLicenseLicense'
+      required:
+      - license
+      type: object
+    SBOMComponentLicenseLicense:
+      description: The software license of the component of the SBOM.
+      properties:
+        name:
+          description: The name of the software license of the component of the SBOM.
+          example: MIT
+          type: string
+      required:
+      - name
+      type: object
+    SBOMComponentLicenseType:
+      description: The SBOM component license type.
+      enum:
+      - network_strong_copyleft
+      - non_standard_copyleft
+      - other_non_free
+      - other_non_standard
+      - permissive
+      - public_domain
+      - strong_copyleft
+      - weak_copyleft
+      example: application
+      type: string
+      x-enum-varnames:
+      - NETWORK_STRONG_COPYLEFT
+      - NON_STANDARD_COPYLEFT
+      - OTHER_NON_FREE
+      - OTHER_NON_STANDARD
+      - PERMISSIVE
+      - PUBLIC_DOMAIN
+      - STRONG_COPYLEFT
+      - WEAK_COPYLEFT
+    SBOMComponentProperty:
+      description: The custom property of the component of the SBOM.
+      properties:
+        name:
+          description: The name of the custom property of the component of the SBOM.
+          example: license_type
+          type: string
+        value:
+          description: The value of the custom property of the component of the SBOM.
+          example: permissive
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    SBOMComponentSupplier:
+      description: The supplier of the component.
+      properties:
+        name:
+          description: Identifier of the supplier of the component.
+          example: https://go.dev
+          type: string
+      required:
+      - name
       type: object
     SBOMComponentType:
       description: The SBOM component type
@@ -33153,8 +33397,25 @@ components:
     SBOMMetadata:
       description: Provides additional information about a BOM.
       properties:
+        authors:
+          description: List of authors of the SBOM.
+          items:
+            $ref: '#/components/schemas/SBOMMetadataAuthor'
+          type: array
         component:
           $ref: '#/components/schemas/SBOMMetadataComponent'
+        timestamp:
+          description: The timestamp of the SBOM creation.
+          example: '2025-07-08T07:24:53Z'
+          type: string
+      type: object
+    SBOMMetadataAuthor:
+      description: Author of the SBOM.
+      properties:
+        name:
+          description: The identifier of the Author of the SBOM.
+          example: Datadog, Inc.
+          type: string
       type: object
     SBOMMetadataComponent:
       description: The component that the BOM describes.
@@ -33816,7 +34077,7 @@ components:
             - effective_date: '2025-02-03T05:00:00Z'
               end_date: '2025-12-31T00:00:00Z'
               interval:
-                seconds: 300
+                seconds: 3600
               members:
               - user:
                   id: 00000000-aba1-0000-0000-000000000000
@@ -42135,6 +42396,14 @@ components:
           type: string
         library:
           $ref: '#/components/schemas/Library'
+        origin:
+          description: Vulnerability origin.
+          example:
+          - agentless-scanner
+          items:
+            example: agentless-scanner
+            type: string
+          type: array
         remediations:
           description: List of remediations.
           items:
@@ -42174,6 +42443,7 @@ components:
       - exposure_time
       - remediations
       - fix_available
+      - origin
       type: object
     VulnerabilityCvss:
       description: Vulnerability severities.
@@ -48723,6 +48993,151 @@ paths:
       - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/datasets:
+    get:
+      description: Get all datasets that have been configured for an organization.
+      operationId: GetAllDatasets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseMulti'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all datasets
+      tags:
+      - Datasets
+      x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: safe
+    post:
+      description: Create a dataset with the configurations in the request.
+      operationId: CreateDataset
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: Test RUM Dataset
+                  principals:
+                  - role:23bacb30-1c59-11f0-a596-da7ad0900002
+                  product_filters:
+                  - filters:
+                    - '@application.id:application_123'
+                    product: rum
+                type: dataset
+            schema:
+              $ref: '#/components/schemas/DatasetCreateRequest'
+        description: Dataset payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create a dataset
+      tags:
+      - Datasets
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        operationId: DeleteDataset
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/datasets/{dataset_id}:
+    delete:
+      description: Deletes the dataset associated with the ID.
+      operationId: DeleteDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete a dataset
+      tags:
+      - Datasets
+      x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieves the dataset associated with the ID.
+      operationId: GetDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a single dataset by ID
+      tags:
+      - Datasets
+      x-menu-order: 2
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v2/domain_allowlist:
@@ -59037,7 +59452,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     post:
       description: Create a new pipeline.
       operationId: CreatePipeline
@@ -59093,7 +59509,8 @@ paths:
         - name: pipeline_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
     post:
       description: 'Validates a pipeline configuration without creating or updating
@@ -59132,7 +59549,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
     delete:
       description: Delete a pipeline.
@@ -59177,7 +59595,8 @@ paths:
         - observability_pipelines_delete
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     get:
       description: Get a specific pipeline by its ID.
       operationId: GetPipeline
@@ -59213,7 +59632,8 @@ paths:
         - observability_pipelines_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
     put:
       description: Update a pipeline.
       operationId: UpdatePipeline
@@ -59257,7 +59677,8 @@ paths:
         - observability_pipelines_deploy
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in Preview.'
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -59361,6 +59782,10 @@ paths:
 
         - RUM Applications: `rum-application`
 
+        - Cross Org Connections: `cross-org-connection`
+
+        - Spreadsheets: `spreadsheet`
+
 
         #### Supported relations for resources
 
@@ -59402,7 +59827,11 @@ paths:
 
         Connection Groups           | `viewer`, `editor`
 
-        RUM Application             | `viewer`, `editor`'
+        RUM Application             | `viewer`, `editor`
+
+        Cross Org Connections       | `viewer`, `editor`
+
+        Spreadsheets                | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -61917,6 +62346,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter by teams.
+        example: compute
+        in: query
+        name: filter[teams]
+        required: false
+        schema:
+          type: string
       - description: Filter by architecture.
         example: arm64
         in: query
@@ -62016,6 +62452,136 @@ paths:
         - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
+  /api/v2/security/sboms:
+    get:
+      description: 'Get a list of assets SBOMs for an organization.
+
+
+        ### Pagination
+
+
+        Please review the [Pagination section](#pagination) for the "List Vulnerabilities"
+        endpoint.
+
+
+        ### Filtering
+
+
+        Please review the [Filtering section](#filtering) for the "List Vulnerabilities"
+        endpoint.
+
+
+        ### Metadata
+
+
+        Please review the [Metadata section](#metadata) for the "List Vulnerabilities"
+        endpoint.'
+      operationId: ListAssetsSBOMs
+      parameters:
+      - description: Its value must come from the `links` section of the response
+          of the first request. Do not manually edit it.
+        example: b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+        in: query
+        name: page[token]
+        required: false
+        schema:
+          type: string
+      - description: The page number to be retrieved. It should be equal to or greater
+          than 1.
+        example: 1
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: The type of the assets for the SBOM request.
+        example: Repository
+        in: query
+        name: filter[asset_type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssetType'
+      - description: The name of the asset for the SBOM request.
+        example: github.com/datadog/datadog-agent
+        in: query
+        name: filter[asset_name]
+        required: false
+        schema:
+          type: string
+      - description: The name of the component that is a dependency of an asset.
+        example: opentelemetry-api
+        in: query
+        name: filter[package_name]
+        required: false
+        schema:
+          type: string
+      - description: The version of the component that is a dependency of an asset.
+        example: 1.33.1
+        in: query
+        name: filter[package_version]
+        required: false
+        schema:
+          type: string
+      - description: The software license name of the component that is a dependency
+          of an asset.
+        example: Apache-2.0
+        in: query
+        name: filter[license_name]
+        required: false
+        schema:
+          type: string
+      - description: The software license type of the component that is a dependency
+          of an asset.
+        example: network_strong_copyleft
+        in: query
+        name: filter[license_type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/SBOMComponentLicenseType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetsSBOMsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Bad request: The server cannot process the request due to
+            invalid syntax in the request.'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Forbidden: Access denied'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Not found: asset not found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
+      summary: List assets SBOMs
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/sboms/{asset_type}:
     get:
       description: 'Get a single SBOM related to an asset by its type and name.
@@ -62540,6 +63106,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter by origin.
+        example: agentless-scanner
+        in: query
+        name: filter[origin]
+        required: false
+        schema:
+          type: string
       - description: Filter by asset name.
         example: datadog-agent
         in: query
@@ -62616,6 +63189,13 @@ paths:
         example: staging
         in: query
         name: filter[asset.environments]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset teams.
+        example: compute
+        in: query
+        name: filter[asset.teams]
         required: false
         schema:
           type: string
@@ -69230,6 +69810,14 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: 'Data Access Controls in Datadog is a feature that allows administrators
+    and access managers to regulate
+
+    access to sensitive data. By defining Restricted Datasets, you can ensure that
+    only specific teams or roles can
+
+    view certain types of telemetry (for example, logs, traces, metrics, and RUM data).'
+  name: Datasets
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 

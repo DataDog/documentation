@@ -70,7 +70,7 @@ See the wizard [official documentation][13] for options.
 
 ### Use Datadog Metro Configuration
 
-Starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
+Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
 
 Add it to your `metro.config.js` to allow for accurate symbolication of stacktraces on Datadog:
 
@@ -86,7 +86,7 @@ module.exports = withDatadogMetroConfig(config);
 
 ### Use the `datadog-ci react-native inject-debug-id` command
 
-As an alternative to the Metro Configuration, starting from `@datadog/mobile-react-native@2.9.0` and `@datadog/datadog-ci@v3.10.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
+As an alternative to the Metro Configuration, starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
 
 Usage instructions are available on the [command documentation page][17].
 
