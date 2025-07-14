@@ -14,6 +14,10 @@ further_reading:
 <strong>Looking for 1st Gen Functions?</strong> If you're using legacy Cloud Run Functions (1st generation), see the <a href="/serverless/google_cloud_run/functions_1st_gen">1st Gen Functions documentation</a> for setup instructions.
 </div>
 
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the `cloud asset viewer` role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+</div>
+
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the Datadog Agent in a sidecar container.
 
 [1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
