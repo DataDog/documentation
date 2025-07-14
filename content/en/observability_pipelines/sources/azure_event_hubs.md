@@ -58,7 +58,7 @@ After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka so
     1. Check the **Stream to the Event Hub** box.
 1. Repeat for each region. Logs must stream to Event Hubs in the same region.
 
-### Configure Kafka-compatible connection for the event hub
+### Configure Kafka-compatible connection for the Event Hub
 
 Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9093`, which Observability Pipelines uses as the Kafka source.
 
