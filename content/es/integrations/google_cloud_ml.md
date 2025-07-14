@@ -3,9 +3,9 @@
 "app_uuid": "ed0cf686-2653-4082-bf00-1ad5d1dcd379"
 "assets":
   "integration":
-    "auto_install": falso
+    "auto_install": false
     "events":
-      "creates_events": falso
+      "creates_events": false
     "metrics":
       "check": "gcp.ml.training.cpu.utilization"
       "metadata_path": "metadata.csv"
@@ -24,22 +24,22 @@
 - "google cloud"
 - "log collection"
 - "ai/ml"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
 "description": Realiza el seguimiento de las métricas clave de Google Cloud Machine Learning.
-"display_on_public_website": verdadero
+"display_on_public_website": true
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_ml/"
-"draft": falso
+"draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
   "tag": "Blog"
   "text": "Prácticas recomendadas para la monitorización de modelos de ML en producción"
 "git_integration_title": "google_cloud_ml"
-"has_logo": verdadero
+"has_logo": true
 "integration_id": "google_cloud_ml"
 "integration_title": "Google Cloud ML"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "google_cloud_ml"
 "public_title": "Google Cloud ML"
