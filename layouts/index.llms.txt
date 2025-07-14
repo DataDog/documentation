@@ -1,0 +1,6 @@
+This line prints! But it is the only line that does.
+
+{{ range where .Site.RegularPages "Lang" "en" }}
+  TITLE: {{ .Title }}
+  FILE: {{ .File.Path }}
+{{ end }}
