@@ -41,13 +41,13 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 ## Setup 
 To enable Datadog Disaster Recovery:
 
-[Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
-[Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
-[Configure your DDR organization](#configure-your-ddr-organization)
-[Test the failover process](#test-the-failover-process)
+1. [Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
+2. [Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
+3. [Configure your DDR organization](#configure-your-ddr-organization)
+4. [Test the failover process](#test-the-failover-process)
 
 ### Configure Datadog Disaster Recovery
-{{% collapse-content title=" 1. Create your DDR Datadog organization and share it with your Customer Success Manager" level="h5" %}}
+{{% collapse-content title=" Create your DDR Datadog organization and share it with your Customer Success Manager" level="h5" %}}
 <div class="alert alert-info">Datadog can set this up for you if you'd prefer.</div>
 
 #### Create the DDR org
@@ -75,7 +75,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 ### Retrieve the public IDs and link your organization
-{{% collapse-content title=" 2. Retrieve the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
+{{% collapse-content title="Retrieve the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
 
 #### Retrieve the public IDs
 
@@ -107,7 +107,7 @@ curl -v -H "Content-Type: application/json" -H
 
 
 ### Configure your DDR organization
-{{% collapse-content title=" 3. Create your Datadog API and App key for syncing" level="h5" %}}
+{{% collapse-content title="Create your Datadog API and App key for syncing" level="h5" %}}
 In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful in [steps 6][id="using-sync-cli-tool"] to copy dashboards and monitors between Datadog sites. 
 
 <div class="alert alert-info">
@@ -116,7 +116,7 @@ Datadog can help copy the API key signatures for your Agents to the DDR back-up 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title=" 4. Configure Single Sign On for the Datadog App" level="h5" %}}
+{{% collapse-content title="Configure Single Sign On for the Datadog App" level="h5" %}}
 Go to your [Organization Settings][1] to configure [SAML][9] or Google Login for your users. 
 
 **Datadog recommends using Single Sign On (SSO)** to enable all your users to seamlessly login to your Disaster Recovery organization during an outage.
@@ -125,7 +125,7 @@ You must invite each of your users to your Disaster Recovery organization and gi
 {{% /collapse-content %}}
 
 
-{{% collapse-content title=" 5. Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
+{{% collapse-content title=" Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
 
 Your cloud integrations must be configured in both Primary and DDR organizations. Because these integrations only run in one Datacenter at a time, **the integrations must run only in the Primary data center.**
 
@@ -138,7 +138,7 @@ During an integration failover, integrations will run only in the DDR data cente
 
 
 
-{{% collapse-content title=" 6. Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
+{{% collapse-content title="Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
 Datadog provides a tool called [datadog sync-cli][3] to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
 
 Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
@@ -181,7 +181,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 
-{{% collapse-content title=" 7. Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
+{{% collapse-content title="Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
 [Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
 
 Remote Configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
@@ -190,7 +190,7 @@ Remote Configuration is strongly recommended for a more seamless failover contro
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=" 8. Update your Datadog Agent configuration" level="h5" %}}
+{{% collapse-content title="Update your Datadog Agent configuration" level="h5" %}}
 This step requires that you are on the Agent version **7.54 or higher**. 
 
 Agent **v7.54+** has a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured DDR Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic disaster recovery exercises/drills. 
@@ -216,7 +216,7 @@ Your Datadog customer success manager will work with you on scheduling dedicated
 
 
 ### Test the failover process
-{{% collapse-content title=" 9. Activate and test DDR failover in Agent-based environments" level="h5" %}}
+{{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
 {{< tabs >}}
@@ -284,7 +284,7 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=" 10. Activate and test DDR failover in cloud integrations" level="h5" %}}
+{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h5" %}}
 
 ##### Cloud integrations failover
 
