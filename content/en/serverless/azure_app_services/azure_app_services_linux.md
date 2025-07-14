@@ -140,7 +140,7 @@ For .NET applications, the following environment variables are **required** unle
 | `DD_TRACE_LOG_DIRECTORY`   | `/home/LogFiles/dotnet`  | Where tracer logs are stored |
 | `CORECLR_ENABLE_PROFILING` | 1  | Instructs the .NET CLR that profiling should be enabled.                   | 
 | `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` | Profiler GUID. |
-| `CORECLR_PROFILER_PATH`    | `/home/site/wwwroot/datadog//Datadog.Trace.ClrProfiler.Native.so` | The profiler binary that the .NET CLR loads into memory, which contains the GUID. |
+| `CORECLR_PROFILER_PATH`    | `/home/site/wwwroot/datadog/<os-arch>/Datadog.Trace.ClrProfiler.Native.so` | The profiler binary that the .NET CLR loads into memory, which contains the GUID. |
 
 In `CORECLR_PROFILER_PATH`, replace `<os-arch>` with one of:
 - `linux-x64`
