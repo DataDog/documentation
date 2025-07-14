@@ -5,7 +5,7 @@
   "dashboards":
     "gcp_sql_screen": "assets/dashboards/gcp_sql_screen.json"
   "integration":
-    "auto_install": falso
+    "auto_install": false
     "events":
       "creates_events": false
     "metrics":
@@ -29,15 +29,15 @@
 "custom_kind": "integración"
 "dependencies": []
 "description": "Realiza el seguimiento de las métricas de rendimiento, estado y replicación de la base de datos".
-"display_on_public_website": verdadero
+"display_on_public_website": true
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloudsql/"
-"draft": falso
+"draft": false
 "git_integration_title": "google_cloudsql"
-"has_logo": verdadero
+"has_logo": true
 "integration_id": "google-cloudsql"
 "integration_title": "Google CloudSQL"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "google_cloudsql"
 "public_title": "Google CloudSQL"
