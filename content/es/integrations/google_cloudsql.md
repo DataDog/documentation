@@ -14,7 +14,7 @@
       "prefix": "gcp.cloudsql."
     "service_checks":
       "metadata_path": "assets/service_checks.json"
-    "source_type_id": 185
+    "source_type_id": 185,
     "source_type_name": "Google CloudSQL"
 "author":
   "homepage": "https://www.datadoghq.com"
@@ -26,7 +26,7 @@
 - "data stores"
 - "google cloud"
 - "log collection"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
 "description": "Realiza el seguimiento de las métricas de rendimiento, estado y replicación de la base de datos".
 "display_on_public_website": true
