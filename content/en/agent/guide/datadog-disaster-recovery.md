@@ -39,14 +39,9 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 <br>
 
 ## Setup 
-To enable Datadog Disaster Recovery:
+To enable Datadog Disaster Recovery, follow these steps:
 
-1. [Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
-2. [Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
-3. [Configure your DDR organization](#configure-your-ddr-organization)
-4. [Test the failover process](#test-the-failover-process)
-
-### Configure Datadog Disaster Recovery
+### 1. Configure Datadog Disaster Recovery
 {{% collapse-content title=" Create your DDR Datadog organization and share it with your Customer Success Manager" level="h5" %}}
 <div class="alert alert-info">Datadog can set this up for you if you'd prefer.</div>
 
@@ -74,7 +69,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 
-### Retrieve the public IDs and link your organization
+### 2. Retrieve the public IDs and link your organization
 {{% collapse-content title="Retrieve the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
 
 #### Retrieve the public IDs
@@ -106,7 +101,7 @@ curl -v -H "Content-Type: application/json" -H
 
 
 
-### Configure your DDR organization
+### 3. Configure your DDR organization
 {{% collapse-content title="Create your Datadog API and App key for syncing" level="h5" %}}
 In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful in [steps 6][id="using-sync-cli-tool"] to copy dashboards and monitors between Datadog sites. 
 
@@ -215,7 +210,7 @@ Your Datadog customer success manager will work with you on scheduling dedicated
 {{% /collapse-content %}} <br>
 
 
-### Test the failover process
+### 4. Test the failover process
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
