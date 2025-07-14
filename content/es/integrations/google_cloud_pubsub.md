@@ -5,7 +5,7 @@
   "dashboards":
     "gcp_pub_sub_screen": "assets/dashboards/gcp_pub_sub_screen.json"
   "integration":
-    "auto_install": falso
+    "auto_install": false
     "events":
       "creates_events": false
     "metrics":
@@ -26,14 +26,14 @@
 - "google cloud"
 - "log collection"
 - "message queues"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
 "description": Realiza el seguimiento de las métricas clave de Google Cloud PubSub.
-"display_on_public_website": verdadero
+"display_on_public_website": true
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_pubsub/"
-"draft": falso
+"draft": false
 "git_integration_title": "google_cloud_pubsub"
-"has_logo": verdadero
+"has_logo": true
 "integration_id": "google-cloud-pubsub"
 "integration_title": "Google Cloud Pubsub"
 "integration_version": ""
