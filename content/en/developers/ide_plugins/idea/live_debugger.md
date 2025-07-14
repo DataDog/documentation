@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 60 minutes.
+The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are added dynamically, so there is no need to redeploy your code, allowing you to resolve issues in a running system. You can edit or delete logpoints at any time, and they automatically expire after 48 hours.
 
 ## Live Debugger tab
 The **Live Debugger** in the Datadog tool window shows the defined logpoints and their related output:
@@ -38,7 +38,7 @@ To add a logpoint, right-click on a line of code in the source editor and select
 
 The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. If a condition is defined, log events are generated only when the condition evaluates to true.
 
-Logpoints expire automatically after 60 minutes.
+Logpoints expire automatically after 48 hours.
 
 #### Local and remote versions
 Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if possible, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
@@ -52,7 +52,7 @@ To modify the log message for a logpoint, right-click the logpoint and select **
 
 You can update the log message and the (optional) logpoint condition. Changing the service or environment requires deleting the logpoint and creating a new one.
 
-**Note**: Applying changes to the logpoint also extends the expiration time to 60 minutes.
+**Note**: Applying changes to the logpoint also extends the expiration time to 48 hours.
 
 ### Delete a logpoint
 You can delete logpoints by right-clicking the icon in the gutter of the source editor, or the entry in the tool window, and selecting **Delete** from the context menu.
@@ -67,7 +67,7 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 | {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" width="24px" >}}        | **Error**: The logpoint is not generating log events due to an error. |
 | {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" width="24px" >}}    | **Warning**: The logpoint may not be generating log events. |
 
-Disabling then re-enabling a logpoint extends its expiry time to 60 minutes.
+Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
 ## Prerequisites
 The Live Debugger feature supports Java and Python and is subject to the same setup requirements as [Dynamic Instrumentation][1].
