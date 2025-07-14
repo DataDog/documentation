@@ -30,7 +30,7 @@ Ensure your agent is running version `7.69.0` or later.
 
 ##### 2. Enable [remote configuration][3]
 
-Confirm Remote Configuration is enabled for your agent (typically enabled by default). Verify this setting on the [Fleet Automation page][4] and also confirm it at the organizational level via the [Remote Configuration settings page][5].
+Confirm that Remote Configuration is enabled for your agent (it is typically enabled by default). Verify this setting on the [Fleet Automation page][4] and also confirm it at the organizational level from the [Remote Configuration settings page][5].
 
 ##### 3. Configure Kafka consumer integration
 
