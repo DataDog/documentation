@@ -14,7 +14,7 @@
       "prefix": "gcp.cloudsql."
     "service_checks":
       "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "185"
+    "source_type_id": 185
     "source_type_name": "Google CloudSQL"
 "author":
   "homepage": "https://www.datadoghq.com"
