@@ -13,7 +13,7 @@ Before diving into detailed configuration steps, here's a quick overview of what
 | Verify permissions | You need a few log access permissions, which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
 
 
-### Agent Setup
+### Agent setup
 
 #### Selecting an Agent
 Any Datadog agent having access to Kafka can be used for setup.
