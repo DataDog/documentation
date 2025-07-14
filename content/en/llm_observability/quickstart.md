@@ -6,21 +6,17 @@ further_reading:
     - link: '/llm_observability'
       tag: 'Documentation'
       text: 'Learn about LLM Observability'
+    - link: '/llm_observability/sdk'
+      tag: 'SDK'
+      text: 'SDK reference'
 ---
 
-## Overview
 
-This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If your application is written in another language, you can create traces by calling the [API][8] instead.
-
-## Setup
-
-{{< tabs >}}
-{{% tab "Host" %}}
 ## Trace an LLM application
 
 ### Prerequisites
 
-- LLM Observability requires a Datadog API key. Find your API key [in the Datadog application](https://app.datadoghq.com/organization-settings/api-keys).
+- LLM Observability requires a Datadog API key if you don't have an Agent running. Find your API key [in the Datadog application](https://app.datadoghq.com/organization-settings/api-keys).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -38,7 +34,8 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    DD_SITE={{< region-param key="dd_site" code="true" >}} \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run <your application command>
+   DD_LLMOBS_AGENTLESS_ENABLED=1 \
+   ddtrace-run <your application command>
    ```
 
    Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
@@ -61,7 +58,8 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    DD_SITE={{< region-param key="dd_site" code="true" >}} \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
+   DD_LLMOBS_AGENTLESS_ENABLED=1 \
+   NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
 
    Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
@@ -71,8 +69,7 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
 
 {{% /tab %}}
 {{< /tabs >}}
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+
 ## Trace an LLM application in AWS Lambda
 The following steps generate an LLM Observability trace in an AWS Lambda environment and create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
@@ -142,7 +139,6 @@ export const handler = async (event) => {
 {{% /tab %}}
 {{< /tabs >}}
 {{% /tab %}}
-{{< /tabs >}}
 
 3. Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library else you may need to instrument your application's LLM calls manually.
 

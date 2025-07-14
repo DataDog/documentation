@@ -4609,24 +4609,19 @@ menu:
       parent: llm_obs
       identifier: llm_obs_quickstart
       weight: 2
-    - name: Application Instrumentation
+    - name: Instrumentation
       url: llm_observability/instrumentation/
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 3
     - name: LLM Obs SDK
       url: llm_observability/sdk
-      parent: llm_obs
+      parent: llm_obs_instrumentation
       identifier: llm_obs_sdk
       weight: 301
-    - name: Auto Instrumentation
-      url: llm_observability/sdk/auto_instrumentation
-      parent: llm_obs_sdk
-      identifier: llm_obs_setup_auto_instrumentation
-      weight: 302
     - name: LLM Obs API
       url: llm_observability/setup/api/
-      parent: llm_obs
+      parent: llm_obs_instrumentation
       identifier: llm_obs_api
       weight: 303
     - name: Monitoring
