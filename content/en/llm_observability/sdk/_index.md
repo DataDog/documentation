@@ -6,39 +6,26 @@ aliases:
     - /llm_observability/setup/sdk/python
     - /llm_observability/setup/sdk/nodejs
     - /llm_observability/setup/sdk
-    - /llm_observability/instrumentation
 ---
 
 ## Overview
 
-Datadog's LLM Observability SDK provides automatic instrumentation as well as manual APIs that give you deep and rich insights into the cost, health and quality of your LLM applications.
+Datadog's LLM Observability SDK for enhances the observability of your LLM applications. The SDK supports Python versions 3.7 and newer. 
 
+### Supported runtimes
+
+| Runtime | Version |
+| ------- | ------- |
+| Python  | 3.7+    |
+| Node.js | 16+     |
 
 For information about LLM Observability's integration support, see [Auto Instrumentation][13].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
-## Installation
+For usage examples you can run from a Jupyter notebook, see the [LLM Observability Jupyter Notebooks repository][10].
 
-## Enabling
-
-## Configuration
-
-## Automatic Instrumentation
-
-## Manual Instrumentation
-
-### Capturing LLM Operations
-
-#### Distributed workflows
-
-#### Annotating LLM Operations
-
-#### Tagging User Sessions
-
-### Submitting Evaluations
-
-### Modifying Operation Input and Output
+## Setup
 
 ### Prerequisites
 
@@ -854,7 +841,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user.
+Session tracking allows you to associate multiple interactions with a given user. 
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1646,14 +1633,6 @@ tracer.use('http', false) // disable the http integration
 [1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
 {{< /tabs >}}
-
-
-### Supported runtimes
-
-| Runtime | Version |
-| ------- | ------- |
-| Python  | 3.7+    |
-| Node.js | 16+     |
 
 
 [1]: https://github.com/openai/openai-python
