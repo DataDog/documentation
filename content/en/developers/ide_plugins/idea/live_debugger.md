@@ -30,14 +30,14 @@ The Logpoints tree on the left-side of the panel shows the available logpoints, 
 Select any logpoint to display its status and recently generated events, or to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
 ### Logpoint status and events
-The central panel displays status and recent event information for the selected logpoint. The list shows up to 50 events from within the past 24 hours. Select an event to view the generated log message, the captured variables and the runtime stacktrace for the event.
+The central panel displays the status and recent event information for the selected logpoint. Select an event to view the generated log message, the captured variables and the runtime stacktrace for the event. The list shows up to 50 events from within the past 24 hours.
 
 At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore all log events for the selected logpoint. 
 
 ### Logpoint event data
-The right-most panel displays data for the selected logpoint event, including captured runtime variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
+The right-most panel displays data for the selected logpoint event, including captured variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
 
-The **Captures** tab shows a tree-view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint. The data is fully searchable.
+The **Captures** tab shows a tree-view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint. The data is fully searchable and selected items can be copied to the clipboard.
 
 The **Stacktrace** tab shows the runtime path execution leading up to the logpoint. Double-click any frame in the stack trace to open the corresponding source file location.
 
@@ -46,7 +46,7 @@ In the source editor, an icon is shown in the gutter for any line that has a log
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
-Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint. These actions are described in later sections.
+Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint.
 
 ## Managing logpoints
 
@@ -55,13 +55,13 @@ To add a logpoint, right-click on a line of code in the source editor and select
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
-Logpoints expire automatically after 48 hours. Logpoint events are rate-limited to 1 execution per second.
-
 The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. Generated log messages automatically pass through the Dynamic Instrumentation [Sensitive Data Scanner][5].
 
 When a condition is defined, log events are generated only when the condition evaluates to true. Use conditions to capture events based on runtime state, for example a particular transaction or product identifier.
 
-The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more useful information but require more storage.
+The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more useful information but require more capacity.
+
+Logpoints expire automatically after 48 hours. Logpoint events are rate-limited to 1 execution per second.
 
 #### Local and remote versions
 Notice that the remote code may be a different version compared to the source code in the IDE. The **New Logpoint** dialog displays the version of the code that is deployed remotely, if it can be detected, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
@@ -75,7 +75,7 @@ To modify the log message for a logpoint, right-click the logpoint and select **
 
 You can update the log message, the logpoint condition, and the capture depth. Changing the service or environment requires deleting the logpoint and creating a new one.
 
-**Note**: Applying changes to the logpoint also extends the expiration time to 48 hours.
+Applying changes to the logpoint also extends the expiration time to 48 hours.
 
 ### Delete a logpoint
 You can delete logpoints by right-clicking the icon in the gutter of the source editor, or the entry in the tool window, and selecting **Delete** from the context menu.
@@ -101,7 +101,7 @@ The Live Debugger feature in the IDE supports Java and Python and is subject to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/live_debugger//#getting-started
+[1]: /tracing/live_debugger/#getting-started
 [2]: /logs/explorer/
 [3]: /dynamic_instrumentation/expression-language/
 [4]: /integrations/guide/source-code-integration/?tab=java#tag-your-telemetry-with-git-information
