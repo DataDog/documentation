@@ -1,0 +1,4 @@
+- HTTP/S client URI endpoint
+	- Stored as the environment variable `DD_OP_DESTINATION_HTTP_CLIENT_URI`.
+- HTTP/S endpoint bearer token
+	- Stored as the environment variable `DD_OP_DESTINATION_HTTP_CLIENT_BEARER_TOKEN`.
