@@ -4623,7 +4623,7 @@ menu:
       url: llm_observability/setup/api/
       parent: llm_obs_instrumentation
       identifier: llm_obs_api
-      weight: 303
+      weight: 302
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs

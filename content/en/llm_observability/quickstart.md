@@ -138,7 +138,6 @@ export const handler = async (event) => {
 
 {{% /tab %}}
 {{< /tabs >}}
-{{% /tab %}}
 
 3. Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library else you may need to instrument your application's LLM calls manually.
 
