@@ -17,7 +17,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 <div class="alert alert-info">To instrument your Google Cloud Run applications with the in-process approach, see <a href="/serverless/google_cloud_run/containers_in_process">Instrument Google Cloud Run In-Process</a>.</div>
 
 <div class="alert alert-info">
-<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the `cloud asset viewer` role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
 </div>
 
 ## Setup

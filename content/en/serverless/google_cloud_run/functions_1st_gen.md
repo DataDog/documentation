@@ -9,7 +9,7 @@ title: Legacy Cloud Run Functions Gen 1
 </div>
 
 <div class="alert alert-info">
-<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the `cloud asset viewer` role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
 </div>
 
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatibility layer.

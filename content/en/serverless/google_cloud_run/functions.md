@@ -15,7 +15,7 @@ further_reading:
 </div>
 
 <div class="alert alert-info">
-<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the `cloud asset viewer` role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
 </div>
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the Datadog Agent in a sidecar container.
