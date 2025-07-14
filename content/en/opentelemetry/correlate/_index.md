@@ -96,6 +96,6 @@ After unified service tagging is configured, you can connect your various teleme
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/correlate/logs_and_traces
-[1]: /opentelemetry/correlate/metrics_and_traces
-[1]: /opentelemetry/correlate/rum_and_traces
-[1]: /opentelemetry/correlate/dbm_and_traces
+[2]: /opentelemetry/correlate/metrics_and_traces
+[3]: /opentelemetry/correlate/rum_and_traces
+[4]: /opentelemetry/correlate/dbm_and_traces
