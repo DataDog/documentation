@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_pubsub"
 "public_title": "Google Cloud Pubsub"
-"short_description": "Una solución de middleware empresarial orientada a mensajes escalable, flexible y fiable en Google Cloud".
+"short_description": "Una solución de middleware empresarial orientada a mensajes escalable, flexible y fiable en Google Cloud"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
