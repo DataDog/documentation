@@ -18,27 +18,50 @@ The **Live Debugger** in the Datadog tool window shows the defined logpoints and
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-The tree on the left shows all logpoints created by the current user. Select a logpoint to display its status and the log messages emitted during the past 24 hours. At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to show log events for the selected logpoint.
+The panel has three sections: the first shows a tree of available logpoints, the second shows the status and events for the selected logpoint, and the last shows data for the selected logpoint event, if any.  These components are described in the sections below.
 
-To navigate to the source code location for a logpoint, right-click and select **Jump to Source**.
+### Logpoints tree
+The Logpoints tree on the left-side of the panel shows the available logpoints, with several filter options provided:
+
+* *Only my logpoints* - show only logpoints created by the current user
+* *Only the current repositories* - show only logpoints for the repositories associated with the current project
+* *Only enabled logpoints* - show only logpoints that are enabled
+
+Select a logpoint to display its status and generated events, and to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it.  To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
+
+### Logpoint status and events
+The central panel displays status and event information for the selected logpoint. The list shows the most recently generated logpoint events, up to 50 from within the past 24 hours. Select an event to view the generated log message, the captured variables and the runtime stack-trace for the event.
+
+At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore log events for a logpoint. 
+
+### Logpoint event data
+The right-most panel displays data for the selected logpoint event, including captured variable information and the stacktrace for the event. This runtime context is invaluable for reasoning about the source code and diagnosing observed behavior.
+
+The **Captures** tab shows a tree-view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint.
+
+The **Stacktrace** tab shows the runtime path execution leading up to the logpoint. Double-click any frame in the stack trace to open the corresponding source file location.
 
 ## Source editor
 In the source editor, an icon is shown in the gutter for any line that has a logpoint defined:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
-Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to enable, disable, edit, and delete the logpoint. These actions are described in later sections.
+Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint. These actions are described in later sections.
 
 ## Managing logpoints
 
 ### Add a logpoint
-To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, the log message you would like to have emitted at runtime, and an optional logpoint condition expression:
+To add a logpoint, right-click on a line of code in the source editor and select **Add a Log to a Live Service**. A dialog appears where you can enter the service name, the environment, a template for the log message you would like to have emitted at runtime, the variable capture depth, and an optional logpoint condition expression:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
-The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. If a condition is defined, log events are generated only when the condition evaluates to true.
+Logpoints expire automatically after 48 hours. Logpoint events are rate-limited to 1 execution per second.
 
-Logpoints expire automatically after 48 hours.
+The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. Log messages automatically pass through the Live Debugger [Sensitive Data Scanner][5]. 
+
+When a condition is defined, log events are generated only when the condition evaluates to true. 
+
+The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values.
 
 #### Local and remote versions
 Notice that the remote code may be a different version compared to the source code in the IDE. The New Logpoint dialog displays the version of the code that is deployed remotely, if possible, so that you can see exactly where the logpoint is being placed. This requires that your application or service is [tagged with Git information][4].
@@ -70,13 +93,14 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
 ## Prerequisites
-The Live Debugger feature supports Java and Python and is subject to the same setup requirements as [Dynamic Instrumentation][1].
+The Live Debugger feature in the IDE supports Java and Python and is subject to the same setup requirements as [Live Debugger][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dynamic_instrumentation/
+[1]: /tracing/live_debugger//#getting-started
 [2]: /logs/explorer/
 [3]: /dynamic_instrumentation/expression-language/
 [4]: /integrations/guide/source-code-integration/?tab=java#tag-your-telemetry-with-git-information
+[5]: /tracing/dynamic_instrumentation/sensitive-data-scrubbing/
