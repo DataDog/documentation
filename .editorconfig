@@ -1,8 +1,7 @@
 root = true
 
 [*]
-# unix-style EOL
-end_of_line = lf
+end_of_line = lf  # unix-style EOL
 trim_trailing_whitespace = true
 insert_final_newline = true
 charset = utf-8
