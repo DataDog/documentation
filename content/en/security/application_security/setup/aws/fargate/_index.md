@@ -19,7 +19,7 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
-Learn how to setup App and API Protection (AAP) on your AWS Fargate tasks by selecting the programming language your task is written with.
+Learn how to set up App and API Protection (AAP) on your AWS Fargate tasks by selecting your task's  programming language.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>

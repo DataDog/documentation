@@ -6,10 +6,6 @@ further_reading:
     text: "Automatically identify issues and generate fixes with the Bits AI Dev Agent"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Bits AI Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
 Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}

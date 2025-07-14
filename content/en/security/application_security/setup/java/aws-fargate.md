@@ -2,7 +2,7 @@
 code_lang: aws-fargate
 type: multi-code-lang
 code_lang_weight: 60
-title: Setup App and API Protection for Java on AWS Fargate
+title: Set up App and API Protection for Java on AWS Fargate
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ further_reading:
 - Java application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Java tracing library (see version requirements [here][1])
+- Datadog Java tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

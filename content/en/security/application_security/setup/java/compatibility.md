@@ -23,14 +23,15 @@ The minimum tracer version to get all supported App and API Protection capabilit
 
 
 ### Supported deployment types
-| Type              | Threat Detection support |
-|------------------ | ------------------------ |
-| Docker            | {{< X >}}                |
-| Kubernetes        | {{< X >}}                |
-| Amazon ECS        | {{< X >}}                |
-| AWS Fargate       | {{< X >}}                |
-| AWS Lambda        | {{< X >}}                |
-| Google Cloud Run  | {{< X >}}                |
+
+Threat Detection is supported for the following deployment types:
+
+- Docker
+- Kubernetes
+- Amazon ECS
+- AWS Fargate
+- AWS Lambda
+- Google Cloud Run
 
 ## Language and framework compatibility
 

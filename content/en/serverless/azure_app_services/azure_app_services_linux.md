@@ -106,7 +106,7 @@ Then, run the following command to set up the sidecar container:
 {{< code-block lang="shell" >}}
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 {{< /code-block >}}
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
@@ -128,6 +128,9 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 | `DD_API_KEY` | Your Datadog API key. | See [Organization Settings > API Keys][301] in Datadog. |
 | `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Your [Datadog site][302]. Defaults to `datadoghq.com`. |
 | `DD_SERVICE` | Your application's service name. | Defaults to the name field value in `package.json`. |
+| `DD_ENV` | Your application's environment name. | There is no default value for this field. |
+| `DD_SERVERLESS_LOG_PATH` | The log path the sidecar uses to collect logs. | Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`. |
+| `WEBSITES_ENABLE_APP_SERVICE_STORAGE` | `true` | Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar. |
 
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 

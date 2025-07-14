@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Java on Linux
+title: Set up App and API Protection for Java on Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 30
@@ -29,7 +29,7 @@ further_reading:
 
 ## 1. Installing the Datadog Agent
 
-Install the Datadog Agent by following the [setup instructions for Linux hosts](/agent/?tab=Linux).
+Install the Datadog Agent by following the [setup instructions for Linux hosts][3].
 
 ## 2. Enabling App and API Protection monitoring
 
@@ -116,4 +116,5 @@ If you encounter issues while setting up App and API Protection for your Java ap
 
 [1]: /security/application_security/setup/java/compatibility
 [2]: /security/application_security/setup/java/troubleshooting
+[3]: /agent/?tab=Linux
 
